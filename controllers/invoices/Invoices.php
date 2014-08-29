@@ -264,7 +264,6 @@ class SI_Invoices extends SI_Controller {
 	 * @return                 
 	 */
 	public static function save_line_items( $post_id, $post, $callback_args, $invoice_id = NULL ) {
-
 		if ( !isset( $_POST['line_item_key'] ) )
 			return;
 		
@@ -286,8 +285,8 @@ class SI_Invoices extends SI_Controller {
 		// Set the line items meta
 		$invoice->set_line_items($line_items);
 
-		$deposit = ( isset( $_POST['deposit'] ) && $_POST['deposit'] != '' ) ? $_POST['deposit'] : '' ;
-		$invoice->set_deposit( $deposit );
+		// Deposits are not supported without the premium version.
+		$invoice->set_deposit( $invoice->get_balance() );
 
 		$subject = ( isset( $_POST['subject'] ) && $_POST['subject'] != '' ) ? $_POST['subject'] : 0 ;
 		if ( $subject && $subject != get_the_title( $post_id ) ) {
@@ -299,8 +298,6 @@ class SI_Invoices extends SI_Controller {
 			// Update the post in the database
 			wp_update_post( $est_post );
 		}
-
-
 	}
 
 	/**

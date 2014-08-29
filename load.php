@@ -34,18 +34,25 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/models/Record.php';
 	do_action( 'si_require_model_classes' );
 
-	// controllers
+	/////////////////
+	// Controllers //
+	/////////////////
+
+	// settings
 	require_once SI_PATH.'/controllers/admin/Settings.php';
 	require_once SI_PATH.'/controllers/admin/Settings_API.php';
 
+	// json api
 	require_once SI_PATH.'/controllers/api/JSON_API.php';
 	
+	// checkouts
 	require_once SI_PATH.'/controllers/checkout/Checkouts.php';
 
+	// clients
 	require_once SI_PATH.'/controllers/clients/Clients.php';
 
+	// developer logs
 	require_once SI_PATH.'/controllers/developer/Logs.php';
-
 
 	// Estimates
 	require_once SI_PATH.'/controllers/estimates/Estimate_Submission.php';
@@ -57,11 +64,13 @@ function sprout_invoices_load() {
 		require_once SI_PATH.'/controllers/estimates/Estimates_Premium.php';
 	}
 	
+	// invoices	
 	require_once SI_PATH.'/controllers/invoices/Invoices.php';
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/invoices/Invoices_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/invoices/Invoices_Premium.php';
 	}
 
+	// notifications
 	require_once SI_PATH.'/controllers/notifications/Notifications_Control.php';
 	require_once SI_PATH.'/controllers/notifications/Notifications.php';
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/notifications/Notifications_Premium.php' ) ) {
@@ -69,11 +78,12 @@ function sprout_invoices_load() {
 	}
 	require_once SI_PATH.'/controllers/notifications/Notifications_Admin_Table.php';
 
+	// payment processing
 	require_once SI_PATH.'/controllers/payment-processing/Payment_Processors.php';
 	require_once SI_PATH.'/controllers/payment-processing/Credit_Card_Processors.php';
 	require_once SI_PATH.'/controllers/payment-processing/Offsite_Processors.php';
 
-	// Processors
+	// payment processors
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_EC.php' ) ) {
 		require_once SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_EC.php';
 	}
@@ -84,29 +94,34 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_Admin_Payment.php';
 	do_action( 'si_payment_processors_loaded' );
 
+	// payments
 	require_once SI_PATH.'/controllers/payments/Payments.php';
 	require_once SI_PATH.'/controllers/payments/Payments_Admin_Table.php';
 
+	// internal records
 	require_once SI_PATH.'/controllers/records/Internal_Records.php';
 	require_once SI_PATH.'/controllers/records/Records_Admin_Table.php';
 
+	// reporting
 	require_once SI_PATH.'/controllers/reporting/Reporting.php';
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/reporting/Reporting_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/reporting/Reporting_Premium.php';
 	}
 	require_once SI_PATH.'/controllers/templating/Templating.php';
 
+	// updates
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) {
 		require_once SI_PATH.'/controllers/updates/Updates.php';
 	}
 	
-	// Importers
+	// importers
 	require_once SI_PATH.'/importers/Importer.php';
 	require_once SI_PATH.'/importers/Freshbooks.php';
 	require_once SI_PATH.'/importers/Harvest.php';
 	require_once SI_PATH.'/importers/WP-Invoice.php';
 	do_action( 'si_importers_loaded' );
 
+	// all done
 	do_action( 'si_require_controller_classes' );
 
 	// Template tags
@@ -117,6 +132,7 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/template-tags/ui.php';
 	require_once SI_PATH.'/template-tags/utility.php';
 
+	// addons
 	require_once SI_PATH.'/add-ons/Addons.php';
 
 	///////////////////
@@ -140,44 +156,65 @@ function sprout_invoices_load() {
 	SI_Settings_API::init();
 	SI_Templating_API::init();
 
+	// updates
 	if ( !SI_FREE_TEST && method_exists( 'SI_Updates', 'init' ) ) {
 		SI_Updates::init();
 	}
 	
+	// api
 	SI_JSON_API::init();
+
+	// reports
 	SI_Reporting::init();
 	if ( !SI_FREE_TEST && method_exists( 'SI_Reporting_Premium', 'init' ) ) {
 		SI_Reporting_Premium::init();
 	}
 
+	// records and logs
 	SI_Internal_Records::init();
 	SI_Dev_Logs::init();
 
+	// settings
 	SI_Admin_Settings::init();
 
+	// payments and processing
 	SI_Payment_Processors::init();
 	SI_Payments::init();
 
+	// notifications
 	SI_Notifications::init(); // Hooks come before parent class.
 	if ( !SI_FREE_TEST && method_exists( 'SI_Notifications_Premium', 'init' ) ) {
 		SI_Notifications_Premium::init();
 	}
 	SI_Notifications_Control::init();
 
+	// clients
 	SI_Clients::init();
 
+	// estimates
 	SI_Estimates::init();
+	if ( !SI_FREE_TEST && method_exists( 'SI_Estimates_Premium', 'init' ) ) {
+		SI_Estimates_Premium::init();
+	}
 	if ( !SI_FREE_TEST && method_exists( 'SI_Estimates_Submission_Premium', 'init' ) ) {
 		SI_Estimates_Submission_Premium::init();
 	}
 	SI_Estimate_Submissions::init();
 
+	// checkouts
 	SI_Checkouts::init();
-	SI_Invoices::init();
 
+	// invoices
+	SI_Invoices::init();
+	if ( !SI_FREE_TEST && method_exists( 'SI_Invoices_Premium', 'init' ) ) {
+		SI_Invoices_Premium::init();
+	}
+
+	// importer
 	SI_Importer::init();
 
-	if ( class_exists( 'SA_Addons' ) ) {
+	// addons
+	if ( method_exists( 'SA_Addons', 'init' ) ) {
 		SA_Addons::init();
 	}
 }

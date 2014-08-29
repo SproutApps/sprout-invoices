@@ -98,6 +98,11 @@ Welcome! This is a big update and a big step for us.
 * Better dashboard let you know what's up.
 * Remove some unnecess****ary cruft.
 
+
+**0.9.8.1**
+
+* Fix deposit and cleanup files
+
 **0.9.2**
 
 * Admin bar links

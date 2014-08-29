@@ -153,7 +153,12 @@
 						<span><?php echo number_format( floatval( si_get_invoice_balance() ), 2 ) ?></span><?php echo sa_get_currency_symbol() ?>
 					<?php endif ?>
 				</div>
-				<?php if ( floatval( $total - $total_payments ) > 0.00 || $status == 'auto-draft' ): ?>
+				<?php if ( apply_filters( 'show_upgrade_messaging', '__return_true' ) ): ?>
+					<div id="deposit">
+						<b title="Upgrade Sprout Invoices to enable deposits" class="helptip"><?php si_e('Deposit Due') ?></b>
+						<input type="number" name="deposit" value="<?php echo $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any" disabled="disabled">
+					</div>
+				<?php elseif ( floatval( $total - $total_payments ) > 0.00 || $status == 'auto-draft' ): ?>
 					<div id="deposit">
 						<b title="Set the amount due for the next payment&mdash;the amount due will be used if blank" class="helptip"><?php si_e('Deposit Due') ?></b>
 						<input type="number" name="deposit" value="<?php echo $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any">

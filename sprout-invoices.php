@@ -10,7 +10,7 @@ Plugin Name: Sprout Invoices
 Plugin URI: https://sproutapps.co/sprout-invoices/
 Description: App allows for any WordPress site to accept estimates, create invoices and receive invoice payments. Learn more at <a href="https://sproutapps.co">Sprout Apps</a>.
 Author: Sprout Apps
-Version: 0.9.8
+Version: 0.9.8.1
 Author URI: https://sproutapps.co
 */
 
