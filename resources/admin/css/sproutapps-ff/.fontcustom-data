@@ -1,0 +1,25 @@
+{
+  "fonts": [
+    "iconvault_089f247ae3a668d46e463c071555147b.ttf",
+    "iconvault_089f247ae3a668d46e463c071555147b.woff",
+    "iconvault_089f247ae3a668d46e463c071555147b.eot",
+    "iconvault_089f247ae3a668d46e463c071555147b.svg"
+  ],
+  "templates": [
+    "iconvault-preview.html",
+    "iconvault-preview.css"
+  ],
+  "file_name": "iconvault_089f247ae3a668d46e463c071555147b",
+  "glyphs": [
+    "vault",
+    "receipt",
+    "sproutapps-estimates",
+    "notebook",
+    "sproutapps-invoices",
+    "handshake",
+    "light-saber",
+    "golf",
+    "sproutapps-logo",
+    "sproutapps-flat"
+  ]
+}

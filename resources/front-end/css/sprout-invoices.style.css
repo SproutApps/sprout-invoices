@@ -1,0 +1,1629 @@
+/**
+ * I do apologize for anything you might see below. I do have really high standards for style sheet organization and
+ * I left that at the door trying to get this first version released.
+ *
+ * FUTURE Organize
+ */
+
+/**
+ * Font faces for sprout apps
+ */
+
+@font-face {
+	font-family: "sproutapps-ff";
+	src: url("../../admin/css/sproutapps-ff/sproutapps-ff.eot");
+	src: url("../../admin/css/sproutapps-ff/sproutapps-ff.eot?#iefix") format("embedded-opentype"),
+       url("../../admin/css/sproutapps-ff/sproutapps-ff.woff") format("woff"),
+       url("../../admin/css/sproutapps-ff/sproutapps-ff.ttf") format("truetype"),
+       url("../../admin/css/sproutapps-ff/sproutapps-ff.svg#sproutapps-ff") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.icon-register:before,
+.icon-vault:before,
+.icon-receipt:before,
+.icon-sproutapps-estimates:before,
+.icon-calculator:before,
+.icon-lightsaber:before,
+.icon-notebook:before,
+.icon-percentage:before,
+.icon-badge:before,
+.icon-sproutapps-invoices:before,
+.icon-hour-glass:before,
+.icon-abacus:before,
+.icon-handshake:before,
+.icon-light-saber:before,
+.icon-hackathon:before,
+.icon-golf:before,
+.icon-sproutapps-logo:before,
+.icon-coins:before,
+.icon-sproutapps-flat:before {
+	font-family: "sproutapps-ff";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	text-decoration: inherit;
+}
+
+.icon-register:before {
+	content: "\f100";
+}
+
+.icon-vault:before {
+	content: "\f101";
+}
+
+.icon-receipt:before {
+	content: "\f102";
+}
+
+.icon-sproutapps-estimates:before {
+	content: "\f103";
+}
+
+.icon-calculator:before {
+	content: "\f104";
+}
+
+.icon-lightsaber:before {
+	content: "\f105";
+}
+
+.icon-notebook:before {
+	content: "\f106";
+}
+
+.icon-percentage:before {
+	content: "\f107";
+}
+
+.icon-badge:before {
+	content: "\f108";
+}
+
+.icon-sproutapps-invoices:before {
+	content: "\f109";
+}
+
+.icon-hour-glass:before {
+	content: "\f10a";
+}
+
+.icon-abacus:before {
+	content: "\f10b";
+}
+
+.icon-handshake:before {
+	content: "\f10c";
+}
+
+.icon-light-saber:before {
+	content: "\f10d";
+}
+
+.icon-hackathon:before {
+	content: "\f10e";
+}
+
+.icon-golf:before {
+	content: "\f10f";
+}
+
+.icon-sproutapps-logo:before {
+	content: "\f110";
+}
+
+.icon-coins:before {
+	content: "\f111";
+}
+
+.icon-sproutapps-flat:before {
+	content: "\f112";
+}
+
+/**
+ * HTML5 display definitions
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+	display: block;
+}
+
+audio,
+canvas,
+video {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+audio:not([controls]) {
+	display: none;
+	height: 0;
+}
+
+[hidden] {
+	display: none;
+}
+
+/**
+ * Base
+ */
+
+html {
+	font-size: 100%;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+	font-family: sans-serif;
+}
+
+body {
+	margin: 0;
+}
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:active,
+a:hover {
+	outline: 0;
+}
+
+/**
+ * Primary Colors
+ */
+
+#doc .doc_total,
+.button.primary_button {
+	background-color: #4D9FFF;
+}
+
+#invoice #doc .doc_total.doc_balance,
+#invoice.paid #doc .doc_total.doc_balance {
+	background-color: #FAFAFA;
+	color: #777;
+}
+
+#invoice #doc .doc_total,
+#invoice .button.primary_button {
+	background-color: #FF5B4D;
+}
+
+#invoice.paid #doc .doc_total,
+#invoice .button.deposit_paid {
+	background-color: #4D9FFF;
+}
+
+#line_total {
+	color: #4D9FFF;
+}
+
+#invoice #line_total {
+	color: #FF5B4D;
+}
+
+.disabled:hover {
+	cursor: default;
+}
+
+/**
+ * Typography
+ */
+
+body {
+	font: 200 .9em/1.4 "Open Sans", sans-serif;
+	text-rendering: optimizeLegibility;
+	background-color: #FAFAFA;
+	color: #363B4D;
+}
+
+a {
+	color: #363B4D;
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+
+h2 {
+	font-size: 1.5em;
+	margin: 0.83em 0;
+}
+
+h3 {
+	font-size: 1.17em;
+	margin: 1em 0;
+}
+
+h4 {
+	font-size: 1em;
+	margin: 1.33em 0;
+}
+
+h5 {
+	font-size: 0.83em;
+	margin: 1.67em 0;
+}
+
+h6 {
+	font-size: 0.67em;
+	margin: 2.33em 0;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+blockquote {
+	margin: 1em 40px;
+}
+
+dfn {
+	font-style: italic;
+}
+
+hr {
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	height: 0;
+}
+
+mark {
+	background: #ff0;
+	color: #000;
+}
+
+p,
+pre {
+	margin: 1em 0;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace, serif;
+	_font-family: 'courier new', monospace;
+	font-size: 1em;
+}
+
+pre {
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+q {
+	quotes: none;
+}
+
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+small {
+	font-size: 80%;
+}
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+/**
+ * Lists
+ */
+
+dl,
+menu,
+ol,
+ul {
+	margin: 1em 0;
+}
+
+dd {
+	margin: 0 0 0 40px;
+}
+
+menu,
+ol,
+ul {
+	padding: 0 0 0 40px;
+}
+
+nav ul,
+nav ol {
+	list-style: none;
+	list-style-image: none;
+}
+
+/**
+ * Embedded content
+ */
+
+img {
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+/**
+ * Forms
+ */
+
+form {
+	margin: 0;
+}
+
+fieldset {
+	border: 1px solid #c0c0c0;
+	margin: 0 2px;
+	padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+	border: 0;
+	padding: 0;
+	white-space: normal;
+	*margin-left: -7px;
+}
+
+button,
+input,
+select,
+textarea {
+	font-size: 100%;
+	margin: 0;
+	vertical-align: baseline;
+	*vertical-align: middle;
+}
+
+button,
+input {
+	line-height: normal;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	-webkit-appearance: button;
+	cursor: pointer;
+	*overflow: visible;
+}
+
+button[disabled],
+html input[disabled] {
+	cursor: default;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+	*height: 13px;
+	*width: 13px;
+}
+
+input[type="search"] {
+	-webkit-appearance: textfield;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+textarea {
+	overflow: auto;
+	
+
+/* 1 */
+    vertical-align: top;
+/* 2
+
+*/
+}
+
+/**
+ * Clearfix
+ */
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0
+}
+
+.clearfix {
+	display: inline-block
+}
+
+html[xmlns] .clearfix {
+	display: block
+}
+
+* html .clearfix {
+	height: 1%
+}
+
+/**
+ * Paid Stamp
+ */
+
+#status {
+	text-transform: uppercase;
+	text-align: center;
+	color: #099E1B;
+	font: bold 3em/1.1em Georgia, "Times New Roman", Times, serif;
+	white-space: nowrap;
+	position: absolute;
+	top: 25%;
+	left: 30%;
+	border: 5px solid #099E1B;
+	padding: 0 10px;
+	transform: rotate(-15deg);
+	-ms-transform: rotate(-15deg);
+	z-indexwebkit-transform: rotate(-15deg);
+}
+
+/**
+ * Layout
+ */
+
+#outer_doc_wrap {
+	width: 880px;
+	padding: 40px 0 65px;
+	margin: 0 auto 55px;
+}
+
+#doc_header_wrap {
+	background-color: rgba(244,244,244);
+	position: relative;
+	top: 0px;
+	border: 3px solid #363B3F;
+	border-bottom: none;
+}
+
+.stuck #doc_header_wrap {
+	background-color: rgba(249,249,249,.8);
+	width: 874px;
+	border-bottom: 3px solid #363B3F;
+}
+
+#header_title {
+	padding: 25px 50px;
+	display: block;
+}
+
+.header_id {
+	font-size: 1.5em;
+	font-weight: 800;
+}
+
+#header_logo {
+	margin-bottom: 25px;
+}
+
+#header_wrap {
+	margin-bottom: 50px;
+	width: 100%;
+}
+
+.header_info {
+	float: left;
+}
+
+#logo {
+	float: right;
+	margin: 0px
+}
+
+#logo img {
+	max-height: 80px;
+}
+
+#doc_actions {
+	margin-top: 5px;
+	float: right;
+}
+
+#document_wrap {
+	background: white;
+	border: 3px solid #363B3F;
+	border-top: none;
+	font-size: 16px;
+	line-height: 1.1em;
+}
+
+#doc {
+	padding: 50px 40px;
+}
+
+div#header_logo {
+	width: 100%;
+}
+
+div#vcards {
+	float: right;
+	width: 45%;
+}
+
+.doc_details {
+	font-weight: 600;
+}
+
+/**
+ * Invoice Payments
+ */
+
+.purchase_button:after {
+	font-family: 'dashicons';
+	vertical-align: top;
+	content: " \f140"
+}
+
+.payment_option a {
+	display: block;
+	text-align: right;
+}
+
+.payment_option a img {
+	margin-top: 3px;
+}
+
+/**
+ * DD
+ */
+
+#doc dl {
+	margin: 0;
+	padding: 0;
+}
+
+#doc dt {
+	margin: 0;
+	padding: .7em 0;
+	float: left;
+	clear: left;
+	width: 120px;
+	text-align: right;
+	font-size: .8em;
+	line-height: 1.3em;
+	font-weight: 200;
+}
+
+#line_items_totals b,
+#doc dt {
+	font-size: .8em;
+	line-height: 1.3em;
+	font-weight: 200;
+}
+
+#doc dt .dt_heading,
+#line_items_totals b {
+	margin: 0;
+	line-height: 1.3;
+}
+
+#doc dd {
+	margin: 0 0 0px 130px;
+	padding: .5em 0 .5em 10px;
+	border-left: 2px solid #363B3F;
+	font-weight: 200;
+}
+
+#doc dd b {
+	font-weight: 400;
+	margin-bottom: 5px;
+	display: block;
+}
+
+#doc .doc_total {
+	font-weight: 600;
+	margin-top: 10px;
+	color: #FFF;
+}
+
+#doc .doc_total dd {
+	border: none;
+}
+
+.button {
+	background-color: #363B3F;
+	color: #FFF;
+	font-weight: 600;
+	font-size: 1em;
+	padding: 10px;
+	border: none;
+}
+
+.button.print_button {
+	background-color: #ddd;
+	color: #7c7c7c;
+}
+
+/**
+ * Footer
+ */
+
+#footer_wrap {
+	background-color: #fafafa;
+}
+
+#footer_wrap ul {
+	margin: 0;
+	padding: 25px 50px;
+	list-style: none;
+}
+
+#footer_wrap ul li {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+#footer_wrap ul li strong {
+	color: #ccc;
+}
+
+#footer_credit {
+	color: #ddd;
+}
+
+/**
+ * Line items
+ */
+
+.helptip.rate_ico:after {
+	font-family: "sproutapps-ff";
+	content: '\f111';
+}
+
+.helptip.qty_ico:after {
+	font-family: "sproutapps-ff";
+	content: '\f10b';
+}
+
+.helptip.percentage_ico:after {
+	font-family: "sproutapps-ff";
+	content: '\f104';
+}
+
+.line_item_type:after {
+	content: '\f348';
+	color: #C7C7C7;
+	font: 400 20px/1 dashicons;
+	speak: none;
+	display: inline-block;
+	padding: 0 2px 0 0;
+	top: 0;
+	left: -1px;
+	position: relative;
+	vertical-align: top;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none!important
+}
+#doc_line_items {
+	width: 100%;
+}
+#doc_line_items ol {
+	list-style: none;
+	padding-left: 0px;
+}
+
+#line_items_header {
+	border-top: none;
+	border-bottom: 1px solid #363B3F;
+	padding-top: 10px;
+	margin-bottom: 30px;
+}
+
+#line_items_footer {
+	padding-top: 15px;
+	padding-bottom: 16px;
+	border-top: 1px solid #363B3F;
+	display: block;
+}
+
+#add_line_item {
+	float: left;
+	margin-left: 4%;
+}
+
+#line_items_totals,
+#status_updates {
+	float: right;
+}
+
+#line_items_totals {
+	text-align: right;
+}
+
+#line_items_totals b {
+	margin-right: 20px;
+}
+
+#line_items_totals div {
+	margin-bottom: 10px;
+}
+
+#line_item_add {
+	display: none;
+}
+
+.line_item {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	min-height: 70px;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+
+.items_list .line_item {
+	margin-left: 33px;
+	margin-top: 10px;
+}
+
+.line_item.has_children {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+#items .line_item .column {
+	background-color: #fafafa;
+}
+
+#items .items_list .line_item .column {
+	background-color: #fff;
+}
+
+#items .line_item .column.column_type {
+	background-color: inherit;
+	padding-left: 0;
+	padding-right: 20px;
+}
+
+#line_items_header .line_item {
+	margin: 0px;
+	padding: 0px;
+	min-height: 20px;
+	font-weight: 600;
+}
+
+.line_item .column {
+	flex: 1;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	padding: 10px;
+	text-align: center;
+}
+
+.line_item .column_type.column,
+.line_item .column_desc.column {
+	text-align: left;
+}
+
+.line_item .column_total.column {
+	text-align: right;
+}
+
+.line_item .column_type {
+	flex: .2;
+	-webkit-flex: .2;
+	-moz-flex: .2;
+	-ms-flex: .2;
+}
+
+.line_item .column_desc {
+	flex: 6;
+	-webkit-flex: 6;
+	-moz-flex: 6;
+	-ms-flex: 6;
+}
+
+.item .item .line_item .column_desc {
+	flex: 5.5;
+	-webkit-flex: 5.5;
+	-moz-flex: 5.5;
+	-ms-flex: 5.5;
+}
+
+.line_item p {
+	margin-top: 0px;
+}
+
+/**
+ * Utility
+ */
+
+.spinner {
+	background: url(../img/spinner.gif) no-repeat;
+	-webkit-background-size: 20px 20px;
+	background-size: 20px 20px;
+	display: none;
+	float: right;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	width: 20px;
+	height: 20px;
+	margin: 2px 5px 0;
+}
+
+.si_inline_spinner {
+	float: none;
+	margin: 0 5px -6px
+}
+
+/**
+ * HiDPI Displays
+ */
+
+@media print,
+  (-o-min-device-pixel-ratio: 5/4),
+  (-webkit-min-device-pixel-ratio: 1.25),
+  (min-resolution: 120dpi) {
+
+	.spinner {
+		background-image: url(../img/spinner-2x.gif);
+	}
+
+}
+
+.helptip:hover {
+	cursor: help
+}
+
+.helptip:after {
+	content: '\f223';
+	color: #C7C7C7;
+	font: 400 20px/1 dashicons;
+	speak: none;
+	display: inline-block;
+	padding: 0 2px 0 0;
+	top: 0;
+	left: -1px;
+	position: relative;
+	vertical-align: top;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none!important
+}
+
+/**
+ * Payment Form
+ */
+
+#credit_card_checkout_wrap,
+#check_info_checkout_wrap {
+	background-color: #FFF;
+	margin: 0px -1000px 50px -1000px;
+	padding: 50px 1000px;
+	display: none;
+	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+	-moz-box-shadow: inset 0 0 5px #ccc;
+	-webkit-box-shadow: inset 0 0 5px #ccc;
+	box-shadow: inset 0 0 5px #ccc;
+}
+
+#billing_cc_fields {
+	width: 100%;
+}
+
+#billing_cc_fields .sa-fieldset {
+	width: 46%;
+	float: left;
+	clear: right;
+	margin: 0 2%;
+}
+
+#billing_cc_fields input,
+#billing_cc_fields textarea {
+	width: 100%;
+}
+
+#billing_cc_fields #sa_credit_cc_expiration_month,
+#billing_cc_fields #sa_credit_cc_expiration_year,
+#billing_cc_fields #sa_credit_cc_cvv {
+	float: left;
+	width: 30%;
+	margin-right: 3%;
+}
+
+#billing_cc_fields #sa_credit_cc_expiration_month,
+#billing_cc_fields #sa_credit_cc_expiration_year {
+	margin-top: 5px;
+}
+
+#billing_cc_fields #sa_credit_cc_expiration_year {
+	width: 21%;
+}
+
+#billing_cc_fields #sa_credit_cc_cvv {
+	width: 30%;
+}
+
+#billing_cc_fields #sa_billing_zone,
+#billing_cc_fields #sa_billing_country {
+	width: 45%;
+	float: left;
+	margin-right: 10px
+}
+
+#billing_cc_fields #sa_credit_cc_expiration_year,
+#billing_cc_fields .sa-control-group {
+	margin-bottom: 10px;
+}
+
+#credit_card_checkout_wrap .sa-form .label_wrap {
+	display: none;
+}
+
+.sa_credit_cc_expiration_year {
+	display: none;
+}
+
+#checks_fields .required {
+	display: none;
+}
+
+#checks_fields input,
+#checks_fields textarea {
+	width: 50%
+}
+
+#checks_fields input#sa_checks_mailed {
+	width: auto;
+}
+
+.button-primary {
+	float: right;
+	margin-top: 3em;
+	margin-right: 2%;
+}
+.security_message.clearfix {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+#check_info_checkout_wrap .button-primary {
+	float: none;
+	margin-left: 12em;
+}
+
+/**
+ * Forms Utility
+ */
+
+.sa-form input[type="text"],
+.sa-form input[type="password"],
+.sa-form input[type="email"],
+.sa-form input[type="url"],
+.sa-form input[type="date"],
+.sa-form input[type="month"],
+.sa-form input[type="time"],
+.sa-form input[type="datetime"],
+.sa-form input[type="datetime-local"],
+.sa-form input[type="week"],
+.sa-form input[type="number"],
+.sa-form input[type="search"],
+.sa-form input[type="tel"],
+.sa-form input[type="color"],
+.sa-form select,
+.sa-form textarea {
+	padding: 0.5em 0.6em;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 1px 3px #ddd;
+	border-radius: 4px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.sa-form input:not([type]) {
+	padding: 0.5em 0.6em;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 1px 3px #ddd;
+	border-radius: 4px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
+
+/* May be able to remove this tweak as color inputs become more standardized across browsers. */
+
+.sa-form input[type="color"] {
+	padding: 0.2em 0.5em;
+}
+
+.sa-form input[type="text"]:focus,
+.sa-form input[type="password"]:focus,
+.sa-form input[type="email"]:focus,
+.sa-form input[type="url"]:focus,
+.sa-form input[type="date"]:focus,
+.sa-form input[type="month"]:focus,
+.sa-form input[type="time"]:focus,
+.sa-form input[type="datetime"]:focus,
+.sa-form input[type="datetime-local"]:focus,
+.sa-form input[type="week"]:focus,
+.sa-form input[type="number"]:focus,
+.sa-form input[type="search"]:focus,
+.sa-form input[type="tel"]:focus,
+.sa-form input[type="color"]:focus,
+.sa-form select:focus,
+.sa-form textarea:focus {
+	outline: 0;
+	outline: thin dotted \9;
+	
+
+/* IE
+
+6-9 */
+    border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.sa-form input:not([type]):focus {
+	outline: 0;
+	outline: thin dotted \9;
+	
+
+/* IE
+
+6-9 */
+    border-color: #129FEA;
+}
+
+.sa-form input[type="file"]:focus,
+.sa-form input[type="radio"]:focus,
+.sa-form input[type="checkbox"]:focus {
+	outline: thin dotted #333;
+	outline: 1px auto #129FEA;
+}
+
+.sa-form .sa-checkbox,
+.sa-form .sa-radio {
+	margin: 0.5em 0;
+	display: block;
+}
+
+.sa-form input[type="text"][disabled],
+.sa-form input[type="password"][disabled],
+.sa-form input[type="email"][disabled],
+.sa-form input[type="url"][disabled],
+.sa-form input[type="date"][disabled],
+.sa-form input[type="month"][disabled],
+.sa-form input[type="time"][disabled],
+.sa-form input[type="datetime"][disabled],
+.sa-form input[type="datetime-local"][disabled],
+.sa-form input[type="week"][disabled],
+.sa-form input[type="number"][disabled],
+.sa-form input[type="search"][disabled],
+.sa-form input[type="tel"][disabled],
+.sa-form input[type="color"][disabled],
+.sa-form select[disabled],
+.sa-form textarea[disabled] {
+	cursor: not-allowed;
+	background-color: #eaeded;
+	color: #cad2d3;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.sa-form input:not([type])[disabled] {
+	cursor: not-allowed;
+	background-color: #eaeded;
+	color: #cad2d3;
+}
+
+.sa-form input[readonly],
+.sa-form select[readonly],
+.sa-form textarea[readonly] {
+	background: #eee;
+	
+
+/*
+
+menu hover bg color */
+    color: #777;
+	/
+
+* menu text color */
+    border-color: #ccc;
+}
+
+.sa-form input:focus:invalid,
+.sa-form textarea:focus:invalid,
+.sa-form select:focus:invalid {
+	color: #b94a48;
+	border-color: #ee5f5b;
+}
+
+.sa-form input:focus:invalid:focus,
+.sa-form textarea:focus:invalid:focus,
+.sa-form select:focus:invalid:focus {
+	border-color: #e9322d;
+}
+
+.sa-form input[type="file"]:focus:invalid:focus,
+.sa-form input[type="radio"]:focus:invalid:focus,
+.sa-form input[type="checkbox"]:focus:invalid:focus {
+	outline-color: #e9322d;
+}
+
+.sa-form select {
+	border: 1px solid #ccc;
+	background-color: white;
+}
+
+.sa-form select[multiple] {
+	height: auto;
+}
+
+.sa-form label {
+	margin: 0.5em 0 0.2em;
+}
+
+.sa-form fieldset {
+	margin: 0;
+	padding: 0.35em 0 0.75em;
+	border: 0;
+}
+
+.sa-form legend {
+	display: block;
+	width: 100%;
+	padding: 0.3em 0;
+	margin-bottom: 0.3em;
+	color: #333;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.sa-form-stacked input[type="text"],
+.sa-form-stacked input[type="password"],
+.sa-form-stacked input[type="email"],
+.sa-form-stacked input[type="url"],
+.sa-form-stacked input[type="date"],
+.sa-form-stacked input[type="month"],
+.sa-form-stacked input[type="time"],
+.sa-form-stacked input[type="datetime"],
+.sa-form-stacked input[type="datetime-local"],
+.sa-form-stacked input[type="week"],
+.sa-form-stacked input[type="number"],
+.sa-form-stacked input[type="search"],
+.sa-form-stacked input[type="tel"],
+.sa-form-stacked input[type="color"],
+.sa-form-stacked select,
+.sa-form-stacked label,
+.sa-form-stacked textarea {
+	display: block;
+	margin: 0.25em 0;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.sa-form-stacked input:not([type]) {
+	display: block;
+	margin: 0.25em 0;
+}
+
+.sa-form-aligned input,
+.sa-form-aligned textarea,
+.sa-form-aligned select,
+
+
+
+
+/* NOTE: sa-help-inline is deprecated. Use .sa-form-message-inline instead. */
+.sa-form-aligned .sa-help-inline,
+.sa-form-message-inline {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+}
+
+.sa-form-aligned textarea {
+	vertical-align: top;
+}
+
+/* Aligned Forms */
+
+.sa-form-aligned .sa-control-group {
+	margin-bottom: 0.5em;
+}
+
+.sa-form-aligned .sa-control-group label {
+	text-align: right;
+	display: inline-block;
+	vertical-align: middle;
+	width: 10em;
+	margin: 0 1em 0 0;
+}
+
+.sa-form-aligned .sa-controls {
+	margin: 1.5em 0 0 10em;
+}
+
+/* Rounded Inputs */
+
+.sa-form input.sa-input-rounded,
+.sa-form .sa-input-rounded {
+	border-radius: 2em;
+	padding: 0.5em 1em;
+}
+
+/* Grouped Inputs */
+
+.sa-form .sa-group fieldset {
+	margin-bottom: 10px;
+}
+
+.sa-form .sa-group input {
+	display: block;
+	padding: 10px;
+	margin: 0;
+	border-radius: 0;
+	position: relative;
+	top: -1px;
+}
+
+.sa-form .sa-group input:focus {
+	z-index: 2;
+}
+
+.sa-form .sa-group input:first-child {
+	top: 1px;
+	border-radius: 4px 4px 0 0;
+}
+
+.sa-form .sa-group input:last-child {
+	top: -2px;
+	border-radius: 0 0 4px 4px;
+}
+
+.sa-form .sa-group button {
+	margin: 0.35em 0;
+}
+
+.sa-form .sa-input-1 {
+	width: 100%;
+}
+
+.sa-form .sa-input-2-3 {
+	width: 66%;
+}
+
+.sa-form .sa-input-1-2 {
+	width: 50%;
+}
+
+.sa-form .sa-input-1-3 {
+	width: 33%;
+}
+
+.sa-form .sa-input-1-4 {
+	width: 25%;
+}
+
+/* Inline help for forms */
+
+/* NOTE: sa-help-inline is deprecated. Use .sa-form-message-inline instead. */
+
+.sa-form .sa-help-inline,
+.sa-form-message-inline {
+	display: inline-block;
+	padding-left: 0.3em;
+	color: #666;
+	vertical-align: middle;
+	font-size: 0.875em;
+}
+
+/* Block help for forms */
+
+.sa-form-message {
+	display: block;
+	color: #666;
+	font-size: 0.875em;
+}
+
+@media only screen and (max-width : 480px) {
+
+	.sa-form button[type="submit"] {
+		margin: 0.7em 0 0;
+	}
+
+	.sa-form input:not([type]),
+	    .sa-form input[type="text"],
+	    .sa-form input[type="password"],
+	    .sa-form input[type="email"],
+	    .sa-form input[type="url"],
+	    .sa-form input[type="date"],
+	    .sa-form input[type="month"],
+	    .sa-form input[type="time"],
+	    .sa-form input[type="datetime"],
+	    .sa-form input[type="datetime-local"],
+	    .sa-form input[type="week"],
+	    .sa-form input[type="number"],
+	    .sa-form input[type="search"],
+	    .sa-form input[type="tel"],
+	    .sa-form input[type="color"],
+	    .sa-form label {
+		margin-bottom: 0.3em;
+		display: block;
+	}
+
+	.sa-group input:not([type]),
+	    .sa-group input[type="text"],
+	    .sa-group input[type="password"],
+	    .sa-group input[type="email"],
+	    .sa-group input[type="url"],
+	    .sa-group input[type="date"],
+	    .sa-group input[type="month"],
+	    .sa-group input[type="time"],
+	    .sa-group input[type="datetime"],
+	    .sa-group input[type="datetime-local"],
+	    .sa-group input[type="week"],
+	    .sa-group input[type="number"],
+	    .sa-group input[type="search"],
+	    .sa-group input[type="tel"],
+	    .sa-group input[type="color"] {
+		margin-bottom: 0;
+	}
+
+	.sa-form-aligned .sa-control-group label {
+		margin-bottom: 0.3em;
+		text-align: left;
+		display: block;
+		width: 100%;
+	}
+
+	.sa-form-aligned .sa-controls {
+		margin: 1.5em 0 0 0;
+	}
+	.sa-form .sa-help-inline,
+    .sa-form-message-inline,
+    .sa-form-message {
+		display: block;
+		font-size: 0.75em;
+		padding: 0.2em 0 0.8em;
+	}
+
+}
+
+/**
+ * History
+ */
+
+#doc_history dl {
+	padding: .5em
+}
+
+#doc_history dt {
+	float: left;
+	clear: left;
+	width: 200px;
+	text-align: right;
+	font-weight: 700
+}
+
+#doc_history dt:after {
+	content: ":"
+}
+
+#doc_history {
+	margin: 100px auto;
+	width: 600px;
+}
+
+#doc_history dd {
+	margin-bottom: 15px;
+	padding-left: 20px;
+	border-left: 1px solid #ddd;
+	min-height: 60px;
+	margin-left: 220px;
+}
+
+#doc_history dt {
+	padding-top: 20px
+}
+
+#doc_history dd:first-of-type p {
+	margin: 0;
+	margin-top: -15px
+}
+
+#doc_history dd {
+	padding-top: 8px
+}
+
+#doc_history dt:after {
+	content: ''
+}
+
+#doc_history dd:after {
+	content: "\f140";
+	color: #ddd;
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font: normal 2em/1 dashicons;
+	vertical-align: top;
+	position: relative;
+	left: -36px;
+	bottom: -18px
+}
+
+#doc_history dd:first-of-type:before {
+	font-family: "sproutapps-ff" !important;
+	content: '\f10a';
+	color: #ddd;
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font: normal 2em/1 dashicons;
+	vertical-align: top;
+	position: relative;
+	left: -35px;
+	top: -40px;
+}
+
+#doc_history dt .history_date {
+	font-weight: 400;
+	font-size: .9em
+}
+
+#doc_history dt span.history_status:before {
+	content: '\f464';
+	color: #ddd;
+	font: 400 20px/1 dashicons;
+	speak: none;
+	display: inline-block;
+	padding: 0 2px 0 0;
+	top: 0;
+	right: 3px;
+	position: relative;
+	vertical-align: top;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none!important
+}
+
+#doc_history dt span.si_notification:before {
+	content: '\f466'
+}
+
+#doc_history dt span.si_viewed_status_update:before {
+	content: '\f177'
+}
+
+#doc_history dt span.si_history_status_update:before {
+	content: '\f173'
+}
+
+#doc_history dt span.payment:before {
+	font-family: "sproutapps-ff";
+	content: "\f100";
+	margin-top: -4px;
+}
+
+#doc_history dt span.si_invoice_created:before {
+	font-family: "sproutapps-ff";
+	content: "\f109";
+	margin-top: -4px;
+}
+
+#doc_history dt span.creation_event:before {
+	content: ''
+}
+
+/**
+ * Print
+ */
+
+@media only print {
+
+	#doc_header_wrap-sticky-wrapper,
+		#doc_history {
+		display: none;
+	}
+
+	#document_wrap {
+		border: none;
+	}
+
+	#header_wrap {
+		margin-bottom: 10px;
+	}
+
+	.line_item {
+		margin-bottom: 0px;
+		padding-bottom: 0px;
+	}
+
+}
