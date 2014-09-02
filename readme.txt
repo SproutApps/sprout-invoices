@@ -12,9 +12,9 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 == Description ==
 
-Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management..._seriously though_, I\'m trying to build something awesome that you will love. Thank you for your support.
+Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management...seriously though, I'm trying to build something awesome that you will love.
 
-Sprout Invoices is the cornerstone for Sprout Apps. Helping streamline what could be a very complex workflow of accepting estimates and getting invoices paid; integrating the entire process into your site.
+Sprout Invoices is the first and the our cornerstone. Helping streamline what could be a very complex workflow of accepting estimates and getting invoices paid; integrating the entire process into your site.
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
@@ -22,21 +22,22 @@ Sprout Invoices helps streamline the complex workflow of accepting estimates and
 
 **[Fully featured upgrades and add-on marketplace available.](https://sproutapps.co/sprout-invoices/)**
 
-=== Requests ===
+= Requests =
 
 Receiving estimate requests on your site is simplified with Sprout Invoices. Use the customizable default form or integrate with an existing form built a favorite form builder plugin, e.g. Gravity Forms or Ninja Forms.
 
-=== Estimating ===
+= Estimating =
 
 Estimates are automatically created based on estimate request submissions from your site. Review, update, and send the estimate to your new client without having to depend on communicating via email first.
 
 
-=== Invoicing ===
+= Invoicing =
 
 Invoices are automatically generated from accepted estimates speeding up the process of getting paid. Sprout Invoices understands deposit payments and doesn't have the same hoops other invoice services require.
 
 
-==== Flexibility built in ===
+= Flexibility built in =
+
 While Sprout Invoices automates many of the tasks to improve workflow the power comes from customization.
 
 *Custom Estimate and Invoice Templates*
@@ -52,7 +53,7 @@ Accept credit cards via Paypal Pro or send them to Paypal for invoice payments. 
 Over two hundred filters and actions allow you to hook into Sprout Invoices and alter whatever you'd like.
 
 
-=== Feature List ===
+= Feature List =
 
 Some people love feature lists:
 
@@ -86,11 +87,12 @@ Some people love feature lists:
 
 1. Invoice Template
 2. Easy Invoice Management
-3. A dashboard with charts and summaries answer the question "how am I doing?".
-4. Dynamic reports allow for date filtering, sorting, search, and exporting.
-5. Common management tasks are sped up by Sprout Invoices utilization of AJAX.
+3. Easy Invoice Management
+4. A dashboard with charts and summaries answer the question "how am I doing?".
+5. Dynamic reports allow for date filtering, sorting, search, and exporting.
+6. Common management tasks are sped up by Sprout Invoices utilization of AJAX.
+7. Easy Estimate Management
 
-TODO
 
 == Upgrade Notice ==
 
@@ -100,7 +102,7 @@ TODO
 
 == Changelog ==
 
-==1.0==
+= 1.0 =
 
 Welcome! This is a big update and a big step for us.
 
@@ -112,13 +114,13 @@ Welcome! This is a big update and a big step for us.
 * Better dashboard let you know what's up.
 * Remove some unnecessary cruft.
 
-=0.9.2=
+= 0.9.2 =
 
 * Admin bar links
 * Additional hooks and filters required by submission integration add-on
 * Minor updates
 
-=0.9.1=
+= 0.9.1 =
 
 * Line Item UI changes.
 * Invoice Style fixes
@@ -126,11 +128,11 @@ Welcome! This is a big update and a big step for us.
 * Better documentation and linking to site.
 
 
-=0.9=
+= 0.9 =
 
 * Initial Release
 
-=0.9.0.1=
+= 0.9.0.1 =
 
 * Remove debugging logs from release branch.
 
