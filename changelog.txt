@@ -10,6 +10,10 @@ Welcome! This is a big update and a big step for us.
 * Better dashboard let you know what's up.
 * Remove some unnecessary cruft.
 
+=0.9.8.4=
+
+* Dashboard fix
+
 =0.9.8.3=
 
 * Import progress fix.
