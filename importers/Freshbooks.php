@@ -202,6 +202,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 					}
 
 				}
+
+				$progress[] = 'clients';
+				update_option( self::PROGRESS_OPTION, $progress );
 			}
 			else {
 				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
@@ -213,8 +216,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 			self::update_progress_info( 'clients', 0, 0, 100, self::__('Clients already imported.') );
 			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Contacts already imported.') );
 		}
-		$progress[] = 'clients';
-		update_option( self::PROGRESS_OPTION, $progress );
 
 		///////////////
 		// Estimates //
@@ -256,6 +257,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 						self::update_progress_info( 'estimates', $i, $total_records );
 					}
 				}
+
+				$progress[] = 'estimates';
+				update_option( self::PROGRESS_OPTION, $progress );
 			}
 			else {
 				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
@@ -265,8 +269,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 		else{
 			self::update_progress_info( 'estimates', 0, 0, 100, self::__('Estimates already imported.') );
 		}
-		$progress[] = 'estimates';
-		update_option( self::PROGRESS_OPTION, $progress );
 
 
 		///////////////
@@ -312,6 +314,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 					}
 
 				}
+
+				$progress[] = 'invoices';
+				update_option( self::PROGRESS_OPTION, $progress );
 			}
 			else {
 				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
@@ -321,8 +326,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 		else{
 			self::update_progress_info( 'invoices', 0, 0, 100, self::__('Invoices already imported.') );
 		}
-		$progress[] = 'invoices';
-		update_option( self::PROGRESS_OPTION, $progress );
 
 
 		//////////////
@@ -367,6 +370,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 					}
 
 				}
+				
+				$progress[] = 'payments';
+				update_option( self::PROGRESS_OPTION, $progress );
 			}
 			else {
 				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
@@ -376,8 +382,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 		else{
 			self::update_progress_info( 'payments', 0, 0, 100, self::__('Invoices already imported.') );
 		}
-		$progress[] = 'payments';
-		update_option( self::PROGRESS_OPTION, $progress );
 
 
 		//////////////

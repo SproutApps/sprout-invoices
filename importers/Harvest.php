@@ -182,6 +182,8 @@ class SI_Harvest_Import extends SI_Importer {
 						self::update_progress_info( 'clients', $i, $total );
 						self::create_client( $client );
 					}
+					$progress[] = 'clients';
+					update_option( self::PROGRESS_OPTION, $progress );
 				}
 				else {
 					$auth_error = TRUE;
@@ -192,8 +194,6 @@ class SI_Harvest_Import extends SI_Importer {
 		else {
 			self::update_progress_info( 'clients', 0, 0, 100, self::__('Clients already imported.') );
 		}
-		$progress[] = 'clients';
-		update_option( self::PROGRESS_OPTION, $progress );
 
 		//////////////
 		// Contacts //
@@ -215,6 +215,9 @@ class SI_Harvest_Import extends SI_Importer {
 						self::update_progress_info( 'contacts', $i, $total );
 						self::create_contact( $contact );
 					}
+
+					$progress[] = 'contacts';
+					update_option( self::PROGRESS_OPTION, $progress );
 				}
 				else {
 					$auth_error = TRUE;
@@ -225,8 +228,6 @@ class SI_Harvest_Import extends SI_Importer {
 		else {
 			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Contacts already imported.') );
 		}
-		$progress[] = 'contacts';
-		update_option( self::PROGRESS_OPTION, $progress );
 
 		///////////////
 		// Estimates //
@@ -315,8 +316,10 @@ class SI_Harvest_Import extends SI_Importer {
 					}	
 				}
 			}
-			$progress[] = 'invoices_page';
-			update_option( self::PROGRESS_OPTION, $progress );
+			if ( $total ) {
+				$progress[] = 'invoices_page';
+				update_option( self::PROGRESS_OPTION, $progress );
+			}
 		}
 
 		////////////////////////
