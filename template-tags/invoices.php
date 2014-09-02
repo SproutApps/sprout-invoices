@@ -746,8 +746,10 @@ function si_payment_options( $id = 0, $return = 'options' ) {
 	if ( $return == 'options' ) {
 		$processor_options = array();
 		foreach ( $enabled_processors as $class ) {
-			$payment_processor = call_user_func( array( $class, 'get_instance' ) );
-			$processor_options[$payment_processor->get_slug()] = $payment_processor->checkout_options();
+			if ( method_exists( $class, 'get_instance' ) ) {
+				$payment_processor = call_user_func( array( $class, 'get_instance' ) );
+				$processor_options[$payment_processor->get_slug()] = $payment_processor->checkout_options();
+			}
 		}
 		$enabled_processors = $processor_options; // overload with slugs
 	}
@@ -760,9 +762,11 @@ function si_is_cc_processor( $slug = '' ) {
 	$is_cc_processor = FALSE;
 	$enabled_processors = SI_Payment_Processors::enabled_processors();
 	foreach ( $enabled_processors as $class ) {
-		$payment_processor = call_user_func( array( $class, 'get_instance' ) );
-		if ( $payment_processor->get_slug() && $slug === $payment_processor->get_slug() ) {
-			$is_cc_processor = is_subclass_of( $class, 'SI_Credit_Card_Processors'); 
+		if ( method_exists( $class, 'get_instance' ) ) {
+			$payment_processor = call_user_func( array( $class, 'get_instance' ) );
+			if ( $payment_processor->get_slug() && $slug === $payment_processor->get_slug() ) {
+				$is_cc_processor = is_subclass_of( $class, 'SI_Credit_Card_Processors'); 
+			}
 		}
 	}
 	return $is_cc_processor;

@@ -25,6 +25,9 @@ class SI_Admin_Settings extends SI_Controller {
 		// Register Settings
 		self::register_settings();
 
+		// Help Sections
+		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
 		// Redirect after activation
 		add_action( 'admin_init', array( __CLASS__, 'redirect_on_activation' ), 20, 0 );
 
@@ -381,6 +384,65 @@ class SI_Admin_Settings extends SI_Controller {
 					'title' => self::__($item['title']),
 					'href' => $item['href'],
 				) );
+		}
+	}
+
+
+
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-sprout-apps_page_sprout-apps/settings', array( __CLASS__, 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		if ( !isset( $_GET['tab'] ) ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'general-about',
+					'title' => self::__( 'License' ),
+					'content' => sprintf( '<p>%s</p>', self::__('Activate your license if you have not done so already.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'general-leads',
+					'title' => self::__( 'Credit Card Processing' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('To get you started, Sprout Invoices provides a fully customizable form for estimate submissions. Add the shortcode below to a page to use this default form: <code>[estimate_submission]Thank you![/estimate_submission]</code>'), self::__('Additional documentation is available to customize the default estimate form and using the integration add-on.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'general-estimate',
+					'title' => self::__( 'Estimate/Invoice Settings' ),
+					'content' => sprintf( '<p>%s</p>', self::__('The Default Terms and Default Notes will be added to each estimate unless an estimate has customized Terms and/or Notes.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'general-notification',
+					'title' => self::__( 'Notification Settings' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('The from name and from e-mail is used for all Sprout Invoice notifications. Example, “Joc Pederson” future@dodgers.com.'), self::__('Changing the email format to “HTML” will make the default notifications unformatted and look like garbage; if you want to create some pretty HTML notifications make sure to modify all notification formatting.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'general-company',
+					'title' => self::__( 'Company Info' ),
+					'content' => sprintf( '<p>%s</p>', self::__('This information is used on all estimates and invoices. You’ll want to make sure to set this information before sending out any invoices/estimates.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'general-advanced',
+					'title' => self::__( 'Advanced' ),
+					'content' => sprintf( '<p>%s</p>', self::__('The option to Save Logs is for debugging purposes and not recommended, unless advised. It’s important to note that turning enabling this option on a live site may cause private transaction data to be saved in the DB unencrypted, i.e. CC data.') )
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
 		}
 	}
 

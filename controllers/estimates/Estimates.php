@@ -27,6 +27,9 @@ class SI_Estimates extends SI_Controller {
 
 		self::register_settings();
 
+		// Help Sections
+		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
 		if ( is_admin() ) {
 			// Admin columns
 			add_filter( 'manage_edit-'.SI_Estimate::POST_TYPE.'_columns', array( __CLASS__, 'register_columns' ) );
@@ -999,6 +1002,72 @@ class SI_Estimates extends SI_Controller {
 			'weight' => 0,
 		);
 		return $items;
+	}
+
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-edit.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-post.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-post-new.php', array( get_class(), 'help_tabs' ) );
+		add_action( 'load-edit-tags.php', array( get_class(), 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		$post_type = '';
+		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == SI_Estimate::POST_TYPE ) {
+			$post_type = SI_Estimate::POST_TYPE;
+		}
+		if ( $post_type == '' && isset( $_GET['post'] ) ) {
+			$post_type = get_post_type( $_GET['post'] );
+		}
+		if ( !isset( $_GET['taxonomy'] ) && $post_type == SI_Estimate::POST_TYPE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'manage-estimates',
+					'title' => self::__( 'Manage Estimates' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('The status on the estimate table view can be updated without having to go the edit screen by click on the current status and selecting a new one.'), self::__('If an invoice is associated an icon linking to the edit page will show in the last column.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'edit-estimates',
+					'title' => self::__( 'Editing Estimates' ),
+					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__('Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__('Knowledgebase Article') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'mng-payments',
+					'title' => self::__( 'Predefined Tasks' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('An admin to manage your tasks is found under Estimates > Tasks  in the admin. When adding a new task the “Name” is what you will select when adding new line items, the description is used to dill the line item description field.'), self::__('Pre-defined tasks are used for both Estimates and Invoices.') ),
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
+		if ( isset( $_GET['taxonomy'] ) && $_GET['taxonomy'] == SI_Estimate::LINE_ITEM_TAXONOMY && $post_type == SI_Estimate::POST_TYPE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'mng-payments',
+					'title' => self::__( 'Line Item Tasks' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__('An admin to manage your tasks is found under Estimates > Tasks  in the admin. When adding a new task the “Name” is what you will select when adding new line items, the description is used to dill the line item description field.'), self::__('Pre-defined tasks are used for both Estimates and Invoices.'), self::__('Subscribe to the blog or twitter account to get updates when new features are added to pre-defined tasks, since the ability to add a pre-defined rate, quantity and percentage is in the works.') ),
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/predefined-tasks-line-items/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
+
 	}
 
 }

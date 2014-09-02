@@ -140,7 +140,10 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 		}
 	}
 
-	$total = $data['total'];
+	$desc = ( isset( $data['desc'] ) ) ? $data['desc'] : '' ;
+	$rate = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
+	$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 0 ;
+	$total = ( isset( $data['total'] ) ) ? $data['total'] : 0 ;
 	if ( !empty( $children ) ) {
 		$total = 0;
 		foreach ( $children as $child_position ) {
@@ -163,13 +166,13 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 					} ?>
 			</div>
 			<div class="column column_desc">
-				<?php echo apply_filters( 'the_content', $data['desc'] ) ?>
+				<?php echo apply_filters( 'the_content', $desc ) ?>
 			</div>
 			<div class="column column_rate">
-				<?php esc_attr_e( $data['rate'] ) ?>
+				<?php esc_attr_e( $rate ) ?>
 			</div>
 			<div class="column column_qty">
-				<?php esc_attr_e( $data['qty'] ) ?>
+				<?php esc_attr_e( $qty ) ?>
 			</div>
 			<?php if ( $has_percentage_adj ): ?>
 				<div class="column column_tax">
@@ -195,6 +198,12 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 		$type_options[$item_type->term_id] = $item_type->name;
 	}
 	$data = $items[$position];
+
+	$desc = ( isset( $data['desc'] ) ) ? $data['desc'] : '' ;
+	$rate = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
+	$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 0 ;
+	$total = ( isset( $data['total'] ) ) ? $data['total'] : 0 ;
+	
 	ob_start(); ?>
 		<div class="item_action_column">
 			<div class="item_action dd-handle"></div>
@@ -203,27 +212,27 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 		</div>
 		<div class="line_item<?php if ( !empty( $children ) ) echo ' has_children' ?>">
 			<div class="column column_desc">
-				<textarea name="line_item_desc[]"><?php esc_attr_e( $data['desc'] ) ?></textarea>
+				<textarea name="line_item_desc[]"><?php esc_attr_e( $desc ) ?></textarea>
 			</div>
 			<div class="column column_rate">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_rate[]" value="<?php esc_attr_e( $data['rate'] ) ?>" placeholder="1" size="3">
+				<input class="totalled_input" type="text" name="line_item_rate[]" value="<?php esc_attr_e( $rate ) ?>" placeholder="1" size="3">
 			</div>
 			<div class="column column_qty">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_qty[]" value="<?php esc_attr_e( $data['qty'] ) ?>" size="2">
+				<input class="totalled_input" type="text" name="line_item_qty[]" value="<?php esc_attr_e( $qty ) ?>" size="2">
 			</div>
 			<div class="column column_tax">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_tax[]" value="<?php esc_attr_e( $data['tax'] ) ?>" placeholder="" size="1" max="100">
+				<input class="totalled_input" type="text" name="line_item_tax[]" value="<?php esc_attr_e( $tax ) ?>" placeholder="" size="1" max="100">
 			</div>
 			<div class="column column_total">
 				<?php if ( sa_currency_format_before() ): ?>
-					<?php echo sa_get_currency_symbol() ?><span><?php esc_attr_e( $data['total'] ) ?></span>
+					<?php echo sa_get_currency_symbol() ?><span><?php esc_attr_e( $total ) ?></span>
 				<?php else: ?>
-					<span><?php esc_attr_e( $data['total'] ) ?></span><?php echo sa_get_currency_symbol() ?>
+					<span><?php esc_attr_e( $total ) ?></span><?php echo sa_get_currency_symbol() ?>
 				<?php endif ?>
-				<input class="totalled_input" type="hidden" name="line_item_total[]" value="<?php esc_attr_e( $data['total'] ) ?>">
+				<input class="totalled_input" type="hidden" name="line_item_total[]" value="<?php esc_attr_e( $total ) ?>">
 			</div>
 			<input class="line_item_index" type="hidden" name="line_item_key[]" value="<?php echo $position ?>">
 		</div>

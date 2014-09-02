@@ -20,6 +20,9 @@ class SI_Reporting extends SI_Controller {
 		self::register_settings();
 		add_filter( 'si_settings_page_sub_heading_sprout-apps/settings', array( get_class(), 'reports_subtitle' ) );
 
+		// Help Sections
+		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
 		add_action( 'wp_ajax_'.self::AJAX_ACTION,  array( __CLASS__, 'get_chart_data' ), 10, 0 );
 
 		// Admin bar
@@ -731,6 +734,39 @@ class SI_Reporting extends SI_Controller {
 			'weight' => 0,
 		);
 		return $items;
+	}
+	
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-sprout-apps_page_sprout-apps/settings', array( __CLASS__, 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		if ( isset( $_GET['tab'] ) && $_GET['tab'] == self::SETTINGS_PAGE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'reports-about',
+					'title' => self::__( 'About Reports' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__('The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.'), self::__('<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.'), self::__('<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'reports-tables',
+					'title' => self::__( 'Report Tables' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__('<b>Date filtering</b> is available and can be used to retrieve data in-between t, dates, or after a date, or before a date.'), self::__('<b>Modify columns</b> within the table with the “Show / hide columns” button.'), self::__('<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.'), self::__('Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.') )
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
 	}
 
 }

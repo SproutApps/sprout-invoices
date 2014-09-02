@@ -18,6 +18,9 @@ class SI_Clients extends SI_Controller {
 
 		if ( is_admin() ) {
 
+			// Help Sections
+			add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
 			// Meta boxes
 			add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ) );
 			add_action( 'do_meta_boxes', array( __CLASS__, 'modify_meta_boxes' ) );
@@ -662,5 +665,59 @@ class SI_Clients extends SI_Controller {
 			'weight' => 0,
 		);
 		return $items;
+	}
+
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-edit.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-post.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-post-new.php', array( get_class(), 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		$post_type = '';
+		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == SI_Client::POST_TYPE ) {
+			$post_type = SI_Client::POST_TYPE;
+		}
+		if ( $post_type == '' && isset( $_GET['post'] ) ) {
+			$post_type = get_post_type( $_GET['post'] );
+		}
+		if ( $post_type == SI_Client::POST_TYPE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'edit-clients',
+					'title' => self::__( 'Manage Clients' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('The information here is used for estimates and invoices and includes settings to: Edit Company Name, Edit the company address, and Edit their website url.'), self::__('<b>Important note:</b> when clients are created new WordPress users are also created and given the “client” role. Creating users will allow for future functionality, i.e. client dashboards.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'associate-users',
+					'title' => self::__( 'Associated Users' ),
+					'content' => sprintf( '<p>%s</p>', self::__('When clients are created a WP user is created and associated and clients are not limited to a single user. Not limited a client to a single user allows for you to have multiple points of contact at/for a company/client. Example, the recipients for sending estimate and invoice notifications are these associated users.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'client-history',
+					'title' => self::__( 'Client History' ),
+					'content' => sprintf( '<p>%s</p>', self::__('Important points are shown in the client history and just like estimate and invoices private notes can be added for only you and other team members to see.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'client-invoices',
+					'title' => self::__( 'Invoices and Estimates' ),
+					'content' => sprintf( '<p>%s</p>', self::__('All invoices and estimates associated with the client are shown below the associated users option. This provides a quick way to jump to the record you need to see.') ),
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
 	}
 }

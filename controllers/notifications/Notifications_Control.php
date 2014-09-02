@@ -51,6 +51,9 @@ class SI_Notifications_Control extends SI_Controller {
 		// Create default notifications
 		add_action( 'admin_init', array( __CLASS__, 'create_notifications' ) );
 
+		// Help Sections
+		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
 	}
 
 	////////////
@@ -670,4 +673,59 @@ class SI_Notifications_Control extends SI_Controller {
 			exit();
 		}
 	}
+
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-edit.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-post.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-sprout-apps_page_sprout-apps/settings', array( __CLASS__, 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		$post_type = '';
+		if ( isset( $_GET['tab'] ) && $_GET['tab'] == self::SETTINGS_PAGE ) {
+			$post_type = SI_Notification::POST_TYPE;
+		}
+		if ( $post_type == '' && isset( $_GET['post'] ) ) {
+			$post_type = get_post_type( $_GET['post'] );
+		}
+		if ( $post_type == SI_Notification::POST_TYPE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'notification-customizations',
+					'title' => self::__( 'About Notifications' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('Notifications include the emails sent to you and your clients, including responses to prospective clients after submitting an estimate request.'), self::__('Each one of your notifications can be customized; hover over the notification you want and click the edit link.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'notification-disable',
+					'title' => self::__( 'Disable Notifications' ),
+					'content' => sprintf( '<p>%s</p>', self::__('The notifications edit screen will have an option next to the "Update" button to disable the notification from being sent.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'notification-editing',
+					'title' => self::__( 'Notification Editing' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__('<b>Subject</b> - The first input is for the notifications subject. If the notification is an e-mail than it would be subject line for that e-mail notification.'), self::__('<b>Message Body</b> - The main editor is the notification body. Use the available shortcodes to have dynamic information included when the notification is received. Make sure to change the Notification Setting if HTML formatting is added to your notifications.'), self::__('<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each.'), self::__('<b>Update</b> - The select list can be used if you want to change the current notification to a different type; it’s recommended you go to the notification you want to edit instead of using this option. The Disabled option available to prevent this notification from sending.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'notification-advanced',
+					'title' => self::__( 'Advanced' ),
+					'content' => sprintf( '<p><b>HTML Emails</b> - Enable HTML notifications within the <a href="%s">General Settings</a> page. Make sure to change use HTML on all notifications.</p>', admin_url('admin.php?page=sprout-apps/settings') ),
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
+	}
+
 }

@@ -31,6 +31,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		self::$money_format = get_option( self::MONEY_FORMAT_OPTION, '%0.2f' );
 		self::register_payment_settings();
 
+		// Help Sections
+		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
 		// AJAX utility
 		add_action( 'wp_ajax_si_manually_capture_payment',  array( __CLASS__, 'manually_capture_payment' ), 10, 0 );
 		add_action( 'wp_ajax_si_mark_payment_complete',  array( __CLASS__, 'manually_mark_complete' ), 10, 0 );
@@ -505,5 +508,50 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			$years[$this_year+$i] = $this_year+$i;
 		}
 		return apply_filters( 'si_payment_year_options', $years );
+	}
+
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-sprout-apps_page_sprout-apps/settings', array( __CLASS__, 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		if ( isset( $_GET['tab'] ) && $_GET['tab'] == self::SETTINGS_PAGE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'payment-about',
+					'title' => self::__( 'About Payment Processing' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('By default no payment processors are active. After selecting the Payment Settings tab you will find that there are two types of Payment Processors: Offsite Processors and Credit Card Processors.'), self::__('After selecting the processors you want to accept for invoice payments and saving the processor options will be shown. Each payment process has its own settings, review and complete each option before saving again') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'payment-cc',
+					'title' => self::__( 'Credit Card Processing' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('These are the credit card payment processors. You’ll notice that only one credit card processor can be activated at a time, this is by design since there’s no viable reason to accept CCs from multiple processors.'), self::__('If you ware accepting credit card information on your site you will want to use SSL for your site to keep your client’s data secure. Having SSL on your site is highly recommended for more reasons than accepting CC information, since every WordPress site has at least a login form.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'payment-offsite',
+					'title' => self::__( 'Offsite Processing' ),
+					'content' => sprintf( '<p>%s</p>', self::__('Essentially a payment processed outside of your site. These payments can include external payment providers like Paypal and Check or P.O. payments. Virtually an unlimited amount of offsite processors can be activated.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'payment-currency',
+					'title' => self::__( 'Currency Symbol' ),
+					'content' => sprintf( '<p>%s</p>', self::__('If your currency is formatted wight the symbol after the amount, place a % before your currency symbol. For example, %£.') )
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payment-settings/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
 	}
 }

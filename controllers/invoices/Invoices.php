@@ -26,6 +26,9 @@ class SI_Invoices extends SI_Controller {
 
 		self::register_settings();
 
+		// Help Sections
+		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
 		if ( is_admin() ) {
 			// Meta boxes
 			add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ), 100 );
@@ -1035,6 +1038,48 @@ class SI_Invoices extends SI_Controller {
 			'weight' => 0,
 		);
 		return $items;
+	}
+
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-edit.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-post.php', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-post-new.php', array( get_class(), 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		$post_type = '';
+		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == SI_Invoice::POST_TYPE ) {
+			$post_type = SI_Invoice::POST_TYPE;
+		}
+		if ( $post_type == '' && isset( $_GET['post'] ) ) {
+			$post_type = get_post_type( $_GET['post'] );
+		}
+		if ( $post_type == SI_Invoice::POST_TYPE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'manage-invoices',
+					'title' => self::__( 'Manage Invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__('The status on the invoice table view can be updated without having to go the edit screen by click on the current status and selecting a new one.'), self::__('Payments are tallied and shown in the Paid column. Hovering over the invoice row will show a Payments link.'),  self::__('If the invoice has an associated estimate the icon linking to the edit page of the estimate will show in the last column.') )
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'edit-invoices',
+					'title' => self::__( 'Editing Invoices' ),
+					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__('Editing invoices is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__('Knowledgebase Article') ),
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
 	}
 
 }

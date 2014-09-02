@@ -17,6 +17,9 @@ class SI_Payments extends SI_Controller {
 	public static function init() {
 		self::register_settings();
 
+		// Help Sections
+		add_action( 'in_admin_header', array( get_class(), 'help_sections' ) );
+
 		add_filter( 'views_sprout-invoices_page_sprout-invoices/payment_records', array( __CLASS__, 'modify_views' ) );
 
 		add_action( 'wp_ajax_si_void_payment',  array( get_class(), 'maybe_void_payment' ), 10, 0 );
@@ -170,5 +173,34 @@ class SI_Payments extends SI_Controller {
 			'weight' => 0,
 		);
 		return $items;
+	}
+
+	////////////////
+	// Admin Help //
+	////////////////
+
+
+	public static function help_sections() {
+		// get screen and add sections.
+		$screen = get_current_screen();
+		if ( $screen->base == 'sa_invoice_page_sprout-apps/invoice_payments' ) {
+			$screen->add_help_tab( array(
+					'id' => 'about-payments',
+					'title' => self::__( 'About Payments' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('Payment statuses include:'), self::__('<b>Pending</b> - the payment could be waiting for admin approval or waiting for the payment processor.<br/><b>Authorized</b> – a payment status set for signifying that the payment was authorized by the processor and a capture of the payment will be attempted later.<br/><b>Void</b> - payment was voided by the admin or declined by the payment processor after it was authorized or pending.') ),
+				) );
+
+			$screen->add_help_tab( array(
+					'id' => 'mng-payments',
+					'title' => self::__( 'Managing Payments' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__('Hovering over a payment brings up multiple links and options:'), self::__('<b>Void Payment</b> - Allows you to void a payment and add a note that will be added to the Transaction Data.'), self::__('<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw data stored by a payment processor.'), self::__('<b>Invoice and Client</b> – A link to the associated invoice and client edit pages.'), self::__('The payment totals are current and are not at the moment of the payment. The payment type is shown under the Data column.') ),
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
 	}
 }

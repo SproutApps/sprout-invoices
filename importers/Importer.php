@@ -17,8 +17,12 @@ class SI_Importer extends SI_Controller {
 	public static function init() {
 		// Admin
 		self::register_importer_admin();
+
 		// Hook into form submission
 		add_action( 'init', array( __CLASS__, 'process_importer' ) );
+
+		// Help Sections
+		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
 	}
 
 	public static function get_importers() {
@@ -124,4 +128,32 @@ class SI_Importer extends SI_Controller {
 		//
 	}
 
+	////////////////
+	// Admin Help //
+	////////////////
+
+	public static function help_sections() {
+		add_action( 'load-sprout-apps_page_sprout-apps/settings', array( __CLASS__, 'help_tabs' ) );
+	}
+
+	public static function help_tabs() {
+		if ( isset( $_GET['tab'] ) && $_GET['tab'] == self::SETTINGS_PAGE ) {
+			// get screen and add sections.
+			$screen = get_current_screen();
+
+			$screen->add_help_tab( array(
+					'id' => 'importing-about',
+					'title' => self::__( 'About Importing' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>', self::__('This feature provides a way for you to import data from external invoicing services, including Harvest, Freshbooks, or WP-Invoice.'), self::__(' If you have your data in one of these systems you can import all of your clients, contacts, estimates, invoices, and payments into Sprout Invoices.'), 'https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/', self::__('More Information') ),
+				) );
+
+			$screen->set_help_sidebar(
+				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/', self::__('Documentation') ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+			);
+		}
+	}
 }
+
+
