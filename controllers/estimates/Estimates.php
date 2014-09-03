@@ -196,7 +196,7 @@ class SI_Estimates extends SI_Controller {
 	public static function quick_links( $post ) {
 		if ( get_post_type( $post ) == SI_Estimate::POST_TYPE ) {
 			$estimate = SI_Estimate::get_instance( $post->ID );
-			$status = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_status() : 0 ;
+			$status = ( is_a( $estimate, 'SI_Estimate' ) && $estimate->get_status() != 'auto-draft' ) ? $estimate->get_status() : SI_Estimate::STATUS_TEMP ;
 			self::load_view( 'admin/meta-boxes/estimates/quick-links', array(
 					'id' => $post->ID,
 					'post' => $post,
@@ -225,7 +225,7 @@ class SI_Estimates extends SI_Controller {
 		$estimate = SI_Estimate::get_instance( $post->ID );
 		$total = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_total() : '0.00' ;
 		$subtotal = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_subtotal() : '0.00' ;
-		$status = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_status() : 0 ;
+		$status = ( is_a( $estimate, 'SI_Estimate' ) && $estimate->get_status() != 'auto-draft' ) ? $estimate->get_status() : SI_Estimate::STATUS_TEMP ;
 		$line_items = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_line_items() : array() ;
 		self::load_view( 'admin/meta-boxes/estimates/line-items', array(
 				'id' => $post->ID,
@@ -306,11 +306,12 @@ class SI_Estimates extends SI_Controller {
 		}
 
 		$estimate = SI_Estimate::get_instance( $post->ID );
+		$status = ( is_a( $estimate, 'SI_Estimate' ) && $estimate->get_status() != 'auto-draft' ) ? $estimate->get_status() : SI_Estimate::STATUS_TEMP ;
 		self::load_view( 'admin/meta-boxes/estimates/information', array(
 				'id' => $post->ID,
 				'post' => $post,
 				'estimate' => $estimate,
-				'status' => $estimate->get_status(),
+				'status' => $status,
 				'status_options' => SI_Estimate::get_statuses(),
 				'invoice_id' => $estimate->get_invoice_id(),
 				'expiration_date' => $estimate->get_expiration_date(),
@@ -802,8 +803,8 @@ class SI_Estimates extends SI_Controller {
 								<?php printf( self::__( '<li><a class="doc_status_change decline" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Mark Declined' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_DECLINED, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Declined' ) ); ?>
 							<?php endif ?>
 							<?php
-								if ( current_user_can( 'delete_post', $post->ID ) ) {
-									echo "<li><a class='submitdelete' title='" . esc_attr( __( 'Delete Estimate Permanently' ) ) . "' href='" . get_delete_post_link( $post->ID, '' ) . "'>" . __( 'Delete' ) . "</a></li>";
+								if ( current_user_can( 'delete_post', $id ) ) {
+									echo "<li><a class='submitdelete' title='" . esc_attr( __( 'Delete Estimate Permanently' ) ) . "' href='" . get_delete_post_link( $id, '' ) . "'>" . __( 'Delete' ) . "</a></li>";
 								} ?>
 						</ul>
 					</div>

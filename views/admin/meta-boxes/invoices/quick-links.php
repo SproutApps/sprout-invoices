@@ -13,7 +13,7 @@
 <div id="subject_header" class="clearfix">
 	<div id="subject_header_actions" class="clearfix">
 		<div id="subject_input_wrap">
-			<?php $title = ( $status != 'auto-draft' ) ? get_the_title( $id ) : '' ; ?>
+			<?php $title = ( $status != ( 'auto-draft' || SI_Invoice::STATUS_TEMP ) ) ? get_the_title( $id ) : '' ; ?>
 			<input type="text" name="subject" value="<?php echo $title ?>" placeholder="<?php si_e('Subject...') ?>">
 		</div>
 

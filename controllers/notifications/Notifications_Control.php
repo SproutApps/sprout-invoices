@@ -41,7 +41,6 @@ class SI_Notifications_Control extends SI_Controller {
 		add_action( 'do_meta_boxes', array( __CLASS__, 'modify_meta_boxes' ) );
 
 		// Admin js for notification management
-		wp_register_script( 'si_admin_notifications', SI_URL . '/resources/admin/js/notification.js', array( 'jquery' ), self::SI_VERSION );
 		add_action( 'load-post.php', array( __CLASS__, 'queue_notification_js' ) );
 		add_action( 'load-post-new.php', array( __CLASS__, 'queue_notification_js' ) );
 
@@ -182,6 +181,7 @@ class SI_Notifications_Control extends SI_Controller {
 	public static function queue_notification_js() {
 		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
 		if ( ( isset( $_GET['post_type'] ) && SI_Notification::POST_TYPE == $_GET['post_type'] ) || SI_Notification::POST_TYPE == get_post_type( $post_id ) ) {
+			wp_register_script( 'si_admin_notifications', SI_URL . '/resources/admin/js/notification.js', array( 'jquery' ), self::SI_VERSION );
 			wp_enqueue_script( 'si_admin_notifications' );
 		}
 	}
@@ -254,8 +254,7 @@ class SI_Notifications_Control extends SI_Controller {
 				'notification_types' => self::$notifications,
 				'notifications_option' => get_option( self::NOTIFICATIONS_OPTION_NAME, array() ),
 				'post' => $post,
-				'disabled' => $notification->get_disabled(),
-				'current_notification_type' => $current_notification_type,
+				'disabled' => $notification->get_disabled()
 			), FALSE );
 	}
 
@@ -466,10 +465,10 @@ class SI_Notifications_Control extends SI_Controller {
 	 */
 	public static function notification_record( $notification_name, $data, $to, $notification_title, $notification_content ) {
 		$associated_record = 0;
-		if ( $data['estimate'] && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$associated_record = $data['estimate']->get_id();
 		}
-		if ( $data['invoice'] && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$associated_record = $data['invoice']->get_id();
 		}
 		$content = '';
@@ -590,6 +589,7 @@ class SI_Notifications_Control extends SI_Controller {
 		}
 		if ( !is_a( $user, 'WP_User' ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Get User Email FAILED', $user );
+			return FALSE;
 		}
 		$user_email = $user->user_email;
 		$name = $user->first_name . ' ' . $user->last_name;

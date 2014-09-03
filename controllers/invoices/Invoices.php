@@ -211,7 +211,7 @@ class SI_Invoices extends SI_Controller {
 	public static function quick_links( $post ) {
 		if ( get_post_type( $post ) == SI_Invoice::POST_TYPE ) {
 			$invoice = SI_Invoice::get_instance( $post->ID );
-			$status = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_status() : 0 ;
+			$status = ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_status() != 'auto-draft' ) ? $invoice->get_status() : SI_Invoice::STATUS_TEMP ;
 			self::load_view( 'admin/meta-boxes/invoices/quick-links', array(
 					'id' => $post->ID,
 					'post' => $post,
@@ -242,7 +242,7 @@ class SI_Invoices extends SI_Controller {
 		$subtotal = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_subtotal() : '0.00' ;
 		$payments_total = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_payments_total() : '0.00' ;
 		$deposit = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_deposit() : '0.00' ;
-		$status = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_status() : 0 ;
+		$status = ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_status() != 'auto-draft' ) ? $invoice->get_status() : SI_Invoice::STATUS_TEMP ;
 		$line_items = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_line_items() : array() ;
 		self::load_view( 'admin/meta-boxes/invoices/line-items', array(
 				'id' => $post->ID,
@@ -327,11 +327,12 @@ class SI_Invoices extends SI_Controller {
 		}
 
 		$invoice = SI_Invoice::get_instance( $post->ID );
+		$status = ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_status() != 'auto-draft' ) ? $invoice->get_status() : SI_Invoice::STATUS_TEMP ;
 		self::load_view( 'admin/meta-boxes/invoices/information', array(
 				'id' => $post->ID,
 				'post' => $post,
 				'invoice' => $invoice,
-				'status' => $invoice->get_status(),
+				'status' => $status,
 				'status_options' => SI_Invoice::get_statuses(),
 				'estimate_id' => $invoice->get_estimate_id(),
 				'invoice_id' => $invoice->get_invoice_id(),
@@ -630,8 +631,8 @@ class SI_Invoices extends SI_Controller {
 								<?php printf( self::__( '<li><a class="doc_status_change decline" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Write-off Invoice' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_WO, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Write-off' ) ); ?>
 							<?php endif ?>
 							<?php
-								if ( current_user_can( 'delete_post', $post->ID ) ) {
-									echo "<li><a class='submitdelete' title='" . esc_attr( __( 'Delete Invoice Permanently' ) ) . "' href='" . get_delete_post_link( $post->ID, '' ) . "'>" . __( 'Delete' ) . "</a></li>";
+								if ( current_user_can( 'delete_post', $id ) ) {
+									echo "<li><a class='submitdelete' title='" . esc_attr( __( 'Delete Invoice Permanently' ) ) . "' href='" . get_delete_post_link( $id, '' ) . "'>" . __( 'Delete' ) . "</a></li>";
 								} ?>
 						</ul>
 					</div>

@@ -343,12 +343,12 @@ class SI_Payment extends SI_Post_Type {
 			if ( is_array( $args['invoices'] ) ) {
 				$payment_ids = array();
 				foreach ( $args['invoices'] as $invoice_id ) {
-					$meta[self::$meta_keys['invoice_id']] = $invoice_id;
+					$meta[self::$meta_keys['invoice']] = $invoice_id;
 					$payment_ids = array_merge( $payment_ids, self::find_by_meta( self::POST_TYPE, $meta ) );
 				}
 				return $payment_ids; // End early since we're returning an array.
 			} else {
-				$meta[self::$meta_keys['invoice_id']] = $args['invoices'];
+				$meta[self::$meta_keys['invoice']] = $args['invoices'];
 			}
 		}
 		$payment_ids = self::find_by_meta( self::POST_TYPE, $meta );

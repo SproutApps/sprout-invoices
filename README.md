@@ -99,6 +99,11 @@ Welcome! This is a big update and a big step for us.
 * Better dashboard let you know what's up.
 * Remove some unnecess****ary cruft.
 
+
+**0.9.9.1**
+
+* Minor bug fixes
+
 **0.9.9**
 
 * Plugin updates fix

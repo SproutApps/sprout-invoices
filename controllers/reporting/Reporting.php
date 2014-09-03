@@ -409,7 +409,7 @@ class SI_Reporting extends SI_Controller {
 		$expire = self::CACHE_TIMEOUT;
 
 		// Build data array, without a explicit build segments without posts will not show.
-		$data[] = array(
+		$data = array(
 				'invoices' => 0,
 				'payments' => 0,
 				'totals' => 0,

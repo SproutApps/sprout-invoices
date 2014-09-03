@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 0.9.9
+Stable tag: 0.9.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,10 @@ Some people love feature lists:
 
 == Upgrade Notice ==
 
+= 0.9.9.1 =
+
+Minor bug fixes
+
 = 0.9.8 =
 
 * Initial Release
@@ -113,6 +117,10 @@ Welcome! This is a big update and a big step for us.
 * Admin bar links.
 * Better dashboard let you know what's up.
 * Remove some unnecessary cruft.
+
+= 0.9.9.1 =
+
+* Minor bug fixes
 
 = 0.9.9 =
 

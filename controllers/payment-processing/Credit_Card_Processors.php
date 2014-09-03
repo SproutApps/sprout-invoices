@@ -36,7 +36,6 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			);
 			sa_form_field( 'cc_cache', $data, 'credit' );
 		}
-		return $fields;
 	}
 
 	/**
@@ -239,7 +238,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @param  SI_Checkouts $checkout 
 	 * @return array           
 	 */
-	protected function payment_billing_fields() {
+	protected function payment_billing_fields( SI_Checkouts $checkout ) {
 		$billing_fields = self::get_standard_address_fields();
 		$billing_fields = apply_filters( 'si_payment_billing_fields', $billing_fields, __CLASS__, $checkout );
 		uasort( $billing_fields, array( __CLASS__, 'sort_by_weight' ) );

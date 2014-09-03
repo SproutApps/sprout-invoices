@@ -14,6 +14,7 @@ class SI_Estimate extends SI_Post_Type {
 	const LINE_ITEM_TAXONOMY = 'si_line_item_types';
 	const REWRITE_SLUG = 'sprout-estimate';
 
+	const STATUS_TEMP = 'temp'; // estimate is in a draft state, can't use 'draft' otherwise a url will not be created
 	const STATUS_REQUEST = 'request'; // estimate hasn't been approved or declined
 	const STATUS_PENDING = 'publish'; // estimate hasn't been approved or declined
 	const STATUS_APPROVED = 'approved'; // estimate was approved by client
@@ -82,6 +83,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	public static function get_statuses() {
 		$statuses = array(
+			self::STATUS_TEMP => self::__('Draft'),
 			self::STATUS_REQUEST => self::__('Request'),
 			self::STATUS_PENDING => self::__('Pending'),
 			self::STATUS_APPROVED => self::__('Approved'),

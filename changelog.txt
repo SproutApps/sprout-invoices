@@ -1,39 +1,43 @@
-==1.0==
+= 1.0 =
 
 Welcome! This is a big update and a big step for us.
 
 * There's a free version and most like you're using it.
 * Import from WP-Invoice, Harvest or Freshbooks.
-* TODO: Helpers, coming before this is truly 1.0. (shush! this is really 0.9.8)
+* TODO: Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)
 * So many bug fixes that make this a legit 1.0 release.
 * Admin bar links.
 * Better dashboard let you know what's up.
 * Remove some unnecessary cruft.
 
-=0.9.9=
+= 0.9.9.1 =
+
+* Minor bug fixes
+
+= 0.9.9 =
 
 * Plugin updates fix
 * Add-ons not loading, e.g. Stripe.
 
-=0.9.8.4=
+= 0.9.8.4 =
 
 * Dashboard fix
 
-=0.9.8.3=
+= 0.9.8.3 =
 
 * Import progress fix.
 
-=0.9.8.1=
+= 0.9.8.1 =
 
 * Fix deposit and cleanup files
 
-=0.9.2=
+= 0.9.2 =
 
 * Admin bar links
 * Additional hooks and filters required by submission integration add-on
 * Minor updates
 
-=0.9.1=
+= 0.9.1 =
 
 * Line Item UI changes.
 * Invoice Style fixes
@@ -41,11 +45,10 @@ Welcome! This is a big update and a big step for us.
 * Better documentation and linking to site.
 
 
-=0.9=
+= 0.9 =
 
 * Initial Release
 
-=0.9.0.1=
+= 0.9.0.1 =
 
 * Remove debugging logs from release branch.
-

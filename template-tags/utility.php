@@ -96,18 +96,24 @@ function si_format_address( $address, $return = 'array', $separator = "\n" ) {
 	if ( !empty($address['first_name']) || !empty($address['last_name']) ) {
 		$lines[] = $address['first_name'].' '.$address['last_name'];
 	}
-	$lines[] = $address['street'];
-	$city_line = $address['city'];
-	if ( $city_line && ( $address['zone'] || $address['postal_code'] ) ) {
+	if ( !empty( $address['street'] ) ) {
+		$lines[] = $address['street'];
+	}
+	$city_line = '';
+	if ( !empty( $address['city'] ) ) {
+		$city_line .= $address['city'];
+	}
+	if ( $city_line != '' && ( !empty( $address['zone'] ) || !empty( $address['postal_code'] ) ) ) {
 		$city_line .= ', ';
+		if ( !empty( $address['zone'] ) ) {
+			$city_line .= $address['zone'];
+		}
+		if ( !empty( $address['postal_code'] ) ) {
+			$city_line = rtrim( $city_line ).' '.$address['postal_code'];
+		}
 	}
-	$city_line .= $address['zone'];
-	$city_line = rtrim( $city_line ).' '.$address['postal_code'];
-	$city_line = rtrim( $city_line );
-	if ( $city_line ) {
-		$lines[] = $city_line;
-	}
-	if ( $address['country'] ) {
+	$lines[] = rtrim( $city_line );
+	if ( !empty( $address['country'] ) ) {
 		$lines[] = $address['country'];
 	}
 	switch ( $return ) {

@@ -100,7 +100,9 @@ class SI_Settings_API extends SI_Controller {
 			'tab_only' => FALSE,
 			'callback' => NULL,
 			'ajax' => FALSE,
-			'ajax_full_page' => FALSE
+			'ajax_full_page' => FALSE,
+			'add_new' => '',
+			'add_new_post_type' => ''
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );
 		extract( $parsed_args );
@@ -259,7 +261,7 @@ class SI_Settings_API extends SI_Controller {
 		endforeach;
 		// Add the add new buttons after the tabs
 		foreach ( $tabs as $key => $data ):
-			if ( $data['add_new'] ) {
+			if ( $data['add_new'] && isset( $data['add_new_post_type'] ) ) {
 				$post_new_file = "post-new.php?post_type=" . $data['add_new_post_type'];
 				echo ' <a href="' . esc_url( admin_url( $post_new_file ) ) . '" class="add-new-h2">' . esc_html( $data['add_new'] ) . '</a>';
 			}

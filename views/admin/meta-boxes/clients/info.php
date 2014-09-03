@@ -3,11 +3,11 @@
 	unset( $fields['email'] );
 	unset( $fields['first_name'] );
 	unset( $fields['last_name'] );
-	$fields['street']['default'] = $address['street'];
-	$fields['city']['default'] = $address['city'];
-	$fields['zone']['default'] = $address['zone'];
-	$fields['postal_code']['default'] = $address['postal_code'];
-	$fields['country']['default'] = $address['country'];
+	$fields['street']['default']= ( isset( $address['street'] ) ) ? $address['street'] : '' ;
+	$fields['city']['default']= ( isset( $address['city'] ) ) ? $address['city'] : '' ;
+	$fields['zone']['default']= ( isset( $address['zone'] ) ) ? $address['zone'] : '' ;
+	$fields['postal_code']['default']= ( isset( $address['postal_code'] ) ) ? $address['postal_code'] : '' ;
+	$fields['country']['default']= ( isset( $address['country'] ) ) ? $address['country'] : '' ;
 	$fields['website']['default'] = $website; ?>
 
 

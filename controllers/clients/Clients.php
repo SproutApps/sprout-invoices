@@ -306,10 +306,14 @@ class SI_Clients extends SI_Controller {
 			printf( '<b>%s</b>: ', si__('Users') );
 			if ( !empty( $associated_users ) ) {
 				$users_print = array();
-				foreach ($associated_users as $user_id) {
+				foreach ( $associated_users as $user_id ) {
 					$user = get_userdata( $user_id );
-					$users_print[] = sprintf( '<span class="associated_user"><a href="%s">%s</a></span>', get_edit_user_link( $user_id ), $user->display_name );
+					if ( $user ) {
+						$users_print[] = sprintf( '<span class="associated_user"><a href="%s">%s</a></span>', get_edit_user_link( $user_id ), $user->display_name );
+					}
 				}
+			}
+			if ( !empty( $users_print ) ) {
 				echo implode( ', ', $users_print );
 			}
 			else {

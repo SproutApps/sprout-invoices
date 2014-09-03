@@ -86,7 +86,7 @@ class SI_Checks extends SI_Offsite_Processors {
 	 * @param  SI_Checkouts $checkout 
 	 * @return                  
 	 */
-	public function invoice_pane() {
+	public function invoice_pane( SI_Checkouts $checkout ) {
 		self::load_view( 'templates/checkout/checks/form', array(
 				'checkout' => NULL,
 				'type' => self::PAYMENT_SLUG,

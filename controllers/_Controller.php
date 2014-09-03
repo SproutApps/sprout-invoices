@@ -587,9 +587,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		// Enqueue
-		add_action( 'init', array( __CLASS__, 'register_resources' ) );
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'frontend_enqueue' ) );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'register_resources' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'register_resources' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'frontend_enqueue' ), 20 );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ), 20 );
 		
 		// Cron
 		add_filter( 'cron_schedules', array( __CLASS__, 'si_cron_schedule' ) );
@@ -769,7 +770,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			$view .= '.php';
 		}
 		$file = SI_PATH.'/views/'.$view;
-		if ( $allow_theme_override ) {
+		if ( $allow_theme_override && defined( 'TEMPLATEPATH' ) ) {
 			$file = self::locate_template( array( $view ), $file );
 		}
 		$file = apply_filters( 'sprout_invoice_template_'.$view, $file );

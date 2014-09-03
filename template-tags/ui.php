@@ -202,6 +202,7 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 	$desc = ( isset( $data['desc'] ) ) ? $data['desc'] : '' ;
 	$rate = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
 	$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 0 ;
+	$tax = ( isset( $data['tax'] ) ) ? $data['tax'] : '' ;
 	$total = ( isset( $data['total'] ) ) ? $data['total'] : 0 ;
 	
 	ob_start(); ?>

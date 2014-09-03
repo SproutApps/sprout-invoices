@@ -85,9 +85,8 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="5"><?php self::_e('Totals') ?></th>
+					<th colspan="6"><?php self::_e('Totals') ?></th>
 					<th><?php sa_formatted_money( $table_total_estimated ) ?></th>
-					<th><?php sa_formatted_money( $table_total_paid ) ?></th>
 					<th><?php sa_formatted_money( $table_subtotal ) ?></th>
 				</tr>
 			</tfoot>

@@ -398,8 +398,9 @@ class SI_Checkouts extends SI_Controller {
 	 */
 	private function complete_checkout() {
 		// process the payment
-		do_action( 'processing_payment', $this, $purchase );
+		do_action( 'checkout_processing_payment', $this );
 		$payment = $this->payment_processor->process_payment( $this, $this->invoice );
+		do_action( 'checkout_process_payment', $this, $payment );
 		do_action( 'si_log', __CLASS__ . '::' . __FUNCTION__ . ' - complete_checkout payment', $payment );
 
 		if ( !is_a( $payment, 'SI_Payment' ) ) {

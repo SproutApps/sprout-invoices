@@ -65,7 +65,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	public static function get_statuses() {
 		$statuses = array(
-			self::STATUS_TEMP => self::__('Temp'),
+			self::STATUS_TEMP => self::__('Draft'),
 			self::STATUS_PENDING => self::__('Pending'),
 			self::STATUS_PARTIAL => self::__('Outstanding Balance'),
 			self::STATUS_PAID => self::__('Paid'),
@@ -230,8 +230,10 @@ class SI_Invoice extends SI_Post_Type {
 		$total = $this->get_calculated_total( FALSE );
 		$paid = $this->get_payments_total();
 		$balance = floatval( $total-$paid );
-		if ( round( $balance, 2 ) < 0.01 ) {
-			$this->set_as_paid();
+		if ( $this->get_status() === self::STATUS_PENDING ) {
+			if ( round( $balance, 2 ) < 0.01 ) {
+				$this->set_as_paid();
+			}
 		}
 		return round( $balance, 2 );
 	}
@@ -484,8 +486,9 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public function set_calculated_total() {
+		$total = $this->get_calculated_total();
 		$this->save_post_meta( array(
-				self::$meta_keys['total'] => $this->get_calculated_total(),
+				self::$meta_keys['total'] => $total,
 			) );
 		return $total;
 	}
@@ -495,7 +498,7 @@ class SI_Invoice extends SI_Post_Type {
 		$line_items = $this->get_line_items();
 		if ( !empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
-				if ( isset( $data['rate'] ) ) {
+				if ( isset( $data['tax'] ) && isset( $data['rate'] ) ) {
 					$subtotal += ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
 				}
 			}

@@ -92,6 +92,9 @@ if ( !function_exists('sa_get_form_field') ) :
  * @return string           form field input, select, radio, etc.
  */
 function sa_get_form_field( $key, $data, $category ) {
+	if ( !isset( $data['default'] ) ) {
+		$data['default'] = '';
+	}
 	if ( empty($data['default']) && isset( $_REQUEST['sa_'.$category.'_'.$key] ) && $_REQUEST['sa_'.$category.'_'.$key] != '' ) {
 		$data['default'] = $_REQUEST['sa_'.$category.'_'.$key];
 	}
@@ -210,9 +213,17 @@ if ( !function_exists('sa_get_form_label') ) :
  * @return string           <label>
  */
 function sa_get_form_label( $key, $data, $category ) {
-	$out = '<label for="sa_'.$category.'_'.$key.'">'.$data['label'].'</label>';
-	if ( isset( $data['required'] ) && $data['required'] ) {
-		$out .= ' <span class="required">*</span>';
+	if ( $data['type'] == 'hidden' ) {
+		$out = '';
+	}
+	else {
+		if ( !isset( $data['label'] ) ) {
+			$data['label'] = '';
+		}
+		$out = '<label for="sa_'.$category.'_'.$key.'">'.$data['label'].'</label>';
+		if ( isset( $data['required'] ) && $data['required'] ) {
+			$out .= ' <span class="required">*</span>';
+		}
 	}
 	return apply_filters( 'sa_get_form_label', $out, $key, $data, $category );
 }

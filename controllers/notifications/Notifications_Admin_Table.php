@@ -51,7 +51,7 @@ class SI_Notifications_Table extends WP_List_Table {
 	 */
 	function column_title( $item ) {
 		$notification_id = array_search( $item->ID, get_option( SI_Notifications::NOTIFICATIONS_OPTION_NAME, array() ) );
-		$name = SI_Notifications::$notifications[$notification_id]['name'];
+		$name = ( $notification_id ) ? SI_Notifications::$notifications[$notification_id]['name'] : si__('Unassigned') ;
 		$notification = SI_Notification::get_instance( $item->ID );
 		$status = ( $notification->get_disabled() ) ? '<span style="color:red">'.si__( 'disabled' ).'</span>' : '<span>'.si__( 'active' ).'</span>' ;
 

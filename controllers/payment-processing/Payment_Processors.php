@@ -231,10 +231,10 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * Show a pane based on the page within checkout. If not on the checkout 
 	 * show all invoice panes and the active cc processors payments pane.
 	 * 
-	 * @param  boolean $current 
+	 * @param  string $current 
 	 * @return string
 	 */
-	public static function show_payments_pane( $current = FALSE ) {
+	public static function show_payments_pane( $current = '' ) {
 		$checkout = SI_Checkouts::get_instance();
 		if ( SI_Checkouts::is_checkout_page() ) {
 			$current = $checkout->get_current_page();
@@ -242,6 +242,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			do_action( 'payments_pane_action', $current, $checkout );
 			$processor = $checkout->get_processor();
 		}
+		$pane = '';
 		switch ( $current ) {
 			case SI_Checkouts::CONFIRMATION_PAGE:
 				if ( method_exists( $processor, 'confirmation_pane' ) ) {

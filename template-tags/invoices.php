@@ -788,7 +788,7 @@ function si_get_credit_card_checkout_form_action( $id = 0 ) {
 		$type = $processor->get_slug();
 	}
 	$url = remove_query_arg( SI_Checkouts::CHECKOUT_ACTION, si_get_payment_link( 0, $type ) );
-	return apply_filters( 'si_get_credit_card_checkout_form_action', $url, $processer );
+	return apply_filters( 'si_get_credit_card_checkout_form_action', $url, $processor );
 }
 endif;
 

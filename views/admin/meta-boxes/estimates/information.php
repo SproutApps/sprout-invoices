@@ -33,7 +33,7 @@ if ( 0 != $post->ID ) {
 		<div class="status-wrap">
 			<select name="post_status">
 				<?php foreach ( $status_options as $status_key => $status_name ): ?>
-					<?php printf( '<option value="%s" %s>%s</option>', $status_key, selected( $status_key, $status_id, FALSE ), $status_name ) ?>
+					<?php printf( '<option value="%s" %s>%s</option>', $status_key, selected( $status_key, $status, FALSE ), $status_name ) ?>
 				<?php endforeach ?>
 			</select>
  		</div>

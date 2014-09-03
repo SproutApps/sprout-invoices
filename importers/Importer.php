@@ -66,7 +66,7 @@ class SI_Importer extends SI_Controller {
 		self::$importers[$class] = $label;
 	}
 
-	public function importer_page() {
+	public static function importer_page() {
 		self::load_view( 'admin/importer/importing', array(
 				'importers' => self::get_importers()
 			), FALSE );
