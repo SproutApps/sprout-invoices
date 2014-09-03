@@ -13,6 +13,8 @@ function sprout_invoices_load() {
 		return; // already loaded, or a name collision
 	}
 
+	do_action( 'sprout_invoices_preload' );
+
 	//////////
 	// Load //
 	//////////
@@ -217,6 +219,7 @@ function sprout_invoices_load() {
 	if ( method_exists( 'SA_Addons', 'init' ) ) {
 		SA_Addons::init();
 	}
+	do_action( 'sprout_invoices_loaded' );
 }
 
 /**
@@ -232,9 +235,7 @@ define( 'SI_SUPPORTED_PHP_VERSION', version_compare( phpversion(), '5.2.4', '>='
  * Compatibility check
  */
 if ( SI_SUPPORTED_WP_VERSION && SI_SUPPORTED_PHP_VERSION ) {
-	do_action( 'sprout_invoices_preload' );
-	sprout_invoices_load();
-	do_action( 'sprout_invoices_loaded' );
+	add_action( 'plugins_loaded', 'sprout_invoices_load', 1000 );
 } else {
 	/**
 	 * Disable SI and add fail notices if compatibility check fails

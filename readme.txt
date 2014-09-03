@@ -1,10 +1,10 @@
-=== Plugin Name ===
+=== Sprout Invoices - Client Invoicing & Estimates ===
 Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 0.9.8.3
+Stable tag: 0.9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,9 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 == Description ==
 
-Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management...seriously though, I'm trying to build something awesome that you will love.
+Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management...*seriously though*, I'm trying to build something awesome that you will love.
 
-Sprout Invoices is the first and the our cornerstone. Helping streamline what could be a very complex workflow of accepting estimates and getting invoices paid; integrating the entire process into your site.
+Sprout Invoices is not only our first Sprout App but the cornerstone for future apps. Sprout Invoices sets to help streamline what could be a very complex workflow of accepting estimates and getting invoices paid; integrating the entire process into your existing WordPress site under your full control.
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
@@ -108,11 +108,28 @@ Welcome! This is a big update and a big step for us.
 
 * There's a free version and most like you're using it.
 * Import from WP-Invoice, Harvest or Freshbooks.
-* TODO: Helpers, coming before this is truly 1.0. (shush! this is really 0.9.8)
+* TODO: Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)
 * So many bug fixes that make this a legit 1.0 release.
 * Admin bar links.
 * Better dashboard let you know what's up.
 * Remove some unnecessary cruft.
+
+= 0.9.9 =
+
+* Plugin updates fix
+* Add-ons not loading, e.g. Stripe.
+
+= 0.9.8.4 =
+
+* Dashboard fix
+
+= 0.9.8.3 =
+
+* Import progress fix.
+
+= 0.9.8.1 =
+
+* Fix deposit and cleanup files
 
 = 0.9.2 =
 

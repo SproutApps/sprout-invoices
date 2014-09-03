@@ -4,15 +4,16 @@
 
 ## Description
 
-Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management..._seriously though_, I'm trying to build something awesome that you will love. Thank you for your support.
+Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management...*seriously though*, I'm trying to build something awesome that you will love.
 
-Sprout Invoices is the cornerstone for Sprout Apps. Helping streamline what could be a very complex workflow of accepting estimates and getting invoices paid; integrating the entire process into your site.
+Sprout Invoices is not only our first Sprout App but the cornerstone for future apps. Sprout Invoices sets to help streamline what could be a very complex workflow of accepting estimates and getting invoices paid; integrating the entire process into your existing WordPress site under your full control.
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
 Sprout Invoices helps streamline the complex workflow of accepting estimates and getting invoices paid.
 
 **[Fully featured upgrades and add-on marketplace available.](https://sproutapps.co/sprout-invoices/)**
+
 
 ### Requests
 
@@ -98,6 +99,18 @@ Welcome! This is a big update and a big step for us.
 * Better dashboard let you know what's up.
 * Remove some unnecess****ary cruft.
 
+**0.9.9**
+
+* Plugin updates fix
+* Add-ons not loading, e.g. Stripe.
+
+**0.9.8.4**
+
+* Dashboard fix
+
+**0.9.8.3**
+
+* Import progress fix.
 
 **0.9.8.1**
 
