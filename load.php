@@ -159,7 +159,7 @@ function sprout_invoices_load() {
 	SI_Templating_API::init();
 
 	// updates
-	if ( !SI_FREE_TEST && method_exists( 'SI_Updates', 'init' ) ) {
+	if ( !SI_FREE_TEST && class_exists( 'SI_Updates' ) ) {
 		SI_Updates::init();
 	}
 	
@@ -168,7 +168,7 @@ function sprout_invoices_load() {
 
 	// reports
 	SI_Reporting::init();
-	if ( !SI_FREE_TEST && method_exists( 'SI_Reporting_Premium', 'init' ) ) {
+	if ( !SI_FREE_TEST && class_exists( 'SI_Reporting_Premium' ) ) {
 		SI_Reporting_Premium::init();
 	}
 
@@ -185,7 +185,7 @@ function sprout_invoices_load() {
 
 	// notifications
 	SI_Notifications::init(); // Hooks come before parent class.
-	if ( !SI_FREE_TEST && method_exists( 'SI_Notifications_Premium', 'init' ) ) {
+	if ( !SI_FREE_TEST && class_exists( 'SI_Notifications_Premium' ) ) {
 		SI_Notifications_Premium::init();
 	}
 	SI_Notifications_Control::init();
@@ -195,10 +195,10 @@ function sprout_invoices_load() {
 
 	// estimates
 	SI_Estimates::init();
-	if ( !SI_FREE_TEST && method_exists( 'SI_Estimates_Premium', 'init' ) ) {
+	if ( !SI_FREE_TEST && class_exists( 'SI_Estimates_Premium' ) ) {
 		SI_Estimates_Premium::init();
 	}
-	if ( !SI_FREE_TEST && method_exists( 'SI_Estimates_Submission_Premium', 'init' ) ) {
+	if ( !SI_FREE_TEST && class_exists( 'SI_Estimates_Submission_Premium' ) ) {
 		SI_Estimates_Submission_Premium::init();
 	}
 	SI_Estimate_Submissions::init();
@@ -208,7 +208,7 @@ function sprout_invoices_load() {
 
 	// invoices
 	SI_Invoices::init();
-	if ( !SI_FREE_TEST && method_exists( 'SI_Invoices_Premium', 'init' ) ) {
+	if ( !SI_FREE_TEST && class_exists( 'SI_Invoices_Premium' ) ) {
 		SI_Invoices_Premium::init();
 	}
 
@@ -216,7 +216,7 @@ function sprout_invoices_load() {
 	SI_Importer::init();
 
 	// addons
-	if ( method_exists( 'SA_Addons', 'init' ) ) {
+	if ( class_exists( 'SA_Addons' ) ) {
 		SA_Addons::init();
 	}
 	do_action( 'sprout_invoices_loaded' );

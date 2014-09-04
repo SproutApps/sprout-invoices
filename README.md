@@ -83,21 +83,24 @@ Some people love feature lists:
 4. Dynamic reports allow for date filtering, sorting, search, and exporting.
 5. Common management tasks are sped up by Sprout Invoices utilization of AJAX.
 
-TODO
-
 ### Changelog
 
-**1.0**
+**1.0 (coming soon)**
 
 Welcome! This is a big update and a big step for us.
 
 * There's a free version and most like you're using it.
 * Import from WP-Invoice, Harvest or Freshbooks.
-* TODO: Helpers, coming before this is truly 1.0. (shush! this is really 0.9.8)
+* Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)
 * So many bug fixes that make this a legit 1.0 release.
 * Admin bar links.
 * Better dashboard let you know what's up.
-* Remove some unnecess****ary cruft.
+* Remove some unnecessary cruft.
+* Multiple taxes
+
+**0.9.9.2 - 1.0 GM**
+
+* Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
 
 
 **0.9.9.1**

@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 0.9.9.1
+Stable tag: 0.9.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,27 +96,29 @@ Some people love feature lists:
 
 == Upgrade Notice ==
 
-= 0.9.9.1 =
+= 0.9.9.2 - 1.0 GM =
 
-Minor bug fixes
+* Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
 
-= 0.9.8 =
-
-* Initial Release
 
 == Changelog ==
 
-= 1.0 =
+= 1.0 (coming soon) =
 
 Welcome! This is a big update and a big step for us.
 
 * There's a free version and most like you're using it.
 * Import from WP-Invoice, Harvest or Freshbooks.
-* TODO: Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)
+* Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)
 * So many bug fixes that make this a legit 1.0 release.
 * Admin bar links.
 * Better dashboard let you know what's up.
 * Remove some unnecessary cruft.
+* Multiple taxes
+
+= 0.9.9.2 - 1.0 GM =
+
+* Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
 
 = 0.9.9.1 =
 
