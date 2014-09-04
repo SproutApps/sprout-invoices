@@ -157,7 +157,7 @@ class SI_Notifications_Control extends SI_Controller {
 						'post_content' => $data['default_content']
 					) );
 				$notification = SI_Notification::get_instance( $post_id );
-				self::save_meta_box_notification_submit( $post_id, $post, $args, $notification_id );
+				self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $notification_id );
 				if ( isset( $data['default_disabled'] ) && $data['default_disabled'] ) {
 					$notification->set_disabled( 'TRUE' );
 				}
@@ -265,7 +265,7 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return                      
 	 */
 	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_id = NULL ) {
-		if ( NULL === $callback_args['notification_type'] && isset( $_POST['notification_type'] ) ) {
+		if ( isset( $_POST['notification_type'] ) && NULL === $callback_args['notification_type'] ) {
 			$notification_id = $_POST['notification_type'];
 		}
 

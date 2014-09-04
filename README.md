@@ -98,6 +98,12 @@ Welcome! This is a big update and a big step for us.
 * Remove some unnecessary cruft.
 * Multiple taxes
 
+
+
+**0.9.9.3 - 1.0 GM**
+
+* Strict standards fixins
+
 **0.9.9.2 - 1.0 GM**
 
 * Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...

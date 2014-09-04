@@ -74,7 +74,7 @@ class SI_Reporting extends SI_Controller {
 	}
 
 	public static function reports_dashboard() {
-		switch ( $_GET[self::REPORT_QV] ) {
+		switch ( isset( $_GET[self::REPORT_QV] ) && $_GET[self::REPORT_QV] ) {
 			case 'invoices':
 				self::load_view( 'admin/reports/invoices.php', array() );
 				break;

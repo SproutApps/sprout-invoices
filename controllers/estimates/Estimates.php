@@ -877,7 +877,9 @@ class SI_Estimates extends SI_Controller {
 	 * @return array
 	 */
 	public static function filter_status_view( $views = array() ) {
-		$views['publish'] = str_replace( 'Published', 'Pending', $views['publish'] );
+		if ( isset( $views['publish'] ) ) {
+			$views['publish'] = str_replace( 'Published', 'Pending', $views['publish'] );
+		}
 		return $views;
 	}
 
