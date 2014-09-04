@@ -98,7 +98,11 @@ Welcome! This is a big update and a big step for us.
 * Remove some unnecessary cruft.
 * Multiple taxes
 
+**0.9.9.4 - 1.0 GM**
 
+* WP-Invoice Importer Bug fix: Import any type
+* WP-Invoice Importer Bug fix: Fix devision by zero error
+* WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
 **0.9.9.3 - 1.0 GM**
 

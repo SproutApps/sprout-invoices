@@ -11,7 +11,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 	const PROCESS_ACTION = 'start_import';
 	const DELETE_WPINVOICE_DATA = 'import_archived';
 	const PAYMENT_METHOD = 'WPInvoice Imported';
-	const PROGRESS_OPTION = 'current_import_progress_wpinvoice';
+	const PROGRESS_OPTION = 'current_import_progress_wpinvoice_v1';
 
 	// Meta
 	const WPINVOICE_ID = '_wpinvoice_id';
@@ -106,7 +106,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 		$args = array(
 				'post_type' => 'wpi_object', // why object? I don't get it either.
-				'post_status' => 'active',
+				'post_status' => 'any',
 				'posts_per_page' => -1,
 				'fields' => 'ids'
 			);
@@ -148,9 +148,11 @@ class SI_WPInvoice_Import extends SI_Importer {
 		foreach ( $wp_invoice_ids as $wp_invoice_id ) {
 			$wp_invoice = new WPI_Invoice();
 			$wp_invoice = $wp_invoice->load_invoice( array( 'id' => $wp_invoice_id, 'return' => TRUE ) );
-			if ( $wp_invoice['type'] != 'invoice' ) {
+
+			if ( $wp_invoice['type'] != 'invoice' && $wp_invoice['type'] != 'recurring') {
 				continue;
 			}
+
 			// prp($wp_invoice);
 			// continue;
 			/////////////
@@ -161,7 +163,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			self::update_progress_info( 'com', 0, 0, 20, self::__('Attempting to import new clients from what WP-Invoice stores...') );
 			$new_client_id = self::create_client( $wp_invoice );
 			self::update_progress_info( 'clients', $clients_tally, $invoices_total );
-
+			
 			//////////////
 			// Contacts //
 			//////////////
@@ -230,7 +232,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			'city' => isset( $wp_invoice_user_data['city'] ) ? self::esc__($wp_invoice_user_data['city']) : '',
 			'zone' => isset( $wp_invoice_user_data['state'] ) ? self::esc__($wp_invoice_user_data['state']) : '',
 			'postal_code' => isset( $wp_invoice_user_data['zip'] ) ? self::esc__($wp_invoice_user_data['zip']) : '',
-			'country' => isset( $wp_invoice_user_data['country'] ) ? self::esc__($wp_invoice_user_data['country']) : 'US',
+			'country' => isset( $wp_invoice_user_data['country'] ) ? self::esc__($wp_invoice_user_data['country']) : apply_filters( 'si_default_country_code', 'US' ),
 		);
 		$args = array(
 			'address' => $address,
@@ -283,7 +285,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 		}
 		// Get client
 		if ( !$client_id ) {
-			$clients = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice['client_id'] ) );
+			$clients = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice['ID'] ) );
 			// Get client and confirm it's validity
 			$client = SI_Client::get_instance( $clients[0] );
 			$client_id = ( is_a( $client, 'SI_Client' ) ) ? $client->get_id() : 0 ;
@@ -317,6 +319,23 @@ class SI_WPInvoice_Import extends SI_Importer {
 		}
 		if ( isset( $wp_invoice['post_content'] ) ) {
 			$invoice->set_notes( $wp_invoice['post_content'] );
+		}
+		if ( isset( $wp_invoice['post_status'] ) ) {
+			switch ( $wp_invoice['post_status'] ) {
+				case 'paid':
+					$invoice->set_as_paid();
+					break;
+				case 'active':
+				case 'pending':
+					$invoice->set_pending();
+					break;
+				case 'refund':
+					$invoice->set_as_written_off();
+					break;
+				default:
+					$invoice->set_as_temp();
+					break;
+			}
 		}
 		$invoice->set_issue_date( strtotime( $wp_invoice['due_date_day'].'-'.$wp_invoice['due_date_month'].'-'.$wp_invoice['due_date_year'] ) );
 		// post date
@@ -382,7 +401,6 @@ class SI_WPInvoice_Import extends SI_Importer {
 			do_action( 'si_error', 'Invoice imported already', $payment['ID'] );
 			return;
 		}
-
 		$payment_id = SI_Payment::new_payment( array(
 				'payment_method' => ( isset( $payment['action'] ) ) ? self::PAYMENT_METHOD . ' :: ' . $payment['action'] : self::PAYMENT_METHOD,
 				'invoice' => $invoice->get_id(),
@@ -417,7 +435,12 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 	public static function update_progress_info( $context = 'contacts', $i = 0, $total_records = 0, $percent = 0, $messaging = '' ) {
 		if ( !$percent ) {
-			$percent = intval($i/$total_records * 100);
+			if ( $i > 0 && $total_records > 0 ) {
+				$percent = intval($i/$total_records * 100);
+			}
+			else {
+				$percent = 100;
+			}
 		}
 		if ( $messaging == '' ) {
 			$messaging = sprintf( self::__('%o %s of %o imported.'), $i, $context, $total_records );
