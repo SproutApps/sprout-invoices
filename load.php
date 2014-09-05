@@ -235,7 +235,7 @@ define( 'SI_SUPPORTED_PHP_VERSION', version_compare( phpversion(), '5.2.4', '>='
  * Compatibility check
  */
 if ( SI_SUPPORTED_WP_VERSION && SI_SUPPORTED_PHP_VERSION ) {
-	add_action( 'plugins_loaded', 'sprout_invoices_load', 1000 );
+	sprout_invoices_load();
 } else {
 	/**
 	 * Disable SI and add fail notices if compatibility check fails

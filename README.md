@@ -98,6 +98,11 @@ Welcome! This is a big update and a big step for us.
 * Remove some unnecessary cruft.
 * Multiple taxes
 
+
+**0.9.9.5 - 1.0 GM**
+
+* Subject line fix.
+
 **0.9.9.4 - 1.0 GM**
 
 * WP-Invoice Importer Bug fix: Import any type
