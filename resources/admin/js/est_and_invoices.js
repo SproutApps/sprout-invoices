@@ -522,20 +522,31 @@ jQuery(function($) {
 	}
 
 	function calculate_total() {
-		var $total = parseFloat( $('#line_subtotal span').text() ),
+		var $total = 0,
+			$sub_total = parseFloat( $('#line_subtotal span').text().replace(/[^0-9\.]+/g,"") ),
 			$tax = parseFloat( $('input[name="tax"]').val() ),
+			$tax2 = parseFloat( $('input[name="tax2"]').val() ),
 			$discount = parseFloat( $('input[name="discount"]').val() );
-		
+
+		var $tax_total = 0;
 		if ( $tax > 0 ) {
 			// adjust for tax
-			$total = $total * ( ( 100 + $tax ) / 100 );
+			$tax_total = $sub_total * ( ( $tax ) / 100 );
 		};
 
+		var $tax2_total = 0;
+		if ( $tax2 > 0 ) {
+			// adjust for tax2
+			$tax2_total = $sub_total * ( ( $tax2 ) / 100 );
+		};
+
+		// total after tax
+		$total = $sub_total + $tax_total + $tax2_total;
+		
 		if ( $discount > 0 ) {
-			// adjust for tax
+			// adjust for discount
 			$total = $total * ( ( 100 - $discount ) / 100 );
 		};
-
 
 		var $total_span = $('#line_total span'),
 			$formatted_total = parseFloat( $total ).toFixed(2);

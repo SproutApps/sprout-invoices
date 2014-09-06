@@ -191,6 +191,47 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 	return apply_filters( 'si_line_item_build', $data, $position, $items );
 }
 
+
+function si_line_item_build_plain( $position = 1.0, $items = array(), $children = array() ) {
+	$data = $items[$position];
+	
+	$has_percentage_adj = FALSE;
+	foreach ( $items as $b_position => $b_data ) {
+		if ( isset( $b_data['tax'] ) && $b_data['tax'] ) {
+			$has_percentage_adj = TRUE;
+		}
+	}
+
+	$desc = ( isset( $data['desc'] ) ) ? $data['desc'] : '' ;
+	$rate = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
+	$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 0 ;
+	$total = ( isset( $data['total'] ) ) ? $data['total'] : 0 ;
+	if ( !empty( $children ) ) {
+		$total = 0;
+		foreach ( $children as $child_position ) {
+			$child_data = $items[$child_position];
+			$total += $child_data['total'];
+		}
+		$data['rate'] = '';
+		$data['qty'] = '';
+		$data['tax'] = '';
+	}
+	ob_start(); ?>
+		<?php echo strip_tags( $desc ) ?> <?php si_e(' // ') ?>
+		<?php si_e('Rate:') ?> <?php esc_attr_e( $rate ) ?>
+		<?php si_e('Qty:') ?> <?php esc_attr_e( $qty ) ?>
+		<?php if ( $has_percentage_adj ): ?>
+			<?php if ( isset( $data['tax'] ) && $data['tax'] ): ?>
+			<?php si_e('Adjustment:') ?> <?php esc_attr_e( $data['tax'] ) ?>%
+			<?php endif ?>
+		<?php endif ?>
+		<?php si_e('Total:') ?> <?php sa_formatted_money($total) ?>
+	<?php
+	$data = ob_get_contents();
+	ob_end_clean();
+	return apply_filters( 'si_line_item_build_plain', $data, $position, $items );
+}
+
 function si_line_item_build_option( $position = 1.0, $items = array(), $children = array() ) {
 	$item_types = get_terms( array( SI_Estimate::LINE_ITEM_TAXONOMY ), array( 'hide_empty' => FALSE, 'fields' => 'all' ) );
 	$type_options = array();

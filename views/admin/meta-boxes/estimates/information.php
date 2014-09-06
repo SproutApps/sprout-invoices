@@ -7,6 +7,7 @@
 	$client_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_client_id() : 0;
 	$discount = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_discount() : '';
 	$tax = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax() : '';
+	$tax2 = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax2() : '';
 	$currency = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_currency() : '';
 	 ?>
 <!-- issue date -->
@@ -197,7 +198,7 @@ if ( 0 != $post->ID ) {
 	<a href="#edit_tax" class="edit-tax hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit tax') ?></span>
 	</a>
-	<span title="Tax is applied before the discount." class="tooltip"></span>
+	<span id="tax_tooltip" title="Tax is applied before the discount." class="tooltip"></span>
 
 	<div id="tax_div" class="control_wrap hide-if-js">
 		<div class="tax-wrap">
@@ -207,6 +208,27 @@ if ( 0 != $post->ID ) {
 		<p>
 			<a href="#edit_tax" class="save_control save-tax hide-if-no-js button"><?php si_e('OK') ?></a>
 			<a href="#edit_tax" class="cancel_control cancel-tax hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+		</p>
+ 	</div>
+</div>
+
+<!-- Tax2 -->
+<div class="misc-pub-section update-total" data-edit-id="tax2">
+	<span id="tax2" class="wp-media-buttons-icon"><?php si_e('Tax') ?> <b><?php echo $tax2 ?></b>%</span>
+
+	<a href="#edit_tax2" class="edit-tax2 hide-if-no-js edit_control" >
+		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit tax') ?></span>
+	</a>
+	<span title="Tax is applied before the discount." class="tooltip"></span>
+
+	<div id="tax2_div" class="control_wrap hide-if-js">
+		<div class="tax2-wrap">
+			<input type="text" name="tax2" value="<?php echo $tax2 ?>" size="3">%
+ 		</div>
+ 		
+		<p>
+			<a href="#edit_tax2" class="save_control save-tax2 hide-if-no-js button"><?php si_e('OK') ?></a>
+			<a href="#edit_tax2" class="cancel_control cancel-tax2 hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
 		</p>
  	</div>
 </div>

@@ -367,6 +367,7 @@ class SI_Invoices extends SI_Controller {
 		$client_id = ( isset( $_POST['client'] ) && $_POST['client'] != '' ) ? $_POST['client'] : '' ;
 		$discount = ( isset( $_POST['discount'] ) && $_POST['discount'] != '' ) ? $_POST['discount'] : '' ;
 		$tax = ( isset( $_POST['tax'] ) && $_POST['tax'] != '' ) ? $_POST['tax'] : '' ;
+		$tax2 = ( isset( $_POST['tax2'] ) && $_POST['tax2'] != '' ) ? $_POST['tax2'] : '' ;
 		$currency = ( isset( $_POST['currency'] ) && $_POST['currency'] != '' ) ? $_POST['currency'] : '' ;
 
 		$invoice->set_status( $status );
@@ -376,6 +377,7 @@ class SI_Invoices extends SI_Controller {
 		$invoice->set_client_id( $client_id );
 		$invoice->set_discount( $discount );
 		$invoice->set_tax( $tax );
+		$invoice->set_tax2( $tax2 );
 		$invoice->set_currency( $currency );
 
 		// Last thing to do is set the total based on the options set, including the line items.

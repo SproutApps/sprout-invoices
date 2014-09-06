@@ -475,7 +475,8 @@ span.inline_success_message {
 	content: '\f313'
 }
 
-.postbox span#tax:before {
+.postbox span#tax:before,
+.postbox span#tax2:before {
 	content: '\f184'
 }
 
@@ -1405,4 +1406,12 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 
 dd .add_item_help {
 	margin-top: -1px;
+}
+
+/**
+ * Help
+ */
+.si_pointer_help_tab .wp-pointer-arrow {
+	right: 10px;
+	left: auto !important;
 }

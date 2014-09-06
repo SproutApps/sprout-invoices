@@ -15,6 +15,7 @@ class SI_Harvest_Import extends SI_Importer {
 	const PROCESS_ARCHIVED = 'si_harvest_import_archived';
 	const PAYMENT_METHOD = 'Harvest Imported';
 	const PROGRESS_OPTION = 'current_import_progress_harvest';
+	const DELETE_PROGRESS = 'remove_progress_option';
 
 	// Meta
 	const HARVEST_ID = '_harvest_id';
@@ -23,6 +24,7 @@ class SI_Harvest_Import extends SI_Importer {
 	private static $harvest_pass;
 	private static $harvest_account;
 	private static $importing_archived;
+	private static $start_progress_over;
 
 	public static function init() {
 		// Settings
@@ -88,8 +90,17 @@ class SI_Harvest_Import extends SI_Importer {
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'archived',
-							'label' => '',
+							'label' => self::__( 'Import inactive clients.' ),
 							'description' => self::__( '' )
+						)
+					),
+					self::DELETE_PROGRESS => array(
+						'label' => self::__( 'Clear Progress' ),
+						'option' => array(
+							'type' => 'checkbox',
+							'value' => 'restart',
+							'label' => 'Re-start the Import Process',
+							'description' => self::__( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.' )
 						)
 					),
 					self::PROCESS_ACTION => array(
@@ -116,6 +127,11 @@ class SI_Harvest_Import extends SI_Importer {
 		if ( isset( $_POST[self::HARVEST_ACCOUNT_OPTION] ) && $_POST[self::HARVEST_ACCOUNT_OPTION] != '') {
 			self::$harvest_account = $_POST[self::HARVEST_ACCOUNT_OPTION];
 			update_option( self::HARVEST_ACCOUNT_OPTION, $_POST[self::HARVEST_ACCOUNT_OPTION] );
+		}
+
+		// Clear out progress
+		if ( isset( $_POST[self::DELETE_PROGRESS] ) && $_POST[self::DELETE_PROGRESS] == 'restart' ) {
+			delete_option( self::PROGRESS_OPTION );
 		}
 	}
 
@@ -348,7 +364,7 @@ class SI_Harvest_Import extends SI_Importer {
 			do_action( 'si_error', 'Client imported already', $client->id );
 			return;
 		}
-		if ( !self::$importing_archived && $client->active == 'false' ) {
+		if ( !self::import_archived_data() && $client->active == 'false' ) {
 			return;
 		}
 		$args = array(

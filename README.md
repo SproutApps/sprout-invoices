@@ -85,7 +85,7 @@ Some people love feature lists:
 
 ### Changelog
 
-**1.0 (coming soon)**
+**1.0**
 
 Welcome! This is a big update and a big step for us.
 
@@ -98,22 +98,17 @@ Welcome! This is a big update and a big step for us.
 * Remove some unnecessary cruft.
 * Multiple taxes
 
-
-**0.9.9.5 - 1.0 GM**
-
-* Subject line fix.
-
-**0.9.9.4 - 1.0 GM**
+**0.9.9.4**
 
 * WP-Invoice Importer Bug fix: Import any type
 * WP-Invoice Importer Bug fix: Fix devision by zero error
 * WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
-**0.9.9.3 - 1.0 GM**
+**0.9.9.3**
 
 * Strict standards fixins
 
-**0.9.9.2 - 1.0 GM**
+**0.9.9.2**
 
 * Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
 

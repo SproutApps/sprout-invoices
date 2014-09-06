@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 0.9.9.5
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,29 +96,7 @@ Some people love feature lists:
 
 == Upgrade Notice ==
 
-= 0.9.9.5 - 1.0 GM =
-
-* Subject line fix.
-
-= 0.9.9.4 - 1.0 GM =
-
-* WP-Invoice Importer Bug fix: Import any type
-* WP-Invoice Importer Bug fix: Fix devision by zero error
-* WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
-
-= 0.9.9.3 - 1.0 GM =
-
-* Strict standards fixins
-
-
-= 0.9.9.2 - 1.0 GM =
-
-* Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
-
-
-== Changelog ==
-
-= 1.0 (coming soon) =
+= 1.0 =
 
 Welcome! This is a big update and a big step for us.
 
@@ -131,21 +109,33 @@ Welcome! This is a big update and a big step for us.
 * Remove some unnecessary cruft.
 * Multiple taxes
 
-= 0.9.9.5 - 1.0 GM =
 
-* Subject line fix.
+== Changelog ==
 
-= 0.9.9.4 - 1.0 GM =
+= 1.0 =
+
+Welcome! This is a big update and a big step for us.
+
+* There's a free version and most like you're using it.
+* Import from WP-Invoice, Harvest or Freshbooks.
+* Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)
+* So many bug fixes that make this a legit 1.0 release.
+* Admin bar links.
+* Better dashboard let you know what's up.
+* Remove some unnecessary cruft.
+* Multiple taxes
+
+= 0.9.9.4 =
 
 * WP-Invoice Importer Bug fix: Import any type
 * WP-Invoice Importer Bug fix: Fix devision by zero error
 * WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
-= 0.9.9.3 - 1.0 GM =
+= 0.9.9.3 =
 
 * Strict standards fixins
 
-= 0.9.9.2 - 1.0 GM =
+= 0.9.9.2 =
 
 * Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
 

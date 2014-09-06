@@ -38,6 +38,7 @@ class SI_Estimate extends SI_Post_Type {
 		'shipping' => '_doc_shipping', // int
 		'submission' => '_submitted_items', // array
 		'tax' => '_doc_tax', // int
+		'tax2' => '_doc_tax2', // int
 		'total' => '_total', // int
 		'terms' => '_doc_terms', // string
 		'user_id' => '_user_id', // int
@@ -393,6 +394,34 @@ class SI_Estimate extends SI_Post_Type {
 		return $tax;
 	}
 
+	public function get_tax_total() {
+		$tax = $this->get_tax();
+		$subtotal = $this->get_subtotal();
+		$calculated_total = floatval( $subtotal * ( $tax / 100 ) );
+		return round( $calculated_total, 2 );
+	}
+
+	/**
+	 * Tax
+	 */
+	public function get_tax2() {
+		return (int)$this->get_post_meta( self::$meta_keys['tax2'] );
+	}
+
+	public function set_tax2( $tax = 0 ) {
+		$this->save_post_meta( array(
+				self::$meta_keys['tax2'] => $tax,
+			) );
+		return $tax;
+	}
+
+	public function get_tax2_total() {
+		$tax = $this->get_tax2();
+		$subtotal = $this->get_subtotal();
+		$calculated_total = floatval( $subtotal * ( $tax / 100 ) );
+		return round( $calculated_total, 2 );
+	}
+
 	/**
 	 * totals
 	 */
@@ -409,11 +438,25 @@ class SI_Estimate extends SI_Post_Type {
 		return $total;
 	}
 
-	public function set_calculated_total() {
+	/**
+	 * Calculated total includes any taxes and discounts.
+	 * @return  
+	 */
+	public function get_calculated_total() { 
 		$total = 0;
 		$subtotal = $this->get_subtotal();
-		$pre_disc_total = $subtotal * ( ( 100 + $this->get_tax() ) / 100 );
+		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
+			$subtotal = $this->get_total();
+		}
+		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
+		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
+		$pre_disc_total = $subtotal+$tax_total+$tax2_total;
 		$total = $pre_disc_total * ( ( 100 - $this->get_discount() ) / 100 );
+		return $total;
+	}
+
+	public function set_calculated_total() {
+		$total = $this->get_calculated_total();
 		$this->save_post_meta( array(
 				self::$meta_keys['total'] => $total,
 			) );

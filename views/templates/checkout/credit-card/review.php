@@ -1,10 +1,10 @@
-<form id="gb_checkout_review" action="<?php echo si_get_credit_card_checkout_form_action() ?>" method="post">
+<form id="si_checkout_review" action="<?php echo si_get_credit_card_checkout_form_action() ?>" method="post">
 	<div class="checkout_block right_form clearfix">
 
 		<div class="paymentform-info">
-			<h2 class="section_heading gb_ff"><?php si_e( 'Your Payment Information' ); ?></h2>
+			<h2 class="section_heading"><?php si_e( 'Your Payment Information' ); ?></h2>
 		</div>
-		<fieldset id="gb-billing">
+		<fieldset id="si-billing">
 			<table>
 				<tbody>
 					<?php foreach ( $billing_fields as $key => $data ): ?>

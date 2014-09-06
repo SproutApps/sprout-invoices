@@ -121,8 +121,6 @@ class SI_Admin_Settings extends SI_Controller {
 	 */
 	public static function redirect_on_activation() {
 		if ( get_option( 'si_do_activation_redirect', FALSE ) ) {
-			// Flush the rewrite rules after SI is activated.
-			flush_rewrite_rules();
 			delete_option( 'si_do_activation_redirect' );
 			wp_redirect( admin_url( 'admin.php?page=' . self::TEXT_DOMAIN . '/settings&tab=dashboard' ) );
 		}
@@ -174,10 +172,6 @@ class SI_Admin_Settings extends SI_Controller {
 	 * @return string 
 	 */
 	public static function welcome_page() {
-		// TODO REMOVE - don't flush the rewrite rules every time this page is loaded,
-		// this will help those that have already installed though. 
-		flush_rewrite_rules();
-		
 		// Determine if this is a premium install.
 		// TODO abstract this and use a filter in another file.
 		$premium = ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) ? '-premium' : '' ;

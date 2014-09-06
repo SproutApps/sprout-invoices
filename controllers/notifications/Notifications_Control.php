@@ -265,7 +265,7 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return                      
 	 */
 	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_id = NULL ) {
-		if ( isset( $_POST['notification_type'] ) && NULL === $callback_args['notification_type'] ) {
+		if ( isset( $callback_args['notification_type'] ) && isset( $_POST['notification_type'] ) && NULL === $callback_args['notification_type'] ) {
 			$notification_id = $_POST['notification_type'];
 		}
 

@@ -13,6 +13,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 	const FRESHBOOKS_ACCOUNT_OPTION = 'si_freshbooks_domain_option';
 	const PROCESS_ARCHIVED = 'import_archived';
 	const PAYMENT_METHOD = 'Freshbooks Imported';
+	const DELETE_PROGRESS = 'remove_progress_option';
 	const PROGRESS_OPTION = 'current_import_progress_freshbooks';
 
 	// Meta
@@ -21,6 +22,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 	private static $freshbooks_token;
 	private static $freshbooks_account;
 	private static $importing_archived;
+	private static $start_progress_over;
 
 	public static function init() {
 		// Settings
@@ -56,31 +58,38 @@ class SI_Freshbooks_Import extends SI_Importer {
 							'type' => 'text',
 							'default' => self::$freshbooks_token,
 							'attributes' => array( 'placeholder' => self::__(
-								'6c4384e126e4b560d1227f4ad0f88b2c') ),
+								'6c4384e426e4b560d1227f4ad0f88b2c') ),
 							'description' => self::__( 'Get your token form My Account > Freshbooks API ' ),
 						)
 					),
 					self::FRESHBOOKS_ACCOUNT_OPTION => array(
-						'label' => self::__( 'Domain' ),
+						'label' => self::__( 'Account/Sub-domain' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$freshbooks_account,
 							'attributes' => array( 'placeholder' => self::__(
 								'your-subdomain') ),
-							'description' => self::__( '' )
+							'description' => self::__( 'https://[subdomain].freshbooks.com' )
 						)
 					),
-					/*/
 					self::PROCESS_ARCHIVED => array(
 						'label' => self::__( 'Import Archived' ),
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'archived',
-							'label' => '',
+							'label' => self::__( 'Import archived clients.' ),
 							'description' => self::__( '' )
 						)
 					),
-					/**/
+					self::DELETE_PROGRESS => array(
+						'label' => self::__( 'Clear Progress' ),
+						'option' => array(
+							'type' => 'checkbox',
+							'value' => 'restart',
+							'label' => self::__('Re-start the Import Process'),
+							'description' => self::__( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.' )
+						)
+					),
 					self::PROCESS_ACTION => array(
 						'option' => array(
 							'type' => 'hidden',
@@ -101,6 +110,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		if ( isset( $_POST[self::FRESHBOOKS_ACCOUNT_OPTION] ) && $_POST[self::FRESHBOOKS_ACCOUNT_OPTION] != '') {
 			self::$freshbooks_account = $_POST[self::FRESHBOOKS_ACCOUNT_OPTION];
 			update_option( self::FRESHBOOKS_ACCOUNT_OPTION, $_POST[self::FRESHBOOKS_ACCOUNT_OPTION] );
+		}
+
+		// Clear out progress
+		if ( isset( $_POST[self::DELETE_PROGRESS] ) && $_POST[self::DELETE_PROGRESS] == 'restart' ) {
+			delete_option( self::PROGRESS_OPTION );
 		}
 	}
 
@@ -132,6 +146,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 		require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
 		FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
 		
+
 		// Store the import progress
 		$progress = get_option( self::PROGRESS_OPTION, array() );
 		// Suppress notifications
@@ -404,24 +419,24 @@ class SI_Freshbooks_Import extends SI_Importer {
 			do_action( 'si_error', 'Client imported already', $client['client_id'] );
 			return;
 		}
-		if ( !self::$importing_archived && $client['folder'] != 'active' ) {
+		if ( !self::import_archived_data() && $client['folder'] != 'active' ) {
 			return;
 		}
 		// args to create new client
 		$address = array(
-			'street' => !is_array( $client['p_street1'] ) ? self::esc__( $client['contact_street']) : '',
-			'city' => !is_array( $client['p_city'] ) ? self::esc__($client['p_city']) : '',
-			'zone' => !is_array( $client['p_state'] ) ? self::esc__($client['p_state']) : '',
-			'postal_code' => !is_array( $client['p_code'] ) ? self::esc__($client['p_code']) : '',
-			'country' => !is_array( $client['p_country'] ) ? self::esc__($client['p_country']) : '',
+			'street' => ( isset( $client['contact_street'] ) && !is_array( $client['p_street1'] ) ) ? self::esc__( $client['contact_street']) : '',
+			'city' => ( isset( $client['p_city'] ) && !is_array( $client['p_city'] ) ) ? self::esc__($client['p_city']) : '',
+			'zone' => ( isset( $client['p_state'] ) && !is_array( $client['p_state'] ) ) ? self::esc__($client['p_state']) : '',
+			'postal_code' => ( isset( $client['p_code'] ) && !is_array( $client['p_code'] ) ) ? self::esc__($client['p_code']) : '',
+			'country' => ( isset( $client['p_country'] ) && !is_array( $client['p_country'] ) ) ? self::esc__($client['p_country']) : '',
 		);
 		$args = array(
 			'address' => $address,
-			'company_name' => ( !is_array( $client['company_name'] ) ) ? $client['company_name'] : '',
-			'website' => ( !is_array( $client['website'] ) ) ? $client['website'] : '',
-			'currency' => ( !is_array( $client['currency_code'] ) ) ? $client['currency_code'] : '',
+			'company_name' => ( isset( $client['company_name'] ) && !is_array( $client['company_name'] ) ) ? $client['company_name'] : '',
+			'website' => ( isset( $client['website'] ) && !is_array( $client['website'] ) ) ? $client['website'] : '',
+			'currency' => ( isset( $client['currency_code'] ) && !is_array( $client['currency_code'] ) ) ? $client['currency_code'] : '',
 		);
-		if ( $args['company_name'] == '' ) {
+		if ( isset( $client['company_name'] ) && $args['company_name'] == '' ) {
 			if ( is_array( $client['first_name'] ) || is_array( $client['last_name'] ) ) {
 				do_action( 'si_error', 'Client creation error', $client['client_id'] );
 				return;
@@ -442,11 +457,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		$contacts_created = array();
 		// The first contact is part of the master client.
 		$contact_by_client = array(
-			'contact_id' => $client['contact_id'],
-			'username' => $client['username'],
-			'email' => $client['email'],
-			'first_name' => ( !is_array( $client['first_name'] ) ) ? $client['first_name'] : '',
-			'last_name' => ( !is_array( $client['first_name'] ) ) ? $client['first_name'] : '',
+			'contact_id' =>  ( isset( $client['contact_id'] ) && !is_array( $client['contact_id'] ) ) ? $client['contact_id'] : '',
+			'username' =>  ( isset( $client['username'] ) && !is_array( $client['username'] ) ) ? $client['username'] : '',
+			'email' =>  ( isset( $client['email'] ) && !is_array( $client['email'] ) ) ? $client['email'] : '',
+			'first_name' => ( isset( $client['first_name'] ) && !is_array( $client['first_name'] ) ) ? $client['first_name'] : '',
+			'last_name' => ( isset( $client['last_name'] ) && !is_array( $client['last_name'] ) ) ? $client['last_name'] : '',
 		);
 		$contacts_created[] = self::create_contact( $contact_by_client, $client_id );
 
