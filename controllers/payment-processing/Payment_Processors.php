@@ -168,10 +168,10 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	public static function settings_description() {
 		$credit = self::get_registered_processors('credit');
 		if ( empty( $credit ) ) {
-			printf( self::__('<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Add more payment gateways and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>'), si_get_purchase_link() );
+			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Add more payment gateways and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', si_get_purchase_link() );
 		}
 		else {
-			printf( self::__('<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>More Payment Gateways Available:</strong> Checkout the Sprout Apps <a href="%s">marketplace</a>.</p></div>'), self::PLUGIN_URL . '/marketplace/' );
+			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>More Payment Gateways Available:</strong> Checkout the Sprout Apps <a href="%s">marketplace</a>.</p></div>', self::PLUGIN_URL . '/marketplace/' );
 		}
 	}
 

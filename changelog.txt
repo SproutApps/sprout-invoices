@@ -1,3 +1,17 @@
+= 1.0.1 =
+
+* Localization support!
+* Invoice/Esitmate metabox order fix
+* Translatable string improvements
+* Importer improvements
+* Invoices with Outstanding Balance have a label on mngt. screen.
+* Reports table updates
+* Fix for advanced reporting on some hosts
+* Title/Subject not showing correctly
+* Better error handling during import
+* apple_filters('the_content') to the terms and notes on estimates and invoices
+* Load order update to improve add-on support
+
 = 1.0 =
 
 Welcome! This is a big update and a big step for us.
@@ -11,17 +25,21 @@ Welcome! This is a big update and a big step for us.
 * Remove some unnecessary cruft.
 * Multiple taxes
 
-= 0.9.9.4 =
+= 0.9.9.5 - 1.0 GM =
+
+* Subject line fix.
+
+= 0.9.9.4 - 1.0 GM =
 
 * WP-Invoice Importer Bug fix: Import any type
 * WP-Invoice Importer Bug fix: Fix devision by zero error
 * WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
-= 0.9.9.3 =
+= 0.9.9.3 - 1.0 GM =
 
 * Strict standards fixins
 
-= 0.9.9.2 =
+= 0.9.9.2 - 1.0 GM =
 
 * Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
 

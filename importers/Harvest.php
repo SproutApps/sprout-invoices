@@ -62,7 +62,7 @@ class SI_Harvest_Import extends SI_Importer {
 							'default' => self::$harvest_user,
 							'attributes' => array( 'placeholder' => self::__(
 								'user@gmail.com') ),
-							'description' => self::__( '' ),
+							'description' => '',
 						)
 					),
 					self::HARVEST_PASS_OPTION => array(
@@ -72,17 +72,17 @@ class SI_Harvest_Import extends SI_Importer {
 							'default' => self::$harvest_pass,
 							'attributes' => array( 'placeholder' => self::__(
 								'password') ),
-							'description' => self::__( '' )
+							'description' => ''
 						)
 					),
 					self::HARVEST_ACCOUNT_OPTION => array(
-						'label' => self::__( 'Domain' ),
+						'label' => self::__( 'Account/Sub-domain' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$harvest_account,
 							'attributes' => array( 'placeholder' => self::__(
-								'domain/account') ),
-							'description' => self::__( '' )
+								'your-subdomain') ),
+							'description' => self::__( 'https://[subdomain].harvest.com' )
 						)
 					),
 					self::PROCESS_ARCHIVED => array(
@@ -91,7 +91,7 @@ class SI_Harvest_Import extends SI_Importer {
 							'type' => 'checkbox',
 							'value' => 'archived',
 							'label' => self::__( 'Import inactive clients.' ),
-							'description' => self::__( '' )
+							'description' => ''
 						)
 					),
 					self::DELETE_PROGRESS => array(

@@ -23,6 +23,11 @@ class SI_Notifications extends SI_Notifications_Control {
 	 * @return
 	 */
 	private static function notification_hooks() {
+		// Notifications can be suppressed
+		if ( apply_filters( 'suppress_notifications', FALSE ) ) {
+			return;
+		}
+
 		// estimates
 		add_action( 'send_estimate', array( __CLASS__, 'estimate_notification' ), 10, 2 );
 		// invoices
@@ -321,14 +326,16 @@ class SI_Notifications extends SI_Notifications_Control {
 				$client_users = array( $user_id );
 			}
 			foreach ( array_unique( $client_users ) as $user_id ) {
-				$to = self::get_user_email( $user_id );
-				$data = array(
-					'payment' => $payment,
-					'invoice' => $invoice,
-					'client' => $client,
-					'to' => $to
-				);
-				self::send_notification( 'final_payment', $data, $to );
+				if ( ! is_wp_error( $user_id ) ) {
+					$to = self::get_user_email( $user_id );
+					$data = array(
+						'payment' => $payment,
+						'invoice' => $invoice,
+						'client' => $client,
+						'to' => $to
+					);
+					self::send_notification( 'final_payment', $data, $to );
+				}
 			}
 		}
 	}

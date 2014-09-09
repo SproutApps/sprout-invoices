@@ -78,7 +78,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 							'type' => 'checkbox',
 							'value' => 'archived',
 							'label' => self::__( 'Import archived clients.' ),
-							'description' => self::__( '' )
+							'description' => ''
 						)
 					),
 					self::DELETE_PROGRESS => array(

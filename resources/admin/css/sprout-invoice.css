@@ -1334,7 +1334,7 @@ dt span.creation_event:before {
 }
 
 #si_report .dataTables_wrapper {
-	top: -32px;
+	/* top: -32px; */
 }
 
 #si_report .dataTables_wrapper table#si_reports_table {
@@ -1343,7 +1343,9 @@ dt span.creation_event:before {
 
 #si_report .tablenav.top {
 	position: relative;
-	z-index: 100;
+	z-index: 10000;
+	float: left;
+	margin-bottom: -25px;
 }
 
 input[type="date"]:before {

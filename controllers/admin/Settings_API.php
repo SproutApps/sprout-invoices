@@ -225,6 +225,7 @@ class SI_Settings_API extends SI_Controller {
 		$ajax_full_page = isset(self::$admin_pages[$plugin_page]['ajax_full_page'])?self::$admin_pages[$plugin_page]['ajax_full_page']:'';
 		$reset = isset(self::$admin_pages[$plugin_page]['reset'])?self::$admin_pages[$plugin_page]['reset']:'';
 		$section = isset(self::$admin_pages[$plugin_page]['section'])?self::$admin_pages[$plugin_page]['section']:'';
+
 		self::load_view( 'admin/settings', array(
 				'title' => self::__($title),
 				'page' => $plugin_page,

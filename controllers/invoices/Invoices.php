@@ -155,6 +155,7 @@ class SI_Invoices extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_line_items' ),
 				'context' => 'normal',
 				'priority' => 'high',
+				'weight' => 0,
 				'save_priority' => 5
 			),
 			'si_invoice_update' => array(
@@ -163,6 +164,7 @@ class SI_Invoices extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_meta_box_invoice_information' ),
 				'context' => 'normal',
 				'priority' => 'high',
+				'weight' => 20,
 				'save_priority' => 50
 			),
 			'si_doc_send' => array(
@@ -171,6 +173,7 @@ class SI_Invoices extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_invoice_note' ),
 				'context' => 'normal',
 				'priority' => 'low',
+				'weight' => 30,
 				'save_priority' => 500
 			),
 			'si_invoice_notes' => array(
@@ -179,13 +182,15 @@ class SI_Invoices extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_notes' ),
 				'context' => 'normal',
 				'priority' => 'low',
+				'weight' => 100
 			),
 			'si_invoice_history' => array(
 				'title' => si__( 'Invoice History' ),
 				'show_callback' => array( __CLASS__, 'show_submission_history_view' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
-				'priority' => 'low'
+				'priority' => 'low',
+				'weight' => 20
 			)
 		);
 		do_action( 'sprout_meta_box', $args, SI_Invoice::POST_TYPE );
@@ -440,7 +445,9 @@ class SI_Invoices extends SI_Controller {
 			if ( is_a( $client , 'SI_Client') ) {
 				$client_users = $client->get_associated_users();
 				foreach ( $client_users as $user_id ) {
-					$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', $user_id, esc_attr( SI_Notifications::get_user_email( $user_id ) ) );
+					if ( !is_wp_error( $user_id ) ) {
+						$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', $user_id, esc_attr( SI_Notifications::get_user_email( $user_id ) ) );
+					}
 				}
 			}
 			// Send to me.
@@ -603,7 +610,7 @@ class SI_Invoices extends SI_Controller {
 		case 'doc_link':
 			$estimate_id = $invoice->get_estimate_id();
 			if ( $estimate_id ) {
-				printf( self::__( '<a class="doc_link" title="%s" href="%s">%s</a>' ), self::__( 'Invoice\'s Estimate' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
+				printf( '<a class="doc_link" title="%s" href="%s">%s</a>', self::__( 'Invoice\'s Estimate' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
 			}
 			break;
 		case 'status': ?>
@@ -612,25 +619,27 @@ class SI_Invoices extends SI_Controller {
 							$status_change_span = '&nbsp;<span class="status_change" data-dropdown="#status_change_'.get_the_ID().'"><div class="dashicons dashicons-arrow-down"></div></span></button>';
 							 ?>
 						<?php if ( $invoice->get_status() == SI_Invoice::STATUS_PENDING || $invoice->get_status() == SI_Invoice::STATUS_PARTIAL ): ?>
-							<?php printf( self::__( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Pending payment(s)' ), si__('Pending Payment'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Pending payment(s)' ), si__('Pending Payment'), $status_change_span ); ?>
 						<?php elseif ( $invoice->get_status() == SI_Invoice::STATUS_PAID ): ?>
-							<?php printf( self::__( '<button class="si_status complete tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Fully Paid' ), si__('Paid'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status complete tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Fully Paid' ), si__('Paid'), $status_change_span ); ?>
+						<?php elseif ( $invoice->get_status() == SI_Invoice::STATUS_PARTIAL ): ?>
+							<?php printf( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Outstanding Balance' ), si__('Outstanding Balance'), $status_change_span ); ?>
 						<?php elseif ( $invoice->get_status() == SI_Invoice::STATUS_WO ): ?>
-							<?php printf( self::__( '<button class="si_status declined tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Written-off' ), si__('Written Off'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status declined tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Written-off' ), si__('Written Off'), $status_change_span ); ?>
 						<?php else: ?>
-							<?php printf( self::__( '<button class="si_status temp tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Draft Invoice' ), si__('Draft'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status temp tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Draft Invoice' ), si__('Draft'), $status_change_span ); ?>
 						<?php endif ?>
 					</span>
 					<div id="status_change_<?php the_ID() ?>" class="dropdown dropdown-tip dropdown-relative">
 						<ul class="dropdown-menu">
 							<?php if ( $invoice->get_status() != SI_Invoice::STATUS_PENDING ): ?>
-								<?php printf( self::__( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Mark Pending Payment(s)' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Pending' ) ); ?>
+								<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Pending Payment(s)' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Pending' ) ); ?>
 							<?php endif ?>
 							<?php /**/ if ( $invoice->get_status() != SI_Invoice::STATUS_PAID ): ?>
-								<?php printf( self::__( '<li><a class="doc_status_change publish" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Mark as Paid.' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PAID, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Paid' ) ); ?>
+								<?php printf( '<li><a class="doc_status_change publish" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark as Paid.' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PAID, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Paid' ) ); ?>
 							<?php endif  /**/ ?>
 							<?php if ( $invoice->get_status() != SI_Invoice::STATUS_WO ): ?>
-								<?php printf( self::__( '<li><a class="doc_status_change decline" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Write-off Invoice' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_WO, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Write-off' ) ); ?>
+								<?php printf( '<li><a class="doc_status_change decline" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Write-off Invoice' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_WO, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Write-off' ) ); ?>
 							<?php endif ?>
 							<?php
 								if ( current_user_can( 'delete_post', $id ) ) {
@@ -642,10 +651,10 @@ class SI_Invoices extends SI_Controller {
 			break;
 
 		case 'total':
-			printf( self::__('%s <span class="description">(of %s)</span>'), sa_get_formatted_money( $invoice->get_payments_total() ), sa_get_formatted_money( $invoice->get_total() ) );
+			printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), self::__('of'), sa_get_formatted_money( $invoice->get_total() ) );
 
 			echo '<div class="row-actions">';
-			printf( self::__( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>' ), self::__( 'Review payments.' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, self::__( 'Payments' ) );
+			printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', self::__( 'Review payments.' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, self::__( 'Payments' ) );
 
 			break;
 

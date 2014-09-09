@@ -329,12 +329,12 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'weight' => 2,
 			),
 			'city_zone_postal' => array(
-				'label' => self::__( '' ),
+				'label' => '',
 				'value' => esc_attr( $bill_cache['city'] ) . ', ' . esc_attr( $bill_cache['zone'] ) . ' ' . esc_attr( $bill_cache['postal_code'] ),
 				'weight' => 3,
 			),
 			'country' => array(
-				'label' => self::__( '' ),
+				'label' => '',
 				'value' => esc_attr( $bill_cache['country'] ),
 				'weight' => 4,
 			),

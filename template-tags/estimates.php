@@ -553,7 +553,7 @@ function si_get_estimate_terms( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$estimate = SI_Estimate::get_instance( $id );
-	return apply_filters( 'si_get_estimate_terms', $estimate->get_terms(), $estimate );
+	return apply_filters( 'si_get_estimate_terms', apply_filters( 'the_content', $estimate->get_terms() ), $estimate );
 }
 endif;
 
@@ -617,7 +617,7 @@ function si_get_estimate_notes( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$estimate = SI_Estimate::get_instance( $id );
-	return apply_filters( 'si_get_estimate_notes', $estimate->get_notes(), $estimate );
+	return apply_filters( 'si_get_estimate_notes', apply_filters( 'the_content', $estimate->get_notes() ), $estimate );
 }
 endif;
 

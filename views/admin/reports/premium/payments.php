@@ -77,8 +77,8 @@
 							$payment_void_total = 0;
 						}
 						
-						$payment_link = sprintf( self::__( '<a class="payments_link" title="%s" href="%s&s=%s">#%s</a>' ), self::__( 'Payment' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), get_the_ID(), get_the_ID() );
-						$payments_link = sprintf( self::__( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>' ), self::__( 'Invoice Payments' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $invoice_id, sa_get_formatted_money( si_get_invoice_payments_total( $invoice_id ) ) );
+						$payment_link = sprintf( '<a class="payments_link" title="%s" href="%s&s=%s">#%s</a>', self::__( 'Payment' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), get_the_ID(), get_the_ID() );
+						$payments_link = sprintf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', self::__( 'Invoice Payments' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $invoice_id, sa_get_formatted_money( si_get_invoice_payments_total( $invoice_id ) ) );
 						$invoice_name = ( $invoice_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $invoice_id ), get_the_title( $invoice_id ) ) : self::__('N/A') ;
 						$client_name = ( si_get_invoice_client_id( $invoice_id ) ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_invoice_client_id( $invoice_id ) ), get_the_title( si_get_invoice_client_id( $invoice_id ) ) ) : self::__('N/A') ; ?>
 						<tr> 

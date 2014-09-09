@@ -2431,7 +2431,7 @@
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $http . $this->_account . ".harvestapp.com/" . $url );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		@curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('User-Agent: PHP Wrapper Library for Harvest API', 'Accept: application/xml', 'Content-Type: application/xml', 'Authorization: Basic (' . base64_encode( $this->_user . ":" . $this->_password ). ')' ) );
         curl_setopt($ch, CURLOPT_HEADERFUNCTION, array(&$this,'parseHeader'));

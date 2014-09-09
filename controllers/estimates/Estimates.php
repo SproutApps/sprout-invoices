@@ -140,6 +140,7 @@ class SI_Estimates extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_line_items' ),
 				'context' => 'normal',
 				'priority' => 'high',
+				'weight' => 0,
 				'save_priority' => 5
 			),
 			'si_estimate_update' => array(
@@ -148,6 +149,7 @@ class SI_Estimates extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_meta_box_estimate_information' ),
 				'context' => 'normal',
 				'priority' => 'high',
+				'weight' => 20,
 				'save_priority' => 50
 			),
 			'si_doc_send' => array(
@@ -156,6 +158,7 @@ class SI_Estimates extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_estimate_note' ),
 				'context' => 'normal',
 				'priority' => 'low',
+				'weight' => 30,
 				'save_priority' => 500
 			),
 			'si_estimate_notes' => array(
@@ -164,13 +167,15 @@ class SI_Estimates extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_notes' ),
 				'context' => 'normal',
 				'priority' => 'low',
+				'weight' => 100
 			),
 			'si_estimate_history' => array(
 				'title' => si__( 'Estimate History' ),
 				'show_callback' => array( __CLASS__, 'show_submission_history_view' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
-				'priority' => 'low'
+				'priority' => 'low',
+				'weight' => 20
 			)
 		);
 		do_action( 'sprout_meta_box', $args, SI_Estimate::POST_TYPE );
@@ -775,7 +780,7 @@ class SI_Estimates extends SI_Controller {
 		case 'doc_link':
 			$invoice_id = $estimate->get_invoice_id();
 			if ( $invoice_id ) {
-				printf( self::__( '<a class="doc_link" title="%s" href="%s">%s</a>' ), self::__( 'Invoice for this estimate.' ), get_edit_post_link( $invoice_id ), '<div class="dashicons icon-sproutapps-invoices"></div>' );
+				printf( '<a class="doc_link" title="%s" href="%s">%s</a>', self::__( 'Invoice for this estimate.' ), get_edit_post_link( $invoice_id ), '<div class="dashicons icon-sproutapps-invoices"></div>' );
 			}
 			break;
 		case 'status': ?>
@@ -784,13 +789,13 @@ class SI_Estimates extends SI_Controller {
 							$status_change_span = '&nbsp;<span class="status_change" data-dropdown="#status_change_'.get_the_ID().'"><div class="dashicons dashicons-arrow-down"></div></span></button>';
 							 ?>
 						<?php if ( $estimate->get_status() == SI_Estimate::STATUS_PENDING ): ?>
-							<?php printf( self::__( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Currently Pending.' ), si__('Pending'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Pending.' ), si__('Pending'), $status_change_span ); ?>
 						<?php elseif ( $estimate->get_status() == SI_Estimate::STATUS_APPROVED ): ?>
-							<?php printf( self::__( '<button class="si_status complete tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Currently Approved.' ), si__('Approved'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status complete tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Approved.' ), si__('Approved'), $status_change_span ); ?>
 						<?php elseif ( $estimate->get_status() == SI_Estimate::STATUS_DECLINED ): ?>
-							<?php printf( self::__( '<button class="si_status declined tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Currently Declined.' ), si__('Declined'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status declined tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Declined.' ), si__('Declined'), $status_change_span ); ?>
 						<?php else: ?>
-							<?php printf( self::__( '<button class="si_status request tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>' ), self::__( 'Pending Estimate Request.' ), si__('Pending Request'), $status_change_span ); ?>
+							<?php printf( '<button class="si_status request tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Pending Estimate Request.' ), si__('Pending Request'), $status_change_span ); ?>
 						<?php endif ?>
 					</span>
 
@@ -798,13 +803,13 @@ class SI_Estimates extends SI_Controller {
 						<ul class="dropdown-menu">
 							<!--<span class="helptip" title="<?php si_e('Quick links to change status') ?>"></span>-->
 							<?php if ( $estimate->get_status() != SI_Estimate::STATUS_PENDING ): ?>
-								<?php printf( self::__( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Mark Pending' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Pending' ) ); ?>
+								<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Pending' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Pending' ) ); ?>
 							<?php endif ?>
 							<?php if ( $estimate->get_status() != SI_Estimate::STATUS_APPROVED ): ?>
-								<?php printf( self::__( '<li><a class="doc_status_change publish" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Mark Approved' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_APPROVED, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Approve' ) ); ?>
+								<?php printf( '<li><a class="doc_status_change publish" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Approved' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_APPROVED, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Approve' ) ); ?>
 							<?php endif ?>
 							<?php if ( $estimate->get_status() != SI_Estimate::STATUS_DECLINED ): ?>
-								<?php printf( self::__( '<li><a class="doc_status_change decline" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>' ), self::__( 'Mark Declined' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_DECLINED, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Declined' ) ); ?>
+								<?php printf( '<li><a class="doc_status_change decline" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Declined' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_DECLINED, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Declined' ) ); ?>
 							<?php endif ?>
 							<?php
 								if ( current_user_can( 'delete_post', $id ) ) {

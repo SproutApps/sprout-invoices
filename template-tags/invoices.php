@@ -611,7 +611,7 @@ function si_get_invoice_terms( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$invoice = SI_Invoice::get_instance( $id );
-	return apply_filters( 'si_get_invoice_terms', $invoice->get_terms(), $invoice );
+	return apply_filters( 'si_get_invoice_terms', apply_filters( 'the_content', $invoice->get_terms() ), $invoice );
 }
 endif;
 
@@ -675,7 +675,7 @@ function si_get_invoice_notes( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$invoice = SI_Invoice::get_instance( $id );
-	return apply_filters( 'si_get_invoice_notes', $invoice->get_notes(), $invoice );
+	return apply_filters( 'si_get_invoice_notes', apply_filters( 'the_content', $invoice->get_notes() ), $invoice );
 }
 endif;
 
@@ -1010,9 +1010,3 @@ function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
 
 	return $returned_history;
 }
-
-
-
-
-
-

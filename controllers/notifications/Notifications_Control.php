@@ -445,10 +445,16 @@ class SI_Notifications_Control extends SI_Controller {
 		$filtered_headers = apply_filters( 'si_notification_headers', $headers, $notification_name, $data, $from_email, $from_name, $html );
 		
 		// Use the wp_email function
-		wp_mail( $to, $notification_title, $notification_content, $filtered_headers );
+		$sent = wp_mail( $to, $notification_title, $notification_content, $filtered_headers );
 		
-		// Create notification record
-		self::notification_record( $notification_name, $data, $to, $notification_title, $notification_content );
+		if ( $sent != false ) {
+			// Create notification record
+			self::notification_record( $notification_name, $data, $to, $notification_title, $notification_content );
+		}
+		else {
+			do_action( 'si_error', 'FAILED NOTIFICATION - Attempted e-mail: ' . $to, $data );
+			return FALSE;
+		}
 
 		// Mark the notification as sent.
 		self::mark_notification_sent( $notification_name, $data, $to );
@@ -599,6 +605,12 @@ class SI_Notifications_Control extends SI_Controller {
 		} else {
 			$to = "$name <$user_email>";
 		}
+
+		// compensate for strange bug where the name came through but the email wasn't.
+		if ( strpos( $to, $user_email ) !== false ) {
+			$to = $user_email;
+		}
+
 		return $to;
 	}
 

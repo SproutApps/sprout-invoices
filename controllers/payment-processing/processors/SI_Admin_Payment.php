@@ -70,7 +70,8 @@ class SI_Admin_Payment extends SI_Controller {
 				'show_callback' => array( __CLASS__, 'show_payment_view' ),
 				'save_callback' => array( __CLASS__, 'save_admin_payment' ),
 				'context' => 'normal',
-				'priority' => 'low'
+				'priority' => 'low',
+				'weight' => 70
 			)
 		);
 		do_action( 'sprout_meta_box', $args, SI_Invoice::POST_TYPE );

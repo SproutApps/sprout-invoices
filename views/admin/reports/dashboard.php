@@ -8,7 +8,7 @@
 		<?php do_action( 'si_settings_page_sub_heading_'.$_GET['page'] ); ?>
 	</div>
 	
-	<?php printf( self::__('<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Add awesome reporting and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>'), si_get_purchase_link() ); ?>
+	<?php printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Add awesome reporting and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', si_get_purchase_link() ); ?>
 
 	<div id="dashboard-widgets-wrap">
 		<div id="dashboard-widgets" class="metabox-holder">

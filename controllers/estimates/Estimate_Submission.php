@@ -59,8 +59,8 @@ class SI_Estimate_Submissions extends SI_Controller {
 	}
 
 	public static function submission_settings_description() {		
-		printf( self::__('<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Enable Estimate Submission integrations and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>'), si_get_purchase_link() );	
-		printf( self::__('<p>Estimate submissions is the start of the <a href="%s">Sprout Invoices workflow</a>.</p>'), self::PLUGIN_URL.'/sprout-invoices/' );
+		printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Enable Estimate Submission integrations and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', si_get_purchase_link() );	
+		printf( '<p>%s</p>', self::__('Estimate submissions is the start of the <a href="%s">Sprout Invoices workflow</a>.'), self::PLUGIN_URL.'/sprout-invoices/' );
 	}
 
 	public static function advanced_form_integration_view() {
