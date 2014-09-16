@@ -552,7 +552,7 @@ span.inline_success_message {
 
 #subject_header #subject_header_actions #subject_input_wrap {
 	float: left;
-	width: 30%
+	width: 40%
 }
 
 #subject_header #subject_header_actions #subject_input_wrap input {
@@ -563,23 +563,36 @@ span.inline_success_message {
 
 #quick_links {
 	float: left;
-	width: 65%
+	width: 55%
 }
 
 #quick_links b {
-	display: inline-block;
-	margin-left: 15px;
-	line-height: 2.5em
+	/* display: inline-block; */
+	/* margin-left: 15px; */
+	/* line-height: 2.5em */
 }
 
 #quick_links .button {
 	display: inline-block;
-	margin: 4px 0 15px 15px;
+	margin: 5px 0 15px 15px;
 	margin-left: 15px;
 	margin-bottom: 15px
 }
+#quick_links .quick_status_update .button {
+	margin: 0px;
+}
 
-#quick_links .button span:before {
+#quick_links .quick_status_update {
+	display: inline-block;
+	margin: 5px 0 15px 15px;
+}
+#quick_links .spinner {
+	margin-top: 9px;
+	margin-left: 15px;
+}
+
+#quick_links .button span:before,
+#quick_links .doc_status_change span:before {
 	font: 400 20px/1 dashicons;
 	speak: none;
 	display: inline-block;
@@ -591,6 +604,9 @@ span.inline_success_message {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none!important
+}
+#quick_links .doc_status_change span:before {
+	top: 0px;
 }
 
 #quick_links .doc_status_change.temp span:before {
@@ -697,7 +713,11 @@ span.inline_success_message {
 	color: #E14D43
 }
 
+span.status_change {
+	display: inline-block;
+}
 .wp-core-ui .current_status {
+	display: inline-block;
 	-webkit-box-shadow: none!important;
 	font-weight: 600
 }
@@ -736,19 +756,6 @@ span.inline_success_message {
 
 .post_link span {
 	margin-right: 5px
-}
-
-@media (max-width: 1120px) {
-
-	#quick_links span {
-		font-size: 0
-	}
-
-	#quick_links .button span:before {
-		padding: 0;
-		right: 0
-	}
-
 }
 
 .line_item span.helptip:after {

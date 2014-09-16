@@ -24,6 +24,9 @@ if ( 0 != $post->ID ) {
 } ?>
 
 
+
+<?php do_action( 'doc_information_meta_box_first', $invoice ) ?>
+
 <div class="misc-pub-section" data-edit-id="status" data-edit-type="select">
 	<span id="status" class="wp-media-buttons-icon"><?php si_e('Status:') ?> <b><?php echo $status_options[$status] ?></b></span>
 
@@ -89,7 +92,11 @@ if ( 0 != $post->ID ) {
  	</div>
 </div>
 
+<?php do_action( 'doc_information_meta_box_date_row_last', $invoice ) ?>
+
 <hr/>
+
+<?php do_action( 'doc_information_meta_box_client_row', $invoice ) ?>
 
 <!-- Client -->
 <div class="misc-pub-section" data-edit-id="client" data-edit-type="select">
@@ -147,7 +154,12 @@ if ( 0 != $post->ID ) {
 		</p>
  	</div>
 </div>
+
+<?php do_action( 'doc_information_meta_box_client_row_last', $invoice ) ?>
+
 <hr/>
+
+<?php do_action( 'doc_information_meta_box_meta_row', $invoice ) ?>
 
 <!-- PO Number -->
 <div class="misc-pub-section" data-edit-id="po_number">
@@ -253,3 +265,5 @@ if ( 0 != $post->ID ) {
  	</div>
 </div>
 <?php /**/ ?>
+
+<?php do_action( 'doc_information_meta_box_last', $invoice ) ?>

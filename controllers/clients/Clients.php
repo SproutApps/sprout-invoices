@@ -651,7 +651,7 @@ class SI_Clients extends SI_Controller {
 			);
 
 		header( 'Content-type: application/json' );
-		if ( SA_DEV ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		echo json_encode( $response );
 		exit();
 	}

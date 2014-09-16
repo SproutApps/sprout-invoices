@@ -1,5 +1,11 @@
 <?php
 
+if ( class_exists( 'SA_Settings_API' ) ) {
+	// Another Sprout App is active
+	return;
+}
+
+
 /**
  * Admin settings pages and meta controller.
  *
@@ -8,7 +14,7 @@
  * @package Sprout_Invoice
  * @subpackage Settings
  */
-class SI_Settings_API extends SI_Controller {
+class SA_Settings_API extends SI_Controller {
 
 	private static $admin_pages = array();
 	private static $options = array();
@@ -192,6 +198,10 @@ class SI_Settings_API extends SI_Controller {
 		if ( !current_user_can( 'manage_options' ) ) {
 			return; // not allowed to view this page
 		}
+		if ( isset( $_GET['settings-updated'] ) && isset( $_GET['settings-updated'] ) ) {
+			// Update rewrite rules when options are updated.
+			flush_rewrite_rules();
+		}
 		if ( isset( $_GET['tab'] ) && $_GET['tab'] != '' ) {
 			$tabs = apply_filters( 'si_option_tabs', self::$option_tabs );
 			if ( isset( $tabs[$_GET['tab']] ) ) {
@@ -283,7 +293,7 @@ class SI_Settings_API extends SI_Controller {
 			uasort( $sections, array( __CLASS__, 'sort_by_weight' ) );
 			foreach ( $sections as $section_id => $section_args ) {
 				// Check to see if we're on a tab and try to figure out what settings to register
-				$tab = ( isset( $section_args['tab'] ) ) ? $section_args['tab'] : 'settings';
+				$tab = ( isset( $section_args['tab'] ) ) ? $section_args['tab'] : $page;
 				$tpage = self::TEXT_DOMAIN.'/'.$tab;
 				$display = ( isset( $section_args['callback'] ) && is_callable( $section_args['callback'] ) ) ? $section_args['callback'] : array( __CLASS__, 'display_settings_section' ) ;
 				$title = ( isset( $section_args['title'] ) ) ? $section_args['title'] : '' ;

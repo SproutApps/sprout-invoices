@@ -671,6 +671,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'ajax_url' => get_admin_url().'/admin-ajax.php',
 			'plugin_url' => SI_URL,
 			'thank_you_string' => self::__( 'Thank you' ),
+			'updating_string' => self::__( 'Updating...' ),
 			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
 			'security' => wp_create_nonce( self::NONCE )
 		);
@@ -712,6 +713,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$si_js_object = array(
 			'plugin_url' => SI_URL,
 			'thank_you_string' => self::__( 'Thank you' ),
+			'updating_string' => self::__( 'Updating...' ),
 			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
 			'security' => wp_create_nonce( self::NONCE )
 		);
@@ -809,7 +811,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 */
 	protected static function locate_template( $possibilities, $default = '' ) {
 		$possibilities = apply_filters( 'sprout_invoice_template_possibilities', $possibilities );
-
+		$possibilities = array_filter( $possibilities );
 		// check if the theme has an override for the template
 		$theme_overrides = array();
 		foreach ( $possibilities as $p ) {
@@ -1275,7 +1277,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		);
 
 		header( 'Content-type: application/json' );
-		if ( SA_DEV ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		echo json_encode( $data );
 		exit();
 
@@ -1295,11 +1297,19 @@ abstract class SI_Controller extends Sprout_Invoices {
 		switch ( get_post_type( $_REQUEST['id'] ) ) {
 			case SI_Invoice::POST_TYPE:
 				$doc = SI_Invoice::get_instance( $_REQUEST['id'] );
-				$statuses = SI_Invoice::get_statuses();
+				$doc->set_status( $_REQUEST['status'] );
+				$view = self::load_view_to_string( 'admin/sections/invoice-status-change-drop', array(
+						'id' => $_REQUEST['id'],
+						'status' => $doc->get_status()
+					), FALSE );
 				break;
 			case SI_Estimate::POST_TYPE:
 				$doc = SI_Estimate::get_instance( $_REQUEST['id'] );
-				$statuses = SI_Estimate::get_statuses();
+				$doc->set_status( $_REQUEST['status'] );
+				$view = self::load_view_to_string( 'admin/sections/estimate-status-change-drop', array(
+						'id' => $_REQUEST['id'],
+						'status' => $doc->get_status()
+					), FALSE );
 				break;
 			
 			default:
@@ -1307,13 +1317,12 @@ abstract class SI_Controller extends Sprout_Invoices {
 				break;
 		}
 		
-		// set the status
-		$doc->set_status( $_REQUEST['status'] );
+		// action
 		do_action( 'doc_status_changed', $doc, $_REQUEST );
 		
 		header( 'Content-type: application/json' );
-		if ( SA_DEV ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( array( 'response' => si__('Status updated: '), 'status' => $statuses[$_REQUEST['status']], 'status_key' => $_REQUEST['status'] ) );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo json_encode( array( 'new_button' => $view ) );
 		exit();
 
 	}
@@ -1328,7 +1337,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			$message = self::__('Something failed.');
 		}
 		if ( $json ) header( 'Content-type: application/json' );
-		if ( SA_DEV ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		if ( $json ) {
 			echo json_encode( array( 'error' => 1, 'response' => $message ) );
 		}

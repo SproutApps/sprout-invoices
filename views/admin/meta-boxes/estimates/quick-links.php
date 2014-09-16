@@ -12,47 +12,27 @@
 
 <div id="subject_header" class="clearfix">
 	<div id="subject_header_actions" class="clearfix">
-		<div id="subject_input_wrap">
+
+		<div id="subject_input_wrap" class="clearfix">
 			<?php $title = ( $status != 'auto-draft' && get_the_title( $id ) != __('Auto Draft') ) ? get_the_title( $id ) : '' ; ?>
 			<input type="text" name="subject" value="<?php echo $title ?>" placeholder="<?php si_e('Subject...') ?>">
 		</div>
 
 		<?php if ( $statuses ): ?>
+
 			<div id="quick_links">
-				<?php 
-					unset($statuses[SI_Estimate::STATUS_REQUEST]); // Requests is a temp status.
-					foreach ( $statuses as $status_key => $status_name ) {
-						$current_status = ( $status_key == $status ) ? 'current_status' : '' ;
-						$disabled = ( $status_key == $status ) ? 'disabled="true"' : '' ;
-						switch ( $status_key ) {
-							case SI_Estimate::STATUS_REQUEST:
-								$title = self::__( 'Request' );
-								break;
-							case SI_Estimate::STATUS_PENDING:
-								$title = self::__( 'Pending Approval' );
-								break;
-							case SI_Estimate::STATUS_APPROVED:
-								$title = self::__( 'Approved' );
-								break;
-							case SI_Estimate::STATUS_DECLINED:
-								$title = self::__( 'Declined' );
-								break;
-							
-							default:
-								$title = sprintf( self::__( 'Quickly mark as %s.' ), $status_name );
-								break;
-						}
-						printf( self::__( '<button class="doc_status_change %s tooltip button %s" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s" %s><span>%s</span></button>' ), $status_key, $current_status, $title, get_edit_post_link( $id ), $id, $status_key, wp_create_nonce( SI_Estimates::NONCE ), $disabled, $status_name );
-					} ?>
-				
+
+				<?php SI_Estimates::status_change_dropdown( $id ) ?>
+
 				<a href="#send_estimate" id="send_doc_quick_link" class="send tooltip button" title="<?php si_e('Send this estimate.') ?>"><span>&nbsp;</span></a>
 				
 				<a href="<?php echo self::get_clone_post_url( $id ) ?>" id="duplicate_estimate_quick_link" class="duplicate tooltip button" title="<?php si_e('Duplicate this estimate') ?>"><span>&nbsp;</span></a>
 
 				<?php
 					if ( current_user_can( 'delete_post', $id ) ) {
-						echo "<a class='submitdelete tooltip button' title='" . si__( 'Delete this estimate permanently' ). "' href='" . get_delete_post_link( $id, '' ) . "'><span>&nbsp;</span></a>";
+						echo "<a class='submitdelete tooltip button clock' title='" . si__( 'Delete this estimate permanently' ). "' href='" . get_delete_post_link( $id, '' ) . "'><span>&nbsp;</span></a>";
 					} ?>
+
 			</div>
 		<?php endif ?>
 	</div>

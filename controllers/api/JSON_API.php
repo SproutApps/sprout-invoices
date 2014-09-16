@@ -121,7 +121,7 @@ class SI_JSON_API extends SI_Controller {
 			exit();
 		}
 		$token = self::get_user_token( $user );
-		if ( SI_DEV ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		echo json_encode( $token );
 		exit();
 	}
@@ -164,7 +164,7 @@ class SI_JSON_API extends SI_Controller {
 		$user_id = apply_filters( 'si_api_authenticate_request_user_id', $user_id, $_REQUEST, $user );
 		if ( $die && !$user_id ) {
 			status_header( 401 );
-			if ( SI_DEV ) header( 'Access-Control-Allow-Origin: *' );
+			if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 			die( -1 );
 		}
 		return $user_id;

@@ -666,7 +666,7 @@ class SI_Reporting extends SI_Controller {
 	//////////////
 	
 	public static function get_cache( $data_name = '' ) {
-		if ( SI_DEV ) { // If dev than don't cache.
+		if ( self::DEBUG ) { // If dev than don't cache.
 			return FALSE;
 		}
 		$cache = get_transient( self::CACHE_KEY_PREFIX.$data_name );

@@ -20,7 +20,7 @@
 			?>
 			<div class="rss_widget clearfix">
 				<?php if ( $maxitems == 0 ) : ?>
-					<p><?php self::_e( 'Could not connect to SeC server for updates.' ); ?></p>
+					<p><?php self::_e( 'Could not connect to SIserver for updates.' ); ?></p>
 				<?php else : ?>
 					<?php foreach ( $rss_items as $item ) :
 						$excerpt = sa_get_truncate( strip_tags( $item->get_content() ), 30 );

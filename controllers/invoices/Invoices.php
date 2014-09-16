@@ -14,15 +14,17 @@ class SI_Invoices extends SI_Controller {
 	const VIEWED_STATUS_UPDATE = 'si_viewed_status_update';
 	const TERMS_OPTION = 'si_default_invoice_terms';
 	const NOTES_OPTION = 'si_default_invoice_notes';
-	const FILTER_QUERY_VAR = 'filter_invoices';
+	const SLUG_OPTION = 'si_invoices_perma_slug';
 	private static $default_terms;
 	private static $default_notes;
+	private static $invoices_slug;
 
 	public static function init() {
 
 		// Settings
 		self::$default_terms = get_option( self::TERMS_OPTION, 'We do expect payment within 21 days, so please process this invoice within that time. There will be a 1.5% interest charge per month on late invoices.' );
 		self::$default_notes = get_option( self::NOTES_OPTION, 'Thank you; we really appreciate your business.' );
+		self::$invoices_slug = get_option( self::SLUG_OPTION, SI_Invoice::REWRITE_SLUG );
 
 		self::register_settings();
 
@@ -55,7 +57,6 @@ class SI_Invoices extends SI_Controller {
 		add_filter( 'wp_unique_post_slug', array( __CLASS__, 'post_slug'), 10, 4 );
 
 		// Templating
-		add_filter( 'template_include', array( __CLASS__, 'override_template' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX - 100 );
 		
 		// Create invoice when estimate is approved.
@@ -82,6 +83,9 @@ class SI_Invoices extends SI_Controller {
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 10, 1 );
+
+		// Rewrite rules
+		add_filter( 'si_register_post_type_args-'.SI_Invoice::POST_TYPE, array( __CLASS__, 'modify_post_type_slug' ) );
 	}
 
 	/**
@@ -96,6 +100,19 @@ class SI_Invoices extends SI_Controller {
 				'weight' => 20,
 				'tab' => 'settings',
 				'settings' => array(
+					self::SLUG_OPTION => array(
+						'label' => self::__( 'Invoice Permalink Slug' ),
+						'sanitize_callback' => array( __CLASS__, 'sanitize_slug_option' ),
+						'option' => array(
+							'type' => 'text',
+							'attributes' => array(
+								'class' => 'medium-text',
+							),
+							'default' => self::$invoices_slug,
+							'description' => sprintf( self::__( 'Example invoice url: %s/%s/045b41dd14ab8507d80a27b7357630a5/' ), site_url(), '<strong>'.self::$invoices_slug.'</strong>' )
+						),
+						
+					),
 					self::TERMS_OPTION => array(
 						'label' => self::__( 'Default Terms' ),
 						'option' => array(
@@ -136,6 +153,33 @@ class SI_Invoices extends SI_Controller {
 		return $post_types;
 	}
 
+	////////////////////
+	// rewrite slugs //
+	////////////////////
+
+	/**
+	 * PRe-register post type arguments
+	 * @param  array  $args 
+	 * @return array       
+	 */
+	public static function modify_post_type_slug( $args = array() ) {
+		$args['rewrite']['slug'] = self::$invoices_slug;
+		return $args;
+	}
+	
+	/**
+	 * Don't allow for a blank value
+	 * @param  string $option 
+	 * @return string
+	 */
+	public static function sanitize_slug_option( $option = '' ) {
+		// Trim and remove someone from entering the full url.
+		$option = str_replace( site_url(), '', trim( $option ) );
+		if ( $option == '' ) {
+			$option = SI_Invoice::REWRITE_SLUG;
+		}
+		return sanitize_title_with_dashes( $option );
+	}
 
 	/////////////////
 	// Meta boxes //
@@ -176,14 +220,6 @@ class SI_Invoices extends SI_Controller {
 				'weight' => 30,
 				'save_priority' => 500
 			),
-			'si_invoice_notes' => array(
-				'title' => si__( 'Terms & Notes' ),
-				'show_callback' => array( __CLASS__, 'show_notes_view' ),
-				'save_callback' => array( __CLASS__, 'save_notes' ),
-				'context' => 'normal',
-				'priority' => 'low',
-				'weight' => 100
-			),
 			'si_invoice_history' => array(
 				'title' => si__( 'Invoice History' ),
 				'show_callback' => array( __CLASS__, 'show_submission_history_view' ),
@@ -191,6 +227,14 @@ class SI_Invoices extends SI_Controller {
 				'context' => 'normal',
 				'priority' => 'low',
 				'weight' => 20
+			),
+			'si_invoice_notes' => array(
+				'title' => si__( 'Terms & Notes' ),
+				'show_callback' => array( __CLASS__, 'show_notes_view' ),
+				'save_callback' => array( __CLASS__, 'save_notes' ),
+				'context' => 'normal',
+				'priority' => 'low',
+				'weight' => 100
 			)
 		);
 		do_action( 'sprout_meta_box', $args, SI_Invoice::POST_TYPE );
@@ -306,6 +350,8 @@ class SI_Invoices extends SI_Controller {
 			// Update the post in the database
 			wp_update_post( $est_post );
 		}
+		
+		do_action( 'si_save_line_items_meta_box', $post_id, $post, $invoice );
 	}
 
 	/**
@@ -613,41 +659,10 @@ class SI_Invoices extends SI_Controller {
 				printf( '<a class="doc_link" title="%s" href="%s">%s</a>', self::__( 'Invoice\'s Estimate' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
 			}
 			break;
-		case 'status': ?>
-					<span id="status_<?php the_ID() ?>">
-						<?php 
-							$status_change_span = '&nbsp;<span class="status_change" data-dropdown="#status_change_'.get_the_ID().'"><div class="dashicons dashicons-arrow-down"></div></span></button>';
-							 ?>
-						<?php if ( $invoice->get_status() == SI_Invoice::STATUS_PENDING || $invoice->get_status() == SI_Invoice::STATUS_PARTIAL ): ?>
-							<?php printf( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Pending payment(s)' ), si__('Pending Payment'), $status_change_span ); ?>
-						<?php elseif ( $invoice->get_status() == SI_Invoice::STATUS_PAID ): ?>
-							<?php printf( '<button class="si_status complete tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Fully Paid' ), si__('Paid'), $status_change_span ); ?>
-						<?php elseif ( $invoice->get_status() == SI_Invoice::STATUS_PARTIAL ): ?>
-							<?php printf( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Outstanding Balance' ), si__('Outstanding Balance'), $status_change_span ); ?>
-						<?php elseif ( $invoice->get_status() == SI_Invoice::STATUS_WO ): ?>
-							<?php printf( '<button class="si_status declined tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Written-off' ), si__('Written Off'), $status_change_span ); ?>
-						<?php else: ?>
-							<?php printf( '<button class="si_status temp tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Draft Invoice' ), si__('Draft'), $status_change_span ); ?>
-						<?php endif ?>
-					</span>
-					<div id="status_change_<?php the_ID() ?>" class="dropdown dropdown-tip dropdown-relative">
-						<ul class="dropdown-menu">
-							<?php if ( $invoice->get_status() != SI_Invoice::STATUS_PENDING ): ?>
-								<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Pending Payment(s)' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Pending' ) ); ?>
-							<?php endif ?>
-							<?php /**/ if ( $invoice->get_status() != SI_Invoice::STATUS_PAID ): ?>
-								<?php printf( '<li><a class="doc_status_change publish" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark as Paid.' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PAID, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Paid' ) ); ?>
-							<?php endif  /**/ ?>
-							<?php if ( $invoice->get_status() != SI_Invoice::STATUS_WO ): ?>
-								<?php printf( '<li><a class="doc_status_change decline" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Write-off Invoice' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_WO, wp_create_nonce( SI_Controller::NONCE ), self::__( 'Write-off' ) ); ?>
-							<?php endif ?>
-							<?php
-								if ( current_user_can( 'delete_post', $id ) ) {
-									echo "<li><a class='submitdelete' title='" . esc_attr( __( 'Delete Invoice Permanently' ) ) . "' href='" . get_delete_post_link( $id, '' ) . "'>" . __( 'Delete' ) . "</a></li>";
-								} ?>
-						</ul>
-					</div>
-				<?php
+		case 'status': 
+			
+			self::status_change_dropdown( $id );
+
 			break;
 
 		case 'total':
@@ -779,32 +794,6 @@ class SI_Invoices extends SI_Controller {
 	// Templating //
 	/////////////////
 
-
-	/**
-	 * Override the template and use something custom.
-	 * @param  string $template 
-	 * @return string           full path.
-	 */
-	public static function override_template( $template ) {
-		if ( SI_Invoice::is_invoice_query() ) {
-			if ( is_single() ) {
-				$template = self::locate_template( array(
-						'invoice.php',
-						'invoice/invoice.php',
-					), $template );
-			} else {
-				$status = get_query_var( self::FILTER_QUERY_VAR );
-				$template = self::locate_template( array(
-						'invoice/'.$status.'-invoices.php',
-						$status.'-invoices.php',
-						'invoices.php',
-						'invoice/invoices.php'
-					), $template );
-			}
-		}
-		return apply_filters( 'si_invoice_template', $template );
-	}
-
 	/**
 	 * Remove all scripts and styles from the estimate view and then add those specific to si.
 	 * @return  
@@ -889,7 +878,7 @@ class SI_Invoices extends SI_Controller {
 		do_action( 'send_invoice', $invoice, $_REQUEST['sa_metabox_recipients'] );
 
 		header( 'Content-type: application/json' );
-		if ( SA_DEV ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		echo json_encode( array( 'response' => si__('Notification Queued') ) );
 		exit();
 	}
@@ -1052,6 +1041,23 @@ class SI_Invoices extends SI_Controller {
 			'weight' => 0,
 		);
 		return $items;
+	}
+
+	public static function status_change_dropdown( $id ) {
+		if ( !$id ) {
+			global $post;
+			$id = $post->ID;
+		}
+		$invoice = SI_Invoice::get_instance( $id );
+
+		if ( !is_a( $invoice, 'SI_Invoice' ) )
+			return; // return for that temp post
+
+		self::load_view( 'admin/sections/invoice-status-change-drop', array(
+				'id' => $id,
+				'status' => $invoice->get_status()
+			), FALSE );
+
 	}
 
 	////////////////

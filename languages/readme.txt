@@ -1,6 +1,6 @@
 ********************************************************
 
-  Sprout Invoices I18n
+  Sprout Invoices i18n
   ====================
   
   Do not put custom translations here. They will be deleted

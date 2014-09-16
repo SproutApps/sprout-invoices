@@ -12,6 +12,7 @@ Make sure to checkout the [Sprout Invoices](https://sproutapps.co/sprout-invoice
 * The best [payment experience](https://sproutapps.co/news/sprout-invoices-payment-options-deposits-checks-authorizations/) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutapps.co/marketplace/paypal-payments-express-checkout/) (additional gateways available).
 * Unlimited Invoices, Estimates and Clients. No restrictions!
 * Fully [customizable templates](https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/) with your own theme.
+* Localization support for your language!
 * [Payment management](https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/).
 * [Advanced Reporting](https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/) (limited w/ free version)
 * [Client management](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/).
@@ -88,6 +89,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 
 ### Changelog
+
+**1.0.5**
+
+* New templating class (select the invoice/estimate template)
+* New status UI
+* Notification updates
+* Better rewrite handling
+* Minor bug fixes
 
 **1.0**
 

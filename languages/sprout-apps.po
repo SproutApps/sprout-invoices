@@ -3877,7 +3877,7 @@ msgid "Sprout Apps News and Updates"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-apps-dashboard.php:23
-msgid "Could not connect to SeC server for updates."
+msgid "Could not connect to SIserver for updates."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-apps-dashboard.php:41

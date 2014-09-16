@@ -22,6 +22,7 @@ if ( 0 != $post->ID ) {
 	$date = date_i18n( $datef, strtotime( current_time('mysql') ) );
 } ?>
 
+<?php do_action( 'doc_information_meta_box_first', $estimate ) ?>
 
 <div class="misc-pub-section" data-edit-id="status" data-edit-type="select">
 	<span id="status" class="wp-media-buttons-icon"><?php si_e('Status:') ?> <b><?php echo $status_options[$status] ?></b></span>
@@ -88,7 +89,12 @@ if ( 0 != $post->ID ) {
  	</div>
 </div>
 
+
+<?php do_action( 'doc_information_meta_box_date_row_last', $estimate ) ?>
+
 <hr/>
+
+<?php do_action( 'doc_information_meta_box_client_row', $estimate ) ?>
 
 <!-- Client -->
 <div class="misc-pub-section" data-edit-id="client" data-edit-type="select">
@@ -150,7 +156,12 @@ if ( 0 != $post->ID ) {
 		</p>
  	</div>
 </div>
+
+<?php do_action( 'doc_information_meta_box_client_row_last', $estimate ) ?>
+
 <hr/>
+
+<?php do_action( 'doc_information_meta_box_meta_row', $estimate ) ?>
 
 <!-- PO Number -->
 <div class="misc-pub-section" data-edit-id="po_number">
@@ -257,3 +268,5 @@ if ( 0 != $post->ID ) {
  	</div>
 </div>
 <?php /**/ ?>
+
+<?php do_action( 'doc_information_meta_box_last', $estimate ) ?>

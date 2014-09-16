@@ -169,10 +169,14 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 				<?php echo apply_filters( 'the_content', $desc ) ?>
 			</div>
 			<div class="column column_rate">
-				<?php esc_attr_e( $rate ) ?>
+				<?php if ( empty( $children ) ): ?>
+					<?php esc_attr_e( $rate ) ?>
+				<?php endif ?>
 			</div>
 			<div class="column column_qty">
-				<?php esc_attr_e( $qty ) ?>
+				<?php if ( empty( $children ) ): ?>
+					<?php esc_attr_e( $qty ) ?>
+				<?php endif ?>
 			</div>
 			<?php if ( $has_percentage_adj ): ?>
 				<div class="column column_tax">
@@ -217,15 +221,15 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
 		$data['tax'] = '';
 	}
 	ob_start(); ?>
-		<?php echo strip_tags( $desc ) ?> <?php si_e(' // ') ?>
-		<?php si_e('Rate:') ?> <?php esc_attr_e( $rate ) ?>
-		<?php si_e('Qty:') ?> <?php esc_attr_e( $qty ) ?>
-		<?php if ( $has_percentage_adj ): ?>
-			<?php if ( isset( $data['tax'] ) && $data['tax'] ): ?>
-			<?php si_e('Adjustment:') ?> <?php esc_attr_e( $data['tax'] ) ?>%
-			<?php endif ?>
-		<?php endif ?>
-		<?php si_e('Total:') ?> <?php sa_formatted_money($total) ?>
+<?php echo strip_tags( $desc ) ?> <?php si_e(' // ') ?>
+<?php si_e('Rate:') ?> <?php esc_attr_e( $rate ) ?>
+<?php si_e('Qty:') ?> <?php esc_attr_e( $qty ) ?>
+<?php if ( $has_percentage_adj ): ?>
+<?php if ( isset( $data['tax'] ) && $data['tax'] ): ?>
+<?php si_e('Adjustment:') ?> <?php esc_attr_e( $data['tax'] ) ?>%
+<?php endif ?>
+<?php endif ?>
+<?php si_e('Total:') ?> <?php sa_formatted_money($total) ?>
 	<?php
 	$data = ob_get_contents();
 	ob_end_clean();

@@ -207,7 +207,7 @@ function si_number_format( $value = 1, $dec_point = '.' , $thousands_sep = '', $
 	echo apply_filters( 'si_number_format', si_get_number_format( $value, $dec_point, $thousands_sep ) );
 }
 
-
+if ( !function_exists('sa_get_truncate') ) :
 /**
  * Truncate a string, strip tags and append a more link
  * @param string  $text           string to truncate
@@ -235,6 +235,7 @@ function sa_get_truncate( $text, $excerpt_length = 44, $more_link = false ) {
     }
     return apply_filters( 'sa_get_truncate', $text, $excerpt_length, $more_link );
 }
+endif;
 
 /////////////////////
 // Developer Tools //

@@ -645,7 +645,7 @@ class SI_Notifications extends SI_Notifications_Control {
 						$children = si_line_item_get_children( $position, $line_items ); ?>
 					<?php 
 						// build single item
-						echo "\n* " . si_line_item_build_plain( $position, $line_items, $children ) ?>
+						echo "\n\n* " . si_line_item_build_plain( $position, $line_items, $children ) ?>
 
 					<?php if ( !empty( $children ) ): // if has children, loop and show ?>
 						<?php foreach ( $children as $child_position ): ?>

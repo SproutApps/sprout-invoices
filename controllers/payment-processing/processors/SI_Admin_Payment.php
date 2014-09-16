@@ -195,7 +195,7 @@ class SI_Admin_Payment extends SI_Controller {
 		self::create_admin_payment( $_REQUEST['sa_metabox_invoice_id'], $amount, $number, $date, $notes );
 
 		header( 'Content-type: application/json' );
-		if ( SA_DEV ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		echo json_encode( array( 'response' => si__('Payment Added') ) );
 		exit();
 	}

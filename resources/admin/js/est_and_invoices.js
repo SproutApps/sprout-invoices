@@ -11,48 +11,47 @@ jQuery(function($) {
 	/**
 	 * Status Updates
 	 */
-	jQuery("#quick_links .doc_status_change").on('click', function(e) {
+	jQuery("#quick_links .quick_status_update a.doc_status_change").live('click', function(e) {
 		e.preventDefault();
 		var $status_change_link = $( this ),
-			$status_link_text = $( this ).html(),
+			$status_button = $( this ).closest('.quick_status_update'),
 			$new_status = $status_change_link.data( 'status-change' ),
+			$new_status_title = $status_change_link.text(),
 			$id = $status_change_link.data( 'id' ),
 			$nonce = $status_change_link.data( 'nonce' ),
 			$status_span = $('#status b'),
-			$status_select = $('[name="status"]'),
+			$status_select = $('[name="post_status"]'),
 			$publish_button = $('[type="submit"]'),
 			$publish_button_text = $publish_button.val();
 
-		$('.qtip').hide(); // hide the qtip otherwise it will never leave.
-
-		$status_change_link.html('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
-		$publish_button.val('Saving...');
+		$status_button.html('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$publish_button.val( si_js_object.updating_string );
 
 		$.post( ajaxurl, { action: 'si_change_doc_status', id: $id, status: $new_status, change_status_nonce: $nonce },
 			function( data ) {
 				if ( data.error ) {
-					$status_change_link.append( data.response );	
+					$status_button.html( data.response );	
 				}
 				else {
-					$("#quick_links .doc_status_change").each(function(i, status) {
-						$(status).removeClass('current_status');
-						$(status).removeAttr('disabled');
-					});
-					
-					$status_change_link.html( $status_link_text ).addClass('current_status').attr("disabled", true);
+					$button_html = $( data.new_button ).html();
+					// swap out the button with the new one
+					$status_button.html( $button_html );
 
-					$status_select.val(data.status_key);
+					// Update status dropdown
+					$status_select.val( $new_status );
 					$status_span.text( $status_select.find('option:selected').text() );
-					$publish_button.val($publish_button_text);
+					// Change 
+					$publish_button.val( $publish_button_text );
 				};
 				return data;
 			}
 		);
 	});
+
 	$('#send_doc_quick_link').live( 'click', function(e) {
 		$('html, body').animate({
 			scrollTop: $("#si_doc_send").offset().top
-		}, 2000);
+		}, 200);
 	});
 
 	/**

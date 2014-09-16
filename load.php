@@ -42,7 +42,11 @@ function sprout_invoices_load() {
 
 	// settings
 	require_once SI_PATH.'/controllers/admin/Settings.php';
-	require_once SI_PATH.'/controllers/admin/Settings_API.php';
+
+	if ( !class_exists( 'SA_Settings_API' ) ) {
+		require_once SI_PATH.'/controllers/admin/Settings_API.php';
+	}
+
 	require_once SI_PATH.'/controllers/admin/Help.php';
 
 	// json api
@@ -116,7 +120,7 @@ function sprout_invoices_load() {
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) {
 		require_once SI_PATH.'/controllers/updates/Updates.php';
 	}
-	
+
 	// importers
 	require_once SI_PATH.'/importers/Importer.php';
 	require_once SI_PATH.'/importers/Freshbooks.php';
@@ -139,7 +143,7 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/add-ons/Addons.php';
 
 	// l18n
-	require_once SI_PATH.'/languages/SI_l18n.php';
+	require_once SI_PATH.'/languages/SI_i18n.php';
 
 	///////////////////
 	// init() models //
@@ -159,7 +163,7 @@ function sprout_invoices_load() {
 	/////////////////////////
 	do_action( 'si_controllers_init' );
 	SI_Controller::init();
-	SI_Settings_API::init();
+	SA_Settings_API::init();
 	SI_Templating_API::init();
 
 	// updates
@@ -227,8 +231,8 @@ function sprout_invoices_load() {
 	// help
 	SI_Help::init();
 
-	// l18n
-	SI_l18n::init();
+	// i18n & l10n
+	SI_i18n::init();
 	
 	do_action( 'sprout_invoices_loaded' );
 }

@@ -12,16 +12,17 @@ jQuery(function($) {
     	}
     });
 
-    jQuery("#the-list .doc_status_change").on('click', function(e) {
+    jQuery("#the-list .doc_status_change").live('click', function(e) {
 		e.preventDefault();
 		var $status_change_link = $( this ),
+			$status_button = $( this ).closest('.quick_status_update'),
 			$row_actions = $status_change_link.closest( '.row-actions' ),
 			$new_status = $status_change_link.data( 'status-change' ),
 			$id = $status_change_link.data( 'id' ),
 			$nonce = $status_change_link.data( 'nonce' ),
 			$status_span = $( '#status_' + $id );
 
-		$status_span.append('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$status_button.html('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
 		
 		$.post( ajaxurl, { action: 'si_change_doc_status', id: $id, status: $new_status, change_status_nonce: $nonce },
 			function( data ) {
@@ -29,8 +30,9 @@ jQuery(function($) {
 					$status_span.html( data.response );	
 				}
 				else {
-					$status_span.html( data.response + data.status );
-					$row_actions.hide();
+					$button_html = $( data.new_button ).html();
+					// swap out the button with the new one
+					$status_button.html( $button_html );
 				};
 				return data;
 			}

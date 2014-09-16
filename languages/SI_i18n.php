@@ -6,7 +6,7 @@
  * @package Sprout_Invoice
  * @subpackage l18n
  */
-class SI_l18n extends SI_Controller {
+class SI_i18n extends SI_Controller {
 
 	public static function init() {
 		self::load_textdomain();

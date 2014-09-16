@@ -667,4 +667,3 @@ function si_estimate_currency( $id = 0 ) {
 	echo apply_filters( 'si_estimate_currency', si_get_estimate_currency($id), $id );
 }
 endif;
-
