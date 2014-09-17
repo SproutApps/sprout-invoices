@@ -23,6 +23,10 @@ class SI_Importer extends SI_Controller {
 
 		// Help Sections
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+
+		// AJAX
+		add_action( 'wp_ajax_si_import', array( __CLASS__, 'maybe_init_import' ) );
+		add_action( 'wp_ajax_nopriv_si_import', array( __CLASS__, 'maybe_init_import' ) );
 	}
 
 	public static function get_importers() {
@@ -86,29 +90,27 @@ class SI_Importer extends SI_Controller {
 		}
 	}
 
-
 	/**
-	 * Create a client 
-	 * @param  array       $args 
-	 * @return                    
+	 * Verify request and start an import method
+	 * @return
 	 */
-	public static function new_client( $args = array() ) {	
-		$address = array(
-			'street' => isset( $args['street'] ) ?self::esc__( $args['contact_street']) : '',
-			'city' => isset( $args['city'] ) ? self::esc__($args['contact_city']) : '',
-			'zone' => isset( $args['zone'] ) ? self::esc__($args['contact_zone']) : '',
-			'postal_code' => isset( $args['code'] ) ? self::esc__($args['contact_postal_code']) : '',
-			'country' => isset( $args['country'] ) ? self::esc__($args['contact_country']) : '',
-		);
+	public static function maybe_init_import() {
+		if ( !isset( $_REQUEST['importer'] ) )
+			self::ajax_fail( 'Forget something?' );
 
-		$args = array(
-			'company_name' => isset( $args['name'] ) ? self::esc__($args['estimate_client_name']) : '',
-			'website' => isset( $args['website'] ) ? self::esc__($args['website']) : '',
-			'address' => $address
-		);
+		if ( !isset( $_REQUEST['method'] ) )
+			self::ajax_fail( 'Forget something?' );
 
-		$client_id = SI_Client::new_client( $args );
-		return $client_id;
+		$nonce = $_REQUEST['security'];
+		if ( !wp_verify_nonce( $nonce, self::NONCE ) )
+			self::ajax_fail( 'Not going to fall for it!' );
+
+		$class = $_REQUEST['importer'];
+		$method = 'import_'.$_REQUEST['method'];
+		if ( method_exists( $class, $method ) ) {
+			call_user_func( array( $class, $method ) );
+		}
+		exit();
 	}
 
 	/*

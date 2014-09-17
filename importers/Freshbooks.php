@@ -125,7 +125,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 	public static function maybe_process_import() {
 		if ( isset( $_POST[self::PROCESS_ACTION] ) && wp_verify_nonce( $_POST[self::PROCESS_ACTION], self::PROCESS_ACTION ) ) {
 			add_filter( 'si_show_importer_settings', '__return_false' );
-			add_action( 'si_import_progress', array( __CLASS__, 'init_import_show_progress' ) );
 		}
 	}
 
@@ -139,278 +138,461 @@ class SI_Freshbooks_Import extends SI_Importer {
 	}
 
 	/**
-	 * Start the import process
+	 * Utility to return a JSON error
+	 * @param  string $message 
+	 * @return json          
 	 */
-	public static function init_import_show_progress() {
-		$error = FALSE;
+	public static function return_error( $message ) {
+		header( 'Content-type: application/json' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo json_encode( 
+				array( 'error' => TRUE, 'message' => $message )
+					);
+		exit();
+	}
+
+	/**
+	 * Return the progress array
+	 * @param  array  $array associated array with method and status message
+	 * @return json        
+	 */
+	public static function return_progress( $array = array() ) {
+		header( 'Content-type: application/json' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo json_encode( $array );
+		exit();
+	}
+
+	/**
+	 * First step in the import progress
+	 * @return 
+	 */
+	public static function import_authentication() {
 		require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
 		FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
-		
+
+		// Initial API callback to get the client list
+		$fb = new FreshBooksRequest('client.list');
+		$fb->post( array( 'per_page' => 5 ) );
+		$fb->request();
+		if( ! $fb->success() ) {
+			$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
+			self::return_error( $error );
+		}
+		self::return_progress( array( 'authentication' => array( 
+					'message' => self::__('Communicating with the Freshbooks API...'), 
+					'progress' => 99.9,
+					'next_step' => 'clients'
+					) ) );
+	}
+
+	/**
+	 * Second step is to import clients and contacts
+	 * @return 
+	 */
+	public static function import_clients() {
 
 		// Store the import progress
 		$progress = get_option( self::PROGRESS_OPTION, array() );
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
-		// run script forever
-		set_time_limit( 0 );
+		if ( !isset( $progress['clients_complete'] ) ) {
 
-		echo '<script language="javascript">document.getElementById("patience").className="updated";</script>';
+			$error = FALSE;
+			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
+			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
 
-		self::update_progress_info( 'com', 0, 0, 10, self::__('Attempting to authentic API connection...') );
+			$progress_key = 'client_import_progress';
+			if ( !isset( $progress[$progress_key] ) ) {
+				$progress[$progress_key] = 1;
+				update_option( self::PROGRESS_OPTION, $progress );
+			}
 
-		//////////////////////////
-		// Clients and Contacts //
-		//////////////////////////
-		if ( !in_array( 'clients', $progress ) ) {
-
-			self::update_progress_info( 'com', 0, 0, 20, self::__('Attempting to get your Freshbooks clients...') );
-
-			// Initial API callback to get the client list
+			// Start importing the clients 10 at a time
 			$fb = new FreshBooksRequest('client.list');
-			$fb->post( array( 'per_page' => 100 ) );
+			$fb->post( array( 'page' => $progress[$progress_key], 'per_page' => 20 ) );
 			$fb->request();
 
-			if( $fb->success() ) {
-				$i = 0;
-				$ic = 0;
-				$response = $fb->getResponse();
-				$pages = $response['clients']['@attributes']['pages'];
-				$total_records = $response['clients']['@attributes']['total'];
+			if( !$fb->success() ) {	
+				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
+				self::return_error( $error );
+			}
 
-				self::update_progress_info( 'clients', $i, $total_records );
-				self::update_progress_info( 'contacts', $ic, $total_records );
+			$response = $fb->getResponse();
 
+			$pages = $response['clients']['@attributes']['pages'];
+			$total_records = $response['clients']['@attributes']['total'];
+			$total_imported = ($total_records/$pages)*$progress[$progress_key];
+
+			if ( $progress[$progress_key] <= $pages ) {
 				foreach ( $response['clients']['client'] as $key => $client ) {
 					$new_client_id = self::create_client( $client );
 					$contacts_created = self::create_contacts( $client, $new_client_id );
-
-					// update progress
-					$i++;
-					self::update_progress_info( 'clients', $i, $total_records );
-					// update contacts progress
-					$ic += count($contacts_created);
-					$percent = intval($i/$total_records * 100);
-					self::update_progress_info( 'contacts', $ic, $total_records, $percent );
 				}
 
+				$progress[$progress_key]++;
+				update_option( self::PROGRESS_OPTION, $progress );
 
-				// Loop through all remaining pages.
-				for ( $page = 2; $page <= $pages; $page++ ) { 
+				// Return the progress
+				self::return_progress( array( 
+								'authentication' => array(  
+								'message' => sprintf( self::__('Attempting to import %s contacts and their clients...'), $total_records ), 
+									'progress' => 20+$progress[$progress_key]
+									),
+								'clients' => array(
+									'message' => sprintf( self::__('Imported about %s clients so far.'), $total_imported ), 
+									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									),
+								'contacts' => array( 
+									'message' => sprintf( self::__('Imported more than %s contacts from imported clients.'), $total_imported ), 
+									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'next_step' => 'clients'
+									),
+								) );
+			}
 
-					$fb = new FreshBooksRequest('client.list');
-					$fb->post( array( 'page' => $page, 'per_page' => 100 ) );
-					$fb->request();
-					$response = $fb->getResponse();
+			// Mark as complete
+			$progress['clients_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
 
-					foreach ( $response['clients']['client'] as $key => $client ) {
-						$new_client_id = self::create_client( $client );
-						$contacts_created = self::create_contacts( $client, $new_client_id );
+			// Complete
+			self::return_progress( array( 
+							'authentication' => array( 
+								'message' => sprintf( self::__('Successfully imported %s contacts and their clients...'), $total_records ), 
+								'progress' => 25
+								),
+							'clients' => array(
+								'message' => sprintf( self::__('Imported more than %s clients!'), $total_imported ),  
+								'progress' => 100,
+								),
+							'contacts' => array( 
+								'message' => sprintf( self::__('More than %s contacts were added and assigned to their clients!'), $total_imported ), 
+								'progress' => 100,
+								'next_step' => 'estimates'
+								),
+							) );
+		}
 
-						// update progress
-						$i++;
-						self::update_progress_info( 'clients', $i, $total_records );
-						// update contacts progress
-						$ic += count($contacts_created);
-						$percent = intval($i/$total_records * 100);
-						self::update_progress_info( 'contacts', $ic, $total_records, $percent );
-					}
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => sprintf( self::__('Successfully imported %s contacts and their clients already, moving on...'), $total_records ), 
+							'progress' => 25
+							),
+						'clients' => array( 
+							'message' => sprintf( self::__('Successfully imported %s clients already.'), $total_records ), 
+							'progress' => 100,
+							),
+						'contacts' => array( 
+							'message' => sprintf( self::__('Successfully imported more than %s contacts from their clients already.'), $total_records ), 
+							'progress' => 100,
+							'next_step' => 'estimates'
+							),
+						) );
+		
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
 
-				}
+	}
 
-				$progress[] = 'clients';
+	/**
+	 * Third step is to import estimates
+	 * @return 
+	 */
+	public static function import_estimates() {
+		
+		// Store the import progress
+		$progress = get_option( self::PROGRESS_OPTION, array() );
+		// Suppress notifications
+		add_filter( 'suppress_notifications', '__return_true' );
+		
+		if ( !isset( $progress['estimates_complete'] ) ) {
+
+			$error = FALSE;
+			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
+			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
+
+			$progress_key = 'estimate_import_progress';
+			if ( !isset( $progress[$progress_key] ) ) {
+				$progress[$progress_key] = 1;
 				update_option( self::PROGRESS_OPTION, $progress );
 			}
-			else {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
-				self::update_progress_info( 'clients', 0, 0, 100, $error );
-				self::update_progress_info( 'contacts', 0, 0, 100, $error );
-			}
-		}
-		else {
-			self::update_progress_info( 'clients', 0, 0, 100, self::__('Clients already imported.') );
-			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Contacts already imported.') );
-		}
 
-		///////////////
-		// Estimates //
-		///////////////
-		if ( !in_array( 'estimates', $progress ) ) {
-			self::update_progress_info( 'com', 0, 0, 40, self::__('Attempting to get your Freshbooks estimates...') );
-
-			// Initial API callback to get the estimates list
+			// Start importing the clients 10 at a time
 			$fb = new FreshBooksRequest('estimate.list');
-			$fb->post( array( 'per_page' => 100 ) );
+			$fb->post( array( 'page' => $progress[$progress_key], 'per_page' => 10 ) );
 			$fb->request();
 
-			if( $fb->success() ) {
-				$i = 0;
-				$response = $fb->getResponse();
-				$pages = $response['estimates']['@attributes']['pages'];
-				$total_records = $response['estimates']['@attributes']['total'];
+			if( !$fb->success() ) {	
+				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
+				self::return_error( $error );
+			}
 
-				self::update_progress_info( 'estimates', $i, $total_records );
+			$response = $fb->getResponse();
+
+			$pages = $response['estimates']['@attributes']['pages'];
+			$total_records = $response['estimates']['@attributes']['total'];
+			$total_imported = $pages*$progress[$progress_key];
+
+			if ( $progress[$progress_key] <= $pages ) {
 
 				foreach ( $response['estimates']['estimate'] as $key => $estimate ) {
 					$new_estimate_id = self::create_estimate( $estimate );
-					// update progress
-					$i++;
-					self::update_progress_info( 'estimates', $i, $total_records );
 				}
 
-				// Loop through all remaining pages.
-				for ( $page = 2; $page <= $pages; $page++ ) { 
-					$fb = new FreshBooksRequest('estimate.list');
-					$fb->post( array( 'page' => $page, 'per_page' => 100 ) );
-					$fb->request();
-					$response = $fb->getResponse();
+				$progress[$progress_key]++;
+				update_option( self::PROGRESS_OPTION, $progress );
 
-					foreach ( $response['invoices']['invoice'] as $key => $invoice ) {
-						$new_estimate_id = self::create_estimate( $invoice );
-						// update progress
-						$i++;
-						self::update_progress_info( 'estimates', $i, $total_records );
-					}
-				}
+				// Return the progress
+				self::return_progress( array( 
+								'authentication' => array(  
+									'message' => sprintf( self::__('Attempting to import %s estimates...'), $total_records ), 
+									'progress' => 25+$progress[$progress_key]
+									),
+								'estimates' => array(
+									'message' => sprintf( self::__('Imported about %s estimates so far.'), $total_imported ), 
+									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'next_step' => 'estimates'
+									),
+								) );
+			}
 
-				$progress[] = 'estimates';
+			// Mark as complete
+			$progress['estimates_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
+
+			// Complete
+			self::return_progress( array( 
+							'authentication' => array( 
+								'message' => sprintf( self::__('Successfully imported %s estimates...'), $total_records ), 
+								'progress' => 50
+								),
+							'estimates' => array(
+								'message' => sprintf( self::__('Imported %s estimates!'), $total_records ),  
+								'progress' => 100,
+								'next_step' => 'invoices'
+								),
+							) );
+		}
+
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => sprintf( self::__('Successfully imported %s estimates already, moving on...'), $total_records ), 
+							'progress' => 50
+							),
+						'estimates' => array( 
+							'progress' => 100,
+							'message' => sprintf( self::__('Successfully imported %s estimates already.'), $total_records ), 
+							'next_step' => 'invoices'
+							),
+						) );
+		
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
+
+	}
+
+	/**
+	 * Fourth step is to import invoices
+	 * @return 
+	 */
+	public static function import_invoices() {
+		
+		// Store the import progress
+		$progress = get_option( self::PROGRESS_OPTION, array() );
+		// Suppress notifications
+		add_filter( 'suppress_notifications', '__return_true' );
+
+		if ( !isset( $progress['invoices_complete'] ) ) {
+
+			$error = FALSE;
+			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
+			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
+
+			$progress_key = 'invoices_import_progress';
+			if ( !isset( $progress[$progress_key] ) ) {
+				$progress[$progress_key] = 1;
 				update_option( self::PROGRESS_OPTION, $progress );
 			}
-			else {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
-				self::update_progress_info( 'estimates', 0, 0, 100, $error );
-			}
-		}
-		else{
-			self::update_progress_info( 'estimates', 0, 0, 100, self::__('Estimates already imported.') );
-		}
 
-
-		///////////////
-		// Invoices //
-		///////////////
-		if ( !in_array( 'invoices', $progress ) ) {
-			self::update_progress_info( 'com', 0, 0, 65, self::__('Attempting to get your Freshbooks invoices...') );
-
-			// Initial API callback to get the invoice list
+			// Start importing the clients 10 at a time
 			$fb = new FreshBooksRequest('invoice.list');
-			$fb->post( array( 'per_page' => 100 ) );
+			$fb->post( array( 'page' => $progress[$progress_key], 'per_page' => 10 ) );
 			$fb->request();
 
-			if( $fb->success() ) {
-				$i = 0;
-				$response = $fb->getResponse();
-				$pages = $response['invoices']['@attributes']['pages'];
-				$total_records = $response['invoices']['@attributes']['total'];
+			if( !$fb->success() ) {	
+				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
+				self::return_error( $error );
+			}
 
-				self::update_progress_info( 'invoices', $i, $total_records );
+			$response = $fb->getResponse();
+
+			$pages = $response['invoices']['@attributes']['pages'];
+			$total_records = $response['invoices']['@attributes']['total'];
+			$total_imported = $pages*$progress[$progress_key];
+
+			if ( $progress[$progress_key] <= $pages ) {
 
 				foreach ( $response['invoices']['invoice'] as $key => $invoice ) {
 					$new_invoice_id = self::create_invoice( $invoice );
-					// update progress
-					$i++;
-					self::update_progress_info( 'invoices', $i, $total_records );
 				}
 
-
-				// Loop through all remaining pages.
-				for ( $page = 2; $page <= $pages; $page++ ) { 
-
-					$fb = new FreshBooksRequest('invoice.list');
-					$fb->post( array( 'page' => $page, 'per_page' => 100 ) );
-					$fb->request();
-					$response = $fb->getResponse();
-
-					foreach ( $response['invoices']['invoice'] as $key => $invoice ) {
-						$new_invoice_id = self::create_invoice( $invoice );
-						// update progress
-						$i++;
-						self::update_progress_info( 'invoices', $i, $total_records );
-					}
-
-				}
-
-				$progress[] = 'invoices';
+				$progress[$progress_key]++;
 				update_option( self::PROGRESS_OPTION, $progress );
+
+				// Return the progress
+				self::return_progress( array( 
+								'authentication' => array(  
+									'message' => sprintf( self::__('Attempting to import %s invoices...'), $total_records ), 
+									'progress' => 50+$progress[$progress_key]
+									),
+								'invoices' => array(
+									'message' => sprintf( self::__('Imported about %s invoices so far.'), $total_imported ), 
+									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'next_step' => 'invoices'
+									),
+								) );
 			}
-			else {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
-				self::update_progress_info( 'invoices', 0, 0, 100, $error );
-			}
-		}
-		else{
-			self::update_progress_info( 'invoices', 0, 0, 100, self::__('Invoices already imported.') );
-		}
 
+			// Mark as complete
+			$progress['invoices_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
 
-		//////////////
-		// Payments //
-		//////////////
-		if ( !in_array( 'payments', $progress ) ) {
-			self::update_progress_info( 'com', 0, 0, 85, self::__('Attempting to get your Freshbooks payments...') );
-
-			// Initial API callback to get the invoice list
-			$fb = new FreshBooksRequest('payment.list');
-			$fb->post( array( 'per_page' => 100 ) );
-			$fb->request();
-
-			if( $fb->success() ) {
-				$i = 0;
-				$response = $fb->getResponse();
-				$pages = $response['payments']['@attributes']['pages'];
-				$total_records = $response['payments']['@attributes']['total'];
-
-				self::update_progress_info( 'payments', $i, $total_records );
-				foreach ( $response['payments']['payment'] as $key => $payment ) {
-					$new_payment_id = self::create_payment( $payment );
-					// update progress
-					$i++;
-					self::update_progress_info( 'payments', $i, $total_records );
-				}
-
-
-				// Loop through all remaining pages.
-				for ( $page = 2; $page <= $pages; $page++ ) { 
-
-					$fb = new FreshBooksRequest('payment.list');
-					$fb->post( array( 'page' => $page, 'per_page' => 100 ) );
-					$fb->request();
-					$response = $fb->getResponse();
-
-					foreach ( $response['payments']['payment'] as $key => $payment ) {
-						$new_payment_id = self::create_payment( $payment );
-						// update progress
-						$i++;
-						self::update_progress_info( 'payments', $i, $total_records );
-					}
-
-				}
-				
-				$progress[] = 'payments';
-				update_option( self::PROGRESS_OPTION, $progress );
-			}
-			else {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
-				self::update_progress_info( 'payments', 0, 0, 100, $error );
-			}
-		}
-		else{
-			self::update_progress_info( 'payments', 0, 0, 100, self::__('Invoices already imported.') );
+			// Complete
+			self::return_progress( array( 
+							'authentication' => array( 
+								'message' => sprintf( self::__('Successfully imported %s invoices...'), $total_records ), 
+								'progress' => 75
+								),
+							'invoices' => array(
+								'message' => sprintf( self::__('Imported %s invoices!'), $total_records ),  
+								'progress' => 100,
+								'next_step' => 'payments'
+								),
+							) );
 		}
 
-
-		//////////////
-		// All done //
-		//////////////
-		self::update_progress_info( 'com', 0, 0, 100, self::__('API connection closed.') );
-		echo '<script language="javascript">document.getElementById("complete_import").className="";</script>';
-
-		if ( $error && $error == self::__('Authentication error.') ) {
-			update_option( self::PROGRESS_OPTION, array() );
-			echo '<script language="javascript">document.getElementById("auth_patience").className="error";</script>';
-		}
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => sprintf( self::__('Successfully imported %s invoices already, moving on...'), $total_records ), 
+							'progress' => 75
+							),
+						'invoices' => array( 
+							'message' => sprintf( self::__('Successfully imported %s invoices already.'), $total_records ), 
+							'progress' => 100,
+							'next_step' => 'payments'
+							),
+						) );
+		
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
 
 	}
+
+	/**
+	 * Final step is to import payments
+	 * @return 
+	 */
+	public static function import_payments() {
+		
+		// Store the import progress
+		$progress = get_option( self::PROGRESS_OPTION, array() );
+		// Suppress notifications
+		add_filter( 'suppress_notifications', '__return_true' );
+
+		if ( !isset( $progress['payments_complete'] ) ) {
+
+			$error = FALSE;
+			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
+			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
+
+			$progress_key = 'payments_import_progress';
+			if ( !isset( $progress[$progress_key] ) ) {
+				$progress[$progress_key] = 1;
+				update_option( self::PROGRESS_OPTION, $progress );
+			}
+
+			// Start importing the clients 10 at a time
+			$fb = new FreshBooksRequest('payment.list');
+			$fb->post( array( 'page' => $progress[$progress_key], 'per_page' => 10 ) );
+			$fb->request();
+
+			if( !$fb->success() ) {	
+				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__('Authentication error.') : $fb->getError() ;
+				self::return_error( $error );
+			}
+
+			$response = $fb->getResponse();
+
+			$pages = $response['payments']['@attributes']['pages'];
+			$total_records = $response['payments']['@attributes']['total'];
+			$total_imported = $pages*$progress[$progress_key];
+
+			if ( $progress[$progress_key] <= $pages ) {
+
+				foreach ( $response['payments']['payment'] as $key => $payment ) {
+					$new_payment_id = self::create_payment( $payment );
+				}
+
+				$progress[$progress_key]++;
+				update_option( self::PROGRESS_OPTION, $progress );
+
+				// Return the progress
+				self::return_progress( array( 
+								'authentication' => array(  
+									'message' => sprintf( self::__('Attempting to import %s payments...'), $total_records ), 
+									'progress' => 75+$progress[$progress_key]
+									),
+								'payments' => array(
+									'message' => sprintf( self::__('Imported about %s payments so far.'), $total_imported ), 
+									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'next_step' => 'payments'
+									),
+								) );
+			}
+
+			// Mark as complete
+			$progress['payments_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
+
+			// Complete
+			self::return_progress( array( 
+							'authentication' => array( 
+								'message' => sprintf( self::__('Successfully imported %s payments...'), $total_records ), 
+								'progress' => 100
+								),
+							'payments' => array(
+								'message' => sprintf( self::__('Imported %s payments!'), $total_records ),  
+								'progress' => 100,
+								'next_step' => 'complete'
+								),
+							) );
+		}
+
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => sprintf( self::__('Successfully imported %s estimates already, moving on...'), $total_records ), 
+							'progress' => 100
+							),
+						'payments' => array( 
+							'message' => sprintf( self::__('Successfully imported %s payments already.'), $total_records ), 
+							'progress' => 100,
+							'next_step' => 'complete'
+							),
+						) );
+		
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
+
+	}
+
+	//////////////
+	// Utility //
+	//////////////
 
 	public static function create_client( $client = array() ) {
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::FRESHBOOKS_ID => $client['client_id'] ) );
@@ -498,9 +680,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 			'last_name' => ( !is_array( $contact['first_name'] ) ) ? $contact['first_name'] : '',
 		);
 		$user_id = SI_Clients::create_user( $args );
-		update_usermeta( $user_id, self::FRESHBOOKS_ID, $contact['contact_id'] );
-		if ( !is_array( $contact['phone1'] ) ) update_usermeta( $user_id, self::USER_META_PHONE, $contact['phone1'] );
-		if ( !is_array( $contact['phone2'] ) ) update_usermeta( $user_id, self::USER_META_OFFICE_PHONE, $contact['phone2'] );
+		update_user_meta( $user_id, self::FRESHBOOKS_ID, $contact['contact_id'] );
+		if ( isset( $contact['phone1'] ) && !is_array( $contact['phone1'] ) ) update_user_meta( $user_id, self::USER_META_PHONE, $contact['phone1'] );
+		if ( isset( $contact['phone2'] ) && !is_array( $contact['phone2'] ) ) update_user_meta( $user_id, self::USER_META_OFFICE_PHONE, $contact['phone2'] );
 
 		// Assign new user to client.
 		$client->add_associated_user( $user_id );
@@ -724,24 +906,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 
 	protected function __construct() {
 		//
-	}
-
-	public static function update_progress_info( $context = 'contacts', $i = 0, $total_records = 0, $percent = 0, $messaging = '' ) {
-		if ( !$percent ) {
-			$percent = intval($i/$total_records * 100);
-		}
-		if ( $context == 'contacts' && $messaging == '' ) {
-			$messaging = sprintf( self::__('%o contacts from %o clients imported.'), $i, $total_records );
-		}
-		if ( $messaging == '' ) {
-			$messaging = sprintf( self::__('%o %s of %o imported.'), $i, $context, $total_records );
-		}
-		echo '<span id="progress_js"><script language="javascript">
-			document.getElementById("'.$context.'_import_progress").innerHTML="<div style=\"width:'.$percent.'%;background-color:#ddd;\">&nbsp;</div>";
-			document.getElementById("'.$context.'_import_information").innerHTML="'.$messaging.'";
-			document.getElementById("progress_js").remove();
-			</script></span>';
-		flush();
 	}
 
 	protected static function csv_to_array( $csv, $delimiter = ',', $enclosure = '', $escape = '\\', $terminator = "\n") { 

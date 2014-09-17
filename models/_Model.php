@@ -556,10 +556,13 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			$array_values = array_values( $meta );
 			$cache_key = 'si_find_by_meta_'.$post_type.'_'.reset( $array_keys );
 			$cache_index = reset( $array_values );
-			$cache = wp_cache_get( $cache_key, 'si' );
-			if ( is_array( $cache ) && isset( $cache[$cache_index] ) ) {
-				return $cache[$cache_index];
+			if ( $cache_index ) {
+				$cache = wp_cache_get( $cache_key, 'si' );
+				if ( is_array( $cache ) && isset( $cache[$cache_index] ) ) {
+					return $cache[$cache_index];
+				}
 			}
+			
 		}
 
 		// Optionally bypass the standard db call
@@ -586,7 +589,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			$result = get_posts( $args );
 		}
 
-		if ( count( $meta ) == 1 ) {
+		if ( count( $meta ) == 1 && $cache_index ) {
 			$cache[$cache_index] = $result;
 			wp_cache_set( $cache_key, $cache, 'si' );
 		}

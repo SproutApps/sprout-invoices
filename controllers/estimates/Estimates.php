@@ -406,9 +406,7 @@ class SI_Estimates extends SI_Controller {
 		$estimate->set_client_id( $client_id );
 		$estimate->set_discount( $discount );
 		$estimate->set_tax( $tax );
-		error_log( 'tax: ' . print_r( $tax, TRUE ) );
 		$estimate->set_tax2( $tax2 );
-		error_log( 'tax2: ' . print_r( $tax2, TRUE ) );
 		$estimate->set_currency( $currency );
 
 		// Last thing to do is set the total based on the options set, including the line items.

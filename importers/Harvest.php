@@ -142,7 +142,6 @@ class SI_Harvest_Import extends SI_Importer {
 	public static function maybe_process_import() {
 		if ( isset( $_POST[self::PROCESS_ACTION] ) && wp_verify_nonce( $_POST[self::PROCESS_ACTION], self::PROCESS_ACTION ) ) {
 			add_filter( 'si_show_importer_settings', '__return_false' );
-			add_action( 'si_import_progress', array( __CLASS__, 'init_import_show_progress' ) );
 		}
 	}
 
@@ -156,9 +155,36 @@ class SI_Harvest_Import extends SI_Importer {
 	}
 
 	/**
-	 * Start the import process
+	 * Utility to return a JSON error
+	 * @param  string $message 
+	 * @return json          
 	 */
-	public static function init_import_show_progress() {
+	public static function return_error( $message ) {
+		header( 'Content-type: application/json' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo json_encode( 
+				array( 'error' => TRUE, 'message' => $message )
+					);
+		exit();
+	}
+
+	/**
+	 * Return the progress array
+	 * @param  array  $array associated array with method and status message
+	 * @return json        
+	 */
+	public static function return_progress( $array = array() ) {
+		header( 'Content-type: application/json' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo json_encode( $array );
+		exit();
+	}
+
+	/**
+	 * First step in the import progress
+	 * @return 
+	 */
+	public static function import_authentication() {
 		$auth_error = FALSE;
 		require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
 		spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
@@ -169,193 +195,448 @@ class SI_Harvest_Import extends SI_Importer {
 		$api->setRetryMode( HarvestAPI::RETRY );
 		$api->setSSL( true );
 
+		// get clients, though we're just confirming credentials
+		$result = $api->getClients();
+		if( ! $result->isSuccess() ) {
+			self::return_error( self::__('Authentication error.') );
+		}
+		self::return_progress( array( 'authentication' => array( 
+					'message' => self::__('Communicating with the Harvest API...'), 
+					'progress' => 99.9,
+					'next_step' => 'clients'
+					) ) );
+	}
+
+	/**
+	 * Second step is to import clients and contacts
+	 * @return 
+	 */
+	public static function import_clients() {
+
 		// Store the import progress
 		$progress = get_option( self::PROGRESS_OPTION, array() );
-
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
-
-		set_time_limit( 0 ); // run script forever
-
-		echo '<script language="javascript">document.getElementById("patience").className="updated";</script>';
-
-		self::update_progress_info( 'com', 0, 0, 10, self::__('Attempting to authentic API connection...') );
-
-		///////////////
-		// Clients //
-		///////////////
-		if ( !in_array( 'clients', $progress ) ) {
-
-			self::update_progress_info( 'com', 0, 0, 20, self::__('Attempting to get your Harvest clients...') );
-
-			$result = $api->getClients();
-			if( $result->isSuccess() ) {
-				$i = 0;
-				$total = count( $result->data );
-				if ( $total ) {
-					foreach ( $result->data as $client_id => $client ) {
-						$i++;
-						self::update_progress_info( 'clients', $i, $total );
-						self::create_client( $client );
-					}
-					$progress[] = 'clients';
-					update_option( self::PROGRESS_OPTION, $progress );
-				}
-				else {
-					$auth_error = TRUE;
-					self::update_progress_info( 'clients', 0, 0, 100, self::__('No clients imported.') );
-				}
-			}
-		}
-		else {
-			self::update_progress_info( 'clients', 0, 0, 100, self::__('Clients already imported.') );
-		}
-
-		//////////////
-		// Contacts //
-		//////////////
-		if ( !in_array( 'contacts', $progress ) ) {
-			// Just in case the role wasn't already added
-			add_role( SI_Client::USER_ROLE, self::__('Client'), array( 'read' => true, 'level_0' => true ) );
-
-			self::update_progress_info( 'com', 0, 0, 45, self::__('Attempting to get your Harvest contacts...') );
-
-			// Contacts
-			$result = $api->getContacts();
-			if( $result->isSuccess() ) {
-				$i = 0;
-				$total = count( $result->data );
-				if ( $total ) {
-					foreach ( $result->data as $contact_id => $contact ) {
-						$i++;
-						self::update_progress_info( 'contacts', $i, $total );
-						self::create_contact( $contact );
-					}
-
-					$progress[] = 'contacts';
-					update_option( self::PROGRESS_OPTION, $progress );
-				}
-				else {
-					$auth_error = TRUE;
-					self::update_progress_info( 'contacts', 0, 0, 100, self::__('No contacts imported.') );
-				}
-			}
-		}
-		else {
-			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Contacts already imported.') );
-		}
-
-		///////////////
-		// Estimates //
-		///////////////
-		self::update_progress_info( 'com', 0, 0, 60, self::__('Attempting to get your Harvest estimates...') );
-		self::update_progress_info( 'estimates', 0, 0, 100, self::__('Harvest API does not permit access to your estimates.') );
-
-		$progress[] = 'estimates';
-		update_option( self::PROGRESS_OPTION, $progress );
-
-		//////////////
-		// Invoices //
-		//////////////
 		
-		self::update_progress_info( 'com', 0, 0, 65, self::__('Attempting to get your Harvest invoices...') );
+		if ( !isset( $progress['clients_complete'] ) ) {
 
-		// total invoice count, updated ASAP
-		$total = 0;
-		// total invoices processed 
-		$i = 0;
-		// Current page on invoices imported
-		$progress_count = array_count_values( $progress );
-		$api_page = ( isset( $progress_count['invoices_page'] ) ) ? $progress_count['invoices_page'] : 1 ;
+			$auth_error = FALSE;
+			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
+			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
+			$api = new HarvestAPI();
+			$api->setUser( self::$harvest_user );
+			$api->setPassword( self::$harvest_pass );
+			$api->setAccount( self::$harvest_account );
+			$api->setRetryMode( HarvestAPI::RETRY );
+			$api->setSSL( true );
 
-		if ( $api_page > 1 ) {
-			// Progress message
-			self::update_progress_info( 'invoices', 0, 0, 80, self::__('Some invoices were imported already and the importer will try to start where it left off.') );
-			sleep(1);
-		}
-
-		for ( $api_page; $api_page < 100; $api_page++ ) {
-			$filter = new Harvest_Invoice_Filter();
-     		$filter->set( 'page', $api_page );
-			$result = $api->getInvoices( $filter );
-			if( $result->isSuccess() ) {
-				// count of total payments
-				$payments_total = 0;
-				// update the total invoices
-				$total += count( $result->data );
-
-				if ( count( $result->data ) == 0 ) {
-					if ( $api_page == 1 ) { // first attempt
-						$auth_error = TRUE;
-						self::update_progress_info( 'invoices', 0, 0, 100, self::__('No invoices imported.') );
-					}
-					else {
-						self::update_progress_info( 'invoices', 0, 0, 100, self::__('No new invoices imported.') );
-					}
-					$api_page = 101;
-					break;
-				}
-
-				foreach ( $result->data as $invoice_id => $invoice ) {
-					$i++;
-					self::update_progress_info( 'invoices', $i, $total );
-					$new_invoice = self::create_invoice( $invoice );
-
-					if ( is_a( $new_invoice, 'SI_Invoice' ) ) {
-
-						////////////////
-						// Line Items //
-						////////////////
-						$result = $api->getInvoice( $invoice_id );
-						if( $result->isSuccess() ) {
-							self::add_invoice_line_items( $result->data, $new_invoice );
-						}
-						
-						
-						//////////////
-						// Payments //
-						//////////////
-						$result = $api->getInvoicePayments( $invoice_id );
-						if( $result->isSuccess() ) {
-							$p = 0;
-							$ptotal = count( $result->data );
-							foreach ( $result->data as $payment_id => $payment ) {
-								$p++;
-								$payments_total++;
-								$ppercent = intval($p/$ptotal * 100);
-								$message = sprintf( self::__('%o payments of %o imported for %s.'), $p, $ptotal, $new_invoice->get_title() );
-								self::update_progress_info( 'payments', $p, $payments_total, $ppercent, $message );
-
-								self::create_invoice_payment( $payment, $new_invoice );
-							}
-						}
-					}	
-				}
-			}
-			if ( $total ) {
-				$progress[] = 'invoices_page';
+			$progress_key = 'clients_import_progress';
+			if ( !isset( $progress[$progress_key] ) ) {
+				$progress[$progress_key] = 0;
 				update_option( self::PROGRESS_OPTION, $progress );
 			}
+
+			$result = $api->getClients();
+
+			if( !$result->isSuccess() ) {	
+				self::return_error( self::__('Client import error.') );
+			}
+
+			// Start importing the clients 20 at a time
+			$total_records = count( $result->data );
+			// Break the array up into pages
+			$paged_data = array_chunk( $result->data, 20 );
+			$pages = count( $paged_data );
+			$total_imported = intval( ($total_records/$pages)*$progress[$progress_key] );
+
+			if ( $progress[$progress_key] <= $pages ) {
+
+				$current_page = $paged_data[$progress[$progress_key]];
+				foreach ( $current_page as $client_id => $client ) {
+					self::create_client( $client );
+				}
+
+				$progress[$progress_key]++;
+				update_option( self::PROGRESS_OPTION, $progress );
+
+				// Return the progress
+				self::return_progress( array( 
+								'authentication' => array(  
+									'message' => sprintf( self::__('Attempting to import %s clients...'), $total_records ), 
+									'progress' => 10+$progress[$progress_key]
+									),
+								'clients' => array(
+									'message' => sprintf( self::__('Imported about %s clients so far.'), $total_imported ), 
+									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'next_step' => 'clients'
+									),
+								) );
+			}
+
+			// Mark as complete
+			$progress['clients_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
+
+			// Complete
+			self::return_progress( array( 
+							'authentication' => array( 
+								'message' => sprintf( self::__('Successfully imported %s clients...'), $total_records ), 
+								'progress' => 50
+								),
+							'clients' => array(
+								'message' => sprintf( self::__('Imported %s clients!'), $total_records ),  
+								'progress' => 100,
+								'next_step' => 'contacts'
+								),
+							) );
 		}
 
-		////////////////////////
-		// Payments messaging //
-		////////////////////////
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => sprintf( self::__('Successfully imported %s clients already, moving on...'), $total_records ), 
+							'progress' => 50
+							),
+						'clients' => array( 
+							'progress' => 100,
+							'message' => sprintf( self::__('Successfully imported %s clients already.'), $total_records ), 
+							'next_step' => 'contacts'
+							),
+						) );
 		
-		$message = sprintf( self::__('%s Payments imported.' ), $payments_total );
-		self::update_progress_info( 'payments', $p, $payments_total, 100, $message );
-
-		//////////////
-		// All done //
-		//////////////
-		self::update_progress_info( 'com', 0, 0, 100, self::__('API connection closed.') );
-		echo '<script language="javascript">document.getElementById("complete_import").className="";</script>';
-
-		if ( $auth_error ) {
-			echo '<script language="javascript">document.getElementById("auth_patience").className="error";</script>';
-		}
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
 
 	}
+
+	/**
+	 * Third step is to import contacts
+	 * @return 
+	 */
+	public static function import_contacts() {
+
+		// Store the import progress
+		$progress = get_option( self::PROGRESS_OPTION, array() );
+		// Suppress notifications
+		add_filter( 'suppress_notifications', '__return_true' );
+		
+		if ( !isset( $progress['contacts_complete'] ) ) {
+
+			$auth_error = FALSE;
+			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
+			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
+			$api = new HarvestAPI();
+			$api->setUser( self::$harvest_user );
+			$api->setPassword( self::$harvest_pass );
+			$api->setAccount( self::$harvest_account );
+			$api->setRetryMode( HarvestAPI::RETRY );
+			$api->setSSL( true );
+
+			$progress_key = 'contacts_import_progress';
+			if ( !isset( $progress[$progress_key] ) ) {
+				$progress[$progress_key] = 0;
+				update_option( self::PROGRESS_OPTION, $progress );
+			}
+
+			$result = $api->getContacts();
+
+			if( !$result->isSuccess() ) {	
+				self::return_error( self::__('Contact import error.') );
+			}
+
+			// Start importing the contacts 20 at a time
+			$total_records = count( $result->data );
+			// Break the array up into pages
+			$paged_data = array_chunk( $result->data, 20 );
+			$pages = count( $paged_data )-1;
+			$total_imported = intval( ($total_records/$pages)*$progress[$progress_key] );
+
+			if ( $progress[$progress_key] <= $pages ) {
+
+				$current_page = $paged_data[$progress[$progress_key]];
+				foreach ( $current_page as $contact_id => $contact ) {
+					self::create_contact( $contact );
+				}
+
+				$progress[$progress_key]++;
+				update_option( self::PROGRESS_OPTION, $progress );
+
+				// Return the progress
+				self::return_progress( array( 
+								'authentication' => array(  
+									'message' => sprintf( self::__('Attempting to import %s contacts...'), $total_records ), 
+									'progress' => 25+$progress[$progress_key]
+									),
+								'contacts' => array(
+									'message' => sprintf( self::__('Imported about %s contacts so far.'), $total_imported ), 
+									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'next_step' => 'contacts'
+									),
+								) );
+			}
+
+			// Mark as complete
+			$progress['contacts_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
+
+			// Complete
+			self::return_progress( array( 
+							'authentication' => array( 
+								'message' => sprintf( self::__('Successfully imported %s contacts...'), $total_records ), 
+								'progress' => 50
+								),
+							'contacts' => array(
+								'message' => sprintf( self::__('Imported %s contacts!'), $total_records ),  
+								'progress' => 100,
+								'next_step' => 'estimates'
+								),
+							) );
+		}
+
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => sprintf( self::__('Successfully imported %s contacts already, moving on...'), $total_records ), 
+							'progress' => 50
+							),
+						'contacts' => array( 
+							'progress' => 100,
+							'message' => sprintf( self::__('Successfully imported %s contacts already.'), $total_records ), 
+							'next_step' => 'estimates'
+							),
+						) );
+		
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
+
+	}
+
+	/**
+	 * Fourth step is to import estimates
+	 * @return 
+	 */
+	public static function import_estimates() {
+
+		// Store the import progress
+		$progress = get_option( self::PROGRESS_OPTION, array() );
+		
+		// Mark as complete
+		$progress['estimates_complete'] = 1;
+		update_option( self::PROGRESS_OPTION, $progress );
+
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => self::__('Attempting to get your Harvest estimates...'), 
+							'progress' => 50
+							),
+						'estimates' => array( 
+							'progress' => 100,
+							'message' => self::__( 'The Harvest API does not permit access to your estimates.' ), 
+							'next_step' => 'invoices'
+							),
+						) );
+		
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
+
+	}
+
+	/**
+	 * Final step is to import invoices and payments
+	 * @return 
+	 */
+	public static function import_invoices() {
+
+		// Store the import progress
+		$progress = get_option( self::PROGRESS_OPTION, array() );
+		// Suppress notifications
+		add_filter( 'suppress_notifications', '__return_true' );
+		
+		if ( !isset( $progress['invoices_complete'] ) ) {
+
+			set_time_limit( 0 ); // run script forever
+
+			$progress_key = 'invoices_import_progress';
+			if ( !isset( $progress[$progress_key] ) ) {
+				$progress[$progress_key] = 0;
+				update_option( self::PROGRESS_OPTION, $progress );
+			}
+			// Check which chunk we're at
+			// Since increment of 50 invoices will tend to bring a server to it's knees
+			// break up the returned results down.
+			$progress_pagechunk_key = 'invoices_import_progress_pagechunk';
+			if ( !isset( $progress[$progress_pagechunk_key] ) ) {
+				$progress[$progress_pagechunk_key] = 0;
+				update_option( self::PROGRESS_OPTION, $progress );
+			}
+
+			// If we're just starting out than provide messaging
+			if ( $progress[$progress_key] == 0 ) {
+				$progress[$progress_key]++;
+				update_option( self::PROGRESS_OPTION, $progress );
+
+				// Return the progress
+				self::return_progress( array( 
+								'authentication' => array(  
+									'message' => self::__('Attempting to import your invoices and their payments...'), 
+									'progress' => 60+$progress[$progress_key]
+									),
+								'invoices' => array(
+									'message' => sprintf( self::__('Currently importing invoices and their payments in increments of %s. Thank you for your patience, this is a very slow process.'), 50 ), 
+									'progress' => 15+($progress[$progress_key]*5)
+									),
+								'payments' => array( 
+									'message' => self::__('Payments will be imported with new invoices'), 
+									'progress' => 15+($progress[$progress_key]*5),
+									'next_step' => 'invoices',
+									),
+								) );
+			}
+
+
+			$auth_error = FALSE;
+			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
+			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
+			$api = new HarvestAPI();
+			$api->setUser( self::$harvest_user );
+			$api->setPassword( self::$harvest_pass );
+			$api->setAccount( self::$harvest_account );
+			$api->setRetryMode( HarvestAPI::RETRY );
+			$api->setSSL( true );
+
+			$filter = new Harvest_Invoice_Filter();
+			$filter->set( 'page', $progress[$progress_key] );
+			$result = $api->getInvoices( $filter );
+
+			if( !$result->isSuccess() ) {	
+				self::return_error( self::__('Invoice import error.') );
+			}
+
+			if ( $result->isSuccess() ) {
+
+				$payments_imported = 0;
+				$invoices_imported = 0;
+
+				// Break the array up into pages of 10 items
+				$paged_data = array_chunk( $result->data, apply_filters( 'si_harvest_import_increments_for_invoices', 10 ) );
+
+				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' page: ', $progress[$progress_key], FALSE );
+				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' chunk count: ', count( $paged_data ), FALSE );
+				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' chunk progress: ', $progress[$progress_pagechunk_key], FALSE );
+
+				if ( isset( $paged_data[$progress[$progress_pagechunk_key]] ) ) {
+					
+					$current_chunk = $paged_data[$progress[$progress_pagechunk_key]];
+					foreach ( $current_chunk as $key => $invoice ) {
+						$invoices_imported++;
+
+						$invoice_id = $invoice->id;
+						$new_invoice = self::create_invoice( $invoice );
+
+						if ( is_a( $new_invoice, 'SI_Invoice' ) ) {
+
+							////////////////
+							// Line Items //
+							////////////////
+							$result = $api->getInvoice( $invoice_id );
+							if( $result->isSuccess() ) {
+								self::add_invoice_line_items( $result->data, $new_invoice );
+							}
+							
+							
+							//////////////
+							// Payments //
+							//////////////
+							$result = $api->getInvoicePayments( $invoice_id );
+							if( $result->isSuccess() ) {
+								foreach ( $result->data as $payment_id => $payment ) {
+									$payments_imported++;
+									self::create_invoice_payment( $payment, $new_invoice );
+								}
+							}
+						}					
+					}
+					// Update the page chunk currently processed
+					$progress[$progress_pagechunk_key]++;
+					// If the last chunk was just processed than 
+					// start the progress over
+					if ( $progress[$progress_pagechunk_key] == count( $paged_data ) ) {
+						unset($progress[$progress_pagechunk_key]);
+
+						// Total progress for paged HAPI filter
+						$progress[$progress_key]++;
+						update_option( self::PROGRESS_OPTION, $progress );
+					}
+					update_option( self::PROGRESS_OPTION, $progress );
+
+					// Return the progress
+					self::return_progress( array( 
+									'authentication' => array(  
+										'message' => sprintf( self::__('Attempting to import %s new invoices and their payments...'), $invoices_imported ), 
+										'progress' => 60+$progress[$progress_key]
+										),
+									'payments' => array( 
+										'message' => sprintf( self::__('Just imported %s more payments.'), $payments_imported ), 
+										'progress' => 15+($progress[$progress_key]*2),
+										),
+									'invoices' => array(
+										'message' => sprintf( self::__('Importing invoices in increments of %s. Thank you for your patience, this is a very slow process.'), apply_filters( 'si_harvest_import_increments_for_invoices', 10 ) ), 
+										'progress' => 15+($progress[$progress_key]*2),
+										'next_step' => 'invoices'
+										),
+									) );
+				}
+				
+			}
+
+			// Mark as complete
+			$progress['invoices_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
+
+			// Complete
+			self::return_progress( array( 
+							'authentication' => array( 
+								'message' => self::__('Successfully imported a bunch of invoices...'), 
+								'progress' => 100
+								),
+							'payments' => array( 
+								'message' => self::__('Successfully imported a bunch of payments.'), 
+								'progress' => 100
+								),
+							'invoices' => array(
+								'message' => self::__('Finished importing your invoices!'),  
+								'progress' => 100,
+								'next_step' => 'complete'
+								),
+							) );
+		}
+
+		// Completed previously
+		self::return_progress( array( 
+						'authentication' => array( 
+							'message' => self::__('Successfully imported invoices already, moving on...'), 
+							'progress' => 50
+							),
+						'payments' => array( 
+							'message' => self::__('Successfully imported a bunch of payments already.'), 
+							'progress' => 100
+							),
+						'invoices' => array( 
+							'progress' => 100,
+							'message' => self::__('Imported all the invoices already!'),  
+							'next_step' => 'complete'
+							),
+						) );
+		
+		// If this is needed something went wrong since json should have been printed and exited.
+		return;
+
+	}
+
+	//////////////
+	// utility //
+	//////////////
 
 	public static function create_client( Harvest_Client $client ) {
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::HARVEST_ID => $client->id ) );
@@ -400,10 +681,10 @@ class SI_Harvest_Import extends SI_Importer {
 			'last_name' => $contact->last_name
 		);
 		$user_id = SI_Clients::create_user( $args );
-		update_usermeta( $user_id, self::HARVEST_ID, $contact->id );
-		update_usermeta( $user_id, self::USER_META_TITLE, $contact->title );
-		update_usermeta( $user_id, self::USER_META_PHONE, $contact->phone_mobile );
-		update_usermeta( $user_id, self::USER_META_OFFICE_PHONE, $contact->phone_office );
+		update_user_meta( $user_id, self::HARVEST_ID, $contact->id );
+		update_user_meta( $user_id, self::USER_META_TITLE, $contact->title );
+		update_user_meta( $user_id, self::USER_META_PHONE, $contact->phone_mobile );
+		update_user_meta( $user_id, self::USER_META_OFFICE_PHONE, $contact->phone_office );
 
 		// Assign new user to client.
 		$client->add_associated_user( $user_id );
@@ -532,20 +813,6 @@ class SI_Harvest_Import extends SI_Importer {
 
 	protected function __construct() {
 		//
-	}
-
-	public static function update_progress_info( $context = 'contacts', $i = 0, $total_records = 0, $percent = 0, $messaging = '' ) {
-		if ( !$percent ) {
-			$percent = intval($i/$total_records * 100);
-		}
-		if ( $messaging == '' ) {
-			$messaging = sprintf( self::__('%o %s of %o imported.'), $i, $context, $total_records );
-		}
-		echo '<script language="javascript">document.getElementById("progress_js").remove();</script><span id="progress_js"><script language="javascript">
-			document.getElementById("'.$context.'_import_progress").innerHTML="<div style=\"width:'.$percent.'%;background-color:#ddd;\">&nbsp;</div>";
-			document.getElementById("'.$context.'_import_information").innerHTML="'.$messaging.'";
-			</script></span>';
-		flush();
 	}
 
 	protected static function csv_to_array( $csv, $delimiter = ',', $enclosure = '', $escape = '\\', $terminator = "\n") { 

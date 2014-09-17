@@ -102,7 +102,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 		// run script forever
 		set_time_limit( 0 );
 
-		self::update_progress_info( 'com', 0, 0, 10, self::__('Looking for any WP-Invoices...') );
+		self::update_progress_info( 'authentication', 0, 0, 10, self::__('Looking for any WP-Invoices...') );
 
 		$args = array(
 				'post_type' => 'wpi_object', // why object? I don't get it either.
@@ -114,7 +114,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 		$wp_invoice_ids = get_posts( $args );
 
 		if ( empty( $wp_invoice_ids ) ) {
-			self::update_progress_info( 'com', 0, 0, 100, self::__('We couldn\'t fine any WP-Invoices to import.') );
+			self::update_progress_info( 'authentication', 0, 0, 100, self::__('We couldn\'t fine any WP-Invoices to import.') );
 			self::update_progress_info( 'clients', 0, 0, 100, self::__('Skipped.') );
 			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Skipped.') );
 			self::update_progress_info( 'estimates', 0, 0, 100, self::__('Skipped.') );
@@ -124,7 +124,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 		}
 
 		if ( !class_exists( 'WPI_Invoice' ) ) {
-			self::update_progress_info( 'com', 0, 0, 100, self::__('WP-Invoices needs to be activated before proceeding.') );
+			self::update_progress_info( 'authentication', 0, 0, 100, self::__('WP-Invoices needs to be activated before proceeding.') );
 			self::update_progress_info( 'clients', 0, 0, 100, self::__('Incomplete.') );
 			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Incomplete.') );
 			self::update_progress_info( 'estimates', 0, 0, 100, self::__('Incomplete.') );
@@ -158,37 +158,33 @@ class SI_WPInvoice_Import extends SI_Importer {
 			/////////////
 			// Clients //
 			/////////////
-			usleep(10000);
 			$clients_tally++;
-			self::update_progress_info( 'com', 0, 0, 20, self::__('Attempting to import new clients from what WP-Invoice stores...') );
+			self::update_progress_info( 'authentication', 0, 0, 20, self::__('Attempting to import new clients from what WP-Invoice stores...') );
 			$new_client_id = self::create_client( $wp_invoice );
 			self::update_progress_info( 'clients', $clients_tally, $invoices_total );
 			
 			//////////////
 			// Contacts //
 			//////////////
-			usleep(10000);
 			// Just in case the role wasn't already added
 			add_role( SI_Client::USER_ROLE, self::__('Client'), array( 'read' => true, 'level_0' => true ) );
 			$contacts_tally++;
-			self::update_progress_info( 'com', 0, 0, 40, self::__('Attempting to convert wp-invoice users to clients...') );
+			self::update_progress_info( 'authentication', 0, 0, 40, self::__('Attempting to convert wp-invoice users to clients...') );
 			self::create_contact( $wp_invoice, $new_client_id );
 			self::update_progress_info( 'contacts', $contacts_tally, $invoices_total );
 
 			//////////////
 			// Invoices //
 			//////////////
-			usleep(10000);
 			$invoices_tally++;
-			self::update_progress_info( 'com', 0, 0, 60, self::__('Attempting to import invoices...') );
+			self::update_progress_info( 'authentication', 0, 0, 60, self::__('Attempting to import invoices...') );
 			$new_invoice = self::create_invoice( $wp_invoice, $new_client_id );
 			self::update_progress_info( 'invoices', $invoices_tally, $invoices_total );
 
 			//////////////
 			// Payments //
 			//////////////
-			usleep(10000);
-			self::update_progress_info( 'com', 0, 0, 80, self::__('Attempting to import payments...') );
+			self::update_progress_info( 'authentication', 0, 0, 80, self::__('Attempting to import payments...') );
 			if ( !empty( $wp_invoice['log'] ) ) {
 				foreach ( $wp_invoice['log'] as $key => $event ) {
 					if ( $event['attribute'] == 'balance' ) {
@@ -199,10 +195,9 @@ class SI_WPInvoice_Import extends SI_Importer {
 				}
 			}
 			else {
-				self::update_progress_info( 'com', 0, 0, 80, self::__('No payments were found.') );
+				self::update_progress_info( 'authentication', 0, 0, 80, self::__('No payments were found.') );
 			}
 			
-			usleep(10000);
 			if ( self::delete_wpinvoice_data() ) {
 				printf( 'Deleting WP-Invoice: %s', esc_attr($wp_invoice['post_title']) );
 				//wp_delete_post( $invoice_id, TRUE );
@@ -213,7 +208,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 		//////////////
 		// All done //
 		//////////////
-		self::update_progress_info( 'com', 0, 0, 100, self::__('Finished importing...') );
+		self::update_progress_info( 'authentication', 0, 0, 100, self::__('Finished importing...') );
 		echo '<script language="javascript">document.getElementById("complete_import").className="";</script>';
 
 	}

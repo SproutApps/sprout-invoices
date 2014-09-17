@@ -715,6 +715,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'thank_you_string' => self::__( 'Thank you' ),
 			'updating_string' => self::__( 'Updating...' ),
 			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
+			'done_string' => self::__( 'Finished!' ),
 			'security' => wp_create_nonce( self::NONCE )
 		);
 		wp_localize_script( 'si_admin', 'si_js_object', apply_filters( 'si_admin_scripts_localization', $si_js_object ) );

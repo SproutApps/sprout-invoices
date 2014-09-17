@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**1.0.7**
+
+* Much improved importing with AJAX
+
 **1.0.6**
 
 * Auto upgrades fix for pro users
