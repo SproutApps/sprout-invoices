@@ -92,13 +92,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 **1.0.8**
 
-*Bug Fixes*
+_Bug Fixes_
 * Client creation via AJAX/Modal
 * Quick send bug fixes for Estimates and Invoices
 * client_name shortcode
 * Minor fixes for importing from freshbooks, harvest and WP-Invoices
 
-*Features*
+_Features_
 * Major overhaul of importing from freshbooks, harvest and WP-Invoices.
 
 **1.0.7**
