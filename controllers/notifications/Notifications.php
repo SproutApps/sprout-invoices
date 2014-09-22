@@ -968,11 +968,17 @@ class SI_Notifications extends SI_Notifications_Control {
 	 * @return string          filtered
 	 */
 	public static function shortcode_client_name( $atts, $content, $code, $data ) {
-		$name = '';
+		$client_id = 0;
 		if ( isset( $data['client'] ) && is_a( $data['client'], 'SI_Client' ) ) {
-			$client_id = $data['client']->get_id();
-			$name = get_the_title( $client_id );
+			$client_id = $data['client']->get_id();			
 		}
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			$client_id = $data['invoice']->get_client_id();
+		}
+		elseif ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			$client_id = $data['estimate']->get_client_id();
+		}
+		$name = ( $client_id ) ? get_the_title( $client_id ) : '' ;
 		return $name;
 	}
 

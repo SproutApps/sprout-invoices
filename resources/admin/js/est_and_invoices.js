@@ -58,7 +58,7 @@ jQuery(function($) {
 	 * Disable quick send if the form has changed.
 	 */
 	$('form#post').on( 'keyup change', 'input:not([name="sa_metabox_recipients[]"]), select, textarea:not([name="sa_metabox_sender_note"])', function( e ){
-		$('#quick_send_option').hide();
+		// $('#quick_send_option #send_doc_notification').attr( 'disabled', 'disabled' );
 	});
 
 	/**

@@ -611,8 +611,8 @@ class SI_Clients extends SI_Controller {
 		if ( !wp_verify_nonce( $nonce, self::SUBMISSION_NONCE ) )
 			self::ajax_fail( 'Not going to fall for it!' );
 
-		if ( !current_user_can( 'create_posts' ) )
-			return;
+		if ( !current_user_can( 'publish_posts' ) )
+			self::ajax_fail( 'User cannot create new posts!' );
 		
 		$user_id = 0;
 		// Attempt to create a user

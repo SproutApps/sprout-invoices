@@ -657,25 +657,25 @@ class SI_Estimates extends SI_Controller {
 				}
 			}
 		}
-		if ( !isset( $_REQUEST['sa_metabox_notification_nonce'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( !isset( $_REQUEST['sa_send_metabox_notification_nonce'] ) )
+			self::ajax_fail( 'Forget something (nonce)?' );
 
-		$nonce = $_REQUEST['sa_metabox_notification_nonce'];
+		$nonce = $_REQUEST['sa_send_metabox_notification_nonce'];
 		if ( !wp_verify_nonce( $nonce, SI_Controller::NONCE ) )
 			self::ajax_fail( 'Not going to fall for it!' );
 
-		if ( !isset( $_REQUEST['sa_metabox_doc_id'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( !isset( $_REQUEST['sa_send_metabox_doc_id'] ) )
+			self::ajax_fail( 'Forget something (id)?' );
 
 		if ( !isset( $_REQUEST['sa_metabox_recipients'] ) || empty( $_REQUEST['sa_metabox_recipients'] ) )
 			self::ajax_fail( 'A recipient is required.' );
 
-		if ( get_post_type( $_REQUEST['sa_metabox_doc_id'] ) != SI_Estimate::POST_TYPE ) {
+		if ( get_post_type( $_REQUEST['sa_send_metabox_doc_id'] ) != SI_Estimate::POST_TYPE ) {
 			return;
 		}
 
-		$estimate = SI_Estimate::get_instance( $_REQUEST['sa_metabox_doc_id'] );
-		$estimate->set_sender_note( $_REQUEST['sa_metabox_sender_note'] );
+		$estimate = SI_Estimate::get_instance( $_REQUEST['sa_send_metabox_doc_id'] );
+		$estimate->set_sender_note( $_REQUEST['sa_send_metabox_sender_note'] );
 		do_action( 'send_estimate', $estimate, $_REQUEST['sa_metabox_recipients'] );
 
 		header( 'Content-type: application/json' );

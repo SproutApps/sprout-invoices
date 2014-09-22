@@ -1,5 +1,5 @@
 <div id="send_doc_options_wrap" class="admin_fields clearfix">
-	<?php sa_admin_fields( $fields ); ?>
+	<?php sa_admin_fields( $fields, 'send_metabox' ); ?>
 	<div id="quick_send_option" class="form-group">
 		<span class="label_wrap">&nbsp;</span>
 		<div class="input_wrap">
