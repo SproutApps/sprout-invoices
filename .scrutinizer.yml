@@ -1,0 +1,5 @@
+filter:
+    excluded_paths:
+        - importers/lib/*
+        - resources/admin/plugins/*
+        - resources/front-end/plugins/*
