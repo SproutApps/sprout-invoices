@@ -243,7 +243,7 @@ class SI_Templating_API extends SI_Controller {
 	 * @param WP_Post|null $post Optional. The post being edited, provided for context.
 	 * @return array Array of page templates, keyed by filename, with the value of the translated header name.
 	 */
-	public function get_doc_templates( $type = null ) {
+	public static function get_doc_templates( $type = null ) {
 		
 		$doc_templates = FALSE;
 
