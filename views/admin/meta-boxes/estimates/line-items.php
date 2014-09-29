@@ -101,7 +101,11 @@
 					<span class="add_button_wrap button">
 						<a href="javascript:void(0)" class="add_button item_add_type item_add_no_type">&nbsp;<?php si_e('Add') ?></a>
 					</span>
-					<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions.') ?>" class="helptip add_item_help"></span>
+					<?php if ( apply_filters( 'show_upgrade_messaging', '__return_true' ) ): ?>
+						<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
+					<?php else: ?>
+						<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions.') ?>" class="helptip add_item_help"></span>
+					<?php endif ?>
 				<?php endif ?>
 			</div>
 			<div id="line_items_totals">

@@ -331,14 +331,17 @@ if ( !function_exists( 'pp' ) ) {
  * URL to purchase this app
  * @return string 
  */
-function si_purchase_link() {
-	echo si_get_purchase_link();
+function si_purchase_link( $url = '' ) {
+	echo si_get_purchase_link( $url );
 }
 
 /**
  * URL to purchase this app
  * @return string 
  */
-function si_get_purchase_link() {
-	return add_query_arg( array( 'ref' => 'free', 'url' => home_url() ), 'http://sproutapps.co/sprout-invoices/purchase/' );	;
+function si_get_purchase_link( $url = '' ) {
+	if ( $url == '' ) {
+		$url = 'https://sproutapps.co/sprout-invoices/purchase/';
+	}
+	return add_query_arg( array( 'ref' => 'free', 'url' => urlencode( home_url() ) ), $url );	;
 }

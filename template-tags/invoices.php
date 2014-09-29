@@ -504,6 +504,23 @@ function si_invoice_calculated_total( $id = 0 ) {
 }
 endif;
 
+if ( !function_exists('si_has_invoice_deposit') ) :
+/**
+ * Check to see if the deposit is calculated or there's an actual deposit
+ * @param  integer $id 
+ * @return string      
+ */
+function si_has_invoice_deposit( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$calc_deposit = si_get_invoice_deposit( $id );
+	$total = si_get_invoice_total( $id );
+	return $calc_deposit < $total;
+}
+endif;
+
 if ( !function_exists('si_get_invoice_deposit') ) :
 /**
  * Get the invoice deposit

@@ -176,25 +176,27 @@ class SI_Templating_API extends SI_Controller {
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
 			<span id="template" class="wp-media-buttons-icon"><b><?php echo $template_options[$template] ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
 
-			<?php if ( count( $template_options ) > 1 ): ?>
 				<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
 					<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different template') ?></span>
 				</a>
 
 				<div id="template_div" class="control_wrap hide-if-js">
 					<div class="template-wrap">
-						<select name="doc_template">
-							<?php foreach ( $template_options as $template_key => $template_name ): ?>
-								<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, FALSE ), $template_name ) ?>
-							<?php endforeach ?>
-						</select>
+						<?php if ( count( $template_options ) > 1 ): ?>
+							<select name="doc_template">
+								<?php foreach ( $template_options as $template_key => $template_name ): ?>
+									<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, FALSE ), $template_name ) ?>
+								<?php endforeach ?>
+							</select>
+						<?php else: ?>
+							<span><?php printf( si__('No <a href="%s" target="_blank">Custom Templates</a> Found'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
+						<?php endif ?>
 			 		</div>
 					<p>
 						<a href="#edit_template" class="save_control save-template hide-if-no-js button"><?php si_e('OK') ?></a>
 						<a href="#edit_template" class="cancel_control cancel-template hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
 					</p>
 			 	</div>
-			<?php endif ?>
 		</div>
 		<?php
 	}

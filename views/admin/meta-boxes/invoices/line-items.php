@@ -101,7 +101,11 @@
 					<span class="add_button_wrap button">
 						<a href="javascript:void(0)" class="add_button item_add_type item_add_no_type">&nbsp;<?php si_e('Add') ?></a>
 					</span>
-					<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions.') ?>" class="helptip add_item_help"></span>
+					<?php if ( apply_filters( 'show_upgrade_messaging', '__return_true' ) ): ?>
+						<span title="<?php self::esc_e('Tasks can be created to help with invoice creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
+					<?php else: ?>
+						<span title="<?php self::esc_e('Tasks can be created to help with invoice creation by adding default descriptions.') ?>" class="helptip add_item_help"></span>
+					<?php endif ?>
 				<?php endif ?>
 
 				<div id="invoice_status_updates">
@@ -156,7 +160,7 @@
 				<?php if ( apply_filters( 'show_upgrade_messaging', '__return_true' ) ): ?>
 					<div id="deposit">
 						<b title="Upgrade Sprout Invoices to enable deposits" class="helptip"><?php si_e('Deposit Due') ?></b>
-						<input type="number" name="deposit" value="<?php echo $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any" disabled="disabled">
+						<input type="number" name="deposit" value="<?php echo floatval( $total - $total_payments ) ?>" min="0" max="0"  step="any" disabled="disabled">
 					</div>
 				<?php elseif ( floatval( $total - $total_payments ) > 0.00 || $status == 'auto-draft' ): ?>
 					<div id="deposit">

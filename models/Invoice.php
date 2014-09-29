@@ -242,7 +242,6 @@ class SI_Invoice extends SI_Post_Type {
 	/**
 	 * Deposit Adjustment
 	 */
-
 	public function get_deposit() {
 		$total = $this->get_calculated_total();
 		$payments_total = $this->get_payments_total();

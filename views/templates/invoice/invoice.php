@@ -43,7 +43,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 					<span class="header_id"><?php printf( 'Invoice %s', si_get_invoice_id() ) ?></span>
 					<div id="doc_actions">
 						<?php 
-							$payment_string = ( si_get_invoice_deposit() ) ? si__('Pay Deposit') : si__('Pay Invoice') ;
+							$payment_string = ( si_has_invoice_deposit() ) ? si__('Pay Deposit') : si__('Pay Invoice') ;
 							 ?>
 						<?php if ( si_get_invoice_balance() ): ?>
 							<a href="#pay" class="button primary_button purchase_button" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" data-dropdown="#payment_selection"><?php echo $payment_string ?></a>
@@ -145,7 +145,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 								</dl>
 							<?php endif ?>
 
-							<?php if ( si_get_invoice_deposit() ): ?>
+							<?php if ( si_has_invoice_deposit() ): ?>
 								<dl class="doc_total_with_deposit">
 									<dt><span class="dt_heading"><?php si_e('Invoice Total') ?></span></dt>
 									<dd><?php sa_formatted_money( si_get_invoice_total() ) ?></dd>

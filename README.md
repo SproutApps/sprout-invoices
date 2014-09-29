@@ -90,6 +90,17 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**1.0.9**
+
+_Bug Fixes_
+
+* Deposits bug for free versions
+* Tasks clarification for free version
+
+_Features_
+
+* Custom template messaging improvements
+
 **1.0.8**
 
 _Bug Fixes_
