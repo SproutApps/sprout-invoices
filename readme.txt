@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.0.9
+Stable tag: 1.0.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,28 +114,25 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
-= 1.0.9 =
+= 1.0.9.1 =
 
-_Bug Fixes_
-
-* Deposits bug for free versions
-* Tasks clarification for free version
-
-_Features_
-
-* Custom template messaging improvements
+* _Bug Fixes_
+** Deposits bug for free versions
+** Tasks clarification for free version
+** Allow for deletion with new drop-down UI
+* _Features_
+** Custom template messaging improvements
 
 = 1.0.8 =
 
-_Bug Fixes_
-* Client creation via AJAX/Modal
-* Quick send bug fixes for Estimates and Invoices
-* client_name shortcode
-* Minor fixes for importing from freshbooks, harvest and WP-Invoices
+* _Bug Fixes_
+** Client creation via AJAX/Modal
+** Quick send bug fixes for Estimates and Invoices
+** client_name shortcode
+** Minor fixes for importing from freshbooks, harvest and WP-Invoices
 
-_Features_
-* Major overhaul of importing from freshbooks, harvest and WP-Invoices.
-
+* _Features_
+** Major overhaul of importing from freshbooks, harvest and WP-Invoices.
 = 1.0.7 =
 
 * Much improved importing with AJAX
@@ -168,7 +165,7 @@ _Features_
 
 == Changelog ==
 
-= 1.0.9 =
+= 1.0.9.1 =
 
 _Bug Fixes_
 * Client creation via AJAX/Modal

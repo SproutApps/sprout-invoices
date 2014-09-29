@@ -1,25 +1,22 @@
-= 1.0.9 =
+= 1.0.9.1 =
 
-_Bug Fixes_
-
-* Deposits bug for free versions
-* Tasks clarification for free version
-
-_Features_
-
-* Custom template messaging improvements
+* _Bug Fixes_
+** Deposits bug for free versions
+** Tasks clarification for free version
+** Allow for deletion with new drop-down UI
+* _Features_
+** Custom template messaging improvements
 
 = 1.0.8 =
 
-_Bug Fixes_
-* Client creation via AJAX/Modal
-* Quick send bug fixes for Estimates and Invoices
-* client_name shortcode
-* Minor fixes for importing from freshbooks, harvest and WP-Invoices
+* _Bug Fixes_
+** Client creation via AJAX/Modal
+** Quick send bug fixes for Estimates and Invoices
+** client_name shortcode
+** Minor fixes for importing from freshbooks, harvest and WP-Invoices
 
-_Features_
-* Major overhaul of importing from freshbooks, harvest and WP-Invoices.
-
+* _Features_
+** Major overhaul of importing from freshbooks, harvest and WP-Invoices.
 = 1.0.7 =
 
 * Much improved importing with AJAX

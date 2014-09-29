@@ -38,7 +38,7 @@
 			<?php endif ?>
 			<?php
 				if ( current_user_can( 'delete_post', $id ) ) {
-					printf( '<li><a class="doc_status_change delete" title="%s" href="%s">%s</a></li>', self::__( 'Delete Invoice' ), get_delete_post_link( $id, '' ), self::__( '<b>Delete:</b> Trash Invoice' ) );
+					printf( '<li><a class="doc_status_delete delete" title="%s" href="%s">%s</a></li>', self::__( 'Delete Invoice' ), get_delete_post_link( $id, '' ), self::__( '<b>Delete:</b> Trash Invoice' ) );
 				} ?>
 		</ul>
 	</div>

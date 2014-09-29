@@ -90,12 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
-**1.0.9**
+**1.0.9.1**
 
 _Bug Fixes_
 
 * Deposits bug for free versions
 * Tasks clarification for free version
+* Allow for deletion with new drop-down UI
 
 _Features_
 

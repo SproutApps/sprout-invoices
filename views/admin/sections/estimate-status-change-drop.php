@@ -32,7 +32,7 @@
 			<li><hr/></li>
 			<?php
 				if ( current_user_can( 'delete_post', $id ) ) {
-					printf( '<li><a class="doc_status_change delete" title="%s" href="%s">%s</a></li>', self::__( 'Delete Estimate' ), get_delete_post_link( $id, '' ), self::__( '<b>Delete:</b> Trash Estimate' ) );
+					printf( '<li><a class="doc_status_delete delete" title="%s" href="%s">%s</a></li>', self::__( 'Delete Estimate' ), get_delete_post_link( $id, '' ), self::__( '<b>Delete:</b> Trash Estimate' ) );
 				} ?>
 		</ul>
 	</div>

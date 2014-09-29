@@ -928,7 +928,7 @@ class SI_Invoices extends SI_Controller {
 	 * @param  object $doc estimate or invoice object
 	 * @return int cloned invoice id.
 	 */
-	public function create_invoice_on_est_acceptance( $doc ) {
+	public static function create_invoice_on_est_acceptance( $doc ) {
 		if ( !is_a( $doc, 'SI_Estimate' ) ) {
 			return;
 		}
