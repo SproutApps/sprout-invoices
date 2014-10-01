@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**1.0.10**
+
+
+_Bug Fixes_
+** Client could have non-user_ids associated
+** Handle text input with bad formatting better
+
 **1.0.9.1**
 
 _Bug Fixes_

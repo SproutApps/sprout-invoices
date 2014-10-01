@@ -127,6 +127,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
+				'default' => date( get_option( 'date_format' ) ),
 				'required' => TRUE
 			),
 			'notes' => array(
@@ -181,7 +182,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				'data' => array(
 					'amount' => $amount,
 					'check_number' => $number,
-					'date' => $date,
+					'date' => strtotime( $date ),
 					'notes' => $notes
 				),
 			), SI_Payment::STATUS_PENDING );

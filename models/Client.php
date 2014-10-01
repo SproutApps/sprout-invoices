@@ -136,7 +136,7 @@ class SI_Client extends SI_Post_Type {
 		if ( !is_array( $users ) ) {
 			$users = array();
 		}
-		return array_filter($users);
+		return array_filter( $users );
 	}
 
 	/**
@@ -165,7 +165,7 @@ class SI_Client extends SI_Post_Type {
 	 * @param integer $user_id 
 	 */
 	public function add_associated_user( $user_id = 0 ) {
-		if ( $user_id && !$this->is_user_associated( $user_id ) ) {
+		if ( is_numeric( $user_id) && !$this->is_user_associated( $user_id ) ) {
 			$this->add_post_meta( array(
 					self::$meta_keys['associated_users'] => $user_id
 				) );

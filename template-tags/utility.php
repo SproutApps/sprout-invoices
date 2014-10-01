@@ -192,6 +192,27 @@ function sa_currency_format_before() {
 	return apply_filters( 'sa_currency_format_before', $bool );
 }
 
+if ( !function_exists( 'sa_get_unformat_money' ) ) :
+/**
+ * Unformat money
+ * @param  string $money 
+ * @return float        
+ */
+function sa_get_unformat_money( $money ) {
+    $cleanString = preg_replace('/([^0-9\.,])/i', '', $money);
+    $onlyNumbersString = preg_replace('/([^0-9])/i', '', $money);
+
+    $separatorsCountToBeErased = strlen($cleanString) - strlen($onlyNumbersString) - 1;
+
+    $stringWithCommaOrDot = preg_replace('/([,\.])/', '', $cleanString, $separatorsCountToBeErased);
+    $removedThousendSeparator = preg_replace('/(\.|,)(?=[0-9]{3,}$)/', '',  $stringWithCommaOrDot);
+
+    $float = (float) str_replace( ',', '.', $removedThousendSeparator );
+    return apply_filters( 'sa_get_unformat_money', $float, $money );
+}
+endif;
+
+
 /**
  * Convert string to a number format
  * @param integer $value         number to format

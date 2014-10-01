@@ -41,7 +41,7 @@ class SI_Admin_Payment extends SI_Controller {
 				'data' => array(
 					'amount' => $amount,
 					'check_number' => $number,
-					'date' => $date,
+					'date' => strtotime( $date ),
 					'notes' => $notes
 				),
 			), SI_Payment::STATUS_COMPLETE );
@@ -115,7 +115,8 @@ class SI_Admin_Payment extends SI_Controller {
 				'label' => self::__( 'Date Received' ),
 				'attributes' => array(
 					'autocomplete' => 'off',
-				)
+				),
+				'default' => date( get_option( 'date_format' ) ),
 			),
 			'payment_notes' => array(
 				'type' => 'textarea',
@@ -180,7 +181,7 @@ class SI_Admin_Payment extends SI_Controller {
 			self::ajax_fail( 'Forget something?' );
 
 		if ( get_post_type( $_REQUEST['sa_metabox_invoice_id'] ) != SI_Invoice::POST_TYPE ) {
-			return;
+			self::ajax_fail( 'Error: Invoice PT mismatch.' );
 		}
 
 		$amount = ( isset( $_REQUEST['sa_metabox_payment_amount'] ) ) ? $_REQUEST['sa_metabox_payment_amount'] : 0 ;
@@ -189,7 +190,7 @@ class SI_Admin_Payment extends SI_Controller {
 		$notes = ( isset( $_REQUEST['sa_metabox_payment_notes'] ) ) ? $_REQUEST['sa_metabox_payment_notes'] : '' ;
 
 		if ( !$amount ) {
-			return FALSE;
+			self::ajax_fail( 'No payment amount set.' );
 		}
 
 		self::create_admin_payment( $_REQUEST['sa_metabox_invoice_id'], $amount, $number, $date, $notes );

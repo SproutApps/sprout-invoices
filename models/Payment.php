@@ -192,7 +192,7 @@ class SI_Payment extends SI_Post_Type {
 
 	public function set_amount( $amount ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['amount'] => $amount,
+				self::$meta_keys['amount'] => sa_get_unformat_money( $amount ),
 			) );
 	}
 
