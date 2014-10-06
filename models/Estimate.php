@@ -188,7 +188,7 @@ class SI_Estimate extends SI_Post_Type {
 			$estimate->set_user_id( get_current_user_id() );
 		}
 
-		do_action( 'sa_new_estimate', $client, $args );
+		do_action( 'sa_new_estimate', $estimate, $args );
 		return $id;
 	}
 

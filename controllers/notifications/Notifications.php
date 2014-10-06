@@ -1157,7 +1157,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			if ( !empty( $data['submission_fields']['fields'] ) ) {
 				ob_start(); ?>
 					<?php foreach ( $data['submission_fields']['fields'] as $key => $value ): ?>
-						<?php if ( $value['data']['label'] && $value['data']['type'] != 'hidden' ): ?>
+						<?php if ( isset( $value['data']['label'] ) && isset( $value['data']['type'] ) && $value['data']['type'] != 'hidden' ): ?>
 							<dt><?php echo $value['data']['label'] ?></dt>
 							<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== FALSE ): ?>
 								<dd><p><?php 

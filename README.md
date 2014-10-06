@@ -90,8 +90,15 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
-**1.0.10**
+**1.0.10.1**
 
+* _Bug Fixes_
+
+** Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)
+
+= 1.0.10 =
+
+**1.0.10**
 
 _Bug Fixes_
 ** Client could have non-user_ids associated

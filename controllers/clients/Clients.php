@@ -503,6 +503,7 @@ class SI_Clients extends SI_Controller {
 	 */
 	public static function filter_estimate_submission_fields( $fields = array() ) {
 		if ( is_user_logged_in() ) {
+			$client_id = 0;
 			$client_ids = SI_Client::get_clients_by_user( get_current_user_id() );
 			if ( !empty( $client_ids ) ) {
 				$client_id = array_pop( $client_ids );
@@ -530,7 +531,7 @@ class SI_Clients extends SI_Controller {
 	 * @param  array       $parsed_args 
 	 * @return                    
 	 */
-	public static function create_client_from_submission( SI_Estimate $estimate, $parsed_args = array() ) {	
+	public static function create_client_from_submission( SI_Estimate $estimate, $parsed_args = array() ) {
 		$client_id = ( isset( $_REQUEST['client_id'] ) && get_post_type( $_REQUEST['client_id'] ) == SI_Client::POST_TYPE ) ? $_REQUEST['client_id'] : 0;
 		$user_id = get_current_user_id();
 

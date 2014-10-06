@@ -879,7 +879,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 		$payment_id = SI_Payment::new_payment( array(
 				'payment_method' => ( isset( $payment['type'] ) && !is_array( $payment['type'] ) ) ? $payment['type'] : self::PAYMENT_METHOD,
 				'invoice' => $invoice_id,
-				'amount' => $payment['amount'],
+				'amount' => round( $payment['amount'], 2),
 				'transaction_id' => ( isset( $payment['payment_id'] ) ) ? $payment['payment_id'] : '',
 				'data' => array(
 					'api_response' => $payment
