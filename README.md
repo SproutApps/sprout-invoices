@@ -90,13 +90,26 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**1.1**
+
+* _Features:_
+	* Improved Invoice and Estimate templates
+	* Client specific invoice templates
+	* Client specific estimate templates
+	* Customizable money formats
+	* Improved multi-currency support
+	* Client specific money format
+	* Client specific currency code for payment processing
+	* minor UI improvements
+
+* _Bug Fixes:_
+	* Few error prevention updates
+
 **1.0.10.1**
 
 * _Bug Fixes_
 
 ** Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)
-
-= 1.0.10 =
 
 **1.0.10**
 

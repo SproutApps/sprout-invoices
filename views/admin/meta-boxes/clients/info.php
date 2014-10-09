@@ -7,8 +7,7 @@
 	$fields['city']['default']= ( isset( $address['city'] ) ) ? $address['city'] : '' ;
 	$fields['zone']['default']= ( isset( $address['zone'] ) ) ? $address['zone'] : '' ;
 	$fields['postal_code']['default']= ( isset( $address['postal_code'] ) ) ? $address['postal_code'] : '' ;
-	$fields['country']['default']= ( isset( $address['country'] ) ) ? $address['country'] : '' ;
-	$fields['website']['default'] = $website; ?>
+	$fields['country']['default']= ( isset( $address['country'] ) ) ? $address['country'] : '' ; ?>
 
 
 <div id="client_fields" class="admin_fields clearfix">

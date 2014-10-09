@@ -31,6 +31,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		self::$money_format = get_option( self::MONEY_FORMAT_OPTION, '%0.2f' );
 		self::register_payment_settings();
 
+		// Currency Code Change
+		add_filter( 'si_currency_code', array( get_class(), 'maybe_change_currency_code' ), 10, 2 );
+
 		// Help Sections
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
 
@@ -40,6 +43,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		// Main section
 		add_action( 'si_payments_pane', array( __CLASS__, 'show_payments_pane' ), 100 );
+
 	}
 
 	/**
@@ -117,6 +121,25 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	}
 
 	/**
+	 * Filtering the payment processor currency code option based on some predefined options.
+	 * @param  string  $currency_code  
+	 * @param  integer $invoice_id     
+	 * @param  string  $payment_method 
+	 * @return string                  
+	 */
+	public static function maybe_change_currency_code( $currency_code = '', $invoice_id = 0, $payment_method = '' ) {
+		$invoice = SI_Invoice::get_instance( $invoice_id );
+		$client = $invoice->get_client();
+		if ( !is_wp_error( $client ) ) {
+			$client_currency = $client->get_currency();
+			if ( $client_currency != '' ) {
+				$currency_code = $client_currency;
+			}
+		}
+		return $currency_code;
+	}
+
+	/**
 	 * Register the payment settings
 	 * @return  
 	 */
@@ -156,7 +179,15 @@ abstract class SI_Payment_Processors extends SI_Controller {
 							'label' => '',
 							'default' => self::$currency_symbol,
 							'attributes' => array( 'class' => 'small-text' ),
-						'description' => self::__( 'If your currency has the symbol after the amount place a % before your currency symbol. Example, %&pound; ' )
+						'description' => self::__( 'If your currency has the symbol after the amount place a % before your currency symbol. Example, % &pound; ' )
+						)
+					),
+					self::MONEY_FORMAT_OPTION => array(
+						'label' => self::__( 'Money Format' ),
+						'option' => array(
+							'type' => 'bypass',
+							'output' => sa_get_formatted_money( rand( 11000, 9999999 ) ),
+							'description' => sprintf( self::__( 'Money formatting is based on the local (%s) this WordPress install was configured with during installation. Please review the Sprout Invoices knowledgebase if this needs to be changed.' ), '<code>'.get_locale().'</code>' )
 						)
 					)
 				)

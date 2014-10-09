@@ -34,6 +34,10 @@ class SI_Templating_API extends SI_Controller {
 
 		add_action( 'doc_information_meta_box_client_row_last', array( __CLASS__, 'doc_template_selection' ) );
 		add_action( 'si_save_line_items_meta_box', array( __CLASS__, 'save_doc_template_selection' ) );
+
+		// Client option
+		add_filter( 'si_client_adv_form_fields', array( __CLASS__, 'client_option' ) );
+		add_action( 'SI_Clients::save_meta_box_client_adv_information', array( __CLASS__, 'save_client_options' ) );
 	}
 
 	/////////////////
@@ -93,6 +97,26 @@ class SI_Templating_API extends SI_Controller {
 	 */
 	public static function get_doc_current_template( $doc_id ) {
 		$template_id = get_post_meta( $doc_id, self::TEMPLATE_OPTION, TRUE );
+		if ( $template_id == '' ) {
+			switch ( get_post_type( $doc_id ) ) {
+				case SI_Invoice::POST_TYPE:
+					$invoice = SI_Invoice::get_instance( $doc_id );
+					$client_id = $invoice->get_client_id();
+					$template_id = self::get_client_invoice_template( $client_id );
+					break;
+				case SI_Estimate::POST_TYPE:
+					$estimate = SI_Estimate::get_instance( $doc_id );
+					$client_id = $estimate->get_client_id();
+					$template_id = self::get_client_estimate_template( $client_id );
+					break;
+				
+				default:
+					break;
+			}
+		}
+		if ( !$template_id ) {
+			$template_id = '';
+		}
 		return $template_id;
 	}
 
@@ -104,6 +128,46 @@ class SI_Templating_API extends SI_Controller {
 	 */
 	public static function save_doc_current_template( $doc_id = 0, $doc_template = '' ) {
 		update_post_meta( $doc_id, self::TEMPLATE_OPTION, $doc_template );
+	}
+
+	/**
+	 * Get the template for a client
+	 * @param  string $doc 
+	 * @return 
+	 */
+	public static function get_client_invoice_template( $client_id ) {
+		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION, TRUE );
+		return $template_id;
+	}
+
+	/**
+	 * Get the template for a client
+	 * @param  string $doc 
+	 * @return 
+	 */
+	public static function get_client_estimate_template( $client_id ) {
+		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION.'_est', TRUE );
+		return $template_id;
+	}
+
+	/**
+	 * Save the template selection for a client by post id
+	 * @param  integer $post_id      
+	 * @param  string  $doc_template 
+	 * @return                 
+	 */
+	public static function save_client_invoice_template( $client_id = 0, $doc_template = '' ) {
+		update_post_meta( $client_id, self::TEMPLATE_OPTION, $doc_template );
+	}
+
+	/**
+	 * Save the template selection for a client by post id
+	 * @param  integer $post_id      
+	 * @param  string  $doc_template 
+	 * @return                 
+	 */
+	public static function save_client_estimate_template( $client_id = 0, $doc_template = '' ) {
+		update_post_meta( $client_id, self::TEMPLATE_OPTION.'_est', $doc_template );
 	}
 
 	/**
@@ -171,7 +235,7 @@ class SI_Templating_API extends SI_Controller {
 		if ( ! isset( $template_options ) || empty( $template_options ) ) {
 			return;
 		}
-		$doc_type_name = ( is_a( $doc, 'SI_Invoice' ) ) ? 'invoice' : self::__('estimate') ;
+		$doc_type_name = ( is_a( $doc, 'SI_Invoice' ) ) ? self::__('invoice') : self::__('estimate') ;
 		$template = self::get_doc_current_template( $doc->get_id() ); ?>
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
 			<span id="template" class="wp-media-buttons-icon"><b><?php echo $template_options[$template] ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
@@ -202,6 +266,29 @@ class SI_Templating_API extends SI_Controller {
 	}
 
 	/**
+	 * Add additional options in the advanced client meta box.
+	 * @param  array  $adv_fields 
+	 * @return              
+	 */
+	public static function client_option( $adv_fields = array() ) {
+		$adv_fields['inv_template_options'] = array(
+			'weight' => 200,
+			'label' => self::__( 'Invoice Template' ),
+			'type' => 'bypass',
+			'output' => self::client_template_options( 'invoice', get_the_ID() ),
+			'description' => self::__( 'This invoice template will override the default invoice template, unless another template is selected when creating/editing an invoice.' )
+		);
+		$adv_fields['est_template_options'] = array(
+			'weight' => 210,
+			'label' => self::__( 'Estimate Template' ),
+			'type' => 'bypass',
+			'output' => self::client_template_options( 'estimate', get_the_ID() ),
+			'description' => self::__( 'This estimate template will override the default estimate template, unless another template is selected when creating/editing an estimate.' )
+		);
+		return $adv_fields;
+	}
+
+	/**
 	 * Save the template selection for a doc by post id
 	 * @param  integer $post_id      
 	 * @param  string  $doc_template 
@@ -212,10 +299,63 @@ class SI_Templating_API extends SI_Controller {
 		self::save_doc_current_template( $post_id, $doc_template );
 	}
 
+	/**
+	 * Save client options on advanced meta box save action
+	 * @param  integer $post_id 
+	 * @return            
+	 */
+	public static function save_client_options( $post_id = 0 ) {
+		$doc_template_invoice = ( isset( $_POST['doc_template_invoice'] ) ) ? $_POST['doc_template_invoice'] : '' ;
+		self::save_client_invoice_template( $post_id, $doc_template_invoice );
+
+		$doc_template_estimate = ( isset( $_POST['doc_template_estimate'] ) ) ? $_POST['doc_template_estimate'] : '' ;
+		self::save_client_estimate_template( $post_id, $doc_template_estimate );
+	}
+
 	//////////////
 	// Utility //
 	//////////////
 
+	/**
+	 * Template selection for advanced client options
+	 * @param  string  $type      invoice/estimate
+	 * @param  integer $client_id 
+	 * @return              
+	 */
+	public static function client_template_options( $type = 'invoice', $client_id = 0 ) {
+		ob_start();
+		$template_options = ( $type != 'estimate' ) ? self::get_invoice_templates() : self::get_estimate_templates() ;
+		$doc_type_name = ( $type != 'estimate' ) ? self::__('invoice') : self::__('estimate') ;
+		$template = ( $type != 'estimate' ) ? self::get_client_invoice_template( $client_id ) : self::get_client_estimate_template( $client_id ); ?>
+		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
+			<span id="template" class="wp-media-buttons-icon"><b><?php echo $template_options[$template] ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
+
+			<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
+				<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different template') ?></span>
+			</a>
+
+			<div id="template_div" class="control_wrap hide-if-js">
+				<div class="template-wrap">
+					<?php if ( count( $template_options ) > 1 ): ?>
+						<select name="doc_template_<?php echo $doc_type_name ?>">
+							<?php foreach ( $template_options as $template_key => $template_name ): ?>
+								<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, FALSE ), $template_name ) ?>
+							<?php endforeach ?>
+						</select>
+					<?php else: ?>
+						<span><?php printf( si__('No <a href="%s" target="_blank">Custom Templates</a> Found'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
+					<?php endif ?>
+		 		</div>
+				<p>
+					<a href="#edit_template" class="save_control save-template hide-if-no-js button"><?php si_e('OK') ?></a>
+					<a href="#edit_template" class="cancel_control cancel-template hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+				</p>
+		 	</div>
+		</div>
+		<?php
+		$view = ob_get_clean();
+		return $view;
+	}
 
 	/**
 	 * Search for files in the templates, within the sa directory.

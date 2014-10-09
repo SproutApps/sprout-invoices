@@ -71,11 +71,7 @@
 						<input class="totalled_input" type="text" name="line_item_tax[]" value="" placeholder="" size="1" max="100">
 					</div>
 					<div class="column column_total">
-						<?php if ( sa_currency_format_before() ): ?>
-							<?php echo sa_get_currency_symbol() ?><span>0.00</span>
-						<?php else: ?>
-							<span>0.00</span><?php echo sa_get_currency_symbol() ?>
-						<?php endif ?>
+						<?php sa_formatted_money( 0 ) ?>
 						<input class="totalled_input" type="hidden" name="line_item_total[]" value="">
 					</div>
 					<input class="line_item_index" type="hidden" name="line_item_key[]" value="0">
@@ -111,19 +107,11 @@
 			<div id="line_items_totals">
 				<div id="line_subtotal">
 					<b><?php si_e('Subtotal') ?></b>
-					<?php if ( sa_currency_format_before() ): ?>
-						<?php echo sa_get_currency_symbol() ?><span><?php echo number_format( floatval( $subtotal ), 2 ) ?></span>
-					<?php else: ?>
-						<span><?php echo number_format( floatval( $subtotal ), 2 ) ?></span><?php echo sa_get_currency_symbol() ?>
-					<?php endif ?>
+					<?php sa_formatted_money( $subtotal ) ?>
 				</div>
 				<div id="line_total">
 					<b title="Total includes tax and discount." class="helptip"><?php si_e('Total') ?></b>
-					<?php if ( sa_currency_format_before() ): ?>
-						<?php echo sa_get_currency_symbol() ?><span><?php echo number_format( floatval( $total ), 2 ) ?></span>
-					<?php else: ?>
-						<span><?php echo number_format( floatval( $total ), 2 ) ?></span><?php echo sa_get_currency_symbol() ?>
-					<?php endif ?>
+					<?php sa_formatted_money( $total ) ?>
 				</div>
 			</div>
 

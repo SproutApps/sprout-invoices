@@ -521,7 +521,8 @@ class SI_Invoice extends SI_Post_Type {
 		$line_items = $this->get_line_items();
 		if ( !empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
-				if ( isset( $data['tax'] ) && isset( $data['rate'] ) ) {
+				if ( isset( $data['tax'] ) ) {
+					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
 					$subtotal += ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
 				}
 			}

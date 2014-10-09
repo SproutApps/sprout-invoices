@@ -499,7 +499,13 @@ span.inline_success_message {
 	margin-left: -12px;
 	margin-bottom: -12px
 }
+.post-type-sa_client #post-body-content {
+	display: none;
+}
 
+#si_client_advanced .misc-pub-section {
+	padding-left: 0px;
+}
 .wp-list-table th#doc_link,.users-php .wp-list-table th#client {
 	width: 3em
 }
@@ -1522,4 +1528,11 @@ dd .add_item_help {
 .si_pointer_help_tab .wp-pointer-arrow {
 	right: 10px;
 	left: auto !important;
+}
+
+/**
+ * Misc.
+ */
+#poststuff .sa-form-field.sa-form-field-bypass h3 {
+    padding: 16px 0px 8px;
 }

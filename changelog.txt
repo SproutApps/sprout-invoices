@@ -1,34 +1,49 @@
+= 1.1 =
+
+* _Features:_
+	* Improved Invoice and Estimate templates
+	* Client specific invoice templates
+	* Client specific estimate templates
+	* Customizable money formats
+	* Improved multi-currency support
+	* Client specific money format
+	* Client specific currency code for payment processing
+	* minor UI improvements
+
+* _Bug Fixes:_
+	* Few error prevention updates
+
 = 1.0.10.1 =
 
 * _Bug Fixes_
-
-** Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)
+	* Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)
 
 = 1.0.10 =
 
 * _Bug Fixes_
-** Client could have non-user_ids associated
-** Handle text input with bad formatting better
+	* Client could have non-user_ids associated
+	* Handle text input with bad formatting better
 
 = 1.0.9.1 =
 
 * _Bug Fixes_
-** Deposits bug for free versions
-** Tasks clarification for free version
-** Allow for deletion with new drop-down UI
+	* Deposits bug for free versions
+	* Tasks clarification for free version
+	* Allow for deletion with new drop-down UI
 * _Features_
-** Custom template messaging improvements
+	* Custom template messaging improvements
 
 = 1.0.8 =
 
 * _Bug Fixes_
-** Client creation via AJAX/Modal
-** Quick send bug fixes for Estimates and Invoices
-** client_name shortcode
-** Minor fixes for importing from freshbooks, harvest and WP-Invoices
+	* Client creation via AJAX/Modal
+	* Quick send bug fixes for Estimates and Invoices
+	* client_name shortcode
+	* Minor fixes for importing from freshbooks, harvest and WP-Invoices
 
 * _Features_
-** Major overhaul of importing from freshbooks, harvest and WP-Invoices.
+	* Major overhaul of importing from freshbooks, harvest and WP-Invoices.
+
 = 1.0.7 =
 
 * Much improved importing with AJAX

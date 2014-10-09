@@ -143,11 +143,24 @@ function sa_currency_symbol() {
  * @return return                   
  */
 function sa_get_currency_symbol( $filter_location = TRUE ) {
-	$string = SI_Payment_Processors::get_currency_symbol();
+	$string = apply_filters( 'sa_get_currency_symbol_pre', SI_Payment_Processors::get_currency_symbol() );
 	if ( $filter_location && strstr( $string, '%' ) ) {
 		$string = str_replace( '%', '', $string );
 	}
 	return apply_filters( 'sa_get_currency_symbol', $string );
+}
+
+/**
+ * Is the currency symbol before or after amount.
+ * @return bool 
+ */
+function sa_currency_format_before() {
+	$bool = TRUE;
+	$symbol = sa_get_currency_symbol( FALSE );
+	if ( strstr( $symbol, '%' ) ) {
+		$bool = FALSE;
+	}
+	return apply_filters( 'sa_currency_format_before', $bool );
 }
 
 /**
@@ -156,8 +169,8 @@ function sa_get_currency_symbol( $filter_location = TRUE ) {
  * @param integer $amount amount to convert to money format 
  * @return string
  */
-function sa_formatted_money( $amount, $decimals = TRUE ) {
-	echo apply_filters( 'sa_formatted_money', sa_get_formatted_money( $amount, $decimals ), $amount );
+function sa_formatted_money( $amount, $amount_wrap = '<span class="money_amount">%s</span>', $locale = '' ) {
+	echo apply_filters( 'sa_formatted_money', sa_get_formatted_money( $amount, $amount_wrap, $locale ), $amount );
 }
 
 /**
@@ -165,31 +178,31 @@ function sa_formatted_money( $amount, $decimals = TRUE ) {
  * @param integer $amount amount to convert to money format
  * @return string         
  */
-function sa_get_formatted_money( $amount, $decimals = TRUE ) {
+function sa_get_formatted_money( $amount, $amount_wrap = '%s', $locale = '' ) {
 	$orig_amount = $amount;
+
+	if ( $locale == '' ) {
+		$locale = get_locale();
+	}
+	// Format the amount and wrap
+	setlocale( LC_MONETARY, apply_filters( 'sa_set_monetary_locale', $locale ) ); // de_DE && nl_NL && en_US - get_locale()
+	$formated_money = money_format( '%!n', (double) $amount );
+	$number = sprintf( $amount_wrap, $formated_money );
+
+	// Add symbol
 	$symbol = sa_get_currency_symbol( FALSE );
-	$number = number_format( floatval( $amount ), 2 );
 	if ( strstr( $symbol, '%' ) ) {
 		$string = str_replace( '%', $number, $symbol );
 	} else {
 		$string = $symbol . $number;
 	}
+
+	// negative value placement
 	if ( $number < 0 ) {
 		$string = '-'.str_replace( '-', '', $string );
 	}
-	if ( !$decimals ) {
-		$string = str_replace('.00','', $string);
-	}
+	
 	return apply_filters( 'sa_get_formatted_money', $string, $orig_amount );
-}
-
-function sa_currency_format_before() {
-	$symbol = sa_get_currency_symbol( FALSE );
-	if ( strstr( $symbol, '%' ) ) {
-		$bool = FALSE;
-	}
-	$bool = TRUE;
-	return apply_filters( 'sa_currency_format_before', $bool );
 }
 
 if ( !function_exists( 'sa_get_unformatted_money' ) ) :
@@ -366,3 +379,99 @@ function si_get_purchase_link( $url = '' ) {
 	}
 	return add_query_arg( array( 'ref' => 'free', 'url' => urlencode( home_url() ) ), $url );	;
 }
+
+
+if ( !function_exists('money_format') ) :
+/**
+ * Replacement for php money_format function not found on windows systems
+ * http://php.net/manual/en/function.money-format.php#89060
+ * @param  string $format 
+ * @param  float $number 
+ * @return          
+ */
+function money_format( $format, $number )  { 
+    $regex  = '/%((?:[\^!\-]|\+|\(|\=.)*)([0-9]+)?'. 
+              '(?:#([0-9]+))?(?:\.([0-9]+))?([in%])/'; 
+    if ( setlocale(LC_MONETARY, 0) == 'C' ) { 
+        setlocale( LC_MONETARY, '' ); 
+    } 
+    $locale = localeconv(); 
+    preg_match_all($regex, $format, $matches, PREG_SET_ORDER); 
+    foreach ($matches as $fmatch) { 
+        $value = floatval($number); 
+        $flags = array( 
+            'fillchar'  => preg_match('/\=(.)/', $fmatch[1], $match) ? 
+                           $match[1] : ' ', 
+            'nogroup'   => preg_match('/\^/', $fmatch[1]) > 0, 
+            'usesignal' => preg_match('/\+|\(/', $fmatch[1], $match) ? 
+                           $match[0] : '+', 
+            'nosimbol'  => preg_match('/\!/', $fmatch[1]) > 0, 
+            'isleft'    => preg_match('/\-/', $fmatch[1]) > 0 
+        ); 
+        $width      = trim($fmatch[2]) ? (int)$fmatch[2] : 0; 
+        $left       = trim($fmatch[3]) ? (int)$fmatch[3] : 0; 
+        $right      = trim($fmatch[4]) ? (int)$fmatch[4] : $locale['int_frac_digits']; 
+        $conversion = $fmatch[5]; 
+
+        $positive = true; 
+        if ($value < 0) { 
+            $positive = false; 
+            $value  *= -1; 
+        } 
+        $letter = $positive ? 'p' : 'n'; 
+
+        $prefix = $suffix = $cprefix = $csuffix = $signal = ''; 
+
+        $signal = $positive ? $locale['positive_sign'] : $locale['negative_sign']; 
+        switch (true) { 
+            case $locale["{$letter}_sign_posn"] == 1 && $flags['usesignal'] == '+': 
+                $prefix = $signal; 
+                break; 
+            case $locale["{$letter}_sign_posn"] == 2 && $flags['usesignal'] == '+': 
+                $suffix = $signal; 
+                break; 
+            case $locale["{$letter}_sign_posn"] == 3 && $flags['usesignal'] == '+': 
+                $cprefix = $signal; 
+                break; 
+            case $locale["{$letter}_sign_posn"] == 4 && $flags['usesignal'] == '+': 
+                $csuffix = $signal; 
+                break; 
+            case $flags['usesignal'] == '(': 
+            case $locale["{$letter}_sign_posn"] == 0: 
+                $prefix = '('; 
+                $suffix = ')'; 
+                break; 
+        } 
+        if (!$flags['nosimbol']) { 
+            $currency = $cprefix . 
+                        ($conversion == 'i' ? $locale['int_curr_symbol'] : $locale['currency_symbol']) . 
+                        $csuffix; 
+        } else { 
+            $currency = ''; 
+        } 
+        $space  = $locale["{$letter}_sep_by_space"] ? ' ' : ''; 
+
+        $value = number_format($value, $right, $locale['mon_decimal_point'], 
+                 $flags['nogroup'] ? '' : $locale['mon_thousands_sep']); 
+        $value = @explode($locale['mon_decimal_point'], $value); 
+
+        $n = strlen($prefix) + strlen($currency) + strlen($value[0]); 
+        if ($left > 0 && $left > $n) { 
+            $value[0] = str_repeat($flags['fillchar'], $left - $n) . $value[0]; 
+        } 
+        $value = implode($locale['mon_decimal_point'], $value); 
+        if ($locale["{$letter}_cs_precedes"]) { 
+            $value = $prefix . $currency . $space . $value . $suffix; 
+        } else { 
+            $value = $prefix . $value . $space . $currency . $suffix; 
+        } 
+        if ($width > 0) { 
+            $value = str_pad($value, $width, $flags['fillchar'], $flags['isleft'] ? 
+                     STR_PAD_RIGHT : STR_PAD_LEFT); 
+        } 
+
+        $format = str_replace($fmatch[0], $value, $format); 
+    } 
+    return $format; 
+} 
+endif;

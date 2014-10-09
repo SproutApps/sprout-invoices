@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.0.10.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,10 +12,15 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 == Description ==
 
-Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing those tedious tasks we have to perform to get paid.
-
+Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps (aka plugins) to help us all work more efficiently & provide complete control the WordPress way. Our latest Sprout Apps are Sprout Invoices and Help Scout Desk, with many more to come.
 
 = Sprout Invoice Features =
+
+==Sprout Invoices – Premium WordPress Invoicing Plugin==
+
+Reduce the time spent fielding project requests, estimating projects & getting paid. Processes are heavily automated and highly customizable to fit your business workflow and brand.
+
+Never worry about how well your business is doing because of some arbitrary limits based on how large your client base is or how many staff members need access.
 
 Make sure to checkout the [Sprout Invoices](https://sproutapps.co/sprout-invoices/) features page for more detailed information. As well as the full featured [demo](https://sproutapps.co/demo/playground).
 
@@ -26,6 +31,7 @@ Make sure to checkout the [Sprout Invoices](https://sproutapps.co/sprout-invoice
 * [Payment management](https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/).
 * [Advanced Reporting](https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/) (limited w/ free version)
 * [Client management](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/).
+* [Multi-currency support with client specific options](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients-options/).
 * Localization support for your language!
 * [Freshbooks, Harvest and WP-Invoice Importing](https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/).
 * Fully [customizable notifications](https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/). Notifications are sent from your server and allow for plain-text and HTML.
@@ -48,7 +54,6 @@ The short list...
 * Payment terms (coming soon)
 
 Please note that this feature list is incomplete, since it's long enough.
-
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
@@ -114,79 +119,65 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
+* _Features:_
+	* Improved Invoice and Estimate templates
+	* Client specific invoice templates
+	* Client specific estimate templates
+	* Customizable money formats
+	* Improved multi-currency support
+	* Client specific money format
+	* Client specific currency code for payment processing
+	* minor UI improvements
+
+* _Bug Fixes:_
+	* Few error prevention updates
+
+== Changelog ==
+= 1.1 =
+
+* _Features:_
+	* Improved Invoice and Estimate templates
+	* Client specific invoice templates
+	* Client specific estimate templates
+	* Customizable money formats
+	* Improved multi-currency support
+	* Client specific money format
+	* Client specific currency code for payment processing
+	* minor UI improvements
+
+* _Bug Fixes:_
+	* Few error prevention updates
+
 = 1.0.10.1 =
 
 * _Bug Fixes_
-
-** Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)
+	* Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)
 
 = 1.0.10 =
 
 * _Bug Fixes_
-** Client could have non-user_ids associated
-** Handle text input with bad formatting better
+	* Client could have non-user_ids associated
+	* Handle text input with bad formatting better
 
 = 1.0.9.1 =
 
 * _Bug Fixes_
-** Deposits bug for free versions
-** Tasks clarification for free version
-** Allow for deletion with new drop-down UI
+	* Deposits bug for free versions
+	* Tasks clarification for free version
+	* Allow for deletion with new drop-down UI
 * _Features_
-** Custom template messaging improvements
+	* Custom template messaging improvements
 
 = 1.0.8 =
 
 * _Bug Fixes_
-** Client creation via AJAX/Modal
-** Quick send bug fixes for Estimates and Invoices
-** client_name shortcode
-** Minor fixes for importing from freshbooks, harvest and WP-Invoices
+	* Client creation via AJAX/Modal
+	* Quick send bug fixes for Estimates and Invoices
+	* client_name shortcode
+	* Minor fixes for importing from freshbooks, harvest and WP-Invoices
 
 * _Features_
-** Major overhaul of importing from freshbooks, harvest and WP-Invoices.
-= 1.0.7 =
-
-* Much improved importing with AJAX
-
-= 1.0.6 =
-
-* Auto upgrades fix for pro users
-
-= 1.0.5 =
-* New templating class (select the invoice/estimate template)
-* New status UI
-* Notification updates
-* Better rewrite handling
-* Minor bug fixes
-
-= 1.0.1 =
-
-* Localization support!
-* Invoice/Esitmate metabox order fix
-* Translatable string improvements
-* Importer improvements
-* Invoices with Outstanding Balance have a label on mngt. screen.
-* Reports table updates
-* Fix for advanced reporting on some hosts
-* Title/Subject not showing correctly
-* Better error handling during import
-* apple_filters('the_content') to the terms and notes on estimates and invoices
-* Load order update to improve add-on support
-
-
-== Changelog ==
-
-= 1.0.10.1 =
-
-_Bug Fixes_
-* Client creation via AJAX/Modal
-* Quick send bug fixes for Estimates and Invoices
-* client_name shortcode
-* Minor fixes for importing from freshbooks, harvest and WP-Invoices
-
-_Features_
-* Major overhaul of importing from freshbooks, harvest and WP-Invoices.
+	* Major overhaul of importing from freshbooks, harvest and WP-Invoices.
 
 = 1.0.7 =
 
@@ -202,6 +193,10 @@ _Features_
 * Notification updates
 * Better rewrite handling
 * Minor bug fixes
+
+= 1.0.2 =
+
+* Settings API improvements
 
 = 1.0.1 =
 
@@ -229,6 +224,10 @@ Welcome! This is a big update and a big step for us.
 * Better dashboard let you know what's up.
 * Remove some unnecessary cruft.
 * Multiple taxes
+
+= 0.9.9.5 - 1.0 GM =
+
+* Subject line fix.
 
 = 0.9.9.4 - 1.0 GM =
 
@@ -289,4 +288,4 @@ Welcome! This is a big update and a big step for us.
 
 == Support ==
 
-More info coming soon.
+Priority support is provided with an [upgraded version](https://sproutapps.co/sprout-invoices/). All free support will provided in the [forums](https://wordpress.org/support/plugin/sprout-invoices).

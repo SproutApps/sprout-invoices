@@ -33,8 +33,8 @@ class SI_Clients extends SI_Controller {
 
 
 			// User Admin columns
-			add_filter ( 'manage_users_columns', array( __CLASS__, 'user_register_columns' ) );
-			add_filter ( 'manage_users_custom_column', array( __CLASS__, 'user_column_display' ), 10, 3 );
+			add_filter( 'manage_users_columns', array( __CLASS__, 'user_register_columns' ) );
+			add_filter( 'manage_users_custom_column', array( __CLASS__, 'user_column_display' ), 10, 3 );
 
 			// AJAX
 			add_action( 'wp_ajax_sa_create_client',  array( __CLASS__, 'maybe_create_client' ), 10, 0 );
@@ -46,6 +46,10 @@ class SI_Clients extends SI_Controller {
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 10, 1 );
+
+		// Currency Formatting
+		add_filter( 'sa_get_currency_symbol_pre', array( __CLASS__, 'maybe_filter_currency_symbol' ) );
+		add_filter( 'sa_set_monetary_locale', array( __CLASS__, 'maybe_filter_money_format_money_format' ) );
 	}
 
 	/////////////////
@@ -66,7 +70,8 @@ class SI_Clients extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_meta_box_client_information' ),
 				'context' => 'normal',
 				'priority' => 'high',
-				'save_priority' => 0
+				'save_priority' => 0,
+				'weight' => 10,
 			),
 			'si_client_submit' => array(
 				'title' => 'Update',
@@ -75,12 +80,21 @@ class SI_Clients extends SI_Controller {
 				'context' => 'side',
 				'priority' => 'high'
 			),
+			'si_client_advanced' => array(
+				'title' => si__( 'Advanced' ),
+				'show_callback' => array( __CLASS__, 'show_adv_information_meta_box' ),
+				'save_callback' => array( __CLASS__, 'save_meta_box_client_adv_information' ),
+				'context' => 'normal',
+				'priority' => 'low',
+				'weight' => 50,
+			),
 			'si_client_history' => array(
 				'title' => si__( 'History' ),
 				'show_callback' => array( __CLASS__, 'show_client_history_view' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
-				'priority' => 'low'
+				'priority' => 'low',
+				'weight' => 100,
 			)
 		);
 		do_action( 'sprout_meta_box', $args, SI_Client::POST_TYPE );
@@ -148,9 +162,25 @@ class SI_Clients extends SI_Controller {
 			self::load_view( 'admin/meta-boxes/clients/info', array(
 					'client' => $client,
 					'id' => $post->ID,
-					'fields' => self::form_fields( FALSE ),
+					'fields' => self::form_fields( FALSE, $client ),
 					'address' => $client->get_address(),
 					'website' => $client->get_website()
+				) );
+		}
+	}
+
+	/**
+	 * Information
+	 * @param  object $post
+	 * @return
+	 */
+	public static function show_adv_information_meta_box( $post ) {
+		if ( get_post_type( $post ) == SI_Client::POST_TYPE ) {
+			$client = SI_Client::get_instance( $post->ID );
+			self::load_view( 'admin/meta-boxes/clients/advanced', array(
+					'client' => $client,
+					'id' => $post->ID,
+					'fields' => self::adv_form_fields( FALSE, $client )
 				) );
 		}
 	}
@@ -188,6 +218,26 @@ class SI_Clients extends SI_Controller {
 			// Update the post into the database
 			wp_update_post( $client_post );
 		}
+	}
+
+	/**
+	 * Saving info meta
+	 * @param  int $post_id       
+	 * @param  object $post          
+	 * @param  array $callback_args 
+	 * @param  int $estimate_id   
+	 * @return                 
+	 */
+	public static function save_meta_box_client_adv_information( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+		$currency = ( isset( $_POST['sa_metabox_currency'] ) && $_POST['sa_metabox_currency'] != '' ) ? $_POST['sa_metabox_currency'] : '' ;
+		$currency_symbol = ( isset( $_POST['sa_metabox_currency_symbol'] ) && $_POST['sa_metabox_currency_symbol'] != '' ) ? $_POST['sa_metabox_currency_symbol'] : '' ;
+		$money_format = ( isset( $_POST['sa_metabox_money_format'] ) && $_POST['sa_metabox_money_format'] != '' ) ? $_POST['sa_metabox_money_format'] : '' ;
+
+		$client = SI_Client::get_instance( $post_id );
+
+		$client->set_currency( $currency );
+		$client->set_currency_symbol( $currency_symbol );
+		$client->set_money_format( $money_format );
 	}
 
 	/**
@@ -425,13 +475,13 @@ class SI_Clients extends SI_Controller {
 	// Forms //
 	////////////
 
-	public static function form_fields( $required = TRUE ) {
-
+	public static function form_fields( $required = TRUE, $client = 0 ) {
+		$fields = array();
 		$fields['name'] = array(
 			'weight' => 1,
 			'label' => self::__( 'Company Name' ),
 			'type' => 'text',
-			'required' => $required,
+			'required' => TRUE, // always necessary
 			'default' => ''
 		);
 
@@ -448,6 +498,7 @@ class SI_Clients extends SI_Controller {
 			'label' => self::__( 'Website' ),
 			'type' => 'text',
 			'required' => $required,
+			'default' => ( $client ) ? $client->get_website() : '',
 			'placeholder' => 'http://'
 		);
 
@@ -460,6 +511,54 @@ class SI_Clients extends SI_Controller {
 		$fields = array_merge( $fields, self::get_standard_address_fields( $required ) );
 
 		$fields = apply_filters( 'si_client_form_fields', $fields );
+		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
+		return $fields;
+	}
+
+	public static function adv_form_fields( $required = TRUE, $client = 0 ) {
+
+		$fields = array();
+
+		$fields['currency'] = array(
+			'weight' => 220,
+			'label' => self::__( 'Currency Code' ),
+			'type' => 'text',
+			'default' => ( $client ) ? $client->get_currency() : '',
+			'required' => $required,
+			'placeholder' => 'USD',
+			'attributes' => array( 'size' => '8' ),
+			'description' => self::__( 'This setting will override the setting for each payment processor that supports differing currency codes.' )
+		);
+
+		$fields['currency_symbol'] = array(
+			'weight' => 225,
+			'label' => self::__( 'Currency Symbol' ),
+			'type' => 'text',
+			'default' => ( $client ) ? $client->get_currency_symbol() : '$',
+			'required' => $required,
+			'placeholder' => '$',
+			'attributes' => array( 'class' => 'small-text' ),
+			'description' => self::__( 'This setting will override the default payments setting. If your currency has the symbol after the amount place a % before your currency symbol. Example, % &pound;' )
+		);
+
+		$money_format = ( $client ) ? $client->get_money_format() : get_locale();
+		$fields['money_format'] = array(
+			'weight' => 230,
+			'label' => self::__( 'Money Format' ),
+			'type' => 'select',
+			'default' => $money_format,
+			'options' => $required,
+			'options' => array_flip( self::$locales ),
+			'description' => sprintf( self::__( 'Current format: %1$s. The default money formatting (%2$s) can be overridden for all client estimates and invoices here.' ), sa_get_formatted_money( rand( 11000, 9999999 ) ), '<code>'.get_locale().'</code>' )
+		);
+
+		$fields['nonce'] = array(
+			'type' => 'hidden',
+			'value' => wp_create_nonce( self::SUBMISSION_NONCE ),
+			'weight' => 10000
+		);
+
+		$fields = apply_filters( 'si_client_adv_form_fields', $fields );
 		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
 		return $fields;
 	}
@@ -481,15 +580,72 @@ class SI_Clients extends SI_Controller {
 			'role' => SI_Client::USER_ROLE
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );
-		extract( $parsed_args );
 
 		// check if the user already exists.
-		if ( $user = get_user_by('email', $user_email ) ) {
+		if ( $user = get_user_by('email', $parsed_args['user_email'] ) ) {
 			return $user->ID;
 		}
 
 		$user_id = wp_insert_user( $parsed_args );
 		return $user_id;
+	}
+
+	///////////////////////////////
+	// money Formatting Filters //
+	///////////////////////////////
+
+	public static function maybe_filter_currency_symbol( $symbol = '' ) {
+		switch ( get_post_type( get_the_id() ) ) {
+			case SI_Client::POST_TYPE:
+				$client = SI_Client::get_instance( get_the_id() );
+				break;
+			case SI_Invoice::POST_TYPE:
+				$invoice = SI_Invoice::get_instance( get_the_id() );
+				$client = $invoice->get_client();
+				break;
+			case SI_Estimate::POST_TYPE:
+				$estimate = SI_Estimate::get_instance( get_the_id() );
+				$client = $estimate->get_client();
+				break;
+			
+			default:
+				$client = null;
+				break;
+		}
+		if ( is_a( $client, 'SI_Client' ) ) {
+			$client_symbol = $client->get_currency_symbol();
+			if ( $client_symbol != '' ) {
+				$symbol = $client_symbol;
+			}
+		}
+		return $symbol;
+	}
+
+	public static function maybe_filter_money_format_money_format( $money_format = '' ) {
+		switch ( get_post_type( get_the_id() ) ) {
+			case SI_Client::POST_TYPE:
+				$client = SI_Client::get_instance( get_the_id() );
+				break;
+			case SI_Invoice::POST_TYPE:
+				$invoice = SI_Invoice::get_instance( get_the_id() );
+				$client = $invoice->get_client();
+				break;
+			case SI_Estimate::POST_TYPE:
+				$estimate = SI_Estimate::get_instance( get_the_id() );
+				$client = $estimate->get_client();
+				break;
+			
+			default:
+				$client = null;
+				break;
+		}
+		if ( is_a( $client, 'SI_Client' ) ) {
+			$client_money_format = $client->get_money_format();
+			if ( $client_money_format != '' ) {
+				$money_format = $client_money_format;
+			}
+		}
+		return $money_format;
 	}
 
 	//////////////////

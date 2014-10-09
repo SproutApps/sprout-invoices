@@ -160,7 +160,7 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 				<?php 
 					if ( isset( $data['type'] ) && $data['type'] ) {
 						$term = get_term( $data['type'], SI_Estimate::LINE_ITEM_TAXONOMY );
-						if ( !is_wp_error( $term ) ) {
+						if ( !is_wp_error( $term ) && $term ) {
 							printf( '<span class="line_item_type tooltip" title="%s"></span>', esc_attr__( $term->name ) );
 						}
 					} ?>
@@ -272,11 +272,7 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 				<input class="totalled_input" type="text" name="line_item_tax[]" value="<?php esc_attr_e( $tax ) ?>" placeholder="" size="1" max="100">
 			</div>
 			<div class="column column_total">
-				<?php if ( sa_currency_format_before() ): ?>
-					<?php echo sa_get_currency_symbol() ?><span><?php esc_attr_e( $total ) ?></span>
-				<?php else: ?>
-					<span><?php esc_attr_e( $total ) ?></span><?php echo sa_get_currency_symbol() ?>
-				<?php endif ?>
+				<?php sa_formatted_money( $total ) ?>
 				<input class="totalled_input" type="hidden" name="line_item_total[]" value="<?php esc_attr_e( $total ) ?>">
 			</div>
 			<input class="line_item_index" type="hidden" name="line_item_key[]" value="<?php echo $position ?>">

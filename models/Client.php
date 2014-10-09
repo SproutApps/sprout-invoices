@@ -16,7 +16,9 @@ class SI_Client extends SI_Post_Type {
 	private static $meta_keys = array(
 		'address' => '_address',
 		'currency' => '_currency',
+		'currency_symbol' => '_currency_symbol',
 		'associated_users' => '_associated_users',
+		'money_format' => '_money_format',
 		'website' => '_website',
 	); // A list of meta keys this class cares about. Try to keep them in alphabetical order.
 
@@ -90,27 +92,26 @@ class SI_Client extends SI_Post_Type {
 			'user_id' => 0
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );
-		extract( $parsed_args );
 
 		$id = wp_insert_post( array(
 			'post_status' => 'publish',
 			'post_type' => self::POST_TYPE,
-			'post_title' => $company_name
+			'post_title' => $parsed_args['company_name']
 		) );
 		if ( is_wp_error( $id ) ) {
 			return 0;
 		}
 
 		$client = self::get_instance( $id );
-		$client->set_address( $address );
-		$client->set_currency( $currency );
-		$client->set_website( $website );
+		$client->set_address( $parsed_args['address'] );
+		$client->set_currency( $parsed_args['currency'] );
+		$client->set_website( $parsed_args['website'] );
 
-		if ( $user_id ) {	
-			$client->add_associated_user( $user_id );	
+		if ( $parsed_args['user_id'] ) {	
+			$client->add_associated_user( $parsed_args['user_id'] );	
 		}
 
-		do_action( 'sa_new_client', $client, $args );
+		do_action( 'sa_new_client', $client, $parsed_args );
 		return $id;
 	}
 
@@ -184,6 +185,23 @@ class SI_Client extends SI_Post_Type {
 
 	public function set_currency( $currency ) {
 		return $this->save_post_meta( array( self::$meta_keys['currency'] => $currency ) );
+	}
+
+	public function get_currency_symbol() {
+		return $this->get_post_meta( self::$meta_keys['currency_symbol'] );
+	}
+
+	public function set_currency_symbol( $currency_symbol ) {
+		return $this->save_post_meta( array( self::$meta_keys['currency_symbol'] => $currency_symbol ) );
+	}
+
+	public function get_money_format() {
+		$option = $this->get_post_meta( self::$meta_keys['money_format'] );
+		return ( $option == '' ) ? get_locale() : $option ;
+	}
+
+	public function set_money_format( $money_format ) {
+		return $this->save_post_meta( array( self::$meta_keys['money_format'] => $money_format ) );
 	}
 
 	public function get_website() {

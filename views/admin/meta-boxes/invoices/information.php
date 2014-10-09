@@ -23,8 +23,6 @@ if ( 0 != $post->ID ) {
 	$date = date_i18n( $datef, strtotime( current_time('mysql') ) );
 } ?>
 
-
-
 <?php do_action( 'doc_information_meta_box_first', $invoice ) ?>
 
 <div class="misc-pub-section" data-edit-id="status" data-edit-type="select">
@@ -241,29 +239,5 @@ if ( 0 != $post->ID ) {
 		</p>
  	</div>
 </div>
-<?php 
-	// FUTURE
-	// Bring the currency option from payments into the invoice/estimate so each estimate can have it's own currency.
-	/*/
-	 ?>
-<!-- Currency -->
-<div class="misc-pub-section" data-edit-id="currency">
-	<span id="currency" class="wp-media-buttons-icon"><?php si_e('Currency Code') ?> <b><?php echo $currency ?></b></span>
-
-	<a href="#edit_currency" class="edit-currency hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit invoice id') ?></span>
-	</a>
-
-	<div id="currency_div" class="control_wrap hide-if-js">
-		<div class="currency-wrap">
-			<input type="text" name="currency" value="<?php echo $currency ?>" size="10">
- 		</div>
-		<p>
-			<a href="#edit_currency" class="save_control save-currency hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_currency" class="cancel_control cancel-currency hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
-		</p>
- 	</div>
-</div>
-<?php /**/ ?>
 
 <?php do_action( 'doc_information_meta_box_last', $invoice ) ?>
