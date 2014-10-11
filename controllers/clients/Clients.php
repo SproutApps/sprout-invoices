@@ -481,7 +481,7 @@ class SI_Clients extends SI_Controller {
 			'weight' => 1,
 			'label' => self::__( 'Company Name' ),
 			'type' => 'text',
-			'required' => TRUE, // always necessary
+			'required' => $required, // always necessary
 			'default' => ''
 		);
 

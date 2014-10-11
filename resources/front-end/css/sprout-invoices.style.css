@@ -768,7 +768,7 @@ div#vcards {
 	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none!important
 }
-#doc_line_items {
+#doc_line_items_wrap, #doc_line_items {
 	width: 100%;
 }
 #doc_line_items ol {

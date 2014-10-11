@@ -133,7 +133,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							}
 						} ?>
 
-					<section>
+					<section id="doc_line_items_wrap" class="clearfix">
 						<div id="doc_line_items" class="clearfix">
 							<div id="line_items_header">
 								<?php do_action( 'si_document_line_items_header' ) ?>

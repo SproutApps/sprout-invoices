@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+
+**1.1.0.1**
+
+* _Bug Fixes:_
+	* Saving error
+	* Line item width after payment
+
 **1.1**
 
 * _Features:_

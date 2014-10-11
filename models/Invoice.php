@@ -247,7 +247,7 @@ class SI_Invoice extends SI_Post_Type {
 		$payments_total = $this->get_payments_total();
 		$option = $this->get_post_meta( self::$meta_keys['deposit'] );
 		$deposit = ( ( $total - $payments_total ) > 0.00 ) ? $option : '' ;
-		if ( $option > ( $total - $payments_total ) ) {
+		if ( $option > ( $total - $payments_total ) ) { // check if deposit is more than waits' due.
 			$deposit = floatval($total - $payments_total);
 		}
 		return ( $deposit != '' ) ? round($deposit,2) : $deposit ;
