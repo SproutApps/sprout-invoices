@@ -969,7 +969,7 @@ class SI_Invoices extends SI_Controller {
 	 */
 	public static function post_slug( $slug, $post_ID, $post_status, $post_type ) {
 		if ( $post_type == SI_Invoice::POST_TYPE ) {
-			return $post_ID; // TODO unique
+			return $post_ID;
 		}
 		return $slug;
 	}

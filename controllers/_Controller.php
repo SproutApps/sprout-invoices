@@ -1251,7 +1251,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * @param  string $new_post_status 
 	 * @return                   
 	 */
-	function clone_post( $post_id, $new_post_status = 'draft', $new_post_type = '' ){
+	protected static function clone_post( $post_id, $new_post_status = 'draft', $new_post_type = '' ){
 		$post = get_post( $post_id );
 		$new_post_id = 0;
 		if ( isset( $post ) && $post != null ) {

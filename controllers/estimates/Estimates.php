@@ -986,8 +986,8 @@ class SI_Estimates extends SI_Controller {
 	 * @param string $original_slug The original post slug.
 	 */
 	public static function post_slug( $slug, $post_ID, $post_status, $post_type ) {
-		if ( $post_type == SI_Invoice::POST_TYPE ) {
-			return $post_ID; // TODO unique
+		if ( $post_type == SI_Estimate::POST_TYPE ) {
+			return $post_ID;
 		}
 		return $slug;
 	}

@@ -214,13 +214,14 @@ class SI_Checkouts extends SI_Controller {
 	}
 
 	private function load_invoice() {
-		$invoice_id = url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
+		$invoice_id = ( isset( $_GET['sa_invoice'] ) && !self::using_permalinks() ) ? $_GET['sa_invoice'] : url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
 		if ( get_post_type( $invoice_id ) !== SI_Invoice::POST_TYPE ) {
 			self::set_message( self::__( 'Invoice ID invalid.' ), self::MESSAGE_STATUS_ERROR );
 			wp_redirect( '/', 303 );
 			exit();
 		}
 		$this->invoice = SI_Invoice::get_instance( $invoice_id );
+		error_log( 'this: ' . print_r( $this, TRUE ) );
 		if ( !$this->invoice && !$this->checkout_complete ) {
 			self::set_message( self::__( 'No invoice associated with this checkout.' ), self::MESSAGE_STATUS_ERROR );
 			wp_redirect( '/', 303 );

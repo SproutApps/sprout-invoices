@@ -1,4 +1,13 @@
-= 1.1.0.1 =
+= 1.1.1 =
+
+* _Bug Fixes:_
+	* Estimates slug not created
+	* Clone warning (strict notices)
+	* Other minor bug fixes
+	* Better support for sites without permalinks setup
+
+
+= 1.1.1 =
 
 * _Bug Fixes:_
 	* Saving error

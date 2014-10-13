@@ -91,6 +91,15 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 ### Changelog
 
 
+**1.1.1**
+
+* _Bug Fixes:_
+	* Estimates slug not created
+	* Clone warning (strict notices)
+	* Other minor bug fixes
+	* Better support for sites without permalinks setup
+
+
 **1.1.0.1**
 
 * _Bug Fixes:_
