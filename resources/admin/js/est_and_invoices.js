@@ -22,7 +22,15 @@ jQuery(function($) {
 			$status_span = $('#status b'),
 			$status_select = $('[name="post_status"]'),
 			$publish_button = $('[type="submit"]'),
-			$publish_button_text = $publish_button.val();
+			$publish_button_text = $publish_button.val(),
+			$current_status = si_js_object.doc_status;
+
+		// if a auto-draft the status can't be changed until after it's saved.
+		if ( $current_status === 'auto-draft' ) {
+			$('[name="post_status"]').val($new_status);
+			$('#status.wp-media-buttons-icon b').text( $status_change_link.attr('title') );
+			return;
+		};
 
 		$status_button.html('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
 		$publish_button.val( si_js_object.updating_string );

@@ -515,9 +515,12 @@ function si_has_invoice_deposit( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	$calc_deposit = si_get_invoice_deposit( $id );
+	$deposit = si_get_invoice_deposit( $id );
+	if ( $deposit < 0.01 ) {
+		return FALSE;
+	}
 	$total = si_get_invoice_total( $id );
-	return $calc_deposit < $total;
+	return $deposit < $total;
 }
 endif;
 
@@ -533,7 +536,7 @@ function si_get_invoice_deposit( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$invoice = SI_Invoice::get_instance( $id );
-	return apply_filters( 'si_get_invoice_deposit', $invoice->get_deposit(), $invoice );
+	return apply_filters( 'si_get_invoice_deposit', si_get_number_format( $invoice->get_deposit() ), $invoice );
 }
 endif;
 

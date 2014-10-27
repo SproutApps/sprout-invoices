@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,21 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
+= 1.1.2 =
+
+* _Changes:_
+	* No index on estimates and invoices!
+	* Paypal line items will not longer use qty since PP prevents fractions (now?)
+	* Some themes don't register their scripts and styles correctly, so unregistering them comes later on wp_print_scripts
+
+* _Bug Fixes:_
+	* Deposit function adjustments
+	* Paypal balance calculation fix
+	* Paypal qty fraction fix.
+	* Misc. errors and notices
+	* Estimates/Invoices auto-draft bug when doc isn't saved first
+	* Other minor bug fixes
+
 = 1.1.1 =
 
 * _Bug Fixes:_
@@ -150,6 +165,22 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 	* Few error prevention updates
 
 == Changelog ==
+
+= 1.1.2 =
+
+* _Changes:_
+	* No index on estimates and invoices!
+	* Paypal line items will not longer use qty since PP prevents fractions (now?)
+	* Some themes don't register their scripts and styles correctly, so unregistering them comes later on wp_print_scripts
+	* Some themes don't register their scripts and styles correctly, so unregistering them comes later on wp_print_scripts
+
+* _Bug Fixes:_
+	* Deposit function adjustments
+	* Paypal balance calculation fix
+	* Paypal qty fraction fix.
+	* Misc. errors and notices
+	* Estimates/Invoices auto-draft bug when doc isn't saved first
+	* Other minor bug fixes
 
 = 1.1 =
 

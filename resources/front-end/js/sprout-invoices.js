@@ -15,11 +15,13 @@ jQuery(function($) {
 	 * Tooltip with qtip
 	 * @type {}
 	 */
-	$('.tooltip[title!=""], .helptip[title!=""]').qtip({
-		style: {
-					classes: 'qtip-bootstrap'
+	if ( jQuery.isFunction('qtip') ) {
+		$('.tooltip[title!=""], .helptip[title!=""]').qtip({
+			style: {
+				classes: 'qtip-bootstrap'
 			}
 		});
+	};
 
 
 	/**

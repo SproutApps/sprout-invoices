@@ -128,9 +128,14 @@ class SI_Payments_Table extends WP_List_Table {
 		$invoice_id = $payment->get_invoice_id();
 		if ( $invoice_id ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
-			echo '<strong>'.si__( 'Payment Total' ).':</strong> '.sa_get_formatted_money( $payment->get_amount() ).'<br/>';
-			echo '<em>'.si__( 'Invoice Balance' ).': '.sa_get_formatted_money( $invoice->get_balance() ).'</em><br/>';
-			echo '<em>'.si__( 'Invoice Total' ).': '.sa_get_formatted_money( $invoice->get_total() ).'</em>';
+			if ( is_a( $invoice, 'SI_Invoice' ) ) {
+				echo '<strong>'.si__( 'Payment Total' ).':</strong> '.sa_get_formatted_money( $payment->get_amount() ).'<br/>';
+				echo '<em>'.si__( 'Invoice Balance' ).': '.sa_get_formatted_money( $invoice->get_balance() ).'</em><br/>';
+				echo '<em>'.si__( 'Invoice Total' ).': '.sa_get_formatted_money( $invoice->get_total() ).'</em>';
+			}
+			else {
+				si_e('No invoice found');
+			}
 		}
 		else {
 			printf( si__('No invoice associated with this payment.') );
@@ -160,7 +165,7 @@ class SI_Payments_Table extends WP_List_Table {
 
 		//Build row actions
 		$actions = array(
-			'detail'    => sprintf( '<a href="#TB_inline?width=900&height=600&inlineId=data_id_%s" class="show_payment_detail thickbox" id="%s" title="'.si__( 'Transaction Data' ).'">'.si__( 'Transaction Data' ).'</a><div id="data_id_%s" style="display:none;">%s</div>', $payment_id, $payment_id, $payment_id, $detail )
+			'detail'    => sprintf( '<a href="#TB_inline?width=900&height=600&inlineId=data_id_%s" class="thickbox button" title="'.si__( 'Transaction Data' ).'">'.si__( 'Transaction Data' ).'</a><div id="data_id_%s" style="display:none;">%s</div>', $payment_id, $payment_id, $detail )
 		);
 
 		//Return the title contents

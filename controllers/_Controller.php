@@ -846,10 +846,24 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function admin_enqueue() {
+		// Localization
+		$si_js_object = array(
+			'plugin_url' => SI_URL,
+			'thank_you_string' => self::__( 'Thank you' ),
+			'updating_string' => self::__( 'Updating...' ),
+			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
+			'done_string' => self::__( 'Finished!' ),
+			'security' => wp_create_nonce( self::NONCE )
+		);
+
 		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
 		if ( ( isset( $_GET['post_type'] ) && ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == $_GET['post_type'] ) || ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == get_post_type( $post_id ) ) {
 			wp_enqueue_script( 'nestable' );
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
+			// add doc info
+			$si_js_object += array(
+				'doc_status' => get_post_status( get_the_id() )
+			);
 		}
 
 		if ( ( isset( $_GET['post_type'] ) && SI_Client::POST_TYPE == $_GET['post_type'] ) || SI_Client::POST_TYPE == get_post_type( $post_id ) ) {
@@ -863,15 +877,6 @@ abstract class SI_Controller extends Sprout_Invoices {
 		wp_enqueue_style( 'qtip' );
 		wp_enqueue_style( 'sprout_invoice_admin_css' );
 
-		// Localization
-		$si_js_object = array(
-			'plugin_url' => SI_URL,
-			'thank_you_string' => self::__( 'Thank you' ),
-			'updating_string' => self::__( 'Updating...' ),
-			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
-			'done_string' => self::__( 'Finished!' ),
-			'security' => wp_create_nonce( self::NONCE )
-		);
 		wp_localize_script( 'si_admin', 'si_js_object', apply_filters( 'si_admin_scripts_localization', $si_js_object ) );
 	}
 
@@ -1502,7 +1507,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		exit();
 	}
 
-	function get_user_ip() {
+	public static function get_user_ip() {
 	    $client  = @$_SERVER['HTTP_CLIENT_IP'];
 	    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
 	    $remote  = $_SERVER['REMOTE_ADDR'];

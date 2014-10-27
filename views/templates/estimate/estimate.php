@@ -25,6 +25,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php wp_head(); // styles and scripts are filtered ?>
+		<meta name="robots" content="noindex" />
 	</head>
 
 	<body id="estimate" <?php body_class(); ?>>

@@ -58,7 +58,8 @@ class SI_Estimates extends SI_Controller {
 		add_filter( 'wp_unique_post_slug', array( __CLASS__, 'post_slug'), 10, 4 );
 
 		// Templating
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX - 100 );
+		// add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX );
+		add_action( 'wp_print_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX ); // can't rely on themes to abide by enqueing correctly
 
 		// Status updates
 		add_action( 'si_estimate_status_updated',  array( __CLASS__, 'maybe_create_status_update_record' ), 10, 3 );

@@ -1,3 +1,18 @@
+= 1.1.2 =
+
+* _Changes:_
+	* No index on estimates and invoices!
+	* Paypal line items will not longer use qty since PP prevents fractions (now?)
+	* Some themes don't register their scripts and styles correctly, so unregistering them comes later on wp_print_scripts
+
+* _Bug Fixes:_
+	* Deposit function adjustments
+	* Paypal balance calculation fix
+	* Paypal qty fraction fix.
+	* Misc. errors and notices
+	* Estimates/Invoices auto-draft bug when doc isn't saved first
+	* Other minor bug fixes
+
 = 1.1.1 =
 
 * _Bug Fixes:_
@@ -7,7 +22,7 @@
 	* Better support for sites without permalinks setup
 
 
-= 1.1.1 =
+= 1.1.0.1 =
 
 * _Bug Fixes:_
 	* Saving error

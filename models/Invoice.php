@@ -243,14 +243,12 @@ class SI_Invoice extends SI_Post_Type {
 	 * Deposit Adjustment
 	 */
 	public function get_deposit() {
-		$total = $this->get_calculated_total();
-		$payments_total = $this->get_payments_total();
-		$option = $this->get_post_meta( self::$meta_keys['deposit'] );
-		$deposit = ( ( $total - $payments_total ) > 0.00 ) ? $option : '' ;
-		if ( $option > ( $total - $payments_total ) ) { // check if deposit is more than waits' due.
-			$deposit = floatval($total - $payments_total);
+		$balance = $this->get_balance();
+		$deposit = floatval( $this->get_post_meta( self::$meta_keys['deposit'] ) );
+		if ( $deposit > $balance ) { // check if deposit is more than waits' due.
+			$deposit = floatval( $balance );
 		}
-		return ( $deposit != '' ) ? round($deposit,2) : $deposit ;
+		return round( $deposit, 2 );
 	}
 
 	public function set_deposit( $deposit = 0 ) {

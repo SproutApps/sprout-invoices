@@ -57,7 +57,8 @@ class SI_Invoices extends SI_Controller {
 		add_filter( 'wp_unique_post_slug', array( __CLASS__, 'post_slug'), 10, 4 );
 
 		// Templating
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX - 100 );
+		// add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX );
+		add_action( 'wp_print_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX ); // can't rely on themes to abide by enqueing correctly
 		
 		// Create invoice when estimate is approved.
 		add_action( 'doc_status_changed',  array( __CLASS__, 'create_invoice_on_est_acceptance' ), 0 ); // fire before any others
@@ -811,6 +812,7 @@ class SI_Invoices extends SI_Controller {
 					else {
 						$wp_scripts->queue = $allowed_scripts;
 					}
+					error_log( 'queue: ' . print_r( $wp_scripts->queue, TRUE ) );
 				}
 				$allowed_styles = apply_filters( 'si_allowed_admin_doc_scripts', array( 'sprout_doc_style', 'qtip', 'dropdown' ) );
 				$allowed_admin_styles = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_styles ) );
@@ -821,6 +823,7 @@ class SI_Invoices extends SI_Controller {
 					else {
 						$wp_styles->queue = $allowed_styles;
 					}
+					error_log( 'queue: ' . print_r( $wp_styles->queue, TRUE ) );
 				}
 				do_action( 'si_doc_enqueue_filtered' );
 			}

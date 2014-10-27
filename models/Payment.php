@@ -120,6 +120,8 @@ class SI_Payment extends SI_Post_Type {
 		}
 		if ( isset( $args['invoice'] ) ) {
 			$payment->set_invoice_id( $args['invoice'] );
+		} else {
+			do_action( 'si_error', 'Payment created without an invoice associated!', $args );
 		}
 		if ( isset( $args['transaction_id'] ) ) {
 			$payment->set_transaction_id( $args['transaction_id'] );
@@ -272,6 +274,9 @@ class SI_Payment extends SI_Post_Type {
 			return NULL;
 		}
 		$invoice = SI_Invoice::get_instance( $invoice_id );
+		if ( !is_a( $invoice, 'SI_Invoice' ) ) {
+			return NULL;
+		}
 		return $invoice->get_client();
 	}
 
