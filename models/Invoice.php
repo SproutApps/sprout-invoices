@@ -57,7 +57,7 @@ class SI_Invoice extends SI_Post_Type {
 				'slug' => self::REWRITE_SLUG,
 				'with_front' => FALSE,
 			),
-			'supports' => array( '' )
+			'supports' => array( 'editor' )
 		);
 		self::register_post_type( self::POST_TYPE, 'Invoice', 'Invoices', $post_type_args );
 
@@ -493,7 +493,7 @@ class SI_Invoice extends SI_Post_Type {
 			// SI_Invoices::change_status_after_payment attempts to do this, however
 			// sometimes there's a delay/cache
 			$this->get_balance(); 
-		 } 
+		} 
 		$total = 0;
 		$subtotal = $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value

@@ -1088,8 +1088,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function load_messages() {
 		$user_id = get_current_user_id();
+		$messages = FALSE;
 		if ( !$user_id ) {
-			$messages = get_transient( 'si_messaging_for_'.$_SERVER['REMOTE_ADDR'] );
+			if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+				$messages = get_transient( 'si_messaging_for_'.$_SERVER['REMOTE_ADDR'] );
+			}
 		} else {
 			global $blog_id;
 			$messages = get_user_meta( $user_id, $blog_id.'_'.self::MESSAGE_META_KEY, TRUE );

@@ -311,7 +311,6 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function paid_notification( SI_Payment $payment, $args = array() ) {
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance( $invoice_id );
-		error_log( 'invoices: ' . print_r( $invoice, TRUE ) );
 		if ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_balance() < 0.01 ) { // leave a bit of room for floating point arithmetic
 			$client = $invoice->get_client();
 			// get the user ids associated with this doc.

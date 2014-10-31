@@ -6,11 +6,7 @@
  * Any edit will not be saved when this plugin is upgraded. Not upgrading will prevent you from receiving new features,
  * limit our ability to support your site and potentially expose your site to security risk that an upgrade has fixed.
  *
- * Theme overrides are easy too, so there's no excuse...
- *
- * Simply this copy file to your active WordPress theme's directory within a new folder called "sprout".
- * For example: the invoice.php template can be customized by copying the file to
- *                 /wp-content/themes/twenty-fourteen/sprout/invoice.php
+ * https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/
  *
  * You find something that you're not able to customize? We want your experience to be awesome so let support know and we'll be able to help you.
  *
@@ -29,7 +25,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 	</head>
 
 	<body id="invoice" <?php body_class(); ?>>
-		
+
 		<div id="outer_doc_wrap">
 
 			<?php si_display_messages(); ?>
@@ -43,6 +39,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 				<header id="header_title">
 					<span class="header_id"><?php printf( 'Invoice %s', si_get_invoice_id() ) ?></span>
 					<div id="doc_actions">
+						<?php do_action( 'si_doc_actions_pre' ) ?>
 						<?php 
 							$payment_string = ( si_has_invoice_deposit() ) ? si__('Pay Deposit') : si__('Pay Invoice') ;
 							 ?>
@@ -66,6 +63,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 								</ul>
 							</div>
 						<?php endif ?>
+						<?php do_action( 'si_doc_actions' ) ?>
 					</div><!-- #doc_actions -->
 				</header><!-- #header_title -->
 			</div><!-- #doc_header_wrap -->
@@ -286,6 +284,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 				</div><!-- #doc -->
 
 				<div id="footer_wrap">
+					<?php do_action( 'si_document_footer' ) ?>
 					<aside>
 						<ul class="doc_footer_items">
 							<li class="doc_footer_item">
@@ -303,6 +302,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 		</div><!-- #outer_doc_wrap -->
 		
 		<div id="doc_history">
+			<?php do_action( 'si_document_history' ) ?>
 			<?php foreach ( si_doc_history_records() as $item_id => $data ): ?>
 				<dt>
 					<span class="history_status <?php echo $data['status_type'] ?>"><?php echo $data['type']; ?></span><br/>

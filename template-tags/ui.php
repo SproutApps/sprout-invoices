@@ -220,15 +220,14 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
 		$data['qty'] = '';
 		$data['tax'] = '';
 	}
-	ob_start(); ?>
-<?php echo strip_tags( $desc ) ?>  <?php si_e(' // ') ?>  
+	ob_start(); ?><?php echo strip_tags( $desc ) ?> 
 <?php si_e('Rate:') ?> <?php esc_attr_e( $rate ) ?>  <?php si_e('Qty:') ?> <?php esc_attr_e( $qty ) ?>
 <?php if ( $has_percentage_adj ): ?>
 <?php if ( isset( $data['tax'] ) && $data['tax'] ): ?>
   <?php si_e('Adjustment:') ?> <?php esc_attr_e( $data['tax'] ) ?>%
 <?php endif ?>
 <?php endif ?>
-  <?php si_e('Total:') ?> <?php sa_formatted_money($total) ?>
+  <?php si_e('Total:') ?> <?php sa_formatted_money( $total, '%s' ) ?>
 	<?php
 	$data = ob_get_contents();
 	ob_end_clean();

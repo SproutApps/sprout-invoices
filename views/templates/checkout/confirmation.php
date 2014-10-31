@@ -6,11 +6,7 @@
  * Any edit will not be saved when this plugin is upgraded. Not upgrading will prevent you from receiving new features,
  * limit our ability to support your site and potentially expose your site to security risk that an upgrade has fixed.
  *
- * Theme overrides are easy too, so there's no excuse...
- *
- * Simply this copy file to your active WordPress theme's directory within a new folder called "sprout".
- * For example: the invoice.php template can be customized by copying the file to
- *                 /wp-content/themes/twenty-fourteen/sprout/invoice.php
+ * https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/
  *
  * You find something that you're not able to customize? We want your experience to be awesome so let support know and we'll be able to help you.
  *

@@ -90,6 +90,32 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**1.1.3**
+
+* _Changes:_
+	* New hooks for estimates and invoice templates
+	* Starting to create some unit tests
+	* Doc changes
+
+* _Bug Fixes:_
+	* Fix qtip
+	* Total calculation issue with template tag
+
+**1.1.2**
+
+* _Changes:_
+	* No index on estimates and invoices!
+	* Paypal line items will not longer use qty since PP prevents fractions (now?)
+	* Some themes don't register their scripts and styles correctly, so unregistering them comes later on wp_print_scripts
+
+* _Bug Fixes:_
+	* Deposit function adjustments
+	* Paypal balance calculation fix
+	* Paypal qty fraction fix.
+	* Misc. errors and notices
+	* Estimates/Invoices auto-draft bug when doc isn't saved first
+	* Other minor bug fixes
+
 
 **1.1.1**
 

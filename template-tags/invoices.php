@@ -519,7 +519,7 @@ function si_has_invoice_deposit( $id = 0 ) {
 	if ( $deposit < 0.01 ) {
 		return FALSE;
 	}
-	$total = si_get_invoice_total( $id );
+	$total = si_get_invoice_calculated_total( $id );
 	return $deposit < $total;
 }
 endif;

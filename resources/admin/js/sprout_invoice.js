@@ -6,13 +6,11 @@ jQuery(function($) {
 	 * Tooltip with qtip
 	 * @type {}
 	 */
-	if ( jQuery.isFunction('qtip') ) {
-		$('.tooltip[title!=""], .helptip[title!=""]').qtip({
-			style: {
-				classes: 'qtip-bootstrap'
-			}
-		});
-	};
+	$('.tooltip[title!=""], .helptip[title!=""]').qtip({
+		style: {
+			classes: 'qtip-bootstrap'
+		}
+	});
 
     jQuery("#the-list .doc_status_change").live('click', function(e) {
 		e.preventDefault();

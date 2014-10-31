@@ -57,8 +57,8 @@ class SI_Invoices extends SI_Controller {
 		add_filter( 'wp_unique_post_slug', array( __CLASS__, 'post_slug'), 10, 4 );
 
 		// Templating
-		// add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX );
-		add_action( 'wp_print_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX ); // can't rely on themes to abide by enqueing correctly
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX );
+		add_action( 'wp_print_scripts', array( __CLASS__, 'remove_scripts_and_styles_from_stupid_themes_and_plugins' ), -PHP_INT_MAX ); // can't rely on themes to abide by enqueing correctly
 		
 		// Create invoice when estimate is approved.
 		add_action( 'doc_status_changed',  array( __CLASS__, 'create_invoice_on_est_acceptance' ), 0 ); // fire before any others
@@ -795,6 +795,21 @@ class SI_Invoices extends SI_Controller {
 	// Templating //
 	/////////////////
 
+
+	/**
+	 * Remove all actions to wp_print_scripts since stupid themes (and plugins) want to use it as a 
+	 * hook to enqueue scripts and plugins. Ideally we would live in a world where this wasn't necessary
+	 * but it is. 
+	 * @return
+	 */
+	public static function remove_scripts_and_styles_from_stupid_themes_and_plugins() {
+		if ( SI_Invoice::is_invoice_query() && is_single() ) {
+			if ( apply_filters( 'si_remove_scripts_styles_on_doc_pages', '__return_true' ) ) {
+				remove_all_actions( 'wp_print_scripts' );
+			}
+		}
+	}
+
 	/**
 	 * Remove all scripts and styles from the estimate view and then add those specific to si.
 	 * @return  
@@ -812,7 +827,6 @@ class SI_Invoices extends SI_Controller {
 					else {
 						$wp_scripts->queue = $allowed_scripts;
 					}
-					error_log( 'queue: ' . print_r( $wp_scripts->queue, TRUE ) );
 				}
 				$allowed_styles = apply_filters( 'si_allowed_admin_doc_scripts', array( 'sprout_doc_style', 'qtip', 'dropdown' ) );
 				$allowed_admin_styles = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_styles ) );
@@ -823,7 +837,6 @@ class SI_Invoices extends SI_Controller {
 					else {
 						$wp_styles->queue = $allowed_styles;
 					}
-					error_log( 'queue: ' . print_r( $wp_styles->queue, TRUE ) );
 				}
 				do_action( 'si_doc_enqueue_filtered' );
 			}

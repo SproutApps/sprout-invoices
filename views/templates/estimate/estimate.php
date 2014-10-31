@@ -8,9 +8,7 @@
  *
  * Theme overrides are easy too, so there's no excuse...
  *
- * Simply this copy file to your active WordPress theme's directory within a new folder called "sprout".
- * For example: the estimate.php template can be customized by copying the file to
- *                 /wp-content/themes/twenty-fourteen/sprout/estimate.php
+ * https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/
  *
  * You find something that you're not able to customize? We want your experience to be awesome so let support know and we'll be able to help you.
  *
@@ -36,6 +34,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 				<header id="header_title">
 					<span class="header_id"><?php printf( 'Estimate %s', si_get_estimate_id() ) ?></span>
 					<div id="doc_actions">
+						<?php do_action( 'si_doc_actions_pre' ) ?>
 						<?php if ( !si_is_estimate_approved() ): ?>
 							<a href="#accept" class="button primary_button status_change" data-status-change="accept" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>"><?php si_e('Accept Estimate') ?></a>
 						<?php else: ?>
@@ -46,6 +45,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						<?php else: ?>
 							<a href="javascript:void(0)" class="button disabled"><?php si_e('Declined') ?></a>
 						<?php endif ?>
+						<?php do_action( 'si_doc_actions' ) ?>
 					</div><!-- #doc_actions -->
 				</header><!-- #header_title -->
 			</div><!-- #doc_header_wrap -->
@@ -203,6 +203,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 					</section>
 
 					<section id="doc_notes">
+						<?php do_action( 'si_document_notes_pre' ) ?>
 						<?php if ( si_get_estimate_notes() ): ?>
 
 						<?php do_action( 'si_document_notes' ) ?>
@@ -228,6 +229,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 				</div><!-- #doc -->
 
 				<div id="footer_wrap">
+					<?php do_action( 'si_document_footer' ) ?>
 					<aside>
 						<ul class="doc_footer_items">
 							<li class="doc_footer_item">
@@ -245,6 +247,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 		</div><!-- #outer_doc_wrap -->
 		
 		<div id="doc_history">
+			<?php do_action( 'si_document_history' ) ?>
 			<?php foreach ( si_doc_history_records() as $item_id => $data ): ?>
 				<dt>
 					<span class="history_status <?php echo $data['status_type'] ?>"><?php echo $data['type']; ?></span><br/>
