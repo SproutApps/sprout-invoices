@@ -57,7 +57,7 @@ class SI_Invoice extends SI_Post_Type {
 				'slug' => self::REWRITE_SLUG,
 				'with_front' => FALSE,
 			),
-			'supports' => array( 'editor' )
+			'supports' => array( '' )
 		);
 		self::register_post_type( self::POST_TYPE, 'Invoice', 'Invoices', $post_type_args );
 

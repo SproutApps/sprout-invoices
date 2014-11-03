@@ -91,6 +91,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						</div><!-- #header_logo -->
 
 						<div id="vcards">
+							<?php do_action( 'si_document_vcards_pre' ) ?>
 							<dl id="doc_address_info">
 								<dl class="from_addy">
 									<dt>
@@ -107,16 +108,20 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 											<span class="dt_heading"><?php si_e('To') ?></span>
 										</dt>
 										<dd>
-											<b><?php echo get_the_title( si_get_invoice_client_id() ) ?></b> 
+											<b><?php echo get_the_title( si_get_invoice_client_id() ) ?></b>
+											
+											<?php do_action( 'si_document_client_addy' ) ?>
+											 
 											<?php si_client_address( si_get_invoice_client_id() ) ?>
 										</dd>
 									</dl>
 								<?php endif ?>
-								
 							</dl><!-- #doc_address_info -->
+							<?php do_action( 'si_document_vcards' ) ?>
 						</div><!-- #vcards -->
 						
 						<div class="doc_details clearfix">
+							<?php do_action( 'si_document_details_pre' ) ?>
 
 							<dl class="date">
 								<dt><span class="dt_heading"><?php si_e('Date') ?></span></dt>
@@ -144,6 +149,8 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 								</dl>
 							<?php endif ?>
 
+							<?php do_action( 'si_document_details_totals' ) ?>
+
 							<?php if ( si_has_invoice_deposit() ): ?>
 								<dl class="doc_total_with_deposit">
 									<dt><span class="dt_heading"><?php si_e('Invoice Total') ?></span></dt>
@@ -166,6 +173,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 								<dd><?php sa_formatted_money( si_get_invoice_balance() ) ?></dd>
 							</dl>
 
+							<?php do_action( 'si_document_details' ) ?>
 						</div><!-- #doc_details -->
 
 					</section>

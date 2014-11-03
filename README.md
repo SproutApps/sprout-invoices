@@ -90,6 +90,17 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**1.1.4**
+
+* _Changes:_
+	* No page breaks when printing large invoices/estimates
+	* Better error handling for invoices without clients assigned
+	* Helper functions for future payment processors
+	* More hooks and filters
+
+* _Bug Fixes:_
+	* Critical Paypal EC update to capture payment
+
 **1.1.3**
 
 * _Changes:_

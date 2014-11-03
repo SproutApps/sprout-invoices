@@ -558,7 +558,7 @@ class SI_Clients extends SI_Controller {
 			'weight' => 10000
 		);
 
-		$fields = apply_filters( 'si_client_adv_form_fields', $fields );
+		$fields = apply_filters( 'si_client_adv_form_fields', $fields, $client );
 		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
 		return $fields;
 	}

@@ -1608,6 +1608,10 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 @media only print {
 
+	#doc_line_items_wrap, #doc_line_items {
+		display: inline;
+	}
+
 	#doc_header_wrap-sticky-wrapper,
 		#doc_history {
 		display: none;
@@ -1624,6 +1628,11 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 	.line_item {
 		margin-bottom: 0px;
 		padding-bottom: 0px;
+	}
+
+	#status {
+		top: 5%;
+		left: 30%;
 	}
 
 }

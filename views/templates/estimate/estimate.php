@@ -70,6 +70,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						</div><!-- #header_logo -->
 
 						<div id="vcards">
+							<?php do_action( 'si_document_vcards_pre' ) ?>
 							<dl id="doc_address_info">
 								<dl class="from_addy">
 									<dt>
@@ -86,16 +87,20 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 											<span class="dt_heading"><?php si_e('To') ?></span>
 										</dt>
 										<dd>
-											<b><?php echo get_the_title( si_get_estimate_client_id() ) ?></b> 
+											<b><?php echo get_the_title( si_get_estimate_client_id() ) ?>
+											
+											<?php do_action( 'si_document_client_addy' ) ?></b> 
 											<?php si_client_address( si_get_estimate_client_id() ) ?>
+
 										</dd>
 									</dl>
 								<?php endif ?>
-								
+								<?php do_action( 'si_document_vcards' ) ?>
 							</dl><!-- #doc_address_info -->
 						</div><!-- #vcards -->
 						
 						<div class="doc_details clearfix">
+							<?php do_action( 'si_document_details_pre' ) ?>
 
 							<dl class="date">
 								<dt><span class="dt_heading"><?php si_e('Date') ?></span></dt>
@@ -116,11 +121,14 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 								</dl>
 							<?php endif ?>
 
+							<?php do_action( 'si_document_details_totals' ) ?>
+
 							<dl class="doc_total">
 								<dt><span class="dt_heading"><?php si_e('Estimate Total') ?></span></dt>
 								<dd><?php sa_formatted_money( si_get_estimate_total() ) ?></dd>
 							</dl>
 
+							<?php do_action( 'si_document_details' ) ?>
 						</div><!-- #doc_details -->
 
 					</section>
