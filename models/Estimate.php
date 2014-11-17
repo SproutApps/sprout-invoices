@@ -469,7 +469,8 @@ class SI_Estimate extends SI_Post_Type {
 		if ( !empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
 				if ( $data['rate'] ) {
-					$subtotal += ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
+					$calc = ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
+					$subtotal += $line_item_total = apply_filters( 'si_line_item_total', $calc, $data );
 				}
 			}
 		}

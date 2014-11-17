@@ -814,8 +814,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		wp_enqueue_script( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.min.js', array('jquery'), false, true );
 
 		// Templates
-		wp_register_script( 'sprout_doc_scripts', SI_URL . '/resources/front-end/js/sprout-invoices.js', array( 'jquery' ), self::SI_VERSION );
-		wp_register_style( 'sprout_doc_style', SI_URL . '/resources/front-end/css/sprout-invoices.style.css', array( 'open-sans', 'dashicons' ), self::SI_VERSION  );
+		wp_register_script( 'sprout_doc_scripts', SI_URL . '/resources/front-end/js/sprout-invoices.js', array( 'jquery', 'qtip' ), self::SI_VERSION );
+		wp_register_style( 'sprout_doc_style', SI_URL . '/resources/front-end/css/sprout-invoices.style.css', array( 'open-sans', 'dashicons', 'qtip' ), self::SI_VERSION  );
 
 	}
 

@@ -743,7 +743,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_invoice_id( $atts, $content, $code, $data ) {
 		$invoice_id = 0;
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$invoice_id = $data['invoice']->get_id();
+			$invoice_id = $data['invoice']->get_invoice_id();
 		}
 		return $invoice_id;
 	}
@@ -972,10 +972,10 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['client'] ) && is_a( $data['client'], 'SI_Client' ) ) {
 			$client_id = $data['client']->get_id();			
 		}
-		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+		if ( !$client_id && isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$client_id = $data['invoice']->get_client_id();
 		}
-		elseif ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+		if ( !$client_id && isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$client_id = $data['estimate']->get_client_id();
 		}
 		$name = ( $client_id ) ? get_the_title( $client_id ) : '' ;
@@ -1032,7 +1032,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_estimate_id( $atts, $content, $code, $data ) {
 		$estimate_id = 0;
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
-			$estimate_id = $data['estimate']->get_id();
+			$estimate_id = $data['estimate']->get_estimate_id();
 		}
 		return $estimate_id;
 	}

@@ -387,7 +387,12 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 
 	public function get_invoice_id() {
-		return $this->get_post_meta( self::$meta_keys['invoice_id'] );
+		$id = (int)$this->get_post_meta( self::$meta_keys['invoice_id'] );
+		if ( !$id ) {
+			$id = $this->get_id();
+			$this->set_estimate_id( $id );
+		}
+		return $id;
 	}
 
 	public function set_invoice_id( $invoice_id = 0 ) {
@@ -521,7 +526,8 @@ class SI_Invoice extends SI_Post_Type {
 			foreach ( $line_items as $key => $data ) {
 				if ( isset( $data['tax'] ) ) {
 					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
-					$subtotal += ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
+					$calc = ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
+					$subtotal += $line_item_total = apply_filters( 'si_line_item_total', $calc, $data );
 				}
 			}
 		}

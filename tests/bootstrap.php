@@ -5,7 +5,7 @@ $_SERVER['SERVER_NAME'] = '';
 $PHP_SELF = $GLOBALS['PHP_SELF'] = $_SERVER['PHP_SELF'] = '/index.php';
 
 $_tests_dir = getenv('WP_TESTS_DIR');
-if ( !$_tests_dir ) $_tests_dir = '/tmp/wordpress-tests-lib';
+if ( !$_tests_dir ) $_tests_dir = '/Users/dancameron/Projects/tmp/wordpress-tests-lib';
 
 require_once $_tests_dir . '/includes/functions.php';
 

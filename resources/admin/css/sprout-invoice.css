@@ -765,9 +765,9 @@ span.status_change {
 }
 
 .line_item span.helptip:after {
-	font-size: 2em;
-	top: -10px;
-	color: #888;
+	font-size: 1em;
+	top: 3px;
+	left: 2px;
 }
 
 .line_item .helptip.rate_ico:after {

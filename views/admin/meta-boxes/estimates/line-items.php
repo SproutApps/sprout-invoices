@@ -2,23 +2,8 @@
 	<div id="line_items_header">
 		<div class="clearfix">
 			<div class="line_item">
-				<div class="column column_desc">
-					<?php si_e('Description') ?>
-				</div>
-				<div class="column column_rate">
-					<span class="helptip rate_ico" title="<?php si_e('Rate') ?>"></span>
-				</div>
-				<div class="column column_qty">
-					<span class="helptip qty_ico" title="<?php si_e('Quantity') ?>"></span>
-				</div>
-				<div class="column column_tax">
-					<span class="helptip percentage_ico" title="<?php si_e('A percentage adjustment per line item, i.e. tax or discount') ?>"></span>
-				</div>
-				<div class="column column_total">
-					<?php si_e('Amount') ?>
-				</div>
+				<?php echo si_line_item_header_columns( 'estimates' ) ?>
 			</div>
-
 		</div>
 	</div>
 	<div id="nestable" class="dd">
@@ -49,33 +34,9 @@
 			<?php endif ?>
 
 			<li id="line_item_default" class="item" <?php if ( !empty( $line_items ) ) echo 'style="display:none"'; ?> data-id="1">
-				<div class="item_action_column">
-					<div class="item_action dd-handle"></div>
-					<!--<div class="item_action item_clone"></div>-->
-					<div class="item_action item_delete"></div>
-				</div>
-				<div class="line_item">
-					<div class="column column_desc">
-						<textarea name="line_item_desc[]"></textarea>
-					</div>
-					<div class="column column_rate">
-						<span></span>
-						<input class="totalled_input" type="text" name="line_item_rate[]" value="" placeholder="1" size="3">
-					</div>
-					<div class="column column_qty">
-						<span></span>
-						<input class="totalled_input" type="text" name="line_item_qty[]" value="1" size="2">
-					</div>
-					<div class="column column_tax">
-						<span></span>
-						<input class="totalled_input" type="text" name="line_item_tax[]" value="" placeholder="" size="1" max="100">
-					</div>
-					<div class="column column_total">
-						<?php sa_formatted_money( 0 ) ?>
-						<input class="totalled_input" type="hidden" name="line_item_total[]" value="">
-					</div>
-					<input class="line_item_index" type="hidden" name="line_item_key[]" value="0">
-				</div>
+				<?php 
+					// build single item
+					echo si_line_item_build_option( 0 ) ?>
 			</li>
 		</ol>
 	</div>

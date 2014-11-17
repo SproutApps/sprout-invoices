@@ -164,35 +164,35 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 							printf( '<span class="line_item_type tooltip" title="%s"></span>', esc_attr__( $term->name ) );
 						}
 					} ?>
-			</div>
+			</div><!-- / column_type -->
 			<div class="column column_desc">
 				<?php echo apply_filters( 'the_content', $desc ) ?>
-			</div>
+			</div><!-- / item_action_column -->
 			<div class="column column_rate">
 				<?php if ( empty( $children ) ): ?>
 					<?php esc_attr_e( $rate ) ?>
 				<?php endif ?>
-			</div>
+			</div><!-- / column_rate -->
 			<div class="column column_qty">
 				<?php if ( empty( $children ) ): ?>
 					<?php esc_attr_e( $qty ) ?>
 				<?php endif ?>
-			</div>
+			</div><!-- / column_qty -->
 			<?php if ( $has_percentage_adj ): ?>
 				<div class="column column_tax">
 					<?php if ( isset( $data['tax'] ) && $data['tax'] ): ?>
 						<?php esc_attr_e( $data['tax'] ) ?>%
 					<?php endif ?>
-				</div>
+				</div><!-- / column_tax -->
 			<?php endif ?>
 			<div class="column column_total">
 				<?php sa_formatted_money($total) ?>
-			</div>
+			</div><!-- / column_total -->
 		</div>
 	<?php
 	$data = ob_get_contents();
 	ob_end_clean();
-	return apply_filters( 'si_line_item_build', $data, $position, $items );
+	return apply_filters( 'si_line_item_build', $data, $position, $items, $children );
 }
 
 
@@ -231,7 +231,7 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
 	<?php
 	$data = ob_get_contents();
 	ob_end_clean();
-	return apply_filters( 'si_line_item_build_plain', $data, $position, $items );
+	return apply_filters( 'si_line_item_build_plain', $data, $position, $items, $children );
 }
 
 function si_line_item_build_option( $position = 1.0, $items = array(), $children = array() ) {
@@ -240,46 +240,52 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 	foreach ( $item_types as $item_type ) {
 		$type_options[$item_type->term_id] = $item_type->name;
 	}
-	$data = $items[$position];
 
+	$data = ( !empty( $items ) && isset( $items[$position] ) ) ? $items[$position] : array();
 	$desc = ( isset( $data['desc'] ) ) ? $data['desc'] : '' ;
-	$rate = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
-	$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 0 ;
+	$rate = ( isset( $data['rate'] ) ) ? $data['rate'] : '' ;
+	$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : '' ;
 	$tax = ( isset( $data['tax'] ) ) ? $data['tax'] : '' ;
-	$total = ( isset( $data['total'] ) ) ? $data['total'] : 0 ;
+	$total = ( isset( $data['total'] ) ) ? $data['total'] : '' ;
 	
 	ob_start(); ?>
 		<div class="item_action_column">
 			<div class="item_action dd-handle"></div>
 			<!--<div class="item_action item_clone"></div>-->
 			<div class="item_action item_delete"></div>
-		</div>
+		</div><!-- / item_action_column -->
 		<div class="line_item<?php if ( !empty( $children ) ) echo ' has_children' ?>">
 			<div class="column column_desc">
 				<textarea name="line_item_desc[]"><?php esc_attr_e( $desc ) ?></textarea>
-			</div>
-			<div class="column column_rate">
+				<!-- desc -->
+			</div><!-- / column_desc -->
+			<div class="column parent_hide column_rate">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_rate[]" value="<?php esc_attr_e( $rate ) ?>" placeholder="1" size="3">
-			</div>
-			<div class="column column_qty">
+				<input class="totalled_input" type="text" name="line_item_rate[]" value="<?php esc_attr_e( $rate ) ?>" placeholder="80" size="3">
+				<!-- rate -->
+			</div><!-- / column_rate -->
+			<div class="column parent_hide column_qty">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_qty[]" value="<?php esc_attr_e( $qty ) ?>" size="2">
-			</div>
-			<div class="column column_tax">
+				<input class="totalled_input" type="text" name="line_item_qty[]" value="<?php esc_attr_e( $qty ) ?>" placeholder="1" size="2">
+				<!-- qty -->
+			</div><!-- / column_qty -->
+			<div class="column parent_hide column_tax">
 				<span></span>
 				<input class="totalled_input" type="text" name="line_item_tax[]" value="<?php esc_attr_e( $tax ) ?>" placeholder="" size="1" max="100">
-			</div>
+				<!-- tax -->
+			</div><!-- / column_tax -->
 			<div class="column column_total">
 				<?php sa_formatted_money( $total ) ?>
 				<input class="totalled_input" type="hidden" name="line_item_total[]" value="<?php esc_attr_e( $total ) ?>">
-			</div>
+				<!-- total -->
+			</div><!-- / column_total -->
 			<input class="line_item_index" type="hidden" name="line_item_key[]" value="<?php echo $position ?>">
+			<!-- hidden -->
 		</div>
 	<?php
 	$data = ob_get_contents();
 	ob_end_clean();
-	return apply_filters( 'si_line_item_build_option', $data, $position, $items );
+	return apply_filters( 'si_line_item_build_option', $data, $position, $items, $children );
 }
 
 function si_line_item_get_children( $position = 1, $items = array() ) {
@@ -292,6 +298,65 @@ function si_line_item_get_children( $position = 1, $items = array() ) {
 		}
 	}
 	return apply_filters( 'si_line_item_get_children', $children, $position, $items );
+}
+
+function si_line_item_header_columns( $context = '') {
+	ob_start(); ?>
+		<div class="column column_desc">
+			<?php si_e('Description') ?>
+		</div>
+		<!-- desc -->
+		<div class="column column_rate">
+			<?php si_e('Rate') ?>
+		</div>
+		<!-- rate -->
+		<div class="column column_qty">
+			<?php si_e('Qty') ?>
+		</div>
+		<!-- qty -->
+		<div class="column column_tax">
+			<?php si_e('%') ?><span class="helptip" title="<?php si_e('A percentage adjustment per line item, i.e. tax or discount') ?>"></span>
+		</div>
+		<!-- tax -->
+		<div class="column column_total">
+			<?php si_e('Amount') ?>
+		</div>
+		<!-- amount -->
+	<?php
+	$header = ob_get_clean();
+	return apply_filters( 'si_line_item_header_columns', $header, $context );
+}
+
+function si_line_item_header_front_end( $context = '', $show_tax = TRUE ) {
+	ob_start(); ?>
+		<div class="column column_type">&nbsp;</div>
+		<!-- / type -->
+		<div class="column column_desc">
+			<?php si_e('Description') ?>
+		</div>
+		<!-- / desc -->
+		<div class="column column_rate">
+			<?php si_e('Rate') ?>
+		</div>
+		<!-- / rate -->
+		<div class="column column_qty">
+			<?php si_e('Qty') ?>
+		</div>
+		<!-- / qty -->
+		<?php if ( $show_tax ): ?>
+			<div class="column column_tax">
+				<?php si_e('%') ?><span class="helptip" title="<?php si_e('A percentage adjustment per line item, i.e. tax or discount') ?>"></span>
+			</div>
+			<!-- / tax -->
+		<?php endif ?>
+		<!-- amount -->
+		<div class="column column_total">
+			<?php si_e('Amount') ?>
+		</div>
+		<!-- / amount -->
+	<?php
+	$header = ob_get_clean();
+	return apply_filters( 'si_line_item_header_front_end', $header, $context, $show_tax );
 }
 
 if ( !function_exists('si_display_messages') ) :

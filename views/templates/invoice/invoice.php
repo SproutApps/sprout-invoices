@@ -192,24 +192,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							<div id="line_items_header">
 								<?php do_action( 'si_document_line_items_header' ) ?>
 								<div class="line_item">
-									<div class="column column_type">&nbsp;</div>
-									<div class="column column_desc">
-										<?php si_e('Description') ?>
-									</div>
-									<div class="column column_rate">
-										<span class="helptip rate_ico" title="<?php si_e('Rate') ?>"></span>
-									</div>
-									<div class="column column_qty">
-										<span class="helptip qty_ico" title="<?php si_e('Quantity') ?>"></span>
-									</div>
-									<?php if ( $has_percentage_adj ): ?>
-										<div class="column column_tax">
-											<span class="helptip percentage_ico" title="<?php si_e('A percentage adjustment per line item, i.e. tax or discount') ?>"></span>
-										</div>
-									<?php endif ?>
-									<div class="column column_total">
-										<?php si_e('Total') ?>
-									</div>
+									<?php echo si_line_item_header_front_end( 'invoices', $has_percentage_adj ) ?>
 								</div>
 							</div>
 							<ol id="items">

@@ -1,5 +1,13 @@
-= 1.1.4 =
+= 1.1.5 =
 
+* _Changes:_
+	* More hooks and filters
+	* fix for unit tests
+* _Bug Fixes:_
+	* ID shortcode fix
+	* js error with custom templates
+
+= 1.1.4 =
 * _Changes:_
 	* No page breaks when printing large invoices/estimates
 	* Better error handling for invoices without clients assigned

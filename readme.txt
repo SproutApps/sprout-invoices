@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,7 @@ Make sure to checkout the [Sprout Invoices](https://sproutapps.co/sprout-invoice
 * Integrates with [Gravity Forms, Ninja Forms and more](https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/) (premium upgrade).
 * Accept [Stripe Payments](https://sproutapps.co/marketplace/stripe-payments/) (paid add-on or premium upgrade)
 * Improved user experience with AJAX.
-* Taxes
+* [Advanced Taxes](https://sproutapps.co/marketplace/advanced-tax-rates-hst-pst-gst-support/)
 * Client records with multiple points of contact
 * Pre-defined tasks/line-items
 * No extra database tables!
@@ -119,6 +119,15 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
+= 1.1.5 =
+
+* _Changes:_
+	* More hooks and filters
+	* fix for unit tests
+* _Bug Fixes:_
+	* ID shortcode fix
+	* js error with custom templates
+	
 = 1.1.4 =
 
 * _Changes:_

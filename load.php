@@ -138,6 +138,7 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/template-tags/invoices.php';
 	require_once SI_PATH.'/template-tags/ui.php';
 	require_once SI_PATH.'/template-tags/utility.php';
+	require_once SI_PATH.'/template-tags/docs.php';
 
 	// addons
 	require_once SI_PATH.'/add-ons/Addons.php';

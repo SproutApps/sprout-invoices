@@ -400,20 +400,14 @@ jQuery(function($) {
 			// If has children
 			if ( $(li).children('ol').length > 0 ) {
 				// hide the parent input fields
-				$(li).find('.column_rate input').attr( "type", "hidden" );
-				$(li).find('.column_qty input').attr( "type", "hidden" );
-				$(li).find('.column_tax input').attr( "type", "hidden" );
+				$(li).find('.column.parent_hide input').attr( "type", "hidden" );
 			}
 			else {
-				$(li).find('.column_rate input').attr( "type", "text" );
-				$(li).find('.column_qty input').attr( "type", "text" );
-				$(li).find('.column_tax input').attr( "type", "text" );
+				$(li).find('.column.parent_hide input').attr( "type", "text" );
 			}
 		});
 		$('ol.items_list .has_children').each(function(i, parent) {
-			$(parent).find('.column_rate input').val('');
-			$(parent).find('.column_qty input').val('');
-			$(parent).find('.column_tax input').val('');
+			$(parent).find('.column.parent_hide input').val('');
 		});
 	}
 
@@ -426,6 +420,7 @@ jQuery(function($) {
 		calculate_totals();
 		calculate_subtotal();
 		calculate_total();
+		forceNumeric( $(this) );
 	});
 
 	/**
@@ -455,13 +450,15 @@ jQuery(function($) {
 		$(li).find('.column_total span').html('');
 
 		// do the totals
-		var $rate_totals = $(li).find('.column_rate input').val();
-		var $qty_totals = $(li).find('.column_qty input').val();
-		var $tax_totals = $(li).find('.column_tax input').val();
-		var $total_totals = ( $rate_totals * $qty_totals ) * ( ( 100 - $tax_totals ) / 100 );
+		var $rate_total = $(li).find('.column_rate input').val();
+		var $qty_total = $(li).find('.column_qty input').val();
+		var $tax_total = $(li).find('.column_tax input').val();
+		var $total = ( $rate_total * $qty_total ) * ( ( 100 - $tax_total ) / 100 );
 		
-		$(li).find('.column_total span').html( parseFloat( $total_totals ).toFixed(2) );
-		$(li).find('.column_total input').val( parseFloat( $total_totals ).toFixed(2) );
+		$(li).find('.column_total span').html( parseFloat( $total ).toFixed(2) );
+		$(li).find('.column_total input').val( parseFloat( $total ).toFixed(2) );
+
+		$('ol.items_list').trigger( 'calculated_line_item_totals', [ li, $total ] );
 
 	}
 
@@ -510,6 +507,7 @@ jQuery(function($) {
 				/**/
 			}
 		});
+		$('ol.items_list').trigger( 'calculate_parent_line_item_totals' );
 	}
 
 	function calculate_subtotal() {
@@ -559,6 +557,8 @@ jQuery(function($) {
 			$formatted_total = parseFloat( $total ).toFixed(2);
 
 		total_update( $total_span, $formatted_total );
+
+		$('ol.items_list').trigger( 'calculate_total', [ $formatted_total ] );
 	}
 
 	/**
@@ -592,6 +592,35 @@ jQuery(function($) {
 			selection.removeAllRanges();
 			selection.addRange(range);
 		}
+	}
+
+
+	// forceNumeric() plug-in implementation
+	function forceNumeric(element) {
+		return element.each(function () {
+			$(element).keydown(function (e) {
+				var key = e.which || e.keyCode;
+
+				if (!e.shiftKey && !e.altKey && !e.ctrlKey &&
+				// numbers   
+				 key >= 48 && key <= 57 ||
+				// Numeric keypad
+				 key >= 96 && key <= 105 ||
+				// comma, period and minus, . on keypad
+				key == 190 || key == 109 || key == 110 ||
+				// Backspace and Tab and Enter
+				key == 8 || key == 9 || key == 13 ||
+				// Home and End
+				key == 35 || key == 36 ||
+				// left and right arrows
+				key == 37 || key == 39 ||
+				// Del and Ins
+				key == 46 || key == 45)
+				 return true;
+
+				return false;
+			});
+		});
 	}
 
 });
