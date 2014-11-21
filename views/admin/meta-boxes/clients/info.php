@@ -1,5 +1,5 @@
 <?php
-	$fields['name']['default'] = ( get_the_title( $id ) != 'Auto Draft' ) ? get_the_title( $id ) : '' ; ;
+	$fields['name']['default'] = ( get_the_title( $id ) != 'Auto Draft' ) ? get_the_title( $id ) : '' ;
 	unset( $fields['email'] );
 	unset( $fields['first_name'] );
 	unset( $fields['last_name'] );

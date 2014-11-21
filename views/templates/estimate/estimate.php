@@ -64,7 +64,13 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 									<p class="title"><?php the_title() ?></p>
 								</div>
 
-								<h1 id="logo"><img src="<?php echo si_doc_header_logo_url() ?>" alt="document logo" ></h1>
+								<h1 id="logo">
+									<?php if ( get_theme_mod( 'si_logo' ) ) : ?>
+										<img src="<?php echo esc_url( get_theme_mod( 'si_logo', si_doc_header_logo_url() ) ); ?>" alt="document logo" >
+									<?php else: ?>
+										<img src="<?php echo si_doc_header_logo_url() ?>" alt="document logo" >
+									<?php endif; ?>
+								</h1>
 							</header><!-- /header -->
 
 						</div><!-- #header_logo -->

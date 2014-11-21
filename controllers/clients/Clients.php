@@ -23,6 +23,7 @@ class SI_Clients extends SI_Controller {
 
 			// Meta boxes
 			add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ) );
+			add_filter( 'wp_insert_post_data', array( __CLASS__, 'update_post_data' ), 100, 2 );
 			add_action( 'do_meta_boxes', array( __CLASS__, 'modify_meta_boxes' ) );
 			add_action( 'edit_form_top', array( __CLASS__, 'name_box' ) );
 
@@ -194,7 +195,7 @@ class SI_Clients extends SI_Controller {
 	 * @return                 
 	 */
 	public static function save_meta_box_client_information( $post_id, $post, $callback_args, $estimate_id = NULL ) {
-		$name = ( isset( $_POST['sa_metabox_name'] ) && $_POST['sa_metabox_name'] != '' ) ? $_POST['sa_metabox_name'] : '' ;
+		// name is filtered via update_post_data
 		$website = ( isset( $_POST['sa_metabox_website'] ) && $_POST['sa_metabox_website'] != '' ) ? $_POST['sa_metabox_website'] : '' ;
 
 		$address = array(
@@ -208,16 +209,18 @@ class SI_Clients extends SI_Controller {
 		$client = SI_Client::get_instance( $post_id );
 		$client->set_website( $website );
 		$client->set_address( $address );
-
-		if ( $name && $name != get_the_title( $post_id ) ) {
-			$client_post = array(
-				'ID' => $post_id,
-				'post_title' => $name
-				);
-
-			// Update the post into the database
-			wp_update_post( $client_post );
+	}
+	
+	public static function update_post_data( $data = array(), $post = array() ) {
+		if ( $post['post_type'] == SI_Client::POST_TYPE ) {
+			$title = '';
+			if ( isset( $_POST['sa_metabox_name'] ) && $_POST['sa_metabox_name'] != '' ) {
+				$title = $_POST['sa_metabox_name'];
+			}
+			// modify the post title
+			$data['post_title'] = $title;
 		}
+		return $data;
 	}
 
 	/**

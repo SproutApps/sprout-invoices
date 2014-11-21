@@ -34,6 +34,7 @@ class SI_Invoices extends SI_Controller {
 		if ( is_admin() ) {
 			// Meta boxes
 			add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ), 100 );
+			add_filter( 'wp_insert_post_data', array( __CLASS__, 'update_post_data' ), 100, 2 );
 			add_action( 'do_meta_boxes', array( __CLASS__, 'modify_meta_boxes' ), 100 );
 			add_action( 'edit_form_top', array( __CLASS__, 'quick_links' ), 100 );
 
@@ -340,19 +341,20 @@ class SI_Invoices extends SI_Controller {
 
 		// Deposits are not supported without the premium version.
 		$invoice->set_deposit( $invoice->get_balance() );
-
-		$subject = ( isset( $_POST['subject'] ) && $_POST['subject'] != '' ) ? $_POST['subject'] : 0 ;
-		if ( $subject && $subject != get_the_title( $post_id ) ) {
-			$est_post = array(
-				'ID' => $post_id,
-				'post_title' => $subject
-				);
-
-			// Update the post in the database
-			wp_update_post( $est_post );
-		}
 		
 		do_action( 'si_save_line_items_meta_box', $post_id, $post, $invoice );
+	}
+
+	public static function update_post_data( $data = array(), $post = array() ) {
+		if ( $post['post_type'] == SI_Invoice::POST_TYPE ) {
+			$title = '';
+			if ( isset( $_POST['subject'] ) && $_POST['subject'] != '' ) {
+				$title = $_POST['subject'];
+			}
+			// modify the post title
+			$data['post_title'] = $title;
+		}
+		return $data;
 	}
 
 	/**

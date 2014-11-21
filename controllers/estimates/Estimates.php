@@ -46,6 +46,7 @@ class SI_Estimates extends SI_Controller {
 
 			// Meta boxes
 			add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ), 100 );
+			add_filter( 'wp_insert_post_data', array( __CLASS__, 'update_post_data' ), 100, 2 );
 			add_action( 'do_meta_boxes', array( __CLASS__, 'modify_meta_boxes' ), 100 );
 			add_action( 'edit_form_top', array( __CLASS__, 'quick_links' ), 100 );
 
@@ -321,18 +322,19 @@ class SI_Estimates extends SI_Controller {
 		// Set the line items meta
 		$estimate->set_line_items($line_items);
 
-		$subject = ( isset( $_POST['subject'] ) && $_POST['subject'] != '' ) ? $_POST['subject'] : 0 ;
-		if ( $subject && $subject != get_the_title( $post_id ) ) {
-			$est_post = array(
-				'ID' => $post_id,
-				'post_title' => $subject
-				);
-
-			// Update the post into the database
-			wp_update_post( $est_post );
-		}
-
 		do_action( 'si_save_line_items_meta_box', $post_id, $post, $estimate );
+	}
+
+	public static function update_post_data( $data = array(), $post = array() ) {
+		if ( $post['post_type'] == SI_Estimate::POST_TYPE ) {
+			$title = '';
+			if ( isset( $_POST['subject'] ) && $_POST['subject'] != '' ) {
+				$title = $_POST['subject'];
+			}
+			// modify the post title
+			$data['post_title'] = $title;
+		}
+		return $data;
 	}
 
 	/**
