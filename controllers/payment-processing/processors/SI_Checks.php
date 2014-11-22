@@ -127,7 +127,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
-				'default' => date( get_option( 'date_format' ) ),
+				'default' => date_i18n( get_option( 'date_format' ) ),
 				'required' => TRUE
 			),
 			'notes' => array(

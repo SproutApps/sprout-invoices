@@ -18,42 +18,7 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 
 	<div id="minor-publishing">
 		<p>
-			<b><?php si_e('Associated Users') ?></b> <span class="helptip" title="<?php si_e('Clients can have multiple users associated. Each user will receive notifications.') ?>"></span>
-			<select id="associated_users" style="width:100%" class="select2">
-				<option></option>
-				<?php foreach ( $users as $user ): ?>
-					<?php if ( !in_array( $user->ID, $associated_users ) ): ?>
-						<option value="<?php echo $user->ID ?>" <?php selected( in_array( $user->ID, $associated_users ), TRUE ) ?> data-url="<?php echo admin_url( 'user-edit.php?user_id=' . $user->ID ) ?>" data-user-email="<?php echo $user->user_email ?>"><?php echo $user->display_name ?></option>
-					<?php endif ?>
-				<?php endforeach ?>
-			</select>
-			<?php if ( !empty( $associated_users ) ): ?>
-				<ul id="associated_users_list">
-					<?php foreach ( $associated_users as $a_user_id ): ?>
-						<?php 
-							$u = get_userdata( $a_user_id );
-							if ( !is_a( $u, 'WP_User' ) ) {
-							 	continue;
-							 } ?>
-						<li id="list_user_id-<?php echo $a_user_id ?>"><?php printf( '<a href="%s" class="tooltip" title="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $a_user_id ), $u->user_email, $u->display_name ) ?>  <a data-id="<?php echo $a_user_id ?>" class="remove_user del_button">X</a></li>
-					<?php endforeach ?>
-				</ul>
-				<div id="hidden_associated_users_list" class="cloak">
-					<?php foreach ( $associated_users as $a_user_id ): ?>
-						<input type="hidden" name="associated_users[]" value="<?php echo $a_user_id ?>" />
-					<?php endforeach ?>
-				</div>
-			<?php else: ?>
-				<ul id="associated_users_list"></ul>
-				<div id="hidden_associated_users_list" class="cloak"></div>
-			<?php endif ?>
-
-			<a href="#TB_inline?width=300&height=200&inlineId=user_creation_modal" id="user_creation_modal_tb_link" class="thickbox button" title="<?php si_e('Create new user for this client') ?>"><?php si_e('New User') ?></a>
-		</p>
-		<hr/>
-		<?php do_action('client_submit_pre_invoices') ?>
-		<p>
-			<b><?php si_e('Invoices') ?></b>
+			<b><?php si_e('Invoices: ') ?></b>
 			<?php if ( !empty( $invoices ) ): ?>
 				<dl>
 					<?php foreach ( $invoices as $invoice_id ): ?>
@@ -66,9 +31,8 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 			<?php endif ?>
 		</p>
 		<hr/>
-		<?php do_action('client_submit_pre_estimates') ?>
 		<p>
-			<b><?php si_e('Estimates') ?></b>
+			<b><?php si_e('Estimates: ') ?></b>
 			<?php if ( !empty( $estimates ) ): ?>
 				<dl>
 					<?php foreach ( $estimates as $estimate_id ): ?>
@@ -98,7 +62,7 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 			if ( !in_array( $post->post_status, array('publish', 'future', 'private') ) || 0 == $post->ID ) {
 				if ( $can_publish ) : ?>
 					<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Publish') ?>" />
-					<?php submit_button( __( 'Publish' ), 'primary button-large', 'publish', false, array( 'accesskey' => 'p' ) ); ?>
+					<?php submit_button( __( 'Create' ), 'primary button-large', 'publish', false, array( 'accesskey' => 'p' ) ); ?>
 				<?php else : ?>
 					<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Submit for Review') ?>" />
 					<?php submit_button( __( 'Submit for Review' ), 'primary button-large', 'publish', false, array( 'accesskey' => 'p' ) ); ?>

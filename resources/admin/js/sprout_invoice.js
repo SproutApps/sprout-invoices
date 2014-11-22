@@ -3,6 +3,18 @@ jQuery.noConflict();
 jQuery(function($) {
 
 	/**
+	 * select2 init
+	 */
+	$('.select2').select2({
+		// Support for optgroup searching
+		matcher: function(term, optText, els) {
+			var allText = optText + els[0].parentNode.getAttribute('label')  || '';
+			return (''+allText).toUpperCase().indexOf((''+term).toUpperCase()) >= 0;
+		}
+	});
+	
+
+	/**
 	 * Tooltip with qtip
 	 * @type {}
 	 */
@@ -38,8 +50,6 @@ jQuery(function($) {
 			}
 		);
 	});
-
-
 
 	/**
 	 * License Activation

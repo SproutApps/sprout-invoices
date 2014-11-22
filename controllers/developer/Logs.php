@@ -195,7 +195,7 @@ class SI_Dev_Logs extends SI_Controller {
 	 */
 	public static function filter_where_with_when( $where = '' ) {
 		// posts 15+ old
-		$offset = apply_filters( 'si_logs_purge_filter_delay', date( 'Y-m-d', strtotime( '-15 days' ) ), $where );
+		$offset = apply_filters( 'si_logs_purge_filter_delay', date_i18n( 'Y-m-d', strtotime( '-15 days' ) ), $where );
 		$where .= " AND post_date <= '" . $offset . "'";
 		return $where;
 	}

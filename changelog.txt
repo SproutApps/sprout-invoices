@@ -1,10 +1,19 @@
-= 1.1.6 =
-* _Bug Fixes:_
-	* Prevent post save looping on some hosts
+= 2.0 =
+
+* _NEW:_
+	* Projects
+	* Time Tracking (premium version)
+	* WYSIWYG for line items (premium version)
+
 * _Changes:_
-	* Customizer compatibility for logo uploading.
+	* Improved Client management
+	* Easier user assignment and creation for Clients
+	* Streamlined Invoice and Estimate edit UI
+	* Freshened editing and management all around
+	* New possibilities for add-ons
 
 = 1.1.5 =
+
 * _Changes:_
 	* More hooks and filters
 	* fix for unit tests

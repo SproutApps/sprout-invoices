@@ -34,6 +34,7 @@ class SI_Estimate extends SI_Post_Type {
 		'notes' => '_estimate_notes', // string
 		'po' => '_doc_po_number', // string
 		'private_notes' => '_estimate_private_notes', // string
+		'project_id' => '_project_id', // int
 		'send_notes' => '_estimate_send_notes', // string
 		'shipping' => '_doc_shipping', // int
 		'submission' => '_submitted_items', // array
@@ -162,7 +163,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	public static function create_estimate( $args, $status = self::STATUS_REQUEST ) {
 		$defaults = array(
-			'subject' => sprintf( self::__('New Estimate: %s'), date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'subject' => sprintf( self::__('New Estimate: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'requirements' => self::__('No requirements submitted. Check to make sure the "requirements" field is required.'),
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );
@@ -420,6 +421,28 @@ class SI_Estimate extends SI_Post_Type {
 		$subtotal = $this->get_subtotal();
 		$calculated_total = floatval( $subtotal * ( $tax / 100 ) );
 		return round( $calculated_total, 2 );
+	}
+
+	/**
+	 * Project
+	 */
+	public function get_project_id() {
+		return (int)$this->get_post_meta( self::$meta_keys['project_id'] );
+	}
+
+	public function set_project_id( $project_id = 0 ) {
+		$this->save_post_meta( array(
+				self::$meta_keys['project_id'] => $project_id,
+			) );
+		return $tax;
+	}
+
+	public function get_project() {
+		if ( class_exists( 'SI_Project' ) ) {		
+			$project_id = $this->get_project_id();
+			$project = SI_Project::get_instance( $project_id );
+			return $project;
+		}
 	}
 
 	/**

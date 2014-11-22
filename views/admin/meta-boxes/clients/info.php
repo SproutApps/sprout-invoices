@@ -1,8 +1,11 @@
 <?php
 	$fields['name']['default'] = ( get_the_title( $id ) != 'Auto Draft' ) ? get_the_title( $id ) : '' ;
-	unset( $fields['email'] );
-	unset( $fields['first_name'] );
-	unset( $fields['last_name'] );
+	
+	if ( !empty( $associated_users ) ) {
+		unset( $fields['email'] );
+		unset( $fields['first_name'] );
+		unset( $fields['last_name'] );
+	}
 	$fields['street']['default']= ( isset( $address['street'] ) ) ? $address['street'] : '' ;
 	$fields['city']['default']= ( isset( $address['city'] ) ) ? $address['city'] : '' ;
 	$fields['zone']['default']= ( isset( $address['zone'] ) ) ? $address['zone'] : '' ;

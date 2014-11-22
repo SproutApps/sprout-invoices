@@ -327,7 +327,7 @@ class SI_Estimates extends SI_Controller {
 
 	public static function update_post_data( $data = array(), $post = array() ) {
 		if ( $post['post_type'] == SI_Estimate::POST_TYPE ) {
-			$title = '';
+			$title = $post['post_title'];
 			if ( isset( $_POST['subject'] ) && $_POST['subject'] != '' ) {
 				$title = $_POST['subject'];
 			}
@@ -376,7 +376,7 @@ class SI_Estimates extends SI_Controller {
 			), FALSE );
 
 		// add the client modal
-		self::load_view( 'admin/meta-boxes/estimates/client-creation-modal', array( 'fields' => SI_Clients::form_fields( FALSE ) ) );
+		self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( FALSE ) ) );
 	}
 
 	/**
@@ -396,7 +396,7 @@ class SI_Estimates extends SI_Controller {
 		$expiration_o = ( isset( $_POST['expiration_o'] ) && $_POST['expiration_o'] != '' ) ? $_POST['expiration_o'] : '' ;
 		$estimate_id = ( isset( $_POST['estimate_id'] ) && $_POST['estimate_id'] != '' ) ? $_POST['estimate_id'] : '' ;
 		$po_number = ( isset( $_POST['po_number'] ) && $_POST['po_number'] != '' ) ? $_POST['po_number'] : '' ;
-		$client_id = ( isset( $_POST['client'] ) && $_POST['client'] != '' ) ? $_POST['client'] : '' ;
+		$client_id = ( isset( $_POST['sa_metabox_client'] ) && $_POST['sa_metabox_client'] != '' ) ? $_POST['sa_metabox_client'] : '' ;
 		$discount = ( isset( $_POST['discount'] ) && $_POST['discount'] != '' ) ? $_POST['discount'] : '' ;
 		$tax = ( isset( $_POST['tax'] ) && $_POST['tax'] != '' ) ? $_POST['tax'] : '' ;
 		$tax2 = ( isset( $_POST['tax2'] ) && $_POST['tax2'] != '' ) ? $_POST['tax2'] : '' ;
@@ -528,10 +528,6 @@ class SI_Estimates extends SI_Controller {
 			$sender_notes = ( isset( $_POST['sa_metabox_sender_note'] ) && $_POST['sa_metabox_sender_note'] != '' ) ? $_POST['sa_metabox_sender_note'] : '' ;
 		}
 		$estimate->set_sender_note( $sender_notes );
-
-		if ( !empty( $_POST['sa_metabox_recipients'] ) ) {
-			do_action( 'send_estimate', $estimate, $_POST['sa_metabox_recipients'] );
-		}
 	}
 
 	/**
@@ -621,25 +617,21 @@ class SI_Estimates extends SI_Controller {
 		if ( SI_Estimate::is_estimate_query() && is_single() ) {
 			if ( apply_filters( 'si_remove_scripts_styles_on_doc_pages', '__return_true' ) ) {
 				global $wp_scripts, $wp_styles;
-				$allowed_scripts = apply_filters( 'si_allowed_admin_doc_scripts', array( 'sprout_doc_scripts', 'qtip', 'dropdown' ) );
+				$allowed_scripts = apply_filters( 'si_allowed_doc_scripts', array( 'sprout_doc_scripts', 'qtip', 'dropdown' ) );
 				$allowed_admin_scripts = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_scripts ) );
-				foreach( $wp_scripts->queue as $handle ) {
-					if ( current_user_can( 'edit_posts' ) ) {
-						$wp_scripts->queue = $allowed_admin_scripts;
-					}
-					else {
-						$wp_scripts->queue = $allowed_scripts;
-					}
+				if ( current_user_can( 'edit_posts' ) ) {
+					$wp_scripts->queue = $allowed_admin_scripts;
+				}
+				else {
+					$wp_scripts->queue = $allowed_scripts;
 				}
 				$allowed_styles = apply_filters( 'si_allowed_admin_doc_scripts', array( 'sprout_doc_style', 'qtip', 'dropdown' ) );
 				$allowed_admin_styles = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_styles ) );
-				foreach( $wp_styles->queue as $handle ) {
-					if ( current_user_can( 'edit_posts' ) ) {
-						$wp_styles->queue = $allowed_admin_styles;
-					}
-					else {
-						$wp_styles->queue = $allowed_styles;
-					}
+				if ( current_user_can( 'edit_posts' ) ) {
+					$wp_styles->queue = $allowed_admin_styles;
+				}
+				else {
+					$wp_styles->queue = $allowed_styles;
 				}
 				do_action( 'si_doc_enqueue_filtered' );
 			}

@@ -2,7 +2,7 @@
 
 	<dt>
 		<span class="history_status creation_event"><?php si_e('Created') ?></span><br/>
-		<span class="history_date"><?php echo date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $post->post_date ) ) ?></span>
+		<span class="history_date"><?php echo date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $post->post_date ) ) ?></span>
 	</dt>
 
 	<dd><p>
@@ -21,7 +21,7 @@
 	<?php foreach ( $history as $item_id => $data ): ?>
 		<dt>
 			<span class="history_status <?php echo $data['status_type'] ?>"><?php echo $data['type']; ?></span><br/>
-			<span class="history_date"><?php echo date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
+			<span class="history_date"><?php echo date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
 		</dt>
 
 		<dd>

@@ -614,6 +614,30 @@ class SI_Notifications_Control extends SI_Controller {
 		return $to;
 	}
 
+	/**
+	 * Get associated client user ids
+	 * @param  object $doc Invoice/Estimate
+	 * @return array      
+	 */
+	public static function get_document_recipients( $doc ) {
+		$client = $doc->get_client();
+		$client_users = array();
+		// get the user ids associated with this doc.
+		if ( !is_wp_error( $client ) ) {
+			$client_users = $client->get_associated_users();
+		}
+		else { // no client associated
+			$user_id = $doc->get_user_id(); // check to see if a user id is associated
+			if ( $user_id ) {
+				$client_users = array( $user_id );
+			}
+		}
+		if ( is_wp_error( $client_users ) || !is_array( $client_users ) ) {
+			do_action( 'si_error', 'get_document_recipients ERROR', $client_users );
+		}
+		return $client_users;
+	}
+
 	//////////////////////////
 	// Shortcode callbacks //
 	//////////////////////////

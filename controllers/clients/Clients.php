@@ -39,6 +39,9 @@ class SI_Clients extends SI_Controller {
 
 			// AJAX
 			add_action( 'wp_ajax_sa_create_client',  array( __CLASS__, 'maybe_create_client' ), 10, 0 );
+			add_action( 'wp_ajax_sa_create_user',  array( __CLASS__, 'maybe_create_user' ), 10, 0 );
+
+			add_action( 'wp_ajax_sa_client_submit_metabox',  array( __CLASS__, 'submit_meta_box_view' ), 10, 0 );
 
 		}
 
@@ -150,6 +153,12 @@ class SI_Clients extends SI_Controller {
 				'invoices' => $client->get_invoices(),
 				'estimates' => $client->get_estimates(),
 			), FALSE );
+
+		add_thickbox();
+
+		// add the user creation modal
+		$fields = self::user_form_fields( $post->ID );
+		self::load_view( 'admin/meta-boxes/clients/create-user-modal', array( 'fields' => $fields ) );
 	}
 
 	/**
@@ -163,6 +172,7 @@ class SI_Clients extends SI_Controller {
 			self::load_view( 'admin/meta-boxes/clients/info', array(
 					'client' => $client,
 					'id' => $post->ID,
+					'associated_users' => $client->get_associated_users(),
 					'fields' => self::form_fields( FALSE, $client ),
 					'address' => $client->get_address(),
 					'website' => $client->get_website()
@@ -209,11 +219,30 @@ class SI_Clients extends SI_Controller {
 		$client = SI_Client::get_instance( $post_id );
 		$client->set_website( $website );
 		$client->set_address( $address );
+		
+		$user_id = 0;
+		// Attempt to create a user
+		if ( isset( $_POST['sa_metabox_email'] ) && $_POST['sa_metabox_email'] != '' ) {
+			$user_args = array(
+				'user_login' => self::esc__($_POST['sa_metabox_email']),
+				'display_name' => isset( $_POST['sa_metabox_name'] ) ? self::esc__($_POST['sa_metabox_name']) : self::esc__($_POST['sa_metabox_email']),
+				'user_pass' => wp_generate_password(), // random password
+				'user_email' => isset( $_POST['sa_metabox_email'] ) ? self::esc__($_POST['sa_metabox_email']) : '',
+				'first_name' => isset( $_POST['sa_metabox_first_name'] ) ? self::esc__($_POST['sa_metabox_first_name']) : '',
+				'last_name' => isset( $_POST['sa_metabox_last_name'] ) ? self::esc__($_POST['sa_metabox_last_name']) : '',
+				'user_url' => isset( $_POST['sa_metabox_website'] ) ? self::esc__($_POST['sa_metabox_website']) : ''
+			);
+			$user_id = self::create_user( $user_args );
+		}
+
+		if ( $user_id ) {
+			$client->add_associated_user($user_id);
+		}
 	}
 	
 	public static function update_post_data( $data = array(), $post = array() ) {
 		if ( $post['post_type'] == SI_Client::POST_TYPE ) {
-			$title = '';
+			$title = $post['post_title'];
 			if ( isset( $_POST['sa_metabox_name'] ) && $_POST['sa_metabox_name'] != '' ) {
 				$title = $_POST['sa_metabox_name'];
 			}
@@ -252,11 +281,12 @@ class SI_Clients extends SI_Controller {
 	 * @return                 
 	 */
 	public static function save_submit_meta_box( $post_id, $post, $callback_args, $estimate_id = NULL ) {
-		if ( !isset( $_POST['associated_users'] ) )
-			return;
 
 		$client = SI_Client::get_instance( $post_id );
 		$client->clear_associated_users();
+
+		if ( !isset( $_POST['associated_users'] ) )
+			return;
 
 		foreach ( $_POST['associated_users'] as $user_id ) {
 			$client->add_associated_user($user_id);
@@ -446,6 +476,7 @@ class SI_Clients extends SI_Controller {
 				$client_ids = SI_Client::get_clients_by_user( $id );
 				
 				if ( !empty( $client_ids ) ) {
+					$string = '';
 					foreach ( $client_ids as $client_id ) {
 						$string .= sprintf( self::__( '<a class="doc_link" title="%s" href="%s">%s</a>' ), get_the_title( $client_id ), get_edit_post_link( $client_id ), '<div class="dashicons dashicons-id-alt"></div>' );
 					}
@@ -493,6 +524,7 @@ class SI_Clients extends SI_Controller {
 			'label' => self::__( 'Email' ),
 			'type' => 'text',
 			'required' => $required,
+			'description' => self::__('This e-mail will be used to create a new client user. Leave blank if associating an existing user.'),
 			'default' => ''
 		);
 
@@ -514,6 +546,55 @@ class SI_Clients extends SI_Controller {
 		$fields = array_merge( $fields, self::get_standard_address_fields( $required ) );
 
 		$fields = apply_filters( 'si_client_form_fields', $fields );
+		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
+		return $fields;
+	}
+
+	public static function user_form_fields( $client_id = 0 ) {
+		$fields = array();
+		$fields['display_name'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Full Name & Title' ),
+			'type' => 'text',
+			'required' => FALSE,
+		);
+
+		$fields['email'] = array(
+			'weight' => 3,
+			'label' => self::__( 'Email' ),
+			'type' => 'text',
+			'required' => FALSE, // required but the modal will block updates
+			'default' => ''
+		);
+
+		$fields['first_name'] = array(
+			'weight' => 50,
+			'label' => self::__( 'First Name' ),
+			'placeholder' => self::__( 'First Name' ),
+			'type' => 'text',
+			'required' => FALSE,
+		);
+		$fields['last_name'] = array(
+			'weight' => 51,
+			'label' => self::__( 'Last Name' ),
+			'placeholder' => self::__( 'Last Name' ),
+			'type' => 'text',
+			'required' => FALSE,
+		);
+
+		$fields['client_id'] = array(
+			'type' => 'hidden',
+			'value' => $client_id,
+			'weight' => 10000
+		);
+
+		$fields['nonce'] = array(
+			'type' => 'hidden',
+			'value' => wp_create_nonce( self::SUBMISSION_NONCE ),
+			'weight' => 10000
+		);
+
+		$fields = apply_filters( 'si_user_form_fields', $fields );
 		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
 		return $fields;
 	}
@@ -552,6 +633,7 @@ class SI_Clients extends SI_Controller {
 			'default' => $money_format,
 			'options' => $required,
 			'options' => array_flip( self::$locales ),
+			'attributes' => array( 'class' => 'select2' ),
 			'description' => sprintf( self::__( 'Current format: %1$s. The default money formatting (%2$s) can be overridden for all client estimates and invoices here.' ), sa_get_formatted_money( rand( 11000, 9999999 ) ), '<code>'.get_locale().'</code>' )
 		);
 
@@ -815,6 +897,81 @@ class SI_Clients extends SI_Controller {
 		echo json_encode( $response );
 		exit();
 	}
+
+	/**
+	 * AJAX submission
+	 * @return  
+	 */
+	public static function maybe_create_user() {
+
+		// form maybe be serialized
+		if ( isset( $_REQUEST['serialized_fields'] ) ) {
+			foreach ( $_REQUEST['serialized_fields'] as $key => $data ) {
+				$_REQUEST[$data['name']] = $data['value'];
+			}
+		}
+
+		if ( !isset( $_REQUEST['sa_user_nonce'] ) )
+			self::ajax_fail( 'Forget something?' );
+
+		$nonce = $_REQUEST['sa_user_nonce'];
+		if ( !wp_verify_nonce( $nonce, self::SUBMISSION_NONCE ) )
+			self::ajax_fail( 'Not going to fall for it!' );
+
+		if ( !current_user_can( 'publish_posts' ) )
+			self::ajax_fail( 'User cannot create new posts!' );
+
+		$client = SI_Client::get_instance( $_REQUEST['sa_user_client_id'] );
+
+		// Attempt to create a user
+		if ( is_a( $client, 'SI_Client' ) && isset( $_REQUEST['sa_user_email'] ) && $_REQUEST['sa_user_email'] != '' ) {
+			$user_args = array(
+				'user_login' => self::esc__($_REQUEST['sa_user_email']),
+				'display_name' => isset( $_REQUEST['sa_user_display_name'] ) ? self::esc__($_REQUEST['sa_user_display_name']) : self::esc__($_REQUEST['sa_user_email']),
+				'user_pass' => wp_generate_password(), // random password
+				'user_email' => isset( $_REQUEST['sa_user_email'] ) ? self::esc__($_REQUEST['sa_user_email']) : '',
+				'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? self::esc__($_REQUEST['sa_user_first_name']) : '',
+				'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? self::esc__($_REQUEST['sa_user_last_name']) : ''
+			);
+			$user_id = self::create_user( $user_args );
+
+			$client->add_associated_user( $user_id );
+		}
+		else {
+			self::ajax_fail( 'An e-mail is required' );
+		}
+	}
+
+	////////////////
+	// AJAX View //
+	////////////////
+
+	/**
+	 * Meta box view
+	 * Abstracted to be called via AJAX
+	 * @param int $client_id 
+	 * 
+	 */
+	public static function submit_meta_box_view( $client_id = 0 ) {
+		if ( !current_user_can( 'edit_posts' ) )
+			self::ajax_fail( 'User cannot create new posts!' );
+
+		if ( !$client_id && isset( $_REQUEST['client_id'] ) ) {
+			$client_id = $_REQUEST['client_id'];
+		}
+
+		$client = SI_Client::get_instance( $client_id );
+
+		if ( !is_a( $client, 'SI_Client' ) ) {
+			self::ajax_fail( 'Client not found.' );
+		}
+
+		global $post;
+		$post = $client->get_post();
+		print self::show_submit_meta_box( $client->get_post(), array() );
+		exit();
+	}
+
 
 	//////////////
 	// Utility //

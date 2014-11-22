@@ -139,7 +139,7 @@ class SI_Records_Table extends WP_List_Table {
 	}
 
 	function column_recorded( $item ) {
-		$name = date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $item->post_date ) );
+		$name = date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $item->post_date ) );
 		echo $name;
 	}
 

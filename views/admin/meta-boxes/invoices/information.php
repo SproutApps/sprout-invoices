@@ -109,14 +109,14 @@ if ( 0 != $post->ID ) {
 
 	<div id="client_div" class="control_wrap hide-if-js">
 		<div class="client-wrap">
-			<select name="client">
+			<select name="sa_metabox_client" class="select2">
 				<option value="create_client"><?php si_e('Create client') ?></option>
 				<?php foreach ( $client_options as $id => $client_name ): ?>
 					<?php printf( '<option value="%s" %s>%s</option>', $id, selected( $id, $client_id, FALSE ), $client_name ) ?>
 				<?php endforeach ?>
 			</select>
 
-			<a href="#TB_inline?width=600&height=380&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox helptip" title="<?php si_e('Create new client') ?>"></a>
+			<a href="#TB_inline?width=600&height=380&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox tooltip" title="<?php si_e('Create new client') ?>"></a>
 
  		</div>
 		<p>
@@ -125,6 +125,7 @@ if ( 0 != $post->ID ) {
 		</p>
  	</div>
 </div>
+<?php do_action( 'doc_information_meta_box_client_row_after_client', $invoice ) ?>
 
 <?php if ( $estimate_id ): ?>
 	<!-- Invoice -->

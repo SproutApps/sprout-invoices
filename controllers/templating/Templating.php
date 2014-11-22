@@ -184,6 +184,7 @@ class SI_Templating_API extends SI_Controller {
 				$custom_path = ( $custom_template != '' ) ? 'invoice/'.$custom_template : '' ;
 				$template = self::locate_template( array(
 						$custom_path,
+						'invoice-'.get_locale().'.php',
 						'invoice.php',
 						'invoice/invoice.php',
 					), $template );
@@ -205,6 +206,7 @@ class SI_Templating_API extends SI_Controller {
 				$custom_path = ( $custom_template != '' ) ? 'estimate/'.$custom_template : '' ;
 				$template = self::locate_template( array(
 						$custom_path,
+						'estimate-'.get_locale().'.php',
 						'estimate.php',
 						'estimate/estimate.php',
 					), $template );

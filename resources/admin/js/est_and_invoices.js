@@ -1,20 +1,213 @@
-jQuery.noConflict();
+;(function( $, si, undefined ) {
 
-jQuery(function($) {
-	var SI = SI || {};
+	si.docEdit = {
+		config: {
+			inline_spinner: '<span class="spinner si_inline_spinner" style="display:inline-block;"></span>'	
+		},
+	};
+
+	/**
+	 * methods
+	 */
+	si.docEdit.init = function() {
+
+		/**
+		 * Use the nestable jquery plugin on the line items.
+		 */
+		$('#nestable').nestable({ 
+			maxDepth: 2,
+			listClass: 'items_list',
+			itemClass: 'item',
+			expandBtnHTML: '<button data-action="expand" type="button"></button>',
+			collapseBtnHTML: '<button data-action="collapse" type="button"></button>',
+			callback: function(l,e){
+				// l is the main container
+				// e is the element that was moved
+				modify_input_key();
+				handle_parents();
+				calculate_totals();
+			}
+		});
+
+		// sticky header
+		si.docEdit.stickySave();
+
+		// WYSIWYG
+		if ( si_js_object.premium ) {
+			$('.item:not(#line_item_default) .column_desc [name="line_item_desc[]"]').redactor();
+		};
+		
+		// Select permalink
+		$('#permalink-select').live( 'click', function(e) {
+			SelectText('permalink-select');
+		});
+
+		// Time importing
+		$('#time_import_question_answer').live( 'click', function(e) {
+			e.preventDefault();
+			si.docEdit.timeImportingButton( this );
+		});
+
+		// Time importing
+		$('#time_importing_project_selection select').live( 'change', function(e) {
+			e.preventDefault();
+			si.docEdit.timeImportingProjectSelected( this );
+		});
+
+		// Add initial item if none exist.
+		if ( $('#nestable > ol.items_list > li').length === 1 ) {
+			$('.item_add_type.item_add_no_type').trigger('click');
+		};
+
+		// Create private note
+		$("#save_private_note").on('click', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			si.docEdit.createNote( $( this ) );
+		});
+		
+		// Status updates
+		$("#quick_links .quick_status_update a.doc_status_change").live('click', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			si.docEdit.statusChange( $( this ) );
+		});
+
+		// scroll to send
+		$('#send_doc_quick_link').live( 'click', function(e) {
+			$('html, body').animate({
+				scrollTop: $("#si_doc_send").offset().top
+			}, 200);
+		});
 
 
-	$('#permalink-select').live( 'click', function(e) {
-		SelectText('permalink-select');
-	});
+	};
+
+	/**
+	 * Sticky header
+	 * @return {} 
+	 */
+	si.docEdit.stickySave = function() {
+		var $sticky_offest = ( $('body').hasClass('admin-bar') ) ? 30: 0;
+		$(".sticky_save").sticky( { topSpacing: $sticky_offest, center:true, className: 'stuck' } );
+	};
+
+	si.docEdit.timeImportingButton = function( button ) {
+		var $select_wrap = $('#time_importing_project_selection'),
+			$time_help = $('.add_time_help');
+		$(button).hide();
+		$time_help.hide();
+		$select_wrap.fadeIn();
+	};
+
+	si.docEdit.timeImportingProjectSelected = function( select ) {
+		var $select = $(select),
+			project_id = $select.val(),
+			nonce = $('#time_tracking_nonce').val(),
+			$info_project_span = $('#project b'),
+			$info_project_select = $('[name="doc_project"]');
+
+		$('span.inline_error_message').hide();
+		$select.after(si.docEdit.config.inline_spinner);
+		$.post( ajaxurl, { action: 'sa_projects_time', project_id: project_id, nonce: nonce, billable: true },
+			function( response ) {
+				$('.spinner').hide();
+				if ( response.error ) {
+					$select.after('<span class="inline_error_message">' + response.response + '</span>');	
+				}
+				else {
+					$.each( response, function(i, time) {
+						si.docEdit.timeAddItem( time );
+					});
+					$('#time_importing_project_selection').hide();
+					$('#time_import_question_answer').fadeIn();
+				}
+			}
+		);
+
+		// Update project dropdown if not other project is selected.
+		// This will cause the dropdown to default to the first project.
+		if ( $info_project_select.val() < 1 ) {
+			$info_project_select.val( project_id );
+			$info_project_span.text( $select.find('option:selected').text() );
+		};
+		
+		
+	};
+
+	si.docEdit.timeAddItem = function( time ) {
+		// clone the default line item.
+		var $row = $('#line_item_default').clone().attr('id','').attr('style',''),
+			$dropdown = $('#type_selection'),
+			description = time.description,
+			qty = time.qty,
+			rate = time.activity_rate,
+			tax = time.activity_tax;
+
+		$('#line_item_default').hide();
+
+		// remove any children
+		$($row).children('ol').remove();
+
+		// append the row to the list.
+		$('ol.items_list > li:last').after($row);
+
+		// clear out totals and inputs
+		$row.find('.column input').val('');
+
+		// Set the values
+		$row.find('.column_total span').html('');
+		$row.find('.column_desc textarea').val( description );
+		$row.find('[name="line_item_qty[]"]').val( qty );
+		$row.find('[name="line_item_rate[]"]').val( rate );
+		$row.find('[name="line_item_tax[]"]').val( tax );
+		$row.find('[name="line_item_time_id[]"]').val( time.id );
+
+		handle_parents();
+
+		// update key
+		modify_input_key();
+
+		// calculate
+		$row.find('.totalled_input').trigger('keyup');
+
+		// redactor
+		if ( si_js_object.premium ) {
+			$row.find('.column_desc [name="line_item_desc[]"]').redactor();
+		};
+		
+		return;
+	};
+
+	si.docEdit.createNote = function( $add_button ) {
+		var $post_id = $add_button.data( 'post-id' ),
+			$nonce = $add_button.data( 'nonce' ),
+			$private_note = $( '[name="private_note"]' ),
+			$add_button_og_text = $add_button.text();
+		$add_button.html( '' );
+		$add_button.append('<span class="spinner" style="display:block;"></span>');
+		$.post( ajaxurl, { action: 'sa_create_private_note', associated_id: $post_id, notes: $private_note.val(), private_note_nonce: $nonce },
+			function( data ) {
+				if ( data.id ) {
+					var dl = '<dt>' + data.type + '<br/>' + data.post_date + '</dt><dd><p>' + data.content + '</p></dd>';
+					$('#history_list').append( dl );
+					$private_note.val('');
+				}
+				else {
+					$add_button.after( '<p><code>' + data.error + '</code></p>' );
+				};
+
+				$add_button.html( $add_button_og_text );
+				return data;
+			}
+		);
+	};
 
 	/**
 	 * Status Updates
 	 */
-	jQuery("#quick_links .quick_status_update a.doc_status_change").live('click', function(e) {
-		e.preventDefault();
-		var $status_change_link = $( this ),
-			$status_button = $( this ).closest('.quick_status_update'),
+	si.docEdit.statusChange = function( $status_change_link ) {
+		var $status_button = $status_change_link.closest('.quick_status_update'),
 			$new_status = $status_change_link.data( 'status-change' ),
 			$new_status_title = $status_change_link.text(),
 			$id = $status_change_link.data( 'id' ),
@@ -54,13 +247,15 @@ jQuery(function($) {
 				return data;
 			}
 		);
-	});
+	};
 
-	$('#send_doc_quick_link').live( 'click', function(e) {
-		$('html, body').animate({
-			scrollTop: $("#si_doc_send").offset().top
-		}, 200);
-	});
+	///////////////////////
+	// TODO standardize //
+	///////////////////////
+
+	
+
+	
 
 	/**
 	 * Disable quick send if the form has changed.
@@ -181,7 +376,7 @@ jQuery(function($) {
 				$('.spinner').hide();
 				if ( data.error ) {
 					$('.spinner').hide();
-					$send_button.after('<span class="inline_error_message">' + data.response + '</span>');	
+					$save_button.after('<span class="inline_error_message">' + data.response + '</span>');	
 				}
 				else {
 					// close modal
@@ -190,8 +385,7 @@ jQuery(function($) {
 					$('#create_client_tb_link').hide();
 					// change option text
 					$('#client b').text(data.title);
-					// add the new option to the select option
-					$('[name="client"]').append($('<option/>', { 
+					$('[name="sa_metabox_client"]').append($('<option/>', { 
 							value: data.id,
 							text : data.title 
 						})).val(data.id);
@@ -211,39 +405,82 @@ jQuery(function($) {
 	});
 
 	/**
-	 * Create private note
+	 * Manage users for client list
 	 */
-	$("#save_private_note").on('click', function(e) {
+	$('#associated_users').live('change', function(e) {
+		var $user_id = $(this).select2('data').id,
+			$user_name = $(this).select2('data').text,
+			$option = $(this).find("option:selected"),
+			$edit_url = $option.data('url'),
+			$dl = $('#associated_users_list');
+
+		var user_item = '<li id="list_user_id-'+$user_id+'"><a href="'+$edit_url+'">'+$user_name+'</a> <a data-id="'+$user_id+'" class="remove_user del_button">X</a></li>';
+		
+		$dl.append( user_item );
+		$('#hidden_associated_users_list').append($('<input/>', {
+							type: 'hidden',
+							name: 'associated_users[]',
+							value: $user_id
+						}));
+	});
+
+	/**
+	 * Remove user and hidden option associated list
+	 */
+	$('.remove_user').live('click', function(e) {
+		var $user_id = $( this ).data('id');
+		$('#list_user_id-'+$user_id).remove();
+		$('#hidden_associated_users_list').find( '[value="'+$user_id+'"]' ).remove();
+	});
+
+	/**
+	 * Create user via ajax
+	 */
+	$('#create_user').live('click', function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		var $add_button = $( this ),
-			$post_id = $add_button.data( 'post-id' ),
-			$nonce = $add_button.data( 'nonce' ),
-			$private_note = $( '[name="private_note"]' ),
-			$add_button_og_text = $add_button.text();
-		$add_button.html( '' );
-		$add_button.append('<span class="spinner" style="display:block;"></span>');
-		$.post( ajaxurl, { action: 'sa_create_private_note', associated_id: $post_id, notes: $private_note.val(), private_note_nonce: $nonce },
+		var $save_button = $( this ),
+			$fields = $( "#user_create_form :input" ).serializeArray(),
+			$client_id = $( "#sa_user_client_id" ).val(),
+			$save_button_og_text = $save_button.text();
+
+		$save_button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$.post( ajaxurl, { action: 'sa_create_user', serialized_fields: $fields },
 			function( data ) {
-				if ( data.id ) {
-					var dl = '<dt>' + data.type + '<br/>' + data.post_date + '</dt><dd><p>' + data.content + '</p></dd>';
-					$('#history_list').append( dl );
-					$private_note.val('');
+				$('.spinner').hide();
+				if ( data.error ) {
+					$('.spinner').hide();
+					$save_button.after('<span class="inline_error_message">' + data.response + '</span>');	
 				}
 				else {
-					$add_button.after( '<p><code>' + data.error + '</code></p>' );
-				};
-
-				$add_button.html( $add_button_og_text );
-				return data;
+					refresh_client_submit_meta( $client_id );
+					self.parent.tb_remove();
+				}
 			}
 		);
 	});
 
 	/**
+	 * Refresh the client submit sidebar
+	 * @param  {int} $client_id 
+	 * @return {html}            
+	 */
+	function refresh_client_submit_meta ( $client_id ) {
+		var $submit_box = $('#si_client_submit .submitbox'),
+			$user_modal = $('#user_creation_modal');
+		$.post( ajaxurl, { action: 'sa_client_submit_metabox', client_id: $client_id },
+			function( data ) {
+				$user_modal.remove();
+				$submit_box.html(data);
+				$('#associated_users').select2();
+			}
+		);
+	};
+
+	/**
 	 * Add an admin payment
 	 */
-	$("#add_admin_payments").on('click', function(e) {
+	$("#add_admin_payments").live('click', function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 		var $send_button = $(this),
@@ -275,24 +512,6 @@ jQuery(function($) {
 	calculate_parent_line_item_totals();
 
 	/**
-	 * Use the nestable jquery plugin on the line items.
-	 */
-	$('#nestable').nestable({ 
-		maxDepth: 2,
-		listClass: 'items_list',
-		itemClass: 'item',
-		expandBtnHTML: '<button data-action="expand" type="button"></button>',
-		collapseBtnHTML: '<button data-action="collapse" type="button"></button>',
-		callback: function(l,e){
-			// l is the main container
-			// e is the element that was moved
-			modify_input_key();
-			handle_parents();
-			calculate_totals();
-		}
-	});
-
-	/**
 	 * Add a line items
 	 * @return {} 
 	 */
@@ -305,7 +524,7 @@ jQuery(function($) {
 		// remove any children
 		$($row).children('ol').remove();
 		// append the row to the list.
-		$('ol.items_list li:last').after($row);
+		$('ol.items_list > li:last').after($row);
 		// clear out totals and inputs
 		$row.find('.column input').val('');
 		//$row.find('.column textarea').val('');
@@ -316,6 +535,13 @@ jQuery(function($) {
 		modify_input_key();
 		// hide the dropdown
 		$('#type_selection').dropdown('hide');
+
+		// Add the redactor
+		if ( si_js_object.premium ) {
+			$row.find('.column_desc [name="line_item_desc[]"]').redactor();
+		};
+		
+
 		return false;
 	});
 
@@ -623,4 +849,10 @@ jQuery(function($) {
 		});
 	}
 
+
+})( jQuery, window.si = window.si || {} );
+
+// Init
+jQuery(function() {
+	si.docEdit.init();
 });

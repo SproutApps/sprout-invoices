@@ -44,6 +44,24 @@ class Test_Payments extends WP_UnitTestCase {
 		$this->invoice->set_line_items( $line_items );
 	}
 
+	function test_deposit_conversion() {
+		// Copy of Stripe
+		$deposit = '1,001230.01';
+		// strip out commas
+		$value = preg_replace( "/\,/i", "", $deposit );
+		// strip out all but numbers, dash, and dot
+		$value = preg_replace( "/([^0-9\.\-])/i", "", $value );
+		// make sure we are dealing with a proper number now, no +.4393 or 3...304 or 76.5895,94
+		if ( !is_numeric( $value ) ) {
+			$this->assertEquals( FALSE, TRUE );
+		}
+		// convert to a float explicitly
+		$value = (float)$value;
+		$converted = round( $value, 2 )*100;
+
+		$this->assertEquals( 100123001, $converted );
+	}
+
 	function test_add_payment_deposit() {
 		$total = $this->invoice->get_calculated_total();
 		$deposit = si_get_number_format( $total/3 ); // pay 1/3

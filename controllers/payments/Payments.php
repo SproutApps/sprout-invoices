@@ -93,7 +93,7 @@ class SI_Payments extends SI_Controller {
 		$payment->set_status( SI_Payment::STATUS_VOID );
 		$payment->set_payment_method( self::__( 'Admin Void' ) );
 		// Merge old data with new updated message
-		$new_data = wp_parse_args( $payment->get_data(), array( 'void_notes' => $new_data, 'updated' => sprintf( self::__( 'Voided by User #%s on %s' ), get_current_user_id(), date( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ) ) ) ) );
+		$new_data = wp_parse_args( $payment->get_data(), array( 'void_notes' => $new_data, 'updated' => sprintf( self::__( 'Voided by User #%s on %s' ), get_current_user_id(), date_i18n( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ) ) ) ) );
 		$payment->set_data( $new_data );
 
 		add_action( 'si_void_payment', $payment_id, $new_data );

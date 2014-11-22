@@ -56,7 +56,7 @@
 									<b><?php self::_e('Latest Updates') ?></b> 
 									<ul>
 										<?php foreach ( $invoices->posts as $invoice_id ): ?>
-											<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php echo date( get_option( 'date_format' ), get_post_modified_time( 'U', false, $invoice_id ) ) ?></li>
+											<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_modified_time( 'U', false, $invoice_id ) ) ?></li>
 										<?php endforeach ?>
 									</ul>
 								<?php else: ?>
@@ -86,7 +86,7 @@
 									<b><?php self::_e('Overdue &amp; Unpaid') ?></b> 
 									<ul>
 										<?php foreach ( $invoices->posts as $invoice_id ): ?>
-											<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php printf( self::__('Due: %s'), date( get_option('date_format'), si_get_invoice_due_date( $invoice_id ) ) ) ?></li>
+											<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php printf( self::__('Due: %s'), date_i18n( get_option('date_format'), si_get_invoice_due_date( $invoice_id ) ) ) ?></li>
 										<?php endforeach ?>
 									</ul>
 								<?php else: ?>
@@ -230,7 +230,7 @@
 									<b><?php self::_e('Latest Updates') ?></b> 
 									<ul>
 										<?php foreach ( $estimates->posts as $estimate_id ): ?>
-											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date( get_option( 'date_format' ), get_post_modified_time( 'U', false, $estimate_id ) ) ?></li>
+											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_modified_time( 'U', false, $estimate_id ) ) ?></li>
 										<?php endforeach ?>
 									</ul>
 								<?php else: ?>
@@ -253,7 +253,7 @@
 									<b><?php self::_e('Recent Requests') ?></b> 
 									<ul>
 										<?php foreach ( $estimates->posts as $estimate_id ): ?>
-											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date( get_option( 'date_format' ), get_post_time( 'U', false, $estimate_id ) ) ?></li>
+											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, $estimate_id ) ) ?></li>
 										<?php endforeach ?>
 									</ul>
 								<?php else: ?>
@@ -277,7 +277,7 @@
 									<b><?php self::_e('Recent Declined') ?></b> 
 									<ul>
 										<?php foreach ( $estimates->posts as $estimate_id ): ?>
-											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date( get_option( 'date_format' ), get_post_time( 'U', false, $estimate_id ) ) ?></li>
+											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, $estimate_id ) ) ?></li>
 										<?php endforeach ?>
 									</ul>
 								<?php else: ?>
@@ -307,7 +307,7 @@
 									<b><?php self::_e('Expired &amp; Pending') ?></b> 
 									<ul>
 										<?php foreach ( $estimates->posts as $estimate_id ): ?>
-											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php printf( self::__('Expired: %s'), date( get_option('date_format'), si_get_estimate_expiration_date( $estimate_id ) ) ) ?></li>
+											<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php printf( self::__('Expired: %s'), date_i18n( get_option('date_format'), si_get_estimate_expiration_date( $estimate_id ) ) ) ?></li>
 										<?php endforeach ?>
 									</ul>
 								<?php else: ?>

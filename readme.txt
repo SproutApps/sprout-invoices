@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.1.6
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,7 @@ Make sure to checkout the [Sprout Invoices](https://sproutapps.co/sprout-invoice
 * Unlimited Invoices, Estimates and Clients. No restrictions!
 * Fully [customizable templates](https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/) with your own theme.
 * [Payment management](https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/).
+* [Time Tracking and Projects](https://sproutapps.co/sprout-invoices/projects-time-tracking-sprout-invoices/).
 * [Advanced Reporting](https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/) (limited w/ free version)
 * [Client management](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/).
 * [Multi-currency support with client specific options](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients-options/).
@@ -49,7 +50,6 @@ Make sure to checkout the [Sprout Invoices](https://sproutapps.co/sprout-invoice
 
 The short list...
 
-* Time tracking (coming soon)
 * Recurring payments (coming soon)
 * Payment terms (coming soon)
 
@@ -119,12 +119,19 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
-= 1.1.6 =
+= 2.0 =
 
-* _Bug Fixes:_
-	* Prevent post save looping on some hosts
+* _NEW:_
+	* Projects
+	* Time Tracking (premium version)
+	* WYSIWYG for line items (premium version)
+
 * _Changes:_
-	* Customizer compatibility for logo uploading.
+	* Improved Client management
+	* Easier user assignment and creation for Clients
+	* Streamlined Invoice and Estimate edit UI
+	* Freshened editing and management all around
+	* New possibilities for add-ons
 
 = 1.1.5 =
 

@@ -127,7 +127,7 @@
 						<tr> 
 							<td><?php the_ID() ?></td>
 							<td><?php printf( '<a href="%s">%s</a>', get_edit_post_link( get_the_ID() ), get_the_title( get_the_ID() ) ) ?></td>
-							<td><?php echo date( get_option('date_format'), strtotime( $client->get_post_date() ) ) ?></td>
+							<td><?php echo date_i18n( get_option('date_format'), strtotime( $client->get_post_date() ) ) ?></td>
 							<td><?php echo $number_estimate ?></td>
 							<td><?php echo $number_estimate_complete ?></td>
 							<td><?php echo $number_invoices ?></td>

@@ -58,7 +58,7 @@ if ( 0 != $post->ID ) {
 
 <!-- expiration date -->
 <div class="misc-pub-section" data-edit-id="expiration_date" data-edit-type="date">
-	<span id="expiration_date" class="wp-media-buttons-icon"><?php si_e('Expire on:') ?> <b><?php echo date( 'M j, Y', $expiration_date ) ?></b></span>
+	<span id="expiration_date" class="wp-media-buttons-icon"><?php si_e('Expire on:') ?> <b><?php echo date_i18n( 'M j, Y', $expiration_date ) ?></b></span>
 
 	<a href="#edit_expiration_date" class="edit-expiration_date hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit expiration date and time') ?></span>
@@ -109,7 +109,7 @@ if ( 0 != $post->ID ) {
 
 	<div id="client_div" class="control_wrap hide-if-js">
 		<div class="client-wrap">
-			<select name="client">
+			<select name="sa_metabox_client" class="select2">
 				<option value="create_client"><?php si_e('Create client') ?></option>
 				<?php foreach ( $client_options as $id => $client_name ): ?>
 					<?php printf( '<option value="%s" %s>%s</option>', $id, selected( $id, $client_id, FALSE ), $client_name ) ?>
@@ -125,6 +125,8 @@ if ( 0 != $post->ID ) {
 		</p>
  	</div>
 </div>
+<?php do_action( 'doc_information_meta_box_client_row_after_client', $estimate ) ?>
+
 <?php if ( $invoice_id ): ?>
 	<!-- Invoice -->
 	<div class="misc-pub-section" data-edit-id="invoice_id">

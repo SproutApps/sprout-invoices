@@ -164,7 +164,7 @@ function si_invoice_issue_date( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_invoice_issue_date', date( get_option('date_format'), si_get_invoice_issue_date($id) ), $id );
+	echo apply_filters( 'si_invoice_issue_date', date_i18n( get_option('date_format'), si_get_invoice_issue_date($id) ), $id );
 }
 endif;
 
@@ -195,7 +195,7 @@ function si_invoice_due_date( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_invoice_due_date', date( get_option('date_format'), si_get_invoice_due_date($id) ), $id );
+	echo apply_filters( 'si_invoice_due_date', date_i18n( get_option('date_format'), si_get_invoice_due_date($id) ), $id );
 }
 endif;
 
@@ -226,7 +226,7 @@ function si_invoice_expiration_date( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_invoice_expiration_date', date( get_option('date_format'), si_get_invoice_expiration_date($id) ), $id );
+	echo apply_filters( 'si_invoice_expiration_date', date_i18n( get_option('date_format'), si_get_invoice_expiration_date($id) ), $id );
 }
 endif;
 

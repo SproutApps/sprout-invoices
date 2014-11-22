@@ -74,7 +74,8 @@ class SI_Reporting extends SI_Controller {
 	}
 
 	public static function reports_dashboard() {
-		switch ( isset( $_GET[self::REPORT_QV] ) && $_GET[self::REPORT_QV] ) {
+		$report_dash = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : FALSE ;
+		switch ( $report_dash ) {
 			case 'invoices':
 				self::load_view( 'admin/reports/invoices.php', array() );
 				break;
@@ -165,7 +166,7 @@ class SI_Reporting extends SI_Controller {
 			);
 		$data = self::total_invoice_data_by_date_segment();
 		foreach ( $data as $segment => $seg_data ) {
-			$return['labels'][] = date( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
 			$return['invoices'][] = $seg_data['totals'];
 			$return['payments'][] = $seg_data['paid'];
 		}
@@ -188,7 +189,7 @@ class SI_Reporting extends SI_Controller {
 			);
 		$data = self::total_invoice_data_by_date_segment();
 		foreach ( $data as $segment => $seg_data ) {
-			$return['labels'][] = date( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
 			$return['payments'][] = $seg_data['paid'];
 			$return['balances'][] = $seg_data['balance'];
 		}
@@ -212,7 +213,7 @@ class SI_Reporting extends SI_Controller {
 		$inv_data = self::total_invoice_data_by_date_segment();
 		$est_data = self::total_estimate_data_by_date_segment();
 		foreach ( $inv_data as $segment => $seg_data ) {
-			$return['labels'][] = date( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
 			$return['invoices'][] = $seg_data['invoices'];
 			$return['estimates'][] = $est_data[$segment]['estimates'];
 		}
@@ -235,7 +236,7 @@ class SI_Reporting extends SI_Controller {
 			);
 		$est_data = self::total_estimate_data_by_date_segment();
 		foreach ( $est_data as $segment => $seg_data ) {
-			$return['labels'][] = date( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
 			$return['requests'][] = $seg_data['requests'];
 			$return['invoices_generated'][] = $seg_data['invoices_generated'];
 		}
@@ -439,7 +440,7 @@ class SI_Reporting extends SI_Controller {
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('this Sunday') )-time();
+					$expire = strtotime( date( "Y-m-t" ), strtotime('this Sunday') )-current_time('timestamp');
 					break;
 				case 'lastweek':
 					$args['date_query'] = array(
@@ -448,7 +449,7 @@ class SI_Reporting extends SI_Controller {
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('this Sunday') )-time();
+					$expire = strtotime( date( "Y-m-t" ), strtotime('this Sunday') )-current_time('timestamp');
 					break;
 				case 'month':
 					$args['date_query'] = array(
@@ -457,7 +458,7 @@ class SI_Reporting extends SI_Controller {
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ) )-time();
+					$expire = strtotime( date( "Y-m-t" ) )-current_time('timestamp');
 					break;
 				case 'lastmonth':
 					$args['date_query'] = array(
@@ -466,7 +467,7 @@ class SI_Reporting extends SI_Controller {
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ) )-time();
+					$expire = strtotime( date( "Y-m-t" ) )-current_time('timestamp');
 					break;
 				case 'year':
 					$args['date_query'] = array(
@@ -475,7 +476,7 @@ class SI_Reporting extends SI_Controller {
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('12/31') )-time();
+					$expire = strtotime( date( "Y-m-t" ), strtotime('12/31') )-current_time('timestamp');
 					break;
 				case 'lastyear':
 					$args['date_query'] = array(
@@ -484,7 +485,7 @@ class SI_Reporting extends SI_Controller {
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('12/31') )-time();
+					$expire = strtotime( date( "Y-m-t" ), strtotime('12/31') )-current_time('timestamp');
 					break;
 				default:
 					break;
@@ -724,7 +725,6 @@ class SI_Reporting extends SI_Controller {
 		}
 		return array_reverse( $stretch );
 	}
-
 
 	public static function add_link_to_admin_bar( $items ) {
 		$items[] = array(

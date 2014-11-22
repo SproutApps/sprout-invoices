@@ -234,6 +234,7 @@ endif;
  * @return string                 
  */
 function si_get_number_format( $value = 1, $dec_point = '.' , $thousands_sep = '' ) {
+	// TODO possibly use number_format_i18n.
 	$fraction = ( is_null($dec_point) || !$dec_point ) ? 0 : 2 ;
 	return apply_filters( 'si_get_number_format', number_format( floatval( $value ), $fraction, $dec_point, $thousands_sep ) );
 }
@@ -354,6 +355,10 @@ if ( !function_exists( 'pp' ) ) {
 		}
 
 		return implode( $sep, $msgs );
+	}
+
+	function wpbt() {
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, FALSE ), TRUE ) );
 	}
 }
 

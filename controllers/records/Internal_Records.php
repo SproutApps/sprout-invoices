@@ -22,7 +22,7 @@ class SI_Internal_Records extends SI_Controller {
 
 		add_action( 'admin_menu', array( __CLASS__, 'add_admin_page' ), 10, 0 );
 
-		add_action( 'delete_post', array( __CLASS__, 'attempt_associated_record_deletion' ) );
+		add_action( 'deleted_post', array( __CLASS__, 'attempt_associated_record_deletion' ) );
 
 		self::add_admin_page();
 	}

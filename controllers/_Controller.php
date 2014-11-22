@@ -794,12 +794,17 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function register_resources() {
 		// admin js
-		wp_register_script( 'si_admin', SI_URL . '/resources/admin/js/sprout_invoice.js', array( 'jquery' ), self::SI_VERSION );
+		wp_register_script( 'si_admin', SI_URL . '/resources/admin/js/sprout_invoice.js', array( 'jquery', 'qtip', 'select2' ), self::SI_VERSION );
 
 		// Item management
 		wp_register_script( 'nestable', SI_URL . '/resources/admin/js/nestable.js', array( 'jquery' ), self::SI_VERSION );
-		wp_register_script( 'si_admin_est_and_invoices', SI_URL . '/resources/admin/js/est_and_invoices.js', array( 'jquery', 'nestable' ), self::SI_VERSION );
+		wp_register_script( 'sticky', SI_URL . '/resources/admin/js/sticky.js', array( 'jquery' ), self::SI_VERSION );
+		wp_register_script( 'si_admin_est_and_invoices', SI_URL . '/resources/admin/js/est_and_invoices.js', array( 'jquery', 'nestable', 'sticky' ), self::SI_VERSION );
 		wp_register_style( 'sprout_invoice_admin_css', SI_URL . '/resources/admin/css/sprout-invoice.css', array(), self::SI_VERSION  );
+
+		// Redactor
+		wp_register_script( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.min.js', array( 'jquery' ), self::SI_VERSION );
+		wp_register_style( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.css', array(), self::SI_VERSION  );
 
 		// Select2
 		wp_register_style( 'select2_css', SI_URL . '/resources/admin/plugins/select2/select2.css', null, false, false );
@@ -853,13 +858,22 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'updating_string' => self::__( 'Updating...' ),
 			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
 			'done_string' => self::__( 'Finished!' ),
-			'security' => wp_create_nonce( self::NONCE )
+			'security' => wp_create_nonce( self::NONCE ),
+			'premium' => ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) ? true : false,
 		);
 
 		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
 		if ( ( isset( $_GET['post_type'] ) && ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == $_GET['post_type'] ) || ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == get_post_type( $post_id ) ) {
+			
+			if ( !SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
+				wp_enqueue_script( 'redactor' );
+				wp_enqueue_style( 'redactor' );
+			}
+
 			wp_enqueue_script( 'nestable' );
+			wp_enqueue_script( 'sticky' );
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
+
 			// add doc info
 			$si_js_object += array(
 				'doc_status' => get_post_status( get_the_id() )
@@ -867,11 +881,12 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		if ( ( isset( $_GET['post_type'] ) && SI_Client::POST_TYPE == $_GET['post_type'] ) || SI_Client::POST_TYPE == get_post_type( $post_id ) ) {
-			wp_enqueue_script( 'select2' );
-			wp_enqueue_style( 'select2_css' );
+			// only clients admin
 		}
 
 		wp_enqueue_script( 'qtip' );
+		wp_enqueue_script( 'select2' );
+		wp_enqueue_style( 'select2_css' );
 		wp_enqueue_script( 'si_admin' );
 		
 		wp_enqueue_style( 'qtip' );
@@ -1399,7 +1414,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'weight' => 75,
 			'label' => self::__( 'State' ),
 			'type' => 'select-state',
-			'options' => self::get_state_options( array( 'include_option_none' => ' -- '.self::__( 'State' ).' -- ' ) ),
+			'options' => self::get_state_options(),
+			'attributes' => array( 'class' => 'select2' ),
 			'required' => $required
 		); // FUTURE: Add some JavaScript to switch between select box/text-field depending on country
 
@@ -1408,7 +1424,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'label' => self::__( 'Country' ),
 			'type' => 'select',
 			'required' => $required,
-			'options' => self::get_country_options( array( 'include_option_none' => ' -- '.self::__( 'Country' ).' -- ' ) )
+			'options' => self::get_country_options( array( 'include_option_none' => ' -- '.self::__( 'Country' ).' -- ' ) ),
+			'attributes' => array( 'class' => 'select2' ),
 		);
 		return apply_filters( 'si_get_standard_address_fields', $fields, $required, $user_id );
 	}

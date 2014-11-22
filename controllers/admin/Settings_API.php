@@ -378,7 +378,7 @@ class SA_Settings_API extends SI_Controller {
 			<textarea type="textarea" name="<?php echo $name; ?>" id="<?php echo $name; ?>" rows="<?php echo isset( $data['rows'] )?$data['rows']:4; ?>" cols="<?php echo isset( $data['cols'] )?$data['cols']:40; ?>" class="small-text code" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>><?php echo $data['default']; ?></textarea>
 		<?php elseif ( $data['type'] == 'wysiwyg' ): ?>
 			<?php
-				wp_editor( $data['default'], $name, array( 'textarea_rows' => 10 ) ); ?>
+				wp_editor_styleless( $data['default'], $name, array( 'textarea_rows' => 10 ) ); ?>
 		<?php elseif ( $data['type'] == 'select-state' ):  // FUTURE AJAX based on country selection  ?>
 			<select type="select" name="<?php echo $name; ?>" id="<?php echo $name; ?>" class="regular-text" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
 				<?php foreach ( $data['options'] as $group => $states ) : ?>

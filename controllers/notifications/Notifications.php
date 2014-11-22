@@ -313,25 +313,14 @@ class SI_Notifications extends SI_Notifications_Control {
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		if ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_balance() < 0.01 ) { // leave a bit of room for floating point arithmetic
 			$client = $invoice->get_client();
-			// get the user ids associated with this doc.
-			if ( !is_wp_error( $client ) ) {
-				$client_users = $client->get_associated_users();
-			}
-			else { // no client associated
-				$user_id = $invoice->get_user_id(); // check to see if a user id is associated
-				if ( !$user_id ) {
-					return;
-				}
-				$client = 0;
-				$client_users = array( $user_id );
-			}
+			$client_users = self::get_document_recipients( $invoice );
 			foreach ( array_unique( $client_users ) as $user_id ) {
 				if ( ! is_wp_error( $user_id ) ) {
 					$to = self::get_user_email( $user_id );
 					$data = array(
 						'payment' => $payment,
 						'invoice' => $invoice,
-						'client' => $client,
+						'client' => ( is_a( $client, 'SI_Client' ) ) ? $client : 0,
 						'to' => $to
 					);
 					self::send_notification( 'final_payment', $data, $to );
@@ -453,7 +442,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	 */
 	public static function shortcode_date( $atts, $content, $code, $data ) {
 		$atts = shortcode_atts( array( 'format' => get_option( 'date_format' ) ), $atts );
-		return date( $atts['format'], current_time( 'timestamp' ) );
+		return date_i18n( $atts['format'], current_time( 'timestamp' ) );
 	}
 
 	/**
@@ -797,7 +786,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		$date = '';
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$timestamp = $data['invoice']->get_issue_date();
-			$date = date( get_option('date_format'), $timestamp );
+			$date = date_i18n( get_option('date_format'), $timestamp );
 		}
 		return $date;
 	}
@@ -815,7 +804,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		$date = '';
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$timestamp = $data['invoice']->get_due_date();
-			$date = date( get_option('date_format'), $timestamp );
+			$date = date_i18n( get_option('date_format'), $timestamp );
 		}
 		return $date;
 	}
@@ -1086,7 +1075,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		$date = '';
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$timestamp = $data['estimate']->get_issue_date();
-			$date = date( get_option('date_format'), $timestamp );
+			$date = date_i18n( get_option('date_format'), $timestamp );
 		}
 		return $date;
 	}

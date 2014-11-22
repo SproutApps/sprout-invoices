@@ -126,11 +126,23 @@
 	content: "\f112";
 }
 
-#wp-admin-bar-si_menu .icon-sproutapps-flat:before {
-    font-size: 2em;
-    float: left;
-    margin-top: 2px;
-    margin-right: 2px;
+#time_import_question_answer_upgrade:before,
+#time_import_question_answer:before {
+	font-family: 'dashicons';
+	vertical-align: top;
+    margin-right: 4px;
+	content: "\f321"
+}
+
+
+#wpadminbar #wp-admin-bar-si_menu .icon-sproutapps-flat.ab-icon {
+	font-size: 2em !important;
+	top: -2px;
+}
+
+#wpadminbar #wp-admin-bar-si_time_tracker .ab-icon {
+	top: 2px;
+	left: 4px;	
 }
 /**
  * Misc
@@ -204,6 +216,143 @@ form.si_settings_form table .wp-editor-wrap {
 	max-width: 600px;
 }
 
+.select2 {
+	min-width: 210px;
+}
+
+.del_button {
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	float: left;
+	text-indent: 0;
+	overflow: hidden;
+	position: absolute;
+}
+.del_button:before {
+	background: 0 0;
+	color: #bbb;
+	content: '\f153';
+	display: block!important;
+	font: 400 16px/1 dashicons;
+	speak: none;
+	height: 20px;
+	text-align: center;
+	width: 20px;
+	-webkit-font-smoothing: antialiased!important;
+}
+
+/**
+ * General
+ */
+
+.td_center {
+	vertical-align: center;
+	text-align: center;
+}
+
+/**
+ * Tables
+ */
+ 
+table.sa_table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: none;
+}
+.sa_table td, 
+.sa_table th {
+  padding: 0;
+  border: none;
+}
+ 
+.sa_table {
+  max-width: 100%;
+  background-color: transparent;
+}
+.sa_table th {
+  text-align: left;
+}
+.table.sa_table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.table.sa_table > thead > tr > th, 
+.table.sa_table > tbody > tr > th, 
+.table.sa_table > tfoot > tr > th, 
+.table.sa_table > thead > tr > td, 
+.table.sa_table > tbody > tr > td, 
+.table.sa_table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+.table.sa_table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+.table.sa_table > caption + thead > tr:first-child > th, 
+.table.sa_table > colgroup + thead > tr:first-child > th, 
+.table.sa_table > thead:first-child > tr:first-child > th, 
+.table.sa_table > caption + thead > tr:first-child > td, 
+.table.sa_table > colgroup + thead > tr:first-child > td, 
+.table.sa_table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.table.sa_table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+.table.sa_table .table.sa_table {
+  background-color: #fff;
+}
+.table.sa_table-condensed > thead > tr > th, 
+.table.sa_table-condensed > tbody > tr > th, 
+.table.sa_table-condensed > tfoot > tr > th, 
+.table.sa_table-condensed > thead > tr > td, 
+.table.sa_table-condensed > tbody > tr > td, 
+.table.sa_table-condensed > tfoot > tr > td {
+  padding: 5px;
+}
+.table.sa_table-bordered {
+  border: 1px solid #ddd;
+}
+.table.sa_table-bordered > thead > tr > th, 
+.table.sa_table-bordered > tbody > tr > th, 
+.table.sa_table-bordered > tfoot > tr > th, 
+.table.sa_table-bordered > thead > tr > td, 
+.table.sa_table-bordered > tbody > tr > td, 
+.table.sa_table-bordered > tfoot > tr > td {
+  border: 1px solid #ddd;
+}
+.table.sa_table-bordered > thead > tr > th, 
+.table.sa_table-bordered > thead > tr > td {
+  border-bottom-width: 2px;
+}
+.table.sa_table-striped > tbody > tr:nth-child(odd) > td, 
+.table.sa_table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+.table.sa_table-hover > tbody > tr:hover > td, 
+.table.sa_table-hover > tbody > tr:hover > th {
+  background-color: #f5f5f5;
+}
+.sa_table col[class*="col-"] {
+  position: static;
+  display: .sa_table-column;
+  float: none;
+}
+.sa_table td[class*="col-"], 
+.sa_table th[class*="col-"] {
+  position: static;
+  display: .sa_table-cell;
+  float: none;
+}
+
+.table.sa_table td p {
+	margin-top: 0px;
+}
 /**
  * Copy of button-large
  */
@@ -471,6 +620,10 @@ span.inline_success_message {
 	content: "\f337"
 }
 
+.postbox span#project:before {
+	content: "\f308"
+}
+
 .postbox span#discount:before {
 	content: '\f313'
 }
@@ -494,6 +647,7 @@ span.inline_success_message {
 	top: 5px
 }
 
+#si_project_submit #major-publishing-actions,
 #si_client_submit #major-publishing-actions {
 	margin-right: -12px;
 	margin-left: -12px;
@@ -830,6 +984,10 @@ span.status_change {
 	clear: both;
 }
 
+div#invoice_status_updates-sticky-wrapper {
+	width: auto !important;
+}
+
 #line_items_totals {
 	text-align: right
 }
@@ -1083,7 +1241,7 @@ span.status_change {
 	padding: .5em
 }
 
-#si_estimate_history dt,#si_client_history dt,#si_invoice_history dt {
+#si_estimate_history dt,#si_client_history dt,#si_invoice_history dt, #si_project_history dt {
 	float: left;
 	clear: left;
 	width: 200px;
@@ -1092,14 +1250,14 @@ span.status_change {
 }
 
 #private_note_wrap {
-	margin-left: 60px
+	margin-left: 30px
 }
 
-#si_estimate_history dt:after,#si_client_history dt:after,#si_invoice_history dt:after {
+#si_estimate_history dt:after,#si_client_history dt:after,#si_invoice_history dt:after, #si_project_history dt:after {
 	content: ":"
 }
 
-#si_estimate_history dd,#si_client_history dd,#si_invoice_history dd {
+#si_estimate_history dd,#si_client_history dd,#si_invoice_history dd, #si_project_history dd {
 	margin: 0 0 0 210px;
 	padding: 0 0 .5em
 }
@@ -1250,7 +1408,18 @@ dt span.creation_event:before {
 .admin_fields .form-group {
 	display: block;
 	clear: both;
-	padding: 5px 0
+	padding: 10px 0
+}
+.admin_fields .form-group.hidden {
+	display: none;
+}
+.form-group:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
 }
 
 .admin_fields .label_wrap {
@@ -1261,6 +1430,9 @@ dt span.creation_event:before {
 	margin-right: 10px;
 	width: 130px
 }
+.admin_fields .checkbox.input_wrap {
+	margin-left: 141px;
+}
 
 .admin_fields .input_wrap {
 	float: left;
@@ -1268,43 +1440,57 @@ dt span.creation_event:before {
 	width: 440px
 }
 
-#client_create_form .sa-control-group {
+#client_create_form .sa-control-group,
+#user_create_form .sa-control-group {
 	display: inline-block;
 	width: 45%;
 	float: left;
 	margin: 10px 25px 10px 0
 }
 
-#client_create_form .label_wrap {
+#client_create_form .label_wrap,
+#user_create_form .label_wrap {
 	display: none;
 }
 
-#client_create_form input, #client_create_form select, #client_create_form textarea {
+#client_create_form input, #client_create_form select, #client_create_form textarea,
+#user_create_form input, #user_create_form select, #user_create_form textarea {
 	width: 100%
 }
 
-#client_create_form textarea {
+#client_create_form textarea,
+#user_create_form textarea {
 	height: 5.2em
 }
 
-#si_estimate_notes .inside h3,#si_invoice_notes .inside h3 {
+#si_estimate_notes .inside h3,
+#si_invoice_notes .inside h3,
+#si_project_information .inside h3 {
 	margin-top: 2.5em;
 	margin-bottom: -2.5em;
+	padding-left: 0px;
 	border: none;
 	z-index: 100;
 	position: relative;
 	width: 200px
 }
 
-#si_estimate_notes .inside h3:hover,#si_invoice_notes .inside h3:hover {
+#si_estimate_notes .inside h3:hover,
+#si_invoice_notes .inside h3:hover,
+#si_project_information .inside h3:hover {
 	cursor: inherit
 }
-
-#si_client_submit dl {
+#si_project_information #wp-content-editor-tools {
+	background-color: transparent;
+	padding-top: 0px;
+}
+#si_client_submit dl,
+#si_project_submit dl {
 	padding: 0
 }
 
-#si_client_submit dt {
+#si_client_submit dt,
+#si_project_submit dt {
 	float: left;
 	clear: left;
 	text-align: right;
@@ -1312,11 +1498,13 @@ dt span.creation_event:before {
 	margin-right: .5em
 }
 
-#si_client_submit dt:after {
+#si_client_submit dt:after,
+#si_project_submit dt:after {
 	content: ":"
 }
 
-#si_client_submit dd {
+#si_client_submit dd,
+#si_project_submit dd {
 	margin: 0;
 	padding: 0 0 .5em
 }
@@ -1535,4 +1723,21 @@ dd .add_item_help {
  */
 #poststuff .sa-form-field.sa-form-field-bypass h3 {
     padding: 16px 0px 8px;
+}
+
+.sticky-wrapper.stuck #status_updates,
+.sticky-wrapper.stuck #invoice_status_updates {
+	left: 0;
+	background-color: rgba( 0, 0, 0, .75 );
+	width: 100%;
+	padding: 10px;
+	margin-top: 0px;
+	z-index: 105;
+}
+.sticky-wrapper.stuck #publishing-action {
+	margin-right: 30px;
+}
+
+#time_importing {
+	margin-left: 30px;
 }

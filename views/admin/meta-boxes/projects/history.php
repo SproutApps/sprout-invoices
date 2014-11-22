@@ -21,23 +21,11 @@
 					$type = si__('Private Note');
 					break;
 
-				case SI_Estimates::HISTORY_UPDATE:
-					$type = si__('Estimate Updated');
-					break;
-
-				case SI_Estimates::VIEWED_STATUS_UPDATE:
-					$type = si__('Estimate Viewed');
-					break;
-
 				case SI_Notifications::RECORD:
 					$type = si__('Notification');
 					break;
 
-				case SI_Estimates::HISTORY_INVOICE_CREATED:
-					$type = si__('Invoice Created');
-					break;
-
-				case SI_Estimates::HISTORY_STATUS_UPDATE:
+				case SI_Projects::HISTORY_STATUS_UPDATE:
 				default:
 					$type = si__('Status Update');
 					break;
@@ -66,7 +54,9 @@
 
 <div id="private_note_wrap">
 	<p>
-		<textarea id="private_note" name="private_note" class="clearfix"></textarea>
-		<a href="javascript:void(0)" id="save_private_note" class="button" data-post-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Internal_Records::NONCE ) ?>"><?php si_e('Save') ?></a> <span class="helptip" title="<?php si_e("These private notes will be added to the history.") ?>"></span>
+		<textarea id="private_note" name="private_note" class="clearfix" disabled="disabled" style="height:40px;"></textarea>
+		<?php if (  apply_filters( 'show_upgrade_messaging', '__return_true' ) ) {
+			printf( si__('<span class="helptip" title="Upgrade for Private Notes"></span>'), si_get_purchase_link() );
+		} ?>
 	</p>
 </div>

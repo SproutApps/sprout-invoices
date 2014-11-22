@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div id="nestable" class="dd">
-		<ol class="items_list">
+		<ol id="line_item_list" class="items_list">
 
 			<?php if ( !empty( $line_items ) ): ?>
 				<?php foreach ( $line_items as $position => $data ): ?>
@@ -33,7 +33,7 @@
 				<?php endforeach ?>
 			<?php endif ?>
 
-			<li id="line_item_default" class="item" <?php if ( !empty( $line_items ) ) echo 'style="display:none"'; ?> data-id="1">
+			<li id="line_item_default" class="item" style="display:none" data-id="1">
 				<?php 
 					// build single item
 					echo si_line_item_build_option( 0 ) ?>
@@ -76,7 +76,7 @@
 				</div>
 			</div>
 
-			<div id="status_updates">
+			<div id="status_updates" class="sticky_save">
 				<div id="publishing-action">
 					<span class="spinner"></span>
 					<?php

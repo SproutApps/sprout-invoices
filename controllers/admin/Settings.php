@@ -362,7 +362,7 @@ class SI_Admin_Settings extends SI_Controller {
 		$wp_admin_bar->add_node( array(
 				'id' => self::MENU_ID,
 				'parent' => false,
-				'title' => '<span class="icon-sproutapps-flat">'.self::__('Sprout Invoices').'</span>',
+				'title' => '<span class="icon-sproutapps-flat ab-icon"></span>'.self::__('Sprout Invoices'),
 				'href' => admin_url( 'admin.php?page=sprout-apps/settings&tab=reporting' )
 			) );
 

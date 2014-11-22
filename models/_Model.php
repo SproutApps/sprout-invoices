@@ -418,7 +418,29 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @return string
 	 */
 	public function get_title() {
-		return $this->post->post_title;
+		return str_replace( __('Auto Draft'), '', $this->post->post_title);
+	}
+
+
+	/**
+	 * Set the content of the post and save
+	 *
+	 * @param string  $content
+	 * @return void
+	 */
+	public function set_content( $content ) {
+		$this->post->post_content = $content;
+		$this->save_post();
+	}
+
+
+	/**
+	 * Get the content of the post
+	 *
+	 * @return string
+	 */
+	public function get_content() {
+		return $this->post->post_content;
 	}
 
 

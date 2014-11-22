@@ -85,7 +85,7 @@ class SI_Client extends SI_Post_Type {
 	 */
 	public static function new_client( $args ) {
 		$defaults = array(
-			'company_name' => sprintf( self::__('New Client: %s'), date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'company_name' => sprintf( self::__('New Client: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'website' => '',
 			'address' => array(),
 			'currency' => 'USD',
@@ -216,7 +216,6 @@ class SI_Client extends SI_Post_Type {
 	// Utility //
 	//////////////
 
-
 	public function get_invoices() {
 		$invoices = self::find_by_meta( SI_Invoice::POST_TYPE, array( '_client_id' => $this->get_id() ) );
 		return $invoices;
@@ -261,6 +260,16 @@ class SI_Client extends SI_Post_Type {
 	public function get_history( $type = '' ) {
 		// FUTURE v1.1 query for estimates and invoices too
 		return SI_Record::get_records_by_association( $this->ID );
+	}
+
+	public static function get_all_clients() {
+		// TODO CACHE
+		$clients = self::find_by_meta( self::POST_TYPE );
+		$aa = array();
+		foreach ( $clients as $client_id ) {
+			$aa[$client_id] = get_the_title( $client_id );
+		}
+		return $aa;
 	}
 
 }
