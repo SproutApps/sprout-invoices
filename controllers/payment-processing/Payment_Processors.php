@@ -44,6 +44,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		// Main section
 		add_action( 'si_payments_pane', array( __CLASS__, 'show_payments_pane' ), 100 );
 
+		// js
+		add_filter( 'si_admin_scripts_localization',  array( __CLASS__, 'add_currency_options' ) );
 	}
 
 	/**
@@ -172,16 +174,6 @@ abstract class SI_Payment_Processors extends SI_Controller {
 						'label' => self::__( 'Payment Processors' ),
 						'option' => array( __CLASS__, 'display_payment_methods_field' )
 						),
-					self::CURRENCY_SYMBOL_OPTION => array(
-						'label' => self::__( 'Currency Symbol' ),
-						'option' => array(
-							'type' => 'text',
-							'label' => '',
-							'default' => self::$currency_symbol,
-							'attributes' => array( 'class' => 'small-text' ),
-						'description' => self::__( 'If your currency has the symbol after the amount place a % before your currency symbol. Example, % &pound; ' )
-						)
-					),
 					self::MONEY_FORMAT_OPTION => array(
 						'label' => self::__( 'Money Format' ),
 						'option' => array(
@@ -397,7 +389,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return string 
 	 */
 	public static function get_currency_symbol() {
-		return self::$currency_symbol;
+		$localeconv = localeconv();
+		return $localeconv['currency_symbol'];
 	}
 
 	/**
@@ -428,6 +421,13 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	public function cancel_recurring_payment( SI_Payment $payment ) {
 		$payment->set_status( SI_Payment::STATUS_CANCELLED );
 		// it's up to the individual payment processor to handle any other details
+	}
+
+
+	public static function add_currency_options( $js_object = array() ) {
+		$js_object['currency_symbol'] = self::get_currency_symbol();
+		$js_object['localeconv'] = localeconv();
+		return $js_object;
 	}
 
 	/**

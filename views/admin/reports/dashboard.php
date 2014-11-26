@@ -20,9 +20,11 @@
 						</h3>
 						<div class="inside">
 							<div class="main">
+								<?php 
+									$invoice_data = SI_Reporting::total_invoice_data(); ?>
 								<dl>
 									<dt><?php self::_e('Outstanding') ?></dt>
-									<dd>N/A<span title="<?php self::esc_e('Data available with upgraded version of Sprout Invoices') ?>" class="helptip add_item_help"></span></dd>
+									<dd><?php sa_formatted_money( $invoice_data['balance'] )  ?></dd>
 
 									<dt><?php self::_e('Paid (this week)') ?></dt>
 									<dd>N/A<span title="<?php self::esc_e('Data available with upgraded version of Sprout Invoices') ?>" class="helptip add_item_help"></span></dd>
@@ -120,7 +122,10 @@
 
 										console.log(inv_data);
 
-										var chart = new Chart(ctx).Line(inv_data);
+										var chart = new Chart(ctx).Line(inv_data, {
+												responsive: true,
+												maintainAspectRatio: true
+											});
 									}
 
 									var inv_chart_data = function () {
@@ -132,7 +137,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log(data);
 												inv_data = {
 													labels: data.labels,
 													datasets: [
@@ -164,7 +168,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(invoice_payments_chart);
 										inv_chart_data();
 									});
 								</script>

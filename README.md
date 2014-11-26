@@ -90,6 +90,42 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**2.0.5**
+
+* NEW: Reports dashboard fully responsive
+* Change: Chart js API updated
+* Fix: Dashboard values incorrect under certain circumstances
+* Fix: Chart values are now localized
+* Fix: Other minor fixes
+
+**2.0**
+
+* _NEW:_
+	* Projects
+	* Time Tracking (premium version)
+	* WYSIWYG for line items (premium version)
+
+* _Changes:_
+	* Improved Client management
+	* Easier user assignment and creation for Clients
+	* Streamlined Invoice and Estimate edit UI
+	* Freshened editing and management all around
+	* New possibilities for add-ons
+
+**1.1.6**
+
+* _Changes:_
+	* Customizer compatibility for logo uploading.
+
+**1.1.5**
+
+* _Changes:_
+	* More hooks and filters
+	* fix for unit tests
+* _Bug Fixes:_
+	* ID shortcode fix
+	* js error with custom templates
+
 **1.1.4**
 
 * _Changes:_

@@ -8,6 +8,15 @@
 		<?php do_action( 'si_settings_page_sub_heading_'.$_GET['page'] ); ?>
 	</div>
 	
+	<script type="text/javascript">
+		// chart defaults
+		Chart.defaults.global.responsive = true;
+		Chart.defaults.global.maintainAspectRatio = true;
+		// default to currency formatted
+		Chart.defaults.global.multiTooltipTemplate = function(label){
+			return label.datasetLabel + ': ' + si_format_money( label.value );
+		};
+	</script>
 	<div id="dashboard-widgets-wrap">
 		<div id="dashboard-widgets" class="metabox-holder">
 			<div id="postbox-container-1" class="postbox-container">
@@ -20,31 +29,36 @@
 							<div class="main">
 								<?php 
 									$invoice_data = SI_Reporting::total_invoice_data();
-									$week_invoice_data = SI_Reporting::total_invoice_data('week');
-									$last_week_invoice_data = SI_Reporting::total_invoice_data('lastweek');
-									$month_invoice_data = SI_Reporting::total_invoice_data('month');
-									$last_month_invoice_data = SI_Reporting::total_invoice_data('lastmonth');
-									$year_invoice_data = SI_Reporting::total_invoice_data('year');
-									// $last_year_invoice_data = SI_Reporting::total_invoice_data('lastyear'); ?>
+
+									$week_payment_data = SI_Reporting::total_payment_data('week');
+
+									$last_week_payment_data = SI_Reporting::total_payment_data('lastweek');
+									$month_payment_data = SI_Reporting::total_payment_data('month');
+									$last_month_payment_data = SI_Reporting::total_payment_data('lastmonth');
+									$year_payment_data = SI_Reporting::total_payment_data('year');
+									$last_year_payment_data = SI_Reporting::total_invoice_data('lastyear'); ?>
 
 								<dl>
 									<dt><?php self::_e('Outstanding') ?></dt>
 									<dd><?php sa_formatted_money( $invoice_data['balance'] )  ?></dd>
 
 									<dt><?php self::_e('Paid (this week)') ?></dt>
-									<dd><?php sa_formatted_money( $week_invoice_data['paid'] )  ?></dd>
+									<dd><?php sa_formatted_money( $week_payment_data['totals'] )  ?></dd>
 
 									<dt><?php self::_e('Paid (last week)') ?></dt>
-									<dd><?php sa_formatted_money( $last_week_invoice_data['paid'] )  ?></dd>
+									<dd><?php sa_formatted_money( $last_week_payment_data['totals'] )  ?></dd>
 
 									<dt><?php self::_e('Paid (month to date)') ?></dt>
-									<dd><?php sa_formatted_money( $month_invoice_data['paid'] )  ?></dd>
+									<dd><?php sa_formatted_money( $month_payment_data['totals'] )  ?></dd>
 
 									<dt><?php self::_e('Paid (last month)') ?></dt>
-									<dd><?php sa_formatted_money( $last_month_invoice_data['paid'] )  ?></dd>
+									<dd><?php sa_formatted_money( $last_month_payment_data['totals'] )  ?></dd>
 
 									<dt><?php self::_e('Paid (year to date)') ?></dt>
-									<dd><?php sa_formatted_money( $year_invoice_data['paid'] )  ?></dd>
+									<dd><?php sa_formatted_money( $year_payment_data['totals'] )  ?></dd>
+
+									<dt><?php self::_e('Paid (last year)') ?></dt>
+									<dd><?php sa_formatted_money( $last_year_payment_data['totals'] )  ?></dd>
 								</dl>
 
 								<?php 
@@ -112,20 +126,12 @@
 								<canvas id="invoice_payments_chart" min-height="300" max-height="500"></canvas>
 								<script type="text/javascript" charset="utf-8">
 									var inv_data = {};
-
+									
 									function invoice_payments_chart() {
 										var can = jQuery('#invoice_payments_chart');
 										var ctx = can.get(0).getContext("2d");
-										var container = can.parent().parent();
 
-										var $container = jQuery(container);
-
-										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										console.log(inv_data);
-
-										var chart = new Chart(ctx).Line(inv_data);
+										var chart = new Chart(ctx).Line( inv_data );
 									}
 
 									var inv_chart_data = function () {
@@ -137,7 +143,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log(data);
 												inv_data = {
 													labels: data.labels,
 													datasets: [
@@ -169,7 +174,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(invoice_payments_chart);
 										inv_chart_data();
 									});
 								</script>
@@ -190,15 +194,8 @@
 
 									function balance_totals_chart() {
 										var can = jQuery('#balance_totals_chart');
-										var ctx = can.get(0).getContext("2d");
-										var container = can.parent().parent();
-
-										var $container = jQuery(container);
-
-										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										var chart = new Chart(ctx).Line(balance_data);
+										var ctx = can.get(0).getContext("2d");                
+										var chart = new Chart(ctx).Line( balance_data );
 									}
 
 									var balance_chart_data = function () {
@@ -210,7 +207,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log(data);
 												balance_data = {
 													labels: data.labels,
 													datasets: [
@@ -242,7 +238,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(balance_totals_chart);
 										balance_chart_data();
 									});
 								</script>
@@ -265,14 +260,7 @@
 									function payments_status_chart() {
 										var can = jQuery('#payments_status_chart');
 										var ctx = can.get(0).getContext("2d");
-										var container = can.parent().parent();
-
-										var $container = jQuery(container);
-
-										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										var chart = new Chart(ctx).Doughnut(payment_status_data);
+										var chart = new Chart(ctx).Doughnut(payment_status_data );
 									}
 
 									var payments_status_chart_data = function () {
@@ -310,7 +298,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(payments_status_chart);
 										payments_status_chart_data();
 									});
 								</script>
@@ -333,14 +320,7 @@
 									function invoice_status_chart() {
 										var can = jQuery('#invoice_status_chart');
 										var ctx = can.get(0).getContext("2d");
-										var container = can.parent().parent();
-
-										var $container = jQuery(container);
-
-										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										var chart = new Chart(ctx).Doughnut(invoice_status_data);
+										var chart = new Chart(ctx).Doughnut(invoice_status_data );
 									}
 
 									var invoice_status_data = function () {
@@ -352,8 +332,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log('payment_statuses: ');
-												console.log(data);
 												invoice_status_data = [
 													{
 														value: data.status_temp,
@@ -392,7 +370,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(invoice_status_chart);
 										invoice_status_data();
 									});
 								</script>
@@ -527,14 +504,9 @@
 									function est_invoices_chart() {
 										var can = jQuery('#est_invoices_chart');
 										var ctx = can.get(0).getContext("2d");
-										var container = can.parent().parent();
-
-										var $container = jQuery(container);
-
-										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										var chart = new Chart(ctx).Bar(est_inv_totals_data);
+										var chart = new Chart(ctx).Bar( est_inv_totals_data, {
+											multiTooltipTemplate: "<%= value %>",
+										} );
 									}
 
 									var est_inv_totals_data = function () {
@@ -546,7 +518,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log(data);
 												est_inv_totals_data = {
 													labels: data.labels,
 													datasets: [
@@ -578,7 +549,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(est_invoices_chart);
 										est_inv_totals_data();
 									});
 								</script>
@@ -599,14 +569,7 @@
 									function req_estimates_chart() {
 										var can = jQuery('#req_estimates_chart');
 										var ctx = can.get(0).getContext("2d");
-										var container = can.parent().parent();
-
-										var $container = jQuery(container);
-
-										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										var chart = new Chart(ctx).Bar(req_est_totals_data);
+										var chart = new Chart(ctx).Bar( req_est_totals_data );
 									}
 
 									var req_est_totals_data = function () {
@@ -618,7 +581,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log(data);
 												req_est_totals_data = {
 													labels: data.labels,
 													datasets: [
@@ -650,7 +612,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(req_estimates_chart);
 										req_est_totals_data();
 									});
 								</script>
@@ -673,14 +634,10 @@
 									function estimate_status_chart() {
 										var can = jQuery('#estimate_status_chart');
 										var ctx = can.get(0).getContext("2d");
-										var container = can.parent().parent();
-
-										var $container = jQuery(container);
-
-										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										var chart = new Chart(ctx).Doughnut(estimate_status_data);
+										var chart = new Chart(ctx).Doughnut(estimate_status_data, {
+												responsive: true,
+												maintainAspectRatio: true
+											});
 									}
 
 									var estimate_status_data = function () {
@@ -692,8 +649,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log('estimates_statuses: ');
-												console.log(data);
 												estimate_status_data = [
 													{
 														value: data.status_request,
@@ -726,7 +681,6 @@
 									};
 
 									jQuery(document).ready(function($) {
-										jQuery(window).resize(estimate_status_chart);
 										estimate_status_data();
 									});
 								</script>

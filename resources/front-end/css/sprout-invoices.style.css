@@ -553,6 +553,7 @@ html[xmlns] .clearfix {
 	background-color: rgba(249,249,249,.8);
 	width: 874px;
 	border-bottom: 3px solid #363B3F;
+	z-index: 10;
 }
 
 #header_title {

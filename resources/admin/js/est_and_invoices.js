@@ -33,7 +33,7 @@
 		si.docEdit.stickySave();
 
 		// WYSIWYG
-		if ( si_js_object.premium ) {
+		if ( si_js_object.redactor ) {
 			$('.item:not(#line_item_default) .column_desc [name="line_item_desc[]"]').redactor();
 		};
 		
@@ -172,7 +172,7 @@
 		$row.find('.totalled_input').trigger('keyup');
 
 		// redactor
-		if ( si_js_object.premium ) {
+		if ( si_js_object.redactor ) {
 			$row.find('.column_desc [name="line_item_desc[]"]').redactor();
 		};
 		
@@ -537,7 +537,7 @@
 		$('#type_selection').dropdown('hide');
 
 		// Add the redactor
-		if ( si_js_object.premium ) {
+		if ( si_js_object.redactor ) {
 			$row.find('.column_desc [name="line_item_desc[]"]').redactor();
 		};
 		

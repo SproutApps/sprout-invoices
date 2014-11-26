@@ -10,7 +10,7 @@
 class SI_Reporting extends SI_Controller {
 	const SETTINGS_PAGE = 'reporting';
 	const REPORT_QV = 'report';
-	const CACHE_KEY_PREFIX = 'si_report_cache_';
+	const CACHE_KEY_PREFIX = 'si_report_cache_v5_';
 	const AJAX_ACTION = 'si_report_data';
 	const AJAX_NONCE = 'si_report_nonce';
 	const CACHE_TIMEOUT = 172800; // 48 hours
@@ -597,6 +597,127 @@ class SI_Reporting extends SI_Controller {
 		return self::set_cache( __FUNCTION__, $data );
 	}
 
+	public static function total_payment_data( $this = 'century' ) {
+		// Return cache if present.
+		$cache = self::get_cache(__FUNCTION__.$this);
+		if ( $cache ) {
+			return $cache;
+		}
+		$expire = self::CACHE_TIMEOUT;
+
+		// Build data array, without a explicit build segments without posts will not show.
+		$data = array(
+				'payments' => 0,
+				'totals' => 0,
+				'status_pending' => 0,
+				'status_authorized' => 0,
+				'status_complete' => 0,
+				'status_partial' => 0,
+				'status_void' => 0
+			);
+		$args = array(
+			'post_type' => SI_Payment::POST_TYPE,
+			'post_status' => 'any', // Not Written-off?
+			'posts_per_page' => -1,
+			'orderby' => 'date',
+			'fields' => 'ids',
+			);
+
+		// If date filtered
+		if ( $this != 'century' ) {
+			switch ( $this ) {
+				case 'week':
+					$args['date_query'] = array(
+						array(
+							'week' => date( 'W', strtotime('this week') ),
+							'year' => date( 'o', strtotime('this year') ),
+							'inclusive' => true,
+						)
+					);
+					$expire = strtotime('this Sunday')-current_time('timestamp');
+					break;
+				case 'lastweek':
+					$args['date_query'] = array(
+						array(
+							'week' => date( 'W', strtotime('-1 week') ),
+							'year' => date( 'o', strtotime('this year') ),
+							'inclusive' => true,
+						)
+					);
+					$expire = strtotime('this Sunday')-current_time('timestamp');
+					break;
+				case 'month':
+					$args['date_query'] = array(
+						array(
+							'month' => date('m'),
+							'year' => date( 'o', strtotime('this year') ),
+							'inclusive' => true,
+						)
+					);
+					$expire = strtotime('last day of month')-current_time('timestamp');
+					break;
+				case 'lastmonth':
+					$args['date_query'] = array(
+						array(
+							'month' => date( 'm', strtotime('-1 month') ),
+							'year' => date( 'o', strtotime('this year') ),
+							'inclusive' => true,
+						)
+					);
+					$expire = strtotime('last day of year')-current_time('timestamp');
+					break;
+				case 'year':
+					$args['date_query'] = array(
+						array(
+							'year' => date('Y'),
+							'inclusive' => true,
+						)
+					);
+					$expire = strtotime('last day of year')-current_time('timestamp');
+					break;
+				case 'lastyear':
+					$args['date_query'] = array(
+						array(
+							'year' => date( 'Y', strtotime('-1  year') ),
+							'inclusive' => true,
+						)
+					);
+					$expire = strtotime('last day of year')-current_time('timestamp');
+					break;
+				default:
+					break;
+			}
+		}
+		$payments = new WP_Query( $args );
+		foreach ( $payments->posts as $payment_id ) {
+			$payment = SI_Payment::get_instance( $payment_id );
+			$data['payments'] += 1;
+			if ( $payment->get_status() !== SI_Payment::STATUS_VOID ) {
+				$data['totals'] += $payment->get_amount();
+			}
+			switch ( get_post_status( $payment_id ) ) {
+				case SI_Payment::STATUS_PENDING:
+					$data['status_pending'] += 1;
+					break;
+				case SI_Payment::STATUS_AUTHORIZED:
+					$data['status_authorized'] += 1;
+					break;
+				case SI_Payment::STATUS_COMPLETE:
+					$data['status_complete'] += 1;
+					break;
+				case SI_Payment::STATUS_PARTIAL:
+					$data['status_partial'] += 1;
+					break;
+				case SI_Payment::STATUS_VOID:
+					$data['status_void'] += 1;
+					break;
+				default:
+					break;
+			}
+		}
+		return self::set_cache( __FUNCTION__.$this, $data, $expire );
+	}
+
 	public static function total_payment_data_by_date_segment( $segment = 'weeks', $span = 6 ) {
 		// Return cache if present.
 		$cache = self::get_cache(__FUNCTION__);
@@ -667,7 +788,7 @@ class SI_Reporting extends SI_Controller {
 	//////////////
 	
 	public static function get_cache( $data_name = '' ) {
-		if ( self::DEBUG ) { // If dev than don't cache.
+		if ( self::DEBUG || isset( $_GET['nocache'] ) ) { // If dev than don't cache.
 			return FALSE;
 		}
 		$cache = get_transient( self::CACHE_KEY_PREFIX.$data_name );
