@@ -54,6 +54,9 @@ class SI_Clients extends SI_Controller {
 		// Currency Formatting
 		add_filter( 'sa_get_currency_symbol_pre', array( __CLASS__, 'maybe_filter_currency_symbol' ) );
 		add_filter( 'sa_set_monetary_locale', array( __CLASS__, 'maybe_filter_money_format_money_format' ) );
+		
+		// Currency Code Change
+		add_filter( 'si_currency_code', array( get_class(), 'maybe_change_currency_code' ), 10, 2 );
 	}
 
 	/////////////////
@@ -856,6 +859,10 @@ class SI_Clients extends SI_Controller {
 		if ( !current_user_can( 'publish_posts' ) )
 			self::ajax_fail( 'User cannot create new posts!' );
 		
+		if ( !isset( $_REQUEST['sa_client_name'] ) || $_REQUEST['sa_client_name'] == '' ) {
+			self::ajax_fail( 'A company name is required' );
+		}
+
 		$user_id = 0;
 		// Attempt to create a user
 		if ( isset( $_REQUEST['sa_client_email'] ) && $_REQUEST['sa_client_email'] != '' ) {
@@ -921,25 +928,28 @@ class SI_Clients extends SI_Controller {
 		if ( !current_user_can( 'publish_posts' ) )
 			self::ajax_fail( 'User cannot create new posts!' );
 
-		$client = SI_Client::get_instance( $_REQUEST['sa_user_client_id'] );
-
 		// Attempt to create a user
-		if ( is_a( $client, 'SI_Client' ) && isset( $_REQUEST['sa_user_email'] ) && $_REQUEST['sa_user_email'] != '' ) {
-			$user_args = array(
-				'user_login' => self::esc__($_REQUEST['sa_user_email']),
-				'display_name' => isset( $_REQUEST['sa_user_display_name'] ) ? self::esc__($_REQUEST['sa_user_display_name']) : self::esc__($_REQUEST['sa_user_email']),
-				'user_pass' => wp_generate_password(), // random password
-				'user_email' => isset( $_REQUEST['sa_user_email'] ) ? self::esc__($_REQUEST['sa_user_email']) : '',
-				'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? self::esc__($_REQUEST['sa_user_first_name']) : '',
-				'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? self::esc__($_REQUEST['sa_user_last_name']) : ''
-			);
-			$user_id = self::create_user( $user_args );
-
-			$client->add_associated_user( $user_id );
-		}
-		else {
+		if ( !isset( $_REQUEST['sa_user_email'] ) || $_REQUEST['sa_user_email'] == '' ) {
 			self::ajax_fail( 'An e-mail is required' );
 		}
+
+		$client = SI_Client::get_instance( $_REQUEST['sa_user_client_id'] );
+
+		if ( is_a( $client, 'SI_Client' ) ) {
+			self::ajax_fail( 'Client not found' );
+		}
+
+		$user_args = array(
+			'user_login' => self::esc__($_REQUEST['sa_user_email']),
+			'display_name' => isset( $_REQUEST['sa_user_display_name'] ) ? self::esc__($_REQUEST['sa_user_display_name']) : self::esc__($_REQUEST['sa_user_email']),
+			'user_pass' => wp_generate_password(), // random password
+			'user_email' => isset( $_REQUEST['sa_user_email'] ) ? self::esc__($_REQUEST['sa_user_email']) : '',
+			'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? self::esc__($_REQUEST['sa_user_first_name']) : '',
+			'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? self::esc__($_REQUEST['sa_user_last_name']) : ''
+		);
+		$user_id = self::create_user( $user_args );
+
+		$client->add_associated_user( $user_id );
 	}
 
 	////////////////
@@ -970,6 +980,31 @@ class SI_Clients extends SI_Controller {
 		$post = $client->get_post();
 		print self::show_submit_meta_box( $client->get_post(), array() );
 		exit();
+	}
+
+	//////////////
+	// filters //
+	//////////////
+
+
+
+	/**
+	 * Filtering the payment processor currency code option based on some predefined options.
+	 * @param  string  $currency_code  
+	 * @param  integer $invoice_id     
+	 * @param  string  $payment_method 
+	 * @return string                  
+	 */
+	public static function maybe_change_currency_code( $currency_code = '', $invoice_id = 0, $payment_method = '' ) {
+		$invoice = SI_Invoice::get_instance( $invoice_id );
+		$client = $invoice->get_client();
+		if ( !is_wp_error( $client ) ) {
+			$client_currency = $client->get_currency();
+			if ( $client_currency != '' ) {
+				$currency_code = $client_currency;
+			}
+		}
+		return $currency_code;
 	}
 
 

@@ -8,7 +8,7 @@ if ( !function_exists('si_projects_select') ) :
  * @param  integer $selected_id
  * @return string
  */
-function si_projects_select( $selected_id = 0, $client_id = 0, $blank = FALSE, $el_id = 'doc_project' ) {
+function si_projects_select( $selected_id = 0, $client_id = 0, $blank = TRUE, $el_id = 'doc_project' ) {
 	$selections = array();
 	if ( $client_id ) {
 		$client = SI_Client::get_instance( $client_id );

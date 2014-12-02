@@ -1,3 +1,10 @@
+= 2.0.6 =
+
+* _Bug Fixes:_
+	* Client currency code not defaulting
+	* Bug fix for sites without permalinks
+	* AJAX bug fixes for clients and other sections
+
 = 2.0 =
 
 * _NEW:_

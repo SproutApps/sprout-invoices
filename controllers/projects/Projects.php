@@ -304,7 +304,7 @@ class SI_Projects extends SI_Controller {
 		$client_options[0] = self::__('');
 		$client_options += SI_Client::get_all_clients();
 		
-		$description = ( $client_id ) ? sprintf( self::__( 'Edit <a href="%s">%s</a>, select another client or <a href="%s">create a new client</a>.' ), get_edit_post_link( $client_id ), get_the_title( $client_id ), '#TB_inline?width=600&height=450&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) : sprintf( self::__( 'Select an existing client or <a href="%s">create a new client</a>.' ), '#TB_inline?width=600&height=380&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) ;		
+		$description = ( $client_id ) ? sprintf( self::__( 'Edit <a href="%s">%s</a>, select another client or <a href="%s">create a new client</a>.' ), get_edit_post_link( $client_id ), get_the_title( $client_id ), '#TB_inline?width=600&height=450&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) : sprintf( self::__( 'Select an existing client or <a href="%s">create a new client</a>.' ), '#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) ;		
 		$fields['client'] = array(
 			'weight' => 3,
 			'label' => self::__( 'Client' ),

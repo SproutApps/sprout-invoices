@@ -260,7 +260,7 @@
 	/**
 	 * Disable quick send if the form has changed.
 	 */
-	$('form#post').on( 'keyup change', 'input:not([name="sa_metabox_recipients[]"]), select, textarea:not([name="sa_metabox_sender_note"])', function( e ){
+	$('form#post').live( 'keyup change', 'input:not([name="sa_metabox_recipients[]"]), select, textarea:not([name="sa_metabox_sender_note"])', function( e ){
 		// $('#quick_send_option #send_doc_notification').attr( 'disabled', 'disabled' );
 	});
 
@@ -363,7 +363,7 @@
 	/**
 	 * Create client via ajax
 	 */
-	$('#create_client').on('click', function(e) {
+	$('#create_client').live('click', function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 		var $save_button = $( this ),

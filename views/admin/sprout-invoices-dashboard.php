@@ -4,7 +4,9 @@
 
 	<div class="about-text"><?php printf( self::__( 'The future of <a href="%s">Sprout Invoices</a> relies on happy customers supporting Sprout Apps by purchasing upgraded versions. If you like this free version of Sprout Invoices please consider <a href="%s">purchasing an upgrade</a>.' ), self::PLUGIN_URL, si_get_purchase_link() ); ?></div>
 
-	<div class="upgrade_message clearfix"><p><strong>Upgrade Discount Available:</strong> Write a <a href="https://wordpress.org/support/view/plugin-reviews/sprout-invoices">plugin review</a> about this free version and <a href="https://sproutapps.co/sprout-invoices/sprout-invoices-discount-code/">send us the link</a>.</p></div>
+	<!--<div class="upgrade_message clearfix"><p><strong>Upgrade Discount Available:</strong> Write a <a href="https://wordpress.org/support/view/plugin-reviews/sprout-invoices">plugin review</a> about this free version and <a href="https://sproutapps.co/sprout-invoices/sprout-invoices-discount-code/">send us the link</a>.</p></div>-->
+
+	<div class="upgrade_message clearfix"><p><strong>Huge Discounts!</strong> Starting December 1 &amp; Decreasing Every Day until Christmas.</p><p><a href="https://sproutapps.co/news/cyber-christmas-discounts-sprout-invoices-1-help-scout-desk-50-off/?ref=free" class="button">Sprout Invoices starts at $1</a></p></div>
 
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>

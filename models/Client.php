@@ -88,7 +88,7 @@ class SI_Client extends SI_Post_Type {
 			'company_name' => sprintf( self::__('New Client: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'website' => '',
 			'address' => array(),
-			'currency' => 'USD',
+			'currency' => '',
 			'user_id' => 0
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );

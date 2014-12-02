@@ -215,12 +215,30 @@ class SI_Checkouts extends SI_Controller {
 
 	private function load_invoice() {
 		
-		$invoice_id = ( isset( $_GET['sa_invoice'] ) && !self::using_permalinks() ) ? $_GET['sa_invoice'] : url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
+		$invoice_id = 0;
+		if ( isset( $_GET['sa_invoice'] ) && !self::using_permalinks() ) {
+			if ( is_numeric( $_GET['sa_invoice'] ) ) {
+				$invoice_id = $_GET['sa_invoice'];
+			}
+			// slugs are used in some strange circumstances
+			else {
+				$posts = get_posts(array(
+					'name' => $_GET['sa_invoice'],
+					'posts_per_page' => 1,
+					'post_type' => SI_Invoice::POST_TYPE
+				) );
+				$post = $posts[0];
+				$invoice_id = $post->ID;
+			}
+		}
+		// If permalinks are used this is the default method of finding the post id.
+		if ( !$invoice_id ) {
+			$invoice_id = url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
+		}
 
-		if ( get_post_type( $invoice_id ) !== SI_Invoice::POST_TYPE ) {
-			self::set_message( self::__( 'Invoice ID invalid.' ), self::MESSAGE_STATUS_ERROR );
-			wp_redirect( '/', 303 );
-			exit();
+		if ( !$invoice_id || get_post_type( $invoice_id ) !== SI_Invoice::POST_TYPE ) {
+			self::set_message( self::__( 'Invoice ID invalid. Payments are disabled.' ), self::MESSAGE_STATUS_ERROR );
+			return;
 		}
 
 		$this->invoice = SI_Invoice::get_instance( $invoice_id );

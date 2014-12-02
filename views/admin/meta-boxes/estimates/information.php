@@ -116,7 +116,7 @@ if ( 0 != $post->ID ) {
 				<?php endforeach ?>
 			</select>
 
-			<a href="#TB_inline?width=600&height=380&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox tooltip" title="<?php si_e('Create new client') ?>"></a>
+			<a href="#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox tooltip" title="<?php si_e('Create new client') ?>"></a>
 
  		</div>
 		<p>
