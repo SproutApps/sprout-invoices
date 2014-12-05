@@ -623,7 +623,7 @@ class SI_Notifications_Control extends SI_Controller {
 		$client = $doc->get_client();
 		$client_users = array();
 		// get the user ids associated with this doc.
-		if ( !is_wp_error( $client ) ) {
+		if ( !is_wp_error( $client ) && is_a( $client, 'SI_Client' ) ) {
 			$client_users = $client->get_associated_users();
 		}
 		else { // no client associated

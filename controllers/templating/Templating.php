@@ -171,6 +171,21 @@ class SI_Templating_API extends SI_Controller {
 	}
 
 	/**
+	 * Some plugins and themes are a bit overzealous with these functions and screw with the templates.
+	 * This will remove all actions and then readd the admin bar
+	 */
+	public static function remove_header_footer_actions() {
+		if ( apply_filters( 'si_remove_header_footer_actions', TRUE )) {
+			if ( SI_Invoice::is_invoice_query() || SI_Estimate::is_estimate_query() ) {
+				remove_all_actions( 'wp_header' );
+				remove_all_actions( 'wp_footer' );
+				add_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
+				do_action( 'si_removed_header_footer_actions' );
+			}
+		}
+	}
+
+	/**
 	 * Override the template and use something custom.
 	 * @param  string $template 
 	 * @return string           full path.
@@ -179,6 +194,10 @@ class SI_Templating_API extends SI_Controller {
 
 		// Invoicing
 		if ( SI_Invoice::is_invoice_query() ) {
+
+			// remove actions from plugins and themes
+			self::remove_header_footer_actions();
+
 			if ( is_single() ) {
 				$custom_template = self::get_doc_current_template( get_the_id() );
 				$custom_path = ( $custom_template != '' ) ? 'invoice/'.$custom_template : '' ;
@@ -201,6 +220,10 @@ class SI_Templating_API extends SI_Controller {
 
 		// Estimates
 		if ( SI_Estimate::is_estimate_query() ) {
+
+			// remove actions from plugins and themes
+			self::remove_header_footer_actions();
+
 			if ( is_single() ) {
 				$custom_template = self::get_doc_current_template( get_the_id() );
 				$custom_path = ( $custom_template != '' ) ? 'estimate/'.$custom_template : '' ;
