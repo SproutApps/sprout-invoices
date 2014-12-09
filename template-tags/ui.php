@@ -166,7 +166,11 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 					} ?>
 			</div><!-- / column_type -->
 			<div class="column column_desc">
-				<?php echo apply_filters( 'the_content', $desc ) ?>
+				<?php if ( apply_filters( 'si_the_content_filter_line_item_descriptions', TRUE )): ?>
+					<?php echo apply_filters( 'the_content', $desc ) ?>
+				<?php else: ?>
+					<?php echo wpautop( $desc ) ?>
+				<?php endif ?>
 			</div><!-- / item_action_column -->
 			<div class="column column_rate">
 				<?php if ( empty( $children ) ): ?>

@@ -824,8 +824,8 @@ class SI_Invoices extends SI_Controller {
 				else {
 					$wp_scripts->queue = $allowed_scripts;
 				}
-				$allowed_styles = apply_filters( 'si_allowed_admin_doc_scripts', array( 'sprout_doc_style', 'qtip', 'dropdown' ) );
-				$allowed_admin_styles = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_styles ) );
+				$allowed_styles = apply_filters( 'si_allowed_doc_styles', array( 'sprout_doc_style', 'qtip', 'dropdown' ) );
+				$allowed_admin_styles = apply_filters( 'si_allowed_admin_doc_styles', array_merge( array( 'admin-bar' ), $allowed_styles ) );
 				if ( current_user_can( 'edit_posts' ) ) {
 					$wp_styles->queue = $allowed_admin_styles;
 				}

@@ -1,5 +1,15 @@
 <?php 
 
+
+function si_head() {
+	do_action( 'si_head' );
+}
+
+
+function si_footer() {
+	do_action( 'si_footer' );
+}
+
 /**
  * Wrapper functions for many estimate and invoice template-tags
  * so they can be called ambiguously.

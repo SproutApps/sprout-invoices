@@ -848,7 +848,34 @@ abstract class SI_Controller extends Sprout_Invoices {
 				'estimate_total' => si_get_estimate_total()
 			);
 		}
-		wp_localize_script( 'sprout_doc_scripts', 'si_js_object', apply_filters( 'si_sprout_doc_scripts_localization', $si_js_object ) );
+		wp_localize_script( 'sprout_doc_scripts', 'si_js_object', self::get_localized_js() );
+	}
+
+	public static function get_localized_js() {
+		// Localization
+		$si_js_object = array(
+			'ajax_url' => get_admin_url().'/admin-ajax.php',
+			'plugin_url' => SI_URL,
+			'thank_you_string' => self::__( 'Thank you' ),
+			'updating_string' => self::__( 'Updating...' ),
+			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
+			'security' => wp_create_nonce( self::NONCE ),
+			'locale' => get_locale()
+		);
+		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Invoice::POST_TYPE ) ) {
+			$si_js_object += array(
+				'invoice_id' => get_the_ID(),
+				'invoice_amount' => si_get_invoice_calculated_total(),
+				'invoice_balance' => si_get_invoice_balance()
+			);
+		}
+		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Estimate::POST_TYPE ) ) {
+			$si_js_object += array(
+				'estimate_id' => get_the_ID(),
+				'estimate_total' => si_get_estimate_total()
+			);
+		}
+		return apply_filters( 'si_sprout_doc_scripts_localization', $si_js_object );
 	}
 
 	public static function admin_enqueue() {

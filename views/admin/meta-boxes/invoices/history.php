@@ -31,7 +31,7 @@
 					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 				</p>
 				<div id="notification_message_<?php echo $item_id ?>" class="cloak">
-					<?php echo apply_filters( 'the_content', $data['content'] ) ?>
+					<?php echo wpautop( $data['content'] ) ?>
 				</div>
 			<?php elseif ( $data['status_type'] == SI_Importer::RECORD ): ?>
 				<p>
@@ -46,7 +46,7 @@
 					<?php echo $data['update_title'] ?>
 				</p>
 			<?php else: ?>
-				<?php echo apply_filters( 'the_content', $data['content'] ) ?>
+				<?php echo wpautop( $data['content'] ) ?>
 			<?php endif ?>
 			
 		</dd>

@@ -20,7 +20,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 		<title><?php wp_title( '|', true, 'right' ); ?></title>
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<?php wp_head(); // styles and scripts are filtered ?>
+		<?php si_head(); ?>
 		<meta name="robots" content="noindex" />
 	</head>
 
@@ -313,14 +313,14 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 						</p>
 						<div id="notification_message_<?php echo $item_id ?>" class="cloak">
-							<?php echo apply_filters( 'the_content', $data['content'] ) ?>
+							<?php echo wpautop( $data['content'] ) ?>
 						</div>
 					<?php elseif ( $data['status_type'] == SI_Invoices::VIEWED_STATUS_UPDATE ) : ?>
 						<p>
 							<?php echo $data['update_title'] ?>
 						</p>
 					<?php else: ?>
-						<?php echo apply_filters( 'the_content', $data['content'] ) ?>
+						<?php echo wpautop( $data['content'] ) ?>
 					<?php endif ?>
 					
 				</dd>
@@ -334,6 +334,6 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 	</body>
 	<?php do_action( 'si_document_footer' ) ?>
-	<?php wp_footer() ?>
+	<?php si_footer() ?>
 </html>
 <?php do_action( 'invoice_viewed' ) ?>

@@ -1741,3 +1741,7 @@ dd .add_item_help {
 #time_importing {
 	margin-left: 30px;
 }
+
+.select2-drop {
+	z-index: 1000000;
+}

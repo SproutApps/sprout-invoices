@@ -35,9 +35,14 @@ class SI_Templating_API extends SI_Controller {
 		add_action( 'doc_information_meta_box_client_row_last', array( __CLASS__, 'doc_template_selection' ) );
 		add_action( 'si_save_line_items_meta_box', array( __CLASS__, 'save_doc_template_selection' ) );
 
+		// Enqueue
+		add_action( 'si_head', array( __CLASS__, 'head_scripts' ) );
+		add_action( 'si_footer', array( __CLASS__, 'footer_scripts' ) );
+
 		// Client option
 		add_filter( 'si_client_adv_form_fields', array( __CLASS__, 'client_option' ) );
 		add_action( 'SI_Clients::save_meta_box_client_adv_information', array( __CLASS__, 'save_client_options' ) );
+
 	}
 
 	/////////////////
@@ -120,6 +125,46 @@ class SI_Templating_API extends SI_Controller {
 		return $template_id;
 	}
 
+	public static function head_scripts() { 
+		global $wp_scripts;
+		?>
+			<link rel="stylesheet" id="open-sans-css" href="//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext" type="text/css" media="all">
+			<link rel="stylesheet" id="dashicons-css" href="<?php echo site_url() ?>/wp-includes/css/dashicons.min.css" type="text/css" media="all">
+			<link rel="stylesheet" id="qtip-css" href="<?php echo SI_RESOURCES ?>admin/plugins/qtip/jquery.qtip.min.css" type="text/css" media="">
+			<link rel="stylesheet" id="dropdown-css" href="<?php echo SI_RESOURCES ?>admin/plugins/dropdown/jquery.dropdown.css" type="text/css" media="">
+
+			<link rel="stylesheet" id="sprout_doc_style-css" href="<?php echo SI_RESOURCES ?>front-end/css/sprout-invoices.style.css" type="text/css" media="all">
+			<?php SI_Customizer::inject_css() ?>
+
+			<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery.js"></script>
+			<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+			<script type="text/javascript" src="<?php echo SI_RESOURCES ?>admin/plugins/qtip/jquery.qtip.min.js"></script>
+			<script type="text/javascript" src="<?php echo SI_RESOURCES ?>admin/plugins/dropdown/jquery.dropdown.min.js"></script>
+			<script type="text/javascript" src="<?php echo SI_RESOURCES ?>front-end/js/sprout-invoices.js"></script>
+			<script type="text/javascript">
+				/* <![CDATA[ */
+				var si_js_object = <?php echo json_encode( SI_Controller::get_localized_js() ); ?>;
+				/* ]]> */
+			</script>
+		<?php
+	}
+
+	public static function footer_scripts() {
+		?>
+			<?php if ( current_user_can( 'edit_post', get_the_id() ) ): ?>
+				<link rel="stylesheet" id="admin-bar-css" href="<?php echo site_url() ?>/wp-includes/css/admin-bar.min.css" type="text/css" media="all">
+				<?php wp_admin_bar_render() ?>
+			
+				<!-- TODO get customizer to be live -->
+				<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/json2.min.js"></script>
+				<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/underscore.min.js"></script>
+				<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/customize-base.min.js"></script>
+				<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/customize-preview.min.js"></script>
+				<script type="text/javascript" src="<?php echo SI_RESOURCES ?>admin/js/customizer.js"></script>
+			<?php endif ?>
+		<?php
+	}
+
 	/**
 	 * Save the template selection for a doc by post id
 	 * @param  integer $post_id      
@@ -171,21 +216,6 @@ class SI_Templating_API extends SI_Controller {
 	}
 
 	/**
-	 * Some plugins and themes are a bit overzealous with these functions and screw with the templates.
-	 * This will remove all actions and then readd the admin bar
-	 */
-	public static function remove_header_footer_actions() {
-		if ( apply_filters( 'si_remove_header_footer_actions', TRUE )) {
-			if ( SI_Invoice::is_invoice_query() || SI_Estimate::is_estimate_query() ) {
-				remove_all_actions( 'wp_header' );
-				remove_all_actions( 'wp_footer' );
-				add_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
-				do_action( 'si_removed_header_footer_actions' );
-			}
-		}
-	}
-
-	/**
 	 * Override the template and use something custom.
 	 * @param  string $template 
 	 * @return string           full path.
@@ -194,9 +224,6 @@ class SI_Templating_API extends SI_Controller {
 
 		// Invoicing
 		if ( SI_Invoice::is_invoice_query() ) {
-
-			// remove actions from plugins and themes
-			self::remove_header_footer_actions();
 
 			if ( is_single() ) {
 				$custom_template = self::get_doc_current_template( get_the_id() );
@@ -220,9 +247,6 @@ class SI_Templating_API extends SI_Controller {
 
 		// Estimates
 		if ( SI_Estimate::is_estimate_query() ) {
-
-			// remove actions from plugins and themes
-			self::remove_header_footer_actions();
 
 			if ( is_single() ) {
 				$custom_template = self::get_doc_current_template( get_the_id() );

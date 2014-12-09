@@ -330,7 +330,7 @@ class SI_Clients extends SI_Controller {
 	 */
 	public static function redirect_clients() {
 		$user = wp_get_current_user();
-		if ( !isset( $user->roles ) || $user->roles[0] == 'sa_client' ) {
+		if ( !isset( $user->roles ) || ( !empty( $user->roles ) && $user->roles[0] == 'sa_client' ) ) {
 			wp_redirect( home_url() );
 			exit();
 		}
@@ -522,14 +522,16 @@ class SI_Clients extends SI_Controller {
 			'default' => ''
 		);
 
-		$fields['email'] = array(
-			'weight' => 3,
-			'label' => self::__( 'Email' ),
-			'type' => 'text',
-			'required' => $required,
-			'description' => self::__('This e-mail will be used to create a new client user. Leave blank if associating an existing user.'),
-			'default' => ''
-		);
+		if ( !$client ) {
+			$fields['email'] = array(
+				'weight' => 3,
+				'label' => self::__( 'Email' ),
+				'type' => 'text',
+				'required' => $required,
+				'description' => self::__('This e-mail will be used to create a new client user. Leave blank if associating an existing user.'),
+				'default' => ''
+			);
+		}
 
 		$fields['website'] = array(
 			'weight' => 120,
@@ -547,6 +549,12 @@ class SI_Clients extends SI_Controller {
 		);
 
 		$fields = array_merge( $fields, self::get_standard_address_fields( $required ) );
+
+		// Don't add fields to add new clients when the client exists
+		if ( $client ) {
+			unset($fields['first_name']);
+			unset($fields['last_name']);
+		}
 
 		$fields = apply_filters( 'si_client_form_fields', $fields );
 		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
@@ -935,7 +943,7 @@ class SI_Clients extends SI_Controller {
 
 		$client = SI_Client::get_instance( $_REQUEST['sa_user_client_id'] );
 
-		if ( is_a( $client, 'SI_Client' ) ) {
+		if ( !is_a( $client, 'SI_Client' ) ) {
 			self::ajax_fail( 'Client not found' );
 		}
 

@@ -42,10 +42,10 @@
 					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $r_post->ID ?>" id="show_notification_tb_link_<?php echo $r_post->ID ?>" class="thickbox tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 				</p>
 				<div id="notification_message_<?php echo $r_post->ID ?>" class="cloak">
-					<?php echo apply_filters( 'the_content', $r_post->post_content ) ?>
+					<?php echo wpautop( $r_post->post_content ) ?>
 				</div>
 			<?php else: ?>
-				<?php echo apply_filters( 'the_content', $r_post->post_content ) ?>
+				<?php echo wpautop( $r_post->post_content ) ?>
 			<?php endif ?>
 			
 		</dd>

@@ -403,7 +403,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 
 	public static function add_currency_options( $js_object = array() ) {
-		$js_object['currency_symbol'] = self::get_currency_symbol();
+		$js_object['currency_symbol'] = sa_get_currency_symbol();
 		$js_object['localeconv'] = localeconv();
 		return $js_object;
 	}

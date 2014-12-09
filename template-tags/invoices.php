@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Sprout Apps Invoice Template Functions
  *
