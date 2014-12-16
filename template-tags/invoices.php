@@ -453,6 +453,9 @@ function si_get_invoice_balance( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$invoice = SI_Invoice::get_instance( $id );
+	if ( $invoice->get_status() == SI_Invoice::STATUS_PAID ) {
+		return 0;
+	}
 	return apply_filters( 'si_get_invoice_balance', $invoice->get_balance(), $invoice );
 }
 endif;

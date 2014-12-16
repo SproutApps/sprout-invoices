@@ -1,3 +1,7 @@
+= 2.0.8 =
+
+* Tested bump for 4.1
+
 = 2.0.7 =
 
 * Change/New: Estimate and Invoice templates are no longer using wp_head and wp_footer. Instead use si_head and si_footer (respectively). This allows for the templates to not be subjected to plugins and themes that inject code with those hooks. If you've created a custom template you should look into changing those functions.

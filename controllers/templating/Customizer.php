@@ -40,7 +40,7 @@ class SI_Customizer extends SI_Controller {
 
 		$wp_customize->add_setting( 'si_logo', array(
 			'sanitize_callback' => 'esc_url_raw',
-			'transport' => 'postMessage',
+			//'transport' => 'postMessage',
 			) );
 
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'si_logo', array(
@@ -53,7 +53,7 @@ class SI_Customizer extends SI_Controller {
 		$wp_customize->add_setting( 'si_invoices_color', array(
 		    'default'           => '#FF5B4D',
 		    'sanitize_callback' => 'sanitize_hex_color',
-		    'transport' => 'postMessage',
+		    //'transport' => 'postMessage',
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'si_invoices_color', array(
@@ -66,7 +66,7 @@ class SI_Customizer extends SI_Controller {
 		$wp_customize->add_setting( 'si_estimates_color', array(
 		    'default'           => '#4D9FFF',
 		    'sanitize_callback' => 'sanitize_hex_color',
-		    'transport' => 'postMessage',
+		    //'transport' => 'postMessage',
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'si_estimates_color', array(

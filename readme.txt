@@ -3,8 +3,8 @@ Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
-Tested up to: 4.0
-Stable tag: 2.0.7
+Tested up to: 4.1
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -123,6 +123,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Projects, time tracking and more!
 
 == Changelog ==
+
+= 2.0.8 =
+
+* Tested bump for 4.1
 
 = 2.0.7 =
 
