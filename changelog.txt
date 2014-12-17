@@ -1,3 +1,9 @@
+= 2.0.9 =
+
+* Confirmation page fix
+* Improved CC processing for future add-ons
+* Firefox style issue in admin
+
 = 2.0.8 =
 
 * Tested bump for 4.1
