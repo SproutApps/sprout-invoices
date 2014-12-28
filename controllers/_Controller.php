@@ -976,7 +976,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( substr( $view, -4 ) != '.php' ) {
 			$view .= '.php';
 		}
-		$file = SI_PATH.'/views/'.$view;
+		$path = apply_filters( 'si_views_path', SI_PATH.'/views/' );
+		$file = $path.$view;
 		if ( $allow_theme_override && defined( 'TEMPLATEPATH' ) ) {
 			$file = self::locate_template( array( $view ), $file );
 		}

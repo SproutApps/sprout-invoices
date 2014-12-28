@@ -279,7 +279,7 @@ class SI_Payments_Table extends WP_List_Table {
 		 */
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 
-		$filter = ( isset( $_REQUEST['post_status'] ) ) ? $_REQUEST['post_status'] : array( SI_Payment::STATUS_PENDING, SI_Payment::STATUS_AUTHORIZED, SI_Payment::STATUS_COMPLETE, SI_Payment::STATUS_PARTIAL );
+		$filter = ( isset( $_REQUEST['post_status'] ) ) ? $_REQUEST['post_status'] : array( SI_Payment::STATUS_PENDING, SI_Payment::STATUS_AUTHORIZED, SI_Payment::STATUS_COMPLETE, SI_Payment::STATUS_PARTIAL, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED );
 
 		$args = array(
 			'post_type' => SI_Payment::POST_TYPE,

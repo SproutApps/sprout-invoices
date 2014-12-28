@@ -135,7 +135,7 @@ class SI_Projects extends SI_Controller {
 	}
 
 	public static function show_upgrade_notice() {
-		if ( apply_filters( 'show_upgrade_messaging', '__return_true' ) ) {
+		if ( apply_filters( 'show_upgrade_messaging', TRUE ) ) {
 			printf( '<p><strong>Upgrade Available:</strong> Add time tracking and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p>', si_get_purchase_link() );
 		}
 	}

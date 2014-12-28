@@ -16,6 +16,7 @@ class SI_Payment extends SI_Post_Type {
 	const STATUS_PARTIAL = 'payment-partial'; // payment has been authorized and partially captured
 	const STATUS_VOID = 'void'; // payment has been voided
 	const STATUS_REFUND = 'refunded'; // payment has been voided
+	
 	const STATUS_RECURRING = 'recurring'; // a recurring payment has been created and is ongoing
 	const STATUS_CANCELLED = 'cancelled'; // a recurring payment has been cancelled
 	private static $instances = array();

@@ -385,7 +385,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @param SI_Payment $payment
 	 * @return void
 	 */
-	public function verify_recurring_payment( SI_Payment $payment ) {
+	public function verify_recurring_payment( SI_Invoice $invoice ) {
 		// default implementation does nothing
 		// it's up to the individual payment processor to verify
 	}
@@ -396,9 +396,31 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @param SI_Payment $payment
 	 * @return void
 	 */
-	public function cancel_recurring_payment( SI_Payment $payment ) {
+	public function cancel_recurring_payment( SI_Invoice $invoice ) {
+		$payment = self::get_recurring_payment( $invoice );
+		if ( !$payment ) {
+			return;
+		}
 		$payment->set_status( SI_Payment::STATUS_CANCELLED );
 		// it's up to the individual payment processor to handle any other details
+	}
+
+	public static function get_recurring_payment( SI_Invoice $invoice ) {
+		$payment_ids = $invoice->get_payments();
+		if ( empty( $payment_ids ) ) {
+			return 0;
+		}
+		$r_payment_id = 0;
+		foreach ( $payment_ids as $pid ) {
+			if ( in_array( get_post_status( $pid ), array( SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
+				$payment_id = $pid;
+			}
+		}
+		if ( !$r_payment_id ) {
+			return FALSE;
+		}
+		$payment = SI_Payment::get_instance( $r_payment_id );
+		return $payment;
 	}
 
 

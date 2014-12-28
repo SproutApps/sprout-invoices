@@ -57,7 +57,7 @@
 <div id="private_note_wrap">
 	<p>
 		<textarea id="private_note" name="private_note" class="clearfix" disabled="disabled" style="height:40px;"></textarea>
-		<?php if (  apply_filters( 'show_upgrade_messaging', '__return_true' ) ) {
+		<?php if (  apply_filters( 'show_upgrade_messaging', TRUE ) ) {
 			printf( si__('<span class="helptip" title="Upgrade for Private Notes"></span>'), si_get_purchase_link() );
 		} ?>
 	</p>

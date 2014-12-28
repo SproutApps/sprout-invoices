@@ -1032,3 +1032,15 @@ function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
 
 	return $returned_history;
 }
+
+///////////////
+// Recurring //
+///////////////
+
+function si_is_invoice_recurring( $invoice ) {
+	if ( !is_a( $invoice, 'SI_Invoice' ) ) {
+		return FALSE;
+	}
+	return SI_Subscription_Payments::has_subscription_payment( $invoice->get_id() );
+}
+

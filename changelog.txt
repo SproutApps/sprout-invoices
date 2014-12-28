@@ -1,3 +1,9 @@
+= 3.0 =
+
+* New: Recurring Payments (aka subscriptions)
+* New: Recurring Invoices
+* Fix: Less than a bunch more than a couple
+
 = 2.0.9 =
 
 * Confirmation page fix

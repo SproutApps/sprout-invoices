@@ -669,7 +669,7 @@ class SI_Invoice extends SI_Post_Type {
 		$payment_total = 0;
 		foreach ( $payment_ids as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
-			if ( $payment->get_status() !== SI_Payment::STATUS_VOID ) {
+			if ( !in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
 				$payment_total += $payment->get_amount();
 			}
 		}

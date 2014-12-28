@@ -90,13 +90,12 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
-**2.0.5**
 
-* NEW: Reports dashboard fully responsive
-* Change: Chart js API updated
-* Fix: Dashboard values incorrect under certain circumstances
-* Fix: Chart values are now localized
-* Fix: Other minor fixes
+**3.0**
+
+* New: Recurring Payments (aka subscriptions)
+* New: Recurring Invoices
+* Fix: Less than a bunch more than a couple
 
 **2.0**
 

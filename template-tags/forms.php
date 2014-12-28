@@ -31,6 +31,9 @@ function sa_admin_fields( $fields, $context = 'metabox' ) {
 							$data['attributes']['class'] = 'checkbox'; ?>
 						<?php sa_form_field( $key, $data, $context ); ?> <?php echo $data['label']; ?>
 					</label>
+					<?php if ( !empty( $data['description'] ) ): ?>
+						<p class="description help_block"><?php echo $data['description'] ?></p>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		</div>
@@ -150,7 +153,7 @@ function sa_get_form_field( $key, $data, $category ) {
 	<?php else: ?>
 		<input type="<?php echo $data['type']; ?>" name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" class="text-input" value="<?php echo $data['default']; ?>" placeholder="<?php echo isset( $data['placeholder'] )?$data['placeholder']:$data['label']; ?>" size="<?php echo isset( $data['size'] )?$data['size']:40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 	<?php endif; ?>
-	<?php if ( !empty( $data['description'] ) ): ?>
+	<?php if ( !empty( $data['description'] ) && $data['type'] != 'checkbox' ): ?>
 		<p class="description help_block"><?php echo $data['description'] ?></p>
 	<?php endif; ?>
 	</span>

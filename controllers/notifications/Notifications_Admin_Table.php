@@ -19,7 +19,7 @@ class SI_Notifications_Table extends WP_List_Table {
 	}
 
 	function extra_tablenav( $which ) {
-		if ( $which == 'top' && apply_filters( 'show_upgrade_messaging', '__return_true' ) ) {
+		if ( $which == 'top' && apply_filters( 'show_upgrade_messaging', TRUE ) ) {
 			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Add more notifications and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', si_get_purchase_link() );
 		}
 	}

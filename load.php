@@ -37,9 +37,6 @@ function sprout_invoices_load() {
 
 	// Premium models
 	require_once SI_PATH.'/models/Project.php';
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/models/Time_Premium.php' ) ) {
-		require_once SI_PATH.'/models/Time_Premium.php';
-	}
 
 	do_action( 'si_require_model_classes' );
 
@@ -131,10 +128,6 @@ function sprout_invoices_load() {
 
 	require_once SI_PATH.'/controllers/templating/Customizer.php';
 
-	// time tracking
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/projects/Time_Tracking_Premium.php' ) ) {
-		require_once SI_PATH.'/controllers/projects/Time_Tracking_Premium.php';
-	}
 
 	// updates
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) {
@@ -161,9 +154,6 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/template-tags/utility.php';
 	require_once SI_PATH.'/template-tags/docs.php';
 
-	// addons
-	require_once SI_PATH.'/add-ons/Addons.php';
-
 	// l18n
 	require_once SI_PATH.'/languages/SI_i18n.php';
 
@@ -181,9 +171,6 @@ function sprout_invoices_load() {
 	SI_Payment::init();
 
 	SI_Project::init();
-	if ( !SI_FREE_TEST && class_exists( 'SI_Time' ) ) {
-		SI_Time::init();
-	}
 
 	/////////////////////////
 	// init() controllers //
@@ -253,25 +240,23 @@ function sprout_invoices_load() {
 	if ( !SI_FREE_TEST && class_exists( 'SI_Projects_Premium' ) ) {
 		SI_Projects_Premium::init();
 	}
-	if ( !SI_FREE_TEST && class_exists( 'SI_Time_Tracking_Premium' ) ) {
-		SI_Time_Tracking_Premium::init();
-	}
 
 	// importer
 	SI_Importer::init();
-
-	// addons
-	if ( class_exists( 'SA_Addons' ) ) {
-		SA_Addons::init();
-	}
 
 	// help
 	SI_Help::init();
 
 	// i18n & l10n
 	SI_i18n::init();
+
+	// addons
+	require_once SI_PATH.'/add-ons/Addons.php';
+	SA_Addons::init();
 	
 	do_action( 'sprout_invoices_loaded' );
+
+
 }
 
 /**

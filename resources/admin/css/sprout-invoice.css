@@ -529,9 +529,16 @@ form table .sa_addon {
 #toplevel_page_sprout-apps .wp-menu-image:before {
 	font-family: "sproutapps-ff";
 	content: "\f112";
-	font-size: 34px;
-	margin-top: -10px;
-	margin-left: -16px;
+	font-size: 32px;
+	margin-top: -8px;
+	margin-left: -10px;
+}
+@-moz-document url-prefix() {
+   #toplevel_page_sprout-apps .wp-menu-image:before {
+		font-size: 32px;
+		margin-top: -2px;
+		margin-left: -12px;
+	}
 }
 
 #toplevel_page_sprout-apps li.wp-first-item {
@@ -1744,4 +1751,11 @@ dd .add_item_help {
 
 .select2-drop {
 	z-index: 1000000;
+}
+
+/**
+ * Recurring
+ */
+input#sa_recurring_invoice_custom_freq {
+	width: 50px;
 }

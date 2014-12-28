@@ -6,7 +6,7 @@
 	$num_posts = wp_count_posts( SI_Invoice::POST_TYPE );
 	$num_posts->{'auto-draft'} = 0; // remove auto-drafts
 	$total_posts = array_sum( (array) $num_posts );
-	if ( $total_posts >= 10 && apply_filters( 'show_upgrade_messaging', '__return_true' ) ) {
+	if ( $total_posts >= 10 && apply_filters( 'show_upgrade_messaging', TRUE ) ) {
 		printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Congrats on your %s Invoice!</strong> Please consider supporting the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', self::number_ordinal_suffix($total_posts), si_get_purchase_link() );
 	} ?>
 
@@ -35,7 +35,7 @@
 		<b><?php si_e('Permalink') ?></b>
 		<span id="permalink-select" tabindex="-1"><?php echo get_permalink( $id ) ?></span>
 		<span id="view-post-btn"><a href="<?php echo get_permalink( $id ) ?>" class="button button-small"><?php si_e('View Invoice') ?></a></span>
-		<?php if (  apply_filters( 'show_upgrade_messaging', '__return_true' ) ) {
+		<?php if (  apply_filters( 'show_upgrade_messaging', TRUE ) ) {
 			printf( si__('<span class="helptip" title="Upgrade for Private URLs"></span>'), si_get_purchase_link() );
 		} ?>
 	</div>
