@@ -234,7 +234,7 @@ class Test_Reporting extends WP_UnitTestCase {
 
 		// time not last month.
 		$min_epoch = strtotime('2009-01-01');
-		$max_epoch = strtotime('2014-12-31');
+		$max_epoch = strtotime('2014-10-31');
 
 		// Random invoices and payments
 		for ($i=0; $i < 10; $i++) { 
@@ -274,6 +274,7 @@ class Test_Reporting extends WP_UnitTestCase {
 		// Build some invoices with payments made this month
 		$min_epoch = strtotime('first day of this month');
 		$max_epoch = strtotime('last day of this month');
+
 		foreach ( $invoice_totals as $key => $total ) {
 			$id = $this->build_test_invoice( $total );
 			$rand_time = rand( $min_epoch, $max_epoch );

@@ -434,7 +434,7 @@ class SI_Estimate extends SI_Post_Type {
 		$this->save_post_meta( array(
 				self::$meta_keys['project_id'] => $project_id,
 			) );
-		return $tax;
+		return $project_id;
 	}
 
 	public function get_project() {

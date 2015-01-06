@@ -10,7 +10,7 @@
 class SI_Reporting extends SI_Controller {
 	const SETTINGS_PAGE = 'reporting';
 	const REPORT_QV = 'report';
-	const CACHE_KEY_PREFIX = 'si_report_cache_v5_';
+	const CACHE_KEY_PREFIX = 'si_report_cache_v6a_';
 	const AJAX_ACTION = 'si_report_data';
 	const AJAX_NONCE = 'si_report_nonce';
 	const CACHE_TIMEOUT = 172800; // 48 hours
@@ -355,7 +355,7 @@ class SI_Reporting extends SI_Controller {
 		}
 		$args = array(
 			'post_type' => SI_Invoice::POST_TYPE,
-			'post_status' => 'any', // Not Written-off?
+			'post_status' => array( SI_Invoice::STATUS_PENDING, SI_Invoice::STATUS_PARTIAL, SI_Invoice::STATUS_PAID ),
 			'posts_per_page' => -1,
 			'orderby' => 'date',
 			'fields' => 'ids',
@@ -425,7 +425,7 @@ class SI_Reporting extends SI_Controller {
 			);
 		$args = array(
 			'post_type' => SI_Invoice::POST_TYPE,
-			'post_status' => 'any', // Not Written-off?
+			'post_status' => array( SI_Invoice::STATUS_PENDING, SI_Invoice::STATUS_PARTIAL, SI_Invoice::STATUS_PAID ),
 			'posts_per_page' => -1,
 			'fields' => 'ids',
 			);
@@ -630,55 +630,55 @@ class SI_Reporting extends SI_Controller {
 					$args['date_query'] = array(
 						array(
 							'week' => date( 'W', strtotime('this week') ),
-							'year' => date( 'o', strtotime('this year') ),
+							'year' => date( 'o', strtotime('this week') ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('this Sunday')-current_time('timestamp');
+					$expire = strtotime('tomorrow')-current_time('timestamp');
 					break;
 				case 'lastweek':
 					$args['date_query'] = array(
 						array(
 							'week' => date( 'W', strtotime('-1 week') ),
-							'year' => date( 'o', strtotime('this year') ),
+							'year' => date( 'o', strtotime('-1 week') ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('this Sunday')-current_time('timestamp');
+					$expire = strtotime('next week')-current_time('timestamp');
 					break;
 				case 'month':
 					$args['date_query'] = array(
 						array(
-							'month' => date('m'),
-							'year' => date( 'o', strtotime('this year') ),
+							'month' => date( 'm', strtotime('first day of this month') ),
+							'year' => date( 'o', strtotime('first day of this month') ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('last day of month')-current_time('timestamp');
+					$expire = strtotime('tomorrow')-current_time('timestamp');
 					break;
 				case 'lastmonth':
 					$args['date_query'] = array(
 						array(
-							'month' => date( 'm', strtotime('-1 month') ),
-							'year' => date( 'o', strtotime('this year') ),
+							'month' => date( 'm', strtotime('first day of previous month') ),
+							'year' => date( 'o', strtotime('first day of previous month') ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('last day of year')-current_time('timestamp');
+					$expire = strtotime('first day of next month')-current_time('timestamp');
 					break;
 				case 'year':
 					$args['date_query'] = array(
 						array(
-							'year' => date('Y'),
+							'year' => date( 'Y', strtotime('first day of this year') ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('last day of year')-current_time('timestamp');
+					$expire = strtotime('tomorrow')-current_time('timestamp');
 					break;
 				case 'lastyear':
 					$args['date_query'] = array(
 						array(
-							'year' => date( 'Y', strtotime('-1  year') ),
+							'year' => date( 'Y', strtotime( 'first day of previous year' ) ),
 							'inclusive' => true,
 						)
 					);
@@ -881,6 +881,14 @@ class SI_Reporting extends SI_Controller {
 					'title' => self::__( 'Report Tables' ),
 					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__('<b>Date filtering</b> is available and can be used to retrieve data in-between t, dates, or after a date, or before a date.'), self::__('<b>Modify columns</b> within the table with the “Show / hide columns” button.'), self::__('<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.'), self::__('Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.') )
 				) );
+
+			if ( !isset( $_GET['report'] ) ) {
+				$screen->add_help_tab( array(
+						'id' => 'reports-refresh',
+						'title' => self::__( 'Dashboard Refresh' ),
+						'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.'), add_query_arg( array( 'nocache' => 1 ) ), si__('Refresh') )
+					) );
+			}
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .

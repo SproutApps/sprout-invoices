@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**3.1**
+
+* Dashboard updates including method to flush cached values
+* Notification shortcode filters
+
+**3.0.1**
+
+* Reporting fixes
 
 **3.0**
 

@@ -442,7 +442,8 @@ class SI_Notifications extends SI_Notifications_Control {
 	 */
 	public static function shortcode_date( $atts, $content, $code, $data ) {
 		$atts = shortcode_atts( array( 'format' => get_option( 'date_format' ) ), $atts );
-		return date_i18n( $atts['format'], current_time( 'timestamp' ) );
+		$date = date_i18n( $atts['format'], current_time( 'timestamp' ) );
+		return apply_filters( 'shortcode_date', $date, $data );
 	}
 
 	/**
@@ -477,7 +478,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				$name = get_the_title( $client_id );
 			}
 		}
-		return $name;
+		return apply_filters( 'shortcode_sender_name', $name, $data );
 	}
 
 	/**
@@ -518,7 +519,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				$sender_note = $data['estimate']->get_sender_note();
 			}
 		}
-		return $sender_note;
+		return apply_filters( 'shortcode_admin_note', $sender_note, $data );
 	}
 
 	/**
@@ -535,7 +536,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['payment'] ) ) {
 			$amount = sa_get_formatted_money( $data['payment']->get_amount() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_payment_total', $amount, $data );
 	}
 
 	/**
@@ -602,7 +603,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			</table>
 		<?php
 		$table = ob_get_clean();
-		return $table;
+		return apply_filters( 'shortcode_line_item_table', $table, $line_items, $data );
 	}
 
 	/**
@@ -645,7 +646,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			<?php endforeach ?>
 		<?php
 		$table = ob_get_clean();
-		return $table;
+		return apply_filters( 'shortcode_line_item_plain_list', $table, $line_items, $data );
 	}
 
 	/**
@@ -696,7 +697,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			
 		<?php
 		$table = ob_get_clean();
-		return $table;
+		return apply_filters( 'shortcode_line_item_list', $table, $line_items, $data );
 	}
 
 	/**
@@ -717,7 +718,8 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			
 		}
-		return ( $invoice_id ) ? get_the_title( $invoice_id ) : '' ;
+		$subject = ( $invoice_id ) ? html_entity_decode( get_the_title( $invoice_id ) ) : '' ;
+		return apply_filters( 'shortcode_invoice_subject', $subject, $invoice_id, $data );
 	}
 
 	/**
@@ -734,7 +736,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$invoice_id = $data['invoice']->get_invoice_id();
 		}
-		return $invoice_id;
+		return apply_filters( 'shortcode_invoice_id', $invoice_id, $data );
 	}
 
 	/**
@@ -752,7 +754,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			$url = get_edit_post_link( $invoice_id );
 		}
-		return $url;
+		return apply_filters( 'shortcode_invoice_edit_url', $url, $invoice_id, $data );
 	}
 
 	/**
@@ -770,7 +772,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			$url = get_permalink( $invoice_id );
 		}
-		return $url;
+		return apply_filters( 'shortcode_invoice_url', $url, $invoice_id, $data );
 	}
 
 	/**
@@ -788,7 +790,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$timestamp = $data['invoice']->get_issue_date();
 			$date = date_i18n( get_option('date_format'), $timestamp );
 		}
-		return $date;
+		return apply_filters( 'shortcode_invoice_issue_date', $date, $data );
 	}
 
 	/**
@@ -806,7 +808,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$timestamp = $data['invoice']->get_due_date();
 			$date = date_i18n( get_option('date_format'), $timestamp );
 		}
-		return $date;
+		return apply_filters( 'shortcode_invoice_due_date', $date, $data );
 	}
 
 	/**
@@ -825,7 +827,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$pastdue = current_time( 'timestamp' )-$due_date;
 			$date = floor($pastdue/(60*60*24));
 		}
-		return $days;
+		return apply_filters( 'shortcode_invoice_past_due_date', $days, $data );
 	}
 
 	/**
@@ -842,7 +844,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$po_number = $data['invoice']->get_po_number();
 		}
-		return $po_number;
+		return apply_filters( 'shortcode_invoice_po_number', $po_number, $data );
 	}
 
 	/**
@@ -859,7 +861,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_total() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_invoice_total', $amount, $data );
 	}
 
 	/**
@@ -876,7 +878,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_calculated_total() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_invoice_calculated_total', $amount, $data );
 	}
 
 	/**
@@ -893,7 +895,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_subtotal() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_invoice_subtotal', $amount, $data );
 	}
 
 	/**
@@ -910,7 +912,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_balance() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_invoice_total_due', $amount, $data );
 	}
 
 	/**
@@ -927,7 +929,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_deposit() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_invoice_deposit_amount', $amount, $data );
 	}
 
 	/**
@@ -944,7 +946,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_payments_total() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_invoice_total_payments', $amount, $data );
 	}
 
 	/**
@@ -968,7 +970,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$client_id = $data['estimate']->get_client_id();
 		}
 		$name = ( $client_id ) ? get_the_title( $client_id ) : '' ;
-		return $name;
+		return apply_filters( 'shortcode_client_name', $name, $data );
 	}
 
 	/**
@@ -986,7 +988,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$client_id = $data['client']->get_id();
 			$url = get_edit_post_link( $client_id );
 		}
-		return $url;
+		return apply_filters( 'shortcode_client_edit_url', $url, $data );
 	}
 
 
@@ -1006,7 +1008,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate_id = $data['estimate']->get_id();
 			$title = get_the_title( $estimate_id );
 		}
-		return $title;
+		return apply_filters( 'shortcode_estimate_subject', $title, $data );
 	}
 
 	/**
@@ -1023,7 +1025,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$estimate_id = $data['estimate']->get_estimate_id();
 		}
-		return $estimate_id;
+		return apply_filters( 'shortcode_estimate_id', $estimate_id, $data );
 	}
 
 	/**
@@ -1041,7 +1043,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate_id = $data['estimate']->get_id();
 			$url = get_edit_post_link( $estimate_id );
 		}
-		return $url;
+		return apply_filters( 'shortcode_estimate_edit_url', $url, $data );
 	}
 
 	/**
@@ -1059,7 +1061,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate_id = $data['estimate']->get_id();
 			$url = get_permalink( $estimate_id );
 		}
-		return $url;
+		return apply_filters( 'shortcode_estimate_url', $url, $data );
 	}
 
 	/**
@@ -1077,7 +1079,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$timestamp = $data['estimate']->get_issue_date();
 			$date = date_i18n( get_option('date_format'), $timestamp );
 		}
-		return $date;
+		return apply_filters( 'shortcode_estimate_issue_date', $date, $data );
 	}
 
 	/**
@@ -1094,7 +1096,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$po_number = $data['estimate']->get_po_number();
 		}
-		return $po_number;
+		return apply_filters( 'shortcode_estimate_po_number', $po_number, $data );
 	}
 
 	/**
@@ -1111,7 +1113,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$amount = sa_get_formatted_money( $data['estimate']->get_total() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_estimate_total', $amount, $data );
 	}
 
 	/**
@@ -1128,7 +1130,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$amount = sa_get_formatted_money( $data['estimate']->get_subtotal() );
 		}
-		return $amount;
+		return apply_filters( 'shortcode_estimate_subtotal', $amount, $data );
 	}
 
 	/**
@@ -1164,7 +1166,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				$entries = ob_get_clean();
 			}
 		}
-		return $entries;
+		return apply_filters( 'shortcode_lead_entries', $entries, $data );
 	}
 
 }

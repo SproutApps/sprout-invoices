@@ -413,7 +413,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		$r_payment_id = 0;
 		foreach ( $payment_ids as $pid ) {
 			if ( in_array( get_post_status( $pid ), array( SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
-				$payment_id = $pid;
+				$r_payment_id = $pid;
 			}
 		}
 		if ( !$r_payment_id ) {
