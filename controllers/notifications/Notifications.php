@@ -754,7 +754,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			$url = get_edit_post_link( $invoice_id );
 		}
-		return apply_filters( 'shortcode_invoice_edit_url', $url, $invoice_id, $data );
+		return apply_filters( 'shortcode_invoice_edit_url', $url, $data );
 	}
 
 	/**
@@ -772,7 +772,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			$url = get_permalink( $invoice_id );
 		}
-		return apply_filters( 'shortcode_invoice_url', $url, $invoice_id, $data );
+		return apply_filters( 'shortcode_invoice_url', $url, $data );
 	}
 
 	/**
