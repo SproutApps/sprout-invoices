@@ -15,10 +15,10 @@
 global $action;
 $datef = __( 'M j, Y @ G:i' );
 if ( 0 != $post->ID ) {
-	$stamp = __('Issued on: <b>%1$s</b>');
+	$stamp = si__('Issued on: <b>%1$s</b>');
 	$date = date_i18n( $datef, $issue_date );
 } else { // draft (no saves, and thus no date specified)
-	$stamp = __('Issue <b>immediately</b>');
+	$stamp = si__('Issue <b>immediately</b>');
 	$date = date_i18n( $datef, strtotime( current_time('mysql') ) );
 } ?>
 

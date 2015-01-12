@@ -98,7 +98,7 @@ class SI_Invoices extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_invoice_settings' => array(
-				'title' => 'Invoice Settings',
+				'title' => self::__('Invoice Settings'),
 				'weight' => 20,
 				'tab' => 'settings',
 				'settings' => array(

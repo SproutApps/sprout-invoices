@@ -157,6 +157,9 @@ function sprout_invoices_load() {
 	// l18n
 	require_once SI_PATH.'/languages/SI_i18n.php';
 
+	// i18n & l10n
+	SI_i18n::init();
+
 	///////////////////
 	// init() models //
 	///////////////////
@@ -246,9 +249,6 @@ function sprout_invoices_load() {
 
 	// help
 	SI_Help::init();
-
-	// i18n & l10n
-	SI_i18n::init();
 
 	// addons
 	require_once SI_PATH.'/add-ons/Addons.php';

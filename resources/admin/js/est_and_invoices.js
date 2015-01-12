@@ -646,7 +646,7 @@
 		calculate_totals();
 		calculate_subtotal();
 		calculate_total();
-		forceNumeric( $(this) );
+		//forceNumeric( $(this) );
 	});
 
 	/**
@@ -823,6 +823,7 @@
 
 	// forceNumeric() plug-in implementation
 	function forceNumeric(element) {
+		return true;
 		return element.each(function () {
 			$(element).keydown(function (e) {
 				var key = e.which || e.keyCode;

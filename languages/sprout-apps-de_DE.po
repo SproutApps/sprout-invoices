@@ -1,37 +1,47 @@
-# 
+#
 # Translators:
 # Bram Kort <bram.kort@live.nl>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Sprout Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-08 15:38-0800\n"
-"PO-Revision-Date: 2015-01-12 19:02+0000\n"
-"Last-Translator: Sprout Apps <l18n@sproutapps.co>\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/sprout-invoices/language/nl/)\n"
+"POT-Creation-Date: 2015-01-12 14:46-0800\n"
+"PO-Revision-Date: 2015-01-12 14:46-0800\n"
+"Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/sprout-invoices/"
+"language/nl/)\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
-"X-Poedit-Basepath: /Users/dancameron/Projects/Sprout_Apps/development/wp-content/\n"
-"X-Poedit-KeywordsList: __;_e;self::__;self::_e;si__;si_e;si_esc_e;si_esc__\n"
+"X-Poedit-Basepath: /Users/dancameron/Projects/Sprout_Apps/development/wp-"
+"content/\n"
+"X-Poedit-KeywordsList: self::__;self::_e;si__;si_e;si_esc_e;si_esc__;__;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: plugins/sprout-invoices-pro\n"
 "X-Poedit-SearchPath-1: plugins/sprout-invoices-addon-paypal-ec\n"
 "X-Poedit-SearchPath-2: plugins/sprout-invoices-addon-stripe-payments\n"
 "X-Poedit-SearchPath-3: plugins/sprout-invoices-addon-form-integrations\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:62
 msgid "Recurring Invoice Creation"
 msgstr "Terugkerende Factuur Generatie"
 
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:85
+#, fuzzy, php-format
+msgid ""
+"This invoice was created from a recurring invoice: <a href=\"%s\">%s</a>"
+msgstr "Factuur aangemaakt: <a href=\"%s\">%s</a>."
+
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:134
 msgid ""
 "Check if this invoice should be recurring and be cloned on the frequency "
 "below."
-msgstr "Controleer of deze factuur repeterend en gekopieerd moet worden volgens onderstaande frequentie."
+msgstr ""
+"Controleer of deze factuur repeterend en gekopieerd moet worden volgens "
+"onderstaande frequentie."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:141
 msgid "Recurring Invoice"
@@ -101,13 +111,16 @@ msgstr "Tijdsduur"
 msgid ""
 "Number of billing periods that make up one billing cycle. Note: If the "
 "billing period is SemiMonth, the billing frequency must be 1."
-msgstr "Aantal facturatie periodes die samen één factureringscyclus vormen. Opmerking: Als de facturatie periode een deel van een maand is, moet de facturatie frequentie 1 zijn."
+msgstr ""
+"Aantal facturatie periodes die samen één factureringscyclus vormen. "
+"Opmerking: Als de facturatie periode een deel van een maand is, moet de "
+"facturatie frequentie 1 zijn."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/views/admin/meta-boxes/invoices/subscription-payments.php:5
 msgid "Review Payment"
 msgstr "Controleer Betaling"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time.php:76
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time.php:77
 msgid "Billable Work"
 msgstr "Factureerbaar Werk"
 
@@ -136,10 +149,13 @@ msgstr "Project"
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:277
 #, php-format
 msgid ""
-"Select an activity, <a href=\"%s\">create a new activity</a> or <a "
-"class=\"thickbox\" href=\"%s\" title=\"Edit Activities\">manage existing "
+"Select an activity, <a href=\"%s\">create a new activity</a> or <a class="
+"\"thickbox\" href=\"%s\" title=\"Edit Activities\">manage existing "
 "activities</a>."
-msgstr "Selecteer een activiteit, <a href=\"%s\">maak een nieuwe activiteit aan</a> of <a class=\"thickbox\" href=\"%s\" title=\"Edit Activities\">beheer bestaande activiteiten</a>."
+msgstr ""
+"Selecteer een activiteit, <a href=\"%s\">maak een nieuwe activiteit aan</a> "
+"of <a class=\"thickbox\" href=\"%s\" title=\"Edit Activities\">beheer "
+"bestaande activiteiten</a>."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:287
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:7
@@ -187,16 +203,16 @@ msgstr "Standaard tarief"
 msgid "Default Percentage"
 msgstr "Standaard percentage"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:578
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:579
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-creation-form.php:7
 msgid "Create Activity"
 msgstr "Maak Activiteit Aan"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:580
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:581
 msgid "Track Time"
 msgstr "Houd de tijd bij"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:582
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:583
 msgid "Time saved!"
 msgstr "Tijd bespaard!"
 
@@ -308,7 +324,7 @@ msgid "Private note failed to save, try again."
 msgstr "Privé notitie is niet opgeslagen, probeer het opnieuw."
 
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:1485
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:979
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1025
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:21
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:21
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:21
@@ -333,7 +349,9 @@ msgstr "Geneste regel onderdelen"
 msgid ""
 "Line items can be nested. Use this handle and drag the line item around to "
 "re-order or make it a sub-item."
-msgstr "Onderdelen kunnen worden genest. Gebruik deze hendel en wijzig de volgorde van de onderdelen of maak er een sub-item van."
+msgstr ""
+"Onderdelen kunnen worden genest. Gebruik deze hendel en wijzig de volgorde "
+"van de onderdelen of maak er een sub-item van."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Help.php:205
 msgid "Need Help?"
@@ -343,12 +361,24 @@ msgstr "Hulp nodig?"
 msgid ""
 "This help tab has a lot of great information for you to learn all about the "
 "options and settings on this page."
-msgstr "Dit Hulp tabblad geeft veel leerzame informatie over de opties en instellingen op deze pagina."
+msgstr ""
+"Dit Hulp tabblad geeft veel leerzame informatie over de opties en "
+"instellingen op deze pagina."
+
+#: plugins/sprout-invoices-pro/controllers/admin/Settings.php:57
+#, fuzzy
+msgid "General Settings"
+msgstr "Betalingsinstellingen "
+
+#: plugins/sprout-invoices-pro/controllers/admin/Settings.php:68
+msgid "Getting Started"
+msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:196
 msgid ""
 "The company name and address will be shown on the estimates and invoices."
-msgstr "De bedrijfsnaam en het adres zal op de offertes en facturen worden vermeld."
+msgstr ""
+"De bedrijfsnaam en het adres zal op de offertes en facturen worden vermeld."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:209
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:519
@@ -364,7 +394,9 @@ msgstr "Contact e-mail"
 msgid ""
 "Select the states and countries/provinces for all forms, e.g. purchase, "
 "estimates and registration."
-msgstr "Selecteer de landen / provincies voor alle vormen, bv aankopen, offertes en registraties."
+msgstr ""
+"Selecteer de landen / provincies voor alle vormen, bv aankopen, offertes en "
+"registraties."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:365
 #: plugins/sprout-invoices-pro/controllers/templating/Customizer.php:36
@@ -389,13 +421,19 @@ msgid ""
 "To get you started, Sprout Invoices provides a fully customizable form for "
 "estimate submissions. Add the shortcode below to a page to use this default "
 "form: <code>[estimate_submission]Thank you![/estimate_submission]</code>"
-msgstr "Om snel aan de slag te kunnen biedt Sprout Facturen een volledig aanpasbaar formulier voor offertes. Voeg de onderstaande verkorte code toe aan een willekeurige pagina om het standaard formulier te gebruiken <code> [estimate_submission] Bedankt [/ estimate_submission] </ code>"
+msgstr ""
+"Om snel aan de slag te kunnen biedt Sprout Facturen een volledig aanpasbaar "
+"formulier voor offertes. Voeg de onderstaande verkorte code toe aan een "
+"willekeurige pagina om het standaard formulier te gebruiken <code> "
+"[estimate_submission] Bedankt [/ estimate_submission] </ code>"
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:420
 msgid ""
-"Additional documentation is available to customize the default estimate form"
-" and using the integration add-on."
-msgstr "Er is extra documentatie beschikbaar om het standaard offerte formulier aan te passen en het gebruik van de integratie add-on."
+"Additional documentation is available to customize the default estimate form "
+"and using the integration add-on."
+msgstr ""
+"Er is extra documentatie beschikbaar om het standaard offerte formulier aan "
+"te passen en het gebruik van de integratie add-on."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:425
 msgid "Estimate/Invoice Settings"
@@ -403,9 +441,11 @@ msgstr "Offerte / Factuur Instellingen"
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:426
 msgid ""
-"The Default Terms and Default Notes will be added to each estimate unless an"
-" estimate has customized Terms and/or Notes."
-msgstr "De Standaard Voorwaarden en Standaard Opmerkingen zullen worden toegevoegd aan elke offerte, tenzij deze aangepaste Voorwaarden en Opmerkingen hebben."
+"The Default Terms and Default Notes will be added to each estimate unless an "
+"estimate has customized Terms and/or Notes."
+msgstr ""
+"De Standaard Voorwaarden en Standaard Opmerkingen zullen worden toegevoegd "
+"aan elke offerte, tenzij deze aangepaste Voorwaarden en Opmerkingen hebben."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:431
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:83
@@ -416,14 +456,19 @@ msgstr "Instellingen voor meldingen"
 msgid ""
 "The from name and from e-mail is used for all Sprout Invoice notifications. "
 "Example, “Joc Pederson” future@dodgers.com."
-msgstr "De 'Van' naam van en 'Van' e-mail wordt gebruikt voor alle Sprout Factuur meldingen. Bijvoorbeeld, “Joc Pederson” future@dodgers.com."
+msgstr ""
+"De 'Van' naam van en 'Van' e-mail wordt gebruikt voor alle Sprout Factuur "
+"meldingen. Bijvoorbeeld, “Joc Pederson” future@dodgers.com."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:432
 msgid ""
 "Changing the email format to “HTML” will make the default notifications "
 "unformatted and look like garbage; if you want to create some pretty HTML "
 "notifications make sure to modify all notification formatting."
-msgstr "Door het veranderen van het e-mail formaat naar \"HTML\" worden de standaard meldingen platte tekst en dat ziet er niet goed ui; als je mooie HTML wilt maken zul je de opmaak van alle kennisgevingen op moeten maken."
+msgstr ""
+"Door het veranderen van het e-mail formaat naar \"HTML\" worden de standaard "
+"meldingen platte tekst en dat ziet er niet goed ui; als je mooie HTML wilt "
+"maken zul je de opmaak van alle kennisgevingen op moeten maken."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:437
 msgid "Company Info"
@@ -433,7 +478,10 @@ msgstr "Bedrijfsinformatie"
 msgid ""
 "This information is used on all estimates and invoices. You’ll want to make "
 "sure to set this information before sending out any invoices/estimates."
-msgstr "Deze informatie wordt gebruikt op alle offertes en facturen. U zult deze informatie zeker aan willen passen voordat u een offerte en/of factuur verstuurd."
+msgstr ""
+"Deze informatie wordt gebruikt op alle offertes en facturen. U zult deze "
+"informatie zeker aan willen passen voordat u een offerte en/of factuur "
+"verstuurd."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:443
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:91
@@ -448,7 +496,11 @@ msgid ""
 "unless advised. It’s important to note that turning enabling this option on "
 "a live site may cause private transaction data to be saved in the DB "
 "unencrypted, i.e. CC data."
-msgstr "De optie om de logging aan te zetten is alleen voor het opsporen van fouten en is niet aan te raden, tenzij geadviseerd. Het is belangrijk om op te merken dat het instellen van deze optie op een live site transactionele privégegevens onversleutelt opslaat in de DB, bijvoorbeeld CC data."
+msgstr ""
+"De optie om de logging aan te zetten is alleen voor het opsporen van fouten "
+"en is niet aan te raden, tenzij geadviseerd. Het is belangrijk om op te "
+"merken dat het instellen van deze optie op een live site transactionele "
+"privégegevens onversleutelt opslaat in de DB, bijvoorbeeld CC data."
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:448
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1081
@@ -535,8 +587,8 @@ msgstr "Saved"
 
 #: plugins/sprout-invoices-pro/controllers/checkout/Checkouts.php:148
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:215
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1017
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1022
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1063
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1068
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:80
 msgid "Payment"
 msgstr "Betaling"
@@ -667,7 +719,9 @@ msgstr "E-mail"
 msgid ""
 "This e-mail will be used to create a new client user. Leave blank if "
 "associating an existing user."
-msgstr "Deze e-mail wordt gebruikt om een klant als gebruiker aan te maken. Laat leeg als u een relatie wilt maken met een bestaande gebruiker."
+msgstr ""
+"Deze e-mail wordt gebruikt om een klant als gebruiker aan te maken. Laat "
+"leeg als u een relatie wilt maken met een bestaande gebruiker."
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:538
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:216
@@ -692,7 +746,9 @@ msgstr "Valuta Code"
 msgid ""
 "This setting will override the setting for each payment processor that "
 "supports differing currency codes."
-msgstr "Deze instelling zal de instelling voor elke betalingsverwerker overschrijven die ondersteuning biedt voor verschillende valuta codes."
+msgstr ""
+"Deze instelling zal de instelling voor elke betalingsverwerker overschrijven "
+"die ondersteuning biedt voor verschillende valuta codes."
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:630
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:578
@@ -704,7 +760,10 @@ msgid ""
 "This setting will override the default payments setting. If your currency "
 "has the symbol after the amount place a % before your currency symbol. "
 "Example, % &pound;"
-msgstr "Deze instelling zal de standaardinstelling voor betalingen overschrijven. Als uw munteenheid het symbool na het bedrag heeft plaatst dan een % voor uw valuta symbool. Bijvoorbeeld, % & euro;"
+msgstr ""
+"Deze instelling zal de standaardinstelling voor betalingen overschrijven. "
+"Als uw munteenheid het symbool na het bedrag heeft plaatst dan een % voor uw "
+"valuta symbool. Bijvoorbeeld, % & euro;"
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:642
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:156
@@ -716,7 +775,9 @@ msgstr "Valuta symbool"
 msgid ""
 "Current format: %1$s. The default money formatting (%2$s) can be overridden "
 "for all client estimates and invoices here."
-msgstr "Huidig formaat:%1$s. De standaard geld opmaak (%2$s) kan hier voor alle klantoffertes en facturen worden overschreven."
+msgstr ""
+"Huidig formaat:%1$s. De standaard geld opmaak (%2$s) kan hier voor alle "
+"klantoffertes en facturen worden overschreven."
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1027
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:106
@@ -732,14 +793,22 @@ msgid ""
 "The information here is used for estimates and invoices and includes "
 "settings to: Edit Company Name, Edit the company address, and Edit their "
 "website url."
-msgstr "De informatie die hier wordt gebruikt voor offertes en facturen bevat instellingen voor: Bewerken Bedrijfsnaam, Bewerk het adres van het bedrijf, en Bewerk hun website url."
+msgstr ""
+"De informatie die hier wordt gebruikt voor offertes en facturen bevat "
+"instellingen voor: Bewerken Bedrijfsnaam, Bewerk het adres van het bedrijf, "
+"en Bewerk hun website url."
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1059
 msgid ""
-"<b>Important note:</b> when clients are created new WordPress users are also"
-" created and given the “client” role. Creating users will allow for future "
+"<b>Important note:</b> when clients are created new WordPress users are also "
+"created and given the “client” role. Creating users will allow for future "
 "functionality, i.e. client dashboards."
-msgstr "<b> Belangrijke opmerking: </ b> wanneer klanten worden aangemaakt worden deze als WordPress gebruikers aangemaakt en krijgen de rol van \"cliënt\". Hierdoor krijgen deze klanten ook een inlog account voor het dashboard van WordPress vanwaar ze profiel aanpassen kunnen dien zoals bijvoorbeeld de kleuren."
+msgstr ""
+"<b> Belangrijke opmerking: </ b> wanneer klanten worden aangemaakt worden "
+"deze als WordPress gebruikers aangemaakt en krijgen de rol van \"cliënt\". "
+"Hierdoor krijgen deze klanten ook een inlog account voor het dashboard van "
+"WordPress vanwaar ze profiel aanpassen kunnen dien zoals bijvoorbeeld de "
+"kleuren."
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1064
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/submit.php:21
@@ -748,12 +817,17 @@ msgstr "Bijbehorende Gebruikers"
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1065
 msgid ""
-"When clients are created a WP user is created and associated and clients are"
-" not limited to a single user. Not limited a client to a single user allows "
-"for you to have multiple points of contact at/for a company/client. Example,"
-" the recipients for sending estimate and invoice notifications are these "
+"When clients are created a WP user is created and associated and clients are "
+"not limited to a single user. Not limited a client to a single user allows "
+"for you to have multiple points of contact at/for a company/client. Example, "
+"the recipients for sending estimate and invoice notifications are these "
 "associated users."
-msgstr "Als klanten worden gemaakt wordt deze gekoppeld als WP gebruiker en klanten zijn niet beperkt tot één gebruiker. Het niet beperken van een klant tot een enkele gebruiker maakt dat u meerdere contactpunten heeft voor een bedrijf/klant. Bijvoorbeeld, de ontvangers voor offertes en facturen kunnen 1 of meerdere personen zijn."
+msgstr ""
+"Als klanten worden gemaakt wordt deze gekoppeld als WP gebruiker en klanten "
+"zijn niet beperkt tot één gebruiker. Het niet beperken van een klant tot een "
+"enkele gebruiker maakt dat u meerdere contactpunten heeft voor een bedrijf/"
+"klant. Bijvoorbeeld, de ontvangers voor offertes en facturen kunnen 1 of "
+"meerdere personen zijn."
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1070
 msgid "Client History"
@@ -764,7 +838,10 @@ msgid ""
 "Important points are shown in the client history and just like estimate and "
 "invoices private notes can be added for only you and other team members to "
 "see."
-msgstr "Belangrijke punten worden weergegeven in de klant geschiedenis en net als offertes en facturen kunnen er privé notities worden toegevoegd die alleen voor u en andere teamleden te zichtbaar zijn."
+msgstr ""
+"Belangrijke punten worden weergegeven in de klant geschiedenis en net als "
+"offertes en facturen kunnen er privé notities worden toegevoegd die alleen "
+"voor u en andere teamleden te zichtbaar zijn."
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1076
 msgid "Invoices and Estimates"
@@ -773,9 +850,12 @@ msgstr "Facturen en Offertes"
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1077
 msgid ""
 "All invoices and estimates associated with the client are shown below the "
-"associated users option. This provides a quick way to jump to the record you"
-" need to see."
-msgstr "Alle klantgerelateerde facturen en offertes worden onder de gebruikers opties van de desbetreffende klant getoond. Dit biedt een snelle manier om naar het desbetreffende onderdeel te gaan dat u wilt zien."
+"associated users option. This provides a quick way to jump to the record you "
+"need to see."
+msgstr ""
+"Alle klantgerelateerde facturen en offertes worden onder de gebruikers "
+"opties van de desbetreffende klant getoond. Dit biedt een snelle manier om "
+"naar het desbetreffende onderdeel te gaan dat u wilt zien."
 
 #: plugins/sprout-invoices-pro/controllers/developer/Logs.php:50
 msgid "Save Logs"
@@ -789,7 +869,9 @@ msgstr "Sla alle logs als een sprout app gegeven op (dev_log)."
 msgid ""
 "Note: This should only be used for testing and troubleshooting. Records are "
 "found under Tools."
-msgstr "Opmerking: Dit mag alleen worden gebruikt voor het testen en het oplossen van problemen. Gegevens zijn te vinden onder Tools."
+msgstr ""
+"Opmerking: Dit mag alleen worden gebruikt voor het testen en het oplossen "
+"van problemen. Gegevens zijn te vinden onder Tools."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:33
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:32
@@ -803,16 +885,26 @@ msgstr "Lead generatie"
 msgid "Default Submission Form"
 msgstr "Standaard aanmeldformulier "
 
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:42
+msgid "N/A in free version"
+msgstr ""
+
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:43
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:42
 #, php-format
 msgid ""
-"To get you started, Sprout Invoices provides a <a href=\"%s\" "
-"target=\"_blank\">fully customizable form</a> for estimate submissions. "
-"Simply add this shortcode to a page and an estimate submission form will be "
-"available to prospective clients. Notifications will be sent for each "
-"submission and a new estimate (and client) will be generated."
-msgstr "Om een begin te maken, biedt Sprout Facturen een <a href=\"%s\" target=\"_blank\">volledig aanpasbare en klantgerichte offerteformulieren </a> om te versturen. Voeg eenvoudig deze shortcode aan een willekeurige pagina toe waarna er een compleet offerteformulier toegevoegd zal worden die u naar potentiële klanten kunt sturen. Van iedere afgifte zal er een kennisgeving worden gestuurd (en klant worden aangemaakt) in het systeem."
+"To get you started, Sprout Invoices provides a <a href=\"%s\" target=\"_blank"
+"\">fully customizable form</a> for estimate submissions. Simply add this "
+"shortcode to a page and an estimate submission form will be available to "
+"prospective clients. Notifications will be sent for each submission and a "
+"new estimate (and client) will be generated."
+msgstr ""
+"Om een begin te maken, biedt Sprout Facturen een <a href=\"%s\" target="
+"\"_blank\">volledig aanpasbare en klantgerichte offerteformulieren </a> om "
+"te versturen. Voeg eenvoudig deze shortcode aan een willekeurige pagina toe "
+"waarna er een compleet offerteformulier toegevoegd zal worden die u naar "
+"potentiële klanten kunt sturen. Van iedere afgifte zal er een kennisgeving "
+"worden gestuurd (en klant worden aangemaakt) in het systeem."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:47
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:46
@@ -824,28 +916,48 @@ msgstr "Gravity Forms en Ninja Forms Integratie"
 #, php-format
 msgid ""
 "Instead of creating our own advanced form builder we've integrated with the "
-"top WordPress form plugins. Make sure to read the <a href=\"%s\" "
-"target=\"_blank\">integration guide</a> to make the best use of your custom "
-"forms."
-msgstr "In plaats van het installeren van een eigen geavanceerde formulierbouwer hebben wij geïntegreerd met de top van de WordPress formulier plugins. Zorg ervoor dat u de <a href=\"%s\" target=\"_blank\"> integratie gids </a> goed leest om het beste te halen uit u eigengemaakte formulieren."
+"top WordPress form plugins. Make sure to read the <a href=\"%s\" target="
+"\"_blank\">integration guide</a> to make the best use of your custom forms."
+msgstr ""
+"In plaats van het installeren van een eigen geavanceerde formulierbouwer "
+"hebben wij geïntegreerd met de top van de WordPress formulier plugins. Zorg "
+"ervoor dat u de <a href=\"%s\" target=\"_blank\"> integratie gids </a> goed "
+"leest om het beste te halen uit u eigengemaakte formulieren."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:63
+#, php-format
+msgid ""
+"<strong>Upgrade Available:</strong> Enable Estimate Submission integrations "
+"and support the future of Sprout Invoices by <a href=\"%s\">upgrading</a>."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:65
+#, fuzzy, php-format
+msgid ""
+"<p>Estimate submissions is the start of the <a href=\"%s\">Sprout Invoices "
+"workflow</a>.</p>"
+msgstr ""
+"Offerte verzendingen zijn het startpunt van de <a href=\"%s\"> Sprout "
+"Facturen workflow </a>."
+
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:75
+msgid "$0-5"
+msgstr "$0-5"
+
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:77
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:75
+#: plugins/sprout-invoices-pro/views/admin/sprout-apps-dashboard.php:49
+msgid "Advanced Form Integration with Gravity and Ninja Forms"
+msgstr "Geavanceerde Formulier Integratie met Gravity en Ninja Formulieren"
+
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:63
 #, php-format
 msgid ""
 "Estimate submissions is the start of the <a href=\"%s\">Sprout Invoices "
 "workflow</a>."
-msgstr "Offerte verzendingen zijn het startpunt van de <a href=\"%s\"> Sprout Facturen workflow </a>."
-
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:73
-msgid "$0-5"
-msgstr "$0-5"
-
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission.php:75
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:75
-#: plugins/sprout-invoices-pro/views/admin/sprout-apps-dashboard.php:49
-msgid "Advanced Form Integration with Gravity and Ninja Forms"
-msgstr "Geavanceerde Formulier Integratie met Gravity en Ninja Formulieren"
+msgstr ""
+"Offerte verzendingen zijn het startpunt van de <a href=\"%s\"> Sprout "
+"Facturen workflow </a>."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:73
 msgid "$0"
@@ -877,7 +989,9 @@ msgstr "Bestand"
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:121
 msgid "Upload a PDF or screenshots to help with your estimate requirements."
-msgstr "Upload een PDF of voeg screendumps toe om uw offerte aanvraag nog duidelijker te maken."
+msgstr ""
+"Upload een PDF of voeg screendumps toe om uw offerte aanvraag nog "
+"duidelijker te maken."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:126
 msgid "Project State"
@@ -938,10 +1052,13 @@ msgstr "Budget"
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:177
 msgid ""
-"This has little influence on estimates; this helps us better understand what"
-" you consider the scope of the project is and allows us to set appropriate "
+"This has little influence on estimates; this helps us better understand what "
+"you consider the scope of the project is and allows us to set appropriate "
 "expectations/solutions in our estimate."
-msgstr "Dit heeft weinig invloed op de ramingen; Dit helpt ons beter te begrijpen wat de omvang van het project is en stelt ons in staat om de juiste verwachtingen / oplossingen in onze offerte mee te nemen."
+msgstr ""
+"Dit heeft weinig invloed op de ramingen; Dit helpt ons beter te begrijpen "
+"wat de omvang van het project is en stelt ons in staat om de juiste "
+"verwachtingen / oplossingen in onze offerte mee te nemen."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:182
 msgid "Examples"
@@ -984,7 +1101,9 @@ msgstr "Nieuwe offerte: %s"
 msgid ""
 "No requirements submitted. Check to make sure the \"requirements\" field is "
 "required."
-msgstr "Geen requirements doorgegeven. Controleren of het 'requirements' veld vereist is."
+msgstr ""
+"Geen requirements doorgegeven. Controleren of het 'requirements' veld "
+"vereist is."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:101
 msgid "Estimate Permalink Slug"
@@ -1012,7 +1131,9 @@ msgstr "Standaard notitie"
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:126
 msgid ""
 "These are the default notes public to a client reviewing their estimate."
-msgstr "Dit zijn de standaard publieke aantekeningen voor een klant die zijn offerte controleert."
+msgstr ""
+"Dit zijn de standaard publieke aantekeningen voor een klant die zijn offerte "
+"controleert."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:185
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:199
@@ -1070,13 +1191,17 @@ msgstr "Stuur mij een kopie"
 msgid ""
 "A notification will be sent if recipients are selected and this estimate is "
 "saved."
-msgstr "Als deze offerte wordt opgeslagen zal er een kennisgeving naar de geselecteerde ontvangers worden verzonden."
+msgstr ""
+"Als deze offerte wordt opgeslagen zal er een kennisgeving naar de "
+"geselecteerde ontvangers worden verzonden."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:495
 msgid ""
 "This note will be added to the Estimate Notification via the [sender_note] "
 "shortcode."
-msgstr "Deze notitie zal aan de Offerte Notitie worden toegevoegd via de [sender_note] shortcode."
+msgstr ""
+"Deze notitie zal aan de Offerte Notitie worden toegevoegd via de "
+"[sender_note] shortcode."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:692
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:892
@@ -1139,8 +1264,8 @@ msgstr "Status"
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/line-items.php:74
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:26
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:217
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:193
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:238
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:208
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:251
 msgid "Total"
 msgstr "Totaal"
 
@@ -1161,13 +1286,18 @@ msgstr "Manage offertes"
 msgid ""
 "The status on the estimate table view can be updated without having to go "
 "the edit screen by click on the current status and selecting a new one."
-msgstr "De status van de offerte tabelweergave kan worden bijgewerkt zonder dat u naar het Edit scherm hoeft te gaan door te klikken op de huidige status en een nieuwe te selecteren."
+msgstr ""
+"De status van de offerte tabelweergave kan worden bijgewerkt zonder dat u "
+"naar het Edit scherm hoeft te gaan door te klikken op de huidige status en "
+"een nieuwe te selecteren."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1057
 msgid ""
 "If an invoice is associated an icon linking to the edit page will show in "
 "the last column."
-msgstr "Als een factuur wordt gekoppeld verschijnt er een icoontje in de laatste kolom met een link naar de edit pagina."
+msgstr ""
+"Als een factuur wordt gekoppeld verschijnt er een icoontje in de laatste "
+"kolom met een link naar de edit pagina."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1062
 msgid "Editing Estimates"
@@ -1178,7 +1308,10 @@ msgid ""
 "Editing estimates is intentionally easy to do but a review here would "
 "exhaust this limited space. Please review the knowledgeable for a complete "
 "overview."
-msgstr "Offertes bewerken is erg eenvoudig te doen waardoor verdere uitleg zonde zou zijn van de beperkte ruimte die hier beschikbaar is. Voor meer informatie over het bewerken van offertes verwijzen we u naar onze knowledgebase."
+msgstr ""
+"Offertes bewerken is erg eenvoudig te doen waardoor verdere uitleg zonde zou "
+"zijn van de beperkte ruimte die hier beschikbaar is. Voor meer informatie "
+"over het bewerken van offertes verwijzen we u naar onze knowledgebase."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1063
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:1104
@@ -1193,15 +1326,20 @@ msgstr "Voorgedefinieerde Taken"
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1085
 msgid ""
 "An admin to manage your tasks is found under Estimates > Tasks  in the "
-"admin. When adding a new task the “Name” is what you will select when adding"
-" new line items, the description is used to dill the line item description "
+"admin. When adding a new task the “Name” is what you will select when adding "
+"new line items, the description is used to dill the line item description "
 "field."
-msgstr "Een admin om uw taken te beheren is te vinden onder Offertes > Taken in de admin. U kunt een nieuw item toevoegen aan de lijst door de \"Naam\" te selecteren. De omschrijving wordt gebruikt om de beschrijving van het item in te vullen."
+msgstr ""
+"Een admin om uw taken te beheren is te vinden onder Offertes > Taken in de "
+"admin. U kunt een nieuw item toevoegen aan de lijst door de \"Naam\" te "
+"selecteren. De omschrijving wordt gebruikt om de beschrijving van het item "
+"in te vullen."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1069
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1085
 msgid "Pre-defined tasks are used for both Estimates and Invoices."
-msgstr "Vooraf gedefinieerde taken worden zowel voor offertes en facturen gebruikt."
+msgstr ""
+"Vooraf gedefinieerde taken worden zowel voor offertes en facturen gebruikt."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1084
 msgid "Line Item Tasks"
@@ -1210,9 +1348,12 @@ msgstr "Regel Item Taken"
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:1085
 msgid ""
 "Subscribe to the blog or twitter account to get updates when new features "
-"are added to pre-defined tasks, since the ability to add a pre-defined rate,"
-" quantity and percentage is in the works."
-msgstr "Abonneer je op ons blog en/of twitter-account om updates te ontvangen als er nieuwe functies worden toegevoegd aan vooraf gedefinieerde taken, aangezien deze een groot deel van uw werk versnellen."
+"are added to pre-defined tasks, since the ability to add a pre-defined rate, "
+"quantity and percentage is in the works."
+msgstr ""
+"Abonneer je op ons blog en/of twitter-account om updates te ontvangen als er "
+"nieuwe functies worden toegevoegd aan vooraf gedefinieerde taken, aangezien "
+"deze een groot deel van uw werk versnellen."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Premium.php:95
 msgid "Option name for this line item type."
@@ -1234,7 +1375,9 @@ msgstr "Standaard omschrijving"
 msgid ""
 "This will dynamically set the line item description when this type is "
 "selected."
-msgstr "Dit zal dynamisch de post beschrijving instellen wanneer dit type wordt geselecteerd."
+msgstr ""
+"Dit zal dynamisch de post beschrijving instellen wanneer dit type wordt "
+"geselecteerd."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:106
 msgid "Invoice Permalink Slug"
@@ -1243,16 +1386,19 @@ msgstr "Factuur Permalink Type"
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:114
 #, php-format
 msgid "Example invoice url: %s/%s/045b41dd14ab8507d80a27b7357630a5/"
-msgstr "Voorbeeld factuur url:\n%s/%s/045b41dd14ab8507d80a27b7357630a5/"
+msgstr ""
+"Voorbeeld factuur url:\n"
+"%s/%s/045b41dd14ab8507d80a27b7357630a5/"
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:123
 msgid "These are the default terms for an invoice."
 msgstr "Dit zijn de standaard termen voor een factuur."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:132
-msgid ""
-"These are the default notes public to a client reviewing their invoice."
-msgstr "Dit zijn de standaard publieke aantekeningen voor een klant om hun factuur na te kijken."
+msgid "These are the default notes public to a client reviewing their invoice."
+msgstr ""
+"Dit zijn de standaard publieke aantekeningen voor een klant om hun factuur "
+"na te kijken."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:217
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/send.php:6
@@ -1277,13 +1423,17 @@ msgstr "Sla deze factuur op voor het versturen,"
 msgid ""
 "A notification will be sent if recipients are selected and this invoice is "
 "saved."
-msgstr "Zodra deze factuur wordt opgeslagen zal er een kennisgeving worden verzonden naar de geselecteerde ontvangers"
+msgstr ""
+"Zodra deze factuur wordt opgeslagen zal er een kennisgeving worden verzonden "
+"naar de geselecteerde ontvangers"
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:519
 msgid ""
 "This note will be added to the Invoice Notification via the [sender_note] "
 "shortcode."
-msgstr "Deze notitie zal aan de Factuur Melding worden toegevoegd via de [sender_note] shortcode."
+msgstr ""
+"Deze notitie zal aan de Factuur Melding worden toegevoegd via de "
+"[sender_note] shortcode."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:633
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:24
@@ -1325,7 +1475,7 @@ msgstr "Controleer betalingen."
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/dashboard.php:160
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/dashboard.php:224
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:223
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:244
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:257
 msgid "Payments"
 msgstr "Betalingen"
 
@@ -1335,21 +1485,28 @@ msgstr "Manage facturen"
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:1098
 msgid ""
-"The status on the invoice table view can be updated without having to go the"
-" edit screen by click on the current status and selecting a new one."
-msgstr "De status op de factuur tabelweergave kan worden bijgewerkt zonder dat u naar het bewerkingsscherm toe hoeft te gaan door te klikken op de huidige status en het selecteren van een nieuwe."
+"The status on the invoice table view can be updated without having to go the "
+"edit screen by click on the current status and selecting a new one."
+msgstr ""
+"De status op de factuur tabelweergave kan worden bijgewerkt zonder dat u "
+"naar het bewerkingsscherm toe hoeft te gaan door te klikken op de huidige "
+"status en het selecteren van een nieuwe."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:1098
 msgid ""
-"Payments are tallied and shown in the Paid column. Hovering over the invoice"
-" row will show a Payments link."
-msgstr "Betalingen worden geteld en weergegeven in de Paid kolom. Als u over de factuur rij zweeft zal er een betalingslink getoond worden."
+"Payments are tallied and shown in the Paid column. Hovering over the invoice "
+"row will show a Payments link."
+msgstr ""
+"Betalingen worden geteld en weergegeven in de Paid kolom. Als u over de "
+"factuur rij zweeft zal er een betalingslink getoond worden."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:1098
 msgid ""
 "If the invoice has an associated estimate the icon linking to the edit page "
 "of the estimate will show in the last column."
-msgstr "Indien de factuur een bijbehorende offerte heeft verschijnt er een icoontje met een link naar de Edit pagina in de laatste kolom."
+msgstr ""
+"Indien de factuur een bijbehorende offerte heeft verschijnt er een icoontje "
+"met een link naar de Edit pagina in de laatste kolom."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:1103
 msgid "Editing Invoices"
@@ -1357,10 +1514,12 @@ msgstr "Facturen aanpassen"
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:1104
 msgid ""
-"Editing invoices is intentionally easy to do but a review here would exhaust"
-" this limited space. Please review the knowledgeable for a complete "
-"overview."
-msgstr "Offertes bewerken is erg eenvoudig te doen waardoor verdere uitleg zonde zou zijn van de beperkte ruimte die hier beschikbaar is. Voor meer informatie over het bewerken van offertes verwijzen we u naar onze knowledgebase."
+"Editing invoices is intentionally easy to do but a review here would exhaust "
+"this limited space. Please review the knowledgeable for a complete overview."
+msgstr ""
+"Offertes bewerken is erg eenvoudig te doen waardoor verdere uitleg zonde zou "
+"zijn van de beperkte ruimte die hier beschikbaar is. Voor meer informatie "
+"over het bewerken van offertes verwijzen we u naar onze knowledgebase."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Premium.php:112
 #, php-format
@@ -1377,7 +1536,9 @@ msgstr "Lead ontvangen"
 msgid ""
 "Customize the email that is sent to a prospective client after a lead is "
 "submitted."
-msgstr "Pas de e-mail aan die naar een potentiële klant wordt gestuurd nadat een lead verstuurd is."
+msgstr ""
+"Pas de e-mail aan die naar een potentiële klant wordt gestuurd nadat een "
+"lead verstuurd is."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:50
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:99
@@ -1393,7 +1554,8 @@ msgstr "Offerte beschikbaar"
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:57
 msgid "Customize the estimate email that is sent to selected recipients."
-msgstr "Pas de offerte e-mail aan die naar geselecteerde ontvangers wordt verstuurd."
+msgstr ""
+"Pas de offerte e-mail aan die naar geselecteerde ontvangers wordt verstuurd."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:59
 #, php-format
@@ -1406,7 +1568,9 @@ msgstr "Factuur beschikbaar"
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:65
 msgid "Customize the invoice email that is sent to selected recipients."
-msgstr "Pas de factuur e-mail aan die naar de geselecteerde ontvangers wordt gestuurd."
+msgstr ""
+"Pas de factuur e-mail aan die naar de geselecteerde ontvangers wordt "
+"gestuurd."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:67
 #, php-format
@@ -1423,7 +1587,9 @@ msgstr "Storting Betaling ontvangen"
 msgid ""
 "Customize the payment email that is sent to the client recipients when a "
 "deposit is made."
-msgstr "Pas de e-mail aan die naar de klant verstuurd wordt als er een aanbetaling is gedaan."
+msgstr ""
+"Pas de e-mail aan die naar de klant verstuurd wordt als er een aanbetaling "
+"is gedaan."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:75
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Premium.php:63
@@ -1437,9 +1603,11 @@ msgstr "Factuur betaald"
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:81
 msgid ""
-"Customize the email sent to the client recipients when the final payment for"
-" an invoice is made."
-msgstr "Pas de e-mail aan die naar de klant verstuurd wordt als de laatste betaling van een factuur voldaan is."
+"Customize the email sent to the client recipients when the final payment for "
+"an invoice is made."
+msgstr ""
+"Pas de e-mail aan die naar de klant verstuurd wordt als de laatste betaling "
+"van een factuur voldaan is."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:83
 #, php-format
@@ -1454,9 +1622,11 @@ msgstr "Betalingsherinnering"
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:88
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Premium.php:68
 msgid ""
-"Customize the email that is sent to the client recipients in order to remind"
-" them that their payment is overdue."
-msgstr "Pas de e-mail aan die naar de klant verstuurd wordt als de betalingsdatum overschreden is."
+"Customize the email that is sent to the client recipients in order to remind "
+"them that their payment is overdue."
+msgstr ""
+"Pas de e-mail aan die naar de klant verstuurd wordt als de betalingsdatum "
+"overschreden is."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:90
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Premium.php:70
@@ -1474,7 +1644,9 @@ msgstr "Lead verstuurd"
 msgid ""
 "Customize the email that is sent to the site admin after an lead is "
 "submitted."
-msgstr "Pas de e-mail aan die naar de admin verzonden wordt wanneer een lead ingestuurd wordt."
+msgstr ""
+"Pas de e-mail aan die naar de admin verzonden wordt wanneer een lead "
+"ingestuurd wordt."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:104
 msgid "Estimate Accepted"
@@ -1483,7 +1655,8 @@ msgstr "Offerte geaccepteerd"
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:105
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:112
 msgid "Customize the email sent to the admin after an estimate is accepted."
-msgstr "Pas de e-mail verzonden naar de admin na een schatting wordt geaccepteerd."
+msgstr ""
+"Pas de e-mail verzonden naar de admin na een schatting wordt geaccepteerd."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:107
 #, php-format
@@ -1505,7 +1678,9 @@ msgstr "Betaling ontvangen"
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:119
 msgid "Customize the email sent to an admin when any payment is received."
-msgstr "Pas de e-mail aan die naar de admin verzonden wordt wanneer een betaling ontvangen is."
+msgstr ""
+"Pas de e-mail aan die naar de admin verzonden wordt wanneer een betaling "
+"ontvangen is."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:121
 #, php-format
@@ -1537,19 +1712,25 @@ msgstr "Gebruikt om de weer te geven ."
 msgid ""
 "Used to display the line items for an estimate or invoice in a table format "
 "(HTML)."
-msgstr "Gebruikt om de regelitems voor een offerte of factuur in een tabelformaat (HTML) weer te geven."
+msgstr ""
+"Gebruikt om de regelitems voor een offerte of factuur in een tabelformaat "
+"(HTML) weer te geven."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:161
 msgid ""
 "Used to display the line items for an estimate or invoice in a list format "
 "(HTML)."
-msgstr "Gebruikt om de regelitems voor een offerte of factuur in een lijstformaat (HTML) weer te geven."
+msgstr ""
+"Gebruikt om de regelitems voor een offerte of factuur in een lijstformaat "
+"(HTML) weer te geven."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:165
 msgid ""
 "Used to display the line items for an estimate or invoice in a plain text "
 "list."
-msgstr "Gebruikt om de regelitems voor een offerte of factuur in platte tekst weer te geven."
+msgstr ""
+"Gebruikt om de regelitems voor een offerte of factuur in platte tekst weer "
+"te geven."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:169
 msgid "Used to display the invoice subject."
@@ -1577,7 +1758,8 @@ msgstr "Gebruikt om de vervaldatum weer te geven."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:193
 msgid "Used to display how many days the invoice is past due."
-msgstr "Gebruikt om te laten zien hoeveel dagen de factuur over de vervaldatum is."
+msgstr ""
+"Gebruikt om te laten zien hoeveel dagen de factuur over de vervaldatum is."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:197
 msgid "Used to display the invoice po number."
@@ -1726,7 +1908,9 @@ msgstr "Platte Tekst"
 msgid ""
 "Default notifications are in plain text. If set to HTML, custom HTML "
 "notifications are required."
-msgstr "Standaard meldingen zijn in platte tekst. Indien u ze instelt op HTML, zijn op maat HTML meldingen nodig."
+msgstr ""
+"Standaard meldingen zijn in platte tekst. Indien u ze instelt op HTML, zijn "
+"op maat HTML meldingen nodig."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:206
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:66
@@ -1755,13 +1939,17 @@ msgstr "Over Meldingen"
 msgid ""
 "Notifications include the emails sent to you and your clients, including "
 "responses to prospective clients after submitting an estimate request."
-msgstr "Kennisgevingen bevatten de e-mails verzonden naar u en uw klanten, inclusief reacties op potentiële klanten na het indienen van een offerteaanvraag."
+msgstr ""
+"Kennisgevingen bevatten de e-mails verzonden naar u en uw klanten, inclusief "
+"reacties op potentiële klanten na het indienen van een offerteaanvraag."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:738
 msgid ""
 "Each one of your notifications can be customized; hover over the "
 "notification you want and click the edit link."
-msgstr "Elk van uw meldingen kan worden aangepast; zweef over de melding die u wilt bewerken en klik op de link bewerken."
+msgstr ""
+"Elk van uw meldingen kan worden aangepast; zweef over de melding die u wilt "
+"bewerken en klik op de link bewerken."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:743
 msgid "Disable Notifications"
@@ -1771,7 +1959,9 @@ msgstr "Meldingen uitschakelen"
 msgid ""
 "The notifications edit screen will have an option next to the \"Update\" "
 "button to disable the notification from being sent."
-msgstr "Het scherm meldingen bewerken bevat een optie naast de knop \"Update\" om te voorkomen dat de melding wordt verzonden."
+msgstr ""
+"Het scherm meldingen bewerken bevat een optie naast de knop \"Update\" om te "
+"voorkomen dat de melding wordt verzonden."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:749
 msgid "Notification Editing"
@@ -1782,7 +1972,10 @@ msgid ""
 "<b>Subject</b> - The first input is for the notifications subject. If the "
 "notification is an e-mail than it would be subject line for that e-mail "
 "notification."
-msgstr "<b> Onderwerp </ b> - De eerste waarde is voor het kennisgevingen onderwerp. Als de melding een e-mail is dan wordt de het de onderwerpregel van die e-mail."
+msgstr ""
+"<b> Onderwerp </ b> - De eerste waarde is voor het kennisgevingen onderwerp. "
+"Als de melding een e-mail is dan wordt de het de onderwerpregel van die e-"
+"mail."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:750
 msgid ""
@@ -1790,13 +1983,19 @@ msgid ""
 "available shortcodes to have dynamic information included when the "
 "notification is received. Make sure to change the Notification Setting if "
 "HTML formatting is added to your notifications."
-msgstr "<b> Bericht Body </ b> - De main editor is het kennisgevingen veld. Gebruik de beschikbare shortcodes om dynamische informatie op te nemen wanneer de kennisgeving wordt verzonden. Zorg ervoor dat u de melding instellingen verandert voor HTML opmaak."
+msgstr ""
+"<b> Bericht Body </ b> - De main editor is het kennisgevingen veld. Gebruik "
+"de beschikbare shortcodes om dynamische informatie op te nemen wanneer de "
+"kennisgeving wordt verzonden. Zorg ervoor dat u de melding instellingen "
+"verandert voor HTML opmaak."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:750
 msgid ""
 "<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for "
 "each."
-msgstr "<b>Shortcodes</ b> - Een lijst van shortcodes wordt meegeleverd inclusief een omschrijving voor elke shortcode."
+msgstr ""
+"<b>Shortcodes</ b> - Een lijst van shortcodes wordt meegeleverd inclusief "
+"een omschrijving voor elke shortcode."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:750
 msgid ""
@@ -1804,7 +2003,12 @@ msgid ""
 "current notification to a different type; it’s recommended you go to the "
 "notification you want to edit instead of using this option. The Disabled "
 "option available to prevent this notification from sending."
-msgstr "<b> Bijwerken </ b> - De select lijst kan gebruikt worden als u de huidige mededeling wilt veranderen in ene ander type; het wordt aanbevolen dat u naar de melding gaat die u aan wilt passen in plaats van deze optie te gebruiken. Er is een Disable optie beschikbaar om te voorkomen dat het bericht verstuurd wordt."
+msgstr ""
+"<b> Bijwerken </ b> - De select lijst kan gebruikt worden als u de huidige "
+"mededeling wilt veranderen in ene ander type; het wordt aanbevolen dat u "
+"naar de melding gaat die u aan wilt passen in plaats van deze optie te "
+"gebruiken. Er is een Disable optie beschikbaar om te voorkomen dat het "
+"bericht verstuurd wordt."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Credit_Card_Processors.php:92
 msgid "Cardholder Name"
@@ -1819,8 +2023,8 @@ msgstr "Kaart nummer"
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Credit_Card_Processors.php:121
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Credit_Card_Processors.php:298
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:132
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:125
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:153
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:132
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:160
 msgid "Expiration Date"
 msgstr "Vervaldatum"
 
@@ -1875,7 +2079,10 @@ msgid ""
 "Money formatting is based on the local (%s) this WordPress install was "
 "configured with during installation. Please review the Sprout Invoices "
 "knowledgebase if this needs to be changed."
-msgstr "Geld opmaak is gebaseerd op de lokale (%s) waar deze WordPress-installatie mee geconfigureerd is tijdens de installatie. Lees de Sprout Facturen kennisbank als u dit aan wilt passen."
+msgstr ""
+"Geld opmaak is gebaseerd op de lokale (%s) waar deze WordPress-installatie "
+"mee geconfigureerd is tijdens de installatie. Lees de Sprout Facturen "
+"kennisbank als u dit aan wilt passen."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:189
 msgid "Offsite Processors"
@@ -1951,21 +2158,32 @@ msgid ""
 "By default no payment processors are active. After selecting the Payment "
 "Settings tab you will find that there are two types of Payment Processors: "
 "Offsite Processors and Credit Card Processors."
-msgstr "Standaard zijn er geen betalingsverwerkers actief. Na het selecteren van het tabblad Betaling Instellingen vindt u twee soorten betalingsverwerkers: Offsite Processors en Credit Card Processors."
+msgstr ""
+"Standaard zijn er geen betalingsverwerkers actief. Na het selecteren van het "
+"tabblad Betaling Instellingen vindt u twee soorten betalingsverwerkers: "
+"Offsite Processors en Credit Card Processors."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:561
 msgid ""
 "After selecting the processors you want to accept for invoice payments and "
-"saving the processor options will be shown. Each payment process has its own"
-" settings, review and complete each option before saving again"
-msgstr "Na het selecteren van de betalingsverwerker die u wilt accepteren voor factuurbetalingen worden na het opslaan de opties getoond. Iedere betalingsverwerker heeft zijn eigen instellingen, evaluatie en aanvulling van elke optie die u opnieuw op dient te slaan na het instellen."
+"saving the processor options will be shown. Each payment process has its own "
+"settings, review and complete each option before saving again"
+msgstr ""
+"Na het selecteren van de betalingsverwerker die u wilt accepteren voor "
+"factuurbetalingen worden na het opslaan de opties getoond. Iedere "
+"betalingsverwerker heeft zijn eigen instellingen, evaluatie en aanvulling "
+"van elke optie die u opnieuw op dient te slaan na het instellen."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:567
 msgid ""
 "These are the credit card payment processors. You’ll notice that only one "
 "credit card processor can be activated at a time, this is by design since "
 "there’s no viable reason to accept CCs from multiple processors."
-msgstr "Dit zijn de credit card betalingsverwerkers. U zult merken dat er slechts één creditcard processor tegelijk kan worden geactiveerd, dit is zo ontworpen omdat er geen legitieme reden is om CC's van meerdere providers te accepteren."
+msgstr ""
+"Dit zijn de credit card betalingsverwerkers. U zult merken dat er slechts "
+"één creditcard processor tegelijk kan worden geactiveerd, dit is zo "
+"ontworpen omdat er geen legitieme reden is om CC's van meerdere providers te "
+"accepteren."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:567
 msgid ""
@@ -1973,7 +2191,11 @@ msgid ""
 "use SSL for your site to keep your client’s data secure. Having SSL on your "
 "site is highly recommended for more reasons than accepting CC information, "
 "since every WordPress site has at least a login form."
-msgstr "Als je creditcardgegevens verwerkt op uw site zult u SSL willen gebruiken om de gegevens van uw klant veilig te houden. Het hebben van SSL op uw site is een aanrader voor meer redenen dan alleen CC gegevens te accepteren, omdat elke WordPress site ten minste een login scherm heeft."
+msgstr ""
+"Als je creditcardgegevens verwerkt op uw site zult u SSL willen gebruiken om "
+"de gegevens van uw klant veilig te houden. Het hebben van SSL op uw site is "
+"een aanrader voor meer redenen dan alleen CC gegevens te accepteren, omdat "
+"elke WordPress site ten minste een login scherm heeft."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:572
 msgid "Offsite Processing"
@@ -1984,13 +2206,18 @@ msgid ""
 "Essentially a payment processed outside of your site. These payments can "
 "include external payment providers like Paypal and Check or P.O. payments. "
 "Virtually an unlimited amount of offsite processors can be activated."
-msgstr "In wezen een betaling verwerking buiten uw website. Deze betalingen kunnen bestaan uit externe betalingsproviders zoals PayPa, Check of P.O. payments. Vrijwel een onbeperkte hoeveelheid offsite verwerkers kan worden geactiveerd."
+msgstr ""
+"In wezen een betaling verwerking buiten uw website. Deze betalingen kunnen "
+"bestaan uit externe betalingsproviders zoals PayPa, Check of P.O. payments. "
+"Vrijwel een onbeperkte hoeveelheid offsite verwerkers kan worden geactiveerd."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:579
 msgid ""
 "If your currency is formatted wight the symbol after the amount, place a % "
 "before your currency symbol. For example, %£."
-msgstr "Als uw munt is geformatteerd met het symbool achter het bedrag, plaats een % voor uw valuta symbool. Bijvoorbeeld, %€."
+msgstr ""
+"Als uw munt is geformatteerd met het symbool achter het bedrag, plaats een % "
+"voor uw valuta symbool. Bijvoorbeeld, %€."
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Admin_Payment.php:69
 msgid "Admin Payment"
@@ -2024,8 +2251,8 @@ msgstr "Datum ontvangen"
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/notes.php:13
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/notes.php:13
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:242
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:208
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:263
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:223
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:276
 msgid "Notes"
 msgstr "Opmerkingen"
 
@@ -2148,7 +2375,7 @@ msgstr "<b>Actuele Betalings Status:</b> <code>%s</code>"
 msgid "Paypal Profile ID: "
 msgstr "PayPal profiel ID:"
 
-#: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_EC.php:938
+#: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_EC.php:941
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:746
 #, php-format
 msgid " (Error Code: %s)"
@@ -2229,11 +2456,18 @@ msgstr "Betalingstatussen zijn:"
 msgid ""
 "<b>Pending</b> - the payment could be waiting for admin approval or waiting "
 "for the payment processor.<br/><b>Authorized</b> – a payment status set for "
-"signifying that the payment was authorized by the processor and a capture of"
-" the payment will be attempted later.<br/><b>Void</b> - payment was voided "
-"by the admin or declined by the payment processor after it was authorized or"
-" pending."
-msgstr "b>In afwachting</ b> - de betaling kan wachten op admin goedkeuring of wachten op de betalingsverwerker.<br/> <b>Toegestaan</ b> - een in te stellen betalingsstatus die aangeeft dat de betaling is geautoriseerd door de verwerker en een er later een melding van de betaling zal later worden toegevoegd.<br/> <b> Vervallen</ b> -. betaling werd vernietigd door de admin of afgewezen door de betalingsverwerker nadat hij was goedgekeurd of in afwachting is."
+"signifying that the payment was authorized by the processor and a capture of "
+"the payment will be attempted later.<br/><b>Void</b> - payment was voided by "
+"the admin or declined by the payment processor after it was authorized or "
+"pending."
+msgstr ""
+"b>In afwachting</ b> - de betaling kan wachten op admin goedkeuring of "
+"wachten op de betalingsverwerker.<br/> <b>Toegestaan</ b> - een in te "
+"stellen betalingsstatus die aangeeft dat de betaling is geautoriseerd door "
+"de verwerker en een er later een melding van de betaling zal later worden "
+"toegevoegd.<br/> <b> Vervallen</ b> -. betaling werd vernietigd door de "
+"admin of afgewezen door de betalingsverwerker nadat hij was goedgekeurd of "
+"in afwachting is."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:195
 msgid "Managing Payments"
@@ -2241,31 +2475,40 @@ msgstr "Betalingen Managen"
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:196
 msgid "Hovering over a payment brings up multiple links and options:"
-msgstr "Als u over een betaling zweeft krijgt u meerdere links en opties te zien:"
+msgstr ""
+"Als u over een betaling zweeft krijgt u meerdere links en opties te zien:"
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:196
 msgid ""
 "<b>Void Payment</b> - Allows you to void a payment and add a note that will "
 "be added to the Transaction Data."
-msgstr "<b> Vervallen Betaling </ b> - Hiermee kunt u een betaling laten vervallen. Er zal tegelijkertijd een notitie worden toegevoegd aan de Transactie Data."
+msgstr ""
+"<b> Vervallen Betaling </ b> - Hiermee kunt u een betaling laten vervallen. "
+"Er zal tegelijkertijd een notitie worden toegevoegd aan de Transactie Data."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:196
 msgid ""
 "<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw "
 "data stored by a payment processor."
-msgstr "<b>Transactiedata</ b> - Wordt gebruikt om een betaling op te lossen, dit is de ruwe data opgeslagen door een betalingsverwerker."
+msgstr ""
+"<b>Transactiedata</ b> - Wordt gebruikt om een betaling op te lossen, dit is "
+"de ruwe data opgeslagen door een betalingsverwerker."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:196
 msgid ""
-"<b>Invoice and Client</b> – A link to the associated invoice and client edit"
-" pages."
-msgstr "b> Factuur en Klant</ b> - Een link naar de bijbehorende factuur en klant bewerking pagina's."
+"<b>Invoice and Client</b> – A link to the associated invoice and client edit "
+"pages."
+msgstr ""
+"b> Factuur en Klant</ b> - Een link naar de bijbehorende factuur en klant "
+"bewerking pagina's."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:196
 msgid ""
-"The payment totals are current and are not at the moment of the payment. The"
-" payment type is shown under the Data column."
-msgstr "De betalingstotalen zijn actueel en zijn niet van het moment van de betaling. Het type betaling is opgenomen onder de Data kolom."
+"The payment totals are current and are not at the moment of the payment. The "
+"payment type is shown under the Data column."
+msgstr ""
+"De betalingstotalen zijn actueel en zijn niet van het moment van de "
+"betaling. Het type betaling is opgenomen onder de Data kolom."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:63
 #: plugins/sprout-invoices-pro/controllers/records/Records_Admin_Table.php:106
@@ -2277,7 +2520,7 @@ msgid "Associated records cannot be found."
 msgstr "Gekoppelde records kunnen niet worden gevonden."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:132
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1029
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1075
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:29
 msgid "Payment Total"
 msgstr "Totaal Betalingen"
@@ -2290,8 +2533,8 @@ msgstr "Factuursaldo"
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:134
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:141
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:151
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:162
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:172
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:169
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:179
 msgid "Invoice Total"
 msgstr "Factuurtotaal"
 
@@ -2349,14 +2592,17 @@ msgstr "Projectnaam"
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:307
 #, php-format
 msgid ""
-"Edit <a href=\"%s\">%s</a>, select another client or <a href=\"%s\">create a"
-" new client</a>."
-msgstr "Bewerken <a href=\"%s\">%s</a>, selecteer een andere cliënt of <a href=\"%s\">maak een nieuwe klant aan</a>."
+"Edit <a href=\"%s\">%s</a>, select another client or <a href=\"%s\">create a "
+"new client</a>."
+msgstr ""
+"Bewerken <a href=\"%s\">%s</a>, selecteer een andere cliënt of <a href=\"%s"
+"\">maak een nieuwe klant aan</a>."
 
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:307
 #, php-format
 msgid "Select an existing client or <a href=\"%s\">create a new client</a>."
-msgstr "Selecteer een bestaande klant of <a href=\"%s\"> maak een nieuwe klant</a>."
+msgstr ""
+"Selecteer een bestaande klant of <a href=\"%s\"> maak een nieuwe klant</a>."
 
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:330
 msgid "End Date"
@@ -2450,20 +2696,28 @@ msgstr "Over Rapporten"
 msgid ""
 "The Reports dashboard links to the many single reports that Sprout Invoice "
 "provides, don’t miss them."
-msgstr "Het rapporten dashboard bevat vele links naar rapporten die Sprout Invoice biedt, mis ze niet."
+msgstr ""
+"Het rapporten dashboard bevat vele links naar rapporten die Sprout Invoice "
+"biedt, mis ze niet."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:876
 msgid ""
-"<b>Dashboard</b> - Is the place to get a quick status overview. See what was"
-" recently updated, what’s currently overdue or unpaid, and other important "
+"<b>Dashboard</b> - Is the place to get a quick status overview. See what was "
+"recently updated, what’s currently overdue or unpaid, and other important "
 "information about your business."
-msgstr "<b> Dashboard </ b> - Is de plek om snel een statusoverzicht te krijgen. Zie wat onlangs is bijgewerkt, wat momenteel achterstallig of onbetaald is, en andere belangrijke informatie over uw bedrijf."
+msgstr ""
+"<b> Dashboard </ b> - Is de plek om snel een statusoverzicht te krijgen. Zie "
+"wat onlangs is bijgewerkt, wat momenteel achterstallig of onbetaald is, en "
+"andere belangrijke informatie over uw bedrijf."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:876
 msgid ""
 "<b>Reports</b> - Reports have advanced filtering and are highly "
 "customizable. All data is dynamically updated without reloading."
-msgstr "<b>Rapporten</ b> - Rapporten hebben uitgebreide filteringsmogelijkheden en zijn zeer flexibel. Alle gegevens worden dynamisch bijgewerkt zonder de pagina te herladen."
+msgstr ""
+"<b>Rapporten</ b> - Rapporten hebben uitgebreide filteringsmogelijkheden en "
+"zijn zeer flexibel. Alle gegevens worden dynamisch bijgewerkt zonder de "
+"pagina te herladen."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:881
 msgid "Report Tables"
@@ -2473,25 +2727,32 @@ msgstr "Rapport Tabellen"
 msgid ""
 "<b>Date filtering</b> is available and can be used to retrieve data in-"
 "between t, dates, or after a date, or before a date."
-msgstr "<b>Datum filtering</ b> is beschikbaar en kan worden gebruikt om gegevens tussen datums, na een datum of vóór een datum op te halen."
+msgstr ""
+"<b>Datum filtering</ b> is beschikbaar en kan worden gebruikt om gegevens "
+"tussen datums, na een datum of vóór een datum op te halen."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:882
 msgid ""
-"<b>Modify columns</b> within the table with the “Show / hide columns” "
-"button."
-msgstr "<b>Kolommen wijzigen</ b>binnen de tabel met de \"Toon / verberg kolommen\" knop."
+"<b>Modify columns</b> within the table with the “Show / hide columns” button."
+msgstr ""
+"<b>Kolommen wijzigen</ b>binnen de tabel met de \"Toon / verberg kolommen\" "
+"knop."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:882
 msgid ""
 "<b>Export</b> the table, filtered or not, to many formats, including CSV, "
 "Excel, PDF or your computers clipboard."
-msgstr "<b>Exporteer</ b> de tabel, gefilterd of niet, naar vele formaten, waaronder CSV, Excel, PDF of naar het klembord van uw computer."
+msgstr ""
+"<b>Exporteer</ b> de tabel, gefilterd of niet, naar vele formaten, waaronder "
+"CSV, Excel, PDF of naar het klembord van uw computer."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:882
 msgid ""
 "Records are <em>limited to 2,500 items</em>. If you want to return more use "
 "the ‘si_reports_show_records’ filter."
-msgstr "Records zijn <em>beperkt tot 2.500 items</ em>. Als u er meer terug wilt zien kunt u gebruik maken van het filter 'si_reports_show_records'."
+msgstr ""
+"Records zijn <em>beperkt tot 2.500 items</ em>. Als u er meer terug wilt "
+"zien kunt u gebruik maken van het filter 'si_reports_show_records'."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:888
 msgid "Dashboard Refresh"
@@ -2502,7 +2763,11 @@ msgid ""
 "The reports dashboard is cached and if new invoices or estimates were just "
 "created the values under \"Invoice Dashboard\" may be out of date. Use the "
 "refresh button below to flush the cache and get the latest stats."
-msgstr "Het rapporten dashboard wordt gecached en als er nieuwe facturen of offertes gemaakt zijn kunnen de waarden onder \"Factuur Dashboard\" verouderd zijn. Gebruik de refresh-knop hieronder om de cache te spoelen en ontvang de laatste statistieken."
+msgstr ""
+"Het rapporten dashboard wordt gecached en als er nieuwe facturen of offertes "
+"gemaakt zijn kunnen de waarden onder \"Factuur Dashboard\" verouderd zijn. "
+"Gebruik de refresh-knop hieronder om de cache te spoelen en ontvang de "
+"laatste statistieken."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:889
 msgid "Refresh"
@@ -2578,7 +2843,8 @@ msgstr "Selecteer een andere template"
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:395
 #, php-format
 msgid "No <a href=\"%s\" target=\"_blank\">Custom Templates</a> Found"
-msgstr "Geen <a href=\"%s\" target=\"_blank\">Aangepaste Templates</a> Gevonden"
+msgstr ""
+"Geen <a href=\"%s\" target=\"_blank\">Aangepaste Templates</a> Gevonden"
 
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:309
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:399
@@ -2632,7 +2898,9 @@ msgstr "Factuur Template"
 msgid ""
 "This invoice template will override the default invoice template, unless "
 "another template is selected when creating/editing an invoice."
-msgstr "Deze factuur template overschrijft de standaard factuur template, tenzij een andere sjabloon wordt geselecteerd bij het maken / bewerken van een factuur."
+msgstr ""
+"Deze factuur template overschrijft de standaard factuur template, tenzij een "
+"andere sjabloon wordt geselecteerd bij het maken / bewerken van een factuur."
 
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:332
 msgid "Estimate Template"
@@ -2642,7 +2910,9 @@ msgstr "Offerte Template"
 msgid ""
 "This estimate template will override the default estimate template, unless "
 "another template is selected when creating/editing an estimate."
-msgstr "Deze factuur template overschrijft de standaard factuur template, tenzij een andere sjabloon wordt geselecteerd bij het maken / bewerken van een offerte."
+msgstr ""
+"Deze factuur template overschrijft de standaard factuur template, tenzij een "
+"andere sjabloon wordt geselecteerd bij het maken / bewerken van een offerte."
 
 #: plugins/sprout-invoices-pro/controllers/updates/Updates.php:68
 msgid "Sprout Invoices Activation"
@@ -2655,10 +2925,13 @@ msgstr "Licentiecode"
 #: plugins/sprout-invoices-pro/controllers/updates/Updates.php:78
 #, php-format
 msgid ""
-"Enter your license key to enable automatic plugin updates. Find your license"
-" key in your Sprout Apps Dashboard under the <a href=\"%s\" "
-"target=\"_blank\">Downloads</a> section."
-msgstr "Voer uw licentiesleutel om automatische plugin updates in te schakelen. Vind uw licentiecode in uw Sprout Apps Dashboard onder de <a href=\"%s\" target=\"_blank\"> Downloads </a> sectie."
+"Enter your license key to enable automatic plugin updates. Find your license "
+"key in your Sprout Apps Dashboard under the <a href=\"%s\" target=\"_blank"
+"\">Downloads</a> section."
+msgstr ""
+"Voer uw licentiesleutel om automatische plugin updates in te schakelen. Vind "
+"uw licentiecode in uw Sprout Apps Dashboard onder de <a href=\"%s\" target="
+"\"_blank\"> Downloads </a> sectie."
 
 #: plugins/sprout-invoices-pro/controllers/updates/Updates.php:92
 #: plugins/sprout-invoices-pro/controllers/updates/Updates.php:95
@@ -2746,7 +3019,9 @@ msgstr "Herstart het Import Proces"
 msgid ""
 "This will start the import process from the start. Any records already "
 "imported will not be duplicated but any new records will."
-msgstr "Dit zal het importproces vanaf het begin starten. Alle al geïmporteerd records worden niet overschreven. Alle nieuwe wel."
+msgstr ""
+"Dit zal het importproces vanaf het begin starten. Alle al geïmporteerd "
+"records worden niet overschreven. Alle nieuwe wel."
 
 #: plugins/sprout-invoices-pro/importers/Freshbooks.php:179
 #: plugins/sprout-invoices-pro/importers/Freshbooks.php:218
@@ -2790,13 +3065,15 @@ msgstr "Meer dan %s klanten geïmporteerd."
 #: plugins/sprout-invoices-pro/importers/Freshbooks.php:270
 #, php-format
 msgid "More than %s contacts were added and assigned to their clients!"
-msgstr "Er werden meer dan %s contacten toegevoegd en toegewezen aan hun klanten!"
+msgstr ""
+"Er werden meer dan %s contacten toegevoegd en toegewezen aan hun klanten!"
 
 #: plugins/sprout-invoices-pro/importers/Freshbooks.php:280
 #, php-format
 msgid ""
 "Successfully imported %s contacts and their clients already, moving on..."
-msgstr "Tot nu toe zijn %s contacten en hun klanten geïmporteerd, het schiet al op..."
+msgstr ""
+"Tot nu toe zijn %s contacten en hun klanten geïmporteerd, het schiet al op..."
 
 #: plugins/sprout-invoices-pro/importers/Freshbooks.php:284
 #: plugins/sprout-invoices-pro/importers/Harvest.php:302
@@ -2806,9 +3083,9 @@ msgstr "Al %s klanten succesvol geïmporteerd."
 
 #: plugins/sprout-invoices-pro/importers/Freshbooks.php:288
 #, php-format
-msgid ""
-"Successfully imported more than %s contacts from their clients already."
-msgstr "Tot nu toe meer dan %s contacten van hun klanten succesvol geïmporteerd."
+msgid "Successfully imported more than %s contacts from their clients already."
+msgstr ""
+"Tot nu toe meer dan %s contacten van hun klanten succesvol geïmporteerd."
 
 #: plugins/sprout-invoices-pro/importers/Freshbooks.php:350
 #, php-format
@@ -3013,7 +3290,9 @@ msgstr "Proberen om uw facturen en hun betalingen te importeren ..."
 msgid ""
 "Currently importing invoices and their payments in increments of %s. Thank "
 "you for your patience, this is a very slow process."
-msgstr "Momenteel worden facturen en hun betalingen geïmporteerd in stappen van %s. Dank u voor uw geduld, dit is een zeer traag proces."
+msgstr ""
+"Momenteel worden facturen en hun betalingen geïmporteerd in stappen van %s. "
+"Dank u voor uw geduld, dit is een zeer traag proces."
 
 #: plugins/sprout-invoices-pro/importers/Harvest.php:490
 msgid "Payments will be imported with new invoices"
@@ -3036,9 +3315,11 @@ msgstr "Zojuist %s meer betalingen geïmporteerd."
 #: plugins/sprout-invoices-pro/importers/Harvest.php:584
 #, php-format
 msgid ""
-"Importing invoices in increments of %s. Thank you for your patience, this is"
-" a very slow process."
-msgstr "Facturen importeren in stappen van %s. Dank u voor uw geduld, dit is een zeer traag proces."
+"Importing invoices in increments of %s. Thank you for your patience, this is "
+"a very slow process."
+msgstr ""
+"Facturen importeren in stappen van %s. Dank u voor uw geduld, dit is een "
+"zeer traag proces."
 
 #: plugins/sprout-invoices-pro/importers/Harvest.php:600
 msgid "Successfully imported a bunch of invoices..."
@@ -3080,13 +3361,17 @@ msgstr "Over de importeerfunctie"
 msgid ""
 "This feature provides a way for you to import data from external invoicing "
 "services, including Harvest, Freshbooks, or WP-Invoice."
-msgstr "Deze functie biedt een manier om gegevens uit externe facturatie diensten te importeren, met inbegrip van Harvest, FreshBooks, en WP-Invoice."
+msgstr ""
+"Deze functie biedt een manier om gegevens uit externe facturatie diensten te "
+"importeren, met inbegrip van Harvest, FreshBooks, en WP-Invoice."
 
 #: plugins/sprout-invoices-pro/importers/Importer.php:149
 msgid ""
 " If you have your data in one of these systems you can import all of your "
 "clients, contacts, estimates, invoices, and payments into Sprout Invoices."
-msgstr "Als u uw gegevens in één van deze systemen zit kunt u al uw klanten, contacten, schattingen, facturen en betalingen importeren in Sprout Facturen."
+msgstr ""
+"Als u uw gegevens in één van deze systemen zit kunt u al uw klanten, "
+"contacten, schattingen, facturen en betalingen importeren in Sprout Facturen."
 
 #: plugins/sprout-invoices-pro/importers/Importer.php:149
 msgid "More Information"
@@ -3104,7 +3389,9 @@ msgstr "Delete WP-facturen"
 msgid ""
 "You must really love us to delete those WP-Invoices, since you can't go "
 "back. Settings and the log table (sigh) will be kept."
-msgstr "U moet echt van ons houden om die WP-Facturen te verwijderen, omdat u niet terug kunt gaan. Instellingen en de logfile(s) zullen behouden blijven."
+msgstr ""
+"U moet echt van ons houden om die WP-Facturen te verwijderen, omdat u niet "
+"terug kunt gaan. Instellingen en de logfile(s) zullen behouden blijven."
 
 #: plugins/sprout-invoices-pro/importers/WP-Invoice.php:105
 msgid "Looking for any WP-Invoices..."
@@ -3261,9 +3548,11 @@ msgstr "%s geplubliceerd. <a target=\"_blank\" href=\"%s\">Voorbeeld%s</a>"
 #: plugins/sprout-invoices-pro/models/_Model.php:178
 #, php-format
 msgid ""
-"%s scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" "
-"href=\"%2$s\">Preview %s</a>"
-msgstr "%s gepland voor: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Voorbeeld%s</a>"
+"%s scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Preview %s</a>"
+msgstr ""
+"%s gepland voor: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Voorbeeld%s</a>"
 
 #: plugins/sprout-invoices-pro/models/_Model.php:178
 #: plugins/sprout-invoices-pro/models/_Model.php:194
@@ -3275,7 +3564,8 @@ msgstr "M j, Y @ G:i"
 #: plugins/sprout-invoices-pro/models/_Model.php:179
 #, php-format
 msgid "%s draft updated. <a target=\"_blank\" href=\"%s\">Preview %s</a>"
-msgstr "%s concept geactualiseerd. <a target=\"_blank\" href=\"%s\">Voorbeeld %s</a>"
+msgstr ""
+"%s concept geactualiseerd. <a target=\"_blank\" href=\"%s\">Voorbeeld %s</a>"
 
 #: plugins/sprout-invoices-pro/models/_Model.php:191
 #, php-format
@@ -3415,27 +3705,27 @@ msgstr "Betaling #%d"
 msgid "New Project: %s"
 msgstr "Nieuw Project: %s"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:983
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1029
 msgid "Updated"
 msgstr "Bijgewerkt"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:987
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1033
 msgid "Viewed"
 msgstr "Bekeken"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:991
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1037
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:33
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:25
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:25
 msgid "Notification"
 msgstr "Kennisgeving"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:995
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1041
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:37
 msgid "Invoice Created"
 msgstr "Factuur aangemaakt"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:999
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1045
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history-premium.php:13
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history.php:13
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/history-premium.php:13
@@ -3443,18 +3733,18 @@ msgstr "Factuur aangemaakt"
 msgid "Submitted"
 msgstr "Verzonden"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1003
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1049
 msgid "Imported"
 msgstr "Geimporteerd"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1008
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1054
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:42
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:30
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:30
 msgid "Status Update"
 msgstr "Status update"
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1023
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1069
 msgid "payment"
 msgstr "betaling"
 
@@ -3502,7 +3792,8 @@ msgstr "%"
 #: plugins/sprout-invoices-pro/template-tags/ui.php:322
 #: plugins/sprout-invoices-pro/template-tags/ui.php:352
 msgid "A percentage adjustment per line item, i.e. tax or discount"
-msgstr "Een procentuele aanpassing per item, bivoorbeeld de belasting of korting"
+msgstr ""
+"Een procentuele aanpassing per item, bivoorbeeld de belasting of korting"
 
 #: plugins/sprout-invoices-pro/views/admin/settings.php:14
 msgid "Saving..."
@@ -3521,9 +3812,14 @@ msgstr "Welkom bij <a href=\"%s\">Sprout Apps</a>!"
 msgid ""
 "Our mission is to build a suite of apps to help small businesses and "
 "freelancers work more efficiently by reducing the tedious business tasks "
-"associated with client management...<em>seriously though</em>, I'm trying to"
-" build something awesome that you will love. Thank you for your support."
-msgstr "Onze missie is om een suite van applicaties te bouwen die kleine bedrijven en freelancers efficiënter laten werken door het verminderen van vervelende zakelijke taken gerelateerd aan klantmanagement ... <em>even serieus</ em>, Ik wil iets iets geweldigs bouwen waar je van houd. Bedankt voor de ondersteuning."
+"associated with client management...<em>seriously though</em>, I'm trying to "
+"build something awesome that you will love. Thank you for your support."
+msgstr ""
+"Onze missie is om een suite van applicaties te bouwen die kleine bedrijven "
+"en freelancers efficiënter laten werken door het verminderen van vervelende "
+"zakelijke taken gerelateerd aan klantmanagement ... <em>even serieus</ em>, "
+"Ik wil iets iets geweldigs bouwen waar je van houd. Bedankt voor de "
+"ondersteuning."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-apps-dashboard.php:11
 msgid "Sprout Apps News and Updates"
@@ -3561,11 +3857,14 @@ msgstr "Start met <a href=\"%s\">Sprout Invoices</a>!"
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:5
 msgid ""
-"Sprout Invoices is the cornerstone for Sprout Apps. We want it to streamline"
-" what could be a very complex workflow of accepting estimates and getting "
-"invoices paid. Our mission is to make you a happy user; let us hear from "
-"you."
-msgstr "Sprout Facturen is de hoeksteen voor Sprout Apps. We willen de zeer complexe workflow van het aanvaarden van de offerte en het betaald krijgen van de facturen stroomlijnen. Onze missie is gebruiker tevreden te stellen; Laat van je horen."
+"Sprout Invoices is the cornerstone for Sprout Apps. We want it to streamline "
+"what could be a very complex workflow of accepting estimates and getting "
+"invoices paid. Our mission is to make you a happy user; let us hear from you."
+msgstr ""
+"Sprout Facturen is de hoeksteen voor Sprout Apps. We willen de zeer complexe "
+"workflow van het aanvaarden van de offerte en het betaald krijgen van de "
+"facturen stroomlijnen. Onze missie is gebruiker tevreden te stellen; Laat "
+"van je horen."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:14
 msgid "First Things First..."
@@ -3577,7 +3876,11 @@ msgid ""
 "your license, you can get automatic plugin updates from the WordPress "
 "dashboard. Updates provide you with the latest bug fixes and the new "
 "features each release brings."
-msgstr "Een licentie voor Sprout Facturen wordt geleverd met ondersteuning en updates. Door uw licentie te activeren, kunt u de automatische plugin update verkrijgen via het WordPress dashboard. Updates bieden u de laatste bug fixes en nieuwe features die elke nieuwe release brengt."
+msgstr ""
+"Een licentie voor Sprout Facturen wordt geleverd met ondersteuning en "
+"updates. Door uw licentie te activeren, kunt u de automatische plugin update "
+"verkrijgen via het WordPress dashboard. Updates bieden u de laatste bug "
+"fixes en nieuwe features die elke nieuwe release brengt."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:30
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:18
@@ -3588,11 +3891,16 @@ msgstr "De Sprout Facturen Flow"
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:24
 #, php-format
 msgid ""
-"Receiving estimate requests on your site is simplified with Sprout Invoices."
-" <a href='%s'>General Settings</a> has more information on how to add a form"
-" to your site as well as settings to integrate with an advanced form plugin,"
-" e.g. Gravity Forms or Ninja Forms."
-msgstr "Ontvangen van offerte aanvragen gaat zeer eenvoudig met Sprout Facturen. <a href='%s'>Algemene instellingen</a> geeft meer informatie over hoe u een formulier toe kunt voegen aan uw site, alsmede instellingen te integreren met de geavanceerde formulieren plugin, bijv van Gravity Forms of Ninja Formulieren."
+"Receiving estimate requests on your site is simplified with Sprout Invoices. "
+"<a href='%s'>General Settings</a> has more information on how to add a form "
+"to your site as well as settings to integrate with an advanced form plugin, "
+"e.g. Gravity Forms or Ninja Forms."
+msgstr ""
+"Ontvangen van offerte aanvragen gaat zeer eenvoudig met Sprout Facturen. <a "
+"href='%s'>Algemene instellingen</a> geeft meer informatie over hoe u een "
+"formulier toe kunt voegen aan uw site, alsmede instellingen te integreren "
+"met de geavanceerde formulieren plugin, bijv van Gravity Forms of Ninja "
+"Formulieren."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:41
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:29
@@ -3608,7 +3916,12 @@ msgid ""
 "href='%s'>notification</a> to you will provide a link to this new estimate; "
 "allowing you to review, update, and send the estimate to your prospective "
 "client without having to communicate via email."
-msgstr "Een nieuwe <a href='%s'>offerte</a> wordt automatisch aangemaakt en er worden automatisch meldingen verstuurd na iedere offerte aanvraag. De <a href='%s'>melding</a> bevat een link naar de nieuwe offerte; zodat u die kunt beoordelen en/of bijwerken, en doorsturen naar uw potentiële klant zonder te communiceren via e-mail."
+msgstr ""
+"Een nieuwe <a href='%s'>offerte</a> wordt automatisch aangemaakt en er "
+"worden automatisch meldingen verstuurd na iedere offerte aanvraag. De <a "
+"href='%s'>melding</a> bevat een link naar de nieuwe offerte; zodat u die "
+"kunt beoordelen en/of bijwerken, en doorsturen naar uw potentiële klant "
+"zonder te communiceren via e-mail."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:47
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:35
@@ -3624,7 +3937,12 @@ msgid ""
 "the client, instead you  will need to review them before sending. Your <a "
 "href='%s'>notifications</a> are meant to be setup to help review, mark, and "
 "send them out quickly."
-msgstr "Er wordt automatisch een<a href='%s'>factuur</a> gemaakt op basis van een goedgekeurde offerte. Standaard worden deze nieuw aangemaakte facturen<em>niet</ em> naar de klant gestuurd, u dient ze eerst nog te bekijken voordat u ze verzendt. Uw <a href='%s'>meldingen</a> zijn bedoeld om ingesteld te worden om te helpen met recensies, markeren snel versturen."
+msgstr ""
+"Er wordt automatisch een<a href='%s'>factuur</a> gemaakt op basis van een "
+"goedgekeurde offerte. Standaard worden deze nieuw aangemaakte "
+"facturen<em>niet</ em> naar de klant gestuurd, u dient ze eerst nog te "
+"bekijken voordat u ze verzendt. Uw <a href='%s'>meldingen</a> zijn bedoeld "
+"om ingesteld te worden om te helpen met recensies, markeren snel versturen."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:59
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:47
@@ -3642,15 +3960,19 @@ msgstr "Waar te beginnen?"
 msgid ""
 "Start <a href='%s'>importing</a> your data from other services (i.e. WP-"
 "Invoice, Freshbooks or Harvest)."
-msgstr "Start het <a href='%s'> importeren </a> van uw gegevens van andere diensten (bijv. WP-Invoice, FreshBooks of Harvest)."
+msgstr ""
+"Start het <a href='%s'> importeren </a> van uw gegevens van andere diensten "
+"(bijv. WP-Invoice, FreshBooks of Harvest)."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:67
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:55
 #, php-format
 msgid ""
-"Even with the defaults set in <a href='%s'>General Settings</a> the 'Company"
-" Info' should be filled out first."
-msgstr "Zelfs met de standaard instelling in <a href='%s'> Algemene instellingen</a> zullen toch de 'Bedrijfsgegevens' eerst nog ingevuld moeten worden."
+"Even with the defaults set in <a href='%s'>General Settings</a> the 'Company "
+"Info' should be filled out first."
+msgstr ""
+"Zelfs met de standaard instelling in <a href='%s'> Algemene instellingen</a> "
+"zullen toch de 'Bedrijfsgegevens' eerst nog ingevuld moeten worden."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:68
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:56
@@ -3659,24 +3981,35 @@ msgid ""
 "Review your <a href='%s'>Payment Settings</a> and provide different methods "
 "of payments for your clients. Don't let your client find out you've "
 "configured the payment processor incorrectly&mdash;make sure to test."
-msgstr "Herzie uw <a href='%s'>Betaling Instellingen</a> en biedt verschillende betalingsmethoden voor uw klanten. Laat uw klant niet merken dat u de verkeerde betalingsmechnismeinstellingen heeft geconfigureerd&mdash; test eerst zorgvuldig."
+msgstr ""
+"Herzie uw <a href='%s'>Betaling Instellingen</a> en biedt verschillende "
+"betalingsmethoden voor uw klanten. Laat uw klant niet merken dat u de "
+"verkeerde betalingsmechnismeinstellingen heeft geconfigureerd&mdash; test "
+"eerst zorgvuldig."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:69
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:57
 #, php-format
 msgid ""
-"There are a lot of <a href='%s'>notifications</a> sent throughout the entire"
-" client acquisition process, make sure they have your personality and "
+"There are a lot of <a href='%s'>notifications</a> sent throughout the entire "
+"client acquisition process, make sure they have your personality and "
 "represent your brand well. You can send HTML emails, check your <a "
 "href='%s'>General Settings</a> for more information."
-msgstr "Er zijn een heleboel <a href='%s'>meldingen</a> gestuurd gedurende het gehele klantenverwerving proces, zorg ervoor dat je ze persoonlijkheid maakt en goed zijn afgestemd op de relatie met de klant. Je kunt ook HTML e-mails versturen, controleer de <a href='%s'>Algemene instellingen</a> voor meer informatie."
+msgstr ""
+"Er zijn een heleboel <a href='%s'>meldingen</a> gestuurd gedurende het "
+"gehele klantenverwerving proces, zorg ervoor dat je ze persoonlijkheid maakt "
+"en goed zijn afgestemd op de relatie met de klant. Je kunt ook HTML e-mails "
+"versturen, controleer de <a href='%s'>Algemene instellingen</a> voor meer "
+"informatie."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:70
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:58
 msgid ""
 "Grow your business while not forgetting about your loved ones...and the "
 "occasional round of golf."
-msgstr "Laat uw bedrijf groeien maar vergeet uw dierbaren niet... en af en toe een rondje golf."
+msgstr ""
+"Laat uw bedrijf groeien maar vergeet uw dierbaren niet... en af en toe een "
+"rondje golf."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:76
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:64
@@ -3690,7 +4023,10 @@ msgid ""
 "The <a href='%s'>Reports Dashboard</a> should key you on how well your're "
 "growing your business. There are reports for the estimates, invoices, "
 "payments and clients available for filtering and exporting."
-msgstr "Het <a href='%s'>Reports Dashboard</a> moet de sleutel zijn van hoe goed het bedrijf aan het groeien is. Er zijn rapporten voor de offertes, facturen, betalingen en klanten beschikbaar om te filteren en te exporteren."
+msgstr ""
+"Het <a href='%s'>Reports Dashboard</a> moet de sleutel zijn van hoe goed het "
+"bedrijf aan het groeien is. Er zijn rapporten voor de offertes, facturen, "
+"betalingen en klanten beschikbaar om te filteren en te exporteren."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:82
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:70
@@ -3702,9 +4038,12 @@ msgstr "Klanten &amp; WordPress gebruikers?"
 #, php-format
 msgid ""
 "<a href='%s'>Clients</a> have WordPress users associated with them and "
-"clients are not limited to a single user either. This allows for you to have"
-" multiple points of contact for a company/client."
-msgstr "<a href='%s'>Klanten</a> hebben WordPress gebruikers aan hen gekoppeld en klanten zijn niet beperkt tot een enkele gebruiker. Dit maakt het mogelijk voor u om meerdere aanknopingspunten voor een bedrijf / klant te hebben."
+"clients are not limited to a single user either. This allows for you to have "
+"multiple points of contact for a company/client."
+msgstr ""
+"<a href='%s'>Klanten</a> hebben WordPress gebruikers aan hen gekoppeld en "
+"klanten zijn niet beperkt tot een enkele gebruiker. Dit maakt het mogelijk "
+"voor u om meerdere aanknopingspunten voor een bedrijf / klant te hebben."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:87
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:75
@@ -3715,11 +4054,15 @@ msgstr "Wat zijn taken?"
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:76
 #, php-format
 msgid ""
-"<a href='%s'>Tasks</a> help with the creation of your estimates and invoices"
-" by pre-filling line items. Create some tasks that matter to your business "
+"<a href='%s'>Tasks</a> help with the creation of your estimates and invoices "
+"by pre-filling line items. Create some tasks that matter to your business "
 "before creating your first estimate or invoice and you'll see how they can "
 "save you a lot of time."
-msgstr "<a href='%s'>Taken</a>helpen met het creëren van uw offertes en facturen met vooraf ingevulde regel items. Maak een aantal taken die van belang zijn voor uw bedrijf voordat u uw eerste raming of factuur maakt en u zult zien hoe deze u veel tijd besparen."
+msgstr ""
+"<a href='%s'>Taken</a>helpen met het creëren van uw offertes en facturen met "
+"vooraf ingevulde regel items. Maak een aantal taken die van belang zijn voor "
+"uw bedrijf voordat u uw eerste raming of factuur maakt en u zult zien hoe "
+"deze u veel tijd besparen."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:93
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:81
@@ -3729,7 +4072,8 @@ msgstr "Kan ik importeren uit X dienst of WP-Invoice?"
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:94
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:82
 msgid "Yes! WP-Invoice, Harvest and Freshbooks importers are now available."
-msgstr "Yes! WP-Invoice, Harvest en FreshBooks importfuncties zijn nu beschikbaar."
+msgstr ""
+"Yes! WP-Invoice, Harvest en FreshBooks importfuncties zijn nu beschikbaar."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:97
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:85
@@ -3742,7 +4086,11 @@ msgid ""
 "We want to make sure using Sprout Invoices is enjoyable and not a hassle. "
 "Sprout Apps has some pretty awesome <a href='%s'>support</a> and a budding "
 "<a href='%s'>knowledgebase</a> that will help you get anything resolved."
-msgstr "Wij willen ervoor zorgen dat het gebruik van Sprout Facturen leuk en zonder gedoe is. Sprout Apps heeft een geweldige <a href='%s'>ondersteuning</a> en een ontluikende <a href='%s'>kennisbank</a> die u zult helpen om het even wat opgelost te krijgen."
+msgstr ""
+"Wij willen ervoor zorgen dat het gebruik van Sprout Facturen leuk en zonder "
+"gedoe is. Sprout Apps heeft een geweldige <a href='%s'>ondersteuning</a> en "
+"een ontluikende <a href='%s'>kennisbank</a> die u zult helpen om het even "
+"wat opgelost te krijgen."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:3
 #, php-format
@@ -3754,9 +4102,13 @@ msgstr "Dank u voor het gebruik van <a href=\"%s\">Sprout Facturen</a>!"
 msgid ""
 "The future of <a href=\"%s\">Sprout Invoices</a> relies on happy customers "
 "supporting Sprout Apps by purchasing upgraded versions. If you like this "
-"free version of Sprout Invoices please consider <a href=\"%s\">purchasing an"
-" upgrade</a>."
-msgstr "De toekomst van <a href=\"%s\">Sprout Facturen</a>vertrouwt op tevreden klanten die Sprout Apps ondersteuning door nieuwe upgrades te kopen. Als u deze gratis versie van Sprout Facturen prettig vindt werken kunt u overwegen <a href=\"%s\">een upgrade aan te schaffen</a>."
+"free version of Sprout Invoices please consider <a href=\"%s\">purchasing an "
+"upgrade</a>."
+msgstr ""
+"De toekomst van <a href=\"%s\">Sprout Facturen</a>vertrouwt op tevreden "
+"klanten die Sprout Apps ondersteuning door nieuwe upgrades te kopen. Als u "
+"deze gratis versie van Sprout Facturen prettig vindt werken kunt u overwegen "
+"<a href=\"%s\">een upgrade aan te schaffen</a>."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:86
 #, php-format
@@ -3766,7 +4118,12 @@ msgid ""
 "<a href='%s'>knowledgebase</a> (for paid members) that will help you get "
 "anything resolved. Support and documentation is limited for this free "
 "version."
-msgstr "Wij willen ervoor zorgen dat het gebruik van Sprout Facturen leuk en zonder gedoe is. Sprout Apps heeft een geweldige <a href='%s'>ondersteuning</a> en een ontluikende <a href='%s'>kennisbank</a>(voor betalende klanten) die u zullen helpen om wat dan ook opgelost te krijgen. Ondersteuning en documentatie is beperkt voor deze gratis versie."
+msgstr ""
+"Wij willen ervoor zorgen dat het gebruik van Sprout Facturen leuk en zonder "
+"gedoe is. Sprout Apps heeft een geweldige <a href='%s'>ondersteuning</a> en "
+"een ontluikende <a href='%s'>kennisbank</a>(voor betalende klanten) die u "
+"zullen helpen om wat dan ook opgelost te krijgen. Ondersteuning en "
+"documentatie is beperkt voor deze gratis versie."
 
 #: plugins/sprout-invoices-pro/views/admin/importer/importing.php:17
 msgid "Import Clients, Users, Estimates, Invoices and Payments"
@@ -3839,8 +4196,8 @@ msgstr "Offertes Bekeken"
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/history.php:31
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:42
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:42
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:258
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:313
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:273
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:326
 msgid "View Message"
 msgstr "Bekijk Bericht"
 
@@ -3867,7 +4224,9 @@ msgstr "Deze privé notities zullen aan de geschiedenis worden toegevoegd."
 msgid ""
 "Clients can have multiple users associated. Each user will receive "
 "notifications."
-msgstr "Klanten kunnen meerdere gelinkte gebruikers hebben. Elke gebruiker zal meldingen ontvangen."
+msgstr ""
+"Klanten kunnen meerdere gelinkte gebruikers hebben. Elke gebruiker zal "
+"meldingen ontvangen."
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/submit.php:51
 msgid "Create new user for this client"
@@ -3998,6 +4357,8 @@ msgstr "Edit Offerte id"
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:170
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/information.php:165
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:125
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:146
 msgid "PO Number"
 msgstr "Inkoopnummer"
 
@@ -4041,16 +4402,16 @@ msgstr "Toevoegen"
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/line-items.php:105
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:27
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:213
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:189
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:234
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:196
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:241
 msgid "Subtotal"
 msgstr "Subtotaal"
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/notes.php:9
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/notes.php:9
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:252
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:218
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:273
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:233
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:286
 msgid "Terms"
 msgstr "Voorwaarden"
 
@@ -4095,7 +4456,9 @@ msgstr "<span class=\"helptip\" title=\"Upgrade voor Privé URLs\"></span>"
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/send.php:6
 msgid "Make sure to save all information before sending your estimate."
-msgstr "Zorg ervoor dat u alle informatie op heeft opgeslagen voordat u de offerte verstuurd."
+msgstr ""
+"Zorg ervoor dat u alle informatie op heeft opgeslagen voordat u de offerte "
+"verstuurd."
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/information.php:62
 msgid "Due by:"
@@ -4125,7 +4488,9 @@ msgstr "Edit factuur ID"
 msgid ""
 "Any billable time can be imported from your projects into your invoices "
 "dynamically with a pro version upgrade."
-msgstr "Alle factureerbare uren van uw projecten kunnen met de pro-versie upgrade dynamisch in uw facturen worden geïmporteerd."
+msgstr ""
+"Alle factureerbare uren van uw projecten kunnen met de pro-versie upgrade "
+"dynamisch in uw facturen worden geïmporteerd."
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/line-items.php:113
 msgid "Total Due"
@@ -4166,11 +4531,13 @@ msgstr "Bekijk Factuur"
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/send.php:6
 msgid "Make sure to save all information before sending your invoice."
-msgstr "Zorg ervoor dat u alle informatie opslaat voordat u de factuur verstuurd."
+msgstr ""
+"Zorg ervoor dat u alle informatie opslaat voordat u de factuur verstuurd."
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/notifications/shortcodes.php:2
 msgid "Use the following shortcodes to customize the email sent."
-msgstr "Gebruik de volgende shortcodes om de te verzenden e-mail aan te passen."
+msgstr ""
+"Gebruik de volgende shortcodes om de te verzenden e-mail aan te passen."
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/notifications/submit.php:43
 msgid "Disabled"
@@ -4489,7 +4856,9 @@ msgstr "Facturen aangemaakt"
 
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/dashboard.php:618
 msgid "Shows total estimate requests and the total converted into invoices."
-msgstr "Geeft het totaal van alle offerteaanvragen en het totaal wat hiervan omgezet is naar facturen."
+msgstr ""
+"Geeft het totaal van alle offerteaanvragen en het totaal wat hiervan omgezet "
+"is naar facturen."
 
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/dashboard.php:687
 msgid "Statuses from estimates from the last 3 weeks"
@@ -4503,8 +4872,8 @@ msgstr "Verzenddatum"
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/invoices.php:27
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:157
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:227
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:178
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:248
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:185
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:261
 msgid "Balance"
 msgstr "Saldo"
 
@@ -4671,18 +5040,18 @@ msgid "Invoice Number"
 msgstr "Factuur Nummer"
 
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:125
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:146
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:153
 msgid "Invoice Due"
 msgstr "Verschuldigd factuurbedrag"
 
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:146
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:167
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:174
 msgid "Deposit Total"
 msgstr "Totaal storting"
 
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:282
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:277
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:332
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:292
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:345
 msgid "Powered by Sprout Invoices"
 msgstr "Powered by Sprout Invoices"
 
@@ -4720,9 +5089,14 @@ msgstr "Wijs offerte af"
 msgid "Estimate Number"
 msgstr "Offertenummer"
 
-#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:133
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:140
 msgid "Estimate Total"
 msgstr "Offertetotaal"
+
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:202
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:246
+msgid "Taxes"
+msgstr ""
 
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:44
 msgid "Pay Deposit"
@@ -4792,7 +5166,8 @@ msgstr "GravityForms ID"
 #: plugins/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:83
 #, php-format
 msgid "Select the submission form built with <a href=\"%s\">Gravity Forms</a>."
-msgstr "Selecteer het indienformulier gebouwd met <a href=\"%s\"> Gravity Forms </a>."
+msgstr ""
+"Selecteer het indienformulier gebouwd met <a href=\"%s\"> Gravity Forms </a>."
 
 #: plugins/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:92
 msgid "NinjaForms ID"
@@ -4801,7 +5176,8 @@ msgstr "NinjaForms ID"
 #: plugins/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:97
 #, php-format
 msgid "Select the submission form built with <a href=\"%s\">Ninja Forms</a>."
-msgstr "Selecteer het indienformulier gebouwd met <a href=\"%s\"> Ninja Forms</a>."
+msgstr ""
+"Selecteer het indienformulier gebouwd met <a href=\"%s\"> Ninja Forms</a>."
 
 #: plugins/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:106
 msgid "Integration Error"
@@ -4810,9 +5186,11 @@ msgstr "Integratiefout"
 #: plugins/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:109
 #, php-format
 msgid ""
-"It looks like neither <a href=\"%s\">Gravity Forms</a> or <a "
-"href=\"%s\">Ninja Forms</a> is active."
-msgstr "Het lijkt erop dat noch <a href=\"%s\">Gravity Forms</a> of <a href=\"%s\">Ninja Forms</a> actief is."
+"It looks like neither <a href=\"%s\">Gravity Forms</a> or <a href=\"%s"
+"\">Ninja Forms</a> is active."
+msgstr ""
+"Het lijkt erop dat noch <a href=\"%s\">Gravity Forms</a> of <a href=\"%s"
+"\">Ninja Forms</a> actief is."
 
 #: plugins/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:121
 msgid "Form ID Mapping"

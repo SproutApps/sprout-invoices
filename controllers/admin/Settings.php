@@ -54,7 +54,7 @@ class SI_Admin_Settings extends SI_Controller {
 			'slug' => self::SETTINGS_PAGE,
 			'title' => 'Sprout Invoices Settings',
 			'menu_title' => 'Sprout Invoices',
-			'tab_title' => 'General Settings',
+			'tab_title' => self::__('General Settings'),
 			'weight' => 10,
 			'reset' => FALSE, 
 			'section' => 'settings'
@@ -65,7 +65,7 @@ class SI_Admin_Settings extends SI_Controller {
 		$args = array(
 			'slug' => 'dashboard',
 			'title' => 'Sprout Invoices Dashboard',
-			'menu_title' => 'Getting Started',
+			'menu_title' => self::__('Getting Started'),
 			'weight' => 1,
 			'reset' => FALSE, 
 			'tab_only' => TRUE,
@@ -77,7 +77,7 @@ class SI_Admin_Settings extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_site_settings' => array(
-				'title' => 'Company Info',
+				'title' => self::__('Company Info'),
 				'weight' => 200,
 				'tab' => 'settings',
 				'callback' => array( __CLASS__, 'display_general_section' ),

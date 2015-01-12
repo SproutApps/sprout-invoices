@@ -93,7 +93,7 @@ class SI_Estimates extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_estimate_settings' => array(
-				'title' => 'Estimate Settings',
+				'title' => self::__('Estimate Settings'),
 				'weight' => 25,
 				'tab' => 'settings',
 				'settings' => array(

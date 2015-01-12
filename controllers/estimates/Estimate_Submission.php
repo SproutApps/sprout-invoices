@@ -39,7 +39,7 @@ class SI_Estimate_Submissions extends SI_Controller {
 						'label' => self::__( 'Default Submission Form' ),
 						'option' => array(
 							'type' => 'bypass',
-							'output' => '<code>N/A in free version</code>',
+							'output' => sprintf( '<code>%s</code>', self::__('N/A in free version') ),
 							'description' => sprintf( self::__('To get you started, Sprout Invoices provides a <a href="%s" target="_blank">fully customizable form</a> for estimate submissions. Simply add this shortcode to a page and an estimate submission form will be available to prospective clients. Notifications will be sent for each submission and a new estimate (and client) will be generated.'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' )
 							)
 						),
@@ -58,8 +58,10 @@ class SI_Estimate_Submissions extends SI_Controller {
 
 	}
 
-	public static function submission_settings_description() {		
-		printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Enable Estimate Submission integrations and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', si_get_purchase_link() );	
+	public static function submission_settings_description() {
+		echo '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span>';	
+		printf( self::__('<strong>Upgrade Available:</strong> Enable Estimate Submission integrations and support the future of Sprout Invoices by <a href="%s">upgrading</a>.'), si_get_purchase_link() );
+		echo '</p></div>';
 		printf( self::__('<p>Estimate submissions is the start of the <a href="%s">Sprout Invoices workflow</a>.</p>'), self::PLUGIN_URL.'/sprout-invoices/' );
 	}
 

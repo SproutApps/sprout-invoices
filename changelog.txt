@@ -1,3 +1,7 @@
+= 3.2.1 =
+
+* Fix: Missing .mo files for new translations
+
 = 3.2 =
 
 * New: Import time from Freshbooks
