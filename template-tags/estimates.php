@@ -477,6 +477,53 @@ function si_estimate_tax( $id = 0 ) {
 endif;
 
 
+if ( !function_exists('si_get_estimate_tax2') ) :
+/**
+ * Get the estimate tax
+ * @param  integer $id 
+ * @return string      
+ */
+function si_get_estimate_tax2( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$estimate = SI_Estimate::get_instance( $id );
+	return apply_filters( 'si_get_estimate_tax2', $estimate->get_tax2(), $estimate );
+}
+endif;
+
+if ( !function_exists('si_estimate_tax2') ) :
+/**
+ * Echo the estimate tax
+ * @param  integer $id 
+ * @return string      
+ */
+function si_estimate_tax2( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	echo apply_filters( 'si_estimate_tax2', si_get_estimate_tax2($id), $id );
+}
+endif;
+
+if ( !function_exists('si_get_estimate_taxes_total') ) :
+/**
+ * Get the invoice tax
+ * @param  integer $id 
+ * @return string      
+ */
+function si_get_estimate_taxes_total( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$estimate = SI_Estimate::get_instance( $id );
+	return apply_filters( 'si_get_estimate_taxes_total', $estimate->get_tax_total() + $estimate->get_tax2_total(), $estimate );
+}
+endif;
+
 if ( !function_exists('si_get_estimate_total') ) :
 /**
  * Get the estimate total

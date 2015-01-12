@@ -409,6 +409,52 @@ function si_invoice_tax( $id = 0 ) {
 }
 endif;
 
+if ( !function_exists('si_get_invoice_tax2') ) :
+/**
+ * Get the invoice tax
+ * @param  integer $id 
+ * @return string      
+ */
+function si_get_invoice_tax2( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$invoice = SI_Invoice::get_instance( $id );
+	return apply_filters( 'si_get_invoice_tax2', $invoice->get_tax2(), $invoice );
+}
+endif;
+
+if ( !function_exists('si_invoice_tax2') ) :
+/**
+ * Echo the invoice tax
+ * @param  integer $id 
+ * @return string      
+ */
+function si_invoice_tax2( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	echo apply_filters( 'si_invoice_tax2', si_get_invoice_tax2($id), $id );
+}
+endif;
+
+if ( !function_exists('si_get_invoice_taxes_total') ) :
+/**
+ * Get the invoice tax
+ * @param  integer $id 
+ * @return string      
+ */
+function si_get_invoice_taxes_total( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$invoice = SI_Invoice::get_instance( $id );
+	return apply_filters( 'si_get_invoice_taxes_total', $invoice->get_tax_total() + $invoice->get_tax2_total(), $invoice );
+}
+endif;
 
 if ( !function_exists('si_get_invoice_payments_total') ) :
 /**

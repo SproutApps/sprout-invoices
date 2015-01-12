@@ -19,7 +19,7 @@ function sa_admin_fields( $fields, $context = 'metabox' ) {
 	foreach ( $fields as $key => $data ): ?>
 		<div class="form-group<?php if ( $data['type'] == 'hidden' ) echo " hidden" ?>">
 			<?php if ( $data['type'] == 'heading' ): ?>
-				<legend class="legend form-heading" ><?php echo $data['label']; ?></legend>
+				<legend class="legend form-heading" ><?php si_e($data['label']); ?></legend>
 			<?php elseif ( $data['type'] != 'checkbox' ): ?>
 				<span class="label_wrap"><?php sa_form_label( $key, $data, $context ); ?></span>
 				<div class="input_wrap"><?php sa_form_field( $key, $data, $context ); ?></div>
@@ -29,10 +29,10 @@ function sa_admin_fields( $fields, $context = 'metabox' ) {
 						<?php
 							// add class by modifying the attributes.
 							$data['attributes']['class'] = 'checkbox'; ?>
-						<?php sa_form_field( $key, $data, $context ); ?> <?php echo $data['label']; ?>
+						<?php sa_form_field( $key, $data, $context ); ?> <?php si_e($data['label']); ?>
 					</label>
 					<?php if ( !empty( $data['description'] ) ): ?>
-						<p class="description help_block"><?php echo $data['description'] ?></p>
+						<p class="description help_block"><?php si_e($data['description']) ?></p>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
@@ -223,7 +223,7 @@ function sa_get_form_label( $key, $data, $category ) {
 		if ( !isset( $data['label'] ) ) {
 			$data['label'] = '';
 		}
-		$out = '<label for="sa_'.$category.'_'.$key.'">'.$data['label'].'</label>';
+		$out = '<label for="sa_'.$category.'_'.$key.'">'.si__($data['label']).'</label>';
 		if ( isset( $data['required'] ) && $data['required'] ) {
 			$out .= ' <span class="required">*</span>';
 		}

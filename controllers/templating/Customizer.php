@@ -116,7 +116,7 @@ class SI_Customizer extends SI_Controller {
 	*
 	* @since 1.7
 	*/
-	function sanitize_hex_color( $color ) {
+	public static function sanitize_hex_color( $color ) {
 		if ( '' === $color ) {
 			return '';
 		}

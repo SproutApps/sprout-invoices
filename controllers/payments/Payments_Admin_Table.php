@@ -175,11 +175,10 @@ class SI_Payments_Table extends WP_List_Table {
 	function column_status( $item ) {
 		$payment_id = $item->ID;
 		
+		$actions = array();
 		if ( in_array( $item->post_status, array( SI_Payment::STATUS_PENDING, SI_Payment::STATUS_AUTHORIZED, SI_Payment::STATUS_COMPLETE, SI_Payment::STATUS_PARTIAL ) ) ) {
 			
-			$actions = array(
-				'trash'    => '<a href="#TB_inline?width=900&height=260&inlineId=void_payment_'.$payment_id.'" class="thickbox" id="void_link_'.$payment_id.'" title="'.si__('Void Payment').'">'.si__( 'Void Payment' ).'</a>',
-			);
+			$actions['trash'] = '<a href="#TB_inline?width=900&height=260&inlineId=void_payment_'.$payment_id.'" class="thickbox" id="void_link_'.$payment_id.'" title="'.si__('Void Payment').'">'.si__( 'Void Payment' ).'</a>';
 
 			if ( $item->post_status == SI_Payment::STATUS_AUTHORIZED ) {
 				$actions['attempt_capture'] = '<a href="javascript:void(0)" class="si_attempt_capture" ref="'.$payment_id.'">'.si__( 'Attempt Capture' ).'</a>';

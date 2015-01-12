@@ -32,7 +32,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		add_action( 'send_estimate', array( __CLASS__, 'estimate_notification' ), 10, 2 );
 		// invoices
 		add_action( 'send_invoice', array( __CLASS__, 'invoice_notification' ), 10, 2 );
-		add_action( 'si_new_payment', array( __CLASS__, 'paid_notification' ), 10, 2 );
+		add_action( 'payment_complete', array( __CLASS__, 'paid_notification' ) );
 		
 		// Admin
 		add_action( 'doc_status_changed', array( __CLASS__, 'admin_estimate_accepted' ), 10, 2 );
@@ -308,7 +308,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		}
 	}
 
-	public static function paid_notification( SI_Payment $payment, $args = array() ) {
+	public static function paid_notification( SI_Payment $payment ) {
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		if ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_balance() < 0.01 ) { // leave a bit of room for floating point arithmetic

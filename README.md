@@ -90,6 +90,16 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**3.2**
+
+
+* New: Import time from Freshbooks
+* New: Add PO Number and separate Tax line items to templates
+* New: pt_BR and nl Translations
+* Fix: Review untranslated strings
+* Fix: Send paid notification after payment is complete, not created
+* Fix: Some minor php warnings and notices
+
 **3.1**
 
 * Dashboard updates including method to flush cached values

@@ -120,6 +120,13 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 								</dl>
 							<?php endif ?>
 
+							<?php if ( si_get_estimate_po_number() ): ?>
+								<dl class="estimate_po_number">
+									<dt><span class="dt_heading"><?php si_e('PO Number') ?></span></dt>
+									<dd><?php si_estimate_po_number() ?></dd>
+								</dl>
+							<?php endif ?>
+
 							<?php if ( si_get_estimate_expiration_date() ): ?>
 								<dl class="date">
 									<dt><span class="dt_heading"><?php si_e('Expiration Date') ?></span></dt>
@@ -189,8 +196,16 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 										<b><?php si_e('Subtotal') ?></b>
 										<?php sa_formatted_money( si_get_estimate_subtotal() ) ?>
 									</div>
+
+									<?php if ( si_get_estimate_taxes_total() ): ?>
+										<div id="line_taxes">
+											<b><?php si_e('Taxes') ?></b>
+											<?php sa_formatted_money( si_get_estimate_taxes_total() ) ?>
+										</div>
+									<?php endif ?>
+
 									<div id="line_total">
-										<b title="Total includes taxes and discounts." class="helptip"><?php si_e('Total') ?></b>
+										<b title="Total includes discounts and other fees." class="helptip"><?php si_e('Total') ?></b>
 										<?php sa_formatted_money( si_get_estimate_total() ) ?>
 									</div>
 								</div>
