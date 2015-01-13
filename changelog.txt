@@ -1,6 +1,7 @@
-= 3.2.1 =
+= 3.2.2 =
 
 * Fix: Missing .mo files for new translations
+* Fix: Quantity fields not allowing for decimals and negatives with some OSs
 
 = 3.2 =
 
