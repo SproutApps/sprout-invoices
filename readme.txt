@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 3.2.2
+Stable tag: 3.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,8 +16,7 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps (aka plugins) to help us all work more efficiently & provide complete control the WordPress way. Our latest Sprout Apps are Sprout Invoices and Help Scout Desk, with many more to come.
 
-*Huge Discounts!* Starting December 1 & Decreasing Every Day until Christmas.
-[Sprout Invoices starts at $1](https://sproutapps.co/news/cyber-christmas-discounts-sprout-invoices-1-help-scout-desk-50-off/)
+>*New Years Discounts Available!* Take control of your invoicing in the new year with Sprout Invoices and paid versions are now [discounted](https://sproutapps.co/news/new-years-party/)
 
 
 = Sprout Invoice Features =
@@ -123,6 +122,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Recurring payments, recurring invoices and more!
 
 == Changelog ==
+
+= 3.2.3 =
+
+* Fix: Firefox not allowing negative value in qty inputs 
 
 = 3.2.2 =
 

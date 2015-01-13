@@ -1,3 +1,7 @@
+= 3.2.3 =
+
+* Fix: Firefox not allowing negative value in qty inputs 
+
 = 3.2.2 =
 
 * Fix: Missing .mo files for new translations
