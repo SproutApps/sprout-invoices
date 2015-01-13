@@ -335,6 +335,7 @@ class SI_Reporting extends SI_Controller {
 	
 		// FUTURE charts should be dynamic based on selected segment.
 		$weeks = self::walk_back_x_span( $span, $segment );
+		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
 
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
@@ -361,7 +362,7 @@ class SI_Reporting extends SI_Controller {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( "Y-m-d", strtotime( date( 'Y' ) . 'W' . array_shift($weeks) ) ),
+						'after'     => date( "Y-m-d", strtotime( $year . 'W' . array_shift($weeks) ) ),
 						'inclusive' => true,
 					)
 				)
@@ -535,6 +536,7 @@ class SI_Reporting extends SI_Controller {
 	
 		// FUTURE charts should be dynamic based on selected segment.
 		$weeks = self::walk_back_x_span( $span, $segment );
+		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
 
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
@@ -559,7 +561,7 @@ class SI_Reporting extends SI_Controller {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( "Y-m-d", strtotime( date( 'Y' ) . 'W' . array_shift($weeks) ) ),
+						'after'     => date( "Y-m-d", strtotime( $year . 'W' . array_shift($weeks) ) ),
 						'inclusive' => true,
 					)
 				)
@@ -727,6 +729,7 @@ class SI_Reporting extends SI_Controller {
 	
 		// FUTURE charts should be dynamic based on selected segment.
 		$weeks = self::walk_back_x_span( $span, $segment );
+		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
 
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
@@ -749,7 +752,7 @@ class SI_Reporting extends SI_Controller {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( "Y-m-d", strtotime( date( 'Y' ) . 'W' . array_shift($weeks) ) ),
+						'after'     => date( "Y-m-d", strtotime( $year . 'W' . array_shift($weeks) ) ),
 						'inclusive' => true,
 					)
 				)
