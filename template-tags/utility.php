@@ -399,8 +399,14 @@ function money_format( $format, $number )  {
               '(?:#([0-9]+))?(?:\.([0-9]+))?([in%])/'; 
     if ( setlocale(LC_MONETARY, 0) == 'C' ) { 
         setlocale( LC_MONETARY, '' ); 
-    } 
-    $locale = localeconv(); 
+    }
+    if ( !has_filter('si_localeconv') ) {
+    	$locale = localeconv(); 
+    }
+    else {
+    	$locale = apply_filters( 'si_localeconv', array() ); 
+    }
+    
     preg_match_all($regex, $format, $matches, PREG_SET_ORDER); 
     foreach ($matches as $fmatch) { 
         $value = floatval($number); 

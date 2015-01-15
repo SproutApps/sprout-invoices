@@ -1,3 +1,8 @@
+= 3.3.1 =
+
+* Fix: Estimates not being associated with Invoices correctly
+* Added: Filtering localeconv with si_localeconv
+
 = 3.3 =
 
 * Fix: Charts on reports dashboard not working

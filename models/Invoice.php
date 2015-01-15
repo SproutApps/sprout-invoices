@@ -391,7 +391,7 @@ class SI_Invoice extends SI_Post_Type {
 		$id = (int)$this->get_post_meta( self::$meta_keys['invoice_id'] );
 		if ( !$id ) {
 			$id = $this->get_id();
-			$this->set_estimate_id( $id );
+			$this->set_invoice_id( $id );
 		}
 		return $id;
 	}
