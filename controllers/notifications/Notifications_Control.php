@@ -295,10 +295,8 @@ class SI_Notifications_Control extends SI_Controller {
 
 		// Mark as disabled or not.
 		if ( isset( $_POST['notification_type_disabled'] ) && $_POST['notification_type_disabled'] == 'TRUE' ) {
-			error_log( 'set disabled: ' . print_r( TRUE, TRUE ) );
 			$notification->set_disabled( 'TRUE' );
 		} else {
-			error_log( 'not: ' . print_r( TRUE, TRUE ) );
 			$notification->set_disabled( 0 );
 		}
 	}
