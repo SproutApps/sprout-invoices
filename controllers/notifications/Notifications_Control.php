@@ -157,7 +157,7 @@ class SI_Notifications_Control extends SI_Controller {
 						'post_content' => $data['default_content']
 					) );
 				$notification = SI_Notification::get_instance( $post_id );
-				self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $notification_id );
+				self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $post_id );
 				if ( isset( $data['default_disabled'] ) && $data['default_disabled'] ) {
 					$notification->set_disabled( 'TRUE' );
 				}
@@ -269,8 +269,14 @@ class SI_Notifications_Control extends SI_Controller {
 			$notification_id = $_POST['notification_type'];
 		}
 
-		if ( is_null( $notification_id ) )
+		if ( is_null( $notification_id ) ) {
+			if ( isset( $_POST['ID'] ) ) {
+				$notification_id = $_POST['ID'];
+			}
+		}
+		if ( get_post_type( $notification_id ) != SI_Notification::POST_TYPE ) {
 			return;
+		}
 
 		$notifications = get_option( self::NOTIFICATIONS_OPTION_NAME, array() );
 		// Remove any existing notification types that point to the post currently being saved
@@ -289,8 +295,10 @@ class SI_Notifications_Control extends SI_Controller {
 
 		// Mark as disabled or not.
 		if ( isset( $_POST['notification_type_disabled'] ) && $_POST['notification_type_disabled'] == 'TRUE' ) {
+			error_log( 'set disabled: ' . print_r( TRUE, TRUE ) );
 			$notification->set_disabled( 'TRUE' );
 		} else {
+			error_log( 'not: ' . print_r( TRUE, TRUE ) );
 			$notification->set_disabled( 0 );
 		}
 	}

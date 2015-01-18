@@ -1,3 +1,9 @@
+= 3.4 =
+
+* Fix: Notification activation
+* Fix: FF incompatibility with status update drop-down
+* Change: Invoice ID shown on payments page
+
 = 3.3.1 =
 
 * Fix: Estimates not being associated with Invoices correctly

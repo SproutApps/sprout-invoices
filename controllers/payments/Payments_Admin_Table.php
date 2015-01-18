@@ -95,6 +95,7 @@ class SI_Payments_Table extends WP_List_Table {
 		// wp_delete_post( $item->ID, TRUE );
 		$payment = SI_Payment::get_instance( $item->ID );	
 		$invoice_id = $payment->get_invoice_id();
+		$invoice = SI_Invoice::get_instance($invoice_id);
 		$client = $payment->get_client();
 
 		//Build row actions
@@ -118,7 +119,7 @@ class SI_Payments_Table extends WP_List_Table {
 		//Return the title contents
 		return sprintf( '%1$s <span style="color:silver">(invoice&nbsp;id:%2$s)</span>%3$s',
 			$item->post_title,
-			$invoice_id,
+			$invoice->get_invoice_id(),
 			$this->row_actions( $actions )
 		);
 	}
