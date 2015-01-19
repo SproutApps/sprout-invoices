@@ -48,8 +48,10 @@ class SI_Admin_Payment extends SI_Controller {
 		if ( !$payment_id ) {
 			return FALSE;
 		}
-
 		do_action( 'admin_payment', $payment_id, $invoice );
+		
+		$payment = SI_Payment::get_instance( $payment_id );
+		do_action( 'payment_complete', $payment );
 	}
 
 

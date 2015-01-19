@@ -147,27 +147,28 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return
 	 */
 	public static function create_notifications() {
-		foreach ( self::$notifications as $notification_id => $data ) {
-			$notification = self::get_notification_instance( $notification_id );
-			if ( is_null( $notification ) ) {
-				$post_id = wp_insert_post( array(
-						'post_status' => 'publish',
-						'post_type' => SI_Notification::POST_TYPE,
-						'post_title' => $data['default_title'],
-						'post_content' => $data['default_content']
-					) );
-				$notification = SI_Notification::get_instance( $post_id );
-				self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $post_id );
-				if ( isset( $data['default_disabled'] ) && $data['default_disabled'] ) {
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'sprout-apps/settings' ) {
+			foreach ( self::$notifications as $notification_id => $data ) {
+				$notification = self::get_notification_instance( $notification_id );
+				if ( is_null( $notification ) ) {
+					$post_id = wp_insert_post( array(
+							'post_status' => 'publish',
+							'post_type' => SI_Notification::POST_TYPE,
+							'post_title' => $data['default_title'],
+							'post_content' => $data['default_content']
+						) );
+					$notification = SI_Notification::get_instance( $post_id );
+					self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $post_id );
+					if ( isset( $data['default_disabled'] ) && $data['default_disabled'] ) {
+						$notification->set_disabled( 'TRUE' );
+					}
+				}
+				// Don't allow for a notification to enabled if specifically shouldn't
+				if ( isset( $data['always_disabled'] ) && $data['always_disabled'] ) {
 					$notification->set_disabled( 'TRUE' );
 				}
 			}
-			// Don't allow for a notification to enabled if specifically shouldn't
-			if ( isset( $data['always_disabled'] ) && $data['always_disabled'] ) {
-				$notification->set_disabled( 'TRUE' );
-			}
 		}
-
 	}
 
 	/////////////////
@@ -710,6 +711,9 @@ class SI_Notifications_Control extends SI_Controller {
 	}
 
 	public static function maybe_redirect_away_from_notification_admin_table( $current_screen ) {
+		if ( isset( $_GET['noredirect'] ) ) {
+			return;
+		}
 		if ( SI_Notification::POST_TYPE == $current_screen->post_type && 'edit' == $current_screen->base ) {
 			wp_redirect( admin_url( 'admin.php?page=' . self::get_admin_page() ) );
 			exit();

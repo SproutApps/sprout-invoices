@@ -1,3 +1,10 @@
+= 3.5 =
+
+* Change: Payment notification after admin payment
+* Improved: State and Country Selection
+* Improved: Language translations
+* Improved: Filtering localeconv
+
 = 3.4 =
 
 * Fix: Notification activation

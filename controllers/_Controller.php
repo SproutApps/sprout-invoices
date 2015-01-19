@@ -1241,7 +1241,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function get_state_options( $args = array() ) {
 		$states = self::$grouped_states;
 		if ( isset( $args['include_option_none'] ) && $args['include_option_none'] ) {
-			$states = array( array( '' => $args['include_option_none'] ) ) + $states;
+			$states = array( self::__('Select') => array( $args['include_option_none'] ) ) + $states;
 		}
 		$states = apply_filters( 'sprout_state_options', $states, $args );
 		return $states;
@@ -1445,7 +1445,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'weight' => 75,
 			'label' => self::__( 'State' ),
 			'type' => 'select-state',
-			'options' => self::get_state_options(),
+			'options' => self::get_state_options( array( 'include_option_none' => ' -- '.self::__( 'State' ).' -- ' ) ),
 			'attributes' => array( 'class' => 'select2' ),
 			'required' => $required
 		); // FUTURE: Add some JavaScript to switch between select box/text-field depending on country
