@@ -683,6 +683,7 @@ class SI_Clients extends SI_Controller {
 		}
 
 		$user_id = wp_insert_user( $parsed_args );
+		do_action( 'si_user_created', $user_id, $parsed_args );
 		return $user_id;
 	}
 

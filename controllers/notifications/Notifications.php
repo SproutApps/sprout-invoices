@@ -55,7 +55,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_estimate' => array(
 					'name' => self::__( 'Estimate Available' ),
 					'description' => self::__( 'Customize the estimate email that is sent to selected recipients.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Your Estimate is Available' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/estimate', NULL )
 				),
@@ -63,7 +63,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_invoice' => array(
 					'name' => self::__( 'Invoice Available' ),
 					'description' => self::__( 'Customize the invoice email that is sent to selected recipients.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Your Invoice is Available' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/invoice', NULL )
 				),
@@ -71,7 +71,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'deposit_payment' => array(
 					'name' => self::__( 'Deposit Payment Received' ),
 					'description' => self::__( 'Customize the payment email that is sent to the client recipients when a deposit is made.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Deposit Received' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', NULL ),
 					'always_disabled' => TRUE
@@ -79,14 +79,14 @@ class SI_Notifications extends SI_Notifications_Control {
 				'final_payment' => array(
 					'name' => self::__( 'Invoice Paid' ),
 					'description' => self::__( 'Customize the email sent to the client recipients when the final payment for an invoice is made.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Thank You' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-final', NULL )
 				),
 				'reminder_payment' => array(
 					'name' => self::__( 'Payment Reminder' ),
 					'description' => self::__( 'Customize the email that is sent to the client recipients in order to remind them that their payment is overdue.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Invoice Payment Overdue' ),  get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-reminder', NULL ),
 					'always_disabled' => TRUE
@@ -138,7 +138,7 @@ class SI_Notifications extends SI_Notifications_Control {
 					'callback' => array( 'SI_Notifications', 'shortcode_sender_name' )
 					),
 				'username' => array(
-					'description' => self::__( 'Used to display the user&rsquo;s name.' ),
+					'description' => self::__( 'Used to display the user&rsquo;s login.' ),
 					'callback' => array( 'SI_Notifications', 'shortcode_username' )
 					),
 				'admin_note' => array(
@@ -467,7 +467,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				$name = $user->first_name . ' ' . $user->last_name;
 				// no first and last name?
 				if ( $name == ' ' ) {
-					$name = $display_name;
+					$name = $user->display_name;
 				}
 			}
 		}
@@ -589,14 +589,14 @@ class SI_Notifications extends SI_Notifications_Control {
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ( $line_items as $position => $data ): ?>
+					<?php foreach ( $line_items as $position => $ldata ): ?>
 						<tr class="item" data-id="<?php echo $position ?>">
 							<td><?php esc_attr_e( $position+1 ) ?></td>
-							<td><?php echo apply_filters( 'the_content', $data['desc'] ) ?></td>
-							<td><?php esc_attr_e( $data['rate'] ) ?></td>
-							<td><?php esc_attr_e( $data['qty'] ) ?></td>
-							<td><?php esc_attr_e( $data['tax'] ) ?>%</td>
-							<td><?php sa_formatted_money( $data['total'] ) ?></td>
+							<td><?php echo apply_filters( 'the_content', $ldata['desc'] ) ?></td>
+							<td><?php esc_attr_e( $ldata['rate'] ) ?></td>
+							<td><?php esc_attr_e( $ldata['qty'] ) ?></td>
+							<td><?php esc_attr_e( $ldata['tax'] ) ?>%</td>
+							<td><?php sa_formatted_money( $ldata['total'] ) ?></td>
 						</tr>
 					<?php endforeach ?>
 				</tbody>

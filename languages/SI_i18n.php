@@ -28,9 +28,13 @@ class SI_i18n extends SI_Controller {
 
 		// Setup paths to current locale file
 		$mofile_local  = $sa_lang_dir . $mofile;
+		$mofile_plugins_global = WP_LANG_DIR . '/plugins/' . self::TEXT_DOMAIN . '/' . $mofile;
 		$mofile_global = WP_LANG_DIR . '/' . self::TEXT_DOMAIN . '/' . $mofile;
 
-		if ( file_exists( $mofile_global ) ) {
+		if ( file_exists( $mofile_plugins_global ) ) {
+			// Look in global /wp-content/languages/plugins/sprout-apps folder
+			load_textdomain( self::TEXT_DOMAIN, $mofile_plugins_global );
+		} elseif ( file_exists( $mofile_global ) ) {
 			// Look in global /wp-content/languages/sprout-apps folder
 			load_textdomain( self::TEXT_DOMAIN, $mofile_global );
 		} elseif ( file_exists( $mofile_local ) ) {

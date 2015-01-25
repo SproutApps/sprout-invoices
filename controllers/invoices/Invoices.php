@@ -887,6 +887,11 @@ class SI_Invoices extends SI_Controller {
 		$invoice->set_sender_note( $_REQUEST['sa_send_metabox_sender_note'] );
 		do_action( 'send_invoice', $invoice, $_REQUEST['sa_metabox_recipients'] );
 
+		// If status is temp than change to pending.
+		if ( $invoice->get_status() == SI_Invoice::STATUS_TEMP ) {
+			$invoice->set_pending();
+		}
+
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		echo json_encode( array( 'response' => si__('Notification Queued') ) );

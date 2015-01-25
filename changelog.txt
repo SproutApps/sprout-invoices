@@ -1,3 +1,10 @@
+= 4.0 =
+
+* NEW: Client Dashboards
+* NEW: HTML notification add-on support
+* NEW: Time importing from Freshbooks
+* Misc. bug fixes and updates
+
 = 3.5 =
 
 * Change: Payment notification after admin payment

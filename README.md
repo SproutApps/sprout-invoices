@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.0**
+
+* NEW: Client Dashboards
+* NEW: HTML notification add-on support
+* NEW: Time importing from Freshbooks
+* Misc. bug fixes and updates
+
+
 **3.2**
 
 

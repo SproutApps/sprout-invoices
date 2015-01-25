@@ -1759,3 +1759,14 @@ dd .add_item_help {
 input#sa_recurring_invoice_custom_freq {
 	width: 50px;
 }
+
+/**
+ * Dashboard
+ */
+#associated_users_list .dash_link {
+    float: left;
+    text-decoration: none;
+    margin-right: 5px;
+    font-size: .5em !important;
+    color: #bbb;
+}

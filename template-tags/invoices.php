@@ -179,7 +179,7 @@ function si_get_invoice_due_date( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$invoice = SI_Invoice::get_instance( $id );
-	return apply_filters( 'si_get_invoice_due_date', $invoice->get_due_date(), $invoice );
+	return apply_filters( 'si_get_invoice_due_date', $invoice->get_expiration_date(), $invoice );
 }
 endif;
 

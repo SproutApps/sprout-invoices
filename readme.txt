@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 3.5
+Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps (aka plugins) to help us all work more efficiently & provide complete control the WordPress way. Our latest Sprout Apps are Sprout Invoices and Help Scout Desk, with many more to come.
 
->*New Years Discounts Available!* Take control of your invoicing in the new year with Sprout Invoices and paid versions are now [discounted](https://sproutapps.co/news/new-years-party/)
+>*New Years Discounts Available!* Take control of your invoicing in the new year with Sprout Invoices and take advantage of the discounts now [discounted](https://sproutapps.co/news/new-years-party/)
 
 
 = Sprout Invoice Features =
@@ -37,29 +37,27 @@ Make sure to review the [Sprout Invoices](https://sproutapps.co/sprout-invoices/
 * Localization support for your language!
 * [Freshbooks, Harvest and WP-Invoice Importing](https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/).
 * Fully [customizable notifications](https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/). Notifications are sent from your server and allow for plain-text and HTML.
-* [Deposit payments](https://sproutapps.co/news/feature-spotlight-invoice-deposits/) (premium upgrade)
 * [Nested line items](https://sproutapps.co/news/feature-spotlight-nested-invoice-line-items/).
 * [Advanced records](https://sproutapps.co/support/knowledgebase/sprout-invoices/tools/) with any extra tables!
 * Includes a [customizable estimates/lead generation form](https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/).
-* Integrates with [Gravity Forms, Ninja Forms and more](https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/) (premium upgrade).
-* Accept [Stripe Payments](https://sproutapps.co/marketplace/stripe-payments/) (paid add-on or premium upgrade)
 * Improved user experience with AJAX.
 * [Advanced Taxes](https://sproutapps.co/marketplace/advanced-tax-rates-hst-pst-gst-support/)
 * Client records with multiple points of contact
 * Pre-defined tasks/line-items
 * No extra database tables!
 
-The short list...
+Premium Features
 
-* Recurring payments (coming soon)
-* Payment terms (coming soon)
-
-Please note that this feature list is incomplete, it's long enough already.
-
-**[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
+* Integrates with [Gravity Forms, Ninja Forms and more](https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/) (paid add-on or premium upgrade).
+* Accept [Stripe Payments](https://sproutapps.co/marketplace/stripe-payments/) (paid add-on or premium upgrade).
+* [Deposit payments](https://sproutapps.co/news/feature-spotlight-invoice-deposits/) (premium upgrade).
+* [Recurring/Subscription Payments](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/) (premium upgrade).
+* [Recurring Invoices](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/) (premium upgrade).
+* [Client Dashboards](https://sproutapps.co/news/sprout-invoices-client-dashboard-beautiful-html-e-mails/) (premium upgrade).
 
 **A [fully featured upgrade](https://sproutapps.co/sprout-invoices/) and [add-on marketplace](https://sproutapps.co/marketplace/) are available.**
 
+**[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
 = Flexibility built in =
 
@@ -119,9 +117,16 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
-Recurring payments, recurring invoices and more!
+Client dashboards and HTML notifications
 
 == Changelog ==
+
+= 4.0 =
+
+* NEW: Client Dashboards
+* NEW: HTML notification add-on support
+* NEW: Time importing from Freshbooks
+* Misc. bug fixes and updates
 
 = 3.5 =
 

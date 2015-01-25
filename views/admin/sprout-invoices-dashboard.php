@@ -27,13 +27,13 @@
 				<div class="col-2">
 					<span class="flow_icon icon-sproutapps-estimates"></span>
 					<h4><?php self::_e( 'Estimating' ); ?></h4>
-					<p><?php printf( self::__( "A new <a href='%s'>estimate</a> is automatically created and notifications are sent after every estimate request submission. The <a href='%s'>notification</a> to you will provide a link to this new estimate; allowing you to review, update, and send the estimate to your prospective client without having to communicate via email." ), admin_url('post-new.php?post_type='.SI_Estimate::POST_TYPE),  admin_url('admin.php?page=sprout-apps/notifications') ); ?></p>
+					<p><?php printf( self::__( "A new <a href='%s'>estimate</a> is automatically created and notifications are sent after every estimate request submission. The <a href='%s'>notification</a> to you will provide a link to this new estimate; allowing you to review, update, and send the estimate to your prospective client without having to communicate via email." ), admin_url('post-new.php?post_type='.SI_Estimate::POST_TYPE),  admin_url('admin.php?page=sprout-apps/settings&tab=notifications') ); ?></p>
 					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
 				</div>
 				<div class="col-3 last-feature">
 					<span class="flow_icon icon-sproutapps-invoices"></span>
 					<h4><?php self::_e( 'Invoicing' ); ?></h4>
-					<p><?php printf( self::__( "An <a href='%s'>invoice</a> is automatically created from an accepted estimate. By default these newly created invoices are <em>not</em> sent to the client, instead you  will need to review them before sending. Your <a href='%s'>notifications</a> are meant to be setup to help review, mark, and send them out quickly." ), admin_url('post-new.php?post_type='.SI_Invoice::POST_TYPE),  admin_url('admin.php?page=sprout-apps/notifications') ); ?></p>
+					<p><?php printf( self::__( "An <a href='%s'>invoice</a> is automatically created from an accepted estimate. By default these newly created invoices are <em>not</em> sent to the client, instead you  will need to review them before sending. Your <a href='%s'>notifications</a> are meant to be setup to help review, mark, and send them out quickly." ), admin_url('post-new.php?post_type='.SI_Invoice::POST_TYPE),  admin_url('admin.php?page=sprout-apps/settings&tab=notifications') ); ?></p>
 					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
 				</div>
 			</div>
@@ -54,7 +54,7 @@
 						<li><?php printf( self::__( "Start <a href='%s'>importing</a> your data from other services (i.e. WP-Invoice, Freshbooks or Harvest)." ), admin_url('admin.php?page=sprout-apps/settings&tab=import') ); ?></li>
 						<li><?php printf( self::__( "Even with the defaults set in <a href='%s'>General Settings</a> the 'Company Info' should be filled out first." ), admin_url('admin.php?page=sprout-apps/settings') ); ?></li>
 						<li><?php printf( self::__( "Review your <a href='%s'>Payment Settings</a> and provide different methods of payments for your clients. Don't let your client find out you've configured the payment processor incorrectly&mdash;make sure to test." ), admin_url('admin.php?page=sprout-apps/settings&tab=payments') ); ?></li>
-						<li><?php printf( self::__( "There are a lot of <a href='%s'>notifications</a> sent throughout the entire client acquisition process, make sure they have your personality and represent your brand well. You can send HTML emails, check your <a href='%s'>General Settings</a> for more information." ), admin_url('admin.php?page=sprout-apps/notifications'), admin_url('admin.php?page=sprout-apps/settings') ); ?></li>
+						<li><?php printf( self::__( "There are a lot of <a href='%s'>notifications</a> sent throughout the entire client acquisition process, make sure they have your personality and represent your brand well. You can send HTML emails, check your <a href='%s'>General Settings</a> for more information." ), admin_url('admin.php?page=sprout-apps/settings&tab=notifications'), admin_url('admin.php?page=sprout-apps/settings') ); ?></li>
 						<li><?php self::_e('Grow your business while not forgetting about your loved ones...and the occasional round of golf.') ?></li>
 					</ol>
 					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>

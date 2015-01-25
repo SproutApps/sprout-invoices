@@ -31,7 +31,7 @@ class SI_Notifications_Control extends SI_Controller {
 		self::$notification_format = get_option( self::EMAIL_FORMAT, 'TEXT' );
 
 		// Default notifications
-		self::notifications_and_shortcodes();
+		add_action( 'init', array( __CLASS__, 'notifications_and_shortcodes' ), 5 );
 
 		// register settings
 		self::register_settings();
@@ -128,7 +128,7 @@ class SI_Notifications_Control extends SI_Controller {
 		return ( self::$notification_format == 'HTML' );
 	}
 
-	protected static function notifications_and_shortcodes() {
+	public static function notifications_and_shortcodes() {
 		if ( !isset( self::$notifications ) ) {
 			// Notification types include a name and a list of shortcodes
 			$default_notifications = array(); // defaults are in the hooks class
@@ -158,7 +158,7 @@ class SI_Notifications_Control extends SI_Controller {
 							'post_content' => $data['default_content']
 						) );
 					$notification = SI_Notification::get_instance( $post_id );
-					self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $post_id );
+					self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $notification_id );
 					if ( isset( $data['default_disabled'] ) && $data['default_disabled'] ) {
 						$notification->set_disabled( 'TRUE' );
 					}
@@ -265,31 +265,33 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @param  string $notification_id 
 	 * @return                      
 	 */
-	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_id = NULL ) {
-		if ( isset( $callback_args['notification_type'] ) && isset( $_POST['notification_type'] ) && NULL === $callback_args['notification_type'] ) {
-			$notification_id = $_POST['notification_type'];
+	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_type = NULL ) {
+		if ( $notification_type === NULL && isset( $_POST['notification_type'] ) ) {
+			$notification_type = $_POST['notification_type'];
 		}
 
-		if ( is_null( $notification_id ) ) {
+		if ( is_null( $post_id ) ) {
 			if ( isset( $_POST['ID'] ) ) {
-				$notification_id = $_POST['ID'];
+				$post_id = $_POST['ID'];
 			}
 		}
-		if ( get_post_type( $notification_id ) != SI_Notification::POST_TYPE ) {
+		if ( get_post_type( $post_id ) != SI_Notification::POST_TYPE ) {
 			return;
 		}
 
-		$notifications = get_option( self::NOTIFICATIONS_OPTION_NAME, array() );
 		// Remove any existing notification types that point to the post currently being saved
-		$notifications = array_flip( $notifications );
-		unset( $notifications[$post_id] );
-		$notifications = array_flip( $notifications );
+		$notification_set = get_option( self::NOTIFICATIONS_OPTION_NAME, array() );
+		foreach ( $notification_set as $op_type => $note_id ) {
+			if ( $note_id == $post_id ) {
+				unset( $notification_set[$post_id] );
+			}
+		}
 
-		if ( isset( self::$notifications[$notification_id] ) ) {
+		if ( isset( self::$notifications[$notification_type] ) ) {
 
 			// Associate this post with the given notification type
-			$notifications[$notification_id] = $post_id;
-			update_option( self::NOTIFICATIONS_OPTION_NAME, $notifications );
+			$notification_set[$notification_type] = $post_id;
+			update_option( self::NOTIFICATIONS_OPTION_NAME, $notification_set );
 		}
 
 		$notification = SI_Notification::get_instance( $post_id );
