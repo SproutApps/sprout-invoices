@@ -214,8 +214,10 @@ class SI_Invoice extends SI_Post_Type {
 		$this->set_status( self::STATUS_WO );
 	}
 
-	public function get_status_label() {
-		$status = $this->get_status();
+	public function get_status_label( $status = '' ) {
+		if ( $status == '' ) {
+			$status = $this->get_status();
+		}
 		$statuses = self::get_statuses();
 		return $statuses[$status];
 	}
@@ -526,7 +528,6 @@ class SI_Invoice extends SI_Post_Type {
 			// sometimes there's a delay/cache
 			$this->get_balance(); 
 		} 
-		$total = 0;
 		$subtotal = $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
@@ -554,7 +555,7 @@ class SI_Invoice extends SI_Post_Type {
 				if ( isset( $data['tax'] ) ) {
 					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
 					$calc = ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
-					$subtotal += $line_item_total = apply_filters( 'si_line_item_total', $calc, $data );
+					$subtotal += apply_filters( 'si_line_item_total', $calc, $data );
 				}
 			}
 		}

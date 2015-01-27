@@ -197,9 +197,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
+		$total_records = 0;
 		if ( !isset( $progress['clients_complete'] ) ) {
 
-			$error = FALSE;
 			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
 			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
 
@@ -228,7 +228,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			if ( $progress[$progress_key] <= $pages ) {
 				foreach ( $response['clients']['client'] as $key => $client ) {
 					$new_client_id = self::create_client( $client );
-					$contacts_created = self::create_contacts( $client, $new_client_id );
+					self::create_contacts( $client, $new_client_id );
 				}
 
 				$progress[$progress_key]++;
@@ -307,9 +307,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 		
+		$total_records = 0;
 		if ( !isset( $progress['estimates_complete'] ) ) {
 
-			$error = FALSE;
 			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
 			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
 
@@ -338,7 +338,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			if ( $progress[$progress_key] <= $pages ) {
 
 				foreach ( $response['estimates']['estimate'] as $key => $estimate ) {
-					$new_estimate_id = self::create_estimate( $estimate );
+					self::create_estimate( $estimate );
 				}
 
 				$progress[$progress_key]++;
@@ -405,9 +405,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
+		$total_records = 0;
 		if ( !isset( $progress['invoices_complete'] ) ) {
 
-			$error = FALSE;
 			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
 			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
 
@@ -436,7 +436,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			if ( $progress[$progress_key] <= $pages ) {
 
 				foreach ( $response['invoices']['invoice'] as $key => $invoice ) {
-					$new_invoice_id = self::create_invoice( $invoice );
+					self::create_invoice( $invoice );
 				}
 
 				$progress[$progress_key]++;
@@ -503,9 +503,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
+		$total_records = 0;
 		if ( !isset( $progress['payments_complete'] ) ) {
 
-			$error = FALSE;
 			require_once SI_PATH . '/importers/lib/freshbooks/FreshBooksRequest.php';
 			FreshBooksRequest::init( self::$freshbooks_account, self::$freshbooks_token );
 
@@ -534,7 +534,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			if ( $progress[$progress_key] <= $pages ) {
 
 				foreach ( $response['payments']['payment'] as $key => $payment ) {
-					$new_payment_id = self::create_payment( $payment );
+					self::create_payment( $payment );
 				}
 
 				$progress[$progress_key]++;
@@ -628,7 +628,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 		$client_id = SI_Client::new_client( $args );
 		// notes
 		if ( isset( $client['notes'] ) && $client['notes'] != '' ) {
-			$record_id = SI_Internal_Records::new_record( $client['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $client_id, '', 0 );
+			SI_Internal_Records::new_record( $client['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $client_id, '', 0 );
 		}
 		// create import record
 		update_post_meta( $client_id, self::FRESHBOOKS_ID, $client['client_id'] );

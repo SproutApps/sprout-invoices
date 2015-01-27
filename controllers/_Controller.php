@@ -1167,7 +1167,6 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( !isset( self::$messages ) ) {
 			self::load_messages();
 		}
-		$messages = array();
 		foreach ( $statuses as $status ) {
 			foreach ( self::$messages[$status] as $message ) {
 				self::load_view( 'templates/messages', array(
@@ -1505,6 +1504,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( !isset( $_REQUEST['id'] ) )
 			self::ajax_fail( 'Forget something?' );
 
+		$view = '';
 		switch ( get_post_type( $_REQUEST['id'] ) ) {
 			case SI_Invoice::POST_TYPE:
 				$doc = SI_Invoice::get_instance( $_REQUEST['id'] );
@@ -1525,6 +1525,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			
 			default:
 				self::ajax_fail( 'Not an estimate or invoice.' );
+				return;
 				break;
 		}
 		

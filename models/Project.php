@@ -253,7 +253,7 @@ class SI_Project extends SI_Post_Type {
 		// Invoice id will show as billed
 		$original_data = $time_data;
 		unset( $original_data['invoice_id'] );
-		update_post_meta( $this->ID, $key, $time_data, $original_data );
+		update_post_meta( $this->ID, 'time_invoice_id', $time_data, $original_data );
 	}
 
 

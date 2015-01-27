@@ -142,7 +142,6 @@ class SI_Clients extends SI_Controller {
 	 * @return                
 	 */
 	public static function show_submit_meta_box( $post, $metabox ) {
-		$notification = SI_Notification::get_instance( $post->ID );
 		$client = SI_Client::get_instance( $post->ID );
 
 		$args = apply_filters( 'si_get_users_for_association_args', array( 'fields' => array( 'ID', 'user_email', 'display_name' ) ) );

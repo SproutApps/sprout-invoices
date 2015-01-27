@@ -83,13 +83,8 @@ class SA_Settings_API extends SI_Controller {
 
 	/**
 	 * Register a settings sub-page in the plugin's menu
-	 *
-	 * @static
-	 * @param string  $slug
-	 * @param string  $title
-	 * @param string  $menu_title
-	 * @param string  $weight
-	 * @return string The menu slug that will be used for the page
+	 * @param  array $args 
+	 * @return string       
 	 */
 	public static function register_page( $args ) {
 
@@ -450,7 +445,7 @@ class SA_Settings_API extends SI_Controller {
 				return;
 			
 			// unserialize
-			wp_parse_str( $_POST['options'], $options );
+			wp_parse_str( $_POST['options'], array() );
 			// Confirm the form was an update
 			if ( isset( $options['action'] ) && $options['action'] == 'update' ) {
 				$option_page = ( isset( $options['option_page'] ) ) ? $options['option_page'] : 'general' ;
@@ -504,7 +499,7 @@ class SA_Settings_API extends SI_Controller {
 	 * Registered meta boxes for all post types, including the si_deal post type.
 	 * 	
 	 * @param  array  $registered_boxes array of registered metaboxes
-	 * @param  string/array $type             post type(s)
+	 * @param  string/array $post_types             post type(s)
 	 * @return null 		                  modifies class variable for all pt metaboxes
 	 */
 	public static function register_meta_box( $registered_boxes = array(), $post_types = array() ) {
@@ -544,7 +539,8 @@ class SA_Settings_API extends SI_Controller {
 			uasort( $meta_boxes, array( __CLASS__, 'sort_by_weight' ) );
 			// Loop through each meta box registered under this type.
 			foreach ( $meta_boxes as $metabox_name => $args ) {
-					extract( apply_filters( $metabox_name . '_meta_box_args', $args ) );
+				$args = apply_filters( $metabox_name . '_meta_box_args', $args );
+				extract( $args );
 				add_meta_box( $metabox_name, self::__( $title ), $callback, $screen, $context, $priority, $args );
 			}
 		}

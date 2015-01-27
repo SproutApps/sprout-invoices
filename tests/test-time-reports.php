@@ -248,7 +248,7 @@ class Test_Reporting extends WP_UnitTestCase {
 			
 			// tally the invoice balances
 			$invoice_totaled += (float)$invoice_total;
-			$payment_totaled += (float)$payment_totals[$key];
+			$payment_totaled += (float)$payment_totals[$i];
 		}
 
 

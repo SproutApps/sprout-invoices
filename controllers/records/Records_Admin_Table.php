@@ -81,6 +81,7 @@ class SI_Records_Table extends WP_List_Table {
 
 	function extra_tablenav( $which ) {
 		global $post_type_object, $cat;
+		$term_id = 0;
 		?>
 		<div class="alignleft actions"> <?php
 

@@ -474,6 +474,7 @@ class SI_Templating_API extends SI_Controller {
 		if ( ! is_dir( $path ) )
 			return false;
 
+		$_extensions = '';
 		if ( $extensions ) {
 			$extensions = (array) $extensions;
 			$_extensions = implode( '|', $extensions );

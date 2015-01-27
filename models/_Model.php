@@ -572,6 +572,9 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @return array
 	 */
 	public static function find_by_meta( $post_type, $meta = array() ) {
+		$cache = array();
+		$cache_index = 0;
+		$cache_key = 0;
 		// see if we've cached the result
 		if ( count( $meta ) == 1 ) {
 			$array_keys = array_keys( $meta );

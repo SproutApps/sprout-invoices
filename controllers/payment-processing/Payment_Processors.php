@@ -95,9 +95,10 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 	/**
 	 * Get the active credit card processor
-	 * @return  
+	 * @return  mixed
 	 */
 	public static function get_active_credit_card_processor() {
+		$processor = '';
 		self::$active_payment_processors = self::enabled_processors();
 		foreach ( self::$active_payment_processors as $class ) {
 			if ( self::is_cc_processor($class) ) {
@@ -236,6 +237,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return string
 	 */
 	public static function show_payments_pane( $current = '' ) {
+		$processor = '';
 		$checkout = SI_Checkouts::get_instance();
 		if ( SI_Checkouts::is_checkout_page() ) {
 			$current = $checkout->get_current_page();

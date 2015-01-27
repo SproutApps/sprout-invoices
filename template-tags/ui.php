@@ -44,7 +44,7 @@ function si_locate_file( $possibilities = array() ) {
 	}
 
 	// we don't have it
-	return $default;
+	return '';
 }
 endif;
 

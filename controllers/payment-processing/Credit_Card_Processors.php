@@ -25,7 +25,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * Making it all more important to have SSL.
 	 *
 	 * @param array   $panes
-	 * @param SI_Checkouts $checkout
+	 * @param SI_Checkouts/string $checkout
 	 * @return array
 	 */
 	public function credit_card_cache( $checkout = '' ) {
@@ -359,7 +359,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	/**
 	 * Process the payment form
 	 *
-	 * @return void
+	 * @return bool
 	 */
 	public function validate_billing( SI_Checkouts $checkout ) {
 		$valid = TRUE;

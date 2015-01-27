@@ -140,6 +140,7 @@ class SI_JSON_API extends SI_Controller {
 			return TRUE;
 		}
 
+		$user = '';
 		$user_id = FALSE;
 		if ( !empty( $_REQUEST['user'] ) && !empty( $_REQUEST['signature'] ) && !empty( $_REQUEST['timestamp'] ) ) {
 			$user = self::get_user();
@@ -174,7 +175,7 @@ class SI_JSON_API extends SI_Controller {
 	 * Get (and create if necessary) an API token for the user
 	 *
 	 * @param WP_User|int $user
-	 * @return string
+	 * @return bool/string
 	 */
 	private static function get_user_token( $user = 0 ) {
 		$user = $user ? $user : wp_get_current_user();

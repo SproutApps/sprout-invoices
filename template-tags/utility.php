@@ -176,8 +176,8 @@ function sa_currency_format_before() {
  * @param integer $amount amount to convert to money format 
  * @return string
  */
-function sa_formatted_money( $amount, $amount_wrap = '<span class="money_amount">%s</span>', $locale = '' ) {
-	echo apply_filters( 'sa_formatted_money', sa_get_formatted_money( $amount, $amount_wrap, $locale ), $amount );
+function sa_formatted_money( $amount, $amount_wrap = '<span class="money_amount">%s</span>' ) {
+	echo apply_filters( 'sa_formatted_money', sa_get_formatted_money( $amount, $amount_wrap ), $amount );
 }
 
 /**

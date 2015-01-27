@@ -278,7 +278,7 @@ class SI_Checkouts extends SI_Controller {
 	/**
 	 * Sets $this->current_page to the next incomplete page
 	 *
-	 * @return string The current page key
+	 * @return mixed The current page key
 	 */
 	private function set_current_page() {
 		if ( isset( $this->cache['completed'] ) && is_array( $this->cache['completed'] ) ) {
@@ -300,7 +300,7 @@ class SI_Checkouts extends SI_Controller {
 	 *
 	 *
 	 * @param bool    $reload Whether to check the page cache again
-	 * @return string The key of the current page
+	 * @return mixed The key of the current page
 	 */
 	public function get_current_page( $reload = FALSE ) {
 		if ( !$this->current_page || $reload ) {

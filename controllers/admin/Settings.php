@@ -300,8 +300,8 @@ class SI_Admin_Settings extends SI_Controller {
 
 	/**
 	 * Save callback for saving states
-	 * @param  array  $options 
-	 * @return $options          
+	 * @param  array  $selected 
+	 * @return $selected          
 	 */
 	public static function save_states( $selected = array() ) {
 		$sanitized_options = array();

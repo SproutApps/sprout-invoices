@@ -231,7 +231,6 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return                
 	 */
 	public static function show_shortcode_meta_box( $post, $metabox ) {
-		$notification = SI_Notification::get_instance( $post->ID );
 		$id = preg_replace( '/^' . preg_quote( self::META_BOX_PREFIX ) . '/', '', $metabox['id'] );
 		if ( isset( self::$notifications[$id] ) ) {
 			self::load_view( 'admin/meta-boxes/notifications/shortcodes', array(
@@ -359,14 +358,11 @@ class SI_Notifications_Control extends SI_Controller {
 			$notification_post = $notification->get_post();
 			$title = $notification_post->post_title;
 			$title = self::do_shortcodes( $notification_name, $title );
-			return apply_filters( 'si_get_notification_instance_subject', $title, $notification_name, $data );
 		} elseif ( isset( self::$notifications[$notification_name] ) && isset( self::$notifications[$notification_name]['default_title'] ) ) {
 			$title = self::$notifications[$notification_name]['default_title'];
 			$title = self::do_shortcodes( $notification_name, $title );
-			return apply_filters( 'si_get_notification_instance_subject', $title, $notification_name, $data );
 		}
-
-		return apply_filters( 'si_get_notification_instance_subject', '', $notification_name, $data );
+		return apply_filters( 'si_get_notification_instance_subject', $title, $notification_name, $data );
 	}
 
 	/**
@@ -383,13 +379,11 @@ class SI_Notifications_Control extends SI_Controller {
 			$notification_post = $notification->get_post();
 			$content = $notification_post->post_content;
 			$content = self::do_shortcodes( $notification_name, $content );
-			return apply_filters( 'si_get_notification_instance_content', $content, $notification_name, $data );
 		} elseif ( isset( self::$notifications[$notification_name] ) && isset( self::$notifications[$notification_name]['default_content'] ) ) {
 			$content = self::$notifications[$notification_name]['default_content'];
 			$content = self::do_shortcodes( $notification_name, $content );
-			return apply_filters( 'si_get_notification_instance_content', $content, $notification_name, $data );
 		}
-		return apply_filters( 'si_get_notification_instance_content', '', $notification_name, $data );
+		return apply_filters( 'si_get_notification_instance_content', $content, $notification_name, $data );
 	}
 
 	/**
@@ -403,9 +397,6 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return 
 	 */
 	public static function send_notification( $notification_name, $data = array(), $to, $from_email = null, $from_name = null, $html = null ) {
-		// The options registered in the notification type array
-		$registered_notification = self::$notifications[$notification_name];
-
 		// don't send disabled notifications
 		if ( apply_filters( 'suppress_notifications', FALSE ) || self::is_disabled( $notification_name ) ) {
 			return;
@@ -586,7 +577,7 @@ class SI_Notifications_Control extends SI_Controller {
 		// then try to determine based on email address
 		if ( !$user_id ) {
 			$email = ( isset( $data['user_email'] ) && $data['user_email'] != '' ) ? $data['user_email'] : $to ;
-			$user = get_user_by( 'email', $to );
+			$user = get_user_by( 'email', $email );
 			if ( $user && isset( $user->ID ) ) {
 				$user_id = $user->ID;
 			}

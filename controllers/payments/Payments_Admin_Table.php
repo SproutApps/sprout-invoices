@@ -22,7 +22,6 @@ class SI_Payments_Table extends WP_List_Table {
 
 		$status_links = array();
 		$num_posts = wp_count_posts( self::$post_type, 'readable' );
-		$class = '';
 		$allposts = '';
 
 		$total_posts = array_sum( (array) $num_posts );

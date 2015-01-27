@@ -236,7 +236,7 @@ class SI_Client extends SI_Post_Type {
 		return $clients;
 	}
 
-	public static function get_payments() {
+	public function get_payments() {
 		$payments = array();
 		$invoices = $this->get_invoices();
 		foreach ( $invoices as $invoice_id ) {

@@ -463,9 +463,7 @@ class SI_Estimates extends SI_Controller {
 
 		// options for recipients
 		$client = $estimate->get_client();
-		$current_user = get_userdata( get_current_user_id() );
 		
-		$recipient_options = '<span class="label_wrap"><label for="sa_metabox_recipients">'.si__('Recipients').'</label></span>';
 		$recipient_options = '<div class="form-group"><div class="input_wrap">';
 		
 			// client users
@@ -706,7 +704,7 @@ class SI_Estimates extends SI_Controller {
 	 */
 	public static function maybe_create_status_update_record( SI_Estimate $estimate, $status = '', $original_status = '' ) {
 		do_action( 'si_new_record', 
-			sprintf( si__('Status changed: %s to <b>%s</b>.'), ucfirst( str_replace( 'publish', self::__('Pending'), $original_status ) ), ucfirst( str_replace( 'publish', self::__('Pending'), $status ) ) ), 
+			sprintf( si__('Status changed: %s to <b>%s</b>.'), SI_Estimate::get_status_label( $original_status ), SI_Estimate::get_status_label( $status ) ), 
 			self::HISTORY_STATUS_UPDATE, 
 			$estimate->get_id(), 
 			sprintf( si__('Status update for %s.'), $estimate->get_id() ), 

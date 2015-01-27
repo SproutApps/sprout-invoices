@@ -805,11 +805,7 @@ if ( !function_exists('si_payment_options') ) :
  * @param  integer $id  // FUTURE
  * @return string      
  */
-function si_payment_options( $id = 0, $return = 'options' ) {
-	if ( !$id ) {
-		global $post;
-		$id = $post->ID;
-	}
+function si_payment_options( $return = 'options' ) {
 	$enabled_processors = SI_Payment_Processors::enabled_processors();
 	if ( $return == 'options' ) {
 		$processor_options = array();
@@ -846,44 +842,14 @@ if ( !function_exists('si_get_credit_card_checkout_form_action') ) :
  * @param  integer $id  // FUTURE
  * @return string      
  */
-function si_get_credit_card_checkout_form_action( $id = 0 ) {
-	if ( !$id ) {
-		global $post;
-		$id = $post->ID;
-	}
+function si_get_credit_card_checkout_form_action() {
+	$type = '';
 	$processor = SI_Payment_Processors::get_active_credit_card_processor();
 	if ( $processor ) {
 		$type = $processor->get_slug();
 	}
 	$url = remove_query_arg( SI_Checkouts::CHECKOUT_ACTION, si_get_payment_link( 0, $type ) );
 	return apply_filters( 'si_get_credit_card_checkout_form_action', $url, $processor );
-}
-endif;
-
-if ( !function_exists('si_get_credit_card_checkout_form') ) :
-/**
- * The payment link for invoices
- * @param  integer $id  // FUTURE
- * @return string      
- */
-function si_get_credit_card_checkout_form() {
-	$form = '';
-	$processor = SI_Payment_Processors::get_active_credit_card_processor();
-	if ( $processor ) {
-		$form = $processor->credit_card_payment_form();
-	}
-	return apply_filters( 'si_get_credit_card_checkout_form', $form, $processer );
-}
-endif;
-
-if ( !function_exists('si_credit_card_checkout_form') ) :
-/**
- * The payment link for invoices
- * @param  integer $id  // FUTURE
- * @return string      
- */
-function si_credit_card_checkout_form() {
-	echo si_get_credit_card_checkout_form();
 }
 endif;
 
@@ -1060,8 +1026,6 @@ function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
 			$returned_history[ $item_id ]['content'] = $r_post->post_content;
 		}
 		elseif( get_post_type( $item_id ) == SI_Payment::POST_TYPE ) {
-			$type = si__('Payment');
-			$status_type = 'payment';
 			$payment = SI_Payment::get_instance( $item_id );
 			$p_post = $payment->get_post();
 

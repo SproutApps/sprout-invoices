@@ -95,7 +95,8 @@ class SI_WPInvoice_Import extends SI_Importer {
 	 */
 	public static function init_import_show_progress() {
 		// Store the import progress
-		$progress = get_option( self::PROGRESS_OPTION, array() );
+		get_option( self::PROGRESS_OPTION, array() );
+
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 

@@ -70,7 +70,7 @@ class SI_Help extends SI_Controller {
 	 * @param string  $selector   The HTML elements, on which the pointer should be attached.
 	 * @param array   $args       Arguments to be passed to the pointer JS (see wp-pointer.dev.js).
 	 */
-	private static function print_js( $pointer_id, $selector, $args, $close = null, $steps = null ) {
+	private static function print_js( $pointer_id, $selector, $args, $close = null ) {
 		if ( empty( $pointer_id ) || empty( $selector ) || empty( $args ) || empty( $args['content'] ) )
 			return;
 
@@ -166,20 +166,18 @@ class SI_Help extends SI_Controller {
 
 
 	public static function pointer_si_help_tab_post() {
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : FALSE;
-		if ( $post_id ) {
-			$post_type = get_post_type( $post_id );
-		} else {
-			$post_type = ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) ? $_REQUEST['post_type'] : null ;
+		if ( self::is_relevant_admin_page() ) {
+			self::pointer_si_help_tab( '_post' );
 		}
-
-		if ( !in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE ) ) ) {
-			return;
-		}
-		self::pointer_si_help_tab( '_post' );
 	}
 
 	public static function pointer_si_help_tab_edit() {
+		if ( self::is_relevant_admin_page() ) {
+			self::pointer_si_help_tab( '_edit' );
+		}
+	}
+
+	public static function is_relevant_admin_page() {
 		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : FALSE;
 		if ( $post_id ) {
 			$post_type = get_post_type( $post_id );
@@ -188,9 +186,9 @@ class SI_Help extends SI_Controller {
 		}
 
 		if ( !in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE ) ) ) {
-			return;
+			return FALSE;
 		}
-		self::pointer_si_help_tab( '_edit' );
+		return TRUE;
 	}
 
 	public static function pointer_si_help_tab_settings() {

@@ -185,7 +185,6 @@ class SI_Harvest_Import extends SI_Importer {
 	 * @return 
 	 */
 	public static function import_authentication() {
-		$auth_error = FALSE;
 		require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
 		spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
 		$api = new HarvestAPI();
@@ -218,9 +217,9 @@ class SI_Harvest_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 		
+		$total_records = 0;
 		if ( !isset( $progress['clients_complete'] ) ) {
 
-			$auth_error = FALSE;
 			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
 			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
 			$api = new HarvestAPI();
@@ -319,10 +318,10 @@ class SI_Harvest_Import extends SI_Importer {
 		$progress = get_option( self::PROGRESS_OPTION, array() );
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
-		
+			
+		$total_records = 0;
 		if ( !isset( $progress['contacts_complete'] ) ) {
 
-			$auth_error = FALSE;
 			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
 			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
 			$api = new HarvestAPI();
@@ -494,8 +493,6 @@ class SI_Harvest_Import extends SI_Importer {
 								) );
 			}
 
-
-			$auth_error = FALSE;
 			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
 			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
 			$api = new HarvestAPI();
