@@ -147,6 +147,13 @@ function sa_get_currency_symbol( $filter_location = TRUE ) {
 	if ( $filter_location && strstr( $string, '%' ) ) {
 		$string = str_replace( '%', '', $string );
 	}
+	// If no position is set add it.
+	if ( !$filter_location && !strstr( $string, '%' )) {
+		$locale_formatting = si_localeconv();
+		if ( !$locale_formatting['p_cs_precedes'] ) {
+			$string . '%';
+		}
+	}
 	return apply_filters( 'sa_get_currency_symbol', $string );
 }
 
@@ -178,32 +185,13 @@ function sa_formatted_money( $amount, $amount_wrap = '<span class="money_amount"
  * @param integer $amount amount to convert to money format
  * @return string         
  */
-function sa_get_formatted_money( $amount, $amount_wrap = '%s', $locale = '' ) {
+function sa_get_formatted_money( $amount, $amount_wrap = '%s' ) {
 	$orig_amount = $amount;
 
-	if ( $locale == '' ) {
-		$locale = get_locale();
-	}
-	// Format the amount and wrap
-	setlocale( LC_MONETARY, apply_filters( 'sa_set_monetary_locale', $locale ) ); // de_DE && nl_NL && en_US - get_locale()
-	
-	$formated_money = money_format( '%!n', (double) $amount );
+	$formated_money = si_money_format( '%n', (double) $amount );
 	$number = sprintf( $amount_wrap, $formated_money );
-
-	// Add symbol
-	$symbol = sa_get_currency_symbol( FALSE );
-	if ( strstr( $symbol, '%' ) ) {
-		$string = str_replace( '%', $number, $symbol );
-	} else {
-		$string = $symbol . $number;
-	}
-
-	// negative value placement
-	if ( $number < 0 ) {
-		$string = '-'.str_replace( '-', '', $string );
-	}
 	
-	return apply_filters( 'sa_get_formatted_money', $string, $orig_amount );
+	return apply_filters( 'sa_get_formatted_money', $number, $orig_amount, $amount_wrap );
 }
 
 if ( !function_exists( 'sa_get_unformatted_money' ) ) :
@@ -390,22 +378,37 @@ function si_get_purchase_link( $url = '' ) {
 
 if ( !function_exists('si_localeconv') ) :
 function si_localeconv( ) {
-	$locale = apply_filters( 'sa_set_monetary_locale', get_locale() );
+	$locale = apply_filters( 'sa_set_monetary_locale', get_locale().'.utf8' );
 	setlocale( LC_MONETARY, apply_filters( 'sa_set_monetary_locale', $locale ) );
+
+	// Set some symbols automatically.
+	if ( isset( $locale['int_curr_symbol'] ) ) {
+		switch ( $locale['int_curr_symbol'] ) {
+			case 'AUS':
+			case 'GBP':
+				$locale['currency_symbol'] = '£';
+				break;
+			case 'EUR':
+				$locale['currency_symbol'] = '€';
+				break;
+			
+			default:
+				break;
+		}
+	}
 	$locale = (function_exists( 'localeconv' )) ? localeconv() : array() ;
 	return apply_filters( 'si_localeconv', $locale );
 }
 endif;
 
-if ( !function_exists('money_format') ) :
+if ( !function_exists('si_money_format') ) :
 /**
- * Replacement for php money_format function not found on windows systems
- * http://php.net/manual/en/function.money-format.php#89060
+ * Replacement for php money_format function
  * @param  string $format 
  * @param  float $number 
  * @return          
  */
-function money_format( $format, $number )  { 
+function si_money_format( $format, $number )  { 
 	$regex  = '/%((?:[\^!\-]|\+|\(|\=.)*)([0-9]+)?'. 
 			  '(?:#([0-9]+))?(?:\.([0-9]+))?([in%])/'; 
 	$locale = si_localeconv(); 

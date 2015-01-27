@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.0.2**
+
+* CHANGE: Improving automatic money formatting for non-US currencies
+
 **4.0**
 
 * NEW: Client Dashboards
