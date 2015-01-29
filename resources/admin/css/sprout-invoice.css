@@ -427,7 +427,7 @@ table.sa_table {
 }
 
 img.footer_sa_logo {
-	min-width: 40%;
+	width: 40%;
 	float: none !important;
 	margin-left: 30% !important;
 	margin-top: 30px !important;
@@ -1711,6 +1711,34 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 	line-height: 1px;
 	float: left;
 	margin-top: -.3em;
+}
+
+
+.activate_message {
+	margin: 25px 0;
+	padding: 1px 12px;
+	background-color: #fff;
+	border-top: 4px solid #8CBA52;
+	border-bottom: 4px solid #8CBA52;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+.activate_message .icon-sproutapps-flat {
+	font-size: 3em;
+	line-height: 1px;
+	float: left;
+	margin-top: -.3em;
+}
+.activation_msg h4 {
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.wp-core-ui .activate_message button.button-large {
+	font-size: 1em;
+	padding: 10px 12px;
+	line-height: 24px;
+	height: 48px;
 }
 
 dd .add_item_help {

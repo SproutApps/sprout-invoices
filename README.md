@@ -90,6 +90,17 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.1**
+
+* NEW: Allow to clean up notifications, which is a fix from a bug in an older version.
+* CHANGE: Updates to the free version.
+
+**4.0.3**
+
+* CHANGE: Again...improving automatic money formatting for non-US currencies
+* FIX: Translation fix
+* FIXES: Misc. minor code updates
+
 **4.0.2**
 
 * CHANGE: Improving automatic money formatting for non-US currencies

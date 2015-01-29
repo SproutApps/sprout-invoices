@@ -4,16 +4,33 @@
 
 	<div class="about-text"><?php printf( self::__( 'The future of <a href="%s">Sprout Invoices</a> relies on happy customers supporting Sprout Apps by purchasing upgraded versions. If you like this free version of Sprout Invoices please consider <a href="%s">purchasing an upgrade</a>.' ), self::PLUGIN_URL, si_get_purchase_link() ); ?></div>
 
-	<!--<div class="upgrade_message clearfix"><p><strong>Upgrade Discount Available:</strong> Write a <a href="https://wordpress.org/support/view/plugin-reviews/sprout-invoices">plugin review</a> about this free version and <a href="https://sproutapps.co/sprout-invoices/sprout-invoices-discount-code/">send us the link</a>.</p></div>-->
-
-	<div class="upgrade_message clearfix"><p><strong>New Years Party!</strong> We're having a (month long) New Years party and you're all invited.</p><p><a href="https://sproutapps.co/news/new-years-party/?ref=free" class="button">Sprout Invoices Discounts</a></p></div>
-
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 
 	<div class="welcome_content clearfix">
 		<div class="license-overview">
+
+			<?php if ( SI_Free_License::license_status() == FALSE ): ?>
+				<div class="activate_message clearfix">
+					<div class="activation_msg clearfix">
+						 <h4><?php self::_e('Get a free Sprout Apps license instantly...') ?></h4>
+					</div>
+					<div class="activation_inputs clearfix">
+						<input type="text" name="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" id="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" value="<?php echo SI_Free_License::license_key() ?>" class="fat-input <?php echo 'license_'.SI_Free_License::license_status() ?>" size="40" class="text-input" placeholder="<?php self::_e('Enter your email.') ?>">
+							<button id="free_license" class="button button-primary button-large"><?php self::_e('Get License') ?></button>
+						<div id="license_message" class="clearfix"></div>
+					</div>
+
+					<div class="activation_msg clearfix">
+						<?php self::_e('A free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key for your free version of Sprout Invoices.') ?></p>
+					</div>
+				</div>
+			<?php endif ?>
+
+			<!--<div class="upgrade_message clearfix"><p><strong>Upgrade Discount Available:</strong> Write a <a href="https://wordpress.org/support/view/plugin-reviews/sprout-invoices">plugin review</a> about this free version and <a href="https://sproutapps.co/sprout-invoices/sprout-invoices-discount-code/">send us the link</a>.</p></div>-->
+
+			<div class="upgrade_message clearfix"><p><strong>Consider Upgrading this New Years!</strong> We're having a New Years party, join your friends and colleges, and purchase a discounted upgrade.</p><p><a href="<?php si_purchase_link() ?>" class="button">Sprout Invoices Discounts</a></p></div>
 
 			<h2 class="headline_callout"><?php self::_e('The Sprout Invoices Flow') ?></h2>
 
@@ -83,7 +100,7 @@
 				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
 
 				<h4><?php self::_e( 'I need help! Where is the support?' ); ?></h4>
-				<p><?php printf( self::__( "We want to make sure using Sprout Invoices is enjoyable and not a hassle. Sprout Apps has some pretty awesome <a href='%s'>support</a> and a budding <a href='%s'>knowledgebase</a> (for paid members) that will help you get anything resolved. Support and documentation is limited for this free version." ), self::PLUGIN_URL.'/support/', self::PLUGIN_URL.'/support/knowledgebase/' ); ?></p>
+				<p><?php printf( self::__( "We want to make sure using Sprout Invoices is enjoyable and not a hassle. Sprout Apps has some pretty awesome <a href='%s'>support</a> and a budding <a href='%s'>knowledgebase</a> that will help you get anything resolved. Support and documentation is limited for this free version." ), self::PLUGIN_URL.'/support/', self::PLUGIN_URL.'/support/knowledgebase/' ); ?></p>
 
 				<p><?php printf( "<a href='https://sproutapps.co/support/' target='_blank' class='button'>%s</a>", self::__('Support') ); ?>&nbsp;<?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
 

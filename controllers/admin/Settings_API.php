@@ -445,7 +445,7 @@ class SA_Settings_API extends SI_Controller {
 				return;
 			
 			// unserialize
-			wp_parse_str( $_POST['options'], array() );
+			wp_parse_str( $_POST['options'], $options );
 			// Confirm the form was an update
 			if ( isset( $options['action'] ) && $options['action'] == 'update' ) {
 				$option_page = ( isset( $options['option_page'] ) ) ? $options['option_page'] : 'general' ;

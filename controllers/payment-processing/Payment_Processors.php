@@ -24,11 +24,14 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		// always load all enabled processors on admin pages
 		if ( is_admin() ) {
 			self::load_enabled_processors();
+			// store option after locale can be loaded.
+			add_filter( 'shutdown',  array( __CLASS__, 'store_format_option' ) );
 		}
 
 		// Settings
 		self::$currency_symbol = get_option( self::CURRENCY_SYMBOL_OPTION, '$' );
 		self::$money_format = get_option( self::MONEY_FORMAT_OPTION, '%0.2f' );
+		
 		self::register_payment_settings();
 
 		// Help Sections
@@ -43,6 +46,12 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		// js
 		add_filter( 'si_admin_scripts_localization',  array( __CLASS__, 'add_currency_options' ) );
+	}
+
+	public static function store_format_option() {
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'sprout-apps/settings' ) {
+			update_option( self::MONEY_FORMAT_OPTION, sa_get_formatted_money( rand( 11000, 9999999 ) ) );
+		}
 	}
 
 	/**
@@ -157,7 +166,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 						'label' => self::__( 'Money Format' ),
 						'option' => array(
 							'type' => 'bypass',
-							'output' => sa_get_formatted_money( rand( 11000, 9999999 ) ),
+							'output' => get_option( self::MONEY_FORMAT_OPTION ),
 							'description' => sprintf( self::__( 'Money formatting is based on the local (%s) this WordPress install was configured with during installation. Please review the Sprout Invoices knowledgebase if this needs to be changed.' ), '<code>'.get_locale().'</code>' )
 						)
 					)

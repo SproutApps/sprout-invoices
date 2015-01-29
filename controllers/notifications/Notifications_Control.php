@@ -53,6 +53,12 @@ class SI_Notifications_Control extends SI_Controller {
 		// Help Sections
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
 
+
+		if ( is_admin() ) {
+			add_action( 'init', array( get_class(), 'maybe_refresh_notifications' ) );
+		}
+
+
 	}
 
 	////////////
@@ -759,11 +765,46 @@ class SI_Notifications_Control extends SI_Controller {
 					'content' => sprintf( '<p><b>HTML Emails</b> - Enable HTML notifications within the <a href="%s">General Settings</a> page. Make sure to change use HTML on all notifications.</p>', admin_url('admin.php?page=sprout-apps/settings') ),
 				) );
 
+			
+			$screen->add_help_tab( array(
+					'id' => 'notification-refresh',
+					'title' => self::__( 'Notifications Cleanup' ),
+					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.'), add_query_arg( array( 'refresh-notifications' => 1 ) ), si__('Clean') )
+				) );
+
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
 				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/', self::__('Documentation') ) .
 				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
 			);
+		}
+	}
+
+	///////////
+	// Misc //
+	///////////
+
+	public static function maybe_refresh_notifications() {
+		if ( !is_admin() ) {
+			return;
+		}
+		if ( !current_user_can('delete_posts') ) {
+			return;
+		}
+		if ( isset( $_GET['refresh-notifications'] ) && $_GET['refresh-notifications'] ) { // If dev than don't cache.
+			$active_notifications = get_option( self::NOTIFICATIONS_OPTION_NAME );
+
+			$args = array(
+				'post_type' => SI_Notification::POST_TYPE,
+				'posts_per_page' => -1,
+				'exclude' => array_values($active_notifications),
+				'fields' => 'ids'
+			);
+			$posts = get_posts( $args );
+
+			foreach ( $posts as $post_id ) {
+				wp_delete_post( $post_id, TRUE );
+			}
 		}
 	}
 

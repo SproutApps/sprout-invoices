@@ -70,6 +70,34 @@ jQuery(function($) {
 		);
 	});
 
+
+	/**
+	 * License Activation
+	 */
+	$('#free_license').on('click', function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		var $button = $( this ),
+			$license_key = $('#si_license_key').val(),
+			$license_message = $('#license_message');
+
+		$button.hide();
+		$button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$.post( ajaxurl, { action: 'si_get_license', license: $license_key, security: si_js_object.security },
+			function( data ) {
+				$('.spinner').hide();
+				if ( data.error ) {
+					$button.show();
+					$license_message.html('<span class="inline_error_message">' + data.response + '</span>');
+				}
+				else {
+					$('#si_license_key').val(data.license);
+					$license_message.html('<span class="inline_success_message">' + data.response + '</span>');
+				}
+			}
+		);
+	});
+
 	/**
 	 * License Activation
 	 */

@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 4.0.2
+Stable tag: 4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,17 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Client dashboards and HTML notifications
 
 == Changelog ==
+
+= 4.1 =
+
+* NEW: Allow to clean up notifications, which is a fix from a bug in an older version.
+* CHANGE: Updates to the free version.
+
+= 4.0.3 =
+
+* CHANGE: Again...improving automatic money formatting for non-US currencies
+* FIX: Translation fix
+* FIXES: Misc. minor code updates
 
 = 4.0.2 =
 

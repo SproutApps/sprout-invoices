@@ -133,6 +133,9 @@ function sprout_invoices_load() {
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) {
 		require_once SI_PATH.'/controllers/updates/Updates.php';
 	}
+	if ( file_exists( SI_PATH.'/controllers/updates/Free_License.php' ) ) {
+		require_once SI_PATH.'/controllers/updates/Free_License.php';
+	}
 
 	// importers
 	require_once SI_PATH.'/importers/Importer.php';
@@ -187,6 +190,9 @@ function sprout_invoices_load() {
 	// updates
 	if ( !SI_FREE_TEST && class_exists( 'SI_Updates' ) ) {
 		SI_Updates::init();
+	}
+	if ( class_exists( 'SI_Free_License' ) ) {
+		SI_Free_License::init();
 	}
 	
 	// api
