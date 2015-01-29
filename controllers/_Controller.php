@@ -811,12 +811,12 @@ abstract class SI_Controller extends Sprout_Invoices {
 		wp_register_script( 'select2', SI_URL . '/resources/admin/plugins/select2/select2.min.js', array( 'jquery' ), false, false );
 
 		// qtip plugin
-		wp_enqueue_style( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.css', null, false, false );
-		wp_enqueue_script( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.js', array('jquery'), false, true );
+		wp_register_style( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.css', null, false, false );
+		wp_register_script( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.js', array('jquery'), false, true );
 
 		// dropdown plugin
-		wp_enqueue_style( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.css', null, false, false );
-		wp_enqueue_script( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.min.js', array('jquery'), false, true );
+		wp_register_style( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.css', null, false, false );
+		wp_register_script( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.min.js', array('jquery'), false, true );
 
 		// Templates
 		wp_register_script( 'sprout_doc_scripts', SI_URL . '/resources/front-end/js/sprout-invoices.js', array( 'jquery', 'qtip' ), self::SI_VERSION );
@@ -891,6 +891,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'redactor' => false
 		);
 
+		// doc admin templates
 		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
 		if ( ( isset( $_GET['post_type'] ) && ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == $_GET['post_type'] ) || ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == get_post_type( $post_id ) ) {
 			
@@ -903,6 +904,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 			wp_enqueue_script( 'nestable' );
 			wp_enqueue_script( 'sticky' );
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
+
+			// dropdowns
+			wp_enqueue_style( 'dropdown' );
+			wp_enqueue_script( 'dropdown' );
 
 			// add doc info
 			$si_js_object += array(

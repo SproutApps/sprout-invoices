@@ -90,8 +90,9 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
-**4.1.1**
+**4.1.2**
 
+* FIX: Compatibility fix with some plugins, namely Visual Composer
 * FIX: Fixing bad build with white screen of death. Sorry! Seriously! Sorry!
 
 **4.1**
