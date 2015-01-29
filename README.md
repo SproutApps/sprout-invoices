@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.1.1**
+
+* FIX: Fixing bad build with white screen of death. Sorry! Seriously! Sorry!
+
 **4.1**
 
 * NEW: Allow to clean up notifications, which is a fix from a bug in an older version.
