@@ -19,14 +19,11 @@
 			listClass: 'items_list',
 			itemClass: 'item',
 			expandBtnHTML: '<button data-action="expand" type="button"></button>',
-			collapseBtnHTML: '<button data-action="collapse" type="button"></button>',
-			callback: function(l,e){
-				// l is the main container
-				// e is the element that was moved
-				modify_input_key();
-				handle_parents();
-				calculate_totals();
-			}
+			collapseBtnHTML: '<button data-action="collapse" type="button"></button>'
+		}).on( 'change', function(e) {
+			modify_input_key();
+			handle_parents();
+			calculate_totals();
 		});
 
 		// sticky header
@@ -609,6 +606,7 @@
 		$('ol.items_list').each(function(i, ol) {
 			ol = $(ol);
 			level1 = ol.closest('li').index() + 1;
+
 			ol.children('li').each(function(i, li) {
 				li = $(li);
 				$index = ( level1 === 0 ) ? li.index() + 1 : level1 + '.' + (li.index() + 1);

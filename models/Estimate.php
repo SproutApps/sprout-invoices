@@ -337,7 +337,7 @@ class SI_Estimate extends SI_Post_Type {
 	 * PO number
 	 */
 	public function get_po_number() {
-		return (int)$this->get_post_meta( self::$meta_keys['po'] );
+		return $this->get_post_meta( self::$meta_keys['po'] );
 	}
 
 	public function set_po_number( $po_number = 0 ) {
@@ -373,7 +373,7 @@ class SI_Estimate extends SI_Post_Type {
 	 * discount
 	 */
 	public function get_discount() {
-		return (int)$this->get_post_meta( self::$meta_keys['discount'] );
+		return (float)$this->get_post_meta( self::$meta_keys['discount'] );
 	}
 
 	public function set_discount( $discount = 0 ) {
@@ -387,7 +387,7 @@ class SI_Estimate extends SI_Post_Type {
 	 * Tax
 	 */
 	public function get_tax() {
-		return (int)$this->get_post_meta( self::$meta_keys['tax'] );
+		return $this->get_post_meta( self::$meta_keys['tax'] );
 	}
 
 	public function set_tax( $tax = 0 ) {
@@ -398,7 +398,7 @@ class SI_Estimate extends SI_Post_Type {
 	}
 
 	public function get_tax_total() {
-		$tax = $this->get_tax();
+		$tax = (float)$this->get_tax();
 		$subtotal = $this->get_subtotal();
 		$calculated_total = floatval( $subtotal * ( $tax / 100 ) );
 		return round( $calculated_total, 2 );
@@ -408,7 +408,7 @@ class SI_Estimate extends SI_Post_Type {
 	 * Tax
 	 */
 	public function get_tax2() {
-		return (int)$this->get_post_meta( self::$meta_keys['tax2'] );
+		return (float)$this->get_post_meta( self::$meta_keys['tax2'] );
 	}
 
 	public function set_tax2( $tax = 0 ) {

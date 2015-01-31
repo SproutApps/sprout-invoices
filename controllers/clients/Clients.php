@@ -624,6 +624,7 @@ class SI_Clients extends SI_Controller {
 			'description' => self::__( 'This setting will override the setting for each payment processor that supports differing currency codes.' )
 		);
 
+		/*/
 		$fields['currency_symbol'] = array(
 			'weight' => 225,
 			'label' => self::__( 'Currency Symbol' ),
@@ -634,6 +635,7 @@ class SI_Clients extends SI_Controller {
 			'attributes' => array( 'class' => 'small-text' ),
 			'description' => self::__( 'This setting will override the default payments setting. If your currency has the symbol after the amount place a % before your currency symbol. Example, % &pound;' )
 		);
+		/**/
 
 		$money_format = ( $client ) ? $client->get_money_format() : get_locale();
 		$fields['money_format'] = array(

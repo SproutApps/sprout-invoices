@@ -90,6 +90,15 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.2**
+
+* FIX: Fix for nested items
+* IMPROVEMENT: Nesting items UX/UI
+* CHANGE: localeconv() defaults so money is always formated
+* IMPROVEMENT: Compatibility with Visual Composer and other plugins
+* CHANGE: Remove Client currency code option, never used.
+* CHANGE: Taxes are floats not integers
+
 **4.1.2**
 
 * FIX: Compatibility fix with some plugins, namely Visual Composer

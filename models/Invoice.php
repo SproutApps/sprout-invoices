@@ -413,7 +413,7 @@ class SI_Invoice extends SI_Post_Type {
 	 * discount
 	 */
 	public function get_discount() {
-		return (int)$this->get_post_meta( self::$meta_keys['discount'] );
+		return (float)$this->get_post_meta( self::$meta_keys['discount'] );
 	}
 
 	public function set_discount( $discount = 0 ) {
@@ -427,7 +427,7 @@ class SI_Invoice extends SI_Post_Type {
 	 * Shipping
 	 */
 	public function get_shipping() {
-		return (int)$this->get_post_meta( self::$meta_keys['shipping'] );
+		return (float)$this->get_post_meta( self::$meta_keys['shipping'] );
 	}
 
 	public function set_shipping( $shipping = 0 ) {
@@ -441,7 +441,7 @@ class SI_Invoice extends SI_Post_Type {
 	 * Tax
 	 */
 	public function get_tax() {
-		return (int)$this->get_post_meta( self::$meta_keys['tax'] );
+		return (float)$this->get_post_meta( self::$meta_keys['tax'] );
 	}
 
 	public function set_tax( $tax = 0 ) {
@@ -462,7 +462,7 @@ class SI_Invoice extends SI_Post_Type {
 	 * Tax
 	 */
 	public function get_tax2() {
-		return (int)$this->get_post_meta( self::$meta_keys['tax2'] );
+		return (float)$this->get_post_meta( self::$meta_keys['tax2'] );
 	}
 
 	public function set_tax2( $tax = 0 ) {

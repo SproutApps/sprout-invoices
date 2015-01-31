@@ -155,13 +155,6 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 								</dl>
 							<?php endif ?>
 
-							<?php if ( si_get_invoice_expiration_date() ): ?>
-								<dl class="date">
-									<dt><span class="dt_heading"><?php si_e('Expiration Date') ?></span></dt>
-									<dd><?php si_invoice_expiration_date() ?></dd>
-								</dl>
-							<?php endif ?>
-
 							<?php do_action( 'si_document_details_totals' ) ?>
 
 							<?php if ( si_has_invoice_deposit() ): ?>

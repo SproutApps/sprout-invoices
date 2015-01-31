@@ -893,7 +893,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 		// doc admin templates
 		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
-		if ( ( isset( $_GET['post_type'] ) && ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == $_GET['post_type'] ) || ( SI_Estimate::POST_TYPE || SI_Invoice::POST_TYPE ) == get_post_type( $post_id ) ) {
+		if ( 
+			isset( $_GET['post_type'] ) && 
+			( SI_Estimate::POST_TYPE == $_GET['post_type'] || SI_Invoice::POST_TYPE == $_GET['post_type'] ) || 
+			( SI_Estimate::POST_TYPE == get_post_type( $post_id ) || SI_Invoice::POST_TYPE == get_post_type( $post_id ) ) 
+			) {
 			
 			if ( !SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
 				$si_js_object['redactor'] = true;
@@ -1280,6 +1284,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( !defined('DONOTCACHEPAGE') ) {
 			define('DONOTCACHEPAGE', TRUE);
 		}
+		nocache_headers();
 	}
 
 	/**

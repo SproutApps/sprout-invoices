@@ -393,24 +393,46 @@ if ( !function_exists('si_localeconv') ) :
 function si_localeconv( ) {
 	$locale = apply_filters( 'sa_set_monetary_locale', get_locale() );
 	setlocale( LC_MONETARY, $locale );
+	$localeconv = (function_exists( 'localeconv' )) ? localeconv() : array() ;
+
+	// Set a default if localeconv doesn't exist.
+	$localeconv = array(
+		'decimal_point' => '.',
+		'thousands_sep' => '',
+		'int_curr_symbol' => 'USD',
+		'currency_symbol' => '$',
+		'mon_decimal_point' => '.',
+		'mon_thousands_sep' =>  ',',
+		'positive_sign' => '',
+		'negative_sign' => '-',
+		'int_frac_digits' => 2,
+		'frac_digits' => 2,
+		'p_cs_precedes' => 1,
+		'p_sep_by_space' => 0,
+		'n_cs_precedes' => 1,
+		'n_sep_by_space' => 0,
+		'p_sign_posn' => 1,
+		'n_sign_posn' => 1,
+		'grouping' => array(),
+		'mon_grouping' => array( 3, 3 ),
+	);
 
 	// Set some symbols automatically.
-	if ( isset( $locale['int_curr_symbol'] ) ) {
-		switch ( $locale['int_curr_symbol'] ) {
+	if ( isset( $localeconv['int_curr_symbol'] ) ) {
+		switch ( $localeconv['int_curr_symbol'] ) {
 			case 'AUS':
 			case 'GBP':
-				$locale['currency_symbol'] = '£';
+				$localeconv['currency_symbol'] = '£';
 				break;
 			case 'EUR':
-				$locale['currency_symbol'] = '€';
+				$localeconv['currency_symbol'] = '€';
 				break;
 			
 			default:
 				break;
 		}
 	}
-	$locale = (function_exists( 'localeconv' )) ? localeconv() : array() ;
-	return apply_filters( 'si_localeconv', $locale );
+	return apply_filters( 'si_localeconv', $localeconv );
 }
 endif;
 

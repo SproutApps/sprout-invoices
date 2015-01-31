@@ -118,9 +118,7 @@
 										var $container = jQuery(container);
 
 										can.attr('width', $container.width()); //max width
-										can.attr('height', $container.height()); //max height                   
-
-										console.log(inv_data);
+										can.attr('height', $container.height()); //max height
 
 										var chart = new Chart(ctx).Line(inv_data, {
 												responsive: true,
@@ -354,7 +352,6 @@
 											security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 											},
 											function( data ) {
-												console.log(data);
 												est_inv_totals_data = {
 													labels: data.labels,
 													datasets: [

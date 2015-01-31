@@ -1609,6 +1609,10 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 @media only print {
 
+	#wpadminbar {
+		display: none;
+	}
+
 	#doc_line_items_wrap, #doc_line_items {
 		display: inline;
 	}

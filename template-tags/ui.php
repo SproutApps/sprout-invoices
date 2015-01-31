@@ -174,7 +174,7 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 			</div><!-- / item_action_column -->
 			<div class="column column_rate">
 				<?php if ( empty( $children ) ): ?>
-					<?php esc_attr_e( $rate ) ?>
+					<?php esc_attr_e( sa_get_formatted_money( $rate ) ) ?>
 				<?php endif ?>
 			</div><!-- / column_rate -->
 			<div class="column column_qty">
