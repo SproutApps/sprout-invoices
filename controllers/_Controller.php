@@ -919,8 +919,17 @@ abstract class SI_Controller extends Sprout_Invoices {
 			);
 		}
 
-		if ( ( isset( $_GET['post_type'] ) && SI_Client::POST_TYPE == $_GET['post_type'] ) || SI_Client::POST_TYPE == get_post_type( $post_id ) ) {
-			// only clients admin
+		if ( 
+			isset( $_GET['post_type'] ) && 
+			SI_Client::POST_TYPE == $_GET['post_type'] || 
+			SI_Client::POST_TYPE == get_post_type( $post_id )
+			) {
+			
+			wp_enqueue_script( 'si_admin_est_and_invoices' );
+
+			// dropdowns
+			wp_enqueue_style( 'dropdown' );
+			wp_enqueue_script( 'dropdown' );
 		}
 
 		wp_enqueue_script( 'qtip' );

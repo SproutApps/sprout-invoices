@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.2.1**
+
+* FIX: JS issues on client management page.
+
 **4.2**
 
 * FIX: Fix for nested items
