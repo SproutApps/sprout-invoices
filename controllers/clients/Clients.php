@@ -53,7 +53,7 @@ class SI_Clients extends SI_Controller {
 
 		// Currency Formatting
 		add_filter( 'sa_get_currency_symbol_pre', array( __CLASS__, 'maybe_filter_currency_symbol' ) );
-		add_filter( 'sa_set_monetary_locale', array( __CLASS__, 'maybe_filter_money_format_money_format' ) );
+		add_filter( 'sa_set_monetary_locale', array( __CLASS__, 'maybe_filter_money_format_money_format' ), 10, 2 );
 		
 		// Currency Code Change
 		add_filter( 'si_currency_code', array( get_class(), 'maybe_change_currency_code' ), 10, 2 );
@@ -719,17 +719,20 @@ class SI_Clients extends SI_Controller {
 		return $symbol;
 	}
 
-	public static function maybe_filter_money_format_money_format( $money_format = '' ) {
-		switch ( get_post_type( get_the_id() ) ) {
+	public static function maybe_filter_money_format_money_format( $money_format = '', $doc_id = 0 ) {
+		if ( !$doc_id ) {
+			$doc_id = get_the_ID();
+		}
+		switch ( get_post_type( $doc_id ) ) {
 			case SI_Client::POST_TYPE:
-				$client = SI_Client::get_instance( get_the_id() );
+				$client = SI_Client::get_instance( $doc_id );
 				break;
 			case SI_Invoice::POST_TYPE:
-				$invoice = SI_Invoice::get_instance( get_the_id() );
+				$invoice = SI_Invoice::get_instance( $doc_id );
 				$client = $invoice->get_client();
 				break;
 			case SI_Estimate::POST_TYPE:
-				$estimate = SI_Estimate::get_instance( get_the_id() );
+				$estimate = SI_Estimate::get_instance( $doc_id );
 				$client = $estimate->get_client();
 				break;
 			

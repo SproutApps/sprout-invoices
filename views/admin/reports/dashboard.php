@@ -69,25 +69,12 @@
 								<?php endif ?>
 
 								<?php 
-									$args = array(
-										'post_type' => SI_Invoice::POST_TYPE,
-										'post_status' => array( SI_Invoice::STATUS_PARTIAL, SI_Invoice::STATUS_PENDING ),
-										'posts_per_page' => 3,
-										'fields' => 'ids',
-										'meta_query' => array(
-												array(
-													'meta_key' => '_due_date',
-													'value' => array( 0, current_time( 'timestamp' ) ),
-													'compare' => 'BETWEEN'
-													)
-											)
-										);
-									$invoices = new WP_Query( $args ); ?>
+									$invoices = SI_Invoice::get_overdue_invoices(); ?>
 
-								<?php if ( !empty( $invoices->posts ) ): ?>
+								<?php if ( !empty( $invoices ) ): ?>
 									<b><?php self::_e('Overdue &amp; Unpaid') ?></b> 
 									<ul>
-										<?php foreach ( $invoices->posts as $invoice_id ): ?>
+										<?php foreach ( $invoices as $invoice_id ): ?>
 											<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php printf( self::__('Due: %s'), date_i18n( get_option('date_format'), si_get_invoice_due_date( $invoice_id ) ) ) ?></li>
 										<?php endforeach ?>
 									</ul>

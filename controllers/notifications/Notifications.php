@@ -55,7 +55,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_estimate' => array(
 					'name' => self::__( 'Estimate Available' ),
 					'description' => self::__( 'Customize the estimate email that is sent to selected recipients.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_total', 'estimate_subtotal', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Your Estimate is Available' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/estimate', NULL )
 				),
@@ -63,7 +63,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_invoice' => array(
 					'name' => self::__( 'Invoice Available' ),
 					'description' => self::__( 'Customize the invoice email that is sent to selected recipients.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Your Invoice is Available' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/invoice', NULL )
 				),
@@ -71,7 +71,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'deposit_payment' => array(
 					'name' => self::__( 'Deposit Payment Received' ),
 					'description' => self::__( 'Customize the payment email that is sent to the client recipients when a deposit is made.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Deposit Received' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', NULL ),
 					'always_disabled' => TRUE
@@ -79,14 +79,14 @@ class SI_Notifications extends SI_Notifications_Control {
 				'final_payment' => array(
 					'name' => self::__( 'Invoice Paid' ),
 					'description' => self::__( 'Customize the email sent to the client recipients when the final payment for an invoice is made.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Thank You' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-final', NULL )
 				),
 				'reminder_payment' => array(
 					'name' => self::__( 'Payment Reminder' ),
 					'description' => self::__( 'Customize the email that is sent to the client recipients in order to remind them that their payment is overdue.' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number','invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Invoice Payment Overdue' ),  get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-reminder', NULL ),
 					'always_disabled' => TRUE
@@ -197,6 +197,18 @@ class SI_Notifications extends SI_Notifications_Control {
 						'description' => self::__( 'Used to display the invoice po number.' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_invoice_po_number' )
 					),
+				'invoice_tax_total' => array(
+						'description' => self::__( 'Used to display the invoice tax total.' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax_total' )
+					),
+				'invoice_tax' => array(
+						'description' => self::__( 'Used to display the invoice tax.' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax' )
+					),
+				'invoice_tax2' => array(
+						'description' => self::__( 'Used to display the invoice tax (2).' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax2' )
+					),
 				'invoice_total' => array(
 						'description' => self::__( 'Used to display the invoice total.' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total' )
@@ -260,6 +272,18 @@ class SI_Notifications extends SI_Notifications_Control {
 				'estimate_subtotal' => array(
 						'description' => self::__( 'Used to display the estimate total.' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_estimate_subtotal' )
+					),
+				'estimate_tax_total' => array(
+						'description' => self::__( 'Used to display the estimate tax total.' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax_total' )
+					),
+				'estimate_tax' => array(
+						'description' => self::__( 'Used to display the estimate tax.' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax' )
+					),
+				'estimate_tax2' => array(
+						'description' => self::__( 'Used to display the estimate tax (2).' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax2' )
 					),
 				'lead_entries' => array(
 						'description' => self::__( 'Used to display the lead entries in HTML.' ),
@@ -534,7 +558,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_payment_total( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['payment'] ) ) {
-			$amount = sa_get_formatted_money( $data['payment']->get_amount() );
+			$amount = sa_get_formatted_money( $data['payment']->get_amount(), $data['payment']->get_id() );
 		}
 		return apply_filters( 'shortcode_payment_total', $amount, $data );
 	}
@@ -565,12 +589,15 @@ class SI_Notifications extends SI_Notifications_Control {
 	 * @return string          filtered
 	 */
 	public static function shortcode_line_item_table( $atts, $content, $code, $data ) {
+		$doc_id = 0;
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$line_items = $data['invoice']->get_line_items();
+			$doc_id = $data['invoice']->get_id();
 		}
 		else {
 			if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$line_items = $data['estimate']->get_line_items();
+				$doc_id = $data['estimate']->get_id();
 			}
 		}
 		if ( empty( $line_items ) ) {
@@ -596,7 +623,7 @@ class SI_Notifications extends SI_Notifications_Control {
 							<td><?php esc_attr_e( $ldata['rate'] ) ?></td>
 							<td><?php esc_attr_e( $ldata['qty'] ) ?></td>
 							<td><?php esc_attr_e( $ldata['tax'] ) ?>%</td>
-							<td><?php sa_formatted_money( $ldata['total'] ) ?></td>
+							<td><?php sa_formatted_money( $ldata['total'], $doc_id ) ?></td>
 						</tr>
 					<?php endforeach ?>
 				</tbody>
@@ -616,12 +643,15 @@ class SI_Notifications extends SI_Notifications_Control {
 	 * @return string          filtered
 	 */
 	public static function shortcode_line_item_plain_list( $atts, $content, $code, $data ) {
+		$doc_id = 0;
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$line_items = $data['invoice']->get_line_items();
+			$doc_id = $data['invoice']->get_id();
 		}
 		else {
 			if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$line_items = $data['estimate']->get_line_items();
+				$doc_id = $data['estimate']->get_id();
 			}
 		}
 		if ( empty( $line_items ) ) {
@@ -635,11 +665,11 @@ class SI_Notifications extends SI_Notifications_Control {
 						$children = si_line_item_get_children( $position, $line_items ); ?>
 					<?php 
 						// build single item
-						echo "\n\n* " . si_line_item_build_plain( $position, $line_items, $children ) ?>
+						echo "\n\n* " . si_line_item_build_plain( $position, $line_items, $children, $doc_id ) ?>
 
 					<?php if ( !empty( $children ) ): // if has children, loop and show ?>
 						<?php foreach ( $children as $child_position ): ?>
-							<?php echo "\n** " . si_line_item_build_plain( $child_position, $line_items ) ?>
+							<?php echo "\n** " . si_line_item_build_plain( $child_position, $line_items, array(), $doc_id ) ?>
 						<?php endforeach ?>
 					<?php endif ?>
 				<?php endif ?>
@@ -848,6 +878,60 @@ class SI_Notifications extends SI_Notifications_Control {
 	}
 
 	/**
+	 * Return the invoice tax total
+	 * 
+	 * @param  array $atts    
+	 * @param  string $content 
+	 * @param  string $code    
+	 * @param  array $data    
+	 * @return string          filtered
+	 */
+	public static function shortcode_invoice_tax_total( $atts, $content, $code, $data ) {
+		$amount = sa_get_formatted_money(0);
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			$tax_total = $data['invoice']->get_tax_total() + $data['invoice']->get_tax2_total();
+			$amount = sa_get_formatted_money( $tax_total, $data['invoice']->get_id() );
+		}
+		return apply_filters( 'shortcode_invoice_tax_total', $amount, $data );
+	}
+
+
+	/**
+	 * Return the invoice tax
+	 * 
+	 * @param  array $atts    
+	 * @param  string $content 
+	 * @param  string $code    
+	 * @param  array $data    
+	 * @return string          filtered
+	 */
+	public static function shortcode_invoice_tax( $atts, $content, $code, $data ) {
+		$amount = sa_get_formatted_money(0);
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			$amount = sa_get_formatted_money( $data['invoice']->get_tax_total(), $data['invoice']->get_id() );
+		}
+		return apply_filters( 'shortcode_invoice_tax', $amount, $data );
+	}
+
+
+	/**
+	 * Return the invoice tax 2
+	 * 
+	 * @param  array $atts    
+	 * @param  string $content 
+	 * @param  string $code    
+	 * @param  array $data    
+	 * @return string          filtered
+	 */
+	public static function shortcode_invoice_tax2( $atts, $content, $code, $data ) {
+		$amount = sa_get_formatted_money(0);
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			$amount = sa_get_formatted_money( $data['invoice']->get_tax2_total(), $data['invoice']->get_id() );
+		}
+		return apply_filters( 'shortcode_invoice_tax', $amount, $data );
+	}
+
+	/**
 	 * Return the invoice total
 	 * 
 	 * @param  array $atts    
@@ -857,9 +941,9 @@ class SI_Notifications extends SI_Notifications_Control {
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_total( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$amount = sa_get_formatted_money( $data['invoice']->get_total() );
+			$amount = sa_get_formatted_money( $data['invoice']->get_total(), $data['invoice']->get_ID() );
 		}
 		return apply_filters( 'shortcode_invoice_total', $amount, $data );
 	}
@@ -876,7 +960,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_invoice_calculated_total( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$amount = sa_get_formatted_money( $data['invoice']->get_calculated_total() );
+			$amount = sa_get_formatted_money( $data['invoice']->get_calculated_total(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_invoice_calculated_total', $amount, $data );
 	}
@@ -893,7 +977,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_invoice_subtotal( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$amount = sa_get_formatted_money( $data['invoice']->get_subtotal() );
+			$amount = sa_get_formatted_money( $data['invoice']->get_subtotal(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_invoice_subtotal', $amount, $data );
 	}
@@ -910,7 +994,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_invoice_total_due( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$amount = sa_get_formatted_money( $data['invoice']->get_balance() );
+			$amount = sa_get_formatted_money( $data['invoice']->get_balance(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_invoice_total_due', $amount, $data );
 	}
@@ -927,7 +1011,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_invoice_deposit_amount( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$amount = sa_get_formatted_money( $data['invoice']->get_deposit() );
+			$amount = sa_get_formatted_money( $data['invoice']->get_deposit(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_invoice_deposit_amount', $amount, $data );
 	}
@@ -944,7 +1028,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_invoice_total_payments( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$amount = sa_get_formatted_money( $data['invoice']->get_payments_total() );
+			$amount = sa_get_formatted_money( $data['invoice']->get_payments_total(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_invoice_total_payments', $amount, $data );
 	}
@@ -1100,6 +1184,60 @@ class SI_Notifications extends SI_Notifications_Control {
 	}
 
 	/**
+	 * Return the estimate tax total
+	 * 
+	 * @param  array $atts    
+	 * @param  string $content 
+	 * @param  string $code    
+	 * @param  array $data    
+	 * @return string          filtered
+	 */
+	public static function shortcode_estimate_tax_total( $atts, $content, $code, $data ) {
+		$amount = sa_get_formatted_money(0);
+		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			$tax_total = $data['estimate']->get_tax_total() + $data['estimate']->get_tax2_total();
+			$amount = sa_get_formatted_money( $tax_total, $data['estimate']->get_id() );
+		}
+		return apply_filters( 'shortcode_estimate_tax_total', $amount, $data );
+	}
+
+
+	/**
+	 * Return the estimate tax
+	 * 
+	 * @param  array $atts    
+	 * @param  string $content 
+	 * @param  string $code    
+	 * @param  array $data    
+	 * @return string          filtered
+	 */
+	public static function shortcode_estimate_tax( $atts, $content, $code, $data ) {
+		$amount = sa_get_formatted_money(0);
+		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			$amount = sa_get_formatted_money( $data['estimate']->get_tax_total(), $data['estimate']->get_id() );
+		}
+		return apply_filters( 'shortcode_estimate_tax', $amount, $data );
+	}
+
+
+	/**
+	 * Return the estimate tax 2
+	 * 
+	 * @param  array $atts    
+	 * @param  string $content 
+	 * @param  string $code    
+	 * @param  array $data    
+	 * @return string          filtered
+	 */
+	public static function shortcode_estimate_tax2( $atts, $content, $code, $data ) {
+		$amount = sa_get_formatted_money(0);
+		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			$amount = sa_get_formatted_money( $data['estimate']->get_tax2_total(), $data['estimate']->get_id() );
+		}
+		return apply_filters( 'shortcode_estimate_tax', $amount, $data );
+	}
+
+	/**
 	 * Return the estimate total
 	 * 
 	 * @param  array $atts    
@@ -1111,7 +1249,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_estimate_total( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
-			$amount = sa_get_formatted_money( $data['estimate']->get_total() );
+			$amount = sa_get_formatted_money( $data['estimate']->get_total(), $data['estimate']->get_id() );
 		}
 		return apply_filters( 'shortcode_estimate_total', $amount, $data );
 	}
@@ -1128,7 +1266,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_estimate_subtotal( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
-			$amount = sa_get_formatted_money( $data['estimate']->get_subtotal() );
+			$amount = sa_get_formatted_money( $data['estimate']->get_subtotal(), $data['estimate']->get_id() );
 		}
 		return apply_filters( 'shortcode_estimate_subtotal', $amount, $data );
 	}

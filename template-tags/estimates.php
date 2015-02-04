@@ -551,7 +551,7 @@ function si_estimate_total( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_estimate_total', sa_get_formatted_money( si_get_estimate_total($id) ), $id );
+	echo apply_filters( 'si_estimate_total', sa_get_formatted_money( si_get_estimate_total($id), $id ), $id );
 }
 endif;
 
@@ -583,7 +583,7 @@ function si_estimate_subtotal( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_estimate_subtotal', sa_get_formatted_money( si_get_estimate_subtotal($id) ), $id );
+	echo apply_filters( 'si_estimate_subtotal', sa_get_formatted_money( si_get_estimate_subtotal($id), $id ), $id );
 }
 endif;
 

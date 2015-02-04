@@ -9,18 +9,21 @@
 class SI_Admin_Settings extends SI_Controller {
 	const WELCOME_SETTINGS_SLUG = 'welcome';
 	const ADDRESS_OPTION = 'si_address';
+	const CURRENCY_FORMAT_OPTION = 'si_localeconv_setting';
 	const COUNTRIES_OPTION = 'si_countries_filter';
 	const STATES_OPTION = 'si_states_filter';
 	const MENU_ID = 'si_menu';
 	protected static $address;
 	protected static $option_countries;
 	protected static $option_states;
+	protected static $localeconv_options;
 
 	public static function init() {
 		// Store options
 		self::$address = get_option( self::ADDRESS_OPTION, FALSE );
 		self::$option_countries = get_option( self::COUNTRIES_OPTION, FALSE );
 		self::$option_states = get_option( self::STATES_OPTION, FALSE );
+		self::$localeconv_options = get_option( self::CURRENCY_FORMAT_OPTION, si_localeconv( 0, false ) );
 		
 		// Register Settings
 		self::register_settings();
@@ -37,6 +40,11 @@ class SI_Admin_Settings extends SI_Controller {
 		// Admin bar
 		add_action( 'admin_bar_menu', array( get_class(), 'sa_admin_bar' ), 62 );
 
+		add_filter( 'si_localeconv', array( __CLASS__, 'localeconv_options' ), 0 );
+	}
+
+	public static function localeconv_options() {
+		return self::$localeconv_options;
 	}
 
 
@@ -86,6 +94,19 @@ class SI_Admin_Settings extends SI_Controller {
 						'label' => NULL,
 						'option' => array( __CLASS__, 'display_address_fields' ),
 						'sanitize_callback' => array( __CLASS__, 'save_address' )
+					),
+				)
+			),
+			'si_currency_settings' => array(
+				'title' => self::__('Currency Formatting'),
+				'weight' => 250,
+				'tab' => 'settings',
+				'callback' => array( __CLASS__, 'display_currency_section' ),
+				'settings' => array(
+					self::CURRENCY_FORMAT_OPTION => array(
+						'label' => NULL,
+						'option' => array( __CLASS__, 'display_currency_locale_fields' ),
+						'sanitize_callback' => array( __CLASS__, 'save_currency_locale' )
 					),
 				)
 			),
@@ -197,7 +218,7 @@ class SI_Admin_Settings extends SI_Controller {
 	}
 
 	public static function display_address_fields() {
-		echo '<div id="client_fields" class="admin_fields clearfix">';
+		echo '<div id="client_fields" class="split admin_fields clearfix">';
 		sa_admin_fields( self::address_form_fields( FALSE ) );
 		echo '</div>';
 	}
@@ -254,6 +275,142 @@ class SI_Admin_Settings extends SI_Controller {
 		return self::$address;
 	}
 
+
+	///////////////////////
+	// Currency options //
+	///////////////////////
+
+	public static function display_currency_section() {
+		printf( self::__( '<p>Manually set your currency formatting. More information about these settings and using a filter can be found in the <a href="%s">documentation</a>.</p>' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/troubleshooting/troubleshooting-moneycurrency-issues/' );
+	}
+
+	public static function display_currency_locale_fields() {
+		$localeconv = self::$localeconv_options;
+
+		$fields['int_curr_symbol'] = array(
+			'weight' => 1,
+			'label' => self::__( 'International Currency Symbol' ),
+			'type' => 'text',
+			'default' => ( isset( $localeconv['int_curr_symbol'] ) ) ? $localeconv['int_curr_symbol'] : '',
+			'description' => self::__( 'U.S. default is <code>USD</code>' )
+		);
+		$fields['currency_symbol'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Currency Symbol' ),
+			'type' => 'text',
+			'default' => ( isset( $localeconv['currency_symbol'] ) ) ? $localeconv['currency_symbol'] : '',
+			'description' => self::__( 'U.S. default is <code>$</code>' )
+		);
+		$fields['mon_decimal_point'] = array(
+			'weight' => 5,
+			'label' => self::__( 'Decimal Point' ),
+			'type' => 'text',
+			'default' => ( isset( $localeconv['mon_decimal_point'] ) ) ? $localeconv['mon_decimal_point'] : '.',
+			'description' => self::__( 'U.S. default is <code>.</code>' )
+		);
+		$fields['mon_thousands_sep'] = array(
+			'weight' => 10,
+			'label' => self::__( 'Thousands Separator' ),
+			'type' => 'text',
+			'default' => ( isset( $localeconv['mon_thousands_sep'] ) ) ? $localeconv['mon_thousands_sep'] : ',',
+			'description' => self::__( 'U.S. default is <code>,</code>' )
+		);
+		$fields['positive_sign'] = array(
+			'weight' => 15,
+			'label' => self::__( 'Positive Sign' ),
+			'type' => 'text',
+			'default' => ( isset( $localeconv['positive_sign'] ) ) ? $localeconv['positive_sign'] : '',
+			'description' => self::__( 'U.S. default is blank' )
+		);
+		$fields['negative_sign'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Negative Sign' ),
+			'type' => 'text',
+			'default' => ( isset( $localeconv['negative_sign'] ) ) ? $localeconv['negative_sign'] : '',
+			'description' => self::__( 'U.S. default is <code>-</code>' )
+		);
+		$fields['int_frac_digits'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Fraction Digits' ),
+			'type' => 'text',
+			'default' => ( isset( $localeconv['int_frac_digits'] ) ) ? $localeconv['int_frac_digits'] : '',
+			'description' => self::__( 'U.S. default is <code>2</code>' )
+		);
+		$fields['mon_grouping'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Money Grouping' ),
+			'type' => 'checkbox',
+			'type' => 'text',
+			'default' => ( !empty( $localeconv['mon_grouping'] ) ) ? implode( ',', $localeconv['mon_grouping'] ) : '3, 3',
+			'description' => self::__( 'U.S. default is <code>3, 3</code>' )
+		);
+		$fields['p_cs_precedes'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Currency Symbol Precedes (Positive)' ),
+			'type' => 'checkbox',
+			'value' => '1',
+			'default' => ( isset( $localeconv['p_cs_precedes'] ) ) ? $localeconv['p_cs_precedes'] : 1,
+			'description' => self::__( 'U.S. default is checked.' )
+		);
+		$fields['p_sep_by_space'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Space Separation (Positive)' ),
+			'type' => 'checkbox',
+			'value' => '1',
+			'default' => ( isset( $localeconv['p_sep_by_space'] ) ) ? $localeconv['p_sep_by_space'] : 0,
+			'description' => self::__( 'U.S. default is unchecked.' )
+		);
+		$fields['p_sign_posn'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Positive Position' ),
+			'type' => 'checkbox',
+			'value' => '1',
+			'default' => ( isset( $localeconv['p_sign_posn'] ) ) ? $localeconv['p_sign_posn'] : 1,
+			'description' => self::__( 'U.S. default is checked.' )
+		);
+		$fields['n_cs_precedes'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Currency Symbol Precedes (Negative)' ),
+			'type' => 'checkbox',
+			'value' => '1',
+			'default' => ( isset( $localeconv['n_cs_precedes'] ) ) ? $localeconv['n_cs_precedes'] : 1,
+			'description' => self::__( 'U.S. default is checked.' )
+		);
+		$fields['n_sep_by_space'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Space Separation (Negative)' ),
+			'type' => 'checkbox',
+			'value' => '1',
+			'default' => ( isset( $localeconv['n_sep_by_space'] ) ) ? $localeconv['n_sep_by_space'] : 0,
+			'description' => self::__( 'U.S. default is unchecked.' )
+		);
+		$fields['n_sign_posn'] = array(
+			'weight' => 1,
+			'label' => self::__( 'Positive Position' ),
+			'type' => 'checkbox',
+			'value' => '1',
+			'default' => ( isset( $localeconv['n_sign_posn'] ) ) ? $localeconv['n_sign_posn'] : 1,
+			'description' => self::__( 'U.S. default is checked.' )
+		);
+		echo '<div id="currency_fields" class="split admin_fields clearfix">';
+		sa_admin_fields( $fields );
+		echo '</div>';
+	}
+
+	 public static function save_currency_locale( $locale = array() ) {
+	 	$localeconv = array();
+	 	$lc = si_localeconv( 0, false );
+	 	foreach ( $lc as $key => $default ) {
+	 		$localeconv[$key] = isset( $_POST['sa_metabox_'.$key] ) ? $_POST['sa_metabox_'.$key] : '';
+	 	}
+	 	if ( isset( $_POST['sa_metabox_mon_grouping'] ) ) {
+	 		$mon_grouping = explode( ',', $_POST['sa_metabox_mon_grouping'] );
+	 		if ( is_array( $mon_grouping ) ) {
+		 		$localeconv['mon_grouping'] = array_map( 'trim', $mon_grouping );
+	 		}
+	 	}
+		return $localeconv;
+	 }
 
 	////////////////////////////////
 	// State and Country Settings //

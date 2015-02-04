@@ -1447,6 +1447,26 @@ dt span.creation_event:before {
 	width: 440px
 }
 
+.split.admin_fields {
+	margin-left: -200px;
+}
+.split.admin_fields .form-group {
+	display: inline-block;
+	float: left;
+	clear: right;
+	width: 45%
+}
+.split.admin_fields .checkbox.input_wrap {
+	margin-left: 40px;
+	width: 45%;
+}
+.split.admin_fields .input_wrap {
+	width: 45%
+}
+#currency_fields.split.admin_fields .input_wrap input.text-input {
+	width: 3em
+}
+
 #client_create_form .sa-control-group,
 #user_create_form .sa-control-group {
 	display: inline-block;

@@ -814,7 +814,7 @@ class SI_Estimates extends SI_Controller {
 			break;
 
 		case 'total':
-			printf( '<span class="estimate_total">%s</span>', sa_get_formatted_money( $estimate->get_total() ) );
+			printf( '<span class="estimate_total">%s</span>', sa_get_formatted_money( $estimate->get_total(), $estimate->get_id() ) );
 			break;
 
 		case 'client':

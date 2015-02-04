@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 4.2.1
+Stable tag: 4.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,16 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Client dashboards and HTML notifications
 
 == Changelog ==
+
+= 4.3.1 =
+
+* FIX: Expiration dates not displaying
+* NEW: Currency formating options
+* FIX: Client dashboard updates
+* FIX: Custom currency for clients and notifications
+* NEW: Tax shortcodes
+* NEW: Added si_client_dashboard_page_id filter
+* FIX: Newly created invoices from a recurring schedule will have it's due date and issue date set
 
 = 4.2.1 =
 

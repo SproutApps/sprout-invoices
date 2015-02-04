@@ -130,8 +130,8 @@ class SI_Payments_Table extends WP_List_Table {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 			if ( is_a( $invoice, 'SI_Invoice' ) ) {
 				echo '<strong>'.si__( 'Payment Total' ).':</strong> '.sa_get_formatted_money( $payment->get_amount() ).'<br/>';
-				echo '<em>'.si__( 'Invoice Balance' ).': '.sa_get_formatted_money( $invoice->get_balance() ).'</em><br/>';
-				echo '<em>'.si__( 'Invoice Total' ).': '.sa_get_formatted_money( $invoice->get_total() ).'</em>';
+				echo '<em>'.si__( 'Invoice Balance' ).': '.sa_get_formatted_money( $invoice->get_balance(), $invoice->get_id() ).'</em><br/>';
+				echo '<em>'.si__( 'Invoice Total' ).': '.sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ).'</em>';
 			}
 			else {
 				si_e('No invoice found');

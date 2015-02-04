@@ -663,7 +663,7 @@ class SI_Invoices extends SI_Controller {
 			break;
 
 		case 'total':
-			printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), self::__('of'), sa_get_formatted_money( $invoice->get_total() ) );
+			printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), self::__('of'), sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ) );
 
 			echo '<div class="row-actions">';
 			printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', self::__( 'Review payments.' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, self::__( 'Payments' ) );

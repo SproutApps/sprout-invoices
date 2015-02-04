@@ -90,6 +90,16 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.3.1**
+
+* FIX: Expiration dates not displaying
+* NEW: Currency formating options
+* FIX: Client dashboard updates
+* FIX: Custom currency for clients and notifications
+* NEW: Tax shortcodes
+* NEW: Added si_client_dashboard_page_id filter
+* FIX: Newly created invoices from a recurring schedule will have it's due date and issue date set
+
 **4.2.1**
 
 * FIX: JS issues on client management page.

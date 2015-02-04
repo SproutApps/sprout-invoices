@@ -200,7 +200,7 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 }
 
 
-function si_line_item_build_plain( $position = 1.0, $items = array(), $children = array() ) {
+function si_line_item_build_plain( $position = 1.0, $items = array(), $children = array(), $doc_id = 0 ) {
 	$data = $items[$position];
 	
 	$has_percentage_adj = FALSE;
@@ -231,7 +231,7 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
   <?php si_e('Adjustment:') ?> <?php esc_attr_e( $data['tax'] ) ?>%
 <?php endif ?>
 <?php endif ?>
-  <?php si_e('Total:') ?> <?php sa_formatted_money( $total, '%s' ) ?>
+  <?php si_e('Total:') ?> <?php sa_formatted_money( $total, $doc_id, '%s' ) ?>
 	<?php
 	$data = ob_get_contents();
 	ob_end_clean();

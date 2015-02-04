@@ -171,27 +171,34 @@ function sa_currency_format_before() {
 }
 
 /**
- * Print an amount as formatted money.
- * @see sa_get_formatted_money()
- * @param integer $amount amount to convert to money format
- * @return string
+ * Prints the amount as formatted money. Place symbol based on location.
+ * @param  integer  $amount      amount to convert
+ * @param  string  $amount_wrap strintf
+ * @param  integer $doc_id      used for filtering
+ * @return string               
  */
-function sa_formatted_money( $amount, $amount_wrap = '<span class="money_amount">%s</span>' ) {
-	echo apply_filters( 'sa_formatted_money', sa_get_formatted_money( $amount, $amount_wrap ), $amount );
+function sa_formatted_money( $amount, $doc_id = 0, $amount_wrap = '<span class="money_amount">%s</span>' ) {
+	echo apply_filters( 'sa_formatted_money', sa_get_formatted_money( $amount, $doc_id, $amount_wrap ), $amount, $doc_id );
 }
 
 /**
  * Return an amount as formatted money. Place symbol based on location.
- * @param integer $amount amount to convert to money format
- * @return string        
+ * @param  integer  $amount      amount to convert
+ * @param  string  $amount_wrap strintf
+ * @param  integer $doc_id      used for filtering
+ * @return integer               
  */
-function sa_get_formatted_money( $amount, $amount_wrap = '%s' ) {
+function sa_get_formatted_money( $amount, $doc_id = 0, $amount_wrap = '%s' ) {
+	if ( strpos( $doc_id, '%s' ) !== false ) {
+		$amount_wrap = $doc_id; // flip parameters for backwards compatibility.
+		$doc_id = 0;
+	}
 	$orig_amount = $amount;
 
-	$formated_money = si_money_format( '%n', (double) $amount );
+	$formated_money = si_money_format( '%n', (double) $amount, $doc_id );
 	$number = sprintf( $amount_wrap, $formated_money );
 	
-	return apply_filters( 'sa_get_formatted_money', $number, $orig_amount, $amount_wrap );
+	return apply_filters( 'sa_get_formatted_money', $number, $orig_amount, $doc_id, $amount_wrap );
 }
 
 if ( !function_exists( 'sa_get_unformatted_money' ) ) :
@@ -217,13 +224,13 @@ endif;
 
 /**
  * Convert string to a number format
+ * Not recommended, instead use number_format_i18n.
  * @param integer $value         number to format
  * @param string  $dec_point     Decimal
  * @param string  $thousands_sep Thousand separator
  * @return string                
  */
 function si_get_number_format( $value = 1, $dec_point = '.' , $thousands_sep = '' ) {
-	// TODO possibly use number_format_i18n.
 	$fraction = ( is_null($dec_point) || !$dec_point ) ? 0 : 2 ;
 	return apply_filters( 'si_get_number_format', number_format( floatval( $value ), $fraction, $dec_point, $thousands_sep ) );
 }
@@ -390,16 +397,25 @@ function si_get_sa_link( $url = '' ) {
 
 
 if ( !function_exists('si_localeconv') ) :
-function si_localeconv( ) {
-	$locale = apply_filters( 'sa_set_monetary_locale', get_locale() );
+function si_localeconv( $doc_id = 0, $filtered = TRUE ) {
+	
+	$locale = apply_filters( 'sa_set_monetary_locale', get_locale(), $doc_id );
+	
+	if ( $filtered ) {
+		$localeconv = apply_filters( 'si_localeconv', array(), $locale );
+		if ( !empty( $localeconv ) && $localeconv['int_curr_symbol'] != '' ) {
+			return $localeconv;
+		}
+	}
+
 	setlocale( LC_MONETARY, $locale );
 	$localeconv = (function_exists( 'localeconv' )) ? localeconv() : array() ;
-
+	
 	// Set a default if localeconv doesn't exist.
-	if ( empty( $localeconv ) ) {
+	if ( empty( $localeconv ) || $localeconv['int_curr_symbol'] == '' ) {
 		$localeconv = array(
 			'decimal_point' => '.',
-			'thousands_sep' => '',
+			'thousands_sep' => ',',
 			'int_curr_symbol' => 'USD',
 			'currency_symbol' => '$',
 			'mon_decimal_point' => '.',
@@ -433,7 +449,7 @@ function si_localeconv( ) {
 				break;
 		}
 	}
-	return apply_filters( 'si_localeconv', $localeconv );
+	return $localeconv;
 }
 endif;
 
@@ -444,10 +460,10 @@ if ( !function_exists('si_money_format') ) :
  * @param  float $number
  * @return         
  */
-function si_money_format( $format, $number )  {
+function si_money_format( $format, $number, $doc_id = 0 )  {
 	$regex  = '/%((?:[\^!\-]|\+|\(|\=.)*)([0-9]+)?'.
 			  '(?:#([0-9]+))?(?:\.([0-9]+))?([in%])/';
-	$locale = si_localeconv();
+	$locale = si_localeconv( $doc_id );
 
 	if ( empty( $locale['mon_grouping'] ) ) {
 		return $number;

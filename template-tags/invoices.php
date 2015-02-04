@@ -179,7 +179,7 @@ function si_get_invoice_due_date( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$invoice = SI_Invoice::get_instance( $id );
-	return apply_filters( 'si_get_invoice_due_date', $invoice->get_expiration_date(), $invoice );
+	return apply_filters( 'si_get_invoice_due_date', $invoice->get_due_date(), $invoice );
 }
 endif;
 
@@ -483,7 +483,7 @@ function si_invoice_payments_total( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_invoice_payments_total', sa_get_formatted_money( si_get_invoice_payments_total($id) ), $id );
+	echo apply_filters( 'si_invoice_payments_total', sa_get_formatted_money( si_get_invoice_payments_total($id), $id ), $id );
 }
 endif;
 
@@ -517,7 +517,7 @@ function si_invoice_balance( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_invoice_balance', sa_get_formatted_money( si_get_invoice_balance($id) ), $id );
+	echo apply_filters( 'si_invoice_balance', sa_get_formatted_money( si_get_invoice_balance($id), $id ), $id );
 }
 endif;
 
@@ -548,7 +548,7 @@ function si_invoice_calculated_total( $id = 0 ) {
 		global $post;
 		$id = $post->ID;
 	}
-	echo apply_filters( 'si_invoice_calculated_total', sa_get_formatted_money( si_get_invoice_calculated_total($id) ), $id );
+	echo apply_filters( 'si_invoice_calculated_total', sa_get_formatted_money( si_get_invoice_calculated_total($id), $id ), $id );
 }
 endif;
 
@@ -1036,7 +1036,7 @@ function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
 
 			$returned_history[ $item_id ]['content'] = '';
 			$returned_history[ $item_id ]['content'] .= '<span>'.$payment->get_payment_method().'</span><br/>';
-			$returned_history[ $item_id ]['content'] .= '<b>'.si__( 'Payment Total' ).':</b> '.sa_get_formatted_money( $payment->get_amount() );
+			$returned_history[ $item_id ]['content'] .= '<b>'.si__( 'Payment Total' ).':</b> '.sa_get_formatted_money( $payment->get_amount(), $item_id );
 		}
 	}
 
