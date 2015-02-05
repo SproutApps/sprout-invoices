@@ -90,6 +90,12 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.3.2**
+
+* IMPROVEMENT: Auto updates
+* UPDATE: PO updates
+* FIX: Better handling of client dashboard page id caching
+
 **4.3.1**
 
 * FIX: Expiration dates not displaying

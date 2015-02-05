@@ -258,6 +258,7 @@ function sprout_invoices_load() {
 
 	// addons
 	require_once SI_PATH.'/add-ons/Addons.php';
+	require_once SI_PATH.'/add-ons/updates/edd_plugin_updater.class.php';
 	SA_Addons::init();
 	
 	do_action( 'sprout_invoices_loaded' );
