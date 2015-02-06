@@ -32,7 +32,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 			<div id="doc_header_wrap" class="sticky_header">
 				<header id="header_title">
-					<span class="header_id"><?php printf( 'Estimate %s', si_get_estimate_id() ) ?></span>
+					<span class="header_id"><?php printf( si__('Estimate %s'), si_get_estimate_id() ) ?></span>
 					<div id="doc_actions">
 						<?php do_action( 'si_doc_actions_pre' ) ?>
 						<?php if ( !si_is_estimate_approved() ): ?>
@@ -205,7 +205,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 									<?php endif ?>
 
 									<div id="line_total">
-										<b title="Total includes discounts and other fees." class="helptip"><?php si_e('Total') ?></b>
+										<b title="<?php si_e('Total includes discounts and other fees.') ?>" class="helptip"><?php si_e('Total') ?></b>
 										<?php sa_formatted_money( si_get_estimate_total() ) ?>
 									</div>
 								</div>

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sprout Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-04 07:50-0800\n"
-"PO-Revision-Date: 2015-02-04 07:50-0800\n"
+"POT-Creation-Date: 2015-02-06 09:24-0800\n"
+"PO-Revision-Date: 2015-02-06 09:24-0800\n"
 "Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
 "Language-Team: Sprout Venture <l18n@sproutapps.co>\n"
 "Language: en_US\n"
@@ -64,11 +64,11 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:235
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:230
 msgid "Error: No Dashboard Found (code: 002)."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:343
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:348
 msgid "Client Dashboard (auto generated)"
 msgstr ""
 
@@ -150,7 +150,7 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:100
 #, php-format
-msgid "<b>%s Payment:</b> %s"
+msgid "<b>%s:</b> %s"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:109
@@ -435,6 +435,29 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-tracker.php:7
 msgid "Log Time"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:176
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:183
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
+"\">update now</a>."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:328
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:328
+msgid "Error"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:832
@@ -2985,15 +3008,15 @@ msgstr ""
 msgid "License not created."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:68
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:69
 msgid "Sprout Invoices Activation"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:74
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:75
 msgid "License Key"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:78
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:79
 #, php-format
 msgid ""
 "Enter your license key to enable automatic plugin updates. Find your license "
@@ -3001,36 +3024,36 @@ msgid ""
 "\">Downloads</a> section."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:92
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:95
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:93
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:96
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:23
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:26
 msgid "Activate License"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:93
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:94
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard-premium.php:24
 msgid "Deactivate License"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:161
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:209
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:162
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:210
 msgid "Thank you for supporting the future of Sprout Invoices."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:161
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:162
 msgid "License is not active."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:185
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:186
 msgid "License is deactivated."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:185
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:186
 msgid "Something went wrong. Contact support for help."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:209
+#: plugins/sprout-invoices-pro/controllers/updates/Updates.php:210
 msgid "License is not valid."
 msgstr ""
 
@@ -5054,6 +5077,11 @@ msgstr ""
 msgid "Submit Order"
 msgstr ""
 
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:35
+#, php-format
+msgid "Estimate %s"
+msgstr ""
+
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:39
 msgid "Accept Estimate"
 msgstr ""
@@ -5077,6 +5105,16 @@ msgstr ""
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:202
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:239
 msgid "Taxes"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:208
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:244
+msgid "Total includes discounts and other fees."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:40
+#, php-format
+msgid "Invoice %s"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:44
