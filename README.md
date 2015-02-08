@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.3.3**
+
+* FIX: Estimate Accept/Decline not working on some setups.
+* IMPROVEMENT: Improved security on estimates.
+* IMPROVEMENT: Re-worked currency formatting again.
+* FIX: Strict Standard notice fixes.
+* UPDATE: PO Updates.
+
 **4.3.2**
 
 * IMPROVEMENT: Auto updates

@@ -18,7 +18,7 @@ class SI_Help extends SI_Controller {
 		add_filter( 'admin_footer_text', array( __CLASS__, 'please_rate_si' ), 1, 2 );
 	}
 
-	function please_rate_si( $footer_text ) {
+	public static function please_rate_si( $footer_text ) {
 		if (
 			( isset( $_GET['page'] ) && $_GET['page'] == 'sprout-apps/settings' ) ||
 			( isset( $_GET['post_type'] ) && in_array( $_GET['post_type'], array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE ) ) )

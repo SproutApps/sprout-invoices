@@ -397,59 +397,35 @@ function si_get_sa_link( $url = '' ) {
 
 
 if ( !function_exists('si_localeconv') ) :
-function si_localeconv( $doc_id = 0, $filtered = TRUE ) {
-	
-	$locale = apply_filters( 'sa_set_monetary_locale', get_locale(), $doc_id );
-	
-	if ( $filtered ) {
-		$localeconv = apply_filters( 'si_localeconv', array(), $locale );
-		if ( !empty( $localeconv ) && $localeconv['int_curr_symbol'] != '' ) {
-			return $localeconv;
+function si_localeconv( $doc_id = 0 ) {
+	$localeconv = array();
+	// Allow locale to be filtered, e.g. client
+	$locale = apply_filters( 'sa_set_monetary_locale', FALSE, $doc_id );
+	if ( $locale !== FALSE ) {
+		// attempt to get localeconv based on local
+		setlocale( LC_MONETARY, $locale );
+		$localeconv = ( function_exists( 'localeconv' ) ) ? localeconv() : array();
+		if ( isset( $localeconv['int_curr_symbol'] ) ) {
+			switch ( $localeconv['int_curr_symbol'] ) {
+				case 'AUS':
+				case 'GBP':
+					$localeconv['currency_symbol'] = '£';
+					break;
+				case 'EUR':
+					$localeconv['currency_symbol'] = '€';
+					break;
+				
+				default:
+					break;
+			}
 		}
 	}
-
-	setlocale( LC_MONETARY, $locale );
-	$localeconv = (function_exists( 'localeconv' )) ? localeconv() : array() ;
-	
-	// Set a default if localeconv doesn't exist.
+	// if localeconv wasn't set already, from above, filter it.
+	// settings sets the defaults with this filter.
 	if ( empty( $localeconv ) || $localeconv['int_curr_symbol'] == '' ) {
-		$localeconv = array(
-			'decimal_point' => '.',
-			'thousands_sep' => ',',
-			'int_curr_symbol' => 'USD',
-			'currency_symbol' => '$',
-			'mon_decimal_point' => '.',
-			'mon_thousands_sep' =>  ',',
-			'positive_sign' => '',
-			'negative_sign' => '-',
-			'int_frac_digits' => 2,
-			'frac_digits' => 2,
-			'p_cs_precedes' => 1,
-			'p_sep_by_space' => 0,
-			'n_cs_precedes' => 1,
-			'n_sep_by_space' => 0,
-			'p_sign_posn' => 1,
-			'n_sign_posn' => 1,
-			'grouping' => array(),
-			'mon_grouping' => array( 3, 3 ),
-		);
+		$localeconv = apply_filters( 'si_localeconv', $localeconv, $locale );
 	}
-	// Set some symbols automatically.
-	if ( isset( $localeconv['int_curr_symbol'] ) ) {
-		switch ( $localeconv['int_curr_symbol'] ) {
-			case 'AUS':
-			case 'GBP':
-				$localeconv['currency_symbol'] = '£';
-				break;
-			case 'EUR':
-				$localeconv['currency_symbol'] = '€';
-				break;
-			
-			default:
-				break;
-		}
-	}
-	return $localeconv;
+	return apply_filters( 'si_get_localeconv', $localeconv, $doc_id, $locale );
 }
 endif;
 

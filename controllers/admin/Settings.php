@@ -23,7 +23,7 @@ class SI_Admin_Settings extends SI_Controller {
 		self::$address = get_option( self::ADDRESS_OPTION, FALSE );
 		self::$option_countries = get_option( self::COUNTRIES_OPTION, FALSE );
 		self::$option_states = get_option( self::STATES_OPTION, FALSE );
-		self::$localeconv_options = get_option( self::CURRENCY_FORMAT_OPTION, si_localeconv( 0, false ) );
+		self::$localeconv_options = get_option( self::CURRENCY_FORMAT_OPTION, array() );
 		
 		// Register Settings
 		self::register_settings();
@@ -44,7 +44,30 @@ class SI_Admin_Settings extends SI_Controller {
 	}
 
 	public static function localeconv_options() {
-		return self::$localeconv_options;
+		$localeconv = self::$localeconv_options;
+		if ( empty( $localeconv ) || $localeconv['int_curr_symbol'] == '' ) {
+			$localeconv = array(
+				'decimal_point' => '.',
+				'thousands_sep' => ',',
+				'int_curr_symbol' => 'USD',
+				'currency_symbol' => '$',
+				'mon_decimal_point' => '.',
+				'mon_thousands_sep' =>  ',',
+				'positive_sign' => '',
+				'negative_sign' => '-',
+				'int_frac_digits' => 2,
+				'frac_digits' => 2,
+				'p_cs_precedes' => 1,
+				'p_sep_by_space' => 0,
+				'n_cs_precedes' => 1,
+				'n_sep_by_space' => 0,
+				'p_sign_posn' => 1,
+				'n_sign_posn' => 1,
+				'grouping' => array(),
+				'mon_grouping' => array( 3, 3 ),
+			);
+		}
+		return $localeconv;
 	}
 
 
@@ -285,7 +308,7 @@ class SI_Admin_Settings extends SI_Controller {
 	}
 
 	public static function display_currency_locale_fields() {
-		$localeconv = self::$localeconv_options;
+		$localeconv = self::localeconv_options();
 
 		$fields['int_curr_symbol'] = array(
 			'weight' => 1,
@@ -399,8 +422,27 @@ class SI_Admin_Settings extends SI_Controller {
 
 	 public static function save_currency_locale( $locale = array() ) {
 	 	$localeconv = array();
-	 	$lc = si_localeconv( 0, false );
-	 	foreach ( $lc as $key => $default ) {
+	 	$lc_options = array(
+				'decimal_point' => '.',
+				'thousands_sep' => ',',
+				'int_curr_symbol' => 'USD',
+				'currency_symbol' => '$',
+				'mon_decimal_point' => '.',
+				'mon_thousands_sep' =>  ',',
+				'positive_sign' => '',
+				'negative_sign' => '-',
+				'int_frac_digits' => 2,
+				'frac_digits' => 2,
+				'p_cs_precedes' => 1,
+				'p_sep_by_space' => 0,
+				'n_cs_precedes' => 1,
+				'n_sep_by_space' => 0,
+				'p_sign_posn' => 1,
+				'n_sign_posn' => 1,
+				'grouping' => array(),
+				'mon_grouping' => array( 3, 3 ),
+			);
+	 	foreach ( $lc_options as $key => $default ) {
 	 		$localeconv[$key] = isset( $_POST['sa_metabox_'.$key] ) ? $_POST['sa_metabox_'.$key] : '';
 	 	}
 	 	if ( isset( $_POST['sa_metabox_mon_grouping'] ) ) {
