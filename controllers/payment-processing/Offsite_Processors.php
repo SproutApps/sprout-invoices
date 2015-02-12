@@ -7,15 +7,9 @@
  * @subpackage Payments
  */
 abstract class SI_Offsite_Processors extends SI_Payment_Processors {
-	// payment handler
-	const PAYMENT_HANDLER_QUERY_ARG = 'payment_handler';
-	private static $payment_handler_path = 'payment_handler';
-	private static $payment_handler = NULL;
-
 
 	protected function __construct() {
 		parent::__construct();
-		self::register_query_var( self::PAYMENT_HANDLER_QUERY_ARG, array( __CLASS__, 'handle_action' ) );
 
 		add_action( 'si_checkout_action_'.SI_Checkouts::PAYMENT_PAGE, array( $this, 'processed_payment_page' ), 20, 1 );
 	}
@@ -49,25 +43,5 @@ abstract class SI_Offsite_Processors extends SI_Payment_Processors {
 	 */
 	public static function returned_from_offsite() {
 		return FALSE;
-	}
-
-	/**
-	 * Handler action
-	 * @return  string
-	 */
-	public static function handler_url() {
-		return home_url( add_query_arg( self::PAYMENT_HANDLER_QUERY_ARG, 1 ) );		
-	}
-
-	/**
-	 * Callback from payment handler query variable.
-	 * @return  
-	 */
-	private function handle_action() {
-		self::do_not_cache();
-		if ( isset( $_GET[self::PAYMENT_HANDLER_QUERY_ARG] ) ) {
-			do_action( 'si_payment_handler_'.strtolower( $_GET[self::PAYMENT_HANDLER_QUERY_ARG] ), $this );
-		}
-		do_action( 'si_payment_handler', $_POST, $this );
 	}
 }

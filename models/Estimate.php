@@ -318,7 +318,7 @@ class SI_Estimate extends SI_Post_Type {
 	 * Estimate ID
 	 */
 	public function get_estimate_id() {
-		$id = (int)$this->get_post_meta( self::$meta_keys['estimate_id'] );
+		$id = $this->get_post_meta( self::$meta_keys['estimate_id'] );
 		if ( !$id ) {
 			$id = $this->get_id();
 			$this->set_estimate_id( $id );

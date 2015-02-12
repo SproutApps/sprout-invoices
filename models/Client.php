@@ -197,7 +197,7 @@ class SI_Client extends SI_Post_Type {
 
 	public function get_money_format() {
 		$option = $this->get_post_meta( self::$meta_keys['money_format'] );
-		return ( $option == '' ) ? get_locale() : $option ;
+		return $option;
 	}
 
 	public function set_money_format( $money_format ) {

@@ -638,6 +638,7 @@ class SI_Clients extends SI_Controller {
 		/**/
 
 		$money_format = ( $client ) ? $client->get_money_format() : get_locale();
+		$si_localeconv = si_localeconv();
 		$fields['money_format'] = array(
 			'weight' => 230,
 			'label' => self::__( 'Money Format' ),
@@ -646,7 +647,7 @@ class SI_Clients extends SI_Controller {
 			'options' => $required,
 			'options' => array_flip( self::$locales ),
 			'attributes' => array( 'class' => 'select2' ),
-			'description' => sprintf( self::__( 'Current format: %1$s. The default money formatting (%2$s) can be overridden for all client estimates and invoices here.' ), sa_get_formatted_money( rand( 11000, 9999999 ), get_the_id() ), '<code>'.get_locale().'</code>' )
+			'description' => sprintf( self::__( 'Current format: %1$s. The default money formatting (%2$s) can be overridden for all client estimates and invoices here.' ), sa_get_formatted_money( rand( 11000, 9999999 ), get_the_id() ), '<code>'.$si_localeconv['int_curr_symbol'].'</code>' )
 		);
 
 		$fields['nonce'] = array(

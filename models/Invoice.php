@@ -394,7 +394,7 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 
 	public function get_invoice_id() {
-		$id = (int)$this->get_post_meta( self::$meta_keys['invoice_id'] );
+		$id = $this->get_post_meta( self::$meta_keys['invoice_id'] );
 		if ( !$id ) {
 			$id = $this->get_id();
 			$this->set_invoice_id( $id );

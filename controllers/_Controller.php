@@ -576,6 +576,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	);
 
 	protected static $locales = array( 
+		'Default' => '',
 		'Albanian (Albania)' => 'sq_AL',
 		'Albanian' => 'sq',
 		'Arabic (Algeria)' => 'ar_DZ',
@@ -752,8 +753,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 		// Messages
 		add_action( 'init', array( __CLASS__, 'load_messages' ), 0, 0 );
-		add_action( 'loop_start', array( __CLASS__, 'do_loop_start' ), 10, 1 );
-
+		
 		// AJAX
 		add_action( 'wp_ajax_si_display_messages', array( __CLASS__, 'display_messages' ) );
 		add_action( 'wp_ajax_nopriv_si_display_messages', array( __CLASS__, 'display_messages' ) );
@@ -1197,13 +1197,6 @@ abstract class SI_Controller extends Sprout_Invoices {
 		self::save_messages();
 		if ( defined( 'DOING_AJAX' ) ) {
 			exit();
-		}
-	}
-
-	public static function do_loop_start( $query ) {
-		global $wp_query;
-		if ( $query == $wp_query ) {
-			self::display_messages();
 		}
 	}
 
