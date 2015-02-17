@@ -1038,8 +1038,9 @@ class SI_Invoices extends SI_Controller {
 	//////////////
 
 	public static function is_edit_screen() {
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
-		if ( ( isset( $_GET['post_type'] ) && SI_Invoice::POST_TYPE == $_GET['post_type'] ) || SI_Invoice::POST_TYPE == get_post_type( $post_id ) ) {
+		$screen = get_current_screen();
+		$screen_post_type = str_replace( 'edit-', '', $screen->id );
+		if ( $screen_post_type == SI_Invoice::POST_TYPE ) {
 			return TRUE;
 		}
 		return FALSE;
@@ -1084,13 +1085,9 @@ class SI_Invoices extends SI_Controller {
 
 	public static function help_tabs() {
 		$post_type = '';
-		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == SI_Invoice::POST_TYPE ) {
-			$post_type = SI_Invoice::POST_TYPE;
-		}
-		if ( $post_type == '' && isset( $_GET['post'] ) ) {
-			$post_type = get_post_type( $_GET['post'] );
-		}
-		if ( $post_type == SI_Invoice::POST_TYPE ) {
+		$screen = get_current_screen();
+		$screen_post_type = str_replace( 'edit-', '', $screen->id );
+		if ( $screen_post_type == SI_Invoice::POST_TYPE ) {
 			// get screen and add sections.
 			$screen = get_current_screen();
 

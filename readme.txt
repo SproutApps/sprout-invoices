@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 4.3.3
+Stable tag: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,48 +14,45 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 = Sprout Invoices – Premium WordPress Invoicing Plugin =
 
-Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps (aka plugins) to help us all work more efficiently & provide complete control the WordPress way. Our latest Sprout Apps are Sprout Invoices and Help Scout Desk, with many more to come.
-
->*New Years Discounts Available!* Take control of your invoicing in the new year with Sprout Invoices and take advantage of the discounts now [discounted](https://sproutapps.co/news/new-years-party/)
-
+Our mission at [Sprout Apps](https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) is to build a suite of apps (aka plugins) to help us all work more efficiently & provide complete control the WordPress way. Our latest Sprout Apps are Sprout Invoices and Help Scout Desk, with many more to come.
 
 = Sprout Invoice Features =
 
 Reduce the time spent fielding project requests, estimating projects & getting paid. Processes are heavily automated and highly customizable to fit your business workflow and brand.
 
-Make sure to review the [Sprout Invoices](https://sproutapps.co/sprout-invoices/) features page for more detailed information. As well as the full featured [demo](https://sproutapps.co/demo/playground).
+Make sure to review the [Sprout Invoices](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) features page for more detailed information. As well as the full featured [demo](https://sproutapps.co/demo/playground).
 
-* An awesome [estimate & invoice workflow](https://sproutapps.co/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/). 
-* The best [payment experience](https://sproutapps.co/news/sprout-invoices-payment-options-deposits-checks-authorizations/) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutapps.co/marketplace/paypal-payments-express-checkout/) (additional gateways available).
+* An awesome [estimate & invoice workflow](https://sproutapps.co/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org). 
+* The best [payment experience](https://sproutapps.co/news/sprout-invoices-payment-options-deposits-checks-authorizations/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutapps.co/marketplace/paypal-payments-express-checkout/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (additional gateways available).
 * Unlimited Invoices, Estimates and Clients. No restrictions!
-* Fully [customizable templates](https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/) with your own theme.
-* [Payment management](https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/).
-* [Time Tracking and Projects](https://sproutapps.co/sprout-invoices/projects-time-tracking-sprout-invoices/).
-* [Advanced Reporting](https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/) (limited w/ free version)
-* [Client management](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/).
-* [Multi-currency support with client specific options](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients-options/).
+* Fully [customizable templates](https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) with your own theme.
+* [Payment management](https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+* [Advanced Reporting](https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (limited w/ free version)
+* [Client management](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+* [Multi-currency support with client specific options](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients-options/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
 * Localization support for your language!
-* [Freshbooks, Harvest and WP-Invoice Importing](https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/).
-* Fully [customizable notifications](https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/). Notifications are sent from your server and allow for plain-text and HTML.
-* [Nested line items](https://sproutapps.co/news/feature-spotlight-nested-invoice-line-items/).
-* [Advanced records](https://sproutapps.co/support/knowledgebase/sprout-invoices/tools/) with any extra tables!
-* Includes a [customizable estimates/lead generation form](https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/).
+* [Freshbooks, Harvest and WP-Invoice Importing](https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+* Fully [customizable notifications](https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org). Notifications are sent from your server and allow for plain-text and HTML.
+* [Nested line items](https://sproutapps.co/news/feature-spotlight-nested-invoice-line-items/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+* [Advanced records](https://sproutapps.co/support/knowledgebase/sprout-invoices/tools/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) with any extra tables!
+* Includes a [customizable estimates/lead generation form](https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
 * Improved user experience with AJAX.
-* [Advanced Taxes](https://sproutapps.co/marketplace/advanced-tax-rates-hst-pst-gst-support/)
+* [Advanced Taxes](https://sproutapps.co/marketplace/advanced-tax-rates-hst-pst-gst-support/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org)
 * Client records with multiple points of contact
 * Pre-defined tasks/line-items
 * No extra database tables!
 
-Premium Features
+Pro Features
 
-* Integrates with [Gravity Forms, Ninja Forms and more](https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/) (paid add-on or premium upgrade).
-* Accept [Stripe Payments](https://sproutapps.co/marketplace/stripe-payments/) (paid add-on or premium upgrade).
-* [Deposit payments](https://sproutapps.co/news/feature-spotlight-invoice-deposits/) (premium upgrade).
-* [Recurring/Subscription Payments](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/) (premium upgrade).
-* [Recurring Invoices](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/) (premium upgrade).
-* [Client Dashboards](https://sproutapps.co/news/sprout-invoices-client-dashboard-beautiful-html-e-mails/) (premium upgrade).
+* Integrates with [Gravity Forms, Ninja Forms and more](https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (paid add-on or premium upgrade).
+* Accept [Stripe Payments](https://sproutapps.co/marketplace/stripe-payments/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (paid add-on or premium upgrade).
+* [Time Tracking and Projects](https://sproutapps.co/sprout-invoices/projects-time-tracking-sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+* [Deposit payments](https://sproutapps.co/news/feature-spotlight-invoice-deposits/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
+* [Recurring/Subscription Payments](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
+* [Recurring Invoices](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
+* [Client Dashboards](https://sproutapps.co/news/sprout-invoices-client-dashboard-beautiful-html-e-mails/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
 
-**A [fully featured upgrade](https://sproutapps.co/sprout-invoices/) and [add-on marketplace](https://sproutapps.co/marketplace/) are available.**
+**A [fully featured upgrade](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) and [add-on marketplace](https://sproutapps.co/marketplace/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) are available.**
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
@@ -101,7 +98,7 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Frequently Asked Questions ==
 
-**Please visit [Sprout Apps](https://sproutapps.co/sprout-invoices/).**
+**Please visit [Sprout Apps](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).**
 
 
 == Screenshots ==
@@ -120,6 +117,16 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Client dashboards and HTML notifications
 
 == Changelog ==
+
+= 4.4 =
+
+* IMPROVEMENT: Estimates and Invoices can have strings for IDs
+* IMPROVEMENT: Force private URL under circumstances when auto-draft is tried to use
+* IMPROVEMENT: Optimize logic for screen checking
+* IMPROVEMENT: Added client default currency formatting option
+* IMPROVEMENT: Cross compatibility with other plugins, including Visual Composer
+* FIX: Email on client dashboard error
+* UPDATE: Datatables library update
 
 = 4.3.3 =
 
@@ -512,4 +519,4 @@ Welcome! This is a big update and a big step for us.
 
 == Support ==
 
-Priority support is provided with an [upgraded version](https://sproutapps.co/sprout-invoices/). All free support will provided in the [forums](https://wordpress.org/support/plugin/sprout-invoices).
+Priority support is provided with an [upgraded version](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org). All free support will provided in the [forums](https://wordpress.org/support/plugin/sprout-invoices).

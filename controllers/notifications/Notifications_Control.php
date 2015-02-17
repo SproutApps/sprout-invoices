@@ -186,8 +186,9 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return  
 	 */
 	public static function queue_notification_js() {
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
-		if ( ( isset( $_GET['post_type'] ) && SI_Notification::POST_TYPE == $_GET['post_type'] ) || SI_Notification::POST_TYPE == get_post_type( $post_id ) ) {
+		$screen = get_current_screen();
+		$screen_post_type = str_replace( 'edit-', '', $screen->id );
+		if ( $screen_post_type == SI_Notification::POST_TYPE ) {
 			wp_register_script( 'si_admin_notifications', SI_URL . '/resources/admin/js/notification.js', array( 'jquery' ), self::SI_VERSION );
 			wp_enqueue_script( 'si_admin_notifications' );
 		}

@@ -90,6 +90,16 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.4**
+
+* IMPROVEMENT: Estimates and Invoices can have strings for IDs
+* IMPROVEMENT: Force private URL under circumstances when auto-draft is tried to use
+* IMPROVEMENT: Optimize logic for screen checking
+* IMPROVEMENT: Added client default currency formatting option
+* IMPROVEMENT: Cross compatibility with other plugins, including Visual Composer
+* FIX: Email on client dashboard error
+* UPDATE: Datatables library update
+
 **4.3.3**
 
 * FIX: Estimate Accept/Decline not working on some setups.

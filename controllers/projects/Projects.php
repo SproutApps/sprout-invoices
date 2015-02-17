@@ -54,8 +54,9 @@ class SI_Projects extends SI_Controller {
 	 * 
 	 */
 	public static function admin_enqueue() {
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
-		if ( ( isset( $_GET['post_type'] ) && SI_Project::POST_TYPE == $_GET['post_type'] ) || SI_Project::POST_TYPE == get_post_type( $post_id ) ) {
+		$screen = get_current_screen();
+		$screen_post_type = str_replace( 'edit-', '', $screen->id );
+		if ( $screen_post_type == SI_Project::POST_TYPE ) {
 			// only projects
 		}
 	}
@@ -519,13 +520,10 @@ class SI_Projects extends SI_Controller {
 
 	public static function help_tabs() {
 		$post_type = '';
-		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == SI_Project::POST_TYPE ) {
-			$post_type = SI_Project::POST_TYPE;
-		}
-		if ( $post_type == '' && isset( $_GET['post'] ) ) {
-			$post_type = get_post_type( $_GET['post'] );
-		}
-		if ( $post_type == SI_Project::POST_TYPE ) {
+
+		$screen = get_current_screen();
+		$screen_post_type = str_replace( 'edit-', '', $screen->id );
+		if ( $screen_post_type == SI_Project::POST_TYPE ) {
 			// get screen and add sections.
 			$screen = get_current_screen();
 

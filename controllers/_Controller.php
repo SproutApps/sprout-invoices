@@ -892,12 +892,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 		);
 
 		// doc admin templates
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : -1;
-		if ( 
-			isset( $_GET['post_type'] ) && 
-			( SI_Estimate::POST_TYPE == $_GET['post_type'] || SI_Invoice::POST_TYPE == $_GET['post_type'] ) || 
-			( SI_Estimate::POST_TYPE == get_post_type( $post_id ) || SI_Invoice::POST_TYPE == get_post_type( $post_id ) ) 
-			) {
+		$screen = get_current_screen();
+		$screen_post_type = str_replace( 'edit-', '', $screen->id );
+		if ( in_array( $screen_post_type, array( SI_Estimate::POST_TYPE, SI_Invoice::POST_TYPE ) ) ) {
 			
 			if ( !SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
 				$si_js_object['redactor'] = true;
@@ -919,11 +916,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			);
 		}
 
-		if ( 
-			isset( $_GET['post_type'] ) && 
-			SI_Client::POST_TYPE == $_GET['post_type'] || 
-			SI_Client::POST_TYPE == get_post_type( $post_id )
-			) {
+		if ( $screen_post_type == SI_Client::POST_TYPE ) {
 			
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
 
