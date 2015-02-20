@@ -222,7 +222,7 @@ class SI_Notifications extends SI_Notifications_Control {
 						'callback' => array( 'SI_Notifications', 'shortcode_invoice_subtotal' )
 					),
 				'invoice_total_due' => array(
-						'description' => self::__( 'Used to display the total amount due.' ),
+						'description' => self::__( 'Used to display the total amount due, or deposit if set.' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total_due' )
 					),
 				'invoice_deposit_amount' => array(

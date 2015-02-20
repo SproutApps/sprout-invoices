@@ -121,6 +121,7 @@ Client dashboards and HTML notifications
 = 4.5 =
 
 * IMPROVEMENT: UI update so other plugins wont conflict.
+* Fix: [invoice_total_due] should respect deposit amounts
 * Update: Future status
 
 = 4.4 =
