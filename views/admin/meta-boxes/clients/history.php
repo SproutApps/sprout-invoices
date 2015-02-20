@@ -51,7 +51,7 @@
 			<?php if ( $record->get_type() == SI_Notifications::RECORD ): ?>
 				<p>
 					<?php echo $r_post->post_title ?>
-					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $r_post->ID ?>" id="show_notification_tb_link_<?php echo $r_post->ID ?>" class="thickbox tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
+					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $r_post->ID ?>" id="show_notification_tb_link_<?php echo $r_post->ID ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 				</p>
 				<div id="notification_message_<?php echo $r_post->ID ?>" class="cloak">
 					<?php echo wpautop( $r_post->post_content ) ?>

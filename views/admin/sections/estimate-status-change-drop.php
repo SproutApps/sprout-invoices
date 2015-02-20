@@ -5,15 +5,15 @@
 				$status_change_span = '&nbsp;<div class="dashicons dashicons-arrow-down"></div>';
 				 ?>
 			<?php if ( $status == SI_Estimate::STATUS_PENDING ): ?>
-				<?php printf( '<button class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Pending.' ), si__('Pending'), $status_change_span ); ?>
+				<?php printf( '<button class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Pending.' ), si__('Pending'), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Estimate::STATUS_APPROVED ): ?>
-				<?php printf( '<button class="si_status complete tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Approved.' ), si__('Approved'), $status_change_span ); ?>
+				<?php printf( '<button class="si_status complete si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Approved.' ), si__('Approved'), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Estimate::STATUS_DECLINED ): ?>
-				<?php printf( '<button class="si_status declined tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Declined.' ), si__('Declined'), $status_change_span ); ?>
+				<?php printf( '<button class="si_status declined si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Currently Declined.' ), si__('Declined'), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Estimate::STATUS_REQUEST ): ?>
-				<?php printf( '<button class="si_status draft tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'New Estimate Request' ), si__('Submission'), $status_change_span ); ?>
+				<?php printf( '<button class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'New Estimate Request' ), si__('Submission'), $status_change_span ); ?>
 			<?php else: ?>
-				<?php printf( '<button class="si_status draft tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Pending Estimate Request.' ), si__('Draft'), $status_change_span ); ?>
+				<?php printf( '<button class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', self::__( 'Pending Estimate Request.' ), si__('Draft'), $status_change_span ); ?>
 			<?php endif ?>
 		</span>
 	</span>

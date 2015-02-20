@@ -22,9 +22,9 @@
 				
 				<?php SI_Invoices::status_change_dropdown( $id ) ?>
 
-				<a href="#send_invoice" id="send_doc_quick_link" class="send tooltip button" title="<?php si_e('Send this invoice') ?>"><span>&nbsp;</span></a>
+				<a href="#send_invoice" id="send_doc_quick_link" class="send si_tooltip button" title="<?php si_e('Send this invoice') ?>"><span>&nbsp;</span></a>
 				
-				<a href="<?php echo self::get_clone_post_url( $id ) ?>" id="duplicate_invoice_quick_link" class="duplicate tooltip button" title="<?php si_e('Duplicate this invoice') ?>"><span>&nbsp;</span></a>
+				<a href="<?php echo self::get_clone_post_url( $id ) ?>" id="duplicate_invoice_quick_link" class="duplicate si_tooltip button" title="<?php si_e('Duplicate this invoice') ?>"><span>&nbsp;</span></a>
 
 			</div>
 		<?php endif ?>

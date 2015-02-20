@@ -28,7 +28,7 @@
 			<?php if ( $data['status_type'] == SI_Notifications::RECORD ): ?>
 				<p>
 					<?php echo $data['update_title'] ?>
-					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
+					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 				</p>
 				<div id="notification_message_<?php echo $item_id ?>" class="cloak">
 					<?php echo wpautop( $data['content'] ) ?>
@@ -36,7 +36,7 @@
 			<?php elseif ( $data['status_type'] == SI_Importer::RECORD ): ?>
 				<p>
 					<?php echo $data['update_title'] ?>
-					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox tooltip notification_message" title="<?php si_e('View Data') ?>"><?php si_e('View Data') ?></a>
+					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Data') ?>"><?php si_e('View Data') ?></a>
 				</p>
 				<div id="notification_message_<?php echo $item_id ?>" class="cloak">
 					<?php prp( json_decode( $data['content'] ) ); ?>

@@ -15,7 +15,7 @@ jQuery(function($) {
 	 * Tooltip with qtip
 	 * @type {}
 	 */
-	$('.tooltip[title!=""], .helptip[title!=""]').qtip({
+	$('.si_tooltip[title!=""], .helptip[title!=""]').qtip({
 		style: {
 			classes: 'qtip-bootstrap'
 		}

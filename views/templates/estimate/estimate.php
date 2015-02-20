@@ -270,7 +270,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 					<?php if ( $data['status_type'] == SI_Notifications::RECORD ): ?>
 						<p>
 							<?php echo $update_title ?>
-							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
+							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 						</p>
 						<div id="notification_message_<?php echo $item_id ?>" class="cloak">
 							<?php echo wpautop( $data['content'] ) ?>

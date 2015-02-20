@@ -35,7 +35,7 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 							if ( !is_a( $u, 'WP_User' ) ) {
 							 	continue;
 							 } ?>
-						<li id="list_user_id-<?php echo $a_user_id ?>"><?php printf( '<a href="%s" class="tooltip" title="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $a_user_id ), $u->user_email, $u->display_name ) ?>  <a data-id="<?php echo $a_user_id ?>" class="remove_user del_button">X</a> <?php do_action('client_associated_user_list', $a_user_id ) ?></li>
+						<li id="list_user_id-<?php echo $a_user_id ?>"><?php printf( '<a href="%s" class="si_tooltip" title="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $a_user_id ), $u->user_email, $u->display_name ) ?>  <a data-id="<?php echo $a_user_id ?>" class="remove_user del_button">X</a> <?php do_action('client_associated_user_list', $a_user_id ) ?></li>
 					<?php endforeach ?>
 				</ul>
 				<div id="hidden_associated_users_list" class="cloak">

@@ -24,13 +24,13 @@
 
 				<?php SI_Estimates::status_change_dropdown( $id ) ?>
 
-				<a href="#send_estimate" id="send_doc_quick_link" class="send tooltip button" title="<?php si_e('Send this estimate.') ?>"><span>&nbsp;</span></a>
+				<a href="#send_estimate" id="send_doc_quick_link" class="send si_tooltip button" title="<?php si_e('Send this estimate.') ?>"><span>&nbsp;</span></a>
 				
-				<a href="<?php echo self::get_clone_post_url( $id ) ?>" id="duplicate_estimate_quick_link" class="duplicate tooltip button" title="<?php si_e('Duplicate this estimate') ?>"><span>&nbsp;</span></a>
+				<a href="<?php echo self::get_clone_post_url( $id ) ?>" id="duplicate_estimate_quick_link" class="duplicate si_tooltip button" title="<?php si_e('Duplicate this estimate') ?>"><span>&nbsp;</span></a>
 
 				<?php
 					if ( current_user_can( 'delete_post', $id ) ) {
-						echo "<a class='submitdelete tooltip button clock' title='" . si__( 'Delete this estimate permanently' ). "' href='" . get_delete_post_link( $id, '' ) . "'><span>&nbsp;</span></a>";
+						echo "<a class='submitdelete si_tooltip button clock' title='" . si__( 'Delete this estimate permanently' ). "' href='" . get_delete_post_link( $id, '' ) . "'><span>&nbsp;</span></a>";
 					} ?>
 
 			</div>

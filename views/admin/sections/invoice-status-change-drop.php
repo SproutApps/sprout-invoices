@@ -5,15 +5,15 @@
 				$status_change_span = '&nbsp;<div class="dashicons dashicons-arrow-down"></div>';
 				 ?>
 			<?php if ( $status == SI_Invoice::STATUS_PENDING ): ?>
-				<?php printf( '<span class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Pending payment(s)' ), si__('Pending Payment(s)'), $status_change_span ); ?>
+				<?php printf( '<span class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Pending payment(s)' ), si__('Pending Payment(s)'), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Invoice::STATUS_PAID ): ?>
-				<?php printf( '<span class="si_status complete tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Fully Paid' ), si__('Paid'), $status_change_span ); ?>
+				<?php printf( '<span class="si_status complete si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Fully Paid' ), si__('Paid'), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Invoice::STATUS_PARTIAL ): ?>
-				<?php printf( '<span class="si_status publish tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Outstanding Balance' ), si__('Outstanding Balance'), $status_change_span ); ?>
+				<?php printf( '<span class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Outstanding Balance' ), si__('Outstanding Balance'), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Invoice::STATUS_WO ): ?>
-				<?php printf( '<span class="si_status declined tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Written-off' ), si__('Written Off'), $status_change_span ); ?>
+				<?php printf( '<span class="si_status declined si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Written-off' ), si__('Written Off'), $status_change_span ); ?>
 			<?php else: ?>
-				<?php printf( '<span class="si_status temp tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Temp Invoice' ), si__('Temp'), $status_change_span ); ?>
+				<?php printf( '<span class="si_status temp si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Temp Invoice' ), si__('Temp'), $status_change_span ); ?>
 			<?php endif ?>
 		</span>
 	</span>

@@ -14,6 +14,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	const STATUS_TEMP = 'temp'; // invoice is in a draft state, can't use 'draft' otherwise a url will not be created
 	const STATUS_PENDING = 'publish'; // invoice pending payment
+	const STATUS_FUTURE = 'future'; // invoice pending payment
 	const STATUS_PARTIAL = 'partial'; // invoice is partially paid for NOT USED
 	const STATUS_PAID = 'complete'; // invoice is complete
 	const STATUS_WO = 'write-off'; // invoice is written off
@@ -69,6 +70,7 @@ class SI_Invoice extends SI_Post_Type {
 		$statuses = array(
 			self::STATUS_TEMP => self::__('Draft'),
 			self::STATUS_PENDING => self::__('Pending'),
+			self::STATUS_FUTURE => self::__('Scheduled'),
 			self::STATUS_PARTIAL => self::__('Outstanding Balance'),
 			self::STATUS_PAID => self::__('Paid'),
 			self::STATUS_WO => self::__('Written Off'),

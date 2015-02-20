@@ -994,7 +994,13 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_invoice_total_due( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money(0);
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
-			$amount = sa_get_formatted_money( $data['invoice']->get_balance(), $data['invoice']->get_id() );
+			if ( $data['invoice']->get_deposit() > 0.01 ) {
+				$amount = sa_get_formatted_money( $data['invoice']->get_deposit(), $data['invoice']->get_id() );
+			}
+			else {
+				$amount = sa_get_formatted_money( $data['invoice']->get_balance(), $data['invoice']->get_id() );
+			}
+			
 		}
 		return apply_filters( 'shortcode_invoice_total_due', $amount, $data );
 	}

@@ -90,6 +90,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**4.5**
+
+* IMPROVEMENT: UI update so other plugins wont conflict.
+* Update: Future status
+
 **4.4**
 
 * IMPROVEMENT: Estimates and Invoices can have strings for IDs

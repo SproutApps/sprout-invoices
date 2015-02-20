@@ -296,9 +296,9 @@
 		var $parent = $(this).parents('.misc-pub-section'),
 			$id = $parent.data('edit-id'),
 			$controls = $parent.find('.control_wrap'),
-			$tooltip = $parent.find('.tooltip');
+			$si_tooltip = $parent.find('.si_tooltip');
 		$(this).hide();
-		$tooltip.show();
+		$si_tooltip.show();
 		$controls.slideDown('fast');
 	});
 
@@ -311,7 +311,7 @@
 			$type = $parent.data('edit-type'),
 			$span = $parent.find('span b'),
 			$edit_control = $parent.find('.edit_control'),
-			$tooltip = $parent.find('.tooltip'),
+			$si_tooltip = $parent.find('.si_tooltip'),
 			$controls = $parent.find('.control_wrap');
 
 		var $value = ( $type === 'select' ) ? $parent.find($type + ' option:selected').text() : $parent.find('input').val();
@@ -332,7 +332,7 @@
 			calculate_total();
 		};
 
-		$tooltip.hide();
+		$si_tooltip.hide();
 		$edit_control.show();
 		$controls.slideUp('fast');
 		return;
@@ -342,10 +342,10 @@
 		e.stopPropagation();
 		e.preventDefault();
 		var $parent = $(this).parents('.misc-pub-section'),
-			$tooltip = $parent.find('.tooltip'),
+			$si_tooltip = $parent.find('.si_tooltip'),
 			$edit_control = $parent.find('.edit_control');
 
-		$tooltip.hide();
+		$si_tooltip.hide();
 		$edit_control.show();
 		$(this).parents('.control_wrap').slideUp('fast');
 	});
@@ -389,11 +389,11 @@
 
 					var	$client_controls = $('#client').parents('.misc-pub-section'),
 						$edit_control = $client_controls.find('.edit_control'),
-						$tooltip = $client_controls.find('.tooltip'),
+						$si_tooltip = $client_controls.find('.si_tooltip'),
 						$controls = $client_controls.find('.control_wrap');
 
 					// close the control						
-					$tooltip.hide();
+					$si_tooltip.hide();
 					$edit_control.show();
 					$controls.slideUp('slow');
 				}

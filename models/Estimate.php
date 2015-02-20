@@ -17,6 +17,7 @@ class SI_Estimate extends SI_Post_Type {
 	const STATUS_TEMP = 'temp'; // estimate is in a draft state, can't use 'draft' otherwise a url will not be created
 	const STATUS_REQUEST = 'request'; // estimate hasn't been approved or declined
 	const STATUS_PENDING = 'publish'; // estimate hasn't been approved or declined
+	const STATUS_FUTURE = 'future'; // invoice pending payment
 	const STATUS_APPROVED = 'approved'; // estimate was approved by client
 	const STATUS_DECLINED = 'declined'; // estimate was declined by client
 
@@ -88,6 +89,7 @@ class SI_Estimate extends SI_Post_Type {
 			self::STATUS_TEMP => self::__('Draft'),
 			self::STATUS_REQUEST => self::__('Request'),
 			self::STATUS_PENDING => self::__('Pending'),
+			self::STATUS_FUTURE => self::__('Scheduled'),
 			self::STATUS_APPROVED => self::__('Approved'),
 			self::STATUS_DECLINED => self::__('Declined'),
 		);
