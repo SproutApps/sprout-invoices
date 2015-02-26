@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.0.1**
+
+* FIX: Comment issue with multiple line items open
+* FIX: PayPal total issue when invoice has a deposit and previous payments
+* FIX: Estimate line item button styling issue
+* FIX: Comment shortcode issue when client has multiple users
+* FIX: Compatibility fix with other plugins/themes using .tooltip
+
 **5.0**
 
 * NEW: Line item commenting (pro version)

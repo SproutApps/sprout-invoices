@@ -807,16 +807,16 @@ abstract class SI_Controller extends Sprout_Invoices {
 		wp_register_style( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.css', array(), self::SI_VERSION  );
 
 		// Select2
-		wp_register_style( 'select2_css', SI_URL . '/resources/admin/plugins/select2/select2.css', null, false, false );
-		wp_register_script( 'select2', SI_URL . '/resources/admin/plugins/select2/select2.min.js', array( 'jquery' ), false, false );
+		wp_register_style( 'select2_css', SI_URL . '/resources/admin/plugins/select2/select2.css', null, self::SI_VERSION, false );
+		wp_register_script( 'select2', SI_URL . '/resources/admin/plugins/select2/select2.min.js', array( 'jquery' ), self::SI_VERSION, false );
 
 		// qtip plugin
-		wp_register_style( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.css', null, false, false );
-		wp_register_script( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.js', array('jquery'), false, true );
+		wp_register_style( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.css', null, self::SI_VERSION, false );
+		wp_register_script( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.js', array('jquery'), self::SI_VERSION, true );
 
 		// dropdown plugin
-		wp_register_style( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.css', null, false, false );
-		wp_register_script( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.min.js', array('jquery'), false, true );
+		wp_register_style( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.css', null, self::SI_VERSION, false );
+		wp_register_script( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.min.js', array('jquery'), self::SI_VERSION, true );
 
 		// Templates
 		wp_register_script( 'sprout_doc_scripts', SI_URL . '/resources/front-end/js/sprout-invoices.js', array( 'jquery', 'qtip' ), self::SI_VERSION );

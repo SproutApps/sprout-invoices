@@ -116,7 +116,7 @@ if ( 0 != $post->ID ) {
 				<?php endforeach ?>
 			</select>
 
-			<a href="#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox tooltip" title="<?php si_e('Create new client') ?>"></a>
+			<a href="#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox si_tooltip" title="<?php si_e('Create new client') ?>"></a>
 
  		</div>
 		<p>
@@ -132,10 +132,10 @@ if ( 0 != $post->ID ) {
 	<div class="misc-pub-section" data-edit-id="invoice_id">
 		<span id="invoice_id" class="wp-media-buttons-icon"><?php si_e('Associated Invoice:') ?> <b><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a></b></span>
 	</div>
-<?php else: ?>
+<?php elseif ( apply_filters( 'si_show_create_invoice_from_estimate_button', FALSE ) ): ?>
 	<!-- Invoice -->
 	<div class="misc-pub-section" data-edit-id="invoice_id">
-		<a id="invoice_create" href="<?php echo self::get_clone_post_url( get_the_ID(), SI_INVOICE::POST_TYPE ) ?>" class="button tooltip" <?php if ($status !== SI_Estimate::STATUS_APPROVED) echo 'disabled'; ?> title="<?php si_e('Create an invoice from an approved estimate.') ?>"><span><?php si_e('Create Invoice') ?></span></a>
+		<a id="invoice_create" href="<?php echo self::get_clone_post_url( get_the_ID(), SI_INVOICE::POST_TYPE ) ?>" class="button si_tooltip" <?php if ( $status == SI_Estimate::STATUS_TEMP ) echo 'disabled'; ?> title="<?php si_e('Create an invoice from an approved estimate.') ?>"><span><?php si_e('Create Invoice') ?></span></a>
 	</div>
 <?php endif ?>
 

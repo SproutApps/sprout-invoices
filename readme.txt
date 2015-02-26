@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 5.0
+Stable tag: 5.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Line Item Commenting, Pre-defined Items, and more
 
 == Changelog ==
+
+= 5.0.1 =
+
+* FIX: Comment issue with multiple line items open
+* FIX: PayPal total issue when invoice has a deposit and previous payments
+* FIX: Estimate line item button styling issue
+* FIX: Comment shortcode issue when client has multiple users
+* FIX: Compatibility fix with other plugins/themes using .tooltip
 
 = 5.0 =
 

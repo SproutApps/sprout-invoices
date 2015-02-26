@@ -611,7 +611,7 @@ span.inline_success_message {
 	font-family: "sproutapps-ff";
 	content: "\e609";
 	font-size: 32px;
-	margin-top: -12px;
+	margin-top: -6px;
 	margin-right: 2px;
 	color: #333;
 }
@@ -983,14 +983,19 @@ span.status_change {
 #add_line_item .add_button_wrap {
 	float: left;
 }
+#add_line_item .add_button_wrap.button {
+	padding: 0px;
+}
 #add_line_item .add_button_wrap a {
 	color: inherit;
 	text-decoration: none;
+	padding-left: 10px;
 }
 #add_line_item .add_button_wrap a.add_button_drop {
 	border-left: 1px solid #DFDFDF;
 	padding-left: 6px;
 	margin-left: 5px;
+	padding-right: 10px;
 }
 #line_items_totals,#status_updates {
 	float: right;

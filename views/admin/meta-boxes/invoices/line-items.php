@@ -53,7 +53,7 @@
 					<span title="<?php self::esc_e('Tasks can be created to help with invoice creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
 					
 					<span id="time_importing">
-						<?php printf( '<button id="time_import_question_answer_upgrade" class="button disabled tooltip" title="%s">%s</button>', self::__('Any billable time can be imported from your projects into your invoices dynamically with a pro version upgrade.'), self::__('Import Time') ) ?>
+						<?php printf( '<button id="time_import_question_answer_upgrade" class="button disabled si_tooltip" title="%s">%s</button>', self::__('Any billable time can be imported from your projects into your invoices dynamically with a pro version upgrade.'), self::__('Import Time') ) ?>
 					</span>
 				<?php endif ?>
 				

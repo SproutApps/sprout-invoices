@@ -47,12 +47,10 @@
 				<?php do_action('si_add_line_item') ?>
 
 				<span class="add_button_wrap">
-					<?php echo apply_filters( 'si_add_line_item_add_button button', '<a href="javascript:void(0)" class="add_line_item add_button item_add_type item_add_no_type">&nbsp;'.si__('Add').'</a>' ) ?>
+					<?php echo apply_filters( 'si_add_line_item_add_button', '<a href="javascript:void(0)" class="add_line_item add_button item_add_type item_add_no_type">&nbsp;'.si__('Add').'</a>' ) ?>
 				</span>
 				<?php if ( apply_filters( 'show_upgrade_messaging', TRUE ) ): ?>
 					<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
-				<?php else: ?>
-					<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions.') ?>" class="helptip add_item_help"></span>
 				<?php endif ?>
 			</div>
 
@@ -91,10 +89,4 @@
 			</div>
 		</div>
 	</div>
-
-</div>
-<div class="cloak">
-	<?php foreach ( $item_types as $term ): ?>
-		<span id="term_desc_<?php echo $term->term_id ?>"><?php echo $term->description ?></span>
-	<?php endforeach ?>
 </div>
