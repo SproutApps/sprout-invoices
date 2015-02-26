@@ -43,28 +43,19 @@
 	<div id="line_items_footer" class="clearfix">
 		<div class="mngt_wrap clearfix">
 			<div id="add_line_item">
-				<?php if ( !empty( $item_types_options ) ): ?>
-					<span class="add_button_wrap button">
-						<a href="javascript:void(0)" class="add_button item_add_type item_add_no_type">&nbsp;<?php si_e('Add') ?></a><a href="javascript:void(0)" class="add_button add_button_drop" data-dropdown="#type_selection"></a>
-					</span>
-					<div id="type_selection" class="dropdown dropdown-tip dropdown-relative">
-						<ul class="dropdown-menu">
-							<?php foreach ( $item_types_options as $key => $label ): ?>
-								<li><a class="item_add_type" href="javascript:void(0)" data-type-key="<?php self::esc_e( $key ) ?>"><?php self::esc_e( $label ) ?></a></li>
-							<?php endforeach ?>
-						</ul>
-					</div>
+				
+				<?php do_action('si_add_line_item') ?>
+
+				<span class="add_button_wrap">
+					<?php echo apply_filters( 'si_add_line_item_add_button button', '<a href="javascript:void(0)" class="add_line_item add_button item_add_type item_add_no_type">&nbsp;'.si__('Add').'</a>' ) ?>
+				</span>
+				<?php if ( apply_filters( 'show_upgrade_messaging', TRUE ) ): ?>
+					<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
 				<?php else: ?>
-					<span class="add_button_wrap button">
-						<a href="javascript:void(0)" class="add_button item_add_type item_add_no_type">&nbsp;<?php si_e('Add') ?></a>
-					</span>
-					<?php if ( apply_filters( 'show_upgrade_messaging', TRUE ) ): ?>
-						<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
-					<?php else: ?>
-						<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions.') ?>" class="helptip add_item_help"></span>
-					<?php endif ?>
+					<span title="<?php self::esc_e('Tasks can be created to help with estimate creation by adding default descriptions.') ?>" class="helptip add_item_help"></span>
 				<?php endif ?>
 			</div>
+
 			<div id="line_items_totals">
 				<div id="line_subtotal">
 					<b><?php si_e('Subtotal') ?></b>

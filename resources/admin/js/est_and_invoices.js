@@ -32,6 +32,7 @@
 		// WYSIWYG
 		if ( si_js_object.redactor ) {
 			$('.item:not(#line_item_default) .column_desc [name="line_item_desc[]"]').redactor();
+			$('.si_redactorize').redactor();
 		};
 		
 		// Select permalink
@@ -509,15 +510,12 @@
 	calculate_parent_line_item_totals();
 
 	/**
-	 * Add a line items
+	 * Add a blank line item
 	 * @return {} 
 	 */
-	$('.item_add_type').live( 'click', function() {
+	$('.add_line_item').live( 'click', function() {
 		// clone the first line item.
-		var $row = $('#line_item_default').clone().attr('id','').attr('style',''),
-			$dropdown = $('#type_selection'),
-			$type = $(this).data('type-key'),
-			$type_description = $('#term_desc_'+$type).text();
+		var $row = $('#line_item_default').clone().attr('id','').attr('style','');
 		// remove any children
 		$($row).children('ol').remove();
 		// append the row to the list.
@@ -526,7 +524,6 @@
 		$row.find('.column input').val('');
 		//$row.find('.column textarea').val('');
 		$row.find('.column_total span').html('');
-		$row.find('.column_desc textarea').val($type_description);
 		handle_parents();
 		// update key
 		modify_input_key();
@@ -538,7 +535,6 @@
 			$row.find('.column_desc [name="line_item_desc[]"]').redactor();
 		};
 		
-
 		return false;
 	});
 

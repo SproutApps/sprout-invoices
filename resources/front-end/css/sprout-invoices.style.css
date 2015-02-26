@@ -20,6 +20,7 @@
 	font-style: normal;
 }
 
+
 .icon-register:before,
 .icon-vault:before,
 .icon-receipt:before,
@@ -40,90 +41,108 @@
 .icon-coins:before,
 .icon-sproutapps-flat:before {
 	font-family: "sproutapps-ff";
+	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
+
+	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	display: inline-block;
 	text-decoration: inherit;
 }
 
-.icon-register:before {
-	content: "\f100";
-}
-
-.icon-vault:before {
-	content: "\f101";
-}
-
-.icon-receipt:before {
-	content: "\f102";
-}
-
-.icon-sproutapps-estimates:before {
-	content: "\f103";
-}
-
-.icon-calculator:before {
-	content: "\f104";
+.icon-handshake:before {
+	content: "\e615";
 }
 
 .icon-lightsaber:before {
-	content: "\f105";
+	content: "\e604";
 }
 
-.icon-notebook:before {
-	content: "\f106";
-}
-
-.icon-percentage:before {
-	content: "\f107";
-}
-
-.icon-badge:before {
-	content: "\f108";
-}
-
-.icon-sproutapps-invoices:before {
-	content: "\f109";
-}
-
-.icon-hour-glass:before {
-	content: "\f10a";
-}
-
-.icon-abacus:before {
-	content: "\f10b";
-}
-
-.icon-handshake:before {
-	content: "\f10c";
-}
-
-.icon-light-saber:before {
-	content: "\f10d";
-}
-
-.icon-hackathon:before {
-	content: "\f10e";
-}
-
-.icon-golf:before {
-	content: "\f10f";
-}
-
-.icon-sproutapps-logo:before {
-	content: "\f110";
-}
-
-.icon-coins:before {
-	content: "\f111";
+.icon-vault:before {
+	content: "\e614";
 }
 
 .icon-sproutapps-flat:before {
-	content: "\f112";
+	content: "\e600";
+}
+
+.icon-sproutapps-logo:before {
+	content: "\e601";
+}
+
+.icon-sproutapps-invoices:before,
+.icon-invoice:before {
+	content: "\e602";
+}
+
+.icon-golf:before {
+	content: "\e603";
+}
+
+.icon-help-solid:before {
+	content: "\e605";
+}
+
+.icon-info-solid:before {
+	content: "\e606";
+}
+
+.icon-info:before {
+	content: "\e607";
+}
+
+.icon-question:before {
+	content: "\e608";
+}
+
+.icon-sproutapps-estimates:before,
+.icon-estimate:before {
+	content: "\e609";
+}
+
+.icon-hour-glass:before {
+	content: "\e60a";
+}
+
+.icon-percent:before {
+	content: "\e60b";
+}
+
+.icon-abacus:before {
+	content: "\e60c";
+}
+
+.icon-calculator:before {
+	content: "\e60d";
+}
+
+.icon-register:before {
+	content: "\e60e";
+}
+
+.icon-hackathon:before {
+	content: "\e60f";
+}
+
+.icon-coins:before {
+	content: "\e610";
+}
+
+.icon-checklist:before {
+	content: "\e611";
+}
+
+.icon-notebook:before {
+	content: "\e612";
+}
+
+.icon-piggy-bank:before {
+	content: "\e613";
 }
 
 /**
@@ -191,6 +210,10 @@ a:focus {
 a:active,
 a:hover {
 	outline: 0;
+}
+
+.cloak {
+	display: none;
 }
 
 /**
@@ -741,17 +764,17 @@ div#vcards {
 
 .helptip.rate_ico:after {
 	font-family: "sproutapps-ff";
-	content: '\f111';
+	content: '\e610';
 }
 
 .helptip.qty_ico:after {
 	font-family: "sproutapps-ff";
-	content: '\f10b';
+	content: '\e60c';
 }
 
 .helptip.percentage_ico:after {
 	font-family: "sproutapps-ff";
-	content: '\f104';
+	content: '\e60b';
 }
 
 .line_item_type:after {
@@ -1543,7 +1566,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 #doc_history dd:first-of-type:before {
 	font-family: "sproutapps-ff" !important;
-	content: '\f10a';
+	content: '\e60a';
 	color: #ddd;
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
@@ -1586,16 +1609,19 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 #doc_history dt span.si_history_status_update:before {
 	content: '\f173'
 }
+#doc_history dt span.history_status.comment:before {
+	content: "\e614";
+}
 
 #doc_history dt span.payment:before {
 	font-family: "sproutapps-ff";
-	content: "\f100";
+	content: "\e60e";
 	margin-top: -4px;
 }
 
 #doc_history dt span.si_invoice_created:before {
 	font-family: "sproutapps-ff";
-	content: "\f109";
+	content: "\e602";
 	margin-top: -4px;
 }
 
@@ -1640,4 +1666,77 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 		left: 30%;
 	}
 
+}
+
+/**
+ * Comments
+ */
+
+.line_item_comments {
+    margin-top: -40px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #F2F2F2;
+    border-top: 2px #D3D3D3 solid;
+}
+ol ol .line_item_comments {
+	margin-left: 40px;
+    
+	border-top: 2px #E7E7E7 solid;
+	background-color: #FAFAFA;
+}
+.li_comments_toggle {
+	float: left;
+	padding-right: 5px;
+	color: #D8D8D8;
+	margin-top: 10px;
+	margin-left: -30px;
+}
+ol ol .li_comments_toggle {
+	margin-left: 0px;
+}
+.li_comments_toggle.has_comments {
+	color: #FF5B4D;
+}
+
+.line_item_comments .comment_meta.vcard {
+    float: left;
+    margin: 10px 10px 10px 0px;
+}
+
+.line_item_comments .comment {
+    display: block;
+    margin-bottom: 30px;
+    border-top: 1px solid #D3D3D3;
+}
+.line_item_comments .comment.highlight {
+	background-color: #E5E5E5;
+	padding-left: 15px;
+}
+.line_item_comments span.comment_date {
+    float: right;
+    color: #363B3F;
+    font-size: 8px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    /* margin-top: -27px; */
+    background-color: #D3D3D3;
+    white-space: nowrap;
+}
+.line_item_comment_wrap {
+	width: 100%;
+}
+.line_item_comment_wrap textarea {
+	width: 80%;
+	height: 5em;
+	padding: 1em;
+	border: 1px solid #eee;
+
+}
+.line_item_comment_wrap .submit.button {
+	float: left;
+	clear: both;
+	margin: 10px 10px 0px 0px;
 }

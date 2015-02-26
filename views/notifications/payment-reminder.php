@@ -4,4 +4,4 @@ This is a friendly reminder to let you know that Invoice [invoice_id] is [invoic
 
 Thank you for your business.
 
-Cheers,
+Cheers!

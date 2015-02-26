@@ -408,7 +408,6 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( apply_filters( 'suppress_notifications', FALSE ) || self::is_disabled( $notification_name ) ) {
 			return;
 		}
-
 		// So shortcode handlers know whether the email is being sent as html or plaintext
 		if ( null == $html ) {
 			$html = ( self::$notification_format == 'HTML' ) ? TRUE : FALSE ;

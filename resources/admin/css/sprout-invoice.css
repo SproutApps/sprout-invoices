@@ -40,91 +40,111 @@
 .icon-coins:before,
 .icon-sproutapps-flat:before {
 	font-family: "sproutapps-ff";
+	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
+
+	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	display: inline-block;
 	text-decoration: inherit;
 }
 
-.icon-register:before {
-	content: "\f100";
-}
-
-.icon-vault:before {
-	content: "\f101";
-}
-
-.icon-receipt:before {
-	content: "\f102";
-}
-
-.icon-sproutapps-estimates:before {
-	content: "\f103";
-}
-
-.icon-calculator:before {
-	content: "\f104";
+.icon-handshake:before {
+	content: "\e615";
 }
 
 .icon-lightsaber:before {
-	content: "\f105";
+	content: "\e604";
 }
 
-.icon-notebook:before {
-	content: "\f106";
-}
-
-.icon-percentage:before {
-	content: "\f107";
-}
-
-.icon-badge:before {
-	content: "\f108";
-}
-
-.icon-sproutapps-invoices:before {
-	content: "\f109";
-}
-
-.icon-hour-glass:before {
-	content: "\f10a";
-}
-
-.icon-abacus:before {
-	content: "\f10b";
-}
-
-.icon-handshake:before {
-	content: "\f10c";
-}
-
-.icon-light-saber:before {
-	content: "\f10d";
-}
-
-.icon-hackathon:before {
-	content: "\f10e";
-}
-
-.icon-golf:before {
-	content: "\f10f";
-}
-
-.icon-sproutapps-logo:before {
-	content: "\f110";
-}
-
-.icon-coins:before {
-	content: "\f111";
+.icon-vault:before {
+	content: "\e614";
 }
 
 .icon-sproutapps-flat:before {
-	content: "\f112";
+	content: "\e600";
 }
+
+.icon-sproutapps-logo:before {
+	content: "\e601";
+}
+
+.icon-sproutapps-invoices:before,
+.icon-invoice:before {
+	content: "\e602";
+}
+
+.icon-golf:before {
+	content: "\e603";
+}
+
+.icon-help-solid:before {
+	content: "\e605";
+}
+
+.icon-info-solid:before {
+	content: "\e606";
+}
+
+.icon-info:before {
+	content: "\e607";
+}
+
+.icon-question:before {
+	content: "\e608";
+}
+
+.icon-sproutapps-estimates:before,
+.icon-estimate:before {
+	content: "\e609";
+}
+
+.icon-hour-glass:before {
+	content: "\e60a";
+}
+
+.icon-percent:before {
+	content: "\e60b";
+}
+
+.icon-abacus:before {
+	content: "\e60c";
+}
+
+.icon-calculator:before {
+	content: "\e60d";
+}
+
+.icon-register:before {
+	content: "\e60e";
+}
+
+.icon-hackathon:before {
+	content: "\e60f";
+}
+
+.icon-coins:before {
+	content: "\e610";
+}
+
+.icon-checklist:before {
+	content: "\e611";
+}
+
+.icon-notebook:before {
+	content: "\e612";
+}
+
+.icon-piggy-bank:before {
+	content: "\e613";
+}
+
+
 
 #time_import_question_answer_upgrade:before,
 #time_import_question_answer:before {
@@ -396,7 +416,7 @@ table.sa_table {
 }
 
 #si_dashboard .flow_icon {
-	margin-top: -60px;
+	/* margin-top: -60px; */
 	font-size: 20vw;
 	text-align: center;
 	display: block;
@@ -417,8 +437,8 @@ table.sa_table {
 /**/
 
 #si_dashboard .flow_icon.icon-sproutapps-invoices {
-	font-size: 12vw;
-	margin-top: 10px;
+	font-size: 16vw;
+	margin-top: 30px;
 	margin-bottom: 55px;
 }
 
@@ -510,28 +530,20 @@ form table .sa_addon {
 
 #menu-posts-sa_estimate .wp-menu-image:before {
 	font-family: "sproutapps-ff";
-	content: "\f103";
-	font-size: 40px;
-	margin-top: -16px;
-	margin-left: -20px;
-}
-
-#adminmenu #menu-posts-sa_estimate .wp-menu-image {
-	width: 50px;
+	content: "\e609";
+	font-weight: bold;
 }
 
 #menu-posts-sa_invoice .wp-menu-image:before {
 	font-family: "sproutapps-ff";
-	content: "\f109";
-	margin-top: -4px;
+	content: "\e602";
+	font-weight: bold;
 }
 
 #toplevel_page_sprout-apps .wp-menu-image:before {
 	font-family: "sproutapps-ff";
-	content: "\f112";
-	font-size: 32px;
-	margin-top: -8px;
-	margin-left: -10px;
+	content: "\e600";
+	margin-left: -6px;
 }
 @-moz-document url-prefix() {
    #toplevel_page_sprout-apps .wp-menu-image:before {
@@ -597,7 +609,7 @@ span.inline_success_message {
 
 .postbox span#estimate_id:before {
 	font-family: "sproutapps-ff";
-	content: "\f103";
+	content: "\e609";
 	font-size: 32px;
 	margin-top: -12px;
 	margin-right: 2px;
@@ -606,7 +618,7 @@ span.inline_success_message {
 
 .postbox span#invoice_create span:before, .postbox span#invoice_id:before {
 	font-family: "sproutapps-ff";
-	content: "\f109";
+	content: "\e602";
 	margin-top: -4px;
 	color: #666;
 }
@@ -933,17 +945,17 @@ span.status_change {
 
 .line_item .helptip.rate_ico:after {
 	font-family: "sproutapps-ff";
-	content: '\f111';
+	content: '\e610';
 }
 
 .line_item .helptip.qty_ico:after {
 	font-family: "sproutapps-ff";
-	content: '\f10b';
+	content: '\e60c';
 }
 
 .line_item .helptip.percentage_ico:after {
 	font-family: "sproutapps-ff";
-	content: '\f104';
+	content: '\e60b';
 }
 
 #line_items_footer #publishing-action input {
@@ -1244,11 +1256,11 @@ div#invoice_status_updates-sticky-wrapper {
 	margin: 0
 }
 
-#si_estimate_history dl,#si_client_history dl,#si_invoice_history dl {
+#si_estimate_history dl,#si_client_history dl,#si_invoice_history dl,#comments_list dl {
 	padding: .5em
 }
 
-#si_estimate_history dt,#si_client_history dt,#si_invoice_history dt, #si_project_history dt {
+#si_estimate_history dt,#si_client_history dt,#si_invoice_history dt, #si_project_history dt, #comments_list dt {
 	float: left;
 	clear: left;
 	width: 200px;
@@ -1260,11 +1272,11 @@ div#invoice_status_updates-sticky-wrapper {
 	margin-left: 30px
 }
 
-#si_estimate_history dt:after,#si_client_history dt:after,#si_invoice_history dt:after, #si_project_history dt:after {
+#si_estimate_history dt:after,#si_client_history dt:after,#si_invoice_history dt:after, #si_project_history dt:after, #comments_list dt:after {
 	content: ":"
 }
 
-#si_estimate_history dd,#si_client_history dd,#si_invoice_history dd, #si_project_history dd {
+#si_estimate_history dd,#si_client_history dd,#si_invoice_history dd, #si_project_history dd, #comments_list dd {
 	margin: 0 0 0 210px;
 	padding: 0 0 .5em
 }
@@ -1273,35 +1285,42 @@ div#invoice_status_updates-sticky-wrapper {
 	padding-top: 13px
 }
 
-#history_list {
+#history_list,
+#comments_list {
 	margin-top: 30px;
 }
 
-#history_list dd {
+#history_list dd,
+#comments_list dd {
 	margin-bottom: 15px;
 	padding-left: 10px;
 	border-left: 1px solid #ddd;
 	min-height: 60px
 }
 
-#history_list dt {
+#history_list dt,
+#comments_list dt {
 	padding-top: 20px
 }
 
-#history_list dd:first-of-type p {
+#history_list dd:first-of-type p,
+#comments_list dd:first-of-type p {
 	margin: 0;
 	margin-top: -15px
 }
 
-#history_list dd {
+#history_list dd,
+#comments_list dd {
 	padding-top: 8px
 }
 
-#history_list dt:after {
+#history_list dt:after,
+#comments_list dt:after {
 	content: ''
 }
 
-#history_list dd:after {
+#history_list dd:after,
+#comments_list dd:after {
 	content: "\f140";
 	color: #ddd;
 	display: inline-block;
@@ -1315,7 +1334,7 @@ div#invoice_status_updates-sticky-wrapper {
 
 #history_list dd:first-of-type:before {
 	font-family: "sproutapps-ff" !important;
-	content: '\f10a';
+	content: '\e60a';
 	color: #ddd;
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
@@ -1386,22 +1405,25 @@ dt span.si_history_status_update:before {
 
 dt span.sa_private_notes:before {
 	font-family: "sproutapps-ff";
-	content: "\f106";
+	content: "\e612";
 	margin-top: -4px;
 }
 
 dt span.payment:before {
 	font-family: "sproutapps-ff";
-	content: "\f100";
+	content: "\e60e";
 	margin-top: -4px;
 }
 
 dt span.si_invoice_created:before {
 	font-family: "sproutapps-ff";
-	content: "\f109";
+	content: "\e602";
 	margin-top: -4px;
 }
 
+dt span.history_status.comment:before {
+	content: "\e614";
+}
 dt span.creation_event:before {
 	content: ''
 }
@@ -1817,4 +1839,79 @@ input#sa_recurring_invoice_custom_freq {
     margin-right: 5px;
     font-size: .5em !important;
     color: #bbb;
+}
+
+
+/**
+ * Comments
+ */
+
+.item_comments.show_doc_comments_modal.has_comments {
+	color: #6CAAE4;
+}
+#admin_comment_list ol {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+#admin_comment_list .comment_meta.vcard {
+    float: left;
+    margin: 20px 10px 0px 0px;
+}
+
+#admin_comment_list .comment {
+    display: block;
+    margin: 30px;
+    border-top: 1px solid #D3D3D3;
+}
+
+#admin_comment_list span.comment_date {
+    float: right;
+    color: #363B3F;
+    font-size: 8px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    /* margin-top: -27px; */
+    background-color: #D3D3D3;
+    white-space: nowrap;
+}
+
+#admin_comment_list p {
+    
+} 
+#admin_comment_list #si_comment_response {
+	width: 80% !important;
+	height: 5em;
+	margin-left: 10%;
+	padding: 1em;
+	border: 1px solid #eee;
+
+}
+
+#admin_comment_list .submit_comment_response {
+	margin-left: 10%;
+}
+
+
+
+
+/**
+ * Predefined items
+ */
+#create_pd_item_tb_link:before {
+	font: 400 20px/1 dashicons;
+	speak: none;
+	display: inline-block;
+	padding: 0 2px 0 0;
+	top: 0;
+	left: -1px;
+	position: relative;
+	vertical-align: top;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none!important;
+	content: '\f502';
+	top: 5px
 }

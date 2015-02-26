@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 4.5
+Stable tag: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,6 @@ Make sure to review the [Sprout Invoices](https://sproutapps.co/sprout-invoices/
 * Improved user experience with AJAX.
 * [Advanced Taxes](https://sproutapps.co/marketplace/advanced-tax-rates-hst-pst-gst-support/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org)
 * Client records with multiple points of contact
-* Pre-defined tasks/line-items
 * No extra database tables!
 
 Pro Features
@@ -51,6 +50,9 @@ Pro Features
 * [Recurring/Subscription Payments](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
 * [Recurring Invoices](https://sproutapps.co/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
 * [Client Dashboards](https://sproutapps.co/news/sprout-invoices-client-dashboard-beautiful-html-e-mails/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
+* [Line Item Commenting](https://sproutapps.co/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
+* [Pre-defined Line Items](https://sproutapps.co/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
+* [Dynamic Text](https://sproutapps.co/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
 
 **A [fully featured upgrade](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) and [add-on marketplace](https://sproutapps.co/marketplace/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) are available.**
 
@@ -114,9 +116,16 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
-Client dashboards and HTML notifications
+Line Item Commenting, Pre-defined Items, and more
 
 == Changelog ==
+
+= 5.0 =
+
+* NEW: Line item commenting (pro version)
+* NEW: Pre-defined line items (pro version)
+* NEW: Dynamic text (pro version)
+* UPDATED: Admin UI tweaks
 
 = 4.5 =
 

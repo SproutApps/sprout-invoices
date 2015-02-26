@@ -59,6 +59,29 @@ function si_who_is_paying( SI_Invoice $invoice ) {
 }
 endif;
 
+if ( !function_exists('si_default_client_user') ) :
+/**
+ * Return the user object for the person responsible paying at the time of purchase.
+ * @param  SI_Invoice $invoice 
+ * @return object/FALSE      
+ */
+function si_default_client_user( $client_id = 0 ) {
+	if ( !$client_id ) {
+		$client_id = get_the_id();
+	}
+	$user = FALSE;
+	$client = SI_Client::get_instance( $client_id );
+	if ( !is_wp_error( $client ) ) {
+		$client_users = $client->get_associated_users();
+		$client_user_id = array_shift($client_users);
+		if ( $client_user_id ) {
+			$user = get_userdata( $client_user_id );
+		}
+	}
+	return apply_filters( 'si_default_client_user', $user, $invoice );
+}
+endif;
+
 if ( !function_exists('si_whos_user_id_is_paying') ) :
 /**
  * Return the user object for the person responsible paying at the time of purchase.

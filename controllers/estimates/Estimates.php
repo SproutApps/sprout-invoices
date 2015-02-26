@@ -267,13 +267,6 @@ class SI_Estimates extends SI_Controller {
 	 * @return
 	 */
 	public static function show_line_items_view( $post, $metabox ) {
-
-		$item_types = get_terms( array( SI_Estimate::LINE_ITEM_TAXONOMY ), array( 'hide_empty' => FALSE, 'fields' => 'all' ) );
-		$type_options = array();
-		foreach ( $item_types as $item_type ) {
-			$type_options[$item_type->term_id] = $item_type->name;
-		}
-
 		$estimate = SI_Estimate::get_instance( $post->ID );
 		$total = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_total() : '0.00' ;
 		$subtotal = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_subtotal() : '0.00' ;
@@ -286,8 +279,6 @@ class SI_Estimates extends SI_Controller {
 				'total' => $total,
 				'subtotal' => $subtotal,
 				'line_items' => $line_items,
-				'item_types' => $item_types,
-				'item_types_options' => $type_options
 			), FALSE );
 	}
 
@@ -1068,22 +1059,6 @@ class SI_Estimates extends SI_Controller {
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
 				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
-			);
-		}
-		if ( isset( $_GET['taxonomy'] ) && $_GET['taxonomy'] == SI_Estimate::LINE_ITEM_TAXONOMY && $post_type == SI_Estimate::POST_TYPE ) {
-			// get screen and add sections.
-			$screen = get_current_screen();
-
-			$screen->add_help_tab( array(
-					'id' => 'mng-payments',
-					'title' => self::__( 'Line Item Tasks' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__('An admin to manage your tasks is found under Estimates > Tasks  in the admin. When adding a new task the “Name” is what you will select when adding new line items, the description is used to dill the line item description field.'), self::__('Pre-defined tasks are used for both Estimates and Invoices.'), self::__('Subscribe to the blog or twitter account to get updates when new features are added to pre-defined tasks, since the ability to add a pre-defined rate, quantity and percentage is in the works.') ),
-				) );
-
-			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/predefined-tasks-line-items/', self::__('Documentation') ) .
 				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
 			);
 		}

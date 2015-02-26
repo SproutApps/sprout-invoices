@@ -155,44 +155,41 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 		$data['tax'] = '';
 	}
 	ob_start(); ?>
+		<?php do_action( 'si_line_item_build_pre_row', $data, $items, $position, $children ) ?>
 		<div class="line_item<?php if ( !empty( $children ) ) echo ' has_children' ?>">
-			<div class="column column_type">
-				<?php 
-					if ( isset( $data['type'] ) && $data['type'] ) {
-						$term = get_term( $data['type'], SI_Estimate::LINE_ITEM_TAXONOMY );
-						if ( !is_wp_error( $term ) && $term ) {
-							printf( '<span class="line_item_type tooltip" title="%s"></span>', esc_attr__( $term->name ) );
-						}
-					} ?>
-			</div><!-- / column_type -->
 			<div class="column column_desc">
-				<?php if ( apply_filters( 'si_the_content_filter_line_item_descriptions', TRUE )): ?>
-					<?php echo apply_filters( 'the_content', $desc ) ?>
-				<?php else: ?>
-					<?php echo wpautop( $desc ) ?>
-				<?php endif ?>
+				
+
+				<?php echo apply_filters( 'si_line_item_content', $desc ) ?>
+
+				<?php do_action( 'si_line_item_build_desc', $data, $items, $position, $children ) ?>
 			</div><!-- / item_action_column -->
 			<div class="column column_rate">
 				<?php if ( empty( $children ) ): ?>
 					<?php esc_attr_e( sa_get_formatted_money( $rate ) ) ?>
 				<?php endif ?>
+				<?php do_action( 'si_line_item_build_rate', $data, $items, $position, $children ) ?>
 			</div><!-- / column_rate -->
 			<div class="column column_qty">
 				<?php if ( empty( $children ) ): ?>
 					<?php esc_attr_e( $qty ) ?>
 				<?php endif ?>
+				<?php do_action( 'si_line_item_build_qty', $data, $items, $position, $children ) ?>
 			</div><!-- / column_qty -->
 			<?php if ( $has_percentage_adj ): ?>
 				<div class="column column_tax">
 					<?php if ( isset( $data['tax'] ) && $data['tax'] ): ?>
 						<?php esc_attr_e( $data['tax'] ) ?>%
 					<?php endif ?>
+				<?php do_action( 'si_line_item_build_tax', $data, $items, $position, $children ) ?>
 				</div><!-- / column_tax -->
 			<?php endif ?>
 			<div class="column column_total">
 				<?php sa_formatted_money($total) ?>
+				<?php do_action( 'si_line_item_build_total', $data, $items, $position, $children ) ?>
 			</div><!-- / column_total -->
 		</div>
+		<?php do_action( 'si_line_item_build_row', $data, $items, $position, $children ) ?>
 	<?php
 	$data = ob_get_contents();
 	ob_end_clean();
@@ -224,7 +221,7 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
 		$data['qty'] = '';
 		$data['tax'] = '';
 	}
-	ob_start(); ?><?php echo strip_tags( $desc ) ?> 
+	ob_start(); ?><?php echo apply_filters( 'si_line_item_content', $desc ) ?>
 <?php si_e('Rate:') ?> <?php esc_attr_e( $rate ) ?>  <?php si_e('Qty:') ?> <?php esc_attr_e( $qty ) ?>
 <?php if ( $has_percentage_adj ): ?>
 <?php if ( isset( $data['tax'] ) && $data['tax'] ): ?>
@@ -239,12 +236,6 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
 }
 
 function si_line_item_build_option( $position = 1.0, $items = array(), $children = array() ) {
-	$item_types = get_terms( array( SI_Estimate::LINE_ITEM_TAXONOMY ), array( 'hide_empty' => FALSE, 'fields' => 'all' ) );
-	$type_options = array();
-	foreach ( $item_types as $item_type ) {
-		$type_options[$item_type->term_id] = $item_type->name;
-	}
-
 	$data = ( !empty( $items ) && isset( $items[$position] ) ) ? $items[$position] : array();
 	$desc = ( isset( $data['desc'] ) ) ? $data['desc'] : '' ;
 	$rate = ( isset( $data['rate'] ) ) ? $data['rate'] : '' ;
@@ -257,6 +248,7 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 			<div class="item_action dd-handle"></div>
 			<!--<div class="item_action item_clone"></div>-->
 			<div class="item_action item_delete"></div>
+			<?php do_action( 'si_line_item_build_option_action_row', $data, $items, $position, $children ) ?>
 		</div><!-- / item_action_column -->
 		<div class="line_item<?php if ( !empty( $children ) ) echo ' has_children' ?>">
 			<div class="column column_desc">
@@ -333,8 +325,6 @@ function si_line_item_header_columns( $context = '') {
 
 function si_line_item_header_front_end( $context = '', $show_tax = TRUE ) {
 	ob_start(); ?>
-		<div class="column column_type">&nbsp;</div>
-		<!-- / type -->
 		<div class="column column_desc">
 			<?php si_e('Description') ?>
 		</div>

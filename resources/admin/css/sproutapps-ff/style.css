@@ -1,0 +1,90 @@
+.icon-handshake:before {
+	content: "\e615";
+}
+
+.icon-lightsaber:before {
+	content: "\e604";
+}
+
+.icon-vault:before {
+	content: "\e614";
+}
+
+.icon-sproutapps-flat:before {
+	content: "\e600";
+}
+
+.icon-sproutapps-logo:before {
+	content: "\e601";
+}
+
+.icon-sproutapps-invoices:before,
+.icon-invoice:before {
+	content: "\e602";
+}
+
+.icon-golf:before {
+	content: "\e603";
+}
+
+.icon-help-solid:before {
+	content: "\e605";
+}
+
+.icon-info-solid:before {
+	content: "\e606";
+}
+
+.icon-info:before {
+	content: "\e607";
+}
+
+.icon-question:before {
+	content: "\e608";
+}
+
+.icon-sproutapps-estimates:before,
+.icon-estimate:before {
+	content: "\e609";
+}
+
+.icon-hour-glass:before {
+	content: "\e60a";
+}
+
+.icon-percent:before {
+	content: "\e60b";
+}
+
+.icon-abacus:before {
+	content: "\e60c";
+}
+
+.icon-calculator:before {
+	content: "\e60d";
+}
+
+.icon-register:before {
+	content: "\e60e";
+}
+
+.icon-hackathon:before {
+	content: "\e60f";
+}
+
+.icon-coins:before {
+	content: "\e610";
+}
+
+.icon-checklist:before {
+	content: "\e611";
+}
+
+.icon-notebook:before {
+	content: "\e612";
+}
+
+.icon-piggy-bank:before {
+	content: "\e613";
+}
+

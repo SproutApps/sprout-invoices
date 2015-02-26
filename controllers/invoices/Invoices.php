@@ -88,6 +88,9 @@ class SI_Invoices extends SI_Controller {
 
 		// Rewrite rules
 		add_filter( 'si_register_post_type_args-'.SI_Invoice::POST_TYPE, array( __CLASS__, 'modify_post_type_slug' ) );
+
+		add_filter( 'si_line_item_content', array( __CLASS__, 'line_item_content_filter' ) );
+
 	}
 
 	/**
@@ -281,13 +284,6 @@ class SI_Invoices extends SI_Controller {
 	 * @return
 	 */
 	public static function show_line_items_view( $post, $metabox ) {
-
-		$item_types = get_terms( array( SI_Estimate::LINE_ITEM_TAXONOMY ), array( 'hide_empty' => FALSE, 'fields' => 'all' ) );
-		$type_options = array();
-		foreach ( $item_types as $item_type ) {
-			$type_options[$item_type->term_id] = $item_type->name;
-		}
-
 		$invoice = SI_Invoice::get_instance( $post->ID );
 		$total = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_total() : '0.00' ;
 		$subtotal = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_subtotal() : '0.00' ;
@@ -303,9 +299,7 @@ class SI_Invoices extends SI_Controller {
 				'total_payments' => $payments_total,
 				'subtotal' => $subtotal,
 				'deposit' => $deposit,
-				'line_items' => $line_items,
-				'item_types' => $item_types,
-				'item_types_options' => $type_options
+				'line_items' => $line_items
 			), FALSE );
 	}
 
@@ -1036,6 +1030,16 @@ class SI_Invoices extends SI_Controller {
 	//////////////
 	// Utility //
 	//////////////
+
+	public static function line_item_content_filter( $description = '' ) {
+		if ( apply_filters( 'si_the_content_filter_line_item_descriptions', TRUE ) ) {
+			$content = apply_filters( 'the_content', $description );
+		}
+		else {
+			$content = wpautop( $description );
+		}
+		return $content;
+	}
 
 	public static function is_edit_screen() {
 		$screen = get_current_screen();

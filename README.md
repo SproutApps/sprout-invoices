@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.0**
+
+* NEW: Line item commenting (pro version)
+* NEW: Pre-defined line items (pro version)
+* NEW: Dynamic text (pro version)
+* UPDATED: Admin UI tweaks
+
 **4.5**
 
 * IMPROVEMENT: UI update so other plugins wont conflict.

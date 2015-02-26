@@ -967,6 +967,7 @@ function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
 			# code...
 			break;
 	}
+	$history = apply_filters( 'si_doc_history_records_pre_sort', $history, $doc_id, $filtered );
 	// Sort in ascending order
 	asort( $history, SORT_NUMERIC );
 	
@@ -1030,13 +1031,25 @@ function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
 			$p_post = $payment->get_post();
 
 			$returned_history[ $item_id ]['type'] = si__( 'Payment');
-			$returned_history[ $item_id ]['status_type'] = si__('payment');
+			$returned_history[ $item_id ]['status_type'] = 'payment';
 			$returned_history[ $item_id ]['post_date'] = $p_post->post_date;
 			$returned_history[ $item_id ]['update_title'] = $p_post->post_title;
 
 			$returned_history[ $item_id ]['content'] = '';
 			$returned_history[ $item_id ]['content'] .= '<span>'.$payment->get_payment_method().'</span><br/>';
 			$returned_history[ $item_id ]['content'] .= '<b>'.si__( 'Payment Total' ).':</b> '.sa_get_formatted_money( $payment->get_amount(), $item_id );
+		}
+		else {
+			if ( $filtered ) {
+				$comment = get_comment( $item_id );
+				if ( !is_wp_error( $comment ) ) {
+					$returned_history[ $item_id ]['type'] = $comment->comment_author;
+					$returned_history[ $item_id ]['status_type'] = 'comment';
+					$returned_history[ $item_id ]['post_date'] = $comment->comment_date;
+					$returned_history[ $item_id ]['content'] = get_comment_text( $comment->comment_ID ) . get_comment_meta( $comment->comment_ID, SI_Doc_Comments::DOC_COMMENT_META_POS, true ) ;
+				}
+			}
+			
 		}
 	}
 

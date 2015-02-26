@@ -1505,7 +1505,7 @@
      * $userAssignment->set( "user-id", 11111 ); 
      * $userAssignment->set( "project-id", 12345 ); 
      * $userAssignment->set( "deactivated", true ); 
-     * $userAssignment->set( "hourly-rate", 74.50 ); 
+     * $userAssignment->set( "hourly-rate", 75.00 ); 
      * $userAssignment->set( "is-project-manager", false );
      * 
      * $api = new HarvestAPI(); 
@@ -1662,7 +1662,7 @@
      * $taskAssignment->set( "id", 67849 ); 
      * $taskAssignment->set( "project-id", 12345 ); 
      * $taskAssignment->set( "deactivated", false ); 
-     * $taskAssignment->set( "hourly-rate", 74.50 );
+     * $taskAssignment->set( "hourly-rate", 75.00 );
      * 
      * $api = new HarvestAPI(); 
      * 

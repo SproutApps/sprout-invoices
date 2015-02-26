@@ -188,7 +188,7 @@ function si_is_estimate_submission( $id = 0 ) {
 endif;
 
 
-if ( !function_exists('si_get_estimateissue_date') ) :
+if ( !function_exists('si_get_estimate_issue_date') ) :
 /**
  * Get the estimate issue_date
  * @param  integer $id 

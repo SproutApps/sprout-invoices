@@ -11,7 +11,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	const POST_TYPE = 'sa_estimate';
 	const PROJECT_TAXONOMY = 'si_project_types';
-	const LINE_ITEM_TAXONOMY = 'si_line_item_types';
+	const LINE_ITEM_TAXONOMY = 'si_line_item_types'; // deprecated, todo remove
 	const REWRITE_SLUG = 'sprout-estimate';
 
 	const STATUS_TEMP = 'temp'; // estimate is in a draft state, can't use 'draft' otherwise a url will not be created
@@ -63,6 +63,7 @@ class SI_Estimate extends SI_Post_Type {
 		self::register_post_type( self::POST_TYPE, 'Estimate', 'Estimates', $post_type_args );
 
 		// register category taxonomy
+		// TODO remove since it's now deprecated
 		$singular = 'Task';
 		$plural = 'Tasks';
 		$taxonomy_args = array(
