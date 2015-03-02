@@ -10,7 +10,30 @@ class SI_Customizer extends SI_Controller {
 		add_action( 'customize_register', array( __CLASS__, 'customizer' ) );
 		add_action( 'customize_preview_init', array( __CLASS__, 'customizer_js' ) );
 		add_action( 'wp_head', array( __CLASS__, 'inject_css' ) );
+
+
+		// Admin bar
+		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 10, 1 );
 	}
+
+
+	//////////////
+	// Utility //
+	//////////////
+
+
+	public static function add_link_to_admin_bar( $items ) {
+		if ( si_get_doc_context() ) {
+			$items[] = array(
+				'id' => 'customizer',
+				'title' => self::__( 'Customize' ),
+				'href' => add_query_arg( array( 'url' => urlencode( get_permalink() ) ), admin_url( 'customize.php' ) ),
+				'weight' => 1000,
+			);
+		}
+		return $items;
+	}
+
 
 	public static function customizer_js() {
 		wp_enqueue_script(

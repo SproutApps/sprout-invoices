@@ -1559,11 +1559,11 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:493
 msgid ""
-"This note will be added to the Estimate Notification via the [sender_note] "
+"This note will be added to the Estimate Notification via the [admin_note] "
 "shortcode."
 msgstr ""
 "Esta nota será adicionada à Notificação de Orçamento via o shortcode "
-"[sender_note]."
+"[admin_note]."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates.php:690
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:895
@@ -1757,11 +1757,11 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:517
 msgid ""
-"This note will be added to the Invoice Notification via the [sender_note] "
+"This note will be added to the Invoice Notification via the [admin_note] "
 "shortcode."
 msgstr ""
 "Esta nota será adicionada à Notificação de Fatura via o código curto "
-"[sender_note]."
+"[admin_note]."
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices.php:633
 #: plugins/sprout-invoices-pro/models/Invoice.php:73

@@ -481,7 +481,7 @@ class SI_Estimates extends SI_Controller {
 			'label' => self::__( 'Note' ),
 			'type' => 'textarea',
 			'default' => $estimate->get_sender_note(),
-			'description' => si__('This note will be added to the Estimate Notification via the [sender_note] shortcode.')
+			'description' => si__('This note will be added to the Estimate Notification via the [admin_note] shortcode.')
 		);
 
 		$fields['doc_id'] = array(

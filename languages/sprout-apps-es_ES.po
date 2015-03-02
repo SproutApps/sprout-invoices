@@ -1344,7 +1344,7 @@ msgstr ""
 
 # @ sprout-invoices-pro
 #: controllers/estimates/Estimates.php:495
-msgid "This note will be added to the Estimate Notification via the [sender_note] shortcode."
+msgid "This note will be added to the Estimate Notification via the [admin_note] shortcode."
 msgstr ""
 
 # @ sprout-invoices-pro
@@ -1575,7 +1575,7 @@ msgstr ""
 
 # @ sprout-invoices-pro
 #: controllers/invoices/Invoices.php:519
-msgid "This note will be added to the Invoice Notification via the [sender_note] shortcode."
+msgid "This note will be added to the Invoice Notification via the [admin_note] shortcode."
 msgstr ""
 
 # @ default

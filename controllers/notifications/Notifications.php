@@ -486,17 +486,15 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( is_numeric( $user_id ) && $user_id ) {
 			// Fallback to Username
 			$user = get_userdata( $user_id );
-			if ( $user->display_name == $user->user_nicename ) { // display name is still set to userlogin
-				// Build off first and last name.
-				$name = $user->first_name . ' ' . $user->last_name;
-				// no first and last name?
-				if ( $name == ' ' ) {
-					$name = $user->display_name;
-				}
+			// Build off first and last name.
+			$name = $user->first_name . ' ' . $user->last_name;
+			// no first and last name?
+			if ( $name == ' ' ) {
+				$name = $user->display_name;
 			}
 		}
 		// If no user can be found attempt to use the client.
-		else {
+		if ( $name == self::__('Client') ) {
 			if ( isset( $data['client'] ) && is_a( $data['client'], 'SI_Client' ) ) {
 				$client_id = $data['client']->get_id();
 				$name = get_the_title( $client_id );
