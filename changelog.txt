@@ -1,3 +1,10 @@
+= 5.0.2 =
+
+* FIX: Client Dashboard notification error; fixed with better abstraction
+* FIX: Shortcode fix
+* FIX: Free version fix for PayPal
+* FIX: Add Customizer to the SI menu for clarity
+
 = 5.0.1 =
 
 * FIX: Comment issue with multiple line items open

@@ -1064,6 +1064,9 @@ function si_is_invoice_recurring( $invoice ) {
 	if ( !is_a( $invoice, 'SI_Invoice' ) ) {
 		return FALSE;
 	}
+	if ( !class_exists( 'SI_Subscription_Payments' ) ) {
+		return FALSE;
+	}
 	return SI_Subscription_Payments::has_subscription_payment( $invoice->get_id() );
 }
 
