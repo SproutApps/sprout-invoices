@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.1**
+
+* New: Compatibility class to resolve other plugins problems, e.g. Gravity Forms erring out js on cusotm post type pages
+* FIX: More error reports for missing notifications.
+* FIX: Customizer filter should only be for the front-end
+* FIX: Client Dashboard was blank when a non-client was logged in
+
 **5.0.2**
 
 * FIX: Client Dashboard notification error; fixed with better abstraction

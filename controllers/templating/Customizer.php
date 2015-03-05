@@ -23,7 +23,7 @@ class SI_Customizer extends SI_Controller {
 
 
 	public static function add_link_to_admin_bar( $items ) {
-		if ( si_get_doc_context() ) {
+		if ( is_single() && si_get_doc_context() ) {
 			$items[] = array(
 				'id' => 'customizer',
 				'title' => self::__( 'Customize' ),

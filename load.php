@@ -144,6 +144,9 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/importers/WP-Invoice.php';
 	do_action( 'si_importers_loaded' );
 
+	// Fix others problems
+	require_once SI_PATH.'/controllers/compat/Compatibility.php';
+
 	// all done
 	do_action( 'si_require_controller_classes' );
 
@@ -255,6 +258,9 @@ function sprout_invoices_load() {
 
 	// help
 	SI_Help::init();
+
+	// Compat
+	SI_Compatibility::init();
 
 	// addons
 	require_once SI_PATH.'/add-ons/Addons.php';

@@ -416,9 +416,9 @@ class SI_Notifications_Control extends SI_Controller {
 
 		$notification_title = self::get_notification_instance_subject( $notification_name, $data );
 		$notification_content = self::get_notification_instance_content( $notification_name, $data );
-
 		// Don't send notifications with empty titles or content
 		if ( empty( $notification_title ) || empty( $notification_content ) ) {
+			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Has no Content', $data );
 			return;
 		}
 
@@ -431,6 +431,7 @@ class SI_Notifications_Control extends SI_Controller {
 		// Plugin addons can suppress specific notifications by filtering 'si_suppress_notification'
 		$suppress_notification = apply_filters( 'si_suppress_notification', FALSE, $notification_name, $data, $from_email, $from_name, $html );
 		if ( $suppress_notification ) {
+			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Suppressed', $data );
 			return;
 		}
 
