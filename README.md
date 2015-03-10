@@ -90,6 +90,12 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.2**
+
+* NEW: 'si_default_due_in_days' filter added
+* FIX: Dynamic text within notification shortcodes
+* Misc. Fixes 
+
 **5.1**
 
 * New: Compatibility class to resolve other plugins problems, e.g. Gravity Forms erring out js on cusotm post type pages

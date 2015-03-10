@@ -598,6 +598,15 @@ class SI_Notifications extends SI_Notifications_Control {
 				$doc_id = $data['estimate']->get_id();
 			}
 		}
+		if ( $doc_id ) {
+			// Set the global post to pass the doc id around town
+			global $post;
+			if ( !is_a( $post, 'Post' ) ) {
+				$post = new stdClass;
+				$post->ID = $doc_id;
+				$post = new WP_Post( (object) $post );
+			}
+		}
 		if ( empty( $line_items ) ) {
 			return '';
 		}
@@ -652,6 +661,15 @@ class SI_Notifications extends SI_Notifications_Control {
 				$doc_id = $data['estimate']->get_id();
 			}
 		}
+		if ( $doc_id ) {
+			// Set the global post to pass the doc id around town
+			global $post;
+			if ( !is_a( $post, 'Post' ) ) {
+				$post = new stdClass;
+				$post->ID = $doc_id;
+				$post = new WP_Post( (object) $post );
+			}
+		}
 		if ( empty( $line_items ) ) {
 			return '';
 		}
@@ -693,6 +711,15 @@ class SI_Notifications extends SI_Notifications_Control {
 		else {
 			if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$line_items = $data['estimate']->get_line_items();
+			}
+		}
+		if ( $doc_id ) {
+			// Set the global post to pass the doc id around town
+			global $post;
+			if ( !is_a( $post, 'Post' ) ) {
+				$post = new stdClass;
+				$post->ID = $doc_id;
+				$post = new WP_Post( (object) $post );
 			}
 		}
 		if ( empty( $line_items ) ) {

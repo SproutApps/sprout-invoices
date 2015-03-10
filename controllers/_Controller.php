@@ -925,6 +925,15 @@ abstract class SI_Controller extends Sprout_Invoices {
 			wp_enqueue_script( 'dropdown' );
 		}
 
+		if ( $screen_post_type == SI_Project::POST_TYPE ) {
+			
+			wp_enqueue_script( 'si_admin_est_and_invoices' );
+
+			// dropdowns
+			wp_enqueue_style( 'dropdown' );
+			wp_enqueue_script( 'dropdown' );
+		}
+
 		wp_enqueue_script( 'qtip' );
 		wp_enqueue_script( 'select2' );
 		wp_enqueue_style( 'select2_css' );

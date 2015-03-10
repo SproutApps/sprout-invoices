@@ -1,5 +1,11 @@
 = 5.2 =
 
+* NEW: 'si_default_due_in_days' filter added
+* FIX: Dynamic text within notification shortcodes
+* Misc. Fixes 
+
+= 5.1 =
+
 * New: Compatibility class to resolve other plugins problems, e.g. Gravity Forms erring out js on cusotm post type pages
 * FIX: More error reports for missing notifications.
 * FIX: Customizer filter should only be for the front-end

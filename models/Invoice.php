@@ -325,7 +325,8 @@ class SI_Invoice extends SI_Post_Type {
 	public function get_due_date() {
 		$date = (int)$this->get_post_meta( self::$meta_keys['due_date'] );
 		if ( !$date ) {
-			$date = strtotime( $this->post->post_date )+(60*60*24*14);
+			$days = apply_filters( 'si_default_due_in_days', 14 );
+			$date = strtotime( $this->post->post_date )+(60*60*24*$days);
 		};
 		return $date;
 	}
