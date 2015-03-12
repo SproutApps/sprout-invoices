@@ -1384,7 +1384,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function maybe_clone_and_redirect() {
 		if ( isset( $_GET['clone_si_post'] ) && isset( $_GET['post'] ) && $_GET['clone_si_post'] ) {
-			$post_id = $_GET['post'];
+			$post_id = (int) $_GET['post'];
 			if ( check_admin_referer( 'clone-si_post_'.$post_id, 'clone_si_post' ) ) {
 				$new_post_type = ( isset( $_GET['post_type'] ) ) ? $_GET['post_type'] : '' ;
 				$cloned_post_id = self::clone_post( $post_id, 'publish', $new_post_type );

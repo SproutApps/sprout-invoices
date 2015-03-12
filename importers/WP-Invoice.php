@@ -77,7 +77,6 @@ class SI_WPInvoice_Import extends SI_Importer {
 	public static function maybe_process_import() {
 		if ( isset( $_POST[self::PROCESS_ACTION] ) && wp_verify_nonce( $_POST[self::PROCESS_ACTION], self::PROCESS_ACTION ) ) {
 			add_filter( 'si_show_importer_settings', '__return_false' );
-			add_action( 'si_import_progress', array( __CLASS__, 'init_import_show_progress' ) );
 		}
 	}
 
@@ -91,19 +90,14 @@ class SI_WPInvoice_Import extends SI_Importer {
 	}
 
 	/**
-	 * Start the import process
+	 * First step in the import progress
+	 * @return 
 	 */
-	public static function init_import_show_progress() {
-		// Store the import progress
-		get_option( self::PROGRESS_OPTION, array() );
+	public static function import_authentication() {
 
-		// Suppress notifications
-		add_filter( 'suppress_notifications', '__return_true' );
-
-		// run script forever
-		set_time_limit( 0 );
-
-		self::update_progress_info( 'authentication', 0, 0, 10, self::__('Looking for any WP-Invoices...') );
+		if ( !class_exists( 'WPI_Invoice' ) ) {
+			self::return_error( self::__('WP-Invoices needs to be activated before proceeding.') );
+		}
 
 		$args = array(
 				'post_type' => 'wpi_object', // why object? I don't get it either.
@@ -115,36 +109,64 @@ class SI_WPInvoice_Import extends SI_Importer {
 		$wp_invoice_ids = get_posts( $args );
 
 		if ( empty( $wp_invoice_ids ) ) {
-			self::update_progress_info( 'authentication', 0, 0, 100, self::__('We couldn\'t fine any WP-Invoices to import.') );
-			self::update_progress_info( 'clients', 0, 0, 100, self::__('Skipped.') );
-			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Skipped.') );
-			self::update_progress_info( 'estimates', 0, 0, 100, self::__('Skipped.') );
-			self::update_progress_info( 'invoices', 0, 0, 100, self::__('Skipped.') );
-			self::update_progress_info( 'payments', 0, 0, 100, self::__('Skipped.') );
-			echo '<script language="javascript">document.getElementById("complete_import").className="";</script>';
+			self::return_error( self::__('We couldn\'t fine any WP-Invoices to import.') );
 		}
 
-		if ( !class_exists( 'WPI_Invoice' ) ) {
-			self::update_progress_info( 'authentication', 0, 0, 100, self::__('WP-Invoices needs to be activated before proceeding.') );
-			self::update_progress_info( 'clients', 0, 0, 100, self::__('Incomplete.') );
-			self::update_progress_info( 'contacts', 0, 0, 100, self::__('Incomplete.') );
-			self::update_progress_info( 'estimates', 0, 0, 100, self::__('Incomplete.') );
-			self::update_progress_info( 'invoices', 0, 0, 100, self::__('Incomplete.') );
-			self::update_progress_info( 'payments', 0, 0, 100, self::__('Incomplete.') );
-		}
+		$total_records = count( $wp_invoice_ids );
+		self::return_progress( array( 
+			'authentication' => array( 
+				'message' => sprintf( self::__('Preparing to import from %s invoices...'), $total_records ), 
+				'progress' => 90
+				),
+			'clients' => array(
+				'message' => sprintf( self::__('Importing clients from %s WP-Invoice records...'), $total_records ), 
+				'progress' => 90,
+				),
+			'contacts' => array( 
+				'message' => sprintf( self::__('Importing contacts from %s WP-Invoice records...'), $total_records ),
+				'progress' => 90,
+				),
+			'estimates' => array( 
+				'message' => sprintf( self::__('No estimates will be imported, unfortunately...'), $total_records ),
+				'progress' => 10,
+				),
+			'invoices' => array( 
+				'message' => sprintf( self::__('Importing invoices from %s WP-Invoice records...'), $total_records ),
+				'progress' => 90,
+				),
+			'payments' => array( 
+				'message' => sprintf( self::__('Importing payments from %s WP-Invoice records...'), $total_records ),
+				'progress' => 90,
+				'next_step' => 'invoices'
+				),
+			) );
+	}
 
+	public static function import_invoices() {
+		// Store the import progress
+		get_option( self::PROGRESS_OPTION, array() );
+
+		// Suppress notifications
+		add_filter( 'suppress_notifications', '__return_true' );
+
+		// run script forever
+		set_time_limit( 0 );
+
+		$args = array(
+				'post_type' => 'wpi_object', // why object? I don't get it either.
+				'post_status' => 'any',
+				'posts_per_page' => -1,
+				'fields' => 'ids'
+			);
+
+		$wp_invoice_ids = get_posts( $args );
 
 		$clients_tally = 0;
 		$contacts_tally = 0;
 		$invoices_tally = 0;
 		$payments_tally = 0;
 		$invoices_total = count( $wp_invoice_ids );
-
-		self::update_progress_info( 'clients', $clients_tally, $invoices_total );
-		self::update_progress_info( 'contacts', $contacts_tally, $invoices_total );
-		self::update_progress_info( 'invoices', $invoices_tally, $invoices_total );
-		self::update_progress_info( 'estimates', 0, 0, 100, self::__('WP-Invoices doesn\'t support estimates.') );
-		self::update_progress_info( 'payments', $payments_tally, $invoices_total, 0, sprintf( self::__('Created %o payments from %o invoices.') , $payments_tally, $invoices_total ) );
+		$total_records = count( $wp_invoice_ids );
 
 		foreach ( $wp_invoice_ids as $wp_invoice_id ) {
 			$wp_invoice = new WPI_Invoice();
@@ -160,9 +182,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			// Clients //
 			/////////////
 			$clients_tally++;
-			self::update_progress_info( 'authentication', 0, 0, 20, self::__('Attempting to import new clients from what WP-Invoice stores...') );
 			$new_client_id = self::create_client( $wp_invoice );
-			self::update_progress_info( 'clients', $clients_tally, $invoices_total );
 			
 			//////////////
 			// Contacts //
@@ -170,33 +190,24 @@ class SI_WPInvoice_Import extends SI_Importer {
 			// Just in case the role wasn't already added
 			add_role( SI_Client::USER_ROLE, self::__('Client'), array( 'read' => true, 'level_0' => true ) );
 			$contacts_tally++;
-			self::update_progress_info( 'authentication', 0, 0, 40, self::__('Attempting to convert wp-invoice users to clients...') );
 			self::create_contact( $wp_invoice, $new_client_id );
-			self::update_progress_info( 'contacts', $contacts_tally, $invoices_total );
 
 			//////////////
 			// Invoices //
 			//////////////
 			$invoices_tally++;
-			self::update_progress_info( 'authentication', 0, 0, 60, self::__('Attempting to import invoices...') );
 			$new_invoice = self::create_invoice( $wp_invoice, $new_client_id );
-			self::update_progress_info( 'invoices', $invoices_tally, $invoices_total );
 
 			//////////////
 			// Payments //
 			//////////////
-			self::update_progress_info( 'authentication', 0, 0, 80, self::__('Attempting to import payments...') );
 			if ( !empty( $wp_invoice['log'] ) ) {
 				foreach ( $wp_invoice['log'] as $key => $event ) {
 					if ( $event['attribute'] == 'balance' ) {
 						$payments_tally++;
 						self::create_invoice_payment( $event, $new_invoice );
-						self::update_progress_info( 'payments', $payments_tally, $invoices_total, 100, sprintf( self::__('Created %o payment(s) from %o invoices.') , $payments_tally, $invoices_total ) );
 					}
 				}
-			}
-			else {
-				self::update_progress_info( 'authentication', 0, 0, 80, self::__('No payments were found.') );
 			}
 			
 			if ( self::delete_wpinvoice_data() ) {
@@ -209,8 +220,34 @@ class SI_WPInvoice_Import extends SI_Importer {
 		//////////////
 		// All done //
 		//////////////
-		self::update_progress_info( 'authentication', 0, 0, 100, self::__('Finished importing...') );
-		echo '<script language="javascript">document.getElementById("complete_import").className="";</script>';
+		// Completed previously
+		self::return_progress( array( 
+			'authentication' => array( 
+				'message' => sprintf( self::__('Preparing to import from %s invoices...'), $total_records ), 
+				'progress' => 100
+				),
+			'clients' => array(
+				'message' => sprintf( self::__('Importing %s clients from %s WP-Invoice records...'), $clients_tally, $total_records ), 
+				'progress' => 100,
+				),
+			'contacts' => array( 
+				'message' => sprintf( self::__('Importing %s contacts from %s WP-Invoice records...'), $contacts_tally, $total_records ), 
+				'progress' => 100,
+				),
+			'estimates' => array( 
+				'message' => self::__('No estimates were imported'), 
+				'progress' => 100,
+				),
+			'invoices' => array( 
+				'message' => sprintf( self::__('Importing %s invoices from %s WP-Invoice records...'), $invoices_tally, $total_records ), 
+				'progress' => 100,
+				),
+			'payments' => array( 
+				'message' => sprintf( self::__('Importing %s payments from %s WP-Invoice records...'), $payments_tally, $total_records ), 
+				'progress' => 100,
+				'next_step' => 'complete'
+				),
+			) );
 
 	}
 
@@ -219,8 +256,9 @@ class SI_WPInvoice_Import extends SI_Importer {
 		// Don't create a duplicate if this was already imported.
 		if ( !empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Client imported already', $wp_invoice['ID'] );
-			return;
+			return $possible_dups[0];
 		}
+
 		$wp_invoice_user_data = $wp_invoice['user_data'];
 		// args to create new client
 		$address = array(
@@ -243,6 +281,17 @@ class SI_WPInvoice_Import extends SI_Importer {
 			}
 			$args['company_name'] = $wp_invoice_user_data['first_name'] . ' ' . $wp_invoice_user_data['last_name'];
 		}
+
+		// Attempt to find matching client
+		if ( isset( $args['company_name'] ) ) {
+			global $wpdb;
+			$client_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s", esc_sql( $args['company_name'] ), SI_Client::POST_TYPE ) );
+			if ( !empty( $client_ids ) ) {
+				do_action( 'si_error', 'Client imported already (name match)', $wp_invoice['ID'] );
+				return $client_ids[0];
+			}
+		}
+
 		$client_id = SI_Client::new_client( $args );
 		// create import record
 		update_post_meta( $client_id, self::WPINVOICE_ID, $wp_invoice['ID'] );
@@ -429,24 +478,30 @@ class SI_WPInvoice_Import extends SI_Importer {
 		//
 	}
 
-	public static function update_progress_info( $context = 'contacts', $i = 0, $total_records = 0, $percent = 0, $messaging = '' ) {
-		if ( !$percent ) {
-			if ( $i > 0 && $total_records > 0 ) {
-				$percent = intval($i/$total_records * 100);
-			}
-			else {
-				$percent = 100;
-			}
-		}
-		if ( $messaging == '' ) {
-			$messaging = sprintf( self::__('%o %s of %o imported.'), $i, $context, $total_records );
-		}
-		echo '<span id="progress_js"><script language="javascript">
-			document.getElementById("'.$context.'_import_progress").innerHTML="<div style=\"width:'.$percent.'%;background-color:#ddd;\">&nbsp;</div>";
-			document.getElementById("'.$context.'_import_information").innerHTML="'.$messaging.'";
-			document.getElementById("progress_js").remove();
-			</script></span>';
-		flush();
+	/**
+	 * Utility to return a JSON error
+	 * @param  string $message 
+	 * @return json          
+	 */
+	public static function return_error( $message ) {
+		header( 'Content-type: application/json' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo json_encode( 
+			array( 'error' => TRUE, 'message' => $message )
+					);
+		exit();
+	}
+
+	/**
+	 * Return the progress array
+	 * @param  array  $array associated array with method and status message
+	 * @return json        
+	 */
+	public static function return_progress( $array = array() ) {
+		header( 'Content-type: application/json' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo json_encode( $array );
+		exit();
 	}
 
 }

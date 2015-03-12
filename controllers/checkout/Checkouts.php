@@ -218,7 +218,7 @@ class SI_Checkouts extends SI_Controller {
 		$invoice_id = 0;
 		if ( isset( $_GET['sa_invoice'] ) && !self::using_permalinks() ) {
 			if ( is_numeric( $_GET['sa_invoice'] ) ) {
-				$invoice_id = $_GET['sa_invoice'];
+				$invoice_id = (int) $_GET['sa_invoice'];
 			}
 			// slugs are used in some strange circumstances
 			else {

@@ -317,11 +317,11 @@ class SI_Payments_Table extends WP_List_Table {
 		}
 		// Search
 		elseif ( isset( $_GET['s'] ) && $_GET['s'] != '' ) {
-			$args = array_merge( $args, array( 's' => $_GET['s'] ) );
+			$args = array_merge( $args, array( 's' => sanitize_text_field( $_GET['s'] ) ) );
 		}
 		// Filter by date
 		if ( isset( $_GET['m'] ) && $_GET['m'] != '' ) {
-			$args = array_merge( $args, array( 'm' => $_GET['m'] ) );
+			$args = array_merge( $args, array( 'm' => sanitize_text_field( $_GET['m'] ) ) );
 		}
 		
 		$payments = new WP_Query( $args );

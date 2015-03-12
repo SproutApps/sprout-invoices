@@ -95,7 +95,6 @@ class SI_Free_License extends SI_Controller {
 		if ( !self::$uid ) {
 			return;
 		}
-		echo '<img src="'.self::API_CB.'resources/external/thank-you.png?suid='.self::$uid.'" />';
 	}
 
 

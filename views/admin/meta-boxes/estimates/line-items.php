@@ -60,7 +60,7 @@
 					<?php sa_formatted_money( $subtotal ) ?>
 				</div>
 				<div id="line_total">
-					<b title="Total includes tax and discount." class="helptip"><?php si_e('Total') ?></b>
+					<b title="<?php si_e('Total includes tax and discount.') ?>" class="helptip"><?php si_e('Total') ?></b>
 					<?php sa_formatted_money( $total ) ?>
 				</div>
 			</div>

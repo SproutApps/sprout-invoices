@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.3**
+
+* NEW: Improve WP-Invoice Importer
+
 **5.2**
 
 * NEW: 'si_default_due_in_days' filter added

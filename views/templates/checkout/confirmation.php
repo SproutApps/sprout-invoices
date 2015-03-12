@@ -214,7 +214,7 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 										<?php sa_formatted_money( si_get_invoice_subtotal() ) ?>
 									</div>
 									<div id="line_total">
-										<b title="Total includes tax and discount." class="helptip"><?php si_e('Total') ?></b>
+										<b title="<?php si_e('Total includes tax and discount.') ?>" class="helptip"><?php si_e('Total') ?></b>
 										<?php sa_formatted_money( si_get_invoice_calculated_total() ) ?>
 									</div>
 									<?php if ( si_get_invoice_payments_total() ): ?>
