@@ -19,6 +19,7 @@ class SI_Client extends SI_Post_Type {
 		'currency_symbol' => '_currency_symbol',
 		'associated_users' => '_associated_users',
 		'money_format' => '_money_format',
+		'phone' => '_phone',
 		'website' => '_website',
 	); // A list of meta keys this class cares about. Try to keep them in alphabetical order.
 
@@ -87,6 +88,7 @@ class SI_Client extends SI_Post_Type {
 		$defaults = array(
 			'company_name' => sprintf( self::__('New Client: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'website' => '',
+			'phone' => '',
 			'address' => array(),
 			'currency' => '',
 			'user_id' => 0
@@ -106,6 +108,7 @@ class SI_Client extends SI_Post_Type {
 		$client->set_address( $parsed_args['address'] );
 		$client->set_currency( $parsed_args['currency'] );
 		$client->set_website( $parsed_args['website'] );
+		$client->set_phone( $parsed_args['phone'] );
 
 		if ( $parsed_args['user_id'] ) {	
 			$client->add_associated_user( $parsed_args['user_id'] );	
@@ -202,6 +205,14 @@ class SI_Client extends SI_Post_Type {
 
 	public function set_money_format( $money_format ) {
 		return $this->save_post_meta( array( self::$meta_keys['money_format'] => $money_format ) );
+	}
+
+	public function get_phone() {
+		return $this->get_post_meta( self::$meta_keys['phone'] );
+	}
+
+	public function set_phone( $phone ) {
+		return $this->save_post_meta( array( self::$meta_keys['phone'] => $phone ) );
 	}
 
 	public function get_website() {

@@ -4,16 +4,17 @@
 
 <div id="<?php echo $page ?>" class="wrap">
 
-	<?php screen_icon(); ?>
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 	<div class="clearfix">
-		<?php do_action( 'si_settings_page_sub_heading_'.$_GET['page'] ); ?>
+		<?php 
+			$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '' ;
+			do_action( 'si_settings_page_sub_heading_'.$page ); ?>
 	</div>
 
 	<?php if ( apply_filters( 'si_show_importer_settings', '__return_true' ) ): ?>
-		<form method="post" class="si_settings_form">
+		<form method="post" class="si_settings_form" enctype="multipart/form-data">
 			<h3><?php self::_e('Import Clients, Users, Estimates, Invoices and Payments') ?></h3>
 			<?php settings_fields( $page ); ?>
 			<table class="form-table">

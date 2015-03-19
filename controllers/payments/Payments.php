@@ -15,6 +15,7 @@ class SI_Payments extends SI_Controller {
 	}
 
 	public static function init() {
+		
 		self::register_settings();
 
 		// Help Sections

@@ -101,7 +101,7 @@ class SI_Project extends SI_Post_Type {
 		}
 		$project->set_associated_clients( $parsed_args['associated_clients'] );
 
-		do_action( 'sa_new_project', $project, $args );
+		do_action( 'sa_new_project', $project, $parsed_args );
 		return $id;
 	}
 
@@ -207,12 +207,14 @@ class SI_Project extends SI_Post_Type {
 		}
 		if ( !$time || !is_a( $time, 'SI_Time' ) ) {
 			// get default time to clock time to.
-			
+			$activity_id = SI_Time::default_time();
+			$time = SI_Time::get_instance( $activity_id );
 		}
 		// Create time entry record
 		$new_time_id = $time->new_time( $time_data );
 		// Add to the associated array on this project
 		$this->add_associated_time( $new_time_id );
+		return $new_time_id;
 	}
 
 	/**

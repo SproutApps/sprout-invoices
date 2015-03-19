@@ -40,7 +40,7 @@ class SA_Settings_API extends SI_Controller {
 	}
 
 	public static function init() {
-
+		
 		/////////////////////////
 		// Admin Setting Pages //
 		/////////////////////////
@@ -76,6 +76,7 @@ class SA_Settings_API extends SI_Controller {
 		// save meta boxes
 		add_action( 'save_post', array( __CLASS__, 'save_meta_boxes' ), 10, 2 );
 	}
+
 
 	//////////////////
 	// Admin Pages //

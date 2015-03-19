@@ -1464,14 +1464,24 @@ dt span.creation_event:before {
 	margin-right: 10px;
 	width: 130px
 }
+#side-sortables .admin_fields .label_wrap {
+	margin-left: 0px;
+	margin-bottom: 5px;
+	width: auto;	
+}
 .admin_fields .checkbox.input_wrap {
 	margin-left: 141px;
 }
-
+#side-sortables .admin_fields .checkbox.input_wrap {
+	margin-left: auto;
+}
 .admin_fields .input_wrap {
 	float: left;
 	position: relative;
 	width: 440px
+}
+#side-sortables .admin_fields .input_wrap {
+	width: auto
 }
 
 .split.admin_fields {

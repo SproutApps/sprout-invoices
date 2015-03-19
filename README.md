@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.4**
+
+* FIX: Return all clients on Client Dashboard
+* Improvement: Freshbooks import
+* Improvement: Added nofollow for robots in header meta tag
+* New: Create a payment when an invoice is marked as paid.
+
 **5.3**
 
 * NEW: Improve WP-Invoice Importer

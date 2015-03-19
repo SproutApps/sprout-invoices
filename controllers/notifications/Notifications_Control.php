@@ -34,6 +34,7 @@ class SI_Notifications_Control extends SI_Controller {
 		add_action( 'init', array( __CLASS__, 'notifications_and_shortcodes' ), 5 );
 
 		// register settings
+		
 		self::register_settings();
 
 		// Meta boxes
@@ -602,6 +603,7 @@ class SI_Notifications_Control extends SI_Controller {
 		}
 		if ( !is_a( $user, 'WP_User' ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Get User Email FAILED', $user );
+			wpbt();
 			return FALSE;
 		}
 		$user_email = $user->user_email;
@@ -697,7 +699,6 @@ class SI_Notifications_Control extends SI_Controller {
 		$wp_list_table->prepare_items();
 	?>
 	<div class="wrap">
-		<?php screen_icon(); ?>
 		<h2 class="nav-tab-wrapper">
 			<?php do_action( 'sprout_settings_tabs' ); ?>
 		</h2>

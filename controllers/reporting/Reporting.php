@@ -18,6 +18,7 @@ class SI_Reporting extends SI_Controller {
 	public static function init() {
 		// register settings
 		self::register_settings();
+		
 		add_filter( 'si_settings_page_sub_heading_sprout-apps/settings', array( get_class(), 'reports_subtitle' ) );
 
 		// Help Sections

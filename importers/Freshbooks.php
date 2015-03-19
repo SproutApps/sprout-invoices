@@ -698,8 +698,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		}
 		$clients = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::FRESHBOOKS_ID => $estimate['client_id'] ) );
 		// Get client and confirm it's validity
-		$client = SI_Client::get_instance( $clients[0] );
-		$client_id = ( is_a( $client, 'SI_Client' ) ) ? $client->get_id() : 0 ;
+		$client_id = 0;
+		if ( is_array( $clients ) ) {
+			$client = SI_Client::get_instance( $clients[0] );
+			$client_id = ( is_a( $client, 'SI_Client' ) ) ? $client->get_id() : 0 ;
+		}
 
 		$args = array(
 			'subject' => ( $estimate['description'] ) ? $estimate['description'] : 'Freshbooks Import #' . $estimate['estimate_id']
@@ -786,7 +789,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 		$client_id = ( is_a( $client, 'SI_Client' ) ) ? $client->get_id() : 0 ;
 
 		$args = array(
-			'subject' => ( $invoice['description'] ) ? $invoice['description'] : 'Freshbooks Import #' . $invoice['invoice_id']
+			'subject' => ( isset( $invoice['description'] ) ) ? $invoice['description'] : 'Freshbooks Import #' . $invoice['invoice_id']
 		);
 		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_TEMP );
 		update_post_meta( $new_invoice_id, self::FRESHBOOKS_ID, $invoice['invoice_id'] );

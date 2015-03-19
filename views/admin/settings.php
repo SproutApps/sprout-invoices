@@ -2,13 +2,13 @@
 <?php 
 	$page = ( !isset( $_GET['tab'] ) ) ? $page : self::TEXT_DOMAIN.'/'.$_GET['tab'] ; ?>
 <div id="<?php echo $page ?>" class="wrap">
-
-	<?php screen_icon(); ?>
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 	<div class="clearfix">
-		<?php do_action( 'si_settings_page_sub_heading_'.$_GET['page'] ); ?>
+		<?php 
+			$p = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '' ;
+			do_action( 'si_settings_page_sub_heading_'.$p ); ?>
 	</div>
 
 	<span id="ajax_saving" style="display:none" data-message="<?php self::_e('Saving...') ?>"></span>

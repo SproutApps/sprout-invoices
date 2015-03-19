@@ -1,11 +1,11 @@
 <div class="wrap">
-
-	<?php screen_icon(); ?>
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 	<div class="clearfix">
-		<?php do_action( 'si_settings_page_sub_heading_'.$_GET['page'] ); ?>
+		<?php 
+			$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '' ;
+			do_action( 'si_settings_page_sub_heading_'.$page ); ?>
 	</div>
 	<div id="si_report" class="clearfix">
 		<div class="tablenav top">

@@ -21,7 +21,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php si_head(); ?>
-		<meta name="robots" content="noindex" />
+		<meta name="robots" content="noindex, nofollow" />
 	</head>
 
 	<body id="invoice" <?php body_class(); ?>>

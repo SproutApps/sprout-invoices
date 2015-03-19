@@ -1,11 +1,12 @@
 <div id="reports_dashboard" class="wrap">
 
-	<?php screen_icon(); ?>
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 	<div class="clearfix">
-		<?php do_action( 'si_settings_page_sub_heading_'.$_GET['page'] ); ?>
+		<?php 
+			$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '' ;
+			do_action( 'si_settings_page_sub_heading_'.$page ); ?>
 	</div>
 	
 	<?php printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Add awesome reporting and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', si_get_purchase_link() ); ?>

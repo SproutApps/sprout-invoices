@@ -670,7 +670,7 @@ class SI_Clients extends SI_Controller {
 		$defaults = array(
 			'user_login' => '',
 			'user_name' => '',
-			'password' => '',
+			'user_pass' => '',
 			'user_email' => '',
 			'first_name' => '',
 			'last_name' => '',

@@ -17,7 +17,7 @@ if ( !function_exists('sa_form_fields') ) :
  */
 function sa_admin_fields( $fields, $context = 'metabox' ) {
 	foreach ( $fields as $key => $data ): ?>
-		<div class="form-group<?php if ( $data['type'] == 'hidden' ) echo " hidden" ?>">
+		<div id="si_admin_field_<?php echo $context; ?>_<?php echo $key; ?>" class="form-group<?php if ( $data['type'] == 'hidden' ) echo " hidden" ?>">
 			<?php if ( $data['type'] == 'heading' ): ?>
 				<legend class="legend form-heading" ><?php si_e($data['label']); ?></legend>
 			<?php elseif ( $data['type'] != 'checkbox' ): ?>

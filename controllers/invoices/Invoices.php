@@ -25,7 +25,7 @@ class SI_Invoices extends SI_Controller {
 		self::$default_terms = get_option( self::TERMS_OPTION, 'We do expect payment within 21 days, so please process this invoice within that time. There will be a 1.5% interest charge per month on late invoices.' );
 		self::$default_notes = get_option( self::NOTES_OPTION, 'Thank you; we really appreciate your business.' );
 		self::$invoices_slug = get_option( self::SLUG_OPTION, SI_Invoice::REWRITE_SLUG );
-
+		
 		self::register_settings();
 
 		// Help Sections
@@ -63,6 +63,7 @@ class SI_Invoices extends SI_Controller {
 		
 		// Create invoice when estimate is approved.
 		add_action( 'doc_status_changed',  array( __CLASS__, 'create_invoice_on_est_acceptance' ), 0 ); // fire before any others
+		add_action( 'doc_status_changed',  array( __CLASS__, 'create_payment_when_invoice_marked_as_paid' ) );
 
 		// Mark paid or partial after payment
 		add_action( 'si_new_payment',  array( __CLASS__, 'change_status_after_payment' ) );
@@ -927,6 +928,26 @@ class SI_Invoices extends SI_Controller {
 		else { // else there's no balance
 			$invoice->set_as_paid();
 		}
+	}
+
+	/**
+	 * Create invoice when estimate is accepted.
+	 * @param  object $doc estimate or invoice object
+	 * @return int cloned invoice id.
+	 */
+	public static function create_payment_when_invoice_marked_as_paid( $doc ) {
+		if ( !is_a( $doc, 'SI_Invoice' ) ) {
+			return;
+		}
+		// Check if status changed was to approved.
+		if ( $doc->get_status() != SI_Invoice::STATUS_PAID ) {
+			return;
+		}
+		$balance = $doc->get_balance();
+		if ( $balance < 0.01 ) {
+			return;
+		}
+		SI_Admin_Payment::create_admin_payment( $doc->get_id(), $balance, '', 'Now', self::__('This payment was automatically added to settle the balance after it was marked as "Paid".') );
 	}
 
 	/**
