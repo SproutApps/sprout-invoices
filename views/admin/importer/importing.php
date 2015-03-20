@@ -8,9 +8,7 @@
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 	<div class="clearfix">
-		<?php 
-			$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '' ;
-			do_action( 'si_settings_page_sub_heading_'.$page ); ?>
+		<?php do_action( 'si_settings_page_sub_heading_'.$page ); ?>
 	</div>
 
 	<?php if ( apply_filters( 'si_show_importer_settings', '__return_true' ) ): ?>
@@ -35,7 +33,7 @@
 				</tbody>
 			</table>
 			<table class="form-table">
-				<?php do_settings_fields( $page, 'default' ); ?>
+				<?php do_settings_fields( $page, 'default' ); ?> 
 			</table>
 			<?php do_settings_sections( $page ); ?>
 			<?php submit_button( self::__('Start Import') ); ?>

@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.4.1**
+
+* FIX: Import admin
+
 **5.4**
 
 * FIX: Return all clients on Client Dashboard
