@@ -53,8 +53,10 @@ class SI_Invoice extends SI_Post_Type {
 		// register Invoice post type
 		$post_type_args = array(
 			'public' => TRUE,
+			'exclude_from_search' => TRUE,
 			'has_archive' => FALSE,
 			'show_in_menu' => TRUE,
+			'show_in_nav_menus' => FALSE,
 			'rewrite' => array(
 				'slug' => self::REWRITE_SLUG,
 				'with_front' => FALSE,

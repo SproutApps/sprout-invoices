@@ -51,8 +51,10 @@ class SI_Estimate extends SI_Post_Type {
 		// register Estimate post type
 		$post_type_args = array(
 			'public' => TRUE,
+			'exclude_from_search' => TRUE,
 			'has_archive' => FALSE,
 			'show_in_menu' => TRUE,
+			'show_in_nav_menus' => FALSE,
 			'rewrite' => array(
 				'slug' => self::REWRITE_SLUG,
 				'with_front' => FALSE,
@@ -71,17 +73,7 @@ class SI_Estimate extends SI_Post_Type {
 			'hierarchical' => false
 		);
 		self::register_taxonomy( self::LINE_ITEM_TAXONOMY, array(), $singular, $plural, $taxonomy_args );
-
-		/*/
-		TODO
-		// register project taxonomy
-		$singular = 'Project Type';
-		$plural = 'Project Types';
-		$taxonomy_args = array(
-			'meta_box_cb' => FALSE,
-		);
-		self::register_taxonomy( self::PROJECT_TAXONOMY, array( self::POST_TYPE ), $singular, $plural, $taxonomy_args );
-		/**/
+		
 		self::register_post_statuses();
 	}
 

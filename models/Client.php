@@ -28,7 +28,9 @@ class SI_Client extends SI_Post_Type {
 		// register Client post type
 		$post_type_args = array(
 			'public' => FALSE,
+			'exclude_from_search' => TRUE,
 			'has_archive' => FALSE,
+			'show_in_nav_menus' => FALSE,
 			'show_ui' => TRUE,
 			'show_in_menu' => 'edit.php?post_type='.SI_Invoice::POST_TYPE,
 			'rewrite' => array(

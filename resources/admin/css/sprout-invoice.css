@@ -1583,6 +1583,15 @@ dt span.creation_event:before {
  * Reports
  */
 
+.subsubsub.subsubnav {
+    display: block;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #E5E5E5;
+}
+
 #si_report table.dataTable thead th, #si_report table.dataTable thead td {
 	border-bottom: 1px solid #e1e1e1;
 	font-weight: normal;

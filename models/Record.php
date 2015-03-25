@@ -16,6 +16,7 @@ class SI_Record extends SI_Post_Type {
 
 	public static function init() {
 		$post_type_args = array(
+			'public' => FALSE,
 			'has_archive' => FALSE,
 			'show_in_menu' => FALSE,
 			'rewrite' => FALSE,

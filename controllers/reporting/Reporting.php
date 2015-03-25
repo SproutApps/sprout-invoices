@@ -10,7 +10,7 @@
 class SI_Reporting extends SI_Controller {
 	const SETTINGS_PAGE = 'reporting';
 	const REPORT_QV = 'report';
-	const CACHE_KEY_PREFIX = 'si_report_cache_v6a_';
+	const CACHE_KEY_PREFIX = 'si_rprt_';
 	const AJAX_ACTION = 'si_report_data';
 	const AJAX_NONCE = 'si_report_nonce';
 	const CACHE_TIMEOUT = 172800; // 48 hours
@@ -795,19 +795,32 @@ class SI_Reporting extends SI_Controller {
 		if ( self::DEBUG || isset( $_GET['nocache'] ) ) { // If dev than don't cache.
 			return FALSE;
 		}
-		$cache = get_transient( self::CACHE_KEY_PREFIX.$data_name );
+		
+		if ( apply_filters( 'si_disable_reporting_cache', FALSE ) ) {
+			return FALSE;
+		}
+
+		$key = self::get_hashed_transient_key( $data_name );
+		$cache = get_transient( $key );
+
 		// If cache is empty return false.
 		return ( !empty( $cache ) ) ? $cache : FALSE;
 	}
 
 	public static function set_cache( $data_name = '', $data = array(), $expire = 0 ) {
 		$timeout = ( $expire ) ? $expire : self::CACHE_TIMEOUT ;
-		set_transient( self::CACHE_KEY_PREFIX.$data_name, $data, $timeout ); // cache for a week.
+		$key = self::get_hashed_transient_key( $data_name );
+		set_transient( $key, $data, $timeout ); // cache for a week.
 		return $data;
 	}
 
 	public static function delete_cache( $data_name = '' ) {
-		delete_transient( self::CACHE_KEY_PREFIX.$data_name );
+		$key = self::get_hashed_transient_key( $data_name );
+		delete_transient( $key );
+	}
+
+	public static function get_hashed_transient_key( $data_name ) {
+		return self::CACHE_KEY_PREFIX.md5( $data_name );
 	}
 
 	//////////////

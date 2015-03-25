@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**5.5**
+
+* FIX: Invoices and Estimates were being returned in public search queries.
+
 **5.4.1**
 
 * FIX: Import admin
