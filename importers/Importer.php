@@ -156,6 +156,22 @@ class SI_Importer extends SI_Controller {
 			);
 		}
 	}
+
+	//////////////
+	// Utility //
+	//////////////
+
+	public static function sanitize_subdomain( $url = '' ) {
+		$parsed_url = parse_url( $url );
+		if ( !isset( $parsed_url['host'] ) ) { // the path was given
+			return $url;
+		}
+		$host_segments = explode( '.', $parsed_url['host'] );
+
+		if( count( $host_segments ) <= 2 ) {
+		    return $url; // subdomain not given
+		}
+
+		return $host_segments[0];
+	}
 }
-
-

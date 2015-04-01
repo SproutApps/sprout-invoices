@@ -328,6 +328,11 @@ class SI_Clients extends SI_Controller {
 	 * @return  
 	 */
 	public static function redirect_clients() {
+		// Don't redirect admin-ajax.php requests
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return;
+		}
+		
 		$user = wp_get_current_user();
 		if ( !isset( $user->roles ) || ( !empty( $user->roles ) && $user->roles[0] == 'sa_client' ) ) {
 			wp_redirect( home_url() );

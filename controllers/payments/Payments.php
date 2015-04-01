@@ -27,6 +27,9 @@ class SI_Payments extends SI_Controller {
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 10, 1 );
+
+		add_action( 'deleted_post', array( __CLASS__, 'maybe_delete_payment' ) );
+
 	}
 
 	/**
@@ -164,6 +167,20 @@ class SI_Payments extends SI_Controller {
 			</form>
 		</div>
 		<?php
+	}
+
+	/**
+	 * If an invoice was deleted also delete the payments associated
+	 * @param  integer $post_id 
+	 * @return null           
+	 */
+	public static function maybe_delete_payment( $post_id = 0 ) {
+		if ( get_post_type( $post_id ) == SI_Invoice::POST_TYPE ) {
+			$payment_ids = SI_Payment::get_payments( array( 'invoices' => $post_id ) );
+			foreach ( $payment_ids as $payment_id ) {
+				wp_delete_post( $payment_id );
+			}
+		}
 	}
 
 	public static function add_link_to_admin_bar( $items ) {

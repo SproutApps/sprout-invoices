@@ -1,0 +1,7 @@
+Invoice ID,Description,Company,Invoice Date,Due Date,Discount %,Tax 1 %,Tax 2 %,Tax Total,Total,Currency Code,PO Number,Notes,Terms,Line Item Desc,Line Item Rate,Line Item Quantity,Line Item Percentage,Line Item Total,Estimate ID
+1,Description Import 1,Company 2,1/1/15,,,,,,1,,,,,"line1,line2,line3","1,2,3","1,2,3","1,2,3","1,4,9",
+2,Description Import 2,Company 2,1/1/15,,,,,,2,,,,,"line1,line2,line3","1,2,3","1,2,3","1,2,3","1,4,9",
+3,Description Import 3,Company 2,1/1/15,,,,,,3,,,,,"line1,line2,line3","1,2,3","1,2,3","1,2,3","1,4,9",
+4,Description Import 4,Company 2,1/1/15,,,,,,4,,,,,"line1,line2,line3","1,2,3","1,2,3","1,2,3","1,4,9",
+5,Description Import 5,Company 2,1/1/15,,,,,,5,,,,,"line1,line2,line3","1,2,3","1,2,3","1,2,3","1,4,9",
+6,Description Import 6,Company 2,1/1/15,,,,,,6,,,,,"line1,line2,line3","1,2,3","1,2,3","1,2,3","1,4,9",

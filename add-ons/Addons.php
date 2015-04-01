@@ -26,7 +26,9 @@ class SA_Addons extends SI_Controller {
 		
 		$addons = self::get_addons();
 		foreach ( $addons as $path => $data ) {
-			require SI_PATH.'/add-ons/' . $path;
+			if ( apply_filters( 'si_load_addon', TRUE, $path ) ) {
+				require SI_PATH.'/add-ons/' . $path;
+			}
 		}
 	}
 
@@ -36,7 +38,7 @@ class SA_Addons extends SI_Controller {
 			$cache_addons = array();
 
 		if ( isset($cache_addons[ $addon_folder ]) )
-			return $cache_addons[ $addon_folder ];
+			return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], TRUE );
 
 		$wp_addons = array();
 		$addon_root = SI_PATH . '/add-ons/';
@@ -72,7 +74,7 @@ class SA_Addons extends SI_Controller {
 		}
 
 		if ( empty($addon_files) )
-			return $wp_addons;
+			return apply_filters( 'si_get_addons', $wp_addons );
 
 		foreach ( $addon_files as $addon_file ) {
 			if ( !is_readable( "$addon_root/$addon_file" ) )
@@ -89,7 +91,7 @@ class SA_Addons extends SI_Controller {
 		$cache_addons[ $addon_folder ] = $wp_addons;
 		wp_cache_set('si_addons', $cache_addons, 'si_addons');
 
-		return $wp_addons;
+		return apply_filters( 'si_get_addons', $wp_addons );
 	}
 
 	public static function get_plugin_data( $plugin_file ) {

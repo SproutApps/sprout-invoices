@@ -99,7 +99,7 @@ class SI_Payments_Table extends WP_List_Table {
 
 		//Build row actions
 		$actions = array();
-		if ( $invoice_id ) { // Check if purchase wasn't deleted
+		if ( is_a( $invoice, 'SI_Invoice' ) ) { // Check if purchase wasn't deleted
 			$actions += array(
 				'invoice'    => sprintf( '<a href="%s">Invoice</a>', get_edit_post_link( $invoice_id ) )
 			);
@@ -118,7 +118,7 @@ class SI_Payments_Table extends WP_List_Table {
 		//Return the title contents
 		return sprintf( '%1$s <span style="color:silver">(invoice&nbsp;id:%2$s)</span>%3$s',
 			$item->post_title,
-			$invoice->get_invoice_id(),
+			( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : si__('unknown'),
 			$this->row_actions( $actions )
 		);
 	}

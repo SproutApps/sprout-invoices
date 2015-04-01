@@ -445,6 +445,28 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 
 
 	/**
+	 * Set the excerpt of the post and save
+	 *
+	 * @param string  $excerpt
+	 * @return void
+	 */
+	public function set_excerpt( $excerpt ) {
+		$this->post->post_excerpt = $excerpt;
+		$this->save_post();
+	}
+
+
+	/**
+	 * Get the excerpt of the post
+	 *
+	 * @return string
+	 */
+	public function get_excerpt() {
+		return $this->post->post_excerpt;
+	}
+
+
+	/**
 	 * Get the post_date of the post
 	 *
 	 * @return string

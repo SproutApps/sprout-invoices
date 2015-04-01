@@ -97,36 +97,43 @@ class SI_Payment extends SI_Post_Type {
 		return self::$instances[$id];
 	}
 
-	public static function new_payment( $args, $status = self::STATUS_COMPLETE ) {
-		$title_suffix = ( isset( $args['transaction_id'] ) ) ? $args['transaction_id'] : microtime();
-		$default = array(
-			'post_title' => sprintf( self::__( 'Payment %s' ), $title_suffix ),
-			'post_status' => $status,
-			'post_type' => self::POST_TYPE,
+	public static function new_payment( $passed_args, $status = self::STATUS_COMPLETE ) {
+		$defaults = array(
+			'transaction_id' => microtime(),
+			'status' => $status,
+			'payment_method' => self::__('API'),
+			'amount' => (float) 0,
+			'invoice_id' => 0,
+			'invoice' => 0,
+			'data' => array(),
 		);
-		$id = wp_insert_post( $default );
+		$args = wp_parse_args( $passed_args, $defaults );
+
+		$id = wp_insert_post( array(
+			'post_title' => sprintf( self::__( 'Payment #%d' ), $args['transaction_id'] ),
+			'post_status' => $args['status'],
+			'post_type' => self::POST_TYPE,
+		) );
 		if ( is_wp_error( $id ) ) {
 			return 0;
 		}
+
 		$payment = self::get_instance( $id );
-		$payment->set_title( sprintf( self::__( 'Payment #%d' ), $id ) );
-		if ( isset( $args['payment_method'] ) ) {
-			$payment->set_payment_method( $args['payment_method'] );
-		}
-		if ( isset( $args['amount'] ) ) {
-			$payment->set_amount( $args['amount'] );
-		}
-		if ( isset( $args['data'] ) ) {
-			$payment->set_data( $args['data'] );
-		}
-		if ( isset( $args['invoice'] ) ) {
+
+		$payment->set_transaction_id( $args['transaction_id'] );
+		$payment->set_payment_method( $args['payment_method'] );
+		$payment->set_amount( $args['amount'] );
+		$payment->set_status( $args['status'] );
+		$payment->set_data( $args['data'] );
+		
+		if ( $args['invoice'] ) {
 			$payment->set_invoice_id( $args['invoice'] );
+		} elseif ( $args['invoice_id'] ) {
+			$payment->set_invoice_id( $args['invoice_id'] );
 		} else {
 			do_action( 'si_error', 'Payment created without an invoice associated!', $args );
 		}
-		if ( isset( $args['transaction_id'] ) ) {
-			$payment->set_transaction_id( $args['transaction_id'] );
-		}
+		
 		do_action( 'si_new_payment', $payment, $args );
 		return $id;
 	}

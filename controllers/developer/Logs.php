@@ -76,7 +76,8 @@ class SI_Dev_Logs extends SI_Controller {
 			error_log( '+++' . $subject . ' +++++++++++++++++++++' );
 			if ( !empty( $data ) ) {
 				error_log( print_r( $data, TRUE ) );
-				// error_log( '--------------------- ' . $subject . ' END ---------------------' );
+				wpbt(); // wp_debug_backtrace_summary
+				error_log( '--------------------- ' . $subject . ' END ---------------------' );
 			}
 		}
 

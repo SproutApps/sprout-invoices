@@ -48,9 +48,11 @@ class SI_Admin_Payment extends SI_Controller {
 		if ( !$payment_id ) {
 			return FALSE;
 		}
-		do_action( 'admin_payment', $payment_id, $invoice );
-		
 		$payment = SI_Payment::get_instance( $payment_id );
+		if ( $date != '' ) {
+			$payment->set_post_date( date( 'Y-m-d H:i:s', strtotime( $date ) ) );
+		}
+		do_action( 'admin_payment', $payment_id, $invoice );
 		do_action( 'payment_complete', $payment );
 	}
 

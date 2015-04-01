@@ -50,7 +50,7 @@
 					<?php echo apply_filters( 'si_add_line_item_add_button', '<a href="javascript:void(0)" class="add_line_item add_button item_add_type item_add_no_type button">&nbsp;'.si__('Add').'</a>' ) ?>
 				</span>
 				<?php if ( apply_filters( 'show_upgrade_messaging', TRUE ) ): ?>
-					<span title="<?php self::esc_e('Tasks can be created to help with invoice creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
+					<span title="<?php self::esc_e('Predefined line-items can be created to help with invoice creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
 					
 					<span id="time_importing">
 						<?php printf( '<button id="time_import_question_answer_upgrade" class="button disabled si_tooltip" title="%s">%s</button>', self::__('Any billable time can be imported from your projects into your invoices dynamically with a pro version upgrade.'), self::__('Import Time') ) ?>

@@ -11,6 +11,7 @@
 class SI_Templating_API extends SI_Controller {
 	const TEMPLATE_OPTION = '_doc_template_option';
 	const FILTER_QUERY_VAR = 'filter_doc';
+	const BLANK_SHORTCODE = 'si_blank';
 
 	private static $pages = array();
 	private static $shortcodes = array();
@@ -42,6 +43,10 @@ class SI_Templating_API extends SI_Controller {
 		// Client option
 		add_filter( 'si_client_adv_form_fields', array( __CLASS__, 'client_option' ) );
 		add_action( 'SI_Clients::save_meta_box_client_adv_information', array( __CLASS__, 'save_client_options' ) );
+
+
+		// blank shortcode
+		do_action( 'sprout_shortcode', self::BLANK_SHORTCODE, array( __CLASS__, 'blank_shortcode' ) );
 
 	}
 
@@ -505,6 +510,15 @@ class SI_Templating_API extends SI_Controller {
 		return $files;
 	}
 
+
+
+	/////////////////
+	// Shortcodes //
+	/////////////////
+
+	public static function blank_shortcode( $atts = array() ) {
+		return '';
+	}
 
 
 }

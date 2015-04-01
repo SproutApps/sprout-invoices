@@ -11,6 +11,7 @@ class SI_CSV_Import extends SI_Importer {
 	const PROCESS_ACTION = 'start_import';
 	const CLIENT_FILE_OPTION = 'si_client_csv_upload';
 	const INVOICE_FILE_OPTION = 'si_invoice_csv_upload';
+	const ESTIMATE_FILE_OPTION = 'si_estimate_csv_upload';
 	const PAYMENT_FILE_OPTION = 'si_payment_csv_upload';
 	const PAYMENT_METHOD = 'CSV Imported';
 	const DELETE_PROGRESS = 'remove_progress_option';
@@ -19,9 +20,6 @@ class SI_CSV_Import extends SI_Importer {
 	// Meta
 	const CSV_ID = '_csv_id';
 
-	private static $clients_upload;
-	private static $invoices_upload;
-	private static $payments_upload;
 	private static $start_progress_over;
 
 	public static function init() {
@@ -56,11 +54,18 @@ class SI_CSV_Import extends SI_Importer {
 							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 clients at a time and import all of your clients before importing invoices or payments.' ), SI_URL . '/importers/csv-examples/clients.csv' ),
 						)
 					),
+					self::ESTIMATE_FILE_OPTION => array(
+						'label' => self::__( 'Estimates' ),
+						'option' => array(
+							'type' => 'file',
+							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 estimates at a time and import all of your clients.' ), SI_URL . '/importers/csv-examples/estimates.csv' ),
+						)
+					),
 					self::INVOICE_FILE_OPTION => array(
 						'label' => self::__( 'Invoices' ),
 						'option' => array(
 							'type' => 'file',
-							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 invoices at a time and import all of your clients before importing payments.' ), SI_URL . '/importers/csv-examples/invoices.csv' ),
+							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 invoices at a time, import all of your clients, and import before payments.' ), SI_URL . '/importers/csv-examples/invoices.csv' ),
 						)
 					),
 					self::PAYMENT_FILE_OPTION => array(
@@ -114,6 +119,13 @@ class SI_CSV_Import extends SI_Importer {
 			$invoice_csv = wp_handle_upload( $invoice_csv_file, $upload_overrides );
 			if ( isset( $invoice_csv['file'] ) && $invoice_csv['file'] != '' ) {
 				update_option( self::INVOICE_FILE_OPTION, $invoice_csv['file'] );
+			}
+		}
+		if ( isset( $_FILES[self::ESTIMATE_FILE_OPTION] ) ) {
+			$estimate_csv_file = $_FILES[self::ESTIMATE_FILE_OPTION];
+			$estimate_csv = wp_handle_upload( $estimate_csv_file, $upload_overrides );
+			if ( isset( $estimate_csv['file'] ) && $estimate_csv['file'] != '' ) {
+				update_option( self::ESTIMATE_FILE_OPTION, $estimate_csv['file'] );
 			}
 		}
 		if ( isset( $_FILES[self::PAYMENT_FILE_OPTION] ) ) {
@@ -269,16 +281,77 @@ class SI_CSV_Import extends SI_Importer {
 	 * @return 
 	 */
 	public static function import_estimates() {
+		// run script forever
+		set_time_limit( 0 );
+
+		$csv_file = get_option( self::ESTIMATE_FILE_OPTION );
+
+		if ( !$csv_file ) {
+			// Completed previously
+			self::return_progress( array( 
+						'authentication' => array( 
+							'message' => self::__('Skipping estimate importing without a CSV to process...'), 
+							'progress' => 80
+							),
+						'estimates' => array( 
+							'message' => self::__('Skipped...nothing to import.'), 
+							'progress' => 100,
+							),
+						'invoices' => array( 
+							'progress' => 80,
+							'message' => self::__('Preparing...'), 
+							'next_step' => 'invoices'
+							),
+						) );
+			return;
+		}
+
+		$invoices = self::csv_to_array( $csv_file );
+		$total_records = count( $invoices );
+
+		// Store the import progress
+		$progress = get_option( self::PROGRESS_OPTION, array() );
+		// Suppress notifications
+		add_filter( 'suppress_notifications', '__return_true' );
+
+		if ( !isset( $progress['estimates_complete'] ) ) {
+
+			foreach ( $estimates as $key => $estimate ) {
+				self::create_estimate( $estimate );
+			}
+
+			// Mark as complete
+			$progress['estimates_complete'] = 1;
+			update_option( self::PROGRESS_OPTION, $progress );
+			delete_option( self::ESTIMATE_FILE_OPTION );
+
+			// Complete
+			self::return_progress( array( 
+						'authentication' => array( 
+							'message' => sprintf( self::__('Successfully imported %s estimates...'), $total_records ), 
+							'progress' => 75
+							),
+						'estimates' => array(
+							'message' => sprintf( self::__('Imported %s estimates!'), $total_records ),  
+							'progress' => 100,
+							),
+						'invoices' => array( 
+							'progress' => 80,
+							'message' => self::__('Preparing...'), 
+							'next_step' => 'invoices'
+							),
+						) );
+		}
 
 		// Completed previously
 		self::return_progress( array( 
 						'authentication' => array( 
-							'message' => self::__('Skipping estimate importing since it is not supported yet...'), 
-							'progress' => 45
+							'message' => sprintf( self::__('Successfully imported %s estimates already, moving on...'), $total_records ), 
+							'progress' => 75
 							),
 						'estimates' => array( 
+							'message' => sprintf( self::__('Successfully imported %s estimates already.'), $total_records ), 
 							'progress' => 100,
-							'message' => self::__('Skipped...nothing to import.'), 
 							),
 						'invoices' => array( 
 							'progress' => 80,
@@ -289,6 +362,7 @@ class SI_CSV_Import extends SI_Importer {
 		
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
+
 	}
 
 	/**
@@ -517,12 +591,85 @@ class SI_CSV_Import extends SI_Importer {
 		return $user_id;
 	}
 
-
-	public static function create_invoice( $invoice = array() ) {
-		if ( isset( $invoice['Description'] ) ) {
+	public static function create_estimate( $estimate = array() ) {
+		if ( isset( $invoice['Description'] ) && $invoice['Description'] != '' ) {
 			$subject = $invoice['Description'];
 		}
-		elseif ( isset( $invoice['Client'] ) ) {
+		elseif ( isset( $invoice['Client'] ) && $invoice['Client'] != '' ) {
+			$subject = $invoice['Client'] . ' #' . $invoice['Estimate ID'];
+		}
+		else {
+			$subject = '#' . $invoice['Estimate ID'];
+		}
+		$args = array(
+			'subject' => $subject,
+		);
+		$new_estimate_id = SI_Estimate::create_estimate( $args, SI_Estimate::STATUS_TEMP );
+		update_post_meta( $new_estimate_id, self::CSV_ID, $estimate['Estimate ID'] );
+
+		$est = SI_Estimate::get_instance( $new_estimate_id );
+
+		// Attempt to find matching client
+		if ( isset( $estimate['Company'] ) ) {
+			global $wpdb;
+			$client_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s", esc_sql( $estimate['Company'] ), SI_Client::POST_TYPE ) );
+			// Get client and confirm it's validity
+			if ( is_array( $client_ids ) ) {
+				$client = SI_Client::get_instance( $client_ids[0] );
+				$inv->set_client_id( $client->get_id() );
+			}
+		}
+
+		if ( isset( $estimate['Estimate ID'] ) ) {
+			$est->set_estimate_id( $estimate['Estimate ID'] );
+		}
+		if ( isset( $estimate['Invoice ID'] ) ) {
+			$est->set_invoice_id( $estimate['Invoice ID'] );
+		}
+		if ( isset( $estimate['Total'] ) ) {
+			$est->set_total( $estimate['Total'] );
+		}
+		if ( isset( $estimate['Currency Code'] ) ) {
+			$est->set_currency( $estimate['Currency Code'] );
+		}
+		if ( isset( $estimate['PO Number'] ) ) {
+			$est->set_po_number( $estimate['PO Number'] );
+		}
+		if ( isset( $estimate['Discount %'] ) ) {
+			$est->set_discount( $estimate['Discount %'] );
+		}
+		if ( isset( $estimate['Tax 1 %'] ) ) {
+			$est->set_tax( $estimate['Tax 1 %'] );
+		}
+		if ( isset( $estimate['Tax 2 %'] ) ) {
+			$est->set_tax2( $estimate['Tax 2 %'] );
+		}
+		if ( isset( $estimate['Notes'] ) ) {
+			$est->set_notes( $estimate['Notes'] );
+		}
+		if ( isset( $estimate['Terms'] ) ) {
+			$est->set_terms( $estimate['Terms'] );
+		}
+		if ( isset( $estimate['Estimate Date'] ) ) {
+			$est->set_issue_date( strtotime( $estimate['Estimate Date'] ) );
+		}
+
+		$line_items = self::build_line_items( $estimate );
+		$est->set_line_items( $line_items );
+
+		
+		// post date
+		$est->set_post_date( date( 'Y-m-d H:i:s', strtotime( $estimate['Estimate Date'] ) ) );
+
+		return $est;
+	}
+
+
+	public static function create_invoice( $invoice = array() ) {
+		if ( isset( $invoice['Description'] ) && $invoice['Description'] != '' ) {
+			$subject = $invoice['Description'];
+		}
+		elseif ( isset( $invoice['Client'] ) && $invoice['Client'] != '' ) {
 			$subject = $invoice['Client'] . ' #' . $invoice['Invoice ID'];
 		}
 		else {
@@ -541,8 +688,11 @@ class SI_CSV_Import extends SI_Importer {
 			global $wpdb;
 			$client_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s", esc_sql( $invoice['Company'] ), SI_Client::POST_TYPE ) );
 			// Get client and confirm it's validity
-			$client = SI_Client::get_instance( $client_ids[0] );
-			$inv->set_client_id( $client->get_id() );
+			error_log( 'clients: ' . print_r( $client_ids, TRUE ) );
+			if ( is_array( $client_ids ) && !empty( $client_ids ) ) {
+				$client = SI_Client::get_instance( $client_ids[0] );
+				$inv->set_client_id( $client->get_id() );
+			}
 		}
 
 		if ( isset( $invoice['Invoice ID'] ) ) {
@@ -579,6 +729,10 @@ class SI_CSV_Import extends SI_Importer {
 			$inv->set_due_date( strtotime( $invoice['Due Date'] ) );
 		}
 		
+		$line_items = self::build_line_items( $invoice );
+		$inv->set_line_items( $line_items );
+		error_log( 'invoice +++++++++++++++++++ ' . print_r( $inv->get_title(), TRUE ) );
+
 		// post date
 		$inv->set_post_date( date( 'Y-m-d H:i:s', strtotime( $invoice['Invoice Date'] ) ) );
 
@@ -615,6 +769,29 @@ class SI_CSV_Import extends SI_Importer {
 		$new_payment = SI_Payment::get_instance( $payment_id );
 		$new_payment->set_post_date( date( 'Y-m-d H:i:s', strtotime( $payment['Date'] ) ) );
 		return $new_payment;
+	}
+
+	public static function build_line_items( $data = array() ) {
+		if ( ! isset( $data['Line Item Desc'] ) ) {
+			return array();
+		}
+		$line_items = array();
+		$line_items_desc = explode( ',', $data['Line Item Desc'] );
+		$line_items_rate = explode( ',', $data['Line Item Rate'] );
+		$line_items_qty = explode( ',', $data['Line Item Quantity'] );
+		$line_items_percentage = explode( ',', $data['Line Item Percentage'] );
+		$line_items_total = explode( ',', $data['Line Item Total'] );
+		foreach ( $line_items_desc as $key => $value ) {
+			$line_items[] = array( 
+				'rate' => ( isset( $line_items_rate[$key] ) ) ? $line_items_rate[$key] : 0,
+				'qty' => ( isset( $line_items_qty[$key] ) ) ? $line_items_qty[$key] : 0,
+				'desc' => $value,
+				'total' => ( isset( $line_items_total[$key] ) ) ? $line_items_total[$key] : 0,
+				'tax' => ( isset( $line_items_percentage[$key] ) ) ? $line_items_percentage[$key] : '',
+				);
+		}
+		error_log( 'line items: ' . print_r( $line_items, TRUE ) );
+		return $line_items;
 	}
 
 

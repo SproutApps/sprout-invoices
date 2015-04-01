@@ -89,8 +89,8 @@
 
 				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
 
-				<h4><?php self::_e( 'What are tasks?' ); ?></h4>
-				<p><?php printf( self::__( "<a href='%s'>Tasks</a> help with the creation of your estimates and invoices by pre-filling line items. Create some tasks that matter to your business before creating your first estimate or invoice and you'll see how they can save you a lot of time." ), admin_url('edit-tags.php?taxonomy=si_line_item_types&post_type=sa_estimate') ); ?></p>
+				<h4><?php self::_e( 'What are Predefined Line Items?' ); ?></h4>
+				<p><?php printf( self::__( "Predefined line-tems help with the creation of your estimates and invoices by pre-filling line items. Create some tasks that matter to your business before creating your first estimate or invoice and you'll see how they can save you a lot of time." ) ); ?></p>
 
 				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/predefined-tasks-line-items/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
 			</div>

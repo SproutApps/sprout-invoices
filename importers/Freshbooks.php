@@ -27,7 +27,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 	public static function init() {
 		// Settings
 		self::$freshbooks_token = get_option( self::FRESHBOOKS_TOKEN_OPTION, '' );
-		self::$freshbooks_account = get_option( self::FRESHBOOKS_ACCOUNT_OPTION, '' );
+		self::$freshbooks_account = self::sanitize_subdomain( get_option( self::FRESHBOOKS_ACCOUNT_OPTION, '' ) );
 		self::register_payment_settings();
 		self::save_options();
 
@@ -69,7 +69,8 @@ class SI_Freshbooks_Import extends SI_Importer {
 							'default' => self::$freshbooks_account,
 							'attributes' => array( 'placeholder' => self::__(
 								'your-subdomain') ),
-							'description' => self::__( 'https://[subdomain].freshbooks.com' )
+							'description' => self::__( 'https://[subdomain].freshbooks.com' ),
+							'sanitize_callback' => array( __CLASS__, 'sanitize_subdomain' ),
 						)
 					),
 					self::PROCESS_ARCHIVED => array(
@@ -925,7 +926,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 			} 
 		} 
 		return $r; 
-	} 
-
+	}
 }
 SI_Freshbooks_Import::register();

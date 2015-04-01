@@ -86,7 +86,7 @@ class SI_Client extends SI_Post_Type {
 	 * @param  array $args 
 	 * @return int       
 	 */
-	public static function new_client( $args ) {
+	public static function new_client( $passed_args ) {
 		$defaults = array(
 			'company_name' => sprintf( self::__('New Client: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'website' => '',
@@ -95,28 +95,28 @@ class SI_Client extends SI_Post_Type {
 			'currency' => '',
 			'user_id' => 0
 		);
-		$parsed_args = wp_parse_args( $args, $defaults );
+		$args = wp_parse_args( $passed_args, $defaults );
 
 		$id = wp_insert_post( array(
 			'post_status' => 'publish',
 			'post_type' => self::POST_TYPE,
-			'post_title' => $parsed_args['company_name']
+			'post_title' => $args['company_name']
 		) );
 		if ( is_wp_error( $id ) ) {
 			return 0;
 		}
 
 		$client = self::get_instance( $id );
-		$client->set_address( $parsed_args['address'] );
-		$client->set_currency( $parsed_args['currency'] );
-		$client->set_website( $parsed_args['website'] );
-		$client->set_phone( $parsed_args['phone'] );
+		$client->set_address( $args['address'] );
+		$client->set_currency( $args['currency'] );
+		$client->set_website( $args['website'] );
+		$client->set_phone( $args['phone'] );
 
-		if ( $parsed_args['user_id'] ) {	
-			$client->add_associated_user( $parsed_args['user_id'] );	
+		if ( $args['user_id'] ) {	
+			$client->add_associated_user( $args['user_id'] );	
 		}
 
-		do_action( 'sa_new_client', $client, $parsed_args );
+		do_action( 'sa_new_client', $client, $args );
 		return $id;
 	}
 

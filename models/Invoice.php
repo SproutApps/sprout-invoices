@@ -147,18 +147,36 @@ class SI_Invoice extends SI_Post_Type {
 		return self::$instances[$id];
 	}
 
-	public static function create_invoice( $args, $status = self::STATUS_DRAFT ) {
+	public static function create_invoice( $passed_args, $status = self::STATUS_DRAFT ) {
 		$defaults = array(
 			'subject' => sprintf( self::__('New Invoice: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
-			'requirements' => self::__('No requirements submitted. Check to make sure the "requirements" field is required.'),
+			'user_id' => '',
+			'invoice_id' => '',
+			'estimate_id' => '',
+			'client_id' => '',
+			'project_id' => '',
+			'status' => $status,
+			'deposit' => (float) 0,
+			'total' => (float) 0,
+			'currency' => '',
+			'po_number' => '',
+			'discount' => '',
+			'tax' => (float) 0,
+			'tax2' => (float) 0,
+			'notes' => '',
+			'terms' => '',
+			'issue_date' => time(),
+			'due_date' => 0,
+			'expiration_date' => 0,
+			'line_items' => array(),
+
 		);
-		$parsed_args = wp_parse_args( $args, $defaults );
-		extract( $parsed_args );
+		$args = wp_parse_args( $passed_args, $defaults );
 
 		$id = wp_insert_post( array(
-			'post_status' => $status,
+			'post_status' => $args['status'],
 			'post_type' => self::POST_TYPE,
-			'post_title' => $subject
+			'post_title' => $args['subject'],
 		) );
 		if ( is_wp_error( $id ) ) {
 			return 0;
@@ -170,6 +188,33 @@ class SI_Invoice extends SI_Post_Type {
 		if ( is_user_logged_in() ) {
 			$invoice->set_user_id( get_current_user_id() );
 		}
+
+		$invoice->set_user_id( $args['user_id'] );
+		$invoice->set_invoice_id( $args['invoice_id'] );
+		$invoice->set_estimate_id( $args['estimate_id'] );
+		$invoice->set_client_id( $args['client_id'] );
+		$invoice->set_project_id( $args['project_id'] );
+		$invoice->set_status( $args['status'] );
+		$invoice->set_deposit( $args['deposit'] );
+		$invoice->set_total( $args['total'] );
+		$invoice->set_currency( $args['currency'] );
+		$invoice->set_po_number( $args['po_number'] );
+		$invoice->set_discount( $args['discount'] );
+		$invoice->set_tax( $args['tax'] );
+		$invoice->set_tax2( $args['tax2'] );
+		$invoice->set_notes( $args['notes'] );
+		$invoice->set_terms( $args['terms'] );
+		
+		$issue_date = ( is_numeric( $args['issue_date'] ) ) ? $args['issue_date'] : strtotime( $args['issue_date'] ) ;
+		$invoice->set_issue_date( $issue_date );
+		
+		$due_date = ( is_numeric( $args['due_date'] ) ) ? $args['due_date'] : strtotime( $args['due_date'] ) ;
+		$invoice->set_due_date( $due_date );
+		
+		$expiration_date = ( is_numeric( $args['expiration_date'] ) ) ? $args['expiration_date'] : strtotime( $args['expiration_date'] ) ;
+		$invoice->set_expiration_date( $expiration_date );
+		
+		$invoice->set_line_items( $args['line_items'] );
 
 		do_action( 'sa_new_invoice', $invoice, $args );
 		return $id;
@@ -236,7 +281,7 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 	public function get_balance() {
 		$total = $this->get_calculated_total( FALSE );
-		$paid = $this->get_payments_total();
+		$paid = $this->get_payments_total( FALSE );
 		$balance = floatval( $total-$paid );
 		if ( $this->get_status() === self::STATUS_PENDING ) {
 			if ( round( $balance, 2 ) < 0.01 ) {
@@ -674,11 +719,14 @@ class SI_Invoice extends SI_Post_Type {
 		return $payment_ids;
 	}
 
-	public function get_payments_total() {
+	public function get_payments_total( $pending = TRUE ) {
 		$payment_ids = self::get_payments();
 		$payment_total = 0;
 		foreach ( $payment_ids as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
+			if ( !$pending && $payment->get_status() == SI_Payment::STATUS_PENDING ) {
+				continue;
+			}
 			if ( !in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
 				$payment_total += $payment->get_amount();
 			}
@@ -710,7 +758,10 @@ class SI_Invoice extends SI_Post_Type {
 	 * @param int     $timestamp
 	 * @return array
 	 */
-	public static function get_overdue_invoices( $timestamp = 0 ) {
+	public static function get_overdue_invoices( $timestamp = 0, $delay = 0 ) {
+		if ( !$delay ) {
+			$delay = apply_filters( 'si_get_overdue_yesterday_timestamp', current_time( 'timestamp' )-60*60*24 );
+		}
 		$args = array(
 				'post_type' => self::POST_TYPE,
 				'post_status' => array( self::STATUS_PENDING, self::STATUS_PARTIAL ),
@@ -721,7 +772,7 @@ class SI_Invoice extends SI_Post_Type {
 						'key' => self::$meta_keys['due_date'],
 						'value' => array( 
 							$timestamp,
-							apply_filters( 'si_get_overdue_yesterday_timestamp', current_time( 'timestamp' )-60*60*24 ) ), // yesterday
+							$delay ), // yesterday
 						'compare' => 'BETWEEN' )
 					),
 			);

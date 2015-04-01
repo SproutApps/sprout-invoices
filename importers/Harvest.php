@@ -30,7 +30,7 @@ class SI_Harvest_Import extends SI_Importer {
 		// Settings
 		self::$harvest_user = get_option( self::HARVEST_USER_OPTION, '' );
 		self::$harvest_pass = get_option( self::HARVEST_PASS_OPTION, '' );
-		self::$harvest_account = get_option( self::HARVEST_ACCOUNT_OPTION, '' );
+		self::$harvest_account = self::sanitize_subdomain( get_option( self::HARVEST_ACCOUNT_OPTION, '' ) );
 		self::register_payment_settings();
 		self::save_options();
 
@@ -82,7 +82,8 @@ class SI_Harvest_Import extends SI_Importer {
 							'default' => self::$harvest_account,
 							'attributes' => array( 'placeholder' => self::__(
 								'your-subdomain') ),
-							'description' => self::__( 'https://[subdomain].harvest.com' )
+							'description' => self::__( 'https://[subdomain].harvest.com' ),
+							'sanitize_callback' => array( __CLASS__, 'sanitize_subdomain' ),
 						)
 					),
 					self::PROCESS_ARCHIVED => array(

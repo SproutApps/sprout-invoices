@@ -43,7 +43,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						<?php 
 							$payment_string = ( si_has_invoice_deposit() ) ? si__('Pay Deposit') : si__('Pay Invoice') ;
 							 ?>
-						<?php if ( si_get_invoice_balance() ): ?>
+						<?php if ( si_get_invoice_balance() && si_get_invoice_status() != 'write-off' ): ?>
 							<a href="#pay" class="button primary_button purchase_button" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" data-dropdown="#payment_selection"><?php echo $payment_string ?></a>
 							<div id="payment_selection" class="dropdown dropdown-tip dropdown-anchor-right dropdown-relative">
 								<ul class="dropdown-menu">
@@ -90,8 +90,9 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 									<?php endif; ?>
 								</h1>	
 							</header><!-- /header -->
-
-							<?php if ( !si_get_invoice_balance() ): ?>
+							<?php if ( si_get_invoice_status() == 'write-off' ): ?>
+								<span id="status" class="void"><span class="inner_status"><?php si_e('Void') ?></span></span>
+							<?php elseif ( !si_get_invoice_balance() ): ?>
 								<span id="status" class="paid"><span class="inner_status"><?php si_e('Paid') ?></span></span>
 							<?php endif ?>
 						</div><!-- #header_logo -->
@@ -262,8 +263,8 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 					</section>
 
 					<section id="doc_notes">
-						<?php if ( si_get_invoice_notes() ): ?>
-
+						<?php if ( strlen( si_get_invoice_notes() ) > 1 ): ?>
+							<?php error_log( 'log' . print_r( si_get_invoice_notes(), TRUE ) ); ?>
 						<?php do_action( 'si_document_notes' ) ?>
 						<div id="doc_notes">
 							<h2><?php si_e('Notes') ?></h2>
@@ -272,8 +273,8 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						
 						<?php endif ?>
 
-						<?php if ( si_get_invoice_terms() ): ?>
-						
+						<?php if ( strlen( si_get_invoice_terms() ) > 1 ): ?>
+						<?php error_log( 'log: "' . print_r(  si_get_invoice_terms(), TRUE ) . '"' ); ?>
 						<?php do_action( 'si_document_terms' ) ?>
 						<div id="doc_terms">
 							<h2><?php si_e('Terms') ?></h2>

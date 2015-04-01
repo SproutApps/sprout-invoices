@@ -156,18 +156,34 @@ class SI_Estimate extends SI_Post_Type {
 		return self::$instances[$id];
 	}
 
-	public static function create_estimate( $args, $status = self::STATUS_REQUEST ) {
+	public static function create_estimate( $passed_args, $status = self::STATUS_REQUEST ) {
 		$defaults = array(
 			'subject' => sprintf( self::__('New Estimate: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
-			'requirements' => self::__('No requirements submitted. Check to make sure the "requirements" field is required.'),
+			'user_id' => '',
+			'estimate_id' => '',
+			'invoice_id' => '',
+			'client_id' => '',
+			'project_id' => '',
+			'status' => $status,
+			'total' => (float) 0,
+			'currency' => '',
+			'po_number' => '',
+			'discount' => '',
+			'tax' => (float) 0,
+			'tax2' => (float) 0,
+			'notes' => '',
+			'terms' => '',
+			'issue_date' => time(),
+			'due_date' => 0,
+			'expiration_date' => 0,
+			'line_items' => array(),
 		);
-		$parsed_args = wp_parse_args( $args, $defaults );
-		extract( $parsed_args );
+		$args = wp_parse_args( $passed_args, $defaults );
 
 		$id = wp_insert_post( array(
-			'post_status' => $status,
+			'post_status' => $args['status'],
 			'post_type' => self::POST_TYPE,
-			'post_title' => $subject
+			'post_title' => $args['subject'],
 		) );
 		if ( is_wp_error( $id ) ) {
 			return 0;
@@ -184,7 +200,30 @@ class SI_Estimate extends SI_Post_Type {
 			$estimate->set_user_id( get_current_user_id() );
 		}
 
-		do_action( 'sa_new_estimate', $estimate, $parsed_args );
+		$estimate->set_user_id( $args['user_id'] );
+		$estimate->set_estimate_id( $args['estimate_id'] );
+		$estimate->set_invoice_id( $args['invoice_id'] );
+		$estimate->set_client_id( $args['client_id'] );
+		$estimate->set_project_id( $args['project_id'] );
+		$estimate->set_status( $args['status'] );
+		$estimate->set_total( $args['total'] );
+		$estimate->set_currency( $args['currency'] );
+		$estimate->set_po_number( $args['po_number'] );
+		$estimate->set_discount( $args['discount'] );
+		$estimate->set_tax( $args['tax'] );
+		$estimate->set_tax2( $args['tax2'] );
+		$estimate->set_notes( $args['notes'] );
+		$estimate->set_terms( $args['terms'] );
+
+		$issue_date = ( is_numeric( $args['issue_date'] ) ) ? $args['issue_date'] : strtotime( $args['issue_date'] ) ;
+		$estimate->set_issue_date( $issue_date );
+		
+		$expiration_date = ( is_numeric( $args['expiration_date'] ) ) ? $args['expiration_date'] : strtotime( $args['expiration_date'] ) ;
+		$estimate->set_expiration_date( $expiration_date );
+
+		$estimate->set_line_items( $line_items );
+
+		do_action( 'sa_new_estimate', $estimate, $args );
 		return $id;
 	}
 

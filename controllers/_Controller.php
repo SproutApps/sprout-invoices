@@ -7,6 +7,7 @@
  * @subpackage Controller
  */
 abstract class SI_Controller extends Sprout_Invoices {
+	const SHORTCODE = 'si_blank';
 	const MESSAGE_STATUS_INFO = 'info';
 	const MESSAGE_STATUS_ERROR = 'error';
 	const MESSAGE_META_KEY = 'sa_messages';
@@ -1004,12 +1005,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$file = apply_filters( 'sprout_invoice_template_'.$view, $file );
 		$args = apply_filters( 'load_view_args_'.$view, $args, $allow_theme_override );
 		if ( !empty( $args ) ) extract( $args );
-		if ( self::DEBUG ) {
-			include $file;
-		}
-		else {
-			include $file;	
-		}
+		include $file;
 	}
 
 	/**
@@ -1578,7 +1574,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( $message == '' ) {
 			$message = self::__('Something failed.');
 		}
-		if ( $json ) header( 'Content-type: application/json' );
+		if ( $json ) header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		if ( $json ) {
 			echo json_encode( array( 'error' => 1, 'response' => $message ) );

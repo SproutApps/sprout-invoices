@@ -35,7 +35,7 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 
 			<div id="doc_header_wrap" class="sticky_header">
 				<header id="header_title">
-					<span class="header_id"><?php printf( 'Invoice %s', si_get_invoice_id() ) ?></span>
+					<span class="header_id"><?php printf( si__('Invoice %s'), si_get_invoice_id() ) ?></span>
 					<div id="doc_actions">
 						<?php do_action( 'si_doc_actions_pre' ) ?>
 						<?php 
@@ -68,11 +68,12 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 									<?php endif; ?>
 								</h1>	
 							</header><!-- /header -->
-
-							<?php 
-								$status = ( si_has_invoice_deposit() ) ? si__('Deposit Made') : si__('Paid') ; ?>
-							<span id="status" class="paid"><span class="inner_status"><?php echo $status ?></span></span>
-
+							<?php if ( ! si_get_invoice_balance() ): ?>
+								<?php $status = ( si_has_invoice_deposit() ) ? si__('Deposit Made') : si__('Paid') ; ?>
+								<span id="status" class="paid"><span class="inner_status"><?php echo $status ?></span></span>
+							<?php else : ?>
+								<span id="status" class="void"><span class="inner_status"><?php si_e('Pending') ?></span></span>
+							<?php endif ?>
 						</div><!-- #header_logo -->
 
 						<div id="vcards">
@@ -120,17 +121,17 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 								</dl>
 							<?php endif ?>
 
+							<?php if ( si_get_invoice_po_number() ): ?>
+								<dl class="invoice_po_number">
+									<dt><span class="dt_heading"><?php si_e('PO Number') ?></span></dt>
+									<dd><?php si_invoice_po_number() ?></dd>
+								</dl>
+							<?php endif ?>
+
 							<?php if ( si_get_invoice_due_date() ): ?>
 								<dl class="date">
 									<dt><span class="dt_heading"><?php si_e('Invoice Due') ?></span></dt>
 									<dd><?php si_invoice_due_date() ?></dd>
-								</dl>
-							<?php endif ?>
-
-							<?php if ( si_get_invoice_expiration_date() ): ?>
-								<dl class="date">
-									<dt><span class="dt_heading"><?php si_e('Expiration Date') ?></span></dt>
-									<dd><?php si_invoice_expiration_date() ?></dd>
 								</dl>
 							<?php endif ?>
 
@@ -213,8 +214,14 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 										<b><?php si_e('Subtotal') ?></b>
 										<?php sa_formatted_money( si_get_invoice_subtotal() ) ?>
 									</div>
+									<?php if ( si_get_invoice_taxes_total() ): ?>
+										<div id="line_taxes">
+											<b><?php si_e('Taxes') ?></b>
+											<?php sa_formatted_money( si_get_invoice_taxes_total() ) ?>
+										</div>
+									<?php endif ?>
 									<div id="line_total">
-										<b title="<?php si_e('Total includes tax and discount.') ?>" class="helptip"><?php si_e('Total') ?></b>
+										<b title="<?php si_e('Total includes discounts and other fees.') ?>" class="helptip"><?php si_e('Total') ?></b>
 										<?php sa_formatted_money( si_get_invoice_calculated_total() ) ?>
 									</div>
 									<?php if ( si_get_invoice_payments_total() ): ?>
@@ -235,7 +242,7 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 					</section>
 
 					<section id="doc_notes">
-						<?php if ( si_get_invoice_notes() ): ?>
+						<?php if ( strlen( si_get_invoice_terms() ) > 1 ): ?>
 
 						<?php do_action( 'si_document_notes' ) ?>
 						<div id="doc_notes">
@@ -245,8 +252,8 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 						
 						<?php endif ?>
 
-						<?php if ( si_get_invoice_terms() ): ?>
-						
+						<?php if ( strlen( si_get_invoice_terms() ) > 1 ): ?>
+
 						<?php do_action( 'si_document_terms' ) ?>
 						<div id="doc_terms">
 							<h2><?php si_e('Terms') ?></h2>
@@ -286,4 +293,4 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 	<?php do_action( 'si_document_footer' ) ?>
 	<?php si_footer() ?>
 </html>
-<?php do_action( 'invoice_payment_confirmation_viewed' ) ?>
+<?php do_action( 'invoice_viewed' ) ?>

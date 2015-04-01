@@ -553,6 +553,10 @@ html[xmlns] .clearfix {
 	-ms-transform: rotate(-15deg);
 	z-indexwebkit-transform: rotate(-15deg);
 }
+#status.void {
+	color: #000;
+	border-color: #000;
+}
 
 /**
  * Layout

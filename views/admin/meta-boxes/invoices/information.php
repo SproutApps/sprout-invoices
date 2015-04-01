@@ -1,16 +1,3 @@
-<?php 
-	$due_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_due_date() : current_time( 'timestamp' )+(60*60*24*30);
-	$issue_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_issue_date() : strtotime( $post->post_date ) ;
-	$estimate_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_estimate_id() : 0 ;
-	$invoice_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : '00001';
-	$po_number = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_po_number() : '';
-	$client_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_client_id() : 0;
-	$deposit = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_deposit() : '';
-	$discount = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_discount() : '';
-	$tax = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_tax() : '';
-	$tax2 = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_tax2() : '';
-	$currency = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_currency() : '';
-	 ?>
 <!-- issue date -->
 <?php
 global $action;

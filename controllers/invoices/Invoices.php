@@ -74,6 +74,9 @@ class SI_Invoices extends SI_Controller {
 		// Cloning from estimates
 		add_action( 'si_cloned_post',  array( __CLASS__, 'associate_invoice_after_clone' ), 10, 3 );
 
+		// Adjust invoice id and status after clone
+		add_action( 'si_cloned_post',  array( __CLASS__, 'adjust_cloned_invoice' ), 10, 3 );
+
 		// Notifications
 		add_filter( 'wp_ajax_sa_send_est_notification', array( __CLASS__, 'maybe_send_notification' ) );
 
@@ -377,19 +380,39 @@ class SI_Invoices extends SI_Controller {
 
 		$invoice = SI_Invoice::get_instance( $post->ID );
 		$status = ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_status() != 'auto-draft' ) ? $invoice->get_status() : SI_Invoice::STATUS_TEMP ;
+		$due_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_due_date() : current_time( 'timestamp' )+(60*60*24*30);
+		$expiration_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_expiration_date() : current_time( 'timestamp' )+(60*60*24*30);
+		$issue_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_issue_date() : strtotime( $post->post_date ) ;
+		$estimate_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_estimate_id() : 0 ;
+		$invoice_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : '00001';
+		$po_number = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_po_number() : '';
+		$client_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_client_id() : 0;
+		$deposit = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_deposit() : '';
+		$discount = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_discount() : '';
+		$tax = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_tax() : '';
+		$tax2 = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_tax2() : '';
+		$currency = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_currency() : '';
+
 		self::load_view( 'admin/meta-boxes/invoices/information', array(
 				'id' => $post->ID,
 				'post' => $post,
 				'invoice' => $invoice,
 				'status' => $status,
 				'status_options' => SI_Invoice::get_statuses(),
-				'estimate_id' => $invoice->get_estimate_id(),
-				'invoice_id' => $invoice->get_invoice_id(),
-				'expiration_date' => $invoice->get_expiration_date(),
-				'due_date' => $invoice->get_due_date(),
-				'client_id' => $invoice->get_client_id(),
+				'estimate_id' => $estimate_id,
+				'invoice_id' => $invoice_id,
+				'expiration_date' => $expiration_date,
+				'due_date' => $due_date,
+				'issue_date' => $issue_date,
+				'client_id' => $client_id,
 				'client_options' => $client_options,
-				'clients' => $clients
+				'clients' => $clients,
+				'po_number' => $po_number,
+				'deposit' => $deposit,
+				'discount' => $discount,
+				'tax' => $tax,
+				'tax2' => $tax2,
+				'currency' => $currency,
 			), FALSE );
 
 		// add the client modal
@@ -542,9 +565,14 @@ class SI_Invoices extends SI_Controller {
 
 		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] != '' ) ? $_POST['sender_notes'] : '' ;
 		if ( $sender_notes == '' ) { // check to make sure the sender note option wasn't updated for the send.
-			$sender_notes = ( isset( $_POST['sa_metabox_sender_note'] ) && $_POST['sa_metabox_sender_note'] != '' ) ? $_POST['sa_metabox_sender_note'] : '' ;
+			$sender_notes = ( isset( $_POST['sa_send_metabox_sender_note'] ) && $_POST['sa_send_metabox_sender_note'] != '' ) ? $_POST['sa_send_metabox_sender_note'] : '' ;
 		}
 		$invoice->set_sender_note( $sender_notes );
+
+		if ( !isset( $_REQUEST['sa_metabox_recipients'] ) || empty( $_REQUEST['sa_metabox_recipients'] ) ) {
+			return;
+		}
+		do_action( 'send_invoice', $invoice, $_REQUEST['sa_metabox_recipients'] );
 	}
 
 	/**
@@ -981,6 +1009,28 @@ class SI_Invoices extends SI_Controller {
 				$invoice->set_estimate_id( $cloned_post_id );
 				$invoice->set_as_temp();
 			}
+		}
+	}
+
+	/**
+	 * Adjust the invoice id
+	 * @param  integer $new_post_id   
+	 * @param  integer $cloned_post_id       
+	 * @param  string  $new_post_type 
+	 * @return                  
+	 */
+	public static function adjust_cloned_invoice( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
+		if ( get_post_type( $new_post_id ) == SI_Invoice::POST_TYPE ) {
+			$og_invoice = SI_Invoice::get_instance( $cloned_post_id );
+			$og_id = $og_invoice->get_invoice_id();
+			$invoice = SI_Invoice::get_instance( $new_post_id );
+
+			// Adjust invoice id
+			$new_id = apply_filters( 'si_adjust_cloned_invoice_id', $og_id . '-' . $new_post_id, $new_post_id, $cloned_post_id );
+			$invoice->set_invoice_id( $new_id );
+
+			// Adjust status
+			$invoice->set_as_temp();
 		}
 	}
 

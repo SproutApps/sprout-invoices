@@ -1,15 +1,3 @@
-<?php 
-	$expiration_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_expiration_date() : current_time( 'timestamp' )+(60*60*24*30);
-	$issue_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_issue_date() : strtotime( $post->post_date ) ;
-	$invoice_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_invoice_id() : 0 ;
-	$estimate_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_estimate_id() : '00001';
-	$po_number = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_po_number() : '';
-	$client_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_client_id() : 0;
-	$discount = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_discount() : '';
-	$tax = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax() : '';
-	$tax2 = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax2() : '';
-	$currency = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_currency() : '';
-	 ?>
 <!-- issue date -->
 <?php
 global $action;

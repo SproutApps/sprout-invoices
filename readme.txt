@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 5.5
+Stable tag: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,9 +116,30 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 == Upgrade Notice ==
 
-Line Item Commenting, Pre-defined Items, and more
+CSV Importing and add-ons for Zapier, Toggl, and more!
 
 == Changelog ==
+
+= 6.0 =
+
+* NEW: Zapier Integration (pro version)
+* NEW: CSV Importing
+* NEW: Toggl Integration (pro version)
+* NEW: Filter for payment reminder delay, si_get_overdue_payment_reminder_delay (pro version)
+* NEW: Invoice that is voided will have a new stamp plus the user can't pay
+* NEW: Allow for blank terms and notes with [si_blank] shortcode
+* Improvement: API Updates for Future Release
+* Improvement: CSV Importing of estimates and line items (with examples)
+* Improvement: View logs adjustment to prevent duplication
+* Improvement: Adjust Estimate/Invoice ID after clone
+* Improvement: Confirmation page template updated
+* Improvement: Handle payments better when invoice is deleted
+* FIX: Redactor bug fixes when used within modal
+* FIX: Client dashboard: multiple clients for a single user (pro version)
+* FIX: Cloned Estimates/Invoices shouldn't retain the same status
+* FIX: Send estimates/invoices when saved if recipient is selected
+* FIX: Project Estimates and Invoices on Project admin adjusted
+* FIX: Payment date should be post_date
 
 = 5.5 =
 

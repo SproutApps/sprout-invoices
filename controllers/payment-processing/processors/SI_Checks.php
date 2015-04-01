@@ -189,8 +189,10 @@ class SI_Checks extends SI_Offsite_Processors {
 		if ( !$payment_id ) {
 			return FALSE;
 		}
-
 		$payment = SI_Payment::get_instance( $payment_id );
+		if ( $date != '' ) {
+			$payment->set_post_date( date( 'Y-m-d H:i:s', strtotime( $date ) ) );
+		}
 		do_action( 'payment_pending', $payment );
 		return $payment;
 	}

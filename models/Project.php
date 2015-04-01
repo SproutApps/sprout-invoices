@@ -350,14 +350,7 @@ class SI_Project extends SI_Post_Type {
 	 * @return array 
 	 */
 	public function get_invoices() {
-		$clients = $this->get_associated_clients();
-		$invoices = array();
-		foreach ( $clients as $client_id ) {
-			$client = SI_Client::get_instance( $client_id );
-			if ( is_a( $client, 'SI_Client' ) ) {
-				$invoices = array_merge( $invoices, $client->get_invoices() );
-			}
-		}
+		$invoices = self::find_by_meta( SI_Invoice::POST_TYPE, array( '_project_id' => $this->ID ) );
 		return $invoices;
 	}
 
@@ -366,14 +359,7 @@ class SI_Project extends SI_Post_Type {
 	 * @return array 
 	 */
 	public function get_estimates() {
-		$clients = $this->get_associated_clients();
-		$estimates = array();
-		foreach ( $clients as $client_id ) {
-			$client = SI_Client::get_instance( $client_id );
-			if ( is_a( $client, 'SI_Client' ) ) {
-				$estimates = array_merge( $estimates, $client->get_estimates() );
-			}
-		}
+		$estimates = self::find_by_meta( SI_Estimate::POST_TYPE, array( '_project_id' => $this->ID ) );
 		return $estimates;
 	}
 

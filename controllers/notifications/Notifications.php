@@ -434,6 +434,9 @@ class SI_Notifications extends SI_Notifications_Control {
 
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance( $invoice_id );
+		if ( !is_a( $invoice, 'SI_Invoice' ) ) {
+			return;
+		}
 		$client = $invoice->get_client();
 
 		// Admin email 

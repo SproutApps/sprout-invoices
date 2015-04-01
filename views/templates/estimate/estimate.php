@@ -216,7 +216,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 					<section id="doc_notes">
 						<?php do_action( 'si_document_notes_pre' ) ?>
-						<?php if ( si_get_estimate_notes() ): ?>
+						<?php if ( strlen( si_get_invoice_notes() ) > 1 ): ?>
 
 						<?php do_action( 'si_document_notes' ) ?>
 						<div id="doc_notes">
@@ -226,7 +226,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						
 						<?php endif ?>
 
-						<?php if ( si_get_estimate_terms() ): ?>
+						<?php if ( strlen( si_get_invoice_terms() ) > 1 ): ?>
 						
 						<?php do_action( 'si_document_terms' ) ?>
 						<div id="doc_terms">

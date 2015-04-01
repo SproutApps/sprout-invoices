@@ -71,6 +71,9 @@ class SI_Estimates extends SI_Controller {
 		// Record when invoice is created
 		add_action( 'si_cloned_post',  array( __CLASS__, 'create_record_of_cloned_invoice' ), 10, 3 );
 
+		// Adjust estimate id and status after clone
+		add_action( 'si_cloned_post',  array( __CLASS__, 'adjust_cloned_estimate' ), 10, 3 );
+
 		// Notifications
 		add_filter( 'wp_ajax_sa_send_est_notification', array( __CLASS__, 'maybe_send_notification' ) );
 
@@ -353,17 +356,35 @@ class SI_Estimates extends SI_Controller {
 
 		$estimate = SI_Estimate::get_instance( $post->ID );
 		$status = ( is_a( $estimate, 'SI_Estimate' ) && $estimate->get_status() != 'auto-draft' ) ? $estimate->get_status() : SI_Estimate::STATUS_TEMP ;
+		$expiration_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_expiration_date() : current_time( 'timestamp' )+(60*60*24*30);
+		$issue_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_issue_date() : strtotime( $post->post_date ) ;
+		$invoice_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_invoice_id() : 0 ;
+		$estimate_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_estimate_id() : '00001';
+		$po_number = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_po_number() : '';
+		$client_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_client_id() : 0;
+		$discount = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_discount() : '';
+		$tax = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax() : '';
+		$tax2 = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax2() : '';
+		$currency = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_currency() : '';
+		
 		self::load_view( 'admin/meta-boxes/estimates/information', array(
 				'id' => $post->ID,
 				'post' => $post,
 				'estimate' => $estimate,
 				'status' => $status,
 				'status_options' => SI_Estimate::get_statuses(),
-				'invoice_id' => $estimate->get_invoice_id(),
-				'expiration_date' => $estimate->get_expiration_date(),
-				'client_id' => $estimate->get_client_id(),
+				'invoice_id' => $invoice_id,
+				'expiration_date' => $expiration_date,
+				'client_id' => $client_id,
 				'client_options' => $client_options,
-				'clients' => $clients
+				'clients' => $clients,
+				'issue_date' => $issue_date,
+				'estimate_id' => $estimate_id,
+				'po_number' => $po_number,
+				'discount' => $discount,
+				'tax' => $tax,
+				'tax2' => $tax2,
+				'currency' => $currency,
 			), FALSE );
 
 		// add the client modal
@@ -514,9 +535,14 @@ class SI_Estimates extends SI_Controller {
 
 		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] != '' ) ? $_POST['sender_notes'] : '' ;
 		if ( $sender_notes == '' ) { // check to make sure the sender note option wasn't updated for the send.
-			$sender_notes = ( isset( $_POST['sa_metabox_sender_note'] ) && $_POST['sa_metabox_sender_note'] != '' ) ? $_POST['sa_metabox_sender_note'] : '' ;
+			$sender_notes = ( isset( $_POST['sa_send_metabox_sender_note'] ) && $_POST['sa_send_metabox_sender_note'] != '' ) ? $_POST['sa_send_metabox_sender_note'] : '' ;
 		}
 		$estimate->set_sender_note( $sender_notes );
+
+		if ( !isset( $_REQUEST['sa_metabox_recipients'] ) || empty( $_REQUEST['sa_metabox_recipients'] ) ) {
+			return;
+		}
+		do_action( 'send_estimate', $estimate, $_REQUEST['sa_metabox_recipients'] );
 	}
 
 	/**
@@ -721,6 +747,28 @@ class SI_Estimates extends SI_Controller {
 					0, 
 					FALSE );
 			}
+		}
+	}
+
+	/**
+	 * Adjust the estimate id
+	 * @param  integer $new_post_id   
+	 * @param  integer $cloned_post_id       
+	 * @param  string  $new_post_type 
+	 * @return                  
+	 */
+	public static function adjust_cloned_estimate( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
+		if ( get_post_type( $new_post_id ) == SI_Estimate::POST_TYPE ) {
+			$og_estimate = SI_Estimate::get_instance( $cloned_post_id );
+			$og_id = $og_estimate->get_estimate_id();
+			$estimate = SI_Estimate::get_instance( $new_post_id );
+
+			// Adjust estimate id
+			$new_id = apply_filters( 'si_adjust_cloned_estimate_id', $og_id . '-' . $new_post_id, $new_post_id, $cloned_post_id );
+			$estimate->set_estimate_id( $new_id );
+
+			// Adjust status
+			$estimate->set_pending();
 		}
 	}
 
@@ -1048,12 +1096,6 @@ class SI_Estimates extends SI_Controller {
 					'id' => 'edit-estimates',
 					'title' => self::__( 'Editing Estimates' ),
 					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__('Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__('Knowledgebase Article') ),
-				) );
-
-			$screen->add_help_tab( array(
-					'id' => 'mng-payments',
-					'title' => self::__( 'Predefined Tasks' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('An admin to manage your tasks is found under Estimates > Tasks  in the admin. When adding a new task the “Name” is what you will select when adding new line items, the description is used to dill the line item description field.'), self::__('Pre-defined tasks are used for both Estimates and Invoices.') ),
 				) );
 
 			$screen->set_help_sidebar(

@@ -251,10 +251,6 @@
 	// TODO standardize //
 	///////////////////////
 
-	
-
-	
-
 	/**
 	 * Disable quick send if the form has changed.
 	 */
@@ -282,6 +278,7 @@
 					$send_button.after('<span class="inline_error_message">' + data.response + '</span>');	
 				}
 				else {
+					$('#si_doc_send :checked').removeAttr('checked');
 					$meta_box.before('<div class="updated"><p>' + data.response + '</p></div>');
 				}
 			}

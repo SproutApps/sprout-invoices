@@ -1939,3 +1939,7 @@ input#sa_recurring_invoice_custom_freq {
 	content: '\f502';
 	top: 5px
 }
+
+.modal-open .redactor-dropdown {
+	z-index: 100051 !important;
+}
