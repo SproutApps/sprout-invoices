@@ -1020,13 +1020,13 @@ class SI_Invoices extends SI_Controller {
 	 * @return                  
 	 */
 	public static function adjust_cloned_invoice( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
-		if ( get_post_type( $new_post_id ) == SI_Invoice::POST_TYPE ) {
-			$og_invoice = SI_Invoice::get_instance( $cloned_post_id );
-			$og_id = $og_invoice->get_invoice_id();
+		if ( get_post_type( $cloned_post_id ) == SI_Estimate::POST_TYPE ) {
+			$estimate = SI_Estimate::get_instance( $cloned_post_id );
+			$est_id = $estimate->get_invoice_id();
 			$invoice = SI_Invoice::get_instance( $new_post_id );
 
 			// Adjust invoice id
-			$new_id = apply_filters( 'si_adjust_cloned_invoice_id', $og_id . '-' . $new_post_id, $new_post_id, $cloned_post_id );
+			$new_id = apply_filters( 'si_adjust_cloned_invoice_id', $est_id . '-' . $new_post_id, $new_post_id, $cloned_post_id );
 			$invoice->set_invoice_id( $new_id );
 
 			// Adjust status

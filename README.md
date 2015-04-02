@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**6.0.1**
+
+* FIX: Estimate approval failing under certain circumstances.
+
 **6.0**
 
 * NEW: Zapier Integration (pro version)
