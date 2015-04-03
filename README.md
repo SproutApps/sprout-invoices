@@ -90,6 +90,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**6.0.3**
+
+* FIX: Estimate template error.
+* FIX: Projects page error under come configurations
+
 **6.0.1**
 
 * FIX: Estimate approval failing under certain circumstances.

@@ -264,7 +264,6 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 					<section id="doc_notes">
 						<?php if ( strlen( si_get_invoice_notes() ) > 1 ): ?>
-							<?php error_log( 'log' . print_r( si_get_invoice_notes(), TRUE ) ); ?>
 						<?php do_action( 'si_document_notes' ) ?>
 						<div id="doc_notes">
 							<h2><?php si_e('Notes') ?></h2>
