@@ -9,7 +9,7 @@
  */
 function sprout_invoices_load() {
 	if ( class_exists( 'Sprout_Invoices' ) ) {
-		si_deactivate_plugin();
+		error_log( '** Sprout_Invoices Already Loaded **' );
 		return; // already loaded, or a name collision
 	}
 
@@ -269,37 +269,4 @@ function sprout_invoices_load() {
 	SA_Addons::init();
 	
 	do_action( 'sprout_invoices_loaded' );
-
-
-}
-
-/**
- * Minimum supported version of WordPress
- */
-define( 'SI_SUPPORTED_WP_VERSION', version_compare( get_bloginfo( 'version' ), '3.7', '>=' ) );
-/**
- * Minimum supported version of PHP
- */
-define( 'SI_SUPPORTED_PHP_VERSION', version_compare( phpversion(), '5.2.4', '>=' ) );
-
-/**
- * Compatibility check
- */
-if ( SI_SUPPORTED_WP_VERSION && SI_SUPPORTED_PHP_VERSION ) {
-	sprout_invoices_load();
-} else {
-	/**
-	 * Disable SI and add fail notices if compatibility check fails
-	 * @return string inserted within the WP dashboard
-	 */
-	si_deactivate_plugin();
-	add_action( 'admin_head', 'si_fail_notices' );
-	function si_fail_notices() {
-		if ( !SI_SUPPORTED_WP_VERSION ) {
-			printf( '<div class="error"><p><strong>Sprout Invoices</strong> requires WordPress %s or higher. Please upgrade WordPress and activate the Sprout Invoices Plugin again.</p></div>', SI_SUPPORTED_WP_VERSION );
-		}
-		if ( !SI_SUPPORTED_PHP_VERSION ) {
-			printf( '<div class="error"><p><strong>Sprout Invoices</strong> requires PHP version %s or higher to be installed on your server. Talk to your web host about using a secure version of PHP.</p></div>', SI_SUPPORTED_PHP_VERSION );
-		}
-	}
 }

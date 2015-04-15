@@ -11,11 +11,11 @@ class SI_Admin_Payment extends SI_Controller {
 	const PAYMENT_METHOD = 'Admin Payment';
 	const PAYMENT_SLUG = 'admin_payment';
 	
-	public function get_payment_method() {
+	public static function get_payment_method() {
 		return self::PAYMENT_METHOD;
 	}
 
-	public function get_slug() {
+	public static function get_slug() {
 		return self::PAYMENT_SLUG;
 	}
 
@@ -158,6 +158,7 @@ class SI_Admin_Payment extends SI_Controller {
 		if ( !$amount ) {
 			return FALSE;
 		}
+		error_log( 'ajax: ' . print_r( TRUE, TRUE ) );
 
 		self::create_admin_payment( $invoice->get_id(), $amount, $number, $date, $notes );
 	}
@@ -196,7 +197,7 @@ class SI_Admin_Payment extends SI_Controller {
 		if ( !$amount ) {
 			self::ajax_fail( 'No payment amount set.' );
 		}
-
+		
 		self::create_admin_payment( $_REQUEST['sa_metabox_invoice_id'], $amount, $number, $date, $notes );
 
 		header( 'Content-type: application/json' );

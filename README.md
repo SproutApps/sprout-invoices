@@ -90,6 +90,20 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**6.1**
+
+* NEW: Sprout Invoices Addons Page
+* NEW: Manage bundled addons (for paid users)
+* NEW: Filter the Admin Notification To: email address with `si_admin_notification_to_address`
+* FIX: Block Spambots from Submitting the Payment Form
+* FIX: Redirect to prevent refresh issues when a check/po is submitted #65
+* FIX: PayPal Totals issue with Tax + Deposit #69
+
+**6.0.5**
+
+* FIX: Toggl incompatibility issue
+* FIX: set_invoice_id error
+
 **6.0.3**
 
 * FIX: Estimate template error.

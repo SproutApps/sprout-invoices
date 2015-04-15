@@ -248,6 +248,8 @@ class SI_Templating_API extends SI_Controller {
 						'invoice/invoices.php'
 					), $template );
 			}
+
+			$template = apply_filters( 'si_doc_template', $template, 'invoice' );
 		}
 
 		// Estimates
@@ -271,8 +273,10 @@ class SI_Templating_API extends SI_Controller {
 						'estimate/estimates.php'
 					), $template );
 			}
+
+			$template = apply_filters( 'si_doc_template', $template, 'estimate' );
 		}
-		return apply_filters( 'si_doc_template', $template );
+		return $template;
 	}
 
 	/////////////////

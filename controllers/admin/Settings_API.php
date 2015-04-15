@@ -440,11 +440,11 @@ class SA_Settings_API extends SI_Controller {
 	 * Attempt to save the current page options
 	 * @return  
 	 */
-	public function maybe_save_options_via_ajax() {
+	public static function maybe_save_options_via_ajax() {
 		if ( is_admin() ) {
 			if ( !isset( $_POST['options'] ) )
 				return;
-			
+
 			// unserialize
 			wp_parse_str( $_POST['options'], $options );
 			// Confirm the form was an update
@@ -469,7 +469,7 @@ class SA_Settings_API extends SI_Controller {
 	 * @param  string $option_page 
 	 * @return               
 	 */
-	public function update_options( $submission = array(), $option_page = '' ) {
+	public static function update_options( $submission = array(), $option_page = '' ) {
 		global $wp_settings_fields;
 
 		if ( !isset( $wp_settings_fields[$option_page] ) )

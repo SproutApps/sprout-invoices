@@ -119,7 +119,8 @@ class SI_Payment extends SI_Post_Type {
 		}
 
 		$payment = self::get_instance( $id );
-
+		
+		$payment->set_title( sprintf( self::__( 'Payment #%d' ), $id ) );
 		$payment->set_transaction_id( $args['transaction_id'] );
 		$payment->set_payment_method( $args['payment_method'] );
 		$payment->set_amount( $args['amount'] );

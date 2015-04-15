@@ -375,14 +375,13 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 		}
 		// Admin email 
-		$admin_to = get_option( 'admin_email' );
 		$data = array(
 			'user_id' => $estimate->get_user_id(),
 			'estimate' => $estimate,
 			'invoice' => $invoice,
 			'client' => $estimate->get_client(),
-			'to' => $admin_to
 		);
+		$admin_to = self::admin_email( $data );
 		self::send_notification( 'accepted_estimate', $data, $admin_to );
 	}
 
@@ -408,14 +407,13 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 		}
 		// Admin email 
-		$admin_to = get_option( 'admin_email' );
 		$data = array(
 			'user_id' => $estimate->get_user_id(),
 			'estimate' => $estimate,
 			'invoice' => $invoice,
 			'client' => $estimate->get_client(),
-			'to' => $admin_to
 		);
+		$admin_to = self::admin_email( $data );
 		self::send_notification( 'declined_estimate', $data, $admin_to );
 	}
 
@@ -435,18 +433,18 @@ class SI_Notifications extends SI_Notifications_Control {
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		if ( !is_a( $invoice, 'SI_Invoice' ) ) {
+			do_action( 'si_error', 'Admin Payment Notification Not Sent to Client; No Invoice Found: ' . $invoice_id, $payment->get_id() );
 			return;
 		}
 		$client = $invoice->get_client();
 
 		// Admin email 
-		$admin_to = get_option( 'admin_email' );
 		$data = array(
 			'payment' => $payment,
 			'invoice' => $invoice,
 			'client' => $client,
-			'to' => $admin_to
 		);
+		$admin_to = self::admin_email( $data );
 		self::send_notification( 'payment_notification', $data, $admin_to );
 	}
 

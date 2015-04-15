@@ -623,9 +623,6 @@ class SI_CSV_Import extends SI_Importer {
 		if ( isset( $estimate['Estimate ID'] ) ) {
 			$est->set_estimate_id( $estimate['Estimate ID'] );
 		}
-		if ( isset( $estimate['Invoice ID'] ) ) {
-			$est->set_invoice_id( $estimate['Invoice ID'] );
-		}
 		if ( isset( $estimate['Total'] ) ) {
 			$est->set_total( $estimate['Total'] );
 		}

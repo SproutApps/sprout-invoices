@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 6.0.3
+Stable tag: 6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,20 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 CSV Importing and add-ons for Zapier, Toggl, and more!
 
 == Changelog ==
+
+= 6.1 =
+
+* NEW: Sprout Invoices Addons Page
+* NEW: Manage bundled addons (for paid users)
+* NEW: Filter the Admin Notification To: email address with `si_admin_notification_to_address`
+* FIX: Block Spambots from Submitting the Payment Form
+* FIX: Redirect to prevent refresh issues when a check/po is submitted #65
+* FIX: PayPal Totals issue with Tax + Deposit #69
+
+= 6.0.5 =
+
+* FIX: Toggl incompatibility issue
+* FIX: set_invoice_id error
 
 = 6.0.3 =
 

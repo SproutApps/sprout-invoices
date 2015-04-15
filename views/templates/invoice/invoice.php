@@ -273,7 +273,6 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						<?php endif ?>
 
 						<?php if ( strlen( si_get_invoice_terms() ) > 1 ): ?>
-						<?php error_log( 'log: "' . print_r(  si_get_invoice_terms(), TRUE ) . '"' ); ?>
 						<?php do_action( 'si_document_terms' ) ?>
 						<div id="doc_terms">
 							<h2><?php si_e('Terms') ?></h2>

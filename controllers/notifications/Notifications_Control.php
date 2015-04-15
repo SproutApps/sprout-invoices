@@ -786,6 +786,11 @@ class SI_Notifications_Control extends SI_Controller {
 	// Misc //
 	///////////
 
+	public static function admin_email( $atts = array() ) {
+		$admin_to = apply_filters( 'si_admin_notification_to_address', get_option( 'admin_email' ), $atts );
+		return $admin_to;
+	}
+
 	public static function maybe_refresh_notifications() {
 		if ( !is_admin() ) {
 			return;

@@ -263,7 +263,7 @@ class SI_Invoice extends SI_Post_Type {
 		$this->set_status( self::STATUS_WO );
 	}
 
-	public function get_status_label( $status = '' ) {
+	public static function get_status_label( $status = '' ) {
 		if ( $status == '' ) {
 			$status = $this->get_status();
 		}
@@ -470,6 +470,18 @@ class SI_Invoice extends SI_Post_Type {
 		$this->save_post_meta( array(
 				self::$meta_keys['discount'] => $discount,
 			) );
+		return $discount;
+	}
+
+	public function get_discount_total() {
+		$subtotal = $this->get_subtotal();
+		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
+			$subtotal = $this->get_total();
+		}
+		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
+		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
+		$invoice_total = $subtotal+$tax_total+$tax2_total;
+		$discount = $invoice_total * ( $this->get_discount() / 100 );
 		return $discount;
 	}
 

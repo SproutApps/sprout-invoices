@@ -62,6 +62,8 @@ class SI_Checks extends SI_Offsite_Processors {
 		
 		// Remove pages
 		add_filter( 'si_checkout_pages', array( $this, 'remove_checkout_pages' ) );
+
+		add_action( 'checkout_completed', array( $this, 'post_checkout_redirect' ), 10, 2 );
 	}
 
 
@@ -138,6 +140,13 @@ class SI_Checks extends SI_Offsite_Processors {
 					//'autocomplete' => 'off',
 				),
 				'required' => FALSE
+			),
+			'nonce' => array( // anti-spam honeypot
+				'type' => 'hidden',
+				'weight' => 50,
+				'label' => self::__( 'Skip this unless you are not human.' ),
+				'required' => TRUE,
+				'value' => wp_create_nonce( SI_Controller::NONCE ),
 			)
 		);
 		$fields = apply_filters( 'sa_checks_fields', $fields, $checkout );
@@ -169,6 +178,10 @@ class SI_Checks extends SI_Offsite_Processors {
 		$date = ( isset( $_POST['sa_checks_mailed'] ) ) ? $_POST['sa_checks_mailed'] : FALSE ;
 		$notes = ( isset( $_POST['sa_checks_notes'] ) ) ? $_POST['sa_checks_notes'] : '' ;
 
+		if ( !isset( $_POST['sa_checks_nonce'] ) || !wp_verify_nonce( $_POST['sa_checks_nonce'], self::NONCE ) ) {
+			return FALSE;
+		}
+
 		if ( !$amount ) {
 			return FALSE;
 		}
@@ -195,6 +208,14 @@ class SI_Checks extends SI_Offsite_Processors {
 		}
 		do_action( 'payment_pending', $payment );
 		return $payment;
+	}
+
+	public function post_checkout_redirect( SI_Checkouts $checkout, SI_Payment $payment ) {
+		if ( !is_a( $checkout->get_processor(), __CLASS__ ) ) {
+			return;
+		}
+		wp_redirect( $checkout->checkout_confirmation_url( self::PAYMENT_SLUG ) );
+		exit();
 	}
 
 	/**

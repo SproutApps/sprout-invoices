@@ -202,7 +202,6 @@ class SI_Estimate extends SI_Post_Type {
 
 		$estimate->set_user_id( $args['user_id'] );
 		$estimate->set_estimate_id( $args['estimate_id'] );
-		$estimate->set_invoice_id( $args['invoice_id'] );
 		$estimate->set_client_id( $args['client_id'] );
 		$estimate->set_project_id( $args['project_id'] );
 		$estimate->set_status( $args['status'] );

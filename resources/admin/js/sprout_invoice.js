@@ -19,8 +19,6 @@ function si_format_money ( value ) {
 
 jQuery(function($) {
 
-	
-
 	/**
 	 * select2 init
 	 */
@@ -154,4 +152,90 @@ jQuery(function($) {
 	});
 
 
+});
+
+;(function( $, si, undefined ) {
+
+	si.siAdmin = {
+		config: {
+			failed_save: false
+		},
+	};
+
+	si.siAdmin.InitAjaxSettings = function() {
+
+		$(".ajax_save").change( function( e ) {
+
+			// If the form is failing don't attempt again.
+			if ( si.siAdmin.config.failed_save ) { return };
+
+			// handle the payments form differently, only post if the payment selector is chosen.
+			if ( $(this).hasClass('group-buying/payment') ) {
+				if ( e.target.id == 'si_payment_processor' ) {
+					si.siAdmin.ajax_post_form( $(this) );
+					return;
+				};
+			}
+			// handle the full page ajax pages differently 
+			else if ( $(this).hasClass( 'full_page_ajax' ) ) {
+				si.siAdmin.ajax_post_form( $(this) );
+				return;
+			}
+			else {
+				si.siAdmin.ajax_post_options( $(this) );
+				return;
+			};
+		});
+	};
+
+
+
+	// Use wp_ajax to update each option without a full page return.
+	si.siAdmin.ajax_post_options = function( form ) {
+		var $form_dialog = $("#ajax_saving");
+		si.siAdmin.show_dialog();
+		$.post( ajaxurl, { action: 'si_save_options', options: form.serialize() },
+			function( data ) {
+				$form_dialog.html(data).fadeOut();
+			}
+		);
+	};
+
+	// submit the form in the background and replace the DOM
+	si.siAdmin.ajax_post_form = function( form ) {
+		var $form_dialog = $("#ajax_saving");
+		si.siAdmin.show_dialog();
+		$.ajax( {
+			type: "POST",
+			url: form.attr( 'action' ),
+			data: form.serialize(),
+			success: function( response ) {
+				var new_form = $('<div />').html(response).find('form.ajax_save').html();
+				if ( new_form.length > 0 ) {
+					$form_dialog.html('Saved').fadeOut();
+					form.html(new_form);
+				}
+				else {
+					$form_dialog.html('Auto save failed, use "Save Changes" button.').fadeOut();
+					si.siAdmin.config.failed_save = true;
+				};
+			}
+		});
+	};
+
+	si.siAdmin.show_dialog = function( $html ) {
+		var $form_dialog = $("#ajax_saving");
+		$form_dialog.html( $('#ajax_saving').data( 'message' ) );
+		$form_dialog
+			.css('position', 'fixed')
+			.css('left', '45%')
+			.css('top', '45%')
+			.show();
+	};
+
+})( jQuery, window.si = window.si || {} );
+
+// Init
+jQuery(function() {
+	si.siAdmin.InitAjaxSettings();
 });
