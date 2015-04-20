@@ -625,7 +625,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				</thead>
 				<tbody>
 					<?php foreach ( $line_items as $position => $ldata ): ?>
-						<tr class="item" data-id="<?php echo $position ?>">
+						<tr class="item" data-id="<?php echo (float) $position ?>">
 							<td><?php esc_attr_e( $position+1 ) ?></td>
 							<td><?php echo apply_filters( 'the_content', $ldata['desc'] ) ?></td>
 							<td><?php esc_attr_e( $ldata['rate'] ) ?></td>
@@ -730,7 +730,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			<ol>
 				<?php foreach ( $line_items as $position => $data ): ?>
 					<?php if ( is_int( $position ) ): // is not a child ?>
-						<li class="item" data-id="<?php echo $position ?>">
+						<li class="item" data-id="<?php echo (float) $position ?>">
 							<?php
 								// get the children of this top level item
 								$children = si_line_item_get_children( $position, $line_items ); ?>
@@ -742,7 +742,7 @@ class SI_Notifications extends SI_Notifications_Control {
 							<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
 								<ol class="items_list">
 									<?php foreach ( $children as $child_position ): ?>
-										<li class="item" data-id="<?php echo $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
+										<li class="item" data-id="<?php echo (float) $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
 									<?php endforeach ?>
 								</ol>
 							<?php endif ?>
@@ -810,7 +810,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			$url = get_edit_post_link( $invoice_id );
 		}
-		return apply_filters( 'shortcode_invoice_edit_url', $url, $data );
+		return apply_filters( 'shortcode_invoice_edit_url', esc_url( $url ), $data );
 	}
 
 	/**
@@ -828,7 +828,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			$url = get_permalink( $invoice_id );
 		}
-		return apply_filters( 'shortcode_invoice_url', $url, $data );
+		return apply_filters( 'shortcode_invoice_url', esc_url( $url ), $data );
 	}
 
 	/**
@@ -1104,7 +1104,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$client_id = $data['client']->get_id();
 			$url = get_edit_post_link( $client_id );
 		}
-		return apply_filters( 'shortcode_client_edit_url', $url, $data );
+		return apply_filters( 'shortcode_client_edit_url', esc_url( $url ), $data );
 	}
 
 
@@ -1159,7 +1159,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate_id = $data['estimate']->get_id();
 			$url = get_edit_post_link( $estimate_id );
 		}
-		return apply_filters( 'shortcode_estimate_edit_url', $url, $data );
+		return apply_filters( 'shortcode_estimate_edit_url', esc_url( $url ), $data );
 	}
 
 	/**
@@ -1177,7 +1177,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate_id = $data['estimate']->get_id();
 			$url = get_permalink( $estimate_id );
 		}
-		return apply_filters( 'shortcode_estimate_url', $url, $data );
+		return apply_filters( 'shortcode_estimate_url', esc_url( $url ), $data );
 	}
 
 	/**
@@ -1319,7 +1319,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				ob_start(); ?>
 					<?php foreach ( $data['submission_fields']['fields'] as $key => $value ): ?>
 						<?php if ( isset( $value['data']['label'] ) && isset( $value['data']['type'] ) && $value['data']['type'] != 'hidden' ): ?>
-							<dt><?php echo $value['data']['label'] ?></dt>
+							<dt><?php echo esc_html( $value['data']['label'] ); ?></dt>
 							<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== FALSE ): ?>
 								<dd><p><?php 
 										$term = get_term_by( 'id', $value['value'], SI_Estimate::PROJECT_TAXONOMY );

@@ -958,6 +958,10 @@ span.status_change {
 	content: '\e60b';
 }
 
+#line_items_footer #publishing-action {
+	width: 110%;
+}
+
 #line_items_footer #publishing-action input {
 	zoom: 1.3!important
 }
@@ -2094,4 +2098,5 @@ input#sa_recurring_invoice_custom_freq {
     color: #fff;
     font-weight: 600;
     text-transform: uppercase;
+	position: absolute;
 }

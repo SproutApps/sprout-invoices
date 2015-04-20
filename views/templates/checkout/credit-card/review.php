@@ -9,14 +9,14 @@
 				<tbody>
 					<?php foreach ( $billing_fields as $key => $data ): ?>
 						<tr>
-							<th scope="row"><?php echo $data['label']; ?></th>
-							<td><?php echo $data['value']; ?></td>
+							<th scope="row"><?php echo esc_html( $data['label'] ); ?></th>
+							<td><?php echo esc_html( $data['value'] ); ?></td>
 						</tr>
 					<?php endforeach; ?>
 					<?php foreach ( $cc_fields as $key => $data ): ?>
 						<tr>
-							<th scope="row"><?php echo $data['label']; ?></th>
-							<td><?php echo $data['value']; ?></td>
+							<th scope="row"><?php echo esc_html( $data['label'] ); ?></th>
+							<td><?php echo esc_html( $data['value'] ); ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

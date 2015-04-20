@@ -28,7 +28,7 @@ class SI_JSON_API extends SI_Controller {
 	 * @return            
 	 */
 	public static function get_url( $endpoint = 'payments' ) {
-		return add_query_arg( array( self::API_QUERY_VAR => $endpoint ), home_url() );
+		return esc_url( add_query_arg( array( self::API_QUERY_VAR => $endpoint ), home_url() ) );
 	}
 
 	/**

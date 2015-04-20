@@ -43,17 +43,17 @@
 					break;
 			} ?>
 		<dt>
-			<span class="history_status <?php echo $record->get_type() ?>"><?php echo $type; ?></span><br/>
+			<span class="history_status <?php echo esc_attr( $record->get_type() ) ?>"><?php echo esc_html( $type ); ?></span><br/>
 			<span class="history_date"><?php echo date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $r_post->post_date ) ) ?></span>
 		</dt>
 
 		<dd>
 			<?php if ( $record->get_type() == SI_Notifications::RECORD ): ?>
 				<p>
-					<?php echo $r_post->post_title ?>
-					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $r_post->ID ?>" id="show_notification_tb_link_<?php echo $r_post->ID ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
+					<?php echo esc_html( $r_post->post_title ) ?>
+					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $r_post->ID ?>" id="show_notification_tb_link_<?php echo (int) $r_post->ID ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 				</p>
-				<div id="notification_message_<?php echo $r_post->ID ?>" class="cloak">
+				<div id="notification_message_<?php echo (int) $r_post->ID ?>" class="cloak">
 					<?php echo wpautop( $r_post->post_content ) ?>
 				</div>
 			<?php else: ?>

@@ -246,14 +246,15 @@ class SA_Addons extends SI_Controller {
 	//////////////////
 
 	public static function get_marketplace_addons() {
-		$cache_key = '_si_marketplace_addons_v1';
+		$cache_key = '_si_marketplace_addons_v'.self::SI_VERSION;
 		$cached_addons = get_transient( $cache_key );
 		if ( $cached_addons ) {
 			if ( !empty( $cached_addons ) ) {
 				return $cached_addons;
 			}
 		}
-		$uid = SI_Free_License::uid();
+		
+		$uid = ( class_exists('SI_Free_License') ) ? SI_Free_License::uid() : 0 ;
 		$ref = ( $uid ) ? $uid : 'na' ;
 		// data to send in our API request
 		$api_params = array( 
@@ -265,9 +266,8 @@ class SA_Addons extends SI_Controller {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_get( add_query_arg( $api_params, self::API_CB . 'wp-admin/admin-ajax.php' ), array( 'timeout' => 15, 'sslverify' => false ) );
+		$response = wp_remote_get( esc_url( add_query_arg( $api_params, self::API_CB . 'wp-admin/admin-ajax.php' ) ), array( 'timeout' => 15, 'sslverify' => false ) );
 
-		error_log( 'response: ' . print_r( $response, TRUE ) );
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
 			return false;

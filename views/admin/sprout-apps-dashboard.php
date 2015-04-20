@@ -27,8 +27,8 @@
 						?>
 						<div>
 							<h4><a href="<?php echo esc_url( $item->get_permalink() ); ?>" title="<?php echo esc_html( $item->get_title() ); ?>"><?php echo esc_html( $item->get_title() ); ?></a></h4>
-							<span class="rss_date"><?php echo $item->get_date('j F Y'); ?></span>
-							<p><?php echo $excerpt; ?></p>
+							<span class="rss_date"><?php echo esc_html( $item->get_date('j F Y') ); ?></span>
+							<p><?php echo esc_html( $excerpt ); ?></p>
 						</div>
 					<?php endforeach; ?>
 				<?php endif; ?>

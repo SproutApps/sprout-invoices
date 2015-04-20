@@ -12,7 +12,7 @@
 			<?php if ( !empty( $line_items ) ): ?>
 				<?php foreach ( $line_items as $position => $data ): ?>
 					<?php if ( is_int( $position ) ): // is not a child ?>
-						<li class="item" data-id="<?php echo $position ?>">
+						<li class="item" data-id="<?php echo (float) $position ?>">
 							<?php
 								// get the children of this top level item
 								$children = si_line_item_get_children( $position, $line_items ); ?>
@@ -24,7 +24,7 @@
 							<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
 								<ol class="items_list">
 									<?php foreach ( $children as $child_position ): ?>
-										<li class="item" data-id="<?php echo $child_position ?>"><?php echo si_line_item_build_option( $child_position, $line_items ) ?></li>
+										<li class="item" data-id="<?php echo (float) $child_position ?>"><?php echo si_line_item_build_option( $child_position, $line_items ) ?></li>
 									<?php endforeach ?>
 								</ol>
 							<?php endif ?>
@@ -62,7 +62,6 @@
 
 				<div id="invoice_status_updates" class="sticky_save">
 					<div id="publishing-action">
-						<span class="spinner"></span>
 						<?php
 						$post_type = $post->post_type;
 						$post_type_object = get_post_type_object($post_type);
@@ -80,6 +79,7 @@
 								<input name="save" type="submit" class="button button-primary button-large" id="save" accesskey="p" value="<?php esc_attr_e('Save') ?>" />
 						<?php
 						} ?>
+					<span class="spinner"></span>
 					</div>			
 				</div>
 
@@ -107,7 +107,7 @@
 				<?php elseif ( floatval( $total - $total_payments ) > 0.00 || $status == 'auto-draft' ): ?>
 					<div id="deposit">
 						<b title="Set the amount due for the next payment&mdash;the amount due will be used if blank" class="helptip"><?php si_e('Deposit Due') ?></b>
-						<input type="number" name="deposit" value="<?php echo $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any">
+						<input type="number" name="deposit" value="<?php echo (float) $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any">
 					</div>
 				<?php endif ?>
 			</div>
@@ -121,7 +121,7 @@
 <div class="cloak">
 	<!-- Used to insert descriptions from adding a pre-defined task -->
 	<?php foreach ( $item_types as $term ): ?>
-		<span id="term_desc_<?php echo $term->term_id ?>"><?php echo $term->description ?></span>
+		<span id="term_desc_<?php echo (int) $term->term_id ?>"><?php echo esc_html( $term->description ) ?></span>
 	<?php endforeach ?>
 </div>
 <?php endif ?>

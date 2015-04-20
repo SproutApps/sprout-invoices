@@ -44,7 +44,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							$payment_string = ( si_has_invoice_deposit() ) ? si__('Pay Deposit') : si__('Pay Invoice') ;
 							 ?>
 						<?php if ( si_get_invoice_balance() && si_get_invoice_status() != 'write-off' ): ?>
-							<a href="#pay" class="button primary_button purchase_button" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" data-dropdown="#payment_selection"><?php echo $payment_string ?></a>
+							<a href="#pay" class="button primary_button purchase_button" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" data-dropdown="#payment_selection"><?php echo esc_html( $payment_string ); ?></a>
 							<div id="payment_selection" class="dropdown dropdown-tip dropdown-anchor-right dropdown-relative">
 								<ul class="dropdown-menu">
 									<?php foreach ( si_payment_options() as $slug => $options ): ?>
@@ -206,7 +206,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 								<?php do_action( 'si_document_line_items' ) ?>
 								<?php foreach ( $line_items as $position => $data ): ?>
 									<?php if ( is_int( $position ) ): // is not a child ?>
-										<li class="item" data-id="<?php echo $position ?>">
+										<li class="item" data-id="<?php echo esc_attr( $position ); ?>">
 											<?php
 												// get the children of this top level item
 												$children = si_line_item_get_children( $position, $line_items ); ?>
@@ -218,7 +218,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 											<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
 												<ol class="items_list">
 													<?php foreach ( $children as $child_position ): ?>
-														<li class="item" data-id="<?php echo $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
+														<li class="item" data-id="<?php echo esc_attr( $child_position ); ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
 													<?php endforeach ?>
 												</ol>
 											<?php endif ?>
@@ -307,22 +307,22 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 			<?php do_action( 'si_document_history' ) ?>
 			<?php foreach ( si_doc_history_records() as $item_id => $data ): ?>
 				<dt>
-					<span class="history_status <?php echo $data['status_type'] ?>"><?php echo $data['type']; ?></span><br/>
+					<span class="history_status <?php echo esc_attr( $data['status_type'] ); ?>"><?php echo esc_html( $data['type'] ); ?></span><br/>
 					<span class="history_date"><?php echo date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
 				</dt>
 
 				<dd>
 					<?php if ( $data['status_type'] == SI_Notifications::RECORD ): ?>
 						<p>
-							<?php echo $update_title ?>
-							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
+							<?php echo esc_html( $update_title ); ?>
+							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 						</p>
-						<div id="notification_message_<?php echo $item_id ?>" class="cloak">
+						<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">
 							<?php echo wpautop( $data['content'] ) ?>
 						</div>
 					<?php elseif ( $data['status_type'] == SI_Invoices::VIEWED_STATUS_UPDATE ) : ?>
 						<p>
-							<?php echo $data['update_title'] ?>
+							<?php echo esc_html( $data['update_title'] ); ?>
 						</p>
 					<?php else: ?>
 						<?php echo wpautop( $data['content'] ) ?>

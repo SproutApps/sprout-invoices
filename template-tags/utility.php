@@ -48,6 +48,26 @@ function si_esc_e( $string ) {
 }
 
 /**
+ * A wrapper around WP's __() to add the plugin's text domain
+ * @see Sprout_Invoices::__()
+ * @param string  $string
+ * @return string|void
+ */
+function si_esc_html__( $string ) {
+	return Sprout_Invoices::esc_html__( $string );
+}
+
+/**
+ * A wrapper around WP's _e() to add the plugin's text domain
+ * @see Sprout_Invoices::_e()
+ * @param string  $string
+ * @return void
+ */
+function si_esc_html_e( $string ) {
+	return Sprout_Invoices::esc_html_e( $string );
+}
+
+/**
  * Return a part of a name when a full name is provided
  * @param  string $full_name
  * @param  string $return    first, _first, last or return an array.
@@ -366,32 +386,32 @@ if ( !function_exists( 'pp' ) ) {
  * URL to purchase this app
  * @return string
  */
-function si_purchase_link( $url = '' ) {
-	echo si_get_purchase_link( $url );
+function si_purchase_link( $url = '', $campaign = 'free' ) {
+	echo si_get_purchase_link( $url, $campaign );
 }
 
 /**
  * URL to purchase this app
  * @return string
  */
-function si_get_purchase_link( $url = '' ) {
+function si_get_purchase_link( $url = '', $campaign = 'free' ) {
 	if ( $url == '' ) {
 		$url = 'https://sproutapps.co/sprout-invoices/purchase/';
 	}
-	$url = add_query_arg( array( 'utm_medium' => 'link', 'utm_campaign' => 'free', 'utm_source' => urlencode( home_url() ) ), $url );
-	return apply_filters( 'si_get_purchase_link', $url );
+	$url = add_query_arg( array( 'utm_medium' => 'link', 'utm_campaign' => $campaign, 'utm_source' => urlencode( home_url() ) ), $url );
+	return apply_filters( 'si_get_purchase_link', esc_url( $url ) );
 }
 
 /**
  * URL to purchase this app
  * @return string
  */
-function si_get_sa_link( $url = '' ) {
+function si_get_sa_link( $url = '', $campaign = 'free' ) {
 	if ( $url == '' ) {
 		$url = 'https://sproutapps.co/';
 	}
-	$url = add_query_arg( array( 'utm_medium' => 'link', 'utm_campaign' => 'free', 'utm_source' => urlencode( home_url() ) ), $url );
-	return apply_filters( 'si_get_sa_link', $url );
+	$url = add_query_arg( array( 'utm_medium' => 'link', 'utm_campaign' => $campaign, 'utm_source' => urlencode( home_url() ) ), $url );
+	return apply_filters( 'si_get_sa_link', esc_url( $url ) );
 }
 
 

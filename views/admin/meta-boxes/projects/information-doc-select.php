@@ -1,5 +1,5 @@
 <div class="misc-pub-section" data-edit-id="project" data-edit-type="select">
-	<span id="project" class="wp-media-buttons-icon"><b><?php echo $title ?></b> <span title="<?php self::_e('Select an existing project.') ?>" class="helptip"></span></span>
+	<span id="project" class="wp-media-buttons-icon"><b><?php echo esc_html( $title ); ?></b> <span title="<?php self::_e('Select an existing project.') ?>" class="helptip"></span></span>
 
 		<a href="#edit_project" class="edit-project hide-if-no-js edit_control" >
 			<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different project') ?></span>

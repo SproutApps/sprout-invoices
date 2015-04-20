@@ -156,7 +156,7 @@ class SI_Estimate extends SI_Post_Type {
 		return self::$instances[$id];
 	}
 
-	public static function create_estimate( $passed_args, $status = self::STATUS_REQUEST ) {
+	public static function create_estimate( $passed_args, $status = '' ) {
 		$defaults = array(
 			'subject' => sprintf( self::__('New Estimate: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'user_id' => '',
@@ -164,7 +164,7 @@ class SI_Estimate extends SI_Post_Type {
 			'invoice_id' => '',
 			'client_id' => '',
 			'project_id' => '',
-			'status' => $status,
+			'status' => ( $status ) ? $status : self::STATUS_REQUEST,
 			'total' => (float) 0,
 			'currency' => '',
 			'po_number' => '',

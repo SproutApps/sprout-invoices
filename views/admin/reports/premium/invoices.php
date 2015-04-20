@@ -71,7 +71,7 @@
 							<td><span class="si_status <?php si_invoice_status() ?>"><?php si_invoice_status() ?></span></td>
 							<td><?php si_invoice_issue_date() ?></td>
 							<td><?php printf( '<a href="%s">%s</a>', get_edit_post_link( get_the_ID() ), get_the_title( get_the_ID() ) ) ?></td>
-							<td><?php echo $client_name ?></td>
+							<td><?php echo esc_html( $client_name ); ?></td>
 							<td><?php si_invoice_calculated_total() ?></td>
 							<td><?php si_invoice_payments_total() ?></td>
 							<td><?php si_invoice_balance() ?></td>

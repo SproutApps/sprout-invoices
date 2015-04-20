@@ -192,7 +192,7 @@ class SI_Internal_Records extends SI_Controller {
 		</h2>
 		<?php self::maybe_purge_records(); ?>
 		<form id="records-filter" method="get">
-			<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+			<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
 			<?php $wp_list_table->display() ?>
 		</form>
 	</div>

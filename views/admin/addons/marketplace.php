@@ -1,7 +1,7 @@
 <?php require ABSPATH . 'wp-admin/options-head.php'; // not a general options page, so it must be included here ?>
 <?php 
 	$page = ( !isset( $_GET['tab'] ) ) ? $page : self::TEXT_DOMAIN.'/'.$_GET['tab'] ; ?>
-<div id="<?php echo $page ?>" class="wrap">
+<div id="<?php echo esc_attr( $page ); ?>" class="wrap">
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
@@ -11,8 +11,8 @@
 		<?php else: ?>
 			<div class="clearfix">
 				<ul class="subsubsub">
-					<li class="manage"><a href="<?php echo remove_query_arg( 'marketplace' ) ?>" <?php if ( !isset( $_GET['marketplace'] ) ) echo 'class="current"' ?>><?php self::_e('Manage Bundled Addons') ?></a> |</li>
-					<li class="marketplace"><a href="<?php echo add_query_arg( 'marketplace', 'view' ) ?>" <?php if ( isset( $_GET['marketplace'] ) ) echo 'class="current"' ?>><?php self::_e('Marketplace') ?></a></li>
+					<li class="manage"><a href="<?php echo esc_url( remove_query_arg( 'marketplace' ) ) ?>" <?php if ( !isset( $_GET['marketplace'] ) ) echo 'class="current"' ?>><?php self::_e('Manage Bundled Addons') ?></a> |</li>
+					<li class="marketplace"><a href="<?php echo esc_url( add_query_arg( 'marketplace', 'view' ) ) ?>" <?php if ( isset( $_GET['marketplace'] ) ) echo 'class="current"' ?>><?php self::_e('Marketplace') ?></a></li>
 				</ul>
 			</div>
 		<?php endif ?>
@@ -31,19 +31,19 @@
 									<?php if ( $addon->bundled ): ?>
 										<span class="bundled_addon"><?php si_e('Bundled Free w/ License') ?></span>
 									<?php endif ?>
-									<a href="<?php echo si_get_sa_link( $addon->url ) ?>">
-										<?php echo $addon->thumb ?>
+									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
+										<?php echo esc_html( $addon->thumb ); ?>
 									</a>
 									<div class="download_purchase_link">
-										<a href="<?php echo si_get_sa_link( $addon->purchase_url ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price ?>&nbsp;–&nbsp;<?php si_e('Add to Cart') ?></span></a>
+										<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo esc_html( $addon->price ); ?>&nbsp;–&nbsp;<?php si_e('Add to Cart') ?></span></a>
 									</div>
 								</div>
 								<div class="info">
-									<strong><?php echo $addon->post_title ?></strong>							
+									<strong><?php echo esc_html( $addon->post_title ); ?></strong>							
 									<div class="product-info">
-										<?php echo $addon->excerpt ?>
+										<?php echo esc_html( $addon->excerpt ); ?>
 									</div>
-									<a class="view-details" href="<?php echo si_get_sa_link( $addon->url ) ?>"><?php si_e('View Details') ?></a>
+									<a class="view-details" href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>"><?php si_e('View Details') ?></a>
 								</div>
 							</div>
 						</article>

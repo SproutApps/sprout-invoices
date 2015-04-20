@@ -704,7 +704,7 @@ class SI_Notifications_Control extends SI_Controller {
 		</h2>
 
 		<form id="payments-filter" method="get">
-			<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+			<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
 			<?php $wp_list_table->display() ?>
 		</form>
 	</div>
@@ -771,7 +771,7 @@ class SI_Notifications_Control extends SI_Controller {
 			$screen->add_help_tab( array(
 					'id' => 'notification-refresh',
 					'title' => self::__( 'Notifications Cleanup' ),
-					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.'), add_query_arg( array( 'refresh-notifications' => 1 ) ), si__('Clean') )
+					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.'), esc_url( add_query_arg( array( 'refresh-notifications' => 1 ) ) ), si__('Clean') )
 				) );
 
 			$screen->set_help_sidebar(

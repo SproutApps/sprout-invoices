@@ -1,6 +1,6 @@
 <div class="quick_status_update">
-	<span id="status_<?php echo $id ?>">
-		<span class="status_change" data-dropdown="#status_change_<?php echo $id ?>">
+	<span id="status_<?php echo (int) $id ?>">
+		<span class="status_change" data-dropdown="#status_change_<?php echo (int) $id ?>">
 			<?php 
 				$status_change_span = '&nbsp;<div class="dashicons dashicons-arrow-down"></div>';
 				 ?>
@@ -18,7 +18,7 @@
 		</span>
 	</span>
 
-	<div id="status_change_<?php echo $id ?>" class="dropdown dropdown-tip dropdown-relative dropdown-anchor-right">
+	<div id="status_change_<?php echo (int) $id ?>" class="dropdown dropdown-tip dropdown-relative dropdown-anchor-right">
 		<ul class="dropdown-menu">
 			<?php if ( $status != SI_Estimate::STATUS_PENDING ): ?>
 				<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Pending' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( '<b>Pending: </b> Waiting for Review' ) ); ?>

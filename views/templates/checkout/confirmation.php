@@ -40,7 +40,7 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 						<?php do_action( 'si_doc_actions_pre' ) ?>
 						<?php 
 							$button_status = ( si_get_invoice_balance() ) ? si__('Deposit Made') : si__('Paid in Full') ; ?>
-						<span class="button primary_button deposit_paid"><?php echo $button_status ?></span>
+						<span class="button primary_button deposit_paid"><?php echo esc_html( $button_status ); ?></span>
 						<?php do_action( 'si_doc_actions' ) ?>
 					</div><!-- #doc_actions -->
 				</header><!-- #header_title -->
@@ -70,7 +70,7 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 							</header><!-- /header -->
 							<?php if ( ! si_get_invoice_balance() ): ?>
 								<?php $status = ( si_has_invoice_deposit() ) ? si__('Deposit Made') : si__('Paid') ; ?>
-								<span id="status" class="paid"><span class="inner_status"><?php echo $status ?></span></span>
+								<span id="status" class="paid"><span class="inner_status"><?php echo esc_html( $status ); ?></span></span>
 							<?php else : ?>
 								<span id="status" class="void"><span class="inner_status"><?php si_e('Pending') ?></span></span>
 							<?php endif ?>
@@ -185,7 +185,7 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 								<?php do_action( 'si_document_line_items' ) ?>
 								<?php foreach ( $line_items as $position => $data ): ?>
 									<?php if ( is_int( $position ) ): // is not a child ?>
-										<li class="item" data-id="<?php echo $position ?>">
+										<li class="item" data-id="<?php echo (float) $position ?>">
 											<?php
 												// get the children of this top level item
 												$children = si_line_item_get_children( $position, $line_items ); ?>
@@ -197,7 +197,7 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 											<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
 												<ol class="items_list">
 													<?php foreach ( $children as $child_position ): ?>
-														<li class="item" data-id="<?php echo $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
+														<li class="item" data-id="<?php echo (float) $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
 													<?php endforeach ?>
 												</ol>
 											<?php endif ?>

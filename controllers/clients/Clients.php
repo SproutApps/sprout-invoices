@@ -384,7 +384,7 @@ class SI_Clients extends SI_Controller {
 			
 			echo '<p>';
 			$address = si_format_address( $client->get_address(), 'string', '<br/>' );
-			echo $address;
+			echo esc_html( $address );
 			if ( $address != '' ) {
 				echo '<br/>';
 			}

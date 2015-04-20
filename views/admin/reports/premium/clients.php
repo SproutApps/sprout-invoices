@@ -128,10 +128,10 @@
 							<td><?php the_ID() ?></td>
 							<td><?php printf( '<a href="%s">%s</a>', get_edit_post_link( get_the_ID() ), get_the_title( get_the_ID() ) ) ?></td>
 							<td><?php echo date_i18n( get_option('date_format'), strtotime( $client->get_post_date() ) ) ?></td>
-							<td><?php echo $number_estimate ?></td>
-							<td><?php echo $number_estimate_complete ?></td>
-							<td><?php echo $number_invoices ?></td>
-							<td><?php echo $number_invoices_complete ?></td>
+							<td><?php echo (int) $number_estimate ?></td>
+							<td><?php echo (int) $number_estimate_complete ?></td>
+							<td><?php echo (int) $number_invoices ?></td>
+							<td><?php echo (int) $number_invoices_complete ?></td>
 							<td><?php sa_formatted_money( $total_invoiced ) ?></td>
 							<td><?php sa_formatted_money( $total_payments ) ?></td>
 							<td><?php sa_formatted_money( $total_outstanding ) ?></td>
@@ -148,10 +148,10 @@
 			<tfoot>
 				<tr>
 					<th colspan="3"><?php self::_e('Totals') ?></th>
-					<th><?php echo $table_total_estimate_count ?></th>
-					<th><?php echo $table_total_estimate_complete_count ?></th>
-					<th><?php echo $table_total_invoice_count ?></th>
-					<th><?php echo $table_total_invoices_complete_count ?></th>
+					<th><?php echo (int) $table_total_estimate_count ?></th>
+					<th><?php echo (int) $table_total_estimate_complete_count ?></th>
+					<th><?php echo (int) $table_total_invoice_count ?></th>
+					<th><?php echo (int) $table_total_invoices_complete_count ?></th>
 					<th><?php sa_formatted_money( $table_total_invoiced ) ?></th>
 					<th><?php sa_formatted_money( $table_total_payments ) ?></th>
 					<th><?php sa_formatted_money( $table_total_outstanding ) ?></th>

@@ -12,4 +12,4 @@
  * 
  */ ?>
 
-<p class="sa-message <?php echo $status; ?>"><?php si_e( $message ) ?></p>
+<p class="sa-message <?php echo esc_attr( $status ); ?>"><?php si_e( $message ) ?></p>

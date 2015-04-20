@@ -57,7 +57,6 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 		</div>
 
 		<div id="publishing-action">
-			<span class="spinner"></span>
 			<?php
 			if ( !in_array( $post->post_status, array('publish', 'future', 'private') ) || 0 == $post->ID ) {
 				if ( $can_publish ) : ?>
@@ -72,6 +71,7 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 					<input name="save" type="submit" class="button button-primary button-large" id="publish" accesskey="p" value="<?php esc_attr_e('Update') ?>" />
 			<?php
 			} ?>
+			<span class="spinner"></span>
 		</div>
 	<div class="clear"></div>
 	</div><!-- #major-publishing-actions -->

@@ -100,11 +100,11 @@ class SI_Reporting extends SI_Controller {
 			$current_report = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : 'dashboard' ;
 			?>
 				<ul class="subsubsub">
-					<li class="invoices"><a href="<?php echo remove_query_arg( self::REPORT_QV ) ?>" <?php if ( $current_report == 'dashboard' ) echo 'class="current"' ?>><?php self::_e('Dashboard') ?></a> |</li>
-					<li class="invoices"><a href="<?php echo add_query_arg( self::REPORT_QV, 'invoices' ) ?>" <?php if ( $current_report == 'invoices' ) echo 'class="current"' ?>><?php self::_e('Invoices') ?></a> |</li>
-					<li class="estimates"><a href="<?php echo add_query_arg( self::REPORT_QV, 'estimates' ) ?>" <?php if ( $current_report == 'estimates' ) echo 'class="current"' ?>><?php self::_e('Estimates') ?></a> |</li>
-					<li class="payments"><a href="<?php echo add_query_arg( self::REPORT_QV, 'payments' ) ?>" <?php if ( $current_report == 'payments' ) echo 'class="current"' ?>><?php self::_e('Payments') ?></a> |</li>
-					<li class="clients"><a href="<?php echo add_query_arg( self::REPORT_QV, 'clients' ) ?>" <?php if ( $current_report == 'clients' ) echo 'class="current"' ?>><?php self::_e('Clients') ?></a></li>
+					<li class="invoices"><a href="<?php echo esc_url( remove_query_arg( self::REPORT_QV ) ) ?>" <?php if ( $current_report == 'dashboard' ) echo 'class="current"' ?>><?php self::_e('Dashboard') ?></a> |</li>
+					<li class="invoices"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'invoices' ) ) ?>" <?php if ( $current_report == 'invoices' ) echo 'class="current"' ?>><?php self::_e('Invoices') ?></a> |</li>
+					<li class="estimates"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'estimates' ) ) ?>" <?php if ( $current_report == 'estimates' ) echo 'class="current"' ?>><?php self::_e('Estimates') ?></a> |</li>
+					<li class="payments"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'payments' ) ) ?>" <?php if ( $current_report == 'payments' ) echo 'class="current"' ?>><?php self::_e('Payments') ?></a> |</li>
+					<li class="clients"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'clients' ) ) ?>" <?php if ( $current_report == 'clients' ) echo 'class="current"' ?>><?php self::_e('Clients') ?></a></li>
 				</ul>
 			<?php
 		}
@@ -903,7 +903,7 @@ class SI_Reporting extends SI_Controller {
 				$screen->add_help_tab( array(
 						'id' => 'reports-refresh',
 						'title' => self::__( 'Dashboard Refresh' ),
-						'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.'), add_query_arg( array( 'nocache' => 1 ) ), si__('Refresh') )
+						'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.'), esc_url( add_query_arg( array( 'nocache' => 1 ) ) ), si__('Refresh') )
 					) );
 			}
 

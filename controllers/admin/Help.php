@@ -97,7 +97,7 @@ class SI_Help extends SI_Controller {
 		<script type="text/javascript">
 		//<![CDATA[
 		jQuery(document).ready( function($) {
-			var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
+			var ajaxurl = '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>';
 			var options = <?php echo json_encode( $args ); ?>;
 
 			if ( ! options )
@@ -106,14 +106,14 @@ class SI_Help extends SI_Controller {
 			options = $.extend( options, {
 				close: function() {
 					$.post( ajaxurl, {
-						pointer: '<?php echo $pointer_id; ?>',
+						pointer: '<?php echo (float) $pointer_id; ?>',
 						action: 'dismiss-wp-pointer'
 					});
-					<?php echo $close; ?>
+					<?php echo esc_js( $close ); ?>
 				}
 			});
 
-			$('<?php echo $selector; ?>').pointer( options ).pointer('open');
+			$('<?php echo esc_js( $selector ); ?>').pointer( options ).pointer('open');
 		});
 		//]]>
 		</script>

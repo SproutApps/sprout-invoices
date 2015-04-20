@@ -13,7 +13,7 @@ if ( 0 != $post->ID ) {
 <?php do_action( 'doc_information_meta_box_first', $invoice ) ?>
 
 <div class="misc-pub-section" data-edit-id="status" data-edit-type="select">
-	<span id="status" class="wp-media-buttons-icon"><?php si_e('Status:') ?> <b><?php echo $status_options[$status] ?></b></span>
+	<span id="status" class="wp-media-buttons-icon"><?php si_e('Status:') ?> <b><?php echo esc_html( $status_options[$status] ) ?></b></span>
 
 	<a href="#edit_status" class="edit-status hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different status') ?></span>
@@ -36,7 +36,7 @@ if ( 0 != $post->ID ) {
 
 <div id="submitdiv">
 	<div class="misc-pub-section curtime misc-pub-curtime">
-		<span id="timestamp"><?php printf($stamp, $date); ?></span>
+		<span id="timestamp"><?php printf( $stamp, $date ); ?></span>
 
 		<a href="#edit_timestamp" class="edit-timestamp hide-if-no-js"><span aria-hidden="true"><?php _e( 'Edit' ); ?></span> <span class="screen-reader-text"><?php _e( 'Edit date and time' ); ?></span></a>
 		<div id="timestampdiv" class="hide-if-js"><?php touch_time(($action == 'edit'), 1); ?></div>
@@ -88,7 +88,7 @@ if ( 0 != $post->ID ) {
 	<?php 
 		$client_name = ( $client_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $client_id ), get_the_title( $client_id ) ) : si__('Client N/A') ;
 		 ?>
-	<span id="client" class="wp-media-buttons-icon"><?php si_e('Invoice for') ?> <b><?php echo $client_name ?></b></span>
+	<span id="client" class="wp-media-buttons-icon"><?php si_e('Invoice for') ?> <b><?php echo esc_html( $client_name ) ?></b></span>
 
 	<a href="#edit_client" class="edit-client hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different client') ?></span>
@@ -124,7 +124,7 @@ if ( 0 != $post->ID ) {
 
 <!-- ID -->
 <div class="misc-pub-section" data-edit-id="invoice_id">
-	<span id="invoice_id" class="wp-media-buttons-icon"><?php si_e('Invoice ID') ?> #<b><?php echo $invoice_id ?></b></span>
+	<span id="invoice_id" class="wp-media-buttons-icon"><?php si_e('Invoice ID') ?> #<b><?php echo esc_html( $invoice_id ); ?></b></span>
 
 	<a href="#edit_invoice_id" class="edit-invoice_id hide-if-no-js edit_control">
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit invoice id') ?></span>
@@ -132,7 +132,7 @@ if ( 0 != $post->ID ) {
 
 	<div id="invoice_id_div" class="control_wrap hide-if-js">
 		<div class="invoice_id-wrap">
-			<input type="text" name="invoice_id" value="<?php echo $invoice_id ?>" size="10">
+			<input type="text" name="invoice_id" value="<?php echo esc_attr( $invoice_id ) ?>" size="10">
  		</div>
 		<p>
 			<a href="#edit_invoice_id" class="save_control save-invoice_id button"><?php si_e('OK') ?></a>
@@ -149,7 +149,7 @@ if ( 0 != $post->ID ) {
 
 <!-- PO Number -->
 <div class="misc-pub-section" data-edit-id="po_number">
-	<span id="po_number" class="wp-media-buttons-icon"><?php si_e('PO Number') ?> #<b><?php echo $po_number ?></b></span>
+	<span id="po_number" class="wp-media-buttons-icon"><?php si_e('PO Number') ?> #<b><?php echo esc_html( $po_number ) ?></b></span>
 
 	<a href="#edit_po_number" class="edit-po_number hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit PO number') ?></span>
@@ -157,7 +157,7 @@ if ( 0 != $post->ID ) {
 
 	<div id="po_number_div" class="control_wrap hide-if-js">
 		<div class="po_number-wrap">
-			<input type="text" name="po_number" value="<?php echo $po_number ?>" size="10">
+			<input type="text" name="po_number" value="<?php echo esc_attr( $po_number ); ?>" size="10">
  		</div>
 		<p>
 			<a href="#edit_po_number" class="save_control save-po_number hide-if-no-js button"><?php si_e('OK') ?></a>
@@ -168,7 +168,7 @@ if ( 0 != $post->ID ) {
 
 <!-- Discount -->
 <div class="misc-pub-section update-total" data-edit-id="discount">
-	<span id="discount" class="wp-media-buttons-icon"><?php si_e('Discount') ?> <b><?php echo $discount ?></b>%</span>
+	<span id="discount" class="wp-media-buttons-icon"><?php si_e('Discount') ?> <b><?php echo (float) $discount ?></b>%</span>
 
 	<a href="#edit_discount" class="edit-discount hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit discount') ?></span>
@@ -177,7 +177,7 @@ if ( 0 != $post->ID ) {
 
 	<div id="discount_div" class="control_wrap hide-if-js">
 		<div class="discount-wrap">
-			<input type="text" name="discount" value="<?php echo $discount ?>" size="3">%
+			<input type="text" name="discount" value="<?php echo (float) $discount ?>" size="3">%
  		</div>
 		<p>
 			<a href="#edit_discount" class="save_control save-discount hide-if-no-js button"><?php si_e('OK') ?></a>
@@ -188,7 +188,7 @@ if ( 0 != $post->ID ) {
 
 <!-- Tax -->
 <div class="misc-pub-section update-total" data-edit-id="tax">
-	<span id="tax" class="wp-media-buttons-icon"><?php si_e('Tax') ?> <b><?php echo $tax ?></b>%</span>
+	<span id="tax" class="wp-media-buttons-icon"><?php si_e('Tax') ?> <b><?php echo (float) $tax ?></b>%</span>
 
 	<a href="#edit_tax" class="edit-tax hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit tax') ?></span>
@@ -197,7 +197,7 @@ if ( 0 != $post->ID ) {
 
 	<div id="tax_div" class="control_wrap hide-if-js">
 		<div class="tax-wrap">
-			<input type="text" name="tax" value="<?php echo $tax ?>" size="3">%
+			<input type="text" name="tax" value="<?php echo (float) $tax ?>" size="3">%
  		</div>
  		
 		<p>
@@ -209,7 +209,7 @@ if ( 0 != $post->ID ) {
 
 <!-- Tax2 -->
 <div class="misc-pub-section update-total" data-edit-id="tax2">
-	<span id="tax2" class="wp-media-buttons-icon"><?php si_e('Tax') ?> <b><?php echo $tax2 ?></b>%</span>
+	<span id="tax2" class="wp-media-buttons-icon"><?php si_e('Tax') ?> <b><?php echo (float) $tax2 ?></b>%</span>
 
 	<a href="#edit_tax2" class="edit-tax2 hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit tax') ?></span>
@@ -218,7 +218,7 @@ if ( 0 != $post->ID ) {
 
 	<div id="tax2_div" class="control_wrap hide-if-js">
 		<div class="tax2-wrap">
-			<input type="text" name="tax2" value="<?php echo $tax2 ?>" size="3">%
+			<input type="text" name="tax2" value="<?php echo (float) $tax2 ?>" size="3">%
  		</div>
  		
 		<p>

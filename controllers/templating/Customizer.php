@@ -27,7 +27,7 @@ class SI_Customizer extends SI_Controller {
 			$items[] = array(
 				'id' => 'customizer',
 				'title' => self::__( 'Customize' ),
-				'href' => add_query_arg( array( 'url' => urlencode( get_permalink() ) ), admin_url( 'customize.php' ) ),
+				'href' => esc_url( add_query_arg( array( 'url' => urlencode( get_permalink() ) ), admin_url( 'customize.php' ) ) ),
 				'weight' => 1000,
 			);
 		}
@@ -107,25 +107,25 @@ class SI_Customizer extends SI_Controller {
 			<style>
 			#doc .doc_total,
 			.button.primary_button {
-				background-color: <?php echo $est_color; ?>;
+				background-color: <?php echo esc_attr( $est_color ); ?>;
 			}
 
 			#invoice #doc .doc_total,
 			#invoice .button.primary_button {
-				background-color: <?php echo $inv_color; ?>;
+				background-color: <?php echo esc_attr( $inv_color ); ?>;
 			}
 
 			#invoice.paid #doc .doc_total,
 			#invoice .button.deposit_paid {
-				background-color: <?php echo $est_color; ?>;
+				background-color: <?php echo esc_attr( $est_color ); ?>;
 			}
 
 			#line_total {
-				color: <?php echo $est_color; ?>;
+				color: <?php echo esc_attr( $est_color ); ?>;
 			}
 
 			#invoice #line_total {
-				color: <?php echo $inv_color; ?>;
+				color: <?php echo esc_attr( $inv_color ); ?>;
 			}
 			</style>
 		<?php

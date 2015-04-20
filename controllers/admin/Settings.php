@@ -490,8 +490,8 @@ class SI_Admin_Settings extends SI_Controller {
 		<div class="sprout_country_options">
 			<select name="<?php echo self::COUNTRIES_OPTION ?>[]" multiple="multiple" class="select2" style="min-width:50%;">
 				<?php foreach ( parent::$countries as $key => $name ): ?>
-					<?php $selected = ( empty( self::$option_countries ) || in_array( $name, self::$option_countries ) ) ? 'selected="selected"' : null ;  ?>
-					<option value="<?php echo $name ?>" <?php echo $selected ?>><?php echo $name ?></option>
+					<?php $selected = ( empty( self::$option_countries ) || in_array( $name, self::$option_countries ) ) ? TRUE : FALSE ;  ?>
+					<option value="<?php echo esc_attr( $name ) ?>" <?php selected( $selected, TRUE, TRUE ); ?>><?php echo esc_html( $name ) ?></option>
 				<?php endforeach ?>
 			</select>
 		</div> <?php

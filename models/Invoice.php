@@ -147,7 +147,7 @@ class SI_Invoice extends SI_Post_Type {
 		return self::$instances[$id];
 	}
 
-	public static function create_invoice( $passed_args, $status = self::STATUS_DRAFT ) {
+	public static function create_invoice( $passed_args, $status = '' ) {
 		$defaults = array(
 			'subject' => sprintf( self::__('New Invoice: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'user_id' => '',
@@ -155,7 +155,7 @@ class SI_Invoice extends SI_Post_Type {
 			'estimate_id' => '',
 			'client_id' => '',
 			'project_id' => '',
-			'status' => $status,
+			'status' => ( $status ) ? $status : self::STATUS_TEMP,
 			'deposit' => (float) 0,
 			'total' => (float) 0,
 			'currency' => '',
@@ -169,7 +169,7 @@ class SI_Invoice extends SI_Post_Type {
 			'due_date' => 0,
 			'expiration_date' => 0,
 			'line_items' => array(),
-
+			'fields' => array(),
 		);
 		$args = wp_parse_args( $passed_args, $defaults );
 
@@ -183,6 +183,10 @@ class SI_Invoice extends SI_Post_Type {
 		}
 
 		$invoice = self::get_instance( $id );
+
+		if ( isset( $args['status'] ) ) {
+			$invoice->set_submission_fields( $args['status'] );
+		}
 
 		// Set the submitted user id if logged in.
 		if ( is_user_logged_in() ) {

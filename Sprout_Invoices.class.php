@@ -26,7 +26,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '6.1';
+	const SI_VERSION = '6.1.1';
 	/**
 	 * DB Version
 	 */
@@ -74,11 +74,29 @@ abstract class Sprout_Invoices {
 	}
 
 	/**
+	 * Wrapper around esc_html__
+	 * @param  string $string 
+	 * @return          
+	 */
+	public static function esc_html__( $string ) {
+		return esc_html__( $string, self::TEXT_DOMAIN );
+	}
+
+	/**
 	 * Wrapper around esc_attr__
 	 * @param  string $string 
 	 * @return          
 	 */
 	public static function esc_e( $string ) {
 		return esc_attr_e( $string, self::TEXT_DOMAIN );
+	}
+
+	/**
+	 * Wrapper around esc_html__
+	 * @param  string $string 
+	 * @return          
+	 */
+	public static function esc_html_e( $string ) {
+		return esc_html_e( $string, self::TEXT_DOMAIN );
 	}
 }

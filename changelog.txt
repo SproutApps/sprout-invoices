@@ -1,3 +1,8 @@
+= 6.1.1 =
+
+* SECURITY: Reviewed all uses of add_query_arg, regardless if $url is passed esc_url is used. 
+* SECURITY: Reviewed and updated every case of echoing an un-escaped variable; with a very strict standard of making every variable escaped or casted as an int/float.
+
 = 6.1 =
 
 * NEW: Sprout Invoices Addons Page

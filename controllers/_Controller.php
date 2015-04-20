@@ -1224,7 +1224,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		else
 			$url = get_blog_option( $blog_id, 'home' );
 
-		return apply_filters( 'si_get_home_url_option', $url );
+		return apply_filters( 'si_get_home_url_option', esc_url( $url ) );
 	}
 
 	/**
@@ -1397,9 +1397,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function get_clone_post_url( $post_id = 0, $new_post_type = '' ) {
 		$url = wp_nonce_url( get_edit_post_link( $post_id ), 'clone-si_post_'.$post_id, 'clone_si_post' );
 		if ( $new_post_type != '' ) {
-			$url = add_query_arg( array( 'post_type' => $new_post_type ), $url );
+			$url = add_query_arg( array( 'post_type' => $new_post_type ), esc_url( $url ) );
 		}
-		return apply_filters( 'si_get_clone_post_url', $url, $post_id, $new_post_type );
+		return apply_filters( 'si_get_clone_post_url', esc_url( $url ), $post_id, $new_post_type );
 	}
 
 
@@ -1577,10 +1577,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( $json ) header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		if ( $json ) {
-			echo json_encode( array( 'error' => 1, 'response' => $message ) );
+			echo json_encode( array( 'error' => 1, 'response' => esc_html( $message ) ) );
 		}
 		else {
-			echo $message;
+			echo esc_html( $message );
 		}
 		exit();
 	}

@@ -82,14 +82,14 @@
 						$invoice_name = ( $invoice_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $invoice_id ), get_the_title( $invoice_id ) ) : self::__('N/A') ;
 						$client_name = ( si_get_invoice_client_id( $invoice_id ) ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_invoice_client_id( $invoice_id ) ), get_the_title( si_get_invoice_client_id( $invoice_id ) ) ) : self::__('N/A') ; ?>
 						<tr> 
-							<td><?php echo $payment_link ?></td>
-							<td><span class="si_status payment_status <?php echo $payment->get_status() ?>"><?php echo str_replace( 'Publish', 'Complete', ucfirst( $payment->get_status() ) ) ?></span></td>
+							<td><?php echo esc_html( $payment_link ); ?></td>
+							<td><span class="si_status payment_status <?php echo esc_attr( $payment->get_status() ); ?>"><?php echo str_replace( 'Publish', 'Complete', ucfirst( $payment->get_status() ) ) ?></span></td>
 							<td><?php echo date( get_option('date_format'), strtotime( $payment->get_post_date() ) ) ?></td>
-							<td><?php echo $payment->get_payment_method() ?></td>
-							<td><?php echo $invoice_name ?></td>
-							<td><?php echo $client_name ?></td>
+							<td><?php echo esc_html( $payment->get_payment_method() ); ?></td>
+							<td><?php echo esc_html( $invoice_name ); ?></td>
+							<td><?php echo esc_html( $client_name ); ?></td>
 							<td><?php si_invoice_calculated_total( $invoice_id ) ?></td>
-							<td><?php echo $payments_link ?></td>
+							<td><?php echo esc_html( $payments_link ); ?></td>
 							<td><?php si_invoice_balance( $invoice_id ) ?></td>
 							<td><?php sa_formatted_money( $payment_total ) ?></td>
 							<td><?php sa_formatted_money( $payment_void_total ) ?></td>

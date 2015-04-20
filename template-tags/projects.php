@@ -61,7 +61,7 @@ function si_projects_select( $selected_id = 0, $client_id = 0, $blank = TRUE, $e
 		$out = '<span>'.sprintf( si__('No <a href="%s" target="_blank">projects</a> found'), admin_url( 'post-new.php?post_type='.SI_Project::POST_TYPE ) ).'</span>';
 	}
 	
-	echo $out;
+	echo esc_html( $out );
 
 }
 endif;

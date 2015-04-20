@@ -53,17 +53,17 @@ class SI_Payments extends SI_Controller {
 
 	public function modify_views( $views ) {
 		$auth_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_AUTHORIZED ) ? 'class="current"' : '';
-		$views['authorized_payments'] = '<a href="'.add_query_arg( array( 'post_status' => SI_Payment::STATUS_AUTHORIZED ) ).'" '.$auth_class.'>'.self::__('Authorized/Temp').'</a>';
+		$views['authorized_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_AUTHORIZED ) ) ).'" '.$auth_class.'>'.self::__('Authorized/Temp').'</a>';
 
 
 		$auth_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_PARTIAL ) ? 'class="current"' : '';
-		$views['partial_payments'] = '<a href="'.add_query_arg( array( 'post_status' => SI_Payment::STATUS_PARTIAL ) ).'" '.$auth_class.'>'.self::__('Partial').'</a>';
+		$views['partial_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_PARTIAL ) ) ).'" '.$auth_class.'>'.self::__('Partial').'</a>';
 
 		$void_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_VOID ) ? 'class="current"' : '';
-		$views['voided_payments'] = '<a href="'.add_query_arg( array( 'post_status' => SI_Payment::STATUS_VOID ) ).'" '.$void_class.'>'.self::__('Voided').'</a>';
+		$views['voided_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_VOID ) ) ).'" '.$void_class.'>'.self::__('Voided').'</a>';
 
 		$refund_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_REFUND ) ? 'class="current"' : '';
-		$views['refunded_payments'] = '<a href="'.add_query_arg( array( 'post_status' => SI_Payment::STATUS_REFUND ) ).'" '.$refund_class.'>'.self::__('Refunded').'</a>';
+		$views['refunded_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_REFUND ) ) ).'" '.$refund_class.'>'.self::__('Refunded').'</a>';
 		return $views;
 	}
 
@@ -161,7 +161,7 @@ class SI_Payments extends SI_Controller {
 
 			<?php $wp_list_table->views() ?>
 			<form id="payments-filter" method="get">
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+				<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
 				<?php $wp_list_table->search_box( self::__( 'Search' ), 'payment_id' ); ?>
 				<?php $wp_list_table->display() ?>
 			</form>

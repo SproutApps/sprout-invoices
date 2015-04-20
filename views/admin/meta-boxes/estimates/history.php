@@ -20,30 +20,30 @@
 	
 	<?php foreach ( $history as $item_id => $data ): ?>
 		<dt>
-			<span class="history_status <?php echo $data['status_type'] ?>"><?php echo $data['type']; ?></span><br/>
+			<span class="history_status <?php echo esc_attr( $data['status_type'] ); ?>"><?php echo esc_html( $data['type'] ) ?></span><br/>
 			<span class="history_date"><?php echo date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
 		</dt>
 
 		<dd>
 			<?php if ( $data['status_type'] == SI_Notifications::RECORD ): ?>
 				<p>
-					<?php echo $data['update_title'] ?>
-					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
+					<?php echo esc_html( $data['update_title'] ) ?>
+					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 				</p>
-				<div id="notification_message_<?php echo $item_id ?>" class="cloak">
+				<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">
 					<?php echo wpautop( $data['content'] ) ?>
 				</div>
 			<?php elseif ( $data['status_type'] == SI_Importer::RECORD ): ?>
 				<p>
-					<?php echo $data['update_title'] ?>
-					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo $item_id ?>" id="show_notification_tb_link_<?php echo $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Data') ?>"><?php si_e('View Data') ?></a>
+					<?php echo esc_html( $data['update_title'] ) ?>
+					<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Data') ?>"><?php si_e('View Data') ?></a>
 				</p>
-				<div id="notification_message_<?php echo $item_id ?>" class="cloak">
+				<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">
 					<?php prp( json_decode( $data['content'] ) ); ?>
 				</div>
 			<?php elseif ( $data['status_type'] == SI_Invoices::VIEWED_STATUS_UPDATE ) : ?>
 				<p>
-					<?php echo $data['update_title'] ?>
+					<?php echo esc_html( $data['update_title'] ) ?>
 				</p>
 			<?php else: ?>
 				<?php echo wpautop( $data['content'] ) ?>
@@ -70,7 +70,7 @@
 			<?php foreach ( $submission_fields as $key => $value ): ?>
 				<?php if ( isset( $value['data'] ) ): ?>
 					<?php if ( $value['data']['label'] && $value['data']['type'] != 'hidden' ): ?>
-						<dt><?php echo $value['data']['label'] ?></dt>
+						<dt><?php echo esc_html( $value['data']['label'] ) ?></dt>
 						<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== FALSE ): ?>
 							<dd><p><?php 
 									$term = get_term_by( 'id', $value['value'], SI_Estimate::PROJECT_TAXONOMY );
@@ -94,7 +94,7 @@
 			<ul>
 				<?php foreach ( $media as $id => $mpost ): ?>
 					<?php  $img = wp_get_attachment_image_src( $id, 'thumbnail', TRUE ); ?>
-					<li><a href="<?php echo wp_get_attachment_url( $id ) ?>" target="_blank" class="attachment_url"><img src="<?php  echo $img[0]; ?>" alt="<?php esc_attr_e( $mpost->post_name ) ?>"></a></li>
+					<li><a href="<?php echo wp_get_attachment_url( $id ) ?>" target="_blank" class="attachment_url"><img src="<?php echo esc_url( $img[0] ); ?>" alt="<?php esc_attr( $mpost->post_name ) ?>"></a></li>
 				<?php endforeach ?>
 			</ul>
 		</p>

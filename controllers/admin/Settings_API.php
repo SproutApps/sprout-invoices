@@ -263,7 +263,7 @@ class SA_Settings_API extends SI_Controller {
 				$new_title = self::__( $data['tab_title'] );
 				$current = ( ( isset( $_GET['tab'] ) && $_GET['tab'] ==  $data['slug'] ) || ( !isset( $_GET['tab'] ) && str_replace( self::TEXT_DOMAIN . '/', '', $plugin_page ) ==  $data['slug'] ) ) ? ' nav-tab-active' : '';
 				$url = ( $data['tab_only'] ) ? add_query_arg( array( 'page' => self::TEXT_DOMAIN.'/settings', 'tab' => $data['slug'] ), 'admin.php' ) : add_query_arg( array( 'page' => self::TEXT_DOMAIN.'/settings' ), 'admin.php' ) ;
-				echo '<a href="'.$url.'" class="nav-tab'.$current.'" id="si_options_tab_'.$data['slug'].'">'.$new_title.'</a>';
+				echo '<a href="'.esc_url( $url ).'" class="nav-tab'.$current.'" id="si_options_tab_'.$data['slug'].'">'.$new_title.'</a>';
 			}
 		endforeach;
 		// Add the add new buttons after the tabs
@@ -371,43 +371,43 @@ class SA_Settings_API extends SI_Controller {
 		ob_start(); ?>
 
 		<?php if ( $data['type'] == 'textarea' ): ?>
-			<textarea type="textarea" name="<?php echo $name; ?>" id="<?php echo $name; ?>" rows="<?php echo isset( $data['rows'] )?$data['rows']:4; ?>" cols="<?php echo isset( $data['cols'] )?$data['cols']:40; ?>" class="small-text code" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>><?php echo $data['default']; ?></textarea>
+			<textarea type="textarea" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" rows="<?php echo isset( $data['rows'] )?$data['rows']:4; ?>" cols="<?php echo isset( $data['cols'] )?$data['cols']:40; ?>" class="small-text code" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr( $attr ).'="'.esc_attr( $attr_value ).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>><?php echo esc_textarea( $data['default'] ); ?></textarea>
 		<?php elseif ( $data['type'] == 'wysiwyg' ): ?>
 			<?php
 				wp_editor_styleless( $data['default'], $name, array( 'textarea_rows' => 10 ) ); ?>
 		<?php elseif ( $data['type'] == 'select-state' ):  // FUTURE AJAX based on country selection  ?>
-			<select type="select" name="<?php echo $name; ?>" id="<?php echo $name; ?>" class="regular-text" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
+			<select type="select" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="regular-text" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr( $attr ).'="'.esc_attr( $attr_value ).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
 				<?php foreach ( $data['options'] as $group => $states ) : ?>
-					<optgroup label="<?php echo $group ?>">
+					<optgroup label="<?php echo esc_attr( $group ); ?>">
 						<?php foreach ( $states as $option_key => $option_label ): ?>
-							<option value="<?php echo $option_key; ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo $option_label; ?></option>
+							<option value="<?php echo esc_attr( $option_key ) ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo esc_html($option_label); ?></option>
 						<?php endforeach; ?>
 					</optgroup>
 				<?php endforeach; ?>
 			</select>
 		<?php elseif ( $data['type'] == 'select' ): ?>
-			<select type="select" name="<?php echo $name; ?>" id="<?php echo $name; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
+			<select type="select" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr( $attr ).'="'.esc_attr( $attr_value ).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
 				<?php foreach ( $data['options'] as $option_key => $option_label ): ?>
-				<option value="<?php echo $option_key; ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo $option_label; ?></option>
+				<option value="<?php echo esc_attr( $option_key ); ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo esc_html($option_label); ?></option>
 				<?php endforeach; ?>
 			</select>
 		<?php elseif ( $data['type'] == 'multiselect' ): ?>
-			<select type="select" name="<?php echo $name; ?>[]" id="<?php echo $name; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> multiple="multiple" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
+			<select type="select" name="<?php echo esc_attr( $name ); ?>[]" id="<?php echo esc_attr( $name ); ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr( $attr ).'="'.esc_attr( $attr_value ).'" '; } ?> multiple="multiple" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
 				<?php foreach ( $data['options'] as $option_key => $option_label ): ?>
-					<option value="<?php echo $option_key; ?>" <?php if ( in_array( $option_key, $data['default'] ) ) echo 'selected="selected"' ?>><?php echo $option_label; ?></option>
+					<option value="<?php echo esc_attr( $option_key ); ?>" <?php if ( in_array( $option_key, $data['default'] ) ) echo 'selected="selected"' ?>><?php echo esc_html($option_label); ?></option>
 				<?php endforeach; ?>
 			</select>
 		<?php elseif ( $data['type'] == 'radios' ): ?>
 			<?php foreach ( $data['options'] as $option_key => $option_label ): ?>
-				<label for="<?php echo $name; ?>_<?php esc_attr_e( $option_key ); ?>"><input type="radio" name="<?php echo $name; ?>" id="<?php echo $name; ?>_<?php esc_attr_e( $option_key ); ?>" value="<?php esc_attr_e( $option_key ); ?>" <?php checked( $option_key, $data['default'] ) ?> />&nbsp;<?php _e( $option_label ); ?></label>
+				<label for="<?php echo esc_attr( $name ); ?>_<?php esc_attr_e( $option_key ); ?>"><input type="radio" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>_<?php esc_attr_e( $option_key ); ?>" value="<?php esc_attr_e( $option_key ); ?>" <?php checked( $option_key, $data['default'] ) ?> />&nbsp;<?php echo esc_html($option_label); ?></label>
 				<br />
 			<?php endforeach; ?>
 		<?php elseif ( $data['type'] == 'checkbox' ): ?>
-			<input type="checkbox" name="<?php echo $name; ?>" id="<?php echo $name; ?>" <?php checked( $data['value'], $data['default'] ); ?> value="<?php echo isset( $data['value'] )?$data['value']:'On'; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
+			<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" <?php checked( $data['value'], $data['default'] ); ?> value="<?php echo isset( $data['value'] )?$data['value']:'On'; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr( $attr ).'="'.esc_attr( $attr_value ).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 		<?php elseif ( $data['type'] == 'hidden' ): ?>
-			<input type="hidden" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo $data['value']; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> />
+			<input type="hidden" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $data['value'] ); ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr( $attr ).'="'.esc_attr( $attr_value ).'" '; } ?> />
 		<?php elseif ( $data['type'] == 'file' ): ?>
-			<input type="file" name="<?php echo $name; ?>" id="<?php echo $name; ?>" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
+			<input type="file" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 		<?php elseif ( $data['type'] == 'pages' ): ?>
 			<?php 
 				$defaults = array( 
@@ -420,13 +420,13 @@ class SA_Settings_API extends SI_Controller {
 				$parsed_args = wp_parse_args( $data['args'], $defaults );
 				wp_dropdown_pages( $parsed_args ); ?>
 		<?php elseif ( $data['type'] == 'bypass' ): ?>
-			<?php if ( isset( $data['output'] ) ) echo $data['output']; ?>
+			<?php if ( isset( $data['output'] ) ) echo $data['output']; // not escaped ?>
 		<?php else: ?>
-			<input type="<?php echo $data['type']; ?>" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo $data['default']; ?>" placeholder="<?php echo isset( $data['placeholder'] )?$data['placeholder']:''; ?>" size="<?php echo isset( $data['size'] )?$data['size']:40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?> class="text-input" />
+			<input type="<?php echo esc_attr( $data['type'] ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $data['default'] ); ?>" placeholder="<?php echo isset( $data['placeholder'] )?$data['placeholder']:''; ?>" size="<?php echo isset( $data['size'] )?$data['size']:40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr( $attr ).'="'.esc_attr( $attr_value ).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?> class="text-input" />
 		<?php endif; ?>
 
 		<?php if ( $data['type'] != 'checkbox' && !empty( $data['description'] ) ): ?>
-			<p class="description help_block"><?php echo $data['description'] ?></p>
+			<p class="description help_block"><?php echo esc_html( $data['description'] ); ?></p>
 		<?php endif; ?>
 		<?php
 		return apply_filters( 'si_admin_settings_form_field', ob_get_clean(), $name, $data );

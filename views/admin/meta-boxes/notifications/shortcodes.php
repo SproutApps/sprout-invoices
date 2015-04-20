@@ -4,7 +4,7 @@
 <?php
 foreach ( $type['shortcodes'] as $shortcode ) : if ( isset( $shortcodes[$shortcode] ) ) : ?>
 <p>
-	<strong>[<?php echo $shortcode; ?>]</strong> &mdash;
-	<?php echo $shortcodes[$shortcode]['description']; ?>
+	<strong>[<?php echo esc_html( $shortcode ); ?>]</strong> &mdash;
+	<?php echo esc_html( $shortcodes[$shortcode]['description'] ); ?>
 </p>
 <?php endif; endforeach; ?>

@@ -69,7 +69,7 @@ class SI_Notifications_Table extends WP_List_Table {
 	}
 
 	function column_subject( $item ) {
-		echo $item->post_title;
+		echo esc_html( $item->post_title );
 	}
 
 	function column_message( $item ) {

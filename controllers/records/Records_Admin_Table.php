@@ -141,7 +141,7 @@ class SI_Records_Table extends WP_List_Table {
 
 	function column_recorded( $item ) {
 		$name = date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $item->post_date ) );
-		echo $name;
+		echo esc_html( $name );
 	}
 
 
@@ -154,13 +154,13 @@ class SI_Records_Table extends WP_List_Table {
 	 */
 	function column_type( $item ) {
 		$record = SI_Record::get_instance( $item->ID );
-		echo $record->get_type();
+		echo esc_html( $record->get_type() );
 
 	}
 
 	function column_title( $item ) {
 		$name = $item->post_title;
-		echo $name;
+		echo esc_html( $name );
 	}
 
 	function column_associate( $item ) {
@@ -176,11 +176,11 @@ class SI_Records_Table extends WP_List_Table {
 		$data = $record->get_data();
 		if ( $data != '' ) {
 			?>
-				<a href="#TB_inline?width=900&height=600&inlineId=data_id_<?php echo $item->ID ?>" class="thickbox button" title="<?php echo $item->post_title ?> <?php si_e('Data') ?>"><?php si_e('View Data') ?></a>
+				<a href="#TB_inline?width=900&height=600&inlineId=data_id_<?php echo esc_attr( $item->ID ); ?>" class="thickbox button" title="<?php echo esc_attr( $item->post_title ); ?> <?php si_e('Data') ?>"><?php si_e('View Data') ?></a>
 				<?php if ( is_array( $data ) ): ?>
-					<div id="data_id_<?php echo $item->ID ?>" style="display:none;"><pre style="white-space:pre-wrap; text-align: left; font: normal normal 11px/1.4 menlo, monaco, monospaced; padding: 5px;"><?php print_r( $data ) ?></pre></div>
+					<div id="data_id_<?php echo esc_attr( $item->ID ); ?>" style="display:none;"><pre style="white-space:pre-wrap; text-align: left; font: normal normal 11px/1.4 menlo, monaco, monospaced; padding: 5px;"><?php print_r( $data ) ?></pre></div>
 				<?php else: ?>
-					<div id="data_id_<?php echo $item->ID ?>" style="display:none;"><?php echo apply_filters( 'the_content', $data ) ?></div>
+					<div id="data_id_<?php echo esc_attr( $item->ID ); ?>" style="display:none;"><?php echo apply_filters( 'the_content', $data ) ?></div>
 				<?php endif ?>
 			<?php
 		}

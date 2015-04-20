@@ -2,7 +2,7 @@
 <?php 
 	$page = ( !isset( $_GET['tab'] ) ) ? $page : self::TEXT_DOMAIN.'/'.$_GET['tab'] ; ?>
 
-<div id="<?php echo $page ?>" class="wrap">
+<div id="<?php echo esc_attr( $page ); ?>" class="wrap">
 
 	<h2 class="nav-tab-wrapper">
 		<?php do_action( 'sprout_settings_tabs' ); ?>
@@ -25,7 +25,7 @@
 									<?php 
 										$current = ( isset( $_POST['importer'] ) && $_POST['importer'] != '' ) ? $_POST['importer'] : '' ;
 										 ?>
-									<option value="<?php echo $key ?>" <?php selected( $key, $current ) ?>><?php echo $name ?></option>
+									<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $current ) ?>><?php echo esc_html( $name ) ?></option>
 								<?php endforeach ?>
 							</select>
 						</td>
@@ -46,7 +46,7 @@
 				start_import_ajax_method('authentication');
 
 				function start_import_ajax_method ( $method ) {
-					var $importer = '<?php echo $_POST['importer'] ?>',
+					var $importer = '<?php echo esc_js( $_POST['importer'] ) ?>',
 						$nonce = si_js_object.security;
 					$.post( ajaxurl, { action: 'si_import', importer: $importer, method: $method, security: $nonce },
 						function( data ) {

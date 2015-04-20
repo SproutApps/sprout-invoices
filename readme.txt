@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 6.1
+Stable tag: 6.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 CSV Importing and add-ons for Zapier, Toggl, and more!
 
 == Changelog ==
+
+= 6.1.1 =
+
+* SECURITY: Reviewed all uses of add_query_arg, regardless if $url is passed esc_url is used. 
+* SECURITY: Reviewed and updated every case of echoing an un-escaped variable; with a very strict standard of making every variable escaped or casted as an int/float.
 
 = 6.1 =
 

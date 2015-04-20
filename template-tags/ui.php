@@ -275,7 +275,7 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 				<input class="totalled_input" type="hidden" name="line_item_total[]" value="<?php esc_attr_e( $total ) ?>">
 				<!-- total -->
 			</div><!-- / column_total -->
-			<input class="line_item_index" type="hidden" name="line_item_key[]" value="<?php echo $position ?>">
+			<input class="line_item_index" type="hidden" name="line_item_key[]" value="<?php echo esc_attr( $position ); ?>">
 			<!-- hidden -->
 		</div>
 	<?php

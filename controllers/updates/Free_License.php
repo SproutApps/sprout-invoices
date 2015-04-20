@@ -137,9 +137,9 @@ class SI_Free_License extends SI_Controller {
 
 	public static function add_uid_to_url( $url = '' ) {
 		if ( !self::$uid ) {
-			return $url;
+			return esc_url( $url );
 		}
-		return add_query_arg( array( 'uid' => self::$uid ), $url );
+		return esc_url( add_query_arg( array( 'uid' => self::$uid ), $url ) );
 	}
 	
 }

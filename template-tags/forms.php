@@ -17,7 +17,7 @@ if ( !function_exists('sa_form_fields') ) :
  */
 function sa_admin_fields( $fields, $context = 'metabox' ) {
 	foreach ( $fields as $key => $data ): ?>
-		<div id="si_admin_field_<?php echo $context; ?>_<?php echo $key; ?>" class="form-group<?php if ( $data['type'] == 'hidden' ) echo " hidden" ?>">
+		<div id="si_admin_field_<?php echo esc_attr($context) ?>_<?php echo esc_attr($key) ?>" class="form-group<?php if ( $data['type'] == 'hidden' ) echo " hidden" ?>">
 			<?php if ( $data['type'] == 'heading' ): ?>
 				<legend class="legend form-heading" ><?php si_e($data['label']); ?></legend>
 			<?php elseif ( $data['type'] != 'checkbox' ): ?>
@@ -25,7 +25,7 @@ function sa_admin_fields( $fields, $context = 'metabox' ) {
 				<div class="input_wrap"><?php sa_form_field( $key, $data, $context ); ?></div>
 			<?php else: ?>
 				<div class="checkbox input_wrap">
-					<label for="sa_<?php echo $context; ?>_<?php echo $key; ?>">
+					<label for="sa_<?php echo esc_attr($context) ?>_<?php echo esc_attr($key) ?>">
 						<?php
 							// add class by modifying the attributes.
 							$data['attributes']['class'] = 'checkbox'; ?>
@@ -51,7 +51,7 @@ if ( !function_exists('sa_form_fields') ) :
 function sa_form_fields( $fields, $context = 'contact', $wrap_class = '' ) {
 	foreach ( $fields as $key => $data ): ?>
 			<?php if ( $data['type'] == 'heading' ): ?>
-				<legend class="legend form-heading" ><?php echo $data['label']; ?></legend>
+				<legend class="legend form-heading" ><?php echo esc_html($data['label']) ?></legend>
 			<?php elseif ( $data['type'] != 'checkbox' ): ?>
 				<div class="sa-control-group<?php echo ' ' . $wrap_class ?>">
 					<span class="label_wrap"><?php sa_form_label( $key, $data, $context ); ?></span>
@@ -59,11 +59,11 @@ function sa_form_fields( $fields, $context = 'contact', $wrap_class = '' ) {
 				</div>
 			<?php else: ?>
 				<div class="sa-controls input_wrap<?php echo ' ' . $wrap_class ?>">
-					<label for="si_<?php echo $context; ?>_<?php echo $key; ?>" class="sa-checkbox">
+					<label for="si_<?php echo esc_attr($context) ?>_<?php echo esc_attr($key) ?>" class="sa-checkbox">
 						<?php
 							// add class by modifying the attributes.
 							$data['attributes']['class'] = 'checkbox'; ?>
-						<?php sa_form_field( $key, $data, $context ); ?> <?php echo $data['label']; ?>
+						<?php sa_form_field( $key, $data, $context ); ?> <?php echo esc_html($data['label']) ?>
 					</label>
 				</div>
 			<?php endif; ?>
@@ -113,48 +113,48 @@ function sa_get_form_field( $key, $data, $category ) {
 ?>
 	<span class="<?php sa_form_field_classes( $data ); ?>">
 	<?php if ( $data['type'] == 'textarea' ): ?>
-		<textarea name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" rows="<?php echo isset( $data['rows'] )?$data['rows']:4; ?>" cols="<?php echo isset( $data['cols'] )?$data['cols']:40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?> placeholder="<?php echo isset( $data['placeholder'] )?$data['placeholder']:$data['label']; ?>"><?php echo $data['default']; ?></textarea>
+		<textarea name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" rows="<?php echo isset( $data['rows'] )?$data['rows']:4; ?>" cols="<?php echo isset( $data['cols'] )?esc_attr($data['cols']):40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?> placeholder="<?php echo isset( $data['placeholder'] )?esc_attr($data['placeholder']):esc_attr($data['label']); ?>"><?php echo esc_html( $data['default'] ) ?></textarea>
 	<?php elseif ( $data['type'] == 'select-state' ):  // FUTURE AJAX based on country selection  ?>
-		<select name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
+		<select name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
 			<?php foreach ( $data['options'] as $group => $states ) : ?>
-				<optgroup label="<?php echo $group ?>">
+				<optgroup label="<?php echo esc_attr( $group ); ?>">
 					<?php foreach ( $states as $option_key => $option_label ): ?>
-						<option value="<?php echo $option_key; ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo $option_label; ?></option>
+						<option value="<?php echo esc_attr($option_key) ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo esc_html($option_label) ?></option>
 					<?php endforeach; ?>
 				</optgroup>
 			<?php endforeach; ?>
 		</select>
 	<?php elseif ( $data['type'] == 'select' ): ?>
-		<select name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
+		<select name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
 			<?php foreach ( $data['options'] as $option_key => $option_label ): ?>
-			<option value="<?php echo $option_key; ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo $option_label; ?></option>
+			<option value="<?php echo esc_attr( $option_key ) ?>" <?php selected( $option_key, $data['default'] ) ?>><?php echo esc_html( $option_label ) ?></option>
 			<?php endforeach; ?>
 		</select>
 	<?php elseif ( $data['type'] == 'multiselect' ): ?>
-		<select name="sa_<?php echo $category; ?>_<?php echo $key; ?>[]" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> multiple="multiple" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
+		<select name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>[]" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> multiple="multiple" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>>
 			<?php foreach ( $data['options'] as $option_key => $option_label ): ?>
-				<option value="<?php echo $option_key; ?>" <?php if ( in_array( $option_key, $data['default'] ) ) echo 'selected="selected"' ?>><?php echo $option_label; ?></option>
+				<option value="<?php echo esc_attr($option_key) ?>" <?php if ( in_array( $option_key, $data['default'] ) ) echo 'selected="selected"' ?>><?php echo esc_html($option_label) ?></option>
 			<?php endforeach; ?>
 		</select>
 	<?php elseif ( $data['type'] == 'radios' ): ?>
 		<?php foreach ( $data['options'] as $option_key => $option_label ): ?>
 			<span class="sa-form-field-radio">
-				<label for="sa_<?php echo $category; ?>_<?php echo $key; ?>_<?php esc_attr_e( $option_key ); ?>"><input type="radio" name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>_<?php esc_attr_e( $option_key ); ?>" value="<?php esc_attr_e( $option_key ); ?>" <?php checked( $option_key, $data['default'] ) ?> />&nbsp;<?php _e( $option_label ); ?></label>
+				<label for="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>_<?php esc_attr_e( $option_key ); ?>"><input type="radio" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>_<?php esc_attr_e( $option_key ); ?>" value="<?php esc_attr_e( $option_key ); ?>" <?php checked( $option_key, $data['default'] ) ?> />&nbsp;<?php echo esc_html( $option_label ); ?></label>
 			</span>
 		<?php endforeach; ?>
 	<?php elseif ( $data['type'] == 'checkbox' ): ?>
-		<input type="checkbox" name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" <?php checked( TRUE, $data['default'] ); ?> value="<?php echo isset( $data['value'] )?$data['value']:'On'; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
+		<input type="checkbox" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" <?php checked( TRUE, $data['default'] ); ?> value="<?php echo isset( $data['value'] )?$data['value']:'On'; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 	<?php elseif ( $data['type'] == 'hidden' ): ?>
-		<input type="hidden" name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" value="<?php echo $data['value']; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> />
+		<input type="hidden" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" value="<?php echo esc_attr( $data['value'] ) ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> />
 	<?php elseif ( $data['type'] == 'file' ): ?>
-		<input type="file" name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
+		<input type="file" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 	<?php elseif ( $data['type'] == 'bypass' ): ?>
-		<?php echo $data['output']; ?>
+		<?php echo $data['output'] // not escaped ?>
 	<?php else: ?>
-		<input type="<?php echo $data['type']; ?>" name="sa_<?php echo $category; ?>_<?php echo $key; ?>" id="sa_<?php echo $category; ?>_<?php echo $key; ?>" class="text-input" value="<?php echo $data['default']; ?>" placeholder="<?php echo isset( $data['placeholder'] )?$data['placeholder']:$data['label']; ?>" size="<?php echo isset( $data['size'] )?$data['size']:40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo $attr.'="'.$attr_value.'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
+		<input type="<?php echo esc_attr( $data['type'] ) ?>" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" class="text-input" value="<?php echo esc_attr( $data['default'] ) ?>" placeholder="<?php echo isset( $data['placeholder'] )?$data['placeholder']:$data['label']; ?>" size="<?php echo isset( $data['size'] )?$data['size']:40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 	<?php endif; ?>
 	<?php if ( !empty( $data['description'] ) && $data['type'] != 'checkbox' ): ?>
-		<p class="description help_block"><?php echo $data['description'] ?></p>
+		<p class="description help_block"><?php echo esc_html( $data['description'] ) ?></p>
 	<?php endif; ?>
 	</span>
 	<?php

@@ -296,7 +296,7 @@ class SI_Templating_API extends SI_Controller {
 		$doc_type_name = ( is_a( $doc, 'SI_Invoice' ) ) ? self::__('invoice') : self::__('estimate') ;
 		$template = self::get_doc_current_template( $doc->get_id() ); ?>
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
-			<span id="template" class="wp-media-buttons-icon"><b><?php echo $template_options[$template] ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
+			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
 
 				<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
 					<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different template') ?></span>
@@ -386,7 +386,7 @@ class SI_Templating_API extends SI_Controller {
 		$doc_type_name = ( $type != 'estimate' ) ? self::__('invoice') : self::__('estimate') ;
 		$template = ( $type != 'estimate' ) ? self::get_client_invoice_template( $client_id ) : self::get_client_estimate_template( $client_id ); ?>
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
-			<span id="template" class="wp-media-buttons-icon"><b><?php echo $template_options[$template] ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
+			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
 
 			<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
 				<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different template') ?></span>
@@ -395,7 +395,7 @@ class SI_Templating_API extends SI_Controller {
 			<div id="template_div" class="control_wrap hide-if-js">
 				<div class="template-wrap">
 					<?php if ( count( $template_options ) > 1 ): ?>
-						<select name="doc_template_<?php echo $doc_type_name ?>">
+						<select name="doc_template_<?php echo esc_attr( $doc_type_name ); ?>">
 							<?php foreach ( $template_options as $template_key => $template_name ): ?>
 								<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, FALSE ), $template_name ) ?>
 							<?php endforeach ?>

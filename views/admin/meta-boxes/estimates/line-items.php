@@ -12,7 +12,7 @@
 			<?php if ( !empty( $line_items ) ): ?>
 				<?php foreach ( $line_items as $position => $data ): ?>
 					<?php if ( is_int( $position ) ): // is not a child ?>
-						<li class="item" data-id="<?php echo $position ?>">
+						<li class="item" data-id="<?php echo esc_attr( $position ); ?>">
 							<?php
 								// get the children of this top level item
 								$children = si_line_item_get_children( $position, $line_items ); ?>
@@ -24,7 +24,7 @@
 							<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
 								<ol class="items_list">
 									<?php foreach ( $children as $child_position ): ?>
-										<li class="item" data-id="<?php echo $child_position ?>"><?php echo si_line_item_build_option( $child_position, $line_items ) ?></li>
+										<li class="item" data-id="<?php echo esc_attr( $child_position ); ?>"><?php echo si_line_item_build_option( $child_position, $line_items ) ?></li>
 									<?php endforeach ?>
 								</ol>
 							<?php endif ?>
@@ -67,7 +67,6 @@
 
 			<div id="status_updates" class="sticky_save">
 				<div id="publishing-action">
-					<span class="spinner"></span>
 					<?php
 					$post_type = $post->post_type;
 					$post_type_object = get_post_type_object($post_type);
@@ -85,6 +84,7 @@
 							<input name="save" type="submit" class="button button-primary button-large" id="save" accesskey="p" value="<?php esc_attr_e('Save') ?>" />
 					<?php
 					} ?>
+					<span class="spinner"></span>
 				</div>			
 			</div>
 		</div>

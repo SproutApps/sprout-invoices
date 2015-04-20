@@ -14,7 +14,7 @@
 	<div id="subject_header_actions" class="clearfix">
 		<div id="subject_input_wrap">
 			<?php $title = ( $status != 'auto-draft' && get_the_title( $id ) != __('Auto Draft') ) ? get_the_title( $id ) : '' ; ?>
-			<input type="text" name="subject" value="<?php echo $title ?>" placeholder="<?php si_e('Subject...') ?>">
+			<input type="text" name="subject" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php si_e('Subject...') ?>">
 		</div>
 
 		<?php if ( $statuses ): ?>

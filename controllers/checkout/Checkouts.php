@@ -82,15 +82,15 @@ class SI_Checkouts extends SI_Controller {
 	}
 
 	public function checkout_url( $processor_slug = '1' ) {
-		return add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug ), get_permalink( $this->invoice->get_id() ) );
+		return esc_url( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug ), get_permalink( $this->invoice->get_id() ) ) );
 	}
 
 	public function checkout_complete_url( $processor_slug = '1' ) {
-		return add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::REVIEW_PAGE ), get_permalink( $this->invoice->get_id() ) );
+		return esc_url( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::REVIEW_PAGE ), get_permalink( $this->invoice->get_id() ) ) );
 	}
 
 	public function checkout_confirmation_url( $processor_slug = '1' ) {
-		return add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::CONFIRMATION_PAGE ), get_permalink( $this->invoice->get_id() ) );
+		return esc_url( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::CONFIRMATION_PAGE ), get_permalink( $this->invoice->get_id() ) ) );
 	}
 
 	/**
