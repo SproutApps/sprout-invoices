@@ -16,10 +16,10 @@ class SI_Record extends SI_Post_Type {
 
 	public static function init() {
 		$post_type_args = array(
-			'public' => FALSE,
-			'has_archive' => FALSE,
-			'show_in_menu' => FALSE,
-			'rewrite' => FALSE,
+			'public' => false,
+			'has_archive' => false,
+			'show_in_menu' => false,
+			'rewrite' => false,
 			'supports' => array()
 		);
 		self::register_post_type( self::POST_TYPE, 'Record', 'Records', $post_type_args );
@@ -28,9 +28,9 @@ class SI_Record extends SI_Post_Type {
 		$singular = 'Record Type';
 		$plural = 'Record Types';
 		$taxonomy_args = array(
-			'hierarchical' => TRUE,
-			'public' => FALSE,
-			'show_ui' => FALSE
+			'hierarchical' => true,
+			'public' => false,
+			'show_ui' => false,
 		);
 		self::register_taxonomy( self::TAXONOMY, array( self::POST_TYPE ), $singular, $plural, $taxonomy_args );
 
@@ -49,19 +49,23 @@ class SI_Record extends SI_Post_Type {
 	 * @return SI_Record
 	 */
 	public static function get_instance( $id = 0 ) {
-		if ( !$id )
-			return NULL;
+		if ( ! $id ) {
+			return null;
+		}
 
-		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
-			self::$instances[$id] = new self( $id );
+		if ( ! isset( self::$instances[ $id ] ) || ! self::$instances[ $id ] instanceof self ) {
+			self::$instances[ $id ] = new self( $id );
+		}
 
-		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return NULL;
+		if ( ! isset( self::$instances[ $id ]->post->post_type ) ) {
+			return null;
+		}
 
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return NULL;
+		if ( self::$instances[ $id ]->post->post_type !== self::POST_TYPE ) {
+			return null;
+		}
 
-		return self::$instances[$id];
+		return self::$instances[ $id ];
 	}
 
 	public function activate() {
@@ -99,7 +103,7 @@ class SI_Record extends SI_Post_Type {
 	 */
 	public function get_data() {
 		$content = json_decode( $this->post->post_content );
-		if ( json_last_error() == JSON_ERROR_NONE ) { // is json
+		if ( json_last_error() === JSON_ERROR_NONE ) { // is json
 			return (array) $content;
 		}
 		return $this->post->post_content;
@@ -111,9 +115,9 @@ class SI_Record extends SI_Post_Type {
 	 * @param array   The data
 	 * @return array The data
 	 */
-	public function set_data( $data, $encode = TRUE ) {
+	public function set_data( $data, $encode = true ) {
 		// __sleep preventing will prevent some objects from serializing
-		$this->post->post_content = ( $encode ) ? json_encode( $data ) : $data ;
+		$this->post->post_content = ( $encode ) ? wp_json_encode( $data ) : $data ;
 		$this->save_post();
 		return $data;
 	}
@@ -127,7 +131,7 @@ class SI_Record extends SI_Post_Type {
 	public function get_type() {
 		$terms = wp_get_object_terms( $this->ID, self::TAXONOMY );
 		if ( empty( $terms ) ) {
-			return $this->set_type( self::DEFAULT_TYPE );	
+			return $this->set_type( self::DEFAULT_TYPE );
 		}
 		$type_term = array_pop( $terms );
 		return $type_term->slug;
@@ -152,16 +156,16 @@ class SI_Record extends SI_Post_Type {
 	 * @return
 	 */
 	public static function maybe_add_type( $type = '', $name = '' ) {
-		$type = ( $type == '' ) ? self::DEFAULT_TYPE : $type ;
+		$type = ( '' === $type  ) ? self::DEFAULT_TYPE : $type ;
 		$term = get_term_by( 'slug', $type, self::TAXONOMY );
 		if ( empty( $term ) ) {
-			$name = ( $name != '' ) ? $name : $type;
+			$name = ( '' !== $name ) ? $name : $type;
 			$new_term = wp_insert_term(
 				$name, // the term name
 				self::TAXONOMY, // the taxonomy
 				array( 'slug' => $type )
 			);
-			if ( isset( $new_term['term_id'] ) ) {
+			if ( is_array( $new_term ) && isset( $new_term['term_id'] ) ) {
 				$term = get_term_by( 'id', $new_term['term_id'], self::TAXONOMY );
 			}
 		}
@@ -184,8 +188,8 @@ class SI_Record extends SI_Post_Type {
 		$cache_key = 'si_find_records_by_type_and_assoc_id';
 		$cache_index = $type.$associate_id;
 		$cache = wp_cache_get( $cache_key, 'si' );
-		if ( is_array( $cache ) && isset( $cache[$cache_index] ) ) {
-			return $cache[$cache_index];
+		if ( is_array( $cache ) && isset( $cache[ $cache_index ] ) ) {
+			return $cache[ $cache_index ];
 		}
 
 		$args = array(
@@ -194,14 +198,14 @@ class SI_Record extends SI_Post_Type {
 			'posts_per_page' => -1,
 			'post_parent' => $associate_id,
 			'fields' => 'ids',
-			'si_bypass_filter' => TRUE,
-			self::TAXONOMY => $type
+			'si_bypass_filter' => true,
+			self::TAXONOMY => $type,
 		);
 
 		$result = get_posts( $args );
 
 		// Set cache
-		$cache[$cache_index] = $result;
+		$cache[ $cache_index ] = $result;
 		wp_cache_set( $cache_key, $cache, 'si' );
 
 		return $result;
@@ -219,8 +223,8 @@ class SI_Record extends SI_Post_Type {
 		$cache_key = 'si_find_records_by_type';
 		$cache_index = $type;
 		$cache = wp_cache_get( $cache_key, 'si' );
-		if ( is_array( $cache ) && isset( $cache[$cache_index] ) ) {
-			return $cache[$cache_index];
+		if ( is_array( $cache ) && isset( $cache[ $cache_index ] ) ) {
+			return $cache[ $cache_index ];
 		}
 
 		$args = array(
@@ -228,14 +232,14 @@ class SI_Record extends SI_Post_Type {
 			'post_status' => 'any',
 			'posts_per_page' => -1,
 			'fields' => 'ids',
-			'si_bypass_filter' => TRUE,
-			self::TAXONOMY => $type
+			'si_bypass_filter' => true,
+			self::TAXONOMY => $type,
 		);
 
 		$result = get_posts( $args );
 
 		// Set cache
-		$cache[$cache_index] = $result;
+		$cache[ $cache_index ] = $result;
 		wp_cache_set( $cache_key, $cache, 'si' );
 
 		return $result;
@@ -252,8 +256,8 @@ class SI_Record extends SI_Post_Type {
 		$cache_key = 'si_find_records_by_assoc_id';
 		$cache_index = $associate_id;
 		$cache = wp_cache_get( $cache_key, 'si' );
-		if ( is_array( $cache ) && isset( $cache[$cache_index] ) ) {
-			return $cache[$cache_index];
+		if ( is_array( $cache ) && isset( $cache[ $cache_index ] ) ) {
+			return $cache[ $cache_index ];
 		}
 
 		$args = array(
@@ -262,13 +266,13 @@ class SI_Record extends SI_Post_Type {
 			'posts_per_page' => -1,
 			'post_parent' => $associate_id,
 			'fields' => 'ids',
-			'si_bypass_filter' => TRUE
+			'si_bypass_filter' => true,
 		);
 
 		$result = get_posts( $args );
 
 		// Set cache
-		$cache[$cache_index] = $result;
+		$cache[ $cache_index ] = $result;
 		wp_cache_set( $cache_key, $cache, 'si' );
 
 		return $result;
@@ -276,7 +280,6 @@ class SI_Record extends SI_Post_Type {
 
 	/**
 	 * Flush cache when a new record is created.
-	 * 
 	 * @return null
 	 */
 	public static function flush_cache_hooks() {
@@ -301,4 +304,5 @@ class SI_Record extends SI_Post_Type {
 		wp_cache_delete( 'si_find_records_by_type', 'si' );
 		wp_cache_delete( 'si_find_records_by_assoc_id', 'si' );
 	}
+
 }

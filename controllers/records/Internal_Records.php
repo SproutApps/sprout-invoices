@@ -13,7 +13,7 @@ class SI_Internal_Records extends SI_Controller {
 	const RECORD_PURGE_NONCE = 'si_record_purge_nonce';
 	private static $instance;
 
-	public static function get_admin_page( $prefixed = TRUE ) {
+	public static function get_admin_page( $prefixed = true ) {
 		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
@@ -38,13 +38,13 @@ class SI_Internal_Records extends SI_Controller {
 			'title' => self::__( 'Sprout Invoices Records and Logs' ),
 			'menu_title' => self::__( 'Sprout Records' ),
 			'weight' => 10,
-			'reset' => FALSE, 
+			'reset' => false, 
 			'callback' => array( __CLASS__, 'display_table' )
 			);
 		do_action( 'sprout_settings_page', $args );
 	}
 
-	public static function new_record( $data = array(), $type = 'mixed', $associate_id = -1, $title = '', $author_id = 0, $encoded = TRUE ) {
+	public static function new_record( $data = array(), $type = 'mixed', $associate_id = -1, $title = '', $author_id = 0, $encoded = true ) {
 
 		if ( !$author_id && is_user_logged_in() ) {
 			$author_id = get_current_user_id();
@@ -122,7 +122,7 @@ class SI_Internal_Records extends SI_Controller {
 			flush();
 
 			// delete the post
-			wp_delete_post( $record_id, TRUE );
+			wp_delete_post( $record_id, true );
 		}
 		echo '<script language="javascript">document.getElementById("deletion_information").innerHTML="'.sprintf( self::__('Complete. %o deleted.'), $total ).'"</script>';
 	}
@@ -139,7 +139,7 @@ class SI_Internal_Records extends SI_Controller {
 			$record_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_type = '%s'", $post_id, SI_Record::POST_TYPE ) );
 
 			foreach ( $record_ids as $record_id ) {
-				wp_delete_post( $record_id, TRUE );
+				wp_delete_post( $record_id, true );
 			}
 		}
 	}

@@ -11,7 +11,7 @@
 	<div class="welcome_content clearfix">
 		<div class="license-overview">
 
-			<?php if ( SI_Free_License::license_status() == FALSE ): ?>
+			<?php if ( SI_Free_License::license_status() == false ): ?>
 				<div class="activate_message clearfix">
 					<div class="activation_msg clearfix">
 						 <h4><?php self::_e('Get a free Sprout Apps license instantly...') ?></h4>

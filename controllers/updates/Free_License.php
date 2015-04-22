@@ -39,7 +39,7 @@ class SI_Free_License extends SI_Controller {
 	}
 
 	public static function license_status(){
-		return ( self::$license_key ) ? TRUE : FALSE;
+		return ( self::$license_key ) ? true : false;
 	}
 
 	///////////
@@ -87,7 +87,7 @@ class SI_Free_License extends SI_Controller {
 		}
 
 		header( 'Content-type: application/json' );
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		exit();
 	}
 
@@ -123,7 +123,7 @@ class SI_Free_License extends SI_Controller {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_get( add_query_arg( $api_params, self::API_CB . 'wp-admin/admin-ajax.php' ), array( 'timeout' => 15, 'sslverify' => false ) );
+		$response = wp_safe_remote_get( add_query_arg( $api_params, self::API_CB . 'wp-admin/admin-ajax.php' ), array( 'timeout' => 15, 'sslverify' => false ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
@@ -137,9 +137,9 @@ class SI_Free_License extends SI_Controller {
 
 	public static function add_uid_to_url( $url = '' ) {
 		if ( !self::$uid ) {
-			return esc_url( $url );
+			return $url;
 		}
-		return esc_url( add_query_arg( array( 'uid' => self::$uid ), $url ) );
+		return add_query_arg( array( 'uid' => self::$uid ), $url );
 	}
 	
 }

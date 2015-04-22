@@ -41,23 +41,23 @@ class SI_Importer extends SI_Controller {
 
 		// Addon page
 		$args = array(
-			'slug' => self::get_settings_page( FALSE ),
+			'slug' => self::get_settings_page( false ),
 			'title' => self::__( 'Sprout Invoices Importing' ),
 			'menu_title' => self::__( 'Import' ),
 			'weight' => 50,
 			'section' => 'settings',
-			'tab_only' => TRUE,
+			'tab_only' => true,
 			'callback' => array( __CLASS__, 'importer_page' ),
 			);
 		do_action( 'sprout_settings_page', $args );
 	}
-	
+
 	/**
 	 * Settings page 
 	 * @param  boolean $prefixed 
 	 * @return string            
 	 */
-	public static function get_settings_page( $prefixed = TRUE ) {
+	public static function get_settings_page( $prefixed = true ) {
 		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
@@ -73,7 +73,7 @@ class SI_Importer extends SI_Controller {
 	public static function importer_page() {
 		self::load_view( 'admin/importer/importing', array(
 				'importers' => self::get_importers()
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -164,14 +164,14 @@ class SI_Importer extends SI_Controller {
 	public static function sanitize_subdomain( $url = '' ) {
 		$parsed_url = parse_url( $url );
 		if ( !isset( $parsed_url['host'] ) ) { // the path was given
-			return esc_url( $url );
+			return esc_url_raw( $url );
 		}
 		$host_segments = explode( '.', $parsed_url['host'] );
 
 		if( count( $host_segments ) <= 2 ) {
-		    return esc_url( $url ); // subdomain not given
+		    return esc_url_raw( $url ); // subdomain not given
 		}
 
-		return esc_url( $host_segments[0] );
+		return esc_url_raw( $host_segments[0] );
 	}
 }

@@ -50,7 +50,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			'si_freshbooks_importer_settings' => array(
 				'title' => 'Freshbooks Import Settings',
 				'weight' => 0,
-				'tab' => self::get_settings_page( FALSE ),
+				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::FRESHBOOKS_TOKEN_OPTION => array(
 						'label' => self::__( 'Token' ),
@@ -134,7 +134,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 	 * @return bool
 	 */
 	public static function import_archived_data() {
-		self::$importing_archived = ( isset( $_POST[self::PROCESS_ARCHIVED] ) && $_POST[self::PROCESS_ARCHIVED] == 'archived' ) ? TRUE : FALSE ;
+		self::$importing_archived = ( isset( $_POST[self::PROCESS_ARCHIVED] ) && $_POST[self::PROCESS_ARCHIVED] == 'archived' ) ? true : false ;
 		return self::$importing_archived;
 	}
 
@@ -146,8 +146,8 @@ class SI_Freshbooks_Import extends SI_Importer {
 	public static function return_error( $message ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( 
-				array( 'error' => TRUE, 'message' => $message )
+		echo wp_json_encode( 
+				array( 'error' => true, 'message' => $message )
 					);
 		exit();
 	}
@@ -160,7 +160,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 	public static function return_progress( $array = array() ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( $array );
+		echo wp_json_encode( $array );
 		exit();
 	}
 

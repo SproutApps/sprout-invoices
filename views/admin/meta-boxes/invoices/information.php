@@ -23,7 +23,7 @@ if ( 0 != $post->ID ) {
 		<div class="status-wrap">
 			<select name="post_status">
 				<?php foreach ( $status_options as $status_key => $status_name ): ?>
-					<?php printf( '<option value="%s" %s>%s</option>', $status_key, selected( $status_key, $status, FALSE ), $status_name ) ?>
+					<?php printf( '<option value="%s" %s>%s</option>', $status_key, selected( $status_key, $status, false ), $status_name ) ?>
 				<?php endforeach ?>
 			</select>
  		</div>
@@ -88,7 +88,7 @@ if ( 0 != $post->ID ) {
 	<?php 
 		$client_name = ( $client_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $client_id ), get_the_title( $client_id ) ) : si__('Client N/A') ;
 		 ?>
-	<span id="client" class="wp-media-buttons-icon"><?php si_e('Invoice for') ?> <b><?php echo esc_html( $client_name ) ?></b></span>
+	<span id="client" class="wp-media-buttons-icon"><?php si_e('Invoice for') ?> <b><?php echo $client_name ?></b></span>
 
 	<a href="#edit_client" class="edit-client hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different client') ?></span>
@@ -99,7 +99,7 @@ if ( 0 != $post->ID ) {
 			<select name="sa_metabox_client" class="select2">
 				<option value="create_client"><?php si_e('Create client') ?></option>
 				<?php foreach ( $client_options as $id => $client_name ): ?>
-					<?php printf( '<option value="%s" %s>%s</option>', $id, selected( $id, $client_id, FALSE ), $client_name ) ?>
+					<?php printf( '<option value="%s" %s>%s</option>', $id, selected( $id, $client_id, false ), $client_name ) ?>
 				<?php endforeach ?>
 			</select>
 

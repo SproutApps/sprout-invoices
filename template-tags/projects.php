@@ -8,7 +8,7 @@ if ( !function_exists('si_projects_select') ) :
  * @param  integer $selected_id
  * @return string
  */
-function si_projects_select( $selected_id = 0, $client_id = 0, $blank = TRUE, $el_id = 'doc_project' ) {
+function si_projects_select( $selected_id = 0, $client_id = 0, $blank = true, $el_id = 'doc_project' ) {
 	$selections = array();
 	if ( $client_id ) {
 		$client = SI_Client::get_instance( $client_id );
@@ -51,7 +51,7 @@ function si_projects_select( $selected_id = 0, $client_id = 0, $blank = TRUE, $e
 		foreach ( $selections as $client => $projects ) {
 			$out .= sprintf( '<optgroup label="%s">', $client );
 				foreach ( $projects as $project_id ) {
-					$out .= sprintf( '<option value="%s" %s>%s</option>', $project_id, selected( $project_id, $selected_id, FALSE ), get_the_title( $project_id ) );
+					$out .= sprintf( '<option value="%s" %s>%s</option>', $project_id, selected( $project_id, $selected_id, false ), get_the_title( $project_id ) );
 				}
 			$out .= '</optgroup>';
 		}
@@ -61,7 +61,7 @@ function si_projects_select( $selected_id = 0, $client_id = 0, $blank = TRUE, $e
 		$out = '<span>'.sprintf( si__('No <a href="%s" target="_blank">projects</a> found'), admin_url( 'post-new.php?post_type='.SI_Project::POST_TYPE ) ).'</span>';
 	}
 	
-	echo esc_html( $out );
+	echo $out;
 
 }
 endif;

@@ -35,10 +35,10 @@ class SI_Payment extends SI_Post_Type {
 
 	public static function init() {
 		$post_type_args = array(
-			'public' => FALSE,
-			'show_ui' => FALSE,
-			'rewrite' => FALSE,
-			'has_archive' => FALSE,
+			'public' => false,
+			'show_ui' => false,
+			'rewrite' => false,
+			'has_archive' => false,
 			'supports' => array( 'title' ),
 		);
 		self::register_post_type( self::POST_TYPE, 'Payment', 'Payments', $post_type_args );
@@ -61,10 +61,10 @@ class SI_Payment extends SI_Post_Type {
 		foreach ( $statuses as $status => $label ) {
 			register_post_status( $status, array(
 				'label' => $label,
-				'public' => TRUE,
-				'exclude_from_search' => FALSE,
-				'show_in_admin_all_list' => TRUE,
-          		'show_in_admin_status_list' => TRUE,
+				'public' => true,
+				'exclude_from_search' => false,
+				'show_in_admin_all_list' => true,
+          		'show_in_admin_status_list' => true,
           		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
 			));
 		}
@@ -83,16 +83,16 @@ class SI_Payment extends SI_Post_Type {
 	 */
 	public static function get_instance( $id = 0 ) {
 		if ( !$id )
-			return NULL;
+			return null;
 		
 		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
 			self::$instances[$id] = new self( $id );
 
 		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return NULL;
+			return null;
 		
 		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return NULL;
+			return null;
 		
 		return self::$instances[$id];
 	}
@@ -151,13 +151,13 @@ class SI_Payment extends SI_Post_Type {
 		return $payment_ids;
 	}
 
-	public static function get_pending_payments( $method = NULL, $suppress_filters = TRUE ) {
+	public static function get_pending_payments( $method = null, $suppress_filters = true ) {
 		$args = array(
 			'post_type' => self::POST_TYPE,
 			'post_status' => array( self::STATUS_PARTIAL, self::STATUS_AUTHORIZED ),
 			'posts_per_page' => -1,
 			'fields' => 'ids',
-			'sa_bypass_filter' => TRUE,
+			'sa_bypass_filter' => true,
 			'suppress_filters' => $suppress_filters
 		);
 		if ( $method ) {
@@ -280,20 +280,20 @@ class SI_Payment extends SI_Post_Type {
 	public function get_client() {
 		$invoice_id = $this->get_invoice_id();
 		if ( !$invoice_id ) {
-			return NULL;
+			return null;
 		}
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		if ( !is_a( $invoice, 'SI_Invoice' ) ) {
-			return NULL;
+			return null;
 		}
 		return $invoice->get_client();
 	}
 
 	public function is_recurring() {
 		if ( in_array( $this->get_status(), array( self::STATUS_RECURRING, self::STATUS_CANCELLED ) ) ) {
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -302,21 +302,21 @@ class SI_Payment extends SI_Post_Type {
 	 * @param bool    $refresh Whether to re-verify with the payment processor
 	 * @return bool
 	 */
-	public function is_active( $refresh = FALSE ) {
+	public function is_active( $refresh = false ) {
 		if ( !$this->is_recurring() ) {
-			return FALSE; // non-recurring payments are never active
+			return false; // non-recurring payments are never active
 		}
 		if ( $this->get_status() == self::STATUS_CANCELLED ) {
-			return FALSE;
+			return false;
 		}
 		if ( $refresh ) {
 			$payment_processor = SI_Payment_Processors::get_payment_processor();
 			$payment_processor->verify_recurring_payment( $this );
 		}
 		if ( $this->get_status() == self::STATUS_RECURRING ) {
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**

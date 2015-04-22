@@ -35,10 +35,10 @@ if ( !function_exists('si_who_is_paying') ) :
 /**
  * Return the user object for the person responsible paying at the time of purchase.
  * @param  SI_Invoice $invoice 
- * @return object/FALSE      
+ * @return object/false      
  */
 function si_who_is_paying( SI_Invoice $invoice ) {
-	$user = FALSE;
+	$user = false;
 	if ( is_user_logged_in() ) {
 		$user_id = get_current_user_id();
 		$user = get_userdata( $user_id );
@@ -63,13 +63,13 @@ if ( !function_exists('si_default_client_user') ) :
 /**
  * Return the user object for the person responsible paying at the time of purchase.
  * @param  SI_Invoice $invoice 
- * @return object/FALSE      
+ * @return object/false      
  */
 function si_default_client_user( $client_id = 0 ) {
 	if ( !$client_id ) {
 		$client_id = get_the_id();
 	}
-	$user = FALSE;
+	$user = false;
 	$client = SI_Client::get_instance( $client_id );
 	if ( !is_wp_error( $client ) ) {
 		$client_users = $client->get_associated_users();
@@ -86,7 +86,7 @@ if ( !function_exists('si_whos_user_id_is_paying') ) :
 /**
  * Return the user object for the person responsible paying at the time of purchase.
  * @param  SI_Invoice $invoice 
- * @return object/FALSE      
+ * @return object/false      
  */
 function si_whos_user_id_is_paying( SI_Invoice $invoice ) {
 	$user = si_who_is_paying( $invoice );

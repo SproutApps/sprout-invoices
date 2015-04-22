@@ -6,7 +6,7 @@
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 	<div class="clearfix">
-		<?php if ( apply_filters( 'show_upgrade_messaging', TRUE ) ): ?>
+		<?php if ( apply_filters( 'show_upgrade_messaging', true ) ): ?>
 			<h3><?php si_e('Addons from the Sprout Invoices Marketplace') ?></h3>
 		<?php else: ?>
 			<div class="clearfix">
@@ -32,10 +32,10 @@
 										<span class="bundled_addon"><?php si_e('Bundled Free w/ License') ?></span>
 									<?php endif ?>
 									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
-										<?php echo esc_html( $addon->thumb ); ?>
+										<?php echo $addon->thumb; ?>
 									</a>
 									<div class="download_purchase_link">
-										<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo esc_html( $addon->price ); ?>&nbsp;–&nbsp;<?php si_e('Add to Cart') ?></span></a>
+										<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price; ?>&nbsp;–&nbsp;<?php si_e('Add to Cart') ?></span></a>
 									</div>
 								</div>
 								<div class="info">

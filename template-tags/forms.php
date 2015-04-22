@@ -143,7 +143,7 @@ function sa_get_form_field( $key, $data, $category ) {
 			</span>
 		<?php endforeach; ?>
 	<?php elseif ( $data['type'] == 'checkbox' ): ?>
-		<input type="checkbox" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" <?php checked( TRUE, $data['default'] ); ?> value="<?php echo isset( $data['value'] )?$data['value']:'On'; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
+		<input type="checkbox" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" <?php checked( true, $data['default'] ); ?> value="<?php echo isset( $data['value'] )?$data['value']:'On'; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 	<?php elseif ( $data['type'] == 'hidden' ): ?>
 		<input type="hidden" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" value="<?php echo esc_attr( $data['value'] ) ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> />
 	<?php elseif ( $data['type'] == 'file' ): ?>
@@ -248,7 +248,7 @@ function sa_get_quantity_select( $start = 1, $end = 10, $selected = 1, $name = '
 	}
 	$select = '<select name="'.$name.'">';
 	for ( $i=$start; $i < $end+1; $i++ ) {
-		$select .= '<option value="'.$i.'" '.selected( $selected, $i, FALSE ).'>'.$i.'</option>';
+		$select .= '<option value="'.$i.'" '.selected( $selected, $i, false ).'>'.$i.'</option>';
 	}
 	$select .= "<select>";
 	return apply_filters( 'sa_get_quantity_select', $select, $start, $end, $selected, $name );

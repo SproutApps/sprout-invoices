@@ -46,7 +46,7 @@ class SI_Admin_Payment extends SI_Controller {
 				),
 			), SI_Payment::STATUS_COMPLETE );
 		if ( !$payment_id ) {
-			return FALSE;
+			return false;
 		}
 		$payment = SI_Payment::get_instance( $payment_id );
 		if ( $date != '' ) {
@@ -92,7 +92,7 @@ class SI_Admin_Payment extends SI_Controller {
 				'post' => $post,
 				'invoice' => $invoice,
 				'fields' => self::payment_fields( $invoice )
-			), FALSE );
+			), false );
 	}
 
 	public static function payment_fields( SI_Invoice $invoice ) {
@@ -148,7 +148,7 @@ class SI_Admin_Payment extends SI_Controller {
 	}
 
 	
-	public static function save_admin_payment( $post_id, $post, $callback_args, $invoice_id = NULL ) {
+	public static function save_admin_payment( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
 		$amount = ( isset( $_REQUEST['sa_metabox_payment_amount'] ) ) ? $_REQUEST['sa_metabox_payment_amount'] : 0 ;
 		$number = ( isset( $_REQUEST['sa_metabox_payment_transaction_id'] ) ) ? $_REQUEST['sa_metabox_payment_transaction_id'] : '' ;
@@ -156,9 +156,9 @@ class SI_Admin_Payment extends SI_Controller {
 		$notes = ( isset( $_REQUEST['sa_metabox_payment_notes'] ) ) ? $_REQUEST['sa_metabox_payment_notes'] : '' ;
 
 		if ( !$amount ) {
-			return FALSE;
+			return false;
 		}
-		error_log( 'ajax: ' . print_r( TRUE, TRUE ) );
+		error_log( 'ajax: ' . print_r( true, true ) );
 
 		self::create_admin_payment( $invoice->get_id(), $amount, $number, $date, $notes );
 	}
@@ -202,7 +202,7 @@ class SI_Admin_Payment extends SI_Controller {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( array( 'response' => si__('Payment Added') ) );
+		echo wp_json_encode( array( 'response' => si__('Payment Added') ) );
 		exit();
 	}
 

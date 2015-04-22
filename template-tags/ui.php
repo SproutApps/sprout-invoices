@@ -32,7 +32,7 @@ function si_locate_file( $possibilities = array() ) {
 	foreach ( $possibilities as $p ) {
 		$theme_overrides[] = SI_Controller::get_template_path().'/'.$p;
 	}
-	if ( $found = locate_template( $theme_overrides, FALSE ) ) {
+	if ( $found = locate_template( $theme_overrides, false ) ) {
 		return $found;
 	}
 
@@ -133,10 +133,10 @@ endif;
 function si_line_item_build( $position = 1.0, $items = array(), $children = array() ) {
 	$data = $items[$position];
 	
-	$has_percentage_adj = FALSE;
+	$has_percentage_adj = false;
 	foreach ( $items as $b_position => $b_data ) {
 		if ( isset( $b_data['tax'] ) && $b_data['tax'] ) {
-			$has_percentage_adj = TRUE;
+			$has_percentage_adj = true;
 		}
 	}
 
@@ -200,10 +200,10 @@ function si_line_item_build( $position = 1.0, $items = array(), $children = arra
 function si_line_item_build_plain( $position = 1.0, $items = array(), $children = array(), $doc_id = 0 ) {
 	$data = $items[$position];
 	
-	$has_percentage_adj = FALSE;
+	$has_percentage_adj = false;
 	foreach ( $items as $b_position => $b_data ) {
 		if ( isset( $b_data['tax'] ) && $b_data['tax'] ) {
-			$has_percentage_adj = TRUE;
+			$has_percentage_adj = true;
 		}
 	}
 
@@ -323,7 +323,7 @@ function si_line_item_header_columns( $context = '') {
 	return apply_filters( 'si_line_item_header_columns', $header, $context );
 }
 
-function si_line_item_header_front_end( $context = '', $show_tax = TRUE ) {
+function si_line_item_header_front_end( $context = '', $show_tax = true ) {
 	ob_start(); ?>
 		<div class="column column_desc">
 			<?php si_e('Description') ?>

@@ -565,7 +565,7 @@ function si_has_invoice_deposit( $id = 0 ) {
 	}
 	$deposit = si_get_invoice_deposit( $id );
 	if ( $deposit < 0.01 ) {
-		return FALSE;
+		return false;
 	}
 	$total = si_get_invoice_calculated_total( $id );
 	return $deposit < $total;
@@ -823,7 +823,7 @@ function si_payment_options( $return = 'options' ) {
 endif;
 
 function si_is_cc_processor( $slug = '' ) {
-	$is_cc_processor = FALSE;
+	$is_cc_processor = false;
 	$enabled_processors = SI_Payment_Processors::enabled_processors();
 	foreach ( $enabled_processors as $class ) {
 		if ( method_exists( $class, 'get_instance' ) ) {
@@ -949,7 +949,7 @@ function si_get_complete_url( $invoice_id = 0 ) {
 endif;
 
 
-function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
+function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 	if ( !$doc_id ) {
 		global $post;
 		$doc_id = $post->ID;
@@ -1066,10 +1066,10 @@ function si_doc_history_records( $doc_id = 0, $filtered = TRUE ) {
 
 function si_is_invoice_recurring( $invoice ) {
 	if ( !is_a( $invoice, 'SI_Invoice' ) ) {
-		return FALSE;
+		return false;
 	}
 	if ( !class_exists( 'SI_Subscription_Payments' ) ) {
-		return FALSE;
+		return false;
 	}
 	return SI_Subscription_Payments::has_subscription_payment( $invoice->get_id() );
 }

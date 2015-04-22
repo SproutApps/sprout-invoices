@@ -1,8 +1,8 @@
 <?php 
 	$editor_settings = array(
-			'media_buttons'     => FALSE,
+			'media_buttons'     => false,
 			'textarea_rows'     => 4,
-			'theme_styles'		=> FALSE,
+			'theme_styles'		=> false,
 		);
  ?>
 

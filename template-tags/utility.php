@@ -162,7 +162,7 @@ function sa_currency_symbol() {
  * @param boolean $filter_location filter out the location string from return
  * @return return                  
  */
-function sa_get_currency_symbol( $filter_location = TRUE ) {
+function sa_get_currency_symbol( $filter_location = true ) {
 	$string = apply_filters( 'sa_get_currency_symbol_pre', SI_Payment_Processors::get_currency_symbol() );
 	if ( $filter_location && strstr( $string, '%' ) ) {
 		$string = str_replace( '%', '', $string );
@@ -182,10 +182,10 @@ function sa_get_currency_symbol( $filter_location = TRUE ) {
  * @return bool
  */
 function sa_currency_format_before() {
-	$bool = TRUE;
-	$symbol = sa_get_currency_symbol( FALSE );
+	$bool = true;
+	$symbol = sa_get_currency_symbol( false );
 	if ( strstr( $symbol, '%' ) ) {
-		$bool = FALSE;
+		$bool = false;
 	}
 	return apply_filters( 'sa_currency_format_before', $bool );
 }
@@ -374,7 +374,7 @@ if ( !function_exists( 'pp' ) ) {
 	}
 
 	function wpbt() {
-		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, FALSE ), TRUE ) );
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
 	}
 }
 
@@ -420,8 +420,8 @@ if ( !function_exists('si_localeconv') ) :
 function si_localeconv( $doc_id = 0 ) {
 	$localeconv = array();
 	// Allow locale to be filtered, e.g. client
-	$locale = apply_filters( 'sa_set_monetary_locale', FALSE, $doc_id );
-	if ( $locale !== FALSE ) {
+	$locale = apply_filters( 'sa_set_monetary_locale', false, $doc_id );
+	if ( $locale !== false ) {
 		// attempt to get localeconv based on local
 		setlocale( LC_MONETARY, $locale );
 		$localeconv = ( function_exists( 'localeconv' ) ) ? localeconv() : array();

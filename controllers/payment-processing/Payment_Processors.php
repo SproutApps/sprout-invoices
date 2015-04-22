@@ -69,7 +69,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * Used during checkout where the payment processor is active/selected and defaults to the option
 	 *
 	 * @static
-	 * @return SI_Payment_Processors|NULL
+	 * @return SI_Payment_Processors|null
 	 */
 	public static function get_payment_processor() {
 		if ( isset( $_REQUEST[SI_Checkouts::CHECKOUT_QUERY_VAR] ) && $_REQUEST[SI_Checkouts::CHECKOUT_QUERY_VAR] != '' ) {
@@ -119,14 +119,14 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 	/**
 	 * @param string $class
-	 * @return SI_Payment_Processors|NULL
+	 * @return SI_Payment_Processors|null
 	 */
 	private static function load_processor( $class ) {
 		if ( class_exists( $class ) ) {
 			$processor = call_user_func(array($class, 'get_instance'));
 			return $processor;
 		}
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -137,15 +137,15 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		// Addon page
 		$args = array(
-			'slug' => self::get_settings_page( FALSE ),
+			'slug' => self::get_settings_page( false ),
 			'title' => self::__( 'Sprout Invoices Payment Settings' ),
 			'menu_title' => self::__( 'Payment Settings' ),
 			'weight' => 15,
-			'reset' => FALSE, 
+			'reset' => false, 
 			'section' => 'settings',
-			'tab_only' => TRUE,
-			'ajax' => TRUE,
-			'ajax_full_page' => TRUE,
+			'tab_only' => true,
+			'ajax' => true,
+			'ajax_full_page' => true,
 			);
 		do_action( 'sprout_settings_page', $args );
 
@@ -155,7 +155,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			'si_general_settings' => array(
 				'title' => '',
 				'weight' => 0,
-				'tab' => self::get_settings_page( FALSE ),
+				'tab' => self::get_settings_page( false ),
 				'callback' => array( __CLASS__, 'settings_description' ),
 				'settings' => array(
 					self::ENABLED_PROCESSORS_OPTION => array(
@@ -198,7 +198,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		if ( $offsite ) {
 			printf( '<p><strong>%s</strong></p>', self::__('Offsite Processors') );
 			foreach ( $offsite as $class => $label ) {
-				printf('<p><label><input type="checkbox" name="%s[]" value="%s" %s /> %s</label></p>', self::ENABLED_PROCESSORS_OPTION, esc_attr($class), checked(TRUE, in_array($class, $enabled), FALSE), esc_html($label));
+				printf('<p><label><input type="checkbox" name="%s[]" value="%s" %s /> %s</label></p>', self::ENABLED_PROCESSORS_OPTION, esc_attr($class), checked(true, in_array($class, $enabled), false), esc_html($label));
 			}
 		}
 		if ( $credit ) {
@@ -206,7 +206,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			printf( '<p><select name="%s[]" class="select2">', self::ENABLED_PROCESSORS_OPTION );
 			printf( '<option value="">%s</option>', self::__('-- None --') );
 			foreach ( $credit as $class => $label ) {
-				printf('<option value="%s" %s>%s</option>', esc_attr($class), selected(TRUE, in_array($class, $enabled), FALSE), esc_html($label));
+				printf('<option value="%s" %s>%s</option>', esc_attr($class), selected(true, in_array($class, $enabled), false), esc_html($label));
 			}
 			echo '</select>';
 		}
@@ -217,7 +217,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @param  boolean $prefixed 
 	 * @return string            
 	 */
-	public static function get_settings_page( $prefixed = TRUE ) {
+	public static function get_settings_page( $prefixed = true ) {
 		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
@@ -295,7 +295,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @abstract
 	 * @param SI_Checkouts $checkout
 	 * @param SI_Invoice $invoice
-	 * @return SI_Payment|bool FALSE if the payment failed, otherwise a Payment object
+	 * @return SI_Payment|bool false if the payment failed, otherwise a Payment object
 	 */
 	public abstract function process_payment( SI_Checkouts $checkout, SI_Invoice $invoice );
 
@@ -428,7 +428,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			}
 		}
 		if ( !$r_payment_id ) {
-			return FALSE;
+			return false;
 		}
 		$payment = SI_Payment::get_instance( $r_payment_id );
 		return $payment;
@@ -470,7 +470,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		if ( $payment->get_status() != $status ) {
 			header( 'Content-type: application/json' );
-			echo json_encode( array( 'response' => si__( 'Payment status updated.' ) ) );
+			echo wp_json_encode( array( 'response' => si__( 'Payment status updated.' ) ) );
 			exit();
 		}
 		else {
@@ -504,7 +504,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		if ( $payment->get_status() != $status ) {
 			header( 'Content-type: application/json' );
-			echo json_encode( array( 'response' => si__( 'Payment status updated.' ) ) );
+			echo wp_json_encode( array( 'response' => si__( 'Payment status updated.' ) ) );
 			exit();
 		}
 		else {

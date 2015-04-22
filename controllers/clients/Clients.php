@@ -154,7 +154,7 @@ class SI_Clients extends SI_Controller {
 				'users' => $users,
 				'invoices' => $client->get_invoices(),
 				'estimates' => $client->get_estimates(),
-			), FALSE );
+			), false );
 
 		add_thickbox();
 
@@ -175,7 +175,7 @@ class SI_Clients extends SI_Controller {
 					'client' => $client,
 					'id' => $post->ID,
 					'associated_users' => $client->get_associated_users(),
-					'fields' => self::form_fields( FALSE, $client ),
+					'fields' => self::form_fields( false, $client ),
 					'address' => $client->get_address(),
 					'website' => $client->get_website()
 				) );
@@ -193,7 +193,7 @@ class SI_Clients extends SI_Controller {
 			self::load_view( 'admin/meta-boxes/clients/advanced', array(
 					'client' => $client,
 					'id' => $post->ID,
-					'fields' => self::adv_form_fields( FALSE, $client )
+					'fields' => self::adv_form_fields( false, $client )
 				) );
 		}
 	}
@@ -206,7 +206,7 @@ class SI_Clients extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_meta_box_client_information( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_meta_box_client_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		// name is filtered via update_post_data
 		$website = ( isset( $_POST['sa_metabox_website'] ) && $_POST['sa_metabox_website'] != '' ) ? $_POST['sa_metabox_website'] : '' ;
 
@@ -262,7 +262,7 @@ class SI_Clients extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_meta_box_client_adv_information( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_meta_box_client_adv_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$currency = ( isset( $_POST['sa_metabox_currency'] ) && $_POST['sa_metabox_currency'] != '' ) ? $_POST['sa_metabox_currency'] : '' ;
 		$currency_symbol = ( isset( $_POST['sa_metabox_currency_symbol'] ) && $_POST['sa_metabox_currency_symbol'] != '' ) ? $_POST['sa_metabox_currency_symbol'] : '' ;
 		$money_format = ( isset( $_POST['sa_metabox_money_format'] ) && $_POST['sa_metabox_money_format'] != '' ) ? $_POST['sa_metabox_money_format'] : '' ;
@@ -282,7 +282,7 @@ class SI_Clients extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_submit_meta_box( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_submit_meta_box( $post_id, $post, $callback_args, $estimate_id = null ) {
 
 		$client = SI_Client::get_instance( $post_id );
 		$client->clear_associated_users();
@@ -315,7 +315,7 @@ class SI_Clients extends SI_Controller {
 				'post' => $post,
 				'estimate' => $client,
 				'historical_records' => array_reverse( $client->get_history() ),
-			), FALSE );
+			), false );
 	}
 
 
@@ -384,7 +384,7 @@ class SI_Clients extends SI_Controller {
 			
 			echo '<p>';
 			$address = si_format_address( $client->get_address(), 'string', '<br/>' );
-			echo esc_html( $address );
+			echo $address;
 			if ( $address != '' ) {
 				echo '<br/>';
 			}
@@ -516,7 +516,7 @@ class SI_Clients extends SI_Controller {
 	// Forms //
 	////////////
 
-	public static function form_fields( $required = TRUE, $client = 0 ) {
+	public static function form_fields( $required = true, $client = 0 ) {
 		$fields = array();
 		$fields['name'] = array(
 			'weight' => 1,
@@ -571,14 +571,14 @@ class SI_Clients extends SI_Controller {
 			'weight' => 1,
 			'label' => self::__( 'Full Name & Title' ),
 			'type' => 'text',
-			'required' => FALSE,
+			'required' => false,
 		);
 
 		$fields['email'] = array(
 			'weight' => 3,
 			'label' => self::__( 'Email' ),
 			'type' => 'text',
-			'required' => FALSE, // required but the modal will block updates
+			'required' => false, // required but the modal will block updates
 			'default' => ''
 		);
 
@@ -587,14 +587,14 @@ class SI_Clients extends SI_Controller {
 			'label' => self::__( 'First Name' ),
 			'placeholder' => self::__( 'First Name' ),
 			'type' => 'text',
-			'required' => FALSE,
+			'required' => false,
 		);
 		$fields['last_name'] = array(
 			'weight' => 51,
 			'label' => self::__( 'Last Name' ),
 			'placeholder' => self::__( 'Last Name' ),
 			'type' => 'text',
-			'required' => FALSE,
+			'required' => false,
 		);
 
 		$fields['client_id'] = array(
@@ -614,7 +614,7 @@ class SI_Clients extends SI_Controller {
 		return $fields;
 	}
 
-	public static function adv_form_fields( $required = TRUE, $client = 0 ) {
+	public static function adv_form_fields( $required = true, $client = 0 ) {
 
 		$fields = array();
 
@@ -920,7 +920,7 @@ class SI_Clients extends SI_Controller {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		exit();
 	}
 

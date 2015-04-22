@@ -23,13 +23,13 @@ class SI_Checkouts extends SI_Controller {
 	const CONFIRMATION_PAGE = 'confirmation';
 	
 	// controller and pages
-	private static $checkout_controller = NULL;
+	private static $checkout_controller = null;
 	private $pages = array();
 	private $current_page = '';
 
 	private $invoice;
 	private $payment_processor;
-	public $checkout_complete = FALSE;
+	public $checkout_complete = false;
 	public $cache = array();
 
 
@@ -82,15 +82,15 @@ class SI_Checkouts extends SI_Controller {
 	}
 
 	public function checkout_url( $processor_slug = '1' ) {
-		return esc_url( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug ), get_permalink( $this->invoice->get_id() ) ) );
+		return esc_url_raw( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug ), get_permalink( $this->invoice->get_id() ) ) );
 	}
 
 	public function checkout_complete_url( $processor_slug = '1' ) {
-		return esc_url( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::REVIEW_PAGE ), get_permalink( $this->invoice->get_id() ) ) );
+		return esc_url_raw( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::REVIEW_PAGE ), get_permalink( $this->invoice->get_id() ) ) );
 	}
 
 	public function checkout_confirmation_url( $processor_slug = '1' ) {
-		return esc_url( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::CONFIRMATION_PAGE ), get_permalink( $this->invoice->get_id() ) ) );
+		return esc_url_raw( add_query_arg( array( self::CHECKOUT_QUERY_VAR => $processor_slug, self::CHECKOUT_ACTION => self::CONFIRMATION_PAGE ), get_permalink( $this->invoice->get_id() ) ) );
 	}
 
 	/**
@@ -131,7 +131,7 @@ class SI_Checkouts extends SI_Controller {
 				do_action( 'si_checkout_action', $action, $this );
 				$this->save_cache();
 			}
-			$current = $this->get_current_page( TRUE );
+			$current = $this->get_current_page( true );
 			if ( $current == self::CONFIRMATION_PAGE && !$this->checkout_complete ) {
 				$this->complete_checkout();
 			}
@@ -173,12 +173,12 @@ class SI_Checkouts extends SI_Controller {
 	 */
 	private function load_cache() {
 		global $blog_id;
-		$this->cache = get_user_meta( get_current_user_id(), $blog_id.'_'.self::CACHE_META_KEY, TRUE );
+		$this->cache = get_user_meta( get_current_user_id(), $blog_id.'_'.self::CACHE_META_KEY, true );
 		if ( !is_array( $this->cache ) ) {
 			$this->cache = array();
 		}
 		if ( isset( $this->cache['payment_id'] ) && $this->cache['payment_id'] ) {
-			$this->checkout_complete = TRUE;
+			$this->checkout_complete = true;
 		}
 	}
 
@@ -302,7 +302,7 @@ class SI_Checkouts extends SI_Controller {
 	 * @param bool    $reload Whether to check the page cache again
 	 * @return mixed The key of the current page
 	 */
-	public function get_current_page( $reload = FALSE ) {
+	public function get_current_page( $reload = false ) {
 		if ( !$this->current_page || $reload ) {
 			$this->set_current_page();
 		}
@@ -428,7 +428,7 @@ class SI_Checkouts extends SI_Controller {
 		if ( !is_a( $payment, 'SI_Payment' ) ) {
 			// payment wasn't successful; delete the purchase and go back to the payment page
 			$this->mark_page_incomplete( self::PAYMENT_PAGE );
-			$this->get_current_page( TRUE );
+			$this->get_current_page( true );
 			do_action( 'checkout_failed' );
 			return;
 		}
@@ -437,7 +437,7 @@ class SI_Checkouts extends SI_Controller {
 
 		// wrap up checkout and tell the purchase we're done
 		do_action( 'completing_checkout', $this, $payment );
-		$this->checkout_complete = TRUE;
+		$this->checkout_complete = true;
 		do_action( 'checkout_completed', $this, $payment );
 	}
 

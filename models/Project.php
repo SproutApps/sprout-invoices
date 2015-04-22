@@ -26,13 +26,13 @@ class SI_Project extends SI_Post_Type {
 	public static function init() {
 		// register Project post type
 		$post_type_args = array(
-			'public' => FALSE,
-			'has_archive' => FALSE,
-			'show_ui' => TRUE,
+			'public' => false,
+			'has_archive' => false,
+			'show_ui' => true,
 			'show_in_menu' => 'edit.php?post_type='.SI_Invoice::POST_TYPE,
 			'rewrite' => array(
 				'slug' => self::REWRITE_SLUG,
-				'with_front' => FALSE,
+				'with_front' => false,
 			),
 			'supports' => array( '' )
 		);
@@ -56,16 +56,16 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public static function get_instance( $id = 0 ) {
 		if ( !$id )
-			return NULL;
+			return null;
 		
 		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
 			self::$instances[$id] = new self( $id );
 
 		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return NULL;
+			return null;
 		
 		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return NULL;
+			return null;
 		
 		return self::$instances[$id];
 	}
@@ -115,7 +115,7 @@ class SI_Project extends SI_Post_Type {
 	 * @return array 
 	 */
 	public function get_associated_clients() {
-		$clients = $this->get_post_meta( self::$meta_keys['associated_clients'], FALSE );
+		$clients = $this->get_post_meta( self::$meta_keys['associated_clients'], false );
 		if ( !is_array( $clients ) ) {
 			$clients = array();
 		}
@@ -201,7 +201,7 @@ class SI_Project extends SI_Post_Type {
 	 * @param array $time_data 
 	 */
 	public function create_associated_time( $time_data = array() ) {
-		$time = FALSE;
+		$time = false;
 		if ( isset( $time_data['activity_id'] ) ) {
 			$time = SI_Time::get_instance( $time_data['activity_id'] );
 		}
@@ -264,7 +264,7 @@ class SI_Project extends SI_Post_Type {
 	 * @return array 
 	 */
 	public function get_associated_invoices() {
-		$invoices = $this->get_post_meta( self::$meta_keys['associated_invoices'], FALSE );
+		$invoices = $this->get_post_meta( self::$meta_keys['associated_invoices'], false );
 		if ( !is_array( $invoices ) ) {
 			$invoices = array();
 		}

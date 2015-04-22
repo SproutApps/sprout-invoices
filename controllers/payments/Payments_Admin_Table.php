@@ -91,7 +91,7 @@ class SI_Payments_Table extends WP_List_Table {
 	 * @return string Text to be placed inside the column <td> (movie title only)
 	 */
 	function column_title( $item ) {
-		// wp_delete_post( $item->ID, TRUE );
+		// wp_delete_post( $item->ID, true );
 		$payment = SI_Payment::get_instance( $item->ID );	
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance($invoice_id);
@@ -151,7 +151,7 @@ class SI_Payments_Table extends WP_List_Table {
 		if ( is_array( $data ) ) {
 			foreach ( $data as $key => $value ) {
 				if ( is_array( $value ) ) {
-					$value = sprintf( '<pre id="payment_detail_%s" style="width="500px"; white-space:pre-wrap; text-align: left; font: normal normal 11px/1.4 menlo, monaco, monospaced; padding: 5px;">%s</pre>', $payment_id, print_r( $value, TRUE ) );
+					$value = sprintf( '<pre id="payment_detail_%s" style="width="500px"; white-space:pre-wrap; text-align: left; font: normal normal 11px/1.4 menlo, monaco, monospaced; padding: 5px;">%s</pre>', $payment_id, print_r( $value, true ) );
 				}
 				if ( is_string( $value ) ) {
 					$detail .= '<dl>
@@ -305,7 +305,7 @@ class SI_Payments_Table extends WP_List_Table {
 					break;
 
 				default:
-					$payment_ids = FALSE;
+					$payment_ids = false;
 					break;
 			}
 			if ( $payment_ids ) {

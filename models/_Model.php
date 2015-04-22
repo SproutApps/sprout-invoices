@@ -41,7 +41,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 		}
 		$defaults = array(
 			'show_ui' => true,
-			'show_in_menu' => FALSE,
+			'show_in_menu' => false,
 			'show_in_nav_menus' => false,
 			'public' => true,
 			'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions' ),
@@ -87,9 +87,9 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @return void
 	 */
 	private static function add_register_post_types_hooks() {
-		static $registered = FALSE; // only do it once
+		static $registered = false; // only do it once
 		if ( !$registered ) {
-			$registered = TRUE;
+			$registered = true;
 			add_action( 'init', array( __CLASS__, 'register_post_types' ) );
 			add_action( 'template_redirect', array( __CLASS__, 'context_fixer' ) );
 			add_filter( 'body_class', array( __CLASS__, 'body_classes' ) );
@@ -220,10 +220,10 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			$plural = $singular.'s';
 		}
 		$defaults = array(
-			'hierarchical' => TRUE,
+			'hierarchical' => true,
 			'labels' => self::taxonomy_labels( $singular, $plural ),
-			'show_ui' => TRUE,
-			'query_var' => TRUE,
+			'show_ui' => true,
+			'query_var' => true,
 			'show_in_nav_menus' => false,
 		);
 		$args = wp_parse_args( $args, $defaults );
@@ -260,9 +260,9 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @return void
 	 */
 	private static function add_register_taxonomies_hooks() {
-		static $registered = FALSE; // only do it once
+		static $registered = false; // only do it once
 		if ( !$registered ) {
-			$registered = TRUE;
+			$registered = true;
 			add_action( 'init', array( __CLASS__, 'register_taxonomies' ) );
 		}
 	}
@@ -495,7 +495,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @param array   $meta An associative array of meta keys and their values to save
 	 * @return void
 	 */
-	public function save_post_meta( $meta = array(), $trim = TRUE ) {
+	public function save_post_meta( $meta = array(), $trim = true ) {
 		foreach ( $meta as $key => $value ) {
 			if ( $trim ) {
 				$value = self::trim_input( $value );
@@ -504,7 +504,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 		}
 	}
 
-	public function add_post_meta( $meta = array(), $unique = FALSE ) {
+	public function add_post_meta( $meta = array(), $unique = false ) {
 		foreach ( $meta as $key => $value ) {
 			add_post_meta( $this->ID, $key, $value, $unique );
 		}
@@ -519,12 +519,12 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	/**
 	 * Returns post meta about the post
 	 *
-	 * @param string|NULL $meta_key A string indicating which meta key to retrieve, or NULL to return all keys
-	 * @param bool    $single   TRUE to return the first value, FALSE to return an array of values
+	 * @param string|null $meta_key A string indicating which meta key to retrieve, or null to return all keys
+	 * @param bool    $single   true to return the first value, false to return an array of values
 	 * @return string|array
 	 */
-	public function get_post_meta( $meta_key = NULL, $single = TRUE ) {
-		if ( $meta_key !== NULL ) { // get a single field
+	public function get_post_meta( $meta_key = null, $single = true ) {
+		if ( $meta_key !== null ) { // get a single field
 			return get_post_meta( $this->ID, $meta_key, $single );
 		} else {
 			return get_post_custom( $this->ID );
@@ -613,7 +613,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 		}
 
 		// Optionally bypass the standard db call
-		$result = apply_filters( 'si_find_by_meta', NULL, $post_type, $meta );
+		$result = apply_filters( 'si_find_by_meta', null, $post_type, $meta );
 
 		if ( !is_array( $result ) ) {
 			$args = array(
@@ -621,7 +621,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 				'post_status' => 'any',
 				'posts_per_page' => -1,
 				'fields' => 'ids',
-				'si_bypass_filter' => TRUE
+				'si_bypass_filter' => true
 			);
 
 			if ( !empty( $meta ) ) {

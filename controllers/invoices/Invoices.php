@@ -304,7 +304,7 @@ class SI_Invoices extends SI_Controller {
 				'subtotal' => $subtotal,
 				'deposit' => $deposit,
 				'line_items' => $line_items
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -315,7 +315,7 @@ class SI_Invoices extends SI_Controller {
 	 * @param  int $invoice_id   
 	 * @return                 
 	 */
-	public static function save_line_items( $post_id, $post, $callback_args, $invoice_id = NULL ) {
+	public static function save_line_items( $post_id, $post, $callback_args, $invoice_id = null ) {
 		if ( !isset( $_POST['line_item_key'] ) )
 			return;
 		
@@ -413,10 +413,10 @@ class SI_Invoices extends SI_Controller {
 				'tax' => $tax,
 				'tax2' => $tax2,
 				'currency' => $currency,
-			), FALSE );
+			), false );
 
 		// add the client modal
-		self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( FALSE ) ) );
+		self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( false ) ) );
 	}
 
 	/**
@@ -427,7 +427,7 @@ class SI_Invoices extends SI_Controller {
 	 * @param  int $invoice_id   
 	 * @return                 
 	 */
-	public static function save_meta_box_invoice_information( $post_id, $post, $callback_args, $invoice_id = NULL ) {
+	public static function save_meta_box_invoice_information( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
 
 		$status = ( isset( $_POST['status'] ) && $_POST['status'] != '' ) ? $_POST['status'] : '' ;
@@ -462,7 +462,7 @@ class SI_Invoices extends SI_Controller {
 			$invoice->get_id(), 
 			sprintf( si__('Data updated for %s.'), $invoice->get_id() ), 
 			0, 
-			FALSE );
+			false );
 	}
 
 	/**
@@ -484,7 +484,7 @@ class SI_Invoices extends SI_Controller {
 				'invoice' => $invoice,
 				'fields' => self::sender_submission_fields( $invoice ),
 				'sender_notes' => $invoice->get_sender_note()
-			), FALSE );
+			), false );
 	}
 
 	public static function sender_submission_fields( SI_Invoice $invoice ) {
@@ -560,7 +560,7 @@ class SI_Invoices extends SI_Controller {
 	 * @param  int $invoice_id   
 	 * @return                 
 	 */
-	public static function save_invoice_note( $post_id, $post, $callback_args, $invoice_id = NULL ) {
+	public static function save_invoice_note( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
 
 		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] != '' ) ? $_POST['sender_notes'] : '' ;
@@ -592,9 +592,9 @@ class SI_Invoices extends SI_Controller {
 				'id' => $post->ID,
 				'post' => $post,
 				'invoice' => $invoice,
-				'history' => si_doc_history_records( $post->ID, FALSE ),
+				'history' => si_doc_history_records( $post->ID, false ),
 				'submission_fields' => $invoice->get_submission_fields(),
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -612,7 +612,7 @@ class SI_Invoices extends SI_Controller {
 				'invoice' => $invoice,
 				'terms' => $invoice->get_terms(),
 				'notes' => $invoice->get_notes(),
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -623,7 +623,7 @@ class SI_Invoices extends SI_Controller {
 	 * @param  int $invoice_id   
 	 * @return                 
 	 */
-	public static function save_notes( $post_id, $post, $callback_args, $invoice_id = NULL ) {
+	public static function save_notes( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
 
 		$invoice_terms = ( isset( $_POST['invoice_terms'] ) && $_POST['invoice_terms'] != '' ) ? $_POST['invoice_terms'] : '' ;
@@ -915,7 +915,7 @@ class SI_Invoices extends SI_Controller {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( array( 'response' => si__('Notification Queued') ) );
+		echo wp_json_encode( array( 'response' => si__('Notification Queued') ) );
 		exit();
 	}
 
@@ -939,7 +939,7 @@ class SI_Invoices extends SI_Controller {
 			$invoice->get_id(), 
 			sprintf( si__('Status update for %s.'), $invoice->get_id() ), 
 			0, 
-			FALSE );
+			false );
 	}
 
 	////////////
@@ -1103,7 +1103,7 @@ class SI_Invoices extends SI_Controller {
 	//////////////
 
 	public static function line_item_content_filter( $description = '' ) {
-		if ( apply_filters( 'si_the_content_filter_line_item_descriptions', TRUE ) ) {
+		if ( apply_filters( 'si_the_content_filter_line_item_descriptions', true ) ) {
 			$content = apply_filters( 'the_content', $description );
 		}
 		else {
@@ -1116,9 +1116,9 @@ class SI_Invoices extends SI_Controller {
 		$screen = get_current_screen();
 		$screen_post_type = str_replace( 'edit-', '', $screen->id );
 		if ( $screen_post_type == SI_Invoice::POST_TYPE ) {
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 	public static function add_link_to_admin_bar( $items ) {
@@ -1144,7 +1144,7 @@ class SI_Invoices extends SI_Controller {
 		self::load_view( 'admin/sections/invoice-status-change-drop', array(
 				'id' => $id,
 				'status' => $invoice->get_status()
-			), FALSE );
+			), false );
 
 	}
 

@@ -27,15 +27,15 @@ class SI_Client extends SI_Post_Type {
 	public static function init() {
 		// register Client post type
 		$post_type_args = array(
-			'public' => FALSE,
-			'exclude_from_search' => TRUE,
-			'has_archive' => FALSE,
-			'show_in_nav_menus' => FALSE,
-			'show_ui' => TRUE,
+			'public' => false,
+			'exclude_from_search' => true,
+			'has_archive' => false,
+			'show_in_nav_menus' => false,
+			'show_ui' => true,
 			'show_in_menu' => 'edit.php?post_type='.SI_Invoice::POST_TYPE,
 			'rewrite' => array(
 				'slug' => self::REWRITE_SLUG,
-				'with_front' => FALSE,
+				'with_front' => false,
 			),
 			'supports' => array( '' )
 		);
@@ -67,16 +67,16 @@ class SI_Client extends SI_Post_Type {
 	 */
 	public static function get_instance( $id = 0 ) {
 		if ( !$id )
-			return NULL;
+			return null;
 		
 		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
 			self::$instances[$id] = new self( $id );
 
 		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return NULL;
+			return null;
 		
 		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return NULL;
+			return null;
 		
 		return self::$instances[$id];
 	}
@@ -138,7 +138,7 @@ class SI_Client extends SI_Post_Type {
 	 * @return array 
 	 */
 	public function get_associated_users() {
-		$users = $this->get_post_meta( self::$meta_keys['associated_users'], FALSE );
+		$users = $this->get_post_meta( self::$meta_keys['associated_users'], false );
 		if ( !is_array( $users ) ) {
 			$users = array();
 		}

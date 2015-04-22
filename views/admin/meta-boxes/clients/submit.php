@@ -23,7 +23,7 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 				<option></option>
 				<?php foreach ( $users as $user ): ?>
 					<?php if ( !in_array( $user->ID, $associated_users ) ): ?>
-						<option value="<?php echo (int) $user->ID ?>" <?php selected( in_array( $user->ID, $associated_users ), TRUE ) ?> data-url="<?php echo esc_url( admin_url( 'user-edit.php?user_id=' . $user->ID ) ) ?>" data-user-email="<?php echo esc_attr( $user->user_email ); ?>"><?php echo esc_html( $user->display_name ) ?></option>
+						<option value="<?php echo (int) $user->ID ?>" <?php selected( in_array( $user->ID, $associated_users ), true ) ?> data-url="<?php echo esc_url( admin_url( 'user-edit.php?user_id=' . $user->ID ) ) ?>" data-user-email="<?php echo esc_attr( $user->user_email ); ?>"><?php echo esc_html( $user->display_name ) ?></option>
 					<?php endif ?>
 				<?php endforeach ?>
 			</select>
@@ -88,7 +88,7 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 		<div id="delete-action">
 			<?php
 			if ( current_user_can( "delete_post", $post->ID ) ) { ?>
-				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, TRUE ); ?>"><?php self::_e('Delete') ?></a><?php
+				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php self::_e('Delete') ?></a><?php
 			} ?>
 		</div>
 

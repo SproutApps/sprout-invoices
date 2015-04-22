@@ -50,17 +50,17 @@ class SI_Estimate extends SI_Post_Type {
 	public static function init() {
 		// register Estimate post type
 		$post_type_args = array(
-			'public' => TRUE,
-			'exclude_from_search' => TRUE,
-			'has_archive' => FALSE,
-			'show_in_menu' => TRUE,
-			'show_in_nav_menus' => FALSE,
+			'public' => true,
+			'exclude_from_search' => true,
+			'has_archive' => false,
+			'show_in_menu' => true,
+			'show_in_nav_menus' => false,
 			'rewrite' => array(
 				'slug' => self::REWRITE_SLUG,
-				'with_front' => FALSE,
+				'with_front' => false,
 			),
 			'supports' => array( '' ),
-			'show_in_nav_menus' => FALSE
+			'show_in_nav_menus' => false
 		);
 		self::register_post_type( self::POST_TYPE, 'Estimate', 'Estimates', $post_type_args );
 
@@ -69,7 +69,7 @@ class SI_Estimate extends SI_Post_Type {
 		$singular = 'Task';
 		$plural = 'Tasks';
 		$taxonomy_args = array(
-			'meta_box_cb' => FALSE,
+			'meta_box_cb' => false,
 			'hierarchical' => false
 		);
 		self::register_taxonomy( self::LINE_ITEM_TAXONOMY, array(), $singular, $plural, $taxonomy_args );
@@ -98,10 +98,10 @@ class SI_Estimate extends SI_Post_Type {
 		foreach ( $statuses as $status => $label ) {
 			register_post_status( $status, array(
 				'label' => $label,
-				'public' => TRUE,
-				'exclude_from_search' => FALSE,
-				'show_in_admin_all_list' => TRUE,
-          		'show_in_admin_status_list' => TRUE,
+				'public' => true,
+				'exclude_from_search' => false,
+				'show_in_admin_all_list' => true,
+          		'show_in_admin_status_list' => true,
           		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
 			));
 		}
@@ -112,21 +112,21 @@ class SI_Estimate extends SI_Post_Type {
 	 * @param  object  $query 
 	 * @return boolean        
 	 */
-	public static function is_estimate_query( WP_Query $query = NULL ) {
+	public static function is_estimate_query( WP_Query $query = null ) {
 		if ( is_null( $query ) ) {
 			global $wp_query;
 			$query = $wp_query;
 		}
 		if ( !isset( $query->query_vars['post_type'] ) ) {
-			return FALSE; // normal posts query
+			return false; // normal posts query
 		}
 		if ( $query->query_vars['post_type'] == self::POST_TYPE ) {
-			return TRUE;
+			return true;
 		}
 		if ( is_array( $query->query_vars['post_type'] ) && in_array( self::POST_TYPE, $query->query_vars['post_type'] ) ) {
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 	protected function __construct( $id ) {
@@ -142,16 +142,16 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public static function get_instance( $id = 0 ) {
 		if ( !$id )
-			return NULL;
+			return null;
 		
 		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
 			self::$instances[$id] = new self( $id );
 
 		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return NULL;
+			return null;
 		
 		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return NULL;
+			return null;
 		
 		return self::$instances[$id];
 	}

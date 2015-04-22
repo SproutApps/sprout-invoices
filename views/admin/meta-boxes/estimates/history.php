@@ -56,7 +56,7 @@
 <div id="private_note_wrap">
 	<p>
 		<textarea id="private_note" name="private_note" class="clearfix" disabled="disabled" style="height:40px;"></textarea>
-		<?php if (  apply_filters( 'show_upgrade_messaging', TRUE ) ) {
+		<?php if (  apply_filters( 'show_upgrade_messaging', true ) ) {
 			printf( si__('<span class="helptip" title="Upgrade for Private Notes"></span>'), si_get_purchase_link() );
 		} ?>
 	</p>
@@ -71,7 +71,7 @@
 				<?php if ( isset( $value['data'] ) ): ?>
 					<?php if ( $value['data']['label'] && $value['data']['type'] != 'hidden' ): ?>
 						<dt><?php echo esc_html( $value['data']['label'] ) ?></dt>
-						<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== FALSE ): ?>
+						<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== false ): ?>
 							<dd><p><?php 
 									$term = get_term_by( 'id', $value['value'], SI_Estimate::PROJECT_TAXONOMY );
 									if ( !is_wp_error( $term ) ) {
@@ -93,7 +93,7 @@
 			<h3><?php si_e('Attachments') ?></h3>
 			<ul>
 				<?php foreach ( $media as $id => $mpost ): ?>
-					<?php  $img = wp_get_attachment_image_src( $id, 'thumbnail', TRUE ); ?>
+					<?php  $img = wp_get_attachment_image_src( $id, 'thumbnail', true ); ?>
 					<li><a href="<?php echo wp_get_attachment_url( $id ) ?>" target="_blank" class="attachment_url"><img src="<?php echo esc_url( $img[0] ); ?>" alt="<?php esc_attr( $mpost->post_name ) ?>"></a></li>
 				<?php endforeach ?>
 			</ul>

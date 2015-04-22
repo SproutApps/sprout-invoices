@@ -187,7 +187,7 @@ class FreshBooksRequest {
         }
         else
         {
-            $response = json_decode(json_encode(simplexml_load_string($result)), true);
+            $response = json_decode(wp_json_encode(simplexml_load_string($result)), true);
             $this->_success = ($response['@attributes']['status'] == 'ok');
         }
 

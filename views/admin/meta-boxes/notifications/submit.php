@@ -45,7 +45,7 @@ $can_publish = current_user_can($post_type_object->cap->publish_posts);
 
 			<?php
 			if ( current_user_can( "delete_post", $post->ID ) ) { ?>
-				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, TRUE ); ?>"><?php self::_e('Delete') ?></a><?php
+				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php self::_e('Delete') ?></a><?php
 			} ?>
 		</div>
 

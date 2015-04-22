@@ -24,7 +24,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	 */
 	private static function notification_hooks() {
 		// Notifications can be suppressed
-		if ( apply_filters( 'suppress_notifications', FALSE ) ) {
+		if ( apply_filters( 'suppress_notifications', false ) ) {
 			return;
 		}
 
@@ -48,8 +48,8 @@ class SI_Notifications extends SI_Notifications_Control {
 					'description' => self::__( 'Customize the email that is sent to a prospective client after a lead is submitted.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'lead_entries', 'estimate_id', 'estimate_edit_url', 'client_name', 'client_edit_url', 'estimate_total', 'estimate_subtotal' ),
 					'default_title' => sprintf( self::__( '%s: Estimate Request Received' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/request-received', NULL ),
-					'always_disabled' => TRUE
+					'default_content' => self::load_view_to_string( 'notifications/request-received', null ),
+					'always_disabled' => true
 				),
 				// Estimates
 				'send_estimate' => array(
@@ -57,7 +57,7 @@ class SI_Notifications extends SI_Notifications_Control {
 					'description' => self::__( 'Customize the estimate email that is sent to selected recipients.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_total', 'estimate_subtotal', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Your Estimate is Available' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/estimate', NULL )
+					'default_content' => self::load_view_to_string( 'notifications/estimate', null )
 				),
 				// Invoices
 				'send_invoice' => array(
@@ -65,7 +65,7 @@ class SI_Notifications extends SI_Notifications_Control {
 					'description' => self::__( 'Customize the invoice email that is sent to selected recipients.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Your Invoice is Available' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/invoice', NULL )
+					'default_content' => self::load_view_to_string( 'notifications/invoice', null )
 				),
 				// Payments
 				'deposit_payment' => array(
@@ -73,23 +73,23 @@ class SI_Notifications extends SI_Notifications_Control {
 					'description' => self::__( 'Customize the payment email that is sent to the client recipients when a deposit is made.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Deposit Received' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', NULL ),
-					'always_disabled' => TRUE
+					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', null ),
+					'always_disabled' => true
 				),
 				'final_payment' => array(
 					'name' => self::__( 'Invoice Paid' ),
 					'description' => self::__( 'Customize the email sent to the client recipients when the final payment for an invoice is made.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Thank You' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/payment-final', NULL )
+					'default_content' => self::load_view_to_string( 'notifications/payment-final', null )
 				),
 				'reminder_payment' => array(
 					'name' => self::__( 'Payment Reminder' ),
 					'description' => self::__( 'Customize the email that is sent to the client recipients in order to remind them that their payment is overdue.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number','invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( self::__( '%s: Invoice Payment Overdue' ),  get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/payment-reminder', NULL ),
-					'always_disabled' => TRUE
+					'default_content' => self::load_view_to_string( 'notifications/payment-reminder', null ),
+					'always_disabled' => true
 				),
 				// Admin Notifications
 				'estimate_submitted' => array(
@@ -97,29 +97,29 @@ class SI_Notifications extends SI_Notifications_Control {
 					'description' => self::__( 'Customize the email that is sent to the site admin after an lead is submitted.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( self::__( '%s: Estimate Request Received' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-request-submitted', NULL ),
-					'always_disabled' => TRUE
+					'default_content' => self::load_view_to_string( 'notifications/admin-request-submitted', null ),
+					'always_disabled' => true
 				),
 				'accepted_estimate' => array(
 					'name' => self::__( 'Estimate Accepted' ),
 					'description' => self::__( 'Customize the email sent to the admin after an estimate is accepted.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( self::__( '%s: Estimate Accepted' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-accepted', NULL )
+					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-accepted', null )
 				),
 				'declined_estimate' => array(
 					'name' => self::__( 'Estimate Declined' ),
 					'description' => self::__( 'Customize the email sent to the admin after an estimate is accepted.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( self::__( '%s: Estimate Declined' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-declined', NULL )
+					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-declined', null )
 				),
 				'payment_notification' => array(
 					'name' => self::__( 'Payment Received' ),
 					'description' => self::__( 'Customize the email sent to an admin when any payment is received.' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( self::__( '%s: Payment Received' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-payment', NULL )
+					'default_content' => self::load_view_to_string( 'notifications/admin-payment', null )
 				),
 			);
 		return array_merge( $notifications, $default_notifications );
@@ -1320,7 +1320,7 @@ class SI_Notifications extends SI_Notifications_Control {
 					<?php foreach ( $data['submission_fields']['fields'] as $key => $value ): ?>
 						<?php if ( isset( $value['data']['label'] ) && isset( $value['data']['type'] ) && $value['data']['type'] != 'hidden' ): ?>
 							<dt><?php echo esc_html( $value['data']['label'] ); ?></dt>
-							<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== FALSE ): ?>
+							<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== false ): ?>
 								<dd><p><?php 
 										$term = get_term_by( 'id', $value['value'], SI_Estimate::PROJECT_TAXONOMY );
 										if ( !is_wp_error( $term ) ) {

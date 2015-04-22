@@ -43,7 +43,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			'si_wpinvoice_importer_settings' => array(
 				'title' => 'WPInvoice Import Settings',
 				'weight' => 0,
-				'tab' => self::get_settings_page( FALSE ),
+				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::DELETE_WPINVOICE_DATA => array(
 						'label' => self::__( 'Delete WP-Invoices' ),
@@ -85,7 +85,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 	 * @return bool
 	 */
 	public static function delete_wpinvoice_data() {
-		self::$wpinvoice_delete = ( isset( $_POST[self::DELETE_WPINVOICE_DATA] ) && $_POST[self::DELETE_WPINVOICE_DATA] == 'remove' ) ? TRUE : FALSE ;
+		self::$wpinvoice_delete = ( isset( $_POST[self::DELETE_WPINVOICE_DATA] ) && $_POST[self::DELETE_WPINVOICE_DATA] == 'remove' ) ? true : false ;
 		return self::$wpinvoice_delete;
 	}
 
@@ -170,7 +170,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 		foreach ( $wp_invoice_ids as $wp_invoice_id ) {
 			$wp_invoice = new WPI_Invoice();
-			$wp_invoice = $wp_invoice->load_invoice( array( 'id' => $wp_invoice_id, 'return' => TRUE ) );
+			$wp_invoice = $wp_invoice->load_invoice( array( 'id' => $wp_invoice_id, 'return' => true ) );
 
 			if ( $wp_invoice['type'] != 'invoice' && $wp_invoice['type'] != 'recurring') {
 				continue;
@@ -212,7 +212,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			
 			if ( self::delete_wpinvoice_data() ) {
 				printf( 'Deleting WP-Invoice: %s', esc_attr($wp_invoice['post_title']) );
-				//wp_delete_post( $invoice_id, TRUE );
+				//wp_delete_post( $invoice_id, true );
 			}
 
 		}
@@ -424,7 +424,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 							$new_invoice_id, // post id
 							$event['text'], // title
 							0, // user id
-							FALSE // don't encode
+							false // don't encode
 							);
 				}
 			}
@@ -486,8 +486,8 @@ class SI_WPInvoice_Import extends SI_Importer {
 	public static function return_error( $message ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( 
-			array( 'error' => TRUE, 'message' => $message )
+		echo wp_json_encode( 
+			array( 'error' => true, 'message' => $message )
 					);
 		exit();
 	}
@@ -500,7 +500,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 	public static function return_progress( $array = array() ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( $array );
+		echo wp_json_encode( $array );
 		exit();
 	}
 

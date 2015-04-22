@@ -78,7 +78,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				'checkout' => $checkout,
 				'type' => self::PAYMENT_SLUG,
 				'check_fields' => $this->check_info_fields( $checkout )
-			), TRUE );
+			), true );
 	}
 
 
@@ -90,10 +90,10 @@ class SI_Checks extends SI_Offsite_Processors {
 	 */
 	public function invoice_pane( SI_Checkouts $checkout ) {
 		self::load_view( 'templates/checkout/checks/form', array(
-				'checkout' => NULL,
+				'checkout' => null,
 				'type' => self::PAYMENT_SLUG,
 				'check_fields' => self::check_info_fields( $checkout )
-			), TRUE );
+			), true );
 	}
 
 	/**
@@ -111,7 +111,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => TRUE
+				'required' => true
 			),
 			'check_number' => array(
 				'type' => 'text',
@@ -120,7 +120,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => TRUE
+				'required' => true
 			),
 			'mailed' => array(
 				'type' => 'date',
@@ -130,7 +130,7 @@ class SI_Checks extends SI_Offsite_Processors {
 					'autocomplete' => 'off',
 				),
 				'default' => date_i18n( get_option( 'date_format' ) ),
-				'required' => TRUE
+				'required' => true
 			),
 			'notes' => array(
 				'type' => 'textarea',
@@ -139,13 +139,13 @@ class SI_Checks extends SI_Offsite_Processors {
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => FALSE
+				'required' => false
 			),
 			'nonce' => array( // anti-spam honeypot
 				'type' => 'hidden',
 				'weight' => 50,
 				'label' => self::__( 'Skip this unless you are not human.' ),
-				'required' => TRUE,
+				'required' => true,
 				'value' => wp_create_nonce( SI_Controller::NONCE ),
 			)
 		);
@@ -170,20 +170,20 @@ class SI_Checks extends SI_Offsite_Processors {
 	 *
 	 * @param SI_Checkouts $checkout
 	 * @param SI_Invoice $invoice
-	 * @return SI_Payment|bool FALSE if the payment failed, otherwise a Payment object
+	 * @return SI_Payment|bool false if the payment failed, otherwise a Payment object
 	 */
 	public function process_payment( SI_Checkouts $checkout, SI_Invoice $invoice ) {
-		$amount = ( isset( $_POST['sa_checks_amount'] ) ) ? $_POST['sa_checks_amount'] : FALSE ;
-		$number = ( isset( $_POST['sa_checks_check_number'] ) ) ? $_POST['sa_checks_check_number'] : FALSE ;
-		$date = ( isset( $_POST['sa_checks_mailed'] ) ) ? $_POST['sa_checks_mailed'] : FALSE ;
+		$amount = ( isset( $_POST['sa_checks_amount'] ) ) ? $_POST['sa_checks_amount'] : false ;
+		$number = ( isset( $_POST['sa_checks_check_number'] ) ) ? $_POST['sa_checks_check_number'] : false ;
+		$date = ( isset( $_POST['sa_checks_mailed'] ) ) ? $_POST['sa_checks_mailed'] : false ;
 		$notes = ( isset( $_POST['sa_checks_notes'] ) ) ? $_POST['sa_checks_notes'] : '' ;
 
 		if ( !isset( $_POST['sa_checks_nonce'] ) || !wp_verify_nonce( $_POST['sa_checks_nonce'], self::NONCE ) ) {
-			return FALSE;
+			return false;
 		}
 
 		if ( !$amount ) {
-			return FALSE;
+			return false;
 		}
 
 		// create new payment
@@ -200,7 +200,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				),
 			), SI_Payment::STATUS_PENDING );
 		if ( !$payment_id ) {
-			return FALSE;
+			return false;
 		}
 		$payment = SI_Payment::get_instance( $payment_id );
 		if ( $date != '' ) {
@@ -225,7 +225,7 @@ class SI_Checks extends SI_Offsite_Processors {
 	 * @param bool    $display
 	 * @return void
 	 */
-	private function set_error_messages( $message, $display = TRUE ) {
+	private function set_error_messages( $message, $display = true ) {
 		if ( $display ) {
 			self::set_message( $message, self::MESSAGE_STATUS_ERROR );
 		} else {

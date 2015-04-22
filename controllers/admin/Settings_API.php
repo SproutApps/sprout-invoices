@@ -94,15 +94,15 @@ class SA_Settings_API extends SI_Controller {
 			'slug' => 'undefined_slug',
 			'title' => 'Undefined Title',
 			'menu_title' => 'Undefined Menu Title',
-			'tab_title' => FALSE,
+			'tab_title' => false,
 			'weight' => 10,
-			'reset' => FALSE, 
+			'reset' => false, 
 			'section' => 'theme', 
-			'show_tabs' => TRUE,
-			'tab_only' => FALSE,
-			'callback' => NULL,
-			'ajax' => FALSE,
-			'ajax_full_page' => FALSE,
+			'show_tabs' => true,
+			'tab_only' => false,
+			'callback' => null,
+			'ajax' => false,
+			'ajax_full_page' => false,
 			'add_new' => '',
 			'add_new_post_type' => ''
 		);
@@ -220,7 +220,7 @@ class SA_Settings_API extends SI_Controller {
 						'ajax_full_page' => $ajax_full_page,
 						'reset' => $reset,
 						'section' => $section
-					), FALSE );
+					), false );
 				}
 				return;
 			}
@@ -239,7 +239,7 @@ class SA_Settings_API extends SI_Controller {
 				'ajax_full_page' => $ajax_full_page,
 				'reset' => $reset,
 				'section' => $section
-			), FALSE );
+			), false );
 		return;
 	}
 
@@ -426,7 +426,7 @@ class SA_Settings_API extends SI_Controller {
 		<?php endif; ?>
 
 		<?php if ( $data['type'] != 'checkbox' && !empty( $data['description'] ) ): ?>
-			<p class="description help_block"><?php echo esc_html( $data['description'] ); ?></p>
+			<p class="description help_block"><?php echo $data['description']; ?></p>
 		<?php endif; ?>
 		<?php
 		return apply_filters( 'si_admin_settings_form_field', ob_get_clean(), $name, $data );

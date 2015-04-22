@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**6.1.2**
+
+* FIX: Some escaping issues from 6.1.1
+
 **6.1.1**
 
 * SECURITY: Reviewed all uses of add_query_arg, regardless if $url is passed esc_url is used. 

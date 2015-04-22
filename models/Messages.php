@@ -25,9 +25,9 @@ class SI_Messages extends SI_Post_Type {
 	public static function init() {
 		// register Messages post type
 		$post_type_args = array(
-			'public' => FALSE,
-			'has_archive' => FALSE,
-			'show_ui' => FALSE,
+			'public' => false,
+			'has_archive' => false,
+			'show_ui' => false,
 			'show_in_menu' => 'sprout-invoice',
 			'supports' => array( 'title', 'editor', 'revisions' )
 		);
@@ -47,16 +47,16 @@ class SI_Messages extends SI_Post_Type {
 	 */
 	public static function get_instance( $id = 0 ) {
 		if ( !$id )
-			return NULL;
+			return null;
 		
 		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
 			self::$instances[$id] = new self( $id );
 
 		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return NULL;
+			return null;
 		
 		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return NULL;
+			return null;
 		
 		return self::$instances[$id];
 	}

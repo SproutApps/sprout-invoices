@@ -53,7 +53,7 @@ class SI_Harvest_Import extends SI_Importer {
 			'si_harvest_importer_settings' => array(
 				'title' => 'Harvest Import Settings',
 				'weight' => 0,
-				'tab' => self::get_settings_page( FALSE ),
+				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::HARVEST_USER_OPTION => array(
 						'label' => self::__( 'User' ),
@@ -151,7 +151,7 @@ class SI_Harvest_Import extends SI_Importer {
 	 * @return bool
 	 */
 	public static function import_archived_data() {
-		self::$importing_archived = ( isset( $_POST[self::PROCESS_ARCHIVED] ) && $_POST[self::PROCESS_ARCHIVED] == 'archived' ) ? TRUE : FALSE ;
+		self::$importing_archived = ( isset( $_POST[self::PROCESS_ARCHIVED] ) && $_POST[self::PROCESS_ARCHIVED] == 'archived' ) ? true : false ;
 		return self::$importing_archived;
 	}
 
@@ -163,8 +163,8 @@ class SI_Harvest_Import extends SI_Importer {
 	public static function return_error( $message ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( 
-				array( 'error' => TRUE, 'message' => $message )
+		echo wp_json_encode( 
+				array( 'error' => true, 'message' => $message )
 					);
 		exit();
 	}
@@ -177,7 +177,7 @@ class SI_Harvest_Import extends SI_Importer {
 	public static function return_progress( $array = array() ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( $array );
+		echo wp_json_encode( $array );
 		exit();
 	}
 
@@ -519,9 +519,9 @@ class SI_Harvest_Import extends SI_Importer {
 				// Break the array up into pages of 10 items
 				$paged_data = array_chunk( $result->data, apply_filters( 'si_harvest_import_increments_for_invoices', 10 ) );
 
-				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' page: ', $progress[$progress_key], FALSE );
-				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' chunk count: ', count( $paged_data ), FALSE );
-				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' chunk progress: ', $progress[$progress_pagechunk_key], FALSE );
+				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' page: ', $progress[$progress_key], false );
+				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' chunk count: ', count( $paged_data ), false );
+				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' chunk progress: ', $progress[$progress_pagechunk_key], false );
 
 				if ( isset( $paged_data[$progress[$progress_pagechunk_key]] ) ) {
 					

@@ -20,9 +20,9 @@ class SI_Admin_Settings extends SI_Controller {
 
 	public static function init() {
 		// Store options
-		self::$address = get_option( self::ADDRESS_OPTION, FALSE );
-		self::$option_countries = get_option( self::COUNTRIES_OPTION, FALSE );
-		self::$option_states = get_option( self::STATES_OPTION, FALSE );
+		self::$address = get_option( self::ADDRESS_OPTION, false );
+		self::$option_countries = get_option( self::COUNTRIES_OPTION, false );
+		self::$option_states = get_option( self::STATES_OPTION, false );
 		self::$localeconv_options = get_option( self::CURRENCY_FORMAT_OPTION, array() );
 		
 		// Register Settings
@@ -87,7 +87,7 @@ class SI_Admin_Settings extends SI_Controller {
 			'menu_title' => 'Sprout Invoices',
 			'tab_title' => self::__('General Settings'),
 			'weight' => 10,
-			'reset' => FALSE, 
+			'reset' => false, 
 			'section' => 'settings'
 			);
 		do_action( 'sprout_settings_page', $args );
@@ -98,8 +98,8 @@ class SI_Admin_Settings extends SI_Controller {
 			'title' => 'Sprout Invoices Dashboard',
 			'menu_title' => self::__('Getting Started'),
 			'weight' => 1,
-			'reset' => FALSE, 
-			'tab_only' => TRUE,
+			'reset' => false, 
+			'tab_only' => true,
 			'section' => 'settings',
 			'callback' => array( __CLASS__, 'welcome_page' )
 			);
@@ -114,7 +114,7 @@ class SI_Admin_Settings extends SI_Controller {
 				'callback' => array( __CLASS__, 'display_general_section' ),
 				'settings' => array(
 					self::ADDRESS_OPTION => array(
-						'label' => NULL,
+						'label' => null,
 						'option' => array( __CLASS__, 'display_address_fields' ),
 						'sanitize_callback' => array( __CLASS__, 'save_address' )
 					),
@@ -127,7 +127,7 @@ class SI_Admin_Settings extends SI_Controller {
 				'callback' => array( __CLASS__, 'display_currency_section' ),
 				'settings' => array(
 					self::CURRENCY_FORMAT_OPTION => array(
-						'label' => NULL,
+						'label' => null,
 						'option' => array( __CLASS__, 'display_currency_locale_fields' ),
 						'sanitize_callback' => array( __CLASS__, 'save_currency_locale' )
 					),
@@ -164,7 +164,7 @@ class SI_Admin_Settings extends SI_Controller {
 	 * @ignore
 	 */
 	public static function redirect_on_activation() {
-		if ( get_option( 'si_do_activation_redirect', FALSE ) ) {
+		if ( get_option( 'si_do_activation_redirect', false ) ) {
 			// Flush the rewrite rules after SI is activated.
 			flush_rewrite_rules();
 			delete_option( 'si_do_activation_redirect' );
@@ -178,7 +178,7 @@ class SI_Admin_Settings extends SI_Controller {
 	 * @return bool     
 	 */
 	public static function ssl_check( WP $wp ) {
-		if ( apply_filters( 'si_require_ssl', FALSE, $wp ) ) {
+		if ( apply_filters( 'si_require_ssl', false, $wp ) ) {
 			self::ssl_required();
 		} else {
 			self::no_ssl();
@@ -198,7 +198,7 @@ class SI_Admin_Settings extends SI_Controller {
 	}
 
 	protected static function no_ssl() {
-		if ( is_ssl() && strpos( self::si_get_home_url_option(), 'https' ) === FALSE && apply_filters( 'si_no_ssl_redirect', FALSE ) ) {
+		if ( is_ssl() && strpos( self::si_get_home_url_option(), 'https' ) === false && apply_filters( 'si_no_ssl_redirect', false ) ) {
 			if ( 0 === strpos( $_SERVER['REQUEST_URI'], 'https' ) ) {
 				wp_redirect( preg_replace( '|^https://|', 'http://', $_SERVER['REQUEST_URI'] ) );
 				exit();
@@ -242,11 +242,11 @@ class SI_Admin_Settings extends SI_Controller {
 
 	public static function display_address_fields() {
 		echo '<div id="client_fields" class="split admin_fields clearfix">';
-		sa_admin_fields( self::address_form_fields( FALSE ) );
+		sa_admin_fields( self::address_form_fields( false ) );
 		echo '</div>';
 	}
 
-	public static function address_form_fields( $required = TRUE ) {
+	public static function address_form_fields( $required = true ) {
 
 		$fields['name'] = array(
 			'weight' => 1,
@@ -490,8 +490,8 @@ class SI_Admin_Settings extends SI_Controller {
 		<div class="sprout_country_options">
 			<select name="<?php echo self::COUNTRIES_OPTION ?>[]" multiple="multiple" class="select2" style="min-width:50%;">
 				<?php foreach ( parent::$countries as $key => $name ): ?>
-					<?php $selected = ( empty( self::$option_countries ) || in_array( $name, self::$option_countries ) ) ? TRUE : FALSE ;  ?>
-					<option value="<?php echo esc_attr( $name ) ?>" <?php selected( $selected, TRUE, TRUE ); ?>><?php echo esc_html( $name ) ?></option>
+					<?php $selected = ( empty( self::$option_countries ) || in_array( $name, self::$option_countries ) ) ? true : false ;  ?>
+					<option value="<?php echo esc_attr( $name ) ?>" <?php selected( $selected, true, true ); ?>><?php echo esc_html( $name ) ?></option>
 				<?php endforeach ?>
 			</select>
 		</div> <?php

@@ -98,7 +98,7 @@ class SI_Help extends SI_Controller {
 		//<![CDATA[
 		jQuery(document).ready( function($) {
 			var ajaxurl = '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>';
-			var options = <?php echo json_encode( $args ); ?>;
+			var options = <?php echo wp_json_encode( $args ); ?>;
 
 			if ( ! options )
 				return;
@@ -122,7 +122,7 @@ class SI_Help extends SI_Controller {
 
 	public static function pointer_new_doc() {
 
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : FALSE;
+		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : false;
 		if ( $post_id ) {
 			$post_type = get_post_type( $post_id );
 		} else {
@@ -189,7 +189,7 @@ class SI_Help extends SI_Controller {
 	}
 
 	public static function is_relevant_admin_page() {
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : FALSE;
+		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : false;
 		if ( $post_id ) {
 			$post_type = get_post_type( $post_id );
 		} else {
@@ -197,9 +197,9 @@ class SI_Help extends SI_Controller {
 		}
 
 		if ( !in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE ) ) ) {
-			return FALSE;
+			return false;
 		}
-		return TRUE;
+		return true;
 	}
 
 	public static function pointer_si_help_tab_settings() {

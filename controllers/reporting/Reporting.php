@@ -66,16 +66,16 @@ class SI_Reporting extends SI_Controller {
 			'title' => self::__( 'Reports Dashboard' ),
 			'menu_title' => self::__( 'Reports' ),
 			'weight' => 5,
-			'reset' => FALSE,
+			'reset' => false,
 			'section' => 'settings',
-			'tab_only' => TRUE,
+			'tab_only' => true,
 			'callback' => array( __CLASS__, 'reports_dashboard' )
 			);
 		do_action( 'sprout_settings_page', $args );
 	}
 
 	public static function reports_dashboard() {
-		$report_dash = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : FALSE ;
+		$report_dash = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : false ;
 		switch ( $report_dash ) {
 			case 'invoices':
 				self::load_view( 'admin/reports/invoices.php', array() );
@@ -172,7 +172,7 @@ class SI_Reporting extends SI_Controller {
 			$return['payments'][] = $seg_data['paid'];
 		}
 		header( 'Content-type: application/json' );
-		echo json_encode( $return );
+		echo wp_json_encode( $return );
 		exit();
 	}
 
@@ -195,7 +195,7 @@ class SI_Reporting extends SI_Controller {
 			$return['balances'][] = $seg_data['balance'];
 		}
 		header( 'Content-type: application/json' );
-		echo json_encode( $return );
+		echo wp_json_encode( $return );
 		exit();
 	}
 
@@ -219,7 +219,7 @@ class SI_Reporting extends SI_Controller {
 			$return['estimates'][] = $est_data[$segment]['estimates'];
 		}
 		header( 'Content-type: application/json' );
-		echo json_encode( $return );
+		echo wp_json_encode( $return );
 		exit();
 	}
 
@@ -242,7 +242,7 @@ class SI_Reporting extends SI_Controller {
 			$return['invoices_generated'][] = $seg_data['invoices_generated'];
 		}
 		header( 'Content-type: application/json' );
-		echo json_encode( $return );
+		echo wp_json_encode( $return );
 		exit();
 	}
 
@@ -265,7 +265,7 @@ class SI_Reporting extends SI_Controller {
 			$return['status_void'] += $seg_data['status_void'];
 		}
 		header( 'Content-type: application/json' );
-		echo json_encode( $return );
+		echo wp_json_encode( $return );
 		exit();
 	}
 
@@ -292,7 +292,7 @@ class SI_Reporting extends SI_Controller {
 			$return['status_writeoff'] += $seg_data['status_writeoff'];
 		}
 		header( 'Content-type: application/json' );
-		echo json_encode( $return );
+		echo wp_json_encode( $return );
 		exit();
 	}
 
@@ -317,7 +317,7 @@ class SI_Reporting extends SI_Controller {
 			$return['status_declined'] += $seg_data['status_declined'];
 		}
 		header( 'Content-type: application/json' );
-		echo json_encode( $return );
+		echo wp_json_encode( $return );
 		exit();
 	}
 
@@ -793,18 +793,18 @@ class SI_Reporting extends SI_Controller {
 	
 	public static function get_cache( $data_name = '' ) {
 		if ( self::DEBUG || isset( $_GET['nocache'] ) ) { // If dev than don't cache.
-			return FALSE;
+			return false;
 		}
 		
-		if ( apply_filters( 'si_disable_reporting_cache', FALSE ) ) {
-			return FALSE;
+		if ( apply_filters( 'si_disable_reporting_cache', false ) ) {
+			return false;
 		}
 
 		$key = self::get_hashed_transient_key( $data_name );
 		$cache = get_transient( $key );
 
 		// If cache is empty return false.
-		return ( !empty( $cache ) ) ? $cache : FALSE;
+		return ( !empty( $cache ) ) ? $cache : false;
 	}
 
 	public static function set_cache( $data_name = '', $data = array(), $expire = 0 ) {

@@ -6,8 +6,8 @@
 <h3><?php si_e('Project Brief') ?> <span class="helptip" title="<?php si_e("General project brief.") ?>"></span></h3>
 <?php 
 	$editor_settings = array(
-			'media_buttons'     => FALSE,
+			'media_buttons'     => false,
 			'textarea_rows'     => 4,
-			'theme_styles'		=> FALSE
+			'theme_styles'		=> false
 		);
 	wp_editor_styleless( $project->get_content(), 'content', $editor_settings ); ?>

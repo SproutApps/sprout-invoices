@@ -49,7 +49,7 @@
 				<span class="add_button_wrap">
 					<?php echo apply_filters( 'si_add_line_item_add_button', '<a href="javascript:void(0)" class="add_line_item add_button item_add_type item_add_no_type">&nbsp;'.si__('Add').'</a>' ) ?>
 				</span>
-				<?php if ( apply_filters( 'show_upgrade_messaging', TRUE ) ): ?>
+				<?php if ( apply_filters( 'show_upgrade_messaging', true ) ): ?>
 					<span title="<?php self::esc_e('Predefined line-items can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.') ?>" class="helptip add_item_help"></span>
 				<?php endif ?>
 			</div>

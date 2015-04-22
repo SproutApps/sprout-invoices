@@ -13,7 +13,7 @@ class Test_Reporting extends WP_UnitTestCase {
 
 		// flush
 		foreach ( array_merge( $this->invoice_ids, $this->payment_ids ) as $post_id ) {
-			wp_delete_post( $post_id, TRUE );
+			wp_delete_post( $post_id, true );
 		}
 	}
 

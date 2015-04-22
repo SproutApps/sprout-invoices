@@ -8,10 +8,10 @@
  */
 
 if ( !defined( 'SI_FREE_TEST' ) )
-	define( 'SI_FREE_TEST', FALSE );
+	define( 'SI_FREE_TEST', false );
 
 if ( !defined( 'SI_DEV' ) )
-	define( 'SI_DEV', FALSE );
+	define( 'SI_DEV', false );
 
 abstract class Sprout_Invoices {
 
@@ -26,7 +26,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '6.1.1';
+	const SI_VERSION = '6.1.2';
 	/**
 	 * DB Version
 	 */
@@ -39,7 +39,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * SI_DEV constant within the wp-config to turn on SI debugging
 	 * <code>
-	 * define( 'SI_DEV', TRUE/FALSE )
+	 * define( 'SI_DEV', true/false )
 	 * </code>
 	 */
 	const DEBUG = SI_DEV;

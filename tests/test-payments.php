@@ -53,7 +53,7 @@ class Test_Payments extends WP_UnitTestCase {
 		$value = preg_replace( "/([^0-9\.\-])/i", "", $value );
 		// make sure we are dealing with a proper number now, no +.4393 or 3...304 or 76.5895,94
 		if ( !is_numeric( $value ) ) {
-			$this->assertEquals( FALSE, TRUE );
+			$this->assertEquals( false, true );
 		}
 		// convert to a float explicitly
 		$value = (float)$value;
@@ -78,7 +78,7 @@ class Test_Payments extends WP_UnitTestCase {
 				),
 			), SI_Payment::STATUS_AUTHORIZED );
 		if ( !$payment_id ) {
-			return FALSE;
+			return false;
 		}
 		$payment = SI_Payment::get_instance( $payment_id );
 		do_action( 'payment_authorized', $payment );
@@ -102,7 +102,7 @@ class Test_Payments extends WP_UnitTestCase {
 				),
 			), SI_Payment::STATUS_AUTHORIZED );
 		if ( !$payment_id ) {
-			return FALSE;
+			return false;
 		}
 		$payment = SI_Payment::get_instance( $payment_id );
 		do_action( 'payment_authorized', $payment );

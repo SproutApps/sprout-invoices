@@ -136,7 +136,7 @@ class SI_Projects extends SI_Controller {
 	}
 
 	public static function show_upgrade_notice() {
-		if ( apply_filters( 'show_upgrade_messaging', TRUE ) ) {
+		if ( apply_filters( 'show_upgrade_messaging', true ) ) {
 			printf( '<p><strong>Upgrade Available:</strong> Add time tracking and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p>', si_get_purchase_link() );
 		}
 	}
@@ -155,7 +155,7 @@ class SI_Projects extends SI_Controller {
 				'post' => $post,
 				'invoices' => $project->get_invoices(),
 				'estimates' => $project->get_estimates(),
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class SI_Projects extends SI_Controller {
 			add_thickbox();
 
 			// add the client modal
-			self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( FALSE ) ) );
+			self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( false ) ) );
 		}
 	}
 
@@ -188,7 +188,7 @@ class SI_Projects extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_meta_box_project_information( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_meta_box_project_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		// name is set by update_post_data
 		$client = ( isset( $_POST['sa_metabox_client'] ) && $_POST['sa_metabox_client'] != '' ) ? $_POST['sa_metabox_client'] : '' ;
 		$website = ( isset( $_POST['sa_metabox_website'] ) && $_POST['sa_metabox_website'] != '' ) ? $_POST['sa_metabox_website'] : '' ;
@@ -222,7 +222,7 @@ class SI_Projects extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_submit_meta_box( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_submit_meta_box( $post_id, $post, $callback_args, $estimate_id = null ) {
 		
 
 	}
@@ -246,7 +246,7 @@ class SI_Projects extends SI_Controller {
 				'post' => $post,
 				'project' => $project,
 				'historical_records' => array_reverse( $project->get_history() ),
-			), FALSE );
+			), false );
 	}
 
 	/////////////////////
@@ -265,7 +265,7 @@ class SI_Projects extends SI_Controller {
 				'project_id' => $project_id,
 				'title' => $title,
 				'client_id' => $client_id,
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -286,7 +286,7 @@ class SI_Projects extends SI_Controller {
 	////////////
 
 
-	public static function form_fields( $project = 0, $required = FALSE ) {
+	public static function form_fields( $project = 0, $required = false ) {
 		$fields = array();
 
 		$associated_client = ( $project ) ? $project->get_associated_clients() : array( 0 ) ;
@@ -297,7 +297,7 @@ class SI_Projects extends SI_Controller {
 			'weight' => 1,
 			'label' => self::__( 'Project Name' ),
 			'type' => 'text',
-			'required' => TRUE, // always necessary
+			'required' => true, // always necessary
 			'default' => ( $project ) ? $project->get_title() : ''
 		);
 
@@ -311,7 +311,7 @@ class SI_Projects extends SI_Controller {
 			'label' => self::__( 'Client' ),
 			'type' => 'select',
 			'options' => $client_options,
-			'required' => TRUE,
+			'required' => true,
 			'default' => $client_id,
 			'attributes' => array( 'class' => 'select2' ),
 			'description' => $description

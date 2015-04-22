@@ -75,7 +75,7 @@ class SI_Dev_Logs extends SI_Controller {
 		if ( self::DEBUG ) {
 			error_log( '+++' . $subject . ' +++++++++++++++++++++' );
 			if ( !empty( $data ) ) {
-				error_log( print_r( $data, TRUE ) );
+				error_log( print_r( $data, true ) );
 				wpbt(); // wp_debug_backtrace_summary
 				error_log( '--------------------- ' . $subject . ' END ---------------------' );
 			}
@@ -99,19 +99,19 @@ class SI_Dev_Logs extends SI_Controller {
 	 * @param  array  $data    data
 	 * @return null          
 	 */
-	public static function error( $subject = '', $data = array(), $record_error = TRUE ) {
+	public static function error( $subject = '', $data = array(), $record_error = true ) {
 
 		if ( self::DEBUG ) {
 			error_log( '--- ' . $subject . ' ---------------------' );
 			if ( !empty( $data ) ) {
-				error_log( print_r( $data, TRUE ) );
+				error_log( print_r( $data, true ) );
 				// error_log( '--------------------- ' . $subject . ' END ---------------------' );
 			}
 		}
 
 		if ( $record_error ) {
 			if ( function_exists( 'wp_get_current_user' ) ) {
-				self::record_log( $subject, $data, TRUE );
+				self::record_log( $subject, $data, true );
 			}
 			else {
 				self::$recorded_errors[$subject] = $data;
@@ -136,7 +136,7 @@ class SI_Dev_Logs extends SI_Controller {
 		// records errors
 		if ( !empty( self::$recorded_errors ) ) {
 			foreach ( self::$recorded_errors as $subject => $data ) {
-				self::record_log( $subject, $data , TRUE );
+				self::record_log( $subject, $data , true );
 			}
 			// empty
 			self::$recorded_errors = array();
@@ -151,7 +151,7 @@ class SI_Dev_Logs extends SI_Controller {
 	 * @param  integer $associate_id NOT USED
 	 * @return null                
 	 */
-	public static function record_log( $subject = '', $data = array(), $error = FALSE, $associate_id = 0 ) {
+	public static function record_log( $subject = '', $data = array(), $error = false, $associate_id = 0 ) {
 		$type = ( $error ) ? self::ERROR_TYPE : self::LOG_TYPE ;
 		do_action( 'si_new_record',
 			$data,
@@ -185,7 +185,7 @@ class SI_Dev_Logs extends SI_Controller {
 		$records = new WP_Query( $args );
 		remove_filter( 'posts_where', array( __CLASS__, 'filter_where_with_when' ) ); // Remove filter
 		foreach ( $records->posts as $record_id ) {
-			wp_delete_post( $record_id, TRUE );
+			wp_delete_post( $record_id, true );
 		}
 	}
 

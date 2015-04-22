@@ -780,7 +780,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * @return 
 	 */
 	public static function sprout_invoices_activated() {
-		add_option( 'si_do_activation_redirect', TRUE );
+		add_option( 'si_do_activation_redirect', true );
 		// Get the previous version number
 		$si_version = get_option( 'si_current_version', self::SI_VERSION );
 		if ( version_compare( $si_version, self::SI_VERSION, '<' ) ) { // If an upgrade create some hooks
@@ -992,7 +992,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * @param bool    $allow_theme_override
 	 * @return void
 	 */
-	public static function load_view( $view, $args, $allow_theme_override = TRUE ) {
+	public static function load_view( $view, $args, $allow_theme_override = true ) {
 		// whether or not .php was added
 		if ( substr( $view, -4 ) != '.php' ) {
 			$view .= '.php';
@@ -1017,7 +1017,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * @param bool    $allow_theme_override
 	 * @return string
 	 */
-	protected static function load_view_to_string( $view, $args, $allow_theme_override = TRUE ) {
+	protected static function load_view_to_string( $view, $args, $allow_theme_override = true ) {
 		ob_start();
 		self::load_view( $view, $args, $allow_theme_override );
 		return ob_get_clean();
@@ -1039,7 +1039,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		foreach ( $possibilities as $p ) {
 			$theme_overrides[] = self::get_template_path().'/'.$p;
 		}
-		if ( $found = locate_template( $theme_overrides, FALSE ) ) {
+		if ( $found = locate_template( $theme_overrides, false ) ) {
 			return $found;
 		}
 
@@ -1073,11 +1073,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * Register query var hooks with WordPress.
 	 */
 	private static function add_register_query_var_hooks() {
-		static $registered = FALSE; // only do this once
+		static $registered = false; // only do this once
 		if ( !$registered ) {
 			add_filter( 'query_vars', array( __CLASS__, 'filter_query_vars' ) );
 			add_action( 'parse_request', array( __CLASS__, 'handle_callbacks' ), 10, 1 );
-			$registered = TRUE;
+			$registered = true;
 		}
 	}
 
@@ -1113,7 +1113,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		return !empty( $msgs );
 	}
 
-	public static function set_message( $message, $status = self::MESSAGE_STATUS_INFO, $save = TRUE ) {
+	public static function set_message( $message, $status = self::MESSAGE_STATUS_INFO, $save = true ) {
 		if ( !isset( self::$messages ) ) {
 			self::load_messages();
 		}
@@ -1141,7 +1141,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		update_user_meta( $user_id, $blog_id.'_'.self::MESSAGE_META_KEY, self::$messages );
 	}
 
-	public static function get_messages( $type = NULL ) {
+	public static function get_messages( $type = null ) {
 		if ( !isset( self::$messages ) ) {
 			self::load_messages();
 		}
@@ -1150,14 +1150,14 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function load_messages() {
 		$user_id = get_current_user_id();
-		$messages = FALSE;
+		$messages = false;
 		if ( !$user_id ) {
 			if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
 				$messages = get_transient( 'si_messaging_for_'.$_SERVER['REMOTE_ADDR'] );
 			}
 		} else {
 			global $blog_id;
-			$messages = get_user_meta( $user_id, $blog_id.'_'.self::MESSAGE_META_KEY, TRUE );
+			$messages = get_user_meta( $user_id, $blog_id.'_'.self::MESSAGE_META_KEY, true );
 		}
 		if ( $messages ) {
 			self::$messages = $messages;
@@ -1166,10 +1166,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 	}
 
-	public static function display_messages( $type = NULL ) {
+	public static function display_messages( $type = null ) {
 		$type = ( isset( $_REQUEST['si_message_type'] ) ) ? $_REQUEST['si_message_type'] : $type ;
 		$statuses = array();
-		if ( $type == NULL ) {
+		if ( $type == null ) {
 			if ( isset( self::$messages[self::MESSAGE_STATUS_INFO] ) ) {
 				$statuses[] = self::MESSAGE_STATUS_INFO;
 			}
@@ -1188,7 +1188,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 				self::load_view( 'templates/messages', array(
 						'status' => $status,
 						'message' => $message,
-					), TRUE );
+					), true );
 			}
 			self::$messages[$status] = array();
 		}
@@ -1199,7 +1199,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function login_required( $redirect = '' ) {
-		if ( !get_current_user_id() && apply_filters( 'si_login_required', TRUE ) ) {
+		if ( !get_current_user_id() && apply_filters( 'si_login_required', true ) ) {
 			if ( !$redirect && self::using_permalinks() ) {
 				$schema = is_ssl() ? 'https://' : 'http://';
 				$redirect = $schema.$_SERVER['SERVER_NAME'].htmlspecialchars( $_SERVER['REQUEST_URI'] );
@@ -1210,7 +1210,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			wp_redirect( wp_login_url( $redirect ) );
 			exit();
 		}
-		return TRUE; // explicit return value, for the benefit of the router plugin
+		return true; // explicit return value, for the benefit of the router plugin
 	}
 
 	/**
@@ -1282,7 +1282,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 */
 	public static function do_not_cache() {
 		if ( !defined('DONOTCACHEPAGE') ) {
-			define('DONOTCACHEPAGE', TRUE);
+			define('DONOTCACHEPAGE', true);
 		}
 		nocache_headers();
 	}
@@ -1397,9 +1397,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function get_clone_post_url( $post_id = 0, $new_post_type = '' ) {
 		$url = wp_nonce_url( get_edit_post_link( $post_id ), 'clone-si_post_'.$post_id, 'clone_si_post' );
 		if ( $new_post_type != '' ) {
-			$url = add_query_arg( array( 'post_type' => $new_post_type ), esc_url( $url ) );
+			$url = add_query_arg( array( 'post_type' => $new_post_type ), esc_url_raw( $url ) );
 		}
-		return apply_filters( 'si_get_clone_post_url', esc_url( $url ), $post_id, $new_post_type );
+		return apply_filters( 'si_get_clone_post_url', esc_url_raw( $url ), $post_id, $new_post_type );
 	}
 
 
@@ -1410,7 +1410,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * @param  boolean $shipping 
 	 * @return array            
 	 */
-	public static function get_standard_address_fields( $required = TRUE, $user_id = 0 ) {
+	public static function get_standard_address_fields( $required = true, $user_id = 0 ) {
 		$fields = array();
 		$fields['first_name'] = array(
 			'weight' => 50,
@@ -1486,7 +1486,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( !current_user_can( 'edit_posts' ) )
 			return;
 
-		$record_id = SI_Internal_Records::new_record( $_REQUEST['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $_REQUEST['associated_id'], '', 0, FALSE );
+		$record_id = SI_Internal_Records::new_record( $_REQUEST['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $_REQUEST['associated_id'], '', 0, false );
 		$error = ( $record_id ) ? '' : si__( 'Private note failed to save, try again.' ) ;
 		$data = array(
 			'id' => $record_id,
@@ -1498,7 +1498,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( $data );
+		echo wp_json_encode( $data );
 		exit();
 
 	}
@@ -1527,7 +1527,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 				$view = self::load_view_to_string( 'admin/sections/invoice-status-change-drop', array(
 						'id' => $doc_id,
 						'status' => $doc->get_status()
-					), FALSE );
+					), false );
 				break;
 			case SI_Estimate::POST_TYPE:
 				switch ( $new_status ) {
@@ -1546,7 +1546,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 				$view = self::load_view_to_string( 'admin/sections/estimate-status-change-drop', array(
 						'id' => $doc_id,
 						'status' => $doc->get_status()
-					), FALSE );
+					), false );
 				break;
 			
 			default:
@@ -1560,7 +1560,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( array( 'new_button' => $view ) );
+		echo wp_json_encode( array( 'new_button' => $view ) );
 		exit();
 
 	}
@@ -1570,17 +1570,17 @@ abstract class SI_Controller extends Sprout_Invoices {
 	// Utility //
 	//////////////
 
-	public static function ajax_fail( $message = '', $json = TRUE ) {
+	public static function ajax_fail( $message = '', $json = true ) {
 		if ( $message == '' ) {
 			$message = self::__('Something failed.');
 		}
 		if ( $json ) header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
 		if ( $json ) {
-			echo json_encode( array( 'error' => 1, 'response' => esc_html( $message ) ) );
+			echo wp_json_encode( array( 'error' => 1, 'response' => esc_html( $message ) ) );
 		}
 		else {
-			echo esc_html( $message );
+			echo $message;
 		}
 		exit();
 	}

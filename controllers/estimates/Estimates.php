@@ -282,7 +282,7 @@ class SI_Estimates extends SI_Controller {
 				'total' => $total,
 				'subtotal' => $subtotal,
 				'line_items' => $line_items,
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -293,7 +293,7 @@ class SI_Estimates extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_line_items( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_line_items( $post_id, $post, $callback_args, $estimate_id = null ) {
 
 		if ( !isset( $_POST['line_item_key'] ) )
 			return;
@@ -385,10 +385,10 @@ class SI_Estimates extends SI_Controller {
 				'tax' => $tax,
 				'tax2' => $tax2,
 				'currency' => $currency,
-			), FALSE );
+			), false );
 
 		// add the client modal
-		self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( FALSE ) ) );
+		self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( false ) ) );
 	}
 
 	/**
@@ -399,7 +399,7 @@ class SI_Estimates extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_meta_box_estimate_information( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_meta_box_estimate_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$estimate = SI_Estimate::get_instance( $post_id );
 
 		$status = ( isset( $_POST['status'] ) && $_POST['status'] != '' ) ? $_POST['status'] : '' ;
@@ -434,7 +434,7 @@ class SI_Estimates extends SI_Controller {
 			$estimate->get_id(), 
 			sprintf( si__('Data updated for %s.'), $estimate->get_id() ), 
 			0, 
-			FALSE );
+			false );
 	}
 
 	/**
@@ -456,7 +456,7 @@ class SI_Estimates extends SI_Controller {
 				'estimate' => $estimate,
 				'fields' => self::sender_submission_fields( $estimate ),
 				'sender_notes' => $estimate->get_sender_note()
-			), FALSE );
+			), false );
 	}
 
 	public static function sender_submission_fields( SI_Estimate $estimate ) {
@@ -530,7 +530,7 @@ class SI_Estimates extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_estimate_note( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_estimate_note( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$estimate = SI_Estimate::get_instance( $post_id );
 
 		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] != '' ) ? $_POST['sender_notes'] : '' ;
@@ -562,9 +562,9 @@ class SI_Estimates extends SI_Controller {
 				'id' => $post->ID,
 				'post' => $post,
 				'estimate' => $estimate,
-				'history' => si_doc_history_records( $post->ID, FALSE ),
+				'history' => si_doc_history_records( $post->ID, false ),
 				'submission_fields' => $estimate->get_submission_fields(),
-			), FALSE );
+			), false );
 	}
 
 
@@ -584,7 +584,7 @@ class SI_Estimates extends SI_Controller {
 				'estimate' => $estimate,
 				'terms' => $estimate->get_terms(),
 				'notes' => $estimate->get_notes(),
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -595,7 +595,7 @@ class SI_Estimates extends SI_Controller {
 	 * @param  int $estimate_id   
 	 * @return                 
 	 */
-	public static function save_notes( $post_id, $post, $callback_args, $estimate_id = NULL ) {
+	public static function save_notes( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$estimate = SI_Estimate::get_instance( $post_id );
 
 		$estimate_terms = ( isset( $_POST['estimate_terms'] ) && $_POST['estimate_terms'] != '' ) ? $_POST['estimate_terms'] : '' ;
@@ -704,7 +704,7 @@ class SI_Estimates extends SI_Controller {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( array( 'response' => si__('Notification Queued') ) );
+		echo wp_json_encode( array( 'response' => si__('Notification Queued') ) );
 		exit();
 	}
 
@@ -726,7 +726,7 @@ class SI_Estimates extends SI_Controller {
 			$estimate->get_id(), 
 			sprintf( si__('Status update for %s.'), $estimate->get_id() ), 
 			0, 
-			FALSE );
+			false );
 	}
 
 	/**
@@ -745,7 +745,7 @@ class SI_Estimates extends SI_Controller {
 					$cloned_post_id,
 					sprintf( si__('Invoice Created: %s.'), get_the_title( $new_post_id ) ),
 					0, 
-					FALSE );
+					false );
 			}
 		}
 	}
@@ -1017,9 +1017,9 @@ class SI_Estimates extends SI_Controller {
 		$screen = get_current_screen();
 		$screen_post_type = str_replace( 'edit-', '', $screen->id );
 		if ( $screen_post_type == SI_Estimate::POST_TYPE ) {
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -1062,7 +1062,7 @@ class SI_Estimates extends SI_Controller {
 		self::load_view( 'admin/sections/estimate-status-change-drop', array(
 				'id' => $id,
 				'status' => $estimate->get_status()
-			), FALSE );
+			), false );
 
 	}
 

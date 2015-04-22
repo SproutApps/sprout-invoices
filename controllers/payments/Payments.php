@@ -10,7 +10,7 @@ class SI_Payments extends SI_Controller {
 	const SETTINGS_PAGE = 'invoice_payments';
 	const PAYMENT_QV = 'pay_invoice';
 
-	public static function get_admin_page( $prefixed = TRUE ) {
+	public static function get_admin_page( $prefixed = true ) {
 		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
@@ -45,7 +45,7 @@ class SI_Payments extends SI_Controller {
 			'title' => self::__( 'Payments' ),
 			'menu_title' => self::__( 'Payments' ),
 			'weight' => 14,
-			'reset' => FALSE,
+			'reset' => false,
 			'callback' => array( __CLASS__, 'display_table' )
 			);
 		do_action( 'sprout_settings_page', $args );

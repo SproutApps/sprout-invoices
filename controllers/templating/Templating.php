@@ -106,7 +106,7 @@ class SI_Templating_API extends SI_Controller {
 	 * @return 
 	 */
 	public static function get_doc_current_template( $doc_id ) {
-		$template_id = get_post_meta( $doc_id, self::TEMPLATE_OPTION, TRUE );
+		$template_id = get_post_meta( $doc_id, self::TEMPLATE_OPTION, true );
 		if ( $template_id == '' ) {
 			switch ( get_post_type( $doc_id ) ) {
 				case SI_Invoice::POST_TYPE:
@@ -148,7 +148,7 @@ class SI_Templating_API extends SI_Controller {
 			<script type="text/javascript" src="<?php echo SI_RESOURCES ?>front-end/js/sprout-invoices.js"></script>
 			<script type="text/javascript">
 				/* <![CDATA[ */
-				var si_js_object = <?php echo json_encode( SI_Controller::get_localized_js() ); ?>;
+				var si_js_object = <?php echo wp_json_encode( SI_Controller::get_localized_js() ); ?>;
 				/* ]]> */
 			</script>
 		<?php
@@ -186,7 +186,7 @@ class SI_Templating_API extends SI_Controller {
 	 * @return 
 	 */
 	public static function get_client_invoice_template( $client_id ) {
-		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION, TRUE );
+		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION, true );
 		return $template_id;
 	}
 
@@ -196,7 +196,7 @@ class SI_Templating_API extends SI_Controller {
 	 * @return 
 	 */
 	public static function get_client_estimate_template( $client_id ) {
-		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION.'_est', TRUE );
+		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION.'_est', true );
 		return $template_id;
 	}
 
@@ -307,7 +307,7 @@ class SI_Templating_API extends SI_Controller {
 						<?php if ( count( $template_options ) > 1 ): ?>
 							<select name="doc_template">
 								<?php foreach ( $template_options as $template_key => $template_name ): ?>
-									<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, FALSE ), $template_name ) ?>
+									<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, false ), $template_name ) ?>
 								<?php endforeach ?>
 							</select>
 						<?php else: ?>
@@ -397,7 +397,7 @@ class SI_Templating_API extends SI_Controller {
 					<?php if ( count( $template_options ) > 1 ): ?>
 						<select name="doc_template_<?php echo esc_attr( $doc_type_name ); ?>">
 							<?php foreach ( $template_options as $template_key => $template_name ): ?>
-								<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, FALSE ), $template_name ) ?>
+								<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, false ), $template_name ) ?>
 							<?php endforeach ?>
 						</select>
 					<?php else: ?>
@@ -445,7 +445,7 @@ class SI_Templating_API extends SI_Controller {
 	 */
 	public static function get_doc_templates( $type = null ) {
 		
-		$doc_templates = FALSE;
+		$doc_templates = false;
 
 		if ( ! is_array( $doc_templates ) ) {
 			$doc_templates = array();

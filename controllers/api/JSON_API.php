@@ -28,7 +28,7 @@ class SI_JSON_API extends SI_Controller {
 	 * @return            
 	 */
 	public static function get_url( $endpoint = 'payments' ) {
-		return esc_url( add_query_arg( array( self::API_QUERY_VAR => $endpoint ), home_url() ) );
+		return esc_url_raw( add_query_arg( array( self::API_QUERY_VAR => $endpoint ), home_url() ) );
 	}
 
 	/**
@@ -74,7 +74,7 @@ class SI_JSON_API extends SI_Controller {
 			);
 
 		header( 'Content-type: application/json' );
-		echo json_encode( $data );
+		echo wp_json_encode( $data );
 		exit();
 	}
 
@@ -114,7 +114,7 @@ class SI_JSON_API extends SI_Controller {
 		$user = wp_signon( array(
 				'user_login' => $_REQUEST['user'],
 				'user_password' => $_REQUEST['pwd'],
-				'remember' => FALSE,
+				'remember' => false,
 			) );
 		if ( !$user || is_wp_error( $user ) ) {
 			status_header( 401 );
@@ -122,7 +122,7 @@ class SI_JSON_API extends SI_Controller {
 		}
 		$token = self::get_user_token( $user );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( $token );
+		echo wp_json_encode( $token );
 		exit();
 	}
 
@@ -131,17 +131,17 @@ class SI_JSON_API extends SI_Controller {
 	 * Check to see if the auth-nonce is being used before falling back
 	 * to the more advanced token based authentication.
 	 *
-	 * @param bool    $die If TRUE, execution will stop on failure
-	 * @return int|bool The authenticated user's ID, or FALSE on failure
+	 * @param bool    $die If true, execution will stop on failure
+	 * @return int|bool The authenticated user's ID, or false on failure
 	 */
-	protected static function authenticate_request( $die = TRUE ) {
+	protected static function authenticate_request( $die = true ) {
 		if ( isset( $_REQUEST[self::AUTH_NONCE] ) ) {
 			check_ajax_referer( $_REQUEST[self::AUTH_NONCE], self::AUTH_NONCE );
-			return TRUE;
+			return true;
 		}
 
 		$user = '';
-		$user_id = FALSE;
+		$user_id = false;
 		if ( !empty( $_REQUEST['user'] ) && !empty( $_REQUEST['signature'] ) && !empty( $_REQUEST['timestamp'] ) ) {
 			$user = self::get_user();
 			if ( ( time() - $_REQUEST['timestamp'] < self::TIMEOUT ) && $user ) {
@@ -183,7 +183,7 @@ class SI_JSON_API extends SI_Controller {
 			$user = new WP_User( $user );
 		}
 		if ( !$user->ID ) {
-			return FALSE;
+			return false;
 		}
 		$stored = get_user_option( 'si_api_token', $user->ID );
 		if ( $stored ) {

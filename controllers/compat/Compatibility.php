@@ -15,7 +15,7 @@ class SI_Compatibility extends SI_Controller {
 
 	public static function si_maybe_remove_gravity_forms_add_button( $is_post_edit_page ) {
 		if ( is_admin() ) {
-		    if ( strpos( get_post_type(), 'sa_' ) !== FALSE ) {
+		    if ( strpos( get_post_type(), 'sa_' ) !== false ) {
 		    	return false;
 		    }
 		}

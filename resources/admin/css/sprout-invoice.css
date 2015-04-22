@@ -963,7 +963,11 @@ span.status_change {
 }
 
 #line_items_footer #publishing-action input {
-	zoom: 1.3!important
+	zoom: 1.3 !important;
+}
+#line_items_footer #invoice_status_updates #publishing-action input {
+	float: left;
+	margin-left: 10px;
 }
 
 #line_items_header {

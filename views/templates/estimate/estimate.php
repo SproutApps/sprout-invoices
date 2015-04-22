@@ -148,10 +148,10 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 					<?php
 						$line_items = si_get_estimate_line_items();
-						$has_percentage_adj = FALSE;
+						$has_percentage_adj = false;
 						foreach ( $line_items as $position => $data ) {
 							if ( isset( $data['tax'] ) && $data['tax'] ) {
-								$has_percentage_adj = TRUE;
+								$has_percentage_adj = true;
 							}
 						} ?>
 

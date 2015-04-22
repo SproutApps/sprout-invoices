@@ -42,6 +42,6 @@ abstract class SI_Offsite_Processors extends SI_Payment_Processors {
 	 * @return bool
 	 */
 	public static function returned_from_offsite() {
-		return FALSE;
+		return false;
 	}
 }

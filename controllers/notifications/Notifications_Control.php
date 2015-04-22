@@ -77,9 +77,9 @@ class SI_Notifications_Control extends SI_Controller {
 			'title' => self::__( 'Notifications' ),
 			'menu_title' => self::__( 'Notifications' ),
 			'weight' => 20,
-			'reset' => FALSE,
+			'reset' => false,
 			'section' => 'settings',
-			'tab_only' => TRUE,
+			'tab_only' => true,
 			'callback' => array( __CLASS__, 'display_table' )
 			);
 		do_action( 'sprout_settings_page', $args );
@@ -123,7 +123,7 @@ class SI_Notifications_Control extends SI_Controller {
 		do_action( 'sprout_settings', $settings );
 	}
 
-	public static function get_admin_page( $prefixed = TRUE ) {
+	public static function get_admin_page( $prefixed = true ) {
 		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
@@ -263,7 +263,7 @@ class SI_Notifications_Control extends SI_Controller {
 				'notifications_option' => get_option( self::NOTIFICATIONS_OPTION_NAME, array() ),
 				'post' => $post,
 				'disabled' => $notification->get_disabled()
-			), FALSE );
+			), false );
 	}
 
 	/**
@@ -272,8 +272,8 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @param  string $notification_id 
 	 * @return                      
 	 */
-	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_type = NULL ) {
-		if ( $notification_type === NULL && isset( $_POST['notification_type'] ) ) {
+	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_type = null ) {
+		if ( $notification_type === null && isset( $_POST['notification_type'] ) ) {
 			$notification_type = $_POST['notification_type'];
 		}
 
@@ -318,7 +318,7 @@ class SI_Notifications_Control extends SI_Controller {
 	/**
 	 * Get notification instance.
 	 * @param  string $notification the slug for the notification
-	 * @return SI_Notification/FALSE            
+	 * @return SI_Notification/false            
 	 */
 	public static function get_notification_instance( $notification ) {
 		if ( isset( self::$notifications[$notification] ) ) {
@@ -336,7 +336,7 @@ class SI_Notifications_Control extends SI_Controller {
 				}
 			}
 		}
-		return NULL; // return null and not a boolean for the sake of validity checks elsewhere
+		return null; // return null and not a boolean for the sake of validity checks elsewhere
 	}
 
 	/**
@@ -349,7 +349,7 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( is_a( $notification, 'SI_Notification' ) ) {
 			return $notification->is_disabled();
 		}
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -406,12 +406,12 @@ class SI_Notifications_Control extends SI_Controller {
 	 */
 	public static function send_notification( $notification_name, $data = array(), $to, $from_email = null, $from_name = null, $html = null ) {
 		// don't send disabled notifications
-		if ( apply_filters( 'suppress_notifications', FALSE ) || self::is_disabled( $notification_name ) ) {
+		if ( apply_filters( 'suppress_notifications', false ) || self::is_disabled( $notification_name ) ) {
 			return;
 		}
 		// So shortcode handlers know whether the email is being sent as html or plaintext
 		if ( null == $html ) {
-			$html = ( self::$notification_format == 'HTML' ) ? TRUE : FALSE ;
+			$html = ( self::$notification_format == 'HTML' ) ? true : false ;
 		}
 		$data['html'] = $html;
 
@@ -424,13 +424,13 @@ class SI_Notifications_Control extends SI_Controller {
 		}
 
 		// don't send a notification that has already been sent
-		if ( apply_filters( 'si_was_notification_sent_check', TRUE ) && self::was_notification_sent( $notification_name, $data, $to, $notification_content ) ) {
+		if ( apply_filters( 'si_was_notification_sent_check', true ) && self::was_notification_sent( $notification_name, $data, $to, $notification_content ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Already Sent', $data );
 			return;
 		}
 
 		// Plugin addons can suppress specific notifications by filtering 'si_suppress_notification'
-		$suppress_notification = apply_filters( 'si_suppress_notification', FALSE, $notification_name, $data, $from_email, $from_name, $html );
+		$suppress_notification = apply_filters( 'si_suppress_notification', false, $notification_name, $data, $from_email, $from_name, $html );
 		if ( $suppress_notification ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Suppressed', $data );
 			return;
@@ -461,7 +461,7 @@ class SI_Notifications_Control extends SI_Controller {
 		}
 		else {
 			do_action( 'si_error', 'FAILED NOTIFICATION - Attempted e-mail: ' . $to, $data );
-			return FALSE;
+			return false;
 		}
 
 		// Mark the notification as sent.
@@ -494,7 +494,7 @@ class SI_Notifications_Control extends SI_Controller {
 				$associated_record, // post id
 				sprintf( si__('Notification sent to %s.'), esc_html($to) ), // title
 				0, // user id
-				FALSE // don't encode
+				false // don't encode
 				);
 	}
 
@@ -529,17 +529,17 @@ class SI_Notifications_Control extends SI_Controller {
 		global $blog_id;
 		$user_id = self::get_notification_instance_user_id( $to, $data );
 		if ( !$user_id ) {
-			return FALSE;
+			return false;
 		}
 		if ( $notification_content != '' ) {
 			$data['content'] = $notification_content;
 		}
-		$meta = get_user_meta( $user_id, $blog_id.'_si_notification-'.$notification_name, FALSE );
+		$meta = get_user_meta( $user_id, $blog_id.'_si_notification-'.$notification_name, false );
 		if ( in_array( self::get_hash( $data ), $meta ) ) {
-			return TRUE;
+			return true;
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -604,7 +604,7 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( !is_a( $user, 'WP_User' ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Get User Email FAILED', $user );
 			wpbt();
-			return FALSE;
+			return false;
 		}
 		$user_email = $user->user_email;
 		$name = $user->first_name . ' ' . $user->last_name;
@@ -810,7 +810,7 @@ class SI_Notifications_Control extends SI_Controller {
 			$posts = get_posts( $args );
 
 			foreach ( $posts as $post_id ) {
-				wp_delete_post( $post_id, TRUE );
+				wp_delete_post( $post_id, true );
 			}
 		}
 	}

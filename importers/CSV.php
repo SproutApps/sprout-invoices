@@ -45,7 +45,7 @@ class SI_CSV_Import extends SI_Importer {
 			'si_csv_importer_settings' => array(
 				'title' => 'CSV Import Settings',
 				'weight' => 0,
-				'tab' => self::get_settings_page( FALSE ),
+				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::CLIENT_FILE_OPTION => array(
 						'label' => self::__( 'Clients' ),
@@ -156,8 +156,8 @@ class SI_CSV_Import extends SI_Importer {
 	public static function return_error( $message ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( 
-				array( 'error' => TRUE, 'message' => $message )
+		echo wp_json_encode( 
+				array( 'error' => true, 'message' => $message )
 					);
 		exit();
 	}
@@ -170,7 +170,7 @@ class SI_CSV_Import extends SI_Importer {
 	public static function return_progress( $array = array() ) {
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo json_encode( $array );
+		echo wp_json_encode( $array );
 		exit();
 	}
 
@@ -685,7 +685,7 @@ class SI_CSV_Import extends SI_Importer {
 			global $wpdb;
 			$client_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s", esc_sql( $invoice['Company'] ), SI_Client::POST_TYPE ) );
 			// Get client and confirm it's validity
-			error_log( 'clients: ' . print_r( $client_ids, TRUE ) );
+			error_log( 'clients: ' . print_r( $client_ids, true ) );
 			if ( is_array( $client_ids ) && !empty( $client_ids ) ) {
 				$client = SI_Client::get_instance( $client_ids[0] );
 				$inv->set_client_id( $client->get_id() );
@@ -728,7 +728,7 @@ class SI_CSV_Import extends SI_Importer {
 		
 		$line_items = self::build_line_items( $invoice );
 		$inv->set_line_items( $line_items );
-		error_log( 'invoice +++++++++++++++++++ ' . print_r( $inv->get_title(), TRUE ) );
+		error_log( 'invoice +++++++++++++++++++ ' . print_r( $inv->get_title(), true ) );
 
 		// post date
 		$inv->set_post_date( date( 'Y-m-d H:i:s', strtotime( $invoice['Invoice Date'] ) ) );
@@ -787,7 +787,7 @@ class SI_CSV_Import extends SI_Importer {
 				'tax' => ( isset( $line_items_percentage[$key] ) ) ? $line_items_percentage[$key] : '',
 				);
 		}
-		error_log( 'line items: ' . print_r( $line_items, TRUE ) );
+		error_log( 'line items: ' . print_r( $line_items, true ) );
 		return $line_items;
 	}
 
@@ -811,16 +811,16 @@ class SI_CSV_Import extends SI_Importer {
 
 	protected static function csv_to_array( $filename = '', $delimiter = ',', $fieldnames = '' ) {
 		if( !file_exists( $filename ) || !is_readable( $filename ) ){
-			return FALSE;
+			return false;
 		}
 		if( strlen( $fieldnames ) > 0 ) {
 			$header = explode( ",", $fieldnames );
 		} else {
-			$header = NULL;
+			$header = null;
 		}
 		$data = array();
-		if ( ( $handle = fopen( $filename, 'r' ) ) !== FALSE ) {
-			while ( ( $row = fgetcsv( $handle, 1000, $delimiter ) ) !== FALSE ) {
+		if ( ( $handle = fopen( $filename, 'r' ) ) !== false ) {
+			while ( ( $row = fgetcsv( $handle, 1000, $delimiter ) ) !== false ) {
 				if(!$header)
 					$header = $row;
 				else

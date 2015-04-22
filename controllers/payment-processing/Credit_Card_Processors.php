@@ -93,7 +93,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
-				'required' => TRUE
+				'required' => true
 			),
 			'cc_number' => array(
 				'type' => 'text',
@@ -102,7 +102,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => TRUE
+				'required' => true
 			),
 			'cc_expiration_month' => array(
 				'type' => 'select',
@@ -112,7 +112,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => TRUE
+				'required' => true
 			),
 			'cc_expiration_year' => array(
 				'type' => 'select',
@@ -122,7 +122,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => TRUE
+				'required' => true
 			),
 			'cc_cvv' => array(
 				'type' => 'text',
@@ -132,7 +132,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => TRUE
+				'required' => true
 			)
 		);
 		$fields = apply_filters( 'sa_credit_card_fields', $fields, $checkout );
@@ -158,7 +158,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			$number = preg_replace( '/\D+/', '', $number );
 		}
 		if ( !ctype_digit( $number ) ) {
-			return FALSE; // not a number
+			return false; // not a number
 		}
 
 		$total = 0;
@@ -174,10 +174,10 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		}
 
 		if ( $total % 10 != 0 ) {
-			return FALSE; // invalid checksum
+			return false; // invalid checksum
 		}
 
-		return TRUE; // seems valid
+		return true; // seems valid
 	}
 
 	/**
@@ -189,9 +189,9 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 */
 	public static function is_valid_cvv( $cvv ) {
 		if ( !is_numeric( $cvv ) || strlen( $cvv ) > 4 || strlen( $cvv ) < 3 ) {
-			return FALSE;
+			return false;
 		}
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -208,14 +208,14 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 */
 	public static function is_expired( $year, $month ) {
 		if ( $year < date( 'Y' ) ) {
-			return TRUE;
+			return true;
 		}
 		elseif ( $year == date( 'Y' ) ) {
 			if ( $month < date( 'n' ) ) {
-				return TRUE;
+				return true;
 			}
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -250,7 +250,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @param  SI_Checkouts $checkout 
 	 * @return array           
 	 */
-	protected function payment_fields( $checkout = NULL ) {
+	protected function payment_fields( $checkout = null ) {
 		$fields = self::default_credit_fields( $checkout );
 		foreach ( array_keys( $fields ) as $key ) {
 			if ( isset( $this->cc_cache[$key] ) ) {
@@ -272,7 +272,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'billing_fields' => $this->payment_billing_fields( $checkout ),
 				'cc_fields' => $this->payment_fields( $checkout ),
 				'checkout' => $checkout
-			), TRUE );
+			), true );
 	}
 
 	public function review_pane( SI_Checkouts $checkout ) {
@@ -346,14 +346,14 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'billing_fields' => $bill_fields,
 				'cc_fields' => $cc_fields,
 				'checkout' => $checkout
-			), TRUE );
+			), true );
 	}
 
 	public function confirmation_pane( SI_Checkouts $checkout ) {
 		self::load_view( 'templates/checkout/credit-card/confirmation', array(
 				'checkout' => $checkout,
 				'payment_id' => $checkout->get_payment_id()
-			), TRUE );
+			), true );
 	}
 
 	/**
@@ -362,13 +362,13 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @return bool
 	 */
 	public function validate_billing( SI_Checkouts $checkout ) {
-		$valid = TRUE;
-		if ( apply_filters( 'si_valid_process_payment_page_fields', TRUE ) ) {
+		$valid = true;
+		if ( apply_filters( 'si_valid_process_payment_page_fields', true ) ) {
 			$fields = $this->payment_billing_fields( $checkout );
 			foreach ( $fields as $key => $data ) {
 				$checkout->cache['billing'][$key] = isset( $_POST['sa_billing_'.$key] )?$_POST['sa_billing_'.$key]:'';
 				if ( isset( $data['required'] ) && $data['required'] && !( isset( $checkout->cache['billing'][$key] ) && $checkout->cache['billing'][$key] != '' ) ) {
-					$valid = FALSE;
+					$valid = false;
 					self::set_message( sprintf( self::__( '"%s" field is required.' ), $data['label'] ), self::MESSAGE_STATUS_ERROR );
 				}
 			}
@@ -387,33 +387,33 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @return bool                 
 	 */
 	protected function validate_credit_card( $cc_data, SI_Checkouts $checkout ) {
-		$valid = TRUE;
-		if ( apply_filters( 'si_valid_process_payment_page_fields', TRUE ) ) {
+		$valid = true;
+		if ( apply_filters( 'si_valid_process_payment_page_fields', true ) ) {
 			$cc_fields = $this->payment_fields( $checkout );
 			foreach ( $cc_fields as $key => $data ) {
 				if ( $data['required'] && !( isset( $cc_data[$key] ) && strlen( $cc_data[$key] ) > 0 ) ) {
 					self::set_message( sprintf( self::__( '"%s" field is required.' ), $cc_fields[$key]['label'] ), self::MESSAGE_STATUS_ERROR );
-					$valid = FALSE;
+					$valid = false;
 				}
 			}
 			if ( isset( $cc_data['cc_number'] ) ) {
 				if ( !self::is_valid_credit_card( $cc_data['cc_number'] ) ) {
 					self::set_message( self::__( 'Invalid credit card number' ), self::MESSAGE_STATUS_ERROR );
-					$valid = FALSE;
+					$valid = false;
 				}
 			}
 
 			if ( isset( $cc_data['cc_cvv'] ) ) {
 				if ( !self::is_valid_cvv( $cc_data['cc_cvv'] ) ) {
 					self::set_message( self::__( 'Invalid credit card security code' ), self::MESSAGE_STATUS_ERROR );
-					$valid = FALSE;
+					$valid = false;
 				}
 			}
 
 			if ( !empty($fields['cc_expiration_year']['required']) && isset( $cc_data['cc_expiration_year'] ) ) {
 				if ( self::is_expired( $cc_data['cc_expiration_year'], $cc_data['cc_expiration_month'] ) ) {
 					self::set_message( self::__( 'Credit card is expired.' ), self::MESSAGE_STATUS_ERROR );
-					$valid = FALSE;
+					$valid = false;
 				}
 			}
 		}
