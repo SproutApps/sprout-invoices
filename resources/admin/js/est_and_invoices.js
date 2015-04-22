@@ -2,7 +2,6 @@
 
 	si.docEdit = {
 		config: {
-			inline_spinner: '<span class="spinner si_inline_spinner" style="display:inline-block;"></span>'	
 		},
 	};
 
@@ -183,7 +182,7 @@
 			$private_note = $( '[name="private_note"]' ),
 			$add_button_og_text = $add_button.text();
 		$add_button.html( '' );
-		$add_button.append('<span class="spinner" style="display:block;"></span>');
+		$add_button.append(si_js_object.inline_spinner);
 		$.post( ajaxurl, { action: 'sa_create_private_note', associated_id: $post_id, notes: $private_note.val(), private_note_nonce: $nonce },
 			function( data ) {
 				if ( data.id ) {
@@ -223,7 +222,7 @@
 			return;
 		};
 
-		$status_button.html('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$status_button.html(si_js_object.inline_spinner);
 		$publish_button.val( si_js_object.updating_string );
 
 		$.post( ajaxurl, { action: 'si_change_doc_status', id: $id, status: $new_status, change_status_nonce: $nonce },
@@ -269,7 +268,7 @@
 			$meta_box = $('#si_doc_send'),
 			$fields = $('#send_doc_options_wrap :input').serializeArray();
 
-		$send_button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$send_button.after(si_js_object.inline_spinner);
 		$('span.inline_error_message').hide();
 		$.post( ajaxurl, { action: 'sa_send_est_notification', serialized_fields: $fields },
 			function( data ) {
@@ -365,7 +364,7 @@
 			$fields = $( "#client_create_form :input" ).serializeArray(),
 			$save_button_og_text = $save_button.text();
 
-		$save_button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$save_button.after(si_js_object.inline_spinner);
 		$.post( ajaxurl, { action: 'sa_create_client', serialized_fields: $fields },
 			function( data ) {
 				$('.spinner').hide();
@@ -439,7 +438,7 @@
 			$client_id = $( "#sa_user_client_id" ).val(),
 			$save_button_og_text = $save_button.text();
 
-		$save_button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$save_button.after(si_js_object.inline_spinner);
 		$.post( ajaxurl, { action: 'sa_create_user', serialized_fields: $fields },
 			function( data ) {
 				$('.spinner').hide();
@@ -483,7 +482,7 @@
 			$meta_box = $('#si_invoice_payment'),
 			$fields = $('#admin_payments_options_wrap :input').serializeArray();
 
-		$send_button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$send_button.after(si_js_object.inline_spinner);
 		$('span.inline_error_message').hide();
 		$.post( ajaxurl, { action: 'sa_admin_payment', serialized_fields: $fields },
 			function( data ) {

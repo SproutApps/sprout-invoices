@@ -158,7 +158,6 @@ class SI_Admin_Payment extends SI_Controller {
 		if ( !$amount ) {
 			return false;
 		}
-		error_log( 'ajax: ' . print_r( true, true ) );
 
 		self::create_admin_payment( $invoice->get_id(), $amount, $number, $date, $notes );
 	}

@@ -90,6 +90,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**6.1.3**
+
+* UPDATE: 4.2 Compatibility
+* FIX: Some escaping issues from 6.1.1
+
 **6.1.2**
 
 * FIX: Some escaping issues from 6.1.1

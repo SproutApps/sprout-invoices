@@ -861,7 +861,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'updating_string' => self::__( 'Updating...' ),
 			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
 			'security' => wp_create_nonce( self::NONCE ),
-			'locale' => get_locale()
+			'locale' => get_locale(),
+			'inline_spinner' => '<span class="spinner si_inline_spinner" style="visibility:visible;display:inline-block;"></span>',
 		);
 		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Invoice::POST_TYPE ) ) {
 			$si_js_object += array(
@@ -889,7 +890,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'done_string' => self::__( 'Finished!' ),
 			'security' => wp_create_nonce( self::NONCE ),
 			'premium' => ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) ? true : false,
-			'redactor' => false
+			'redactor' => false,
+			'inline_spinner' => '<span class="spinner si_inline_spinner" style="visibility:visible;display:inline-block;"></span>',
 		);
 
 		// doc admin templates

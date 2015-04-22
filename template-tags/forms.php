@@ -154,7 +154,7 @@ function sa_get_form_field( $key, $data, $category ) {
 		<input type="<?php echo esc_attr( $data['type'] ) ?>" name="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" id="sa_<?php echo esc_attr($category) ?>_<?php echo esc_attr($key) ?>" class="text-input" value="<?php echo esc_attr( $data['default'] ) ?>" placeholder="<?php echo isset( $data['placeholder'] )?$data['placeholder']:$data['label']; ?>" size="<?php echo isset( $data['size'] )?$data['size']:40; ?>" <?php foreach ( $data['attributes'] as $attr => $attr_value ) { echo esc_attr($attr).'="'.esc_attr($attr_value).'" '; } ?> <?php if ( isset( $data['required'] ) && $data['required'] ) echo 'required'; ?>/>
 	<?php endif; ?>
 	<?php if ( !empty( $data['description'] ) && $data['type'] != 'checkbox' ): ?>
-		<p class="description help_block"><?php echo esc_html( $data['description'] ) ?></p>
+		<p class="description help_block"><?php echo $data['description'] ?></p>
 	<?php endif; ?>
 	</span>
 	<?php

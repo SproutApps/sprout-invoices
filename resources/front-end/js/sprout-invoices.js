@@ -33,7 +33,7 @@ jQuery(function($) {
 			$id = $status_change_link.data( 'id' ),
 			$nonce = $status_change_link.data( 'nonce' );
 
-		$action_links.html('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$action_links.html(si_js_object.inline_spinner);
 
 		$.post( si_js_object.ajax_url, { action: 'si_change_doc_status', id: $id, status: $new_status, change_status_nonce: $nonce },
 			function( data ) {

@@ -51,7 +51,7 @@ jQuery(function($) {
 			$nonce = $status_change_link.data( 'nonce' ),
 			$status_span = $( '#status_' + $id );
 
-		$status_button.html('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$status_button.html(si_js_object.inline_spinner);
 		
 		$.post( ajaxurl, { action: 'si_change_doc_status', id: $id, status: $new_status, change_status_nonce: $nonce },
 			function( data ) {
@@ -80,7 +80,7 @@ jQuery(function($) {
 			$license_message = $('#license_message');
 
 		$button.hide();
-		$button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$button.after(si_js_object.inline_spinner);
 		$.post( ajaxurl, { action: 'si_get_license', license: $license_key, security: si_js_object.security },
 			function( data ) {
 				$('.spinner').hide();
@@ -107,7 +107,7 @@ jQuery(function($) {
 			$license_message = $('#license_message');
 
 		$button.hide();
-		$button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$button.after(si_js_object.inline_spinner);
 		$.post( ajaxurl, { action: 'si_activate_license', license: $license_key, security: si_js_object.security },
 			function( data ) {
 				$('.spinner').hide();
@@ -134,7 +134,7 @@ jQuery(function($) {
 			$license_message = $('#license_message');
 
 		$button.hide();
-		$button.after('<span class="spinner si_inline_spinner" style="display:inline-block;"></span>');
+		$button.after(si_js_object.inline_spinner);
 		$.post( ajaxurl, { action: 'si_deactivate_license', license: $license_key, security: si_js_object.security },
 			function( data ) {
 				$('.spinner').hide();

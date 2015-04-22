@@ -70,8 +70,8 @@
 							<td><span class="si_status estimate_status <?php si_estimate_status() ?>"><?php si_estimate_status() ?></span></td>
 							<td><?php si_estimate_issue_date() ?></td>
 							<td><?php printf( '<a href="%s">%s</a>', get_edit_post_link( get_the_ID() ), get_the_title( get_the_ID() ) ) ?></td>
-							<td><?php echo esc_html( $invoice_name ); ?></td>
-							<td><?php echo esc_html( $client_name ); ?></td>
+							<td><?php echo $invoice_name; ?></td>
+							<td><?php echo $client_name; ?></td>
 							<td><?php si_estimate_total() ?></td>
 							<td><?php si_estimate_subtotal() ?></td>
 						</tr> 
