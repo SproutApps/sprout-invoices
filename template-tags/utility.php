@@ -399,7 +399,7 @@ function si_get_purchase_link( $url = '', $campaign = 'free' ) {
 		$url = 'https://sproutapps.co/sprout-invoices/purchase/';
 	}
 	$url = add_query_arg( array( 'utm_medium' => 'link', 'utm_campaign' => $campaign, 'utm_source' => urlencode( home_url() ) ), $url );
-	return apply_filters( 'si_get_purchase_link', esc_url( $url ) );
+	return apply_filters( 'si_get_purchase_link', esc_url_raw( $url ) );
 }
 
 /**
@@ -411,7 +411,7 @@ function si_get_sa_link( $url = '', $campaign = 'free' ) {
 		$url = 'https://sproutapps.co/';
 	}
 	$url = add_query_arg( array( 'utm_medium' => 'link', 'utm_campaign' => $campaign, 'utm_source' => urlencode( home_url() ) ), $url );
-	return apply_filters( 'si_get_sa_link', esc_url( $url ) );
+	return apply_filters( 'si_get_sa_link', esc_url_raw( $url ) );
 }
 
 

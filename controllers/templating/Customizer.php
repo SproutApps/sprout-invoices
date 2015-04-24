@@ -27,7 +27,7 @@ class SI_Customizer extends SI_Controller {
 			$items[] = array(
 				'id' => 'customizer',
 				'title' => self::__( 'Customize' ),
-				'href' => esc_url( add_query_arg( array( 'url' => urlencode( get_permalink() ) ), admin_url( 'customize.php' ) ) ),
+				'href' => esc_url_raw( add_query_arg( array( 'url' => urlencode( get_permalink() ) ), admin_url( 'customize.php' ) ) ),
 				'weight' => 1000,
 			);
 		}

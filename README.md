@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**6.1.5**
+
+* FIX: Some escaping fixes from 6.1.1 for some sites using PayPal
+
+**6.1.4**
+
+* FIX: API callback fix for activation/deactivation and updates.
+
 **6.1.3**
 
 * UPDATE: 4.2 Compatibility

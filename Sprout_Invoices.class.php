@@ -26,7 +26,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '6.1.3';
+	const SI_VERSION = '6.1.5';
 	/**
 	 * DB Version
 	 */

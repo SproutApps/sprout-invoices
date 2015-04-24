@@ -269,7 +269,7 @@ class SA_Addons extends SI_Controller {
 		$api_params = array(
 			'action' => 'sa_marketplace_api',
 			'item_name' => urlencode( self::PLUGIN_NAME ),
-			'url' => home_url(),
+			'url' => urlencode( home_url() ),
 			'uid' => $uid,
 			'ref' => $ref,
 		);

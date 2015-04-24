@@ -563,9 +563,9 @@ class SI_Invoices extends SI_Controller {
 	public static function save_invoice_note( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
 
-		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] != '' ) ? $_POST['sender_notes'] : '' ;
-		if ( $sender_notes == '' ) { // check to make sure the sender note option wasn't updated for the send.
-			$sender_notes = ( isset( $_POST['sa_send_metabox_sender_note'] ) && $_POST['sa_send_metabox_sender_note'] != '' ) ? $_POST['sa_send_metabox_sender_note'] : '' ;
+		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] !== '' ) ? $_POST['sender_notes'] : '' ;
+		if ( $sender_notes === '' ) { // check to make sure the sender note option wasn't updated for the send.
+			$sender_notes = ( isset( $_POST['sa_send_metabox_sender_note'] ) && $_POST['sa_send_metabox_sender_note'] !== '' ) ? $_POST['sa_send_metabox_sender_note'] : '' ;
 		}
 		$invoice->set_sender_note( $sender_notes );
 
@@ -991,8 +991,10 @@ class SI_Invoices extends SI_Controller {
 		if ( $doc->get_status() != SI_Estimate::STATUS_APPROVED ) {
 			return;
 		}
-		$cloned_post_id = self::clone_post( $doc->get_id(), SI_Invoice::STATUS_TEMP, SI_Invoice::POST_TYPE );
-		return $cloned_post_id;
+		$invoice_post_id = self::clone_post( $doc->get_id(), SI_Invoice::STATUS_TEMP, SI_Invoice::POST_TYPE );
+		$invoice = SI_Invoice::get_instance( $invoice_post_id );
+		$invoice->set_sender_note();
+		return $invoice_post_id;
 	}
 
 	/**

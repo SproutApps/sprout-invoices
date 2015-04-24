@@ -116,7 +116,7 @@ class SI_Free_License extends SI_Controller {
 		$api_params = array( 
 			'action' => 'sgmnt_free_license',
 			'item_name' => urlencode( self::PLUGIN_NAME ),
-			'url' => home_url(),
+			'url' => urlencode( home_url() ),
 			'uid' => $license,
 			'first_name'=> $first_name,
 			'last_name' => $last_name,

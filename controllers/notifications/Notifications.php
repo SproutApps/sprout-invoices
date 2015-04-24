@@ -537,7 +537,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $data['invoice'] && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$sender_note = $data['invoice']->get_sender_note();
 		}
-		if ( $sender_note == '' ) {
+		else {
 			if ( $data['estimate'] && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$sender_note = $data['estimate']->get_sender_note();
 			}
