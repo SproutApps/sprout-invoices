@@ -524,6 +524,10 @@ form table .sa_addon {
 	left: 0;
 }
 
+#si_dashboard .three-col>div.last-feature {
+    margin-right: 0px;
+}
+
 /**
  * Docs
  */
@@ -1845,6 +1849,10 @@ dd .add_item_help {
 }
 .sticky-wrapper.stuck #publishing-action {
 	margin-right: 30px;
+}
+
+#line_items_footer .sticky-wrapper.stuck #invoice_status_updates #publishing-action input {
+	float: none;
 }
 
 #time_importing {

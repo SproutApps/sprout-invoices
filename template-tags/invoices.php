@@ -817,7 +817,7 @@ function si_payment_options( $return = 'options' ) {
 		}
 		$enabled_processors = $processor_options; // overload with slugs
 	}
-	return $enabled_processors;
+	return apply_filters( 'si_payment_options', $enabled_processors );
 	
 }
 endif;
