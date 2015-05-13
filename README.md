@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**6.2**
+
+* FIX: Estimate creation via API fix
+* FIX: Pointer Dismissals
+* FIX: Dashboard caching issue
+* FIX: ACF Pro Compatibility
+* FIX: Minor importer updates for sanitization
+
 **6.1.6**
 
 * FIX: Importers failing under certain circumstances.

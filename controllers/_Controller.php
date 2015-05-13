@@ -1572,6 +1572,40 @@ abstract class SI_Controller extends Sprout_Invoices {
 	// Utility //
 	//////////////
 
+	public static function is_si_admin() {
+		if ( ! is_admin() ) {
+			false;
+		}
+		// Options
+		if ( isset( $_GET['page'] ) && strpos( $_GET['page'] , self::TEXT_DOMAIN ) !== false ) {
+			return true;
+		}
+
+		$post_type = false;
+
+		global $current_screen;
+		if ( isset( $current_screen->post_type ) ) {
+			$post_type = $current_screen->post_type;
+		}
+		else {
+			// Trying hard to figure out the post type if not yet set.
+			$post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : false;
+			if ( $post_id ) {
+				$post_type = get_post_type( $post_id );
+			} else {
+				$post_type = ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) ? $_REQUEST['post_type'] : false ;
+			}
+		}
+
+		if ( $post_type ) {
+			if ( in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public static function ajax_fail( $message = '', $json = true ) {
 		if ( $message == '' ) {
 			$message = self::__('Something failed.');

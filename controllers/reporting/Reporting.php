@@ -329,7 +329,7 @@ class SI_Reporting extends SI_Controller {
 
 	public static function total_invoice_data_by_date_segment( $segment = 'weeks', $span = 6 ) {
 		// Return cache if present.
-		$cache = self::get_cache(__FUNCTION__);
+		$cache = self::get_cache( __FUNCTION__ . $segment . $span );
 		if ( $cache ) {
 			return $cache;
 		}
@@ -400,12 +400,12 @@ class SI_Reporting extends SI_Controller {
 			}
 			
 		}
-		return self::set_cache( __FUNCTION__, $data );
+		return self::set_cache( __FUNCTION__ . $segment . $span, $data );
 	}
 
 	public static function total_invoice_data( $this = 'century' ) {
 		// Return cache if present.
-		$cache = self::get_cache(__FUNCTION__.$this);
+		$cache = self::get_cache( __FUNCTION__ . $this );
 		if ( $cache ) {
 			return $cache;
 		}
@@ -525,12 +525,12 @@ class SI_Reporting extends SI_Controller {
 			unset( $invoice );
 			
 		}
-		return self::set_cache( __FUNCTION__.$this, $data, $expire );
+		return self::set_cache( __FUNCTION__ . $this, $data, $expire );
 	}
 
 	public static function total_estimate_data_by_date_segment( $segment = 'weeks', $span = 6 ) {
 		// Return cache if present.
-		$cache = self::get_cache(__FUNCTION__);
+		$cache = self::get_cache( __FUNCTION__ . $segment . $span );
 		if ( $cache ) {
 			return $cache;
 		}
@@ -597,7 +597,7 @@ class SI_Reporting extends SI_Controller {
 					break;
 			}
 		}
-		return self::set_cache( __FUNCTION__, $data );
+		return self::set_cache( __FUNCTION__ . $segment . $span, $data );
 	}
 
 	public static function total_payment_data( $this = 'century' ) {
@@ -723,7 +723,7 @@ class SI_Reporting extends SI_Controller {
 
 	public static function total_payment_data_by_date_segment( $segment = 'weeks', $span = 6 ) {
 		// Return cache if present.
-		$cache = self::get_cache(__FUNCTION__);
+		$cache = self::get_cache( __FUNCTION__ . $segment . $span );
 		if ( $cache ) {
 			return $cache;
 		}
@@ -784,7 +784,7 @@ class SI_Reporting extends SI_Controller {
 					break;
 			}
 		}
-		return self::set_cache( __FUNCTION__, $data );
+		return self::set_cache( __FUNCTION__ . $segment . $span, $data );
 	}
 
 	//////////////

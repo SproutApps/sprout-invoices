@@ -220,7 +220,7 @@ class SI_Estimate extends SI_Post_Type {
 		$expiration_date = ( is_numeric( $args['expiration_date'] ) ) ? $args['expiration_date'] : strtotime( $args['expiration_date'] ) ;
 		$estimate->set_expiration_date( $expiration_date );
 
-		$estimate->set_line_items( $line_items );
+		$estimate->set_line_items( $args['line_items'] );
 
 		do_action( 'sa_new_estimate', $estimate, $args );
 		return $id;

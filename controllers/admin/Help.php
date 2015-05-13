@@ -106,7 +106,7 @@ class SI_Help extends SI_Controller {
 			options = $.extend( options, {
 				close: function() {
 					$.post( ajaxurl, {
-						pointer: '<?php echo (float) $pointer_id; ?>',
+						pointer: '<?php echo esc_js( $pointer_id ); ?>',
 						action: 'dismiss-wp-pointer'
 					});
 					<?php echo esc_js( $close ); ?>
