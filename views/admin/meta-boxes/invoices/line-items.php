@@ -111,8 +111,6 @@
 					</div>
 				<?php endif ?>
 			</div>
-			<?php echo $status ?>
-
 			
 		</div>
 	</div>

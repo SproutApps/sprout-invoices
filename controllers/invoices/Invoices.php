@@ -341,7 +341,7 @@ class SI_Invoices extends SI_Controller {
 		$invoice->set_line_items( $line_items );
 
 		// Deposits are not supported without the premium version.
-		$invoice->set_deposit( $invoice->get_balance() );
+		// $invoice->set_deposit( 0 );
 		
 		do_action( 'si_save_line_items_meta_box', $post_id, $post, $invoice );
 	}

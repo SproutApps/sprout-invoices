@@ -18,11 +18,11 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 * UPDATE: Improved responsive design for meta boxes and multi-column edit screens.
 * FIX: Prevent WP SEO from caring about Sprout Invoices.
 * NEW: Invoice ID dynamic text
-* FIX: Deposits issue for the free version
+* FIX: Deposits issue for the free version (7.0.1)
 * FIX: Start CSV import without using previous files
 * FIX: Fix for old PHP versions without json_last_error
 * FIX: Remove project types from submission page
-* FIX: Deposits issue for the free version
+* FIX: Deposits issue for the free version (7.0.1)
 * FIX: Start CSV import without using previous files
 * FIX: Fix for old PHP versions without json_last_error
 * FIX: Remove project types from submission page
