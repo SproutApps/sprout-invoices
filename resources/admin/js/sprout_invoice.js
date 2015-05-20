@@ -7,11 +7,10 @@ function si_format_money ( value ) {
 		parts[0] = parts[0].replace( /\B(?=(\d{3})+(?!\d))/g, si_js_object.localeconv.mon_thousands_sep );
 		return si_js_object.localeconv.currency_symbol + parts.join(si_js_object.localeconv.mon_decimal_point);
 	}
-	
-	var cformatter = new Intl.NumberFormat( si_js_object.locale, {
+	var cformatter = new Intl.NumberFormat( si_js_object.locale_standard, {
 		style: 'currency',
 		currency: si_js_object.localeconv.int_curr_symbol.trim(),
-		maximumFractionDigits: si_js_object.localeconv.frac_digits,
+		maximumFractionDigits: si_js_object.localeconv.int_frac_digits,
 		minimumFractionDigits: si_js_object.localeconv.int_frac_digits,
 	});
 	return cformatter.format( value );

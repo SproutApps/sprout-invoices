@@ -759,6 +759,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		add_action( 'wp_ajax_si_display_messages', array( __CLASS__, 'display_messages' ) );
 		add_action( 'wp_ajax_nopriv_si_display_messages', array( __CLASS__, 'display_messages' ) );
 
+		add_action( 'wp_ajax_si_number_formatter', array( __CLASS__, 'ajax_number_formatter' ) );
+
 		add_action( 'wp_ajax_sa_create_private_note',  array( get_class(), 'maybe_create_private_note' ), 10, 0 );
 		add_action( 'wp_ajax_nopriv_sa_create_private_note',  array( get_class(), 'maybe_create_private_note' ), 10, 0 );
 		add_action( 'wp_ajax_si_change_doc_status',  array( get_class(), 'maybe_change_status' ), 10, 0 );
@@ -826,29 +828,6 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function frontend_enqueue() {
-		// Localization
-		$si_js_object = array(
-			'ajax_url' => get_admin_url().'/admin-ajax.php',
-			'plugin_url' => SI_URL,
-			'thank_you_string' => self::__( 'Thank you' ),
-			'updating_string' => self::__( 'Updating...' ),
-			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
-			'security' => wp_create_nonce( self::NONCE ),
-			'locale' => get_locale()
-		);
-		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Invoice::POST_TYPE ) ) {
-			$si_js_object += array(
-				'invoice_id' => get_the_ID(),
-				'invoice_amount' => si_get_invoice_calculated_total(),
-				'invoice_balance' => si_get_invoice_balance()
-			);
-		}
-		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Estimate::POST_TYPE ) ) {
-			$si_js_object += array(
-				'estimate_id' => get_the_ID(),
-				'estimate_total' => si_get_estimate_total()
-			);
-		}
 		wp_localize_script( 'sprout_doc_scripts', 'si_js_object', self::get_localized_js() );
 	}
 
@@ -862,6 +841,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
 			'security' => wp_create_nonce( self::NONCE ),
 			'locale' => get_locale(),
+			'locale_standard' => str_replace( '_', '-', get_locale() ),
 			'inline_spinner' => '<span class="spinner si_inline_spinner" style="visibility:visible;display:inline-block;"></span>',
 		);
 		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Invoice::POST_TYPE ) ) {
@@ -881,17 +861,12 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function admin_enqueue() {
+		$si_js_object = self::get_localized_js();
+		
 		// Localization
-		$si_js_object = array(
-			'plugin_url' => SI_URL,
-			'thank_you_string' => self::__( 'Thank you' ),
-			'updating_string' => self::__( 'Updating...' ),
-			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
-			'done_string' => self::__( 'Finished!' ),
-			'security' => wp_create_nonce( self::NONCE ),
-			'premium' => ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) ? true : false,
+		$si_js_object += array(
+			'premium' => ( ! SI_FREE_TEST && file_exists( SI_PATH . '/controllers/updates/Updates.php' ) ) ? true : false,
 			'redactor' => false,
-			'inline_spinner' => '<span class="spinner si_inline_spinner" style="visibility:visible;display:inline-block;"></span>',
 		);
 
 		// doc admin templates
@@ -1242,6 +1217,19 @@ abstract class SI_Controller extends Sprout_Invoices {
 		return ( $a['weight'] < $b['weight'] ) ? -1 : 1;
 	}
 
+	/**
+	 * Comparison function
+	 */
+	public static function sort_by_date( $a, $b ) {
+		if ( !isset( $a['date'] ) || !isset( $b['date'] ) )
+			return 0;	
+		
+		if ( $a['date'] == $b['date'] ) {
+			return 0;
+		}
+		return ( $a['date'] < $b['date'] ) ? -1 : 1;
+	}
+
 
 	/**
 	 * Get default state options
@@ -1475,6 +1463,31 @@ abstract class SI_Controller extends Sprout_Invoices {
 	////////////////////
 	// AJAX Callback //
 	////////////////////
+
+	public static function ajax_number_formatter() {
+
+		if ( ! isset( $_REQUEST['number'] ) ) {
+			self::ajax_fail( 'Forget something?' );
+		}
+
+		$nonce = $_REQUEST['security'];
+		if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' );
+		}
+
+		$number = $_REQUEST['number'];
+		$currency = array(
+			'money' => sa_get_formatted_money( $number ),
+			'unformatted_money' => sa_get_unformatted_money( $number ),
+			'float' => si_get_number_format( $number ),
+			'int' => (int) si_get_number_format( $number ),
+			);
+		header( 'Content-type: application/json' );
+		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		echo wp_json_encode( $currency );
+		exit();
+
+	}
 
 	public static function maybe_create_private_note() {
 

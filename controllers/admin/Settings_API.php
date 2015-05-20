@@ -253,7 +253,7 @@ class SA_Settings_API extends SI_Controller {
 			$plugin_page = ( $_GET['page'] == self::TEXT_DOMAIN ) ? self::TEXT_DOMAIN . '/settings' : $_GET['page'] ;
 		}
 		// Section based on settings slug
-		$section = self::$admin_pages[$plugin_page]['section'];
+		$section = ( isset( self::$admin_pages[$plugin_page] ) ) ? self::$admin_pages[$plugin_page]['section'] : '' ;
 		// get all tabs and sort
 		$tabs = apply_filters( 'si_option_tabs', self::$option_tabs );
 		uasort( $tabs, array( __CLASS__, 'sort_by_weight' ) );

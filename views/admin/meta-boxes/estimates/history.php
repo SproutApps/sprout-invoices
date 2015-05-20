@@ -12,19 +12,22 @@
 			<?php else: ?>
 				<?php si_e('Submitted') ?>
 			<?php endif ?>
-		<?php else: ?>
+		<?php elseif( is_a( $post, 'WP_Post') ) : ?>
 			<?php $user = get_userdata( $post->post_author ) ?>
-			<?php printf( si_e('Added by %s'), $user->display_name )  ?>
+			<?php printf( si__('Added by %s'), $user->display_name )  ?>
+		<?php else: ?>
+			<?php si_e('Added by SI')  ?>
 		<?php endif ?>
 	</p></dd>
 	
 	<?php foreach ( $history as $item_id => $data ): ?>
-		<dt>
+		<dt class="record record-<?php echo $item_id ?>">
+			<span class="history_deletion"><button data-id="<?php echo $item_id ?>" class="delete_record del_button">X</button></span>
 			<span class="history_status <?php echo esc_attr( $data['status_type'] ); ?>"><?php echo esc_html( $data['type'] ) ?></span><br/>
 			<span class="history_date"><?php echo date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
 		</dt>
 
-		<dd>
+		<dd class="record record-<?php echo $item_id ?>">
 			<?php if ( $data['status_type'] == SI_Notifications::RECORD ): ?>
 				<p>
 					<?php echo esc_html( $data['update_title'] ) ?>

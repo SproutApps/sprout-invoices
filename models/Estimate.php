@@ -174,7 +174,6 @@ class SI_Estimate extends SI_Post_Type {
 			'notes' => '',
 			'terms' => '',
 			'issue_date' => time(),
-			'due_date' => 0,
 			'expiration_date' => 0,
 			'line_items' => array(),
 		);
@@ -335,7 +334,8 @@ class SI_Estimate extends SI_Post_Type {
 	public function get_expiration_date() {
 		$date = (int)$this->get_post_meta( self::$meta_keys['expiration_date'] );
 		if ( !$date ) {
-			$date = strtotime( $this->post->post_date )+(60*60*24*30);
+			$days = apply_filters( 'si_default_expiration_in_days', 30 );
+			$date = strtotime( $this->post->post_date )+(60*60*24*$days);
 		};
 		return $date;
 	}

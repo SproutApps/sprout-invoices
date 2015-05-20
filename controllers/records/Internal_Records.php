@@ -24,6 +24,11 @@ class SI_Internal_Records extends SI_Controller {
 
 		add_action( 'deleted_post', array( __CLASS__, 'attempt_associated_record_deletion' ) );
 
+		add_action( 'wp_ajax_si_delete_record',  array( get_class(), 'maybe_delete_record' ), 10, 0 );
+		add_action( 'wp_ajax_si_edit_private_note',  array( get_class(), 'maybe_update_private_note' ), 10, 0 );
+		// ajax views
+		add_action( 'wp_ajax_si_edit_private_note_view',  array( __CLASS__, 'edit_private_note' ), 10, 0 );
+
 		self::add_admin_page();
 	}
 
@@ -38,7 +43,7 @@ class SI_Internal_Records extends SI_Controller {
 			'title' => self::__( 'Sprout Invoices Records and Logs' ),
 			'menu_title' => self::__( 'Sprout Records' ),
 			'weight' => 10,
-			'reset' => false, 
+			'reset' => false,
 			'callback' => array( __CLASS__, 'display_table' )
 			);
 		do_action( 'sprout_settings_page', $args );
@@ -46,7 +51,7 @@ class SI_Internal_Records extends SI_Controller {
 
 	public static function new_record( $data = array(), $type = 'mixed', $associate_id = -1, $title = '', $author_id = 0, $encoded = true ) {
 
-		if ( !$author_id && is_user_logged_in() ) {
+		if ( ! $author_id && is_user_logged_in() ) {
 			$author_id = get_current_user_id();
 		}
 
@@ -59,32 +64,34 @@ class SI_Internal_Records extends SI_Controller {
 		);
 		$id = wp_insert_post( $post );
 
-		if ( $id && !is_wp_error( $id ) ) {
+		if ( $id && ! is_wp_error( $id ) ) {
 			$record = SI_Record::get_instance( $id );
 			$record->set_data( $data, $encoded );
 			$record->set_associate_id( $associate_id );
 			$record->set_type( $type );
+			$record->activate();
 		}
+		do_action( 'si_record_created', $record );
 		return $id;
 	}
 
 	public static function maybe_purge_records() {
-		if ( !isset( $_REQUEST[self::RECORD_PURGE_NONCE] ) )
-			return;
-		
-		if ( !wp_verify_nonce( $_REQUEST[self::RECORD_PURGE_NONCE], self::RECORD_PURGE_NONCE ) )
-			return;
-		
-		if ( isset( $_GET['purge_records'] ) )
-			self::purge_records_display( $_GET['purge_records'] );
+		if ( ! isset( $_REQUEST[self::RECORD_PURGE_NONCE] ) ) {
+			return; }
+
+		if ( ! wp_verify_nonce( $_REQUEST[self::RECORD_PURGE_NONCE], self::RECORD_PURGE_NONCE ) ) {
+			return; }
+
+		if ( isset( $_GET['purge_records'] ) ) {
+			self::purge_records_display( $_GET['purge_records'] ); }
 	}
 
 	public static function purge_records_display( $type = 0 ) {
 
-		ignore_user_abort(1); // run script in background 
-		set_time_limit(0); // run script forever
+		ignore_user_abort( 1 ); // run script in background
+		set_time_limit( 0 ); // run script forever
 
-		echo '<div id="deletion_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="deletion_information">'.self::__('Preparing purge...').'</div>';
+		echo '<div id="deletion_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="deletion_information">'.self::__( 'Preparing purge...' ).'</div>';
 
 		$args = array(
 			'post_type' => SI_Record::POST_TYPE,
@@ -110,11 +117,11 @@ class SI_Internal_Records extends SI_Controller {
 		foreach ( $records as $record_id ) {
 			$i++;
 			// Calculate the percentage
-			$percent = intval($i/$total * 100)."%";
+			$percent = intval( $i / $total * 100 ).'%';
 			// Javascript for updating the progress bar and information
 			echo '<script language="javascript" id="progress_js">
 			document.getElementById("deletion_progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
-			document.getElementById("deletion_information").innerHTML="'.sprintf( self::__('%o records(s) of %o deleted.'), $i, $total ).'";
+			document.getElementById("deletion_information").innerHTML="'.sprintf( self::__( '%o records(s) of %o deleted.' ), $i, $total ).'";
 			document.getElementById("progress_js").remove();
 			</script>';
 
@@ -124,13 +131,13 @@ class SI_Internal_Records extends SI_Controller {
 			// delete the post
 			wp_delete_post( $record_id, true );
 		}
-		echo '<script language="javascript">document.getElementById("deletion_information").innerHTML="'.sprintf( self::__('Complete. %o deleted.'), $total ).'"</script>';
+		echo '<script language="javascript">document.getElementById("deletion_information").innerHTML="'.sprintf( self::__( 'Complete. %o deleted.' ), $total ).'"</script>';
 	}
 
 	/**
 	 * Attempt to delete any records associated with the post just deleted.
-	 * @param  integer $post_id 
-	 * @return            
+	 * @param  integer $post_id
+	 * @return
 	 */
 	public static function attempt_associated_record_deletion( $post_id = 0 ) {
 		// prevent looping and checking if a record has a record associated with it.
@@ -156,7 +163,7 @@ class SI_Internal_Records extends SI_Controller {
 		trigger_error( __CLASS__.' may not be serialized', E_USER_ERROR );
 	}
 	public static function get_instance() {
-		if ( !( self::$instance && is_a( self::$instance, __CLASS__ ) ) ) {
+		if ( ! ( self::$instance && is_a( self::$instance, __CLASS__ ) ) ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -167,6 +174,77 @@ class SI_Internal_Records extends SI_Controller {
 			return 0;
 		}
 		return ( $a < $b ) ? 1 : -1;
+	}
+
+	///////////
+	// AJAX //
+	///////////
+
+	public static function maybe_delete_record() {
+		if ( ! isset( $_REQUEST['nonce'] ) ) {
+			wp_die( 'Forget something?' );
+		}
+
+		$nonce = $_REQUEST['nonce'];
+		if ( ! wp_verify_nonce( $nonce, SI_Controller::NONCE ) ) {
+			wp_die( 'Not going to fall for it!' );
+		}
+
+		if ( current_user_can( 'delete_posts' ) ) {
+			$record_id = $_REQUEST['record_id'];
+			wp_delete_post( $record_id, true );
+			do_action( 'si_deleted_record', $record_id );
+		}
+	}
+
+	public static function edit_private_note() {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			self::ajax_fail( 'User cannot create new posts!' );
+		}
+		if ( ! isset( $_REQUEST['note_id'] ) ) {
+			self::ajax_fail( 'No id given!' );
+		}
+		$record_id = $_REQUEST['note_id'];
+		$record = SI_Record::get_instance( $record_id );
+		$record_post = $record->get_post();
+		$fields = array();
+		$fields['note'] = array(
+			'weight' => 0,
+			'label' => self::__( 'Private Note' ),
+			'type' => 'textarea',
+			'default' => $record_post->post_content,
+		);
+		$fields['record_id'] = array(
+			'weight' => 50,
+			'type' => 'hidden',
+			'value' => $record_id,
+		);
+		self::load_view( 'admin/sections/edit-private-note', array(
+				'fields' => $fields,
+				'record_id' => $record_id,
+			), false );
+		exit();
+	}
+
+	public static function maybe_update_private_note() {
+		if ( ! isset( $_REQUEST['nonce'] ) ) {
+			wp_die( 'Forget something?' );
+		}
+
+		$nonce = $_REQUEST['nonce'];
+		if ( ! wp_verify_nonce( $nonce, SI_Controller::NONCE ) ) {
+			wp_die( 'Not going to fall for it!' );
+		}
+
+		if ( ! isset( $_REQUEST['record_id'] ) ) {
+			self::ajax_fail( 'No id given!' );
+		}
+
+		$record_id = $_REQUEST['record_id'];
+		$private_note = $_REQUEST['private_note'];
+		$record = SI_Record::get_instance( $record_id );
+		$record->set_data( $private_note, false );
+		exit();
 	}
 
 	public static function display_table() {
@@ -188,7 +266,7 @@ class SI_Internal_Records extends SI_Controller {
 	</script>
 	<div class="wrap">
 		<h2>
-			<?php si_e('Sprout Invoices Records') ?>
+			<?php si_e( 'Sprout Invoices Records' ) ?>
 		</h2>
 		<?php self::maybe_purge_records(); ?>
 		<form id="records-filter" method="get">

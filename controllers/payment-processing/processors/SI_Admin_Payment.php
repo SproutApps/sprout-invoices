@@ -31,6 +31,9 @@ class SI_Admin_Payment extends SI_Controller {
 	}
 
 	public static function create_admin_payment( $invoice_id = 0, $amount = '0.00', $number = '', $date = '', $notes = '' ) {
+		if ( did_action( 'si_new_payment' ) > 0 ) { // make sure this 
+			return;
+		}
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		// create new payment
 		$payment_id = SI_Payment::new_payment( array(

@@ -103,10 +103,10 @@ class SI_Record extends SI_Post_Type {
 	 */
 	public function get_data() {
 		$content = json_decode( $this->post->post_content );
-		if ( json_last_error() === JSON_ERROR_NONE ) { // is json
-			return (array) $content;
+		if ( $content === NULL ) { // isn't json
+			return $this->post->post_content;
 		}
-		return $this->post->post_content;
+		return (array) $content;
 	}
 
 	/**

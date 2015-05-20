@@ -12,9 +12,11 @@
 			<?php else: ?>
 				<?php si_e('Submitted') ?>
 			<?php endif ?>
-		<?php else: ?>
+		<?php elseif( is_a( $post, 'WP_Post') ) : ?>
 			<?php $user = get_userdata( $post->post_author ) ?>
-			<?php printf( si_e('Added by %s'), $user->display_name )  ?>
+			<?php printf( si__('Added by %s'), $user->display_name )  ?>
+		<?php else: ?>
+			<?php si_e('Added by SI')  ?>
 		<?php endif ?>
 	</p></dd>
 	

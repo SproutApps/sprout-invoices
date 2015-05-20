@@ -14,11 +14,13 @@ class SI_Notifications_Control extends SI_Controller {
 	const EMAIL_FROM_NAME = 'si_notification_name';
 	const EMAIL_FROM_EMAIL = 'si_notification_email';
 	const EMAIL_FORMAT = 'si_notification_format';
+	const ADMIN_EMAIL = 'si_notifications_admin_email';
 	const NOTIFICATION_SUB_OPTION = 'si_subscription_notifications';
 
 	private static $notification_from_name;
 	private static $notification_from_email;
 	private static $notification_format;
+	private static $admin_email;
 
 	public static $notifications;
 	protected static $shortcodes;
@@ -29,6 +31,7 @@ class SI_Notifications_Control extends SI_Controller {
 		self::$notification_from_name = get_option( self::EMAIL_FROM_NAME, get_bloginfo( 'name' ) );
 		self::$notification_from_email = get_option( self::EMAIL_FROM_EMAIL, get_bloginfo( 'admin_email' ) );
 		self::$notification_format = get_option( self::EMAIL_FORMAT, 'TEXT' );
+		self::$admin_email = get_option( self::ADMIN_EMAIL, get_option( 'admin_email' ) );
 
 		// Default notifications
 		add_action( 'init', array( __CLASS__, 'notifications_and_shortcodes' ), 5 );
@@ -105,6 +108,14 @@ class SI_Notifications_Control extends SI_Controller {
 							'default' => self::$notification_from_email
 							)
 						),
+					self::ADMIN_EMAIL => array(
+						'label' => self::__( 'Admin email' ),
+						'option' => array(
+							'type' => 'text',
+							'default' => self::$admin_email,
+							'description' => self::__( 'E-mail address that receives the admin notifications (e.g. Payment Received).' )
+							)
+						),
 					self::EMAIL_FORMAT => array(
 						'label' => self::__( 'Email format' ),
 						'option' => array(
@@ -116,7 +127,7 @@ class SI_Notifications_Control extends SI_Controller {
 							'default' => self::$notification_format,
 							'description' => self::__('Default notifications are in plain text. If set to HTML, custom HTML notifications are required.')
 							)
-						)
+						),
 					)
 				)
 			);
@@ -436,8 +447,8 @@ class SI_Notifications_Control extends SI_Controller {
 			return;
 		}
 
-		$from_email = ( null == $from_email ) ? self::$notification_from_email : $from_email ;
-		$from_name = ( null == $from_name ) ? self::$notification_from_name : $from_name ;
+		$from_email = ( null === $from_email ) ? self::$notification_from_email : $from_email ;
+		$from_name = ( null === $from_name ) ? self::$notification_from_name : $from_name ;
 
 		if ( $html ) {
 			$headers = array(
@@ -786,9 +797,33 @@ class SI_Notifications_Control extends SI_Controller {
 	// Misc //
 	///////////
 
+	/**
+	 * Splits a string with an email into a name and email.
+	 * @param  string $email "name" <email@email.com>
+	 * @return array        name and email
+	 */
+	public static function email_split( $email = '' ) {
+		$email .= ' ';
+		$pattern = '/([\w\s\'\"]+[\s]+)?(<)?(([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4}))?(>)?/';
+		preg_match( $pattern, $email, $match );
+		$name = ( isset( $match[1] ) ) ? $match[1] : '';
+		$email = ( isset( $match[3] ) ) ? $match[3] : '';
+		return array( 'name' => trim( $name ), 'email' => trim( $email ) );
+	}
+
 	public static function admin_email( $atts = array() ) {
-		$admin_to = apply_filters( 'si_admin_notification_to_address', get_option( 'admin_email' ), $atts );
+		$admin_to = apply_filters( 'si_admin_notification_to_address', self::$admin_email, $atts );
 		return $admin_to;
+	}
+
+	public static function from_email( $atts = array() ) {
+		$from_email = apply_filters( 'si_admin_notification_from_email', self::$notification_from_email, $atts );
+		return $from_email;
+	}
+
+	public static function from_name( $atts = array() ) {
+		$from_name = apply_filters( 'si_admin_notification_from_name', self::$notification_from_name, $atts );
+		return $from_name;
 	}
 
 	public static function maybe_refresh_notifications() {

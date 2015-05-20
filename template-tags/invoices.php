@@ -54,6 +54,9 @@ function si_get_invoice_status( $id = 0 ) {
 		$id = $post->ID;
 	}
 	$invoice = SI_Invoice::get_instance( $id );
+	if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+		return '';
+	}
 	switch ( $invoice->get_status() ) {
 		case 'draft' :
 			$status = SI_Invoice::STATUS_TEMP;
@@ -86,7 +89,7 @@ function si_invoice_status( $id = 0 ) {
 endif;
 
 
-if ( !function_exists('si_get_invoicestatus_label') ) :
+if ( !function_exists('si_get_invoice_status_label') ) :
 /**
  * Get the invoice status_label
  * @param  integer $id 

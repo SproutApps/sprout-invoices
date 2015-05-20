@@ -120,6 +120,7 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/records/Records_Admin_Table.php';
 
 	// reporting
+	require_once SI_PATH.'/controllers/reporting/Dashboard.php';
 	require_once SI_PATH.'/controllers/reporting/Reporting.php';
 	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/reporting/Reporting_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/reporting/Reporting_Premium.php';
@@ -203,6 +204,7 @@ function sprout_invoices_load() {
 	SI_JSON_API::init();
 
 	// reports
+	SI_Dashboard::init();
 	SI_Reporting::init();
 	if ( !SI_FREE_TEST && class_exists( 'SI_Reporting_Premium' ) ) {
 		SI_Reporting_Premium::init();

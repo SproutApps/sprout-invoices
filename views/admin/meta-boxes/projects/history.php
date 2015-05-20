@@ -30,12 +30,13 @@
 					$type = si__('Status Update');
 					break;
 			} ?>
-		<dt>
+		<dt class="record record-<?php echo $record_id ?>">
+			<span class="history_deletion"><button data-id="<?php echo $record_id ?>" class="delete_record del_button">X</button></span>
 			<span class="history_status <?php echo esc_attr( $record->get_type() ); ?>"><?php echo esc_html( $type ); ?></span><br/>
 			<span class="history_date"><?php echo date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $r_post->post_date ) ) ?></span>
 		</dt>
 
-		<dd>
+		<dd class="record record-<?php echo $record_id ?>">
 			<?php if ( $record->get_type() == SI_Notifications::RECORD ): ?>
 				<p>
 					<?php echo esc_html( $r_post->post_title ) ?>

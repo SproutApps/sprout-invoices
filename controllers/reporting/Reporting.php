@@ -7,107 +7,21 @@
  * @package Sprout_Invoice
  * @subpackage Reporting
  */
-class SI_Reporting extends SI_Controller {
-	const SETTINGS_PAGE = 'reporting';
-	const REPORT_QV = 'report';
+class SI_Reporting extends SI_Dashboard {
 	const CACHE_KEY_PREFIX = 'si_rprt_';
 	const AJAX_ACTION = 'si_report_data';
 	const AJAX_NONCE = 'si_report_nonce';
 	const CACHE_TIMEOUT = 172800; // 48 hours
 
 	public static function init() {
-		// register settings
-		self::register_settings();
-		
-		add_filter( 'si_settings_page_sub_heading_sprout-apps/settings', array( get_class(), 'reports_subtitle' ) );
 
 		// Help Sections
-		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
+		add_action( 'admin_menu', array( __CLASS__, 'help_sections' ) );
 
 		add_action( 'wp_ajax_'.self::AJAX_ACTION,  array( __CLASS__, 'get_chart_data' ), 10, 0 );
 
 		// Admin bar
-		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 15, 1 );
-
-		// Enqueue
-		add_action( 'init', array( __CLASS__, 'register_resources' ) );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ) );
-	}
-
-	////////////
-	// admin //
-	////////////
-
-	public static function register_resources() {
-		// Charting
-		wp_register_script( 'chartjs', SI_URL . '/resources/admin/plugins/chartjs/chart.min.js', array( 'jquery' ), false, false );
-
-	}
-
-	public static function admin_enqueue() {
-		// Only on the dashboard
-		if ( isset( $_GET['tab'] ) && !isset( $_GET[self::REPORT_QV] ) && $_GET['tab'] == self::SETTINGS_PAGE ) {
-			wp_enqueue_script( 'chartjs' );
-		}
-	}
-
-	////////////
-	// admin //
-	////////////
-
-	/**
-	 * Hooked on init add the settings page and options.
-	 *
-	 */
-	public static function register_settings() {
-		// Option page
-		$args = array(
-			'slug' => self::SETTINGS_PAGE,
-			'title' => self::__( 'Reports Dashboard' ),
-			'menu_title' => self::__( 'Reports' ),
-			'weight' => 5,
-			'reset' => false,
-			'section' => 'settings',
-			'tab_only' => true,
-			'callback' => array( __CLASS__, 'reports_dashboard' )
-			);
-		do_action( 'sprout_settings_page', $args );
-	}
-
-	public static function reports_dashboard() {
-		$report_dash = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : false ;
-		switch ( $report_dash ) {
-			case 'invoices':
-				self::load_view( 'admin/reports/invoices.php', array() );
-				break;
-			case 'estimates':
-				self::load_view( 'admin/reports/estimates.php', array() );
-				break;
-			case 'payments':
-				self::load_view( 'admin/reports/payments.php', array() );
-				break;
-			case 'clients':
-				self::load_view( 'admin/reports/clients.php', array() );
-				break;
-			default:
-				self::load_view( 'admin/reports/dashboard.php', array() );
-				break;
-		}
-	}
-
-	public static function reports_subtitle() {
-		if ( isset( $_GET['tab'] ) && $_GET['tab'] == self::SETTINGS_PAGE ) {
-			$current_report = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : 'dashboard' ;
-			?>
-				<ul class="subsubsub">
-					<li class="invoices"><a href="<?php echo esc_url( remove_query_arg( self::REPORT_QV ) ) ?>" <?php if ( $current_report == 'dashboard' ) echo 'class="current"' ?>><?php self::_e('Dashboard') ?></a> |</li>
-					<li class="invoices"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'invoices' ) ) ?>" <?php if ( $current_report == 'invoices' ) echo 'class="current"' ?>><?php self::_e('Invoices') ?></a> |</li>
-					<li class="estimates"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'estimates' ) ) ?>" <?php if ( $current_report == 'estimates' ) echo 'class="current"' ?>><?php self::_e('Estimates') ?></a> |</li>
-					<li class="payments"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'payments' ) ) ?>" <?php if ( $current_report == 'payments' ) echo 'class="current"' ?>><?php self::_e('Payments') ?></a> |</li>
-					<li class="clients"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'clients' ) ) ?>" <?php if ( $current_report == 'clients' ) echo 'class="current"' ?>><?php self::_e('Clients') ?></a></li>
-				</ul>
-			<?php
-		}
+		add_filter( 'si_admin_bar', array( __CLASS__, 'add_link_to_admin_bar' ), 15, 1 );
 	}
 
 	///////////////////////////
@@ -826,7 +740,7 @@ class SI_Reporting extends SI_Controller {
 	//////////////
 	// Utility //
 	//////////////
-	
+
 	public static function walk_back_x_span( $x = 6, $span = 'months' ) {
 		switch ( $span ) {
 			case 'months':

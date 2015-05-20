@@ -77,7 +77,77 @@
 			}, 200);
 		});
 
+		// delete history record
+		$('.delete_record').live( 'click', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			si.docEdit.deleteRecord( this );
+		});
 
+		// edit private note
+		$('#save_edit_private_note').live( 'click', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			si.docEdit.editPrivateNote( this );
+		});
+
+		si.docEdit.preventCollapseLineItemsMetaBox();
+	};
+
+	si.docEdit.editPrivateNote = function( button ) {
+		var $button = $(button),
+			record_id = $button.data( 'id' ),
+			private_note = $( '#sa_note_note' ).val(),
+			nonce = si_js_object.security;
+
+		$('span.inline_error_message').hide();
+		$button.after(si_js_object.inline_spinner);
+		$.post( ajaxurl, { action: 'si_edit_private_note', record_id: record_id, private_note: private_note, nonce: nonce },
+			function( response ) {
+				$('.spinner').hide();
+				if ( response.error ) {
+					$button.after('<span class="inline_error_message">' + response.response + '</span>');	
+				}
+				else {
+					// close modal
+					self.parent.tb_remove();
+					$( 'dd.record-' + record_id + ' p:first-of-type' ).html( private_note );
+				}
+			}
+		);
+	};
+
+	si.docEdit.deleteRecord = function( button ) {
+		var $button = $(button),
+			record_id = $button.data( 'id' ),
+			$record_wraps = $( '.record-' + record_id ),
+			nonce = si_js_object.security;
+
+		$.post( ajaxurl, { action: 'si_delete_record', record_id: record_id, nonce: nonce },
+			function( response ) {
+				if ( response.error ) {
+					console.log( response.error );
+				}
+				else {
+					$record_wraps.fadeOut();
+				}
+			}
+		);
+	};
+
+	/**
+	 * Prevent collapse of line items
+	 * @return {} 
+	 */
+	si.docEdit.preventCollapseLineItemsMetaBox = function() {
+		// $('#si_invoice_line_items.postbox .hndle').unbind('click.postboxes');
+		// $('#si_estimate_line_items.postbox .hndle').unbind('click.postboxes');
+		// In case it was closed before the update
+		$('#si_invoice_line_items, #si_estimate_line_items').removeClass('closed');
+		// remove the class after it's been added since unbind isn't working properly.
+		$('#si_invoice_line_items, #si_estimate_line_items').on('click', 'h3.hndle', function(event){
+			$('#si_invoice_line_items, #si_estimate_line_items').removeClass('closed');
+		});
 	};
 
 	/**
@@ -105,7 +175,7 @@
 			$info_project_select = $('[name="doc_project"]');
 
 		$('span.inline_error_message').hide();
-		$select.after(si.docEdit.config.inline_spinner);
+		$select.after(si_js_object.inline_spinner);
 		$.post( ajaxurl, { action: 'sa_projects_time', project_id: project_id, nonce: nonce, billable: true },
 			function( response ) {
 				$('.spinner').hide();
@@ -128,8 +198,6 @@
 			$info_project_select.val( project_id );
 			$info_project_span.text( $select.find('option:selected').text() );
 		};
-		
-		
 	};
 
 	si.docEdit.timeAddItem = function( time ) {
@@ -253,7 +321,23 @@
 	/**
 	 * Disable quick send if the form has changed.
 	 */
-	$('form#post').live( 'keyup change', 'input:not([name="sa_metabox_recipients[]"]), select, textarea:not([name="sa_metabox_sender_note"])', function( e ){
+	$('[name="sa_send_metabox_send_as"]').live( 'click', function( e ){
+		$(this).prop('readonly', false);
+	});
+
+	/**
+	 * Disable quick send if the form has changed.
+	 */
+	$('[name="sa_metabox_custom_recipient"]').live( 'keyup', function( e ){
+		var val = $('[name="sa_metabox_custom_recipient"]').val(),
+			$checkbox = $('[name="sa_metabox_custom_recipient_check"]');
+		if ( val.length > 0 ) {
+			$checkbox.prop('checked', true);
+		}
+		else {
+			$checkbox.prop('checked', false);
+		};
+		
 		// $('#quick_send_option #send_doc_notification').attr( 'disabled', 'disabled' );
 	});
 

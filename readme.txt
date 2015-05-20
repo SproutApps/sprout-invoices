@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.2
-Stable tag: 6.2
+Stable tag: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,31 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 CSV Importing and add-ons for Zapier, Toggl, and more!
 
 == Changelog ==
+
+= 7.0 =
+
+https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
+
+* NEW: WooCommerce Integration is now bundled (for pro users).
+* NEW: Completely revamped Stats Dashboard.
+* NEW: Web accessible Time Tracking widget.
+* NEW: History Management
+* NEW: Subscriber specific Time Tracking dashboard widgets.
+* UPDATE: Easily import unbilled time into an invoice with a single click.
+* UPDATE: Add dashboard widgets to standard WP Dashboard.
+* UPDATE: Improved admin search.
+* NEW: Send invoice/estimate to a new email without creating a Client user with a simple input box.
+* UPDATE: Modify the sender’s email for estimates and invoices on the invoice/estimate admin.
+* UPDATE: Improved pay button on invoice template.
+* UPDATE: Modify the "to" email for all admin notifications without a filter.
+* UPDATE: Zapier integration updates, e.g. email data.
+* UPDATE: Improved responsive design for meta boxes and multi-column edit screens.
+* FIX: Prevent WP SEO from caring about Sprout Invoices.
+* NEW: Invoice ID dynamic text
+* FIX: Deposits issue for the free version
+* FIX: Start CSV import without using previous files
+* FIX: Fix for old PHP versions without json_last_error
+* FIX: Remove project types from submission page
 
 = 6.2 =
 

@@ -165,14 +165,14 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Get the associated times with this project
-	 * @return array 
+	 * @return array
 	 */
 	public function get_associated_times() {
 		$times = $this->get_post_meta( self::$meta_keys['associated_time'] );
-		if ( !is_array( $times ) ) {
+		if ( ! is_array( $times ) ) {
 			$times = array();
 		}
-		return array_filter($times);
+		return array_filter( $times );
 	}
 
 	/**
@@ -192,7 +192,7 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function clear_associated_times() {
 		$this->delete_post_meta( array(
-				self::$meta_keys['associated_time'] => ''
+				self::$meta_keys['associated_time'] => '',
 			) );
 	}
 
@@ -214,6 +214,7 @@ class SI_Project extends SI_Post_Type {
 		$new_time_id = $time->new_time( $time_data );
 		// Add to the associated array on this project
 		$this->add_associated_time( $new_time_id );
+		$this->save_post(); // update modified time.
 		return $new_time_id;
 	}
 

@@ -101,16 +101,17 @@
 				</div>
 				<?php if ( apply_filters( 'show_upgrade_messaging', true ) ): ?>
 					<div id="deposit">
-						<b title="Upgrade Sprout Invoices to enable deposits" class="helptip"><?php si_e('Deposit Due') ?></b>
-						<input type="number" name="deposit" value="<?php echo floatval( $total - $total_payments ) ?>" min="0" max="0"  step="any" disabled="disabled">
+						<b title="Upgrade Sprout Invoices to enable deposits." class="helptip"><?php si_e('Deposit Due') ?></b>
+						<input type="number" name="deposit" min="0" max="0"  step="any" disabled="disabled">
 					</div>
-				<?php elseif ( floatval( $total - $total_payments ) > 0.00 || $status == 'auto-draft' ): ?>
+				<?php elseif ( floatval( $total - $total_payments ) > 0.00 || $status == 'auto-draft' || $status == 'temp' ): ?>
 					<div id="deposit">
 						<b title="Set the amount due for the next payment&mdash;the amount due will be used if blank" class="helptip"><?php si_e('Deposit Due') ?></b>
 						<input type="number" name="deposit" value="<?php echo (float) $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any">
 					</div>
 				<?php endif ?>
 			</div>
+			<?php echo $status ?>
 
 			
 		</div>

@@ -1744,3 +1744,57 @@ ol ol .li_comments_toggle {
 	clear: both;
 	margin: 10px 10px 0px 0px;
 }
+
+/**
+ * Front-end Time Tracking
+ */
+
+.front_end_form.clearfix {
+    width: 100%;
+}
+
+#time_tracker #outer_doc_wrap, #time_tracker div#tt_save {
+    width: 90%;
+    margin-left: 5%;
+}
+
+#time_tracker label {
+    display: none;
+}
+
+#time_tracker .input_wrap {
+    margin-bottom: 10px;
+}
+
+#time_tracker select#sa_time_project_id {
+    float: left;
+    width: 49%;
+    height: 3em;
+}
+
+#time_tracker select#sa_time_activity_id {
+    float: left;
+    margin-left: 2%;
+    width: 49%;
+    height: 3em;
+}
+
+#time_tracker input#sa_time_time_inc {
+    float: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 49%;
+    height: 3em;
+}
+#time_tracker input#sa_time_date {
+    width: 49%;
+    margin-left: 2%;
+    margin-top: 10px;
+    height: 3em;
+}
+#time_tracker button#create_time_entry {
+    margin: 0px;
+  float: left;
+  width: 100%;
+  font-size: 1.5em;
+}

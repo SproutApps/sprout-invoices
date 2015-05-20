@@ -7,10 +7,10 @@
  * @package SI
  */
 
-if ( !defined( 'SI_FREE_TEST' ) )
+if ( ! defined( 'SI_FREE_TEST' ) )
 	define( 'SI_FREE_TEST', false );
 
-if ( !defined( 'SI_DEV' ) )
+if ( ! defined( 'SI_DEV' ) )
 	define( 'SI_DEV', false );
 
 abstract class Sprout_Invoices {
@@ -26,7 +26,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '6.2';
+	const SI_VERSION = '7.0';
 	/**
 	 * DB Version
 	 */

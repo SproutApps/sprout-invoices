@@ -12,10 +12,12 @@ function si_projects_select( $selected_id = 0, $client_id = 0, $blank = true, $e
 	$selections = array();
 	if ( $client_id ) {
 		$client = SI_Client::get_instance( $client_id );
-		$projects = SI_Project::get_projects_by_client( $client_id );
-		$selections[ $client->get_title() ] = $projects;
+		if ( is_a( $client, 'SI_Client' ) ) {
+			$projects = SI_Project::get_projects_by_client( $client_id );
+			$selections[ $client->get_title() ] = $projects;
+		}
 	}
-	else {
+	if ( empty( $selections ) ) {
 		$args = array(
 			'post_type' => SI_Project::POST_TYPE,
 			'post_status' => 'any',
@@ -46,7 +48,7 @@ function si_projects_select( $selected_id = 0, $client_id = 0, $blank = true, $e
 	if ( !empty( $selections ) ) {
 		$out = '<select name="'.$el_id.'" class="select2">';
 		if ( $blank ) {
-			$out .= sprintf( '<option>%s</option>', si__('Select Project') );
+			$out .= sprintf( '<option value="0">%s</option>', si__('Select Project') );
 		}
 		foreach ( $selections as $client => $projects ) {
 			$out .= sprintf( '<optgroup label="%s">', $client );

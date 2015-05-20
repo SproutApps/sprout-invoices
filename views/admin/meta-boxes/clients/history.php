@@ -42,12 +42,14 @@
 					$type = si__('Status Update');
 					break;
 			} ?>
-		<dt>
+		<dt class="record record-<?php echo $record_id ?>">
+			<span class="history_deletion"><button data-id="<?php echo $record_id ?>" class="delete_record del_button">X</button></span>
+
 			<span class="history_status <?php echo esc_attr( $record->get_type() ) ?>"><?php echo esc_html( $type ); ?></span><br/>
 			<span class="history_date"><?php echo date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $r_post->post_date ) ) ?></span>
 		</dt>
 
-		<dd>
+		<dd class="record record-<?php echo $record_id ?>">
 			<?php if ( $record->get_type() == SI_Notifications::RECORD ): ?>
 				<p>
 					<?php echo esc_html( $r_post->post_title ) ?>
@@ -56,6 +58,11 @@
 				<div id="notification_message_<?php echo (int) $r_post->ID ?>" class="cloak">
 					<?php echo wpautop( $r_post->post_content ) ?>
 				</div>
+			<?php elseif ( SI_Controller::PRIVATE_NOTES_TYPE === $record->get_type() ): ?>
+				<?php echo wpautop( $r_post->post_content ) ?>
+				<p>
+					<a class="thickbox si_tooltip edit_private_note" href="<?php echo admin_url( 'admin-ajax.php?action=si_edit_private_note_view&width=600&height=350&note_id=' . $record_id ) ?>" id="show_edit_private_note_tb_link_<?php echo (int) $record_id ?>" title="<?php si_e('Edit Note') ?>"><?php si_e('Edit') ?></a>
+				</p>
 			<?php else: ?>
 				<?php echo wpautop( $r_post->post_content ) ?>
 			<?php endif ?>

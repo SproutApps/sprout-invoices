@@ -53,13 +53,13 @@ jQuery(function($) {
 		);
 	});
 
-	jQuery("#payment_selection a.cc_processor").on('click', function(e) {
+	jQuery("#doc_actions a.cc_processor").on('click', function(e) {
 		e.preventDefault();
 		$('#check_info_checkout_wrap').slideUp('fast');
 		$('#credit_card_checkout_wrap').slideDown();
 	});
 
-	jQuery("#payment_selection #checks a").on('click', function(e) {
+	jQuery("#doc_actions a.checks").on('click', function(e) {
 		e.preventDefault();
 		$('#credit_card_checkout_wrap').slideUp('fast');
 		$('#check_info_checkout_wrap').slideDown();

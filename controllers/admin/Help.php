@@ -14,15 +14,14 @@ class SI_Help extends SI_Controller {
 	public static function init() {
 		if ( is_admin() ) {
 			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_pointer_scripts' ) );
+
+			add_filter( 'posts_where_request', array( __CLASS__, 'filter_admin_search' ) );
 		}
 		add_filter( 'admin_footer_text', array( __CLASS__, 'please_rate_si' ), 1, 2 );
 	}
 
 	public static function please_rate_si( $footer_text ) {
-		if (
-			( isset( $_GET['page'] ) && $_GET['page'] == 'sprout-apps/settings' ) ||
-			( isset( $_GET['post_type'] ) && in_array( $_GET['post_type'], array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE ) ) )
-			 ) {
+		if ( self::is_si_admin() ) {
 			$footer_text = sprintf( self::__( 'Please support the future of <strong>Sprout Invoices</strong> by rating the free version <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%1$s" target="_blank">WordPress.org</a>. Have an awesome %2$s!'), 'http://wordpress.org/support/view/plugin-reviews/sprout-invoices?filter=5', date_i18n('l') );
 		}
 		return $footer_text;
@@ -189,17 +188,7 @@ class SI_Help extends SI_Controller {
 	}
 
 	public static function is_relevant_admin_page() {
-		$post_id = isset( $_GET['post'] ) ? (int)$_GET['post'] : false;
-		if ( $post_id ) {
-			$post_type = get_post_type( $post_id );
-		} else {
-			$post_type = ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) ? $_REQUEST['post_type'] : null ;
-		}
-
-		if ( !in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE ) ) ) {
-			return false;
-		}
-		return true;
+		return self::is_si_admin();
 	}
 
 	public static function pointer_si_help_tab_settings() {
@@ -226,6 +215,49 @@ class SI_Help extends SI_Controller {
 		);
 	}
 
+	//////////////////
+	// Admin Search //
+	//////////////////
+
+	public static function filter_admin_search( $where = '' ) {
+		if ( ! is_admin() || ! is_search() ) {
+			return $where;
+		}
+
+		global $wpdb, $wp;
+		if ( !isset( $_REQUEST['s'] ) || $wp->query_vars['s'] !== $_REQUEST['s'] ) {
+			return $where;
+		}
+
+		$custom_fields = apply_filters( 'si_admin_meta_search', array(), $wp->query_vars['post_type'] );
+		if ( empty( $custom_fields ) ) {
+			return $where;
+		}
+
+		foreach( $custom_fields as $cf ) {
+			// append meta search after title search
+			$where = preg_replace(
+				"/({$wpdb->posts}.post_title LIKE '%{$wp->query_vars['s']}%')/i",
+				"$0 OR ({$wpdb->postmeta}.meta_key = '{$cf}' AND {$wpdb->postmeta}.meta_value LIKE '%{$wp->query_vars['s']}%')",
+				$where
+			);
+		}
+		// join meta and make distinct
+		add_filter( 'posts_join_request', array( __CLASS__, 'filter_admin_search_join' ) );
+		add_filter( 'posts_distinct_request', array( __CLASS__, 'filter_admin_search_distinct' ) );
+		return $where;
+	}
+
+	public static function filter_admin_search_join( $join ) {
+		global $wpdb;
+		$join .= " LEFT JOIN $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id) ";
+		return $join;
+	}
+
+	public static function filter_admin_search_distinct( $distinct ) {
+		$distinct = 'DISTINCT';
+		return $distinct;
+	}
 
 
 }

@@ -52,6 +52,9 @@ class SI_Invoices extends SI_Controller {
 			// Single column
 			add_filter( 'get_user_option_screen_layout_sa_invoice', array( __CLASS__, 'screen_layout_pref' ) );
 			add_filter( 'screen_layout_columns', array( __CLASS__, 'screen_layout_columns' ) );
+
+			// Improve admin search
+			add_filter( 'si_admin_meta_search', array( __CLASS__, 'filter_admin_search' ), 10, 2 );
 		}
 
 		// Unique urls
@@ -490,14 +493,14 @@ class SI_Invoices extends SI_Controller {
 	public static function sender_submission_fields( SI_Invoice $invoice ) {
 		$fields = array();
 
-		$from_name = get_option( SI_Notifications::EMAIL_FROM_NAME, get_bloginfo( 'name' ) );
-		$from_email = get_option( SI_Notifications::EMAIL_FROM_EMAIL, get_bloginfo( 'admin_email' ) );
+		$from_name = SI_Notifications_Control::from_name( array( 'invoice_id' => $invoice->get_id() ) );
+		$from_email = SI_Notifications_Control::from_email( array( 'invoice_id' => $invoice->get_id() ) );
 		$fields['send_as'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Send As' ),
+			'label' => self::__( 'Sender' ),
 			'type' => 'text',
 			'placeholder' => '',
-			'attributes' => array( 'disabled' => 'disabled' ),
+			'attributes' => array( 'readonly' => 'readonly' ),
 			'default' => $from_name . ' <' . $from_email . '>'
 		);
 
@@ -515,6 +518,9 @@ class SI_Invoices extends SI_Controller {
 					}
 				}
 			}
+
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', self::__('client@email.com'), self::__('Entering an email will prevent some notification shortcodes from working since there is no client.') );
+
 			// Send to me.
 			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), si__('Send me a copy') );
 
@@ -569,10 +575,29 @@ class SI_Invoices extends SI_Controller {
 		}
 		$invoice->set_sender_note( $sender_notes );
 
-		if ( !isset( $_REQUEST['sa_metabox_recipients'] ) || empty( $_REQUEST['sa_metabox_recipients'] ) ) {
+		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
+
+		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
+			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
+				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
+			}
+		}
+
+		if ( empty( $recipients ) ) {
 			return;
 		}
-		do_action( 'send_invoice', $invoice, $_REQUEST['sa_metabox_recipients'] );
+
+		$from_email = null;
+		$from_name = null;
+		if ( isset( $_REQUEST['sa_send_metabox_send_as'] ) ) {
+			$name_and_email = SI_Notifications_Control::email_split( $_REQUEST['sa_send_metabox_send_as'] );
+			if ( is_email( $name_and_email['email'] ) ) {
+				$from_name = $name_and_email['name'];
+				$from_email = $name_and_email['email'];
+			}
+		}
+
+		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name  );
 	}
 
 	/**
@@ -779,6 +804,21 @@ class SI_Invoices extends SI_Controller {
 		return $post_states;
 	}
 
+	public static function filter_admin_search( $meta_search = '', $post_type = '' ) {
+		if ( SI_Invoice::POST_TYPE !== $post_type ) {
+			return array();
+		}
+		$meta_search = array(
+			'_client_id',
+			'_estimate_id',
+			'_invoice_id',
+			'_invoice_notes',
+			'_project_id',
+			'_doc_terms',
+		);
+		return $meta_search;
+	}
+
 	///////////////////////////
 	// single column layout //
 	///////////////////////////
@@ -887,26 +927,49 @@ class SI_Invoices extends SI_Controller {
 				}
 			}
 		}
-		if ( !isset( $_REQUEST['sa_send_metabox_notification_nonce'] ) )
+		if ( !isset( $_REQUEST['sa_send_metabox_notification_nonce'] ) ) {
 			self::ajax_fail( 'Forget something (nonce)?' );
+		}
 
 		$nonce = $_REQUEST['sa_send_metabox_notification_nonce'];
-		if ( !wp_verify_nonce( $nonce, SI_Controller::NONCE ) )
+		if ( !wp_verify_nonce( $nonce, SI_Controller::NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' );
+		}
 
-		if ( !isset( $_REQUEST['sa_send_metabox_doc_id'] ) )
+		if ( !isset( $_REQUEST['sa_send_metabox_doc_id'] ) ) {
 			self::ajax_fail( 'Forget something (id)?' );
+		}
 
-		if ( !isset( $_REQUEST['sa_metabox_recipients'] ) || empty( $_REQUEST['sa_metabox_recipients'] ) )
-			self::ajax_fail( 'A recipient is required.' );
-
-		if ( get_post_type( $_REQUEST['sa_send_metabox_doc_id'] ) != SI_Invoice::POST_TYPE ) {
+		if ( get_post_type( $_REQUEST['sa_send_metabox_doc_id'] ) !== SI_Invoice::POST_TYPE ) {
 			return;
+		}
+
+		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
+		
+		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
+			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
+				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
+			}
+		}
+
+		if ( empty( $recipients ) ) {
+			self::ajax_fail( 'A recipient is required.' );
 		}
 
 		$invoice = SI_Invoice::get_instance( $_REQUEST['sa_send_metabox_doc_id'] );
 		$invoice->set_sender_note( $_REQUEST['sa_send_metabox_sender_note'] );
-		do_action( 'send_invoice', $invoice, $_REQUEST['sa_metabox_recipients'] );
+
+		$from_email = null;
+		$from_name = null;
+		if ( isset( $_REQUEST['sa_send_metabox_send_as'] ) ) {
+			$name_and_email = SI_Notifications_Control::email_split( $_REQUEST['sa_send_metabox_send_as'] );
+			if ( is_email( $name_and_email['email'] ) ) {
+				$from_name = $name_and_email['name'];
+				$from_email = $name_and_email['email'];
+			}
+		}
+
+		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name  );
 
 		// If status is temp than change to pending.
 		if ( $invoice->get_status() == SI_Invoice::STATUS_TEMP ) {
@@ -1022,11 +1085,13 @@ class SI_Invoices extends SI_Controller {
 	 * @return                  
 	 */
 	public static function adjust_cloned_invoice( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
-		if ( get_post_type( $cloned_post_id ) == SI_Estimate::POST_TYPE ) {
+		if ( get_post_type( $cloned_post_id ) === SI_Estimate::POST_TYPE ) {
 			$estimate = SI_Estimate::get_instance( $cloned_post_id );
 			$est_id = $estimate->get_invoice_id();
 			$invoice = SI_Invoice::get_instance( $new_post_id );
-
+			if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+				return;
+			}
 			// Adjust invoice id
 			$new_id = apply_filters( 'si_adjust_cloned_invoice_id', $est_id . '-' . $new_post_id, $new_post_id, $cloned_post_id );
 			$invoice->set_invoice_id( $new_id );

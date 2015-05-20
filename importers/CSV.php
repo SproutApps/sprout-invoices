@@ -100,6 +100,10 @@ class SI_CSV_Import extends SI_Importer {
 		// Clear out progress
 		if ( isset( $_POST[self::DELETE_PROGRESS] ) && $_POST[self::DELETE_PROGRESS] == 'restart' ) {
 			delete_option( self::PROGRESS_OPTION );
+			delete_option( self::CLIENT_FILE_OPTION );
+			delete_option( self::INVOICE_FILE_OPTION );
+			delete_option( self::ESTIMATE_FILE_OPTION );
+			delete_option( self::PAYMENT_FILE_OPTION );
 		}
 
 		if ( ! function_exists( 'wp_handle_upload' ) ) {

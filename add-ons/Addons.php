@@ -6,7 +6,7 @@
 */
 class SA_Addons extends SI_Controller {
 	const SETTINGS_PAGE = 'addons';
-	const ADDON_OPTION = 'si_active_addons_v1';
+	const ADDON_OPTION = 'si_active_addons_v2';
 	const API_CB = 'https://sproutapps.co/';
 	private static $active_addons = array();
 
@@ -246,7 +246,7 @@ class SA_Addons extends SI_Controller {
 		if ( empty( $data ) ) {
 			$data = self::get_addon_data( $addon_file );
 		}
-		$key = str_replace( '.php', '', $data['Name'] ) . '-' . $data['Version'];
+		$key = str_replace( '.php', '', $data['Name'] );
 		return sanitize_title( $key );
 	}
 

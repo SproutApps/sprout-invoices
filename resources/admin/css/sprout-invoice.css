@@ -291,6 +291,9 @@ table.sa_table {
   max-width: 100%;
   background-color: transparent;
 }
+.TB_ajaxContent {
+  max-width: 80%;
+}
 .sa_table th {
   text-align: left;
 }
@@ -372,6 +375,17 @@ table.sa_table {
 
 .table.sa_table td p {
 	margin-top: 0px;
+}
+
+.table.sa_table > tfoot > tr > td {
+	border-color: #fff;
+}
+.table.sa_table > tfoot {
+	background-color: #f9f9f9;
+	border-top: 1px solid #ddd;
+}
+.sa_table .tfoot_total_desc {
+	text-align: right;
 }
 /**
  * Copy of button-large
@@ -834,11 +848,6 @@ span.inline_success_message {
 #quick_links .button span.spinner:before {
 	content: ""
 }
-
-.si_status.temp {
-	color: #CCC;
-}
-
 /**
  * Complete / Invoices - #86BD48 134,189,72
  * Pending / Estimates - #FFA500 255,165,0
@@ -861,6 +870,26 @@ span.inline_success_message {
 }
 
 .column-status .submitdelete:hover,#quick_links .submitdelete:hover,.row-actions .submitdelete:hover,.si_status.request,.si_status.write-off {
+	color: #E14D43
+}
+
+.si_status.publish, .si_status.complete {
+	color: #86BD48
+}
+
+.si_status.partial, .si_status.pending {
+	color: #FFA500
+}
+.si_status.temp {
+	color: #26292C
+}
+.si_status.request {
+	color: #55B5E8
+}
+.si_status.declined, .si_status.write-off {
+	color: #26292C
+}
+.si_status.void {
 	color: #E14D43
 }
 
@@ -1366,7 +1395,17 @@ div#invoice_status_updates-sticky-wrapper {
 	font-weight: 400;
 	font-size: .9em
 }
-
+@media (max-width: 600px) {
+	#history_list {
+		display: none;
+	}
+	.admin_fields .input_wrap, .admin_fields .label_wrap {
+		width: 100%;
+		display: block;
+		clear: both;
+		text-align: left;
+	}
+}
 #private_note_wrap {
 	width: 50%
 }
@@ -1404,6 +1443,23 @@ dt span.history_status:before {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none!important
+}
+dt:hover span.history_status:before {
+	visibility: hidden;
+}
+dt span.history_deletion {
+	visibility: hidden;
+}
+dt span.history_deletion button {
+	border: none;
+  	background: none;
+  	padding: 0px;
+}
+dt span.history_deletion button.del_button:before {
+  	color: #E14D43;
+}
+dt:hover span.history_deletion {
+	visibility: visible;
 }
 
 dt span.si_notification:before {
@@ -1473,8 +1529,8 @@ dt span.creation_event:before {
 	font-weight: 700;
 	float: left;
 	padding-top: 3px;
-	margin-right: 10px;
-	width: 130px
+	margin-right: 2%;
+	width: 10%
 }
 #side-sortables .admin_fields .label_wrap {
 	margin-left: 0px;
@@ -1482,7 +1538,7 @@ dt span.creation_event:before {
 	width: auto;	
 }
 .admin_fields .checkbox.input_wrap {
-	margin-left: 141px;
+	margin-left: 12%;
 }
 #side-sortables .admin_fields .checkbox.input_wrap {
 	margin-left: auto;
@@ -1496,6 +1552,14 @@ dt span.creation_event:before {
 	width: auto
 }
 
+@media (max-width: 600px) {
+	.admin_fields .input_wrap, .admin_fields .label_wrap {
+		width: 100%;
+		display: block;
+		clear: both;
+		text-align: left;
+	}
+}
 .split.admin_fields {
 	margin-left: -200px;
 }
@@ -1514,6 +1578,18 @@ dt span.creation_event:before {
 }
 #currency_fields.split.admin_fields .input_wrap input.text-input {
 	width: 3em
+}
+
+/**
+ * Responsive
+ */
+.columns-2 #postbox-container-1 .sa-form-field textarea, .columns-2 #postbox-container-1 .sa-form-field.sa-form-field-text input {
+    width: 100%;
+}
+
+.columns-2 #postbox-container-1 .input_wrap, .columns-2 #postbox-container-1 .label_wrap {
+    clear: both;
+    display: block;
 }
 
 #client_create_form .sa-control-group,
@@ -1645,11 +1721,11 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 
 }
 
-#reports_dashboard dl {
+#reports_dashboard dl, .dashboard_widget dl {
 	padding: 0
 }
 
-#reports_dashboard dt {
+#reports_dashboard dt, .dashboard_widget dt {
 	float: left;
 	clear: left;
 	text-align: right;
@@ -1658,14 +1734,22 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 	width: 140px;
 }
 
-#reports_dashboard dt:after {
+#reports_dashboard dt:after, .dashboard_widget dt:after {
 	content: ":"
 }
 
-#reports_dashboard dd {
+#reports_dashboard dd, .dashboard_widget dd {
 	margin: 0;
 	padding: 0 0 .5em;
 	margin-left: 160px;
+}
+
+.nav-tab-wrapper:empty {
+   display: none;
+}
+
+.index-php h3.dashboard_widget_title {
+	display: none;
 }
 /**
  * Import
@@ -1861,6 +1945,10 @@ dd .add_item_help {
 
 .select2-drop {
 	z-index: 1000000;
+}
+
+#si_admin_field_send_metabox_recipients label {
+    margin-bottom: 5px;
 }
 
 /**
@@ -2111,4 +2199,38 @@ input#sa_recurring_invoice_custom_freq {
     font-weight: 600;
     text-transform: uppercase;
 	position: absolute;
+}
+
+/**
+ * Dashboard widgets
+ */
+
+#time_tracker.postbox #time_tracker_wrap .label_wrap {
+    width: 15%;
+}
+
+#time_tracker.postbox #time_tracker_wrap .input_wrap {
+    width: 80%;
+}
+#time_tracker.postbox #time_tracker_wrap input {
+    width: 30%;
+}
+#time_tracker.postbox #time_tracker_wrap select {
+    width: 60%;
+}
+#time_tracker.postbox #time_tracker_wrap textarea {
+    width: 100%;
+}
+
+#dashboard-widgets h3.dashboard_widget_title a {
+    text-decoration: none;
+}
+
+#dashboard-widgets #time_tracking h3.dashboard_widget_title {
+    padding-left: 10px;
+    background-color: #f9f9f9;
+    float: right;
+}
+#dashboard-widgets #time_tracking thead {
+    background-color: #f9f9f9;
 }

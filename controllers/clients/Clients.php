@@ -43,6 +43,9 @@ class SI_Clients extends SI_Controller {
 
 			add_action( 'wp_ajax_sa_client_submit_metabox',  array( __CLASS__, 'submit_meta_box_view' ), 10, 0 );
 
+			// Improve admin search
+			add_filter( 'si_admin_meta_search', array( __CLASS__, 'filter_admin_search' ), 10, 2 );
+
 		}
 
 		// Prevent Client role admin access
@@ -509,6 +512,17 @@ class SI_Clients extends SI_Controller {
 			unset( $actions['inline hide-if-no-js'] );
 		}
 		return $actions;
+	}
+
+	public static function filter_admin_search( $meta_search = '', $post_type = '' ) {
+		if ( SI_Client::POST_TYPE !== $post_type ) {
+			return array();
+		}
+		$meta_search = array(
+			'_phone',
+			'_website',
+		);
+		return $meta_search;
 	}
 
 

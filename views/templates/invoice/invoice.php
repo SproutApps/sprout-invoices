@@ -44,24 +44,33 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							$payment_string = ( si_has_invoice_deposit() ) ? si__('Pay Deposit') : si__('Pay Invoice') ;
 							 ?>
 						<?php if ( si_get_invoice_balance() && si_get_invoice_status() != 'write-off' ): ?>
-							<a href="#pay" class="button primary_button purchase_button" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" data-dropdown="#payment_selection"><?php echo esc_html( $payment_string ); ?></a>
-							<div id="payment_selection" class="dropdown dropdown-tip dropdown-anchor-right dropdown-relative">
-								<ul class="dropdown-menu">
-									<?php foreach ( si_payment_options() as $slug => $options ): ?>
-										<li id="<?php esc_attr_e( $slug ) ?>" class="payment_option">
-											<a href="<?php si_payment_link( get_the_ID(), $slug ) ?>" data-slug="<?php esc_attr_e( $slug ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" class="payment_option <?php if ( si_is_cc_processor( $slug ) ) echo 'cc_processor' ?>">
-												<?php if ( isset( $options['icons'] ) ): ?>
-													<?php foreach ( $options['icons'] as $path ): ?>
-														<img src="<?php si_esc_e($path) ?>" alt="<?php si_esc_e($options['label']) ?>" height="48" />
-													<?php endforeach ?>
-												<?php else: ?>
-													<span class="process_label"><?php si_esc_e($options['label']) ?></span>
-												<?php endif ?>
-											</a>
-										</li>
-									<?php endforeach ?>
-								</ul>
-							</div>
+							
+							<?php 
+								$payment_options = si_payment_options(); ?>
+							<?php if ( count( $payment_options ) == 1 ): ?>
+								<?php foreach ( $payment_options as $slug => $options ): ?>
+									<a href="<?php si_payment_link( get_the_ID(), $slug ) ?>" href="<?php si_payment_link( get_the_ID(), $slug ) ?>" data-slug="<?php esc_attr_e( $slug ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" class="button primary_button payment_option <?php if ( si_is_cc_processor( $slug ) ) echo 'cc_processor' ?> <?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $payment_string ); ?></a>
+								<?php endforeach ?>
+							<?php else: ?>
+								<a href="#pay" class="button primary_button purchase_button" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" data-dropdown="#payment_selection"><?php echo esc_html( $payment_string ); ?></a>
+								<div id="payment_selection" class="dropdown dropdown-tip dropdown-anchor-right dropdown-relative">
+									<ul class="dropdown-menu">
+										<?php foreach ( $payment_options as $slug => $options ): ?>
+											<li id="<?php esc_attr_e( $slug ) ?>" class="payment_option">
+												<a href="<?php si_payment_link( get_the_ID(), $slug ) ?>" data-slug="<?php esc_attr_e( $slug ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" class="payment_option <?php if ( si_is_cc_processor( $slug ) ) echo 'cc_processor' ?> <?php echo esc_attr( $slug ) ?>">
+													<?php if ( isset( $options['icons'] ) ): ?>
+														<?php foreach ( $options['icons'] as $path ): ?>
+															<img src="<?php si_esc_e($path) ?>" alt="<?php si_esc_e($options['label']) ?>" height="48" />
+														<?php endforeach ?>
+													<?php else: ?>
+														<span class="process_label"><?php si_esc_e($options['label']) ?></span>
+													<?php endif ?>
+												</a>
+											</li>
+										<?php endforeach ?>
+									</ul>
+								</div>
+							<?php endif ?>
 						<?php endif ?>
 						<?php do_action( 'si_doc_actions' ) ?>
 					</div><!-- #doc_actions -->
@@ -206,7 +215,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 								<?php do_action( 'si_document_line_items' ) ?>
 								<?php foreach ( $line_items as $position => $data ): ?>
 									<?php if ( is_int( $position ) ): // is not a child ?>
-										<li class="item" data-id="<?php echo esc_attr( $position ); ?>">
+										<li class="item" data-id="<?php echo (float) $position ?>">
 											<?php
 												// get the children of this top level item
 												$children = si_line_item_get_children( $position, $line_items ); ?>
@@ -218,7 +227,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 											<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
 												<ol class="items_list">
 													<?php foreach ( $children as $child_position ): ?>
-														<li class="item" data-id="<?php echo esc_attr( $child_position ); ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
+														<li class="item" data-id="<?php echo (float) $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
 													<?php endforeach ?>
 												</ol>
 											<?php endif ?>
@@ -307,14 +316,14 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 			<?php do_action( 'si_document_history' ) ?>
 			<?php foreach ( si_doc_history_records() as $item_id => $data ): ?>
 				<dt>
-					<span class="history_status <?php echo esc_attr( $data['status_type'] ); ?>"><?php echo esc_html( $data['type'] ); ?></span><br/>
+					<span class="history_status <?php echo esc_attr( $data['status_type'] ); ?>"><?php echo esc_attr( $data['type'] ); ?></span><br/>
 					<span class="history_date"><?php echo date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
 				</dt>
 
 				<dd>
 					<?php if ( $data['status_type'] == SI_Notifications::RECORD ): ?>
 						<p>
-							<?php echo esc_html( $update_title ); ?>
+							<?php echo esc_html( $update_title ) ?>
 							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
 						</p>
 						<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">

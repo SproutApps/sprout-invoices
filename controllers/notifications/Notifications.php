@@ -29,9 +29,9 @@ class SI_Notifications extends SI_Notifications_Control {
 		}
 
 		// estimates
-		add_action( 'send_estimate', array( __CLASS__, 'estimate_notification' ), 10, 2 );
+		add_action( 'send_estimate', array( __CLASS__, 'estimate_notification' ), 10, 4 );
 		// invoices
-		add_action( 'send_invoice', array( __CLASS__, 'invoice_notification' ), 10, 2 );
+		add_action( 'send_invoice', array( __CLASS__, 'invoice_notification' ), 10, 4 );
 		add_action( 'payment_complete', array( __CLASS__, 'paid_notification' ) );
 		
 		// Admin
@@ -298,37 +298,71 @@ class SI_Notifications extends SI_Notifications_Control {
 	// notification callbacks //
 	/////////////////////////////
 
-	public static function estimate_notification( SI_Estimate $estimate, $recipients = array() ) {
+	public static function estimate_notification( SI_Estimate $estimate, $recipients = array(), $from_email = null, $from_name = null ) {
 		$invoice = '';
 		if ( $invoice_id = $estimate->get_invoice_id() ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 		}
 		foreach ( array_unique( $recipients ) as $user_id ) {
-			$to = self::get_user_email( $user_id );
+			/**
+			 * sometimes the recipients list will pass an email instead of an id
+			 * attempt to find a user first.
+			 */
+			if ( is_email( $user_id ) ) {
+				if ( $user = get_user_by( 'email', $user_id ) ) {
+					$user_id = $user->ID;
+					$to = self::get_user_email( $user_id );
+				}
+				else { // no user found
+					$to = $user_id;
+				}
+			}
+			else {
+				$to = self::get_user_email( $user_id );
+			}
 			$data = array(
-				'user_id' => $user_id,
+				'user_id' => ( is_numeric( $user_id ) ) ? $user_id : '',
 				'estimate' => $estimate,
 				'invoice' => $invoice,
 				'to' => $to
 			);
-			self::send_notification( 'send_estimate', $data, $to );
+			
+			self::send_notification( 'send_estimate', $data, $to, $from_email, $from_name );
 		}
 	}
 
-	public static function invoice_notification( SI_Invoice $invoice, $recipients = array() ) {
+	public static function invoice_notification( SI_Invoice $invoice, $recipients = array(), $from_email = null, $from_name = null ) {
 		$estimate = '';
 		if ( $estimate_id = $invoice->get_estimate_id() ) {
 			$estimate = SI_Estimate::get_instance( $estimate_id );
 		}
 		foreach ( array_unique( $recipients ) as $user_id ) {
-			$to = self::get_user_email( $user_id );
+			
+			/**
+			 * sometimes the recipients list will pass an email instead of an id
+			 * attempt to find a user first.
+			 */
+			if ( is_email( $user_id ) ) {
+				if ( $user = get_user_by( 'email', $user_id ) ) {
+					$user_id = $user->ID;
+					$to = self::get_user_email( $user_id );
+				}
+				else { // no user found
+					$to = $user_id;
+				}
+			}
+			else {
+				$to = self::get_user_email( $user_id );
+			}
+
 			$data = array(
-				'user_id' => $user_id,
+				'user_id' => ( is_numeric( $user_id ) ) ? $user_id : '',
 				'invoice' => $invoice,
 				'estimate' => $estimate,
-				'to' => $to
+				'to' => $to,
 			);
-			self::send_notification( 'send_invoice', $data, $to );
+
+			self::send_notification( 'send_invoice', $data, $to, $from_email, $from_name );
 		}
 	}
 
