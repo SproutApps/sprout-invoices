@@ -23,255 +23,255 @@ abstract class SI_Controller extends Sprout_Invoices {
 	private static $template_path = self::DEFAULT_TEMPLATE_DIRECTORY;
 
 	protected static $countries = array(
-		'AF' => "Afghanistan",
-		'AX' => "Aland Islands",
-		'AL' => "Albania",
-		'DZ' => "Algeria",
-		'AS' => "American Samoa",
-		'AD' => "Andorra",
-		'AO' => "Angola",
-		'AI' => "Anguilla",
-		'AQ' => "Antarctica",
-		'AG' => "Antigua and Barbuda",
-		'AR' => "Argentina",
-		'AM' => "Armenia",
-		'AW' => "Aruba",
-		'AU' => "Australia",
-		'AT' => "Austria",
-		'AZ' => "Azerbaijan",
-		'BS' => "Bahamas",
-		'BH' => "Bahrain",
-		'BD' => "Bangladesh",
-		'BB' => "Barbados",
-		'BY' => "Belarus",
-		'BE' => "Belgium",
-		'BZ' => "Belize",
-		'BJ' => "Benin",
-		'BM' => "Bermuda",
-		'BT' => "Bhutan",
-		'BO' => "Bolivia, Plurinational State of",
-		'BQ' => "Bonaire, Sint Eustatius and Saba",
-		'BA' => "Bosnia and Herzegovina",
-		'BW' => "Botswana",
-		'BV' => "Bouvet Island",
-		'BR' => "Brazil",
-		'IO' => "British Indian Ocean Territory",
-		'BN' => "Brunei Darussalam",
-		'BG' => "Bulgaria",
-		'BF' => "Burkina Faso",
-		'BI' => "Burundi",
-		'KH' => "Cambodia",
-		'CM' => "Cameroon",
-		'CA' => "Canada",
-		'CV' => "Cape Verde",
-		'KY' => "Cayman Islands",
-		'CF' => "Central African Republic",
-		'TD' => "Chad",
-		'CL' => "Chile",
-		'CN' => "China",
-		'CX' => "Christmas Island",
-		'CC' => "Cocos (Keeling) Islands",
-		'CO' => "Colombia",
-		'KM' => "Comoros",
-		'CG' => "Congo",
-		'CD' => "Congo, The Democratic Republic of the",
-		'CK' => "Cook Islands",
-		'CR' => "Costa Rica",
+		'AF' => 'Afghanistan',
+		'AX' => 'Aland Islands',
+		'AL' => 'Albania',
+		'DZ' => 'Algeria',
+		'AS' => 'American Samoa',
+		'AD' => 'Andorra',
+		'AO' => 'Angola',
+		'AI' => 'Anguilla',
+		'AQ' => 'Antarctica',
+		'AG' => 'Antigua and Barbuda',
+		'AR' => 'Argentina',
+		'AM' => 'Armenia',
+		'AW' => 'Aruba',
+		'AU' => 'Australia',
+		'AT' => 'Austria',
+		'AZ' => 'Azerbaijan',
+		'BS' => 'Bahamas',
+		'BH' => 'Bahrain',
+		'BD' => 'Bangladesh',
+		'BB' => 'Barbados',
+		'BY' => 'Belarus',
+		'BE' => 'Belgium',
+		'BZ' => 'Belize',
+		'BJ' => 'Benin',
+		'BM' => 'Bermuda',
+		'BT' => 'Bhutan',
+		'BO' => 'Bolivia, Plurinational State of',
+		'BQ' => 'Bonaire, Sint Eustatius and Saba',
+		'BA' => 'Bosnia and Herzegovina',
+		'BW' => 'Botswana',
+		'BV' => 'Bouvet Island',
+		'BR' => 'Brazil',
+		'IO' => 'British Indian Ocean Territory',
+		'BN' => 'Brunei Darussalam',
+		'BG' => 'Bulgaria',
+		'BF' => 'Burkina Faso',
+		'BI' => 'Burundi',
+		'KH' => 'Cambodia',
+		'CM' => 'Cameroon',
+		'CA' => 'Canada',
+		'CV' => 'Cape Verde',
+		'KY' => 'Cayman Islands',
+		'CF' => 'Central African Republic',
+		'TD' => 'Chad',
+		'CL' => 'Chile',
+		'CN' => 'China',
+		'CX' => 'Christmas Island',
+		'CC' => 'Cocos (Keeling) Islands',
+		'CO' => 'Colombia',
+		'KM' => 'Comoros',
+		'CG' => 'Congo',
+		'CD' => 'Congo, The Democratic Republic of the',
+		'CK' => 'Cook Islands',
+		'CR' => 'Costa Rica',
 		'CI' => "Cote D'ivoire",
-		'HR' => "Croatia",
-		'CU' => "Cuba",
-		'CW' => "Curacao",
-		'CY' => "Cyprus",
-		'CZ' => "Czech Republic",
-		'DK' => "Denmark",
-		'DJ' => "Djibouti",
-		'DM' => "Dominica",
-		'DO' => "Dominican Republic",
-		'EC' => "Ecuador",
-		'EG' => "Egypt",
-		'SV' => "El Salvador",
-		'GQ' => "Equatorial Guinea",
-		'ER' => "Eritrea",
-		'EE' => "Estonia",
-		'ET' => "Ethiopia",
-		'FK' => "Falkland Islands (Malvinas)",
-		'FO' => "Faroe Islands",
-		'FJ' => "Fiji",
-		'FI' => "Finland",
-		'FR' => "France",
-		'GF' => "French Guiana",
-		'PF' => "French Polynesia",
-		'TF' => "French Southern Territories",
-		'GA' => "Gabon",
-		'GM' => "Gambia",
-		'GE' => "Georgia",
-		'DE' => "Germany",
-		'GH' => "Ghana",
-		'GI' => "Gibraltar",
-		'GR' => "Greece",
-		'GL' => "Greenland",
-		'GD' => "Grenada",
-		'GP' => "Guadeloupe",
-		'GU' => "Guam",
-		'GT' => "Guatemala",
-		'GG' => "Guernsey",
-		'GN' => "Guinea",
-		'GW' => "Guinea-Bissau",
-		'GY' => "Guyana",
-		'HT' => "Haiti",
-		'HM' => "Heard Island and McDonald Islands",
-		'VA' => "Holy See (Vatican City State)",
-		'HN' => "Honduras",
-		'HK' => "Hong Kong",
-		'HU' => "Hungary",
-		'IS' => "Iceland",
-		'IN' => "India",
-		'ID' => "Indonesia",
-		'IR' => "Iran, Islamic Republic of",
-		'IQ' => "Iraq",
-		'IE' => "Ireland",
-		'IM' => "Isle of Man",
-		'IL' => "Israel",
-		'IT' => "Italy",
-		'JM' => "Jamaica",
-		'JP' => "Japan",
-		'JE' => "Jersey",
-		'JO' => "Jordan",
-		'KZ' => "Kazakhstan",
-		'KE' => "Kenya",
-		'KI' => "Kiribati",
+		'HR' => 'Croatia',
+		'CU' => 'Cuba',
+		'CW' => 'Curacao',
+		'CY' => 'Cyprus',
+		'CZ' => 'Czech Republic',
+		'DK' => 'Denmark',
+		'DJ' => 'Djibouti',
+		'DM' => 'Dominica',
+		'DO' => 'Dominican Republic',
+		'EC' => 'Ecuador',
+		'EG' => 'Egypt',
+		'SV' => 'El Salvador',
+		'GQ' => 'Equatorial Guinea',
+		'ER' => 'Eritrea',
+		'EE' => 'Estonia',
+		'ET' => 'Ethiopia',
+		'FK' => 'Falkland Islands (Malvinas)',
+		'FO' => 'Faroe Islands',
+		'FJ' => 'Fiji',
+		'FI' => 'Finland',
+		'FR' => 'France',
+		'GF' => 'French Guiana',
+		'PF' => 'French Polynesia',
+		'TF' => 'French Southern Territories',
+		'GA' => 'Gabon',
+		'GM' => 'Gambia',
+		'GE' => 'Georgia',
+		'DE' => 'Germany',
+		'GH' => 'Ghana',
+		'GI' => 'Gibraltar',
+		'GR' => 'Greece',
+		'GL' => 'Greenland',
+		'GD' => 'Grenada',
+		'GP' => 'Guadeloupe',
+		'GU' => 'Guam',
+		'GT' => 'Guatemala',
+		'GG' => 'Guernsey',
+		'GN' => 'Guinea',
+		'GW' => 'Guinea-Bissau',
+		'GY' => 'Guyana',
+		'HT' => 'Haiti',
+		'HM' => 'Heard Island and McDonald Islands',
+		'VA' => 'Holy See (Vatican City State)',
+		'HN' => 'Honduras',
+		'HK' => 'Hong Kong',
+		'HU' => 'Hungary',
+		'IS' => 'Iceland',
+		'IN' => 'India',
+		'ID' => 'Indonesia',
+		'IR' => 'Iran, Islamic Republic of',
+		'IQ' => 'Iraq',
+		'IE' => 'Ireland',
+		'IM' => 'Isle of Man',
+		'IL' => 'Israel',
+		'IT' => 'Italy',
+		'JM' => 'Jamaica',
+		'JP' => 'Japan',
+		'JE' => 'Jersey',
+		'JO' => 'Jordan',
+		'KZ' => 'Kazakhstan',
+		'KE' => 'Kenya',
+		'KI' => 'Kiribati',
 		'KP' => "Korea, Democratic People's Republic of",
-		'KR' => "Korea, Republic of",
-		'KW' => "Kuwait",
-		'KG' => "Kyrgyzstan",
+		'KR' => 'Korea, Republic of',
+		'KW' => 'Kuwait',
+		'KG' => 'Kyrgyzstan',
 		'LA' => "Lao People's Democratic Republic",
-		'LV' => "Latvia",
-		'LB' => "Lebanon",
-		'LS' => "Lesotho",
-		'LR' => "Liberia",
-		'LY' => "Libyan Arab Jamahiriya",
-		'LI' => "Liechtenstein",
-		'LT' => "Lithuania",
-		'LU' => "Luxembourg",
-		'MO' => "Macao",
-		'MK' => "Macedonia, The Former Yugoslav Republic of",
-		'MG' => "Madagascar",
-		'MW' => "Malawi",
-		'MY' => "Malaysia",
-		'MV' => "Maldives",
-		'ML' => "Mali",
-		'MT' => "Malta",
-		'MH' => "Marshall Islands",
-		'MQ' => "Martinique",
-		'MR' => "Mauritania",
-		'MU' => "Mauritius",
-		'YT' => "Mayotte",
-		'MX' => "Mexico",
-		'FM' => "Micronesia, Federated States of",
-		'MD' => "Moldova, Republic of",
-		'MC' => "Monaco",
-		'MN' => "Mongolia",
-		'ME' => "Montenegro",
-		'MS' => "Montserrat",
-		'MA' => "Morocco",
-		'MZ' => "Mozambique",
-		'MM' => "Myanmar",
-		'NA' => "Namibia",
-		'NR' => "Nauru",
-		'NP' => "Nepal",
-		'NL' => "Netherlands",
-		'NC' => "New Caledonia",
-		'NZ' => "New Zealand",
-		'NI' => "Nicaragua",
-		'NE' => "Niger",
-		'NG' => "Nigeria",
-		'NU' => "Niue",
-		'NF' => "Norfolk Island",
-		'MP' => "Northern Mariana Islands",
-		'NO' => "Norway",
-		'OM' => "Oman",
-		'PK' => "Pakistan",
-		'PW' => "Palau",
-		'PS' => "Palestinian Territory, Occupied",
-		'PA' => "Panama",
-		'PG' => "Papua New Guinea",
-		'PY' => "Paraguay",
-		'PE' => "Peru",
-		'PH' => "Philippines",
-		'PN' => "Pitcairn",
-		'PL' => "Poland",
-		'PT' => "Portugal",
-		'PR' => "Puerto Rico",
-		'QA' => "Qatar",
-		'RE' => "Reunion",
-		'RO' => "Romania",
-		'RU' => "Russian Federation",
-		'RW' => "Rwanda",
-		'BL' => "Saint Barthelemy",
-		'SH' => "Saint Helena, Ascension and Tristan Da Cunha",
-		'KN' => "Saint Kitts and Nevis",
-		'LC' => "Saint Lucia",
-		'MF' => "Saint Martin (French Part)",
-		'PM' => "Saint Pierre and Miquelon",
-		'VC' => "Saint Vincent and the Grenadines",
-		'WS' => "Samoa",
-		'SM' => "San Marino",
-		'ST' => "Sao Tome and Principe",
-		'SA' => "Saudi Arabia",
-		'SN' => "Senegal",
-		'RS' => "Serbia",
-		'SC' => "Seychelles",
-		'SL' => "Sierra Leone",
-		'SG' => "Singapore",
-		'SX' => "Sint Maarten (Dutch Part)",
-		'SK' => "Slovakia",
-		'SI' => "Slovenia",
-		'SB' => "Solomon Islands",
-		'SO' => "Somalia",
-		'ZA' => "South Africa",
-		'GS' => "South Georgia and the South Sandwich Islands",
-		'ES' => "Spain",
-		'LK' => "Sri Lanka",
-		'SD' => "Sudan",
-		'SR' => "Suriname",
-		'SJ' => "Svalbard and Jan Mayen",
-		'SZ' => "Swaziland",
-		'SE' => "Sweden",
-		'CH' => "Switzerland",
-		'SY' => "Syrian Arab Republic",
-		'TW' => "Taiwan, Province of China",
-		'TJ' => "Tajikistan",
-		'TZ' => "Tanzania, United Republic of",
-		'TH' => "Thailand",
-		'TL' => "Timor-Leste",
-		'TG' => "Togo",
-		'TK' => "Tokelau",
-		'TO' => "Tonga",
-		'TT' => "Trinidad and Tobago",
-		'TN' => "Tunisia",
-		'TR' => "Turkey",
-		'TM' => "Turkmenistan",
-		'TC' => "Turks and Caicos Islands",
-		'TV' => "Tuvalu",
-		'UG' => "Uganda",
-		'UA' => "Ukraine",
-		'AE' => "United Arab Emirates",
-		'GB' => "United Kingdom",
-		'US' => "United States",
-		'UM' => "United States Minor Outlying Islands",
-		'UY' => "Uruguay",
-		'UZ' => "Uzbekistan",
-		'VU' => "Vanuatu",
-		'VE' => "Venezuela,
-		Bolivarian Republic of",
-		'VN' => "Viet Nam",
-		'VG' => "Virgin Islands, British",
-		'VI' => "Virgin Islands, U.S.",
-		'WF' => "Wallis and Futuna",
-		'EH' => "Western Sahara",
-		'YE' => "Yemen",
-		'ZM' => "Zambia",
-		'ZW' => "Zimbabwe"
+		'LV' => 'Latvia',
+		'LB' => 'Lebanon',
+		'LS' => 'Lesotho',
+		'LR' => 'Liberia',
+		'LY' => 'Libyan Arab Jamahiriya',
+		'LI' => 'Liechtenstein',
+		'LT' => 'Lithuania',
+		'LU' => 'Luxembourg',
+		'MO' => 'Macao',
+		'MK' => 'Macedonia, The Former Yugoslav Republic of',
+		'MG' => 'Madagascar',
+		'MW' => 'Malawi',
+		'MY' => 'Malaysia',
+		'MV' => 'Maldives',
+		'ML' => 'Mali',
+		'MT' => 'Malta',
+		'MH' => 'Marshall Islands',
+		'MQ' => 'Martinique',
+		'MR' => 'Mauritania',
+		'MU' => 'Mauritius',
+		'YT' => 'Mayotte',
+		'MX' => 'Mexico',
+		'FM' => 'Micronesia, Federated States of',
+		'MD' => 'Moldova, Republic of',
+		'MC' => 'Monaco',
+		'MN' => 'Mongolia',
+		'ME' => 'Montenegro',
+		'MS' => 'Montserrat',
+		'MA' => 'Morocco',
+		'MZ' => 'Mozambique',
+		'MM' => 'Myanmar',
+		'NA' => 'Namibia',
+		'NR' => 'Nauru',
+		'NP' => 'Nepal',
+		'NL' => 'Netherlands',
+		'NC' => 'New Caledonia',
+		'NZ' => 'New Zealand',
+		'NI' => 'Nicaragua',
+		'NE' => 'Niger',
+		'NG' => 'Nigeria',
+		'NU' => 'Niue',
+		'NF' => 'Norfolk Island',
+		'MP' => 'Northern Mariana Islands',
+		'NO' => 'Norway',
+		'OM' => 'Oman',
+		'PK' => 'Pakistan',
+		'PW' => 'Palau',
+		'PS' => 'Palestinian Territory, Occupied',
+		'PA' => 'Panama',
+		'PG' => 'Papua New Guinea',
+		'PY' => 'Paraguay',
+		'PE' => 'Peru',
+		'PH' => 'Philippines',
+		'PN' => 'Pitcairn',
+		'PL' => 'Poland',
+		'PT' => 'Portugal',
+		'PR' => 'Puerto Rico',
+		'QA' => 'Qatar',
+		'RE' => 'Reunion',
+		'RO' => 'Romania',
+		'RU' => 'Russian Federation',
+		'RW' => 'Rwanda',
+		'BL' => 'Saint Barthelemy',
+		'SH' => 'Saint Helena, Ascension and Tristan Da Cunha',
+		'KN' => 'Saint Kitts and Nevis',
+		'LC' => 'Saint Lucia',
+		'MF' => 'Saint Martin (French Part)',
+		'PM' => 'Saint Pierre and Miquelon',
+		'VC' => 'Saint Vincent and the Grenadines',
+		'WS' => 'Samoa',
+		'SM' => 'San Marino',
+		'ST' => 'Sao Tome and Principe',
+		'SA' => 'Saudi Arabia',
+		'SN' => 'Senegal',
+		'RS' => 'Serbia',
+		'SC' => 'Seychelles',
+		'SL' => 'Sierra Leone',
+		'SG' => 'Singapore',
+		'SX' => 'Sint Maarten (Dutch Part)',
+		'SK' => 'Slovakia',
+		'SI' => 'Slovenia',
+		'SB' => 'Solomon Islands',
+		'SO' => 'Somalia',
+		'ZA' => 'South Africa',
+		'GS' => 'South Georgia and the South Sandwich Islands',
+		'ES' => 'Spain',
+		'LK' => 'Sri Lanka',
+		'SD' => 'Sudan',
+		'SR' => 'Suriname',
+		'SJ' => 'Svalbard and Jan Mayen',
+		'SZ' => 'Swaziland',
+		'SE' => 'Sweden',
+		'CH' => 'Switzerland',
+		'SY' => 'Syrian Arab Republic',
+		'TW' => 'Taiwan, Province of China',
+		'TJ' => 'Tajikistan',
+		'TZ' => 'Tanzania, United Republic of',
+		'TH' => 'Thailand',
+		'TL' => 'Timor-Leste',
+		'TG' => 'Togo',
+		'TK' => 'Tokelau',
+		'TO' => 'Tonga',
+		'TT' => 'Trinidad and Tobago',
+		'TN' => 'Tunisia',
+		'TR' => 'Turkey',
+		'TM' => 'Turkmenistan',
+		'TC' => 'Turks and Caicos Islands',
+		'TV' => 'Tuvalu',
+		'UG' => 'Uganda',
+		'UA' => 'Ukraine',
+		'AE' => 'United Arab Emirates',
+		'GB' => 'United Kingdom',
+		'US' => 'United States',
+		'UM' => 'United States Minor Outlying Islands',
+		'UY' => 'Uruguay',
+		'UZ' => 'Uzbekistan',
+		'VU' => 'Vanuatu',
+		'VE' => 'Venezuela,
+		Bolivarian Republic of',
+		'VN' => 'Viet Nam',
+		'VG' => 'Virgin Islands, British',
+		'VI' => 'Virgin Islands, U.S.',
+		'WF' => 'Wallis and Futuna',
+		'EH' => 'Western Sahara',
+		'YE' => 'Yemen',
+		'ZM' => 'Zambia',
+		'ZW' => 'Zimbabwe'
 	);
 
 	protected static $states = array(
@@ -576,7 +576,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	);
 
-	protected static $locales = array( 
+	protected static $locales = array(
 		'Default' => '',
 		'Albanian (Albania)' => 'sq_AL',
 		'Albanian' => 'sq',
@@ -734,7 +734,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function init() {
 		if ( is_admin() ) {
-		
+
 			// On Activation
 			add_action( 'si_plugin_activation_hook', array( __CLASS__, 'sprout_invoices_activated' ) );
 
@@ -747,14 +747,14 @@ abstract class SI_Controller extends Sprout_Invoices {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'register_resources' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'frontend_enqueue' ), 20 );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ), 20 );
-		
+
 		// Cron
 		add_filter( 'cron_schedules', array( __CLASS__, 'si_cron_schedule' ) );
 		add_action( 'init', array( __CLASS__, 'set_schedule' ), 10, 0 );
 
 		// Messages
 		add_action( 'init', array( __CLASS__, 'load_messages' ), 0, 0 );
-		
+
 		// AJAX
 		add_action( 'wp_ajax_si_display_messages', array( __CLASS__, 'display_messages' ) );
 		add_action( 'wp_ajax_nopriv_si_display_messages', array( __CLASS__, 'display_messages' ) );
@@ -770,7 +770,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Template path for templates/views, default to 'invoices'.
-	 * 
+	 *
 	 * @return string self::$template_path the folder
 	 */
 	public static function get_template_path() {
@@ -779,7 +779,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Fire actions based on plugin being updated.
-	 * @return 
+	 * @return
 	 */
 	public static function sprout_invoices_activated() {
 		add_option( 'si_do_activation_redirect', true );
@@ -803,11 +803,13 @@ abstract class SI_Controller extends Sprout_Invoices {
 		wp_register_script( 'nestable', SI_URL . '/resources/admin/js/nestable.js', array( 'jquery' ), self::SI_VERSION );
 		wp_register_script( 'sticky', SI_URL . '/resources/admin/js/sticky.js', array( 'jquery' ), self::SI_VERSION );
 		wp_register_script( 'si_admin_est_and_invoices', SI_URL . '/resources/admin/js/est_and_invoices.js', array( 'jquery', 'nestable', 'sticky' ), self::SI_VERSION );
-		wp_register_style( 'sprout_invoice_admin_css', SI_URL . '/resources/admin/css/sprout-invoice.css', array(), self::SI_VERSION  );
+		wp_register_style( 'sprout_invoice_admin_css', SI_URL . '/resources/admin/css/sprout-invoice.css', array(), self::SI_VERSION );
 
 		// Redactor
-		wp_register_script( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.min.js', array( 'jquery' ), self::SI_VERSION );
-		wp_register_style( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.css', array(), self::SI_VERSION  );
+		if ( ! SI_FREE_TEST && file_exists( SI_PATH . '/resources/admin/plugins/redactor/redactor.min.js' ) ) {
+			wp_register_script( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.min.js', array( 'jquery' ), self::SI_VERSION );
+			wp_register_style( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.css', array(), self::SI_VERSION );
+		}
 
 		// Select2
 		wp_register_style( 'select2_css', SI_URL . '/resources/admin/plugins/select2/select2.css', null, self::SI_VERSION, false );
@@ -823,7 +825,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 		// Templates
 		wp_register_script( 'sprout_doc_scripts', SI_URL . '/resources/front-end/js/sprout-invoices.js', array( 'jquery', 'qtip' ), self::SI_VERSION );
-		wp_register_style( 'sprout_doc_style', SI_URL . '/resources/front-end/css/sprout-invoices.style.css', array( 'open-sans', 'dashicons', 'qtip' ), self::SI_VERSION  );
+		wp_register_style( 'sprout_doc_style', SI_URL . '/resources/front-end/css/sprout-invoices.style.css', array( 'open-sans', 'dashicons', 'qtip' ), self::SI_VERSION );
 
 	}
 
@@ -862,7 +864,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function admin_enqueue() {
 		$si_js_object = self::get_localized_js();
-		
+
 		// Localization
 		$si_js_object += array(
 			'premium' => ( ! SI_FREE_TEST && file_exists( SI_PATH . '/controllers/updates/Updates.php' ) ) ? true : false,
@@ -873,8 +875,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$screen = get_current_screen();
 		$screen_post_type = str_replace( 'edit-', '', $screen->id );
 		if ( in_array( $screen_post_type, array( SI_Estimate::POST_TYPE, SI_Invoice::POST_TYPE ) ) ) {
-			
-			if ( !SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
+
+			if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
 				$si_js_object['redactor'] = true;
 				wp_enqueue_script( 'redactor' );
 				wp_enqueue_style( 'redactor' );
@@ -895,7 +897,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		if ( $screen_post_type == SI_Client::POST_TYPE ) {
-			
+
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
 
 			// dropdowns
@@ -904,7 +906,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		if ( $screen_post_type == SI_Project::POST_TYPE ) {
-			
+
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
 
 			// dropdowns
@@ -916,7 +918,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		wp_enqueue_script( 'select2' );
 		wp_enqueue_style( 'select2_css' );
 		wp_enqueue_script( 'si_admin' );
-		
+
 		wp_enqueue_style( 'qtip' );
 		wp_enqueue_style( 'sprout_invoice_admin_css' );
 
@@ -925,8 +927,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Filter WP Cron schedules
-	 * @param  array $schedules 
-	 * @return array            
+	 * @param  array $schedules
+	 * @return array
 	 */
 	public static function si_cron_schedule( $schedules ) {
 		$schedules['minute'] = array(
@@ -951,11 +953,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( self::DEBUG ) {
 			wp_clear_scheduled_hook( self::CRON_HOOK );
 		}
-		if ( !wp_next_scheduled( self::CRON_HOOK ) ) {
+		if ( ! wp_next_scheduled( self::CRON_HOOK ) ) {
 			$interval = apply_filters( 'si_set_schedule', 'quarterhour' );
 			wp_schedule_event( time(), $interval, self::CRON_HOOK );
 		}
-		if ( !wp_next_scheduled( self::DAILY_CRON_HOOK ) ) {
+		if ( ! wp_next_scheduled( self::DAILY_CRON_HOOK ) ) {
 			wp_schedule_event( time(), 'daily', self::DAILY_CRON_HOOK );
 		}
 	}
@@ -981,7 +983,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 		$file = apply_filters( 'sprout_invoice_template_'.$view, $file );
 		$args = apply_filters( 'load_view_args_'.$view, $args, $allow_theme_override );
-		if ( !empty( $args ) ) extract( $args );
+		if ( ! empty( $args ) ) { extract( $args ); }
 		include $file;
 	}
 
@@ -1039,7 +1041,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * Register a query var and a callback method
 	 * @param  string $var      query variable
 	 * @param  string $callback callback for query variable
-	 * @return null           
+	 * @return null
 	 */
 	protected static function register_query_var( $var, $callback = '' ) {
 		self::add_register_query_var_hooks();
@@ -1051,7 +1053,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 */
 	private static function add_register_query_var_hooks() {
 		static $registered = false; // only do this once
-		if ( !$registered ) {
+		if ( ! $registered ) {
 			add_filter( 'query_vars', array( __CLASS__, 'filter_query_vars' ) );
 			add_action( 'parse_request', array( __CLASS__, 'handle_callbacks' ), 10, 1 );
 			$registered = true;
@@ -1060,7 +1062,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Add query vars into the filtered query_vars filter
-	 * @param  array  $vars 
+	 * @param  array  $vars
 	 * @return array  $vars
 	 */
 	public static function filter_query_vars( array $vars ) {
@@ -1070,8 +1072,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Handle callbacks for registered query vars
-	 * @param  WP     $wp 
-	 * @return null     
+	 * @param  WP     $wp
+	 * @return null
 	 */
 	public static function handle_callbacks( WP $wp ) {
 		foreach ( self::$query_vars as $var => $callback ) {
@@ -1087,15 +1089,15 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function has_messages() {
 		$msgs = self::get_messages();
-		return !empty( $msgs );
+		return ! empty( $msgs );
 	}
 
 	public static function set_message( $message, $status = self::MESSAGE_STATUS_INFO, $save = true ) {
-		if ( !isset( self::$messages ) ) {
+		if ( ! isset( self::$messages ) ) {
 			self::load_messages();
 		}
 		$message = self::__( $message );
-		if ( !isset( self::$messages[$status] ) ) {
+		if ( ! isset( self::$messages[$status] ) ) {
 			self::$messages[$status] = array();
 		}
 		self::$messages[$status][] = $message;
@@ -1112,14 +1114,14 @@ abstract class SI_Controller extends Sprout_Invoices {
 	private static function save_messages() {
 		global $blog_id;
 		$user_id = get_current_user_id();
-		if ( !$user_id ) {
+		if ( ! $user_id ) {
 			set_transient( 'si_messaging_for_'.$_SERVER['REMOTE_ADDR'], self::$messages, 300 );
 		}
 		update_user_meta( $user_id, $blog_id.'_'.self::MESSAGE_META_KEY, self::$messages );
 	}
 
 	public static function get_messages( $type = null ) {
-		if ( !isset( self::$messages ) ) {
+		if ( ! isset( self::$messages ) ) {
 			self::load_messages();
 		}
 		return self::$messages;
@@ -1128,7 +1130,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function load_messages() {
 		$user_id = get_current_user_id();
 		$messages = false;
-		if ( !$user_id ) {
+		if ( ! $user_id ) {
 			if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
 				$messages = get_transient( 'si_messaging_for_'.$_SERVER['REMOTE_ADDR'] );
 			}
@@ -1157,7 +1159,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			$statuses = array( $type );
 		}
 
-		if ( !isset( self::$messages ) ) {
+		if ( ! isset( self::$messages ) ) {
 			self::load_messages();
 		}
 		foreach ( $statuses as $status ) {
@@ -1176,8 +1178,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function login_required( $redirect = '' ) {
-		if ( !get_current_user_id() && apply_filters( 'si_login_required', true ) ) {
-			if ( !$redirect && self::using_permalinks() ) {
+		if ( ! get_current_user_id() && apply_filters( 'si_login_required', true ) ) {
+			if ( ! $redirect && self::using_permalinks() ) {
 				$schema = is_ssl() ? 'https://' : 'http://';
 				$redirect = $schema.$_SERVER['SERVER_NAME'].htmlspecialchars( $_SERVER['REQUEST_URI'] );
 				if ( isset( $_REQUEST ) ) {
@@ -1196,10 +1198,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function si_get_home_url_option() {
 		global $blog_id;
 
-		if ( empty( $blog_id ) || !is_multisite() )
-			$url = get_option( 'home' );
-		else
-			$url = get_blog_option( $blog_id, 'home' );
+		if ( empty( $blog_id ) || ! is_multisite() ) {
+			$url = get_option( 'home' ); }
+		else {
+			$url = get_blog_option( $blog_id, 'home' ); }
 
 		return apply_filters( 'si_get_home_url_option', esc_url( $url ) );
 	}
@@ -1208,9 +1210,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * Comparison function
 	 */
 	public static function sort_by_weight( $a, $b ) {
-		if ( !isset( $a['weight'] ) || !isset( $b['weight'] ) )
-			return 0;	
-		
+		if ( ! isset( $a['weight'] ) || ! isset( $b['weight'] ) ) {
+			return 0; }
+
 		if ( $a['weight'] == $b['weight'] ) {
 			return 0;
 		}
@@ -1221,9 +1223,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * Comparison function
 	 */
 	public static function sort_by_date( $a, $b ) {
-		if ( !isset( $a['date'] ) || !isset( $b['date'] ) )
-			return 0;	
-		
+		if ( ! isset( $a['date'] ) || ! isset( $b['date'] ) ) {
+			return 0; }
+
 		if ( $a['date'] == $b['date'] ) {
 			return 0;
 		}
@@ -1233,13 +1235,13 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Get default state options
-	 * @param  array  $args 
-	 * @return array       
+	 * @param  array  $args
+	 * @return array
 	 */
 	public static function get_state_options( $args = array() ) {
 		$states = self::$grouped_states;
 		if ( isset( $args['include_option_none'] ) && $args['include_option_none'] ) {
-			$states = array( self::__('Select') => array( $args['include_option_none'] ) ) + $states;
+			$states = array( self::__( 'Select' ) => array( $args['include_option_none'] ) ) + $states;
 		}
 		$states = apply_filters( 'sprout_state_options', $states, $args );
 		return $states;
@@ -1247,8 +1249,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Get default countries options
-	 * @param  array  $args 
-	 * @return array       
+	 * @param  array  $args
+	 * @return array
 	 */
 	public static function get_country_options( $args = array() ) {
 		$countries = self::$countries;
@@ -1271,8 +1273,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * Tell caching plugins not to cache the current page load
 	 */
 	public static function do_not_cache() {
-		if ( !defined('DONOTCACHEPAGE') ) {
-			define('DONOTCACHEPAGE', true);
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', true );
 		}
 		nocache_headers();
 	}
@@ -1287,7 +1289,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( function_exists( 'wp_cache_post_change' ) ) {
 			// WP Super Cache
 
-			$GLOBALS["super_cache_enabled"] = 1;
+			$GLOBALS['super_cache_enabled'] = 1;
 			wp_cache_post_change( $post_id );
 
 		} elseif ( function_exists( 'w3tc_pgcache_flush_post' ) ) {
@@ -1300,17 +1302,17 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	/**
 	 * Function to duplicate the post
-	 * @param  int $post_id         
-	 * @param  string $new_post_status 
-	 * @return                   
+	 * @param  int $post_id
+	 * @param  string $new_post_status
+	 * @return
 	 */
 	protected static function clone_post( $post_id, $new_post_status = 'draft', $new_post_type = '' ){
 		$post = get_post( $post_id );
 		$new_post_id = 0;
 		if ( isset( $post ) && $post != null ) {
 
-			if ( $new_post_type == '' ) 
-				$new_post_type = $post->post_type;
+			if ( $new_post_type == '' ) {
+				$new_post_type = $post->post_type; }
 
 			/*
 			 * new post data array
@@ -1330,31 +1332,31 @@ abstract class SI_Controller extends Sprout_Invoices {
 				'to_ping'        => $post->to_ping,
 				'menu_order'     => $post->menu_order
 			);
-	 
+
 			// clone the post
 			$new_post_id = wp_insert_post( $args );
 
 			// get current terms and add them to the new post
-			$taxonomies = get_object_taxonomies($post->post_type);
+			$taxonomies = get_object_taxonomies( $post->post_type );
 			if ( is_array( $taxonomies ) ) {
-				foreach ($taxonomies as $taxonomy) {
-					$post_terms = wp_get_object_terms($post_id, $taxonomy, array( 'orderby' => 'term_order' ));
+				foreach ( $taxonomies as $taxonomy ) {
+					$post_terms = wp_get_object_terms( $post_id, $taxonomy, array( 'orderby' => 'term_order' ) );
 					$terms = array();
-					for ($i=0; $i<count($post_terms); $i++) {
+					for ( $i = 0; $i < count( $post_terms ); $i++ ) {
 						$terms[] = $post_terms[$i]->slug;
 					}
-					wp_set_object_terms($new_post_id, $terms, $taxonomy);
+					wp_set_object_terms( $new_post_id, $terms, $taxonomy );
 				}
 			}
-	 
+
 			// Duplicate all post_meta
-			$meta_keys = get_post_custom_keys($post_id);
+			$meta_keys = get_post_custom_keys( $post_id );
 			if ( $meta_keys ) {
-				foreach ($meta_keys as $meta_key) {
-					$meta_values = get_post_custom_values($meta_key, $post_id);
-					foreach ($meta_values as $meta_value) {
-						$meta_value = maybe_unserialize($meta_value);
-						add_post_meta($new_post_id, $meta_key, $meta_value);
+				foreach ( $meta_keys as $meta_key ) {
+					$meta_values = get_post_custom_values( $meta_key, $post_id );
+					foreach ( $meta_values as $meta_value ) {
+						$meta_value = maybe_unserialize( $meta_value );
+						add_post_meta( $new_post_id, $meta_key, $meta_value );
 					}
 				}
 			}
@@ -1377,11 +1379,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 				do_action( 'si_cloned_post_before_redirect', $cloned_post_id );
 
-				wp_redirect( add_query_arg( array( 'post' => $cloned_post_id, 'action' => 'edit' ), admin_url( 'post.php') ) );
+				wp_redirect( add_query_arg( array( 'post' => $cloned_post_id, 'action' => 'edit' ), admin_url( 'post.php' ) ) );
 				exit();
 			}
 		}
-		
+
 	}
 
 	public static function get_clone_post_url( $post_id = 0, $new_post_type = '' ) {
@@ -1396,9 +1398,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 	/**
 	 * Standard Address Fields.
 	 * Params are used for filter only.
-	 * @param  integer $user_id  
-	 * @param  boolean $shipping 
-	 * @return array            
+	 * @param  integer $user_id
+	 * @param  boolean $shipping
+	 * @return array
 	 */
 	public static function get_standard_address_fields( $required = true, $user_id = 0 ) {
 		$fields = array();
@@ -1483,7 +1485,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'int' => (int) si_get_number_format( $number ),
 			);
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( $currency );
 		exit();
 
@@ -1491,18 +1493,18 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function maybe_create_private_note() {
 
-		if ( !isset( $_REQUEST['private_note_nonce'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['private_note_nonce'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$nonce = $_REQUEST['private_note_nonce'];
-		if ( !wp_verify_nonce( $nonce, SI_Internal_Records::NONCE ) )
-			self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, SI_Internal_Records::NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( !current_user_can( 'edit_posts' ) )
-			return;
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return; }
 
 		$record_id = SI_Internal_Records::new_record( $_REQUEST['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $_REQUEST['associated_id'], '', 0, false );
-		$error = ( $record_id ) ? '' : si__( 'Private note failed to save, try again.' ) ;
+		$error = ( $record_id ) ? '' : si__( 'Private note failed to save, try again.' );
 		$data = array(
 			'id' => $record_id,
 			'content' => $_REQUEST['notes'],
@@ -1512,25 +1514,25 @@ abstract class SI_Controller extends Sprout_Invoices {
 		);
 
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( $data );
 		exit();
 
 	}
 
 	public static function maybe_change_status() {
-		if ( !isset( $_REQUEST['change_status_nonce'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['change_status_nonce'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$nonce = esc_attr( $_REQUEST['change_status_nonce'] );
-		if ( !wp_verify_nonce( $nonce, self::NONCE ) )
-			self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( !isset( $_REQUEST['id'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['id'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
-		if ( !isset( $_REQUEST['status'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['status'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$view = '';
 		$doc_id = esc_attr( $_REQUEST['id'] );
@@ -1552,7 +1554,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 					case 'decline':
 						$new_status = SI_Estimate::STATUS_DECLINED;
 						break;
-					
+
 					default:
 						break;
 				}
@@ -1563,18 +1565,18 @@ abstract class SI_Controller extends Sprout_Invoices {
 						'status' => $doc->get_status()
 					), false );
 				break;
-			
+
 			default:
 				self::ajax_fail( 'Not an estimate or invoice.' );
 				return;
 				break;
 		}
-		
+
 		// action
 		do_action( 'doc_status_changed', $doc, $_REQUEST );
-		
+
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( array( 'new_button' => $view ) );
 		exit();
 
@@ -1621,10 +1623,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function ajax_fail( $message = '', $json = true ) {
 		if ( $message == '' ) {
-			$message = self::__('Something failed.');
+			$message = self::__( 'Something failed.' );
 		}
-		if ( $json ) header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( $json ) { header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) ); }
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		if ( $json ) {
 			echo wp_json_encode( array( 'error' => 1, 'response' => esc_html( $message ) ) );
 		}
@@ -1639,10 +1641,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 	    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
 	    $remote  = $_SERVER['REMOTE_ADDR'];
 
-	    if(filter_var($client, FILTER_VALIDATE_IP)) {
+	    if ( filter_var( $client, FILTER_VALIDATE_IP ) ) {
 	        $ip = $client;
 	    }
-	    elseif(filter_var($forward, FILTER_VALIDATE_IP)) {
+	    elseif ( filter_var( $forward, FILTER_VALIDATE_IP ) ) {
 	        $ip = $forward;
 	    }
 	    else {
@@ -1655,21 +1657,21 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * Number with ordinal suffix
 	 */
 	public static function number_ordinal_suffix( $number = 0 ) {
-		if ( !is_numeric( $number ) ) {
+		if ( ! is_numeric( $number ) ) {
 			return $number;
 		}
-		if ( !$number ) {
+		if ( ! $number ) {
 			return 'zero';
 		}
 		$ends = array('th','st','nd','rd','th','th','th','th','th','th');
-		if ( ($number %100) >= 11 && ($number%100) <= 13 ) {
+		if ( ($number % 100) >= 11 && ($number % 100) <= 13 ) {
 			$abbreviation = $number. 'th';
 		}
 		else {
 			$abbreviation = $number. $ends[$number % 10];
 		}
 		return $abbreviation;
-		
+
 	}
 
 	public static function _save_null() {

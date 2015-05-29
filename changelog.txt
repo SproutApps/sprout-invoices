@@ -1,3 +1,10 @@
+= 7.0.3 =
+
+* FIX: Free version issues with redactor add-on
+* FIX: Time tracker not accepting fractions
+* FIX: Time Tracker on Dashboard issue
+* FIX: Deposits issue for free version
+
 = 7.0 =
 
 https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
