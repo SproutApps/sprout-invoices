@@ -8,7 +8,6 @@
  * @subpackage Estimates
  */
 class SI_Estimates extends SI_Controller {
-	const SETTINGS_PAGE = 'estimates';
 	const HISTORY_UPDATE = 'si_history_update';
 	const HISTORY_STATUS_UPDATE = 'si_history_status_update';
 	const HISTORY_INVOICE_CREATED = 'si_invoice_created';
@@ -99,7 +98,7 @@ class SI_Estimates extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_estimate_settings' => array(
-				'title' => self::__('Estimate Settings'),
+				'title' => self::__( 'Estimate Settings' ),
 				'weight' => 25,
 				'tab' => 'settings',
 				'settings' => array(
@@ -114,7 +113,7 @@ class SI_Estimates extends SI_Controller {
 							'default' => self::$estimates_slug,
 							'description' => sprintf( self::__( 'Example estimate url: %s/%s/045b41dd14ab8507d80a27b7357630a5/' ), site_url(), '<strong>'.self::$estimates_slug.'</strong>' )
 						),
-						
+
 					),
 					self::TERMS_OPTION => array(
 						'label' => self::__( 'Default Terms' ),
@@ -135,7 +134,7 @@ class SI_Estimates extends SI_Controller {
 				)
 			)
 		);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	public static function get_default_terms() {
@@ -152,17 +151,17 @@ class SI_Estimates extends SI_Controller {
 
 	/**
 	 * PRe-register post type arguments
-	 * @param  array  $args 
-	 * @return array       
+	 * @param  array  $args
+	 * @return array
 	 */
 	public static function modify_post_type_slug( $args = array() ) {
 		$args['rewrite']['slug'] = self::$estimates_slug;
 		return $args;
 	}
-	
+
 	/**
 	 * Don't allow for a blank value
-	 * @param  string $option 
+	 * @param  string $option
 	 * @return string
 	 */
 	public static function sanitize_slug_option( $option = '' ) {
@@ -290,17 +289,17 @@ class SI_Estimates extends SI_Controller {
 
 	/**
 	 * Saving line items first thing since totals are calculated later based on other options.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_line_items( $post_id, $post, $callback_args, $estimate_id = null ) {
 
-		if ( !isset( $_POST['line_item_key'] ) )
-			return;
-		
+		if ( ! isset( $_POST['line_item_key'] ) ) {
+			return; }
+
 		$estimate = SI_Estimate::get_instance( $post_id );
 		$line_items = array();
 		foreach ( $_POST['line_item_key'] as $key => $order ) {
@@ -317,7 +316,7 @@ class SI_Estimates extends SI_Controller {
 		}
 
 		// Set the line items meta
-		$estimate->set_line_items($line_items);
+		$estimate->set_line_items( $line_items );
 
 		do_action( 'si_save_line_items_meta_box', $post_id, $post, $estimate );
 	}
@@ -359,8 +358,8 @@ class SI_Estimates extends SI_Controller {
 
 		$estimate = SI_Estimate::get_instance( $post->ID );
 		$status = ( is_a( $estimate, 'SI_Estimate' ) && $estimate->get_status() != 'auto-draft' ) ? $estimate->get_status() : SI_Estimate::STATUS_TEMP ;
-		$expiration_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_expiration_date() : current_time( 'timestamp' )+(60*60*24*30);
-		$issue_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_issue_date() : strtotime( $post->post_date ) ;
+		$expiration_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_expiration_date() : current_time( 'timestamp' ) + (60 * 60 * 24 * 30);
+		$issue_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_issue_date() : strtotime( $post->post_date );
 		$invoice_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_invoice_id() : 0 ;
 		$estimate_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_estimate_id() : '00001';
 		$po_number = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_po_number() : '';
@@ -369,7 +368,7 @@ class SI_Estimates extends SI_Controller {
 		$tax = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax() : '';
 		$tax2 = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_tax2() : '';
 		$currency = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_currency() : '';
-		
+
 		self::load_view( 'admin/meta-boxes/estimates/information', array(
 				'id' => $post->ID,
 				'post' => $post,
@@ -396,11 +395,11 @@ class SI_Estimates extends SI_Controller {
 
 	/**
 	 * Saving line items first thing since totals are calculated later based on other options.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_meta_box_estimate_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$estimate = SI_Estimate::get_instance( $post_id );
@@ -431,13 +430,13 @@ class SI_Estimates extends SI_Controller {
 		$estimate->set_calculated_total();
 
 		$user = get_userdata( get_current_user_id() );
-		do_action( 'si_new_record', 
-			sprintf( si__('Estimate updated by %s.'), $user->display_name ), 
-			self::HISTORY_UPDATE, 
-			$estimate->get_id(), 
-			sprintf( si__('Data updated for %s.'), $estimate->get_id() ), 
-			0, 
-			false );
+		do_action( 'si_new_record',
+			sprintf( si__( 'Estimate updated by %s.' ), $user->display_name ),
+			self::HISTORY_UPDATE,
+			$estimate->get_id(),
+			sprintf( si__( 'Data updated for %s.' ), $estimate->get_id() ),
+			0,
+		false );
 	}
 
 	/**
@@ -478,27 +477,27 @@ class SI_Estimates extends SI_Controller {
 
 		// options for recipients
 		$client = $estimate->get_client();
-		
-		$recipient_options = '<div class="form-group"><div class="input_wrap">';
-		
-			// client users
-			if ( is_a( $client , 'SI_Client') ) {
-				$client_users = $client->get_associated_users();
-				foreach ( $client_users as $user_id ) {
-					$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', $user_id, esc_attr( SI_Notifications::get_user_email( $user_id ) ) );
-				}
-			}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', self::__('client@email.com'), self::__('Entering an email will prevent some notification shortcodes from working since there is no client.') );
+		$recipient_options = '<div class="form-group"><div class="input_wrap">';
+
+			// client users
+		if ( is_a( $client , 'SI_Client' ) ) {
+			$client_users = $client->get_associated_users();
+			foreach ( $client_users as $user_id ) {
+				$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', $user_id, esc_attr( SI_Notifications::get_user_email( $user_id ) ) );
+			}
+		}
+
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', self::__( 'client@email.com' ), self::__( 'Entering an email will prevent some notification shortcodes from working since there is no client.' ) );
 
 			// Send to me.
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), si__('Send me a copy') );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), si__( 'Send me a copy' ) );
 
 		$recipient_options .= '</div></div>';
 
 		$fields['recipients'] = array(
 			'weight' => 5,
-			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', si__('Recipients'), si__("A notification will be sent if recipients are selected and this estimate is saved.") ),
+			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', si__( 'Recipients' ), si__( 'A notification will be sent if recipients are selected and this estimate is saved.' ) ),
 			'type' => 'bypass',
 			'output' => $recipient_options
 		);
@@ -508,7 +507,7 @@ class SI_Estimates extends SI_Controller {
 			'label' => self::__( 'Note' ),
 			'type' => 'textarea',
 			'default' => $estimate->get_sender_note(),
-			'description' => si__('This note will be added to the Estimate Notification via the [admin_note] shortcode.')
+			'description' => si__( 'This note will be added to the Estimate Notification via the [admin_note] shortcode.' )
 		);
 
 		$fields['doc_id'] = array(
@@ -530,11 +529,11 @@ class SI_Estimates extends SI_Controller {
 
 	/**
 	 * Save the sender's note.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_estimate_note( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$estimate = SI_Estimate::get_instance( $post_id );
@@ -546,7 +545,7 @@ class SI_Estimates extends SI_Controller {
 		$estimate->set_sender_note( $sender_notes );
 
 		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
-		
+
 		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
 			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
 				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
@@ -567,7 +566,7 @@ class SI_Estimates extends SI_Controller {
 			}
 		}
 
-		do_action( 'send_estimate', $estimate, $recipients, $from_email, $from_name  );
+		do_action( 'send_estimate', $estimate, $recipients, $from_email, $from_name );
 	}
 
 	/**
@@ -614,11 +613,11 @@ class SI_Estimates extends SI_Controller {
 
 	/**
 	 * Saving line items first thing since totals are calculated later based on other options.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_notes( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$estimate = SI_Estimate::get_instance( $post_id );
@@ -636,9 +635,9 @@ class SI_Estimates extends SI_Controller {
 	/////////////////
 
 	/**
-	 * Remove all actions to wp_print_scripts since stupid themes (and plugins) want to use it as a 
+	 * Remove all actions to wp_print_scripts since stupid themes (and plugins) want to use it as a
 	 * hook to enqueue scripts and plugins. Ideally we would live in a world where this wasn't necessary
-	 * but it is. 
+	 * but it is.
 	 * @return
 	 */
 	public static function remove_scripts_and_styles_from_stupid_themes_and_plugins() {
@@ -651,7 +650,7 @@ class SI_Estimates extends SI_Controller {
 
 	/**
 	 * Remove all scripts and styles from the estimate view and then add those specific to si.
-	 * @return  
+	 * @return
 	 */
 	public static function remove_scripts_and_styles() {
 		if ( SI_Estimate::is_estimate_query() && is_single() ) {
@@ -685,7 +684,6 @@ class SI_Estimates extends SI_Controller {
 				wp_enqueue_style( 'dropdown' );
 				wp_enqueue_style( 'qtip' );
 			}
-			
 		}
 	}
 
@@ -699,29 +697,29 @@ class SI_Estimates extends SI_Controller {
 		if ( isset( $_REQUEST['serialized_fields'] ) ) {
 			foreach ( $_REQUEST['serialized_fields'] as $key => $data ) {
 				if ( strpos( $data['name'], '[]' ) !== false ) {
-					$_REQUEST[str_replace('[]', '', $data['name'])][] = $data['value'];
+					$_REQUEST[str_replace( '[]', '', $data['name'] )][] = $data['value'];
 				}
 				else {
 					$_REQUEST[$data['name']] = $data['value'];
 				}
 			}
 		}
-		if ( !isset( $_REQUEST['sa_send_metabox_notification_nonce'] ) )
-			self::ajax_fail( 'Forget something (nonce)?' );
+		if ( ! isset( $_REQUEST['sa_send_metabox_notification_nonce'] ) ) {
+			self::ajax_fail( 'Forget something (nonce)?' ); }
 
 		$nonce = $_REQUEST['sa_send_metabox_notification_nonce'];
-		if ( !wp_verify_nonce( $nonce, SI_Controller::NONCE ) )
-			self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, SI_Controller::NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( !isset( $_REQUEST['sa_send_metabox_doc_id'] ) )
-			self::ajax_fail( 'Forget something (id)?' );
+		if ( ! isset( $_REQUEST['sa_send_metabox_doc_id'] ) ) {
+			self::ajax_fail( 'Forget something (id)?' ); }
 
 		if ( get_post_type( $_REQUEST['sa_send_metabox_doc_id'] ) !== SI_Estimate::POST_TYPE ) {
 			return;
 		}
 
 		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
-		
+
 		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
 			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
 				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
@@ -745,11 +743,11 @@ class SI_Estimates extends SI_Controller {
 			}
 		}
 
-		do_action( 'send_estimate', $estimate, $recipients, $from_email, $from_name  );
+		do_action( 'send_estimate', $estimate, $recipients, $from_email, $from_name );
 
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo wp_json_encode( array( 'response' => si__('Notification Queued') ) );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
+		echo wp_json_encode( array( 'response' => si__( 'Notification Queued' ) ) );
 		exit();
 	}
 
@@ -759,48 +757,48 @@ class SI_Estimates extends SI_Controller {
 
 	/**
 	 * Maybe create a status update record
-	 * @param  SI_Estimate $estimate        
-	 * @param  string      $status          
-	 * @param  string      $original_status 
-	 * @return null                       
+	 * @param  SI_Estimate $estimate
+	 * @param  string      $status
+	 * @param  string      $original_status
+	 * @return null
 	 */
 	public static function maybe_create_status_update_record( SI_Estimate $estimate, $status = '', $original_status = '' ) {
-		do_action( 'si_new_record', 
-			sprintf( si__('Status changed: %s to <b>%s</b>.'), SI_Estimate::get_status_label( $original_status ), SI_Estimate::get_status_label( $status ) ), 
-			self::HISTORY_STATUS_UPDATE, 
-			$estimate->get_id(), 
-			sprintf( si__('Status update for %s.'), $estimate->get_id() ), 
-			0, 
-			false );
+		do_action( 'si_new_record',
+			sprintf( si__( 'Status changed: %s to <b>%s</b>.' ), SI_Estimate::get_status_label( $original_status ), SI_Estimate::get_status_label( $status ) ),
+			self::HISTORY_STATUS_UPDATE,
+			$estimate->get_id(),
+			sprintf( si__( 'Status update for %s.' ), $estimate->get_id() ),
+			0,
+		false );
 	}
 
 	/**
 	 * Create a record of the new invoice created.
-	 * @param  integer $new_post_id   
-	 * @param  integer $cloned_post_id       
-	 * @param  string  $new_post_type 
-	 * @return                  
+	 * @param  integer $new_post_id
+	 * @param  integer $cloned_post_id
+	 * @param  string  $new_post_type
+	 * @return
 	 */
 	public static function create_record_of_cloned_invoice( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
 		if ( get_post_type( $cloned_post_id ) == SI_Estimate::POST_TYPE ) {
 			if ( $new_post_type == SI_Invoice::POST_TYPE ) {
-				do_action( 'si_new_record', 
-					sprintf( si__('Invoice Created: <a href="%s">%s</a>.'), get_edit_post_link( $new_post_id ), get_the_title( $new_post_id ) ),
-					self::HISTORY_INVOICE_CREATED, 
+				do_action( 'si_new_record',
+					sprintf( si__( 'Invoice Created: <a href="%s">%s</a>.' ), get_edit_post_link( $new_post_id ), get_the_title( $new_post_id ) ),
+					self::HISTORY_INVOICE_CREATED,
 					$cloned_post_id,
-					sprintf( si__('Invoice Created: %s.'), get_the_title( $new_post_id ) ),
-					0, 
-					false );
+					sprintf( si__( 'Invoice Created: %s.' ), get_the_title( $new_post_id ) ),
+					0,
+				false );
 			}
 		}
 	}
 
 	/**
 	 * Adjust the estimate id
-	 * @param  integer $new_post_id   
-	 * @param  integer $cloned_post_id       
-	 * @param  string  $new_post_type 
-	 * @return                  
+	 * @param  integer $new_post_id
+	 * @param  integer $cloned_post_id
+	 * @param  string  $new_post_type
+	 * @return
 	 */
 	public static function adjust_cloned_estimate( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
 		if ( get_post_type( $new_post_id ) == SI_Estimate::POST_TYPE ) {
@@ -820,16 +818,16 @@ class SI_Estimates extends SI_Controller {
 	public static function maybe_log_estimate_view() {
 		global $post;
 
-		if ( !is_single() )
-			return;
+		if ( ! is_single() ) {
+			return; }
 
 		// Make sure this is an estimate we're viewing
-		if ( $post->post_type != SI_Estimate::POST_TYPE )
-			return;
-		
+		if ( $post->post_type != SI_Estimate::POST_TYPE ) {
+			return; }
+
 		// Don't log the authors views
-		if ( $post->post_author == get_current_user_id() )
-			return;
+		if ( $post->post_author == get_current_user_id() ) {
+			return; }
 
 		if ( is_user_logged_in() ) {
 			$user = get_userdata( get_current_user_id() );
@@ -840,11 +838,11 @@ class SI_Estimates extends SI_Controller {
 			$whom = self::get_user_ip();
 		}
 		$estimate = SI_Estimate::get_instance( $post->ID );
-		do_action( 'si_new_record', 
-			$_SERVER, 
-			self::VIEWED_STATUS_UPDATE, 
-			$estimate->get_id(), 
-			sprintf( si__('Estimate viewed by %s.'), esc_html( $whom ) ) );
+		do_action( 'si_new_record',
+			$_SERVER,
+			self::VIEWED_STATUS_UPDATE,
+			$estimate->get_id(),
+		sprintf( si__( 'Estimate viewed by %s.' ), esc_html( $whom ) ) );
 	}
 
 
@@ -882,39 +880,38 @@ class SI_Estimates extends SI_Controller {
 	public static function column_display( $column_name, $id ) {
 		$estimate = SI_Estimate::get_instance( $id );
 
-		if ( !is_a( $estimate, 'SI_Estimate' ) )
+		if ( ! is_a( $estimate, 'SI_Estimate' ) ) {
 			return; // return for that temp post
-
+		}
 		switch ( $column_name ) {
 
-		case 'doc_link':
-			$invoice_id = $estimate->get_invoice_id();
-			if ( $invoice_id ) {
-				printf( '<a class="doc_link si_status %1$s" title="%2$s" href="%3$s">%4$s</a>', si_get_invoice_status( $invoice_id ), self::__( 'Invoice for this estimate.' ), get_edit_post_link( $invoice_id ), '<div class="dashicons icon-sproutapps-invoices"></div>' );
-			}
+			case 'doc_link':
+				$invoice_id = $estimate->get_invoice_id();
+				if ( $invoice_id ) {
+					printf( '<a class="doc_link si_status %1$s" title="%2$s" href="%3$s">%4$s</a>', si_get_invoice_status( $invoice_id ), self::__( 'Invoice for this estimate.' ), get_edit_post_link( $invoice_id ), '<div class="dashicons icon-sproutapps-invoices"></div>' );
+				}
 			break;
-		case 'status': 
+			case 'status':
 				self::status_change_dropdown( $id );
 			break;
 
-		case 'total':
-			printf( '<span class="estimate_total">%s</span>', sa_get_formatted_money( $estimate->get_total(), $estimate->get_id() ) );
+			case 'total':
+				printf( '<span class="estimate_total">%s</span>', sa_get_formatted_money( $estimate->get_total(), $estimate->get_id() ) );
 			break;
 
-		case 'client':
-			if ( $estimate->get_client_id() ) {
-				$client = $estimate->get_client();
-				printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
-			}
-			else {
-				printf( '<b>%s</b> ', si__('No client') );
-			}
-			
+			case 'client':
+				if ( $estimate->get_client_id() ) {
+					$client = $estimate->get_client();
+					printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
+				}
+				else {
+					printf( '<b>%s</b> ', si__( 'No client' ) );
+				}
 
 			break;
 
-		default:
-			// code...
+			default:
+				// code...
 			break;
 		}
 
@@ -1045,7 +1042,7 @@ class SI_Estimates extends SI_Controller {
 	 * @return string
 	 */
 	public static function maybe_set_estimate_terms( $terms = '', SI_Estimate $estimate ) {
-		if ( !in_array( $estimate->get_status(), array( SI_Estimate::STATUS_PENDING, SI_Estimate::STATUS_APPROVED, SI_Estimate::STATUS_DECLINED ) ) ) {
+		if ( ! in_array( $estimate->get_status(), array( SI_Estimate::STATUS_PENDING, SI_Estimate::STATUS_APPROVED, SI_Estimate::STATUS_DECLINED ) ) ) {
 			if ( $terms == '' ) {
 				$terms = self::get_default_terms();
 			}
@@ -1061,7 +1058,7 @@ class SI_Estimates extends SI_Controller {
 	 * @return string
 	 */
 	public static function maybe_set_estimate_notes( $notes = '', SI_Estimate $estimate ) {
-		if ( !in_array( $estimate->get_status(), array( SI_Estimate::STATUS_PENDING, SI_Estimate::STATUS_APPROVED, SI_Estimate::STATUS_DECLINED ) ) ) {
+		if ( ! in_array( $estimate->get_status(), array( SI_Estimate::STATUS_PENDING, SI_Estimate::STATUS_APPROVED, SI_Estimate::STATUS_DECLINED ) ) ) {
 			if ( $notes == '' ) {
 				$notes = self::get_default_notes();
 			}
@@ -1110,15 +1107,15 @@ class SI_Estimates extends SI_Controller {
 	}
 
 	public static function status_change_dropdown( $id ) {
-		if ( !$id ) {
+		if ( ! $id ) {
 			global $post;
 			$id = $post->ID;
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 
-		if ( !is_a( $estimate, 'SI_Estimate' ) )
+		if ( ! is_a( $estimate, 'SI_Estimate' ) ) {
 			return; // return for that temp post
-
+		}
 		self::load_view( 'admin/sections/estimate-status-change-drop', array(
 				'id' => $id,
 				'status' => $estimate->get_status()
@@ -1149,19 +1146,19 @@ class SI_Estimates extends SI_Controller {
 			$screen->add_help_tab( array(
 					'id' => 'manage-estimates',
 					'title' => self::__( 'Manage Estimates' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('The status on the estimate table view can be updated without having to go the edit screen by click on the current status and selecting a new one.'), self::__('If an invoice is associated an icon linking to the edit page will show in the last column.') ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'The status on the estimate table view can be updated without having to go the edit screen by click on the current status and selecting a new one.' ), self::__( 'If an invoice is associated an icon linking to the edit page will show in the last column.' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'edit-estimates',
 					'title' => self::__( 'Editing Estimates' ),
-					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__('Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__('Knowledgebase Article') ),
+					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__( 'Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__( 'Knowledgebase Article' ) ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__( 'Documentation' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
 			);
 		}
 

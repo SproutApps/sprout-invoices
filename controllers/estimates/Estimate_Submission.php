@@ -2,7 +2,7 @@
 
 /**
  * Estimates Controller
- * 	
+ *
  *
  * @package Sprout_Invoice
  * @subpackage Estimates
@@ -30,7 +30,7 @@ class SI_Estimate_Submissions extends SI_Controller {
 		// Settings
 		$settings = array(
 			'estimate_submissions' => array(
-				'title' => self::__('Lead Generation'),
+				'title' => self::__( 'Lead Generation' ),
 				'weight' => 5,
 				'tab' => 'settings',
 				'callback' => array( __CLASS__, 'submission_settings_description' ),
@@ -39,8 +39,8 @@ class SI_Estimate_Submissions extends SI_Controller {
 						'label' => self::__( 'Default Submission Form' ),
 						'option' => array(
 							'type' => 'bypass',
-							'output' => sprintf( '<code>%s</code>', self::__('N/A in free version') ),
-							'description' => sprintf( self::__('To get you started, Sprout Invoices provides a <a href="%s" target="_blank">fully customizable form</a> for estimate submissions. Simply add this shortcode to a page and an estimate submission form will be available to prospective clients. Notifications will be sent for each submission and a new estimate (and client) will be generated.'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' )
+							'output' => sprintf( '<code>%s</code>', self::__( 'N/A in free version' ) ),
+							'description' => sprintf( self::__( 'To get you started, Sprout Invoices provides a <a href="%s" target="_blank">fully customizable form</a> for estimate submissions. Simply add this shortcode to a page and an estimate submission form will be available to prospective clients. Notifications will be sent for each submission and a new estimate (and client) will be generated.' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' )
 							)
 						),
 					'advanced_submission_integration_addon' => array(
@@ -48,21 +48,21 @@ class SI_Estimate_Submissions extends SI_Controller {
 						'option' => array(
 							'type' => 'bypass',
 							'output' => self::advanced_form_integration_view(),
-							'description' => sprintf( self::__('Instead of creating our own advanced form builder we\'ve integrated with the top WordPress form plugins. Make sure to read the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.'), self::PLUGIN_URL.'/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' )
+							'description' => sprintf( self::__( 'Instead of creating our own advanced form builder we\'ve integrated with the top WordPress form plugins. Make sure to read the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.' ), self::PLUGIN_URL.'/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' )
 							)
 						),
 					)
 				)
 			);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 
 	}
 
 	public static function submission_settings_description() {
-		echo '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span>';	
-		printf( self::__('<strong>Upgrade Available:</strong> Enable Estimate Submission integrations and support the future of Sprout Invoices by <a href="%s">upgrading</a>.'), si_get_purchase_link() );
+		echo '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span>';
+		printf( self::__( '<strong>Upgrade Available:</strong> Enable Estimate Submission integrations and support the future of Sprout Invoices by <a href="%s">upgrading</a>.' ), si_get_purchase_link() );
 		echo '</p></div>';
-		printf( self::__('<p>Estimate submissions is the start of the <a href="%s">Sprout Invoices workflow</a>.</p>'), self::PLUGIN_URL.'/sprout-invoices/' );
+		printf( self::__( '<p>Estimate submissions is the start of the <a href="%s">Sprout Invoices workflow</a>.</p>' ), self::PLUGIN_URL.'/sprout-invoices/' );
 	}
 
 	public static function advanced_form_integration_view() {
@@ -72,9 +72,9 @@ class SI_Estimate_Submissions extends SI_Controller {
 			<div class="sa_addon">
 				<div class="add_on_img_wrap">
 					<img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/gravity-ninja.png' ?>" />
-					<a class="purchase_button button button-primary button-large" href="<?php echo self::PLUGIN_URL.'/marketplace/advanced-form-integration-gravity-ninja-forms/' ?>"><?php self::_e('$0-5') ?></a>
+					<a class="purchase_button button button-primary button-large" href="<?php echo self::PLUGIN_URL.'/marketplace/advanced-form-integration-gravity-ninja-forms/' ?>"><?php self::_e( '$0-5' ) ?></a>
 				</div>
-				<h4><?php self::_e('Advanced Form Integration with Gravity and Ninja Forms') ?></h4>
+				<h4><?php self::_e( 'Advanced Form Integration with Gravity and Ninja Forms' ) ?></h4>
 			</div>
 		<?php
 		return ob_get_clean();

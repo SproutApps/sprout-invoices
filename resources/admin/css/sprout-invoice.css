@@ -1530,8 +1530,9 @@ dt span.creation_event:before {
 	float: left;
 	padding-top: 3px;
 	margin-right: 2%;
-	width: 10%
+	width: 10%;
 }
+
 #side-sortables .admin_fields .label_wrap {
 	margin-left: 0px;
 	margin-bottom: 5px;
@@ -1572,6 +1573,9 @@ dt span.creation_event:before {
 .split.admin_fields .checkbox.input_wrap {
 	margin-left: 40px;
 	width: 45%;
+}
+.split.admin_fields .label_wrap {
+	width: 30%
 }
 .split.admin_fields .input_wrap {
 	width: 45%

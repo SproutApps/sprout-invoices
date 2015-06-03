@@ -3,7 +3,7 @@
 
 /**
  * Clients Controller
- * 	
+ *
  *
  * @package Sprout_Invoice
  * @subpackage Clients
@@ -25,7 +25,7 @@ class SI_Invoices extends SI_Controller {
 		self::$default_terms = get_option( self::TERMS_OPTION, 'We do expect payment within 21 days, so please process this invoice within that time. There will be a 1.5% interest charge per month on late invoices.' );
 		self::$default_notes = get_option( self::NOTES_OPTION, 'Thank you; we really appreciate your business.' );
 		self::$invoices_slug = get_option( self::SLUG_OPTION, SI_Invoice::REWRITE_SLUG );
-		
+
 		self::register_settings();
 
 		// Help Sections
@@ -63,7 +63,7 @@ class SI_Invoices extends SI_Controller {
 		// Templating
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts_and_styles' ), PHP_INT_MAX );
 		add_action( 'wp_print_scripts', array( __CLASS__, 'remove_scripts_and_styles_from_stupid_themes_and_plugins' ), -PHP_INT_MAX ); // can't rely on themes to abide by enqueing correctly
-		
+
 		// Create invoice when estimate is approved.
 		add_action( 'doc_status_changed',  array( __CLASS__, 'create_invoice_on_est_acceptance' ), 0 ); // fire before any others
 		add_action( 'doc_status_changed',  array( __CLASS__, 'create_payment_when_invoice_marked_as_paid' ) );
@@ -108,7 +108,7 @@ class SI_Invoices extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_invoice_settings' => array(
-				'title' => self::__('Invoice Settings'),
+				'title' => self::__( 'Invoice Settings' ),
 				'weight' => 20,
 				'tab' => 'settings',
 				'settings' => array(
@@ -123,7 +123,7 @@ class SI_Invoices extends SI_Controller {
 							'default' => self::$invoices_slug,
 							'description' => sprintf( self::__( 'Example invoice url: %s/%s/045b41dd14ab8507d80a27b7357630a5/' ), site_url(), '<strong>'.self::$invoices_slug.'</strong>' )
 						),
-						
+
 					),
 					self::TERMS_OPTION => array(
 						'label' => self::__( 'Default Terms' ),
@@ -132,7 +132,7 @@ class SI_Invoices extends SI_Controller {
 							'default' => self::$default_terms,
 							'description' => self::__( 'These are the default terms for an invoice.' )
 						),
-						
+
 					),
 					self::NOTES_OPTION => array(
 						'label' => self::__( 'Default Note' ),
@@ -145,7 +145,7 @@ class SI_Invoices extends SI_Controller {
 				)
 			)
 		);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	public static function get_default_terms() {
@@ -158,7 +158,7 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Used to add the invoice post type to some taxonomy registrations.
-	 * @param array $post_types 
+	 * @param array $post_types
 	 */
 	public static function add_invoice_post_type_to_taxonomy( $post_types ) {
 		$post_types[] = SI_Invoice::POST_TYPE;
@@ -171,17 +171,17 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * PRe-register post type arguments
-	 * @param  array  $args 
-	 * @return array       
+	 * @param  array  $args
+	 * @return array
 	 */
 	public static function modify_post_type_slug( $args = array() ) {
 		$args['rewrite']['slug'] = self::$invoices_slug;
 		return $args;
 	}
-	
+
 	/**
 	 * Don't allow for a blank value
-	 * @param  string $option 
+	 * @param  string $option
 	 * @return string
 	 */
 	public static function sanitize_slug_option( $option = '' ) {
@@ -312,16 +312,16 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Saving line items first thing since totals are calculated later based on other options.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $invoice_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $invoice_id
+	 * @return
 	 */
 	public static function save_line_items( $post_id, $post, $callback_args, $invoice_id = null ) {
-		if ( !isset( $_POST['line_item_key'] ) )
-			return;
-		
+		if ( ! isset( $_POST['line_item_key'] ) ) {
+			return; }
+
 		$invoice = SI_Invoice::get_instance( $post_id );
 		$line_items = array();
 		foreach ( $_POST['line_item_key'] as $key => $order ) {
@@ -342,7 +342,7 @@ class SI_Invoices extends SI_Controller {
 
 		// Deposits are not supported without the premium version.
 		// $invoice->set_deposit( 0 );
-		
+
 		do_action( 'si_save_line_items_meta_box', $post_id, $post, $invoice );
 	}
 
@@ -383,9 +383,9 @@ class SI_Invoices extends SI_Controller {
 
 		$invoice = SI_Invoice::get_instance( $post->ID );
 		$status = ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_status() != 'auto-draft' ) ? $invoice->get_status() : SI_Invoice::STATUS_TEMP ;
-		$due_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_due_date() : current_time( 'timestamp' )+(60*60*24*30);
-		$expiration_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_expiration_date() : current_time( 'timestamp' )+(60*60*24*30);
-		$issue_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_issue_date() : strtotime( $post->post_date ) ;
+		$due_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_due_date() : current_time( 'timestamp' ) + (60 * 60 * 24 * 30);
+		$expiration_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_expiration_date() : current_time( 'timestamp' ) + (60 * 60 * 24 * 30);
+		$issue_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_issue_date() : strtotime( $post->post_date );
 		$estimate_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_estimate_id() : 0 ;
 		$invoice_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : '00001';
 		$po_number = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_po_number() : '';
@@ -424,11 +424,11 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Saving line items first thing since totals are calculated later based on other options.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $invoice_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $invoice_id
+	 * @return
 	 */
 	public static function save_meta_box_invoice_information( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
@@ -459,13 +459,13 @@ class SI_Invoices extends SI_Controller {
 		$invoice->set_calculated_total();
 
 		$user = get_userdata( get_current_user_id() );
-		do_action( 'si_new_record', 
-			sprintf( si__('Invoice updated by %s.'), $user->display_name ), 
-			self::HISTORY_UPDATE, 
-			$invoice->get_id(), 
-			sprintf( si__('Data updated for %s.'), $invoice->get_id() ), 
-			0, 
-			false );
+		do_action( 'si_new_record',
+			sprintf( si__( 'Invoice updated by %s.' ), $user->display_name ),
+			self::HISTORY_UPDATE,
+			$invoice->get_id(),
+			sprintf( si__( 'Data updated for %s.' ), $invoice->get_id() ),
+			0,
+		false );
 	}
 
 	/**
@@ -506,29 +506,29 @@ class SI_Invoices extends SI_Controller {
 
 		// options for recipients
 		$client = $invoice->get_client();
-		
+
 		$recipient_options = '<div class="form-group"><div class="input_wrap">';
-		
+
 			// client users
-			if ( is_a( $client , 'SI_Client') ) {
-				$client_users = $client->get_associated_users();
-				foreach ( $client_users as $user_id ) {
-					if ( !is_wp_error( $user_id ) ) {
-						$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', $user_id, esc_attr( SI_Notifications::get_user_email( $user_id ) ) );
-					}
+		if ( is_a( $client , 'SI_Client' ) ) {
+			$client_users = $client->get_associated_users();
+			foreach ( $client_users as $user_id ) {
+				if ( ! is_wp_error( $user_id ) ) {
+					$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', $user_id, esc_attr( SI_Notifications::get_user_email( $user_id ) ) );
 				}
 			}
+		}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', self::__('client@email.com'), self::__('Entering an email will prevent some notification shortcodes from working since there is no client.') );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', self::__( 'client@email.com' ), self::__( 'Entering an email will prevent some notification shortcodes from working since there is no client.' ) );
 
 			// Send to me.
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), si__('Send me a copy') );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), si__( 'Send me a copy' ) );
 
 		$recipient_options .= '</div></div>';
 
 		$fields['recipients'] = array(
 			'weight' => 5,
-			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', si__('Recipients'), si__("A notification will be sent if recipients are selected and this invoice is saved.") ),
+			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', si__( 'Recipients' ), si__( 'A notification will be sent if recipients are selected and this invoice is saved.' ) ),
 			'type' => 'bypass',
 			'output' => $recipient_options
 		);
@@ -538,7 +538,7 @@ class SI_Invoices extends SI_Controller {
 			'label' => self::__( 'Note' ),
 			'type' => 'textarea',
 			'default' => $invoice->get_sender_note(),
-			'description' => si__('This note will be added to the Invoice Notification via the [admin_note] shortcode.')
+			'description' => si__( 'This note will be added to the Invoice Notification via the [admin_note] shortcode.' )
 		);
 
 		$fields['doc_id'] = array(
@@ -560,11 +560,11 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Save the sender's note.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $invoice_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $invoice_id
+	 * @return
 	 */
 	public static function save_invoice_note( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
@@ -597,7 +597,7 @@ class SI_Invoices extends SI_Controller {
 			}
 		}
 
-		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name  );
+		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name );
 	}
 
 	/**
@@ -642,11 +642,11 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Saving line items first thing since totals are calculated later based on other options.
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $invoice_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $invoice_id
+	 * @return
 	 */
 	public static function save_notes( $post_id, $post, $callback_args, $invoice_id = null ) {
 		$invoice = SI_Invoice::get_instance( $post_id );
@@ -694,43 +694,43 @@ class SI_Invoices extends SI_Controller {
 	public static function column_display( $column_name, $id ) {
 		$invoice = SI_Invoice::get_instance( $id );
 
-		if ( !is_a( $invoice, 'SI_Invoice' ) )
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			return; // return for that temp post
-
+		}
 		switch ( $column_name ) {
-		case 'doc_link':
-			$estimate_id = $invoice->get_estimate_id();
-			if ( $estimate_id ) {
-				printf( '<a class="doc_link" title="%s" href="%s">%s</a>', self::__( 'Invoice\'s Estimate' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
-			}
+			case 'doc_link':
+				$estimate_id = $invoice->get_estimate_id();
+				if ( $estimate_id ) {
+					printf( '<a class="doc_link" title="%s" href="%s">%s</a>', self::__( 'Invoice\'s Estimate' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
+				}
 			break;
-		case 'status': 
-			
-			self::status_change_dropdown( $id );
+			case 'status':
 
-			break;
-
-		case 'total':
-			printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), self::__('of'), sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ) );
-
-			echo '<div class="row-actions">';
-			printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', self::__( 'Review payments.' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, self::__( 'Payments' ) );
+				self::status_change_dropdown( $id );
 
 			break;
 
-		case 'client':
-			if ( $invoice->get_client_id() ) {
-				$client = $invoice->get_client();
-				printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
-			}
-			else {
-				printf( '<b>%s</b> ', si__('No client') );
-			}
+			case 'total':
+				printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), self::__( 'of' ), sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ) );
+
+				echo '<div class="row-actions">';
+				printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', self::__( 'Review payments.' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, self::__( 'Payments' ) );
 
 			break;
 
-		default:
-			// code...
+			case 'client':
+				if ( $invoice->get_client_id() ) {
+					$client = $invoice->get_client();
+					printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
+				}
+				else {
+					printf( '<b>%s</b> ', si__( 'No client' ) );
+				}
+
+			break;
+
+			default:
+				// code...
 			break;
 		}
 
@@ -856,9 +856,9 @@ class SI_Invoices extends SI_Controller {
 
 
 	/**
-	 * Remove all actions to wp_print_scripts since stupid themes (and plugins) want to use it as a 
+	 * Remove all actions to wp_print_scripts since stupid themes (and plugins) want to use it as a
 	 * hook to enqueue scripts and plugins. Ideally we would live in a world where this wasn't necessary
-	 * but it is. 
+	 * but it is.
 	 * @return
 	 */
 	public static function remove_scripts_and_styles_from_stupid_themes_and_plugins() {
@@ -871,7 +871,7 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Remove all scripts and styles from the estimate view and then add those specific to si.
-	 * @return  
+	 * @return
 	 */
 	public static function remove_scripts_and_styles() {
 		if ( SI_Invoice::is_invoice_query() && is_single() ) {
@@ -905,7 +905,6 @@ class SI_Invoices extends SI_Controller {
 				wp_enqueue_style( 'dropdown' );
 				wp_enqueue_style( 'qtip' );
 			}
-			
 		}
 	}
 
@@ -920,23 +919,23 @@ class SI_Invoices extends SI_Controller {
 		if ( isset( $_REQUEST['serialized_fields'] ) ) {
 			foreach ( $_REQUEST['serialized_fields'] as $key => $data ) {
 				if ( strpos( $data['name'], '[]' ) !== false ) {
-					$_REQUEST[str_replace('[]', '', $data['name'])][] = $data['value'];
+					$_REQUEST[str_replace( '[]', '', $data['name'] )][] = $data['value'];
 				}
 				else {
 					$_REQUEST[$data['name']] = $data['value'];
 				}
 			}
 		}
-		if ( !isset( $_REQUEST['sa_send_metabox_notification_nonce'] ) ) {
+		if ( ! isset( $_REQUEST['sa_send_metabox_notification_nonce'] ) ) {
 			self::ajax_fail( 'Forget something (nonce)?' );
 		}
 
 		$nonce = $_REQUEST['sa_send_metabox_notification_nonce'];
-		if ( !wp_verify_nonce( $nonce, SI_Controller::NONCE ) ) {
+		if ( ! wp_verify_nonce( $nonce, SI_Controller::NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' );
 		}
 
-		if ( !isset( $_REQUEST['sa_send_metabox_doc_id'] ) ) {
+		if ( ! isset( $_REQUEST['sa_send_metabox_doc_id'] ) ) {
 			self::ajax_fail( 'Forget something (id)?' );
 		}
 
@@ -945,7 +944,7 @@ class SI_Invoices extends SI_Controller {
 		}
 
 		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
-		
+
 		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
 			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
 				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
@@ -969,7 +968,7 @@ class SI_Invoices extends SI_Controller {
 			}
 		}
 
-		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name  );
+		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name );
 
 		// If status is temp than change to pending.
 		if ( $invoice->get_status() == SI_Invoice::STATUS_TEMP ) {
@@ -977,8 +976,8 @@ class SI_Invoices extends SI_Controller {
 		}
 
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo wp_json_encode( array( 'response' => si__('Notification Queued') ) );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
+		echo wp_json_encode( array( 'response' => si__( 'Notification Queued' ) ) );
 		exit();
 	}
 
@@ -990,19 +989,19 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Maybe create a status update record
-	 * @param  SI_Estimate $estimate        
-	 * @param  string      $status          
-	 * @param  string      $original_status 
-	 * @return null                       
+	 * @param  SI_Estimate $estimate
+	 * @param  string      $status
+	 * @param  string      $original_status
+	 * @return null
 	 */
 	public static function maybe_create_status_update_record( SI_Invoice $invoice, $status = '', $original_status = '' ) {
 		do_action( 'si_new_record',
-			sprintf( si__('Status changed: %s to <b>%s</b>.'), SI_Invoice::get_status_label( $original_status ), SI_Invoice::get_status_label( $status ) ),
-			self::HISTORY_STATUS_UPDATE, 
-			$invoice->get_id(), 
-			sprintf( si__('Status update for %s.'), $invoice->get_id() ), 
-			0, 
-			false );
+			sprintf( si__( 'Status changed: %s to <b>%s</b>.' ), SI_Invoice::get_status_label( $original_status ), SI_Invoice::get_status_label( $status ) ),
+			self::HISTORY_STATUS_UPDATE,
+			$invoice->get_id(),
+			sprintf( si__( 'Status update for %s.' ), $invoice->get_id() ),
+			0,
+		false );
 	}
 
 	////////////
@@ -1013,7 +1012,7 @@ class SI_Invoices extends SI_Controller {
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		// If the invoice has a balance the status should be changed to partial.
-		if ( $invoice->get_balance() >= 0.01 ) { 
+		if ( $invoice->get_balance() >= 0.01 ) {
 			$invoice->set_as_partial();
 		}
 		else { // else there's no balance
@@ -1027,7 +1026,7 @@ class SI_Invoices extends SI_Controller {
 	 * @return int cloned invoice id.
 	 */
 	public static function create_payment_when_invoice_marked_as_paid( $doc ) {
-		if ( !is_a( $doc, 'SI_Invoice' ) ) {
+		if ( ! is_a( $doc, 'SI_Invoice' ) ) {
 			return;
 		}
 		// Check if status changed was to approved.
@@ -1038,7 +1037,7 @@ class SI_Invoices extends SI_Controller {
 		if ( $balance < 0.01 ) {
 			return;
 		}
-		SI_Admin_Payment::create_admin_payment( $doc->get_id(), $balance, '', 'Now', self::__('This payment was automatically added to settle the balance after it was marked as "Paid".') );
+		SI_Admin_Payment::create_admin_payment( $doc->get_id(), $balance, '', 'Now', self::__( 'This payment was automatically added to settle the balance after it was marked as "Paid".' ) );
 	}
 
 	/**
@@ -1047,7 +1046,7 @@ class SI_Invoices extends SI_Controller {
 	 * @return int cloned invoice id.
 	 */
 	public static function create_invoice_on_est_acceptance( $doc ) {
-		if ( !is_a( $doc, 'SI_Estimate' ) ) {
+		if ( ! is_a( $doc, 'SI_Estimate' ) ) {
 			return;
 		}
 		// Check if status changed was to approved.
@@ -1062,10 +1061,10 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Associate a newly cloned invoice with the estimate cloned from
-	 * @param  integer $new_post_id   
-	 * @param  integer $cloned_post_id       
-	 * @param  string  $new_post_type 
-	 * @return                  
+	 * @param  integer $new_post_id
+	 * @param  integer $cloned_post_id
+	 * @param  string  $new_post_type
+	 * @return
 	 */
 	public static function associate_invoice_after_clone( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
 		if ( get_post_type( $cloned_post_id ) == SI_Estimate::POST_TYPE ) {
@@ -1079,10 +1078,10 @@ class SI_Invoices extends SI_Controller {
 
 	/**
 	 * Adjust the invoice id
-	 * @param  integer $new_post_id   
-	 * @param  integer $cloned_post_id       
-	 * @param  string  $new_post_type 
-	 * @return                  
+	 * @param  integer $new_post_id
+	 * @param  integer $cloned_post_id
+	 * @param  string  $new_post_type
+	 * @return
 	 */
 	public static function adjust_cloned_invoice( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
 		if ( get_post_type( $cloned_post_id ) === SI_Estimate::POST_TYPE ) {
@@ -1120,12 +1119,12 @@ class SI_Invoices extends SI_Controller {
 
 	public static function maybe_remove_deposit( SI_Payment $payment, SI_Checkouts $checkout ) {
 		$invoice_id = $payment->get_invoice_id();
-		$invoice = SI_Invoice::get_instance($invoice_id);
+		$invoice = SI_Invoice::get_instance( $invoice_id );
 		$payment_amount = $payment->get_amount();
 		$invoice_deposit = $invoice->get_deposit();
 		if ( $payment_amount >= $invoice_deposit ) {
 			// Reset the deposit since the payment made covers it.
-			$invoice->set_deposit('');
+			$invoice->set_deposit( '' );
 		}
 	}
 
@@ -1141,7 +1140,7 @@ class SI_Invoices extends SI_Controller {
 	 * @return string
 	 */
 	public static function maybe_set_invoice_terms( $terms = '', SI_Invoice $invoice ) {
-		if ( !in_array( $invoice->get_status(), array( SI_Invoice::STATUS_TEMP, SI_Invoice::STATUS_PENDING ) ) ) {
+		if ( ! in_array( $invoice->get_status(), array( SI_Invoice::STATUS_TEMP, SI_Invoice::STATUS_PENDING ) ) ) {
 			if ( $terms == '' ) {
 				$terms = self::get_default_terms();
 			}
@@ -1157,7 +1156,7 @@ class SI_Invoices extends SI_Controller {
 	 * @return string
 	 */
 	public static function maybe_set_invoice_notes( $notes = '', SI_Invoice $invoice ) {
-		if ( !in_array( $invoice->get_status(), array( SI_Invoice::STATUS_TEMP, SI_Invoice::STATUS_PENDING ) ) ) {
+		if ( ! in_array( $invoice->get_status(), array( SI_Invoice::STATUS_TEMP, SI_Invoice::STATUS_PENDING ) ) ) {
 			if ( $notes == '' ) {
 				$notes = self::get_default_notes();
 			}
@@ -1199,15 +1198,15 @@ class SI_Invoices extends SI_Controller {
 	}
 
 	public static function status_change_dropdown( $id ) {
-		if ( !$id ) {
+		if ( ! $id ) {
 			global $post;
 			$id = $post->ID;
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 
-		if ( !is_a( $invoice, 'SI_Invoice' ) )
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			return; // return for that temp post
-
+		}
 		self::load_view( 'admin/sections/invoice-status-change-drop', array(
 				'id' => $id,
 				'status' => $invoice->get_status()
@@ -1236,19 +1235,19 @@ class SI_Invoices extends SI_Controller {
 			$screen->add_help_tab( array(
 					'id' => 'manage-invoices',
 					'title' => self::__( 'Manage Invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__('The status on the invoice table view can be updated without having to go the edit screen by click on the current status and selecting a new one.'), self::__('Payments are tallied and shown in the Paid column. Hovering over the invoice row will show a Payments link.'),  self::__('If the invoice has an associated estimate the icon linking to the edit page of the estimate will show in the last column.') )
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__( 'The status on the invoice table view can be updated without having to go the edit screen by click on the current status and selecting a new one.' ), self::__( 'Payments are tallied and shown in the Paid column. Hovering over the invoice row will show a Payments link.' ),  self::__( 'If the invoice has an associated estimate the icon linking to the edit page of the estimate will show in the last column.' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'edit-invoices',
 					'title' => self::__( 'Editing Invoices' ),
-					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__('Editing invoices is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__('Knowledgebase Article') ),
+					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__( 'Editing invoices is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__( 'Knowledgebase Article' ) ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__( 'Documentation' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
 			);
 		}
 	}

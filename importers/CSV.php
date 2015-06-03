@@ -37,7 +37,7 @@ class SI_CSV_Import extends SI_Importer {
 
 	/**
 	 * Register the payment settings
-	 * @return  
+	 * @return
 	 */
 	public static function register_settings() {
 		// Settings
@@ -80,7 +80,7 @@ class SI_CSV_Import extends SI_Importer {
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'restart',
-							'label' => self::__('Re-start the Import Process'),
+							'label' => self::__( 'Re-start the Import Process' ),
 							'description' => self::__( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.' )
 						)
 					),
@@ -93,7 +93,7 @@ class SI_CSV_Import extends SI_Importer {
 				)
 			)
 		);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	public static function save_options() {
@@ -144,7 +144,7 @@ class SI_CSV_Import extends SI_Importer {
 
 	/**
 	 * Check to see if it's time to start the import process.
-	 * @return  
+	 * @return
 	 */
 	public static function maybe_process_import() {
 		if ( isset( $_POST[self::PROCESS_ACTION] ) && wp_verify_nonce( $_POST[self::PROCESS_ACTION], self::PROCESS_ACTION ) ) {
@@ -154,46 +154,46 @@ class SI_CSV_Import extends SI_Importer {
 
 	/**
 	 * Utility to return a JSON error
-	 * @param  string $message 
-	 * @return json          
+	 * @param  string $message
+	 * @return json
 	 */
 	public static function return_error( $message ) {
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo wp_json_encode( 
-				array( 'error' => true, 'message' => $message )
-					);
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
+		echo wp_json_encode(
+			array( 'error' => true, 'message' => $message )
+		);
 		exit();
 	}
 
 	/**
 	 * Return the progress array
 	 * @param  array  $array associated array with method and status message
-	 * @return json        
+	 * @return json
 	 */
 	public static function return_progress( $array = array() ) {
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( $array );
 		exit();
 	}
 
 	/**
 	 * First step in the import progress
-	 * @return 
+	 * @return
 	 */
 	public static function import_authentication() {
-		self::return_progress( array( 
-					'authentication' => array( 
-						'message' => self::__('Uploaded CSV files being processed...Hold on to your butts...'), 
+		self::return_progress( array(
+					'authentication' => array(
+						'message' => self::__( 'Uploaded CSV files being processed...Hold on to your butts...' ),
 						'progress' => 10,
 					),
-					'clients' => array( 
-						'message' => self::__('Preparing...'), 
+					'clients' => array(
+						'message' => self::__( 'Preparing...' ),
 						'progress' => 80,
 						),
-					'contacts' => array( 
-						'message' => self::__('Preparing...'), 
+					'contacts' => array(
+						'message' => self::__( 'Preparing...' ),
 						'progress' => 80,
 						'next_step' => 'clients'
 						),
@@ -202,7 +202,7 @@ class SI_CSV_Import extends SI_Importer {
 
 	/**
 	 * Second step is to import clients and contacts
-	 * @return 
+	 * @return
 	 */
 	public static function import_clients() {
 		// run script forever
@@ -210,24 +210,24 @@ class SI_CSV_Import extends SI_Importer {
 
 		$csv_file = get_option( self::CLIENT_FILE_OPTION );
 
-		if ( !$csv_file ) {
+		if ( ! $csv_file ) {
 			// Completed previously
-			self::return_progress( array( 
-						'authentication' => array( 
-							'message' => self::__('Skipping clients without a CSV to process...'), 
+			self::return_progress( array(
+						'authentication' => array(
+							'message' => self::__( 'Skipping clients without a CSV to process...' ),
 							'progress' => 25
 							),
-						'clients' => array( 
-							'message' => self::__('Skipped...nothing to import.'), 
+						'clients' => array(
+							'message' => self::__( 'Skipped...nothing to import.' ),
 							'progress' => 100,
 							),
-						'contacts' => array( 
-							'message' => self::__('Skipped...nothing to import.'), 
+						'contacts' => array(
+							'message' => self::__( 'Skipped...nothing to import.' ),
 							'progress' => 100,
 							),
-						'estimates' => array( 
+						'estimates' => array(
 							'progress' => 80,
-							'message' => self::__('Preparing...'), 
+							'message' => self::__( 'Preparing...' ),
 							'next_step' => 'estimates'
 							),
 						) );
@@ -242,7 +242,7 @@ class SI_CSV_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
-		if ( !isset( $progress['clients_complete'] ) ) {
+		if ( ! isset( $progress['clients_complete'] ) ) {
 
 			foreach ( $clients as $key => $client ) {
 				$new_client_id = self::create_client( $client );
@@ -256,33 +256,33 @@ class SI_CSV_Import extends SI_Importer {
 		}
 
 		// Completed previously
-		self::return_progress( array( 
-				'authentication' => array( 
-					'message' => sprintf( self::__('Successfully imported %s contacts and their clients already, moving on...'), $total_records ), 
+		self::return_progress( array(
+				'authentication' => array(
+					'message' => sprintf( self::__( 'Successfully imported %s contacts and their clients already, moving on...' ), $total_records ),
 					'progress' => 25
 					),
-				'clients' => array( 
-					'message' => sprintf( self::__('Successfully imported %s clients.'), $total_records ), 
+				'clients' => array(
+					'message' => sprintf( self::__( 'Successfully imported %s clients.' ), $total_records ),
 					'progress' => 100,
 					),
-				'contacts' => array( 
-					'message' => sprintf( self::__('Successfully imported more than %s contacts from their clients.'), $total_records ), 
+				'contacts' => array(
+					'message' => sprintf( self::__( 'Successfully imported more than %s contacts from their clients.' ), $total_records ),
 					'progress' => 100,
 					),
-				'estimates' => array( 
+				'estimates' => array(
 					'progress' => 80,
-					'message' => self::__('Preparing...'), 
+					'message' => self::__( 'Preparing...' ),
 					'next_step' => 'estimates'
 					),
 				) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
 	}
 	/**
 	 * Third step is to import estimates
-	 * @return 
+	 * @return
 	 */
 	public static function import_estimates() {
 		// run script forever
@@ -290,20 +290,20 @@ class SI_CSV_Import extends SI_Importer {
 
 		$csv_file = get_option( self::ESTIMATE_FILE_OPTION );
 
-		if ( !$csv_file ) {
+		if ( ! $csv_file ) {
 			// Completed previously
-			self::return_progress( array( 
-						'authentication' => array( 
-							'message' => self::__('Skipping estimate importing without a CSV to process...'), 
+			self::return_progress( array(
+						'authentication' => array(
+							'message' => self::__( 'Skipping estimate importing without a CSV to process...' ),
 							'progress' => 80
 							),
-						'estimates' => array( 
-							'message' => self::__('Skipped...nothing to import.'), 
+						'estimates' => array(
+							'message' => self::__( 'Skipped...nothing to import.' ),
 							'progress' => 100,
 							),
-						'invoices' => array( 
+						'invoices' => array(
 							'progress' => 80,
-							'message' => self::__('Preparing...'), 
+							'message' => self::__( 'Preparing...' ),
 							'next_step' => 'invoices'
 							),
 						) );
@@ -318,7 +318,7 @@ class SI_CSV_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
-		if ( !isset( $progress['estimates_complete'] ) ) {
+		if ( ! isset( $progress['estimates_complete'] ) ) {
 
 			foreach ( $estimates as $key => $estimate ) {
 				self::create_estimate( $estimate );
@@ -330,40 +330,40 @@ class SI_CSV_Import extends SI_Importer {
 			delete_option( self::ESTIMATE_FILE_OPTION );
 
 			// Complete
-			self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s estimates...'), $total_records ), 
+			self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s estimates...' ), $total_records ),
 							'progress' => 75
 							),
 						'estimates' => array(
-							'message' => sprintf( self::__('Imported %s estimates!'), $total_records ),  
+							'message' => sprintf( self::__( 'Imported %s estimates!' ), $total_records ),
 							'progress' => 100,
 							),
-						'invoices' => array( 
+						'invoices' => array(
 							'progress' => 80,
-							'message' => self::__('Preparing...'), 
+							'message' => self::__( 'Preparing...' ),
 							'next_step' => 'invoices'
 							),
 						) );
 		}
 
 		// Completed previously
-		self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s estimates already, moving on...'), $total_records ), 
+		self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s estimates already, moving on...' ), $total_records ),
 							'progress' => 75
 							),
-						'estimates' => array( 
-							'message' => sprintf( self::__('Successfully imported %s estimates already.'), $total_records ), 
+						'estimates' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s estimates already.' ), $total_records ),
 							'progress' => 100,
 							),
-						'invoices' => array( 
+						'invoices' => array(
 							'progress' => 80,
-							'message' => self::__('Preparing...'), 
+							'message' => self::__( 'Preparing...' ),
 							'next_step' => 'invoices'
 							),
 						) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
@@ -371,7 +371,7 @@ class SI_CSV_Import extends SI_Importer {
 
 	/**
 	 * Fourth step is to import invoices
-	 * @return 
+	 * @return
 	 */
 	public static function import_invoices() {
 		// run script forever
@@ -379,20 +379,20 @@ class SI_CSV_Import extends SI_Importer {
 
 		$csv_file = get_option( self::INVOICE_FILE_OPTION );
 
-		if ( !$csv_file ) {
+		if ( ! $csv_file ) {
 			// Completed previously
-			self::return_progress( array( 
-						'authentication' => array( 
-							'message' => self::__('Skipping invoice importing without a CSV to process...'), 
+			self::return_progress( array(
+						'authentication' => array(
+							'message' => self::__( 'Skipping invoice importing without a CSV to process...' ),
 							'progress' => 80
 							),
-						'invoices' => array( 
-							'message' => self::__('Skipped...nothing to import.'), 
+						'invoices' => array(
+							'message' => self::__( 'Skipped...nothing to import.' ),
 							'progress' => 100,
 							),
-						'payments' => array( 
+						'payments' => array(
 							'progress' => 80,
-							'message' => self::__('Preparing...'), 
+							'message' => self::__( 'Preparing...' ),
 							'next_step' => 'payments'
 							),
 						) );
@@ -407,7 +407,7 @@ class SI_CSV_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
-		if ( !isset( $progress['invoices_complete'] ) ) {
+		if ( ! isset( $progress['invoices_complete'] ) ) {
 
 			foreach ( $invoices as $key => $invoice ) {
 				self::create_invoice( $invoice );
@@ -419,40 +419,40 @@ class SI_CSV_Import extends SI_Importer {
 			delete_option( self::INVOICE_FILE_OPTION );
 
 			// Complete
-			self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s invoices...'), $total_records ), 
+			self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s invoices...' ), $total_records ),
 							'progress' => 75
 							),
 						'invoices' => array(
-							'message' => sprintf( self::__('Imported %s invoices!'), $total_records ),  
+							'message' => sprintf( self::__( 'Imported %s invoices!' ), $total_records ),
 							'progress' => 100,
 							),
-						'payments' => array( 
+						'payments' => array(
 							'progress' => 80,
-							'message' => self::__('Preparing...'), 
+							'message' => self::__( 'Preparing...' ),
 							'next_step' => 'payments'
 							),
 						) );
 		}
 
 		// Completed previously
-		self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s invoices already, moving on...'), $total_records ), 
+		self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s invoices already, moving on...' ), $total_records ),
 							'progress' => 75
 							),
-						'invoices' => array( 
-							'message' => sprintf( self::__('Successfully imported %s invoices already.'), $total_records ), 
+						'invoices' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s invoices already.' ), $total_records ),
 							'progress' => 100,
 							),
-						'payments' => array( 
+						'payments' => array(
 							'progress' => 80,
-							'message' => self::__('Preparing...'), 
+							'message' => self::__( 'Preparing...' ),
 							'next_step' => 'payments'
 							),
 						) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
@@ -460,7 +460,7 @@ class SI_CSV_Import extends SI_Importer {
 
 	/**
 	 * Final step is to import payments
-	 * @return 
+	 * @return
 	 */
 	public static function import_payments() {
 		// run script forever
@@ -468,15 +468,15 @@ class SI_CSV_Import extends SI_Importer {
 
 		$csv_file = get_option( self::PAYMENT_FILE_OPTION );
 
-		if ( !$csv_file ) {
+		if ( ! $csv_file ) {
 			// Completed previously
-			self::return_progress( array( 
-						'authentication' => array( 
-							'message' => self::__('Skipping payment importing without a CSV to process...'), 
+			self::return_progress( array(
+						'authentication' => array(
+							'message' => self::__( 'Skipping payment importing without a CSV to process...' ),
 							'progress' => 100
 							),
-						'payments' => array( 
-							'message' => self::__('Skipped...nothing to import.'), 
+						'payments' => array(
+							'message' => self::__( 'Skipped...nothing to import.' ),
 							'progress' => 100,
 							'next_step' => 'complete'
 							),
@@ -492,7 +492,7 @@ class SI_CSV_Import extends SI_Importer {
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
 
-		if ( !isset( $progress['payments_complete'] ) ) {
+		if ( ! isset( $progress['payments_complete'] ) ) {
 
 			foreach ( $payments as $key => $payment ) {
 				self::create_payment( $payment );
@@ -504,13 +504,13 @@ class SI_CSV_Import extends SI_Importer {
 			delete_option( self::PAYMENT_FILE_OPTION );
 
 			// Complete
-			self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s payments...'), $total_records ), 
+			self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s payments...' ), $total_records ),
 							'progress' => 100
 							),
 						'payments' => array(
-							'message' => sprintf( self::__('Imported %s payments!'), $total_records ),  
+							'message' => sprintf( self::__( 'Imported %s payments!' ), $total_records ),
 							'progress' => 100,
 							'next_step' => 'complete'
 							),
@@ -518,18 +518,18 @@ class SI_CSV_Import extends SI_Importer {
 		}
 
 		// Completed previously
-		self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s estimates already, moving on...'), $total_records ), 
+		self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s estimates already, moving on...' ), $total_records ),
 							'progress' => 100
 							),
-						'payments' => array( 
-							'message' => sprintf( self::__('Successfully imported %s payments already.'), $total_records ), 
+						'payments' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s payments already.' ), $total_records ),
 							'progress' => 100,
 							'next_step' => 'complete'
 							),
 						) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
@@ -553,7 +553,7 @@ class SI_CSV_Import extends SI_Importer {
 			'company_name' => ( isset( $client['Company'] ) ) ? $client['Company'] : $client['First Name'] . ' ' . $client['Last Name'],
 			'company_name' => ( isset( $client['Company'] ) ) ? $client['Company'] : '',
 			'website' => ( isset( $client['Web Address'] ) ) ? $client['Web Address'] : '',
-			'phone' =>  ( isset( $client['Telephone'] ) ) ? $client['Telephone'] : '',
+			'phone' => ( isset( $client['Telephone'] ) ) ? $client['Telephone'] : '',
 		);
 
 		$client_id = SI_Client::new_client( $args );
@@ -566,10 +566,10 @@ class SI_CSV_Import extends SI_Importer {
 
 	public static function create_contact( $client = array(), $client_id = 0 ) {
 		$contact = array(
-			'username' =>  ( isset( $client['Email Address'] ) ) ? $client['Email Address'] : '',
-			'email' =>  ( isset( $client['Email Address'] ) ) ? $client['Email Address'] : '',
-			'first_name' =>  ( isset( $client['First Name'] ) ) ? $client['First Name'] : '',
-			'last_name' =>  ( isset( $client['Last Name'] ) ) ? $client['Last Name'] : '',
+			'username' => ( isset( $client['Email Address'] ) ) ? $client['Email Address'] : '',
+			'email' => ( isset( $client['Email Address'] ) ) ? $client['Email Address'] : '',
+			'first_name' => ( isset( $client['First Name'] ) ) ? $client['First Name'] : '',
+			'last_name' => ( isset( $client['Last Name'] ) ) ? $client['Last Name'] : '',
 		);
 
 		if ( $user = get_user_by( 'email', $contact['email'] ) ) {
@@ -578,7 +578,7 @@ class SI_CSV_Import extends SI_Importer {
 		}
 		// Get client and confirm it's validity
 		$client = SI_Client::get_instance( $client_id );
-		if ( !is_a( $client, 'SI_Client' ) ) {
+		if ( ! is_a( $client, 'SI_Client' ) ) {
 			return;
 		}
 		$args = array(
@@ -658,7 +658,6 @@ class SI_CSV_Import extends SI_Importer {
 		$line_items = self::build_line_items( $estimate );
 		$est->set_line_items( $line_items );
 
-		
 		// post date
 		$est->set_post_date( date( 'Y-m-d H:i:s', strtotime( $estimate['Estimate Date'] ) ) );
 
@@ -689,8 +688,7 @@ class SI_CSV_Import extends SI_Importer {
 			global $wpdb;
 			$client_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s", esc_sql( $invoice['Company'] ), SI_Client::POST_TYPE ) );
 			// Get client and confirm it's validity
-			error_log( 'clients: ' . print_r( $client_ids, true ) );
-			if ( is_array( $client_ids ) && !empty( $client_ids ) ) {
+			if ( is_array( $client_ids ) && ! empty( $client_ids ) ) {
 				$client = SI_Client::get_instance( $client_ids[0] );
 				$inv->set_client_id( $client->get_id() );
 			}
@@ -729,10 +727,9 @@ class SI_CSV_Import extends SI_Importer {
 		if ( isset( $invoice['Due Date'] ) ) {
 			$inv->set_due_date( strtotime( $invoice['Due Date'] ) );
 		}
-		
+
 		$line_items = self::build_line_items( $invoice );
 		$inv->set_line_items( $line_items );
-		error_log( 'invoice +++++++++++++++++++ ' . print_r( $inv->get_title(), true ) );
 
 		// post date
 		$inv->set_post_date( date( 'Y-m-d H:i:s', strtotime( $invoice['Invoice Date'] ) ) );
@@ -741,7 +738,7 @@ class SI_CSV_Import extends SI_Importer {
 	}
 
 	public static function create_payment( $payment = array() ) {
-		if ( !isset( $payment['Invoice ID'] ) ) {
+		if ( ! isset( $payment['Invoice ID'] ) ) {
 			do_action( 'si_error', 'No Invoice ID given within payment import', $payment );
 			return;
 		}
@@ -754,14 +751,14 @@ class SI_CSV_Import extends SI_Importer {
 			return;
 		}
 		$invoice = SI_Invoice::get_instance( $invoices[0] );
-		if ( !is_a( $invoice, 'SI_Invoice' ) ) {
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			return;
 		}
 
 		$payment_id = SI_Payment::new_payment( array(
 				'payment_method' => ( isset( $payment['Payment Method'] ) ) ? $payment['Payment Method'] : self::PAYMENT_METHOD,
 				'invoice' => $invoice->get_id(),
-				'amount' => round( $payment['Amount'], 2),
+				'amount' => round( $payment['Amount'], 2 ),
 				'transaction_id' => ( isset( $payment['Payment ID'] ) ) ? $payment['Payment ID'] : '',
 				'data' => array(
 					'api_response' => $payment
@@ -783,7 +780,7 @@ class SI_CSV_Import extends SI_Importer {
 		$line_items_percentage = explode( ',', $data['Line Item Percentage'] );
 		$line_items_total = explode( ',', $data['Line Item Total'] );
 		foreach ( $line_items_desc as $key => $value ) {
-			$line_items[] = array( 
+			$line_items[] = array(
 				'rate' => ( isset( $line_items_rate[$key] ) ) ? $line_items_rate[$key] : 0,
 				'qty' => ( isset( $line_items_qty[$key] ) ) ? $line_items_qty[$key] : 0,
 				'desc' => $value,
@@ -791,7 +788,6 @@ class SI_CSV_Import extends SI_Importer {
 				'tax' => ( isset( $line_items_percentage[$key] ) ) ? $line_items_percentage[$key] : '',
 				);
 		}
-		error_log( 'line items: ' . print_r( $line_items, true ) );
 		return $line_items;
 	}
 
@@ -814,21 +810,21 @@ class SI_CSV_Import extends SI_Importer {
 	}
 
 	protected static function csv_to_array( $filename = '', $delimiter = ',', $fieldnames = '' ) {
-		if( !file_exists( $filename ) || !is_readable( $filename ) ){
+		if ( ! file_exists( $filename ) || ! is_readable( $filename ) ){
 			return false;
 		}
-		if( strlen( $fieldnames ) > 0 ) {
-			$header = explode( ",", $fieldnames );
+		if ( strlen( $fieldnames ) > 0 ) {
+			$header = explode( ',', $fieldnames );
 		} else {
 			$header = null;
 		}
 		$data = array();
 		if ( ( $handle = fopen( $filename, 'r' ) ) !== false ) {
 			while ( ( $row = fgetcsv( $handle, 1000, $delimiter ) ) !== false ) {
-				if(!$header)
-					$header = $row;
-				else
-					$data[] = array_combine( $header, $row );
+				if ( ! $header ) {
+					$header = $row; }
+				else {
+					$data[] = array_combine( $header, $row ); }
 			}
 			fclose( $handle );
 		}

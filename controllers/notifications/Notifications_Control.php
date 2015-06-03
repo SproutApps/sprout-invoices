@@ -37,7 +37,7 @@ class SI_Notifications_Control extends SI_Controller {
 		add_action( 'init', array( __CLASS__, 'notifications_and_shortcodes' ), 5 );
 
 		// register settings
-		
+
 		self::register_settings();
 
 		// Meta boxes
@@ -57,11 +57,9 @@ class SI_Notifications_Control extends SI_Controller {
 		// Help Sections
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
 
-
 		if ( is_admin() ) {
 			add_action( 'init', array( get_class(), 'maybe_refresh_notifications' ) );
 		}
-
 
 	}
 
@@ -90,7 +88,7 @@ class SI_Notifications_Control extends SI_Controller {
 		// Settings
 		$settings = array(
 			'notifications' => array(
-				'title' => self::__('Notification Settings'),
+				'title' => self::__( 'Notification Settings' ),
 				'weight' => 30,
 				'tab' => 'settings',
 				'settings' => array(
@@ -125,13 +123,13 @@ class SI_Notifications_Control extends SI_Controller {
 									'TEXT' => self::__( 'Plain Text' )
 								),
 							'default' => self::$notification_format,
-							'description' => self::__('Default notifications are in plain text. If set to HTML, custom HTML notifications are required.')
+							'description' => self::__( 'Default notifications are in plain text. If set to HTML, custom HTML notifications are required.' )
 							)
 						),
 					)
 				)
 			);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, SI_Controller::SETTINGS_PAGE );
 	}
 
 	public static function get_admin_page( $prefixed = true ) {
@@ -147,12 +145,12 @@ class SI_Notifications_Control extends SI_Controller {
 	}
 
 	public static function notifications_and_shortcodes() {
-		if ( !isset( self::$notifications ) ) {
+		if ( ! isset( self::$notifications ) ) {
 			// Notification types include a name and a list of shortcodes
 			$default_notifications = array(); // defaults are in the hooks class
 			self::$notifications = apply_filters( 'sprout_notifications', $default_notifications );
 		}
-		if ( !isset( self::$shortcodes ) ) {
+		if ( ! isset( self::$shortcodes ) ) {
 			// Notification shortcodes include the code, a description, and a callback
 			// Most shortcodes should be defined by a different controller using the 'si_notification_shortcodes' filter
 			$default_shortcodes = array(); // Default shortcodes are in the hooks class
@@ -195,7 +193,7 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * enqueue admin js for notification management
-	 * @return  
+	 * @return
 	 */
 	public static function queue_notification_js() {
 		$screen = get_current_screen();
@@ -208,7 +206,7 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Regsiter meta boxes for notification editing.
-	 * @return 
+	 * @return
 	 */
 	public static function register_meta_boxes() {
 		// notification specific
@@ -223,7 +221,7 @@ class SI_Notifications_Control extends SI_Controller {
 			);
 
 		foreach ( self::$notifications as $notification => $data ) {
-			$name = ( isset( $data['name'] ) ) ? $data['name'] : self::__('N/A') ;
+			$name = ( isset( $data['name'] ) ) ? $data['name'] : self::__( 'N/A' );
 			$args[self::META_BOX_PREFIX . $notification] = array(
 					'title' => sprintf( self::__( '%s Shortcodes' ), $name ),
 					'show_callback' => array( __CLASS__, 'show_shortcode_meta_box' )
@@ -234,20 +232,20 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Remove publish box and add something custom for notifications
-	 * @param  string $post_type 
-	 * @return             
+	 * @param  string $post_type
+	 * @return
 	 */
-	public static function modify_meta_boxes( $post_type ) {	
-		remove_meta_box( 'submitdiv', SI_Notification::POST_TYPE, 'side');
+	public static function modify_meta_boxes( $post_type ) {
+		remove_meta_box( 'submitdiv', SI_Notification::POST_TYPE, 'side' );
 		remove_meta_box( 'slugdiv', SI_Notification::POST_TYPE, 'normal' );
 	}
 
 	/**
 	 * View for notification shortcodes
-	 * @param  SI_Notification $notification 
-	 * @param  WP_Post $post         
-	 * @param  array $metabox      
-	 * @return                
+	 * @param  SI_Notification $notification
+	 * @param  WP_Post $post
+	 * @param  array $metabox
+	 * @return
 	 */
 	public static function show_shortcode_meta_box( $post, $metabox ) {
 		$id = preg_replace( '/^' . preg_quote( self::META_BOX_PREFIX ) . '/', '', $metabox['id'] );
@@ -262,9 +260,9 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Show custom submit box.
-	 * @param  WP_Post $post         
-	 * @param  array $metabox      
-	 * @return                
+	 * @param  WP_Post $post
+	 * @param  array $metabox
+	 * @return
 	 */
 	public static function show_submit_meta_box( $post, $metabox ) {
 		$notification = SI_Notification::get_instance( $post->ID );
@@ -279,9 +277,9 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * main cllback for saving the notification
-	 * @param  object  $notification      
-	 * @param  string $notification_id 
-	 * @return                      
+	 * @param  object  $notification
+	 * @param  string $notification_id
+	 * @return
 	 */
 	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_type = null ) {
 		if ( $notification_type === null && isset( $_POST['notification_type'] ) ) {
@@ -329,7 +327,7 @@ class SI_Notifications_Control extends SI_Controller {
 	/**
 	 * Get notification instance.
 	 * @param  string $notification the slug for the notification
-	 * @return SI_Notification/false            
+	 * @return SI_Notification/false
 	 */
 	public static function get_notification_instance( $notification ) {
 		if ( isset( self::$notifications[$notification] ) ) {
@@ -352,8 +350,8 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Is the notification disabled.
-	 * @param  string  $notification_name 
-	 * @return boolean                    
+	 * @param  string  $notification_name
+	 * @return boolean
 	 */
 	public static function is_disabled( $notification_name ) {
 		$notification = self::get_notification_instance( $notification_name );
@@ -365,15 +363,15 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Get the notification subject from post title
-	 * @param  string $notification_name 
-	 * @param  array $data              
-	 * @return string                  
+	 * @param  string $notification_name
+	 * @param  array $data
+	 * @return string
 	 */
 	public static function get_notification_instance_subject( $notification_name = '', $data = array() ) {
 		self::$data = $data;
 		$title = '';
 		$notification = self::get_notification_instance( $notification_name );
-		if ( !is_null( $notification ) ) {
+		if ( ! is_null( $notification ) ) {
 			$notification_post = $notification->get_post();
 			$title = $notification_post->post_title;
 			$title = self::do_shortcodes( $notification_name, $title );
@@ -386,15 +384,15 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Get the content for the notification.
-	 * @param  string $notification_name 
-	 * @param  array  $data              
+	 * @param  string $notification_name
+	 * @param  array  $data
 	 * @return string
 	 */
 	public static function get_notification_instance_content( $notification_name = '', $data = array() ) {
 		self::$data = $data;
 		$content = '';
 		$notification = self::get_notification_instance( $notification_name );
-		if ( !is_null( $notification ) ) {
+		if ( ! is_null( $notification ) ) {
 			$notification_post = $notification->get_post();
 			$content = $notification_post->post_content;
 			$content = self::do_shortcodes( $notification_name, $content );
@@ -407,13 +405,13 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Send the notification
-	 * @param  string $notification_name 
-	 * @param  array  $data              
-	 * @param  string $to                
-	 * @param  string $from_email        
-	 * @param  string $from_name         
-	 * @param  bool $html              
-	 * @return 
+	 * @param  string $notification_name
+	 * @param  array  $data
+	 * @param  string $to
+	 * @param  string $from_email
+	 * @param  string $from_name
+	 * @param  bool $html
+	 * @return
 	 */
 	public static function send_notification( $notification_name, $data = array(), $to, $from_email = null, $from_name = null, $html = null ) {
 		// don't send disabled notifications
@@ -452,20 +450,20 @@ class SI_Notifications_Control extends SI_Controller {
 
 		if ( $html ) {
 			$headers = array(
-				"From: ".$from_name." <".$from_email.">",
-				"Content-Type: text/html"
+				'From: '.$from_name.' <'.$from_email.'>',
+				'Content-Type: text/html'
 			);
 		} else {
 			$headers = array(
-				"From: ".$from_name." <".$from_email.">",
+				'From: '.$from_name.' <'.$from_email.'>',
 			);
 		}
 		$headers = implode( "\r\n", $headers ) . "\r\n";
 		$filtered_headers = apply_filters( 'si_notification_headers', $headers, $notification_name, $data, $from_email, $from_name, $html );
-		
+
 		// Use the wp_email function
 		$sent = wp_mail( $to, $notification_title, $notification_content, $filtered_headers );
-		
+
 		if ( $sent != false ) {
 			// Create notification record
 			self::notification_record( $notification_name, $data, $to, $notification_title, $notification_content );
@@ -481,12 +479,12 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Create a record that a notification was sent.
-	 * @param  string $notification_name    
-	 * @param  array $data                 
-	 * @param  string $to                   
-	 * @param  string $notification_title   
-	 * @param  string $notification_content 
-	 * @return null                       
+	 * @param  string $notification_name
+	 * @param  array $data
+	 * @param  string $to
+	 * @param  string $notification_title
+	 * @param  string $notification_content
+	 * @return null
 	 */
 	public static function notification_record( $notification_name, $data, $to, $notification_title, $notification_content ) {
 		$associated_record = 0;
@@ -497,16 +495,16 @@ class SI_Notifications_Control extends SI_Controller {
 			$associated_record = $data['invoice']->get_id();
 		}
 		$content = '';
-		$content .= "<b>" . $notification_title . "</b>\r\n\r\n";
+		$content .= '<b>' . $notification_title . "</b>\r\n\r\n";
 		$content .= $notification_content;
-		do_action( 'si_new_record', 
-				$content, // content
-				self::RECORD, // type slug
-				$associated_record, // post id
-				sprintf( si__('Notification sent to %s.'), esc_html($to) ), // title
-				0, // user id
-				false // don't encode
-				);
+		do_action( 'si_new_record',
+			$content, // content
+			self::RECORD, // type slug
+			$associated_record, // post id
+			sprintf( si__( 'Notification sent to %s.' ), esc_html( $to ) ), // title
+			0, // user id
+			false // don't encode
+		);
 	}
 
 	/**
@@ -521,7 +519,7 @@ class SI_Notifications_Control extends SI_Controller {
 	public static function mark_notification_sent( $notification_name, $data, $to ) {
 		global $blog_id;
 		$user_id = self::get_notification_instance_user_id( $to, $data );
-		if ( !$user_id ) {
+		if ( ! $user_id ) {
 			return; // don't know who it is, so we can't log it
 		}
 		add_user_meta( $user_id, $blog_id.'_si_notification-'.$notification_name, self::get_hash( $data ) );
@@ -539,7 +537,7 @@ class SI_Notifications_Control extends SI_Controller {
 	public static function was_notification_sent( $notification_name, $data, $to, $notification_content = '' ) {
 		global $blog_id;
 		$user_id = self::get_notification_instance_user_id( $to, $data );
-		if ( !$user_id ) {
+		if ( ! $user_id ) {
 			return false;
 		}
 		if ( $notification_content != '' ) {
@@ -594,7 +592,7 @@ class SI_Notifications_Control extends SI_Controller {
 			return $data['user']->ID;
 		}
 		// then try to determine based on email address
-		if ( !$user_id ) {
+		if ( ! $user_id ) {
 			$email = ( isset( $data['user_email'] ) && $data['user_email'] != '' ) ? $data['user_email'] : $to ;
 			$user = get_user_by( 'email', $email );
 			if ( $user && isset( $user->ID ) ) {
@@ -612,7 +610,7 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( is_numeric( $user ) ) {
 			$user = get_userdata( $user );
 		}
-		if ( !is_a( $user, 'WP_User' ) ) {
+		if ( ! is_a( $user, 'WP_User' ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Get User Email FAILED', $user );
 			wpbt();
 			return false;
@@ -637,13 +635,13 @@ class SI_Notifications_Control extends SI_Controller {
 	/**
 	 * Get associated client user ids
 	 * @param  object $doc Invoice/Estimate
-	 * @return array      
+	 * @return array
 	 */
 	public static function get_document_recipients( $doc ) {
 		$client = $doc->get_client();
 		$client_users = array();
 		// get the user ids associated with this doc.
-		if ( !is_wp_error( $client ) && is_a( $client, 'SI_Client' ) ) {
+		if ( ! is_wp_error( $client ) && is_a( $client, 'SI_Client' ) ) {
 			$client_users = $client->get_associated_users();
 		}
 		else { // no client associated
@@ -652,7 +650,7 @@ class SI_Notifications_Control extends SI_Controller {
 				$client_users = array( $user_id );
 			}
 		}
-		if ( is_wp_error( $client_users ) || !is_array( $client_users ) ) {
+		if ( is_wp_error( $client_users ) || ! is_array( $client_users ) ) {
 			do_action( 'si_error', 'get_document_recipients ERROR', $client_users );
 		}
 		return $client_users;
@@ -666,10 +664,10 @@ class SI_Notifications_Control extends SI_Controller {
 	/**
 	 * Add the shortcodes via the appropriate WP actions, apply the shortcodes to the content and
 	 * remove the shortcodes after the content has been filtered.
-	 * 
-	 * @param  string $notification_name 
-	 * @param  string $content           
-	 * @return string                    
+	 *
+	 * @param  string $notification_name
+	 * @param  string $content
+	 * @return string
 	 */
 	public static function do_shortcodes( $notification_name, $content ) {
 		foreach ( self::$notifications[$notification_name]['shortcodes'] as $shortcode ) {
@@ -684,10 +682,10 @@ class SI_Notifications_Control extends SI_Controller {
 
 	/**
 	 * Shortcode callbacks.
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered content
 	 */
 	public static function notification_shortcode( $atts, $content, $code ) {
@@ -757,38 +755,37 @@ class SI_Notifications_Control extends SI_Controller {
 			$screen->add_help_tab( array(
 					'id' => 'notification-customizations',
 					'title' => self::__( 'About Notifications' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('Notifications include the emails sent to you and your clients, including responses to prospective clients after submitting an estimate request.'), self::__('Each one of your notifications can be customized; hover over the notification you want and click the edit link.') ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'Notifications include the emails sent to you and your clients, including responses to prospective clients after submitting an estimate request.' ), self::__( 'Each one of your notifications can be customized; hover over the notification you want and click the edit link.' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-disable',
 					'title' => self::__( 'Disable Notifications' ),
-					'content' => sprintf( '<p>%s</p>', self::__('The notifications edit screen will have an option next to the "Update" button to disable the notification from being sent.') ),
+					'content' => sprintf( '<p>%s</p>', self::__( 'The notifications edit screen will have an option next to the "Update" button to disable the notification from being sent.' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-editing',
 					'title' => self::__( 'Notification Editing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__('<b>Subject</b> - The first input is for the notifications subject. If the notification is an e-mail than it would be subject line for that e-mail notification.'), self::__('<b>Message Body</b> - The main editor is the notification body. Use the available shortcodes to have dynamic information included when the notification is received. Make sure to change the Notification Setting if HTML formatting is added to your notifications.'), self::__('<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each.'), self::__('<b>Update</b> - The select list can be used if you want to change the current notification to a different type; it’s recommended you go to the notification you want to edit instead of using this option. The Disabled option available to prevent this notification from sending.') ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__( '<b>Subject</b> - The first input is for the notifications subject. If the notification is an e-mail than it would be subject line for that e-mail notification.' ), self::__( '<b>Message Body</b> - The main editor is the notification body. Use the available shortcodes to have dynamic information included when the notification is received. Make sure to change the Notification Setting if HTML formatting is added to your notifications.' ), self::__( '<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each.' ), self::__( '<b>Update</b> - The select list can be used if you want to change the current notification to a different type; it’s recommended you go to the notification you want to edit instead of using this option. The Disabled option available to prevent this notification from sending.' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-advanced',
 					'title' => self::__( 'Advanced' ),
-					'content' => sprintf( '<p><b>HTML Emails</b> - Enable HTML notifications within the <a href="%s">General Settings</a> page. Make sure to change use HTML on all notifications.</p>', admin_url('admin.php?page=sprout-apps/settings') ),
+					'content' => sprintf( '<p><b>HTML Emails</b> - Enable HTML notifications within the <a href="%s">General Settings</a> page. Make sure to change use HTML on all notifications.</p>', admin_url( 'admin.php?page=sprout-apps/settings' ) ),
 				) );
 
-			
 			$screen->add_help_tab( array(
 					'id' => 'notification-refresh',
 					'title' => self::__( 'Notifications Cleanup' ),
-					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.'), esc_url( add_query_arg( array( 'refresh-notifications' => 1 ) ) ), si__('Clean') )
+					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__( 'In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.' ), esc_url( add_query_arg( array( 'refresh-notifications' => 1 ) ) ), si__( 'Clean' ) )
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/', self::__( 'Documentation' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
 			);
 		}
 	}
@@ -827,10 +824,10 @@ class SI_Notifications_Control extends SI_Controller {
 	}
 
 	public static function maybe_refresh_notifications() {
-		if ( !is_admin() ) {
+		if ( ! is_admin() ) {
 			return;
 		}
-		if ( !current_user_can('delete_posts') ) {
+		if ( ! current_user_can( 'delete_posts' ) ) {
 			return;
 		}
 		if ( isset( $_GET['refresh-notifications'] ) && $_GET['refresh-notifications'] ) { // If dev than don't cache.
@@ -839,7 +836,7 @@ class SI_Notifications_Control extends SI_Controller {
 			$args = array(
 				'post_type' => SI_Notification::POST_TYPE,
 				'posts_per_page' => -1,
-				'exclude' => array_values($active_notifications),
+				'exclude' => array_values( $active_notifications ),
 				'fields' => 'ids'
 			);
 			$posts = get_posts( $args );

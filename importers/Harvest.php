@@ -45,7 +45,7 @@ class SI_Harvest_Import extends SI_Importer {
 
 	/**
 	 * Register the payment settings
-	 * @return  
+	 * @return
 	 */
 	public static function register_payment_settings() {
 		// Settings
@@ -61,7 +61,7 @@ class SI_Harvest_Import extends SI_Importer {
 							'type' => 'text',
 							'default' => self::$harvest_user,
 							'attributes' => array( 'placeholder' => self::__(
-								'user@gmail.com') ),
+							'user@gmail.com') ),
 							'description' => '',
 						)
 					),
@@ -71,7 +71,7 @@ class SI_Harvest_Import extends SI_Importer {
 							'type' => 'password',
 							'default' => self::$harvest_pass,
 							'attributes' => array( 'placeholder' => self::__(
-								'password') ),
+							'password') ),
 							'description' => ''
 						)
 					),
@@ -81,7 +81,7 @@ class SI_Harvest_Import extends SI_Importer {
 							'type' => 'text',
 							'default' => self::$harvest_account,
 							'attributes' => array( 'placeholder' => self::__(
-								'your-subdomain') ),
+							'your-subdomain') ),
 							'description' => self::__( 'https://[subdomain].harvest.com' ),
 							'sanitize_callback' => array( __CLASS__, 'sanitize_subdomain' ),
 						)
@@ -113,19 +113,19 @@ class SI_Harvest_Import extends SI_Importer {
 				)
 			)
 		);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	public static function save_options() {
-		if ( isset( $_POST[self::HARVEST_USER_OPTION] ) && $_POST[self::HARVEST_USER_OPTION] != '') {
+		if ( isset( $_POST[self::HARVEST_USER_OPTION] ) && $_POST[self::HARVEST_USER_OPTION] != '' ) {
 			self::$harvest_user = $_POST[self::HARVEST_USER_OPTION];
 			update_option( self::HARVEST_USER_OPTION, $_POST[self::HARVEST_USER_OPTION] );
 		}
-		if ( isset( $_POST[self::HARVEST_PASS_OPTION] ) && $_POST[self::HARVEST_PASS_OPTION] != '') {
+		if ( isset( $_POST[self::HARVEST_PASS_OPTION] ) && $_POST[self::HARVEST_PASS_OPTION] != '' ) {
 			self::$harvest_pass = $_POST[self::HARVEST_PASS_OPTION];
 			update_option( self::HARVEST_PASS_OPTION, $_POST[self::HARVEST_PASS_OPTION] );
 		}
-		if ( isset( $_POST[self::HARVEST_ACCOUNT_OPTION] ) && $_POST[self::HARVEST_ACCOUNT_OPTION] != '') {
+		if ( isset( $_POST[self::HARVEST_ACCOUNT_OPTION] ) && $_POST[self::HARVEST_ACCOUNT_OPTION] != '' ) {
 			self::$harvest_account = $_POST[self::HARVEST_ACCOUNT_OPTION];
 			update_option( self::HARVEST_ACCOUNT_OPTION, $_POST[self::HARVEST_ACCOUNT_OPTION] );
 		}
@@ -138,7 +138,7 @@ class SI_Harvest_Import extends SI_Importer {
 
 	/**
 	 * Check to see if it's time to start the import process.
-	 * @return  
+	 * @return
 	 */
 	public static function maybe_process_import() {
 		if ( isset( $_POST[self::PROCESS_ACTION] ) && wp_verify_nonce( $_POST[self::PROCESS_ACTION], self::PROCESS_ACTION ) ) {
@@ -157,33 +157,33 @@ class SI_Harvest_Import extends SI_Importer {
 
 	/**
 	 * Utility to return a JSON error
-	 * @param  string $message 
-	 * @return json          
+	 * @param  string $message
+	 * @return json
 	 */
 	public static function return_error( $message ) {
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo wp_json_encode( 
-				array( 'error' => true, 'message' => $message )
-					);
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
+		echo wp_json_encode(
+			array( 'error' => true, 'message' => $message )
+		);
 		exit();
 	}
 
 	/**
 	 * Return the progress array
 	 * @param  array  $array associated array with method and status message
-	 * @return json        
+	 * @return json
 	 */
 	public static function return_progress( $array = array() ) {
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( $array );
 		exit();
 	}
 
 	/**
 	 * First step in the import progress
-	 * @return 
+	 * @return
 	 */
 	public static function import_authentication() {
 		require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
@@ -197,11 +197,11 @@ class SI_Harvest_Import extends SI_Importer {
 
 		// get clients, though we're just confirming credentials
 		$result = $api->getClients();
-		if( ! $result->isSuccess() ) {
-			self::return_error( self::__('Authentication error.') );
+		if ( ! $result->isSuccess() ) {
+			self::return_error( self::__( 'Authentication error.' ) );
 		}
-		self::return_progress( array( 'authentication' => array( 
-					'message' => self::__('Communicating with the Harvest API...'), 
+		self::return_progress( array( 'authentication' => array(
+					'message' => self::__( 'Communicating with the Harvest API...' ),
 					'progress' => 99.9,
 					'next_step' => 'clients'
 					) ) );
@@ -209,7 +209,7 @@ class SI_Harvest_Import extends SI_Importer {
 
 	/**
 	 * Second step is to import clients and contacts
-	 * @return 
+	 * @return
 	 */
 	public static function import_clients() {
 
@@ -217,9 +217,9 @@ class SI_Harvest_Import extends SI_Importer {
 		$progress = get_option( self::PROGRESS_OPTION, array() );
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
-		
+
 		$total_records = 0;
-		if ( !isset( $progress['clients_complete'] ) ) {
+		if ( ! isset( $progress['clients_complete'] ) ) {
 
 			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
 			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
@@ -231,15 +231,15 @@ class SI_Harvest_Import extends SI_Importer {
 			$api->setSSL( true );
 
 			$progress_key = 'clients_import_progress';
-			if ( !isset( $progress[$progress_key] ) ) {
+			if ( ! isset( $progress[$progress_key] ) ) {
 				$progress[$progress_key] = 0;
 				update_option( self::PROGRESS_OPTION, $progress );
 			}
 
 			$result = $api->getClients();
 
-			if( !$result->isSuccess() ) {	
-				self::return_error( self::__('Client import error.') );
+			if ( ! $result->isSuccess() ) {
+				self::return_error( self::__( 'Client import error.' ) );
 			}
 
 			// Start importing the clients 20 at a time
@@ -247,7 +247,7 @@ class SI_Harvest_Import extends SI_Importer {
 			// Break the array up into pages
 			$paged_data = array_chunk( $result->data, 20 );
 			$pages = count( $paged_data );
-			$total_imported = intval( ($total_records/$pages)*$progress[$progress_key] );
+			$total_imported = intval( ($total_records / $pages) * $progress[$progress_key] );
 
 			if ( $progress[$progress_key] <= $pages ) {
 
@@ -260,14 +260,14 @@ class SI_Harvest_Import extends SI_Importer {
 				update_option( self::PROGRESS_OPTION, $progress );
 
 				// Return the progress
-				self::return_progress( array( 
-								'authentication' => array(  
-									'message' => sprintf( self::__('Attempting to import %s clients...'), $total_records ), 
-									'progress' => 10+$progress[$progress_key]
+				self::return_progress( array(
+								'authentication' => array(
+									'message' => sprintf( self::__( 'Attempting to import %s clients...' ), $total_records ),
+									'progress' => 10 + $progress[$progress_key]
 									),
 								'clients' => array(
-									'message' => sprintf( self::__('Imported about %s clients so far.'), $total_imported ), 
-									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'message' => sprintf( self::__( 'Imported about %s clients so far.' ), $total_imported ),
+									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'clients'
 									),
 								) );
@@ -278,13 +278,13 @@ class SI_Harvest_Import extends SI_Importer {
 			update_option( self::PROGRESS_OPTION, $progress );
 
 			// Complete
-			self::return_progress( array( 
-							'authentication' => array( 
-								'message' => sprintf( self::__('Successfully imported %s clients...'), $total_records ), 
+			self::return_progress( array(
+							'authentication' => array(
+								'message' => sprintf( self::__( 'Successfully imported %s clients...' ), $total_records ),
 								'progress' => 50
 								),
 							'clients' => array(
-								'message' => sprintf( self::__('Imported %s clients!'), $total_records ),  
+								'message' => sprintf( self::__( 'Imported %s clients!' ), $total_records ),
 								'progress' => 100,
 								'next_step' => 'contacts'
 								),
@@ -292,18 +292,18 @@ class SI_Harvest_Import extends SI_Importer {
 		}
 
 		// Completed previously
-		self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s clients already, moving on...'), $total_records ), 
+		self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s clients already, moving on...' ), $total_records ),
 							'progress' => 50
 							),
-						'clients' => array( 
+						'clients' => array(
 							'progress' => 100,
-							'message' => sprintf( self::__('Successfully imported %s clients already.'), $total_records ), 
+							'message' => sprintf( self::__( 'Successfully imported %s clients already.' ), $total_records ),
 							'next_step' => 'contacts'
 							),
 						) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
@@ -311,7 +311,7 @@ class SI_Harvest_Import extends SI_Importer {
 
 	/**
 	 * Third step is to import contacts
-	 * @return 
+	 * @return
 	 */
 	public static function import_contacts() {
 
@@ -319,9 +319,9 @@ class SI_Harvest_Import extends SI_Importer {
 		$progress = get_option( self::PROGRESS_OPTION, array() );
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
-			
+
 		$total_records = 0;
-		if ( !isset( $progress['contacts_complete'] ) ) {
+		if ( ! isset( $progress['contacts_complete'] ) ) {
 
 			require_once SI_PATH . '/importers/lib/harvest/HarvestAPI.php';
 			spl_autoload_register( array( 'HarvestAPI', 'autoload' ) );
@@ -333,23 +333,23 @@ class SI_Harvest_Import extends SI_Importer {
 			$api->setSSL( true );
 
 			$progress_key = 'contacts_import_progress';
-			if ( !isset( $progress[$progress_key] ) ) {
+			if ( ! isset( $progress[$progress_key] ) ) {
 				$progress[$progress_key] = 0;
 				update_option( self::PROGRESS_OPTION, $progress );
 			}
 
 			$result = $api->getContacts();
 
-			if( !$result->isSuccess() ) {	
-				self::return_error( self::__('Contact import error.') );
+			if ( ! $result->isSuccess() ) {
+				self::return_error( self::__( 'Contact import error.' ) );
 			}
 
 			// Start importing the contacts 20 at a time
 			$total_records = count( $result->data );
 			// Break the array up into pages
 			$paged_data = array_chunk( $result->data, 20 );
-			$pages = count( $paged_data )-1;
-			$total_imported = intval( ($total_records/$pages)*$progress[$progress_key] );
+			$pages = count( $paged_data ) -1;
+			$total_imported = intval( ($total_records / $pages) * $progress[$progress_key] );
 
 			if ( $progress[$progress_key] <= $pages ) {
 
@@ -362,14 +362,14 @@ class SI_Harvest_Import extends SI_Importer {
 				update_option( self::PROGRESS_OPTION, $progress );
 
 				// Return the progress
-				self::return_progress( array( 
-								'authentication' => array(  
-									'message' => sprintf( self::__('Attempting to import %s contacts...'), $total_records ), 
-									'progress' => 25+$progress[$progress_key]
+				self::return_progress( array(
+								'authentication' => array(
+									'message' => sprintf( self::__( 'Attempting to import %s contacts...' ), $total_records ),
+									'progress' => 25 + $progress[$progress_key]
 									),
 								'contacts' => array(
-									'message' => sprintf( self::__('Imported about %s contacts so far.'), $total_imported ), 
-									'progress' => intval( ($progress[$progress_key]/$pages)*100 ),
+									'message' => sprintf( self::__( 'Imported about %s contacts so far.' ), $total_imported ),
+									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'contacts'
 									),
 								) );
@@ -380,13 +380,13 @@ class SI_Harvest_Import extends SI_Importer {
 			update_option( self::PROGRESS_OPTION, $progress );
 
 			// Complete
-			self::return_progress( array( 
-							'authentication' => array( 
-								'message' => sprintf( self::__('Successfully imported %s contacts...'), $total_records ), 
+			self::return_progress( array(
+							'authentication' => array(
+								'message' => sprintf( self::__( 'Successfully imported %s contacts...' ), $total_records ),
 								'progress' => 50
 								),
 							'contacts' => array(
-								'message' => sprintf( self::__('Imported %s contacts!'), $total_records ),  
+								'message' => sprintf( self::__( 'Imported %s contacts!' ), $total_records ),
 								'progress' => 100,
 								'next_step' => 'estimates'
 								),
@@ -394,18 +394,18 @@ class SI_Harvest_Import extends SI_Importer {
 		}
 
 		// Completed previously
-		self::return_progress( array( 
-						'authentication' => array( 
-							'message' => sprintf( self::__('Successfully imported %s contacts already, moving on...'), $total_records ), 
+		self::return_progress( array(
+						'authentication' => array(
+							'message' => sprintf( self::__( 'Successfully imported %s contacts already, moving on...' ), $total_records ),
 							'progress' => 50
 							),
-						'contacts' => array( 
+						'contacts' => array(
 							'progress' => 100,
-							'message' => sprintf( self::__('Successfully imported %s contacts already.'), $total_records ), 
+							'message' => sprintf( self::__( 'Successfully imported %s contacts already.' ), $total_records ),
 							'next_step' => 'estimates'
 							),
 						) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
@@ -413,30 +413,30 @@ class SI_Harvest_Import extends SI_Importer {
 
 	/**
 	 * Fourth step is to import estimates
-	 * @return 
+	 * @return
 	 */
 	public static function import_estimates() {
 
 		// Store the import progress
 		$progress = get_option( self::PROGRESS_OPTION, array() );
-		
+
 		// Mark as complete
 		$progress['estimates_complete'] = 1;
 		update_option( self::PROGRESS_OPTION, $progress );
 
 		// Completed previously
-		self::return_progress( array( 
-						'authentication' => array( 
-							'message' => self::__('Attempting to get your Harvest estimates...'), 
+		self::return_progress( array(
+						'authentication' => array(
+							'message' => self::__( 'Attempting to get your Harvest estimates...' ),
 							'progress' => 50
 							),
-						'estimates' => array( 
+						'estimates' => array(
 							'progress' => 100,
-							'message' => self::__( 'The Harvest API does not permit access to your estimates.' ), 
+							'message' => self::__( 'The Harvest API does not permit access to your estimates.' ),
 							'next_step' => 'invoices'
 							),
 						) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
@@ -444,7 +444,7 @@ class SI_Harvest_Import extends SI_Importer {
 
 	/**
 	 * Final step is to import invoices and payments
-	 * @return 
+	 * @return
 	 */
 	public static function import_invoices() {
 
@@ -452,13 +452,13 @@ class SI_Harvest_Import extends SI_Importer {
 		$progress = get_option( self::PROGRESS_OPTION, array() );
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
-		
-		if ( !isset( $progress['invoices_complete'] ) ) {
+
+		if ( ! isset( $progress['invoices_complete'] ) ) {
 
 			set_time_limit( 0 ); // run script forever
 
 			$progress_key = 'invoices_import_progress';
-			if ( !isset( $progress[$progress_key] ) ) {
+			if ( ! isset( $progress[$progress_key] ) ) {
 				$progress[$progress_key] = 0;
 				update_option( self::PROGRESS_OPTION, $progress );
 			}
@@ -466,7 +466,7 @@ class SI_Harvest_Import extends SI_Importer {
 			// Since increment of 50 invoices will tend to bring a server to it's knees
 			// break up the returned results down.
 			$progress_pagechunk_key = 'invoices_import_progress_pagechunk';
-			if ( !isset( $progress[$progress_pagechunk_key] ) ) {
+			if ( ! isset( $progress[$progress_pagechunk_key] ) ) {
 				$progress[$progress_pagechunk_key] = 0;
 				update_option( self::PROGRESS_OPTION, $progress );
 			}
@@ -477,18 +477,18 @@ class SI_Harvest_Import extends SI_Importer {
 				update_option( self::PROGRESS_OPTION, $progress );
 
 				// Return the progress
-				self::return_progress( array( 
-								'authentication' => array(  
-									'message' => self::__('Attempting to import your invoices and their payments...'), 
-									'progress' => 60+$progress[$progress_key]
+				self::return_progress( array(
+								'authentication' => array(
+									'message' => self::__( 'Attempting to import your invoices and their payments...' ),
+									'progress' => 60 + $progress[$progress_key]
 									),
 								'invoices' => array(
-									'message' => sprintf( self::__('Currently importing invoices and their payments in increments of %s. Thank you for your patience, this is a very slow process.'), 50 ), 
-									'progress' => 15+($progress[$progress_key]*5)
+									'message' => sprintf( self::__( 'Currently importing invoices and their payments in increments of %s. Thank you for your patience, this is a very slow process.' ), 50 ),
+									'progress' => 15 + ($progress[$progress_key] * 5)
 									),
-								'payments' => array( 
-									'message' => self::__('Payments will be imported with new invoices'), 
-									'progress' => 15+($progress[$progress_key]*5),
+								'payments' => array(
+									'message' => self::__( 'Payments will be imported with new invoices' ),
+									'progress' => 15 + ($progress[$progress_key] * 5),
 									'next_step' => 'invoices',
 									),
 								) );
@@ -507,8 +507,8 @@ class SI_Harvest_Import extends SI_Importer {
 			$filter->set( 'page', $progress[$progress_key] );
 			$result = $api->getInvoices( $filter );
 
-			if( !$result->isSuccess() ) {	
-				self::return_error( self::__('Invoice import error.') );
+			if ( ! $result->isSuccess() ) {
+				self::return_error( self::__( 'Invoice import error.' ) );
 			}
 
 			if ( $result->isSuccess() ) {
@@ -524,7 +524,7 @@ class SI_Harvest_Import extends SI_Importer {
 				do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' chunk progress: ', $progress[$progress_pagechunk_key], false );
 
 				if ( isset( $paged_data[$progress[$progress_pagechunk_key]] ) ) {
-					
+
 					$current_chunk = $paged_data[$progress[$progress_pagechunk_key]];
 					foreach ( $current_chunk as $key => $invoice ) {
 						$invoices_imported++;
@@ -538,26 +538,25 @@ class SI_Harvest_Import extends SI_Importer {
 							// Line Items //
 							////////////////
 							$result = $api->getInvoice( $invoice_id );
-							if( $result->isSuccess() ) {
+							if ( $result->isSuccess() ) {
 								self::add_invoice_line_items( $result->data, $new_invoice );
 							}
-							
-							
+
 							//////////////
 							// Payments //
 							//////////////
 							$result = $api->getInvoicePayments( $invoice_id );
-							if( $result->isSuccess() ) {
+							if ( $result->isSuccess() ) {
 								foreach ( $result->data as $payment_id => $payment ) {
 									$payments_imported++;
 									self::create_invoice_payment( $payment, $new_invoice );
 								}
 							}
-						}					
+						}
 					}
 					// Update the page chunk currently processed
 					$progress[$progress_pagechunk_key]++;
-					// If the last chunk was just processed than 
+					// If the last chunk was just processed than
 					// start the progress over
 					if ( $progress[$progress_pagechunk_key] == count( $paged_data ) ) {
 						unset($progress[$progress_pagechunk_key]);
@@ -569,23 +568,22 @@ class SI_Harvest_Import extends SI_Importer {
 					update_option( self::PROGRESS_OPTION, $progress );
 
 					// Return the progress
-					self::return_progress( array( 
-									'authentication' => array(  
-										'message' => sprintf( self::__('Attempting to import %s new invoices and their payments...'), $invoices_imported ), 
-										'progress' => 60+$progress[$progress_key]
+					self::return_progress( array(
+									'authentication' => array(
+										'message' => sprintf( self::__( 'Attempting to import %s new invoices and their payments...' ), $invoices_imported ),
+										'progress' => 60 + $progress[$progress_key]
 										),
-									'payments' => array( 
-										'message' => sprintf( self::__('Just imported %s more payments.'), $payments_imported ), 
-										'progress' => 15+($progress[$progress_key]*2),
+									'payments' => array(
+										'message' => sprintf( self::__( 'Just imported %s more payments.' ), $payments_imported ),
+										'progress' => 15 + ($progress[$progress_key] * 2),
 										),
 									'invoices' => array(
-										'message' => sprintf( self::__('Importing invoices in increments of %s. Thank you for your patience, this is a very slow process.'), apply_filters( 'si_harvest_import_increments_for_invoices', 10 ) ), 
-										'progress' => 15+($progress[$progress_key]*2),
+										'message' => sprintf( self::__( 'Importing invoices in increments of %s. Thank you for your patience, this is a very slow process.' ), apply_filters( 'si_harvest_import_increments_for_invoices', 10 ) ),
+										'progress' => 15 + ($progress[$progress_key] * 2),
 										'next_step' => 'invoices'
 										),
 									) );
 				}
-				
 			}
 
 			// Mark as complete
@@ -593,17 +591,17 @@ class SI_Harvest_Import extends SI_Importer {
 			update_option( self::PROGRESS_OPTION, $progress );
 
 			// Complete
-			self::return_progress( array( 
-							'authentication' => array( 
-								'message' => self::__('Successfully imported a bunch of invoices...'), 
+			self::return_progress( array(
+							'authentication' => array(
+								'message' => self::__( 'Successfully imported a bunch of invoices...' ),
 								'progress' => 100
 								),
-							'payments' => array( 
-								'message' => self::__('Successfully imported a bunch of payments.'), 
+							'payments' => array(
+								'message' => self::__( 'Successfully imported a bunch of payments.' ),
 								'progress' => 100
 								),
 							'invoices' => array(
-								'message' => self::__('Finished importing your invoices!'),  
+								'message' => self::__( 'Finished importing your invoices!' ),
 								'progress' => 100,
 								'next_step' => 'complete'
 								),
@@ -611,22 +609,22 @@ class SI_Harvest_Import extends SI_Importer {
 		}
 
 		// Completed previously
-		self::return_progress( array( 
-						'authentication' => array( 
-							'message' => self::__('Successfully imported invoices already, moving on...'), 
+		self::return_progress( array(
+						'authentication' => array(
+							'message' => self::__( 'Successfully imported invoices already, moving on...' ),
 							'progress' => 50
 							),
-						'payments' => array( 
-							'message' => self::__('Successfully imported a bunch of payments already.'), 
+						'payments' => array(
+							'message' => self::__( 'Successfully imported a bunch of payments already.' ),
 							'progress' => 100
 							),
-						'invoices' => array( 
+						'invoices' => array(
 							'progress' => 100,
-							'message' => self::__('Imported all the invoices already!'),  
+							'message' => self::__( 'Imported all the invoices already!' ),
 							'next_step' => 'complete'
 							),
 						) );
-		
+
 		// If this is needed something went wrong since json should have been printed and exited.
 		return;
 
@@ -639,11 +637,11 @@ class SI_Harvest_Import extends SI_Importer {
 	public static function create_client( Harvest_Client $client ) {
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::HARVEST_ID => $client->id ) );
 		// Don't create a duplicate if this was already imported.
-		if ( !empty( $possible_dups ) ) {
+		if ( ! empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Client imported already', $client->id );
 			return;
 		}
-		if ( !self::import_archived_data() && $client->active == 'false' ) {
+		if ( ! self::import_archived_data() && $client->active == 'false' ) {
 			return;
 		}
 		$args = array(
@@ -668,7 +666,7 @@ class SI_Harvest_Import extends SI_Importer {
 		}
 		// Get client and confirm it's validity
 		$client = SI_Client::get_instance( $clients[0] );
-		if ( !is_a( $client, 'SI_Client' ) ) {
+		if ( ! is_a( $client, 'SI_Client' ) ) {
 			return;
 		}
 		$args = array(
@@ -696,7 +694,7 @@ class SI_Harvest_Import extends SI_Importer {
 	public static function create_invoice( Harvest_Invoice $invoice ) {
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Invoice::POST_TYPE, array( self::HARVEST_ID => $invoice->id ) );
 		// Don't create a duplicate if this was already imported.
-		if ( !empty( $possible_dups ) ) {
+		if ( ! empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Invoice imported already', $invoice->id );
 			return;
 		}
@@ -724,13 +722,13 @@ class SI_Harvest_Import extends SI_Importer {
 		$inv->set_post_date( date( 'Y-m-d H:i:s', strtotime( $invoice->created_at ) ) );
 
 		// Record
-		do_action( 'si_new_record', 
+		do_action( 'si_new_record',
 			$invoice, // content
 			self::RECORD, // type slug
 			$inv_id, // post id
-			self::__('Invoice Imported'), // title
+			self::__( 'Invoice Imported' ), // title
 			0 // user id
-			);
+		);
 
 		return $inv;
 	}
@@ -740,17 +738,17 @@ class SI_Harvest_Import extends SI_Importer {
 		$csv_string = $invoice->csv_line_items;
 		// Create rows for each line item. Making sure to not break with wrapped line items.
 		// https://bugs.php.net/bug.php?id=55763
-		$lines = preg_split('/[\r\n]{1,2}(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/', $csv_string );
+		$lines = preg_split( '/[\r\n]{1,2}(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/', $csv_string );
 
 		// Build array for each line item
 		$row_arrays = array_map( 'str_getcsv', $lines );
 		// Header row
 		$header = array_shift( $row_arrays );
 		// Rename the key names to match what SI uses
-		$header = str_replace( 
+		$header = str_replace(
 			array( 'unit_price', 'quantity', 'description', 'kind', 'amount' ),
 			array( 'rate', 'qty', 'desc', 'type', 'total' ),
-			$header );
+		$header );
 		// Build a line item associated array with header names
 		$line_items = array();
 		foreach ( $row_arrays as $row ) {
@@ -765,7 +763,7 @@ class SI_Harvest_Import extends SI_Importer {
 	public static function create_invoice_payment( Harvest_Payment $payment, SI_Invoice $invoice ) {
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Payment::POST_TYPE, array( self::HARVEST_ID => $payment->id ) );
 		// Don't create a duplicate if this was already imported.
-		if ( !empty( $possible_dups ) ) {
+		if ( ! empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Invoice imported already', $payment->id );
 			return;
 		}
@@ -813,21 +811,21 @@ class SI_Harvest_Import extends SI_Importer {
 		//
 	}
 
-	protected static function csv_to_array( $csv, $delimiter = ',', $enclosure = '', $escape = '\\', $terminator = "\n") { 
-		$r = array(); 
-		$rows = explode($terminator,trim($csv)); 
-		$names = array_shift($rows); 
-		$names = str_getcsv($names,$delimiter,$enclosure,$escape); 
-		$nc = count($names); 
-		foreach ($rows as $row) { 
-			if (trim($row)) { 
-				$values = str_getcsv($row,$delimiter,$enclosure,$escape); 
-				if (!$values) $values = array_fill(0,$nc,null); 
-				$r[] = array_combine($names,$values); 
-			} 
-		} 
-		return $r; 
-	} 
+	protected static function csv_to_array( $csv, $delimiter = ',', $enclosure = '', $escape = '\\', $terminator = "\n") {
+		$r = array();
+		$rows = explode( $terminator,trim( $csv ) );
+		$names = array_shift( $rows );
+		$names = str_getcsv( $names,$delimiter,$enclosure,$escape );
+		$nc = count( $names );
+		foreach ( $rows as $row ) {
+			if ( trim( $row ) ) {
+				$values = str_getcsv( $row,$delimiter,$enclosure,$escape );
+				if ( ! $values ) { $values = array_fill( 0,$nc,null ); }
+				$r[] = array_combine( $names,$values );
+			}
+		}
+		return $r;
+	}
 
 }
 SI_Harvest_Import::register();

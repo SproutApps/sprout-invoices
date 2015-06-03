@@ -35,7 +35,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 	/**
 	 * Register the payment settings
-	 * @return  
+	 * @return
 	 */
 	public static function register_payment_settings() {
 		// Settings
@@ -63,7 +63,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 				)
 			)
 		);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	public static function save_options() {
@@ -72,7 +72,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 	/**
 	 * Check to see if it's time to start the import process.
-	 * @return  
+	 * @return
 	 */
 	public static function maybe_process_import() {
 		if ( isset( $_POST[self::PROCESS_ACTION] ) && wp_verify_nonce( $_POST[self::PROCESS_ACTION], self::PROCESS_ACTION ) ) {
@@ -91,12 +91,12 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 	/**
 	 * First step in the import progress
-	 * @return 
+	 * @return
 	 */
 	public static function import_authentication() {
 
-		if ( !class_exists( 'WPI_Invoice' ) ) {
-			self::return_error( self::__('WP-Invoices needs to be activated before proceeding.') );
+		if ( ! class_exists( 'WPI_Invoice' ) ) {
+			self::return_error( self::__( 'WP-Invoices needs to be activated before proceeding.' ) );
 		}
 
 		$args = array(
@@ -109,33 +109,33 @@ class SI_WPInvoice_Import extends SI_Importer {
 		$wp_invoice_ids = get_posts( $args );
 
 		if ( empty( $wp_invoice_ids ) ) {
-			self::return_error( self::__('We couldn\'t fine any WP-Invoices to import.') );
+			self::return_error( self::__( 'We couldn\'t fine any WP-Invoices to import.' ) );
 		}
 
 		$total_records = count( $wp_invoice_ids );
-		self::return_progress( array( 
-			'authentication' => array( 
-				'message' => sprintf( self::__('Preparing to import from %s invoices...'), $total_records ), 
+		self::return_progress( array(
+			'authentication' => array(
+				'message' => sprintf( self::__( 'Preparing to import from %s invoices...' ), $total_records ),
 				'progress' => 90
 				),
 			'clients' => array(
-				'message' => sprintf( self::__('Importing clients from %s WP-Invoice records...'), $total_records ), 
+				'message' => sprintf( self::__( 'Importing clients from %s WP-Invoice records...' ), $total_records ),
 				'progress' => 90,
 				),
-			'contacts' => array( 
-				'message' => sprintf( self::__('Importing contacts from %s WP-Invoice records...'), $total_records ),
+			'contacts' => array(
+				'message' => sprintf( self::__( 'Importing contacts from %s WP-Invoice records...' ), $total_records ),
 				'progress' => 90,
 				),
-			'estimates' => array( 
-				'message' => sprintf( self::__('No estimates will be imported, unfortunately...'), $total_records ),
+			'estimates' => array(
+				'message' => sprintf( self::__( 'No estimates will be imported, unfortunately...' ), $total_records ),
 				'progress' => 10,
 				),
-			'invoices' => array( 
-				'message' => sprintf( self::__('Importing invoices from %s WP-Invoice records...'), $total_records ),
+			'invoices' => array(
+				'message' => sprintf( self::__( 'Importing invoices from %s WP-Invoice records...' ), $total_records ),
 				'progress' => 90,
 				),
-			'payments' => array( 
-				'message' => sprintf( self::__('Importing payments from %s WP-Invoice records...'), $total_records ),
+			'payments' => array(
+				'message' => sprintf( self::__( 'Importing payments from %s WP-Invoice records...' ), $total_records ),
 				'progress' => 90,
 				'next_step' => 'invoices'
 				),
@@ -172,7 +172,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			$wp_invoice = new WPI_Invoice();
 			$wp_invoice = $wp_invoice->load_invoice( array( 'id' => $wp_invoice_id, 'return' => true ) );
 
-			if ( $wp_invoice['type'] != 'invoice' && $wp_invoice['type'] != 'recurring') {
+			if ( $wp_invoice['type'] != 'invoice' && $wp_invoice['type'] != 'recurring' ) {
 				continue;
 			}
 
@@ -183,12 +183,12 @@ class SI_WPInvoice_Import extends SI_Importer {
 			/////////////
 			$clients_tally++;
 			$new_client_id = self::create_client( $wp_invoice );
-			
+
 			//////////////
 			// Contacts //
 			//////////////
 			// Just in case the role wasn't already added
-			add_role( SI_Client::USER_ROLE, self::__('Client'), array( 'read' => true, 'level_0' => true ) );
+			add_role( SI_Client::USER_ROLE, self::__( 'Client' ), array( 'read' => true, 'level_0' => true ) );
 			$contacts_tally++;
 			self::create_contact( $wp_invoice, $new_client_id );
 
@@ -201,7 +201,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			//////////////
 			// Payments //
 			//////////////
-			if ( !empty( $wp_invoice['log'] ) ) {
+			if ( ! empty( $wp_invoice['log'] ) ) {
 				foreach ( $wp_invoice['log'] as $key => $event ) {
 					if ( $event['attribute'] == 'balance' ) {
 						$payments_tally++;
@@ -209,41 +209,40 @@ class SI_WPInvoice_Import extends SI_Importer {
 					}
 				}
 			}
-			
+
 			if ( self::delete_wpinvoice_data() ) {
-				printf( 'Deleting WP-Invoice: %s', esc_attr($wp_invoice['post_title']) );
+				printf( 'Deleting WP-Invoice: %s', esc_attr( $wp_invoice['post_title'] ) );
 				//wp_delete_post( $invoice_id, true );
 			}
-
 		}
 
 		//////////////
 		// All done //
 		//////////////
 		// Completed previously
-		self::return_progress( array( 
-			'authentication' => array( 
-				'message' => sprintf( self::__('Preparing to import from %s invoices...'), $total_records ), 
+		self::return_progress( array(
+			'authentication' => array(
+				'message' => sprintf( self::__( 'Preparing to import from %s invoices...' ), $total_records ),
 				'progress' => 100
 				),
 			'clients' => array(
-				'message' => sprintf( self::__('Importing %s clients from %s WP-Invoice records...'), $clients_tally, $total_records ), 
+				'message' => sprintf( self::__( 'Importing %s clients from %s WP-Invoice records...' ), $clients_tally, $total_records ),
 				'progress' => 100,
 				),
-			'contacts' => array( 
-				'message' => sprintf( self::__('Importing %s contacts from %s WP-Invoice records...'), $contacts_tally, $total_records ), 
+			'contacts' => array(
+				'message' => sprintf( self::__( 'Importing %s contacts from %s WP-Invoice records...' ), $contacts_tally, $total_records ),
 				'progress' => 100,
 				),
-			'estimates' => array( 
-				'message' => self::__('No estimates were imported'), 
+			'estimates' => array(
+				'message' => self::__( 'No estimates were imported' ),
 				'progress' => 100,
 				),
-			'invoices' => array( 
-				'message' => sprintf( self::__('Importing %s invoices from %s WP-Invoice records...'), $invoices_tally, $total_records ), 
+			'invoices' => array(
+				'message' => sprintf( self::__( 'Importing %s invoices from %s WP-Invoice records...' ), $invoices_tally, $total_records ),
 				'progress' => 100,
 				),
-			'payments' => array( 
-				'message' => sprintf( self::__('Importing %s payments from %s WP-Invoice records...'), $payments_tally, $total_records ), 
+			'payments' => array(
+				'message' => sprintf( self::__( 'Importing %s payments from %s WP-Invoice records...' ), $payments_tally, $total_records ),
 				'progress' => 100,
 				'next_step' => 'complete'
 				),
@@ -254,7 +253,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 	public static function create_client( $wp_invoice = array() ) {
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice['ID'] ) );
 		// Don't create a duplicate if this was already imported.
-		if ( !empty( $possible_dups ) ) {
+		if ( ! empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Client imported already', $wp_invoice['ID'] );
 			return $possible_dups[0];
 		}
@@ -262,11 +261,11 @@ class SI_WPInvoice_Import extends SI_Importer {
 		$wp_invoice_user_data = $wp_invoice['user_data'];
 		// args to create new client
 		$address = array(
-			'street' => isset( $wp_invoice_user_data['streetaddress'] ) ? self::esc__( $wp_invoice_user_data['streetaddress']) : '',
-			'city' => isset( $wp_invoice_user_data['city'] ) ? self::esc__($wp_invoice_user_data['city']) : '',
-			'zone' => isset( $wp_invoice_user_data['state'] ) ? self::esc__($wp_invoice_user_data['state']) : '',
-			'postal_code' => isset( $wp_invoice_user_data['zip'] ) ? self::esc__($wp_invoice_user_data['zip']) : '',
-			'country' => isset( $wp_invoice_user_data['country'] ) ? self::esc__($wp_invoice_user_data['country']) : apply_filters( 'si_default_country_code', 'US' ),
+			'street' => isset( $wp_invoice_user_data['streetaddress'] ) ? self::esc__( $wp_invoice_user_data['streetaddress'] ) : '',
+			'city' => isset( $wp_invoice_user_data['city'] ) ? self::esc__( $wp_invoice_user_data['city'] ) : '',
+			'zone' => isset( $wp_invoice_user_data['state'] ) ? self::esc__( $wp_invoice_user_data['state'] ) : '',
+			'postal_code' => isset( $wp_invoice_user_data['zip'] ) ? self::esc__( $wp_invoice_user_data['zip'] ) : '',
+			'country' => isset( $wp_invoice_user_data['country'] ) ? self::esc__( $wp_invoice_user_data['country'] ) : apply_filters( 'si_default_country_code', 'US' ),
 		);
 		$args = array(
 			'address' => $address,
@@ -286,7 +285,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 		if ( isset( $args['company_name'] ) ) {
 			global $wpdb;
 			$client_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s", esc_sql( $args['company_name'] ), SI_Client::POST_TYPE ) );
-			if ( !empty( $client_ids ) ) {
+			if ( ! empty( $client_ids ) ) {
 				do_action( 'si_error', 'Client imported already (name match)', $wp_invoice['ID'] );
 				return $client_ids[0];
 			}
@@ -303,12 +302,12 @@ class SI_WPInvoice_Import extends SI_Importer {
 		$user_id = $wp_invoice_user_data['ID'];
 		if ( $user_id ) {
 			// Attempt to convert the wp-invoice user to a client if currently a subscriber.
-			if ( !user_can( $user_id, 'edit_posts' ) ) {
+			if ( ! user_can( $user_id, 'edit_posts' ) ) {
 				wp_update_user( array( 'ID' => $user_id, 'role' => SI_Client::USER_ROLE ) );
 			}
 			// Get client and confirm it's validity
 			$client = SI_Client::get_instance( $client_id );
-			if ( !is_a( $client, 'SI_Client' ) ) {
+			if ( ! is_a( $client, 'SI_Client' ) ) {
 				return;
 			}
 			// Assign user to new client.
@@ -324,12 +323,12 @@ class SI_WPInvoice_Import extends SI_Importer {
 	public static function create_invoice( $wp_invoice = array(), $client_id = 0 ) {
 		// Don't create a duplicate if this was already imported.
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Invoice::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice['ID'] ) );
-		if ( !empty( $possible_dups ) ) {
+		if ( ! empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Invoice imported already', $wp_invoice['ID'] );
 			return;
 		}
 		// Get client
-		if ( !$client_id ) {
+		if ( ! $client_id ) {
 			$clients = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice['ID'] ) );
 			// Get client and confirm it's validity
 			$client = SI_Client::get_instance( $clients[0] );
@@ -388,9 +387,9 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 		// line items
 		$line_items = array();
-		if ( isset( $wp_invoice['itemized_list'] ) && !empty( $wp_invoice['itemized_list'] ) ) {
+		if ( isset( $wp_invoice['itemized_list'] ) && ! empty( $wp_invoice['itemized_list'] ) ) {
 			foreach ( $wp_invoice['itemized_list'] as $key => $item ) {
-				$line_items[] = array( 
+				$line_items[] = array(
 					'rate' => ( isset( $item['price'] ) ) ? $item['price'] : '',
 					'qty' => ( isset( $item['quantity'] ) ) ? $item['quantity'] : '',
 					'desc' => ( $item['description'] == '' ) ? $item['name'] : '<strong>'.$item['name'].'</strong><br/>'.$item['description'],
@@ -401,9 +400,9 @@ class SI_WPInvoice_Import extends SI_Importer {
 			}
 		}
 		// I don't know what itemized charges could possibly be used for but they can be items.
-		if ( isset( $wp_invoice['itemized_charges'] ) && !empty( $wp_invoice['itemized_charges'] ) ) {
+		if ( isset( $wp_invoice['itemized_charges'] ) && ! empty( $wp_invoice['itemized_charges'] ) ) {
 			foreach ( $wp_invoice['itemized_charges'] as $key => $item ) {
-				$line_items[] = array( 
+				$line_items[] = array(
 					'rate' => ( isset( $item['amount'] ) ) ? $item['amount'] : '',
 					'qty' => 1,
 					'desc' => ( isset( $item['name'] ) ) ? $item['name'] : '',
@@ -415,34 +414,34 @@ class SI_WPInvoice_Import extends SI_Importer {
 		}
 		$invoice->set_line_items( $line_items );
 		// Records
-		if ( !empty( $wp_invoice['log'] ) ) {
+		if ( ! empty( $wp_invoice['log'] ) ) {
 			foreach ( $wp_invoice['log'] as $key => $event ) {
 				if ( $event['attribute'] == 'notification' ) { // payments are added separately
-					do_action( 'si_new_record', 
-							self::__('Notification content was not stored by WP-Invoice.'), // content
-							SI_Notifications::RECORD, // type slug
-							$new_invoice_id, // post id
-							$event['text'], // title
-							0, // user id
-							false // don't encode
-							);
+					do_action( 'si_new_record',
+						self::__( 'Notification content was not stored by WP-Invoice.' ), // content
+						SI_Notifications::RECORD, // type slug
+						$new_invoice_id, // post id
+						$event['text'], // title
+						0, // user id
+						false // don't encode
+					);
 				}
 			}
 		}
-		do_action( 'si_new_record', 
+		do_action( 'si_new_record',
 			$wp_invoice, // content
 			self::RECORD, // type slug
 			$new_invoice_id, // post id
-			self::__('Invoice Imported'), // title
+			self::__( 'Invoice Imported' ), // title
 			0 // user id
-			);
+		);
 		return $invoice;
 	}
 
 	public static function create_invoice_payment( $payment = array(), SI_Invoice $invoice ) {
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Payment::POST_TYPE, array( self::WPINVOICE_ID => $payment['ID'] ) );
 		// Don't create a duplicate if this was already imported.
-		if ( !empty( $possible_dups ) ) {
+		if ( ! empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Invoice imported already', $payment['ID'] );
 			return;
 		}
@@ -480,26 +479,26 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 	/**
 	 * Utility to return a JSON error
-	 * @param  string $message 
-	 * @return json          
+	 * @param  string $message
+	 * @return json
 	 */
 	public static function return_error( $message ) {
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo wp_json_encode( 
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
+		echo wp_json_encode(
 			array( 'error' => true, 'message' => $message )
-					);
+		);
 		exit();
 	}
 
 	/**
 	 * Return the progress array
 	 * @param  array  $array associated array with method and status message
-	 * @return json        
+	 * @return json
 	 */
 	public static function return_progress( $array = array() ) {
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( $array );
 		exit();
 	}

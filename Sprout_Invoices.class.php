@@ -7,11 +7,11 @@
  * @package SI
  */
 
-if ( ! defined( 'SI_FREE_TEST' ) )
-	define( 'SI_FREE_TEST', false );
+if ( ! defined( 'SI_FREE_TEST' ) ) {
+	define( 'SI_FREE_TEST', false ); }
 
-if ( ! defined( 'SI_DEV' ) )
-	define( 'SI_DEV', false );
+if ( ! defined( 'SI_DEV' ) ) {
+	define( 'SI_DEV', false ); }
 
 abstract class Sprout_Invoices {
 
@@ -26,7 +26,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '7.0.3';
+	const SI_VERSION = '7.1';
 	/**
 	 * DB Version
 	 */
@@ -66,8 +66,8 @@ abstract class Sprout_Invoices {
 
 	/**
 	 * Wrapper around esc_attr__
-	 * @param  string $string 
-	 * @return          
+	 * @param  string $string
+	 * @return
 	 */
 	public static function esc__( $string ) {
 		return esc_attr__( $string, self::TEXT_DOMAIN );
@@ -75,8 +75,8 @@ abstract class Sprout_Invoices {
 
 	/**
 	 * Wrapper around esc_html__
-	 * @param  string $string 
-	 * @return          
+	 * @param  string $string
+	 * @return
 	 */
 	public static function esc_html__( $string ) {
 		return esc_html__( $string, self::TEXT_DOMAIN );
@@ -84,8 +84,8 @@ abstract class Sprout_Invoices {
 
 	/**
 	 * Wrapper around esc_attr__
-	 * @param  string $string 
-	 * @return          
+	 * @param  string $string
+	 * @return
 	 */
 	public static function esc_e( $string ) {
 		return esc_attr_e( $string, self::TEXT_DOMAIN );
@@ -93,8 +93,8 @@ abstract class Sprout_Invoices {
 
 	/**
 	 * Wrapper around esc_html__
-	 * @param  string $string 
-	 * @return          
+	 * @param  string $string
+	 * @return
 	 */
 	public static function esc_html_e( $string ) {
 		return esc_html_e( $string, self::TEXT_DOMAIN );

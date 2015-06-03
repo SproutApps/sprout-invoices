@@ -1,3 +1,8 @@
+= 7.1 =
+
+* NEW: Sprout Invoice specific user roles
+* FIX: Multiple Sprout Apps settings conflict fix
+
 = 7.0.3 =
 
 * FIX: Free version issues with redactor add-on

@@ -20,7 +20,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	final public static function init() {
 		// init payment processors
 		self::get_payment_processor();
-		
+
 		// always load all enabled processors on admin pages
 		if ( is_admin() ) {
 			self::load_enabled_processors();
@@ -31,7 +31,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		// Settings
 		self::$currency_symbol = get_option( self::CURRENCY_SYMBOL_OPTION, '$' );
 		self::$money_format = get_option( self::MONEY_FORMAT_OPTION, '%0.2f' );
-		
+
 		self::register_payment_settings();
 
 		// Help Sections
@@ -59,8 +59,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return  array
 	 */
 	public static function enabled_processors() {
-		$enabled = get_option(self::ENABLED_PROCESSORS_OPTION, array());
-		if ( !is_array($enabled) ) { $enabled = array(); }
+		$enabled = get_option( self::ENABLED_PROCESSORS_OPTION, array() );
+		if ( ! is_array( $enabled ) ) { $enabled = array(); }
 		return array_filter( $enabled );
 	}
 
@@ -76,7 +76,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			// Get the option specifying which payment processor to use
 			self::$active_payment_processors = self::enabled_processors();
 			foreach ( self::$active_payment_processors as $class ) {
-				$payment_processor = self::load_processor($class);
+				$payment_processor = self::load_processor( $class );
 				if ( $_REQUEST[SI_Checkouts::CHECKOUT_QUERY_VAR] === $payment_processor->get_slug() ) {
 					return $payment_processor;
 				}
@@ -110,8 +110,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		$processor = '';
 		self::$active_payment_processors = self::enabled_processors();
 		foreach ( self::$active_payment_processors as $class ) {
-			if ( self::is_cc_processor($class) ) {
-				$processor = self::load_processor($class);
+			if ( self::is_cc_processor( $class ) ) {
+				$processor = self::load_processor( $class );
 			}
 		}
 		return $processor;
@@ -123,7 +123,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 */
 	private static function load_processor( $class ) {
 		if ( class_exists( $class ) ) {
-			$processor = call_user_func(array($class, 'get_instance'));
+			$processor = call_user_func( array($class, 'get_instance') );
 			return $processor;
 		}
 		return null;
@@ -131,7 +131,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 	/**
 	 * Register the payment settings
-	 * @return  
+	 * @return
 	 */
 	public static function register_payment_settings() {
 
@@ -141,14 +141,13 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			'title' => self::__( 'Sprout Invoices Payment Settings' ),
 			'menu_title' => self::__( 'Payment Settings' ),
 			'weight' => 15,
-			'reset' => false, 
+			'reset' => false,
 			'section' => 'settings',
 			'tab_only' => true,
 			'ajax' => true,
 			'ajax_full_page' => true,
 			);
 		do_action( 'sprout_settings_page', $args );
-
 
 		// Settings
 		$settings = array(
@@ -173,11 +172,11 @@ abstract class SI_Payment_Processors extends SI_Controller {
 				)
 			)
 		);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	public static function settings_description() {
-		$credit = self::get_registered_processors('credit');
+		$credit = self::get_registered_processors( 'credit' );
 		if ( empty( $credit ) ) {
 			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Missing Paypal Express Checkout?</strong> The add-on is available for <b>free</b> on the <a href="%s">Sprout Apps marketplace</a>.</p></div>', si_get_purchase_link( self::PLUGIN_URL . '/marketplace/paypal-payments-express-checkout/' ) );
 		}
@@ -191,31 +190,31 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return null
 	 */
 	public static function display_payment_methods_field() {
-		$offsite = self::get_registered_processors('offsite');
-		$credit = self::get_registered_processors('credit');
+		$offsite = self::get_registered_processors( 'offsite' );
+		$credit = self::get_registered_processors( 'credit' );
 		$enabled = self::enabled_processors();
 
 		if ( $offsite ) {
-			printf( '<p><strong>%s</strong></p>', self::__('Offsite Processors') );
+			printf( '<p><strong>%s</strong></p>', self::__( 'Offsite Processors' ) );
 			foreach ( $offsite as $class => $label ) {
-				printf('<p><label><input type="checkbox" name="%s[]" value="%s" %s /> %s</label></p>', self::ENABLED_PROCESSORS_OPTION, esc_attr($class), checked(true, in_array($class, $enabled), false), esc_html($label));
+				printf( '<p><label><input type="checkbox" name="%s[]" value="%s" %s /> %s</label></p>', self::ENABLED_PROCESSORS_OPTION, esc_attr( $class ), checked( true, in_array( $class, $enabled ), false ), esc_html( $label ) );
 			}
 		}
 		if ( $credit ) {
-			printf( '<br/><p><strong>%s</strong></p>', self::__('Credit Card Processors') );
+			printf( '<br/><p><strong>%s</strong></p>', self::__( 'Credit Card Processors' ) );
 			printf( '<p><select name="%s[]" class="select2">', self::ENABLED_PROCESSORS_OPTION );
-			printf( '<option value="">%s</option>', self::__('-- None --') );
+			printf( '<option value="">%s</option>', self::__( '-- None --' ) );
 			foreach ( $credit as $class => $label ) {
-				printf('<option value="%s" %s>%s</option>', esc_attr($class), selected(true, in_array($class, $enabled), false), esc_html($label));
+				printf( '<option value="%s" %s>%s</option>', esc_attr( $class ), selected( true, in_array( $class, $enabled ), false ), esc_html( $label ) );
 			}
 			echo '</select>';
 		}
 	}
-	
+
 	/**
-	 * Settings page 
-	 * @param  boolean $prefixed 
-	 * @return string            
+	 * Settings page
+	 * @param  boolean $prefixed
+	 * @return string
 	 */
 	public static function get_settings_page( $prefixed = true ) {
 		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
@@ -239,10 +238,10 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	}
 
 	/**
-	 * Show a pane based on the page within checkout. If not on the checkout 
+	 * Show a pane based on the page within checkout. If not on the checkout
 	 * show all invoice panes and the active cc processors payments pane.
-	 * 
-	 * @param  string $current 
+	 *
+	 * @param  string $current
 	 * @return string
 	 */
 	public static function show_payments_pane( $current = '' ) {
@@ -271,16 +270,16 @@ abstract class SI_Payment_Processors extends SI_Controller {
 					$pane = $processor->payments_pane( $checkout );
 				}
 				break;
-			
+
 			default:
 				// Load up all invoice level panes
 				self::$active_payment_processors = self::enabled_processors();
 				foreach ( self::$active_payment_processors as $class ) {
-					$processor = self::load_processor($class);
+					$processor = self::load_processor( $class );
 					if ( method_exists( $processor, 'invoice_pane' ) ) {
 						$pane .= $processor->invoice_pane( $checkout );
 					}
-					if ( self::is_cc_processor($class) && method_exists( $processor, 'payments_pane' ) ) {
+					if ( self::is_cc_processor( $class ) && method_exists( $processor, 'payments_pane' ) ) {
 						$pane .= $processor->payments_pane( $checkout );
 					}
 				}
@@ -307,7 +306,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 */
 	// public static abstract function register();
 
-	
+
 	/**
 	 * Remove the payments page from the list of completed checkout pages
 	 *
@@ -321,21 +320,21 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	/**
 	 * Get all registered processors, activated or not.
 	 * @param  string $filter filter by type
-	 * @return array         
+	 * @return array
 	 */
 	public static function get_registered_processors( $filter = '' ) {
 		$processors = self::$potential_processors;
 		switch ( $filter ) {
 			case 'offsite':
 				foreach ( $processors as $class => $label ) {
-					if ( !self::is_offsite_processor($class) ) {
+					if ( ! self::is_offsite_processor( $class ) ) {
 						unset($processors[$class]);
 					}
 				}
 				break;
 			case 'credit':
 				foreach ( $processors as $class => $label ) {
-					if ( !self::is_cc_processor($class) ) {
+					if ( ! self::is_cc_processor( $class ) ) {
 						unset($processors[$class]);
 					}
 				}
@@ -348,25 +347,25 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 	/**
 	 * Is this a CC processor
-	 * @param  class  $class 
-	 * @return boolean        
+	 * @param  class  $class
+	 * @return boolean
 	 */
 	public static function is_cc_processor( $class ) {
-		return is_subclass_of($class, 'SI_Credit_Card_Processors');
+		return is_subclass_of( $class, 'SI_Credit_Card_Processors' );
 	}
 
 	/**
 	 * Is this a Offsite processor
-	 * @param  class  $class 
-	 * @return boolean        
+	 * @param  class  $class
+	 * @return boolean
 	 */
 	public static function is_offsite_processor( $class ) {
-		return is_subclass_of($class, 'SI_Offsite_Processors');
+		return is_subclass_of( $class, 'SI_Offsite_Processors' );
 	}
 
 	/**
 	 * Payment processors register by adding themselves.
-	 * @param class $class 
+	 * @param class $class
 	 * @param string $label Name of processor
 	 */
 	final protected static function add_payment_processor( $class, $label ) {
@@ -375,7 +374,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 	/**
 	 * Currency option
-	 * @return string 
+	 * @return string
 	 */
 	public static function get_currency_symbol() {
 		$localeconv = si_localeconv();
@@ -409,7 +408,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 */
 	public function cancel_recurring_payment( SI_Invoice $invoice ) {
 		$payment = self::get_recurring_payment( $invoice );
-		if ( !$payment ) {
+		if ( ! $payment ) {
 			return;
 		}
 		$payment->set_status( SI_Payment::STATUS_CANCELLED );
@@ -427,7 +426,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 				$r_payment_id = $pid;
 			}
 		}
-		if ( !$r_payment_id ) {
+		if ( ! $r_payment_id ) {
 			return false;
 		}
 		$payment = SI_Payment::get_instance( $r_payment_id );
@@ -448,22 +447,22 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return
 	 */
 	public static function manually_capture_payment() {
-		if ( !isset( $_REQUEST['capture_payment_nonce'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['capture_payment_nonce'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$nonce = $_REQUEST['capture_payment_nonce'];
-		if ( !wp_verify_nonce( $nonce, self::AJAX_NONCE ) )
-        	self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, self::AJAX_NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
-        if ( !current_user_can( 'delete_posts' ) )
-        	return;
+		if ( ! current_user_can( 'delete_posts' ) ) {
+			return; }
 
 		$payment_id = $_REQUEST['payment_id'];
 		$payment = SI_Payment::get_instance( $payment_id );
 		$status = $payment->get_status();
 
-		if ( !is_a( $payment, 'SI_Payment' ) )
-			self::ajax_fail( 'Payment ID Error.' );
+		if ( ! is_a( $payment, 'SI_Payment' ) ) {
+			self::ajax_fail( 'Payment ID Error.' ); }
 
 		// Payment processors need to allow for this functionality.
 		do_action( 'si_manually_capture_purchase', $payment );
@@ -474,31 +473,31 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			exit();
 		}
 		else {
-			self::ajax_fail('Failed payment capture.');
+			self::ajax_fail( 'Failed payment capture.' );
 		}
 	}
 
 	/**
 	 * Mark payment complete
-	 * 
-	 * @return  
+	 *
+	 * @return
 	 */
 	public static function manually_mark_complete() {
-		if ( !isset( $_REQUEST['complete_payment_nonce'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['complete_payment_nonce'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$nonce = $_REQUEST['complete_payment_nonce'];
-		if ( !wp_verify_nonce( $nonce, self::AJAX_NONCE ) )
-        	self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, self::AJAX_NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
-        if ( !current_user_can( 'delete_posts' ) )
-        	return;
+		if ( ! current_user_can( 'delete_posts' ) ) {
+			return; }
 
 		$payment_id = $_REQUEST['payment_id'];
 		$payment = SI_Payment::get_instance( $payment_id );
 		$status = $payment->get_status();
-		if ( !is_a( $payment, 'SI_Payment' ) )
-			self::ajax_fail( 'Payment ID Error.' );
+		if ( ! is_a( $payment, 'SI_Payment' ) ) {
+			self::ajax_fail( 'Payment ID Error.' ); }
 
 		$payment->set_status( SI_Payment::STATUS_COMPLETE );
 
@@ -508,9 +507,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			exit();
 		}
 		else {
-			self::ajax_fail('Failed payment capture.');
+			self::ajax_fail( 'Failed payment capture.' );
 		}
-		
+
 	}
 
 	/**
@@ -548,7 +547,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		$this_year = (int)date( 'Y' );
 		$years = array();
 		for ( $i = 0 ; $i < $number ; $i++ ) {
-			$years[$this_year+$i] = $this_year+$i;
+			$years[$this_year + $i] = $this_year + $i;
 		}
 		return apply_filters( 'si_payment_year_options', $years );
 	}
@@ -569,31 +568,31 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			$screen->add_help_tab( array(
 					'id' => 'payment-about',
 					'title' => self::__( 'About Payment Processing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('By default no payment processors are active. After selecting the Payment Settings tab you will find that there are two types of Payment Processors: Offsite Processors and Credit Card Processors.'), self::__('After selecting the processors you want to accept for invoice payments and saving the processor options will be shown. Each payment process has its own settings, review and complete each option before saving again') )
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'By default no payment processors are active. After selecting the Payment Settings tab you will find that there are two types of Payment Processors: Offsite Processors and Credit Card Processors.' ), self::__( 'After selecting the processors you want to accept for invoice payments and saving the processor options will be shown. Each payment process has its own settings, review and complete each option before saving again' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'payment-cc',
 					'title' => self::__( 'Credit Card Processing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('These are the credit card payment processors. You’ll notice that only one credit card processor can be activated at a time, this is by design since there’s no viable reason to accept CCs from multiple processors.'), self::__('If you ware accepting credit card information on your site you will want to use SSL for your site to keep your client’s data secure. Having SSL on your site is highly recommended for more reasons than accepting CC information, since every WordPress site has at least a login form.') )
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'These are the credit card payment processors. You’ll notice that only one credit card processor can be activated at a time, this is by design since there’s no viable reason to accept CCs from multiple processors.' ), self::__( 'If you ware accepting credit card information on your site you will want to use SSL for your site to keep your client’s data secure. Having SSL on your site is highly recommended for more reasons than accepting CC information, since every WordPress site has at least a login form.' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'payment-offsite',
 					'title' => self::__( 'Offsite Processing' ),
-					'content' => sprintf( '<p>%s</p>', self::__('Essentially a payment processed outside of your site. These payments can include external payment providers like Paypal and Check or P.O. payments. Virtually an unlimited amount of offsite processors can be activated.') )
+					'content' => sprintf( '<p>%s</p>', self::__( 'Essentially a payment processed outside of your site. These payments can include external payment providers like Paypal and Check or P.O. payments. Virtually an unlimited amount of offsite processors can be activated.' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'payment-currency',
 					'title' => self::__( 'Currency Symbol' ),
-					'content' => sprintf( '<p>%s</p>', self::__('If your currency is formatted wight the symbol after the amount, place a % before your currency symbol. For example, %£.') )
+					'content' => sprintf( '<p>%s</p>', self::__( 'If your currency is formatted wight the symbol after the amount, place a % before your currency symbol. For example, %£.' ) )
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payment-settings/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payment-settings/', self::__( 'Documentation' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
 			);
 		}
 	}

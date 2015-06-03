@@ -2,7 +2,7 @@
 
 /**
  * Notification Model
- * 
+ *
  *
  * @package Sprout_Invoices
  * @subpackage Records
@@ -19,7 +19,7 @@ class SI_Dev_Logs extends SI_Controller {
 	public static function init() {
 		// Admin option
 		self::$record_logs = (bool)get_option( self::LOG_OPTION, 0 );
-		
+
 		// Register settings
 		self::register_settings();
 
@@ -42,41 +42,41 @@ class SI_Dev_Logs extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_developer' => array(
-				'title' => self::__('Advanced'),
+				'title' => self::__( 'Advanced' ),
 				'weight' => 2000,
 				'tab' => 'settings',
 				'settings' => array(
 					self::LOG_OPTION => array(
 						'label' => self::__( 'Save Logs' ),
 						'option' => array(
-							'label' => self::__('Save all logs as a sprout apps records (dev_log).'),
+							'label' => self::__( 'Save all logs as a sprout apps records (dev_log).' ),
 							'type' => 'checkbox',
 							'default' => self::$record_logs,
 							'value' => '1',
-							'description' => self::__('Note: This should only be used for testing and troubleshooting. Records are found under Tools.')
+							'description' => self::__( 'Note: This should only be used for testing and troubleshooting. Records are found under Tools.' )
 							)
 						)
 					)
 				)
 			);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	/**
-	 * Log 
+	 * Log
 	 * Writes to PHP error logs if DEBUG is enabled.
-	 * 
+	 *
 	 * @param  string $subject short title
 	 * @param  array  $data    data
-	 * @return null          
+	 * @return null
 	 */
 	public static function log( $subject = '', $data = array() ) {
 
 		if ( self::DEBUG ) {
 			error_log( '+++' . $subject . ' +++++++++++++++++++++' );
-			if ( !empty( $data ) ) {
+			if ( ! empty( $data ) ) {
 				error_log( print_r( $data, true ) );
-				wpbt(); // wp_debug_backtrace_summary
+				error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
 				error_log( '--------------------- ' . $subject . ' END ---------------------' );
 			}
 		}
@@ -94,16 +94,16 @@ class SI_Dev_Logs extends SI_Controller {
 	/**
 	 * Records log error
 	 * Writes to PHP error logs if DEBUG is enabled.
-	 * 
+	 *
 	 * @param  string $subject short title
 	 * @param  array  $data    data
-	 * @return null          
+	 * @return null
 	 */
 	public static function error( $subject = '', $data = array(), $record_error = true ) {
 
 		if ( self::DEBUG ) {
 			error_log( '--- ' . $subject . ' ---------------------' );
-			if ( !empty( $data ) ) {
+			if ( ! empty( $data ) ) {
 				error_log( print_r( $data, true ) );
 				// error_log( '--------------------- ' . $subject . ' END ---------------------' );
 			}
@@ -121,12 +121,12 @@ class SI_Dev_Logs extends SI_Controller {
 
 	/**
 	 * Fired on init(), logs are recorded if stored.
-	 * 
+	 *
 	 * @return null
 	 */
 	public static function record_stored_logs_and_errors() {
 		// record logs
-		if ( !empty( self::$recorded_logs ) ) {
+		if ( ! empty( self::$recorded_logs ) ) {
 			foreach ( self::$recorded_logs as $subject => $data ) {
 				self::record_log( $subject, $data );
 			}
@@ -134,7 +134,7 @@ class SI_Dev_Logs extends SI_Controller {
 			self::$recorded_logs = array();
 		}
 		// records errors
-		if ( !empty( self::$recorded_errors ) ) {
+		if ( ! empty( self::$recorded_errors ) ) {
 			foreach ( self::$recorded_errors as $subject => $data ) {
 				self::record_log( $subject, $data , true );
 			}
@@ -149,7 +149,7 @@ class SI_Dev_Logs extends SI_Controller {
 	 * @param  array   $data         array of data for the record
 	 * @param  boolean $error        is the type an error or log
 	 * @param  integer $associate_id NOT USED
-	 * @return null                
+	 * @return null
 	 */
 	public static function record_log( $subject = '', $data = array(), $error = false, $associate_id = 0 ) {
 		$type = ( $error ) ? self::ERROR_TYPE : self::LOG_TYPE ;
@@ -158,12 +158,12 @@ class SI_Dev_Logs extends SI_Controller {
 			$type,
 			$associate_id,
 			$subject,
-			1 );
+		1 );
 	}
 
 	/**
 	 * Periodically query for logs older than si_logs_purge_filter_delay (defaults to 15 days) and delete them.
-	 * 
+	 *
 	 * @return null
 	 */
 	public static function purge_old_logs() {
@@ -176,7 +176,7 @@ class SI_Dev_Logs extends SI_Controller {
 							array(
 								'taxonomy' => SI_Record::TAXONOMY,
 								'field' => 'id',
-								'terms' => self::LOG_TYPE 
+								'terms' => self::LOG_TYPE
 							)
 						)
 		);

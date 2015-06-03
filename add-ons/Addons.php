@@ -57,7 +57,7 @@ class SA_Addons extends SI_Controller {
 				)
 			)
 		);
-		do_action( 'sprout_settings', $settings );
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	public static function display_addons_options() {
@@ -108,7 +108,7 @@ class SA_Addons extends SI_Controller {
 	/**
 	 * Settings page
 	 * @param  boolean $prefixed
-	 * @return string 
+	 * @return string
 	 */
 	public static function get_settings_page( $prefixed = true ) {
 		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
@@ -159,8 +159,8 @@ class SA_Addons extends SI_Controller {
 			$cache_addons = array();
 		}
 
-		if ( isset( $cache_addons[ $addon_folder ] ) )
-			return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], true );
+		if ( isset( $cache_addons[ $addon_folder ] ) ) {
+			return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], true ); }
 
 		$si_addons = array();
 		$addon_root = SI_PATH . '/add-ons/';
