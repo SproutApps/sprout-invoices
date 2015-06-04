@@ -13,7 +13,7 @@ class SI_Free_License extends SI_Controller {
 	const API_CB = 'https://sproutapps.co/';
 	protected static $license_key;
 	protected static $uid;
-	
+
 	public static function init() {
 		self::$license_key = trim( get_option( self::LICENSE_KEY_OPTION, '' ) );
 		self::$uid = trim( get_option( self::LICENSE_UID_OPTION, 0 ) );
@@ -47,39 +47,42 @@ class SI_Free_License extends SI_Controller {
 	///////////
 
 	public static function maybe_get_free_license() {
-		if ( !isset( $_REQUEST['security'] ) )
+		if ( ! isset( $_REQUEST['security'] ) ) {
 			self::ajax_fail( 'Forget something?' );
+		}
 
 		$nonce = $_REQUEST['security'];
-		if ( !wp_verify_nonce( $nonce, self::NONCE ) )
+		if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' );
+		}
 
-		if ( !current_user_can( 'activate_plugins' ) )
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
-		
-		if ( !isset( $_REQUEST['license'] ) ) {
+		}
+
+		if ( ! isset( $_REQUEST['license'] ) ) {
 			self::ajax_fail( 'No email submitted' );
 		}
 
-		if ( !is_email( $_REQUEST['license'] ) ) {
+		if ( ! is_email( $_REQUEST['license'] ) ) {
 			self::ajax_fail( 'No Email Submitted' );
 		}
 
 		$license_response = self::get_free_license( $_REQUEST['license'] );
 		if ( is_object( $license_response ) ) {
-			$message = self::__('Thank you for registering Sprout Invoices with Sprout Apps.');
+			$message = self::__( 'Thank you for registering Sprout Invoices with Sprout Apps.' );
 			$response = array(
 					'license' => $license_response->license_key,
 					'uid' => $license_response->uid,
 					'response' => $message,
-					'error' => !isset( $license_response->license_key )
+					'error' => ! isset( $license_response->license_key )
 				);
-			
+
 			update_option( self::LICENSE_KEY_OPTION, $license_response->license_key );
 			update_option( self::LICENSE_UID_OPTION, $license_response->uid );
 		}
 		else {
-			$message = self::__('License not created.') ;
+			$message = self::__( 'License not created.' );
 			$response = array(
 					'response' => $message,
 					'error' => 1
@@ -92,7 +95,7 @@ class SI_Free_License extends SI_Controller {
 	}
 
 	public static function thank_for_registering() {
-		if ( !self::$uid ) {
+		if ( ! self::$uid ) {
 			return;
 		}
 	}
@@ -113,12 +116,12 @@ class SI_Free_License extends SI_Controller {
 		}
 
 		// data to send in our API request
-		$api_params = array( 
+		$api_params = array(
 			'action' => 'sgmnt_free_license',
 			'item_name' => urlencode( self::PLUGIN_NAME ),
 			'url' => urlencode( home_url() ),
 			'uid' => $license,
-			'first_name'=> $first_name,
+			'first_name' => $first_name,
 			'last_name' => $last_name,
 		);
 
@@ -126,8 +129,8 @@ class SI_Free_License extends SI_Controller {
 		$response = wp_safe_remote_get( add_query_arg( $api_params, self::API_CB . 'wp-admin/admin-ajax.php' ), array( 'timeout' => 15, 'sslverify' => false ) );
 
 		// make sure the response came back okay
-		if ( is_wp_error( $response ) )
-			return false;
+		if ( is_wp_error( $response ) ) {
+			return false; }
 
 		// decode the license data
 		$license_response = json_decode( wp_remote_retrieve_body( $response ) );
@@ -136,10 +139,10 @@ class SI_Free_License extends SI_Controller {
 	}
 
 	public static function add_uid_to_url( $url = '' ) {
-		if ( !self::$uid ) {
+		if ( ! self::$uid ) {
 			return $url;
 		}
 		return add_query_arg( array( 'uid' => self::$uid ), $url );
 	}
-	
+
 }

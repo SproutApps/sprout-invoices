@@ -552,7 +552,7 @@ class SI_Admin_Settings extends SI_Controller {
 	 */
 		public static function sa_admin_bar( WP_Admin_Bar $wp_admin_bar ) {
 
-			if ( ! current_user_can( 'manage_options' ) ) {
+			if ( ! current_user_can( 'manage_sprout_invoices_options' ) ) {
 				return; }
 
 			$menu_items = apply_filters( 'si_admin_bar', array() );

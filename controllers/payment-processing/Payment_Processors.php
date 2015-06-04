@@ -454,8 +454,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		if ( ! wp_verify_nonce( $nonce, self::AJAX_NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( ! current_user_can( 'delete_posts' ) ) {
-			return; }
+		if ( ! current_user_can( 'manage_sprout_invoices_payments' ) ) {
+			return;
+		}
 
 		$payment_id = $_REQUEST['payment_id'];
 		$payment = SI_Payment::get_instance( $payment_id );
@@ -490,8 +491,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		if ( ! wp_verify_nonce( $nonce, self::AJAX_NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( ! current_user_can( 'delete_posts' ) ) {
-			return; }
+		if ( ! current_user_can( 'manage_sprout_invoices_payments' ) ) {
+			return;
+		}
 
 		$payment_id = $_REQUEST['payment_id'];
 		$payment = SI_Payment::get_instance( $payment_id );

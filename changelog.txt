@@ -1,3 +1,7 @@
+= 7.2.1 =
+
+* FIX: Updates for Pro Versions
+
 = 7.1 =
 
 * NEW: Sprout Invoice specific user roles

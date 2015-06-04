@@ -827,7 +827,7 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( ! is_admin() ) {
 			return;
 		}
-		if ( ! current_user_can( 'delete_posts' ) ) {
+		if ( ! current_user_can( 'delete_sprout_invoices' ) ) {
 			return;
 		}
 		if ( isset( $_GET['refresh-notifications'] ) && $_GET['refresh-notifications'] ) { // If dev than don't cache.
@@ -837,7 +837,7 @@ class SI_Notifications_Control extends SI_Controller {
 				'post_type' => SI_Notification::POST_TYPE,
 				'posts_per_page' => -1,
 				'exclude' => array_values( $active_notifications ),
-				'fields' => 'ids'
+				'fields' => 'ids',
 			);
 			$posts = get_posts( $args );
 

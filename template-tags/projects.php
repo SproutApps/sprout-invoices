@@ -67,3 +67,82 @@ function si_projects_select( $selected_id = 0, $client_id = 0, $blank = true, $e
 
 }
 endif;
+
+if ( ! function_exists('si_get_docs_project_id') ) :
+function si_get_docs_project_id( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$doc = si_get_doc_object( $id );
+	if ( '' === $doc ) {
+		return 0;
+	}
+	return apply_filters( 'si_get_docs_project_id', $doc->get_project_id(), $doc );
+}
+endif;
+
+
+if ( ! function_exists('si_get_project_start_date') ) :
+function si_get_project_start_date( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$project = SI_Project::get_instance( $id );
+	return apply_filters( 'si_get_project_start_date', $project->get_start_date(), $project );
+}
+endif;
+
+if ( ! function_exists('si_project_start_date') ) :
+function si_project_start_date( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	echo apply_filters( 'si_project_start_date', date_i18n( get_option('date_format'), si_get_project_start_date( $id ) ), $id );
+}
+endif;
+
+
+if ( ! function_exists('si_get_project_end_date') ) :
+function si_get_project_end_date( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$project = SI_Project::get_instance( $id );
+	return apply_filters( 'si_get_project_end_date', $project->get_end_date(), $project );
+}
+endif;
+
+if ( ! function_exists('si_project_end_date') ) :
+function si_project_end_date( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	echo apply_filters( 'si_project_end_date', date_i18n( get_option('date_format'), si_get_project_end_date( $id ) ), $id );
+}
+endif;
+
+if ( ! function_exists('si_get_project_website') ) :
+function si_get_project_website( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	$project = SI_Project::get_instance( $id );
+	return apply_filters( 'si_get_project_website', $project->get_website(), $project );
+}
+endif;
+
+if ( ! function_exists('si_project_website') ) :
+function si_project_website( $id = 0 ) {
+	if ( !$id ) {
+		global $post;
+		$id = $post->ID;
+	}
+	echo apply_filters( 'si_project_website', si_get_project_website( $id ), $id );
+}
+endif;

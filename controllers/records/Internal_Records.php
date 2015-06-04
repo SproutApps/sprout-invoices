@@ -190,7 +190,7 @@ class SI_Internal_Records extends SI_Controller {
 			wp_die( 'Not going to fall for it!' );
 		}
 
-		if ( current_user_can( 'delete_posts' ) ) {
+		if ( current_user_can( 'manage_sprout_invoices_records' ) ) {
 			$record_id = $_REQUEST['record_id'];
 			wp_delete_post( $record_id, true );
 			do_action( 'si_deleted_record', $record_id );
@@ -198,7 +198,7 @@ class SI_Internal_Records extends SI_Controller {
 	}
 
 	public static function edit_private_note() {
-		if ( ! current_user_can( 'edit_posts' ) ) {
+		if ( ! current_user_can( 'edit_sprout_invoices' ) ) {
 			self::ajax_fail( 'User cannot create new posts!' );
 		}
 		if ( ! isset( $_REQUEST['note_id'] ) ) {

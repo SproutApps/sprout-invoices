@@ -48,6 +48,7 @@ class SI_Importer extends SI_Controller {
 			'section' => 'settings',
 			'tab_only' => true,
 			'callback' => array( __CLASS__, 'importer_page' ),
+			'capability' => 'manage_sprout_invoices_importer',
 			);
 		do_action( 'sprout_settings_page', $args );
 	}

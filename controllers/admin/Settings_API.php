@@ -104,13 +104,14 @@ class SA_Settings_API extends SI_Controller {
 			'ajax' => false,
 			'ajax_full_page' => false,
 			'add_new' => '',
-			'add_new_post_type' => ''
+			'add_new_post_type' => '',
+			'capability' => 'manage_sprout_invoices_options',
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );
 		extract( $parsed_args );
 
 		$page = self::TEXT_DOMAIN.'/'.$slug;
-		self::$option_tabs[$slug] = array(
+		self::$option_tabs[ $slug ] = array(
 			'slug' => $slug,
 			'title' => $menu_title,
 			'tab_title' => ( $tab_title ) ? $tab_title : $menu_title,
@@ -121,9 +122,10 @@ class SA_Settings_API extends SI_Controller {
 			'section' => $section,
 			'callback' => $callback,
 			'tab_only' => $tab_only,
+			'capability' => $capability,
 		);
 		if ( ! $tab_only ) {
-			self::$admin_pages[$page] = array(
+			self::$admin_pages[ $page ] = array(
 				'parent' => $parent,
 				'title' => $title,
 				'menu_title' => $menu_title,
@@ -133,10 +135,10 @@ class SA_Settings_API extends SI_Controller {
 				'reset' => $reset,
 				'tab_only' => $tab_only,
 				'section' => $section,
-				'callback' => $callback
+				'callback' => $callback,
+				'capability' => $capability,
 			);
 		}
-
 		return $page;
 	}
 
@@ -165,8 +167,8 @@ class SA_Settings_API extends SI_Controller {
 	public static function add_admin_page() {
 
 		// Add parent menu for SI
-		self::$settings_page = add_menu_page( self::__( 'Sprout Apps' ), self::__( 'Sprout Apps' ), 'manage_options', self::TEXT_DOMAIN );
-		add_submenu_page( self::TEXT_DOMAIN, self::__( 'Sprout Apps' ), self::__( 'Updates' ), 'manage_options', self::TEXT_DOMAIN, array( __CLASS__, 'dashboard_page' ) );
+		self::$settings_page = add_menu_page( self::__( 'Sprout Apps' ), self::__( 'Sprout Apps' ), 'manage_sprout_invoices_options', self::TEXT_DOMAIN );
+		add_submenu_page( self::TEXT_DOMAIN, self::__( 'Sprout Apps' ), self::__( 'Updates' ), 'manage_sprout_invoices_options', self::TEXT_DOMAIN, array( __CLASS__, 'dashboard_page' ) );
 
 		// Sort submenus
 		uasort( self::$admin_pages, array( __CLASS__, 'sort_by_weight' ) );
@@ -174,7 +176,7 @@ class SA_Settings_API extends SI_Controller {
 		foreach ( self::$admin_pages as $page => $data ) {
 			$parent = ( $data['parent'] != '' ) ? $data['parent'] : self::TEXT_DOMAIN ;
 			$callback = ( is_callable( $data['callback'] ) ) ? $data['callback'] : array( __CLASS__, 'default_admin_page' ) ;
-			$hook = add_submenu_page( $parent, $data['title'], self::__( $data['menu_title'] ), 'manage_options', $page, $callback );
+			$hook = add_submenu_page( $parent, $data['title'], self::__( $data['menu_title'] ), $data['capability'], $page, $callback );
 			self::$admin_pages[$page]['hook'] = $hook;
 		}
 	}
@@ -190,7 +192,7 @@ class SA_Settings_API extends SI_Controller {
 	 * @return void
 	 */
 	public static function default_admin_page() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_sprout_invoices_options' ) ) {
 			return; // not allowed to view this page
 		}
 		if ( isset( $_GET['settings-updated'] ) && isset( $_GET['settings-updated'] ) ) {
@@ -442,18 +444,21 @@ class SA_Settings_API extends SI_Controller {
 	public static function maybe_save_options_via_ajax() {
 		if ( is_admin() ) {
 			if ( ! isset( $_POST['options'] ) ) {
-				return; }
+				return;
+			}
 
 			// unserialize
 			wp_parse_str( $_POST['options'], $options );
 			// Confirm the form was an update
 			if ( isset( $options['action'] ) && $options['action'] == 'update' ) {
-				$option_page = ( isset( $options['option_page'] ) ) ? $options['option_page'] : 'general' ;
+
+				$option_page = ( isset( $options['option_page'] ) ) ? $options['option_page'] : 'general';
 
 				// capability check
-				$capability = apply_filters( "option_page_capability_{$option_page}", 'manage_options' );
+				$capability = apply_filters( "option_page_capability_{$option_page}", 'manage_sprout_invoices_options' );
 				if ( ! current_user_can( $capability ) ) {
-					wp_die( __( 'Cheatin&#8217; uh?' ) ); }
+					wp_die( __( 'Cheatin&#8217; uh?' ) );
+				}
 
 				self::update_options( $options, $option_page );
 				echo apply_filters( 'save_options_via_ajax_message', self::__( 'Saved' ), $option_page );

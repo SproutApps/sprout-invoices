@@ -1500,7 +1500,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( ! wp_verify_nonce( $nonce, SI_Internal_Records::NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( ! current_user_can( 'edit_posts' ) ) {
+		if ( ! current_user_can( 'edit_sprout_invoices' ) ) {
 			return; }
 
 		$record_id = SI_Internal_Records::new_record( $_REQUEST['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $_REQUEST['associated_id'], '', 0, false );

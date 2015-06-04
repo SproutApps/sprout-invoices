@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**7.2.1**
+
+* FIX: Updates for Pro Versions
+
 **7.1**
 
 * NEW: Sprout Invoice specific user roles
@@ -126,7 +130,7 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 * FIX: Start CSV import without using previous files
 * FIX: Fix for old PHP versions without json_last_error
 * FIX: Remove project types from submission page
-* FIX: Language translations updated (7.1)
+* FIX: Language translations updated (7.2)
 
 **6.2**
 

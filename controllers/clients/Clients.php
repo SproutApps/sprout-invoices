@@ -2,14 +2,14 @@
 
 /**
  * Clients Controller
- * 	
+ *
  *
  * @package Sprout_Invoice
  * @subpackage Clients
  */
 class SI_Clients extends SI_Controller {
 	const SUBMISSION_NONCE = 'si_client_submission';
-	
+
 
 	public static function init() {
 
@@ -31,7 +31,6 @@ class SI_Clients extends SI_Controller {
 			add_filter( 'manage_edit-'.SI_Client::POST_TYPE.'_columns', array( __CLASS__, 'register_columns' ) );
 			add_filter( 'manage_'.SI_Client::POST_TYPE.'_posts_custom_column', array( __CLASS__, 'column_display' ), 10, 2 );
 			add_action( 'post_row_actions', array( __CLASS__, 'modify_row_actions' ), 10, 2 );
-
 
 			// User Admin columns
 			add_filter( 'manage_users_columns', array( __CLASS__, 'user_register_columns' ) );
@@ -57,7 +56,7 @@ class SI_Clients extends SI_Controller {
 		// Currency Formatting
 		add_filter( 'sa_get_currency_symbol_pre', array( __CLASS__, 'maybe_filter_currency_symbol' ) );
 		add_filter( 'sa_set_monetary_locale', array( __CLASS__, 'maybe_filter_money_format_money_format' ), 10, 2 );
-		
+
 		// Currency Code Change
 		add_filter( 'si_currency_code', array( get_class(), 'maybe_change_currency_code' ), 10, 2 );
 	}
@@ -140,9 +139,9 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Show custom submit box.
-	 * @param  WP_Post $post         
-	 * @param  array $metabox      
-	 * @return                
+	 * @param  WP_Post $post
+	 * @param  array $metabox
+	 * @return
 	 */
 	public static function show_submit_meta_box( $post, $metabox ) {
 		$client = SI_Client::get_instance( $post->ID );
@@ -203,11 +202,11 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Saving info meta
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_meta_box_client_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		// name is filtered via update_post_data
@@ -224,27 +223,27 @@ class SI_Clients extends SI_Controller {
 		$client = SI_Client::get_instance( $post_id );
 		$client->set_website( $website );
 		$client->set_address( $address );
-		
+
 		$user_id = 0;
 		// Attempt to create a user
 		if ( isset( $_POST['sa_metabox_email'] ) && $_POST['sa_metabox_email'] != '' ) {
 			$user_args = array(
-				'user_login' => self::esc__($_POST['sa_metabox_email']),
-				'display_name' => isset( $_POST['sa_metabox_name'] ) ? self::esc__($_POST['sa_metabox_name']) : self::esc__($_POST['sa_metabox_email']),
+				'user_login' => self::esc__( $_POST['sa_metabox_email'] ),
+				'display_name' => isset( $_POST['sa_metabox_name'] ) ? self::esc__( $_POST['sa_metabox_name'] ) : self::esc__( $_POST['sa_metabox_email'] ),
 				'user_pass' => wp_generate_password(), // random password
-				'user_email' => isset( $_POST['sa_metabox_email'] ) ? self::esc__($_POST['sa_metabox_email']) : '',
-				'first_name' => isset( $_POST['sa_metabox_first_name'] ) ? self::esc__($_POST['sa_metabox_first_name']) : '',
-				'last_name' => isset( $_POST['sa_metabox_last_name'] ) ? self::esc__($_POST['sa_metabox_last_name']) : '',
-				'user_url' => isset( $_POST['sa_metabox_website'] ) ? self::esc__($_POST['sa_metabox_website']) : ''
+				'user_email' => isset( $_POST['sa_metabox_email'] ) ? self::esc__( $_POST['sa_metabox_email'] ) : '',
+				'first_name' => isset( $_POST['sa_metabox_first_name'] ) ? self::esc__( $_POST['sa_metabox_first_name'] ) : '',
+				'last_name' => isset( $_POST['sa_metabox_last_name'] ) ? self::esc__( $_POST['sa_metabox_last_name'] ) : '',
+				'user_url' => isset( $_POST['sa_metabox_website'] ) ? self::esc__( $_POST['sa_metabox_website'] ) : ''
 			);
 			$user_id = self::create_user( $user_args );
 		}
 
 		if ( $user_id ) {
-			$client->add_associated_user($user_id);
+			$client->add_associated_user( $user_id );
 		}
 	}
-	
+
 	public static function update_post_data( $data = array(), $post = array() ) {
 		if ( $post['post_type'] == SI_Client::POST_TYPE ) {
 			$title = $post['post_title'];
@@ -259,11 +258,11 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Saving info meta
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_meta_box_client_adv_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$currency = ( isset( $_POST['sa_metabox_currency'] ) && $_POST['sa_metabox_currency'] != '' ) ? $_POST['sa_metabox_currency'] : '' ;
@@ -279,22 +278,22 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Saving submit meta
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_submit_meta_box( $post_id, $post, $callback_args, $estimate_id = null ) {
 
 		$client = SI_Client::get_instance( $post_id );
 		$client->clear_associated_users();
 
-		if ( !isset( $_POST['associated_users'] ) )
-			return;
+		if ( ! isset( $_POST['associated_users'] ) ) {
+			return; }
 
 		foreach ( $_POST['associated_users'] as $user_id ) {
-			$client->add_associated_user($user_id);
+			$client->add_associated_user( $user_id );
 		}
 
 	}
@@ -325,19 +324,19 @@ class SI_Clients extends SI_Controller {
 	////////////
 	// Misc. //
 	////////////
-	
+
 	/**
 	 * Redirect any clients away from the admin.
-	 * @return  
+	 * @return
 	 */
 	public static function redirect_clients() {
 		// Don't redirect admin-ajax.php requests
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
 		}
-		
+
 		$user = wp_get_current_user();
-		if ( !isset( $user->roles ) || ( !empty( $user->roles ) && $user->roles[0] == 'sa_client' ) ) {
+		if ( ! isset( $user->roles ) || ( ! empty( $user->roles ) && $user->roles[0] == 'sa_client' ) ) {
 			wp_redirect( home_url() );
 			exit();
 		}
@@ -378,86 +377,86 @@ class SI_Clients extends SI_Controller {
 	public static function column_display( $column_name, $id ) {
 		$client = SI_Client::get_instance( $id );
 
-		if ( !is_a( $client, 'SI_Client' ) )
+		if ( ! is_a( $client, 'SI_Client' ) ) {
 			return; // return for that temp post
-
+		}
 		switch ( $column_name ) {
-		
-		case 'info':
-			
-			echo '<p>';
-			$address = si_format_address( $client->get_address(), 'string', '<br/>' );
-			echo $address;
-			if ( $address != '' ) {
-				echo '<br/>';
-			}
-			echo make_clickable( esc_url( $client->get_website() ) );
-			echo '</p>';
 
-			$associated_users = $client->get_associated_users();
-			echo '<p>';
-			printf( '<b>%s</b>: ', si__('Users') );
-			if ( !empty( $associated_users ) ) {
-				$users_print = array();
-				foreach ( $associated_users as $user_id ) {
-					$user = get_userdata( $user_id );
-					if ( $user ) {
-						$users_print[] = sprintf( '<span class="associated_user"><a href="%s">%s</a></span>', get_edit_user_link( $user_id ), $user->display_name );
+			case 'info':
+
+				echo '<p>';
+				$address = si_format_address( $client->get_address(), 'string', '<br/>' );
+				echo $address;
+				if ( $address != '' ) {
+					echo '<br/>';
+				}
+				echo make_clickable( esc_url( $client->get_website() ) );
+				echo '</p>';
+
+				$associated_users = $client->get_associated_users();
+				echo '<p>';
+				printf( '<b>%s</b>: ', si__( 'Users' ) );
+				if ( ! empty( $associated_users ) ) {
+					$users_print = array();
+					foreach ( $associated_users as $user_id ) {
+						$user = get_userdata( $user_id );
+						if ( $user ) {
+							$users_print[] = sprintf( '<span class="associated_user"><a href="%s">%s</a></span>', get_edit_user_link( $user_id ), $user->display_name );
+						}
 					}
 				}
-			}
-			if ( !empty( $users_print ) ) {
-				echo implode( ', ', $users_print );
-			}
-			else {
-				echo si__('No associated users');
-			}
-			echo '</p>';
-			
+				if ( ! empty( $users_print ) ) {
+					echo implode( ', ', $users_print );
+				}
+				else {
+					echo si__( 'No associated users' );
+				}
+				echo '</p>';
+
 			break;
 
-		case 'invoices':
+			case 'invoices':
 
-			$invoices = $client->get_invoices();
-			$split = 3;
-			$split_invoices = array_slice( $invoices, 0, $split );
-			if ( !empty( $split_invoices ) ) {
-				echo "<dl>";
-				foreach ($split_invoices as $invoice_id) {
-					printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option('date_format'), false, $invoice_id ), get_edit_post_link( $invoice_id ), get_the_title( $invoice_id ) );
+				$invoices = $client->get_invoices();
+				$split = 3;
+				$split_invoices = array_slice( $invoices, 0, $split );
+				if ( ! empty( $split_invoices ) ) {
+					echo '<dl>';
+					foreach ( $split_invoices as $invoice_id ) {
+						printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option( 'date_format' ), false, $invoice_id ), get_edit_post_link( $invoice_id ), get_the_title( $invoice_id ) );
+					}
+					echo '</dl>';
+					if ( count( $invoices ) > $split ) {
+						printf( '<span class="description">' . si__( '...%s of <a href="%s">%s</a> most recent shown' ) . '</span>', $split, get_edit_post_link( $id ), count( $invoices ) );
+					}
 				}
-				echo "</dl>";
-				if ( count( $invoices ) > $split ) {
-					printf( '<span class="description">' . si__('...%s of <a href="%s">%s</a> most recent shown') . '</span>', $split, get_edit_post_link( $id ), count( $invoices ) );
+				else {
+					printf( '<em>%s</em>', si__( 'No invoices' ) );
 				}
-			}
-			else {
-				printf( '<em>%s</em>', si__('No invoices') );
-			}
 			break;
 
-		case 'estimates':
+			case 'estimates':
 
-			$estimates = $client->get_estimates();
-			$split = 3;
-			$split_estimates = array_slice( $estimates, 0, $split );
-			if ( !empty( $split_estimates ) ) {
-				echo "<dl>";
-				foreach ($split_estimates as $estimate_id) {
-					printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option('date_format'), false, $estimate_id ), get_edit_post_link( $estimate_id ), get_the_title( $estimate_id ) );
+				$estimates = $client->get_estimates();
+				$split = 3;
+				$split_estimates = array_slice( $estimates, 0, $split );
+				if ( ! empty( $split_estimates ) ) {
+					echo '<dl>';
+					foreach ( $split_estimates as $estimate_id ) {
+						printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option( 'date_format' ), false, $estimate_id ), get_edit_post_link( $estimate_id ), get_the_title( $estimate_id ) );
+					}
+					echo '</dl>';
+					if ( count( $estimates ) > $split ) {
+						printf( '<span class="description">' . si__( '...%s of <a href="%s">%s</a> most recent shown' ) . '</span>', $split, get_edit_post_link( $id ), count( $estimates ) );
+					}
 				}
-				echo "</dl>";
-				if ( count( $estimates ) > $split ) {
-					printf( '<span class="description">' . si__('...%s of <a href="%s">%s</a> most recent shown') . '</span>', $split, get_edit_post_link( $id ), count( $estimates ) );
+				else {
+					printf( '<em>%s</em>', si__( 'No estimates' ) );
 				}
-			}
-			else {
-				printf( '<em>%s</em>', si__('No estimates') );
-			}
 			break;
 
-		default:
-			// code...
+			default:
+				// code...
 			break;
 		}
 
@@ -465,8 +464,8 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Register the client column. In CSS make it small.
-	 * @param  array $columns 
-	 * @return array          
+	 * @param  array $columns
+	 * @return array
 	 */
 	public static function user_register_columns( $columns ) {
 		$columns['client'] = '<div class="dashicons dashicons-id-alt"></div>';
@@ -475,17 +474,17 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * User column display
-	 * @param  string $empty       
-	 * @param  string $column_name 
-	 * @param  int $id          
-	 * @return string              
+	 * @param  string $empty
+	 * @param  string $column_name
+	 * @param  int $id
+	 * @return string
 	 */
 	public static function user_column_display( $empty = '', $column_name, $id ) {
 		switch ( $column_name ) {
 			case 'client':
 				$client_ids = SI_Client::get_clients_by_user( $id );
-				
-				if ( !empty( $client_ids ) ) {
+
+				if ( ! empty( $client_ids ) ) {
 					$string = '';
 					foreach ( $client_ids as $client_id ) {
 						$string .= sprintf( self::__( '<a class="doc_link" title="%s" href="%s">%s</a>' ), get_the_title( $client_id ), get_edit_post_link( $client_id ), '<div class="dashicons dashicons-id-alt"></div>' );
@@ -540,13 +539,13 @@ class SI_Clients extends SI_Controller {
 			'default' => ''
 		);
 
-		if ( !$client ) {
+		if ( ! $client ) {
 			$fields['email'] = array(
 				'weight' => 3,
 				'label' => self::__( 'Email' ),
 				'type' => 'text',
 				'required' => $required,
-				'description' => self::__('This e-mail will be used to create a new client user. Leave blank if associating an existing user.'),
+				'description' => self::__( 'This e-mail will be used to create a new client user. Leave blank if associating an existing user.' ),
 				'default' => ''
 			);
 		}
@@ -682,8 +681,8 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Maybe create a user if one is not already created.
-	 * @param  array  $args 
-	 * @return $user_id       
+	 * @param  array  $args
+	 * @return $user_id
 	 */
 	public static function create_user( $args = array() ) {
 		$defaults = array(
@@ -699,7 +698,7 @@ class SI_Clients extends SI_Controller {
 		$parsed_args = wp_parse_args( $args, $defaults );
 
 		// check if the user already exists.
-		if ( $user = get_user_by('email', $parsed_args['user_email'] ) ) {
+		if ( $user = get_user_by( 'email', $parsed_args['user_email'] ) ) {
 			return $user->ID;
 		}
 
@@ -725,7 +724,7 @@ class SI_Clients extends SI_Controller {
 				$estimate = SI_Estimate::get_instance( get_the_id() );
 				$client = $estimate->get_client();
 				break;
-			
+
 			default:
 				$client = null;
 				break;
@@ -740,7 +739,7 @@ class SI_Clients extends SI_Controller {
 	}
 
 	public static function maybe_filter_money_format_money_format( $money_format = '', $doc_id = 0 ) {
-		if ( !$doc_id ) {
+		if ( ! $doc_id ) {
 			$doc_id = get_the_ID();
 		}
 		switch ( get_post_type( $doc_id ) ) {
@@ -755,7 +754,7 @@ class SI_Clients extends SI_Controller {
 				$estimate = SI_Estimate::get_instance( $doc_id );
 				$client = $estimate->get_client();
 				break;
-			
+
 			default:
 				$client = null;
 				break;
@@ -775,14 +774,14 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Filter the submission fields if the user is logged in and a client is already created.
-	 * @param  array  $fields 
-	 * @return array         
+	 * @param  array  $fields
+	 * @return array
 	 */
 	public static function filter_estimate_submission_fields( $fields = array() ) {
 		if ( is_user_logged_in() ) {
 			$client_id = 0;
 			$client_ids = SI_Client::get_clients_by_user( get_current_user_id() );
-			if ( !empty( $client_ids ) ) {
+			if ( ! empty( $client_ids ) ) {
 				$client_id = array_pop( $client_ids );
 			}
 			if ( get_post_type( $client_id ) == SI_Client::POST_TYPE ) {
@@ -804,9 +803,9 @@ class SI_Clients extends SI_Controller {
 	/**
 	 * Hooked into the estimate submission form. Create a client
 	 * if one already doesn't exist.
-	 * @param  SI_Estimate $estimate    
-	 * @param  array       $parsed_args 
-	 * @return                    
+	 * @param  SI_Estimate $estimate
+	 * @param  array       $parsed_args
+	 * @return
 	 */
 	public static function create_client_from_submission( SI_Estimate $estimate, $parsed_args = array() ) {
 		$client_id = ( isset( $_REQUEST['client_id'] ) && get_post_type( $_REQUEST['client_id'] ) == SI_Client::POST_TYPE ) ? $_REQUEST['client_id'] : 0;
@@ -814,57 +813,56 @@ class SI_Clients extends SI_Controller {
 
 		// check to see if the user exists by email
 		if ( isset( $_REQUEST['sa_estimate_email'] ) && $_REQUEST['sa_estimate_email'] != '' ) {
-			if ( $user = get_user_by('email', $_REQUEST['sa_estimate_email'] ) ) {
+			if ( $user = get_user_by( 'email', $_REQUEST['sa_estimate_email'] ) ) {
 				$user_id = $user->ID;
 			}
 		}
 
 		// Check to see if the user is assigned to a client already
-		if ( !$client_id ) {
+		if ( ! $client_id ) {
 			$client_ids = SI_Client::get_clients_by_user( $user_id );
-			if ( !empty( $client_ids ) ) {
+			if ( ! empty( $client_ids ) ) {
 				$client_id = array_pop( $client_ids );
 			}
 		}
-		
+
 		// Create a user for the submission if an email is provided.
-		if ( !$user_id ) {
+		if ( ! $user_id ) {
 			// email is critical
 			if ( isset( $_REQUEST['sa_estimate_email'] ) && $_REQUEST['sa_estimate_email'] != '' ) {
 				$user_args = array(
-					'user_login' => self::esc__($_REQUEST['sa_estimate_email']),
-					'display_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? self::esc__($_REQUEST['sa_estimate_client_name']) : self::esc__($_REQUEST['sa_estimate_email']),
+					'user_login' => self::esc__( $_REQUEST['sa_estimate_email'] ),
+					'display_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? self::esc__( $_REQUEST['sa_estimate_client_name'] ) : self::esc__( $_REQUEST['sa_estimate_email'] ),
 					'user_pass' => wp_generate_password(), // random password
-					'user_email' => isset( $_REQUEST['sa_estimate_email'] ) ? self::esc__($_REQUEST['sa_estimate_email']) : '',
-					'first_name' => si_split_full_name( self::esc__($_REQUEST['sa_estimate_name']), 'first' ),
-					'last_name' => si_split_full_name( self::esc__($_REQUEST['sa_estimate_name']), 'last' ),
-					'user_url' => isset( $_REQUEST['sa_estimate_website'] ) ? self::esc__($_REQUEST['sa_estimate_website']) : ''
+					'user_email' => isset( $_REQUEST['sa_estimate_email'] ) ? self::esc__( $_REQUEST['sa_estimate_email'] ) : '',
+					'first_name' => si_split_full_name( self::esc__( $_REQUEST['sa_estimate_name'] ), 'first' ),
+					'last_name' => si_split_full_name( self::esc__( $_REQUEST['sa_estimate_name'] ), 'last' ),
+					'user_url' => isset( $_REQUEST['sa_estimate_website'] ) ? self::esc__( $_REQUEST['sa_estimate_website'] ) : ''
 				);
 				$user_id = self::create_user( $user_args );
 			}
-			
 		}
 
 		// create the client based on what's submitted.
-		if ( !$client_id ) {
+		if ( ! $client_id ) {
 			$address = array(
-				'street' => isset( $_REQUEST['sa_contact_street'] ) ?self::esc__( $_REQUEST['sa_contact_street']) : '',
-				'city' => isset( $_REQUEST['sa_contact_city'] ) ? self::esc__($_REQUEST['sa_contact_city']) : '',
-				'zone' => isset( $_REQUEST['sa_contact_zone'] ) ? self::esc__($_REQUEST['sa_contact_zone']) : '',
-				'postal_code' => isset( $_REQUEST['sa_contact_postal_code'] ) ? self::esc__($_REQUEST['sa_contact_postal_code']) : '',
-				'country' => isset( $_REQUEST['sa_contact_country'] ) ? self::esc__($_REQUEST['sa_contact_country']) : '',
+				'street' => isset( $_REQUEST['sa_contact_street'] ) ?self::esc__( $_REQUEST['sa_contact_street'] ) : '',
+				'city' => isset( $_REQUEST['sa_contact_city'] ) ? self::esc__( $_REQUEST['sa_contact_city'] ) : '',
+				'zone' => isset( $_REQUEST['sa_contact_zone'] ) ? self::esc__( $_REQUEST['sa_contact_zone'] ) : '',
+				'postal_code' => isset( $_REQUEST['sa_contact_postal_code'] ) ? self::esc__( $_REQUEST['sa_contact_postal_code'] ) : '',
+				'country' => isset( $_REQUEST['sa_contact_country'] ) ? self::esc__( $_REQUEST['sa_contact_country'] ) : '',
 			);
 
 			$args = array(
-				'company_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? self::esc__($_REQUEST['sa_estimate_client_name']) : '',
-				'website' => isset( $_REQUEST['sa_estimate_website'] ) ? self::esc__($_REQUEST['sa_estimate_website']) : '',
+				'company_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? self::esc__( $_REQUEST['sa_estimate_client_name'] ) : '',
+				'website' => isset( $_REQUEST['sa_estimate_website'] ) ? self::esc__( $_REQUEST['sa_estimate_website'] ) : '',
 				'address' => $address,
 				'user_id' => $user_id
 			);
 
 			$client_id = SI_Client::new_client( $args );
 		}
-		
+
 		// Set the estimates client
 		$estimate->set_client_id( $client_id );
 
@@ -882,17 +880,17 @@ class SI_Clients extends SI_Controller {
 			}
 		}
 
-		if ( !isset( $_REQUEST['sa_client_nonce'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['sa_client_nonce'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$nonce = $_REQUEST['sa_client_nonce'];
-		if ( !wp_verify_nonce( $nonce, self::SUBMISSION_NONCE ) )
-			self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, self::SUBMISSION_NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( !current_user_can( 'publish_posts' ) )
-			self::ajax_fail( 'User cannot create new posts!' );
-		
-		if ( !isset( $_REQUEST['sa_client_name'] ) || $_REQUEST['sa_client_name'] == '' ) {
+		if ( ! current_user_can( 'publish_sprout_invoices' ) ) {
+			self::ajax_fail( 'User cannot create new posts!' ); }
+
+		if ( ! isset( $_REQUEST['sa_client_name'] ) || $_REQUEST['sa_client_name'] == '' ) {
 			self::ajax_fail( 'A company name is required' );
 		}
 
@@ -900,28 +898,28 @@ class SI_Clients extends SI_Controller {
 		// Attempt to create a user
 		if ( isset( $_REQUEST['sa_client_email'] ) && $_REQUEST['sa_client_email'] != '' ) {
 			$user_args = array(
-				'user_login' => self::esc__($_REQUEST['sa_client_email']),
-				'display_name' => isset( $_REQUEST['sa_client_name'] ) ? self::esc__($_REQUEST['sa_client_name']) : self::esc__($_REQUEST['sa_client_email']),
+				'user_login' => self::esc__( $_REQUEST['sa_client_email'] ),
+				'display_name' => isset( $_REQUEST['sa_client_name'] ) ? self::esc__( $_REQUEST['sa_client_name'] ) : self::esc__( $_REQUEST['sa_client_email'] ),
 				'user_pass' => wp_generate_password(), // random password
-				'user_email' => isset( $_REQUEST['sa_client_email'] ) ? self::esc__($_REQUEST['sa_client_email']) : '',
-				'first_name' => isset( $_REQUEST['sa_client_first_name'] ) ? self::esc__($_REQUEST['sa_client_first_name']) : '',
-				'last_name' => isset( $_REQUEST['sa_client_last_name'] ) ? self::esc__($_REQUEST['sa_client_last_name']) : '',
-				'user_url' => isset( $_REQUEST['sa_client_website'] ) ? self::esc__($_REQUEST['sa_client_website']) : ''
+				'user_email' => isset( $_REQUEST['sa_client_email'] ) ? self::esc__( $_REQUEST['sa_client_email'] ) : '',
+				'first_name' => isset( $_REQUEST['sa_client_first_name'] ) ? self::esc__( $_REQUEST['sa_client_first_name'] ) : '',
+				'last_name' => isset( $_REQUEST['sa_client_last_name'] ) ? self::esc__( $_REQUEST['sa_client_last_name'] ) : '',
+				'user_url' => isset( $_REQUEST['sa_client_website'] ) ? self::esc__( $_REQUEST['sa_client_website'] ) : ''
 			);
 			$user_id = self::create_user( $user_args );
 		}
 
 		// Create the client
 		$address = array(
-			'street' => isset( $_REQUEST['sa_client_street'] ) ? self::esc__($_REQUEST['sa_client_street']) : '',
-			'city' => isset( $_REQUEST['sa_client_city'] ) ? self::esc__($_REQUEST['sa_client_city']) : '',
-			'zone' => isset( $_REQUEST['sa_client_zone'] ) ? self::esc__($_REQUEST['sa_client_zone']) : '',
-			'postal_code' => isset( $_REQUEST['sa_client_postal_code'] ) ? self::esc__($_REQUEST['sa_client_postal_code']) : '',
-			'country' => isset( $_REQUEST['sa_client_country'] ) ? self::esc__($_REQUEST['sa_client_country']) : '',
+			'street' => isset( $_REQUEST['sa_client_street'] ) ? self::esc__( $_REQUEST['sa_client_street'] ) : '',
+			'city' => isset( $_REQUEST['sa_client_city'] ) ? self::esc__( $_REQUEST['sa_client_city'] ) : '',
+			'zone' => isset( $_REQUEST['sa_client_zone'] ) ? self::esc__( $_REQUEST['sa_client_zone'] ) : '',
+			'postal_code' => isset( $_REQUEST['sa_client_postal_code'] ) ? self::esc__( $_REQUEST['sa_client_postal_code'] ) : '',
+			'country' => isset( $_REQUEST['sa_client_country'] ) ? self::esc__( $_REQUEST['sa_client_country'] ) : '',
 		);
 		$args = array(
-			'company_name' => isset( $_REQUEST['sa_client_name'] ) ? self::esc__($_REQUEST['sa_client_name']) : '',
-			'website' => isset( $_REQUEST['sa_client_website'] ) ? self::esc__($_REQUEST['sa_client_website']) : '',
+			'company_name' => isset( $_REQUEST['sa_client_name'] ) ? self::esc__( $_REQUEST['sa_client_name'] ) : '',
+			'website' => isset( $_REQUEST['sa_client_website'] ) ? self::esc__( $_REQUEST['sa_client_website'] ) : '',
 			'address' => $address,
 			'user_id' => $user_id
 		);
@@ -933,14 +931,14 @@ class SI_Clients extends SI_Controller {
 			);
 
 		header( 'Content-type: application/json' );
-		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
+		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( $response );
 		exit();
 	}
 
 	/**
 	 * AJAX submission
-	 * @return  
+	 * @return
 	 */
 	public static function maybe_create_user() {
 
@@ -951,34 +949,35 @@ class SI_Clients extends SI_Controller {
 			}
 		}
 
-		if ( !isset( $_REQUEST['sa_user_nonce'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['sa_user_nonce'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$nonce = $_REQUEST['sa_user_nonce'];
-		if ( !wp_verify_nonce( $nonce, self::SUBMISSION_NONCE ) )
-			self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, self::SUBMISSION_NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		if ( !current_user_can( 'publish_posts' ) )
+		if ( ! current_user_can( 'publish_sprout_invoices' ) ) {
 			self::ajax_fail( 'User cannot create new posts!' );
+		}
 
 		// Attempt to create a user
-		if ( !isset( $_REQUEST['sa_user_email'] ) || $_REQUEST['sa_user_email'] == '' ) {
+		if ( ! isset( $_REQUEST['sa_user_email'] ) || $_REQUEST['sa_user_email'] == '' ) {
 			self::ajax_fail( 'An e-mail is required' );
 		}
 
 		$client = SI_Client::get_instance( $_REQUEST['sa_user_client_id'] );
 
-		if ( !is_a( $client, 'SI_Client' ) ) {
+		if ( ! is_a( $client, 'SI_Client' ) ) {
 			self::ajax_fail( 'Client not found' );
 		}
 
 		$user_args = array(
-			'user_login' => self::esc__($_REQUEST['sa_user_email']),
-			'display_name' => isset( $_REQUEST['sa_user_display_name'] ) ? self::esc__($_REQUEST['sa_user_display_name']) : self::esc__($_REQUEST['sa_user_email']),
+			'user_login' => self::esc__( $_REQUEST['sa_user_email'] ),
+			'display_name' => isset( $_REQUEST['sa_user_display_name'] ) ? self::esc__( $_REQUEST['sa_user_display_name'] ) : self::esc__( $_REQUEST['sa_user_email'] ),
 			'user_pass' => wp_generate_password(), // random password
-			'user_email' => isset( $_REQUEST['sa_user_email'] ) ? self::esc__($_REQUEST['sa_user_email']) : '',
-			'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? self::esc__($_REQUEST['sa_user_first_name']) : '',
-			'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? self::esc__($_REQUEST['sa_user_last_name']) : ''
+			'user_email' => isset( $_REQUEST['sa_user_email'] ) ? self::esc__( $_REQUEST['sa_user_email'] ) : '',
+			'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? self::esc__( $_REQUEST['sa_user_first_name'] ) : '',
+			'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? self::esc__( $_REQUEST['sa_user_last_name'] ) : ''
 		);
 		$user_id = self::create_user( $user_args );
 
@@ -992,20 +991,21 @@ class SI_Clients extends SI_Controller {
 	/**
 	 * Meta box view
 	 * Abstracted to be called via AJAX
-	 * @param int $client_id 
-	 * 
+	 * @param int $client_id
+	 *
 	 */
 	public static function submit_meta_box_view( $client_id = 0 ) {
-		if ( !current_user_can( 'edit_posts' ) )
+		if ( ! current_user_can( 'edit_sprout_invoices' ) ) {
 			self::ajax_fail( 'User cannot create new posts!' );
+		}
 
-		if ( !$client_id && isset( $_REQUEST['client_id'] ) ) {
+		if ( ! $client_id && isset( $_REQUEST['client_id'] ) ) {
 			$client_id = $_REQUEST['client_id'];
 		}
 
 		$client = SI_Client::get_instance( $client_id );
 
-		if ( !is_a( $client, 'SI_Client' ) ) {
+		if ( ! is_a( $client, 'SI_Client' ) ) {
 			self::ajax_fail( 'Client not found.' );
 		}
 
@@ -1023,15 +1023,15 @@ class SI_Clients extends SI_Controller {
 
 	/**
 	 * Filtering the payment processor currency code option based on some predefined options.
-	 * @param  string  $currency_code  
-	 * @param  integer $invoice_id     
-	 * @param  string  $payment_method 
-	 * @return string                  
+	 * @param  string  $currency_code
+	 * @param  integer $invoice_id
+	 * @param  string  $payment_method
+	 * @return string
 	 */
 	public static function maybe_change_currency_code( $currency_code = '', $invoice_id = 0, $payment_method = '' ) {
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		$client = $invoice->get_client();
-		if ( !is_wp_error( $client ) ) {
+		if ( ! is_wp_error( $client ) ) {
 			$client_currency = $client->get_currency();
 			if ( $client_currency != '' ) {
 				$currency_code = $client_currency;
@@ -1078,31 +1078,31 @@ class SI_Clients extends SI_Controller {
 			$screen->add_help_tab( array(
 					'id' => 'edit-clients',
 					'title' => self::__( 'Manage Clients' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__('The information here is used for estimates and invoices and includes settings to: Edit Company Name, Edit the company address, and Edit their website url.'), self::__('<b>Important note:</b> when clients are created new WordPress users are also created and given the “client” role. Creating users will allow for future functionality, i.e. client dashboards.') ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'The information here is used for estimates and invoices and includes settings to: Edit Company Name, Edit the company address, and Edit their website url.' ), self::__( '<b>Important note:</b> when clients are created new WordPress users are also created and given the “client” role. Creating users will allow for future functionality, i.e. client dashboards.' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'associate-users',
 					'title' => self::__( 'Associated Users' ),
-					'content' => sprintf( '<p>%s</p>', self::__('When clients are created a WP user is created and associated and clients are not limited to a single user. Not limited a client to a single user allows for you to have multiple points of contact at/for a company/client. Example, the recipients for sending estimate and invoice notifications are these associated users.') ),
+					'content' => sprintf( '<p>%s</p>', self::__( 'When clients are created a WP user is created and associated and clients are not limited to a single user. Not limited a client to a single user allows for you to have multiple points of contact at/for a company/client. Example, the recipients for sending estimate and invoice notifications are these associated users.' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'client-history',
 					'title' => self::__( 'Client History' ),
-					'content' => sprintf( '<p>%s</p>', self::__('Important points are shown in the client history and just like estimate and invoices private notes can be added for only you and other team members to see.') ),
+					'content' => sprintf( '<p>%s</p>', self::__( 'Important points are shown in the client history and just like estimate and invoices private notes can be added for only you and other team members to see.' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'client-invoices',
 					'title' => self::__( 'Invoices and Estimates' ),
-					'content' => sprintf( '<p>%s</p>', self::__('All invoices and estimates associated with the client are shown below the associated users option. This provides a quick way to jump to the record you need to see.') ),
+					'content' => sprintf( '<p>%s</p>', self::__( 'All invoices and estimates associated with the client are shown below the associated users option. This provides a quick way to jump to the record you need to see.' ) ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/', self::__( 'Documentation' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
 			);
 		}
 	}

@@ -45,7 +45,6 @@ class SI_Admin_Capabilities extends SI_Controller {
 				),
 			'contributer' => array(
 					'edit_sprout_invoices',
-					'delete_sprout_invoices',
 				),
 			);
 		return $caps;

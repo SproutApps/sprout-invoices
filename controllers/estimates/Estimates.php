@@ -658,7 +658,7 @@ class SI_Estimates extends SI_Controller {
 				global $wp_scripts, $wp_styles;
 				$allowed_scripts = apply_filters( 'si_allowed_doc_scripts', array( 'sprout_doc_scripts', 'qtip', 'dropdown' ) );
 				$allowed_admin_scripts = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_scripts ) );
-				if ( current_user_can( 'edit_posts' ) ) {
+				if ( current_user_can( 'edit_sprout_invoices' ) ) {
 					$wp_scripts->queue = $allowed_admin_scripts;
 				}
 				else {
@@ -666,7 +666,7 @@ class SI_Estimates extends SI_Controller {
 				}
 				$allowed_styles = apply_filters( 'si_allowed_admin_doc_scripts', array( 'sprout_doc_style', 'qtip', 'dropdown' ) );
 				$allowed_admin_styles = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_styles ) );
-				if ( current_user_can( 'edit_posts' ) ) {
+				if ( current_user_can( 'edit_sprout_invoices' ) ) {
 					$wp_styles->queue = $allowed_admin_styles;
 				}
 				else {
