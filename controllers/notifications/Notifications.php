@@ -33,7 +33,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		// invoices
 		add_action( 'send_invoice', array( __CLASS__, 'invoice_notification' ), 10, 4 );
 		add_action( 'payment_complete', array( __CLASS__, 'paid_notification' ) );
-		
+
 		// Admin
 		add_action( 'doc_status_changed', array( __CLASS__, 'admin_estimate_accepted' ), 10, 2 );
 		add_action( 'doc_status_changed', array( __CLASS__, 'admin_estimate_declined' ), 10, 2 );
@@ -326,7 +326,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'invoice' => $invoice,
 				'to' => $to
 			);
-			
+
 			self::send_notification( 'send_estimate', $data, $to, $from_email, $from_name );
 		}
 	}
@@ -337,7 +337,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate = SI_Estimate::get_instance( $estimate_id );
 		}
 		foreach ( array_unique( $recipients ) as $user_id ) {
-			
+
 			/**
 			 * sometimes the recipients list will pass an email instead of an id
 			 * attempt to find a user first.
@@ -390,12 +390,12 @@ class SI_Notifications extends SI_Notifications_Control {
 	/**
 	 * Estimate accepted notification
 	 * @param  object $doc  SI_Invoice or SI_Estimate
-	 * @param  array  $args 
-	 * @return        
+	 * @param  array  $args
+	 * @return
 	 */
 	public static function admin_estimate_accepted( $doc, $args = array() ) {
 		// The $doc doesn't have to be an estimate
-		if ( !is_a( $doc, 'SI_Estimate' ) ) {
+		if ( ! is_a( $doc, 'SI_Estimate' ) ) {
 			return;
 		}
 		// Check if status changed was to approved.
@@ -408,7 +408,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $invoice_id ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 		}
-		// Admin email 
+		// Admin email
 		$data = array(
 			'user_id' => $estimate->get_user_id(),
 			'estimate' => $estimate,
@@ -422,12 +422,12 @@ class SI_Notifications extends SI_Notifications_Control {
 	/**
 	 * Estimate accepted notification
 	 * @param  object $doc  SI_Invoice or SI_Estimate
-	 * @param  array  $args 
-	 * @return        
+	 * @param  array  $args
+	 * @return
 	 */
 	public static function admin_estimate_declined( $doc, $args = array() ) {
 		// The $doc doesn't have to be an estimate
-		if ( !is_a( $doc, 'SI_Estimate' ) ) {
+		if ( ! is_a( $doc, 'SI_Estimate' ) ) {
 			return;
 		}
 		// Check if status changed was to approved.
@@ -440,7 +440,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $invoice_id ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 		}
-		// Admin email 
+		// Admin email
 		$data = array(
 			'user_id' => $estimate->get_user_id(),
 			'estimate' => $estimate,
@@ -453,9 +453,9 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Send the admin a notification when a payment is received.
-	 * @param  SI_Payment $payment 
-	 * @param  array      $args    
-	 * @return               
+	 * @param  SI_Payment $payment
+	 * @param  array      $args
+	 * @return
 	 */
 	public static function admin_payment_notification( SI_Payment $payment, $args = array() ) {
 		$payment_method = $payment->get_payment_method();
@@ -466,13 +466,13 @@ class SI_Notifications extends SI_Notifications_Control {
 
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance( $invoice_id );
-		if ( !is_a( $invoice, 'SI_Invoice' ) ) {
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			do_action( 'si_error', 'Admin Payment Notification Not Sent to Client; No Invoice Found: ' . $invoice_id, $payment->get_id() );
 			return;
 		}
 		$client = $invoice->get_client();
 
-		// Admin email 
+		// Admin email
 		$data = array(
 			'payment' => $payment,
 			'invoice' => $invoice,
@@ -492,11 +492,11 @@ class SI_Notifications extends SI_Notifications_Control {
 	 * Get current date
 	 *
 	 * Currently undocumented, but a "format" attribute can be used to customize the date format
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_date( $atts, $content, $code, $data ) {
@@ -507,15 +507,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the name of the user receiving this email.
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_sender_name( $atts, $content, $code, $data ) {
-		$name = self::__('Client');
+		$name = self::__( 'Client' );
 		$to = ( isset( $data['to'] ) ) ? $data['to'] : 0 ;
 		$user_id = self::get_notification_instance_user_id( $to, $data );
 		if ( is_numeric( $user_id ) && $user_id ) {
@@ -529,7 +529,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			}
 		}
 		// If no user can be found attempt to use the client.
-		if ( $name == self::__('Client') ) {
+		if ( $name == self::__( 'Client' ) ) {
 			if ( isset( $data['client'] ) && is_a( $data['client'], 'SI_Client' ) ) {
 				$client_id = $data['client']->get_id();
 				$name = get_the_title( $client_id );
@@ -539,12 +539,12 @@ class SI_Notifications extends SI_Notifications_Control {
 	}
 
 	/**
-	 * Return the 
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 * Return the
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_username( $atts, $content, $code, $data ) {
@@ -559,11 +559,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the admin sender note attached to a sent estimate/invoice.
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_admin_note( $atts, $content, $code, $data ) {
@@ -581,15 +581,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the payment total
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_payment_total( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['payment'] ) ) {
 			$amount = sa_get_formatted_money( $data['payment']->get_amount(), $data['payment']->get_id() );
 		}
@@ -598,11 +598,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the payment id
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_payment_id( $atts, $content, $code, $data ) {
@@ -614,11 +614,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the line items within an html table.
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_line_item_table( $atts, $content, $code, $data ) {
@@ -636,7 +636,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $doc_id ) {
 			// Set the global post to pass the doc id around town
 			global $post;
-			if ( !is_a( $post, 'Post' ) ) {
+			if ( ! is_a( $post, 'Post' ) ) {
 				$post = new stdClass;
 				$post->ID = $doc_id;
 				$post = new WP_Post( (object) $post );
@@ -649,18 +649,18 @@ class SI_Notifications extends SI_Notifications_Control {
 			<table>
 				<thead>
 					<tr>
-						<th><?php si_e('#') ?></th>
-						<th><?php si_e('Description') ?></th>
-						<th><?php si_e('Rate') ?></th>
-						<th><?php si_e('Quantity') ?></th>
-						<th><?php si_e('% Adjustment') ?></th>
-						<th><?php si_e('Total') ?></th>
+						<th><?php si_e( '#' ) ?></th>
+						<th><?php si_e( 'Description' ) ?></th>
+						<th><?php si_e( 'Rate' ) ?></th>
+						<th><?php si_e( 'Quantity' ) ?></th>
+						<th><?php si_e( '% Adjustment' ) ?></th>
+						<th><?php si_e( 'Total' ) ?></th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ( $line_items as $position => $ldata ): ?>
+					<?php foreach ( $line_items as $position => $ldata ) : ?>
 						<tr class="item" data-id="<?php echo (float) $position ?>">
-							<td><?php esc_attr_e( $position+1 ) ?></td>
+							<td><?php esc_attr_e( $position + 1 ) ?></td>
 							<td><?php echo apply_filters( 'the_content', $ldata['desc'] ) ?></td>
 							<td><?php esc_attr_e( $ldata['rate'] ) ?></td>
 							<td><?php esc_attr_e( $ldata['qty'] ) ?></td>
@@ -677,11 +677,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the line items within an plain text list.
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_line_item_plain_list( $atts, $content, $code, $data ) {
@@ -699,7 +699,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $doc_id ) {
 			// Set the global post to pass the doc id around town
 			global $post;
-			if ( !is_a( $post, 'Post' ) ) {
+			if ( ! is_a( $post, 'Post' ) ) {
 				$post = new stdClass;
 				$post->ID = $doc_id;
 				$post = new WP_Post( (object) $post );
@@ -709,17 +709,17 @@ class SI_Notifications extends SI_Notifications_Control {
 			return '';
 		}
 		ob_start(); ?>
-			<?php foreach ( $line_items as $position => $data ): ?>
-				<?php if ( is_int( $position ) ): // is not a child ?>
+			<?php foreach ( $line_items as $position => $data ) : ?>
+				<?php if ( is_int( $position ) ) : // is not a child ?>
 					<?php
 						// get the children of this top level item
 						$children = si_line_item_get_children( $position, $line_items ); ?>
-					<?php 
+					<?php
 						// build single item
 						echo "\n\n* " . si_line_item_build_plain( $position, $line_items, $children, $doc_id ) ?>
 
-					<?php if ( !empty( $children ) ): // if has children, loop and show ?>
-						<?php foreach ( $children as $child_position ): ?>
+					<?php if ( ! empty( $children ) ) : // if has children, loop and show ?>
+						<?php foreach ( $children as $child_position ) : ?>
 							<?php echo "\n** " . si_line_item_build_plain( $child_position, $line_items, array(), $doc_id ) ?>
 						<?php endforeach ?>
 					<?php endif ?>
@@ -732,11 +732,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the line items within an html list.
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_line_item_list( $atts, $content, $code, $data ) {
@@ -751,7 +751,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $doc_id ) {
 			// Set the global post to pass the doc id around town
 			global $post;
-			if ( !is_a( $post, 'Post' ) ) {
+			if ( ! is_a( $post, 'Post' ) ) {
 				$post = new stdClass;
 				$post->ID = $doc_id;
 				$post = new WP_Post( (object) $post );
@@ -762,20 +762,20 @@ class SI_Notifications extends SI_Notifications_Control {
 		}
 		ob_start(); ?>
 			<ol>
-				<?php foreach ( $line_items as $position => $data ): ?>
-					<?php if ( is_int( $position ) ): // is not a child ?>
+				<?php foreach ( $line_items as $position => $data ) : ?>
+					<?php if ( is_int( $position ) ) : // is not a child ?>
 						<li class="item" data-id="<?php echo (float) $position ?>">
 							<?php
 								// get the children of this top level item
 								$children = si_line_item_get_children( $position, $line_items ); ?>
 
-							<?php 
+							<?php
 								// build single item
 								echo si_line_item_build( $position, $line_items, $children ) ?>
 
-							<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
+							<?php if ( ! empty( $children ) ) : // if has children, loop and show  ?>
 								<ol class="items_list">
-									<?php foreach ( $children as $child_position ): ?>
+									<?php foreach ( $children as $child_position ) : ?>
 										<li class="item" data-id="<?php echo (float) $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
 									<?php endforeach ?>
 								</ol>
@@ -792,21 +792,21 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice subject
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_subject( $atts, $content, $code, $data ) {
 		$invoice_id = 0;
-		if ( !isset( $data['invoice'] ) && $data['estimate'] ) {
+		if ( ! isset( $data['invoice'] ) && $data['estimate'] ) {
 			$invoice_id = $data['estimate']->get_invoice_id();
 		}
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$invoice_id = $data['invoice']->get_id();
-			
+
 		}
 		$subject = ( $invoice_id ) ? html_entity_decode( get_the_title( $invoice_id ) ) : '' ;
 		return apply_filters( 'shortcode_invoice_subject', $subject, $invoice_id, $data );
@@ -814,11 +814,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice id
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_id( $atts, $content, $code, $data ) {
@@ -831,29 +831,31 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice edit url
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_edit_url( $atts, $content, $code, $data ) {
 		$url = '';
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$invoice_id = $data['invoice']->get_id();
-			$url = get_edit_post_link( $invoice_id );
+			// $url = get_edit_post_link( $invoice_id, '' ); // Doesn't work so it needs to be built manually.
+			$post_type_object = get_post_type_object( SI_Invoice::POST_TYPE );
+			$url = apply_filters( 'get_edit_post_link', admin_url( sprintf( $post_type_object->_edit_link . '&action=edit', $invoice_id ) ), $invoice_id, '' );
 		}
 		return apply_filters( 'shortcode_invoice_edit_url', esc_url( $url ), $data );
 	}
 
 	/**
 	 * Return the invoice url
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_url( $atts, $content, $code, $data ) {
@@ -867,66 +869,66 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice issue date
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_issue_date( $atts, $content, $code, $data ) {
 		$date = '';
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$timestamp = $data['invoice']->get_issue_date();
-			$date = date_i18n( get_option('date_format'), $timestamp );
+			$date = date_i18n( get_option( 'date_format' ), $timestamp );
 		}
 		return apply_filters( 'shortcode_invoice_issue_date', $date, $data );
 	}
 
 	/**
 	 * Return the invoice due date
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_due_date( $atts, $content, $code, $data ) {
 		$date = '';
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$timestamp = $data['invoice']->get_due_date();
-			$date = date_i18n( get_option('date_format'), $timestamp );
+			$date = date_i18n( get_option( 'date_format' ), $timestamp );
 		}
 		return apply_filters( 'shortcode_invoice_due_date', $date, $data );
 	}
 
 	/**
 	 * Return the invoice due date
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_past_due_date( $atts, $content, $code, $data ) {
 		$days = 0;
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$due_date = $data['invoice']->get_due_date();
-			$pastdue = current_time( 'timestamp' )-$due_date;
-			$days = floor($pastdue/(60*60*24));
+			$pastdue = current_time( 'timestamp' ) -$due_date;
+			$days = floor( $pastdue / (60 * 60 * 24) );
 		}
 		return apply_filters( 'shortcode_invoice_past_due_date', $days, $data );
 	}
 
 	/**
 	 * Return the invoice po number
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_po_number( $atts, $content, $code, $data ) {
@@ -939,15 +941,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice tax total
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_tax_total( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$tax_total = $data['invoice']->get_tax_total() + $data['invoice']->get_tax2_total();
 			$amount = sa_get_formatted_money( $tax_total, $data['invoice']->get_id() );
@@ -958,15 +960,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice tax
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_tax( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_tax_total(), $data['invoice']->get_id() );
 		}
@@ -976,15 +978,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice tax 2
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_tax2( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_tax2_total(), $data['invoice']->get_id() );
 		}
@@ -993,11 +995,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice total
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_total( $atts, $content, $code, $data ) {
@@ -1010,15 +1012,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice get_calculated_total
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_calculated_total( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_calculated_total(), $data['invoice']->get_id() );
 		}
@@ -1027,15 +1029,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice get_subtotal
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_subtotal( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_subtotal(), $data['invoice']->get_id() );
 		}
@@ -1044,15 +1046,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice get_balance
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_total_due( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			if ( $data['invoice']->get_deposit() > 0.01 ) {
 				$amount = sa_get_formatted_money( $data['invoice']->get_deposit(), $data['invoice']->get_id() );
@@ -1060,22 +1062,21 @@ class SI_Notifications extends SI_Notifications_Control {
 			else {
 				$amount = sa_get_formatted_money( $data['invoice']->get_balance(), $data['invoice']->get_id() );
 			}
-			
 		}
 		return apply_filters( 'shortcode_invoice_total_due', $amount, $data );
 	}
 
 	/**
 	 * Return the invoice get_deposit
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_deposit_amount( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_deposit(), $data['invoice']->get_id() );
 		}
@@ -1084,15 +1085,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the invoice get_payments_total
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_invoice_total_payments( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$amount = sa_get_formatted_money( $data['invoice']->get_payments_total(), $data['invoice']->get_id() );
 		}
@@ -1100,23 +1101,23 @@ class SI_Notifications extends SI_Notifications_Control {
 	}
 
 	/**
-	 * Return the 
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 * Return the
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_client_name( $atts, $content, $code, $data ) {
 		$client_id = 0;
 		if ( isset( $data['client'] ) && is_a( $data['client'], 'SI_Client' ) ) {
-			$client_id = $data['client']->get_id();			
+			$client_id = $data['client']->get_id();
 		}
-		if ( !$client_id && isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+		if ( ! $client_id && isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$client_id = $data['invoice']->get_client_id();
 		}
-		if ( !$client_id && isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+		if ( ! $client_id && isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$client_id = $data['estimate']->get_client_id();
 		}
 		$name = ( $client_id ) ? get_the_title( $client_id ) : '' ;
@@ -1125,11 +1126,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the client edit url
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_client_edit_url( $atts, $content, $code, $data ) {
@@ -1145,11 +1146,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate subject
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_subject( $atts, $content, $code, $data ) {
@@ -1163,11 +1164,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate id
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_id( $atts, $content, $code, $data ) {
@@ -1180,11 +1181,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate edit url
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_edit_url( $atts, $content, $code, $data ) {
@@ -1198,11 +1199,11 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate url
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_url( $atts, $content, $code, $data ) {
@@ -1216,29 +1217,29 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate issue date
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_issue_date( $atts, $content, $code, $data ) {
 		$date = '';
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$timestamp = $data['estimate']->get_issue_date();
-			$date = date_i18n( get_option('date_format'), $timestamp );
+			$date = date_i18n( get_option( 'date_format' ), $timestamp );
 		}
 		return apply_filters( 'shortcode_estimate_issue_date', $date, $data );
 	}
 
 	/**
 	 * Return the estimate po number
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_po_number( $atts, $content, $code, $data ) {
@@ -1251,15 +1252,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate tax total
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_tax_total( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$tax_total = $data['estimate']->get_tax_total() + $data['estimate']->get_tax2_total();
 			$amount = sa_get_formatted_money( $tax_total, $data['estimate']->get_id() );
@@ -1270,15 +1271,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate tax
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_tax( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$amount = sa_get_formatted_money( $data['estimate']->get_tax_total(), $data['estimate']->get_id() );
 		}
@@ -1288,15 +1289,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate tax 2
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_tax2( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$amount = sa_get_formatted_money( $data['estimate']->get_tax2_total(), $data['estimate']->get_id() );
 		}
@@ -1305,15 +1306,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate total
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_total( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$amount = sa_get_formatted_money( $data['estimate']->get_total(), $data['estimate']->get_id() );
 		}
@@ -1322,15 +1323,15 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the estimate get_subtotal
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_estimate_subtotal( $atts, $content, $code, $data ) {
-		$amount = sa_get_formatted_money(0);
+		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 			$amount = sa_get_formatted_money( $data['estimate']->get_subtotal(), $data['estimate']->get_id() );
 		}
@@ -1339,29 +1340,29 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	/**
 	 * Return the lead entries
-	 * 
-	 * @param  array $atts    
-	 * @param  string $content 
-	 * @param  string $code    
-	 * @param  array $data    
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
 	 * @return string          filtered
 	 */
 	public static function shortcode_lead_entries( $atts, $content, $code, $data ) {
 		$entries = '';
 		if ( isset( $data['submission_fields']['fields'] ) ) {
-			if ( !empty( $data['submission_fields']['fields'] ) ) {
+			if ( ! empty( $data['submission_fields']['fields'] ) ) {
 				ob_start(); ?>
-					<?php foreach ( $data['submission_fields']['fields'] as $key => $value ): ?>
-						<?php if ( isset( $value['data']['label'] ) && isset( $value['data']['type'] ) && $value['data']['type'] != 'hidden' ): ?>
+					<?php foreach ( $data['submission_fields']['fields'] as $key => $value ) : ?>
+						<?php if ( isset( $value['data']['label'] ) && isset( $value['data']['type'] ) && $value['data']['type'] != 'hidden' ) : ?>
 							<dt><?php echo esc_html( $value['data']['label'] ); ?></dt>
-							<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__('Type') ) !== false ): ?>
-								<dd><p><?php 
+							<?php if ( is_numeric( $value['value'] ) && strpos( $value['data']['label'], self::__( 'Type' ) ) !== false ) : ?>
+								<dd><p><?php
 										$term = get_term_by( 'id', $value['value'], SI_Estimate::PROJECT_TAXONOMY );
-										if ( !is_wp_error( $term ) ) {
-											self::_e( $term->name );
-										}
-									 ?></p></dd>
-							<?php else: ?>
+								if ( ! is_wp_error( $term ) ) {
+									self::_e( $term->name );
+								}
+										?></p></dd>
+							<?php else : ?>
 								<dd><?php echo apply_filters( 'the_content', $value['value'] ) ?></dd>
 							<?php endif ?>
 						<?php endif ?>

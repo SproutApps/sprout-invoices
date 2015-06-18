@@ -176,8 +176,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	}
 
 	public static function settings_description() {
-		$credit = self::get_registered_processors( 'credit' );
-		if ( empty( $credit ) ) {
+		$processors = self::get_registered_processors( 'offsite' );
+		if ( ! in_array( 'SI_Paypal_EC', array_keys( $processors ) ) ) {
 			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Missing Paypal Express Checkout?</strong> The add-on is available for <b>free</b> on the <a href="%s">Sprout Apps marketplace</a>.</p></div>', si_get_purchase_link( self::PLUGIN_URL . '/marketplace/paypal-payments-express-checkout/' ) );
 		}
 		else {

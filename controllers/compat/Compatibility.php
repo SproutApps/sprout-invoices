@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Fixes other plugins issues.
@@ -15,9 +15,21 @@ class SI_Compatibility extends SI_Controller {
 		// Gravity Forms fix
 		add_filter( 'gform_display_add_form_button', array( __CLASS__, 'si_maybe_remove_gravity_forms_add_button' ), 10, 1 );
 
-		if ( class_exists('acf') ) {
+		if ( class_exists( 'acf' ) ) {
 			// ACF Fix
 			add_filter( 'post_submitbox_start', array( __CLASS__, '_acf_post_submitbox_start' ) );
+		}
+
+		add_action( 'parse_query', array( __CLASS__, 'remove_seo_header_stuff' ) );
+	}
+
+	public static function remove_seo_header_stuff() {
+		if ( self::is_estimate_or_invoice() ) {
+			add_filter( 'index_rel_link', '__return_false' );
+			add_filter( 'parent_post_rel_link', '__return_false' );
+			add_filter( 'start_post_rel_link', '__return_false' );
+			add_filter( 'previous_post_rel_link', '__return_false' );
+			add_filter( 'next_post_rel_link', '__return_false' );
 		}
 	}
 

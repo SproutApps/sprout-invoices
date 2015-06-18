@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**7.3**
+
+* FIX: Edit post link fix for notification shortcodes
+* FIX: Remove "pre=" header that some SEO plugins add
+* CHANGE: [dashboard_link] available on User Creation notification
+* CHANGE: Free Version messaging updates
+
 **7.2.1**
 
 * FIX: Updates for Pro Versions

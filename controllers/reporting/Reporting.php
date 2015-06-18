@@ -29,12 +29,12 @@ class SI_Reporting extends SI_Dashboard {
 	///////////////////////////
 
 	public static function get_chart_data() {
-		if ( !isset( $_REQUEST['security'] ) )
-			self::ajax_fail( 'Forget something?' );
+		if ( ! isset( $_REQUEST['security'] ) ) {
+			self::ajax_fail( 'Forget something?' ); }
 
 		$nonce = $_REQUEST['security'];
-		if ( !wp_verify_nonce( $nonce, self::AJAX_NONCE ) )
-			self::ajax_fail( 'Not going to fall for it!' );
+		if ( ! wp_verify_nonce( $nonce, self::AJAX_NONCE ) ) {
+			self::ajax_fail( 'Not going to fall for it!' ); }
 
 		// FUTURE segment and span
 
@@ -60,7 +60,7 @@ class SI_Reporting extends SI_Dashboard {
 			case 'estimates_statuses':
 				self::estimate_statuses_chart();
 				break;
-			
+
 			default:
 				# code...
 				break;
@@ -69,8 +69,8 @@ class SI_Reporting extends SI_Dashboard {
 
 	/**
 	 * Return two data sets
-	 * @param  string  $segment 
-	 * @param  integer $span    
+	 * @param  string  $segment
+	 * @param  integer $span
 	 * @return  json array
 	 */
 	public static function invoice_payments_chart( $segment = 'weeks', $span = 6 ) {
@@ -92,8 +92,8 @@ class SI_Reporting extends SI_Dashboard {
 
 	/**
 	 * Return two data sets
-	 * @param  string  $segment 
-	 * @param  integer $span    
+	 * @param  string  $segment
+	 * @param  integer $span
 	 * @return  json array
 	 */
 	public static function balance_invoiced_chart( $segment = 'weeks', $span = 6 ) {
@@ -115,8 +115,8 @@ class SI_Reporting extends SI_Dashboard {
 
 	/**
 	 * Return two data sets
-	 * @param  string  $segment 
-	 * @param  integer $span    
+	 * @param  string  $segment
+	 * @param  integer $span
 	 * @return  json array
 	 */
 	public static function est_invoice_totals_chart( $segment = 'weeks', $span = 6 ) {
@@ -139,8 +139,8 @@ class SI_Reporting extends SI_Dashboard {
 
 	/**
 	 * Return two data sets
-	 * @param  string  $segment 
-	 * @param  integer $span    
+	 * @param  string  $segment
+	 * @param  integer $span
 	 * @return  json array
 	 */
 	public static function req_to_inv_totals_chart( $segment = 'weeks', $span = 6 ) {
@@ -162,8 +162,8 @@ class SI_Reporting extends SI_Dashboard {
 
 	/**
 	 * Return two data sets
-	 * @param  string  $segment 
-	 * @param  integer $span    
+	 * @param  string  $segment
+	 * @param  integer $span
 	 * @return  json array
 	 */
 	public static function payment_statuses_chart( $segment = 'weeks', $span = 6 ) {
@@ -185,8 +185,8 @@ class SI_Reporting extends SI_Dashboard {
 
 	/**
 	 * Return two data sets
-	 * @param  string  $segment 
-	 * @param  integer $span    
+	 * @param  string  $segment
+	 * @param  integer $span
 	 * @return  json array
 	 */
 	public static function invoice_statuses_chart( $segment = 'weeks', $span = 6 ) {
@@ -212,8 +212,8 @@ class SI_Reporting extends SI_Dashboard {
 
 	/**
 	 * Return two data sets
-	 * @param  string  $segment 
-	 * @param  integer $span    
+	 * @param  string  $segment
+	 * @param  integer $span
 	 * @return  json array
 	 */
 	public static function estimate_statuses_chart( $segment = 'weeks', $span = 6 ) {
@@ -247,7 +247,7 @@ class SI_Reporting extends SI_Dashboard {
 		if ( $cache ) {
 			return $cache;
 		}
-	
+
 		// FUTURE charts should be dynamic based on selected segment.
 		$weeks = self::walk_back_x_span( $span, $segment );
 		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
@@ -277,7 +277,7 @@ class SI_Reporting extends SI_Dashboard {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( "Y-m-d", strtotime( $year . 'W' . array_shift($weeks) ) ),
+						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
 						'inclusive' => true,
 					)
 				)
@@ -312,7 +312,6 @@ class SI_Reporting extends SI_Dashboard {
 				default:
 					break;
 			}
-			
 		}
 		return self::set_cache( __FUNCTION__ . $segment . $span, $data );
 	}
@@ -352,56 +351,56 @@ class SI_Reporting extends SI_Dashboard {
 				case 'week':
 					$args['date_query'] = array(
 						array(
-							'week' => date( 'W', strtotime('this week') ),
+							'week' => date( 'W', strtotime( 'this week' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('this Sunday') )-current_time('timestamp');
+					$expire = strtotime( date( 'Y-m-t' ), strtotime( 'this Sunday' ) ) -current_time( 'timestamp' );
 					break;
 				case 'lastweek':
 					$args['date_query'] = array(
 						array(
-							'week' => date( 'W', strtotime('-1 week') ),
+							'week' => date( 'W', strtotime( '-1 week' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('this Sunday') )-current_time('timestamp');
+					$expire = strtotime( date( 'Y-m-t' ), strtotime( 'this Sunday' ) ) -current_time( 'timestamp' );
 					break;
 				case 'month':
 					$args['date_query'] = array(
 						array(
-							'month' => date('m'),
+							'month' => date( 'm' ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ) )-current_time('timestamp');
+					$expire = strtotime( date( 'Y-m-t' ) ) -current_time( 'timestamp' );
 					break;
 				case 'lastmonth':
 					$args['date_query'] = array(
 						array(
-							'month' => date( 'm', strtotime('-1 month') ),
+							'month' => date( 'm', strtotime( '-1 month' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ) )-current_time('timestamp');
+					$expire = strtotime( date( 'Y-m-t' ) ) -current_time( 'timestamp' );
 					break;
 				case 'year':
 					$args['date_query'] = array(
 						array(
-							'year' => date('Y'),
+							'year' => date( 'Y' ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('12/31') )-current_time('timestamp');
+					$expire = strtotime( date( 'Y-m-t' ), strtotime( '12/31' ) ) -current_time( 'timestamp' );
 					break;
 				case 'lastyear':
 					$args['date_query'] = array(
 						array(
-							'year' => date( 'Y', strtotime('-1  year') ),
+							'year' => date( 'Y', strtotime( '-1  year' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime( date( "Y-m-t" ), strtotime('12/31') )-current_time('timestamp');
+					$expire = strtotime( date( 'Y-m-t' ), strtotime( '12/31' ) ) -current_time( 'timestamp' );
 					break;
 				default:
 					break;
@@ -437,7 +436,7 @@ class SI_Reporting extends SI_Dashboard {
 					break;
 			}
 			unset( $invoice );
-			
+
 		}
 		return self::set_cache( __FUNCTION__ . $this, $data, $expire );
 	}
@@ -448,7 +447,7 @@ class SI_Reporting extends SI_Dashboard {
 		if ( $cache ) {
 			return $cache;
 		}
-	
+
 		// FUTURE charts should be dynamic based on selected segment.
 		$weeks = self::walk_back_x_span( $span, $segment );
 		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
@@ -476,7 +475,7 @@ class SI_Reporting extends SI_Dashboard {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( "Y-m-d", strtotime( $year . 'W' . array_shift($weeks) ) ),
+						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
 						'inclusive' => true,
 					)
 				)
@@ -516,7 +515,7 @@ class SI_Reporting extends SI_Dashboard {
 
 	public static function total_payment_data( $this = 'century' ) {
 		// Return cache if present.
-		$cache = self::get_cache(__FUNCTION__.$this);
+		$cache = self::get_cache( __FUNCTION__.$this );
 		if ( $cache ) {
 			return $cache;
 		}
@@ -546,51 +545,51 @@ class SI_Reporting extends SI_Dashboard {
 				case 'week':
 					$args['date_query'] = array(
 						array(
-							'week' => date( 'W', strtotime('this week') ),
-							'year' => date( 'o', strtotime('this week') ),
+							'week' => date( 'W', strtotime( 'this week' ) ),
+							'year' => date( 'o', strtotime( 'this week' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('tomorrow')-current_time('timestamp');
+					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
 					break;
 				case 'lastweek':
 					$args['date_query'] = array(
 						array(
-							'week' => date( 'W', strtotime('-1 week') ),
-							'year' => date( 'o', strtotime('-1 week') ),
+							'week' => date( 'W', strtotime( '-1 week' ) ),
+							'year' => date( 'o', strtotime( '-1 week' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('next week')-current_time('timestamp');
+					$expire = strtotime( 'next week' ) -current_time( 'timestamp' );
 					break;
 				case 'month':
 					$args['date_query'] = array(
 						array(
-							'month' => date( 'm', strtotime('first day of this month') ),
-							'year' => date( 'o', strtotime('first day of this month') ),
+							'month' => date( 'm', strtotime( 'first day of this month' ) ),
+							'year' => date( 'o', strtotime( 'first day of this month' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('tomorrow')-current_time('timestamp');
+					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
 					break;
 				case 'lastmonth':
 					$args['date_query'] = array(
 						array(
-							'month' => date( 'm', strtotime('first day of previous month') ),
-							'year' => date( 'o', strtotime('first day of previous month') ),
+							'month' => date( 'm', strtotime( 'first day of previous month' ) ),
+							'year' => date( 'o', strtotime( 'first day of previous month' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('first day of next month')-current_time('timestamp');
+					$expire = strtotime( 'first day of next month' ) -current_time( 'timestamp' );
 					break;
 				case 'year':
 					$args['date_query'] = array(
 						array(
-							'year' => date( 'Y', strtotime('first day of this year') ),
+							'year' => date( 'Y', strtotime( 'first day of this year' ) ),
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('tomorrow')-current_time('timestamp');
+					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
 					break;
 				case 'lastyear':
 					$args['date_query'] = array(
@@ -599,7 +598,7 @@ class SI_Reporting extends SI_Dashboard {
 							'inclusive' => true,
 						)
 					);
-					$expire = strtotime('last day of year')-current_time('timestamp');
+					$expire = strtotime( 'last day of year' ) -current_time( 'timestamp' );
 					break;
 				default:
 					break;
@@ -641,7 +640,7 @@ class SI_Reporting extends SI_Dashboard {
 		if ( $cache ) {
 			return $cache;
 		}
-	
+
 		// FUTURE charts should be dynamic based on selected segment.
 		$weeks = self::walk_back_x_span( $span, $segment );
 		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
@@ -667,7 +666,7 @@ class SI_Reporting extends SI_Dashboard {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( "Y-m-d", strtotime( $year . 'W' . array_shift($weeks) ) ),
+						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
 						'inclusive' => true,
 					)
 				)
@@ -704,12 +703,12 @@ class SI_Reporting extends SI_Dashboard {
 	//////////////
 	// Caching //
 	//////////////
-	
+
 	public static function get_cache( $data_name = '' ) {
 		if ( self::DEBUG || isset( $_GET['nocache'] ) ) { // If dev than don't cache.
 			return false;
 		}
-		
+
 		if ( apply_filters( 'si_disable_reporting_cache', false ) ) {
 			return false;
 		}
@@ -718,7 +717,7 @@ class SI_Reporting extends SI_Dashboard {
 		$cache = get_transient( $key );
 
 		// If cache is empty return false.
-		return ( !empty( $cache ) ) ? $cache : false;
+		return ( ! empty( $cache ) ) ? $cache : false;
 	}
 
 	public static function set_cache( $data_name = '', $data = array(), $expire = 0 ) {
@@ -752,13 +751,13 @@ class SI_Reporting extends SI_Dashboard {
 			case 'days':
 				$stretch = array( date( 'Y-m-d' ) );
 				break;
-			
+
 			default:
 				$stretch = array();
 				break;
 		}
 
-		for ($i = 1; $i <= $x; $i++) {
+		for ( $i = 1; $i <= $x; $i++ ) {
 			switch ( $span ) {
 				case 'months':
 					$stretch[] = date( 'Y-m', strtotime( date( 'Y-m-01' ) . " -$i " . $span ) );
@@ -769,7 +768,7 @@ class SI_Reporting extends SI_Dashboard {
 				case 'days':
 					$stretch[] = date( 'Y-m-d', strtotime( date( 'Y-m-d' ) . " -$i " . $span ) );
 					break;
-				
+
 				default:
 					# code...
 					break;
@@ -787,7 +786,7 @@ class SI_Reporting extends SI_Dashboard {
 		);
 		return $items;
 	}
-	
+
 	////////////////
 	// Admin Help //
 	////////////////
@@ -804,27 +803,27 @@ class SI_Reporting extends SI_Dashboard {
 			$screen->add_help_tab( array(
 					'id' => 'reports-about',
 					'title' => self::__( 'About Reports' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__('The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.'), self::__('<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.'), self::__('<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.') )
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__( 'The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.' ), self::__( '<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.' ), self::__( '<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'reports-tables',
 					'title' => self::__( 'Report Tables' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__('<b>Date filtering</b> is available and can be used to retrieve data in-between t, dates, or after a date, or before a date.'), self::__('<b>Modify columns</b> within the table with the “Show / hide columns” button.'), self::__('<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.'), self::__('Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.') )
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__( '<b>Date filtering</b> is available and can be used to retrieve data in-between t, dates, or after a date, or before a date.' ), self::__( '<b>Modify columns</b> within the table with the “Show / hide columns” button.' ), self::__( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.' ), self::__( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.' ) )
 				) );
 
-			if ( !isset( $_GET['report'] ) ) {
+			if ( ! isset( $_GET['report'] ) ) {
 				$screen->add_help_tab( array(
 						'id' => 'reports-refresh',
 						'title' => self::__( 'Dashboard Refresh' ),
-						'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__('The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.'), esc_url( add_query_arg( array( 'nocache' => 1 ) ) ), si__('Refresh') )
+						'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__( 'The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.' ), esc_url( add_query_arg( array( 'nocache' => 1 ) ) ), si__( 'Refresh' ) )
 					) );
 			}
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/', self::__( 'Documentation' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
 			);
 		}
 	}

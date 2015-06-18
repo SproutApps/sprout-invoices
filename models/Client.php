@@ -2,7 +2,7 @@
 
 /**
  * Client Model
- * 
+ *
  *
  * @package Sprout_Invoices
  * @subpackage Client
@@ -47,7 +47,7 @@ class SI_Client extends SI_Post_Type {
 
 
 	public static function client_role() {
-		add_role( self::USER_ROLE, self::__('Client'), array( 'read' => true, 'level_0' => true ) );
+		add_role( self::USER_ROLE, self::__( 'Client' ), array( 'read' => true, 'level_0' => true ) );
 	}
 
 	public function estimate_submenu() {
@@ -66,29 +66,29 @@ class SI_Client extends SI_Post_Type {
 	 * @return Sprout_Invoices_Client
 	 */
 	public static function get_instance( $id = 0 ) {
-		if ( !$id )
-			return null;
-		
-		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
-			self::$instances[$id] = new self( $id );
+		if ( ! $id ) {
+			return null; }
 
-		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return null;
-		
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return null;
-		
+		if ( ! isset( self::$instances[$id] ) || ! self::$instances[$id] instanceof self ) {
+			self::$instances[$id] = new self( $id ); }
+
+		if ( ! isset( self::$instances[$id]->post->post_type ) ) {
+			return null; }
+
+		if ( self::$instances[$id]->post->post_type != self::POST_TYPE ) {
+			return null; }
+
 		return self::$instances[$id];
 	}
 
 	/**
 	 * Create a client
-	 * @param  array $args 
-	 * @return int       
+	 * @param  array $args
+	 * @return int
 	 */
 	public static function new_client( $passed_args ) {
 		$defaults = array(
-			'company_name' => sprintf( self::__('New Client: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'company_name' => sprintf( self::__( 'New Client: %s' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'website' => '',
 			'phone' => '',
 			'address' => array(),
@@ -112,8 +112,8 @@ class SI_Client extends SI_Post_Type {
 		$client->set_website( $args['website'] );
 		$client->set_phone( $args['phone'] );
 
-		if ( $args['user_id'] ) {	
-			$client->add_associated_user( $args['user_id'] );	
+		if ( $args['user_id'] ) {
+			$client->add_associated_user( $args['user_id'] );
 		}
 
 		do_action( 'sa_new_client', $client, $args );
@@ -135,11 +135,11 @@ class SI_Client extends SI_Post_Type {
 
 	/**
 	 * Get the associated users with this client
-	 * @return array 
+	 * @return array
 	 */
 	public function get_associated_users() {
 		$users = $this->get_post_meta( self::$meta_keys['associated_users'], false );
-		if ( !is_array( $users ) ) {
+		if ( ! is_array( $users ) ) {
 			$users = array();
 		}
 		return array_filter( $users );
@@ -168,19 +168,31 @@ class SI_Client extends SI_Post_Type {
 
 	/**
 	 * Add single user to associated array
-	 * @param integer $user_id 
+	 * @param integer $user_id
 	 */
 	public function add_associated_user( $user_id = 0 ) {
-		if ( is_numeric( $user_id) && !$this->is_user_associated( $user_id ) ) {
+		if ( is_numeric( $user_id ) && ! $this->is_user_associated( $user_id ) ) {
 			$this->add_post_meta( array(
 					self::$meta_keys['associated_users'] => $user_id
 				) );
 		}
 	}
 
+	/**
+	 * Remove single user to associated array
+	 * @param integer $user_id
+	 */
+	public function remove_associated_user( $user_id = 0 ) {
+		if ( is_numeric( $user_id ) && $this->is_user_associated( $user_id ) ) {
+			$this->delete_post_meta( array(
+					self::$meta_keys['associated_users'] => $user_id,
+				) );
+		}
+	}
+
 	public function is_user_associated( $user_id ) {
 		$associated_users = $this->get_associated_users();
-		if ( empty( $associated_users ) ) return;
+		if ( empty( $associated_users ) ) { return; }
 		return in_array( $user_id, $associated_users );
 	}
 
@@ -241,8 +253,8 @@ class SI_Client extends SI_Post_Type {
 
 	/**
 	 * Get the clients that are associated with the user
-	 * @param  integer $user_id 
-	 * @return array           
+	 * @param  integer $user_id
+	 * @return array
 	 */
 	public static function get_clients_by_user( $user_id = 0 ) {
 		$clients = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_users'] => $user_id ) );
@@ -261,8 +273,8 @@ class SI_Client extends SI_Post_Type {
 
 	/**
 	 * Get all payments from this client.
-	 * @param  integer $client_id 
-	 * @return              
+	 * @param  integer $client_id
+	 * @return
 	 */
 	public static function get_payments_by_client( $client_id = 0 ) {
 		$client = self::get_instance( $client_id );

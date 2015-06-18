@@ -11,47 +11,45 @@
 	<div class="welcome_content clearfix">
 		<div class="license-overview">
 
-			<?php if ( SI_Free_License::license_status() == false ): ?>
+			<?php if ( SI_Free_License::license_status() == false ) : ?>
 				<div class="activate_message clearfix">
 					<div class="activation_msg clearfix">
-						 <h4><?php self::_e('Get a free Sprout Apps license instantly...') ?></h4>
+						 <h4><?php self::_e( 'Get a free Sprout Apps license instantly...' ) ?></h4>
 					</div>
 					<div class="activation_inputs clearfix">
-						<input type="text" name="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" id="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" value="<?php echo SI_Free_License::license_key() ?>" class="fat-input <?php echo 'license_'.SI_Free_License::license_status() ?>" size="40" class="text-input" placeholder="<?php self::_e('Enter your email.') ?>">
-							<button id="free_license" class="button button-primary button-large"><?php self::_e('Get License') ?></button>
+						<input type="text" name="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" id="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" value="<?php echo SI_Free_License::license_key() ?>" class="fat-input <?php echo 'license_'.SI_Free_License::license_status() ?>" size="40" class="text-input" placeholder="<?php self::_e( 'Enter your email.' ) ?>">
+							<button id="free_license" class="button button-primary button-large"><?php self::_e( 'Get License' ) ?></button>
 						<div id="license_message" class="clearfix"></div>
 					</div>
 
 					<div class="activation_msg clearfix">
-						<?php self::_e('A free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key for your free version of Sprout Invoices.') ?></p>
+						<?php self::_e( 'A free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key for your free version of Sprout Invoices.' ) ?></p>
 					</div>
 				</div>
 			<?php endif ?>
 
-			<!--<div class="upgrade_message clearfix"><p><strong>Upgrade Discount Available:</strong> Write a <a href="https://wordpress.org/support/view/plugin-reviews/sprout-invoices">plugin review</a> about this free version and <a href="https://sproutapps.co/sprout-invoices/sprout-invoices-discount-code/">send us the link</a>.</p></div>-->
+			<div class="upgrade_message clearfix"><p><strong>Upgrade Discount Available:</strong> Write a <a href="https://wordpress.org/support/view/plugin-reviews/sprout-invoices">plugin review</a> about this free version and <a href="https://sproutapps.co/sprout-invoices/sprout-invoices-discount-code/">send us the link</a>.</p></div>
 
-			<div class="upgrade_message clearfix"><p><strong>Consider Upgrading this New Years!</strong> We're having a New Years party, join your friends and colleges, and purchase a discounted upgrade.</p><p><a href="<?php si_purchase_link() ?>" class="button">Sprout Invoices Discounts</a></p></div>
-
-			<h2 class="headline_callout"><?php self::_e('The Sprout Invoices Flow') ?></h2>
+			<h2 class="headline_callout"><?php self::_e( 'The Sprout Invoices Flow' ) ?></h2>
 
 			<div class="feature-section col three-col clearfix">
 				<div class="col-1">
 					<span class="flow_icon icon-handshake"></span>
 					<h4><?php self::_e( 'Lead Generation' ); ?></h4>
-					<p><?php printf( self::__( "Receiving estimate requests on your site is simplified with Sprout Invoices. <a href='%s'>General Settings</a> has more information on how to add a form to your site as well as settings to integrate with an advanced form plugin, e.g. Gravity Forms or Ninja Forms." ), admin_url('admin.php?page=sprout-apps/settings') ); ?></p>
-					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+					<p><?php printf( self::__( "Receiving estimate requests on your site is simplified with Sprout Invoices. <a href='%s'>General Settings</a> has more information on how to add a form to your site as well as settings to integrate with an advanced form plugin, e.g. Gravity Forms or Ninja Forms." ), admin_url( 'admin.php?page=sprout-apps/settings' ) ); ?></p>
+					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 				</div>
 				<div class="col-2">
 					<span class="flow_icon icon-sproutapps-estimates"></span>
 					<h4><?php self::_e( 'Estimating' ); ?></h4>
-					<p><?php printf( self::__( "A new <a href='%s'>estimate</a> is automatically created and notifications are sent after every estimate request submission. The <a href='%s'>notification</a> to you will provide a link to this new estimate; allowing you to review, update, and send the estimate to your prospective client without having to communicate via email." ), admin_url('post-new.php?post_type='.SI_Estimate::POST_TYPE),  admin_url('admin.php?page=sprout-apps/settings&tab=notifications') ); ?></p>
-					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+					<p><?php printf( self::__( "A new <a href='%s'>estimate</a> is automatically created and notifications are sent after every estimate request submission. The <a href='%s'>notification</a> to you will provide a link to this new estimate; allowing you to review, update, and send the estimate to your prospective client without having to communicate via email." ), admin_url( 'post-new.php?post_type='.SI_Estimate::POST_TYPE ),  admin_url( 'admin.php?page=sprout-apps/settings&tab=notifications' ) ); ?></p>
+					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 				</div>
 				<div class="col-3 last-feature">
 					<span class="flow_icon icon-sproutapps-invoices"></span>
 					<h4><?php self::_e( 'Invoicing' ); ?></h4>
-					<p><?php printf( self::__( "An <a href='%s'>invoice</a> is automatically created from an accepted estimate. By default these newly created invoices are <em>not</em> sent to the client, instead you  will need to review them before sending. Your <a href='%s'>notifications</a> are meant to be setup to help review, mark, and send them out quickly." ), admin_url('post-new.php?post_type='.SI_Invoice::POST_TYPE),  admin_url('admin.php?page=sprout-apps/settings&tab=notifications') ); ?></p>
-					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+					<p><?php printf( self::__( "An <a href='%s'>invoice</a> is automatically created from an accepted estimate. By default these newly created invoices are <em>not</em> sent to the client, instead you  will need to review them before sending. Your <a href='%s'>notifications</a> are meant to be setup to help review, mark, and send them out quickly." ), admin_url( 'post-new.php?post_type='.SI_Invoice::POST_TYPE ),  admin_url( 'admin.php?page=sprout-apps/settings&tab=notifications' ) ); ?></p>
+					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 				</div>
 			</div>
 
@@ -68,41 +66,41 @@
 				<h4><?php self::_e( 'Where do I start?' ); ?></h4>
 				<p>
 					<ol>
-						<li><?php printf( self::__( "Start <a href='%s'>importing</a> your data from other services (i.e. WP-Invoice, Freshbooks or Harvest)." ), admin_url('admin.php?page=sprout-apps/settings&tab=import') ); ?></li>
-						<li><?php printf( self::__( "Even with the defaults set in <a href='%s'>General Settings</a> the 'Company Info' should be filled out first." ), admin_url('admin.php?page=sprout-apps/settings') ); ?></li>
-						<li><?php printf( self::__( "Review your <a href='%s'>Payment Settings</a> and provide different methods of payments for your clients. Don't let your client find out you've configured the payment processor incorrectly&mdash;make sure to test." ), admin_url('admin.php?page=sprout-apps/settings&tab=payments') ); ?></li>
-						<li><?php printf( self::__( "There are a lot of <a href='%s'>notifications</a> sent throughout the entire client acquisition process, make sure they have your personality and represent your brand well. You can send HTML emails, check your <a href='%s'>General Settings</a> for more information." ), admin_url('admin.php?page=sprout-apps/settings&tab=notifications'), admin_url('admin.php?page=sprout-apps/settings') ); ?></li>
-						<li><?php self::_e('Grow your business while not forgetting about your loved ones...and the occasional round of golf.') ?></li>
+						<li><?php printf( self::__( "Start <a href='%s'>importing</a> your data from other services (i.e. WP-Invoice, Freshbooks or Harvest)." ), admin_url( 'admin.php?page=sprout-apps/settings&tab=import' ) ); ?></li>
+						<li><?php printf( self::__( "Even with the defaults set in <a href='%s'>General Settings</a> the 'Company Info' should be filled out first." ), admin_url( 'admin.php?page=sprout-apps/settings' ) ); ?></li>
+						<li><?php printf( self::__( "Review your <a href='%s'>Payment Settings</a> and provide different methods of payments for your clients. Don't let your client find out you've configured the payment processor incorrectly&mdash;make sure to test." ), admin_url( 'admin.php?page=sprout-apps/settings&tab=payments' ) ); ?></li>
+						<li><?php printf( self::__( "There are a lot of <a href='%s'>notifications</a> sent throughout the entire client acquisition process, make sure they have your personality and represent your brand well. You can send HTML emails, check your <a href='%s'>General Settings</a> for more information." ), admin_url( 'admin.php?page=sprout-apps/settings&tab=notifications' ), admin_url( 'admin.php?page=sprout-apps/settings' ) ); ?></li>
+						<li><?php self::_e( 'Grow your business while not forgetting about your loved ones...and the occasional round of golf.' ) ?></li>
 					</ol>
-					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+					<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 				</p>
 			</div>
 			<div>
 				<h4><?php self::_e( 'How well am I doing?' ); ?></h4>				
-				<p><?php printf( self::__( "The <a href='%s'>Reports Dashboard</a> should key you on how well your're growing your business. There are reports for the estimates, invoices, payments and clients available for filtering and exporting." ), admin_url('admin.php?page=sprout-apps/settings&tab=reporting') ); ?></p>
+				<p><?php printf( self::__( "The <a href='%s'>Reports Dashboard</a> should key you on how well your're growing your business. There are reports for the estimates, invoices, payments and clients available for filtering and exporting." ), admin_url( 'admin.php?page=sprout-apps/settings&tab=reporting' ) ); ?></p>
 
-				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 
 
 				<h4><?php self::_e( 'Clients &amp; WordPress Users?' ); ?></h4>
-				<p><?php printf( self::__( "<a href='%s'>Clients</a> have WordPress users associated with them and clients are not limited to a single user either. This allows for you to have multiple points of contact for a company/client." ), admin_url('edit.php?post_type=sa_client') ); ?></p>
+				<p><?php printf( self::__( "<a href='%s'>Clients</a> have WordPress users associated with them and clients are not limited to a single user either. This allows for you to have multiple points of contact for a company/client." ), admin_url( 'edit.php?post_type=sa_client' ) ); ?></p>
 
-				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 
 				<h4><?php self::_e( 'What are Predefined Line Items?' ); ?></h4>
 				<p><?php printf( self::__( "Predefined line-tems help with the creation of your estimates and invoices by pre-filling line items. Create some tasks that matter to your business before creating your first estimate or invoice and you'll see how they can save you a lot of time." ) ); ?></p>
 
-				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/predefined-tasks-line-items/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/predefined-tasks-line-items/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 			</div>
 			<div class="last-feature">
 				<h4><?php self::_e( 'Can I import from X service or WP-Invoice?' ); ?></h4>
 				<p><?php printf( self::__( 'Yes! WP-Invoice, Harvest and Freshbooks importers are now available.' ) ); ?></p>
-				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 
 				<h4><?php self::_e( 'I need help! Where is the support?' ); ?></h4>
 				<p><?php printf( self::__( "We want to make sure using Sprout Invoices is enjoyable and not a hassle. Sprout Apps has some pretty awesome <a href='%s'>support</a> and a budding <a href='%s'>knowledgebase</a> that will help you get anything resolved. Support and documentation is limited for this free version." ), self::PLUGIN_URL.'/support/', self::PLUGIN_URL.'/support/knowledgebase/' ); ?></p>
 
-				<p><?php printf( "<a href='https://sproutapps.co/support/' target='_blank' class='button'>%s</a>", self::__('Support') ); ?>&nbsp;<?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/' target='_blank' class='button'>%s</a>", self::__('Documentation') ); ?></p>
+				<p><?php printf( "<a href='https://sproutapps.co/support/' target='_blank' class='button'>%s</a>", self::__( 'Support' ) ); ?>&nbsp;<?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/' target='_blank' class='button'>%s</a>", self::__( 'Documentation' ) ); ?></p>
 
 				<p><img class="footer_sa_logo" src="<?php echo SI_RESOURCES . 'admin/icons/sproutapps.png' ?>" /></p>
 

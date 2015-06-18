@@ -1621,6 +1621,17 @@ abstract class SI_Controller extends Sprout_Invoices {
 		return false;
 	}
 
+	public static function is_estimate_or_invoice() {
+		$type = false;
+		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Invoice::POST_TYPE ) ) {
+			$type = SI_Invoice::POST_TYPE;
+		}
+		elseif ( is_single() && ( get_post_type( get_the_ID() ) === SI_Estimate::POST_TYPE ) ) {
+			$type = SI_Estimate::POST_TYPE;
+		}
+		return $type;
+	}
+
 	public static function ajax_fail( $message = '', $json = true ) {
 		if ( $message == '' ) {
 			$message = self::__( 'Something failed.' );
