@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.2
-Stable tag: 7.3
+Stable tag: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,12 @@ Woocommerce, Stats dashboard, time tracking updates and more.
 
 == Changelog ==
 
+= 7.4 =
+
+* NEW: Deposit filter allows for new add-ons
+* CHANGE: More Responsive Admin
+* CHANGE: Improved no-index via http headers
+
 = 7.3 =
 
 * FIX: Edit post link fix for notification shortcodes
@@ -167,7 +173,7 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 * FIX: Start CSV import without using previous files
 * FIX: Fix for old PHP versions without json_last_error
 * FIX: Remove project types from submission page
-* FIX: Language translations updated (7.3)
+* FIX: Language translations updated (7.4)
 
 = 6.2 =
 

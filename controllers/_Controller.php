@@ -766,6 +766,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 		add_action( 'wp_ajax_si_change_doc_status',  array( get_class(), 'maybe_change_status' ), 10, 0 );
 		add_action( 'wp_ajax_nopriv_si_change_doc_status',  array( get_class(), 'maybe_change_status' ), 10, 0 );
 
+		// No index
+		add_action( 'pre_si_invoice_view', array( __CLASS__, 'add_x_robots_header' ) );
+		add_action( 'pre_si_estimate_view', array( __CLASS__, 'add_x_robots_header' ) );
+
 	}
 
 	/**
@@ -960,6 +964,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( ! wp_next_scheduled( self::DAILY_CRON_HOOK ) ) {
 			wp_schedule_event( time(), 'daily', self::DAILY_CRON_HOOK );
 		}
+	}
+
+	public static function add_x_robots_header() {
+		header( 'X-Robots-Tag: noindex, nofollow', true );
 	}
 
 	/**

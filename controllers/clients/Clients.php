@@ -290,7 +290,8 @@ class SI_Clients extends SI_Controller {
 		$client->clear_associated_users();
 
 		if ( ! isset( $_POST['associated_users'] ) ) {
-			return; }
+			return;
+		}
 
 		foreach ( $_POST['associated_users'] as $user_id ) {
 			$client->add_associated_user( $user_id );

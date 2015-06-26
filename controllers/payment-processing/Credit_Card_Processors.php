@@ -32,7 +32,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		if ( $this->cc_cache && $checkout->get_current_page() != SI_Checkouts::PAYMENT_PAGE ) {
 			$data = array(
 				'type' => 'hidden',
-				'value' =>  esc_attr( serialize( $this->cc_cache ) ),
+				'value' => esc_attr( serialize( $this->cc_cache ) ),
 			);
 			sa_form_field( 'cc_cache', $data, 'credit' );
 		}
@@ -41,8 +41,8 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	/**
 	 * Process the CC cache being posted and make it a variable.
 	 * @param  string       $action   form actions
-	 * @param  SI_Checkouts $checkout 
-	 * @return                  
+	 * @param  SI_Checkouts $checkout
+	 * @return
 	 */
 	public function process_credit_card_cache( $action, SI_Checkouts $checkout ) {
 		if ( isset( $_POST['sa_credit_cc_cache'] ) ) {
@@ -157,7 +157,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		if ( $sanitize ) {
 			$number = preg_replace( '/\D+/', '', $number );
 		}
-		if ( !ctype_digit( $number ) ) {
+		if ( ! ctype_digit( $number ) ) {
 			return false; // not a number
 		}
 
@@ -188,7 +188,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @return bool
 	 */
 	public static function is_valid_cvv( $cvv ) {
-		if ( !is_numeric( $cvv ) || strlen( $cvv ) > 4 || strlen( $cvv ) < 3 ) {
+		if ( ! is_numeric( $cvv ) || strlen( $cvv ) > 4 || strlen( $cvv ) < 3 ) {
 			return false;
 		}
 		return true;
@@ -228,15 +228,15 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @return string
 	 */
 	public static function mask_card_number( $number, $filler = 'x' ) {
-		$length = strlen( $number )-5;
-		$masked = sprintf( "%s%'".$filler.$length."s%s", substr( $number, 0, 1 ), '', substr( $number, -4 ) );
+		$length = strlen( $number ) -5;
+		$masked = sprintf( "%s%'".$filler.$length.'s%s', substr( $number, 0, 1 ), '', substr( $number, -4 ) );
 		return $masked;
 	}
 
 	/**
 	 * Payment fields
-	 * @param  SI_Checkouts $checkout 
-	 * @return array           
+	 * @param  SI_Checkouts $checkout
+	 * @return array
 	 */
 	protected function payment_billing_fields( SI_Checkouts $checkout ) {
 		$billing_fields = self::get_standard_address_fields();
@@ -247,8 +247,8 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 
 	/**
 	 * Payment fields
-	 * @param  SI_Checkouts $checkout 
-	 * @return array           
+	 * @param  SI_Checkouts $checkout
+	 * @return array
 	 */
 	protected function payment_fields( $checkout = null ) {
 		$fields = self::default_credit_fields( $checkout );
@@ -264,8 +264,8 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 
 	/**
 	 * Loaded via SI_Payment_Processors::show_payments_pane
-	 * @param  SI_Checkouts $checkout 
-	 * @return                  
+	 * @param  SI_Checkouts $checkout
+	 * @return
 	 */
 	public function payments_pane( SI_Checkouts $checkout ) {
 		self::load_view( 'templates/checkout/credit-card/form', array(
@@ -367,14 +367,14 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			$fields = $this->payment_billing_fields( $checkout );
 			foreach ( $fields as $key => $data ) {
 				$checkout->cache['billing'][$key] = isset( $_POST['sa_billing_'.$key] )?$_POST['sa_billing_'.$key]:'';
-				if ( isset( $data['required'] ) && $data['required'] && !( isset( $checkout->cache['billing'][$key] ) && $checkout->cache['billing'][$key] != '' ) ) {
+				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $checkout->cache['billing'][$key] ) && $checkout->cache['billing'][$key] != '' ) ) {
 					$valid = false;
 					self::set_message( sprintf( self::__( '"%s" field is required.' ), $data['label'] ), self::MESSAGE_STATUS_ERROR );
 				}
 			}
 		}
 		$valid = apply_filters( 'si_validate_billing_cc', $valid, $checkout );
-		if ( !$valid ) {
+		if ( ! $valid ) {
 			$this->invalidate_checkout( $checkout );
 		}
 		return $valid;
@@ -382,35 +382,35 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 
 	/**
 	 * Validate if CC submission is valid.
-	 * @param  array       $cc_data  
+	 * @param  array       $cc_data
 	 * @param  SI_Checkouts $checkout [description]
-	 * @return bool                 
+	 * @return bool
 	 */
 	protected function validate_credit_card( $cc_data, SI_Checkouts $checkout ) {
 		$valid = true;
-		if ( apply_filters( 'si_valid_process_payment_page_fields', true ) ) {
+		if ( apply_filters( 'si_valid_process_payment_page_fields', true, $checkout ) ) {
 			$cc_fields = $this->payment_fields( $checkout );
 			foreach ( $cc_fields as $key => $data ) {
-				if ( $data['required'] && !( isset( $cc_data[$key] ) && strlen( $cc_data[$key] ) > 0 ) ) {
+				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $cc_data[$key] ) && strlen( $cc_data[$key] ) > 0 ) ) {
 					self::set_message( sprintf( self::__( '"%s" field is required.' ), $cc_fields[$key]['label'] ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}
 			if ( isset( $cc_data['cc_number'] ) ) {
-				if ( !self::is_valid_credit_card( $cc_data['cc_number'] ) ) {
+				if ( ! self::is_valid_credit_card( $cc_data['cc_number'] ) ) {
 					self::set_message( self::__( 'Invalid credit card number' ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}
 
 			if ( isset( $cc_data['cc_cvv'] ) ) {
-				if ( !self::is_valid_cvv( $cc_data['cc_cvv'] ) ) {
+				if ( ! self::is_valid_cvv( $cc_data['cc_cvv'] ) ) {
 					self::set_message( self::__( 'Invalid credit card security code' ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}
 
-			if ( !empty($fields['cc_expiration_year']['required']) && isset( $cc_data['cc_expiration_year'] ) ) {
+			if ( ! empty($fields['cc_expiration_year']['required']) && isset( $cc_data['cc_expiration_year'] ) ) {
 				if ( self::is_expired( $cc_data['cc_expiration_year'], $cc_data['cc_expiration_month'] ) ) {
 					self::set_message( self::__( 'Credit card is expired.' ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
@@ -419,7 +419,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		}
 
 		$valid = apply_filters( 'si_validate_credit_card_cc', $valid, $checkout );
-		if ( !$valid ) {
+		if ( ! $valid ) {
 			$this->invalidate_checkout( $checkout );
 		}
 		return $valid;

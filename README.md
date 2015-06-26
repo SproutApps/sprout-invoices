@@ -90,6 +90,12 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**7.4**
+
+* NEW: Deposit filter allows for new add-ons
+* CHANGE: More Responsive Admin
+* CHANGE: Improved no-index via http headers
+
 **7.3**
 
 * FIX: Edit post link fix for notification shortcodes

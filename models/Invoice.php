@@ -301,10 +301,10 @@ class SI_Invoice extends SI_Post_Type {
 	public function get_deposit() {
 		$balance = $this->get_balance();
 		$deposit = floatval( $this->get_post_meta( self::$meta_keys['deposit'] ) );
-		if ( $deposit > $balance ) { // check if deposit is more than waits' due.
+		if ( $deposit > $balance ) { // check if deposit is more than what's due.
 			$deposit = floatval( $balance );
 		}
-		return round( $deposit, 2 );
+		return apply_filters( 'si_get_invoice_deposit', round( $deposit, 2 ), $this );
 	}
 
 	public function set_deposit( $deposit = 0 ) {
