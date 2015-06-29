@@ -99,7 +99,7 @@
 					<b title="Total includes tax and discount (minus payments)" class="helptip"><?php si_e('Total Due') ?></b>
 					<?php sa_formatted_money( si_get_invoice_balance() ) ?>
 				</div>
-				<?php if ( apply_filters( 'show_upgrade_messaging', true ) ): ?>
+				<?php if ( apply_filters( 'show_upgrade_messaging', true, 'deposit-line-items' ) ): ?>
 					<div id="deposit">
 						<b title="Upgrade Sprout Invoices to enable deposits." class="helptip"><?php si_e('Deposit Due') ?></b>
 						<input type="number" name="deposit" min="0" max="0" step="any" disabled="disabled">
