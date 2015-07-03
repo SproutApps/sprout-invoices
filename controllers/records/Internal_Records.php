@@ -1,5 +1,9 @@
 <?php
 
+if ( class_exists( 'SI_Internal_Records' ) ) {
+	return;
+}
+
 /**
  * Internal Record Controller
  * Records can be used from anything from logs to temporary payment records. Internal records should be considered temporary.

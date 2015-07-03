@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**7.5**
+
+* NEW: Sprout Client Compatibility
+
 **7.4**
 
 * NEW: Deposit filter allows for new add-ons

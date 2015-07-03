@@ -1,3 +1,7 @@
+= 7.5 =
+
+* NEW: Sprout Client Compatibility
+
 = 7.4 =
 
 * NEW: Deposit filter allows for new add-ons

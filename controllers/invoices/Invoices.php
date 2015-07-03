@@ -1086,7 +1086,7 @@ class SI_Invoices extends SI_Controller {
 	public static function adjust_cloned_invoice( $new_post_id = 0, $cloned_post_id = 0, $new_post_type = '' ) {
 		if ( get_post_type( $cloned_post_id ) === SI_Estimate::POST_TYPE ) {
 			$estimate = SI_Estimate::get_instance( $cloned_post_id );
-			$est_id = $estimate->get_invoice_id();
+			$est_id = $estimate->get_estimate_id();
 			$invoice = SI_Invoice::get_instance( $new_post_id );
 			if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 				return;

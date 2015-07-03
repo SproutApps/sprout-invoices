@@ -101,48 +101,52 @@ function si_split_full_name( $full_name = '', $return = '' ) {
 	}
 }
 
-/**
- * Return a formatted address
- * @param  array $address   an address array
- * @param  string $return    return an array or a string with separation
- * @param  string $separator if not returning an array what should the fields be separated by
- * @return array|string            return an array by default of a string based on $return
- */
-function si_format_address( $address, $return = 'array', $separator = "\n" ) {
-	if ( empty( $address ) ) {
-		return '';
-	}
-	$lines = array();
-	if ( ! empty($address['first_name']) || ! empty($address['last_name']) ) {
-		$lines[] = $address['first_name'].' '.$address['last_name'];
-	}
-	if ( ! empty( $address['street'] ) ) {
-		$lines[] = $address['street'];
-	}
-	$city_line = '';
-	if ( ! empty( $address['city'] ) ) {
-		$city_line .= $address['city'];
-	}
-	if ( $city_line != '' && ( ! empty( $address['zone'] ) || ! empty( $address['postal_code'] ) ) ) {
-		$city_line .= ', ';
-		if ( ! empty( $address['zone'] ) ) {
-			$city_line .= $address['zone'];
+if ( ! function_exists( 'si_format_address' ) ) :
+
+	/**
+	 * Return a formatted address
+	 * @param  array $address   an address array
+	 * @param  string $return    return an array or a string with separation
+	 * @param  string $separator if not returning an array what should the fields be separated by
+	 * @return array|string            return an array by default of a string based on $return
+	 */
+	function si_format_address( $address, $return = 'array', $separator = "\n" ) {
+		if ( empty( $address ) ) {
+			return '';
 		}
-		if ( ! empty( $address['postal_code'] ) ) {
-			$city_line = rtrim( $city_line ).' '.$address['postal_code'];
+		$lines = array();
+		if ( ! empty($address['first_name']) || ! empty($address['last_name']) ) {
+			$lines[] = $address['first_name'].' '.$address['last_name'];
+		}
+		if ( ! empty( $address['street'] ) ) {
+			$lines[] = $address['street'];
+		}
+		$city_line = '';
+		if ( ! empty( $address['city'] ) ) {
+			$city_line .= $address['city'];
+		}
+		if ( $city_line != '' && ( ! empty( $address['zone'] ) || ! empty( $address['postal_code'] ) ) ) {
+			$city_line .= ', ';
+			if ( ! empty( $address['zone'] ) ) {
+				$city_line .= $address['zone'];
+			}
+			if ( ! empty( $address['postal_code'] ) ) {
+				$city_line = rtrim( $city_line ).' '.$address['postal_code'];
+			}
+		}
+		$lines[] = rtrim( $city_line );
+		if ( ! empty( $address['country'] ) ) {
+			$lines[] = $address['country'];
+		}
+		switch ( $return ) {
+			case 'array':
+			return $lines;
+			default:
+			return apply_filters( 'si_format_address', implode( $separator, $lines ), $address, $return, $separator );
 		}
 	}
-	$lines[] = rtrim( $city_line );
-	if ( ! empty( $address['country'] ) ) {
-		$lines[] = $address['country'];
-	}
-	switch ( $return ) {
-		case 'array':
-		return $lines;
-		default:
-		return apply_filters( 'si_format_address', implode( $separator, $lines ), $address, $return, $separator );
-	}
-}
+
+endif;
 
 //////////////
 // Payments //

@@ -3,6 +3,9 @@
 if ( !class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
+if ( class_exists( 'SI_Records_Table' ) ) {
+	return;
+}
 class SI_Records_Table extends WP_List_Table {
 	protected static $post_type = SI_Record::POST_TYPE;
 

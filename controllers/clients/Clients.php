@@ -365,7 +365,7 @@ class SI_Clients extends SI_Controller {
 		$columns['info'] = self::__( 'Info' );
 		$columns['invoices'] = self::__( 'Invoices' );
 		$columns['estimates'] = self::__( 'Estimates' );
-		return $columns;
+		return apply_filters( 'si_client_columns', $columns );
 	}
 
 	/**

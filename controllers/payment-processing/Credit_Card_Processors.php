@@ -388,10 +388,10 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 */
 	protected function validate_credit_card( $cc_data, SI_Checkouts $checkout ) {
 		$valid = true;
-		if ( apply_filters( 'si_valid_process_payment_page_fields', true, $checkout ) ) {
+		if ( apply_filters( 'si_valid_process_payment_page_fields', true ) ) {
 			$cc_fields = $this->payment_fields( $checkout );
 			foreach ( $cc_fields as $key => $data ) {
-				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $cc_data[$key] ) && strlen( $cc_data[$key] ) > 0 ) ) {
+				if ( $data['required'] && ! ( isset( $cc_data[$key] ) && strlen( $cc_data[$key] ) > 0 ) ) {
 					self::set_message( sprintf( self::__( '"%s" field is required.' ), $cc_fields[$key]['label'] ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}

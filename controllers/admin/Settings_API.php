@@ -243,7 +243,6 @@ class SA_Settings_API extends SI_Controller {
 			), false );
 		return;
 	}
-
 	/**
 	 * Build the tabs for all the admin settings
 	 * @param  string $plugin_page slug for settings page
@@ -251,20 +250,21 @@ class SA_Settings_API extends SI_Controller {
 	 */
 	public static function display_settings_tabs( $plugin_page = 0 ) {
 		if ( ! $plugin_page ) {
-			$plugin_page = ( $_GET['page'] == self::TEXT_DOMAIN ) ? self::TEXT_DOMAIN . '/settings' : $_GET['page'] ;
+			$plugin_page = ( self::TEXT_DOMAIN === $_GET['page'] ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : $_GET['page'] ;
 		}
+		error_log( 'page: ' . print_r( $plugin_page, TRUE ) );
 		// Section based on settings slug
-		$section = ( isset( self::$admin_pages[$plugin_page] ) ) ? self::$admin_pages[$plugin_page]['section'] : '' ;
+		$section = self::$admin_pages[ $plugin_page ]['section'];
 		// get all tabs and sort
 		$tabs = apply_filters( 'si_option_tabs', self::$option_tabs );
 		uasort( $tabs, array( __CLASS__, 'sort_by_weight' ) );
 		// loop through tabs and build markup
 		foreach ( $tabs as $key => $data ) :
-			if ( $data['section'] == $section ) {
+			if ( $data['section'] === $section ) {
 				$new_title = self::__( $data['tab_title'] );
-				$current = ( ( isset( $_GET['tab'] ) && $_GET['tab'] == $data['slug'] ) || ( ! isset( $_GET['tab'] ) && str_replace( self::TEXT_DOMAIN . '/', '', $plugin_page ) == $data['slug'] ) ) ? ' nav-tab-active' : '';
-				$url = ( $data['tab_only'] ) ? add_query_arg( array( 'page' => self::TEXT_DOMAIN.'/settings', 'tab' => $data['slug'] ), 'admin.php' ) : add_query_arg( array( 'page' => self::TEXT_DOMAIN.'/settings' ), 'admin.php' );
-				echo '<a href="'.esc_url( $url ).'" class="nav-tab'.$current.'" id="si_options_tab_'.$data['slug'].'">'.$new_title.'</a>';
+				$current = ( ( isset( $_GET['tab'] ) && $_GET['tab'] === $data['slug'] ) || ( ! isset( $_GET['tab'] ) && str_replace( self::TEXT_DOMAIN . '/', '', $plugin_page ) == $data['slug'] ) ) ? ' nav-tab-active' : '';
+				$url = ( $data['tab_only'] ) ? add_query_arg( array( 'page' => $plugin_page, 'tab' => $data['slug'] ), 'admin.php' ) : add_query_arg( array( 'page' => $plugin_page ), 'admin.php' );
+				echo '<a href="'.$url.'" class="nav-tab'.$current.'" id="si_options_tab_'.$data['slug'].'">'.$new_title.'</a>';
 			}
 		endforeach;
 		// Add the add new buttons after the tabs

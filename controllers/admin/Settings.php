@@ -1,5 +1,10 @@
 <?php
 
+if ( class_exists( 'SA_Settings_API' ) ) {
+	// Another Sprout App is active
+	return;
+}
+
 /**
  * Admin settings controller.
  *
