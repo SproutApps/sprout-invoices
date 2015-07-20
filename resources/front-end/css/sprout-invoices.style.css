@@ -1441,6 +1441,11 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 	color: #666;
 	font-size: 0.875em;
 }
+p.si_error {
+    color: red;
+    font-weight: 400;
+	font-size: 0.875em;
+}
 
 @media only screen and (max-width : 480px) {
 

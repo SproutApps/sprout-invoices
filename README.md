@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**7.6**
+
+* FIX: Deposit notification sent only if the payment is complete (not pending)
+* FIX: Allow for deposit total to be set before saving
+* FIX: Help section added to the new reporting dashboards
+* FIX: WP-Invoice Issues with duplicate clients
+* FIX: PayPal line item totaling issues preventing some payments
+
 **7.5**
 
 * NEW: Sprout Client Compatibility

@@ -252,30 +252,30 @@ function si_line_item_build_option( $position = 1.0, $items = array(), $children
 		</div><!-- / item_action_column -->
 		<div class="line_item<?php if ( !empty( $children ) ) echo ' has_children' ?>">
 			<div class="column column_desc">
-				<textarea name="line_item_desc[]"><?php esc_attr_e( $desc ) ?></textarea>
+				<textarea name="line_item_desc[]" class="sa_option_textarea"><?php esc_attr_e( $desc ) ?></textarea>
 				<!-- desc -->
 			</div><!-- / column_desc -->
 			<div class="column parent_hide column_rate">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_rate[]" value="<?php esc_attr_e( $rate ) ?>" placeholder="80" size="3">
+				<input class="totalled_input sa_option_text" type="text" name="line_item_rate[]" value="<?php esc_attr_e( $rate ) ?>" placeholder="80" size="3">
 				<!-- rate -->
 			</div><!-- / column_rate -->
 			<div class="column parent_hide column_qty">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_qty[]" value="<?php esc_attr_e( $qty ) ?>" placeholder="1" size="2">
+				<input class="totalled_input sa_option_text" type="text" name="line_item_qty[]" value="<?php esc_attr_e( $qty ) ?>" placeholder="1" size="2">
 				<!-- qty -->
 			</div><!-- / column_qty -->
 			<div class="column parent_hide column_tax">
 				<span></span>
-				<input class="totalled_input" type="text" name="line_item_tax[]" value="<?php esc_attr_e( $tax ) ?>" placeholder="" size="1" max="100">
+				<input class="totalled_input sa_option_text" type="text" name="line_item_tax[]" value="<?php esc_attr_e( $tax ) ?>" placeholder="" size="1" max="100">
 				<!-- tax -->
 			</div><!-- / column_tax -->
 			<div class="column column_total">
 				<?php sa_formatted_money( $total ) ?>
-				<input class="totalled_input" type="hidden" name="line_item_total[]" value="<?php esc_attr_e( $total ) ?>">
+				<input class="totalled_input sa_option_hidden" type="hidden" name="line_item_total[]" value="<?php esc_attr_e( $total ) ?>">
 				<!-- total -->
 			</div><!-- / column_total -->
-			<input class="line_item_index" type="hidden" name="line_item_key[]" value="<?php echo esc_attr( $position ); ?>">
+			<input class="line_item_index sa_option_hidden" type="hidden" name="line_item_key[]" value="<?php echo esc_attr( $position ); ?>">
 			<!-- hidden -->
 		</div>
 	<?php

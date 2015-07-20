@@ -39,9 +39,9 @@
 									</div>
 								</div>
 								<div class="info">
-									<strong><?php echo esc_html( $addon->post_title ); ?></strong>							
+									<strong><?php echo wp_kses( $addon->post_title ); ?></strong>							
 									<div class="product-info">
-										<?php echo esc_html( $addon->excerpt ); ?>
+										<?php echo wp_kses( $addon->excerpt ); ?>
 									</div>
 									<a class="view-details" href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>"><?php si_e('View Details') ?></a>
 								</div>

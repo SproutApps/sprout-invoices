@@ -130,7 +130,7 @@ class SI_Reporting extends SI_Dashboard {
 		foreach ( $inv_data as $segment => $seg_data ) {
 			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
 			$return['invoices'][] = $seg_data['invoices'];
-			$return['estimates'][] = $est_data[$segment]['estimates'];
+			$return['estimates'][] = $est_data[ $segment ]['estimates'];
 		}
 		header( 'Content-type: application/json' );
 		echo wp_json_encode( $return );
@@ -170,7 +170,7 @@ class SI_Reporting extends SI_Dashboard {
 		$return = array(
 				'status_pending' => 0,
 				'status_complete' => 0,
-				'status_void' => 0
+				'status_void' => 0,
 			);
 		$data = array_slice( self::total_payment_data_by_date_segment(), -3 );
 		foreach ( $data as $segment => $seg_data ) {
@@ -195,7 +195,7 @@ class SI_Reporting extends SI_Dashboard {
 			'status_pending' => 0,
 			'status_partial' => 0,
 			'status_complete' => 0,
-			'status_writeoff' => 0
+			'status_writeoff' => 0,
 			);
 		$data = array_slice( self::total_invoice_data_by_date_segment(), -3 );
 		foreach ( $data as $segment => $seg_data ) {
@@ -221,7 +221,7 @@ class SI_Reporting extends SI_Dashboard {
 			'status_request' => 0,
 			'status_pending' => 0,
 			'status_approved' => 0,
-			'status_declined' => 0
+			'status_declined' => 0,
 			);
 		$data = array_slice( self::total_estimate_data_by_date_segment(), -3 );
 		foreach ( $data as $segment => $seg_data ) {
@@ -255,7 +255,7 @@ class SI_Reporting extends SI_Dashboard {
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
 		foreach ( $weeks as $week_num ) {
-			$data[$week_num] = array(
+			$data[ $week_num ] = array(
 					'invoices' => 0,
 					'payments' => 0,
 					'totals' => 0,
@@ -266,7 +266,7 @@ class SI_Reporting extends SI_Dashboard {
 					'status_pending' => 0,
 					'status_partial' => 0,
 					'status_complete' => 0,
-					'status_writeoff' => 0
+					'status_writeoff' => 0,
 				);
 		}
 		$args = array(
@@ -286,28 +286,28 @@ class SI_Reporting extends SI_Dashboard {
 		foreach ( $invoices->posts as $invoice_id ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 			$week = get_the_time( 'W', $invoice_id );
-			$data[$week]['invoices'] += 1;
-			$data[$week]['payments'] += count( $invoice->get_payments() );
-			$data[$week]['totals'] += si_get_invoice_calculated_total( $invoice_id );
-			$data[$week]['subtotals'] += si_get_invoice_subtotal( $invoice_id );
-			$data[$week]['paid'] += si_get_invoice_payments_total( $invoice_id );
-			$data[$week]['balance'] += si_get_invoice_balance( $invoice_id );
+			$data[ $week ]['invoices'] += 1;
+			$data[ $week ]['payments'] += count( $invoice->get_payments() );
+			$data[ $week ]['totals'] += si_get_invoice_calculated_total( $invoice_id );
+			$data[ $week ]['subtotals'] += si_get_invoice_subtotal( $invoice_id );
+			$data[ $week ]['paid'] += si_get_invoice_payments_total( $invoice_id );
+			$data[ $week ]['balance'] += si_get_invoice_balance( $invoice_id );
 			switch ( get_post_status( $invoice_id ) ) {
 				case 'draft':
 				case SI_Invoice::STATUS_TEMP:
-					$data[$week]['status_temp'] += 1;
+					$data[ $week ]['status_temp'] += 1;
 					break;
 				case SI_Invoice::STATUS_PENDING:
-					$data[$week]['status_pending'] += 1;
+					$data[ $week ]['status_pending'] += 1;
 					break;
 				case SI_Invoice::STATUS_PARTIAL:
-					$data[$week]['status_partial'] += 1;
+					$data[ $week ]['status_partial'] += 1;
 					break;
 				case SI_Invoice::STATUS_PAID:
-					$data[$week]['status_complete'] += 1;
+					$data[ $week ]['status_complete'] += 1;
 					break;
 				case SI_Invoice::STATUS_WO:
-					$data[$week]['status_writeoff'] += 1;
+					$data[ $week ]['status_writeoff'] += 1;
 					break;
 				default:
 					break;
@@ -336,7 +336,7 @@ class SI_Reporting extends SI_Dashboard {
 				'status_pending' => 0,
 				'status_partial' => 0,
 				'status_complete' => 0,
-				'status_writeoff' => 0
+				'status_writeoff' => 0,
 			);
 		$args = array(
 			'post_type' => SI_Invoice::POST_TYPE,
@@ -346,14 +346,14 @@ class SI_Reporting extends SI_Dashboard {
 			);
 
 		// If date filtered
-		if ( $this != 'century' ) {
+		if ( 'century' !== $this ) {
 			switch ( $this ) {
 				case 'week':
 					$args['date_query'] = array(
 						array(
 							'week' => date( 'W', strtotime( 'this week' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( date( 'Y-m-t' ), strtotime( 'this Sunday' ) ) -current_time( 'timestamp' );
 					break;
@@ -362,7 +362,7 @@ class SI_Reporting extends SI_Dashboard {
 						array(
 							'week' => date( 'W', strtotime( '-1 week' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( date( 'Y-m-t' ), strtotime( 'this Sunday' ) ) -current_time( 'timestamp' );
 					break;
@@ -371,7 +371,7 @@ class SI_Reporting extends SI_Dashboard {
 						array(
 							'month' => date( 'm' ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( date( 'Y-m-t' ) ) -current_time( 'timestamp' );
 					break;
@@ -380,7 +380,7 @@ class SI_Reporting extends SI_Dashboard {
 						array(
 							'month' => date( 'm', strtotime( '-1 month' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( date( 'Y-m-t' ) ) -current_time( 'timestamp' );
 					break;
@@ -389,7 +389,7 @@ class SI_Reporting extends SI_Dashboard {
 						array(
 							'year' => date( 'Y' ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( date( 'Y-m-t' ), strtotime( '12/31' ) ) -current_time( 'timestamp' );
 					break;
@@ -398,7 +398,7 @@ class SI_Reporting extends SI_Dashboard {
 						array(
 							'year' => date( 'Y', strtotime( '-1  year' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( date( 'Y-m-t' ), strtotime( '12/31' ) ) -current_time( 'timestamp' );
 					break;
@@ -455,7 +455,7 @@ class SI_Reporting extends SI_Dashboard {
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
 		foreach ( $weeks as $week_num ) {
-			$data[$week_num] = array(
+			$data[ $week_num ] = array(
 					'estimates' => 0,
 					'requests' => 0,
 					'totals' => 0,
@@ -464,7 +464,7 @@ class SI_Reporting extends SI_Dashboard {
 					'status_request' => 0,
 					'status_pending' => 0,
 					'status_approved' => 0,
-					'status_declined' => 0
+					'status_declined' => 0,
 				);
 		}
 		$args = array(
@@ -477,34 +477,34 @@ class SI_Reporting extends SI_Dashboard {
 					array(
 						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
 						'inclusive' => true,
-					)
+					),
 				)
 			);
 		$estimates = new WP_Query( $args );
 		foreach ( $estimates->posts as $estimate_id ) {
 			$week = get_the_time( 'W', $estimate_id );
-			$data[$week]['estimates'] += 1;
-			$data[$week]['totals'] += si_get_estimate_total( $estimate_id );
-			$data[$week]['subtotals'] += si_get_estimate_subtotal( $estimate_id );
+			$data[ $week ]['estimates'] += 1;
+			$data[ $week ]['totals'] += si_get_estimate_total( $estimate_id );
+			$data[ $week ]['subtotals'] += si_get_estimate_subtotal( $estimate_id );
 			if ( si_get_estimate_invoice_id( $estimate_id ) ) {
-				$data[$week]['invoices_generated'] += 1;
+				$data[ $week ]['invoices_generated'] += 1;
 			}
 			// If there are submission fields than it's a request
 			if ( si_is_estimate_submission( $estimate_id ) ) {
-				$data[$week]['requests'] += 1;
+				$data[ $week ]['requests'] += 1;
 			}
 			switch ( get_post_status( $estimate_id ) ) {
 				case SI_Estimate::STATUS_REQUEST:
-					$data[$week]['status_request'] += 1;
+					$data[ $week ]['status_request'] += 1;
 					break;
 				case SI_Estimate::STATUS_PENDING:
-					$data[$week]['status_pending'] += 1;
+					$data[ $week ]['status_pending'] += 1;
 					break;
 				case SI_Estimate::STATUS_APPROVED:
-					$data[$week]['status_approved'] += 1;
+					$data[ $week ]['status_approved'] += 1;
 					break;
 				case SI_Estimate::STATUS_DECLINED:
-					$data[$week]['status_declined'] += 1;
+					$data[ $week ]['status_declined'] += 1;
 					break;
 				default:
 					break;
@@ -529,7 +529,7 @@ class SI_Reporting extends SI_Dashboard {
 				'status_authorized' => 0,
 				'status_complete' => 0,
 				'status_partial' => 0,
-				'status_void' => 0
+				'status_void' => 0,
 			);
 		$args = array(
 			'post_type' => SI_Payment::POST_TYPE,
@@ -540,7 +540,7 @@ class SI_Reporting extends SI_Dashboard {
 			);
 
 		// If date filtered
-		if ( $this != 'century' ) {
+		if ( 'century' !== $this ) {
 			switch ( $this ) {
 				case 'week':
 					$args['date_query'] = array(
@@ -548,7 +548,7 @@ class SI_Reporting extends SI_Dashboard {
 							'week' => date( 'W', strtotime( 'this week' ) ),
 							'year' => date( 'o', strtotime( 'this week' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
 					break;
@@ -558,7 +558,7 @@ class SI_Reporting extends SI_Dashboard {
 							'week' => date( 'W', strtotime( '-1 week' ) ),
 							'year' => date( 'o', strtotime( '-1 week' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( 'next week' ) -current_time( 'timestamp' );
 					break;
@@ -568,7 +568,7 @@ class SI_Reporting extends SI_Dashboard {
 							'month' => date( 'm', strtotime( 'first day of this month' ) ),
 							'year' => date( 'o', strtotime( 'first day of this month' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
 					break;
@@ -578,7 +578,7 @@ class SI_Reporting extends SI_Dashboard {
 							'month' => date( 'm', strtotime( 'first day of previous month' ) ),
 							'year' => date( 'o', strtotime( 'first day of previous month' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( 'first day of next month' ) -current_time( 'timestamp' );
 					break;
@@ -587,7 +587,7 @@ class SI_Reporting extends SI_Dashboard {
 						array(
 							'year' => date( 'Y', strtotime( 'first day of this year' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
 					break;
@@ -596,7 +596,7 @@ class SI_Reporting extends SI_Dashboard {
 						array(
 							'year' => date( 'Y', strtotime( 'first day of previous year' ) ),
 							'inclusive' => true,
-						)
+						),
 					);
 					$expire = strtotime( 'last day of year' ) -current_time( 'timestamp' );
 					break;
@@ -648,14 +648,14 @@ class SI_Reporting extends SI_Dashboard {
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
 		foreach ( $weeks as $week_num ) {
-			$data[$week_num] = array(
+			$data[ $week_num ] = array(
 					'payments' => 0,
 					'totals' => 0,
 					'status_pending' => 0,
 					'status_authorized' => 0,
 					'status_complete' => 0,
 					'status_partial' => 0,
-					'status_void' => 0
+					'status_void' => 0,
 				);
 		}
 		$args = array(
@@ -668,30 +668,30 @@ class SI_Reporting extends SI_Dashboard {
 					array(
 						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
 						'inclusive' => true,
-					)
+					),
 				)
 			);
 		$payments = new WP_Query( $args );
 		foreach ( $payments->posts as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
 			$week = get_the_time( 'W', $payment_id );
-			$data[$week]['payments'] += 1;
-			$data[$week]['totals'] += $payment->get_amount();
+			$data[ $week ]['payments'] += 1;
+			$data[ $week ]['totals'] += $payment->get_amount();
 			switch ( get_post_status( $payment_id ) ) {
 				case SI_Payment::STATUS_PENDING:
-					$data[$week]['status_pending'] += 1;
+					$data[ $week ]['status_pending'] += 1;
 					break;
 				case SI_Payment::STATUS_AUTHORIZED:
-					$data[$week]['status_authorized'] += 1;
+					$data[ $week ]['status_authorized'] += 1;
 					break;
 				case SI_Payment::STATUS_COMPLETE:
-					$data[$week]['status_complete'] += 1;
+					$data[ $week ]['status_complete'] += 1;
 					break;
 				case SI_Payment::STATUS_PARTIAL:
-					$data[$week]['status_partial'] += 1;
+					$data[ $week ]['status_partial'] += 1;
 					break;
 				case SI_Payment::STATUS_VOID:
-					$data[$week]['status_void'] += 1;
+					$data[ $week ]['status_void'] += 1;
 					break;
 				default:
 					break;
@@ -792,40 +792,38 @@ class SI_Reporting extends SI_Dashboard {
 	////////////////
 
 	public static function help_sections() {
-		add_action( 'load-sprout-apps_page_sprout-apps/settings', array( __CLASS__, 'help_tabs' ) );
+		add_action( 'load-dashboard_page_sprout-invoices-stats', array( __CLASS__, 'help_tabs' ) );
 	}
 
 	public static function help_tabs() {
-		if ( isset( $_GET['tab'] ) && $_GET['tab'] == self::SETTINGS_PAGE ) {
-			// get screen and add sections.
-			$screen = get_current_screen();
+		// get screen and add sections.
+		$screen = get_current_screen();
 
+		$screen->add_help_tab( array(
+				'id' => 'reports-about',
+				'title' => self::__( 'About Reports' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__( 'The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.' ), self::__( '<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.' ), self::__( '<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.' ) )
+			) );
+
+		$screen->add_help_tab( array(
+				'id' => 'reports-tables',
+				'title' => self::__( 'Report Tables' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__( '<b>Date filtering</b> is available and can be used to retrieve data in-between t, dates, or after a date, or before a date.' ), self::__( '<b>Modify columns</b> within the table with the “Show / hide columns” button.' ), self::__( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.' ), self::__( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.' ) )
+			) );
+
+		if ( ! isset( $_GET['report'] ) ) {
 			$screen->add_help_tab( array(
-					'id' => 'reports-about',
-					'title' => self::__( 'About Reports' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__( 'The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.' ), self::__( '<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.' ), self::__( '<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.' ) )
+					'id' => 'reports-refresh',
+					'title' => self::__( 'Dashboard Refresh' ),
+					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__( 'The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.' ), esc_url( add_query_arg( array( 'nocache' => 1 ) ) ), si__( 'Refresh' ) )
 				) );
-
-			$screen->add_help_tab( array(
-					'id' => 'reports-tables',
-					'title' => self::__( 'Report Tables' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__( '<b>Date filtering</b> is available and can be used to retrieve data in-between t, dates, or after a date, or before a date.' ), self::__( '<b>Modify columns</b> within the table with the “Show / hide columns” button.' ), self::__( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.' ), self::__( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.' ) )
-				) );
-
-			if ( ! isset( $_GET['report'] ) ) {
-				$screen->add_help_tab( array(
-						'id' => 'reports-refresh',
-						'title' => self::__( 'Dashboard Refresh' ),
-						'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__( 'The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.' ), esc_url( add_query_arg( array( 'nocache' => 1 ) ) ), si__( 'Refresh' ) )
-					) );
-			}
-
-			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/', self::__( 'Documentation' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
-			);
 		}
+
+		$screen->set_help_sidebar(
+			sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
+			sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/', self::__( 'Documentation' ) ) .
+			sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+		);
 	}
 
 }

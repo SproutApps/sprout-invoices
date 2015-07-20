@@ -251,14 +251,15 @@ class SI_WPInvoice_Import extends SI_Importer {
 	}
 
 	public static function create_client( $wp_invoice = array() ) {
-		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice['ID'] ) );
+		$wp_invoice_user_data = $wp_invoice['user_data'];
+
+		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice_user_data['ID'] ) );
 		// Don't create a duplicate if this was already imported.
 		if ( ! empty( $possible_dups ) ) {
-			do_action( 'si_error', 'Client imported already', $wp_invoice['ID'] );
+			do_action( 'si_error', 'Client imported already', $wp_invoice_user_data['ID'] );
 			return $possible_dups[0];
 		}
 
-		$wp_invoice_user_data = $wp_invoice['user_data'];
 		// args to create new client
 		$address = array(
 			'street' => isset( $wp_invoice_user_data['streetaddress'] ) ? self::esc__( $wp_invoice_user_data['streetaddress'] ) : '',
@@ -293,7 +294,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 		$client_id = SI_Client::new_client( $args );
 		// create import record
-		update_post_meta( $client_id, self::WPINVOICE_ID, $wp_invoice['ID'] );
+		update_post_meta( $client_id, self::WPINVOICE_ID, $wp_invoice_user_data['ID'] );
 		return $client_id;
 	}
 

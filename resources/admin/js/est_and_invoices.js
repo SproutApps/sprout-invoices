@@ -700,10 +700,10 @@
 			// If has children
 			if ( $(li).children('ol').length > 0 ) {
 				// hide the parent input fields
-				$(li).find('.column.parent_hide input').attr( "type", "hidden" );
+				$(li).find('.column.parent_hide input.sa_option_text').addClass('cloak');
 			}
 			else {
-				$(li).find('.column.parent_hide input').attr( "type", "text" );
+				$(li).find('.column.parent_hide input.sa_option_text').removeClass('cloak');
 			}
 		});
 		$('ol.items_list .has_children').each(function(i, parent) {
@@ -857,6 +857,8 @@
 			$formatted_total = parseFloat( $total ).toFixed(2);
 
 		total_update( $total_span, $formatted_total );
+
+		$('#deposit input').attr('max',parseFloat( $total ).toFixed(2));
 
 		$('ol.items_list').trigger( 'calculate_total', [ $formatted_total ] );
 	}

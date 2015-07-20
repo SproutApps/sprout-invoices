@@ -15,7 +15,7 @@ class SA_Addons extends SI_Controller {
 		if ( ! is_array( self::$active_addons ) ) {
 			self::$active_addons = self::default_active_addons();
 		}
-		self::register_importer_admin();
+		self::register_addons_admin();
 		self::load_addons();
 	}
 
@@ -27,7 +27,7 @@ class SA_Addons extends SI_Controller {
 	 * Register the addons management screen
 	 * @return
 	 */
-	public static function register_importer_admin() {
+	public static function register_addons_admin() {
 
 		// Addon page
 		$args = array(

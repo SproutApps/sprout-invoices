@@ -653,7 +653,7 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( is_wp_error( $client_users ) || ! is_array( $client_users ) ) {
 			do_action( 'si_error', 'get_document_recipients ERROR', $client_users );
 		}
-		return $client_users;
+		return array_unique( $client_users );
 	}
 
 	//////////////////////////

@@ -252,7 +252,9 @@ class SA_Settings_API extends SI_Controller {
 		if ( ! $plugin_page ) {
 			$plugin_page = ( self::TEXT_DOMAIN === $_GET['page'] ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : $_GET['page'] ;
 		}
-		error_log( 'page: ' . print_r( $plugin_page, TRUE ) );
+		if ( ! isset( self::$admin_pages[ $plugin_page ]['section'] ) ) {
+			return;
+		}
 		// Section based on settings slug
 		$section = self::$admin_pages[ $plugin_page ]['section'];
 		// get all tabs and sort

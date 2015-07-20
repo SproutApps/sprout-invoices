@@ -775,8 +775,8 @@ class SI_Invoice extends SI_Post_Type {
 	 * @return array
 	 */
 	public static function get_overdue_invoices( $timestamp = 0, $delay = 0 ) {
-		if ( !$delay ) {
-			$delay = apply_filters( 'si_get_overdue_yesterday_timestamp', current_time( 'timestamp' )-60*60*24 );
+		if ( ! $delay ) {
+			$delay = apply_filters( 'si_get_overdue_yesterday_timestamp', current_time( 'timestamp' ) - 60 * 60 * 24 );
 		}
 		$args = array(
 				'post_type' => self::POST_TYPE,
@@ -786,10 +786,12 @@ class SI_Invoice extends SI_Post_Type {
 				'meta_query' => array(
 					array(
 						'key' => self::$meta_keys['due_date'],
-						'value' => array( 
+						'value' => array(
 							$timestamp,
-							$delay ), // yesterday
-						'compare' => 'BETWEEN' )
+							$delay,
+							), // yesterday
+						'compare' => 'BETWEEN',
+						),
 					),
 			);
 

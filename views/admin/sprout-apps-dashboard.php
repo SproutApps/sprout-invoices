@@ -39,29 +39,43 @@
 	</div>
 
 	<h2 class="headline_callout"><?php self::_e('Sprout Apps Marketplace') ?></h2>
+			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php si_e('View More Add-ons') ?></span></a>
 	<!-- FUTURE make this entirely dynamic and add the ability to purchase from the backend. -->
-	<div class="feature-section col three-col clearfix">
-		<div class="sa_addon_wrap col-1">
-			<div class="add_on_img_wrap">
-				<img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/gravity-ninja.png' ?>" />
-				<a class="purchase_button button button-primary button-large" href="<?php echo self::PLUGIN_URL.'/marketplace/advanced-form-integration-gravity-ninja-forms/' ?>"><?php self::_e('Free Add-on') ?></a>
+	<div id="marketplace_view">
+		<main id="main" class="container site-main" role="main">
+			<div class="row">
+				<div class="products_grid">
+					<?php 
+						$all_addons = (array) SA_Addons::get_marketplace_addons();
+						$addons = array_slice( $all_addons, 0, 6 ); ?>
+					<?php foreach ( $addons as $addon_id => $addon ): ?>
+						<article class="type-download <?php if ( $addon->bundled ) echo 'bundled' ?>">
+							<div class="section">
+								<div class="pic">
+									<?php if ( $addon->bundled ): ?>
+										<span class="bundled_addon"><?php si_e('Bundled Free w/ License') ?></span>
+									<?php endif ?>
+									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
+										<?php echo $addon->thumb; ?>
+									</a>
+									<div class="download_purchase_link">
+										<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price; ?>&nbsp;–&nbsp;<?php si_e('Add to Cart') ?></span></a>
+									</div>
+								</div>
+								<div class="info">
+									<strong><?php echo wp_kses( $addon->post_title ); ?></strong>							
+									<div class="product-info">
+										<?php echo wp_kses( $addon->excerpt ); ?>
+									</div>
+									<a class="view-details" href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>"><?php si_e('View Details') ?></a>
+								</div>
+							</div>
+						</article>
+					<?php endforeach ?>
+				</div>
+			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php si_e('View More Add-ons') ?></span></a>
 			</div>
-			<h4><?php self::_e('Advanced Form Integration with Gravity and Ninja Forms') ?></h4>
-		</div>
-		<div class="sa_addon_wrap col-2">
-			<div class="add_on_img_wrap">
-				<img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/stripe.png' ?>" />
-				<a class="purchase_button button button-primary button-large" href="<?php echo self::PLUGIN_URL.'/marketplace/stripe-payments/' ?>"><?php self::_e('Purchase') ?></a>
-			</div>
-			<h4><?php self::_e('Stripe Payments') ?></h4>
-		</div>
-		<div class="sa_addon_wrap col-3 last-feature">
-			<div class="add_on_img_wrap">
-				<img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/time-calculator.png' ?>" />
-				<a class="purchase_button button button-primary button-large" href="<?php echo self::PLUGIN_URL.'/marketplace/hourly-rate-calculations/' ?>"><?php self::_e('Purchase') ?></a>
-			</div>
-			<h4><?php self::_e('Hourly Rate Calculations') ?></h4>
-		</div>
+		</main>
 	</div>
 
 </div>

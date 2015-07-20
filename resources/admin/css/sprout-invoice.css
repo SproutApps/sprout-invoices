@@ -145,6 +145,12 @@
 }
 
 
+a.sa_icon_link {
+	text-decoration: none;
+	color: #ccc;
+	zoom: 0.8;
+}
+
 
 #time_import_question_answer_upgrade:before,
 #time_import_question_answer:before {
@@ -270,6 +276,11 @@ form.si_settings_form table .wp-editor-wrap {
 .td_center {
 	vertical-align: center;
 	text-align: center;
+}
+
+span.table_filter_checkout {
+    display: inline-block;
+    margin: 5px 10px;
 }
 
 /**
@@ -1070,8 +1081,8 @@ div#invoice_status_updates-sticky-wrapper {
 
 .item_action_column {
 	float: left;
-	margin-top: 10px;
-	margin-left: -30px;
+	margin-top: 40px;
+	margin-left: -20px;
 	width: auto
 }
 
@@ -1083,7 +1094,7 @@ div#invoice_status_updates-sticky-wrapper {
 	margin-bottom: 15px
 }
 
-.item_clone:before,.item_add:before {
+.item_clone:before, .item_add:before {
 	content: "\f502"
 }
 
@@ -1107,6 +1118,34 @@ div#invoice_status_updates-sticky-wrapper {
 	color: red
 }
 
+
+.item_action.dd-handle {
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    height: 90%;
+}
+
+.item_action.item_clone {
+    cursor: copy;
+}
+
+.item_action.item_delete {
+    cursor: no-drop;
+    position: absolute;
+    z-index: 2;
+}
+.item_action.item_comments {
+    cursor: help;
+    position: absolute;
+    z-index: 3;
+    top: 100px;
+}
+
+.item_action.dd-handle {
+    cursor: move;
+    cursor: -webkit-grab;
+}
 .add_button:before {
 	font-family: 'dashicons';
 	vertical-align: top;

@@ -83,10 +83,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			}
 		}
 		else {
+			self::load_enabled_processors();
 			self::$active_payment_processors = self::enabled_processors();
-			foreach ( self::$active_payment_processors as $class ) {
-				return self::load_processor( $class );
-			}
+			return apply_filters( 'si_default_get_payment_processor', self::$active_payment_processors[0], self::$active_payment_processors );
 		}
 	}
 
