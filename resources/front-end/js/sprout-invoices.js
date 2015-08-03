@@ -47,6 +47,7 @@ jQuery(function($) {
 					else {
 						$action_links.html( si_js_object.thank_you_string );
 					};
+					$(document).trigger( 'status_updated' );
 				};
 				return data;
 			}

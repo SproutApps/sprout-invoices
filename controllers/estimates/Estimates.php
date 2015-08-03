@@ -764,7 +764,7 @@ class SI_Estimates extends SI_Controller {
 	 */
 	public static function maybe_create_status_update_record( SI_Estimate $estimate, $status = '', $original_status = '' ) {
 		do_action( 'si_new_record',
-			sprintf( si__( 'Status changed: %s to <b>%s</b>.' ), SI_Estimate::get_status_label( $original_status ), SI_Estimate::get_status_label( $status ) ),
+			sprintf( si__( 'Status changed: %s to <b>%s</b>.' ), $estimate->get_status_label( $original_status ), $estimate->get_status_label( $status ) ),
 			self::HISTORY_STATUS_UPDATE,
 			$estimate->get_id(),
 			sprintf( si__( 'Status update for %s.' ), $estimate->get_id() ),
