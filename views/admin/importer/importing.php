@@ -1,6 +1,6 @@
 <?php require ABSPATH . 'wp-admin/options-head.php'; // not a general options page, so it must be included here ?>
-<?php 
-	$page = ( !isset( $_GET['tab'] ) ) ? $page : self::TEXT_DOMAIN.'/'.$_GET['tab'] ; ?>
+<?php
+	$page = ( ! isset( $_GET['tab'] ) ) ? $page : self::TEXT_DOMAIN.'/'.$_GET['tab'] ; ?>
 
 <div id="<?php echo esc_attr( $page ); ?>" class="wrap">
 
@@ -11,20 +11,20 @@
 		<?php do_action( 'si_settings_page_sub_heading_'.$page ); ?>
 	</div>
 
-	<?php if ( apply_filters( 'si_show_importer_settings', '__return_true' ) ): ?>
+	<?php if ( apply_filters( 'si_show_importer_settings', '__return_true' ) ) : ?>
 		<form method="post" class="si_settings_form" enctype="multipart/form-data">
-			<h3><?php self::_e('Import Clients, Users, Estimates, Invoices and Payments') ?></h3>
+			<h3><?php self::_e( 'Import Clients, Users, Estimates, Invoices and Payments' ) ?></h3>
 			<?php settings_fields( $page ); ?>
 			<table class="form-table">
 				<tbody>
 					<tr>
-						<th scope="row"><?php self::_e('Select Import Source') ?></th>
+						<th scope="row"><?php self::_e( 'Select Import Source' ) ?></th>
 						<td>
 							<select name="importer">
-								<?php foreach ( $importers as $key => $name ): ?>
-									<?php 
+								<?php foreach ( $importers as $key => $name ) : ?>
+									<?php
 										$current = ( isset( $_POST['importer'] ) && $_POST['importer'] != '' ) ? $_POST['importer'] : '' ;
-										 ?>
+											?>
 									<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $current ) ?>><?php echo esc_html( $name ) ?></option>
 								<?php endforeach ?>
 							</select>
@@ -36,9 +36,9 @@
 				<?php do_settings_fields( $page, 'default' ); ?> 
 			</table>
 			<?php do_settings_sections( $page ); ?>
-			<?php submit_button( self::__('Start Import') ); ?>
+			<?php submit_button( self::__( 'Start Import' ) ); ?>
 		</form>
-	<?php else: ?>
+	<?php else : ?>
 		<script type="text/javascript">
 			jQuery(function($) {
 				
@@ -94,42 +94,42 @@
 		<div id="si_importer" class="wrap about-wrap">
 
 			<p>
-				<div id="authentication_import_information"><?php self::_e('Attempting to validate credentials...') ?></div>
+				<div id="authentication_import_information"><?php self::_e( 'Attempting to validate credentials...' ) ?></div>
 				<div class="progress">
 					<div id="authentication_import_progress" class="progress-bar progress-bar-striped active" style="overflow:hidden;"   role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">&nbsp;</div>
 				</div>
 			</p>
 
 			<p>
-				<div id="clients_import_information"><?php self::_e('No clients imported yet...') ?></div>
+				<div id="clients_import_information"><?php self::_e( 'No clients imported yet...' ) ?></div>
 				<div class="progress">
 					<div id="clients_import_progress" class="progress-bar progress-bar-striped active" style="overflow:hidden;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">&nbsp;</div>
 				</div>
 			</p>
 
 			<p>
-				<div id="contacts_import_information"><?php self::_e('No contacts imported yet...') ?></div>
+				<div id="contacts_import_information"><?php self::_e( 'No contacts imported yet...' ) ?></div>
 				<div class="progress">
 					<div id="contacts_import_progress" class="progress-bar progress-bar-striped active" style="overflow:hidden;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">&nbsp;</div>
 				</div>
 			</p>
 
 			<p>
-				<div id="estimates_import_information"><?php self::_e('No estimates imported yet...') ?></div>
+				<div id="estimates_import_information"><?php self::_e( 'No estimates imported yet...' ) ?></div>
 				<div class="progress">
 					<div id="estimates_import_progress" class="progress-bar progress-bar-striped active" style="overflow:hidden;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">&nbsp;</div>
 				</div>
 			</p>
 
 			<p>
-				<div id="invoices_import_information"><?php self::_e('No invoices imported yet...') ?></div>
+				<div id="invoices_import_information"><?php self::_e( 'No invoices imported yet...' ) ?></div>
 				<div class="progress">
 					<div id="invoices_import_progress" class="progress-bar progress-bar-striped active" style="overflow:hidden;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">&nbsp;</div>
 				</div>
 			</p>
 
 			<p>
-				<div id="payments_import_information"><?php self::_e('No payments imported yet...') ?></div>
+				<div id="payments_import_information"><?php self::_e( 'No payments imported yet...' ) ?></div>
 				<div class="progress">
 					<div id="payments_import_progress" class="progress-bar progress-bar-striped active" style="overflow:hidden;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">&nbsp;</div>
 				</div>

@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**7.6.1**
+
+* FIX: Possible security fix with exposed estimates/invoices with site.com?post_type=*
+
 **7.6**
 
 * FIX: Deposit notification sent only if the payment is complete (not pending)

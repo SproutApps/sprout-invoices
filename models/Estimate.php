@@ -2,7 +2,7 @@
 
 /**
  * Estimate Model
- * 
+ *
  *
  * @package Sprout_Invoices
  * @subpackage Estimate
@@ -73,25 +73,25 @@ class SI_Estimate extends SI_Post_Type {
 			'hierarchical' => false
 		);
 		self::register_taxonomy( self::LINE_ITEM_TAXONOMY, array(), $singular, $plural, $taxonomy_args );
-		
+
 		self::register_post_statuses();
 	}
 
 	public static function get_statuses() {
 		$statuses = array(
-			self::STATUS_TEMP => self::__('Draft'),
-			self::STATUS_REQUEST => self::__('Request'),
-			self::STATUS_PENDING => self::__('Pending'),
-			self::STATUS_FUTURE => self::__('Scheduled'),
-			self::STATUS_APPROVED => self::__('Approved'),
-			self::STATUS_DECLINED => self::__('Declined'),
+			self::STATUS_TEMP => self::__( 'Draft' ),
+			self::STATUS_REQUEST => self::__( 'Request' ),
+			self::STATUS_PENDING => self::__( 'Pending' ),
+			self::STATUS_FUTURE => self::__( 'Scheduled' ),
+			self::STATUS_APPROVED => self::__( 'Approved' ),
+			self::STATUS_DECLINED => self::__( 'Declined' ),
 		);
 		return $statuses;
 	}
 
 	/**
 	 * Post statuses for payments
-	 * @return  
+	 * @return
 	 */
 	private static function register_post_statuses() {
 		$statuses = self::get_statuses();
@@ -101,23 +101,23 @@ class SI_Estimate extends SI_Post_Type {
 				'public' => true,
 				'exclude_from_search' => false,
 				'show_in_admin_all_list' => true,
-          		'show_in_admin_status_list' => true,
-          		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
+		  		'show_in_admin_status_list' => true,
+		  		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
 			));
 		}
 	}
 
 	/**
 	 * Is the current query for an estimate(s)
-	 * @param  object  $query 
-	 * @return boolean        
+	 * @param  object  $query
+	 * @return boolean
 	 */
 	public static function is_estimate_query( WP_Query $query = null ) {
 		if ( is_null( $query ) ) {
 			global $wp_query;
 			$query = $wp_query;
 		}
-		if ( !isset( $query->query_vars['post_type'] ) ) {
+		if ( ! isset( $query->query_vars['post_type'] ) ) {
 			return false; // normal posts query
 		}
 		if ( $query->query_vars['post_type'] == self::POST_TYPE ) {
@@ -141,24 +141,24 @@ class SI_Estimate extends SI_Post_Type {
 	 * @return Sprout_Invoices_Estimate
 	 */
 	public static function get_instance( $id = 0 ) {
-		if ( !$id )
-			return null;
-		
-		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
-			self::$instances[$id] = new self( $id );
+		if ( ! $id ) {
+			return null; }
 
-		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return null;
-		
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return null;
-		
+		if ( ! isset( self::$instances[$id] ) || ! self::$instances[$id] instanceof self ) {
+			self::$instances[$id] = new self( $id ); }
+
+		if ( ! isset( self::$instances[$id]->post->post_type ) ) {
+			return null; }
+
+		if ( self::$instances[$id]->post->post_type != self::POST_TYPE ) {
+			return null; }
+
 		return self::$instances[$id];
 	}
 
 	public static function create_estimate( $passed_args, $status = '' ) {
 		$defaults = array(
-			'subject' => sprintf( self::__('New Estimate: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'subject' => sprintf( self::__( 'New Estimate: %s' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'user_id' => '',
 			'estimate_id' => '',
 			'invoice_id' => '',
@@ -213,10 +213,10 @@ class SI_Estimate extends SI_Post_Type {
 		$estimate->set_notes( $args['notes'] );
 		$estimate->set_terms( $args['terms'] );
 
-		$issue_date = ( is_numeric( $args['issue_date'] ) ) ? $args['issue_date'] : strtotime( $args['issue_date'] ) ;
+		$issue_date = ( is_numeric( $args['issue_date'] ) ) ? $args['issue_date'] : strtotime( $args['issue_date'] );
 		$estimate->set_issue_date( $issue_date );
-		
-		$expiration_date = ( is_numeric( $args['expiration_date'] ) ) ? $args['expiration_date'] : strtotime( $args['expiration_date'] ) ;
+
+		$expiration_date = ( is_numeric( $args['expiration_date'] ) ) ? $args['expiration_date'] : strtotime( $args['expiration_date'] );
 		$estimate->set_expiration_date( $expiration_date );
 
 		$estimate->set_line_items( $args['line_items'] );
@@ -236,27 +236,26 @@ class SI_Estimate extends SI_Post_Type {
 	public function set_status( $status ) {
 		// Don't do anything if there's no true change
 		$current_status = $this->get_status();
-		if ( $current_status == $status )
-			return;
+		if ( $current_status == $status ) {
+			return; }
 
 		// confirm the status exists
-		if ( !in_array( $status, array_keys(self::get_statuses()) ) ) {
+		if ( ! in_array( $status, array_keys( self::get_statuses() ) ) ) {
 			switch ( $status ) {
-				case self::__('approve'):
-				case self::__('accept'):
-					$status = self::STATUS_APPROVED;	
+				case self::__( 'approve' ):
+				case self::__( 'accept' ):
+					$status = self::STATUS_APPROVED;
 					break;
-				case self::__('decline'):
-				case self::__('pushback'):
-					$status = self::STATUS_DECLINED;	
+				case self::__( 'decline' ):
+				case self::__( 'pushback' ):
+					$status = self::STATUS_DECLINED;
 					break;
-				
+
 				default:
 					return; // stop
 					break;
 			}
 		}
-			
 
 		$this->post->post_status = $status;
 		$this->save_post();
@@ -293,7 +292,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	/**
 	 * Get the submission fields
-	 * @return array 
+	 * @return array
 	 */
 	public function get_submission_fields() {
 		return $this->get_post_meta( self::$meta_keys['submission'] );
@@ -301,7 +300,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	/**
 	 * Save the submitted fields
-	 * @param array $fields 
+	 * @param array $fields
 	 */
 	public function set_submission_fields( $fields = array() ) {
 		$this->save_post_meta( array(
@@ -315,7 +314,7 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public function get_issue_date() {
 		$date = (int)$this->get_post_meta( self::$meta_keys['issue_date'] );
-		if ( !$date ) {
+		if ( ! $date ) {
 			$date = strtotime( $this->post->post_date );
 		};
 		return $date;
@@ -333,9 +332,9 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public function get_expiration_date() {
 		$date = (int)$this->get_post_meta( self::$meta_keys['expiration_date'] );
-		if ( !$date ) {
+		if ( ! $date ) {
 			$days = apply_filters( 'si_default_expiration_in_days', 30 );
-			$date = strtotime( $this->post->post_date )+(60*60*24*$days);
+			$date = strtotime( $this->post->post_date ) + (60 * 60 * 24 * $days);
 		};
 		return $date;
 	}
@@ -352,7 +351,7 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public function get_estimate_id() {
 		$id = $this->get_post_meta( self::$meta_keys['estimate_id'] );
-		if ( !$id ) {
+		if ( ! $id ) {
 			$id = $this->get_id();
 			$this->set_estimate_id( $id );
 		}
@@ -385,8 +384,8 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 
 	public function get_client() {
-		if ( !$this->get_client_id() ) {
-			return new WP_Error( 'no_client', self::__('No client associated with this invoice.') );
+		if ( ! $this->get_client_id() ) {
+			return new WP_Error( 'no_client', self::__( 'No client associated with this invoice.' ) );
 		}
 		return SI_Client::get_instance( $this->get_client_id() );
 	}
@@ -473,7 +472,7 @@ class SI_Estimate extends SI_Post_Type {
 	}
 
 	public function get_project() {
-		if ( class_exists( 'SI_Project' ) ) {		
+		if ( class_exists( 'SI_Project' ) ) {
 			$project_id = $this->get_project_id();
 			$project = SI_Project::get_instance( $project_id );
 			return $project;
@@ -498,16 +497,16 @@ class SI_Estimate extends SI_Post_Type {
 
 	/**
 	 * Calculated total includes any taxes and discounts.
-	 * @return  
+	 * @return
 	 */
-	public function get_calculated_total() { 
+	public function get_calculated_total() {
 		$subtotal = $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
 		}
 		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$pre_disc_total = $subtotal+$tax_total+$tax2_total;
+		$pre_disc_total = $subtotal + $tax_total + $tax2_total;
 		$total = $pre_disc_total * ( ( 100 - $this->get_discount() ) / 100 );
 		return $total;
 	}
@@ -523,10 +522,10 @@ class SI_Estimate extends SI_Post_Type {
 	public function get_subtotal() {
 		$subtotal = 0;
 		$line_items = $this->get_line_items();
-		if ( !empty( $line_items ) ) {
+		if ( ! empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
 				if ( $data['rate'] ) {
-					$calc = ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
+					$calc = ( $data['rate'] * $data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
 					$subtotal += apply_filters( 'si_line_item_total', $calc, $data );
 				}
 			}
@@ -584,7 +583,7 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public function get_line_items() {
 		$line_items = $this->get_post_meta( self::$meta_keys['line_items'] );
-		if ( !is_array( $line_items ) ) {
+		if ( ! is_array( $line_items ) ) {
 			$line_items = array();
 		}
 		return $line_items;
@@ -603,9 +602,9 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function get_currency() {
 		$code = $this->get_post_meta( self::$meta_keys['currency'] );
-		if ( !$code ) {
+		if ( ! $code ) {
 			$code = 'USD';
-			$this->set_currency($code);
+			$this->set_currency( $code );
 		}
 		return $code;
 	}
@@ -640,7 +639,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function get_invoice_id() {
 		$invoice_ids = SI_Invoice::get_invoices_by_estimate_id( $this->ID );
-		return array_pop($invoice_ids); // A single invoice should be associated
+		return array_pop( $invoice_ids ); // A single invoice should be associated
 	}
 
 

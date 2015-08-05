@@ -971,7 +971,7 @@ class SI_Invoices extends SI_Controller {
 		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name );
 
 		// If status is temp than change to pending.
-		if ( $invoice->get_status() == SI_Invoice::STATUS_TEMP ) {
+		if ( ! in_array( $invoice->get_status(), array( SI_Invoice::STATUS_PARTIAL, SI_Invoice::STATUS_PAID ) ) ) {
 			$invoice->set_pending();
 		}
 

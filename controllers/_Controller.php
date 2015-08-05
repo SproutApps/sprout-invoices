@@ -770,6 +770,31 @@ abstract class SI_Controller extends Sprout_Invoices {
 		add_action( 'pre_si_invoice_view', array( __CLASS__, 'add_x_robots_header' ) );
 		add_action( 'pre_si_estimate_view', array( __CLASS__, 'add_x_robots_header' ) );
 
+		// archive page
+		add_filter( 'pre_get_posts', array( __CLASS__, 'filter_post_type_query' ) );
+
+	}
+
+	/**
+	 * Prevent the archive page of site.com?post_type=sa_invoice/estimate
+	 * @param  object $query
+	 * @return object $query
+	 * @since 7.6.1
+	 */
+	public static function filter_post_type_query( $query ) {
+		if ( is_admin() ) {
+			return $query;
+		}
+		if ( is_single() ) {
+			return $query;
+		}
+		if ( $query->is_main_query() ) {
+			$type = $query->get( 'post_type' );
+			if ( in_array( $type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE ) ) ) {
+				$query->set( 'post_type', 'post' );
+			}
+		}
+		return $query;
 	}
 
 	/**

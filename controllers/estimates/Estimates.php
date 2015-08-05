@@ -745,6 +745,11 @@ class SI_Estimates extends SI_Controller {
 
 		do_action( 'send_estimate', $estimate, $recipients, $from_email, $from_name );
 
+		// If status is temp than change to pending.
+		if ( $estimate->get_status() !== SI_Estimate::STATUS_APPROVED ) {
+			$estimate->set_pending();
+		}
+
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		echo wp_json_encode( array( 'response' => si__( 'Notification Queued' ) ) );

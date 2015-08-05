@@ -85,7 +85,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		else {
 			self::load_enabled_processors();
 			self::$active_payment_processors = self::enabled_processors();
-			return apply_filters( 'si_default_get_payment_processor', self::$active_payment_processors[0], self::$active_payment_processors );
+			$default = ( isset( self::$active_payment_processors[0] ) ) ? self::$active_payment_processors[0] : array() ;
+			return apply_filters( 'si_default_get_payment_processor', $default, self::$active_payment_processors );
 		}
 	}
 
@@ -501,6 +502,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			self::ajax_fail( 'Payment ID Error.' ); }
 
 		$payment->set_status( SI_Payment::STATUS_COMPLETE );
+		do_action( 'payment_complete', $payment );
 
 		if ( $payment->get_status() != $status ) {
 			header( 'Content-type: application/json' );

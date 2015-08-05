@@ -11,7 +11,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 	const PROCESS_ACTION = 'start_import';
 	const DELETE_WPINVOICE_DATA = 'import_archived';
 	const PAYMENT_METHOD = 'WPInvoice Imported';
-	const PROGRESS_OPTION = 'current_import_progress_wpinvoice_v1';
+	const PROGRESS_OPTION = 'current_import_progress_wpinvoice_v3';
 
 	// Meta
 	const WPINVOICE_ID = '_wpinvoice_id';
@@ -103,7 +103,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 				'post_type' => 'wpi_object', // why object? I don't get it either.
 				'post_status' => 'any',
 				'posts_per_page' => -1,
-				'fields' => 'ids'
+				'fields' => 'ids',
 			);
 
 		$wp_invoice_ids = get_posts( $args );
@@ -112,39 +112,50 @@ class SI_WPInvoice_Import extends SI_Importer {
 			self::return_error( self::__( 'We couldn\'t fine any WP-Invoices to import.' ) );
 		}
 
+		$progress_tally = array();
+		$progress_tally['clients_tally'] = 0;
+		$progress_tally['contacts_tally'] = 0;
+		$progress_tally['invoices_tally'] = 0;
+		$progress_tally['payments_tally'] = 0;
+		$progress_tally['invoices_total'] = count( $wp_invoice_ids );
+		$progress_tally['total_records'] = count( $wp_invoice_ids );
+		update_option( self::PROGRESS_OPTION.'tally', $progress_tally );
+
 		$total_records = count( $wp_invoice_ids );
 		self::return_progress( array(
 			'authentication' => array(
 				'message' => sprintf( self::__( 'Preparing to import from %s invoices...' ), $total_records ),
-				'progress' => 90
+				'progress' => 90,
 				),
 			'clients' => array(
 				'message' => sprintf( self::__( 'Importing clients from %s WP-Invoice records...' ), $total_records ),
-				'progress' => 90,
+				'progress' => 10,
 				),
 			'contacts' => array(
 				'message' => sprintf( self::__( 'Importing contacts from %s WP-Invoice records...' ), $total_records ),
-				'progress' => 90,
+				'progress' => 10,
 				),
 			'estimates' => array(
 				'message' => sprintf( self::__( 'No estimates will be imported, unfortunately...' ), $total_records ),
-				'progress' => 10,
+				'progress' => 0,
 				),
 			'invoices' => array(
 				'message' => sprintf( self::__( 'Importing invoices from %s WP-Invoice records...' ), $total_records ),
-				'progress' => 90,
+				'progress' => 10,
 				),
 			'payments' => array(
 				'message' => sprintf( self::__( 'Importing payments from %s WP-Invoice records...' ), $total_records ),
-				'progress' => 90,
-				'next_step' => 'invoices'
+				'progress' => 10,
+				'next_step' => 'invoices',
 				),
 			) );
+
 	}
 
 	public static function import_invoices() {
 		// Store the import progress
-		get_option( self::PROGRESS_OPTION, array() );
+		$progress = get_option( self::PROGRESS_OPTION, 1 );
+		$progress_tally = get_option( self::PROGRESS_OPTION.'tally', array() );
 
 		// Suppress notifications
 		add_filter( 'suppress_notifications', '__return_true' );
@@ -155,18 +166,56 @@ class SI_WPInvoice_Import extends SI_Importer {
 		$args = array(
 				'post_type' => 'wpi_object', // why object? I don't get it either.
 				'post_status' => 'any',
-				'posts_per_page' => -1,
-				'fields' => 'ids'
+				'posts_per_page' => 25,
+				'offset' => ( $progress * 25 ) - 25,
+				'fields' => 'ids',
 			);
 
 		$wp_invoice_ids = get_posts( $args );
 
-		$clients_tally = 0;
-		$contacts_tally = 0;
-		$invoices_tally = 0;
-		$payments_tally = 0;
-		$invoices_total = count( $wp_invoice_ids );
-		$total_records = count( $wp_invoice_ids );
+		if ( empty( $progress_tally ) ) {
+			$progress_tally['clients_tally'] = 0;
+			$progress_tally['contacts_tally'] = 0;
+			$progress_tally['invoices_tally'] = 0;
+			$progress_tally['payments_tally'] = 0;
+			$progress_tally['invoices_total'] = count( $wp_invoice_ids );
+			$progress_tally['total_records'] = count( $wp_invoice_ids );
+		}
+
+		if ( empty( $wp_invoice_ids ) ) {
+
+			//////////////
+			// All done //
+			//////////////
+
+			self::return_progress( array(
+				'authentication' => array(
+					'message' => sprintf( self::__( 'Imported %s invoices!' ), $progress_tally['total_records'] ),
+					'progress' => 100,
+					),
+				'clients' => array(
+					'message' => sprintf( self::__( 'Importing %s clients from %s WP-Invoice records...' ), $progress_tally['clients_tally'], $progress_tally['total_records'] ),
+					'progress' => 100,
+					),
+				'contacts' => array(
+					'message' => sprintf( self::__( 'Importing %s contacts from %s WP-Invoice records...' ), $progress_tally['contacts_tally'], $progress_tally['total_records'] ),
+					'progress' => 100,
+					),
+				'estimates' => array(
+					'message' => self::__( 'No estimates were imported' ),
+					'progress' => 100,
+					),
+				'invoices' => array(
+					'message' => sprintf( self::__( 'Importing %s invoices from %s WP-Invoice records...' ), $progress_tally['invoices_tally'], $progress_tally['total_records'] ),
+					'progress' => 100,
+					),
+				'payments' => array(
+					'message' => sprintf( self::__( 'Importing %s payments from %s WP-Invoice records...' ), $progress_tally['payments_tally'], $progress_tally['total_records'] ),
+					'progress' => 100,
+					'next_step' => 'complete',
+					),
+				) );
+		}
 
 		foreach ( $wp_invoice_ids as $wp_invoice_id ) {
 			$wp_invoice = new WPI_Invoice();
@@ -181,7 +230,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 			/////////////
 			// Clients //
 			/////////////
-			$clients_tally++;
+			$progress_tally['clients_tally']++;
 			$new_client_id = self::create_client( $wp_invoice );
 
 			//////////////
@@ -189,13 +238,13 @@ class SI_WPInvoice_Import extends SI_Importer {
 			//////////////
 			// Just in case the role wasn't already added
 			add_role( SI_Client::USER_ROLE, self::__( 'Client' ), array( 'read' => true, 'level_0' => true ) );
-			$contacts_tally++;
+			$progress_tally['contacts_tally']++;
 			self::create_contact( $wp_invoice, $new_client_id );
 
 			//////////////
 			// Invoices //
 			//////////////
-			$invoices_tally++;
+			$progress_tally['invoices_tally']++;
 			$new_invoice = self::create_invoice( $wp_invoice, $new_client_id );
 
 			//////////////
@@ -203,61 +252,62 @@ class SI_WPInvoice_Import extends SI_Importer {
 			//////////////
 			if ( ! empty( $wp_invoice['log'] ) ) {
 				foreach ( $wp_invoice['log'] as $key => $event ) {
-					if ( $event['attribute'] == 'balance' ) {
-						$payments_tally++;
+					if ( 'balance' === $event['attribute'] ) {
+						$progress_tally['payments_tally']++;
 						self::create_invoice_payment( $event, $new_invoice );
 					}
 				}
 			}
 
 			if ( self::delete_wpinvoice_data() ) {
-				printf( 'Deleting WP-Invoice: %s', esc_attr( $wp_invoice['post_title'] ) );
-				//wp_delete_post( $invoice_id, true );
+				// printf( 'Deleting WP-Invoice: %s', esc_attr( $wp_invoice['post_title'] ) );
+				// wp_delete_post( $wp_invoice_id, true );
 			}
 		}
 
-		//////////////
-		// All done //
-		//////////////
-		// Completed previously
+		update_option( self::PROGRESS_OPTION, $progress + 1 );
+		update_option( self::PROGRESS_OPTION.'tally', $progress_tally );
+
 		self::return_progress( array(
 			'authentication' => array(
-				'message' => sprintf( self::__( 'Preparing to import from %s invoices...' ), $total_records ),
-				'progress' => 100
-				),
-			'clients' => array(
-				'message' => sprintf( self::__( 'Importing %s clients from %s WP-Invoice records...' ), $clients_tally, $total_records ),
-				'progress' => 100,
-				),
-			'contacts' => array(
-				'message' => sprintf( self::__( 'Importing %s contacts from %s WP-Invoice records...' ), $contacts_tally, $total_records ),
-				'progress' => 100,
-				),
-			'estimates' => array(
-				'message' => self::__( 'No estimates were imported' ),
-				'progress' => 100,
-				),
-			'invoices' => array(
-				'message' => sprintf( self::__( 'Importing %s invoices from %s WP-Invoice records...' ), $invoices_tally, $total_records ),
-				'progress' => 100,
-				),
-			'payments' => array(
-				'message' => sprintf( self::__( 'Importing %s payments from %s WP-Invoice records...' ), $payments_tally, $total_records ),
-				'progress' => 100,
-				'next_step' => 'complete'
-				),
-			) );
+					'message' => sprintf( self::__( 'Preparing to import from %s invoices...' ), $progress_tally['total_records'] ),
+					'progress' => intval( ( $progress_tally['invoices_tally'] / $progress_tally['total_records'] ) * 100 ),
+					),
+				'clients' => array(
+					'message' => sprintf( self::__( 'Importing %s clients from %s WP-Invoice records...' ), $progress_tally['clients_tally'], $progress_tally['total_records'] ),
+					'progress' => intval( ( $progress_tally['invoices_tally'] / $progress_tally['total_records'] ) * 100 ),
+					),
+				'contacts' => array(
+					'message' => sprintf( self::__( 'Importing %s contacts from %s WP-Invoice records...' ), $progress_tally['contacts_tally'], $progress_tally['total_records'] ),
+					'progress' => intval( ( $progress_tally['invoices_tally'] / $progress_tally['total_records'] ) * 100 ),
+					),
+				'estimates' => array(
+					'message' => self::__( 'No estimates were imported' ),
+					'progress' => intval( ( $progress_tally['invoices_tally'] / $progress_tally['total_records'] ) * 100 ),
+					),
+				'invoices' => array(
+					'message' => sprintf( self::__( 'Importing %s invoices from %s WP-Invoice records...' ), $progress_tally['invoices_tally'], $progress_tally['total_records'] ),
+					'progress' => intval( ( $progress_tally['invoices_tally'] / $progress_tally['total_records'] ) * 100 ),
+					),
+				'payments' => array(
+					'message' => sprintf( self::__( 'Importing %s payments from %s WP-Invoice records...' ), $progress_tally['payments_tally'], $progress_tally['total_records'] ),
+					'progress' => intval( ( $progress_tally['invoices_tally'] / $progress_tally['total_records'] ) * 100 ),
+					'next_step' => 'invoices',
+					),
+				) );
 
 	}
 
 	public static function create_client( $wp_invoice = array() ) {
 		$wp_invoice_user_data = $wp_invoice['user_data'];
 
-		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice_user_data['ID'] ) );
-		// Don't create a duplicate if this was already imported.
-		if ( ! empty( $possible_dups ) ) {
-			do_action( 'si_error', 'Client imported already', $wp_invoice_user_data['ID'] );
-			return $possible_dups[0];
+		if ( isset( $wp_invoice_user_data['ID'] ) ) {
+			$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::WPINVOICE_ID => $wp_invoice_user_data['ID'] ) );
+			// Don't create a duplicate if this was already imported.
+			if ( ! empty( $possible_dups ) ) {
+				do_action( 'si_error', 'Client imported already', $wp_invoice_user_data['ID'] );
+				return $possible_dups[0];
+			}
 		}
 
 		// args to create new client

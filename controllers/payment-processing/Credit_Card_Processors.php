@@ -253,8 +253,8 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	protected function payment_fields( $checkout = null ) {
 		$fields = self::default_credit_fields( $checkout );
 		foreach ( array_keys( $fields ) as $key ) {
-			if ( isset( $this->cc_cache[$key] ) ) {
-				$fields[$key]['default'] = $this->cc_cache[$key];
+			if ( isset( $this->cc_cache[ $key ] ) ) {
+				$fields[ $key ]['default'] = $this->cc_cache[ $key ];
 			}
 		}
 		$fields = apply_filters( 'sa_credit_fields', $fields, $checkout );
@@ -268,10 +268,11 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @return
 	 */
 	public function payments_pane( SI_Checkouts $checkout ) {
+		do_action( 'si_cc_payments_pane' );
 		self::load_view( 'templates/checkout/credit-card/form', array(
 				'billing_fields' => $this->payment_billing_fields( $checkout ),
 				'cc_fields' => $this->payment_fields( $checkout ),
-				'checkout' => $checkout
+				'checkout' => $checkout,
 			), true );
 	}
 

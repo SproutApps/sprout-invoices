@@ -2,13 +2,13 @@
 
 /**
  * Invoice Model
- * 
+ *
  *
  * @package Sprout_Invoices
  * @subpackage Invoice
  */
 class SI_Invoice extends SI_Post_Type {
-	
+
 	const POST_TYPE = 'sa_invoice';
 	const REWRITE_SLUG = 'sprout-invoice';
 
@@ -70,19 +70,19 @@ class SI_Invoice extends SI_Post_Type {
 
 	public static function get_statuses() {
 		$statuses = array(
-			self::STATUS_TEMP => self::__('Draft'),
-			self::STATUS_PENDING => self::__('Pending'),
-			self::STATUS_FUTURE => self::__('Scheduled'),
-			self::STATUS_PARTIAL => self::__('Outstanding Balance'),
-			self::STATUS_PAID => self::__('Paid'),
-			self::STATUS_WO => self::__('Written Off'),
+			self::STATUS_TEMP => self::__( 'Draft' ),
+			self::STATUS_PENDING => self::__( 'Pending' ),
+			self::STATUS_FUTURE => self::__( 'Scheduled' ),
+			self::STATUS_PARTIAL => self::__( 'Outstanding Balance' ),
+			self::STATUS_PAID => self::__( 'Paid' ),
+			self::STATUS_WO => self::__( 'Written Off' ),
 		);
 		return $statuses;
 	}
 
 	/**
 	 * Post statuses for payments
-	 * @return  
+	 * @return
 	 */
 	private static function register_post_statuses() {
 		$statuses = self::get_statuses();
@@ -92,23 +92,23 @@ class SI_Invoice extends SI_Post_Type {
 				'public' => true,
 				'exclude_from_search' => false,
 				'show_in_admin_all_list' => true,
-          		'show_in_admin_status_list' => true,
-          		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
+		  		'show_in_admin_status_list' => true,
+		  		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
 			));
 		}
 	}
 
 	/**
 	 * Is the current query for an invoice(s)
-	 * @param  object  $query 
-	 * @return boolean        
+	 * @param  object  $query
+	 * @return boolean
 	 */
 	public static function is_invoice_query( WP_Query $query = null ) {
 		if ( is_null( $query ) ) {
 			global $wp_query;
 			$query = $wp_query;
 		}
-		if ( !isset( $query->query_vars['post_type'] ) ) {
+		if ( ! isset( $query->query_vars['post_type'] ) ) {
 			return false; // normal posts query
 		}
 		if ( $query->query_vars['post_type'] == self::POST_TYPE ) {
@@ -132,24 +132,24 @@ class SI_Invoice extends SI_Post_Type {
 	 * @return Sprout_Invoices_Invoice
 	 */
 	public static function get_instance( $id = 0 ) {
-		if ( !$id )
-			return null;
-		
-		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
-			self::$instances[$id] = new self( $id );
+		if ( ! $id ) {
+			return null; }
 
-		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return null;
-		
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return null;
-		
+		if ( ! isset( self::$instances[$id] ) || ! self::$instances[$id] instanceof self ) {
+			self::$instances[$id] = new self( $id ); }
+
+		if ( ! isset( self::$instances[$id]->post->post_type ) ) {
+			return null; }
+
+		if ( self::$instances[$id]->post->post_type != self::POST_TYPE ) {
+			return null; }
+
 		return self::$instances[$id];
 	}
 
 	public static function create_invoice( $passed_args, $status = '' ) {
 		$defaults = array(
-			'subject' => sprintf( self::__('New Invoice: %s'), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'subject' => sprintf( self::__( 'New Invoice: %s' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'user_id' => '',
 			'invoice_id' => '',
 			'estimate_id' => '',
@@ -208,16 +208,16 @@ class SI_Invoice extends SI_Post_Type {
 		$invoice->set_tax2( $args['tax2'] );
 		$invoice->set_notes( $args['notes'] );
 		$invoice->set_terms( $args['terms'] );
-		
-		$issue_date = ( is_numeric( $args['issue_date'] ) ) ? $args['issue_date'] : strtotime( $args['issue_date'] ) ;
+
+		$issue_date = ( is_numeric( $args['issue_date'] ) ) ? $args['issue_date'] : strtotime( $args['issue_date'] );
 		$invoice->set_issue_date( $issue_date );
-		
-		$due_date = ( is_numeric( $args['due_date'] ) ) ? $args['due_date'] : strtotime( $args['due_date'] ) ;
+
+		$due_date = ( is_numeric( $args['due_date'] ) ) ? $args['due_date'] : strtotime( $args['due_date'] );
 		$invoice->set_due_date( $due_date );
-		
-		$expiration_date = ( is_numeric( $args['expiration_date'] ) ) ? $args['expiration_date'] : strtotime( $args['expiration_date'] ) ;
+
+		$expiration_date = ( is_numeric( $args['expiration_date'] ) ) ? $args['expiration_date'] : strtotime( $args['expiration_date'] );
 		$invoice->set_expiration_date( $expiration_date );
-		
+
 		$invoice->set_line_items( $args['line_items'] );
 
 		do_action( 'sa_new_invoice', $invoice, $args );
@@ -235,13 +235,13 @@ class SI_Invoice extends SI_Post_Type {
 	public function set_status( $status ) {
 		// Don't do anything if there's no true change
 		$current_status = $this->get_status();
-		if ( $current_status == $status )
-			return;
+		if ( $current_status == $status ) {
+			return; }
 
 		// confirm the status exists
-		if ( !in_array( $status, array_keys( self::get_statuses() ) ) )
-			return;
-		
+		if ( ! in_array( $status, array_keys( self::get_statuses() ) ) ) {
+			return; }
+
 		$this->post->post_status = $status;
 		$this->save_post();
 		do_action( 'si_invoice_status_updated', $this, $status, $current_status );
@@ -281,12 +281,12 @@ class SI_Invoice extends SI_Post_Type {
 
 	/**
 	 * Get the remaining invoice balance
-	 * @return  
+	 * @return
 	 */
 	public function get_balance() {
 		$total = $this->get_calculated_total( false );
 		$paid = $this->get_payments_total( false );
-		$balance = floatval( $total-$paid );
+		$balance = floatval( $total -$paid );
 		if ( $this->get_status() === self::STATUS_PENDING ) {
 			if ( round( $balance, 2 ) < 0.01 ) {
 				$this->set_as_paid();
@@ -316,7 +316,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	/**
 	 * Get the submission fields
-	 * @return array 
+	 * @return array
 	 */
 	public function get_submission_fields() {
 		return $this->get_post_meta( self::$meta_keys['submission'] );
@@ -324,7 +324,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	/**
 	 * Save the submitted fields
-	 * @param array $fields 
+	 * @param array $fields
 	 */
 	public function set_submission_fields( $fields = array() ) {
 		$this->save_post_meta( array(
@@ -338,7 +338,7 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 	public function get_issue_date() {
 		$date = (int)$this->get_post_meta( self::$meta_keys['issue_date'] );
-		if ( !$date ) {
+		if ( ! $date ) {
 			$date = strtotime( $this->post->post_date );
 		};
 		return $date;
@@ -375,9 +375,9 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 	public function get_due_date() {
 		$date = (int)$this->get_post_meta( self::$meta_keys['due_date'] );
-		if ( !$date ) {
+		if ( ! $date ) {
 			$days = apply_filters( 'si_default_due_in_days', 14 );
-			$date = strtotime( $this->post->post_date )+(60*60*24*$days);
+			$date = strtotime( $this->post->post_date ) + (60 * 60 * 24 * $days);
 		};
 		return $date;
 	}
@@ -394,8 +394,8 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 	public function get_expiration_date() {
 		$date = (int)$this->get_post_meta( self::$meta_keys['expiration_date'] );
-		if ( !$date ) {
-			$date = strtotime( $this->post->post_date )+(60*60*24*30);
+		if ( ! $date ) {
+			$date = strtotime( $this->post->post_date ) + (60 * 60 * 24 * 30);
 		};
 		return $date;
 	}
@@ -426,8 +426,8 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 
 	public function get_client() {
-		if ( !$this->get_client_id() ) {
-			return new WP_Error( 'no_client', self::__('No client associated with this invoice.') );
+		if ( ! $this->get_client_id() ) {
+			return new WP_Error( 'no_client', self::__( 'No client associated with this invoice.' ) );
 		}
 		return SI_Client::get_instance( $this->get_client_id() );
 	}
@@ -449,7 +449,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	public function get_invoice_id() {
 		$id = $this->get_post_meta( self::$meta_keys['invoice_id'] );
-		if ( !$id ) {
+		if ( ! $id ) {
 			$id = $this->get_id();
 			$this->set_invoice_id( $id );
 		}
@@ -484,7 +484,7 @@ class SI_Invoice extends SI_Post_Type {
 		}
 		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$invoice_total = $subtotal+$tax_total+$tax2_total;
+		$invoice_total = $subtotal + $tax_total + $tax2_total;
 		$discount = $invoice_total * ( $this->get_discount() / 100 );
 		return $discount;
 	}
@@ -560,7 +560,7 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public function get_project() {
-		if ( class_exists( 'SI_Project' ) ) {		
+		if ( class_exists( 'SI_Project' ) ) {
 			$project_id = $this->get_project_id();
 			$project = SI_Project::get_instance( $project_id );
 			return $project;
@@ -585,22 +585,22 @@ class SI_Invoice extends SI_Post_Type {
 
 	/**
 	 * Calculated total includes any taxes and discounts.
-	 * @return  
+	 * @return
 	 */
 	public function get_calculated_total( $check_balance = true ) {
 		if ( $check_balance ) {
 		 	// allow for the status to be updated on the fly.
 			// SI_Invoices::change_status_after_payment attempts to do this, however
 			// sometimes there's a delay/cache
-			$this->get_balance(); 
-		} 
+			$this->get_balance();
+		}
 		$subtotal = $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
 		}
 		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$pre_disc_total = $subtotal+$tax_total+$tax2_total;
+		$pre_disc_total = $subtotal + $tax_total + $tax2_total;
 		$total = $pre_disc_total * ( ( 100 - $this->get_discount() ) / 100 );
 		return $total;
 	}
@@ -616,11 +616,11 @@ class SI_Invoice extends SI_Post_Type {
 	public function get_subtotal() {
 		$subtotal = 0;
 		$line_items = $this->get_line_items();
-		if ( !empty( $line_items ) ) {
+		if ( ! empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
 				if ( isset( $data['tax'] ) ) {
 					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
-					$calc = ( $data['rate']*$data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
+					$calc = ( $data['rate'] * $data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
 					$subtotal += apply_filters( 'si_line_item_total', $calc, $data );
 				}
 			}
@@ -678,7 +678,7 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 	public function get_line_items() {
 		$line_items = $this->get_post_meta( self::$meta_keys['line_items'] );
-		if ( !is_array( $line_items ) ) {
+		if ( ! is_array( $line_items ) ) {
 			$line_items = array();
 		}
 		return $line_items;
@@ -697,9 +697,9 @@ class SI_Invoice extends SI_Post_Type {
 
 	public function get_currency() {
 		$code = $this->get_post_meta( self::$meta_keys['currency'] );
-		if ( !$code ) {
+		if ( ! $code ) {
 			$code = 'USD';
-			$this->set_currency($code);
+			$this->set_currency( $code );
 		}
 		return $code;
 	}
@@ -740,10 +740,10 @@ class SI_Invoice extends SI_Post_Type {
 		$payment_total = 0;
 		foreach ( $payment_ids as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
-			if ( !$pending && $payment->get_status() == SI_Payment::STATUS_PENDING ) {
+			if ( ! $pending && $payment->get_status() == SI_Payment::STATUS_PENDING ) {
 				continue;
 			}
-			if ( !in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
+			if ( ! in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
 				$payment_total += $payment->get_amount();
 			}
 		}
@@ -753,13 +753,13 @@ class SI_Invoice extends SI_Post_Type {
 
 	/**
 	 * Get the invoices based on an estimate id
-	 * @param  integer $estimate_id 
-	 * @return array           
+	 * @param  integer $estimate_id
+	 * @return array
 	 */
 	public static function get_invoices_by_estimate_id( $estimate_id = 0 ) {
 		$invoice_ids = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['estimate_id'] => $estimate_id ) );
-		return $invoice_ids;		
-	} 
+		return $invoice_ids;
+	}
 
 	public function get_history( $type = '' ) {
 		return SI_Record::get_records_by_association( $this->ID );

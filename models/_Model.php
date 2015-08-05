@@ -33,10 +33,10 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	protected static function register_post_type( $post_type, $singular = '', $plural = '', $args = array() ) {
 		self::add_register_post_types_hooks();
 
-		if ( !$singular ) {
+		if ( ! $singular ) {
 			$singular = $post_type;
 		}
-		if ( !$plural ) {
+		if ( ! $plural ) {
 			$plural = $singular.'s';
 		}
 		$defaults = array(
@@ -88,7 +88,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 */
 	private static function add_register_post_types_hooks() {
 		static $registered = false; // only do it once
-		if ( !$registered ) {
+		if ( ! $registered ) {
 			$registered = true;
 			add_action( 'init', array( __CLASS__, 'register_post_types' ) );
 			add_action( 'template_redirect', array( __CLASS__, 'context_fixer' ) );
@@ -158,7 +158,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 */
 	private static function post_type_messages( $name, $args ) {
 		global $post, $post_id;
-		switch ($name) {
+		switch ( $name ) {
 			default:
 				$name = str_replace( 'sa_', '', $name );
 				break;
@@ -166,33 +166,33 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 		if ( $args['public'] ) {
 			$messages = array(
 				0 => '', // Unused. Messages start at index 1.
-				1 => sprintf( self::__('%s updated. <a href="%s">View %s</a>'), ucfirst( $name ), esc_url( get_permalink($post_id) ), $name),
-				2 => self::__('Custom field updated.'),
-				3 => self::__('Custom field deleted.'),
-				4 => sprintf( self::__('%s updated.'), ucfirst( $name ) ),
+				1 => sprintf( self::__( '%s updated. <a href="%s">View %s</a>' ), ucfirst( $name ), esc_url( get_permalink( $post_id ) ), $name ),
+				2 => self::__( 'Custom field updated.' ),
+				3 => self::__( 'Custom field deleted.' ),
+				4 => sprintf( self::__( '%s updated.' ), ucfirst( $name ) ),
 				/* translators: %s: date and time of the revision */
-				5 => isset($_GET['revision']) ? sprintf( self::__('%s restored to revision from %s'), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-				6 => sprintf( self::__('%s published. <a href="%s">View %s</a>'), ucfirst( $name ), esc_url( get_permalink($post_id) ), $name ),
-				7 => sprintf( self::__('%s saved.'), ucfirst( $name ) ),
-				8 => sprintf( self::__('%s submitted. <a target="_blank" href="%s">Preview %s</a>'), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_id) ) ), $name ),
-				9 => sprintf( self::__('%s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %s</a>'), $name, date_i18n( self::__( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_id) ), $name ),
-				10 => sprintf( self::__('%s draft updated. <a target="_blank" href="%s">Preview %s</a>'), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_id) ) ), $name ),
+				5 => isset($_GET['revision']) ? sprintf( self::__( '%s restored to revision from %s' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				6 => sprintf( self::__( '%s published. <a href="%s">View %s</a>' ), ucfirst( $name ), esc_url( get_permalink( $post_id ) ), $name ),
+				7 => sprintf( self::__( '%s saved.' ), ucfirst( $name ) ),
+				8 => sprintf( self::__( '%s submitted. <a target="_blank" href="%s">Preview %s</a>' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
+				9 => sprintf( self::__( '%s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %s</a>' ), $name, date_i18n( self::__( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), $name ),
+				10 => sprintf( self::__( '%s draft updated. <a target="_blank" href="%s">Preview %s</a>' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
 			);
 		}
 		else { // post types that are not public should not have links to a post
 			$messages = array(
 				0 => '', // Unused. Messages start at index 1.
-				1 => sprintf( self::__('%s updated.'), ucfirst( $name ) ),
-				2 => self::__('Custom field updated.'),
-				3 => self::__('Custom field deleted.'),
-				4 => sprintf( self::__('%s updated.'), ucfirst( $name ) ),
+				1 => sprintf( self::__( '%s updated.' ), ucfirst( $name ) ),
+				2 => self::__( 'Custom field updated.' ),
+				3 => self::__( 'Custom field deleted.' ),
+				4 => sprintf( self::__( '%s updated.' ), ucfirst( $name ) ),
 				/* translators: %s: date and time of the revision */
-				5 => isset($_GET['revision']) ? sprintf( self::__('%s restored to revision from %s'), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-				6 => sprintf( self::__('%s published.'), ucfirst( $name ) ),
-				7 => sprintf( self::__('%s saved.'), ucfirst( $name ) ),
-				8 => sprintf( self::__('%s submitted.'), ucfirst( $name ) ),
-				9 => sprintf( self::__('%s scheduled for: <strong>%1$s</strong>.'), ucfirst( $name ), date_i18n( self::__( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ) ),
-				10 => sprintf( self::__('%s draft updated.'), ucfirst( $name ) ),
+				5 => isset($_GET['revision']) ? sprintf( self::__( '%s restored to revision from %s' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				6 => sprintf( self::__( '%s published.' ), ucfirst( $name ) ),
+				7 => sprintf( self::__( '%s saved.' ), ucfirst( $name ) ),
+				8 => sprintf( self::__( '%s submitted.' ), ucfirst( $name ) ),
+				9 => sprintf( self::__( '%s scheduled for: <strong>%1$s</strong>.' ), ucfirst( $name ), date_i18n( self::__( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ) ),
+				10 => sprintf( self::__( '%s draft updated.' ), ucfirst( $name ) ),
 			);
 		}
 
@@ -213,10 +213,10 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	protected static function register_taxonomy( $taxonomy, $post_types, $singular = '', $plural = '', $args = array() ) {
 		self::add_register_taxonomies_hooks();
 
-		if ( !$singular ) {
+		if ( ! $singular ) {
 			$singular = $taxonomy;
 		}
-		if ( !$plural ) {
+		if ( ! $plural ) {
 			$plural = $singular.'s';
 		}
 		$defaults = array(
@@ -261,7 +261,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 */
 	private static function add_register_taxonomies_hooks() {
 		static $registered = false; // only do it once
-		if ( !$registered ) {
+		if ( ! $registered ) {
 			$registered = true;
 			add_action( 'init', array( __CLASS__, 'register_taxonomies' ) );
 		}
@@ -418,7 +418,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @return string
 	 */
 	public function get_title() {
-		return str_replace( __('Auto Draft'), '', $this->post->post_title);
+		return str_replace( __( 'Auto Draft' ), '', $this->post->post_title );
 	}
 
 
@@ -533,14 +533,14 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 
 	/**
 	 * Add a file as a post attachment.
-	 * @param array $files 
-	 * @param string $key   
+	 * @param array $files
+	 * @param string $key
 	 */
 	public function set_attachement( $files, $key = '' ) {
-		if ( function_exists('ga_load_wp_media') ) { // Allow for easy overrides.
+		if ( function_exists( 'ga_load_wp_media' ) ) { // Allow for easy overrides.
 			ga_load_wp_media();
 		}
-		elseif ( !function_exists( 'wp_generate_attachment_metadata' ) ) {
+		elseif ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
 			require_once ABSPATH . 'wp-admin' . '/includes/image.php';
 			require_once ABSPATH . 'wp-admin' . '/includes/file.php';
 			require_once ABSPATH . 'wp-admin' . '/includes/media.php';
@@ -568,16 +568,16 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @return
 	 */
 	public static function trim_input( $value ) {
-		if ( is_object( $value ) )
-			return $value;
-		
+		if ( is_object( $value ) ) {
+			return $value; }
+
 		if ( is_array( $value ) ) {
 			$return = array();
 			foreach ( $value as $k => $v ) {
 				if ( is_object( $v ) ) {
 					$return[$k] = $v;
 					continue;
-				} 
+				}
 				$return[$k] = is_array( $v ) ? self::trim_input( $v ) : trim( $v );
 			}
 			return $return;
@@ -609,13 +609,12 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 					return $cache[$cache_index];
 				}
 			}
-			
 		}
 
 		// Optionally bypass the standard db call
 		$result = apply_filters( 'si_find_by_meta', null, $post_type, $meta );
 
-		if ( !is_array( $result ) ) {
+		if ( ! is_array( $result ) ) {
 			$args = array(
 				'post_type' => $post_type,
 				'post_status' => 'any',
@@ -624,7 +623,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 				'si_bypass_filter' => true
 			);
 
-			if ( !empty( $meta ) ) {
+			if ( ! empty( $meta ) ) {
 				foreach ( $meta as $key => $value ) {
 					$args['meta_query'][] = array(
 						'key' => $key,
