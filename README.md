@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.0.1**
+
+* Fix: Javascript error on some admin pages
+
 **8.0**
 
 Read more all about the release at [Sprout Apps](https://sproutapps.co/news/rocket-8-0-brings-a-new-invoice-line-item-management-and-more/)

@@ -1,3 +1,7 @@
+= 8.0.1 =
+
+* Fix: Javascript error on some admin pages
+
 = 8.0 =
 
 * New: Line Item Types and new management

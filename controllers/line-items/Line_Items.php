@@ -372,7 +372,12 @@ class SI_Line_Items extends SI_Controller {
 	}
 
 	public static function admin_enqueue() {
-		wp_enqueue_script( 'si_line_items' );
+		// doc admin templates
+		$screen = get_current_screen();
+		$screen_post_type = str_replace( 'edit-', '', $screen->id );
+		if ( in_array( $screen_post_type, array( SI_Estimate::POST_TYPE, SI_Invoice::POST_TYPE ) ) ) {
+			wp_enqueue_script( 'si_line_items' );
+		}
 	}
 
 	//////////
