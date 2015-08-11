@@ -596,70 +596,75 @@ class SI_CSV_Import extends SI_Importer {
 	}
 
 	public static function create_estimate( $estimate = array() ) {
-		if ( isset( $invoice['Description'] ) && $invoice['Description'] != '' ) {
-			$subject = $invoice['Description'];
+		if ( isset( $estimate['Description'] ) && $estimate['Description'] != '' ) {
+			$subject = $estimate['Description'];
 		}
-		elseif ( isset( $invoice['Client'] ) && $invoice['Client'] != '' ) {
-			$subject = $invoice['Client'] . ' #' . $invoice['Estimate ID'];
+		elseif ( isset( $estimate['Client'] ) && $estimate['Client'] != '' ) {
+			$subject = $estimate['Client'] . ' #' . $estimate['Estimate ID'];
 		}
 		else {
-			$subject = '#' . $invoice['Estimate ID'];
+			$subject = '#' . $estimate['Estimate ID'];
 		}
 		$args = array(
 			'subject' => $subject,
 		);
-		$new_estimate_id = SI_Estimate::create_estimate( $args, SI_Estimate::STATUS_TEMP );
-		update_post_meta( $new_estimate_id, self::CSV_ID, $estimate['Estimate ID'] );
-
-		$est = SI_Estimate::get_instance( $new_estimate_id );
-
 		// Attempt to find matching client
 		if ( isset( $estimate['Company'] ) ) {
 			global $wpdb;
 			$client_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s", esc_sql( $estimate['Company'] ), SI_Client::POST_TYPE ) );
 			// Get client and confirm it's validity
-			if ( is_array( $client_ids ) ) {
+			if ( is_array( $client_ids ) && ! empty( $client_ids ) ) {
 				$client = SI_Client::get_instance( $client_ids[0] );
-				$inv->set_client_id( $client->get_id() );
+				$args['client_id'] = $client->get_id();
 			}
 		}
 
 		if ( isset( $estimate['Estimate ID'] ) ) {
-			$est->set_estimate_id( $estimate['Estimate ID'] );
+			$args['invoice_id'] = $estimate['Estimate ID'];
 		}
 		if ( isset( $estimate['Total'] ) ) {
-			$est->set_total( $estimate['Total'] );
+			$args['total'] = $estimate['Total'];
 		}
 		if ( isset( $estimate['Currency Code'] ) ) {
-			$est->set_currency( $estimate['Currency Code'] );
+			$args['currency'] = $estimate['Currency Code'];
 		}
 		if ( isset( $estimate['PO Number'] ) ) {
-			$est->set_po_number( $estimate['PO Number'] );
+			$args['po_number'] = $estimate['PO Number'];
 		}
 		if ( isset( $estimate['Discount %'] ) ) {
-			$est->set_discount( $estimate['Discount %'] );
+			$args['discount'] = $estimate['Discount %'];
 		}
 		if ( isset( $estimate['Tax 1 %'] ) ) {
-			$est->set_tax( $estimate['Tax 1 %'] );
+			$args['tax'] = $estimate['Tax 1 %'];
 		}
 		if ( isset( $estimate['Tax 2 %'] ) ) {
-			$est->set_tax2( $estimate['Tax 2 %'] );
+			$args['tax2'] = $estimate['Tax 2 %'];
 		}
 		if ( isset( $estimate['Notes'] ) ) {
-			$est->set_notes( $estimate['Notes'] );
+			$args['notes'] = $estimate['Notes'];
 		}
 		if ( isset( $estimate['Terms'] ) ) {
-			$est->set_terms( $estimate['Terms'] );
+			$args['terms'] = $estimate['Terms'];
 		}
 		if ( isset( $estimate['Estimate Date'] ) ) {
-			$est->set_issue_date( strtotime( $estimate['Estimate Date'] ) );
+			$args['issue_date'] = strtotime( $estimate['Estimate Date'] );
+		}
+		if ( isset( $estimate['Due Date'] ) ) {
+			$args['due_date'] = strtotime( $estimate['Due Date'] );
 		}
 
-		$line_items = self::build_line_items( $estimate );
-		$est->set_line_items( $line_items );
+		$line_items = self::build_line_items( $invoice );
+		$args['line_items'] = $line_items;
+
+		$new_estimate_id = SI_Estimate::create_estimate( $args, SI_Estimate::STATUS_TEMP );
+		update_post_meta( $new_estimate_id, self::CSV_ID, $estimate['Estimate ID'] );
+
+		$est = SI_Estimate::get_instance( $new_estimate_id );
 
 		// post date
-		$est->set_post_date( date( 'Y-m-d H:i:s', strtotime( $estimate['Estimate Date'] ) ) );
+		if ( isset( $estimate['Estimate Date'] ) ) {
+			$est->set_post_date( date( 'Y-m-d H:i:s', strtotime( $estimate['Estimate Date'] ) ) );
+		}
 
 		return $est;
 	}
@@ -678,11 +683,6 @@ class SI_CSV_Import extends SI_Importer {
 		$args = array(
 			'subject' => $subject,
 		);
-		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_TEMP );
-		update_post_meta( $new_invoice_id, self::CSV_ID, $invoice['Invoice ID'] );
-
-		$inv = SI_Invoice::get_instance( $new_invoice_id );
-
 		// Attempt to find matching client
 		if ( isset( $invoice['Company'] ) ) {
 			global $wpdb;
@@ -690,49 +690,56 @@ class SI_CSV_Import extends SI_Importer {
 			// Get client and confirm it's validity
 			if ( is_array( $client_ids ) && ! empty( $client_ids ) ) {
 				$client = SI_Client::get_instance( $client_ids[0] );
-				$inv->set_client_id( $client->get_id() );
+				$args['client_id'] = $client->get_id();
 			}
 		}
 
 		if ( isset( $invoice['Invoice ID'] ) ) {
-			$inv->set_invoice_id( $invoice['Invoice ID'] );
+			$args['invoice_id'] = $invoice['Invoice ID'];
 		}
 		if ( isset( $invoice['Total'] ) ) {
-			$inv->set_total( $invoice['Total'] );
+			$args['total'] = $invoice['Total'];
 		}
 		if ( isset( $invoice['Currency Code'] ) ) {
-			$inv->set_currency( $invoice['Currency Code'] );
+			$args['currency'] = $invoice['Currency Code'];
 		}
 		if ( isset( $invoice['PO Number'] ) ) {
-			$inv->set_po_number( $invoice['PO Number'] );
+			$args['po_number'] = $invoice['PO Number'];
 		}
 		if ( isset( $invoice['Discount %'] ) ) {
-			$inv->set_discount( $invoice['Discount %'] );
+			$args['discount'] = $invoice['Discount %'];
 		}
 		if ( isset( $invoice['Tax 1 %'] ) ) {
-			$inv->set_tax( $invoice['Tax 1 %'] );
+			$args['tax'] = $invoice['Tax 1 %'];
 		}
 		if ( isset( $invoice['Tax 2 %'] ) ) {
-			$inv->set_tax2( $invoice['Tax 2 %'] );
+			$args['tax2'] = $invoice['Tax 2 %'];
 		}
 		if ( isset( $invoice['Notes'] ) ) {
-			$inv->set_notes( $invoice['Notes'] );
+			$args['notes'] = $invoice['Notes'];
 		}
 		if ( isset( $invoice['Terms'] ) ) {
-			$inv->set_terms( $invoice['Terms'] );
+			$args['terms'] = $invoice['Terms'];
 		}
 		if ( isset( $invoice['Invoice Date'] ) ) {
-			$inv->set_issue_date( strtotime( $invoice['Invoice Date'] ) );
+			$args['issue_date'] = strtotime( $invoice['Invoice Date'] );
 		}
 		if ( isset( $invoice['Due Date'] ) ) {
-			$inv->set_due_date( strtotime( $invoice['Due Date'] ) );
+			$args['due_date'] = strtotime( $invoice['Due Date'] );
 		}
 
 		$line_items = self::build_line_items( $invoice );
-		$inv->set_line_items( $line_items );
+		$args['line_items'] = $line_items;
+
+		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_TEMP );
+		update_post_meta( $new_invoice_id, self::CSV_ID, $invoice['Invoice ID'] );
+
+		$inv = SI_Invoice::get_instance( $new_invoice_id );
 
 		// post date
-		$inv->set_post_date( date( 'Y-m-d H:i:s', strtotime( $invoice['Invoice Date'] ) ) );
+		if ( isset( $invoice['Invoice Date'] ) ) {
+			$inv->set_post_date( date( 'Y-m-d H:i:s', strtotime( $invoice['Invoice Date'] ) ) );
+		}
 
 		return $inv;
 	}

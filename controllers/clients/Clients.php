@@ -664,7 +664,7 @@ class SI_Clients extends SI_Controller {
 			'type' => 'select',
 			'default' => $money_format,
 			'options' => $required,
-			'options' => array_flip( self::$locales ),
+			'options' => array_flip( SI_Locales::$locales ),
 			'attributes' => array( 'class' => 'select2' ),
 			'description' => sprintf( self::__( 'Current format: %1$s. The default money formatting (%2$s) can be overridden for all client estimates and invoices here.' ), sa_get_formatted_money( rand( 11000, 9999999 ), get_the_id() ), '<code>'.$si_localeconv['int_curr_symbol'].'</code>' )
 		);

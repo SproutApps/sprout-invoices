@@ -90,8 +90,9 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
-**8.0.1**
+**8.0.2**
 
+* Fix: Javascript error when adding new users on clients page (select2 incompatibility)
 * Fix: Javascript error on some admin pages
 
 **8.0**

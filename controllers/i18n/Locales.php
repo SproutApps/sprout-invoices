@@ -10,7 +10,7 @@
  */
 class SI_Locales extends SI_Controller {
 
-	protected static $locales = array(
+	public static $locales = array(
 		'Default' => '',
 		'Albanian (Albania)' => 'sq_AL',
 		'Albanian' => 'sq',

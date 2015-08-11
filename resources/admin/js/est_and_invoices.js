@@ -483,9 +483,10 @@
 		 * Manage users for client list
 		 */
 		$('#associated_users').live('change', function(e) {
-			var $user_id = $(this).select2('data').id,
-				$user_name = $(this).select2('data').text,
+			var $data = $(this).select2('data')[0],
 				$option = $(this).find("option:selected"),
+				$user_id = $data.id,
+				$user_name = $data.text,
 				$edit_url = $option.data('url'),
 				$dl = $('#associated_users_list');
 
