@@ -3,7 +3,7 @@
 /**
  * Load the SI application
  * (function called at the bottom of this page)
- * 
+ *
  * @package Sprout_Invoices
  * @return void
  */
@@ -38,6 +38,10 @@ function sprout_invoices_load() {
 	// Premium models
 	require_once SI_PATH.'/models/Project.php';
 
+	// i18n
+	require_once SI_PATH.'/controllers/i18n/Countries_States.php';
+	require_once SI_PATH.'/controllers/i18n/Locales.php';
+
 	do_action( 'si_require_model_classes' );
 
 	/////////////////
@@ -47,7 +51,7 @@ function sprout_invoices_load() {
 	// settings
 	require_once SI_PATH.'/controllers/admin/Settings.php';
 
-	if ( !class_exists( 'SA_Settings_API' ) ) {
+	if ( ! class_exists( 'SA_Settings_API' ) ) {
 		require_once SI_PATH.'/controllers/admin/Settings_API.php';
 	}
 
@@ -57,7 +61,7 @@ function sprout_invoices_load() {
 
 	// json api
 	require_once SI_PATH.'/controllers/api/JSON_API.php';
-	
+
 	// checkouts
 	require_once SI_PATH.'/controllers/checkout/Checkouts.php';
 
@@ -69,24 +73,36 @@ function sprout_invoices_load() {
 
 	// Estimates
 	require_once SI_PATH.'/controllers/estimates/Estimate_Submission.php';
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/estimates/Estimate_Submission_Premium.php' ) ) {
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/estimates/Estimate_Submission_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/estimates/Estimate_Submission_Premium.php';
 	}
 	require_once SI_PATH.'/controllers/estimates/Estimates.php';
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/estimates/Estimates_Premium.php' ) ) {
+	require_once SI_PATH.'/controllers/estimates/Estimates_Admin.php';
+	require_once SI_PATH.'/controllers/estimates/Estimates_Edit.php';
+	require_once SI_PATH.'/controllers/estimates/Estimates_Records.php';
+	require_once SI_PATH.'/controllers/estimates/Estimates_Template.php';
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/estimates/Estimates_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/estimates/Estimates_Premium.php';
 	}
-	
-	// invoices	
+
+	// invoices
 	require_once SI_PATH.'/controllers/invoices/Invoices.php';
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/invoices/Invoices_Premium.php' ) ) {
+	require_once SI_PATH.'/controllers/invoices/Invoices_Admin.php';
+	require_once SI_PATH.'/controllers/invoices/Invoices_Edit.php';
+	require_once SI_PATH.'/controllers/invoices/Invoices_Records.php';
+	require_once SI_PATH.'/controllers/invoices/Invoices_Template.php';
+	require_once SI_PATH.'/controllers/invoices/Invoices_Deposit.php';
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/invoices/Invoices_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/invoices/Invoices_Premium.php';
 	}
+
+	// Line Items
+	require_once SI_PATH.'/controllers/line-items/Line_Items.php';
 
 	// notifications
 	require_once SI_PATH.'/controllers/notifications/Notifications_Control.php';
 	require_once SI_PATH.'/controllers/notifications/Notifications.php';
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/notifications/Notifications_Premium.php' ) ) {
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/notifications/Notifications_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/notifications/Notifications_Premium.php';
 	}
 	require_once SI_PATH.'/controllers/notifications/Notifications_Admin_Table.php';
@@ -97,10 +113,10 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/payment-processing/Offsite_Processors.php';
 
 	// payment processors
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_EC.php' ) ) {
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_EC.php' ) ) {
 		require_once SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_EC.php';
 	}
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_Pro.php' ) ) {
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_Pro.php' ) ) {
 		require_once SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_Pro.php';
 	}
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_Checks.php';
@@ -113,7 +129,7 @@ function sprout_invoices_load() {
 
 	// Projects
 	require_once SI_PATH.'/controllers/projects/Projects.php';
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/projects/Projects_Premium.php' ) ) {
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/projects/Projects_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/projects/Projects_Premium.php';
 	}
 
@@ -124,16 +140,15 @@ function sprout_invoices_load() {
 	// reporting
 	require_once SI_PATH.'/controllers/reporting/Dashboard.php';
 	require_once SI_PATH.'/controllers/reporting/Reporting.php';
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/reporting/Reporting_Premium.php' ) ) {
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/reporting/Reporting_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/reporting/Reporting_Premium.php';
 	}
 	require_once SI_PATH.'/controllers/templating/Templating.php';
 
 	require_once SI_PATH.'/controllers/templating/Customizer.php';
 
-
 	// updates
-	if ( !SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) {
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) {
 		require_once SI_PATH.'/controllers/updates/Updates.php';
 	}
 	if ( file_exists( SI_PATH.'/controllers/updates/Free_License.php' ) ) {
@@ -159,16 +174,19 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/template-tags/clients.php';
 	require_once SI_PATH.'/template-tags/forms.php';
 	require_once SI_PATH.'/template-tags/invoices.php';
+	require_once SI_PATH.'/template-tags/line-items.php';
 	require_once SI_PATH.'/template-tags/projects.php';
 	require_once SI_PATH.'/template-tags/ui.php';
 	require_once SI_PATH.'/template-tags/utility.php';
 	require_once SI_PATH.'/template-tags/docs.php';
 
 	// l18n
-	require_once SI_PATH.'/languages/SI_i18n.php';
+	require_once SI_PATH.'/languages/SI_l10n.php';
 
 	// i18n & l10n
-	SI_i18n::init();
+	SI_l10n::init();
+	SI_Locales::init();
+	SI_Countries_States::init();
 
 	///////////////////
 	// init() models //
@@ -193,24 +211,24 @@ function sprout_invoices_load() {
 	SA_Settings_API::init();
 	SI_Templating_API::init();
 	SI_Customizer::init();
-	
+
 	SI_Admin_Capabilities::init();
-	
+
 	// updates
-	if ( !SI_FREE_TEST && class_exists( 'SI_Updates' ) ) {
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Updates' ) ) {
 		SI_Updates::init();
 	}
 	if ( class_exists( 'SI_Free_License' ) ) {
 		SI_Free_License::init();
 	}
-	
+
 	// api
 	SI_JSON_API::init();
 
 	// reports
 	SI_Dashboard::init();
 	SI_Reporting::init();
-	if ( !SI_FREE_TEST && class_exists( 'SI_Reporting_Premium' ) ) {
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Reporting_Premium' ) ) {
 		SI_Reporting_Premium::init();
 	}
 
@@ -227,7 +245,7 @@ function sprout_invoices_load() {
 
 	// notifications
 	SI_Notifications::init(); // Hooks come before parent class.
-	if ( !SI_FREE_TEST && class_exists( 'SI_Notifications_Premium' ) ) {
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Notifications_Premium' ) ) {
 		SI_Notifications_Premium::init();
 	}
 	SI_Notifications_Control::init();
@@ -237,26 +255,38 @@ function sprout_invoices_load() {
 
 	// estimates
 	SI_Estimates::init();
-	if ( !SI_FREE_TEST && class_exists( 'SI_Estimates_Premium' ) ) {
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Estimates_Premium' ) ) {
 		SI_Estimates_Premium::init();
 	}
-	if ( !SI_FREE_TEST && class_exists( 'SI_Estimates_Submission_Premium' ) ) {
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Estimates_Submission_Premium' ) ) {
 		SI_Estimates_Submission_Premium::init();
 	}
 	SI_Estimate_Submissions::init();
+	SI_Estimates_Admin::init();
+	SI_Estimates_Edit::init();
+	SI_Estimates_Template::init();
+	SI_Estimates_Records::init();
 
 	// checkouts
 	SI_Checkouts::init();
 
 	// invoices
 	SI_Invoices::init();
-	if ( !SI_FREE_TEST && class_exists( 'SI_Invoices_Premium' ) ) {
+	SI_Invoices_Admin::init();
+	SI_Invoices_Edit::init();
+	SI_Invoices_Template::init();
+	SI_Invoices_Records::init();
+	SI_Invoices_Deposit::init();
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Invoices_Premium' ) ) {
 		SI_Invoices_Premium::init();
 	}
 
+	// Line items
+	SI_Line_Items::init();
+
 	// projects
 	SI_Projects::init();
-	if ( !SI_FREE_TEST && class_exists( 'SI_Projects_Premium' ) ) {
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Projects_Premium' ) ) {
 		SI_Projects_Premium::init();
 	}
 
@@ -273,6 +303,6 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/add-ons/Addons.php';
 	require_once SI_PATH.'/add-ons/updates/edd_plugin_updater.class.php';
 	SA_Addons::init();
-	
+
 	do_action( 'sprout_invoices_loaded' );
 }

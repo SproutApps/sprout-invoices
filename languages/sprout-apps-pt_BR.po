@@ -188,7 +188,7 @@ msgid "No invoices available."
 msgstr "Não há faturas disponíveis."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/login-form.php:2
-msgid "Welcome. Please sign-in to to view your client dashboard."
+msgid "Welcome. Please sign-in to view your client dashboard."
 msgstr "Bem vindo. Faça login para ver o seu painel de cliente."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/login-form.php:7
@@ -1189,7 +1189,7 @@ msgstr "Enviar"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:45
 #, fuzzy
-msgid "<b>Welcome!</b><br/>Please sign-in to to view your document."
+msgid "<b>Welcome!</b><br/>Please sign-in to view your document."
 msgstr "Bem vindo. Faça login para ver o seu painel de cliente."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Item.php:76

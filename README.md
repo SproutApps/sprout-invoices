@@ -90,6 +90,17 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.0**
+
+Read more all about the release at [Sprout Apps](https://sproutapps.co/news/rocket-8-0-brings-a-new-invoice-line-item-management-and-more/)
+
+* New: Line Item Types and new management
+* New: Pre-defined editing with new types
+* New: Pre-defined item selection search
+* Update: Time Tracking update to support item types
+* New: Invoices and Estimates Admin filtering
+* New: New bulk send of invoices or estimates
+
 **7.6.1**
 
 * FIX: Possible security fix with exposed estimates/invoices with site.com?post_type=*

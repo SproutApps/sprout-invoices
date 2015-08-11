@@ -22,7 +22,7 @@ if ( $total_posts >= 10 && apply_filters( 'show_upgrade_messaging', true ) ) {
 
 			<div id="quick_links">
 
-				<?php SI_Estimates::status_change_dropdown( $id ) ?>
+				<?php do_action( 'si_estimate_status_update', $id ) ?>
 
 				<a href="#send_estimate" id="send_doc_quick_link" class="send si_tooltip button" title="<?php si_e( 'Send this estimate.' ) ?>"><span>&nbsp;</span></a>
 				

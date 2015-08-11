@@ -31,39 +31,39 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 			<?php si_display_messages(); ?>
 			<?php do_action( 'si_invoice_outer_doc_wrap' ) ?>
 			
-			<?php if ( si_get_invoice_balance() ): ?>
-				<?php do_action('si_payments_pane'); ?>
+			<?php if ( si_get_invoice_balance() ) : ?>
+				<?php do_action( 'si_payments_pane' ); ?>
 			<?php endif ?>
 
 			<div id="doc_header_wrap" class="sticky_header">
 				<header id="header_title">
-					<span class="header_id"><?php printf( si__('Invoice %s'), si_get_invoice_id() ) ?></span>
+					<span class="header_id"><?php printf( si__( 'Invoice %s' ), si_get_invoice_id() ) ?></span>
 					<div id="doc_actions">
 						<?php do_action( 'si_doc_actions_pre' ) ?>
-						<?php 
-							$payment_string = ( si_has_invoice_deposit() ) ? si__('Pay Deposit') : si__('Pay Invoice') ;
-							 ?>
-						<?php if ( si_get_invoice_balance() && si_get_invoice_status() != 'write-off' ): ?>
+						<?php
+							$payment_string = ( si_has_invoice_deposit() ) ? si__( 'Pay Deposit' ) : si__( 'Pay Invoice' );
+								?>
+						<?php if ( si_get_invoice_balance() && si_get_invoice_status() != 'write-off' ) : ?>
 							
-							<?php 
+							<?php
 								$payment_options = si_payment_options(); ?>
-							<?php if ( count( $payment_options ) == 1 ): ?>
-								<?php foreach ( $payment_options as $slug => $options ): ?>
-									<a href="<?php si_payment_link( get_the_ID(), $slug ) ?>" href="<?php si_payment_link( get_the_ID(), $slug ) ?>" data-slug="<?php esc_attr_e( $slug ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" class="button primary_button payment_option <?php if ( si_is_cc_processor( $slug ) ) echo 'cc_processor' ?> <?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $payment_string ); ?></a>
+							<?php if ( count( $payment_options ) == 1 ) : ?>
+								<?php foreach ( $payment_options as $slug => $options ) : ?>
+									<a href="<?php si_payment_link( get_the_ID(), $slug ) ?>" href="<?php si_payment_link( get_the_ID(), $slug ) ?>" data-slug="<?php esc_attr_e( $slug ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" class="button primary_button payment_option <?php if ( si_is_cc_processor( $slug ) ) { echo 'cc_processor'; } ?> <?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $payment_string ); ?></a>
 								<?php endforeach ?>
-							<?php else: ?>
+							<?php else : ?>
 								<a href="#pay" class="button primary_button purchase_button" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" data-dropdown="#payment_selection"><?php echo esc_html( $payment_string ); ?></a>
 								<div id="payment_selection" class="dropdown dropdown-tip dropdown-anchor-right dropdown-relative">
 									<ul class="dropdown-menu">
-										<?php foreach ( $payment_options as $slug => $options ): ?>
+										<?php foreach ( $payment_options as $slug => $options ) : ?>
 											<li id="<?php esc_attr_e( $slug ) ?>" class="payment_option">
-												<a href="<?php si_payment_link( get_the_ID(), $slug ) ?>" data-slug="<?php esc_attr_e( $slug ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" class="payment_option <?php if ( si_is_cc_processor( $slug ) ) echo 'cc_processor' ?> <?php echo esc_attr( $slug ) ?>">
-													<?php if ( isset( $options['icons'] ) ): ?>
-														<?php foreach ( $options['icons'] as $path ): ?>
-															<img src="<?php si_esc_e($path) ?>" alt="<?php si_esc_e($options['label']) ?>" height="48" />
+												<a href="<?php si_payment_link( get_the_ID(), $slug ) ?>" data-slug="<?php esc_attr_e( $slug ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>" class="payment_option <?php if ( si_is_cc_processor( $slug ) ) { echo 'cc_processor'; } ?> <?php echo esc_attr( $slug ) ?>">
+													<?php if ( isset( $options['icons'] ) ) : ?>
+														<?php foreach ( $options['icons'] as $path ) : ?>
+															<img src="<?php si_esc_e( $path ) ?>" alt="<?php si_esc_e( $options['label'] ) ?>" height="48" />
 														<?php endforeach ?>
-													<?php else: ?>
-														<span class="process_label"><?php si_esc_e($options['label']) ?></span>
+													<?php else : ?>
+														<span class="process_label"><?php si_esc_e( $options['label'] ) ?></span>
 													<?php endif ?>
 												</a>
 											</li>
@@ -87,22 +87,22 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							
 							<header role="banner">
 								<div class="header_info">
-									<h2 class="doc_type"><?php si_e('Invoice') ?></h2>
+									<h2 class="doc_type"><?php si_e( 'Invoice' ) ?></h2>
 									<p class="title"><?php the_title() ?></p>
 								</div>
 
 								<h1 id="logo">
 									<?php if ( get_theme_mod( 'si_logo' ) ) : ?>
 										<img src="<?php echo esc_url( get_theme_mod( 'si_logo', si_doc_header_logo_url() ) ); ?>" alt="document logo" >
-									<?php else: ?>
+									<?php else : ?>
 										<img src="<?php echo si_doc_header_logo_url() ?>" alt="document logo" >
 									<?php endif; ?>
 								</h1>	
 							</header><!-- /header -->
-							<?php if ( si_get_invoice_status() == 'write-off' ): ?>
-								<span id="status" class="void"><span class="inner_status"><?php si_e('Void') ?></span></span>
-							<?php elseif ( !si_get_invoice_balance() ): ?>
-								<span id="status" class="paid"><span class="inner_status"><?php si_e('Paid') ?></span></span>
+							<?php if ( si_get_invoice_status() == 'write-off' ) : ?>
+								<span id="status" class="void"><span class="inner_status"><?php si_e( 'Void' ) ?></span></span>
+							<?php elseif ( ! si_get_invoice_balance() ) : ?>
+								<span id="status" class="paid"><span class="inner_status"><?php si_e( 'Paid' ) ?></span></span>
 							<?php endif ?>
 						</div><!-- #header_logo -->
 
@@ -111,17 +111,17 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							<dl id="doc_address_info">
 								<dl class="from_addy">
 									<dt>
-										<span class="dt_heading"><?php si_e('From') ?></span>
+										<span class="dt_heading"><?php si_e( 'From' ) ?></span>
 									</dt>
 									<dd>
 										<b><?php si_company_name() ?></b> 
 										<?php si_doc_address() ?>
 									</dd>
 								</dl>
-								<?php if ( si_get_invoice_client_id() ): ?>
+								<?php if ( si_get_invoice_client_id() ) : ?>
 									<dl class="client_addy">
 										<dt>
-											<span class="dt_heading"><?php si_e('To') ?></span>
+											<span class="dt_heading"><?php si_e( 'To' ) ?></span>
 										</dt>
 										<dd>
 											<b><?php echo get_the_title( si_get_invoice_client_id() ) ?></b>
@@ -140,52 +140,52 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							<?php do_action( 'si_document_details_pre' ) ?>
 
 							<dl class="date">
-								<dt><span class="dt_heading"><?php si_e('Date') ?></span></dt>
+								<dt><span class="dt_heading"><?php si_e( 'Date' ) ?></span></dt>
 								<dd><?php si_invoice_issue_date() ?></dd>
 							</dl>
 
-							<?php if ( si_get_invoice_id() ): ?>
+							<?php if ( si_get_invoice_id() ) : ?>
 								<dl class="invoice_number">
-									<dt><span class="dt_heading"><?php si_e('Invoice Number') ?></span></dt>
+									<dt><span class="dt_heading"><?php si_e( 'Invoice Number' ) ?></span></dt>
 									<dd><?php si_invoice_id() ?></dd>
 								</dl>
 							<?php endif ?>
 
-							<?php if ( si_get_invoice_po_number() ): ?>
+							<?php if ( si_get_invoice_po_number() ) : ?>
 								<dl class="invoice_po_number">
-									<dt><span class="dt_heading"><?php si_e('PO Number') ?></span></dt>
+									<dt><span class="dt_heading"><?php si_e( 'PO Number' ) ?></span></dt>
 									<dd><?php si_invoice_po_number() ?></dd>
 								</dl>
 							<?php endif ?>
 
-							<?php if ( si_get_invoice_due_date() ): ?>
+							<?php if ( si_get_invoice_due_date() ) : ?>
 								<dl class="date">
-									<dt><span class="dt_heading"><?php si_e('Invoice Due') ?></span></dt>
+									<dt><span class="dt_heading"><?php si_e( 'Invoice Due' ) ?></span></dt>
 									<dd><?php si_invoice_due_date() ?></dd>
 								</dl>
 							<?php endif ?>
 
 							<?php do_action( 'si_document_details_totals' ) ?>
 
-							<?php if ( si_has_invoice_deposit() ): ?>
+							<?php if ( si_has_invoice_deposit() ) : ?>
 								<dl class="doc_total_with_deposit">
-									<dt><span class="dt_heading"><?php si_e('Invoice Total') ?></span></dt>
+									<dt><span class="dt_heading"><?php si_e( 'Invoice Total' ) ?></span></dt>
 									<dd><?php sa_formatted_money( si_get_invoice_total() ) ?></dd>
 								</dl>
 
 								<dl class="doc_total">
-									<dt><span class="dt_heading"><?php si_e('Deposit Total') ?></span></dt>
+									<dt><span class="dt_heading"><?php si_e( 'Deposit Total' ) ?></span></dt>
 									<dd><?php sa_formatted_money( si_get_invoice_deposit() ) ?></dd>
 								</dl>
-							<?php else: ?>
+							<?php else : ?>
 								<dl class="doc_total">
-									<dt><span class="dt_heading"><?php si_e('Invoice Total') ?></span></dt>
+									<dt><span class="dt_heading"><?php si_e( 'Invoice Total' ) ?></span></dt>
 									<dd><?php sa_formatted_money( si_get_invoice_total() ) ?></dd>
 								</dl>
 							<?php endif ?>
 
 							<dl class="doc_total doc_balance">
-								<dt><span class="dt_heading"><?php si_e('Balance') ?></span></dt>
+								<dt><span class="dt_heading"><?php si_e( 'Balance' ) ?></span></dt>
 								<dd><?php sa_formatted_money( si_get_invoice_balance() ) ?></dd>
 							</dl>
 
@@ -194,97 +194,30 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 					</section>
 
-					<?php
-						$line_items = si_get_invoice_line_items();
-						$has_percentage_adj = false;
-						foreach ( $line_items as $position => $data ) {
-							if ( isset( $data['tax'] ) && $data['tax'] ) {
-								$has_percentage_adj = true;
-							}
-						} ?>
-
 					<section id="doc_line_items_wrap" class="clearfix">
+					
 						<div id="doc_line_items" class="clearfix">
-							<div id="line_items_header">
-								<?php do_action( 'si_document_line_items_header' ) ?>
-								<div class="line_item">
-									<?php echo si_line_item_header_front_end( 'invoices', $has_percentage_adj ) ?>
-								</div>
-							</div>
-							<ol id="items">
-								<?php do_action( 'si_document_line_items' ) ?>
-								<?php foreach ( $line_items as $position => $data ): ?>
-									<?php if ( is_int( $position ) ): // is not a child ?>
-										<li class="item" data-id="<?php echo (float) $position ?>">
-											<?php
-												// get the children of this top level item
-												$children = si_line_item_get_children( $position, $line_items ); ?>
+							
+							<?php do_action( 'si_doc_line_items', get_the_id() ) ?>
 
-											<?php 
-												// build single item
-												echo si_line_item_build( $position, $line_items, $children ) ?>
-
-											<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
-												<ol class="items_list">
-													<?php foreach ( $children as $child_position ): ?>
-														<li class="item" data-id="<?php echo (float) $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
-													<?php endforeach ?>
-												</ol>
-											<?php endif ?>
-										</li>
-									<?php endif ?>
-								<?php endforeach ?>
-
-							</ol>
-
-							<footer id="line_items_footer" class="clearfix">
-								<?php do_action( 'si_document_line_items_footer' ) ?>
-								<div id="line_items_totals">
-									<div id="line_subtotal">
-										<b><?php si_e('Subtotal') ?></b>
-										<?php sa_formatted_money( si_get_invoice_subtotal() ) ?>
-									</div>
-									<?php if ( si_get_invoice_taxes_total() ): ?>
-										<div id="line_taxes">
-											<b><?php si_e('Taxes') ?></b>
-											<?php sa_formatted_money( si_get_invoice_taxes_total() ) ?>
-										</div>
-									<?php endif ?>
-									<div id="line_total">
-										<b title="<?php si_e('Total includes discounts and other fees.') ?>" class="helptip"><?php si_e('Total') ?></b>
-										<?php sa_formatted_money( si_get_invoice_calculated_total() ) ?>
-									</div>
-									<?php if ( si_get_invoice_payments_total() ): ?>
-										<hr/>
-										<div id="line_payments">
-											<b><?php si_e('Payments') ?></b>
-											<?php sa_formatted_money( si_get_invoice_payments_total() ) ?>
-										</div>
-										<div id="line_balance">
-											<b><?php si_e('Balance') ?></b>
-											<?php sa_formatted_money( si_get_invoice_balance() ) ?>
-										</div>
-									<?php endif ?>
-								</div>
-							</footer>
 						</div><!-- #doc_line_items -->
 
 					</section>
 
 					<section id="doc_notes">
-						<?php if ( strlen( si_get_invoice_notes() ) > 1 ): ?>
+						<?php if ( strlen( si_get_invoice_notes() ) > 1 ) : ?>
 						<?php do_action( 'si_document_notes' ) ?>
 						<div id="doc_notes">
-							<h2><?php si_e('Notes') ?></h2>
+							<h2><?php si_e( 'Notes' ) ?></h2>
 							<?php si_invoice_notes() ?>
 						</div><!-- #doc_notes -->
 						
 						<?php endif ?>
 
-						<?php if ( strlen( si_get_invoice_terms() ) > 1 ): ?>
+						<?php if ( strlen( si_get_invoice_terms() ) > 1 ) : ?>
 						<?php do_action( 'si_document_terms' ) ?>
 						<div id="doc_terms">
-							<h2><?php si_e('Terms') ?></h2>
+							<h2><?php si_e( 'Terms' ) ?></h2>
 							<?php si_invoice_terms() ?>
 						</div><!-- #doc_terms -->
 						
@@ -301,7 +234,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							<li class="doc_footer_item">
 								<?php printf( '<strong>%s</strong> %s', '<div class="dashicons dashicons-admin-site"></div>', make_clickable( home_url() ) ) ?>
 							</li>
-							<?php if ( si_get_company_email() ): ?>
+							<?php if ( si_get_company_email() ) : ?>
 								<li class="doc_footer_item">
 									<?php printf( '<strong>%s</strong> %s', '<div class="dashicons dashicons-email-alt"></div>', make_clickable( si_get_company_email() ) ) ?>
 								</li>
@@ -314,17 +247,17 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 		
 		<div id="doc_history">
 			<?php do_action( 'si_document_history' ) ?>
-			<?php foreach ( si_doc_history_records() as $item_id => $data ): ?>
+			<?php foreach ( si_doc_history_records() as $item_id => $data ) : ?>
 				<dt>
 					<span class="history_status <?php echo esc_attr( $data['status_type'] ); ?>"><?php echo esc_attr( $data['type'] ); ?></span><br/>
 					<span class="history_date"><?php echo date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
 				</dt>
 
 				<dd>
-					<?php if ( $data['status_type'] == SI_Notifications::RECORD ): ?>
+					<?php if ( $data['status_type'] == SI_Notifications::RECORD ) : ?>
 						<p>
 							<?php echo esc_html( $update_title ) ?>
-							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e('View Message') ?>"><?php si_e('View Message') ?></a>
+							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e( 'View Message' ) ?>"><?php si_e( 'View Message' ) ?></a>
 						</p>
 						<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">
 							<?php echo wpautop( $data['content'] ) ?>
@@ -333,7 +266,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						<p>
 							<?php echo esc_html( $data['update_title'] ); ?>
 						</p>
-					<?php else: ?>
+					<?php else : ?>
 						<?php echo wpautop( $data['content'] ) ?>
 					<?php endif ?>
 					
@@ -343,7 +276,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 		<div id="footer_credit">
 			<?php do_action( 'si_document_footer_credit' ) ?>
-			<!--<p><?php si_e('Powered by Sprout Invoices') ?></p>-->
+			<!--<p><?php si_e( 'Powered by Sprout Invoices' ) ?></p>-->
 		</div><!-- #footer_messaging -->
 
 	</body>

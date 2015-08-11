@@ -3,8 +3,8 @@ Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
-Tested up to: 4.2
-Stable tag: 7.6.1
+Tested up to: 4.3
+Stable tag: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,17 @@ Woocommerce, Stats dashboard, time tracking updates and more.
 
 == Changelog ==
 
+= 8.0 =
+
+Read more all about the release at [Sprout Apps](https://sproutapps.co/news/rocket-8-0-brings-a-new-invoice-line-item-management-and-more/)
+
+* New: Line Item Types and new management
+* New: Pre-defined editing with new types
+* New: Pre-defined item selection search
+* Update: Time Tracking update to support item types
+* New: Invoices and Estimates Admin filtering
+* New: New bulk send of invoices or estimates
+
 = 7.6.1 =
 
 * FIX: Possible security fix with exposed estimates/invoices with site.com?post_type=*
@@ -189,7 +200,7 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 * FIX: Start CSV import without using previous files
 * FIX: Fix for old PHP versions without json_last_error
 * FIX: Remove project types from submission page
-* FIX: Language translations updated (7.6.1)
+* FIX: Language translations updated (8.0)
 
 = 6.2 =
 

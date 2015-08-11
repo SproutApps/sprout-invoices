@@ -749,7 +749,7 @@ span.inline_success_message {
 	border: none
 }
 
-#line_items_header,#line_items_footer {
+.line_items_header, #line_items_footer {
 	padding: 10px 40px 0;
 	background: #f5f5f5
 }
@@ -1014,11 +1014,29 @@ span.status_change {
 	margin-left: 10px;
 }
 
-#line_items_header {
+.line_items_header {
 	border-top: none;
-	border-bottom: 1px solid #ddd;
-	padding: 0 40px 10px;
-	margin-bottom: 30px
+	border: 1px solid #f5f5f5;
+	padding: 15px 40px;
+    cursor: all-scroll;
+    margin-bottom: 10px;
+    color: #C7C7C7;
+}
+.item:hover .line_items_header {
+	color: #333
+}
+
+.hide_subheading_columns ol .line_items_header .column {
+	visibility: hidden;
+}
+.hide_subheading_columns ol .line_items_header {
+	padding: 0px;
+	padding-left: 40px
+}
+
+.line_items_header .dashicons-randomize {
+	float: left;
+	margin-left: -30px;
 }
 
 #line_items_footer {
@@ -1031,7 +1049,6 @@ span.status_change {
 #add_line_item {
 	float: left
 }
-
 #add_line_item .add_button_wrap {
 	float: left;
 }
@@ -1044,10 +1061,7 @@ span.status_change {
 	padding-left: 10px;
 }
 #add_line_item .add_button_wrap a.add_button_drop {
-	border-left: 1px solid #DFDFDF;
-	padding-left: 6px;
-	margin-left: 5px;
-	padding-right: 10px;
+	padding: 0 10px;
 }
 #line_items_totals,#status_updates {
 	float: right;
@@ -1081,8 +1095,8 @@ div#invoice_status_updates-sticky-wrapper {
 
 .item_action_column {
 	float: left;
-	margin-top: 40px;
-	margin-left: -20px;
+	margin-top: 10px;
+	margin-left: -30px;
 	width: auto
 }
 
@@ -1118,34 +1132,22 @@ div#invoice_status_updates-sticky-wrapper {
 	color: red
 }
 
-
-.item_action.dd-handle {
-    position: absolute;
-    top: 10px;
-    left: -20px;
-    height: 90%;
-}
-
 .item_action.item_clone {
     cursor: copy;
 }
 
 .item_action.item_delete {
     cursor: no-drop;
-    position: absolute;
-    z-index: 2;
+    /* position: absolute; */
+    /* z-index: 2; */
 }
 .item_action.item_comments {
     cursor: help;
-    position: absolute;
-    z-index: 3;
-    top: 100px;
+    /* position: absolute; */
+    /* z-index: 3; */
+    /* top: 100px; */
 }
 
-.item_action.dd-handle {
-    cursor: move;
-    cursor: -webkit-grab;
-}
 .add_button:before {
 	font-family: 'dashicons';
 	vertical-align: top;
@@ -1173,7 +1175,7 @@ div#invoice_status_updates-sticky-wrapper {
 	padding-bottom: 20px
 }
 
-#line_items_header .line_item {
+.line_items_header .line_item {
 	margin: 0;
 	padding: 0;
 	min-height: 20px;
@@ -1185,13 +1187,19 @@ div#invoice_status_updates-sticky-wrapper {
 	-webkit-flex: .5;
 	-moz-flex: .5;
 	-ms-flex: .5;
-	padding: 10px;
 	white-space: nowrap;
 	text-align: center
 }
 
 .line_item .column_type.column,.line_item .column_desc.column {
 	text-align: left
+}
+.line_item .column_desc .redactor-box {
+    width: 98%;
+}
+
+.line_item .redactor-editor {
+    padding-bottom: 0px;
 }
 
 .line_item .column_total.column {
@@ -1248,40 +1256,27 @@ div#invoice_status_updates-sticky-wrapper {
 	display: block;
 	position: relative;
 	margin: 0;
-	padding: 0 40px;
+	/* padding: 0 40px; */
 	list-style: none
 }
 
-.items_list .item {
-	border-bottom: 1px solid #ccc
+.items_list .item .items_list {
+	padding-left: 50px;
 }
 
-.items_list .item .items_list {
-	padding-right: 0
+.line_item_option_row {
+    padding: 0 40px;
 }
 
 .items_list .item .item {
 	margin-top: -20px;
 	border-bottom: none
-}
-
-.item,.dd-empty,.dd-placeholder {
-	display: block;
-	position: relative;
-	padding: 0;
-	margin-bottom: 15px
+;
+	background-color: #FDFDFD;
 }
 
 .item:hover {
 	background-color: #FFF
-}
-
-.dd-handle:before {
-	content: "\f503"
-}
-
-.dd-handle:hover {
-	cursor: move
 }
 
 .item > button {
@@ -1373,7 +1368,6 @@ div#invoice_status_updates-sticky-wrapper {
 
 .dd-placeholder {
 	margin: 5px 0;
-	margin-left: -30px;
 	padding: 0;
 	min-height: 30px;
 	background: #f2fbff;
@@ -2046,7 +2040,7 @@ dd .add_item_help {
 	margin-left: 30px;
 }
 
-.select2-drop {
+.select2-drop, .select2-dropdown {
 	z-index: 1000000;
 }
 
@@ -2153,6 +2147,15 @@ input#sa_recurring_invoice_custom_freq {
 
 .column.column_desc .redactor_toolbar {
     overflow: hidden;
+}
+
+#predefined_line_items {
+    float: left;
+    margin-left: 30px;
+}
+
+#item_creation_modal .admin_fields .label_wrap {
+    width: 25%;
 }
 
 /** Addon Settings */

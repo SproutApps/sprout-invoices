@@ -804,11 +804,15 @@ div#vcards {
 	padding-left: 0px;
 }
 
-#line_items_header {
+.line_items_header {
 	border-top: none;
 	border-bottom: 1px solid #363B3F;
 	padding-top: 10px;
 	margin-bottom: 30px;
+}
+
+.child_items .line_items_header {
+    margin-left: 33px;
 }
 
 #line_items_footer {
@@ -869,6 +873,10 @@ div#vcards {
 	background-color: #fafafa;
 }
 
+#items .line_items_header .line_item .column {
+	background-color: inherit;
+}
+
 #items .items_list .line_item .column {
 	background-color: #fff;
 }
@@ -879,7 +887,7 @@ div#vcards {
 	padding-right: 20px;
 }
 
-#line_items_header .line_item {
+.line_items_header .line_item {
 	margin: 0px;
 	padding: 0px;
 	min-height: 20px;
@@ -1673,6 +1681,10 @@ p.si_error {
 	#status {
 		top: 5%;
 		left: 30%;
+	}
+
+	.li_comments_toggle {
+		display: none;
 	}
 
 }

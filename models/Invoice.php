@@ -235,12 +235,14 @@ class SI_Invoice extends SI_Post_Type {
 	public function set_status( $status ) {
 		// Don't do anything if there's no true change
 		$current_status = $this->get_status();
-		if ( $current_status == $status ) {
-			return; }
+		if ( $current_status === $status ) {
+			return;
+		}
 
 		// confirm the status exists
 		if ( ! in_array( $status, array_keys( self::get_statuses() ) ) ) {
-			return; }
+			return;
+		}
 
 		$this->post->post_status = $status;
 		$this->save_post();

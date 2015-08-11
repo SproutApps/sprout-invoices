@@ -12,6 +12,8 @@
 				<?php printf( '<span class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Outstanding Balance' ), si__( 'Outstanding Balance' ), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Invoice::STATUS_WO ) : ?>
 				<?php printf( '<span class="si_status declined si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Written-off' ), si__( 'Written Off' ), $status_change_span ); ?>
+			<?php elseif ( $status === SI_Invoice::STATUS_FUTURE ) : ?>
+				<?php printf( '<span class="si_status temp si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Temp Invoice' ), si__( 'Scheduled' ), $status_change_span ); ?>
 			<?php else : ?>
 				<?php printf( '<span class="si_status temp si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', self::__( 'Temp Invoice' ), si__( 'Temp' ), $status_change_span ); ?>
 			<?php endif ?>
@@ -19,12 +21,14 @@
 	</span>
 	<div id="status_change_<?php echo (int) $id ?>" class="dropdown dropdown-tip dropdown-relative dropdown-anchor-right">
 		<ul class="dropdown-menu">
-			<?php if ( $status != SI_Invoice::STATUS_PENDING ) : ?>
-				<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Pending Payment(s)' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( '<b>Active:</b> Pending Payment(s)' ) ); ?>
+			<?php if ( SI_Invoice::STATUS_FUTURE !== $status ) : ?>
+				<?php if ( $status != SI_Invoice::STATUS_PENDING ) : ?>
+					<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark Pending Payment(s)' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), self::__( '<b>Active:</b> Pending Payment(s)' ) ); ?>
+				<?php endif ?>
 			<?php endif ?>
-			<?php /**/ if ( $status != SI_Invoice::STATUS_PARTIAL ) : ?>
+			<?php if ( $status != SI_Invoice::STATUS_PARTIAL ) : ?>
 				<?php printf( '<li><a class="doc_status_change publish" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Outstanding Balance.' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PARTIAL, wp_create_nonce( SI_Controller::NONCE ), self::__( '<b>Active:</b> Partial Payment Received' ) ); ?>
-			<?php endif; /**/ ?>
+			<?php endif; ?>
 			<?php if ( $status != SI_Invoice::STATUS_PAID ) : ?>
 				<?php printf( '<li><a class="doc_status_change publish" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', self::__( 'Mark as Paid.' ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PAID, wp_create_nonce( SI_Controller::NONCE ), self::__( '<b>Complete:</b> Paid in Full' ) ); ?>
 			<?php endif; ?>

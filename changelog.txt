@@ -1,3 +1,12 @@
+= 8.0 =
+
+* New: Line Item Types and new management
+* New: Pre-defined editing with new types
+* New: Pre-defined item selection search
+* Update: Time Tracking update to support item types
+* New: Invoices and Estimates Admin filtering
+* New: New bulk send of invoices or estimates
+
 = 7.6.1 =
 
 * FIX: Possible security fix with exposed estimates/invoices with site.com?post_type=*

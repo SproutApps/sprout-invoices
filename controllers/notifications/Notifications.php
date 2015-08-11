@@ -708,26 +708,29 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( empty( $line_items ) ) {
 			return '';
 		}
-		ob_start(); ?>
-			<?php foreach ( $line_items as $position => $data ) : ?>
-				<?php if ( is_int( $position ) ) : // is not a child ?>
-					<?php
-						// get the children of this top level item
-						$children = si_line_item_get_children( $position, $line_items ); ?>
-					<?php
-						// build single item
-						echo "\n\n* " . si_line_item_build_plain( $position, $line_items, $children, $doc_id ) ?>
 
-					<?php if ( ! empty( $children ) ) : // if has children, loop and show ?>
-						<?php foreach ( $children as $child_position ) : ?>
-							<?php echo "\n** " . si_line_item_build_plain( $child_position, $line_items, array(), $doc_id ) ?>
-						<?php endforeach ?>
-					<?php endif ?>
-				<?php endif ?>
-			<?php endforeach ?>
-		<?php
-		$table = ob_get_clean();
-		return apply_filters( 'shortcode_line_item_plain_list', $table, $line_items, $data );
+		$view = '';
+		$prev_type = '';
+		foreach ( $line_items as $position => $item_data ) {
+			if ( is_int( $position ) ) {
+
+				$children = si_line_item_get_children( $position, $line_items );
+				$has_children = ( ! empty( $children ) ) ? true : false ;
+
+				$line_item = si_get_plain_text_line_item( $item_data, $position, $prev_type, $has_children );
+
+				$view .= sprintf( "\n\n* %s", $line_item );
+
+				if ( $has_children ) {
+					foreach ( $children as $child_position => $item_data ) {
+						$line_item = si_get_plain_text_line_item( $line_items[ $child_position ], $child_position, $item_data['type'], false );
+						$view .= sprintf( "\n\t %s", $line_item );
+					}
+				}
+				$prev_type = $item_data['type'];
+			}
+		}
+		return apply_filters( 'shortcode_line_item_plain_list', wp_strip_all_tags( $view ), $line_items, $data );
 	}
 
 	/**

@@ -4,7 +4,7 @@
  * Paypal offsite payment processor.
  *
  * These actions are fired for each checkout page.
- * 
+ *
  * Payment page - 'si_checkout_action_'.SI_Checkouts::PAYMENT_PAGE
  * Review page - 'si_checkout_action_'.SI_Checkouts::REVIEW_PAGE
  * Confirmation page - 'si_checkout_action_'.SI_Checkouts::CONFIRMATION_PAGE
@@ -25,7 +25,7 @@ class SI_Checks extends SI_Offsite_Processors {
 	protected static $instance;
 
 	public static function get_instance() {
-		if ( !( isset( self::$instance ) && is_a( self::$instance, __CLASS__ ) ) ) {
+		if ( ! ( isset( self::$instance ) && is_a( self::$instance, __CLASS__ ) ) ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -50,16 +50,15 @@ class SI_Checks extends SI_Offsite_Processors {
 	public static function checkout_options() {
 		$option = array(
 			'icons' => array( SI_URL . '/resources/front-end/img/check.png', SI_URL . '/resources/front-end/img/po.png' ),
-			'label' => self::__('Check'),
+			'label' => self::__( 'Check' ),
 			'cc' => array()
 			);
-		return $option;
+		return apply_filters( 'si_checks_checkout_options', $option );
 	}
 
 	protected function __construct() {
 		parent::__construct();
 
-		
 		// Remove pages
 		add_filter( 'si_checkout_pages', array( $this, 'remove_checkout_pages' ) );
 
@@ -70,8 +69,8 @@ class SI_Checks extends SI_Offsite_Processors {
 
 	/**
 	 * Loaded via SI_Payment_Processors::show_payments_pane
-	 * @param  SI_Checkouts $checkout 
-	 * @return                  
+	 * @param  SI_Checkouts $checkout
+	 * @return
 	 */
 	public function payments_pane( SI_Checkouts $checkout ) {
 		self::load_view( 'templates/checkout/checks/form', array(
@@ -85,8 +84,8 @@ class SI_Checks extends SI_Offsite_Processors {
 
 	/**
 	 * Loaded via SI_Payment_Processors::show_payments_pane
-	 * @param  SI_Checkouts $checkout 
-	 * @return                  
+	 * @param  SI_Checkouts $checkout
+	 * @return
 	 */
 	public function invoice_pane( SI_Checkouts $checkout ) {
 		self::load_view( 'templates/checkout/checks/form', array(
@@ -178,11 +177,11 @@ class SI_Checks extends SI_Offsite_Processors {
 		$date = ( isset( $_POST['sa_checks_mailed'] ) ) ? $_POST['sa_checks_mailed'] : false ;
 		$notes = ( isset( $_POST['sa_checks_notes'] ) ) ? $_POST['sa_checks_notes'] : '' ;
 
-		if ( !isset( $_POST['sa_checks_nonce'] ) || !wp_verify_nonce( $_POST['sa_checks_nonce'], self::NONCE ) ) {
+		if ( ! isset( $_POST['sa_checks_nonce'] ) || ! wp_verify_nonce( $_POST['sa_checks_nonce'], self::NONCE ) ) {
 			return false;
 		}
 
-		if ( !$amount ) {
+		if ( ! $amount ) {
 			return false;
 		}
 
@@ -199,7 +198,7 @@ class SI_Checks extends SI_Offsite_Processors {
 					'notes' => $notes
 				),
 			), SI_Payment::STATUS_PENDING );
-		if ( !$payment_id ) {
+		if ( ! $payment_id ) {
 			return false;
 		}
 		$payment = SI_Payment::get_instance( $payment_id );
@@ -211,7 +210,7 @@ class SI_Checks extends SI_Offsite_Processors {
 	}
 
 	public function post_checkout_redirect( SI_Checkouts $checkout, SI_Payment $payment ) {
-		if ( !is_a( $checkout->get_processor(), __CLASS__ ) ) {
+		if ( ! is_a( $checkout->get_processor(), __CLASS__ ) ) {
 			return;
 		}
 		wp_redirect( $checkout->checkout_confirmation_url( self::PAYMENT_SLUG ) );

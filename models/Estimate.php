@@ -581,11 +581,13 @@ class SI_Estimate extends SI_Post_Type {
 	/**
 	 * Line items
 	 */
-	public function get_line_items() {
+	public function get_line_items( $type = '' ) {
 		$line_items = $this->get_post_meta( self::$meta_keys['line_items'] );
 		if ( ! is_array( $line_items ) ) {
 			$line_items = array();
 		}
+		// TODO filter out by type list_pluck
+		// Do the same for invoices
 		return $line_items;
 	}
 
