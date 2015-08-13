@@ -303,16 +303,20 @@ class SI_Estimates_Edit extends SI_Estimates {
 
 		$estimate = SI_Estimate::get_instance( $post_id );
 		$line_items = array();
+		// The line_item_key sends the order of each item so they can be linked with the other options
 		foreach ( $_POST['line_item_key'] as $key => $order ) {
-			if ( isset( $_POST['line_item_desc'][$key] ) && $_POST['line_item_desc'][$key] != '' ) {
-				$line_items[$order] = array(
-					'rate' => ( isset( $_POST['line_item_rate'][$key] ) && $_POST['line_item_rate'][$key] != '' ) ? $_POST['line_item_rate'][$key] : 0,
-					'qty' => ( isset( $_POST['line_item_qty'][$key] ) && $_POST['line_item_qty'][$key] != '' ) ? $_POST['line_item_qty'][$key] : 0,
-					'tax' => ( isset( $_POST['line_item_tax'][$key] ) && $_POST['line_item_tax'][$key] != '' ) ? $_POST['line_item_tax'][$key] : 0,
-					'desc' => $_POST['line_item_desc'][$key],
-					'type' => ( isset( $_POST['line_item_type'][$key] ) && $_POST['line_item_type'][$key] != '' ) ? $_POST['line_item_type'][$key] : 0,
-					'total' => ( isset( $_POST['line_item_total'][$key] ) && $_POST['line_item_total'][$key] != '' ) ? $_POST['line_item_total'][$key] : 0,
-					);
+			// make sure there's a description, otherwise it's not an item.
+			if ( isset( $_POST['line_item_desc'][ $key ] ) && '' !== $_POST['line_item_desc'][ $key ] ) {
+				// loop through all post values...
+				foreach ( $_POST as $pkey => $value ) {
+					// if the post value starts with line_item_ than it's something that should be stored with the line item
+					if ( preg_match( '/line_item_([a-zA-Z0-9_ ]*)/', $pkey, $match ) === 1 ) {
+						// the slug/name of the data
+						$data_id = $match[1];
+						// add the value of the post, associated with the key given in the parent loop.
+						$line_items[ $order ][ $data_id ] = ( '' !== $value[ $key ] ) ? $value[ $key ] : '' ;
+					}
+				}
 			}
 		}
 

@@ -15,6 +15,9 @@
 				<?php if ( apply_filters( 'show_upgrade_messaging', true ) ) : ?>
 					<span title="<?php self::esc_e( 'Predefined line-items can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.' ) ?>" class="helptip add_item_help"></span>
 				<?php endif ?>
+
+				<?php do_action( 'si_post_add_line_item' ) ?>
+				
 			</div>
 
 			<?php do_action( 'si_get_line_item_totals_section', $id ) ?>

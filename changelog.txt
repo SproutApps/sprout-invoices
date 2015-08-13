@@ -1,3 +1,9 @@
+= 8.0.3 =
+
+* Fix: Estimates and pre-defined items
+* Fix: Estimates not saved advanced columns correctly
+* NEW: New filters for some bundled add-ons
+
 = 8.0.2 =
 
 * Fix: Javascript error when adding new users on clients page (select2 incompatibility)
