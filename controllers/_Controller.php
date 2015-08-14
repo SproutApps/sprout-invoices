@@ -116,7 +116,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function register_resources() {
 		// admin js
-		wp_register_script( 'si_admin', SI_URL . '/resources/admin/js/sprout_invoice.js', array( 'jquery', 'qtip', 'select2' ), self::SI_VERSION );
+		wp_register_script( 'si_admin', SI_URL . '/resources/admin/js/sprout_invoice.js', array( 'jquery', 'qtip', 'select2_4.0' ), self::SI_VERSION );
 
 		// Item management
 		wp_register_script( 'nestable', SI_URL . '/resources/admin/js/nestable.js', array( 'jquery' ), self::SI_VERSION );
@@ -131,8 +131,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		// Select2
-		wp_register_style( 'select2_css', SI_URL . '/resources/admin/plugins/select2/css/select2.min.css', null, self::SI_VERSION, false );
-		wp_register_script( 'select2', SI_URL . '/resources/admin/plugins/select2/js/select2.min.js', array( 'jquery' ), self::SI_VERSION, false );
+		wp_register_style( 'select2_4.0_css', SI_URL . '/resources/admin/plugins/select2/css/select2.min.css', null, self::SI_VERSION, false );
+		wp_register_script( 'select2_4.0', SI_URL . '/resources/admin/plugins/select2/js/select2.min.js', array( 'jquery' ), self::SI_VERSION, false );
 
 		// qtip plugin
 		wp_register_style( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.css', null, self::SI_VERSION, false );
@@ -182,14 +182,6 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function admin_enqueue() {
-		$si_js_object = self::get_localized_js();
-
-		// Localization
-		$si_js_object += array(
-			'premium' => ( ! SI_FREE_TEST && file_exists( SI_PATH . '/controllers/updates/Updates.php' ) ) ? true : false,
-			'redactor' => false,
-		);
-
 		// doc admin templates
 		$screen = get_current_screen();
 		$screen_post_type = str_replace( 'edit-', '', $screen->id );
@@ -205,43 +197,75 @@ abstract class SI_Controller extends Sprout_Invoices {
 			wp_enqueue_script( 'sticky' );
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
 
-			// dropdowns
-			wp_enqueue_style( 'dropdown' );
-			wp_enqueue_script( 'dropdown' );
-
 			// add doc info
-			$si_js_object += array(
+			$add_to_js_object = array(
 				'doc_status' => get_post_status( get_the_id() )
 			);
+
+			self::enqueue_general_scripts_styles();
 		}
 
-		if ( $screen_post_type == SI_Client::POST_TYPE ) {
+		if ( SI_Client::POST_TYPE === $screen_post_type ) {
 
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
 
-			// dropdowns
-			wp_enqueue_style( 'dropdown' );
-			wp_enqueue_script( 'dropdown' );
+			self::enqueue_general_scripts_styles();
 		}
 
-		if ( $screen_post_type == SI_Project::POST_TYPE ) {
+		if ( SI_Project::POST_TYPE === $screen_post_type ) {
 
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
 
-			// dropdowns
-			wp_enqueue_style( 'dropdown' );
-			wp_enqueue_script( 'dropdown' );
+			self::enqueue_general_scripts_styles();
 		}
 
-		wp_enqueue_script( 'qtip' );
-		wp_enqueue_script( 'select2' );
-		wp_enqueue_style( 'select2_css' );
+		if ( self::is_si_admin() ) {
+			self::enqueue_general_scripts_styles();
+		}
+
 		wp_enqueue_script( 'si_admin' );
-
-		wp_enqueue_style( 'qtip' );
 		wp_enqueue_style( 'sprout_invoice_admin_css' );
 
-		wp_localize_script( 'si_admin', 'si_js_object', apply_filters( 'si_admin_scripts_localization', $si_js_object ) );
+		$si_js_object = self::get_localized_js();
+
+		// Localization
+		$si_js_object += array(
+			'premium' => ( ! SI_FREE_TEST && file_exists( SI_PATH . '/controllers/updates/Updates.php' ) ) ? true : false,
+			'redactor' => false,
+		);
+
+		$js_object = array_merge( $si_js_object, $add_to_js_object );
+		wp_localize_script( 'si_admin', 'si_js_object', apply_filters( 'si_admin_scripts_localization', $js_object ) );
+
+	}
+
+	public static function enqueue_general_scripts_styles( $scripts = array() ) {
+
+		// Defaults
+		if ( empty( $scripts ) ) {
+			$scripts = array( 'dropdown', 'select2', 'qtip' );
+		}
+
+		$scripts = apply_filters( 'si_enqueued_admin_scripts', $scripts );
+
+		if ( in_array( 'dropdown', $scripts ) ) {
+			// dropdowns
+			wp_enqueue_style( 'dropdown' );
+			wp_enqueue_script( 'dropdown' );
+		}
+
+		if ( in_array( 'select2', $scripts ) ) {
+			// selects
+			wp_enqueue_script( 'select2_4.0' );
+			wp_enqueue_style( 'select2_4.0_css' );
+		}
+
+		if ( in_array( 'qtip', $scripts ) ) {
+			// qtips
+			wp_enqueue_script( 'qtip' );
+			wp_enqueue_style( 'qtip' );
+		}
+
 	}
 
 	/**
@@ -882,37 +906,45 @@ abstract class SI_Controller extends Sprout_Invoices {
 	//////////////
 
 	public static function is_si_admin() {
-		if ( ! is_admin() ) {
-			false;
+		$bool = false;
+		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+			return $bool;
 		}
+
 		// Options
 		if ( isset( $_GET['page'] ) && strpos( $_GET['page'] , self::TEXT_DOMAIN ) !== false ) {
-			return true;
+			$bool = true;
 		}
-
-		$post_type = false;
 
 		global $current_screen;
-		if ( isset( $current_screen->post_type ) ) {
-			$post_type = $current_screen->post_type;
+		if ( isset( $current_screen->id ) && strpos( $current_screen->id, self::TEXT_DOMAIN ) !== false ) {
+			$bool = true;
 		}
-		else {
-			// Trying hard to figure out the post type if not yet set.
-			$post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : false;
-			if ( $post_id ) {
-				$post_type = get_post_type( $post_id );
-			} else {
-				$post_type = ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) ? $_REQUEST['post_type'] : false ;
+
+		if ( ! $bool ) { // check if admin for SI post types.
+			$post_type = false;
+
+			if ( isset( $current_screen->post_type ) ) {
+				$post_type = $current_screen->post_type;
+			}
+			else {
+				// Trying hard to figure out the post type if not yet set.
+				$post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : false;
+				if ( $post_id ) {
+					$post_type = get_post_type( $post_id );
+				} else {
+					$post_type = ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) ? $_REQUEST['post_type'] : false ;
+				}
+			}
+
+			if ( $post_type ) {
+				if ( in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE ) ) ) {
+					return true;
+				}
 			}
 		}
 
-		if ( $post_type ) {
-			if ( in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE ) ) ) {
-				return true;
-			}
-		}
-
-		return false;
+		return apply_filters( 'is_si_admin', $bool );
 	}
 
 	public static function is_estimate_or_invoice() {

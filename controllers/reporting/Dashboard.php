@@ -63,6 +63,9 @@ class SI_Dashboard extends SI_Controller {
 
 		// SI Dashboard
 		if ( self::is_si_dash() ) {
+
+			self::enqueue_general_scripts_styles();
+
 			wp_enqueue_script( 'chartjs' );
 
 			self::si_dashboard_setup();
