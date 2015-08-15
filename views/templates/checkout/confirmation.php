@@ -69,10 +69,10 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 								</h1>	
 							</header><!-- /header -->
 							<?php if ( ! si_get_invoice_balance() ): ?>
-								<?php $status = ( si_has_invoice_deposit() ) ? si__('Deposit Made') : si__('Paid') ; ?>
-								<span id="status" class="paid"><span class="inner_status"><?php echo esc_html( $status ); ?></span></span>
+								<span id="status" class="paid"><span class="inner_status"><?php si_e( 'Paid' ) ?></span></span>
 							<?php else : ?>
-								<span id="status" class="void"><span class="inner_status"><?php si_e('Pending') ?></span></span>
+								<?php $status = ( si_get_invoice_balance() ) ? si__( 'Deposit Made' ) : si__( 'Pending' ) ; ?>
+								<span id="status" class="void"><span class="inner_status"><?php echo esc_html( $status ); ?></span></span>
 							<?php endif ?>
 						</div><!-- #header_logo -->
 
@@ -174,69 +174,11 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 						} ?>
 
 					<section id="doc_line_items_wrap" class="clearfix">
+					
 						<div id="doc_line_items" class="clearfix">
-							<div id="line_items_header">
-								<?php do_action( 'si_document_line_items_header' ) ?>
-								<div class="line_item">
-									<?php echo si_line_item_header_front_end( 'invoices', $has_percentage_adj ) ?>
-								</div>
-							</div>
-							<ol id="items">
-								<?php do_action( 'si_document_line_items' ) ?>
-								<?php foreach ( $line_items as $position => $data ): ?>
-									<?php if ( is_int( $position ) ): // is not a child ?>
-										<li class="item" data-id="<?php echo (float) $position ?>">
-											<?php
-												// get the children of this top level item
-												$children = si_line_item_get_children( $position, $line_items ); ?>
+							
+							<?php do_action( 'si_doc_line_items', get_the_id() ) ?>
 
-											<?php 
-												// build single item
-												echo si_line_item_build( $position, $line_items, $children ) ?>
-
-											<?php if ( !empty( $children ) ): // if has children, loop and show  ?>
-												<ol class="items_list">
-													<?php foreach ( $children as $child_position ): ?>
-														<li class="item" data-id="<?php echo (float) $child_position ?>"><?php echo si_line_item_build( $child_position, $line_items ) ?></li>
-													<?php endforeach ?>
-												</ol>
-											<?php endif ?>
-										</li>
-									<?php endif ?>
-								<?php endforeach ?>
-
-							</ol>
-
-							<footer id="line_items_footer" class="clearfix">
-								<?php do_action( 'si_document_line_items_footer' ) ?>
-								<div id="line_items_totals">
-									<div id="line_subtotal">
-										<b><?php si_e('Subtotal') ?></b>
-										<?php sa_formatted_money( si_get_invoice_subtotal() ) ?>
-									</div>
-									<?php if ( si_get_invoice_taxes_total() ): ?>
-										<div id="line_taxes">
-											<b><?php si_e('Taxes') ?></b>
-											<?php sa_formatted_money( si_get_invoice_taxes_total() ) ?>
-										</div>
-									<?php endif ?>
-									<div id="line_total">
-										<b title="<?php si_e('Total includes discounts and other fees.') ?>" class="helptip"><?php si_e('Total') ?></b>
-										<?php sa_formatted_money( si_get_invoice_calculated_total() ) ?>
-									</div>
-									<?php if ( si_get_invoice_payments_total() ): ?>
-										<hr/>
-										<div id="line_payments">
-											<b><?php si_e('Payments') ?></b>
-											<?php sa_formatted_money( si_get_invoice_payments_total() ) ?>
-										</div>
-										<div id="line_balance">
-											<b><?php si_e('Balance') ?></b>
-											<?php sa_formatted_money( si_get_invoice_balance() ) ?>
-										</div>
-									<?php endif ?>
-								</div>
-							</footer>
 						</div><!-- #doc_line_items -->
 
 					</section>

@@ -90,6 +90,12 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.1**
+
+* NEW: MercadoPago Support (payment button link callback)
+* NEW: Line item total sorting
+* Fix: Misc. Error fixes
+
 **8.0.5**
 
 * Fix: Escaped Addresses

@@ -292,6 +292,7 @@ class SI_Line_Items extends SI_Controller {
 						'value' => si_get_estimate_subtotal( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_estimate_subtotal( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => false,
+						'weight' => 10,
 					),
 				'taxes' => array(
 						'label' => si__( 'Taxes' ),
@@ -299,6 +300,7 @@ class SI_Line_Items extends SI_Controller {
 						'formatted' => sa_get_formatted_money( si_get_estimate_taxes_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_estimate_taxes_total( $doc_id ) ),
 						'admin_hide' => true,
+						'weight' => 20,
 					),
 				'total' => array(
 						'label' => si__( 'Total' ),
@@ -306,9 +308,13 @@ class SI_Line_Items extends SI_Controller {
 						'formatted' => sa_get_formatted_money( si_get_estimate_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'helptip' => self::__( 'Total includes discounts and other fees.' ),
 						'hide' => false,
+						'weight' => 100,
 					),
 			);
-		return apply_filters( 'estimate_line_item_totals', $totals, $doc_id );
+
+		$totals = apply_filters( 'estimate_line_item_totals', $totals, $doc_id );
+		uasort( $totals, array( __CLASS__, 'sort_by_weight' ) );
+		return $totals;
 	}
 
 	/**
@@ -328,6 +334,7 @@ class SI_Line_Items extends SI_Controller {
 						'formatted' => sa_get_formatted_money( si_get_invoice_subtotal( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => false,
 						'admin_hide' => false,
+						'weight' => 10,
 					),
 				'taxes' => array(
 						'label' => si__( 'Taxes' ),
@@ -335,6 +342,7 @@ class SI_Line_Items extends SI_Controller {
 						'formatted' => sa_get_formatted_money( si_get_invoice_taxes_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_invoice_taxes_total( $doc_id ) ),
 						'admin_hide' => true,
+						'weight' => 20,
 					),
 				'total' => array(
 						'label' => si__( 'Total' ),
@@ -343,6 +351,7 @@ class SI_Line_Items extends SI_Controller {
 						'helptip' => self::__( 'Total includes discounts and other fees.' ),
 						'hide' => false,
 						'admin_hide' => true,
+						'weight' => 30,
 					),
 				'payments' => array(
 						'label' => si__( 'Payments' ),
@@ -350,6 +359,7 @@ class SI_Line_Items extends SI_Controller {
 						'formatted' => sa_get_formatted_money( si_get_invoice_payments_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id ) ),
 						'admin_hide' => false,
+						'weight' => 40,
 					),
 				'balance' => array(
 						'label' => si__( 'Balance' ),
@@ -357,9 +367,13 @@ class SI_Line_Items extends SI_Controller {
 						'formatted' => sa_get_formatted_money( si_get_invoice_balance( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( (float) si_get_invoice_balance( $doc_id ) === (float) si_get_invoice_calculated_total( $doc_id ) ),
 						'admin_hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id ) ),
+						'weight' => 100,
 					),
 			);
-		return apply_filters( 'invoice_line_item_totals', $totals, $doc_id );
+
+		$totals = apply_filters( 'invoice_line_item_totals', $totals, $doc_id );
+		uasort( $totals, array( __CLASS__, 'sort_by_weight' ) );
+		return $totals;
 	}
 
 	//////////////

@@ -1,3 +1,9 @@
+= 8.1 =
+
+* NEW: MercadoPago Support (payment button link callback)
+* NEW: Line item total sorting
+* Fix: Misc. Error fixes
+
 = 8.0.5 =
 
 * Fix: Escaped Addresses

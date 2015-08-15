@@ -190,7 +190,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 			if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
 
-				$add_to_js_object['redactor'] += true;
+				$add_to_js_object['redactor'] = true;
 
 				wp_enqueue_script( 'redactor' );
 				wp_enqueue_style( 'redactor' );
