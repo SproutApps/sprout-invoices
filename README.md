@@ -90,8 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
-**8.0.4**
+**8.0.5**
 
+* Fix: Escaped Addresses
+* Fix: Redactor fix from 8.0.4
 * Fix: WooCommerce compatibility with their outdated version of select2
 
 **8.0.3**

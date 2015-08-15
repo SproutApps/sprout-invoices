@@ -182,13 +182,16 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function admin_enqueue() {
+		$add_to_js_object = array();
 		// doc admin templates
 		$screen = get_current_screen();
 		$screen_post_type = str_replace( 'edit-', '', $screen->id );
 		if ( in_array( $screen_post_type, array( SI_Estimate::POST_TYPE, SI_Invoice::POST_TYPE ) ) ) {
 
 			if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
-				$si_js_object['redactor'] = true;
+
+				$add_to_js_object['redactor'] += true;
+
 				wp_enqueue_script( 'redactor' );
 				wp_enqueue_style( 'redactor' );
 			}
@@ -198,7 +201,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			wp_enqueue_script( 'si_admin_est_and_invoices' );
 
 			// add doc info
-			$add_to_js_object = array(
+			$add_to_js_object += array(
 				'doc_status' => get_post_status( get_the_id() )
 			);
 

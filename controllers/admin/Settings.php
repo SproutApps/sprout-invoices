@@ -296,7 +296,7 @@ class SI_Admin_Settings extends SI_Controller {
 			'postal_code' => isset( $_POST['sa_metabox_postal_code'] ) ? $_POST['sa_metabox_postal_code'] : '',
 			'country' => isset( $_POST['sa_metabox_country'] ) ? $_POST['sa_metabox_country'] : '',
 		);
-		return $address;
+		return stripslashes_deep( $address );
 	}
 
 	public static function get_site_address() {
