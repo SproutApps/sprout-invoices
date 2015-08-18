@@ -217,6 +217,9 @@ class SI_Line_Items extends SI_Controller {
 		foreach ( $columns as $key => $column ) {
 			$has_column = false;
 			foreach ( $line_items as $position => $data ) {
+				if ( ! isset( $data['type'] ) ) {
+					$data['type'] = self::DEFAULT_TYPE;
+				}
 				if ( $data['type'] !== $type ) {
 					continue;
 				}

@@ -1,3 +1,7 @@
+= 8.1.1 =
+
+* Fix: PHP Notice suppression on old line items.
+
 = 8.1 =
 
 * NEW: MercadoPago Support (payment button link callback)

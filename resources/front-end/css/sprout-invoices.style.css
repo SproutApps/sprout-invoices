@@ -721,6 +721,10 @@ div#vcards {
 	border: none;
 }
 
+#doc .doc_details p {
+    margin-top: 0px;
+}
+
 .button {
 	background-color: #363B3F;
 	color: #FFF;
@@ -733,6 +737,13 @@ div#vcards {
 .button.print_button {
 	background-color: #ddd;
 	color: #7c7c7c;
+}
+
+#header_additional_info {
+    padding: 1em;
+    background-color: #FAFAFA;
+    width: 100%;
+    margin-top: -50px;
 }
 
 /**

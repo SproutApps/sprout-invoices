@@ -8,9 +8,10 @@
 
 			<?php
 				$children = si_line_item_get_children( $position, $line_items );
-				$has_children = ( ! empty( $children ) ) ? true : false ;  ?>
+				$has_children = ( ! empty( $children ) ) ? true : false ; 
+				$item_type = ( isset( $item_data['type'] ) ) ? $item_data['type'] : SI_Line_Items::DEFAULT_TYPE; ?>
 
-			<li class="item item_type_<?php echo esc_attr( $item_data['type'] ) ?> <?php if ( $has_children ) { echo esc_attr( 'line_item_has_children' ); } ?>" data-id="<?php echo (float) $position ?>">
+			<li class="item item_type_<?php echo esc_attr( $item_type ) ?> <?php if ( $has_children ) { echo esc_attr( 'line_item_has_children' ); } ?>" data-id="<?php echo (float) $position ?>">
 
 				<?php si_front_end_line_item( $item_data, $position, $prev_type, $has_children ) ?>
 
@@ -20,8 +21,8 @@
 
 						<?php foreach ( $children as $child_position => $item_data ) : ?>
 
-							<li class="item sub_item item_type_<?php echo esc_attr( $item_data['type'] ) ?>" data-id="<?php echo (float) $child_position ?>">
-								<?php si_front_end_line_item( $line_items[ $child_position ], $child_position, $item_data['type'], false ) ?>
+							<li class="item sub_item item_type_<?php echo esc_attr( $item_type ) ?>" data-id="<?php echo (float) $child_position ?>">
+								<?php si_front_end_line_item( $line_items[ $child_position ], $child_position, $item_type, false ) ?>
 							</li>
 
 						<?php endforeach ?>
@@ -30,7 +31,7 @@
 
 				<?php endif ?>
 
-				<?php $prev_type = $item_data['type']; ?>
+				<?php $prev_type = $item_type; ?>
 
 			</li>
 

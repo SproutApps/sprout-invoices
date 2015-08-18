@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.1.1**
+
+* Fix: PHP Notice suppression on old line items.
+
 **8.1**
 
 * NEW: MercadoPago Support (payment button link callback)
@@ -630,7 +634,7 @@ Welcome! This is a big update and a big step for us.
 
 * Import progress fix.
 
-**0.9.8.1**
+**0.9.8.1.1**
 
 * Fix deposit and cleanup files
 
