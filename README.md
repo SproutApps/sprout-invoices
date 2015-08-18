@@ -90,6 +90,12 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.2**
+
+* New: Bundled add-on for admin filtering
+* New: Pricing options is a hook for invoice templates
+* New: Filter for attachments
+
 **8.1.1**
 
 * Fix: PHP Notice suppression on old line items.
@@ -634,7 +640,7 @@ Welcome! This is a big update and a big step for us.
 
 * Import progress fix.
 
-**0.9.8.1.1**
+**0.9.8.2**
 
 * Fix deposit and cleanup files
 

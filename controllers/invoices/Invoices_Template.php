@@ -12,6 +12,8 @@ class SI_Invoices_Template extends SI_Controller {
 
 	public static function init() {
 
+		add_action( 'si_invoice_payment_button', array( __CLASS__, 'show_payment_options' ), 100 );
+
 		add_filter( 'si_line_item_content', array( __CLASS__, 'line_item_content_filter' ) );
 
 		// Templating
@@ -38,6 +40,21 @@ class SI_Invoices_Template extends SI_Controller {
 	// Templating //
 	/////////////////
 
+
+	/**
+	 * Set a purchase action since it's a bit convoluted.
+	 * @param  integer $invoice_id
+	 * @return string
+	 */
+	public static function show_payment_options( $invoice_id = 0 ) {
+		if ( ! $invoice_id ) {
+			$invoice_id = get_the_id();
+		}
+		self::load_view( 'templates/invoice/payment-options', array(
+				'id' => $invoice_id,
+				'payment_options' => si_payment_options(),
+			), false );
+	}
 
 	/**
 	 * Remove all actions to wp_print_scripts since stupid themes (and plugins) want to use it as a

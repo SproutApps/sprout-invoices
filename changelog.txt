@@ -1,3 +1,9 @@
+= 8.2 =
+
+* New: Bundled add-on for admin filtering
+* New: Pricing options is a hook for invoice templates
+* New: Filter for attachments
+
 = 8.1.1 =
 
 * Fix: PHP Notice suppression on old line items.
