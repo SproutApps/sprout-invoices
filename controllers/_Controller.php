@@ -936,10 +936,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 				if ( $post_id ) {
 					$post_type = get_post_type( $post_id );
 				} else {
-					$post_type = ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) ? $_REQUEST['post_type'] : false ;
+					$post_type = ( isset( $_REQUEST['post_type'] ) ) ? $_REQUEST['post_type'] : false ;
 				}
 			}
-
 			if ( $post_type ) {
 				if ( in_array( $post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE ) ) ) {
 					return true;

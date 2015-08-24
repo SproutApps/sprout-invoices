@@ -288,7 +288,7 @@ class SI_Invoice extends SI_Post_Type {
 	public function get_balance() {
 		$total = $this->get_calculated_total( false );
 		$paid = $this->get_payments_total( false );
-		$balance = floatval( $total -$paid );
+		$balance = floatval( $total - $paid );
 		if ( $this->get_status() === self::STATUS_PENDING ) {
 			if ( round( $balance, 2 ) < 0.01 ) {
 				$this->set_as_paid();

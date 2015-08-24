@@ -18,6 +18,13 @@ class SI_Compatibility extends SI_Controller {
 		if ( class_exists( 'acf' ) ) {
 			// ACF Fix
 			add_filter( 'post_submitbox_start', array( __CLASS__, '_acf_post_submitbox_start' ) );
+
+			add_action( 'init', array( __CLASS__, 'unregister_select2_from_acf' ), 5 );
+		}
+
+		if ( function_exists( 'ultimatemember_activation_hook' ) ) {
+			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'unregister_select2_from_ultimate_member' ), 10 );
+			add_action( 'do_meta_boxes', array( __CLASS__, 'remove_um_metabox' ), 9 );
 		}
 
 		add_action( 'parse_query', array( __CLASS__, 'remove_seo_header_stuff' ) );
@@ -59,7 +66,7 @@ class SI_Compatibility extends SI_Controller {
 		return $is_post_edit_page;
 	}
 
-	function _acf_post_submitbox_start() {
+	public static function _acf_post_submitbox_start() {
 		if ( ! SI_Controller::is_si_admin() ) {
 			return;
 		}
@@ -72,6 +79,27 @@ class SI_Compatibility extends SI_Controller {
 			})(jQuery);
 			</script>
 		<?php
+	}
+
+	public static function unregister_select2_from_acf() {
+		if ( self::is_si_admin() ) {
+			wp_deregister_script( 'select2' );
+			wp_deregister_style( 'select2' );
+		}
+	}
+
+	public static function unregister_select2_from_ultimate_member() {
+		if ( self::is_si_admin() ) {
+			wp_deregister_script( 'um_minified' );
+			wp_deregister_style( 'um_minified' );
+		}
+	}
+
+	public static function remove_um_metabox() {
+		$post_types = array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Notification::POST_TYPE );
+		foreach ( $post_types as $type ) {
+			remove_meta_box( 'um-admin-access-settings', $type, 'side' );
+		}
 	}
 
 }

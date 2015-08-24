@@ -180,6 +180,9 @@ class SI_Invoices extends SI_Controller {
 		if ( $doc->get_status() != SI_Estimate::STATUS_APPROVED ) {
 			return;
 		}
+		if ( apply_filters( 'si_disable_create_invoice_on_est_acceptance', false, $doc ) ) {
+			return;
+		}
 		$invoice_post_id = self::clone_post( $doc->get_id(), SI_Invoice::STATUS_TEMP, SI_Invoice::POST_TYPE );
 		$invoice = SI_Invoice::get_instance( $invoice_post_id );
 		$invoice->set_sender_note();

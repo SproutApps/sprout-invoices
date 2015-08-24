@@ -109,6 +109,8 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							</header><!-- /header -->
 							<?php if ( si_get_invoice_status() == 'write-off' ) : ?>
 								<span id="status" class="void"><span class="inner_status"><?php si_e( 'Void' ) ?></span></span>
+							<?php elseif ( si_get_invoice_balance() <= si_get_invoice_payments_total() ): ?>
+								<span id="status" class="void"><span class="inner_status"><?php si_e( 'Payment Pending' ) ?></span></span>
 							<?php elseif ( ! si_get_invoice_balance() ) : ?>
 								<span id="status" class="paid"><span class="inner_status"><?php si_e( 'Paid' ) ?></span></span>
 							<?php endif ?>

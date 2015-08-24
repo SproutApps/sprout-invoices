@@ -70,6 +70,8 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 							</header><!-- /header -->
 							<?php if ( ! si_get_invoice_balance() ): ?>
 								<span id="status" class="paid"><span class="inner_status"><?php si_e( 'Paid' ) ?></span></span>
+							<?php elseif ( si_get_invoice_balance() <= si_get_invoice_payments_total() ): ?>
+								<span id="status" class="void"><span class="inner_status"><?php si_e( 'Payment Pending' ) ?></span></span>
 							<?php else : ?>
 								<?php $status = ( si_get_invoice_balance() ) ? si__( 'Deposit Made' ) : si__( 'Pending' ) ; ?>
 								<span id="status" class="void"><span class="inner_status"><?php echo esc_html( $status ); ?></span></span>

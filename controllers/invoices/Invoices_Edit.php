@@ -430,6 +430,8 @@ class SI_Invoices_Edit extends SI_Invoices {
 		// Last thing to do is set the total based on the options set, including the line items.
 		$invoice->set_calculated_total();
 
+		do_action( 'invoice_meta_saved', $invoice );
+
 		$user = get_userdata( get_current_user_id() );
 		do_action( 'si_new_record',
 			sprintf( si__( 'Invoice updated by %s.' ), $user->display_name ),

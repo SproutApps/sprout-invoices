@@ -1600,10 +1600,14 @@ dt span.creation_event:before {
 	display: inline-block
 }
 
-.admin_fields .form-group {
+legend.legend.form-heading {
 	display: block;
 	clear: both;
-	padding: 10px 0
+    font-weight: 800;
+    background-color: #eee;
+    padding: 5px 20px;
+    width: 95%;
+    margin: 20px 0px;
 }
 .admin_fields .form-group.hidden {
 	display: none;

@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.3.1**
+
+* New: Save info meta action hook.
+* New: New add-on compatibility hooks.
+* New: New add-on hook to disable invoice creation.
+* FIX: ACF compatibility fixes.
+* FIX: Select2 compatibility issues with some plugins.
+
 **8.2**
 
 * New: Bundled add-on for admin filtering
@@ -636,11 +644,11 @@ Welcome! This is a big update and a big step for us.
 
 * Dashboard fix
 
-**0.9.8.3**
+**0.9.8.3.1**
 
 * Import progress fix.
 
-**0.9.8.2**
+**0.9.8.3.1**
 
 * Fix deposit and cleanup files
 
