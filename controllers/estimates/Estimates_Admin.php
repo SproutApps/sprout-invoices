@@ -103,7 +103,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 			$screen->add_help_tab( array(
 					'id' => 'edit-estimates',
 					'title' => self::__( 'Editing Estimates' ),
-					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__( 'Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgeable for a complete overview.' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__( 'Knowledgebase Article' ) ),
+					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__( 'Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__( 'Knowledgebase Article' ) ),
 				) );
 
 			$screen->set_help_sidebar(

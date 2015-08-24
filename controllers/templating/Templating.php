@@ -30,6 +30,10 @@ class SI_Templating_API extends SI_Controller {
 		// Add shortcodes
 		add_action( 'init', array( __CLASS__, 'add_shortcodes' ) );
 
+		// SI Info
+		add_action( 'wp_footer', array( __CLASS__, 'add_info_to_footer' ) );
+		add_action( 'si_footer', array( __CLASS__, 'add_info_to_footer' ) );
+
 		// Determine template for estimates or invoices
 		add_filter( 'template_include', array( __CLASS__, 'override_template' ) );
 
@@ -512,6 +516,10 @@ class SI_Templating_API extends SI_Controller {
 		}
 
 		return $files;
+	}
+
+	public static function add_info_to_footer() {
+		printf( '<!-- Sprout Invoices v%s -->', self::SI_VERSION );
 	}
 
 

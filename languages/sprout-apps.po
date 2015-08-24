@@ -2763,7 +2763,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:106
 msgid ""
 "Editing estimates is intentionally easy to do but a review here would "
-"exhaust this limited space. Please review the knowledgeable for a complete "
+"exhaust this limited space. Please review the knowledgebase for a complete "
 "overview."
 msgstr ""
 
@@ -2965,7 +2965,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:263
 msgid ""
 "Editing invoices is intentionally easy to do but a review here would exhaust "
-"this limited space. Please review the knowledgeable for a complete overview."
+"this limited space. Please review the knowledgebase for a complete overview."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Deposit.php:33

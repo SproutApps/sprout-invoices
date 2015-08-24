@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.4**
+
+* NEW: Reduce overall size.
+* Fix: CSV Importing of already imported client users
+* Fix: Invoice template showing "Pending Payment" when balance is zero
+* Fix: Ultimate Member compatibility
+
 **8.3.1**
 
 * New: Save info meta action hook.
@@ -644,11 +651,11 @@ Welcome! This is a big update and a big step for us.
 
 * Dashboard fix
 
-**0.9.8.3.1**
+**0.9.8.4**
 
 * Import progress fix.
 
-**0.9.8.3.1**
+**0.9.8.4**
 
 * Fix deposit and cleanup files
 

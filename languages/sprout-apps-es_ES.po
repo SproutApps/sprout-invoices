@@ -2239,7 +2239,7 @@ msgstr ""
 #: controllers/estimates/Estimates.php:1158
 msgid ""
 "Editing estimates is intentionally easy to do but a review here would "
-"exhaust this limited space. Please review the knowledgeable for a complete "
+"exhaust this limited space. Please review the knowledgebase for a complete "
 "overview."
 msgstr ""
 
@@ -2339,7 +2339,7 @@ msgstr ""
 #: controllers/invoices/Invoices.php:1245
 msgid ""
 "Editing invoices is intentionally easy to do but a review here would exhaust "
-"this limited space. Please review the knowledgeable for a complete overview."
+"this limited space. Please review the knowledgebase for a complete overview."
 msgstr ""
 
 # @ default

@@ -572,23 +572,28 @@ class SI_CSV_Import extends SI_Importer {
 			'last_name' => ( isset( $client['Last Name'] ) ) ? $client['Last Name'] : '',
 		);
 
+		$user_id = 0;
 		if ( $user = get_user_by( 'email', $contact['email'] ) ) {
 			do_action( 'si_error', 'Contact/user imported already', $contact );
-			return $user->ID;
+			$user_id = $user->ID;
 		}
+
 		// Get client and confirm it's validity
 		$client = SI_Client::get_instance( $client_id );
 		if ( ! is_a( $client, 'SI_Client' ) ) {
 			return;
 		}
-		$args = array(
-			'user_login' => ( $contact['username'] ) ? $contact['username'] : $contact['email'],
-			'display_name' => $client->get_title(),
-			'user_email' => $contact['email'],
-			'first_name' => ( $contact['first_name'] ) ? $contact['first_name'] : '',
-			'last_name' => ( $contact['last_name'] ) ? $contact['last_name'] : '',
-		);
-		$user_id = SI_Clients::create_user( $args );
+
+		if ( ! $user_id ) {
+			$args = array(
+				'user_login' => ( $contact['username'] ) ? $contact['username'] : $contact['email'],
+				'display_name' => $client->get_title(),
+				'user_email' => $contact['email'],
+				'first_name' => ( $contact['first_name'] ) ? $contact['first_name'] : '',
+				'last_name' => ( $contact['last_name'] ) ? $contact['last_name'] : '',
+			);
+			$user_id = SI_Clients::create_user( $args );
+		}
 
 		// Assign new user to client.
 		$client->add_associated_user( $user_id );
