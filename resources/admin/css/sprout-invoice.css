@@ -1609,6 +1609,9 @@ legend.legend.form-heading {
     width: 95%;
     margin: 20px 0px;
 }
+.admin_fields .form-group {
+	margin-bottom: 10px;
+}
 .admin_fields .form-group.hidden {
 	display: none;
 }

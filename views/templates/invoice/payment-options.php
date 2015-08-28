@@ -2,7 +2,7 @@
 	$payment_string = ( si_has_invoice_deposit() ) ? si__( 'Pay Deposit' ) : si__( 'Pay Invoice' );
 	 ?>
 <?php if ( count( $payment_options ) === 0 ) : ?>
-	<!-- no payment options -->asd
+	<!-- no payment options -->
 <?php elseif ( count( $payment_options ) === 1 ) : ?>
 	<?php foreach ( $payment_options as $slug => $options ) : ?>
 		<?php if ( isset( $options['purchase_button_callback'] ) ): ?>

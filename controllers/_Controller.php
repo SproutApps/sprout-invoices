@@ -780,7 +780,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'options' => SI_Countries_States::get_country_options( array( 'include_option_none' => ' -- '.self::__( 'Country' ).' -- ' ) ),
 			'attributes' => array( 'class' => 'select2' ),
 		);
-		return apply_filters( 'si_get_standard_address_fields', $fields, $required, $user_id );
+		$billing_fields = apply_filters( 'si_get_standard_address_fields', $fields, $required, $user_id );
+		uasort( $billing_fields, array( __CLASS__, 'sort_by_weight' ) );
+		return $billing_fields;
 	}
 
 	////////////////////

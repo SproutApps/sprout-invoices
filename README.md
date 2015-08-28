@@ -90,6 +90,12 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.5**
+
+* NEW: Payment options templating
+* Fix: Caldera Forms compatibility
+* Update: Improved Sprout Clients compatibility with Client Dashboards
+
 **8.4**
 
 * NEW: Reduce overall size.
@@ -647,15 +653,15 @@ Welcome! This is a big update and a big step for us.
 * Plugin updates fix
 * Add-ons not loading, e.g. Stripe.
 
-**0.9.8.4**
+**0.9.8.5**
 
 * Dashboard fix
 
-**0.9.8.4**
+**0.9.8.5**
 
 * Import progress fix.
 
-**0.9.8.4**
+**0.9.8.5**
 
 * Fix deposit and cleanup files
 

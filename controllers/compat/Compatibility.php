@@ -19,7 +19,11 @@ class SI_Compatibility extends SI_Controller {
 			// ACF Fix
 			add_filter( 'post_submitbox_start', array( __CLASS__, '_acf_post_submitbox_start' ) );
 
-			add_action( 'init', array( __CLASS__, 'unregister_select2_from_acf' ), 5 );
+			add_action( 'init', array( __CLASS__, 'replace_older_select2_with_new' ), 5 );
+		}
+
+		if ( class_exists( 'Caldera_Forms' ) ) {
+			add_action( 'init', array( __CLASS__, 'deregister_select2_for_caldera' ), 15 );
 		}
 
 		if ( function_exists( 'ultimatemember_activation_hook' ) ) {
@@ -81,10 +85,20 @@ class SI_Compatibility extends SI_Controller {
 		<?php
 	}
 
-	public static function unregister_select2_from_acf() {
+	public static function deregister_select2_for_caldera() {
+		if ( self::is_si_admin() ) {
+			wp_deregister_script( 'cf-select2minjs' );
+			wp_deregister_style( 'cf-select2css' );
+		}
+	}
+
+	public static function replace_older_select2_with_new() {
 		if ( self::is_si_admin() ) {
 			wp_deregister_script( 'select2' );
 			wp_deregister_style( 'select2' );
+			// Register the SI version with the old handle
+			wp_register_style( 'select2', SI_URL . '/resources/admin/plugins/select2/css/select2.min.css', null, self::SI_VERSION, false );
+			wp_register_script( 'select2', SI_URL . '/resources/admin/plugins/select2/js/select2.min.js', array( 'jquery' ), self::SI_VERSION, false );
 		}
 	}
 

@@ -1,3 +1,9 @@
+= 8.5 =
+
+* NEW: Payment options templating
+* Fix: Caldera Forms compatibility
+* Update: Improved Sprout Clients compatibility with Client Dashboards
+
 = 8.4 =
 
 * NEW: Reduce overall size.
