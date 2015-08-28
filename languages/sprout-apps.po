@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sprout Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-10 17:59-0800\n"
-"PO-Revision-Date: 2015-08-10 18:00-0800\n"
+"POT-Creation-Date: 2015-08-28 14:36-0800\n"
+"PO-Revision-Date: 2015-08-28 14:36-0800\n"
 "Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
 "Language-Team: Sprout Venture <l18n@sproutapps.co>\n"
 "Language: en_US\n"
@@ -58,28 +58,33 @@ msgid "Notifications Sent"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-advanced-tax/inc/SI_Advanced_Tax.php:25
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:166
 msgid "HST"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-advanced-tax/inc/SI_Advanced_Tax.php:33
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:174
 msgid "PST"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:53
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:82
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:83
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:208
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:253
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:154
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:218
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:131
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:17
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:137
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:304
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:340
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:309
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:351
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:657
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:26
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:224
 msgid "Total"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:56
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:157
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:111
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:97
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:144
@@ -90,21 +95,23 @@ msgid "Amount"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:65
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:182
 msgid "GST"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:81
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:82
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:187
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:263
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:355
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:217
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:130
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:368
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/invoices.php:27
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:158
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:234
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:188
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:160
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:174
 msgid "Balance"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:88
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:89
 msgid "Total (Inclusive of GST)"
 msgstr ""
 
@@ -147,17 +154,17 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:83
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:113
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:84
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:86
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:83
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:114
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:100
 msgid "From"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:93
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:123
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:94
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:96
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:93
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:124
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:110
 msgid "To"
 msgstr ""
 
@@ -167,9 +174,9 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/records/Records_Admin_Table.php:202
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/clients.php:22
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:22
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:113
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:115
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:112
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:143
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:129
 msgid "Date"
 msgstr ""
 
@@ -182,9 +189,9 @@ msgstr ""
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:155
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:158
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/information.php:152
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:126
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:128
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:125
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:156
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:142
 msgid "PO Number"
 msgstr ""
 
@@ -203,27 +210,27 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:196
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:243
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:226
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:140
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:13
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:291
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:326
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:294
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:335
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:27
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:214
 msgid "Subtotal"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:202
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:248
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:297
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:333
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:219
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:235
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:301
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:343
 msgid "Taxes"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:208
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:253
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:307
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:343
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:224
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:312
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:354
 msgid "Total includes discounts and other fees."
 msgstr ""
 
@@ -233,9 +240,9 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Checks.php:137
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/notes.php:13
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/notes.php:13
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:249
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:193
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:165
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:211
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:197
 msgid "Notes"
 msgstr ""
 
@@ -243,9 +250,9 @@ msgstr ""
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:286
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/notes.php:9
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/notes.php:9
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:259
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:203
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:175
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:220
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:206
 msgid "Terms"
 msgstr ""
 
@@ -259,32 +266,34 @@ msgstr ""
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:43
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:43
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:215
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:260
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:246
 msgid "View Message"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:292
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:345
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:289
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:233
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:234
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:279
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:265
 msgid "Powered by Sprout Invoices"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:39
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:38
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:40
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:41
 #, php-format
 msgid "Invoice %s"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:43
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:44
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:48
+#: plugins/sprout-invoices-pro/views/templates/invoice/payment-options.php:2
 msgid "Pay Deposit"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:43
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:44
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:48
+#: plugins/sprout-invoices-pro/views/templates/invoice/payment-options.php:2
 msgid "Pay Invoice"
 msgstr ""
 
@@ -294,13 +303,13 @@ msgstr ""
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:24
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:24
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:59
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:90
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:74
 msgid "Invoice"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:102
 #: plugins/sprout-invoices-pro/models/Payment.php:57
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:103
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:87
 msgid "Void"
 msgstr ""
 
@@ -311,35 +320,35 @@ msgstr ""
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:27
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:10
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:72
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:105
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:91
 msgid "Paid"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:148
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:119
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:149
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:121
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:135
 msgid "Invoice Number"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:162
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:133
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:163
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:135
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:149
 msgid "Invoice Due"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:171
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:181
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:134
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:142
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:152
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:172
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:182
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:144
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:154
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:158
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:168
 msgid "Invoice Total"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:176
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:147
-#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:177
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:149
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:163
 msgid "Deposit Total"
 msgstr ""
 
@@ -348,25 +357,58 @@ msgstr ""
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:215
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:86
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:116
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:348
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:360
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:45
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:46
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:188
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:215
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:218
 #: plugins/sprout-invoices-pro/importers/CSV.php:72
 #: plugins/sprout-invoices-pro/views/admin/dashboards/payments-chart.php:49
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/balances-chart.php:39
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/payments-chart.php:40
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:230
 msgid "Payments"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:110
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:51
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:65
+msgid "Additional Company Info"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:57
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:73
+msgid "Business Number"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:97
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:287
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:318
+msgid "VAT"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:102
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:323
+msgid ""
+"A value added tax identification number or VAT identification number (VATIN) "
+"is used in many countries, for value added tax purposes...but you knew "
+"already."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:142
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:363
+#, php-format
+msgid "<em>VAT: %s</em>"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:243
+msgid "Total (Inclusive of Taxes)"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:112
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:161
 msgid "Error: No Dashboard Found (code: 002)."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:233
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:240
 msgid "Client Dashboard (auto generated)"
 msgstr ""
 
@@ -550,8 +592,8 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:8
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:14
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:302
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:392
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:306
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:396
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:64
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history-premium.php:54
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:19
@@ -590,8 +632,8 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:25
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:22
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:318
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:408
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:322
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:412
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:31
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:74
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:111
@@ -614,8 +656,8 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:26
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:23
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:319
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:409
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:323
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:413
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:32
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:75
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:112
@@ -757,7 +799,7 @@ msgid "Outstanding Balances &amp; Payments"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:205
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:291
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:294
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/balances-chart.php:29
 msgid "Invoice Balances"
 msgstr ""
@@ -779,7 +821,7 @@ msgid "Statuses from payments from the last 3 weeks"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:302
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:309
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:312
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices-status-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:2
 msgid "Invoice Status"
@@ -798,7 +840,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-status-chart.php:40
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:37
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:8
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:75
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:76
 msgid "Pending"
 msgstr ""
 
@@ -890,7 +932,7 @@ msgid "No recently expired or pending estimates."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:487
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:318
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:321
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates-invoices-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-invoices-chart.php:2
 msgid "Estimates &amp; Invoices"
@@ -901,7 +943,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:367
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:70
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:388
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:214
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:217
 #: plugins/sprout-invoices-pro/importers/CSV.php:58
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates-invoices-chart.php:36
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-invoices-chart.php:31
@@ -914,7 +956,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:366
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:228
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:387
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:213
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:216
 #: plugins/sprout-invoices-pro/importers/CSV.php:65
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates-invoices-chart.php:46
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-invoices-chart.php:41
@@ -977,9 +1019,87 @@ msgstr ""
 msgid "Missing shortcode type: e.g. ["
 msgstr ""
 
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:40
+msgid "Estimate Acceptance Actions"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:73
+msgid "Disable Invoice Creation"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:77
+msgid ""
+"After an estimate is accepted an invoice is created. Checking this option "
+"will disable that action."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:83
+msgid "Redirect to Invoice"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:87
+msgid ""
+"After an estimate is accepted an invoice is created. This will redirect the "
+"client to the new invoice."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:94
+msgid "Invoice Deposit"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:99
+msgid ""
+"This will be used when the invoice is created to set the deposit for the "
+"initial payment."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:71
+msgid "VAT Number"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:78
+msgid "Additional Info for Invoices/Estimates"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:82
+msgid ""
+"Additional info displayed on Invoices and Estimates. Example information: "
+"TVA identification, Banking info."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:86
+msgid "Invoice Numbering: Prefix"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:93
+msgid "Invoice Numbering: Start"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:112
+msgid "Exclusive of Taxes"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:115
+msgid "TVA Rate, e.g. 0, 6, 12, 21."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:151
+#, php-format
+msgid "Tax: %s&#37;"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:161
+msgid "TVA"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:169
+msgid "Inclusive of Taxes"
+msgstr ""
+
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:69
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:90
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:112
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:31
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:33
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:27
 msgid "No forms found"
@@ -1007,10 +1127,12 @@ msgid "Select the submission form built with <a href=\"%s\">Ninja Forms</a>."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:117
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:36
 msgid "(no title)"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:123
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:42
 msgid "Formidable ID"
 msgstr ""
 
@@ -1035,6 +1157,7 @@ msgid "Form ID Mapping"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:180
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:79
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:81
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:77
 msgid "Subject/Title"
@@ -1045,6 +1168,7 @@ msgid "Requirements"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:182
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:81
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:83
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:79
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:546
@@ -1054,6 +1178,7 @@ msgid "Email"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:183
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:82
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:84
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:80
 msgid "Client/Company Name"
@@ -1078,38 +1203,43 @@ msgid "Address Fields"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:192
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:83
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:81
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:703
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:704
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:730
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:731
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:601
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:602
 msgid "First Name"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:192
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:84
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:82
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:710
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:711
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:737
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:738
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:608
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:609
 msgid "Last Name"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:193
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:87
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:85
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:717
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:718
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:744
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:745
 msgid "Street Address"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:194
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:88
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:86
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:725
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:726
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:752
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:753
 msgid "City"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:195
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:89
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:87
 msgid "State/Province"
 msgstr ""
@@ -1119,9 +1249,10 @@ msgid "Postal Code"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:197
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:91
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:89
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:750
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:753
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:777
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:780
 msgid "Country"
 msgstr ""
 
@@ -1151,14 +1282,14 @@ msgid "Estimate Submitted: Form %s."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:83
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:212
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:215
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:783
 msgid "Dashboard"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:87
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1053
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:216
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:219
 #: plugins/sprout-invoices-pro/importers/CSV.php:51
 msgid "Clients"
 msgstr ""
@@ -1201,17 +1332,37 @@ msgstr ""
 msgid "Invoice Submitted: Form %s."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:53
-msgid "Gravity Form ID Mapping"
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:47
+#, php-format
+msgid "Select the submission form built with <a href=\"%s\">Formidables</a>."
 msgstr ""
 
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:51
+msgid "Formidable ID Mapping"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:59
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:61
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:57
 msgid "Invoice Submission"
 msgstr ""
 
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:80
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:82
 msgid "Pre-defined Item Selection (Checkboxes Field)"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:90
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:88
+msgid "Zip/Postal"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:101
+msgid "SI Line Items"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:53
+msgid "Gravity Form ID Mapping"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:40
@@ -1225,10 +1376,6 @@ msgstr ""
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:78
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:96
 msgid "Invoice Items"
-msgstr ""
-
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:88
-msgid "Zip/Postal"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:112
@@ -1408,15 +1555,15 @@ msgid ""
 "magic you'd come to expect from the Wall-Crawler."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:73
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:79
 msgid "Item Label"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:79
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:85
 msgid "Default Description"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:87
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:93
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:1361
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Admin_Table.php:89
 #: plugins/sprout-invoices-pro/controllers/records/Records_Admin_Table.php:116
@@ -1426,57 +1573,57 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:94
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:100
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:439
 msgid "Default Rate"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:101
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:107
 msgid "Default Qty"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:108
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:114
 msgid "Default %"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:115
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:121
 msgid "Default SKU (if product)"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:142
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:253
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:337
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:148
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:259
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:343
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:277
 msgid "User cannot create an item!"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:147
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:153
 msgid "Not secure!"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:151
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:157
 msgid "No id given!"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:155
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:161
 msgid "Something is wrong!"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:262
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:346
-#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:459
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:268
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:352
+#: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:481
 msgid "No item given!"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:301
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:307
 msgid "Create Pre-defined Item"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:303
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:309
 msgid "Manage Pre-defined Items"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:305
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:311
 msgid "Edit a Pre-defined Item"
 msgstr ""
 
@@ -1505,54 +1652,58 @@ msgstr ""
 msgid "Edit Item"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:62
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:64
 msgid "Recurring Invoice Creation"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:85
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:87
 #, php-format
 msgid ""
 "This invoice was created from a recurring invoice: <a href=\"%s\">%s</a>"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:133
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:135
 msgid ""
 "Check if this invoice should be recurring and be cloned on the frequency "
 "below."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:140
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:142
 msgid "Recurring Invoice"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:149
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:151
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:322
 msgid "Start Date"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:156
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:158
 msgid "Frequency"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:159
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:161
 msgid "Weekly"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:160
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:162
 msgid "Monthly"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:162
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:164
 msgid "Yearly"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:163
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:165
 msgid "Custom"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:174
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:176
 #, php-format
 msgid "Created Every %s Days"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:449
+msgid "Recurring Invoice Settings"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/views/admin/meta-boxes/invoices/recurring.php:6
@@ -1560,35 +1711,39 @@ msgstr ""
 msgid "Generation History"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:63
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:66
 msgid "Recurring Invoice Payment"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:122
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:125
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/views/admin/meta-boxes/invoices/subscription-payments.php:5
 msgid "Recurring Payment"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:126
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:129
 msgid "This will enable recurring payments."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:131
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:134
 msgid "Term"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:141
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:144
 msgid "Unit for billing during this subscription period."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:146
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:149
 msgid "Duration"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:150
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:153
 msgid ""
 "Number of billing periods that make up one billing cycle. Note: If the "
 "billing period is SemiMonth, the billing frequency must be 1."
+msgstr ""
+
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:342
+msgid "Subscription Payments Settings"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/views/admin/meta-boxes/invoices/subscription-payments.php:5
@@ -1666,8 +1821,8 @@ msgid "In hours, e.g. 1.25 for 75 minutes."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:399
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:603
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:617
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:607
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:619
 msgid "Note"
 msgstr ""
 
@@ -1722,7 +1877,7 @@ msgstr ""
 msgid "No unbilled time from your most recent projects."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking-unbilled.php:75
+#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking-unbilled.php:80
 msgid "Import Time into an Invoice"
 msgstr ""
 
@@ -1842,7 +1997,7 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:23
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:569
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:138
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:141
 #: plugins/sprout-invoices-pro/controllers/templating/Customizer.php:59
 msgid "Sprout Invoices"
 msgstr ""
@@ -1910,13 +2065,13 @@ msgid "Order #%s"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:242
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:296
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:386
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:300
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:390
 msgid "invoice"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-zapier/inc/Zapier_Routes.php:258
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:931
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:967
 #: plugins/sprout-invoices-pro/controllers/api/JSON_API.php:429
 msgid "Something failed."
 msgstr ""
@@ -1937,14 +2092,14 @@ msgstr ""
 msgid "This is the API url you will give Zapier to integrate with your site."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:176
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:175
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
 "\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:183
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:182
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
@@ -1952,11 +2107,11 @@ msgid ""
 "\">update now</a>."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:328
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:327
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:328
+#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:327
 msgid "Error"
 msgstr ""
 
@@ -1972,42 +2127,42 @@ msgstr ""
 msgid "Bummer. Maybe next time?"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:255
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:282
 msgid "Once a Minute"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:259
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:286
 msgid "15 Minutes"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:263
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:290
 msgid "Twice Hourly"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:733
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:734
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:760
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:761
 msgid "ZIP Code"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:741
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:743
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:768
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:770
 msgid "State"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:801
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:830
 msgid "Private note failed to save, try again."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:805
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:834
 #: plugins/sprout-invoices-pro/controllers/records/Internal_Records.php:217
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1015
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1018
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:21
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:21
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:21
 msgid "Private Note"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/_Controller.php:806
+#: plugins/sprout-invoices-pro/controllers/_Controller.php:835
 msgid "Just now"
 msgstr ""
 
@@ -2249,7 +2404,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:647
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:93
 #: plugins/sprout-invoices-pro/controllers/developer/Logs.php:45
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:775
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:776
 msgid "Advanced"
 msgstr ""
 
@@ -2265,7 +2420,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1104
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:110
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:267
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:786
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:787
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:596
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:217
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:537
@@ -2278,7 +2433,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1105
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:111
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:268
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:787
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:788
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:597
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:218
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:538
@@ -2309,7 +2464,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1106
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:112
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:269
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:788
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:789
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Payment_Processors.php:598
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:219
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:539
@@ -2322,7 +2477,7 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/admin/Settings_API.php:170
 #: plugins/sprout-invoices-pro/controllers/admin/Settings_API.php:171
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:138
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:141
 msgid "Sprout Apps"
 msgstr ""
 
@@ -2344,7 +2499,7 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/checkout/Checkouts.php:148
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:215
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1056
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1059
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:80
 msgid "Payment"
 msgstr ""
@@ -2379,9 +2534,9 @@ msgid "History"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:312
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:504
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:508
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Premium.php:59
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:516
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:518
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Premium.php:68
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:240
 #: plugins/sprout-invoices-pro/controllers/projects/Projects_Premium.php:55
@@ -2459,7 +2614,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_EC.php:177
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:186
 #: plugins/sprout-invoices-addon-paypal-ec/SI_Paypal_EC.php:177
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:207
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:213
 msgid "Currency Code"
 msgstr ""
 
@@ -2833,55 +2988,55 @@ msgstr ""
 msgid "Terms & Notes"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:423
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:427
 #, php-format
 msgid "Estimate updated by %s."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:426
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:438
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:430
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:440
 #, php-format
 msgid "Data updated for %s."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:440
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:444
 msgid "Save this estimate before sending."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:567
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:579
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:571
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:581
 msgid "Sender"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:587
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:601
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:591
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:603
 msgid "client@email.com"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:587
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:601
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:591
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:603
 msgid ""
 "Entering an email will prevent some notification shortcodes from working "
 "since there is no client."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:590
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:604
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:594
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:606
 msgid "Send me a copy"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:596
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:610
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:600
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:612
 msgid "Recipients"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:596
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:600
 msgid ""
 "A notification will be sent if recipients are selected and this estimate is "
 "saved."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:606
+#: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:610
 msgid ""
 "This note will be added to the Estimate Notification via the [admin_note] "
 "shortcode."
@@ -2914,7 +3069,7 @@ msgstr ""
 msgid "Estimate viewed by %s."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/i18n/Countries_States.php:734
+#: plugins/sprout-invoices-pro/controllers/i18n/Countries_States.php:578
 msgid "Select"
 msgstr ""
 
@@ -3004,22 +3159,22 @@ msgstr ""
 msgid "Invoice History"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:435
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:437
 #, php-format
 msgid "Invoice updated by %s."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:452
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:454
 msgid "Save this invoice before sending."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:610
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:612
 msgid ""
 "A notification will be sent if recipients are selected and this invoice is "
 "saved."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:620
+#: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:622
 msgid ""
 "This note will be added to the Invoice Notification via the [admin_note] "
 "shortcode."
@@ -3449,49 +3604,49 @@ msgstr ""
 msgid "%s Shortcodes"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:504
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:505
 #, php-format
 msgid "Notification sent to %s."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:757
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:758
 msgid "About Notifications"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:758
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:759
 msgid ""
 "Notifications include the emails sent to you and your clients, including "
 "responses to prospective clients after submitting an estimate request."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:758
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:759
 msgid ""
 "Each one of your notifications can be customized; hover over the "
 "notification you want and click the edit link."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:763
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:764
 msgid "Disable Notifications"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:764
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:765
 msgid ""
 "The notifications edit screen will have an option next to the \"Update\" "
 "button to disable the notification from being sent."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:769
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:770
 msgid "Notification Editing"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:770
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
 "<b>Subject</b> - The first input is for the notifications subject. If the "
 "notification is an e-mail than it would be subject line for that e-mail "
 "notification."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:770
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
 "<b>Message Body</b> - The main editor is the notification body. Use the "
 "available shortcodes to have dynamic information included when the "
@@ -3499,13 +3654,13 @@ msgid ""
 "HTML formatting is added to your notifications."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:770
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
 "<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for "
 "each."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:770
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
 "<b>Update</b> - The select list can be used if you want to change the "
 "current notification to a different type; it’s recommended you go to the "
@@ -3513,11 +3668,11 @@ msgid ""
 "option available to prevent this notification from sending."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:781
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:782
 msgid "Notifications Cleanup"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:782
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:783
 msgid ""
 "In an earlier version of Sprout Invoices numerous notifications were "
 "improperly created. Click refresh below to delete all extraneous "
@@ -3525,7 +3680,7 @@ msgid ""
 "notifications before continuing."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:782
+#: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:783
 msgid "Clean"
 msgstr ""
 
@@ -3769,14 +3924,14 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_EC.php:145
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:154
 #: plugins/sprout-invoices-addon-paypal-ec/SI_Paypal_EC.php:145
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:168
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:174
 msgid "Mode"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_EC.php:149
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:158
 #: plugins/sprout-invoices-addon-paypal-ec/SI_Paypal_EC.php:149
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:172
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:178
 msgid "Live"
 msgstr ""
 
@@ -3842,7 +3997,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_EC.php:909
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:702
 #: plugins/sprout-invoices-addon-paypal-ec/SI_Paypal_EC.php:910
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:658
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:729
 #, php-format
 msgid "<b>Current Payment Status:</b> <code>%s</code>"
 msgstr ""
@@ -3868,8 +4023,8 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:84
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:94
 #: plugins/sprout-invoices-pro/views/templates/checkout/credit-card/form.php:12
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:94
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:105
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:96
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:107
 msgid "Credit Card"
 msgstr ""
 
@@ -3910,7 +4065,7 @@ msgid "Are you sure? This will mark the payment as complete."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:158
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:282
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:285
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:81
 msgid "Invoice Payments"
 msgstr ""
@@ -3979,7 +4134,7 @@ msgid "Associated records cannot be found."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:132
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1063
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1066
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:29
 msgid "Payment Total"
 msgstr ""
@@ -4115,31 +4270,31 @@ msgstr ""
 msgid "Association"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:115
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:118
 msgid "Reports Dashboard"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:116
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:119
 msgid "Reports"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:260
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:263
 msgid "Invoices Dashboard"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:269
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:272
 msgid "Estimates Dashboard"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:300
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:303
 msgid "Payments Status"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:327
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:330
 msgid "Estimate Requests Converted"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:336
+#: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:339
 msgid "Estimates Status"
 msgstr ""
 
@@ -4228,48 +4383,48 @@ msgstr ""
 msgid "Estimate Highlight Color"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:88
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:98
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:92
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:102
 msgid "Default Template"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:296
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:386
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:300
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:390
 msgid "estimate"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:299
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:389
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:303
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:393
 #, php-format
 msgid "Select a custom %s template."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:302
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:392
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:306
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:396
 msgid "Select different template"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:314
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:404
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:318
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:408
 #, php-format
 msgid "No <a href=\"%s\" target=\"_blank\">Custom Templates</a> Found"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:334
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:338
 msgid "Invoice Template"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:337
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:341
 msgid ""
 "This invoice template will override the default invoice template, unless "
 "another template is selected when creating/editing an invoice."
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:341
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:345
 msgid "Estimate Template"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:344
+#: plugins/sprout-invoices-pro/controllers/templating/Templating.php:348
 msgid ""
 "This estimate template will override the default estimate template, unless "
 "another template is selected when creating/editing an estimate."
@@ -5126,27 +5281,27 @@ msgstr ""
 msgid "New Project: %s"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1019
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1022
 msgid "Updated"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1023
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1026
 msgid "Viewed"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1027
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1030
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:33
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:25
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:25
 msgid "Notification"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1031
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1034
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:37
 msgid "Invoice Created"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1035
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1038
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history-premium.php:13
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history.php:13
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/history-premium.php:13
@@ -5154,11 +5309,11 @@ msgstr ""
 msgid "Submitted"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1039
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1042
 msgid "Imported"
 msgstr ""
 
-#: plugins/sprout-invoices-pro/template-tags/invoices.php:1044
+#: plugins/sprout-invoices-pro/template-tags/invoices.php:1047
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:42
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history-premium.php:30
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/history.php:30
@@ -5552,7 +5707,7 @@ msgstr ""
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:77
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/submit.php:16
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history-premium.php:66
-#: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/line-items.php:31
+#: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/line-items.php:34
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/history-premium.php:70
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/line-items.php:35
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/notifications/submit.php:16
@@ -5594,7 +5749,7 @@ msgid "Publish"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/submit.php:103
-#: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/line-items.php:34
+#: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/line-items.php:37
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/line-items.php:38
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/notifications/submit.php:60
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/projects/submit.php:67
@@ -6098,12 +6253,17 @@ msgid "<b>Delete:</b> Trash Invoice"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:42
-#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:72
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:76
 msgid "Deposit Made"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:42
 msgid "Paid in Full"
+msgstr ""
+
+#: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:74
+#: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:89
+msgid "Payment Pending"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/views/templates/checkout/credit-card/form.php:7
@@ -6118,50 +6278,67 @@ msgstr ""
 msgid "Submit Order"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:76
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:78
 msgid "Stripe"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:163
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:169
 msgid "Stripe Settings"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:173
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:179
 msgid "Test"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:179
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:185
 msgid "Live Secret Key"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:186
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:192
 msgid "Live Publishable Key"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:193
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:199
 msgid "Test Secret Key"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:200
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:206
 msgid "Test Publishable Key"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:215
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:221
+msgid "Use Stripe Checkout"
+msgstr ""
+
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:223
+msgid ""
+"Stripe Checkout uses a slick modal pop-up to handle the credit card payment."
+msgstr ""
+
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:227
+msgid ""
+"Disable if you rather use the credit card form that is integrated with "
+"Sprout Invoices."
+msgstr ""
+
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:231
 msgid "Disable Stripe JS"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:217
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:233
 msgid "Disable Stripe.js"
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:221
-msgid "Only recommended if you're running a site with SSL already."
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:237
+msgid ""
+"Only recommended if you're running a site with SSL already. Don't bother "
+"with this setting if Stripe Checkout is used."
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:292
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:360
 msgid "This is a secure SSL encrypted payment."
 msgstr ""
 
-#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:660
+#: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:731
 msgid "Stripe Subscription ID: "
 msgstr ""
