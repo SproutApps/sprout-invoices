@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**8.6**
+
+* NEW: Sprout Billings Support
+* NEW: Recurring dashboard updates
+* NEW: Form field wrapper classes
+* Fix: PayPal "Adjustment" resolution
+* OPT: Prevent looping of meta_box saves
+
 **8.5**
 
 * NEW: Payment options templating
@@ -653,15 +661,15 @@ Welcome! This is a big update and a big step for us.
 * Plugin updates fix
 * Add-ons not loading, e.g. Stripe.
 
-**0.9.8.5**
+**0.9.8.6**
 
 * Dashboard fix
 
-**0.9.8.5**
+**0.9.8.6**
 
 * Import progress fix.
 
-**0.9.8.5**
+**0.9.8.6**
 
 * Fix deposit and cleanup files
 

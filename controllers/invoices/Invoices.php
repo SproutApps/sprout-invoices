@@ -186,6 +186,7 @@ class SI_Invoices extends SI_Controller {
 		$invoice_post_id = self::clone_post( $doc->get_id(), SI_Invoice::STATUS_TEMP, SI_Invoice::POST_TYPE );
 		$invoice = SI_Invoice::get_instance( $invoice_post_id );
 		$invoice->set_sender_note();
+		do_action( 'si_create_invoice_on_est_acceptance', $invoice, $doc );
 		return $invoice_post_id;
 	}
 

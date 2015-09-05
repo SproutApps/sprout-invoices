@@ -592,6 +592,11 @@ class SA_Settings_API extends SI_Controller {
 			return;
 		}
 
+		// don't re-run and prevent looping
+		if ( did_action( 'save_post' ) > 1 ) {
+			return;
+		}
+
 		foreach ( self::$meta_boxes as $post_type => $post_meta_boxes ) {
 			// Only save the meta boxes that count
 			if ( $post->post_type == $post_type ) {

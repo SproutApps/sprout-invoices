@@ -1,3 +1,11 @@
+= 8.6 =
+
+* NEW: Sprout Billings Support
+* NEW: Recurring dashboard updates
+* NEW: Form field wrapper classes
+* Fix: PayPal "Adjustment" resolution
+* OPT: Prevent looping of meta_box saves
+
 = 8.5 =
 
 * NEW: Payment options templating
