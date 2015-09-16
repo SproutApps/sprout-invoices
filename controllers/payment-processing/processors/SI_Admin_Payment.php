@@ -123,7 +123,7 @@ class SI_Admin_Payment extends SI_Controller {
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
-				'default' => date_i18n( get_option( 'date_format' ) ),
+				'default' => date_i18n( 'Y-m-d' ),
 			),
 			'payment_notes' => array(
 				'type' => 'textarea',

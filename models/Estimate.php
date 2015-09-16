@@ -171,11 +171,12 @@ class SI_Estimate extends SI_Post_Type {
 			'discount' => '',
 			'tax' => (float) 0,
 			'tax2' => (float) 0,
-			'notes' => '',
-			'terms' => '',
+			'notes' => SI_Estimates_Edit::get_default_terms(),
+			'terms' => SI_Estimates_Edit::get_default_notes(),
 			'issue_date' => time(),
 			'expiration_date' => 0,
 			'line_items' => array(),
+			'fields' => array(),
 		);
 		$args = wp_parse_args( $passed_args, $defaults );
 
@@ -190,8 +191,8 @@ class SI_Estimate extends SI_Post_Type {
 
 		$estimate = self::get_instance( $id );
 
-		if ( isset( $fields ) ) {
-			$estimate->set_submission_fields( $fields );
+		if ( isset( $args['fields'] ) ) {
+			$estimate->set_submission_fields( $args['fields'] );
 		}
 
 		// Set the submitted user id if logged in.

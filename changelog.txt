@@ -1,3 +1,11 @@
+= 8.7 =
+
+* NEW: Filter to suppress notifications on an individual basis. #163
+* FIX: Default Terms/Notes for All Estimate/Invoices bug priority. #162
+* UPDATE: Submission Hooks & Line Item Type priority. #161
+* FIX: Report Filtering/Sorting. #159
+* FIX: Estimate Submission Info Missing. #158
+
 = 8.6 =
 
 * NEW: Sprout Billings Support

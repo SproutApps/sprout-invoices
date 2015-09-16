@@ -414,6 +414,12 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return
 	 */
 	public static function send_notification( $notification_name, $data = array(), $to, $from_email = null, $from_name = null, $html = null ) {
+		// Allow for a notification to be suppressed based on data
+		if ( apply_filters( 'si_disable_this_notification', false, $data, $to ) ) {
+			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Suppressed', $data );
+			return;
+		}
+
 		// don't send disabled notifications
 		if ( apply_filters( 'suppress_notifications', false ) || self::is_disabled( $notification_name ) ) {
 			return;

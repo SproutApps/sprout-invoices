@@ -70,6 +70,7 @@ class SI_Line_Items extends SI_Controller {
 								'type' => 'hidden',
 								'placeholder' => '',
 								'calc' => false,
+								'numeric' => false,
 								'weight' => 3,
 							),
 						'rate' => array(
@@ -116,6 +117,7 @@ class SI_Line_Items extends SI_Controller {
 								'label' => si__( 'SKU' ),
 								'type' => 'input',
 								'calc' => false,
+								'numeric' => false,
 								'hide_if_parent' => true,
 								'weight' => 5,
 							),
@@ -164,6 +166,7 @@ class SI_Line_Items extends SI_Controller {
 								'type' => 'hidden',
 								'placeholder' => '',
 								'calc' => false,
+								'numeric' => false,
 								'weight' => 3,
 							),
 						'rate' => array(

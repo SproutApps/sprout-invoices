@@ -235,7 +235,9 @@
 
 	// si.lineItems.forceNumeric() plug-in implementation
 	si.lineItems.forceNumeric = function(element) {
-		element.numeric();
+		if ( element.hasClass('input_value_is_numeric') ) {
+			element.numeric();
+		};
 	}
 
 	/**

@@ -29,6 +29,13 @@
 				$value = ( isset( $item_data[ $column_slug ] ) ) ? $item_data[ $column_slug ] : '' ;
 				$hide_if_parent = ( isset( $column['hide_if_parent'] ) && $column['hide_if_parent'] ) ? 'parent_hide' : '' ;
 
+				$numeric = ( isset( $column['numeric'] ) ) ? $column['numeric'] : true ;
+				$force_numeric = ' input_value_is_numeric'; // add a space at the beginning.
+				if ( ! $numeric ) {
+					$force_numeric = '';
+				}
+
+
 				// start the view
 				$option = '';
 				$wrap = true;
@@ -38,11 +45,13 @@
 						break;
 					case 'small-input':
 						$option .= '<span></span>';
-						$option .= sprintf( '<input class="totalled_input sa_option_text" type="text" name="line_item_%2$s[]" value="%1$s" placeholder="%3$s" size="3">', esc_attr( $value ), $column_slug, $placeholder );
+						$option .= sprintf( '<input class="totalled_input sa_option_text%4$s" type="text" name="line_item_%2$s[]" value="%1$s" placeholder="%3$s" size="3">', esc_attr( $value ), $column_slug, $placeholder, $force_numeric );
 						break;
 					case 'input':
+						
+						error_log( 'log' . print_r( $numeric, TRUE ) );
 						$option .= '<span></span>';
-						$option .= sprintf( '<input class="totalled_input sa_option_text" type="text" name="line_item_%2$s[]" value="%1$s" placeholder="%3$s" size="6">', esc_attr( $value ), $column_slug, $placeholder );
+						$option .= sprintf( '<input class="totalled_input sa_option_text%4$s" type="text" name="line_item_%2$s[]" value="%1$s" placeholder="%3$s" size="6">', esc_attr( $value ), $column_slug, $placeholder, $force_numeric );
 						break;
 					case 'hidden':
 						$wrap = false;
