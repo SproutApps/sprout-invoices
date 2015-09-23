@@ -210,9 +210,11 @@ class SI_Line_Items extends SI_Controller {
 	}
 
 	public static function remove_unnecessary_front_end_columns( $columns = array(), $type = '' ) {
-		if ( is_admin() || ! is_single() ) {
+
+		if ( apply_filters( 'si_remove_unnecessary_front_end_columns', true ) && is_admin() ) {
 			return $columns;
 		}
+
 		$line_items = si_get_doc_line_items( get_the_id() );
 		if ( empty( $columns ) ) {
 			return $columns;

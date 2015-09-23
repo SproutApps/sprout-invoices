@@ -29,7 +29,7 @@
 
 		<?php 
 			$args = array(
-				'post_type' => SI_Invoice::POST_TYPE,
+				'post_type' => SI_Estimate::POST_TYPE,
 				'post_status' => array( SI_Estimate::STATUS_REQUEST ),
 				'posts_per_page' => 3,
 				'fields' => 'ids'
@@ -53,14 +53,15 @@
 		<?php 
 			$args = array(
 				'orderby' => 'modified',
-				'post_type' => SI_Invoice::POST_TYPE,
+				'post_type' => SI_Estimate::POST_TYPE,
 				'post_status' => array( SI_Estimate::STATUS_DECLINED ),
-				'posts_per_page' => 3,
-				'fields' => 'ids'
+				'fields' => 'ids',
 				);
-			$estimates = new WP_Query( $args ); ?>
+			$estimates = new WP_Query( $args ); 
+			error_log( 'estimates: ' . print_r( $estimates, TRUE ) );
+			?>
 
-		<?php if ( !empty( $estimates->posts ) ): ?>
+		<?php if ( ! empty( $estimates->posts ) ): ?>
 			<b><?php self::_e('Recent Declined') ?></b> 
 			<ul>
 				<?php foreach ( $estimates->posts as $estimate_id ): ?>

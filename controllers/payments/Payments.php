@@ -161,6 +161,7 @@ class SI_Payments extends SI_Controller {
 			<?php $wp_list_table->views() ?>
 			<form id="payments-filter" method="get">
 				<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
+				<input type="hidden" name="post_type" value="<?php echo esc_attr( $_REQUEST['post_type'] ); ?>" />
 				<?php $wp_list_table->search_box( self::__( 'Search' ), 'payment_id' ); ?>
 				<?php $wp_list_table->display() ?>
 			</form>

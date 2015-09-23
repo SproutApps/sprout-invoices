@@ -29,7 +29,7 @@
 
 		<?php 
 			$args = array(
-				'post_type' => SI_Invoice::POST_TYPE,
+				'post_type' => SI_Estimate::POST_TYPE,
 				'post_status' => array( SI_Estimate::STATUS_REQUEST ),
 				'posts_per_page' => 3,
 				'fields' => 'ids'
@@ -53,7 +53,7 @@
 		<?php 
 			$args = array(
 				'orderby' => 'modified',
-				'post_type' => SI_Invoice::POST_TYPE,
+				'post_type' => SI_Estimate::POST_TYPE,
 				'post_status' => array( SI_Estimate::STATUS_DECLINED ),
 				'posts_per_page' => 3,
 				'fields' => 'ids'

@@ -91,6 +91,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 ### Changelog
 
 
+**8.7.1**
+
+* NEW: Filter for sending invoices to prevent filters. i.e. fix for PDF add-on. #165
+* FIX: Estimate dashboard not showing current records. #167
+* FIX: Fix for line item comments not showing highlighted icon when a comment is available. #166
+* FIX: Default Terms/Notes transposed in some cases.
+
 **8.7**
 
 * NEW: Filter to suppress notifications on an individual basis. #163
