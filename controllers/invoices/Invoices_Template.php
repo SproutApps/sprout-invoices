@@ -12,7 +12,7 @@ class SI_Invoices_Template extends SI_Controller {
 
 	public static function init() {
 
-		add_action( 'si_invoice_payment_button', array( __CLASS__, 'show_payment_options' ), 100 );
+		add_action( 'si_invoice_payment_button', array( __CLASS__, 'show_payment_options' ), 100, 2 );
 
 		add_filter( 'si_line_item_content', array( __CLASS__, 'line_item_content_filter' ) );
 
@@ -46,13 +46,17 @@ class SI_Invoices_Template extends SI_Controller {
 	 * @param  integer $invoice_id
 	 * @return string
 	 */
-	public static function show_payment_options( $invoice_id = 0 ) {
+	public static function show_payment_options( $invoice_id = 0, $payment_string = '' ) {
 		if ( ! $invoice_id ) {
 			$invoice_id = get_the_id();
+		}
+		if ( '' === $payment_string ) {
+			$payment_string = ( si_has_invoice_deposit( $invoice_id ) ) ? si__( 'Pay Deposit' ) : si__( 'Pay Invoice' );
 		}
 		self::load_view( 'templates/invoice/payment-options', array(
 				'id' => $invoice_id,
 				'payment_options' => si_payment_options(),
+				'payment_string' => $payment_string,
 			), false );
 	}
 

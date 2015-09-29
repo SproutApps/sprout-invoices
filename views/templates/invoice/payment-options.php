@@ -1,6 +1,3 @@
-<?php 
-	$payment_string = ( si_has_invoice_deposit() ) ? si__( 'Pay Deposit' ) : si__( 'Pay Invoice' );
-	 ?>
 <?php if ( count( $payment_options ) === 0 ) : ?>
 	<!-- no payment options -->
 <?php elseif ( count( $payment_options ) === 1 ) : ?>

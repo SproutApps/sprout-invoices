@@ -44,12 +44,12 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 						<?php do_action( 'si_doc_actions_pre' ) ?>
 
-						<?php
-							$payment_string = ( si_has_invoice_deposit() ) ? si__( 'Pay Deposit' ) : si__( 'Pay Invoice' );
-								?>
 						<?php if ( si_get_invoice_balance() && si_get_invoice_status() != 'write-off' ) : ?>
-								
-							<?php do_action( 'si_invoice_payment_button', get_the_ID() ) ?>
+							
+							<?php
+								$payment_string = ( si_has_invoice_deposit() ) ? si__( 'Pay Deposit' ) : si__( 'Pay Invoice' );
+								?>
+							<?php do_action( 'si_invoice_payment_button', get_the_ID(), $payment_string ) ?>
 							
 						<?php endif ?>
 
