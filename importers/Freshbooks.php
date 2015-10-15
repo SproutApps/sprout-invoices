@@ -36,7 +36,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 	}
 
 	public static function register() {
-		self::add_importer( __CLASS__, self::__( 'Freshbooks' ) );
+		self::add_importer( __CLASS__, __( 'Freshbooks', 'sprout-invoices' ) );
 	}
 
 
@@ -53,42 +53,42 @@ class SI_Freshbooks_Import extends SI_Importer {
 				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::FRESHBOOKS_TOKEN_OPTION => array(
-						'label' => self::__( 'Token' ),
+						'label' => __( 'Token', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$freshbooks_token,
-							'attributes' => array( 'placeholder' => self::__(
-							'6c4384e426e4b560d1227f4ad0f88b2c') ),
-							'description' => self::__( 'Get your token form My Account > Freshbooks API ' ),
+							'attributes' => array( 'placeholder' => __( 
+							'6c4384e426e4b560d1227f4ad0f88b2c', 'sprout-invoices' ) ),
+							'description' => __( 'Get your token form My Account > Freshbooks API ', 'sprout-invoices' ),
 						)
 					),
 					self::FRESHBOOKS_ACCOUNT_OPTION => array(
-						'label' => self::__( 'Account/Sub-domain' ),
+						'label' => __( 'Account/Sub-domain', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$freshbooks_account,
-							'attributes' => array( 'placeholder' => self::__(
-							'your-subdomain') ),
-							'description' => self::__( 'https://[subdomain].freshbooks.com' ),
+							'attributes' => array( 'placeholder' => __( 
+							'your-subdomain', 'sprout-invoices' ) ),
+							'description' => __( 'https://[subdomain].freshbooks.com', 'sprout-invoices' ),
 							'sanitize_callback' => array( __CLASS__, 'sanitize_subdomain' ),
 						)
 					),
 					self::PROCESS_ARCHIVED => array(
-						'label' => self::__( 'Import Archived' ),
+						'label' => __( 'Import Archived', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'archived',
-							'label' => self::__( 'Import archived clients.' ),
+							'label' => __( 'Import archived clients.', 'sprout-invoices' ),
 							'description' => ''
 						)
 					),
 					self::DELETE_PROGRESS => array(
-						'label' => self::__( 'Clear Progress' ),
+						'label' => __( 'Clear Progress', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'restart',
-							'label' => self::__( 'Re-start the Import Process' ),
-							'description' => self::__( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.' )
+							'label' => __( 'Re-start the Import Process', 'sprout-invoices' ),
+							'description' => __( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.', 'sprout-invoices' )
 						)
 					),
 					self::PROCESS_ACTION => array(
@@ -177,11 +177,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		$fb->post( array( 'per_page' => 5 ) );
 		$fb->request();
 		if ( ! $fb->success() ) {
-			$error = ( $fb->getError() == 'System does not exist.' ) ? self::__( 'Authentication error.' ) : $fb->getError();
+			$error = ( $fb->getError() == 'System does not exist.' ) ? __( 'Authentication error.', 'sprout-invoices' ) : $fb->getError();
 			self::return_error( $error );
 		}
 		self::return_progress( array( 'authentication' => array(
-					'message' => self::__( 'Communicating with the Freshbooks API...' ),
+					'message' => __( 'Communicating with the Freshbooks API...', 'sprout-invoices' ),
 					'progress' => 99.9,
 					'next_step' => 'clients'
 					) ) );
@@ -216,7 +216,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			$fb->request();
 
 			if ( ! $fb->success() ) {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__( 'Authentication error.' ) : $fb->getError();
+				$error = ( $fb->getError() == 'System does not exist.' ) ? __( 'Authentication error.', 'sprout-invoices' ) : $fb->getError();
 				self::return_error( $error );
 			}
 
@@ -238,15 +238,15 @@ class SI_Freshbooks_Import extends SI_Importer {
 				// Return the progress
 				self::return_progress( array(
 								'authentication' => array(
-								'message' => sprintf( self::__( 'Attempting to import %s contacts and their clients...' ), $total_records ),
+								'message' => sprintf( __( 'Attempting to import %s contacts and their clients...', 'sprout-invoices' ), $total_records ),
 									'progress' => 20 + $progress[$progress_key]
 									),
 								'clients' => array(
-									'message' => sprintf( self::__( 'Imported about %s clients so far.' ), $total_imported ),
+									'message' => sprintf( __( 'Imported about %s clients so far.', 'sprout-invoices' ), $total_imported ),
 									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									),
 								'contacts' => array(
-									'message' => sprintf( self::__( 'Imported more than %s contacts from imported clients.' ), $total_imported ),
+									'message' => sprintf( __( 'Imported more than %s contacts from imported clients.', 'sprout-invoices' ), $total_imported ),
 									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'clients'
 									),
@@ -260,15 +260,15 @@ class SI_Freshbooks_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 							'authentication' => array(
-								'message' => sprintf( self::__( 'Successfully imported %s contacts and their clients...' ), $total_records ),
+								'message' => sprintf( __( 'Successfully imported %s contacts and their clients...', 'sprout-invoices' ), $total_records ),
 								'progress' => 25
 								),
 							'clients' => array(
-								'message' => sprintf( self::__( 'Imported more than %s clients!' ), $total_imported ),
+								'message' => sprintf( __( 'Imported more than %s clients!', 'sprout-invoices' ), $total_imported ),
 								'progress' => 100,
 								),
 							'contacts' => array(
-								'message' => sprintf( self::__( 'More than %s contacts were added and assigned to their clients!' ), $total_imported ),
+								'message' => sprintf( __( 'More than %s contacts were added and assigned to their clients!', 'sprout-invoices' ), $total_imported ),
 								'progress' => 100,
 								'next_step' => 'estimates'
 								),
@@ -278,15 +278,15 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s contacts and their clients already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s contacts and their clients already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 25
 							),
 						'clients' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s clients already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s clients already.', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							),
 						'contacts' => array(
-							'message' => sprintf( self::__( 'Successfully imported more than %s contacts from their clients already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported more than %s contacts from their clients already.', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							'next_step' => 'estimates'
 							),
@@ -326,7 +326,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			$fb->request();
 
 			if ( ! $fb->success() ) {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__( 'Authentication error.' ) : $fb->getError();
+				$error = ( $fb->getError() == 'System does not exist.' ) ? __( 'Authentication error.', 'sprout-invoices' ) : $fb->getError();
 				self::return_error( $error );
 			}
 
@@ -348,11 +348,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 				// Return the progress
 				self::return_progress( array(
 								'authentication' => array(
-									'message' => sprintf( self::__( 'Attempting to import %s estimates...' ), $total_records ),
+									'message' => sprintf( __( 'Attempting to import %s estimates...', 'sprout-invoices' ), $total_records ),
 									'progress' => 25 + $progress[$progress_key]
 									),
 								'estimates' => array(
-									'message' => sprintf( self::__( 'Imported about %s estimates so far.' ), $total_imported ),
+									'message' => sprintf( __( 'Imported about %s estimates so far.', 'sprout-invoices' ), $total_imported ),
 									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'estimates'
 									),
@@ -366,11 +366,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 							'authentication' => array(
-								'message' => sprintf( self::__( 'Successfully imported %s estimates...' ), $total_records ),
+								'message' => sprintf( __( 'Successfully imported %s estimates...', 'sprout-invoices' ), $total_records ),
 								'progress' => 50
 								),
 							'estimates' => array(
-								'message' => sprintf( self::__( 'Imported %s estimates!' ), $total_records ),
+								'message' => sprintf( __( 'Imported %s estimates!', 'sprout-invoices' ), $total_records ),
 								'progress' => 100,
 								'next_step' => 'invoices'
 								),
@@ -380,12 +380,12 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s estimates already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s estimates already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 50
 							),
 						'estimates' => array(
 							'progress' => 100,
-							'message' => sprintf( self::__( 'Successfully imported %s estimates already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s estimates already.', 'sprout-invoices' ), $total_records ),
 							'next_step' => 'invoices'
 							),
 						) );
@@ -424,7 +424,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			$fb->request();
 
 			if ( ! $fb->success() ) {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__( 'Authentication error.' ) : $fb->getError();
+				$error = ( $fb->getError() == 'System does not exist.' ) ? __( 'Authentication error.', 'sprout-invoices' ) : $fb->getError();
 				self::return_error( $error );
 			}
 
@@ -446,11 +446,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 				// Return the progress
 				self::return_progress( array(
 								'authentication' => array(
-									'message' => sprintf( self::__( 'Attempting to import %s invoices...' ), $total_records ),
+									'message' => sprintf( __( 'Attempting to import %s invoices...', 'sprout-invoices' ), $total_records ),
 									'progress' => 50 + $progress[$progress_key]
 									),
 								'invoices' => array(
-									'message' => sprintf( self::__( 'Imported about %s invoices so far.' ), $total_imported ),
+									'message' => sprintf( __( 'Imported about %s invoices so far.', 'sprout-invoices' ), $total_imported ),
 									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'invoices'
 									),
@@ -464,11 +464,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 							'authentication' => array(
-								'message' => sprintf( self::__( 'Successfully imported %s invoices...' ), $total_records ),
+								'message' => sprintf( __( 'Successfully imported %s invoices...', 'sprout-invoices' ), $total_records ),
 								'progress' => 75
 								),
 							'invoices' => array(
-								'message' => sprintf( self::__( 'Imported %s invoices!' ), $total_records ),
+								'message' => sprintf( __( 'Imported %s invoices!', 'sprout-invoices' ), $total_records ),
 								'progress' => 100,
 								'next_step' => 'payments'
 								),
@@ -478,11 +478,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s invoices already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s invoices already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 75
 							),
 						'invoices' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s invoices already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s invoices already.', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							'next_step' => 'payments'
 							),
@@ -522,7 +522,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			$fb->request();
 
 			if ( ! $fb->success() ) {
-				$error = ( $fb->getError() == 'System does not exist.' ) ? self::__( 'Authentication error.' ) : $fb->getError();
+				$error = ( $fb->getError() == 'System does not exist.' ) ? __( 'Authentication error.', 'sprout-invoices' ) : $fb->getError();
 				self::return_error( $error );
 			}
 
@@ -544,11 +544,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 				// Return the progress
 				self::return_progress( array(
 								'authentication' => array(
-									'message' => sprintf( self::__( 'Attempting to import %s payments...' ), $total_records ),
+									'message' => sprintf( __( 'Attempting to import %s payments...', 'sprout-invoices' ), $total_records ),
 									'progress' => 75 + $progress[$progress_key]
 									),
 								'payments' => array(
-									'message' => sprintf( self::__( 'Imported about %s payments so far.' ), $total_imported ),
+									'message' => sprintf( __( 'Imported about %s payments so far.', 'sprout-invoices' ), $total_imported ),
 									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'payments'
 									),
@@ -562,11 +562,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 							'authentication' => array(
-								'message' => sprintf( self::__( 'Successfully imported %s payments...' ), $total_records ),
+								'message' => sprintf( __( 'Successfully imported %s payments...', 'sprout-invoices' ), $total_records ),
 								'progress' => 100
 								),
 							'payments' => array(
-								'message' => sprintf( self::__( 'Imported %s payments!' ), $total_records ),
+								'message' => sprintf( __( 'Imported %s payments!', 'sprout-invoices' ), $total_records ),
 								'progress' => 100,
 								'next_step' => 'complete'
 								),
@@ -576,11 +576,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s estimates already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s estimates already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 100
 							),
 						'payments' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s payments already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s payments already.', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							'next_step' => 'complete'
 							),
@@ -607,11 +607,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		}
 		// args to create new client
 		$address = array(
-			'street' => ( isset( $client['contact_street'] ) && ! is_array( $client['p_street1'] ) ) ? self::esc__( $client['contact_street'] ) : '',
-			'city' => ( isset( $client['p_city'] ) && ! is_array( $client['p_city'] ) ) ? self::esc__( $client['p_city'] ) : '',
-			'zone' => ( isset( $client['p_state'] ) && ! is_array( $client['p_state'] ) ) ? self::esc__( $client['p_state'] ) : '',
-			'postal_code' => ( isset( $client['p_code'] ) && ! is_array( $client['p_code'] ) ) ? self::esc__( $client['p_code'] ) : '',
-			'country' => ( isset( $client['p_country'] ) && ! is_array( $client['p_country'] ) ) ? self::esc__( $client['p_country'] ) : '',
+			'street' => ( isset( $client['contact_street'] ) && ! is_array( $client['p_street1'] ) ) ? esc__( $client['contact_street'], 'sprout-invoices' ) : '',
+			'city' => ( isset( $client['p_city'] ) && ! is_array( $client['p_city'] ) ) ? esc__( $client['p_city'], 'sprout-invoices' ) : '',
+			'zone' => ( isset( $client['p_state'] ) && ! is_array( $client['p_state'] ) ) ? esc__( $client['p_state'], 'sprout-invoices' ) : '',
+			'postal_code' => ( isset( $client['p_code'] ) && ! is_array( $client['p_code'] ) ) ? esc__( $client['p_code'], 'sprout-invoices' ) : '',
+			'country' => ( isset( $client['p_country'] ) && ! is_array( $client['p_country'] ) ) ? esc__( $client['p_country'], 'sprout-invoices' ) : '',
 		);
 		$args = array(
 			'address' => $address,
@@ -771,7 +771,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			$estimate, // content
 			self::RECORD, // type slug
 			$new_estimate_id, // post id
-			self::__( 'Estimate Imported' ), // title
+			__( 'Estimate Imported', 'sprout-invoices' ), // title
 			0 // user id
 		);
 		return $est;
@@ -855,7 +855,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 			$invoice, // content
 			self::RECORD, // type slug
 			$new_invoice_id, // post id
-			self::__( 'Invoice Imported' ), // title
+			__( 'Invoice Imported', 'sprout-invoices' ), // title
 			0 // user id
 		);
 		return $inv;

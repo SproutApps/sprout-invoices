@@ -56,12 +56,12 @@ class SI_Invoices_Edit extends SI_Invoices {
 		// Settings
 		$settings = array(
 			'si_invoice_settings' => array(
-				'title' => self::__( 'Invoice Settings' ),
+				'title' => __( 'Invoice Settings', 'sprout-invoices' ),
 				'weight' => 20,
 				'tab' => 'settings',
 				'settings' => array(
 					self::SLUG_OPTION => array(
-						'label' => self::__( 'Invoice Permalink Slug' ),
+						'label' => __( 'Invoice Permalink Slug', 'sprout-invoices' ),
 						'sanitize_callback' => array( __CLASS__, 'sanitize_slug_option' ),
 						'option' => array(
 							'type' => 'text',
@@ -69,25 +69,25 @@ class SI_Invoices_Edit extends SI_Invoices {
 								'class' => 'medium-text',
 							),
 							'default' => self::$invoices_slug,
-							'description' => sprintf( self::__( 'Example invoice url: %s/%s/045b41dd14ab8507d80a27b7357630a5/' ), site_url(), '<strong>'.self::$invoices_slug.'</strong>' ),
+							'description' => sprintf( __( 'Example invoice url: %s/%s/045b41dd14ab8507d80a27b7357630a5/', 'sprout-invoices' ), site_url(), '<strong>'.self::$invoices_slug.'</strong>' ),
 						),
 
 					),
 					self::TERMS_OPTION => array(
-						'label' => self::__( 'Default Terms' ),
+						'label' => __( 'Default Terms', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_terms,
-							'description' => self::__( 'These are the default terms for an invoice.' ),
+							'description' => __( 'These are the default terms for an invoice.', 'sprout-invoices' ),
 						),
 
 					),
 					self::NOTES_OPTION => array(
-						'label' => self::__( 'Default Note' ),
+						'label' => __( 'Default Note', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_notes,
-							'description' => self::__( 'These are the default notes public to a client reviewing their invoice.' ),
+							'description' => __( 'These are the default notes public to a client reviewing their invoice.', 'sprout-invoices' ),
 						),
 					)
 				)
@@ -185,7 +185,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 		// invoice specific
 		$args = array(
 			'si_invoice_line_items' => array(
-				'title' => si__( 'Management' ),
+				'title' => __( 'Management', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_line_items_view' ),
 				'save_callback' => array( __CLASS__, 'save_line_items' ),
 				'context' => 'normal',
@@ -194,7 +194,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'save_priority' => 5,
 			),
 			'si_invoice_update' => array(
-				'title' => si__( 'Information' ),
+				'title' => __( 'Information', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_information_meta_box' ),
 				'save_callback' => array( __CLASS__, 'save_meta_box_invoice_information' ),
 				'context' => 'normal',
@@ -203,7 +203,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'save_priority' => 50,
 			),
 			'si_doc_send' => array(
-				'title' => si__( 'Send Invoice' ),
+				'title' => __( 'Send Invoice', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_invoice_send_view' ),
 				'save_callback' => array( __CLASS__, 'save_invoice_note' ),
 				'context' => 'normal',
@@ -212,7 +212,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'save_priority' => 500,
 			),
 			'si_invoice_history' => array(
-				'title' => si__( 'Invoice History' ),
+				'title' => __( 'Invoice History', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_submission_history_view' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
@@ -220,7 +220,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'weight' => 20,
 			),
 			'si_invoice_notes' => array(
-				'title' => si__( 'Terms & Notes' ),
+				'title' => __( 'Terms & Notes', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_notes_view' ),
 				'save_callback' => array( __CLASS__, 'save_notes' ),
 				'context' => 'normal',
@@ -434,10 +434,10 @@ class SI_Invoices_Edit extends SI_Invoices {
 
 		$user = get_userdata( get_current_user_id() );
 		do_action( 'si_new_record',
-			sprintf( si__( 'Invoice updated by %s.' ), $user->display_name ),
+			sprintf( __( 'Invoice updated by %s.', 'sprout-invoices' ), $user->display_name ),
 			self::HISTORY_UPDATE,
 			$invoice->get_id(),
-			sprintf( si__( 'Data updated for %s.' ), $invoice->get_id() ),
+			sprintf( __( 'Data updated for %s.', 'sprout-invoices' ), $invoice->get_id() ),
 			0,
 		false );
 	}
@@ -451,7 +451,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 	 */
 	public static function show_invoice_send_view( $post, $metabox ) {
 		if ( $post->post_status == 'auto-draft' ) {
-			printf( '<p>%s</p>', si__( 'Save this invoice before sending.' ) );
+			printf( '<p>%s</p>', __( 'Save this invoice before sending.', 'sprout-invoices' ) );
 			return;
 		}
 		$invoice = SI_Invoice::get_instance( $post->ID );
@@ -515,7 +515,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 	 */
 	public static function show_submission_history_view( $post, $metabox ) {
 		if ( $post->post_status == 'auto-draft' ) {
-			printf( '<p>%s</p>', si__( 'No history available.' ) );
+			printf( '<p>%s</p>', __( 'No history available.', 'sprout-invoices' ) );
 			return;
 		}
 		$invoice = SI_Invoice::get_instance( $post->ID );
@@ -578,7 +578,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 		$from_email = SI_Notifications_Control::from_email( array( 'invoice_id' => $invoice->get_id() ) );
 		$fields['send_as'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Sender' ),
+			'label' => __( 'Sender', 'sprout-invoices' ),
 			'type' => 'text',
 			'placeholder' => '',
 			'attributes' => array( 'readonly' => 'readonly' ),
@@ -600,26 +600,26 @@ class SI_Invoices_Edit extends SI_Invoices {
 			}
 		}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', self::__( 'client@email.com' ), self::__( 'Entering an email will prevent some notification shortcodes from working since there is no client.' ) );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working since there is no client.', 'sprout-invoices' ) );
 
 			// Send to me.
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), si__( 'Send me a copy' ) );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );
 
 		$recipient_options .= '</div></div>';
 
 		$fields['recipients'] = array(
 			'weight' => 5,
-			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', si__( 'Recipients' ), si__( 'A notification will be sent if recipients are selected and this invoice is saved.' ) ),
+			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', __( 'Recipients', 'sprout-invoices' ), __( 'A notification will be sent if recipients are selected and this invoice is saved.', 'sprout-invoices' ) ),
 			'type' => 'bypass',
 			'output' => $recipient_options,
 		);
 
 		$fields['sender_note'] = array(
 			'weight' => 10,
-			'label' => self::__( 'Note' ),
+			'label' => __( 'Note', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'default' => $invoice->get_sender_note(),
-			'description' => si__( 'This note will be added to the Invoice Notification via the [admin_note] shortcode.' )
+			'description' => __( 'This note will be added to the Invoice Notification via the [admin_note] shortcode.', 'sprout-invoices' )
 		);
 
 		$fields['doc_id'] = array(

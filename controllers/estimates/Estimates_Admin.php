@@ -45,8 +45,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 
 	public static function status_change_dropdown( $id ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 
@@ -67,7 +66,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 	public static function add_link_to_admin_bar( $items ) {
 		$items[] = array(
 			'id' => 'edit_estimates',
-			'title' => self::__( 'Estimates' ),
+			'title' => __( 'Estimates', 'sprout-invoices' ),
 			'href' => admin_url( 'edit.php?post_type='.SI_Estimate::POST_TYPE ),
 			'weight' => 0,
 		);
@@ -96,20 +95,20 @@ class SI_Estimates_Admin extends SI_Estimates {
 
 			$screen->add_help_tab( array(
 					'id' => 'manage-estimates',
-					'title' => self::__( 'Manage Estimates' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'The status on the estimate table view can be updated without having to go the edit screen by click on the current status and selecting a new one.' ), self::__( 'If an invoice is associated an icon linking to the edit page will show in the last column.' ) ),
+					'title' => __( 'Manage Estimates', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The status on the estimate table view can be updated without having to go the edit screen by click on the current status and selecting a new one.', 'sprout-invoices' ), __( 'If an invoice is associated an icon linking to the edit page will show in the last column.', 'sprout-invoices' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'edit-estimates',
-					'title' => self::__( 'Editing Estimates' ),
-					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__( 'Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__( 'Knowledgebase Article' ) ),
+					'title' => __( 'Editing Estimates', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', __( 'Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', __( 'Knowledgebase Article', 'sprout-invoices' ) ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', self::__( 'Documentation' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 
@@ -132,10 +131,10 @@ class SI_Estimates_Admin extends SI_Estimates {
 		unset( $columns['title'] );
 		unset( $columns['comments'] );
 		unset( $columns['author'] );
-		$columns['title'] = self::__( 'Estimate' );
-		$columns['status'] = self::__( 'Status' );
-		$columns['total'] = self::__( 'Total' );
-		$columns['client'] = self::__( 'Client' );
+		$columns['title'] = __( 'Estimate', 'sprout-invoices' );
+		$columns['status'] = __( 'Status', 'sprout-invoices' );
+		$columns['total'] = __( 'Total', 'sprout-invoices' );
+		$columns['client'] = __( 'Client', 'sprout-invoices' );
 		$columns['doc_link'] = '<div class="dashicons icon-sproutapps-invoices"></div>';
 		return $columns;
 	}
@@ -158,7 +157,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 			case 'doc_link':
 				$invoice_id = $estimate->get_invoice_id();
 				if ( $invoice_id ) {
-					printf( '<a class="doc_link si_status %1$s" title="%2$s" href="%3$s">%4$s</a>', si_get_invoice_status( $invoice_id ), self::__( 'Invoice for this estimate.' ), get_edit_post_link( $invoice_id ), '<div class="dashicons icon-sproutapps-invoices"></div>' );
+					printf( '<a class="doc_link si_status %1$s" title="%2$s" href="%3$s">%4$s</a>', si_get_invoice_status( $invoice_id ), __( 'Invoice for this estimate.', 'sprout-invoices' ), get_edit_post_link( $invoice_id ), '<div class="dashicons icon-sproutapps-invoices"></div>' );
 				}
 			break;
 			case 'status':
@@ -175,7 +174,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 					printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
 				}
 				else {
-					printf( '<b>%s</b> ', si__( 'No client' ) );
+					printf( '<b>%s</b> ', __( 'No client', 'sprout-invoices' ) );
 				}
 
 			break;
@@ -249,7 +248,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 			$estimate = SI_Estimate::get_instance( $post->ID );
 			if ( $estimate->get_status() == SI_Estimate::STATUS_REQUEST ) {
 				// FUTURE show "New" with some sort of logic
-				// $post_states[$estimate->get_status()] = si__('New');
+				// $post_states[$estimate->get_status()] = __( 'New', 'sprout-invoices' );
 			}
 		}
 		return $post_states;

@@ -157,9 +157,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$si_js_object = array(
 			'ajax_url' => get_admin_url().'/admin-ajax.php',
 			'plugin_url' => SI_URL,
-			'thank_you_string' => self::__( 'Thank you' ),
-			'updating_string' => self::__( 'Updating...' ),
-			'sorry_string' => self::__( 'Bummer. Maybe next time?' ),
+			'thank_you_string' => __( 'Thank you', 'sprout-invoices' ),
+			'updating_string' => __( 'Updating...', 'sprout-invoices' ),
+			'sorry_string' => __( 'Bummer. Maybe next time?', 'sprout-invoices' ),
 			'security' => wp_create_nonce( self::NONCE ),
 			'locale' => get_locale(),
 			'locale_standard' => str_replace( '_', '-', get_locale() ),
@@ -446,7 +446,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( ! isset( self::$messages ) ) {
 			self::load_messages();
 		}
-		$message = self::__( $message );
+		$message = __( $message, 'sprout-invoices' );
 		if ( ! isset( self::$messages[$status] ) ) {
 			self::$messages[$status] = array();
 		}
@@ -727,57 +727,57 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$fields = array();
 		$fields['first_name'] = array(
 			'weight' => 50,
-			'label' => self::__( 'First Name' ),
-			'placeholder' => self::__( 'First Name' ),
+			'label' => __( 'First Name', 'sprout-invoices' ),
+			'placeholder' => __( 'First Name', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
 		);
 		$fields['last_name'] = array(
 			'weight' => 51,
-			'label' => self::__( 'Last Name' ),
-			'placeholder' => self::__( 'Last Name' ),
+			'label' => __( 'Last Name', 'sprout-invoices' ),
+			'placeholder' => __( 'Last Name', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
 		);
 		$fields['street'] = array(
 			'weight' => 60,
-			'label' => self::__( 'Street Address' ),
-			'placeholder' => self::__( 'Street Address' ),
+			'label' => __( 'Street Address', 'sprout-invoices' ),
+			'placeholder' => __( 'Street Address', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'rows' => 2,
 			'required' => $required,
 		);
 		$fields['city'] = array(
 			'weight' => 65,
-			'label' => self::__( 'City' ),
-			'placeholder' => self::__( 'City' ),
+			'label' => __( 'City', 'sprout-invoices' ),
+			'placeholder' => __( 'City', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
 		);
 
 		$fields['postal_code'] = array(
 			'weight' => 70,
-			'label' => self::__( 'ZIP Code' ),
-			'placeholder' => self::__( 'ZIP Code' ),
+			'label' => __( 'ZIP Code', 'sprout-invoices' ),
+			'placeholder' => __( 'ZIP Code', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
 		);
 
 		$fields['zone'] = array(
 			'weight' => 75,
-			'label' => self::__( 'State' ),
+			'label' => __( 'State', 'sprout-invoices' ),
 			'type' => 'select-state',
-			'options' => SI_Countries_States::get_state_options( array( 'include_option_none' => ' -- '.self::__( 'State' ).' -- ' ) ),
+			'options' => SI_Countries_States::get_state_options( array( 'include_option_none' => ' -- '.__( 'State', 'sprout-invoices' ).' -- ' ) ),
 			'attributes' => array( 'class' => 'select2' ),
 			'required' => $required,
 		); // FUTURE: Add some JavaScript to switch between select box/text-field depending on country
 
 		$fields['country'] = array(
 			'weight' => 80,
-			'label' => self::__( 'Country' ),
+			'label' => __( 'Country', 'sprout-invoices' ),
 			'type' => 'select',
 			'required' => $required,
-			'options' => SI_Countries_States::get_country_options( array( 'include_option_none' => ' -- '.self::__( 'Country' ).' -- ' ) ),
+			'options' => SI_Countries_States::get_country_options( array( 'include_option_none' => ' -- '.__( 'Country', 'sprout-invoices' ).' -- ' ) ),
 			'attributes' => array( 'class' => 'select2' ),
 		);
 		$billing_fields = apply_filters( 'si_get_standard_address_fields', $fields, $required, $user_id );
@@ -827,12 +827,12 @@ abstract class SI_Controller extends Sprout_Invoices {
 			return; }
 
 		$record_id = SI_Internal_Records::new_record( $_REQUEST['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $_REQUEST['associated_id'], '', 0, false );
-		$error = ( $record_id ) ? '' : si__( 'Private note failed to save, try again.' );
+		$error = ( $record_id ) ? '' : __( 'Private note failed to save, try again.', 'sprout-invoices' );
 		$data = array(
 			'id' => $record_id,
 			'content' => $_REQUEST['notes'],
-			'type' => si__( 'Private Note' ),
-			'post_date' => si__( 'Just now' ),
+			'type' => __( 'Private Note', 'sprout-invoices' ),
+			'post_date' => __( 'Just now', 'sprout-invoices' ),
 			'error' => $error
 		);
 
@@ -917,12 +917,12 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		// Options
-		if ( isset( $_GET['page'] ) && strpos( $_GET['page'] , self::TEXT_DOMAIN ) !== false ) {
+		if ( isset( $_GET['page'] ) && strpos( $_GET['page'] , self::APP_DOMAIN ) !== false ) {
 			$bool = true;
 		}
 
 		global $current_screen;
-		if ( isset( $current_screen->id ) && strpos( $current_screen->id, self::TEXT_DOMAIN ) !== false ) {
+		if ( isset( $current_screen->id ) && strpos( $current_screen->id, self::APP_DOMAIN ) !== false ) {
 			$bool = true;
 		}
 
@@ -964,7 +964,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function ajax_fail( $message = '', $json = true ) {
 		if ( $message == '' ) {
-			$message = self::__( 'Something failed.' );
+			$message = __( 'Something failed.', 'sprout-invoices' );
 		}
 		if ( $json ) { header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) ); }
 		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }

@@ -179,7 +179,7 @@ class SI_Records_Table extends WP_List_Table {
 		$data = $record->get_data();
 		if ( $data != '' ) {
 			?>
-				<a href="#TB_inline?width=900&height=600&inlineId=data_id_<?php echo esc_attr( $item->ID ); ?>" class="thickbox button" title="<?php echo esc_attr( $item->post_title ); ?> <?php si_e('Data') ?>"><?php si_e('View Data') ?></a>
+				<a href="#TB_inline?width=900&height=600&inlineId=data_id_<?php echo esc_attr( $item->ID ); ?>" class="thickbox button" title="<?php echo esc_attr( $item->post_title ); ?> <?php _e( 'Data', 'sprout-invoices' ) ?>"><?php _e( 'View Data', 'sprout-invoices' ) ?></a>
 				<?php if ( is_array( $data ) ): ?>
 					<div id="data_id_<?php echo esc_attr( $item->ID ); ?>" style="display:none;"><pre style="white-space:pre-wrap; text-align: left; font: normal normal 11px/1.4 menlo, monaco, monospaced; padding: 5px;"><?php print_r( $data ) ?></pre></div>
 				<?php else: ?>
@@ -199,11 +199,11 @@ class SI_Records_Table extends WP_List_Table {
 	 * */
 	function get_columns() {
 		$columns = array(
-			'recorded'  => si__('Date'),
-			'title'  => si__('Subject'),
-			'data'  => si__('Data'),
-			'associate'  => si__('Association'),
-			'type' => si__('Type')
+			'recorded'  => __( 'Date', 'sprout-invoices' ),
+			'title'  => __( 'Subject', 'sprout-invoices' ),
+			'data'  => __( 'Data', 'sprout-invoices' ),
+			'associate'  => __( 'Association', 'sprout-invoices' ),
+			'type' => __( 'Type', 'sprout-invoices' )
 		);
 		return apply_filters( 'si_mngt_record_columns', $columns );
 	}

@@ -4,7 +4,7 @@
 	</div><!-- #tt_body -->
 	<div id="tt_save">
 		<p>
-			<button id="save_edit_private_note" class="button button-primary" data-id="<?php echo $record_id ?>"><?php self::_e( 'Edit' ) ?></button>
+			<button id="save_edit_private_note" class="button button-primary" data-id="<?php echo $record_id ?>"><?php _e( 'Edit', 'sprout-invoices' ) ?></button>
 		</p>
 	</div><!-- #tt_save -->
 </div><!-- #private_note_edit_modal -->

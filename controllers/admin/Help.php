@@ -22,7 +22,7 @@ class SI_Help extends SI_Controller {
 
 	public static function please_rate_si( $footer_text ) {
 		if ( self::is_si_admin() ) {
-			$footer_text = sprintf( self::__( 'Please support the future of <strong>Sprout Invoices</strong> by rating the free version <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%1$s" target="_blank">WordPress.org</a>. Have an awesome %2$s!'), 'http://wordpress.org/support/view/plugin-reviews/sprout-invoices?filter=5', date_i18n('l') );
+			$footer_text = sprintf( __( 'Please support the future of <strong>Sprout Invoices</strong> by rating the free version <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%1$s" target="_blank">WordPress.org</a>. Have an awesome %2$s!', 'sprout-invoices' ), 'http://wordpress.org/support/view/plugin-reviews/sprout-invoices?filter=5', date_i18n('l') );
 		}
 		return $footer_text;
 	}
@@ -134,8 +134,8 @@ class SI_Help extends SI_Controller {
 
 		if ( $post_type == SI_Estimate::POST_TYPE ) {
 			
-			$content  = '<h3>' . esc_js( self::__( 'Nested Line Items' ) ). '</h3>';
-			$content .= '<p>' . esc_js( self::__( 'Line items can be nested. Use this handle and drag the line item around to re-order or make it a sub-item.' ) ) . '</p>';
+			$content  = '<h3>' . esc_js( __( 'Nested Line Items', 'sprout-invoices' ) ). '</h3>';
+			$content .= '<p>' . esc_js( __( 'Line items can be nested. Use this handle and drag the line item around to re-order or make it a sub-item.', 'sprout-invoices' ) ) . '</p>';
 			$content .= '<p style="height:215px"><img src="https://sproutapps.co/wp-content/uploads/2014/08/line-items-mgmt.gif" alt="Nested line Items" style="width:auto;height:215px;"></p>';
 			self::print_js(
 				'si_nested_line_items',
@@ -152,8 +152,8 @@ class SI_Help extends SI_Controller {
 		//////////////
 		elseif ( $post_type == SI_Invoice::POST_TYPE ) {
 
-			$content  = '<h3>' . esc_js( self::__( 'Nested Line Items' ) ). '</h3>';
-			$content .= '<p>' . esc_js( self::__( 'Line items can be nested. Use this handle and drag the line item around to re-order or make it a sub-item.' ) ) . '</p>';
+			$content  = '<h3>' . esc_js( __( 'Nested Line Items', 'sprout-invoices' ) ). '</h3>';
+			$content .= '<p>' . esc_js( __( 'Line items can be nested. Use this handle and drag the line item around to re-order or make it a sub-item.', 'sprout-invoices' ) ) . '</p>';
 			$content .= '<p style="height:215px"><img src="https://sproutapps.co/wp-content/uploads/2014/08/line-items-mgmt.gif" alt="Nested line Items" style="width:auto;height:215px;"></p>';
 			self::print_js(
 				'si_nested_line_items',
@@ -200,8 +200,8 @@ class SI_Help extends SI_Controller {
 	 */
 	public static function pointer_si_help_tab( $context = null, $class = null, $close_callback = null ) {
 
-		$content  = '<h3>' . esc_js( self::__( 'Need Help?' ) ). '</h3>';
-		$content .= '<p>' . esc_js( self::__( 'This help tab has a lot of great information for you to learn all about the options and settings on this page.' ) ) . '</p>';
+		$content  = '<h3>' . esc_js( __( 'Need Help?', 'sprout-invoices' ) ). '</h3>';
+		$content .= '<p>' . esc_js( __( 'This help tab has a lot of great information for you to learn all about the options and settings on this page.', 'sprout-invoices' ) ) . '</p>';
 
 		self::print_js(
 			'si_help_tab'.$context,

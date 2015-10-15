@@ -112,7 +112,7 @@ class SI_Estimates extends SI_Controller {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
-		echo wp_json_encode( array( 'response' => si__( 'Notification Queued' ) ) );
+		echo wp_json_encode( array( 'response' => __( 'Notification Queued', 'sprout-invoices' ) ) );
 		exit();
 	}
 

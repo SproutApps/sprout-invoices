@@ -89,7 +89,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			'cc_name' => array(
 				'type' => 'text',
 				'weight' => 1,
-				'label' => self::__( 'Cardholder Name' ),
+				'label' => __( 'Cardholder Name', 'sprout-invoices' ),
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
@@ -98,7 +98,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			'cc_number' => array(
 				'type' => 'text',
 				'weight' => 1,
-				'label' => self::__( 'Card Number' ),
+				'label' => __( 'Card Number', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -108,7 +108,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'type' => 'select',
 				'weight' => 2,
 				'options' => self::get_month_options(),
-				'label' => self::__( 'Expiration Date' ),
+				'label' => __( 'Expiration Date', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -118,7 +118,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'type' => 'select',
 				'weight' => 3,
 				'options' => self::get_year_options(),
-				'label' => self::__( 'Expiration Date' ),
+				'label' => __( 'Expiration Date', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -128,7 +128,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'type' => 'text',
 				'size' => 5,
 				'weight' => 10,
-				'label' => self::__( 'Security Code' ),
+				'label' => __( 'Security Code', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -286,22 +286,22 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		));
 		$cc_fields = array(
 			'cc_name' => array(
-				'label' => self::__( 'Cardholder' ),
+				'label' => __( 'Cardholder', 'sprout-invoices' ),
 				'value' => $cache['cc_name'],
 				'weight' => 1,
 			),
 			'cc_number' => array(
-				'label' => self::__( 'Card Number' ),
+				'label' => __( 'Card Number', 'sprout-invoices' ),
 				'value' => $cache['cc_number']?self::mask_card_number( $cache['cc_number'] ):'',
 				'weight' => 2,
 			),
 			'cc_expiration' => array(
-				'label' => self::__( 'Expiration Date' ),
+				'label' => __( 'Expiration Date', 'sprout-invoices' ),
 				'value' => $cache['cc_expiration_month'].'/'.$cache['cc_expiration_year'],
 				'weight' => 3,
 			),
 			'cc_cvv' => array(
-				'label' => self::__( 'CVV' ),
+				'label' => __( 'CVV', 'sprout-invoices' ),
 				'value' => $cache['cc_cvv'],
 				'weight' => 4,
 			),
@@ -320,12 +320,12 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		));
 		$bill_fields = array(
 			'full_name' => array(
-				'label' => self::__( 'Full Name' ),
+				'label' => __( 'Full Name', 'sprout-invoices' ),
 				'value' => esc_attr( $bill_cache['first_name'] ) . ' ' . esc_attr( $bill_cache['last_name'] ),
 				'weight' => 1,
 			),
 			'street' => array(
-				'label' => self::__( 'Address' ),
+				'label' => __( 'Address', 'sprout-invoices' ),
 				'value' => esc_attr( $bill_cache['street'] ),
 				'weight' => 2,
 			),
@@ -370,7 +370,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				$checkout->cache['billing'][$key] = isset( $_POST['sa_billing_'.$key] )?$_POST['sa_billing_'.$key]:'';
 				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $checkout->cache['billing'][$key] ) && $checkout->cache['billing'][$key] != '' ) ) {
 					$valid = false;
-					self::set_message( sprintf( self::__( '"%s" field is required.' ), $data['label'] ), self::MESSAGE_STATUS_ERROR );
+					self::set_message( sprintf( __( '"%s" field is required.', 'sprout-invoices' ), $data['label'] ), self::MESSAGE_STATUS_ERROR );
 				}
 			}
 		}
@@ -393,27 +393,27 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			$cc_fields = $this->payment_fields( $checkout );
 			foreach ( $cc_fields as $key => $data ) {
 				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $cc_data[$key] ) && strlen( $cc_data[$key] ) > 0 ) ) {
-					self::set_message( sprintf( self::__( '"%s" field is required.' ), $cc_fields[$key]['label'] ), self::MESSAGE_STATUS_ERROR );
+					self::set_message( sprintf( __( '"%s" field is required.', 'sprout-invoices' ), $cc_fields[$key]['label'] ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}
 			if ( isset( $cc_data['cc_number'] ) ) {
 				if ( ! self::is_valid_credit_card( $cc_data['cc_number'] ) ) {
-					self::set_message( self::__( 'Invalid credit card number' ), self::MESSAGE_STATUS_ERROR );
+					self::set_message( __( 'Invalid credit card number', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}
 
 			if ( isset( $cc_data['cc_cvv'] ) ) {
 				if ( ! self::is_valid_cvv( $cc_data['cc_cvv'] ) ) {
-					self::set_message( self::__( 'Invalid credit card security code' ), self::MESSAGE_STATUS_ERROR );
+					self::set_message( __( 'Invalid credit card security code', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}
 
 			if ( ! empty($fields['cc_expiration_year']['required']) && isset( $cc_data['cc_expiration_year'] ) ) {
 				if ( self::is_expired( $cc_data['cc_expiration_year'], $cc_data['cc_expiration_month'] ) ) {
-					self::set_message( self::__( 'Credit card is expired.' ), self::MESSAGE_STATUS_ERROR );
+					self::set_message( __( 'Credit card is expired.', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}

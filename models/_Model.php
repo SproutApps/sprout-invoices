@@ -45,7 +45,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			'show_in_nav_menus' => false,
 			'public' => true,
 			'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions' ),
-			'label' => self::__( $plural ),
+			'label' => __( $plural, 'sprout-invoices' ),
 			'labels' => self::post_type_labels( $singular, $plural ),
 		);
 		$args = wp_parse_args( $args, $defaults );
@@ -66,18 +66,18 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 */
 	private static function post_type_labels( $singular, $plural ) {
 		return array(
-			'name' => self::__( $plural ),
-			'singular_name' => self::__( $singular ),
-			'add_new' => self::__( 'Add ' . $singular ),
-			'add_new_item' => self::__( 'Add New ' . $singular ),
-			'edit_item' => self::__( 'Edit ' . $singular ),
-			'new_item' => self::__( 'New ' . $singular ),
-			'all_items' => self::__( $plural ),
-			'view_item' => self::__( 'View ' . $singular ),
-			'search_items' => self::__( 'Search ' . $plural ),
-			'not_found' => self::__( 'No ' . $plural . ' found' ),
-			'not_found_in_trash' => self::__( 'No ' . $plural . ' found in Trash' ),
-			'menu_name' => self::__( $plural )
+			'name' => __( $plural, 'sprout-invoices' ),
+			'singular_name' => __( $singular, 'sprout-invoices' ),
+			'add_new' => __( 'Add ' . $singular, 'sprout-invoices' ),
+			'add_new_item' => __( 'Add New ' . $singular, 'sprout-invoices' ),
+			'edit_item' => __( 'Edit ' . $singular, 'sprout-invoices' ),
+			'new_item' => __( 'New ' . $singular, 'sprout-invoices' ),
+			'all_items' => __( $plural, 'sprout-invoices' ),
+			'view_item' => __( 'View ' . $singular, 'sprout-invoices' ),
+			'search_items' => __( 'Search ' . $plural, 'sprout-invoices' ),
+			'not_found' => __( 'No ' . $plural . ' found', 'sprout-invoices' ),
+			'not_found_in_trash' => __( 'No ' . $plural . ' found in Trash', 'sprout-invoices' ),
+			'menu_name' => __( $plural, 'sprout-invoices' )
 		);
 	}
 
@@ -166,33 +166,33 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 		if ( $args['public'] ) {
 			$messages = array(
 				0 => '', // Unused. Messages start at index 1.
-				1 => sprintf( self::__( '%s updated. <a href="%s">View %s</a>' ), ucfirst( $name ), esc_url( get_permalink( $post_id ) ), $name ),
-				2 => self::__( 'Custom field updated.' ),
-				3 => self::__( 'Custom field deleted.' ),
-				4 => sprintf( self::__( '%s updated.' ), ucfirst( $name ) ),
+				1 => sprintf( __( '%s updated. <a href="%s">View %s</a>', 'sprout-invoices' ), ucfirst( $name ), esc_url( get_permalink( $post_id ) ), $name ),
+				2 => __( 'Custom field updated.', 'sprout-invoices' ),
+				3 => __( 'Custom field deleted.', 'sprout-invoices' ),
+				4 => sprintf( __( '%s updated.', 'sprout-invoices' ), ucfirst( $name ) ),
 				/* translators: %s: date and time of the revision */
-				5 => isset($_GET['revision']) ? sprintf( self::__( '%s restored to revision from %s' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-				6 => sprintf( self::__( '%s published. <a href="%s">View %s</a>' ), ucfirst( $name ), esc_url( get_permalink( $post_id ) ), $name ),
-				7 => sprintf( self::__( '%s saved.' ), ucfirst( $name ) ),
-				8 => sprintf( self::__( '%s submitted. <a target="_blank" href="%s">Preview %s</a>' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
-				9 => sprintf( self::__( '%s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %s</a>' ), $name, date_i18n( self::__( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), $name ),
-				10 => sprintf( self::__( '%s draft updated. <a target="_blank" href="%s">Preview %s</a>' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
+				5 => isset($_GET['revision']) ? sprintf( __( '%s restored to revision from %s', 'sprout-invoices' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				6 => sprintf( __( '%s published. <a href="%s">View %s</a>', 'sprout-invoices' ), ucfirst( $name ), esc_url( get_permalink( $post_id ) ), $name ),
+				7 => sprintf( __( '%s saved.', 'sprout-invoices' ), ucfirst( $name ) ),
+				8 => sprintf( __( '%s submitted. <a target="_blank" href="%s">Preview %s</a>', 'sprout-invoices' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
+				9 => sprintf( __( '%s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %s</a>', 'sprout-invoices' ), $name, date_i18n( __( 'M j, Y @ G:i', 'sprout-invoices' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), $name ),
+				10 => sprintf( __( '%s draft updated. <a target="_blank" href="%s">Preview %s</a>', 'sprout-invoices' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
 			);
 		}
 		else { // post types that are not public should not have links to a post
 			$messages = array(
 				0 => '', // Unused. Messages start at index 1.
-				1 => sprintf( self::__( '%s updated.' ), ucfirst( $name ) ),
-				2 => self::__( 'Custom field updated.' ),
-				3 => self::__( 'Custom field deleted.' ),
-				4 => sprintf( self::__( '%s updated.' ), ucfirst( $name ) ),
+				1 => sprintf( __( '%s updated.', 'sprout-invoices' ), ucfirst( $name ) ),
+				2 => __( 'Custom field updated.', 'sprout-invoices' ),
+				3 => __( 'Custom field deleted.', 'sprout-invoices' ),
+				4 => sprintf( __( '%s updated.', 'sprout-invoices' ), ucfirst( $name ) ),
 				/* translators: %s: date and time of the revision */
-				5 => isset($_GET['revision']) ? sprintf( self::__( '%s restored to revision from %s' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-				6 => sprintf( self::__( '%s published.' ), ucfirst( $name ) ),
-				7 => sprintf( self::__( '%s saved.' ), ucfirst( $name ) ),
-				8 => sprintf( self::__( '%s submitted.' ), ucfirst( $name ) ),
-				9 => sprintf( self::__( '%s scheduled for: <strong>%1$s</strong>.' ), ucfirst( $name ), date_i18n( self::__( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ) ),
-				10 => sprintf( self::__( '%s draft updated.' ), ucfirst( $name ) ),
+				5 => isset($_GET['revision']) ? sprintf( __( '%s restored to revision from %s', 'sprout-invoices' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				6 => sprintf( __( '%s published.', 'sprout-invoices' ), ucfirst( $name ) ),
+				7 => sprintf( __( '%s saved.', 'sprout-invoices' ), ucfirst( $name ) ),
+				8 => sprintf( __( '%s submitted.', 'sprout-invoices' ), ucfirst( $name ) ),
+				9 => sprintf( __( '%s scheduled for: <strong>%1$s</strong>.', 'sprout-invoices' ), ucfirst( $name ), date_i18n( __( 'M j, Y @ G:i', 'sprout-invoices' ), strtotime( $post->post_date ) ) ),
+				10 => sprintf( __( '%s draft updated.', 'sprout-invoices' ), ucfirst( $name ) ),
 			);
 		}
 
@@ -239,18 +239,18 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 
 	private static function taxonomy_labels( $singular, $plural ) {
 		return array(
-			'name' => self::__( $plural ),
-			'singular_name' => self::__( $singular ),
-			'search_items' => self::__( 'Search '.$plural ),
-			'popular_items' => self::__( 'Popular '.$plural ),
-			'all_items' => self::__( 'All '.$plural ),
-			'parent_item' => self::__( 'Parent '.$singular ),
-			'parent_item_colon' => self::__( 'Parent '.$singular.':' ),
-			'edit_item' => self::__( 'Edit '.$singular ),
-			'update_item' => self::__( 'Update '.$singular ),
-			'add_new_item' => self::__( 'Add New '.$singular ),
-			'new_item_name' => self::__( 'New '.$singular.' Name' ),
-			'menu_name' => self::__( $plural ),
+			'name' => __( $plural, 'sprout-invoices' ),
+			'singular_name' => __( $singular, 'sprout-invoices' ),
+			'search_items' => __( 'Search '.$plural, 'sprout-invoices' ),
+			'popular_items' => __( 'Popular '.$plural, 'sprout-invoices' ),
+			'all_items' => __( 'All '.$plural, 'sprout-invoices' ),
+			'parent_item' => __( 'Parent '.$singular, 'sprout-invoices' ),
+			'parent_item_colon' => __( 'Parent '.$singular.':', 'sprout-invoices' ),
+			'edit_item' => __( 'Edit '.$singular, 'sprout-invoices' ),
+			'update_item' => __( 'Update '.$singular, 'sprout-invoices' ),
+			'add_new_item' => __( 'Add New '.$singular, 'sprout-invoices' ),
+			'new_item_name' => __( 'New '.$singular.' Name', 'sprout-invoices' ),
+			'menu_name' => __( $plural, 'sprout-invoices' ),
 		);
 	}
 

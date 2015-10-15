@@ -26,7 +26,7 @@ class SI_Customizer extends SI_Controller {
 		if ( is_single() && si_get_doc_context() ) {
 			$items[] = array(
 				'id' => 'customizer',
-				'title' => self::__( 'Customize' ),
+				'title' => __( 'Customize', 'sprout-invoices' ),
 				'href' => esc_url_raw( add_query_arg( array( 'url' => urlencode( get_permalink() ) ), admin_url( 'customize.php' ) ) ),
 				'weight' => 1000,
 			);
@@ -56,9 +56,9 @@ class SI_Customizer extends SI_Controller {
 
 		// Logo uploader
 		$wp_customize->add_section( 'si_custommizer_section' , array(
-			'title'       => self::__('Sprout Invoices'),
+			'title'       => __( 'Sprout Invoices', 'sprout-invoices' ),
 			'priority'    => 300,
-			'description' => self::__('Upload a logo to replace the default estimate/invoice logo.'),
+			'description' => __( 'Upload a logo to replace the default estimate/invoice logo.', 'sprout-invoices' ),
 			) );
 
 		$wp_customize->add_setting( 'si_logo', array(
@@ -67,7 +67,7 @@ class SI_Customizer extends SI_Controller {
 			) );
 
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'si_logo', array(
-			'label'    => self::__('Invoice & Estimate Logo'),
+			'label'    => __( 'Invoice & Estimate Logo', 'sprout-invoices' ),
 			'section'  => 'si_custommizer_section',
 			'settings' => 'si_logo',
 			) ) );
@@ -80,7 +80,7 @@ class SI_Customizer extends SI_Controller {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'si_invoices_color', array(
-		    'label'	   => self::__('Invoice Highlight Color'),
+		    'label'	   => __( 'Invoice Highlight Color', 'sprout-invoices' ),
 		    'section'  => 'si_custommizer_section',
 		    'settings' => 'si_invoices_color',
 		) ) );
@@ -93,7 +93,7 @@ class SI_Customizer extends SI_Controller {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'si_estimates_color', array(
-		    'label'	   => self::__('Estimate Highlight Color'),
+		    'label'	   => __( 'Estimate Highlight Color', 'sprout-invoices' ),
 		    'section'  => 'si_custommizer_section',
 		    'settings' => 'si_estimates_color',
 		) ) );

@@ -1,9 +1,9 @@
 <h3 class="dashboard_widget_title">
-	<span><?php self::_e('Estimate Dashboard') ?></span>
+	<span><?php _e( 'Estimate Dashboard', 'sprout-invoices' ) ?></span>
 </h3>
 <div class="dashboard_widget inside">
 	<div class="main">
-		<?php 
+		<?php
 			$args = array(
 				'orderby' => 'modified',
 				'post_type' => SI_Estimate::POST_TYPE,
@@ -13,21 +13,21 @@
 				);
 			$estimates = new WP_Query( $args ); ?>
 
-		<?php if ( !empty( $estimates->posts ) ): ?>
-			<b><?php self::_e('Latest Updates') ?></b> 
+		<?php if ( ! empty( $estimates->posts ) ) : ?>
+			<b><?php _e( 'Latest Updates', 'sprout-invoices' ) ?></b> 
 			<ul>
-				<?php foreach ( $estimates->posts as $estimate_id ): ?>
+				<?php foreach ( $estimates->posts as $estimate_id ) : ?>
 					<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_modified_time( 'U', false, $estimate_id ) ) ?></li>
 				<?php endforeach ?>
 			</ul>
-		<?php else: ?>
+		<?php else : ?>
 			<p>
-				<b><?php self::_e('Latest Updates') ?></b><br/>
-				<?php self::_e('No recent estimates found.') ?>
+				<b><?php _e( 'Latest Updates', 'sprout-invoices' ) ?></b><br/>
+				<?php _e( 'No recent estimates found.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 
-		<?php 
+		<?php
 			$args = array(
 				'post_type' => SI_Estimate::POST_TYPE,
 				'post_status' => array( SI_Estimate::STATUS_REQUEST ),
@@ -36,46 +36,44 @@
 				);
 			$estimates = new WP_Query( $args ); ?>
 
-		<?php if ( !empty( $estimates->posts ) ): ?>
-			<b><?php self::_e('Recent Requests') ?></b> 
+		<?php if ( ! empty( $estimates->posts ) ) : ?>
+			<b><?php _e( 'Recent Requests', 'sprout-invoices' ) ?></b> 
 			<ul>
-				<?php foreach ( $estimates->posts as $estimate_id ): ?>
+				<?php foreach ( $estimates->posts as $estimate_id ) : ?>
 					<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, $estimate_id ) ) ?></li>
 				<?php endforeach ?>
 			</ul>
-		<?php else: ?>
+		<?php else : ?>
 			<p>
-				<b><?php self::_e('Recent Requests') ?></b><br/>
-				<?php self::_e('No recently requested estimates.') ?>
+				<b><?php _e( 'Recent Requests', 'sprout-invoices' ) ?></b><br/>
+				<?php _e( 'No recently requested estimates.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 
-		<?php 
+		<?php
 			$args = array(
 				'orderby' => 'modified',
 				'post_type' => SI_Estimate::POST_TYPE,
 				'post_status' => array( SI_Estimate::STATUS_DECLINED ),
 				'fields' => 'ids',
 				);
-			$estimates = new WP_Query( $args ); 
-			error_log( 'estimates: ' . print_r( $estimates, TRUE ) );
-			?>
+			$estimates = new WP_Query( $args ); ?>
 
-		<?php if ( ! empty( $estimates->posts ) ): ?>
-			<b><?php self::_e('Recent Declined') ?></b> 
+		<?php if ( ! empty( $estimates->posts ) ) : ?>
+			<b><?php _e( 'Recent Declined', 'sprout-invoices' ) ?></b> 
 			<ul>
-				<?php foreach ( $estimates->posts as $estimate_id ): ?>
+				<?php foreach ( $estimates->posts as $estimate_id ) : ?>
 					<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, $estimate_id ) ) ?></li>
 				<?php endforeach ?>
 			</ul>
-		<?php else: ?>
+		<?php else : ?>
 			<p>
-				<b><?php self::_e('Recent Declined') ?></b><br/>
-				<?php self::_e('No recently declined estimates.') ?>
+				<b><?php _e( 'Recent Declined', 'sprout-invoices' ) ?></b><br/>
+				<?php _e( 'No recently declined estimates.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 
-		<?php 
+		<?php
 			$args = array(
 				'post_type' => SI_Estimate::POST_TYPE,
 				'post_status' => array( SI_Estimate::STATUS_PENDING ),
@@ -91,17 +89,17 @@
 				);
 			$estimates = new WP_Query( $args ); ?>
 
-		<?php if ( !empty( $estimates->posts ) ): ?>
-			<b><?php self::_e('Expired &amp; Pending') ?></b> 
+		<?php if ( ! empty( $estimates->posts ) ) : ?>
+			<b><?php _e( 'Expired &amp; Pending', 'sprout-invoices' ) ?></b> 
 			<ul>
-				<?php foreach ( $estimates->posts as $estimate_id ): ?>
-					<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php printf( self::__('Expired: %s'), date_i18n( get_option('date_format'), si_get_estimate_expiration_date( $estimate_id ) ) ) ?></li>
+				<?php foreach ( $estimates->posts as $estimate_id ) : ?>
+					<li><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a> &mdash; <?php printf( __( 'Expired: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ), si_get_estimate_expiration_date( $estimate_id ) ) ) ?></li>
 				<?php endforeach ?>
 			</ul>
-		<?php else: ?>
+		<?php else : ?>
 			<p>
-				<b><?php self::_e('Expired &amp; Pending') ?></b><br/>
-				<?php self::_e('No recently expired or pending estimates.') ?>
+				<b><?php _e( 'Expired &amp; Pending', 'sprout-invoices' ) ?></b><br/>
+				<?php _e( 'No recently expired or pending estimates.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 	</div>

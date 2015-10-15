@@ -15,7 +15,7 @@ class SI_Templating_API extends SI_Controller {
 
 	private static $pages = array();
 	private static $shortcodes = array();
-	
+
 	public static function get_template_pages() {
 		return self::$pages;
 	}
@@ -48,7 +48,6 @@ class SI_Templating_API extends SI_Controller {
 		add_filter( 'si_client_adv_form_fields', array( __CLASS__, 'client_option' ) );
 		add_action( 'SI_Clients::save_meta_box_client_adv_information', array( __CLASS__, 'save_client_options' ) );
 
-
 		// blank shortcode
 		do_action( 'sprout_shortcode', self::BLANK_SHORTCODE, array( __CLASS__, 'blank_shortcode' ) );
 
@@ -71,7 +70,7 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Loop through registered shortcodes and use the WP function.
-	 * @return  
+	 * @return
 	 */
 	public static function add_shortcodes(){
 		foreach ( self::$shortcodes as $tag => $callback ) {
@@ -86,28 +85,28 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Get all invoice templates within a user's theme
-	 * @return array 
+	 * @return array
 	 */
 	public static function get_invoice_templates() {
-		$templates = array( '' => self::__('Default Template') );
+		$templates = array( '' => __( 'Default Template', 'sprout-invoices' ) );
 		$templates += self::get_doc_templates( 'invoice' );
 		return $templates;
 	}
 
 	/**
 	 * Get all estimate templates within a user's theme
-	 * @return array 
+	 * @return array
 	 */
 	public static function get_estimate_templates() {
-		$templates = array( '' => self::__('Default Template') );
+		$templates = array( '' => __( 'Default Template', 'sprout-invoices' ) );
 		$templates += self::get_doc_templates( 'estimate' );
 		return $templates;
 	}
 
 	/**
 	 * Get the template for the current doc
-	 * @param  string $doc 
-	 * @return 
+	 * @param  string $doc
+	 * @return
 	 */
 	public static function get_doc_current_template( $doc_id ) {
 		$template_id = get_post_meta( $doc_id, self::TEMPLATE_OPTION, true );
@@ -123,18 +122,18 @@ class SI_Templating_API extends SI_Controller {
 					$client_id = $estimate->get_client_id();
 					$template_id = self::get_client_estimate_template( $client_id );
 					break;
-				
+
 				default:
 					break;
 			}
 		}
-		if ( !$template_id ) {
+		if ( ! $template_id ) {
 			$template_id = '';
 		}
 		return $template_id;
 	}
 
-	public static function head_scripts() { 
+	public static function head_scripts() {
 		global $wp_scripts;
 		?>
 			<link rel="stylesheet" id="open-sans-css" href="//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext" type="text/css" media="all">
@@ -144,6 +143,7 @@ class SI_Templating_API extends SI_Controller {
 
 			<link rel="stylesheet" id="sprout_doc_style-css" href="<?php echo SI_RESOURCES ?>front-end/css/sprout-invoices.style.css" type="text/css" media="all">
 			<?php SI_Customizer::inject_css() ?>
+			<?php self::load_custom_stylesheet() ?>
 
 			<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery.js"></script>
 			<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
@@ -158,9 +158,34 @@ class SI_Templating_API extends SI_Controller {
 		<?php
 	}
 
+	public static function load_custom_stylesheet() {
+		$context = si_get_doc_context();
+		if ( '' === $context ) {
+			return;
+		}
+
+		$context_stylesheet_path = self::locate_template( array(
+						$context . 's.css',
+						$context . '/' . $context . 's.css',
+					), false );
+		if ( $context_stylesheet_path ) {
+			$stylesheet_url = _convert_content_file_path_to_url( $context_stylesheet_path );
+			printf( '<link rel="stylesheet" id="sprout_doc_style-%s-css" href="%s" type="text/css" media="all">', $context, esc_url_raw( $stylesheet_url ) );
+		}
+
+		$stylesheet_path = self::locate_template( array(
+						'sprout-invoices.css',
+					), false );
+
+		if ( $stylesheet_path ) {
+			$general_stylesheet_url = _convert_content_file_path_to_url( $stylesheet_path );
+			printf( '<link rel="stylesheet" id="sprout_doc_style-%s-css" href="%s" type="text/css" media="all">', 'general', esc_url_raw( $general_stylesheet_url ) );
+		}
+	}
+
 	public static function footer_scripts() {
 		?>
-			<?php if ( current_user_can( 'edit_post', get_the_id() ) ): ?>
+			<?php if ( current_user_can( 'edit_post', get_the_id() ) ) : ?>
 				<link rel="stylesheet" id="admin-bar-css" href="<?php echo site_url() ?>/wp-includes/css/admin-bar.min.css" type="text/css" media="all">
 				<?php wp_admin_bar_render() ?>
 			
@@ -176,9 +201,9 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Save the template selection for a doc by post id
-	 * @param  integer $post_id      
-	 * @param  string  $doc_template 
-	 * @return                 
+	 * @param  integer $post_id
+	 * @param  string  $doc_template
+	 * @return
 	 */
 	public static function save_doc_current_template( $doc_id = 0, $doc_template = '' ) {
 		update_post_meta( $doc_id, self::TEMPLATE_OPTION, $doc_template );
@@ -186,8 +211,8 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Get the template for a client
-	 * @param  string $doc 
-	 * @return 
+	 * @param  string $doc
+	 * @return
 	 */
 	public static function get_client_invoice_template( $client_id ) {
 		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION, true );
@@ -196,8 +221,8 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Get the template for a client
-	 * @param  string $doc 
-	 * @return 
+	 * @param  string $doc
+	 * @return
 	 */
 	public static function get_client_estimate_template( $client_id ) {
 		$template_id = get_post_meta( $client_id, self::TEMPLATE_OPTION.'_est', true );
@@ -206,9 +231,9 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Save the template selection for a client by post id
-	 * @param  integer $post_id      
-	 * @param  string  $doc_template 
-	 * @return                 
+	 * @param  integer $post_id
+	 * @param  string  $doc_template
+	 * @return
 	 */
 	public static function save_client_invoice_template( $client_id = 0, $doc_template = '' ) {
 		update_post_meta( $client_id, self::TEMPLATE_OPTION, $doc_template );
@@ -216,9 +241,9 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Save the template selection for a client by post id
-	 * @param  integer $post_id      
-	 * @param  string  $doc_template 
-	 * @return                 
+	 * @param  integer $post_id
+	 * @param  string  $doc_template
+	 * @return
 	 */
 	public static function save_client_estimate_template( $client_id = 0, $doc_template = '' ) {
 		update_post_meta( $client_id, self::TEMPLATE_OPTION.'_est', $doc_template );
@@ -226,7 +251,7 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Override the template and use something custom.
-	 * @param  string $template 
+	 * @param  string $template
 	 * @return string           full path.
 	 */
 	public static function override_template( $template ) {
@@ -235,6 +260,15 @@ class SI_Templating_API extends SI_Controller {
 		if ( SI_Invoice::is_invoice_query() ) {
 
 			if ( is_single() ) {
+
+				if ( ! current_user_can( 'edit_sprout_invoices' ) && apply_filters( 'si_redirect_temp_status', true ) ) {
+					$status = get_post_status();
+					if ( SI_Invoice::STATUS_TEMP === $status ) {
+						wp_safe_redirect( add_query_arg( array( 'si_id' => get_the_id() ), get_home_url() ) );
+						exit();
+					}
+				}
+
 				$custom_template = self::get_doc_current_template( get_the_id() );
 				$custom_path = ( $custom_template != '' ) ? 'invoice/'.$custom_template : '' ;
 				$template = self::locate_template( array(
@@ -252,7 +286,6 @@ class SI_Templating_API extends SI_Controller {
 						'invoice/invoices.php'
 					), $template );
 			}
-
 			$template = apply_filters( 'si_doc_template', $template, 'invoice' );
 		}
 
@@ -260,6 +293,15 @@ class SI_Templating_API extends SI_Controller {
 		if ( SI_Estimate::is_estimate_query() ) {
 
 			if ( is_single() ) {
+
+				if ( ! current_user_can( 'edit_sprout_invoices' ) && apply_filters( 'si_redirect_temp_status', true ) ) {
+					$status = get_post_status();
+					if ( SI_Estimate::STATUS_TEMP === $status ) {
+						wp_safe_redirect( add_query_arg( array( 'si_id' => get_the_id() ), get_home_url() ) );
+						exit();
+					}
+				}
+
 				$custom_template = self::get_doc_current_template( get_the_id() );
 				$custom_path = ( $custom_template != '' ) ? 'estimate/'.$custom_template : '' ;
 				$template = self::locate_template( array(
@@ -297,30 +339,30 @@ class SI_Templating_API extends SI_Controller {
 		if ( ! isset( $template_options ) || empty( $template_options ) ) {
 			return;
 		}
-		$doc_type_name = ( is_a( $doc, 'SI_Invoice' ) ) ? self::__('invoice') : self::__('estimate') ;
+		$doc_type_name = ( is_a( $doc, 'SI_Invoice' ) ) ? __( 'invoice', 'sprout-invoices' ) : __( 'estimate', 'sprout-invoices' );
 		$template = self::get_doc_current_template( $doc->get_id() ); ?>
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
-			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
+			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( __( 'Select a custom %s template.', 'sprout-invoices' ), $doc_type_name ) ?>" class="helptip"></span></span>
 
 				<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
-					<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different template') ?></span>
+					<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Select different template', 'sprout-invoices' ) ?></span>
 				</a>
 
 				<div id="template_div" class="control_wrap hide-if-js">
 					<div class="template-wrap">
-						<?php if ( count( $template_options ) > 1 ): ?>
+						<?php if ( count( $template_options ) > 1 ) : ?>
 							<select name="doc_template">
-								<?php foreach ( $template_options as $template_key => $template_name ): ?>
+								<?php foreach ( $template_options as $template_key => $template_name ) : ?>
 									<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, false ), $template_name ) ?>
 								<?php endforeach ?>
 							</select>
-						<?php else: ?>
-							<span><?php printf( si__('No <a href="%s" target="_blank">Custom Templates</a> Found'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
+						<?php else : ?>
+							<span><?php printf( __( 'No <a href="%s" target="_blank">Custom Templates</a> Found', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
 						<?php endif ?>
 			 		</div>
 					<p>
-						<a href="#edit_template" class="save_control save-template hide-if-no-js button"><?php si_e('OK') ?></a>
-						<a href="#edit_template" class="cancel_control cancel-template hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+						<a href="#edit_template" class="save_control save-template hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+						<a href="#edit_template" class="cancel_control cancel-template hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 					</p>
 			 	</div>
 		</div>
@@ -329,32 +371,32 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Add additional options in the advanced client meta box.
-	 * @param  array  $adv_fields 
-	 * @return              
+	 * @param  array  $adv_fields
+	 * @return
 	 */
 	public static function client_option( $adv_fields = array() ) {
 		$adv_fields['inv_template_options'] = array(
 			'weight' => 200,
-			'label' => self::__( 'Invoice Template' ),
+			'label' => __( 'Invoice Template', 'sprout-invoices' ),
 			'type' => 'bypass',
 			'output' => self::client_template_options( 'invoice', get_the_ID() ),
-			'description' => self::__( 'This invoice template will override the default invoice template, unless another template is selected when creating/editing an invoice.' )
+			'description' => __( 'This invoice template will override the default invoice template, unless another template is selected when creating/editing an invoice.', 'sprout-invoices' )
 		);
 		$adv_fields['est_template_options'] = array(
 			'weight' => 210,
-			'label' => self::__( 'Estimate Template' ),
+			'label' => __( 'Estimate Template', 'sprout-invoices' ),
 			'type' => 'bypass',
 			'output' => self::client_template_options( 'estimate', get_the_ID() ),
-			'description' => self::__( 'This estimate template will override the default estimate template, unless another template is selected when creating/editing an estimate.' )
+			'description' => __( 'This estimate template will override the default estimate template, unless another template is selected when creating/editing an estimate.', 'sprout-invoices' )
 		);
 		return $adv_fields;
 	}
 
 	/**
 	 * Save the template selection for a doc by post id
-	 * @param  integer $post_id      
-	 * @param  string  $doc_template 
-	 * @return                 
+	 * @param  integer $post_id
+	 * @param  string  $doc_template
+	 * @return
 	 */
 	public static function save_doc_template_selection( $post_id = 0 ) {
 		$doc_template = ( isset( $_POST['doc_template'] ) ) ? $_POST['doc_template'] : '' ;
@@ -363,8 +405,8 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Save client options on advanced meta box save action
-	 * @param  integer $post_id 
-	 * @return            
+	 * @param  integer $post_id
+	 * @return
 	 */
 	public static function save_client_options( $post_id = 0 ) {
 		$doc_template_invoice = ( isset( $_POST['doc_template_invoice'] ) ) ? $_POST['doc_template_invoice'] : '' ;
@@ -381,36 +423,36 @@ class SI_Templating_API extends SI_Controller {
 	/**
 	 * Template selection for advanced client options
 	 * @param  string  $type      invoice/estimate
-	 * @param  integer $client_id 
-	 * @return              
+	 * @param  integer $client_id
+	 * @return
 	 */
 	public static function client_template_options( $type = 'invoice', $client_id = 0 ) {
 		ob_start();
-		$template_options = ( $type != 'estimate' ) ? self::get_invoice_templates() : self::get_estimate_templates() ;
-		$doc_type_name = ( $type != 'estimate' ) ? self::__('invoice') : self::__('estimate') ;
+		$template_options = ( $type != 'estimate' ) ? self::get_invoice_templates() : self::get_estimate_templates();
+		$doc_type_name = ( $type != 'estimate' ) ? __( 'invoice', 'sprout-invoices' ) : __( 'estimate', 'sprout-invoices' );
 		$template = ( $type != 'estimate' ) ? self::get_client_invoice_template( $client_id ) : self::get_client_estimate_template( $client_id ); ?>
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
-			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( self::__('Select a custom %s template.'), $doc_type_name ) ?>" class="helptip"></span></span>
+			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( __( 'Select a custom %s template.', 'sprout-invoices' ), $doc_type_name ) ?>" class="helptip"></span></span>
 
 			<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
-				<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different template') ?></span>
+				<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Select different template', 'sprout-invoices' ) ?></span>
 			</a>
 
 			<div id="template_div" class="control_wrap hide-if-js">
 				<div class="template-wrap">
-					<?php if ( count( $template_options ) > 1 ): ?>
+					<?php if ( count( $template_options ) > 1 ) : ?>
 						<select name="doc_template_<?php echo esc_attr( $doc_type_name ); ?>">
-							<?php foreach ( $template_options as $template_key => $template_name ): ?>
+							<?php foreach ( $template_options as $template_key => $template_name ) : ?>
 								<?php printf( '<option value="%s" %s>%s</option>', $template_key, selected( $template_key, $template, false ), $template_name ) ?>
 							<?php endforeach ?>
 						</select>
-					<?php else: ?>
-						<span><?php printf( si__('No <a href="%s" target="_blank">Custom Templates</a> Found'), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
+					<?php else : ?>
+						<span><?php printf( __( 'No <a href="%s" target="_blank">Custom Templates</a> Found', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
 					<?php endif ?>
 		 		</div>
 				<p>
-					<a href="#edit_template" class="save_control save-template hide-if-no-js button"><?php si_e('OK') ?></a>
-					<a href="#edit_template" class="cancel_control cancel-template hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+					<a href="#edit_template" class="save_control save-template hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+					<a href="#edit_template" class="cancel_control cancel-template hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 				</p>
 		 	</div>
 		</div>
@@ -421,7 +463,7 @@ class SI_Templating_API extends SI_Controller {
 
 	/**
 	 * Search for files in the templates, within the sa directory.
-	 * @return array 
+	 * @return array
 	 */
 	public static function get_sa_files( $type = '' ) {
 		if ( $type != '' ) {
@@ -434,7 +476,7 @@ class SI_Templating_API extends SI_Controller {
 			$files += (array) self::scandir( $theme->get_template_directory().'/'.self::get_template_path().$type, 'php', 1 );
 		}
 
-		return array_filter($files);
+		return array_filter( $files );
 	}
 
 
@@ -448,7 +490,7 @@ class SI_Templating_API extends SI_Controller {
 	 * @return array Array of page templates, keyed by filename, with the value of the translated header name.
 	 */
 	public static function get_doc_templates( $type = null ) {
-		
+
 		$doc_templates = false;
 
 		if ( ! is_array( $doc_templates ) ) {
@@ -457,8 +499,8 @@ class SI_Templating_API extends SI_Controller {
 			$files = (array) self::get_sa_files( $type );
 
 			foreach ( $files as $file => $full_path ) {
-				if ( ! preg_match( '|SA Template Name:(.*)$|mi', file_get_contents( $full_path ), $header ) )
-					continue;
+				if ( ! preg_match( '|SA Template Name:(.*)$|mi', file_get_contents( $full_path ), $header ) ) {
+					continue; }
 				$doc_templates[ $file ] = _cleanup_header_comment( $header[1] );
 			}
 
@@ -484,8 +526,8 @@ class SI_Templating_API extends SI_Controller {
 	 * 	for the found files, particularly when this function recurses to lower depths.
 	 */
 	private static function scandir( $path, $extensions = null, $depth = 0, $relative_path = '' ) {
-		if ( ! is_dir( $path ) )
-			return false;
+		if ( ! is_dir( $path ) ) {
+			return false; }
 
 		$_extensions = '';
 		if ( $extensions ) {
@@ -494,8 +536,8 @@ class SI_Templating_API extends SI_Controller {
 		}
 
 		$relative_path = trailingslashit( $relative_path );
-		if ( '/' == $relative_path )
-			$relative_path = '';
+		if ( '/' == $relative_path ) {
+			$relative_path = ''; }
 
 		$results = scandir( $path );
 		$files = array();

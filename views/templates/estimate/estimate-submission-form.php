@@ -15,6 +15,6 @@
 <form id="si_estimate_submission" method="post" action="" enctype="multipart/form-data">
 	<?php sa_form_fields( $fields, 'estimate' ); ?>
 	<div class="form-actions">
-		<input type="submit" class="btn btn-primary" value="<?php si_e( 'Submit' ); ?>" />
+		<input type="submit" class="btn btn-primary" value="<?php _e( 'Submit', 'sprout-invoices' ); ?>" />
 	</div>
 </form>

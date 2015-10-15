@@ -1,33 +1,33 @@
 <h3 class="dashboard_widget_title">
-	<span><?php self::_e('Invoice Dashboard') ?></span>
+	<span><?php _e( 'Invoice Dashboard', 'sprout-invoices' ) ?></span>
 </h3>
 <div class="dashboard_widget inside">
 	<div class="main">
-		<?php 
+		<?php
 			$invoice_data = SI_Reporting::total_invoice_data(); ?>
 		<dl>
-			<dt><?php self::_e('Outstanding') ?></dt>
+			<dt><?php esc_e( 'Outstanding', 'sprout-invoices' ) ?></dt>
 			<dd><?php sa_formatted_money( $invoice_data['balance'] )  ?></dd>
 
-			<dt><?php self::_e('Paid (this week)') ?></dt>
-			<dd>N/A<span title="<?php self::esc_e('Data available with upgraded version of Sprout Invoices') ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_e( 'Paid (this week)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php self::_e('Paid (last week)') ?></dt>
-			<dd>N/A<span title="<?php self::esc_e('Data available with upgraded version of Sprout Invoices') ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_e( 'Paid (last week)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php self::_e('Paid (month to date)') ?></dt>
-			<dd>N/A<span title="<?php self::esc_e('Data available with upgraded version of Sprout Invoices') ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_e( 'Paid (month to date)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php self::_e('Paid (last month)') ?></dt>
-			<dd>N/A<span title="<?php self::esc_e('Data available with upgraded version of Sprout Invoices') ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_e( 'Paid (last month)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php self::_e('Paid (year to date)') ?></dt>
-			<dd>N/A<span title="<?php self::esc_e('Data available with upgraded version of Sprout Invoices') ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_e( 'Paid (year to date)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 		</dl>
 
 		
 
-		<?php 
+		<?php
 			$args = array(
 				'orderby' => 'modified',
 				'post_type' => SI_Invoice::POST_TYPE,
@@ -37,34 +37,34 @@
 				);
 			$invoices = new WP_Query( $args ); ?>
 
-		<?php if ( !empty( $invoices->posts ) ): ?>
-			<b><?php self::_e('Latest Updates') ?></b> 
+		<?php if ( ! empty( $invoices->posts ) ) : ?>
+			<b><?php esc_e( 'Latest Updates', 'sprout-invoices' ) ?></b> 
 			<ul>
-				<?php foreach ( $invoices->posts as $invoice_id ): ?>
+				<?php foreach ( $invoices->posts as $invoice_id ) : ?>
 					<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_modified_time( 'U', false, $invoice_id ) ) ?></li>
 				<?php endforeach ?>
 			</ul>
-		<?php else: ?>
+		<?php else : ?>
 			<p>
-				<b><?php self::_e('Latest Updates') ?></b><br/>
-				<?php self::_e('No invoices found.') ?>
+				<b><?php esc_e( 'Latest Updates', 'sprout-invoices' ) ?></b><br/>
+				<?php esc_e( 'No invoices found.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 
-		<?php 
+		<?php
 			$invoices = SI_Invoice::get_overdue_invoices(); ?>
 
-		<?php if ( !empty( $invoices ) ): ?>
-			<b><?php self::_e('Overdue &amp; Unpaid') ?></b> 
+		<?php if ( ! empty( $invoices ) ) : ?>
+			<b><?php _e( 'Overdue &amp; Unpaid', 'sprout-invoices' ) ?></b> 
 			<ul>
-				<?php foreach ( $invoices as $invoice_id ): ?>
-					<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php printf( self::__('Due: %s'), date_i18n( get_option('date_format'), si_get_invoice_due_date( $invoice_id ) ) ) ?></li>
+				<?php foreach ( $invoices as $invoice_id ) : ?>
+					<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php printf( __( 'Due: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ), si_get_invoice_due_date( $invoice_id ) ) ) ?></li>
 				<?php endforeach ?>
 			</ul>
-		<?php else: ?>
+		<?php else : ?>
 			<p>
-				<b><?php self::_e('Overdue &amp; Unpaid') ?></b><br/>
-				<?php self::_e('No overdue or unpaid invoices.') ?>
+				<b><?php esc_e( 'Overdue &amp; Unpaid', 'sprout-invoices' ) ?></b><br/>
+				<?php esc_e( 'No overdue or unpaid invoices.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 	</div>

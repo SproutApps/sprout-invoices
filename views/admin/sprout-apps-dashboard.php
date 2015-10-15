@@ -2,13 +2,13 @@
 
 	<img class="header_sa_logo" src="<?php echo SI_RESOURCES . 'admin/icons/sproutapps.png' ?>" />
 
-	<h1><?php printf( self::__( 'Welcome to <a href="%s">Sprout Apps</a>!' ), self::PLUGIN_URL ); ?></h1>
+	<h1><?php printf( __( 'Welcome to <a href="%s">Sprout Apps</a>!', 'sprout-invoices' ), self::PLUGIN_URL ); ?></h1>
 
-	<div class="about-text"><?php self::_e( 'Our mission is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management...<em>seriously though</em>, I\'m trying to build something awesome that you will love. Thank you for your support.' ) ?></div>
+	<div class="about-text"><?php _e( 'Our mission is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing the tedious business tasks associated with client management...<em>seriously though</em>, I\'m trying to build something awesome that you will love. Thank you for your support.', 'sprout-invoices' ) ?></div>
 
 	<div id="welcome-panel" class="welcome-panel clearfix">
 		<div class="welcome-panel-content">
-			<h2><?php self::_e( 'Sprout Apps News and Updates' ) ?></h2>
+			<h2><?php _e( 'Sprout Apps News and Updates', 'sprout-invoices' ) ?></h2>
 			<?php
 				$maxitems = 0;
 				include_once( ABSPATH . WPINC . '/feed.php' );
@@ -20,7 +20,7 @@
 			?>
 			<div class="rss_widget clearfix">
 				<?php if ( $maxitems == 0 ) : ?>
-					<p><?php self::_e( 'Could not connect to SIserver for updates.' ); ?></p>
+					<p><?php _e( 'Could not connect to SIserver for updates.', 'sprout-invoices' ); ?></p>
 				<?php else : ?>
 					<?php foreach ( $rss_items as $item ) :
 						$excerpt = sa_get_truncate( strip_tags( $item->get_content() ), 30 );
@@ -38,8 +38,8 @@
 		</div>
 	</div>
 
-	<h2 class="headline_callout"><?php self::_e( 'Sprout Apps Marketplace' ) ?></h2>
-			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php si_e( 'View More Add-ons' ) ?></span></a>
+	<h2 class="headline_callout"><?php _e( 'Sprout Apps Marketplace', 'sprout-invoices' ) ?></h2>
+			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php _e( 'View More Add-ons', 'sprout-invoices' ) ?></span></a>
 	<!-- FUTURE make this entirely dynamic and add the ability to purchase from the backend. -->
 	<div id="marketplace_view">
 		<main id="main" class="container site-main" role="main">
@@ -53,13 +53,13 @@
 							<div class="section">
 								<div class="pic">
 									<?php if ( $addon->bundled ) : ?>
-										<span class="bundled_addon"><?php si_e( 'Bundled Free w/ License' ) ?></span>
+										<span class="bundled_addon"><?php _e( 'Bundled Free w/ License', 'sprout-invoices' ) ?></span>
 									<?php endif ?>
 									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
 										<?php echo $addon->thumb; ?>
 									</a>
 									<div class="download_purchase_link">
-										<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price; ?>&nbsp;–&nbsp;<?php si_e( 'Add to Cart' ) ?></span></a>
+										<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price; ?>&nbsp;–&nbsp;<?php _e( 'Add to Cart', 'sprout-invoices' ) ?></span></a>
 									</div>
 								</div>
 								<div class="info">
@@ -67,13 +67,13 @@
 									<div class="product-info">
 										<?php echo wp_kses( $addon->excerpt, wp_kses_allowed_html( 'post' ) ); ?>
 									</div>
-									<a class="view-details" href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>"><?php si_e( 'View Details' ) ?></a>
+									<a class="view-details" href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>"><?php _e( 'View Details', 'sprout-invoices' ) ?></a>
 								</div>
 							</div>
 						</article>
 					<?php endforeach ?>
 				</div>
-			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php si_e( 'View More Add-ons' ) ?></span></a>
+			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php _e( 'View More Add-ons', 'sprout-invoices' ) ?></span></a>
 			</div>
 		</main>
 	</div>

@@ -10,21 +10,21 @@
 	<div id="si_report" class="clearfix">
 		<div class="tablenav top">
 			<div class="alignleft">
-				<label><?php self::_e( 'From: ' ) ?><input type="date" name="start_date" id="start_date" value=""></label>
-				<label><?php self::_e( 'To: ' ) ?><input type="date" name="end_date" id="end_date" value=""></label>
+				<label><?php _e( 'From: ', 'sprout-invoices' ) ?><input type="date" name="start_date" id="start_date" value=""></label>
+				<label><?php _e( 'To: ', 'sprout-invoices' ) ?><input type="date" name="end_date" id="end_date" value=""></label>
 			</div>
 		</div>
 		<table id="si_reports_table" class="stripe hover wp-list-table widefat"> 
 			<thead>
 				<tr>
-					<th><?php self::_e( 'ID' ) ?></th>
-					<th><?php self::_e( 'Status' ) ?></th>
-					<th><?php self::_e( 'Issue Date' ) ?></th>
-					<th class="row-title"><?php self::_e( 'Subject' ) ?></th>
-					<th><?php self::_e( 'Invoice' ) ?></th>
-					<th><?php self::_e( 'Client' ) ?></th>
-					<th><?php self::_e( 'Total' ) ?></th>
-					<th><?php self::_e( 'Subtotal' ) ?></th>
+					<th><?php _e( 'ID', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Status', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Issue Date', 'sprout-invoices' ) ?></th>
+					<th class="row-title"><?php _e( 'Subject', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Invoice', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Client', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Total', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Subtotal', 'sprout-invoices' ) ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,7 +44,7 @@
 
 					set_time_limit( 0 ); // run script forever
 					// Add a progress bar to show table record collection.
-					echo '<tr class="odd" id="progress_row"><td valign="top" colspan="8" class="dataTables_empty"><div id="rows_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="table_progress">'.self::__( 'Preparing rows...' ).'</div></td></tr>';
+					echo '<tr class="odd" id="progress_row"><td valign="top" colspan="8" class="dataTables_empty"><div id="rows_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="table_progress">'.__( 'Preparing rows...', 'sprout-invoices' ).'</div></td></tr>';
 
 					$records = new WP_Query( $args );
 
@@ -57,14 +57,14 @@
 						// Javascript for updating the progress bar and information
 						echo '<script language="javascript" id="progress_js">
 						document.getElementById("rows_progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
-						document.getElementById("table_progress").innerHTML="'.sprintf( self::__( '%o records(s) of %o added.' ), $i, $records->found_posts ).'";
+						document.getElementById("table_progress").innerHTML="'.sprintf( __( '%o records(s) of %o added.', 'sprout-invoices' ), $i, $records->found_posts ).'";
 						document.getElementById("progress_js").remove();
 						</script>';
 
 						$table_total_estimated += si_get_estimate_total();
 						$table_subtotal += si_get_estimate_subtotal();
-						$invoice_name = ( si_get_estimate_invoice_id() ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_estimate_invoice_id() ), get_the_title( si_get_estimate_invoice_id() ) ) : self::__( 'N/A' );
-						$client_name = ( si_get_estimate_client_id() ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_estimate_client_id() ), get_the_title( si_get_estimate_client_id() ) ) : self::__( 'N/A' ); ?>
+						$invoice_name = ( si_get_estimate_invoice_id() ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_estimate_invoice_id() ), get_the_title( si_get_estimate_invoice_id() ) ) : __( 'N/A', 'sprout-invoices' );
+						$client_name = ( si_get_estimate_client_id() ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_estimate_client_id() ), get_the_title( si_get_estimate_client_id() ) ) : __( 'N/A', 'sprout-invoices' ); ?>
 						<tr> 
 							<td><?php echo si_get_estimate_id( get_the_id() ) ?></td>
 							<td><span class="si_status estimate_status <?php si_estimate_status() ?>"><?php si_estimate_status() ?></span></td>
@@ -85,7 +85,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="6"><?php self::_e( 'Totals' ) ?></th>
+					<th colspan="6"><?php _e( 'Totals', 'sprout-invoices' ) ?></th>
 					<th><?php sa_formatted_money( $table_total_estimated ) ?></th>
 					<th><?php sa_formatted_money( $table_subtotal ) ?></th>
 				</tr>

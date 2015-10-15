@@ -26,7 +26,7 @@
 				// stuff
 				$placeholder = ( isset( $column['placeholder'] ) ) ? $column['placeholder'] : '' ;
 				$val = ( isset( $column['value'] ) ) ? $column['value'] : '' ;
-				$value = ( isset( $item_data[ $column_slug ] ) ) ? $item_data[ $column_slug ] : '' ;
+				$value = ( isset( $item_data[ $column_slug ] ) ) ? $item_data[ $column_slug ] : $val ;
 				$hide_if_parent = ( isset( $column['hide_if_parent'] ) && $column['hide_if_parent'] ) ? 'parent_hide' : '' ;
 
 				$numeric = ( isset( $column['numeric'] ) ) ? $column['numeric'] : true ;
@@ -48,8 +48,6 @@
 						$option .= sprintf( '<input class="totalled_input sa_option_text%4$s" type="text" name="line_item_%2$s[]" value="%1$s" placeholder="%3$s" size="3">', esc_attr( $value ), $column_slug, $placeholder, $force_numeric );
 						break;
 					case 'input':
-						
-						error_log( 'log' . print_r( $numeric, TRUE ) );
 						$option .= '<span></span>';
 						$option .= sprintf( '<input class="totalled_input sa_option_text%4$s" type="text" name="line_item_%2$s[]" value="%1$s" placeholder="%3$s" size="6">', esc_attr( $value ), $column_slug, $placeholder, $force_numeric );
 						break;

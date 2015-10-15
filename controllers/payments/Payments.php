@@ -11,7 +11,7 @@ class SI_Payments extends SI_Controller {
 	const PAYMENT_QV = 'pay_invoice';
 
 	public static function get_admin_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
+		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
 	public static function init() {
@@ -42,8 +42,8 @@ class SI_Payments extends SI_Controller {
 		$args = array(
 			'parent' => 'edit.php?post_type='.SI_Invoice::POST_TYPE,
 			'slug' => self::SETTINGS_PAGE,
-			'title' => self::__( 'Payments' ),
-			'menu_title' => self::__( 'Payments' ),
+			'title' => __( 'Payments', 'sprout-invoices' ),
+			'menu_title' => __( 'Payments', 'sprout-invoices' ),
 			'weight' => 14,
 			'reset' => false,
 			'callback' => array( __CLASS__, 'display_table' )
@@ -53,16 +53,16 @@ class SI_Payments extends SI_Controller {
 
 	public function modify_views( $views ) {
 		$auth_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_AUTHORIZED ) ? 'class="current"' : '';
-		$views['authorized_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_AUTHORIZED ) ) ).'" '.$auth_class.'>'.self::__( 'Authorized/Temp' ).'</a>';
+		$views['authorized_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_AUTHORIZED ) ) ).'" '.$auth_class.'>'.__( 'Authorized/Temp', 'sprout-invoices' ).'</a>';
 
 		$auth_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_PARTIAL ) ? 'class="current"' : '';
-		$views['partial_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_PARTIAL ) ) ).'" '.$auth_class.'>'.self::__( 'Partial' ).'</a>';
+		$views['partial_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_PARTIAL ) ) ).'" '.$auth_class.'>'.__( 'Partial', 'sprout-invoices' ).'</a>';
 
 		$void_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_VOID ) ? 'class="current"' : '';
-		$views['voided_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_VOID ) ) ).'" '.$void_class.'>'.self::__( 'Voided' ).'</a>';
+		$views['voided_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_VOID ) ) ).'" '.$void_class.'>'.__( 'Voided', 'sprout-invoices' ).'</a>';
 
 		$refund_class = ( isset( $_GET['post_status'] ) && $_GET['post_status'] == SI_Payment::STATUS_REFUND ) ? 'class="current"' : '';
-		$views['refunded_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_REFUND ) ) ).'" '.$refund_class.'>'.self::__( 'Refunded' ).'</a>';
+		$views['refunded_payments'] = '<a href="'.esc_url( add_query_arg( array( 'post_status' => SI_Payment::STATUS_REFUND ) ) ).'" '.$refund_class.'>'.__( 'Refunded', 'sprout-invoices' ).'</a>';
 		return $views;
 	}
 
@@ -94,9 +94,9 @@ class SI_Payments extends SI_Controller {
 				return; }
 
 		$payment->set_status( SI_Payment::STATUS_VOID );
-		$payment->set_payment_method( self::__( 'Admin Void' ) );
+		$payment->set_payment_method( __( 'Admin Void', 'sprout-invoices' ) );
 		// Merge old data with new updated message
-		$new_data = wp_parse_args( $payment->get_data(), array( 'void_notes' => $new_data, 'updated' => sprintf( self::__( 'Voided by User #%s on %s' ), get_current_user_id(), date_i18n( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ) ) ) ) );
+		$new_data = wp_parse_args( $payment->get_data(), array( 'void_notes' => $new_data, 'updated' => sprintf( __( 'Voided by User #%s on %s', 'sprout-invoices' ), get_current_user_id(), date_i18n( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ) ) ) ) );
 		$payment->set_data( $new_data );
 
 		add_action( 'si_void_payment', $payment_id, $new_data );
@@ -116,7 +116,7 @@ class SI_Payments extends SI_Controller {
 					var $void_button = $( this ),
 					void_payment_id = $void_button.attr( 'ref' ),
 					notes_form = $( '#transaction_data_' + void_payment_id ).val();
-					$void_button.html("<?php si_e( 'Working...' ) ?>");
+					$void_button.html("<?php _e( 'Working...', 'sprout-invoices' ) ?>");
 					$.post( ajaxurl, { action: 'si_void_payment', payment_id: void_payment_id, notes: notes_form, void_payment_nonce: '<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>' },
 						function( data ) {
 							self.parent.tb_remove();
@@ -126,10 +126,10 @@ class SI_Payments extends SI_Controller {
 				});
 				jQuery(".si_attempt_capture").on('click', function(event) {
 					event.preventDefault();
-					if( confirm( '<?php si_e( 'Are you sure? This will force a capture attempt on this payment.' ) ?>' ) ) {
+					if( confirm( '<?php _e( 'Are you sure? This will force a capture attempt on this payment.', 'sprout-invoices' ) ?>' ) ) {
 						var $capture_link = $( this ),
 						capture_payment_id = $capture_link.attr( 'ref' );
-						$capture_link.html('<?php si_e( 'Working...' ) ?>');
+						$capture_link.html('<?php _e( 'Working...', 'sprout-invoices' ) ?>');
 						$.post( ajaxurl, { action: 'si_manually_capture_payment', payment_id: capture_payment_id, capture_payment_nonce: '<?php echo wp_create_nonce( SI_Payment_Processors::AJAX_NONCE ) ?>' },
 							function( data ) {
 								window.location = window.location.pathname + "?post_type=sa_invoice&page=sprout-apps/invoice_payments&s=" + escape( capture_payment_id );
@@ -139,10 +139,10 @@ class SI_Payments extends SI_Controller {
 				});
 				jQuery(".si_mark_complete").on('click', function(event) {
 					event.preventDefault();
-					if( confirm( '<?php si_e( 'Are you sure? This will mark the payment as complete.' ) ?>' ) ) {
+					if( confirm( '<?php _e( 'Are you sure? This will mark the payment as complete.', 'sprout-invoices' ) ?>' ) ) {
 						var $complete_link = $( this ),
 						complete_payment_id = $complete_link.attr( 'ref' );
-						$complete_link.html('<?php si_e( 'Working...' ) ?>');
+						$complete_link.html('<?php _e( 'Working...', 'sprout-invoices' ) ?>');
 						$.post( ajaxurl, { action: 'si_mark_payment_complete', payment_id: complete_payment_id, complete_payment_nonce: '<?php echo wp_create_nonce( SI_Payment_Processors::AJAX_NONCE ) ?>' },
 							function( data ) {
 								window.location = window.location.pathname + "?post_type=sa_invoice&page=sprout-apps/invoice_payments&s=" + escape( complete_payment_id );
@@ -155,14 +155,14 @@ class SI_Payments extends SI_Controller {
 		<div class="wrap">
 			
 			<h2>
-				<?php si_e( 'Invoice Payments' ) ?>
+				<?php _e( 'Invoice Payments', 'sprout-invoices' ) ?>
 			</h2>
 
 			<?php $wp_list_table->views() ?>
 			<form id="payments-filter" method="get">
 				<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
 				<input type="hidden" name="post_type" value="<?php echo esc_attr( $_REQUEST['post_type'] ); ?>" />
-				<?php $wp_list_table->search_box( self::__( 'Search' ), 'payment_id' ); ?>
+				<?php $wp_list_table->search_box( __( 'Search', 'sprout-invoices' ), 'payment_id' ); ?>
 				<?php $wp_list_table->display() ?>
 			</form>
 		</div>
@@ -186,7 +186,7 @@ class SI_Payments extends SI_Controller {
 	public static function add_link_to_admin_bar( $items ) {
 		$items[] = array(
 			'id' => 'mng_payments',
-			'title' => self::__( 'Payments' ),
+			'title' => __( 'Payments', 'sprout-invoices' ),
 			'href' => admin_url( 'edit.php?post_type='.SI_Invoice::POST_TYPE.'&page=sprout-apps/invoice_payments' ),
 			'weight' => 0,
 		);
@@ -204,20 +204,20 @@ class SI_Payments extends SI_Controller {
 		if ( $screen->base == 'sa_invoice_page_sprout-apps/invoice_payments' ) {
 			$screen->add_help_tab( array(
 					'id' => 'about-payments',
-					'title' => self::__( 'About Payments' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'Payment statuses include:' ), self::__( '<b>Pending</b> - the payment could be waiting for admin approval or waiting for the payment processor.<br/><b>Authorized</b> – a payment status set for signifying that the payment was authorized by the processor and a capture of the payment will be attempted later.<br/><b>Void</b> - payment was voided by the admin or declined by the payment processor after it was authorized or pending.' ) ),
+					'title' => __( 'About Payments', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'Payment statuses include:', 'sprout-invoices' ), __( '<b>Pending</b> - the payment could be waiting for admin approval or waiting for the payment processor.<br/><b>Authorized</b> – a payment status set for signifying that the payment was authorized by the processor and a capture of the payment will be attempted later.<br/><b>Void</b> - payment was voided by the admin or declined by the payment processor after it was authorized or pending.', 'sprout-invoices' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'mng-payments',
-					'title' => self::__( 'Managing Payments' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__( 'Hovering over a payment brings up multiple links and options:' ), self::__( '<b>Void Payment</b> - Allows you to void a payment and add a note that will be added to the Transaction Data.' ), self::__( '<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw data stored by a payment processor.' ), self::__( '<b>Invoice and Client</b> – A link to the associated invoice and client edit pages.' ), self::__( 'The payment totals are current and are not at the moment of the payment. The payment type is shown under the Data column.' ) ),
+					'title' => __( 'Managing Payments', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( 'Hovering over a payment brings up multiple links and options:', 'sprout-invoices' ), __( '<b>Void Payment</b> - Allows you to void a payment and add a note that will be added to the Transaction Data.', 'sprout-invoices' ), __( '<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw data stored by a payment processor.', 'sprout-invoices' ), __( '<b>Invoice and Client</b> – A link to the associated invoice and client edit pages.', 'sprout-invoices' ), __( 'The payment totals are current and are not at the moment of the payment. The payment type is shown under the Data column.', 'sprout-invoices' ) ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/', self::__( 'Documentation' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

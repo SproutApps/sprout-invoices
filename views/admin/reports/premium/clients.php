@@ -10,24 +10,24 @@
 	<div id="si_report" class="clearfix">
 		<div class="tablenav top">
 			<div class="alignleft">
-				<label><?php self::_e('From: ') ?><input type="date" name="start_date" id="start_date" value=""></label>
-				<label><?php self::_e('To: ') ?><input type="date" name="end_date" id="end_date" value=""></label>
+				<label><?php _e( 'From: ', 'sprout-invoices' ) ?><input type="date" name="start_date" id="start_date" value=""></label>
+				<label><?php _e( 'To: ', 'sprout-invoices' ) ?><input type="date" name="end_date" id="end_date" value=""></label>
 			</div>
 		</div>
 		<table id="si_reports_table" class="stripe hover wp-list-table widefat"> 
 			<thead>
 				<tr>
-					<th><?php self::_e('ID') ?></th>
-					<th><?php self::_e('Name') ?></th>
-					<th><?php self::_e('Date') ?></th>
-					<th><?php self::_e('#Estimates') ?></th>
-					<th><?php self::_e('#Accepted') ?></th>
-					<th><?php self::_e('#Invoices') ?></th>
-					<th><?php self::_e('#Paid') ?></th>
-					<th><?php self::_e('Total Invoiced') ?></th>
-					<th><?php self::_e('Total Payments') ?></th>
-					<th><?php self::_e('Total Outstanding') ?></th>
-					<th><?php self::_e('Total Written-off') ?></th>
+					<th><?php _e( 'ID', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Name', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Date', 'sprout-invoices' ) ?></th>
+					<th><?php _e( '#Estimates', 'sprout-invoices' ) ?></th>
+					<th><?php _e( '#Accepted', 'sprout-invoices' ) ?></th>
+					<th><?php _e( '#Invoices', 'sprout-invoices' ) ?></th>
+					<th><?php _e( '#Paid', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Total Invoiced', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Total Payments', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Total Outstanding', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Total Written-off', 'sprout-invoices' ) ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,7 +53,7 @@
 					
 					set_time_limit(0); // run script forever
 					// Add a progress bar to show table record collection.
-					echo '<tr class="odd" id="progress_row"><td valign="top" colspan="8" class="dataTables_empty"><div id="rows_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="table_progress">'.self::__('Preparing rows...').'</div></td></tr>';
+					echo '<tr class="odd" id="progress_row"><td valign="top" colspan="8" class="dataTables_empty"><div id="rows_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="table_progress">'.__( 'Preparing rows...', 'sprout-invoices' ).'</div></td></tr>';
 
 					$records = new WP_Query( $args );
 
@@ -65,7 +65,7 @@
 						// Javascript for updating the progress bar and information
 						echo '<script language="javascript" id="progress_js">
 						document.getElementById("rows_progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
-						document.getElementById("table_progress").innerHTML="'.sprintf( self::__('%o records(s) of %o added.'), $i, $records->found_posts ).'";
+						document.getElementById("table_progress").innerHTML="'.sprintf( __( '%o records(s) of %o added.', 'sprout-invoices' ), $i, $records->found_posts ).'";
 						document.getElementById("progress_js").remove();
 						</script>';
 
@@ -147,7 +147,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="3"><?php self::_e('Totals') ?></th>
+					<th colspan="3"><?php _e( 'Totals', 'sprout-invoices' ) ?></th>
 					<th><?php echo (int) $table_total_estimate_count ?></th>
 					<th><?php echo (int) $table_total_estimate_complete_count ?></th>
 					<th><?php echo (int) $table_total_invoice_count ?></th>

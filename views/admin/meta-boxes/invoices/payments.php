@@ -3,7 +3,7 @@
 	<div id="admin_payments_option" class="form-group">
 		<span class="label_wrap">&nbsp;</span>
 		<div class="input_wrap">
-			<a href="javascript:void(0)" class="button" id="add_admin_payments"><?php si_e('Quick Add') ?></a> <span class="helptip" title="<?php si_e("Add the payment now or save/update the invoice above") ?>"></span>
+			<a href="javascript:void(0)" class="button" id="add_admin_payments"><?php _e( 'Quick Add', 'sprout-invoices' ) ?></a> <span class="helptip" title="<?php _e( "Add the payment now or save/update the invoice above", 'sprout-invoices' ) ?>"></span>
 		</div>
 	</div>
 	

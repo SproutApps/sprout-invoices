@@ -426,7 +426,7 @@ class SI_JSON_API extends SI_Controller {
 	 */
 	public static function fail( $message = '' ) {
 		if ( $message == '' ) {
-			$message = self::__( 'Something failed.' );
+			$message = __( 'Something failed.', 'sprout-invoices' );
 		}
 		wp_send_json_error( $message );
 	}

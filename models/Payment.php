@@ -51,12 +51,12 @@ class SI_Payment extends SI_Post_Type {
 	 */
 	private static function register_post_statuses() {
 		$statuses = array(
-			self::STATUS_AUTHORIZED => self::__('Authorized'),
-			self::STATUS_CANCELLED => self::__('Cancelled'),
-			self::STATUS_PARTIAL => self::__('Partial Payment'),
-			self::STATUS_VOID => self::__('Void'),
-			self::STATUS_REFUND => self::__('Refunded'),
-			self::STATUS_RECURRING => self::__('Recurring'),
+			self::STATUS_AUTHORIZED => __( 'Authorized', 'sprout-invoices' ),
+			self::STATUS_CANCELLED => __( 'Cancelled', 'sprout-invoices' ),
+			self::STATUS_PARTIAL => __( 'Partial Payment', 'sprout-invoices' ),
+			self::STATUS_VOID => __( 'Void', 'sprout-invoices' ),
+			self::STATUS_REFUND => __( 'Refunded', 'sprout-invoices' ),
+			self::STATUS_RECURRING => __( 'Recurring', 'sprout-invoices' ),
 		);
 		foreach ( $statuses as $status => $label ) {
 			register_post_status( $status, array(
@@ -101,7 +101,7 @@ class SI_Payment extends SI_Post_Type {
 		$defaults = array(
 			'transaction_id' => microtime(),
 			'status' => $status,
-			'payment_method' => self::__('API'),
+			'payment_method' => __( 'API', 'sprout-invoices' ),
 			'amount' => (float) 0,
 			'invoice_id' => 0,
 			'invoice' => 0,
@@ -110,7 +110,7 @@ class SI_Payment extends SI_Post_Type {
 		$args = wp_parse_args( $passed_args, $defaults );
 
 		$id = wp_insert_post( array(
-			'post_title' => sprintf( self::__( 'Payment #%d' ), $args['transaction_id'] ),
+			'post_title' => sprintf( __( 'Payment #%d', 'sprout-invoices' ), $args['transaction_id'] ),
 			'post_status' => $args['status'],
 			'post_type' => self::POST_TYPE,
 		) );
@@ -120,7 +120,7 @@ class SI_Payment extends SI_Post_Type {
 
 		$payment = self::get_instance( $id );
 		
-		$payment->set_title( sprintf( self::__( 'Payment #%d' ), $id ) );
+		$payment->set_title( sprintf( __( 'Payment #%d', 'sprout-invoices' ), $id ) );
 		$payment->set_transaction_id( $args['transaction_id'] );
 		$payment->set_payment_method( $args['payment_method'] );
 		$payment->set_amount( $args['amount'] );

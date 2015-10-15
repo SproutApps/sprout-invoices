@@ -1,6 +1,6 @@
 <span id="add_link_item">
 	<span class="add_button_wrap button">
-		<a href="javascript:void(0)" class="add_predefined add_button add_button_drop" data-dropdown="#type_selection">&nbsp;<?php si_e( 'Add' ) ?></a>
+		<a href="javascript:void(0)" class="add_predefined add_button add_button_drop" data-dropdown="#type_selection">&nbsp;<?php _e( 'Add', 'sprout-invoices' ) ?></a>
 	</span>
 	<div id="type_selection" class="dropdown dropdown-tip dropdown-relative">
 		<ul class="dropdown-menu">

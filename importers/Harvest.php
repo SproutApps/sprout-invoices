@@ -39,7 +39,7 @@ class SI_Harvest_Import extends SI_Importer {
 	}
 
 	public static function register() {
-		self::add_importer( __CLASS__, self::__( 'Harvest' ) );
+		self::add_importer( __CLASS__, __( 'Harvest', 'sprout-invoices' ) );
 	}
 
 
@@ -56,52 +56,52 @@ class SI_Harvest_Import extends SI_Importer {
 				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::HARVEST_USER_OPTION => array(
-						'label' => self::__( 'User' ),
+						'label' => __( 'User', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$harvest_user,
-							'attributes' => array( 'placeholder' => self::__(
-							'user@gmail.com') ),
+							'attributes' => array( 'placeholder' => __( 
+							'user@gmail.com', 'sprout-invoices' ) ),
 							'description' => '',
 						)
 					),
 					self::HARVEST_PASS_OPTION => array(
-						'label' => self::__( 'Password' ),
+						'label' => __( 'Password', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'password',
 							'default' => self::$harvest_pass,
-							'attributes' => array( 'placeholder' => self::__(
-							'password') ),
+							'attributes' => array( 'placeholder' => __( 
+							'password', 'sprout-invoices' ) ),
 							'description' => ''
 						)
 					),
 					self::HARVEST_ACCOUNT_OPTION => array(
-						'label' => self::__( 'Account/Sub-domain' ),
+						'label' => __( 'Account/Sub-domain', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$harvest_account,
-							'attributes' => array( 'placeholder' => self::__(
-							'your-subdomain') ),
-							'description' => self::__( 'https://[subdomain].harvest.com' ),
+							'attributes' => array( 'placeholder' => __( 
+							'your-subdomain', 'sprout-invoices' ) ),
+							'description' => __( 'https://[subdomain].harvest.com', 'sprout-invoices' ),
 							'sanitize_callback' => array( __CLASS__, 'sanitize_subdomain' ),
 						)
 					),
 					self::PROCESS_ARCHIVED => array(
-						'label' => self::__( 'Import Archived' ),
+						'label' => __( 'Import Archived', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'archived',
-							'label' => self::__( 'Import inactive clients.' ),
+							'label' => __( 'Import inactive clients.', 'sprout-invoices' ),
 							'description' => ''
 						)
 					),
 					self::DELETE_PROGRESS => array(
-						'label' => self::__( 'Clear Progress' ),
+						'label' => __( 'Clear Progress', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'restart',
 							'label' => 'Re-start the Import Process',
-							'description' => self::__( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.' )
+							'description' => __( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.', 'sprout-invoices' )
 						)
 					),
 					self::PROCESS_ACTION => array(
@@ -198,10 +198,10 @@ class SI_Harvest_Import extends SI_Importer {
 		// get clients, though we're just confirming credentials
 		$result = $api->getClients();
 		if ( ! $result->isSuccess() ) {
-			self::return_error( self::__( 'Authentication error.' ) );
+			self::return_error( __( 'Authentication error.', 'sprout-invoices' ) );
 		}
 		self::return_progress( array( 'authentication' => array(
-					'message' => self::__( 'Communicating with the Harvest API...' ),
+					'message' => __( 'Communicating with the Harvest API...', 'sprout-invoices' ),
 					'progress' => 99.9,
 					'next_step' => 'clients'
 					) ) );
@@ -239,7 +239,7 @@ class SI_Harvest_Import extends SI_Importer {
 			$result = $api->getClients();
 
 			if ( ! $result->isSuccess() ) {
-				self::return_error( self::__( 'Client import error.' ) );
+				self::return_error( __( 'Client import error.', 'sprout-invoices' ) );
 			}
 
 			// Start importing the clients 20 at a time
@@ -262,11 +262,11 @@ class SI_Harvest_Import extends SI_Importer {
 				// Return the progress
 				self::return_progress( array(
 								'authentication' => array(
-									'message' => sprintf( self::__( 'Attempting to import %s clients...' ), $total_records ),
+									'message' => sprintf( __( 'Attempting to import %s clients...', 'sprout-invoices' ), $total_records ),
 									'progress' => 10 + $progress[$progress_key]
 									),
 								'clients' => array(
-									'message' => sprintf( self::__( 'Imported about %s clients so far.' ), $total_imported ),
+									'message' => sprintf( __( 'Imported about %s clients so far.', 'sprout-invoices' ), $total_imported ),
 									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'clients'
 									),
@@ -280,11 +280,11 @@ class SI_Harvest_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 							'authentication' => array(
-								'message' => sprintf( self::__( 'Successfully imported %s clients...' ), $total_records ),
+								'message' => sprintf( __( 'Successfully imported %s clients...', 'sprout-invoices' ), $total_records ),
 								'progress' => 50
 								),
 							'clients' => array(
-								'message' => sprintf( self::__( 'Imported %s clients!' ), $total_records ),
+								'message' => sprintf( __( 'Imported %s clients!', 'sprout-invoices' ), $total_records ),
 								'progress' => 100,
 								'next_step' => 'contacts'
 								),
@@ -294,12 +294,12 @@ class SI_Harvest_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s clients already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s clients already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 50
 							),
 						'clients' => array(
 							'progress' => 100,
-							'message' => sprintf( self::__( 'Successfully imported %s clients already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s clients already.', 'sprout-invoices' ), $total_records ),
 							'next_step' => 'contacts'
 							),
 						) );
@@ -341,7 +341,7 @@ class SI_Harvest_Import extends SI_Importer {
 			$result = $api->getContacts();
 
 			if ( ! $result->isSuccess() ) {
-				self::return_error( self::__( 'Contact import error.' ) );
+				self::return_error( __( 'Contact import error.', 'sprout-invoices' ) );
 			}
 
 			// Start importing the contacts 20 at a time
@@ -364,11 +364,11 @@ class SI_Harvest_Import extends SI_Importer {
 				// Return the progress
 				self::return_progress( array(
 								'authentication' => array(
-									'message' => sprintf( self::__( 'Attempting to import %s contacts...' ), $total_records ),
+									'message' => sprintf( __( 'Attempting to import %s contacts...', 'sprout-invoices' ), $total_records ),
 									'progress' => 25 + $progress[$progress_key]
 									),
 								'contacts' => array(
-									'message' => sprintf( self::__( 'Imported about %s contacts so far.' ), $total_imported ),
+									'message' => sprintf( __( 'Imported about %s contacts so far.', 'sprout-invoices' ), $total_imported ),
 									'progress' => intval( ($progress[$progress_key] / $pages) * 100 ),
 									'next_step' => 'contacts'
 									),
@@ -382,11 +382,11 @@ class SI_Harvest_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 							'authentication' => array(
-								'message' => sprintf( self::__( 'Successfully imported %s contacts...' ), $total_records ),
+								'message' => sprintf( __( 'Successfully imported %s contacts...', 'sprout-invoices' ), $total_records ),
 								'progress' => 50
 								),
 							'contacts' => array(
-								'message' => sprintf( self::__( 'Imported %s contacts!' ), $total_records ),
+								'message' => sprintf( __( 'Imported %s contacts!', 'sprout-invoices' ), $total_records ),
 								'progress' => 100,
 								'next_step' => 'estimates'
 								),
@@ -396,12 +396,12 @@ class SI_Harvest_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s contacts already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s contacts already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 50
 							),
 						'contacts' => array(
 							'progress' => 100,
-							'message' => sprintf( self::__( 'Successfully imported %s contacts already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s contacts already.', 'sprout-invoices' ), $total_records ),
 							'next_step' => 'estimates'
 							),
 						) );
@@ -427,12 +427,12 @@ class SI_Harvest_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => self::__( 'Attempting to get your Harvest estimates...' ),
+							'message' => __( 'Attempting to get your Harvest estimates...', 'sprout-invoices' ),
 							'progress' => 50
 							),
 						'estimates' => array(
 							'progress' => 100,
-							'message' => self::__( 'The Harvest API does not permit access to your estimates.' ),
+							'message' => __( 'The Harvest API does not permit access to your estimates.', 'sprout-invoices' ),
 							'next_step' => 'invoices'
 							),
 						) );
@@ -479,15 +479,15 @@ class SI_Harvest_Import extends SI_Importer {
 				// Return the progress
 				self::return_progress( array(
 								'authentication' => array(
-									'message' => self::__( 'Attempting to import your invoices and their payments...' ),
+									'message' => __( 'Attempting to import your invoices and their payments...', 'sprout-invoices' ),
 									'progress' => 60 + $progress[$progress_key]
 									),
 								'invoices' => array(
-									'message' => sprintf( self::__( 'Currently importing invoices and their payments in increments of %s. Thank you for your patience, this is a very slow process.' ), 50 ),
+									'message' => sprintf( __( 'Currently importing invoices and their payments in increments of %s. Thank you for your patience, this is a very slow process.', 'sprout-invoices' ), 50 ),
 									'progress' => 15 + ($progress[$progress_key] * 5)
 									),
 								'payments' => array(
-									'message' => self::__( 'Payments will be imported with new invoices' ),
+									'message' => __( 'Payments will be imported with new invoices', 'sprout-invoices' ),
 									'progress' => 15 + ($progress[$progress_key] * 5),
 									'next_step' => 'invoices',
 									),
@@ -508,7 +508,7 @@ class SI_Harvest_Import extends SI_Importer {
 			$result = $api->getInvoices( $filter );
 
 			if ( ! $result->isSuccess() ) {
-				self::return_error( self::__( 'Invoice import error.' ) );
+				self::return_error( __( 'Invoice import error.', 'sprout-invoices' ) );
 			}
 
 			if ( $result->isSuccess() ) {
@@ -570,15 +570,15 @@ class SI_Harvest_Import extends SI_Importer {
 					// Return the progress
 					self::return_progress( array(
 									'authentication' => array(
-										'message' => sprintf( self::__( 'Attempting to import %s new invoices and their payments...' ), $invoices_imported ),
+										'message' => sprintf( __( 'Attempting to import %s new invoices and their payments...', 'sprout-invoices' ), $invoices_imported ),
 										'progress' => 60 + $progress[$progress_key]
 										),
 									'payments' => array(
-										'message' => sprintf( self::__( 'Just imported %s more payments.' ), $payments_imported ),
+										'message' => sprintf( __( 'Just imported %s more payments.', 'sprout-invoices' ), $payments_imported ),
 										'progress' => 15 + ($progress[$progress_key] * 2),
 										),
 									'invoices' => array(
-										'message' => sprintf( self::__( 'Importing invoices in increments of %s. Thank you for your patience, this is a very slow process.' ), apply_filters( 'si_harvest_import_increments_for_invoices', 10 ) ),
+										'message' => sprintf( __( 'Importing invoices in increments of %s. Thank you for your patience, this is a very slow process.', 'sprout-invoices' ), apply_filters( 'si_harvest_import_increments_for_invoices', 10 ) ),
 										'progress' => 15 + ($progress[$progress_key] * 2),
 										'next_step' => 'invoices'
 										),
@@ -593,15 +593,15 @@ class SI_Harvest_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 							'authentication' => array(
-								'message' => self::__( 'Successfully imported a bunch of invoices...' ),
+								'message' => __( 'Successfully imported a bunch of invoices...', 'sprout-invoices' ),
 								'progress' => 100
 								),
 							'payments' => array(
-								'message' => self::__( 'Successfully imported a bunch of payments.' ),
+								'message' => __( 'Successfully imported a bunch of payments.', 'sprout-invoices' ),
 								'progress' => 100
 								),
 							'invoices' => array(
-								'message' => self::__( 'Finished importing your invoices!' ),
+								'message' => __( 'Finished importing your invoices!', 'sprout-invoices' ),
 								'progress' => 100,
 								'next_step' => 'complete'
 								),
@@ -611,16 +611,16 @@ class SI_Harvest_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => self::__( 'Successfully imported invoices already, moving on...' ),
+							'message' => __( 'Successfully imported invoices already, moving on...', 'sprout-invoices' ),
 							'progress' => 50
 							),
 						'payments' => array(
-							'message' => self::__( 'Successfully imported a bunch of payments already.' ),
+							'message' => __( 'Successfully imported a bunch of payments already.', 'sprout-invoices' ),
 							'progress' => 100
 							),
 						'invoices' => array(
 							'progress' => 100,
-							'message' => self::__( 'Imported all the invoices already!' ),
+							'message' => __( 'Imported all the invoices already!', 'sprout-invoices' ),
 							'next_step' => 'complete'
 							),
 						) );
@@ -726,7 +726,7 @@ class SI_Harvest_Import extends SI_Importer {
 			$invoice, // content
 			self::RECORD, // type slug
 			$inv_id, // post id
-			self::__( 'Invoice Imported' ), // title
+			__( 'Invoice Imported', 'sprout-invoices' ), // title
 			0 // user id
 		);
 

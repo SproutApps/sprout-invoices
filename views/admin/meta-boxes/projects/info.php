@@ -3,7 +3,7 @@
 </div>
 
 
-<h3><?php si_e('Project Brief') ?> <span class="helptip" title="<?php si_e("General project brief.") ?>"></span></h3>
+<h3><?php _e( 'Project Brief', 'sprout-invoices' ) ?> <span class="helptip" title="<?php _e( "General project brief.", 'sprout-invoices' ) ?>"></span></h3>
 <?php 
 	$editor_settings = array(
 			'media_buttons'     => false,

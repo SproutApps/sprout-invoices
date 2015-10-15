@@ -75,8 +75,8 @@ class SI_Notifications_Control extends SI_Controller {
 		// Option page
 		$args = array(
 			'slug' => self::SETTINGS_PAGE,
-			'title' => self::__( 'Notifications' ),
-			'menu_title' => self::__( 'Notifications' ),
+			'title' => __( 'Notifications', 'sprout-invoices' ),
+			'menu_title' => __( 'Notifications', 'sprout-invoices' ),
 			'weight' => 20,
 			'reset' => false,
 			'section' => 'settings',
@@ -88,42 +88,42 @@ class SI_Notifications_Control extends SI_Controller {
 		// Settings
 		$settings = array(
 			'notifications' => array(
-				'title' => self::__( 'Notification Settings' ),
+				'title' => __( 'Notification Settings', 'sprout-invoices' ),
 				'weight' => 30,
 				'tab' => 'settings',
 				'settings' => array(
 					self::EMAIL_FROM_NAME => array(
-						'label' => self::__( 'From name' ),
+						'label' => __( 'From name', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$notification_from_name
 							)
 						),
 					self::EMAIL_FROM_EMAIL => array(
-						'label' => self::__( 'From email' ),
+						'label' => __( 'From email', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$notification_from_email
 							)
 						),
 					self::ADMIN_EMAIL => array(
-						'label' => self::__( 'Admin email' ),
+						'label' => __( 'Admin email', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$admin_email,
-							'description' => self::__( 'E-mail address that receives the admin notifications (e.g. Payment Received).' )
+							'description' => __( 'E-mail address that receives the admin notifications (e.g. Payment Received ).', 'sprout-invoices' )
 							)
 						),
 					self::EMAIL_FORMAT => array(
-						'label' => self::__( 'Email format' ),
+						'label' => __( 'Email format', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'select',
 							'options' => array(
-									'HTML' => self::__( 'HTML' ),
-									'TEXT' => self::__( 'Plain Text' )
+									'HTML' => __( 'HTML', 'sprout-invoices' ),
+									'TEXT' => __( 'Plain Text', 'sprout-invoices' )
 								),
 							'default' => self::$notification_format,
-							'description' => self::__( 'Default notifications are in plain text. If set to HTML, custom HTML notifications are required.' )
+							'description' => __( 'Default notifications are in plain text. If set to HTML, custom HTML notifications are required.', 'sprout-invoices' )
 							)
 						),
 					)
@@ -133,7 +133,7 @@ class SI_Notifications_Control extends SI_Controller {
 	}
 
 	public static function get_admin_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
+		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
 	//////////////
@@ -221,9 +221,9 @@ class SI_Notifications_Control extends SI_Controller {
 			);
 
 		foreach ( self::$notifications as $notification => $data ) {
-			$name = ( isset( $data['name'] ) ) ? $data['name'] : self::__( 'N/A' );
+			$name = ( isset( $data['name'] ) ) ? $data['name'] : __( 'N/A', 'sprout-invoices' );
 			$args[self::META_BOX_PREFIX . $notification] = array(
-					'title' => sprintf( self::__( '%s Shortcodes' ), $name ),
+					'title' => sprintf( __( '%s Shortcodes', 'sprout-invoices' ), $name ),
 					'show_callback' => array( __CLASS__, 'show_shortcode_meta_box' )
 				);
 		}
@@ -508,7 +508,7 @@ class SI_Notifications_Control extends SI_Controller {
 			$content, // content
 			self::RECORD, // type slug
 			$associated_record, // post id
-			sprintf( si__( 'Notification sent to %s.' ), esc_html( $to ) ), // title
+			sprintf( __( 'Notification sent to %s.', 'sprout-invoices' ), esc_html( $to ) ), // title
 			0, // user id
 			false // don't encode
 		);
@@ -761,38 +761,38 @@ class SI_Notifications_Control extends SI_Controller {
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-customizations',
-					'title' => self::__( 'About Notifications' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'Notifications include the emails sent to you and your clients, including responses to prospective clients after submitting an estimate request.' ), self::__( 'Each one of your notifications can be customized; hover over the notification you want and click the edit link.' ) ),
+					'title' => __( 'About Notifications', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'Notifications include the emails sent to you and your clients, including responses to prospective clients after submitting an estimate request.', 'sprout-invoices' ), __( 'Each one of your notifications can be customized; hover over the notification you want and click the edit link.', 'sprout-invoices' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-disable',
-					'title' => self::__( 'Disable Notifications' ),
-					'content' => sprintf( '<p>%s</p>', self::__( 'The notifications edit screen will have an option next to the "Update" button to disable the notification from being sent.' ) ),
+					'title' => __( 'Disable Notifications', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p>', __( 'The notifications edit screen will have an option next to the "Update" button to disable the notification from being sent.', 'sprout-invoices' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-editing',
-					'title' => self::__( 'Notification Editing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__( '<b>Subject</b> - The first input is for the notifications subject. If the notification is an e-mail than it would be subject line for that e-mail notification.' ), self::__( '<b>Message Body</b> - The main editor is the notification body. Use the available shortcodes to have dynamic information included when the notification is received. Make sure to change the Notification Setting if HTML formatting is added to your notifications.' ), self::__( '<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each.' ), self::__( '<b>Update</b> - The select list can be used if you want to change the current notification to a different type; it’s recommended you go to the notification you want to edit instead of using this option. The Disabled option available to prevent this notification from sending.' ) ),
+					'title' => __( 'Notification Editing', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( '<b>Subject</b> - The first input is for the notifications subject. If the notification is an e-mail than it would be subject line for that e-mail notification.', 'sprout-invoices' ), __( '<b>Message Body</b> - The main editor is the notification body. Use the available shortcodes to have dynamic information included when the notification is received. Make sure to change the Notification Setting if HTML formatting is added to your notifications.', 'sprout-invoices' ), __( '<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each.', 'sprout-invoices' ), __( '<b>Update</b> - The select list can be used if you want to change the current notification to a different type; it’s recommended you go to the notification you want to edit instead of using this option. The Disabled option available to prevent this notification from sending.', 'sprout-invoices' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-advanced',
-					'title' => self::__( 'Advanced' ),
+					'title' => __( 'Advanced', 'sprout-invoices' ),
 					'content' => sprintf( '<p><b>HTML Emails</b> - Enable HTML notifications within the <a href="%s">General Settings</a> page. Make sure to change use HTML on all notifications.</p>', admin_url( 'admin.php?page=sprout-apps/settings' ) ),
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'notification-refresh',
-					'title' => self::__( 'Notifications Cleanup' ),
-					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__( 'In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.' ), esc_url( add_query_arg( array( 'refresh-notifications' => 1 ) ) ), si__( 'Clean' ) )
+					'title' => __( 'Notifications Cleanup', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', __( 'In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.', 'sprout-invoices' ), esc_url( add_query_arg( array( 'refresh-notifications' => 1 ) ) ), __( 'Clean', 'sprout-invoices' ) )
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/', self::__( 'Documentation' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

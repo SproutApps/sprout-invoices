@@ -51,7 +51,7 @@ class SI_Invoices_Template extends SI_Controller {
 			$invoice_id = get_the_id();
 		}
 		if ( '' === $payment_string ) {
-			$payment_string = ( si_has_invoice_deposit( $invoice_id ) ) ? si__( 'Pay Deposit' ) : si__( 'Pay Invoice' );
+			$payment_string = ( si_has_invoice_deposit( $invoice_id ) ) ? __( 'Pay Deposit', 'sprout-invoices' ) : __( 'Pay Invoice', 'sprout-invoices' );
 		}
 		self::load_view( 'templates/invoice/payment-options', array(
 				'id' => $invoice_id,

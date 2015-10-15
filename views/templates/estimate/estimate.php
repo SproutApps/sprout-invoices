@@ -32,18 +32,18 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 			<div id="doc_header_wrap" class="sticky_header">
 				<header id="header_title">
-					<span class="header_id"><?php printf( si__( 'Estimate %s' ), si_get_estimate_id() ) ?></span>
+					<span class="header_id"><?php printf( esc_html__( 'Estimate %s', 'sprout-invoices' ), intval( si_get_estimate_id() ) ) ?></span>
 					<div id="doc_actions">
 						<?php do_action( 'si_doc_actions_pre' ) ?>
 						<?php if ( ! si_is_estimate_approved() ) : ?>
-							<a href="#accept" class="button primary_button status_change" data-status-change="accept" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>"><?php si_e( 'Accept Estimate' ) ?></a>
+							<a href="#accept" class="button primary_button status_change" data-status-change="accept" data-id="<?php the_ID() ?>" data-nonce="<?php esc_attr_e( wp_create_nonce( SI_Controller::NONCE ) ) ?>"><?php esc_html_e( 'Accept Estimate', 'sprout-invoices' ) ?></a>
 						<?php else : ?>
-							<a href="javascript:void(0)" class="button primary_button disabled"><?php si_e( 'Accepted' ) ?></a>
+							<a href="javascript:void(0)" class="button primary_button disabled"><?php esc_html_e( 'Accepted', 'sprout-invoices' ) ?></a>
 						<?php endif ?>
 						<?php if ( ! si_is_estimate_declined() ) : ?>
-							<a href="#decline" class="button status_change" data-status-change="decline" data-id="<?php the_ID() ?>" data-nonce="<?php echo wp_create_nonce( SI_Controller::NONCE ) ?>"><?php si_e( 'Decline Estimate' ) ?></a>
+							<a href="#decline" class="button status_change" data-status-change="decline" data-id="<?php the_ID() ?>" data-nonce="<?php esc_attr_e( wp_create_nonce( SI_Controller::NONCE ) ) ?>"><?php esc_html_e( 'Decline Estimate', 'sprout-invoices' ) ?></a>
 						<?php else : ?>
-							<a href="javascript:void(0)" class="button disabled"><?php si_e( 'Declined' ) ?></a>
+							<a href="javascript:void(0)" class="button disabled"><?php esc_html_e( 'Declined', 'sprout-invoices' ) ?></a>
 						<?php endif ?>
 						<?php do_action( 'si_doc_actions' ) ?>
 					</div><!-- #doc_actions -->
@@ -60,7 +60,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							
 							<header role="banner">
 								<div class="header_info">
-									<h2 class="doc_type"><?php si_e( 'Estimate' ) ?></h2>
+									<h2 class="doc_type"><?php esc_html__( 'Estimate', 'sprout-invoices' ) ?></h2>
 									<p class="title"><?php the_title() ?></p>
 								</div>
 
@@ -68,7 +68,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 									<?php if ( get_theme_mod( 'si_logo' ) ) : ?>
 										<img src="<?php echo esc_url( get_theme_mod( 'si_logo', si_doc_header_logo_url() ) ); ?>" alt="document logo" >
 									<?php else : ?>
-										<img src="<?php echo si_doc_header_logo_url() ?>" alt="document logo" >
+										<img src="<?php echo esc_url_raw( si_doc_header_logo_url() ) ?>" alt="document logo" >
 									<?php endif; ?>
 								</h1>
 							</header><!-- /header -->
@@ -80,7 +80,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							<dl id="doc_address_info">
 								<dl class="from_addy">
 									<dt>
-										<span class="dt_heading"><?php si_e( 'From' ) ?></span>
+										<span class="dt_heading"><?php esc_html_e( 'From', 'sprout-invoices' ) ?></span>
 									</dt>
 									<dd>
 										<b><?php si_company_name() ?></b> 
@@ -90,7 +90,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 								<?php if ( si_get_estimate_client_id() ) : ?>
 									<dl class="client_addy">
 										<dt>
-											<span class="dt_heading"><?php si_e( 'To' ) ?></span>
+											<span class="dt_heading"><?php esc_html_e( 'To', 'sprout-invoices' ) ?></span>
 										</dt>
 										<dd>
 											<b><?php echo get_the_title( si_get_estimate_client_id() ) ?>
@@ -109,27 +109,27 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							<?php do_action( 'si_document_details_pre' ) ?>
 
 							<dl class="date">
-								<dt><span class="dt_heading"><?php si_e( 'Date' ) ?></span></dt>
+								<dt><span class="dt_heading"><?php esc_html_e( 'Date', 'sprout-invoices' ) ?></span></dt>
 								<dd><?php si_estimate_issue_date() ?></dd>
 							</dl>
 
 							<?php if ( si_get_estimate_id() ) : ?>
 								<dl class="estimate_number">
-									<dt><span class="dt_heading"><?php si_e( 'Estimate Number' ) ?></span></dt>
+									<dt><span class="dt_heading"><?php esc_html_e( 'Estimate Number', 'sprout-invoices' ) ?></span></dt>
 									<dd><?php si_estimate_id() ?></dd>
 								</dl>
 							<?php endif ?>
 
 							<?php if ( si_get_estimate_po_number() ) : ?>
 								<dl class="estimate_po_number">
-									<dt><span class="dt_heading"><?php si_e( 'PO Number' ) ?></span></dt>
+									<dt><span class="dt_heading"><?php esc_html_e( 'PO Number', 'sprout-invoices' ) ?></span></dt>
 									<dd><?php si_estimate_po_number() ?></dd>
 								</dl>
 							<?php endif ?>
 
 							<?php if ( si_get_estimate_expiration_date() ) : ?>
 								<dl class="date">
-									<dt><span class="dt_heading"><?php si_e( 'Expiration Date' ) ?></span></dt>
+									<dt><span class="dt_heading"><?php esc_html_e( 'Expiration Date', 'sprout-invoices' ) ?></span></dt>
 									<dd><?php si_estimate_expiration_date() ?></dd>
 								</dl>
 							<?php endif ?>
@@ -137,7 +137,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							<?php do_action( 'si_document_details_totals' ) ?>
 
 							<dl class="doc_total">
-								<dt><span class="dt_heading"><?php si_e( 'Estimate Total' ) ?></span></dt>
+								<dt><span class="dt_heading"><?php esc_html_e( 'Estimate Total', 'sprout-invoices' ) ?></span></dt>
 								<dd><?php sa_formatted_money( si_get_estimate_total() ) ?></dd>
 							</dl>
 
@@ -162,7 +162,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 						<?php do_action( 'si_document_notes' ) ?>
 						<div id="doc_notes">
-							<h2><?php si_e( 'Notes' ) ?></h2>
+							<h2><?php esc_html_e( 'Notes', 'sprout-invoices' ) ?></h2>
 							<?php si_estimate_notes() ?>
 						</div><!-- #doc_notes -->
 						
@@ -172,7 +172,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						
 						<?php do_action( 'si_document_terms' ) ?>
 						<div id="doc_terms">
-							<h2><?php si_e( 'Terms' ) ?></h2>
+							<h2><?php esc_html_e( 'Terms', 'sprout-invoices' ) ?></h2>
 							<?php si_estimate_terms() ?>
 						</div><!-- #doc_terms -->
 						
@@ -205,21 +205,21 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 			<?php foreach ( si_doc_history_records() as $item_id => $data ) : ?>
 				<dt>
 					<span class="history_status <?php echo esc_attr( $data['status_type'] ); ?>"><?php echo esc_html( $data['type'] ); ?></span><br/>
-					<span class="history_date"><?php echo date( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
+					<span class="history_date"><?php echo date( get_option( 'date_format' ) .' @ '. get_option( 'time_format' ), strtotime( $data['post_date'] ) ) ?></span>
 				</dt>
 
 				<dd>
-					<?php if ( $data['status_type'] == SI_Notifications::RECORD ) : ?>
+					<?php if ( SI_Notifications::RECORD === $data['status_type'] ) : ?>
 						<p>
-							<?php echo esc_html( $update_title ); ?>
-							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php si_e( 'View Message' ) ?>"><?php si_e( 'View Message' ) ?></a>
+							<?php echo $update_title; ?>
+							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php _e( 'View Message', 'sprout-invoices' ) ?>"><?php _e( 'View Message', 'sprout-invoices' ) ?></a>
 						</p>
 						<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">
 							<?php echo wpautop( $data['content'] ) ?>
 						</div>
-					<?php elseif ( $data['status_type'] == SI_Invoices::VIEWED_STATUS_UPDATE ) : ?>
+					<?php elseif ( SI_Invoices::VIEWED_STATUS_UPDATE === $data['status_type'] ) : ?>
 						<p>
-							<?php echo esc_html( $data['update_title'] ); ?>
+							<?php echo $data['update_title']; ?>
 						</p>
 					<?php else : ?>
 						<?php echo wpautop( $data['content'] ) ?>
@@ -231,12 +231,12 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 		<div id="footer_credit">
 			<?php do_action( 'si_document_footer_credit' ) ?>
-			<!--<p><?php si_e( 'Powered by Sprout Invoices' ) ?></p>-->
+			<!--<p><?php esc_e( 'Powered by Sprout Invoices', 'sprout-invoices' ) ?></p>-->
 		</div><!-- #footer_messaging -->
 
 	</body>
 	<?php do_action( 'si_document_footer' ) ?>
 	<?php si_footer() ?>
-	<!-- Template Version 8.7.1 -->
+	<!-- Template Version 9.0 -->
 </html>
 <?php do_action( 'estimate_viewed' ) ?>

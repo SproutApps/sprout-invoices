@@ -42,8 +42,8 @@ class SI_Importer extends SI_Controller {
 		// Addon page
 		$args = array(
 			'slug' => self::get_settings_page( false ),
-			'title' => self::__( 'Sprout Invoices Importing' ),
-			'menu_title' => self::__( 'Import' ),
+			'title' => __( 'Sprout Invoices Importing', 'sprout-invoices' ),
+			'menu_title' => __( 'Import', 'sprout-invoices' ),
 			'weight' => 50,
 			'section' => 'settings',
 			'tab_only' => true,
@@ -59,7 +59,7 @@ class SI_Importer extends SI_Controller {
 	 * @return string            
 	 */
 	public static function get_settings_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
+		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
 	/**
@@ -146,14 +146,14 @@ class SI_Importer extends SI_Controller {
 
 			$screen->add_help_tab( array(
 					'id' => 'importing-about',
-					'title' => self::__( 'About Importing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>', self::__('This feature provides a way for you to import data from external invoicing services, including Harvest, Freshbooks, or WP-Invoice.'), self::__(' If you have your data in one of these systems you can import all of your clients, contacts, estimates, invoices, and payments into Sprout Invoices.'), 'https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/', self::__('More Information') ),
+					'title' => __( 'About Importing', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>', __( 'This feature provides a way for you to import data from external invoicing services, including Harvest, Freshbooks, or WP-Invoice.', 'sprout-invoices' ), __( ' If you have your data in one of these systems you can import all of your clients, contacts, estimates, invoices, and payments into Sprout Invoices.', 'sprout-invoices' ), 'https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/', __( 'More Information', 'sprout-invoices' ) ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

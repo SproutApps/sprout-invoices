@@ -127,7 +127,7 @@ class SI_Invoices extends SI_Controller {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
-		echo wp_json_encode( array( 'response' => si__( 'Notification Queued' ) ) );
+		echo wp_json_encode( array( 'response' => __( 'Notification Queued', 'sprout-invoices' ) ) );
 		exit();
 	}
 
@@ -164,7 +164,7 @@ class SI_Invoices extends SI_Controller {
 		if ( $balance < 0.01 ) {
 			return;
 		}
-		SI_Admin_Payment::create_admin_payment( $doc->get_id(), $balance, '', 'Now', self::__( 'This payment was automatically added to settle the balance after it was marked as "Paid".' ) );
+		SI_Admin_Payment::create_admin_payment( $doc->get_id(), $balance, '', 'Now', __( 'This payment was automatically added to settle the balance after it was marked as "Paid".', 'sprout-invoices' ) );
 	}
 
 	/**

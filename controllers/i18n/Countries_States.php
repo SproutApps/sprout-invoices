@@ -575,7 +575,7 @@ class SI_Countries_States extends SI_Controller {
 	public static function get_state_options( $args = array() ) {
 		$states = self::$grouped_states;
 		if ( isset( $args['include_option_none'] ) && $args['include_option_none'] ) {
-			$states = array( self::__( 'Select' ) => array( $args['include_option_none'] ) ) + $states;
+			$states = array( __( 'Select', 'sprout-invoices' ) => array( $args['include_option_none'] ) ) + $states;
 		}
 		$states = apply_filters( 'sprout_state_options', $states, $args );
 		return $states;

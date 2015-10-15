@@ -284,6 +284,10 @@
 		 */
 		$('.item_action.item_clone').live( 'click', function() {
 			var $row = $(this).closest('.item').clone().attr('id','');
+			var rand_num = Math.floor( Math.random() * 10000000 );
+			// change the unique id
+			$row.find('[name="line_item__id[]"]').val( rand_num );
+			// add
 			$(this).closest('.items_list').append($row);
 			// update key
 			si.lineItems.modifyInputKey();

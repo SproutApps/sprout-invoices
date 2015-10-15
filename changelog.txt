@@ -1,3 +1,18 @@
+= 9.0 =
+
+* NEW: Estimate and Invoice shortcodes
+* NEW: Improved reporting and filtering
+* NEW: Dashboard report caches are deleted on record updates
+* NEW: All strings are wrapped by WP functions not wrapper class methods.
+* FIX: Payments by month filtering error
+* NEW: Load custom CSS based on invoice or estimate
+* CHANGE: Line items have a unique index for future features
+* FIX: Line item commenting allows for reordering of comments
+* NEW: Improved dashboard time tracking widget
+* FIX: Fractional discounts for PayPal
+* NEW: Temp status redirects user to home page
+* NEW: Associated client records are removed when a client is deleted.
+
 = 8.7.1 =
 
 * NEW: Filter for sending invoices to prevent filters. i.e. fix for PDF add-on. #165

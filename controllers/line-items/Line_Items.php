@@ -36,9 +36,9 @@ class SI_Line_Items extends SI_Controller {
 
 	public static function line_item_types() {
 		$types = array(
-				self::DEFAULT_TYPE => si__( 'Task' ),
-				'service' => si__( 'Service' ),
-				'product' => si__( 'Product' ),
+				self::DEFAULT_TYPE => __( 'Task', 'sprout-invoices' ),
+				'service' => __( 'Service', 'sprout-invoices' ),
+				'product' => __( 'Product', 'sprout-invoices' ),
 			);
 		return apply_filters( 'si_line_item_types', $types );
 	}
@@ -55,12 +55,18 @@ class SI_Line_Items extends SI_Controller {
 		if ( '' === $type ) {
 			$type = self::DEFAULT_TYPE;
 		}
-		$columns = array();
+		$columns = array(
+				'_id' => array(
+						'type' => 'hidden',
+						'value' => mt_rand(),
+						'weight' => 0,
+					),
+			);
 		switch ( $type ) {
 			case 'service':
-				$columns = array(
+				$columns += array(
 						'desc' => array(
-								'label' => si__( 'Services' ),
+								'label' => __( 'Services', 'sprout-invoices' ),
 								'type' => 'textarea',
 								'calc' => false,
 								'hide_if_parent' => false,
@@ -74,7 +80,7 @@ class SI_Line_Items extends SI_Controller {
 								'weight' => 3,
 							),
 						'rate' => array(
-								'label' => si__( 'Price' ),
+								'label' => __( 'Price', 'sprout-invoices' ),
 								'type' => 'small-input',
 								'calc' => false,
 								'hide_if_parent' => true,
@@ -88,14 +94,14 @@ class SI_Line_Items extends SI_Controller {
 								'weight' => 10,
 							),
 						'tax' => array(
-								'label' => sprintf( '&#37; <span class="helptip" title="%s"></span>', si__( 'A percentage adjustment per line item, i.e. tax or discount' ) ),
+								'label' => sprintf( '&#37; <span class="helptip" title="%s"></span>', __( 'A percentage adjustment per line item, i.e. tax or discount', 'sprout-invoices' ) ),
 								'type' => 'small-input',
 								'calc' => false,
 								'hide_if_parent' => true,
 								'weight' => 15,
 							),
 						'total' => array(
-								'label' => si__( 'Amount' ),
+								'label' => __( 'Amount', 'sprout-invoices' ),
 								'type' => 'total',
 								'placeholder' => sa_get_formatted_money( 0 ),
 								'calc' => true,
@@ -105,16 +111,16 @@ class SI_Line_Items extends SI_Controller {
 					);
 				break;
 			case 'product':
-				$columns = array(
+				$columns += array(
 						'desc' => array(
-								'label' => si__( 'Products' ),
+								'label' => __( 'Products', 'sprout-invoices' ),
 								'type' => 'textarea',
 								'calc' => false,
 								'hide_if_parent' => false,
 								'weight' => 1,
 							),
 						'sku' => array(
-								'label' => si__( 'SKU' ),
+								'label' => __( 'SKU', 'sprout-invoices' ),
 								'type' => 'input',
 								'calc' => false,
 								'numeric' => false,
@@ -122,28 +128,28 @@ class SI_Line_Items extends SI_Controller {
 								'weight' => 5,
 							),
 						'rate' => array(
-								'label' => si__( 'Price' ),
+								'label' => __( 'Price', 'sprout-invoices' ),
 								'type' => 'small-input',
 								'calc' => false,
 								'hide_if_parent' => true,
 								'weight' => 10,
 							),
 						'qty' => array(
-								'label' => si__( 'Qty' ),
+								'label' => __( 'Qty', 'sprout-invoices' ),
 								'type' => 'small-input',
 								'calc' => true,
 								'hide_if_parent' => true,
 								'weight' => 15,
 							),
 						'tax' => array(
-								'label' => sprintf( '&#37; <span class="helptip" title="%s"></span>', si__( 'A percentage adjustment per line item, i.e. tax or discount' ) ),
+								'label' => sprintf( '&#37; <span class="helptip" title="%s"></span>', __( 'A percentage adjustment per line item, i.e. tax or discount', 'sprout-invoices' ) ),
 								'type' => 'small-input',
 								'calc' => false,
 								'hide_if_parent' => true,
 								'weight' => 20,
 							),
 						'total' => array(
-								'label' => si__( 'Amount' ),
+								'label' => __( 'Amount', 'sprout-invoices' ),
 								'type' => 'total',
 								'placeholder' => sa_get_formatted_money( 0 ),
 								'calc' => true,
@@ -154,9 +160,9 @@ class SI_Line_Items extends SI_Controller {
 				break;
 
 			default:
-				$columns = array(
+				$columns += array(
 						'desc' => array(
-								'label' => si__( 'Tasks' ),
+								'label' => __( 'Tasks', 'sprout-invoices' ),
 								'type' => 'textarea',
 								'calc' => false,
 								'hide_if_parent' => false,
@@ -170,7 +176,7 @@ class SI_Line_Items extends SI_Controller {
 								'weight' => 3,
 							),
 						'rate' => array(
-								'label' => si__( 'Rate' ),
+								'label' => __( 'Rate', 'sprout-invoices' ),
 								'type' => 'small-input',
 								'placeholder' => '120',
 								'calc' => false,
@@ -178,7 +184,7 @@ class SI_Line_Items extends SI_Controller {
 								'weight' => 5,
 							),
 						'qty' => array(
-								'label' => si__( 'Qty' ),
+								'label' => __( 'Qty', 'sprout-invoices' ),
 								'type' => 'small-input',
 								'placeholder' => 1,
 								'calc' => true,
@@ -186,7 +192,7 @@ class SI_Line_Items extends SI_Controller {
 								'weight' => 10,
 							),
 						'tax' => array(
-								'label' => sprintf( '&#37; <span class="helptip" title="%s"></span>', si__( 'A percentage adjustment per line item, i.e. tax or discount' ) ),
+								'label' => sprintf( '&#37; <span class="helptip" title="%s"></span>', __( 'A percentage adjustment per line item, i.e. tax or discount', 'sprout-invoices' ) ),
 								'type' => 'small-input',
 								'placeholder' => 0,
 								'calc' => false,
@@ -194,7 +200,7 @@ class SI_Line_Items extends SI_Controller {
 								'weight' => 15,
 							),
 						'total' => array(
-								'label' => si__( 'Amount' ),
+								'label' => __( 'Amount', 'sprout-invoices' ),
 								'type' => 'total',
 								'placeholder' => sa_get_formatted_money( 0 ),
 								'calc' => true,
@@ -214,7 +220,6 @@ class SI_Line_Items extends SI_Controller {
 		if ( apply_filters( 'si_remove_unnecessary_front_end_columns', true ) && is_admin() ) {
 			return $columns;
 		}
-
 		$line_items = si_get_doc_line_items( get_the_id() );
 		if ( empty( $columns ) ) {
 			return $columns;
@@ -296,14 +301,14 @@ class SI_Line_Items extends SI_Controller {
 		}
 		$totals = array(
 				'subtotal' => array(
-						'label' => si__( 'Subtotal' ),
+						'label' => __( 'Subtotal', 'sprout-invoices' ),
 						'value' => si_get_estimate_subtotal( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_estimate_subtotal( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => false,
 						'weight' => 10,
 					),
 				'taxes' => array(
-						'label' => si__( 'Taxes' ),
+						'label' => __( 'Taxes', 'sprout-invoices' ),
 						'value' => si_get_estimate_taxes_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_estimate_taxes_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_estimate_taxes_total( $doc_id ) ),
@@ -311,10 +316,10 @@ class SI_Line_Items extends SI_Controller {
 						'weight' => 20,
 					),
 				'total' => array(
-						'label' => si__( 'Total' ),
+						'label' => __( 'Total', 'sprout-invoices' ),
 						'value' => si_get_estimate_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_estimate_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
-						'helptip' => self::__( 'Total includes discounts and other fees.' ),
+						'helptip' => __( 'Total includes discounts and other fees.', 'sprout-invoices' ),
 						'hide' => false,
 						'weight' => 100,
 					),
@@ -337,7 +342,7 @@ class SI_Line_Items extends SI_Controller {
 		}
 		$totals = array(
 				'subtotal' => array(
-						'label' => si__( 'Subtotal' ),
+						'label' => __( 'Subtotal', 'sprout-invoices' ),
 						'value' => si_get_invoice_subtotal( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_invoice_subtotal( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => false,
@@ -345,7 +350,7 @@ class SI_Line_Items extends SI_Controller {
 						'weight' => 10,
 					),
 				'taxes' => array(
-						'label' => si__( 'Taxes' ),
+						'label' => __( 'Taxes', 'sprout-invoices' ),
 						'value' => si_get_invoice_taxes_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_invoice_taxes_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_invoice_taxes_total( $doc_id ) ),
@@ -353,16 +358,16 @@ class SI_Line_Items extends SI_Controller {
 						'weight' => 20,
 					),
 				'total' => array(
-						'label' => si__( 'Total' ),
+						'label' => __( 'Total', 'sprout-invoices' ),
 						'value' => si_get_invoice_calculated_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_invoice_calculated_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
-						'helptip' => self::__( 'Total includes discounts and other fees.' ),
+						'helptip' => __( 'Total includes discounts and other fees.', 'sprout-invoices' ),
 						'hide' => false,
 						'admin_hide' => true,
 						'weight' => 30,
 					),
 				'payments' => array(
-						'label' => si__( 'Payments' ),
+						'label' => __( 'Payments', 'sprout-invoices' ),
 						'value' => si_get_invoice_payments_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_invoice_payments_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id ) ),
@@ -370,7 +375,7 @@ class SI_Line_Items extends SI_Controller {
 						'weight' => 40,
 					),
 				'balance' => array(
-						'label' => si__( 'Balance' ),
+						'label' => __( 'Balance', 'sprout-invoices' ),
 						'value' => si_get_invoice_balance( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_invoice_balance( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( (float) si_get_invoice_balance( $doc_id ) === (float) si_get_invoice_calculated_total( $doc_id ) ),
@@ -483,7 +488,7 @@ class SI_Line_Items extends SI_Controller {
 		}
 
 		if ( ! $item_type ) {
-			wp_send_json_error( array( 'message' => self::__( 'No item given!' ) ) );
+			wp_send_json_error( array( 'message' => __( 'No item given!', 'sprout-invoices' ) ) );
 		}
 
 		ob_start();

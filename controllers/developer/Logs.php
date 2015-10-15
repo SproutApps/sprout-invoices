@@ -42,18 +42,18 @@ class SI_Dev_Logs extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_developer' => array(
-				'title' => self::__( 'Advanced' ),
+				'title' => __( 'Advanced', 'sprout-invoices' ),
 				'weight' => 2000,
 				'tab' => 'settings',
 				'settings' => array(
 					self::LOG_OPTION => array(
-						'label' => self::__( 'Save Logs' ),
+						'label' => __( 'Save Logs', 'sprout-invoices' ),
 						'option' => array(
-							'label' => self::__( 'Save all logs as a sprout apps records (dev_log).' ),
+							'label' => __( 'Save all logs as a sprout apps records (dev_log).', 'sprout-invoices' ),
 							'type' => 'checkbox',
 							'default' => self::$record_logs,
 							'value' => '1',
-							'description' => self::__( 'Note: This should only be used for testing and troubleshooting. Records are found under Tools.' )
+							'description' => __( 'Note: This should only be used for testing and troubleshooting. Records are found under Tools.', 'sprout-invoices' )
 							)
 						)
 					)

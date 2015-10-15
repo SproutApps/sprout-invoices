@@ -6,10 +6,10 @@
 		);
  ?>
 
-<h3><?php si_e('Terms') ?> <span class="helptip" title="<?php si_e("Terms will be shown on the invoice.") ?>"></span></h3>
+<h3><?php _e( 'Terms', 'sprout-invoices' ) ?> <span class="helptip" title="<?php _e( "Terms will be shown on the invoice.", 'sprout-invoices' ) ?>"></span></h3>
 <?php
 	wp_editor_styleless( $terms, 'invoice_terms', $editor_settings ); ?>
 
-<h3><?php si_e('Notes') ?> <span class="helptip" title="<?php si_e("These notes will be shown on the invoice.") ?>"></span></h3>
+<h3><?php _e( 'Notes', 'sprout-invoices' ) ?> <span class="helptip" title="<?php _e( "These notes will be shown on the invoice.", 'sprout-invoices' ) ?>"></span></h3>
 <?php
 	wp_editor_styleless( $notes, 'invoice_notes', $editor_settings ); ?>

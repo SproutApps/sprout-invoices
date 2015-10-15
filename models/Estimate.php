@@ -79,12 +79,12 @@ class SI_Estimate extends SI_Post_Type {
 
 	public static function get_statuses() {
 		$statuses = array(
-			self::STATUS_TEMP => self::__( 'Draft' ),
-			self::STATUS_REQUEST => self::__( 'Request' ),
-			self::STATUS_PENDING => self::__( 'Pending' ),
-			self::STATUS_FUTURE => self::__( 'Scheduled' ),
-			self::STATUS_APPROVED => self::__( 'Approved' ),
-			self::STATUS_DECLINED => self::__( 'Declined' ),
+			self::STATUS_TEMP => __( 'Draft', 'sprout-invoices' ),
+			self::STATUS_REQUEST => __( 'Request', 'sprout-invoices' ),
+			self::STATUS_PENDING => __( 'Pending', 'sprout-invoices' ),
+			self::STATUS_FUTURE => __( 'Scheduled', 'sprout-invoices' ),
+			self::STATUS_APPROVED => __( 'Approved', 'sprout-invoices' ),
+			self::STATUS_DECLINED => __( 'Declined', 'sprout-invoices' ),
 		);
 		return $statuses;
 	}
@@ -158,7 +158,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	public static function create_estimate( $passed_args, $status = '' ) {
 		$defaults = array(
-			'subject' => sprintf( self::__( 'New Estimate: %s' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'subject' => sprintf( __( 'New Estimate: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'user_id' => '',
 			'estimate_id' => '',
 			'invoice_id' => '',
@@ -243,12 +243,12 @@ class SI_Estimate extends SI_Post_Type {
 		// confirm the status exists
 		if ( ! in_array( $status, array_keys( self::get_statuses() ) ) ) {
 			switch ( $status ) {
-				case self::__( 'approve' ):
-				case self::__( 'accept' ):
+				case __( 'approve', 'sprout-invoices' ):
+				case __( 'accept', 'sprout-invoices' ):
 					$status = self::STATUS_APPROVED;
 					break;
-				case self::__( 'decline' ):
-				case self::__( 'pushback' ):
+				case __( 'decline', 'sprout-invoices' ):
+				case __( 'pushback', 'sprout-invoices' ):
 					$status = self::STATUS_DECLINED;
 					break;
 
@@ -386,7 +386,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function get_client() {
 		if ( ! $this->get_client_id() ) {
-			return new WP_Error( 'no_client', self::__( 'No client associated with this invoice.' ) );
+			return new WP_Error( 'no_client', __( 'No client associated with this invoice.', 'sprout-invoices' ) );
 		}
 		return SI_Client::get_instance( $this->get_client_id() );
 	}
@@ -525,7 +525,7 @@ class SI_Estimate extends SI_Post_Type {
 		$line_items = $this->get_line_items();
 		if ( ! empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
-				if ( $data['rate'] ) {
+				if ( isset( $data['rate'] ) && $data['rate'] ) {
 					$calc = ( $data['rate'] * $data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
 					$subtotal += apply_filters( 'si_line_item_total', $calc, $data );
 				}

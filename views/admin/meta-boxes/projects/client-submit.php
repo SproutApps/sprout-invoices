@@ -1,5 +1,5 @@
 <p>
-	<b><?php si_e('Projects') ?></b>
+	<b><?php _e( 'Projects', 'sprout-invoices' ) ?></b>
 	<?php if ( !empty( $projects ) ): ?>
 		<dl>
 			<?php foreach ( $projects as $project_id ): ?>
@@ -13,14 +13,14 @@
 					<?php elseif ( $project->get_end_date() ): ?>
 						<?php printf( '<b>End</b>&mdash;%s', date_i18n( get_option('date_format'), $project->get_end_date() ) ) ?>
 					<?php else: ?>
-						<?php si_e('No start and/or end date set.') ?>
+						<?php _e( 'No start and/or end date set.', 'sprout-invoices' ) ?>
 					<?php endif ?>
 					
 				</dd>
 			<?php endforeach ?>
 		</dl>
 	<?php else: ?>
-		<em><?php si_e('No projects') ?></em>
+		<em><?php _e( 'No projects', 'sprout-invoices' ) ?></em>
 	<?php endif ?>
 </p>
 <hr/>

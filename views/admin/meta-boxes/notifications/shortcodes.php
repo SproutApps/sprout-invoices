@@ -1,5 +1,5 @@
 <p>
-	<?php si_e( 'Use the following shortcodes to customize the email sent.' ); ?>
+	<?php _e( 'Use the following shortcodes to customize the email sent.', 'sprout-invoices' ); ?>
 </p>
 <?php
 foreach ( $type['shortcodes'] as $shortcode ) : if ( isset( $shortcodes[$shortcode] ) ) : ?>

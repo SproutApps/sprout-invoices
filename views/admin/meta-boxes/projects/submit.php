@@ -18,7 +18,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 
 	<div id="minor-publishing">
 		<p>
-			<b><?php si_e( 'Invoices: ' ) ?></b>
+			<b><?php _e( 'Invoices: ', 'sprout-invoices' ) ?></b>
 			<?php if ( ! empty( $invoices ) ) : ?>
 				<dl>
 					<?php foreach ( $invoices as $invoice_id ) : ?>
@@ -27,12 +27,12 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 					<?php endforeach ?>
 				</dl>
 			<?php else : ?>
-				<em><?php si_e( 'No invoices' ) ?></em>
+				<em><?php _e( 'No invoices', 'sprout-invoices' ) ?></em>
 			<?php endif ?>
 		</p>
 		<hr/>
 		<p>
-			<b><?php si_e( 'Estimates: ' ) ?></b>
+			<b><?php _e( 'Estimates: ', 'sprout-invoices' ) ?></b>
 			<?php if ( ! empty( $estimates ) ) : ?>
 				<dl>
 					<?php foreach ( $estimates as $estimate_id ) : ?>
@@ -41,7 +41,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 					<?php endforeach ?>
 				</dl>
 			<?php else : ?>
-				<em><?php si_e( 'No estimates' ) ?></em>
+				<em><?php _e( 'No estimates', 'sprout-invoices' ) ?></em>
 			<?php endif ?>
 		</p>
 		<div class="clear"></div>
@@ -52,7 +52,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 		<div id="delete-action">
 			<?php
 			if ( current_user_can( 'delete_post', $post->ID ) ) { ?>
-				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php self::_e( 'Delete' ) ?></a><?php
+				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php _e( 'Delete', 'sprout-invoices' ) ?></a><?php
 			} ?>
 		</div>
 

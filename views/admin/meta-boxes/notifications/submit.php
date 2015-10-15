@@ -40,12 +40,12 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 		<div id="delete-action">
 
 			<span id="notification_type_disabled_wrap">
-				<input type="checkbox" id="notification_type_disabled" name="notification_type_disabled" value="TRUE" <?php checked( 'TRUE', $disabled ) ?> />&nbsp;<?php si_e( 'Disabled' ) ?>
+				<input type="checkbox" id="notification_type_disabled" name="notification_type_disabled" value="TRUE" <?php checked( 'TRUE', $disabled ) ?> />&nbsp;<?php _e( 'Disabled', 'sprout-invoices' ) ?>
 			</span>
 
 			<?php
 			if ( current_user_can( 'delete_post', $post->ID ) ) { ?>
-				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php self::_e( 'Delete' ) ?></a><?php
+				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php _e( 'Delete', 'sprout-invoices' ) ?></a><?php
 			} ?>
 		</div>
 

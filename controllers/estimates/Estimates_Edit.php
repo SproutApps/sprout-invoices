@@ -61,12 +61,12 @@ class SI_Estimates_Edit extends SI_Estimates {
 		// Settings
 		$settings = array(
 			'si_estimate_settings' => array(
-				'title' => self::__( 'Estimate Settings' ),
+				'title' => __( 'Estimate Settings', 'sprout-invoices' ),
 				'weight' => 25,
 				'tab' => 'settings',
 				'settings' => array(
 					self::SLUG_OPTION => array(
-						'label' => self::__( 'Estimate Permalink Slug' ),
+						'label' => __( 'Estimate Permalink Slug', 'sprout-invoices' ),
 						'sanitize_callback' => array( __CLASS__, 'sanitize_slug_option' ),
 						'option' => array(
 							'type' => 'text',
@@ -74,24 +74,24 @@ class SI_Estimates_Edit extends SI_Estimates {
 								'class' => 'medium-text',
 							),
 							'default' => self::$estimates_slug,
-							'description' => sprintf( self::__( 'Example estimate url: %s/%s/045b41dd14ab8507d80a27b7357630a5/' ), site_url(), '<strong>'.self::$estimates_slug.'</strong>' )
+							'description' => sprintf( __( 'Example estimate url: %s/%s/045b41dd14ab8507d80a27b7357630a5/', 'sprout-invoices' ), site_url(), '<strong>'.self::$estimates_slug.'</strong>' )
 						),
 
 					),
 					self::TERMS_OPTION => array(
-						'label' => self::__( 'Default Terms' ),
+						'label' => __( 'Default Terms', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_terms,
-							'description' => self::__( 'These are the default terms for an estimate.' )
+							'description' => __( 'These are the default terms for an estimate.', 'sprout-invoices' )
 						),
 					),
 					self::NOTES_OPTION => array(
-						'label' => self::__( 'Default Note' ),
+						'label' => __( 'Default Note', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_notes,
-							'description' => self::__( 'These are the default notes public to a client reviewing their estimate.' )
+							'description' => __( 'These are the default notes public to a client reviewing their estimate.', 'sprout-invoices' )
 						),
 					)
 				)
@@ -188,7 +188,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 		// estimate specific
 		$args = array(
 			'si_estimate_line_items' => array(
-				'title' => si__( 'Management' ),
+				'title' => __( 'Management', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_line_items_view' ),
 				'save_callback' => array( __CLASS__, 'save_line_items' ),
 				'context' => 'normal',
@@ -197,7 +197,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'save_priority' => 5,
 			),
 			'si_estimate_update' => array(
-				'title' => si__( 'Information' ),
+				'title' => __( 'Information', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_information_meta_box' ),
 				'save_callback' => array( __CLASS__, 'save_meta_box_estimate_information' ),
 				'context' => 'normal',
@@ -206,7 +206,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'save_priority' => 50,
 			),
 			'si_doc_send' => array(
-				'title' => si__( 'Send Estimate' ),
+				'title' => __( 'Send Estimate', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_estimate_send_view' ),
 				'save_callback' => array( __CLASS__, 'save_estimate_note' ),
 				'context' => 'normal',
@@ -215,7 +215,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'save_priority' => 500,
 			),
 			'si_estimate_history' => array(
-				'title' => si__( 'Estimate History' ),
+				'title' => __( 'Estimate History', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_submission_history_view' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
@@ -223,7 +223,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'weight' => 20,
 			),
 			'si_estimate_notes' => array(
-				'title' => si__( 'Terms & Notes' ),
+				'title' => __( 'Terms & Notes', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_notes_view' ),
 				'save_callback' => array( __CLASS__, 'save_notes' ),
 				'context' => 'normal',
@@ -424,10 +424,10 @@ class SI_Estimates_Edit extends SI_Estimates {
 
 		$user = get_userdata( get_current_user_id() );
 		do_action( 'si_new_record',
-			sprintf( si__( 'Estimate updated by %s.' ), $user->display_name ),
+			sprintf( __( 'Estimate updated by %s.', 'sprout-invoices' ), $user->display_name ),
 			self::HISTORY_UPDATE,
 			$estimate->get_id(),
-			sprintf( si__( 'Data updated for %s.' ), $estimate->get_id() ),
+			sprintf( __( 'Data updated for %s.', 'sprout-invoices' ), $estimate->get_id() ),
 			0,
 		false );
 	}
@@ -441,7 +441,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 	 */
 	public static function show_estimate_send_view( $post, $metabox ) {
 		if ( $post->post_status == 'auto-draft' ) {
-			printf( '<p>%s</p>', si__( 'Save this estimate before sending.' ) );
+			printf( '<p>%s</p>', __( 'Save this estimate before sending.', 'sprout-invoices' ) );
 			return;
 		}
 		$estimate = SI_Estimate::get_instance( $post->ID );
@@ -505,7 +505,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 	 */
 	public static function show_submission_history_view( $post, $metabox ) {
 		if ( $post->post_status == 'auto-draft' ) {
-			printf( '<p>%s</p>', si__( 'No history available.' ) );
+			printf( '<p>%s</p>', __( 'No history available.', 'sprout-invoices' ) );
 			return;
 		}
 		$estimate = SI_Estimate::get_instance( $post->ID );
@@ -568,7 +568,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 		$from_email = SI_Notifications_Control::from_email( array( 'estimate_id' => $estimate->get_id() ) );
 		$fields['send_as'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Sender' ),
+			'label' => __( 'Sender', 'sprout-invoices' ),
 			'type' => 'text',
 			'placeholder' => '',
 			'attributes' => array( 'readonly' => 'readonly' ),
@@ -588,26 +588,26 @@ class SI_Estimates_Edit extends SI_Estimates {
 			}
 		}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', self::__( 'client@email.com' ), self::__( 'Entering an email will prevent some notification shortcodes from working since there is no client.' ) );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working since there is no client.', 'sprout-invoices' ) );
 
 			// Send to me.
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), si__( 'Send me a copy' ) );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );
 
 		$recipient_options .= '</div></div>';
 
 		$fields['recipients'] = array(
 			'weight' => 5,
-			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', si__( 'Recipients' ), si__( 'A notification will be sent if recipients are selected and this estimate is saved.' ) ),
+			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', __( 'Recipients', 'sprout-invoices' ), __( 'A notification will be sent if recipients are selected and this estimate is saved.', 'sprout-invoices' ) ),
 			'type' => 'bypass',
 			'output' => $recipient_options
 		);
 
 		$fields['sender_note'] = array(
 			'weight' => 10,
-			'label' => self::__( 'Note' ),
+			'label' => __( 'Note', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'default' => $estimate->get_sender_note(),
-			'description' => si__( 'This note will be added to the Estimate Notification via the [admin_note] shortcode.' )
+			'description' => __( 'This note will be added to the Estimate Notification via the [admin_note] shortcode.', 'sprout-invoices' )
 		);
 
 		$fields['doc_id'] = array(

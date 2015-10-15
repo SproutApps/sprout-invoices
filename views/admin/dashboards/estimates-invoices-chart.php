@@ -1,5 +1,5 @@
 <h3 class="dashboard_widget_title">
-	<span><?php self::_e('Estimates &amp; Invoices') ?></span>
+	<span><?php _e( 'Estimates &amp; Invoices', 'sprout-invoices' ) ?></span>
 </h3>
 <div class="dashboard_widget inside">
 	<div class="main">
@@ -25,6 +25,7 @@
 					action: '<?php echo SI_Reporting::AJAX_ACTION ?>', 
 					data: 'est_invoice_totals', 
 					segment: 'weeks', 
+					refresh_cache: si_js_object.reports_refresh_cache,
 					span: 6, 
 					security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 					},
@@ -33,7 +34,7 @@
 							labels: data.labels,
 							datasets: [
 								{
-									label: "<?php self::_e('Estimates') ?>",
+									label: "<?php _e( 'Estimates', 'sprout-invoices' ) ?>",
 									fillColor: "rgba(255,165,0,0.2)",
 									strokeColor: "rgba(255,165,0,1)",
 									pointColor: "rgba(255,165,0,1)",
@@ -43,7 +44,7 @@
 									data: data.estimates
 								},
 								{
-									label: "<?php self::_e('Invoices') ?>",
+									label: "<?php _e( 'Invoices', 'sprout-invoices' ) ?>",
 									fillColor: "rgba(134,189,72,0.2)",
 									strokeColor: "rgba(134,189,72,1)",
 									pointColor: "rgba(134,189,72,1)",
@@ -64,6 +65,6 @@
 				est_inv_totals_data();
 			});
 		</script>
-		<p class="description"><?php self::_e('Shows total estimates and invoices by week.') ?></p>
+		<p class="description"><?php _e( 'Shows total estimates and invoices by week.', 'sprout-invoices' ) ?></p>
 	</div>
 </div>

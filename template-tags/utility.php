@@ -43,7 +43,7 @@ function si_esc__( $string ) {
  * @param string  $string
  * @return void
  */
-function si_esc_e( $string ) {
+function esc_e( $string ) {
 	return Sprout_Invoices::esc_e( $string );
 }
 
@@ -547,3 +547,9 @@ if ( ! function_exists( 'si_money_format' ) ) :
 		return $format;
 	}
 endif;
+
+function _convert_content_file_path_to_url( $file_path = '' ) {
+	$file_path = str_replace( WP_CONTENT_DIR, 'replace-this-with-content-url', $file_path );
+	$url = str_replace( 'replace-this-with-content-url', content_url(), $file_path );
+	return $url;
+}

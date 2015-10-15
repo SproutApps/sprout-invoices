@@ -1064,7 +1064,7 @@ span.status_change {
 	padding: 0 10px;
 }
 #line_items_totals,#status_updates {
-	float: right;
+	float: right !important;
 	margin-right: 10px
 }
 
@@ -1852,9 +1852,6 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
    display: none;
 }
 
-.index-php h3.dashboard_widget_title {
-	display: none;
-}
 /**
  * Import
  */
@@ -2342,11 +2339,30 @@ input#sa_recurring_invoice_custom_freq {
     text-decoration: none;
 }
 
-#dashboard-widgets #time_tracking h3.dashboard_widget_title {
+#dashboard-widgets #time_tracking h3.dashboard_widget_title,
+#dashboard-widgets #unbilled_time_tracking h3.dashboard_widget_title {
     padding-left: 10px;
     background-color: #f9f9f9;
     float: right;
 }
-#dashboard-widgets #time_tracking thead {
+#dashboard-widgets #time_tracking thead,
+#dashboard-widgets #unbilled_time_tracking thead {
     background-color: #f9f9f9;
+}
+
+#dashboard-widgets .dashboard_widget .chart_filter {
+    float: right;
+}
+
+#dashboard-widgets .dashboard_widget .chart_filter input {
+    width: 2em;
+    float: left;
+}
+
+#dashboard-widgets .dashboard_widget .chart_filter select {
+    margin: 0px 5px;
+    float: left;
+}
+#dashboard-widgets .dashboard_widget .chart_filter button {
+	float: left;
 }

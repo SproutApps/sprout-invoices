@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 8.7.1
+Stable tag: 9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,21 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Woocommerce, Stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 9.0 =
+
+* NEW: Estimate and Invoice shortcodes
+* NEW: Improved reporting and filtering
+* NEW: Dashboard report caches are deleted on record updates
+* NEW: All strings are wrapped by WP functions not wrapper class methods.
+* FIX: Payments by month filtering error
+* NEW: Load custom CSS based on invoice or estimate
+* CHANGE: Line items have a unique index for future features
+* FIX: Line item commenting allows for reordering of comments
+* NEW: Improved dashboard time tracking widget
+* FIX: Fractional discounts for PayPal
+* NEW: Temp status redirects user to home page
+* NEW: Associated client records are removed when a client is deleted.
 
 = 8.7.1 =
 

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sprout Invoices\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-28 14:36-0800\n"
-"PO-Revision-Date: 2015-09-29 14:14-0800\n"
+"PO-Revision-Date: 2015-10-14 16:06-0800\n"
 "Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/sprout-apps/"
 "sprout-invoices/language/pt_BR/)\n"
@@ -497,13 +497,13 @@ msgstr "Aceita/Recusar"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:69
 #, php-format
-msgid "<b>Expiration:</b> %s"
-msgstr "<b>Expira:</b> %s"
+msgid "<bi>Expiration:</bi> %s"
+msgstr "<bi>Expira:</bi> %s"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:74
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:68
-msgid "<b>Pending</b> Review"
-msgstr "<b>Pendente</b> Rever"
+msgid "<bi>Pending</bi> Review"
+msgstr "<bi>Pendente</bi> Rever"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:80
 msgid "No estimates pending action."
@@ -526,17 +526,17 @@ msgstr "Pagar"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:76
 #, php-format
-msgid "<b>Due:</b> %s"
-msgstr "<b>Débto:</b> %s"
+msgid "<bi>Due:</bi> %s"
+msgstr "<bi>Débto:</bi> %s"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:83
-msgid "<b>Paid</b> in full"
-msgstr "<b>Pago</b> integralmente"
+msgid "<bi>Paid</bi> in full"
+msgstr "<bi>Pago</bi> integralmente"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:102
 #, php-format
-msgid "<b>%s:</b> %s"
-msgstr "<b>%s:</b> %s"
+msgid "<bi>%s:</bi> %s"
+msgstr "<bi>%s:</bi> %s"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:111
 msgid "No invoices available."
@@ -544,7 +544,7 @@ msgstr "Não há faturas disponíveis."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:118
 #, php-format
-msgid "Balance Due: <b>%s</b>"
+msgid "Balance Due: <bi>%s</bi>"
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/login-form.php:2
@@ -1564,8 +1564,8 @@ msgstr ""
 "documento."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:34
-msgid "<b>Welcome!</b><br/>This document is password protected."
-msgstr "<b>Bem-vindo!</b><br/>Este documento é protegido por senha."
+msgid "<bi>Welcome!</bi><br/>This document is password protected."
+msgstr "<bi>Bem-vindo!</bi><br/>Este documento é protegido por senha."
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:37
 msgid "Enter Password"
@@ -1579,7 +1579,7 @@ msgid "Submit"
 msgstr "Enviar"
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:45
-msgid "<b>Welcome!</b><br/>Please sign-in to view your document."
+msgid "<bi>Welcome!</bi><br/>Please sign-in to view your document."
 msgstr ""
 
 #: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Item.php:78
@@ -2754,11 +2754,11 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1082
 msgid ""
-"<b>Important note:</b> when clients are created new WordPress users are also "
-"created and given the “client” role. Creating users will allow for future "
-"functionality, i.e. client dashboards."
+"<bi>Important note:</bi> when clients are created new WordPress users are "
+"also created and given the “client” role. Creating users will allow for "
+"future functionality, i.e. client dashboards."
 msgstr ""
-"<b>Nota importante:</ b> Quando clientes são criados, novos usuários do "
+"<bi>Nota importante:</bi> Quando clientes são criados, novos usuários do "
 "WordPress também são criados com o papel \"cliente\". Criação de usuários "
 "permitirá uma funcionalidade futura, ou seja, painel cliente."
 
@@ -3199,8 +3199,8 @@ msgstr ""
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Records.php:34
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Records.php:31
 #, php-format
-msgid "Status changed: %s to <b>%s</b>."
-msgstr "Status atualizado: de  %s para <b>%s</b>."
+msgid "Status changed: %s to <bi>%s</bi>."
+msgstr "Status atualizado: de  %s para <bi>%s</bi>."
 
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Records.php:37
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Records.php:34
@@ -3843,42 +3843,42 @@ msgstr "Edição de Notificação"
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
-"<b>Subject</b> - The first input is for the notifications subject. If the "
+"<bi>Subject</bi> - The first input is for the notifications subject. If the "
 "notification is an e-mail than it would be subject line for that e-mail "
 "notification."
 msgstr ""
-"<b>Assunto</b> - A primeira entrada é o assunto das notificações. Se a "
+"<bi>Assunto</bi> - A primeira entrada é o assunto das notificações. Se a "
 "notificação é um e-mail, essa linha seria o assunto do e-mail."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
-"<b>Message Body</b> - The main editor is the notification body. Use the "
+"<bi>Message Body</bi> - The main editor is the notification body. Use the "
 "available shortcodes to have dynamic information included when the "
 "notification is received. Make sure to change the Notification Setting if "
 "HTML formatting is added to your notifications."
 msgstr ""
-"<b>Corpo da mensagem</b> - O editor principal é o corpo notificação. Use os "
-"códigos curtos disponíveis para exibir informação dinâmica, incluído quando "
-"a notificação for recebida. Certifique-se de alterar a configuração de "
-"formato da notificação se formatação HTML for adicionada às suas "
+"<bi>Corpo da mensagem</bi> - O editor principal é o corpo notificação. Use "
+"os códigos curtos disponíveis para exibir informação dinâmica, incluído "
+"quando a notificação for recebida. Certifique-se de alterar a configuração "
+"de formato da notificação se formatação HTML for adicionada às suas "
 "notificações."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
-"<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for "
+"<bi>Shortcodes</bi> – A list of shortcodes is provided with descriptions for "
 "each."
 msgstr ""
-"<b>Códigos Curtos</b> - A lista de códigos de acesso fornecida com as "
+"<bi>Códigos Curtos</bi> - A lista de códigos de acesso fornecida com as "
 "descrições de cada uma."
 
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:771
 msgid ""
-"<b>Update</b> - The select list can be used if you want to change the "
+"<bi>Update</bi> - The select list can be used if you want to change the "
 "current notification to a different type; it’s recommended you go to the "
 "notification you want to edit instead of using this option. The Disabled "
 "option available to prevent this notification from sending."
 msgstr ""
-"<b>Atualizar< b> - A lista de seleção pode ser usada se você quer mudar a "
+"<bi>Atualizar</bi> - A lista de seleção pode ser usada se você quer mudar a "
 "notificação atual para um tipo diferente; é recomendado que você vá para a "
 "notificação que você deseja editar em vez de usar esta opção. A opção "
 "Desativado está disponível para evitar que essa notificação seja enviada."
@@ -4243,8 +4243,8 @@ msgstr "Desconto da fatura"
 #: plugins/sprout-invoices-addon-paypal-ec/SI_Paypal_EC.php:910
 #: plugins/sprout-invoices-addon-stripe-payments/SA_Stripe.php:729
 #, php-format
-msgid "<b>Current Payment Status:</b> <code>%s</code>"
-msgstr "<b>Status Atual do Pagamento: </b> <code>%s</code>"
+msgid "<bi>Current Payment Status:</bi> <code>%s</code>"
+msgstr "<bi>Status Atual do Pagamento: </bi> <code>%s</code>"
 
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_EC.php:911
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Paypal_Pro.php:704
@@ -4330,20 +4330,20 @@ msgstr "Status de pagamento incluem:"
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:207
 msgid ""
-"<b>Pending</b> - the payment could be waiting for admin approval or waiting "
-"for the payment processor.<br/><b>Authorized</b> – a payment status set for "
-"signifying that the payment was authorized by the processor and a capture of "
-"the payment will be attempted later.<br/><b>Void</b> - payment was voided by "
-"the admin or declined by the payment processor after it was authorized or "
-"pending."
+"<bi>Pending</bi> - the payment could be waiting for admin approval or "
+"waiting for the payment processor.<br/><bi>Authorized</bi> – a payment "
+"status set for signifying that the payment was authorized by the processor "
+"and a capture of the payment will be attempted later.<br/><bi>Void</bi> - "
+"payment was voided by the admin or declined by the payment processor after "
+"it was authorized or pending."
 msgstr ""
-"<b>Pendente</b> - O pagamento pode estar à espera de aprovação do "
+"<bi>Pendente</bi> - O pagamento pode estar à espera de aprovação do "
 "administrador ou à espera da resposta do processador de pagamento.<br/> "
-"<b>Autorizado</b> - A situação do pagamento foi definido para o que "
+"<bi>Autorizado</bi> - A situação do pagamento foi definido para o que "
 "significa que o pagamento foi autorizado pelo processador e uma captura do "
-"pagamento foi feita ou será tentada depois.<br/><b>Anulado</b> - O pagamento "
-"foi anulado pelo administrador ou foi anulado pelo processador de pagamento "
-"depois de ter sido autorizado ou pendente."
+"pagamento foi feita ou será tentada depois.<br/><bi>Anulado</bi> - O "
+"pagamento foi anulado pelo administrador ou foi anulado pelo processador de "
+"pagamento depois de ter sido autorizado ou pendente."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:212
 msgid "Managing Payments"
@@ -4355,27 +4355,27 @@ msgstr "Pairando o mouse sobre um pagamento você verá vários links e opções
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:213
 msgid ""
-"<b>Void Payment</b> - Allows you to void a payment and add a note that will "
-"be added to the Transaction Data."
+"<bi>Void Payment</bi> - Allows you to void a payment and add a note that "
+"will be added to the Transaction Data."
 msgstr ""
-"<b> Pagamento Anulado</ b> - Permite anular um pagamento e adicionar uma "
+"<bi> Pagamento Anulado</bi> - Permite anular um pagamento e adicionar uma "
 "nota que será adicionada aos dados da transação."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:213
 msgid ""
-"<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw "
+"<bi>Transaction Data</bi> – Used to troubleshoot a payment, this is the raw "
 "data stored by a payment processor."
 msgstr ""
-"<b>Dados de transações</b> - Usado para solucionar problemas de um "
+"<bi>Dados de transações</bi> - Usado para solucionar problemas de um "
 "pagamento, estes são os dados brutos armazenados por um processador de "
 "pagamento."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:213
 msgid ""
-"<b>Invoice and Client</b> – A link to the associated invoice and client edit "
-"pages."
+"<bi>Invoice and Client</bi> – A link to the associated invoice and client "
+"edit pages."
 msgstr ""
-"<b>Fatura e cliente</b> - Um link para a fatura do cliente e para editar "
+"<bi>Fatura e cliente</bi> - Um link para a fatura do cliente e para editar "
 "páginas associadas."
 
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:213
@@ -4577,20 +4577,20 @@ msgstr ""
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:805
 msgid ""
-"<b>Dashboard</b> - Is the place to get a quick status overview. See what was "
-"recently updated, what’s currently overdue or unpaid, and other important "
-"information about your business."
+"<bi>Dashboard</bi> - Is the place to get a quick status overview. See what "
+"was recently updated, what’s currently overdue or unpaid, and other "
+"important information about your business."
 msgstr ""
-"<b>Painel</b> - É o lugar para obter uma visão geral e rápida do status. "
+"<bi>Painel</bi> - É o lugar para obter uma visão geral e rápida do status. "
 "Veja o que foi recentemente atualizado, o que está atualmente em atraso ou "
 "não remunerado, e outras informações importantes sobre o seu negócio."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:805
 msgid ""
-"<b>Reports</b> - Reports have advanced filtering and are highly "
+"<bi>Reports</bi> - Reports have advanced filtering and are highly "
 "customizable. All data is dynamically updated without reloading."
 msgstr ""
-"<b>Relatórios</b> - Os relatórios têm filtragem avançada e são altamente "
+"<bi>Relatórios</bi> - Os relatórios têm filtragem avançada e são altamente "
 "personalizáveis. Todos os dados são atualizados dinamicamente sem recarregar "
 "a página."
 
@@ -4600,24 +4600,25 @@ msgstr "Tabelas de relatório"
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:811
 msgid ""
-"<b>Date filtering</b> is available and can be used to retrieve data in-"
+"<bi>Date filtering</bi> is available and can be used to retrieve data in-"
 "between t, dates, or after a date, or before a date."
 msgstr ""
-"<b>Filtragem de data</b> está disponível e pode ser utilizada para obter "
+"<bi>Filtragem de data</bi> está disponível e pode ser utilizada para obter "
 "dados intermediários, datas, após uma data, ou antes de uma data."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:811
 msgid ""
-"<b>Modify columns</b> within the table with the “Show / hide columns” button."
+"<bi>Modify columns</bi> within the table with the “Show / hide columns” "
+"button."
 msgstr ""
-"<b>Modificar colunas</b> na tabela com o botão \"Mostrar/Ocultar colunas\"."
+"<bi>Modificar colunas</bi> na tabela com o botão \"Mostrar/Ocultar colunas\"."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:811
 msgid ""
-"<b>Export</b> the table, filtered or not, to many formats, including CSV, "
+"<bi>Export</bi> the table, filtered or not, to many formats, including CSV, "
 "Excel, PDF or your computers clipboard."
 msgstr ""
-"<b>Exportar</b> a tabela, filtrada ou não, em vários formatos, incluindo "
+"<bi>Exportar</bi> a tabela, filtrada ou não, em vários formatos, incluindo "
 "CSV, Excel, PDF ou para sua área de transferência do computador."
 
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:811
@@ -6195,13 +6196,13 @@ msgstr ""
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:6
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/information.php:6
 #, php-format
-msgid "Issued on: <b>%1$s</b>"
-msgstr "Emitido em: <b>%1$s</b>"
+msgid "Issued on: <bi>%1$s</bi>"
+msgstr "Emitido em: <bi>%1$s</bi>"
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:9
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/information.php:9
-msgid "Issue <b>immediately</b>"
-msgstr "Emitir <b>imediatamente</b>"
+msgid "Issue <bi>immediately</bi>"
+msgstr "Emitir <bi>imediatamente</bi>"
 
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:16
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/information.php:16
@@ -6559,32 +6560,32 @@ msgid "Mark Pending"
 msgstr "Marcar como Pendente"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:24
-msgid "<b>Pending: </b> Waiting for Review"
-msgstr "<b>Pendente: </b> Esperando por Revisão"
+msgid "<bi>Pending: </bi> Waiting for Review"
+msgstr "<bi>Pendente: </bi> Esperando por Revisão"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:27
 msgid "Mark Approved"
 msgstr "Marcar como Aprovado"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:27
-msgid "<b>Complete:</b> Estimate Approved"
-msgstr "<b>Completo:</b> Proposta Aprovada"
+msgid "<bi>Complete:</bi> Estimate Approved"
+msgstr "<bi>Completo:</bi> Proposta Aprovada"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:30
 msgid "Mark Declined"
 msgstr "Marcar como Recusado"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:30
-msgid "<b>Void:</b> Estimate Declined"
-msgstr "<b>Recusado:</b> Proposta Recusada"
+msgid "<bi>Void:</bi> Estimate Declined"
+msgstr "<bi>Recusado:</bi> Proposta Recusada"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:35
 msgid "Delete Estimate"
 msgstr "Deletar Proposta"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:35
-msgid "<b>Delete:</b> Trash Estimate"
-msgstr "<b>Deletar:</b> Enviar Proposta para o lixo"
+msgid "<bi>Delete:</bi> Trash Estimate"
+msgstr "<bi>Deletar:</bi> Enviar Proposta para o lixo"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:8
 msgid "Pending payment(s)"
@@ -6612,48 +6613,48 @@ msgid "Mark Pending Payment(s)"
 msgstr "Marcar Pagamento(s) como Pendente"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:26
-msgid "<b>Active:</b> Pending Payment(s)"
-msgstr "<b>Ativo:</b> Pagamento Pendente"
+msgid "<bi>Active:</bi> Pending Payment(s)"
+msgstr "<bi>Ativo:</bi> Pagamento Pendente"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:30
 msgid "Outstanding Balance."
 msgstr "Saldo pendente."
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:30
-msgid "<b>Active:</b> Partial Payment Received"
-msgstr "<b>Ativo:</b> Pagamento Parcial Recebido"
+msgid "<bi>Active:</bi> Partial Payment Received"
+msgstr "<bi>Ativo:</bi> Pagamento Parcial Recebido"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:33
 msgid "Mark as Paid."
 msgstr "Marcar como Pago."
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:33
-msgid "<b>Complete:</b> Paid in Full"
-msgstr "<b>Completo:</b> Pago integralmente"
+msgid "<bi>Complete:</bi> Paid in Full"
+msgstr "<bi>Completo:</bi> Pago integralmente"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:37
 msgid "Make Temporary"
 msgstr "Tornar Temporária"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:37
-msgid "<b>Temp:</b> Drafted Invoice"
-msgstr "<b>Temporária:</b> Rascunho de Fatura"
+msgid "<bi>Temp:</bi> Drafted Invoice"
+msgstr "<bi>Temporária:</bi> Rascunho de Fatura"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:41
 msgid "Write-off Invoice"
 msgstr "Anular Fatura"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:41
-msgid "<b>Void:</b> Write-off Invoice"
-msgstr "<b>Nula:</b> Fatura Anulada"
+msgid "<bi>Void:</bi> Write-off Invoice"
+msgstr "<bi>Nula:</bi> Fatura Anulada"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:45
 msgid "Delete Invoice"
 msgstr "Deletar Fatura"
 
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:45
-msgid "<b>Delete:</b> Trash Invoice"
-msgstr "<b>Deletar:</b> Envia a Fatura para a Lixeira"
+msgid "<bi>Delete:</bi> Trash Invoice"
+msgstr "<bi>Deletar:</bi> Envia a Fatura para a Lixeira"
 
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:42
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:76

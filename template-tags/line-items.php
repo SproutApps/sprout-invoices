@@ -210,3 +210,28 @@ function si_get_plain_text_line_item( $item_data = array(), $position = 0, $prev
 	}
 	return apply_filters( 'si_get_plain_text_line_item', $item, $item_data, $position, $prev_type, $has_children );
 }
+
+function si_get_line_item_value( $doc_id, $position, $data_slug ) {
+	if ( ! $doc_id ) {
+		$doc_id = get_the_id();
+	}
+	$doc = si_get_doc_object( $doc_id );
+	if ( '' === $doc ) {
+		return '';
+	}
+	$line_items = $doc->get_line_items();
+	if ( empty( $line_items ) ) {
+		return '';
+	}
+	$value = '';
+	foreach ( $line_items as $key => $data ) {
+		if ( ! isset( $data[ $data_slug ] ) ) {
+			continue;
+		}
+		if ( (float) $position === (float) $key ) {
+			$value = $data[ $data_slug ];
+		}
+	}
+
+	return $value;
+}

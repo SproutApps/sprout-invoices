@@ -32,8 +32,8 @@ class SA_Addons extends SI_Controller {
 		// Addon page
 		$args = array(
 			'slug' => self::get_settings_page( false ),
-			'title' => self::__( 'Sprout Invoices Add-ons' ),
-			'menu_title' => self::__( 'Add-ons' ),
+			'title' => __( 'Sprout Invoices Add-ons', 'sprout-invoices' ),
+			'menu_title' => __( 'Add-ons', 'sprout-invoices' ),
 			'weight' => 30,
 			'section' => 'settings',
 			'tab_only' => true,
@@ -111,7 +111,7 @@ class SA_Addons extends SI_Controller {
 	 * @return string
 	 */
 	public static function get_settings_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
+		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
 	public static function addons_admin() {

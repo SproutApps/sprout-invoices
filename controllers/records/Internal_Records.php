@@ -18,7 +18,7 @@ class SI_Internal_Records extends SI_Controller {
 	private static $instance;
 
 	public static function get_admin_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
+		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
 	public static function init() {
@@ -44,8 +44,8 @@ class SI_Internal_Records extends SI_Controller {
 		$args = array(
 			'parent' => 'tools.php',
 			'slug' => self::SETTINGS_PAGE,
-			'title' => self::__( 'Sprout Invoices Records and Logs' ),
-			'menu_title' => self::__( 'Sprout Records' ),
+			'title' => __( 'Sprout Invoices Records and Logs', 'sprout-invoices' ),
+			'menu_title' => __( 'Sprout Records', 'sprout-invoices' ),
 			'weight' => 10,
 			'reset' => false,
 			'callback' => array( __CLASS__, 'display_table' )
@@ -95,7 +95,7 @@ class SI_Internal_Records extends SI_Controller {
 		ignore_user_abort( 1 ); // run script in background
 		set_time_limit( 0 ); // run script forever
 
-		echo '<div id="deletion_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="deletion_information">'.self::__( 'Preparing purge...' ).'</div>';
+		echo '<div id="deletion_progress" style="width:100%;border:1px solid #ccc;"></div> <div id="deletion_information">'.__( 'Preparing purge...', 'sprout-invoices' ).'</div>';
 
 		$args = array(
 			'post_type' => SI_Record::POST_TYPE,
@@ -125,7 +125,7 @@ class SI_Internal_Records extends SI_Controller {
 			// Javascript for updating the progress bar and information
 			echo '<script language="javascript" id="progress_js">
 			document.getElementById("deletion_progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
-			document.getElementById("deletion_information").innerHTML="'.sprintf( self::__( '%o records(s) of %o deleted.' ), $i, $total ).'";
+			document.getElementById("deletion_information").innerHTML="'.sprintf( __( '%o records(s) of %o deleted.', 'sprout-invoices' ), $i, $total ).'";
 			document.getElementById("progress_js").remove();
 			</script>';
 
@@ -135,7 +135,7 @@ class SI_Internal_Records extends SI_Controller {
 			// delete the post
 			wp_delete_post( $record_id, true );
 		}
-		echo '<script language="javascript">document.getElementById("deletion_information").innerHTML="'.sprintf( self::__( 'Complete. %o deleted.' ), $total ).'"</script>';
+		echo '<script language="javascript">document.getElementById("deletion_information").innerHTML="'.sprintf( __( 'Complete. %o deleted.', 'sprout-invoices' ), $total ).'"</script>';
 	}
 
 	/**
@@ -214,7 +214,7 @@ class SI_Internal_Records extends SI_Controller {
 		$fields = array();
 		$fields['note'] = array(
 			'weight' => 0,
-			'label' => self::__( 'Private Note' ),
+			'label' => __( 'Private Note', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'default' => $record_post->post_content,
 		);
@@ -270,7 +270,7 @@ class SI_Internal_Records extends SI_Controller {
 	</script>
 	<div class="wrap">
 		<h2>
-			<?php si_e( 'Sprout Invoices Records' ) ?>
+			<?php _e( 'Sprout Invoices Records', 'sprout-invoices' ) ?>
 		</h2>
 		<?php self::maybe_purge_records(); ?>
 		<form id="records-filter" method="get">

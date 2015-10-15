@@ -18,7 +18,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 
 	<div id="minor-publishing">
 		<p>
-			<b><?php si_e( 'Associated Users' ) ?></b> <span class="helptip" title="<?php si_e( 'Clients can have multiple users associated. Each user will receive notifications.' ) ?>"></span>
+			<b><?php _e( 'Associated Users', 'sprout-invoices' ) ?></b> <span class="helptip" title="<?php _e( 'Clients can have multiple users associated. Each user will receive notifications.', 'sprout-invoices' ) ?>"></span>
 			<select id="associated_users" style="width:100%" class="select2">
 				<option></option>
 				<?php foreach ( $users as $user ) : ?>
@@ -48,12 +48,12 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 				<div id="hidden_associated_users_list" class="cloak"></div>
 			<?php endif ?>
 
-			<a href="#TB_inline?width=300&height=200&inlineId=user_creation_modal" id="user_creation_modal_tb_link" class="thickbox button" title="<?php si_e( 'Create new user for this client' ) ?>"><?php si_e( 'New User' ) ?></a>
+			<a href="#TB_inline?width=300&height=200&inlineId=user_creation_modal" id="user_creation_modal_tb_link" class="thickbox button" title="<?php _e( 'Create new user for this client', 'sprout-invoices' ) ?>"><?php _e( 'New User', 'sprout-invoices' ) ?></a>
 		</p>
 		<hr/>
 		<?php do_action( 'client_submit_pre_invoices' ) ?>
 		<p>
-			<b><?php si_e( 'Invoices' ) ?></b>
+			<b><?php _e( 'Invoices', 'sprout-invoices' ) ?></b>
 			<?php if ( ! empty( $invoices ) ) : ?>
 				<dl>
 					<?php foreach ( $invoices as $invoice_id ) : ?>
@@ -62,13 +62,13 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 					<?php endforeach ?>
 				</dl>
 			<?php else : ?>
-				<em><?php si_e( 'No invoices' ) ?></em>
+				<em><?php _e( 'No invoices', 'sprout-invoices' ) ?></em>
 			<?php endif ?>
 		</p>
 		<hr/>
 		<?php do_action( 'client_submit_pre_estimates' ) ?>
 		<p>
-			<b><?php si_e( 'Estimates' ) ?></b>
+			<b><?php _e( 'Estimates', 'sprout-invoices' ) ?></b>
 			<?php if ( ! empty( $estimates ) ) : ?>
 				<dl>
 					<?php foreach ( $estimates as $estimate_id ) : ?>
@@ -77,7 +77,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 					<?php endforeach ?>
 				</dl>
 			<?php else : ?>
-				<em><?php si_e( 'No estimates' ) ?></em>
+				<em><?php _e( 'No estimates', 'sprout-invoices' ) ?></em>
 			<?php endif ?>
 		</p>
 		<div class="clear"></div>
@@ -88,7 +88,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 		<div id="delete-action">
 			<?php
 			if ( current_user_can( 'delete_sprout_invoices', $post->ID ) ) { ?>
-				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php self::_e( 'Delete' ) ?></a><?php
+				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, null, true ); ?>"><?php _e( 'Delete', 'sprout-invoices' ) ?></a><?php
 			} ?>
 		</div>
 

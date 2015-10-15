@@ -40,17 +40,17 @@ class SI_Checks extends SI_Offsite_Processors {
 	}
 
 	public static function register() {
-		self::add_payment_processor( __CLASS__, self::__( 'Check/PO Payment' ) );
+		self::add_payment_processor( __CLASS__, __( 'Check/PO Payment', 'sprout-invoices' ) );
 	}
 
 	public static function public_name() {
-		return self::__( 'Check/PO' );
+		return __( 'Check/PO', 'sprout-invoices' );
 	}
 
 	public static function checkout_options() {
 		$option = array(
 			'icons' => array( SI_URL . '/resources/front-end/img/check.png', SI_URL . '/resources/front-end/img/po.png' ),
-			'label' => self::__( 'Check' ),
+			'label' => __( 'Check', 'sprout-invoices' ),
 			'cc' => array()
 			);
 		return apply_filters( 'si_checks_checkout_options', $option );
@@ -106,7 +106,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'amount' => array(
 				'type' => 'text',
 				'weight' => 1,
-				'label' => self::__( 'Amount' ),
+				'label' => __( 'Amount', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -115,7 +115,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'check_number' => array(
 				'type' => 'text',
 				'weight' => 5,
-				'label' => self::__( 'Check/PO Number' ),
+				'label' => __( 'Check/PO Number', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -124,7 +124,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'mailed' => array(
 				'type' => 'date',
 				'weight' => 10,
-				'label' => self::__( 'Date Mailed' ),
+				'label' => __( 'Date Mailed', 'sprout-invoices' ),
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
@@ -134,7 +134,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'notes' => array(
 				'type' => 'textarea',
 				'weight' => 15,
-				'label' => self::__( 'Notes' ),
+				'label' => __( 'Notes', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -143,7 +143,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'nonce' => array( // anti-spam honeypot
 				'type' => 'hidden',
 				'weight' => 50,
-				'label' => self::__( 'Skip this unless you are not human.' ),
+				'label' => __( 'Skip this unless you are not human.', 'sprout-invoices' ),
 				'required' => true,
 				'value' => wp_create_nonce( SI_Controller::NONCE ),
 			)

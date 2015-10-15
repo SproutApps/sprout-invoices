@@ -70,12 +70,12 @@ class SI_Invoice extends SI_Post_Type {
 
 	public static function get_statuses() {
 		$statuses = array(
-			self::STATUS_TEMP => self::__( 'Draft' ),
-			self::STATUS_PENDING => self::__( 'Pending' ),
-			self::STATUS_FUTURE => self::__( 'Scheduled' ),
-			self::STATUS_PARTIAL => self::__( 'Outstanding Balance' ),
-			self::STATUS_PAID => self::__( 'Paid' ),
-			self::STATUS_WO => self::__( 'Written Off' ),
+			self::STATUS_TEMP => __( 'Draft', 'sprout-invoices' ),
+			self::STATUS_PENDING => __( 'Pending', 'sprout-invoices' ),
+			self::STATUS_FUTURE => __( 'Scheduled', 'sprout-invoices' ),
+			self::STATUS_PARTIAL => __( 'Outstanding Balance', 'sprout-invoices' ),
+			self::STATUS_PAID => __( 'Paid', 'sprout-invoices' ),
+			self::STATUS_WO => __( 'Written Off', 'sprout-invoices' ),
 		);
 		return $statuses;
 	}
@@ -149,7 +149,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	public static function create_invoice( $passed_args, $status = '' ) {
 		$defaults = array(
-			'subject' => sprintf( self::__( 'New Invoice: %s' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'subject' => sprintf( __( 'New Invoice: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'user_id' => '',
 			'invoice_id' => '',
 			'estimate_id' => '',
@@ -429,7 +429,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	public function get_client() {
 		if ( ! $this->get_client_id() ) {
-			return new WP_Error( 'no_client', self::__( 'No client associated with this invoice.' ) );
+			return new WP_Error( 'no_client', __( 'No client associated with this invoice.', 'sprout-invoices' ) );
 		}
 		return SI_Client::get_instance( $this->get_client_id() );
 	}
@@ -488,14 +488,15 @@ class SI_Invoice extends SI_Post_Type {
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
 		$invoice_total = $subtotal + $tax_total + $tax2_total;
 		$discount = $invoice_total * ( $this->get_discount() / 100 );
-		return $discount;
+
+		return si_get_number_format( $discount );
 	}
 
 	/**
 	 * Shipping
 	 */
 	public function get_shipping() {
-		return (float)$this->get_post_meta( self::$meta_keys['shipping'] );
+		return (float) $this->get_post_meta( self::$meta_keys['shipping'] );
 	}
 
 	public function set_shipping( $shipping = 0 ) {
@@ -509,7 +510,7 @@ class SI_Invoice extends SI_Post_Type {
 	 * Tax
 	 */
 	public function get_tax() {
-		return (float)$this->get_post_meta( self::$meta_keys['tax'] );
+		return (float) $this->get_post_meta( self::$meta_keys['tax'] );
 	}
 
 	public function set_tax( $tax = 0 ) {
@@ -530,7 +531,7 @@ class SI_Invoice extends SI_Post_Type {
 	 * Tax
 	 */
 	public function get_tax2() {
-		return (float)$this->get_post_meta( self::$meta_keys['tax2'] );
+		return (float) $this->get_post_meta( self::$meta_keys['tax2'] );
 	}
 
 	public function set_tax2( $tax = 0 ) {
@@ -551,7 +552,7 @@ class SI_Invoice extends SI_Post_Type {
 	 * Project
 	 */
 	public function get_project_id() {
-		return (int)$this->get_post_meta( self::$meta_keys['project_id'] );
+		return (int) $this->get_post_meta( self::$meta_keys['project_id'] );
 	}
 
 	public function set_project_id( $project_id = 0 ) {
@@ -602,9 +603,9 @@ class SI_Invoice extends SI_Post_Type {
 		}
 		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$pre_disc_total = $subtotal + $tax_total + $tax2_total;
-		$total = $pre_disc_total * ( ( 100 - $this->get_discount() ) / 100 );
-		return $total;
+		$invoice_total = $subtotal + $tax_total + $tax2_total;
+		$total = $invoice_total - $this->get_discount_total();
+		return si_get_number_format( $total );
 	}
 
 	public function set_calculated_total() {
@@ -620,10 +621,15 @@ class SI_Invoice extends SI_Post_Type {
 		$line_items = $this->get_line_items();
 		if ( ! empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
-				if ( isset( $data['tax'] ) ) {
+				if ( isset( $data['rate'] ) ) {
 					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
-					$calc = ( $data['rate'] * $data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
-					$subtotal += apply_filters( 'si_line_item_total', $calc, $data );
+					$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 1;
+					$line_total = ( $data['rate'] * $qty );
+					if ( isset( $data['tax'] ) ) {
+						$tax = $line_total * ( $data['tax'] / 100 );
+						$line_total = $line_total - si_get_number_format( $tax ); // convert so that rounding can occur before discount is removed.
+					}
+					$subtotal += apply_filters( 'si_line_item_total', $line_total, $data );
 				}
 			}
 		}

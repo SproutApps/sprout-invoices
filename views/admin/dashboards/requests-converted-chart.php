@@ -1,5 +1,5 @@
 <h3 class="dashboard_widget_title">
-	<span><?php self::_e('Requests &amp; Converted Requests') ?></span>
+	<span><?php _e( 'Requests &amp; Converted Requests', 'sprout-invoices' ) ?></span>
 </h3>
 <div class="dashboard_widget inside">
 	<div class="main">

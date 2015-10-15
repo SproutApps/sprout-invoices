@@ -19,7 +19,7 @@ if ( ! function_exists( 'sa_form_fields' ) ) :
 		foreach ( $fields as $key => $data ) : ?>
 			<div id="si_admin_field_<?php echo esc_attr( $context ) ?>_<?php echo esc_attr( $key ) ?>" class="form-group<?php if ( $data['type'] == 'hidden' ) { echo ' hidden'; } ?>">
 				<?php if ( $data['type'] == 'heading' ) : ?>
-					<legend class="legend form-heading" ><?php si_e( $data['label'] ); ?></legend>
+					<legend class="legend form-heading" ><?php _e( $data['label'], 'sprout-invoices' ); ?></legend>
 				<?php elseif ( $data['type'] != 'checkbox' ) : ?>
 					<span class="label_wrap"><?php sa_form_label( $key, $data, $context ); ?></span>
 					<div class="input_wrap"><?php sa_form_field( $key, $data, $context ); ?></div>
@@ -29,10 +29,10 @@ if ( ! function_exists( 'sa_form_fields' ) ) :
 							<?php
 								// add class by modifying the attributes.
 								$data['attributes']['class'] = 'checkbox'; ?>
-							<?php sa_form_field( $key, $data, $context ); ?> <?php si_e( $data['label'] ); ?>
+							<?php sa_form_field( $key, $data, $context ); ?> <?php _e( $data['label'], 'sprout-invoices' ); ?>
 						</label>
 						<?php if ( ! empty( $data['description'] ) ) : ?>
-							<p class="description help_block"><?php si_e( $data['description'] ) ?></p>
+							<p class="description help_block"><?php _e( $data['description'], 'sprout-invoices' ) ?></p>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
@@ -225,7 +225,7 @@ if ( ! function_exists( 'sa_get_form_label' ) ) :
 			if ( ! isset( $data['label'] ) ) {
 				$data['label'] = '';
 			}
-			$out = '<label for="sa_'.$category.'_'.$key.'">'.si__( $data['label'] ).'</label>';
+			$out = '<label for="sa_'.$category.'_'.$key.'">'.__( $data['label'], 'sprout-invoices' ).'</label>';
 			if ( isset( $data['required'] ) && $data['required'] ) {
 				$out .= ' <span class="required">*</span>';
 			}

@@ -17,8 +17,7 @@ if ( ! function_exists( 'si_get_invoice_line_items' ) ) :
 	 */
 	function si_get_invoice_line_items( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_line_items', $invoice->get_line_items(), $invoice );
@@ -33,8 +32,7 @@ if ( ! function_exists( 'si_get_invoice_history' ) ) :
 	 */
 	function si_get_invoice_history( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_history', $invoice->get_history(), $invoice );
@@ -50,8 +48,7 @@ if ( ! function_exists( 'si_get_invoice_status' ) ) :
 	 */
 	function si_get_invoice_status( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
@@ -81,26 +78,9 @@ if ( ! function_exists( 'si_invoice_status' ) ) :
 	 */
 	function si_invoice_status( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_status', si_get_invoice_status( $id ), $id );
-	}
-endif;
-
-if ( ! function_exists( 'si_get_invoice_status' ) ) :
-	/**
-	 * Echo the invoice status
-	 * @param  integer $id
-	 * @return string
-	 */
-	function si_get_invoice_status( $post_id = 0 ) {
-		if ( ! $post_id ) {
-			global $post;
-			$post_id = $post->ID;
-		}
-		$invoice = SI_Invoice::get_instance( $post_id );
-		return apply_filters( 'si_get_invoice_status', $invoice->get_id(), $post_id );
 	}
 endif;
 
@@ -113,8 +93,7 @@ if ( ! function_exists( 'si_get_invoice_status_label' ) ) :
 	 */
 	function si_get_invoice_status_label( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $post_id );
 		return apply_filters( 'si_get_invoice_status_label', $invoice->get_status_label(), $invoice );
@@ -129,8 +108,7 @@ if ( ! function_exists( 'si_invoice_status_label' ) ) :
 	 */
 	function si_invoice_status_label( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_status_label', si_get_invoice_status_label( $id ), $id );
 	}
@@ -145,8 +123,7 @@ if ( ! function_exists( 'si_get_invoicesubmission_fields' ) ) :
 	 */
 	function si_get_invoice_submission_fields( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_submission_fields', $invoice->get_submission_fields(), $invoice );
@@ -163,8 +140,7 @@ if ( ! function_exists( 'si_get_invoiceissue_date' ) ) :
 	 */
 	function si_get_invoice_issue_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_issue_date', $invoice->get_issue_date(), $invoice );
@@ -179,8 +155,7 @@ if ( ! function_exists( 'si_invoice_issue_date' ) ) :
 	 */
 	function si_invoice_issue_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_issue_date', date_i18n( get_option( 'date_format' ), si_get_invoice_issue_date( $id ) ), $id );
 	}
@@ -194,8 +169,7 @@ if ( ! function_exists( 'si_get_invoice_due_date' ) ) :
 	 */
 	function si_get_invoice_due_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_due_date', $invoice->get_due_date(), $invoice );
@@ -210,8 +184,7 @@ if ( ! function_exists( 'si_invoice_due_date' ) ) :
 	 */
 	function si_invoice_due_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_due_date', date_i18n( get_option( 'date_format' ), si_get_invoice_due_date( $id ) ), $id );
 	}
@@ -225,8 +198,7 @@ if ( ! function_exists( 'si_get_invoice_expiration_date' ) ) :
 	 */
 	function si_get_invoice_expiration_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_expiration_date', $invoice->get_expiration_date(), $invoice );
@@ -241,8 +213,7 @@ if ( ! function_exists( 'si_invoice_expiration_date' ) ) :
 	 */
 	function si_invoice_expiration_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_expiration_date', date_i18n( get_option( 'date_format' ), si_get_invoice_expiration_date( $id ) ), $id );
 	}
@@ -257,8 +228,7 @@ if ( ! function_exists( 'si_get_invoice_id' ) ) :
 	 */
 	function si_get_invoice_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		if ( $invoice->get_invoice_id() ) {
@@ -276,8 +246,7 @@ if ( ! function_exists( 'si_invoice_id' ) ) :
 	 */
 	function si_invoice_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_id', si_get_invoice_id( $id ), $id );
 	}
@@ -292,8 +261,7 @@ if ( ! function_exists( 'si_get_invoice_po_number' ) ) :
 	 */
 	function si_get_invoice_po_number( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_po_number', $invoice->get_po_number(), $invoice );
@@ -308,8 +276,7 @@ if ( ! function_exists( 'si_invoice_po_number' ) ) :
 	 */
 	function si_invoice_po_number( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_po_number', si_get_invoice_po_number( $id ), $id );
 	}
@@ -324,8 +291,7 @@ if ( ! function_exists( 'si_get_invoice_client_id' ) ) :
 	 */
 	function si_get_invoice_client_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_client_id', $invoice->get_client_id(), $invoice );
@@ -340,8 +306,7 @@ if ( ! function_exists( 'si_invoice_client_id' ) ) :
 	 */
 	function si_invoice_client_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_client_id', si_get_invoice_client_id( $id ), $id );
 	}
@@ -356,8 +321,7 @@ if ( ! function_exists( 'si_get_invoice_client' ) ) :
 	 */
 	function si_get_invoice_client( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return $invoice->get_client();
@@ -373,8 +337,7 @@ if ( ! function_exists( 'si_get_invoice_discount' ) ) :
 	 */
 	function si_get_invoice_discount( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_discount', $invoice->get_discount(), $invoice );
@@ -389,8 +352,7 @@ if ( ! function_exists( 'si_invoice_discount' ) ) :
 	 */
 	function si_invoice_discount( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_discount', si_get_invoice_discount( $id ), $id );
 	}
@@ -405,8 +367,7 @@ if ( ! function_exists( 'si_get_invoice_tax' ) ) :
 	 */
 	function si_get_invoice_tax( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_tax', $invoice->get_tax(), $invoice );
@@ -421,8 +382,7 @@ if ( ! function_exists( 'si_invoice_tax' ) ) :
 	 */
 	function si_invoice_tax( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_tax', si_get_invoice_tax( $id ), $id );
 	}
@@ -436,8 +396,7 @@ if ( ! function_exists( 'si_get_invoice_tax2' ) ) :
 	 */
 	function si_get_invoice_tax2( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_tax2', $invoice->get_tax2(), $invoice );
@@ -452,8 +411,7 @@ if ( ! function_exists( 'si_invoice_tax2' ) ) :
 	 */
 	function si_invoice_tax2( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_tax2', si_get_invoice_tax2( $id ), $id );
 	}
@@ -467,8 +425,7 @@ if ( ! function_exists( 'si_get_invoice_taxes_total' ) ) :
 	 */
 	function si_get_invoice_taxes_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_taxes_total', $invoice->get_tax_total() + $invoice->get_tax2_total(), $invoice );
@@ -483,8 +440,7 @@ if ( ! function_exists( 'si_get_invoice_payments_total' ) ) :
 	 */
 	function si_get_invoice_payments_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_payments_total', $invoice->get_payments_total(), $invoice );
@@ -499,8 +455,7 @@ if ( ! function_exists( 'si_invoice_payments_total' ) ) :
 	 */
 	function si_invoice_payments_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_payments_total', sa_get_formatted_money( si_get_invoice_payments_total( $id ), $id ), $id );
 	}
@@ -514,8 +469,7 @@ if ( ! function_exists( 'si_get_invoice_balance' ) ) :
 	 */
 	function si_get_invoice_balance( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		if ( $invoice->get_status() == SI_Invoice::STATUS_PAID ) {
@@ -533,8 +487,7 @@ if ( ! function_exists( 'si_invoice_balance' ) ) :
 	 */
 	function si_invoice_balance( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_balance', sa_get_formatted_money( si_get_invoice_balance( $id ), $id ), $id );
 	}
@@ -548,8 +501,7 @@ if ( ! function_exists( 'si_get_invoice_calculated_total' ) ) :
 	 */
 	function si_get_invoice_calculated_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_calculated_total', $invoice->get_calculated_total(), $invoice );
@@ -564,8 +516,7 @@ if ( ! function_exists( 'si_invoice_calculated_total' ) ) :
 	 */
 	function si_invoice_calculated_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_calculated_total', sa_get_formatted_money( si_get_invoice_calculated_total( $id ), $id ), $id );
 	}
@@ -579,8 +530,7 @@ if ( ! function_exists( 'si_has_invoice_deposit' ) ) :
 	 */
 	function si_has_invoice_deposit( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$deposit = si_get_invoice_deposit( $id );
 		if ( $deposit < 0.01 ) {
@@ -599,8 +549,7 @@ if ( ! function_exists( 'si_get_invoice_deposit' ) ) :
 	 */
 	function si_get_invoice_deposit( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_deposit', si_get_number_format( $invoice->get_deposit() ), $invoice );
@@ -615,8 +564,7 @@ if ( ! function_exists( 'si_invoice_deposit' ) ) :
 	 */
 	function si_invoice_deposit( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_deposit', si_get_invoice_deposit( $id ), $id );
 	}
@@ -630,8 +578,7 @@ if ( ! function_exists( 'si_get_invoice_total' ) ) :
 	 */
 	function si_get_invoice_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_total', $invoice->get_total(), $invoice );
@@ -646,8 +593,7 @@ if ( ! function_exists( 'si_invoice_total' ) ) :
 	 */
 	function si_invoice_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_total', si_get_invoice_total( $id ), $id );
 	}
@@ -662,8 +608,7 @@ if ( ! function_exists( 'si_get_invoice_subtotal' ) ) :
 	 */
 	function si_get_invoice_subtotal( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_subtotal', $invoice->get_subtotal(), $invoice );
@@ -678,8 +623,7 @@ if ( ! function_exists( 'si_invoice_subtotal' ) ) :
 	 */
 	function si_invoice_subtotal( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_subtotal', si_get_invoice_subtotal( $id ), $id );
 	}
@@ -694,8 +638,7 @@ if ( ! function_exists( 'si_get_invoice_terms' ) ) :
 	 */
 	function si_get_invoice_terms( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_terms', apply_filters( 'the_content', $invoice->get_terms() ), $invoice );
@@ -710,8 +653,7 @@ if ( ! function_exists( 'si_invoice_terms' ) ) :
 	 */
 	function si_invoice_terms( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_terms', si_get_invoice_terms( $id ), $id );
 	}
@@ -726,8 +668,7 @@ if ( ! function_exists( 'si_get_invoice_sender_note' ) ) :
 	 */
 	function si_get_invoice_sender_note( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_sender_note', $invoice->get_sender_note(), $invoice );
@@ -742,8 +683,7 @@ if ( ! function_exists( 'si_invoice_sender_note' ) ) :
 	 */
 	function si_invoice_sender_note( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_sender_note', si_get_invoice_sender_note( $id ), $id );
 	}
@@ -758,8 +698,7 @@ if ( ! function_exists( 'si_get_invoice_notes' ) ) :
 	 */
 	function si_get_invoice_notes( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_notes', apply_filters( 'the_content', $invoice->get_notes() ), $invoice );
@@ -774,8 +713,7 @@ if ( ! function_exists( 'si_invoice_notes' ) ) :
 	 */
 	function si_invoice_notes( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_notes', si_get_invoice_notes( $id ), $id );
 	}
@@ -790,8 +728,7 @@ if ( ! function_exists( 'si_get_invoice_currency' ) ) :
 	 */
 	function si_get_invoice_currency( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return apply_filters( 'si_get_invoice_currency', $invoice->get_currency(), $invoice );
@@ -806,8 +743,7 @@ if ( ! function_exists( 'si_invoice_currency' ) ) :
 	 */
 	function si_invoice_currency( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_invoice_currency', si_get_invoice_currency( $id ), $id );
 	}
@@ -881,8 +817,7 @@ if ( ! function_exists( 'si_get_payment_link' ) ) :
 	 */
 	function si_get_payment_link( $id = 0, $type = '' ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		if ( $type == '' ) {
 			$processor = SI_Payment_Processors::get_payment_processor();
@@ -914,8 +849,7 @@ if ( ! function_exists( 'si_get_payment_url' ) ) :
 	 */
 	function si_get_payment_url( $invoice_id = 0 ) {
 		if ( ! $invoice_id ) {
-			global $post;
-			$invoice_id = $post->ID;
+			$invoice_id = get_the_ID();
 		}
 		if ( ! $invoice_id ) {
 			$invoice_id = url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
@@ -936,8 +870,7 @@ if ( ! function_exists( 'si_get_review_url' ) ) :
 	 */
 	function si_get_review_url( $invoice_id = 0 ) {
 		if ( ! $invoice_id ) {
-			global $post;
-			$invoice_id = $post->ID;
+			$invoice_id = get_the_ID();
 		}
 		if ( ! $invoice_id ) {
 			$invoice_id = url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
@@ -958,8 +891,7 @@ if ( ! function_exists( 'si_get_complete_url' ) ) :
 	 */
 	function si_get_complete_url( $invoice_id = 0 ) {
 		if ( ! $invoice_id ) {
-			global $post;
-			$invoice_id = $post->ID;
+			$invoice_id = get_the_ID();
 		}
 		if ( ! $invoice_id ) {
 			$invoice_id = url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
@@ -973,8 +905,7 @@ endif;
 
 function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 	if ( ! $doc_id ) {
-		global $post;
-		$doc_id = $post->ID;
+		$doc_id = get_the_ID();
 	}
 
 	$returned_history = array();
@@ -1015,36 +946,36 @@ function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 			$r_post = $record->get_post();
 			switch ( $record->get_type() ) {
 				case SI_Controller::PRIVATE_NOTES_TYPE:
-					$returned_history[ $item_id ]['type'] = si__( 'Private Note' );
+					$returned_history[ $item_id ]['type'] = __( 'Private Note', 'sprout-invoices' );
 					break;
 
 				case SI_Estimates::HISTORY_UPDATE:
-					$returned_history[ $item_id ]['type'] = si__( 'Updated' );
+					$returned_history[ $item_id ]['type'] = __( 'Updated', 'sprout-invoices' );
 					break;
 
 				case SI_Estimates::VIEWED_STATUS_UPDATE:
-					$returned_history[ $item_id ]['type'] = si__( 'Viewed' );
+					$returned_history[ $item_id ]['type'] = __( 'Viewed', 'sprout-invoices' );
 					break;
 
 				case SI_Notifications::RECORD:
-					$returned_history[ $item_id ]['type'] = si__( 'Notification' );
+					$returned_history[ $item_id ]['type'] = __( 'Notification', 'sprout-invoices' );
 					break;
 
 				case SI_Estimates::HISTORY_INVOICE_CREATED:
-					$returned_history[ $item_id ]['type'] = si__( 'Invoice Created' );
+					$returned_history[ $item_id ]['type'] = __( 'Invoice Created', 'sprout-invoices' );
 					break;
 
 				case SI_Estimate_Submissions::SUBMISSION_UPDATE:
-					$returned_history[ $item_id ]['type'] = si__( 'Submitted' );
+					$returned_history[ $item_id ]['type'] = __( 'Submitted', 'sprout-invoices' );
 					break;
 
 				case SI_Importer::RECORD:
-					$returned_history[ $item_id ]['type'] = si__( 'Imported' );
+					$returned_history[ $item_id ]['type'] = __( 'Imported', 'sprout-invoices' );
 					break;
 
 				case SI_Estimates::HISTORY_STATUS_UPDATE:
 				default:
-					$returned_history[ $item_id ]['type'] = si__( 'Status Update' );
+					$returned_history[ $item_id ]['type'] = __( 'Status Update', 'sprout-invoices' );
 					break;
 			}
 			$returned_history[ $item_id ]['status_type'] = $record->get_type();
@@ -1056,14 +987,14 @@ function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 			$payment = SI_Payment::get_instance( $item_id );
 			$p_post = $payment->get_post();
 
-			$returned_history[ $item_id ]['type'] = si__( 'Payment' );
+			$returned_history[ $item_id ]['type'] = __( 'Payment', 'sprout-invoices' );
 			$returned_history[ $item_id ]['status_type'] = 'payment';
 			$returned_history[ $item_id ]['post_date'] = $p_post->post_date;
 			$returned_history[ $item_id ]['update_title'] = $p_post->post_title;
 
 			$returned_history[ $item_id ]['content'] = '';
 			$returned_history[ $item_id ]['content'] .= '<span>'.$payment->get_payment_method().'</span><br/>';
-			$returned_history[ $item_id ]['content'] .= '<b>'.si__( 'Payment Total' ).':</b> '.sa_get_formatted_money( $payment->get_amount(), $item_id );
+			$returned_history[ $item_id ]['content'] .= '<b>'.__( 'Payment Total', 'sprout-invoices' ).':</b> '.sa_get_formatted_money( $payment->get_amount(), $item_id );
 		}
 		else {
 			if ( $filtered ) {
@@ -1072,7 +1003,8 @@ function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 					$returned_history[ $item_id ]['type'] = $comment->comment_author;
 					$returned_history[ $item_id ]['status_type'] = 'comment';
 					$returned_history[ $item_id ]['post_date'] = $comment->comment_date;
-					$returned_history[ $item_id ]['content'] = get_comment_text( $comment->comment_ID ) . get_comment_meta( $comment->comment_ID, SI_Doc_Comments::DOC_COMMENT_META_POS, true );
+					$returned_history[ $item_id ]['content'] = get_comment_text( $comment->comment_ID );
+					$returned_history[ $item_id ]['comment_id'] = intval( $comment->comment_ID );
 				}
 			}
 		}

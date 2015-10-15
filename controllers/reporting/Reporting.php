@@ -8,7 +8,7 @@
  * @subpackage Reporting
  */
 class SI_Reporting extends SI_Dashboard {
-	const CACHE_KEY_PREFIX = 'si_rprt_';
+	const CACHE_KEY_PREFIX = 'si_rprt_v2_';
 	const AJAX_ACTION = 'si_report_data';
 	const AJAX_NONCE = 'si_report_nonce';
 	const CACHE_TIMEOUT = 172800; // 48 hours
@@ -22,6 +22,12 @@ class SI_Reporting extends SI_Dashboard {
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( __CLASS__, 'add_link_to_admin_bar' ), 15, 1 );
+
+		// refresh cache
+		add_filter( 'si_sprout_doc_scripts_localization',  array( __CLASS__, 'maybe_refresh_cache' ) );
+
+		// Record updated
+		add_action( 'save_post', array( __CLASS__, 'maybe_clear_report_cache' ), 10, 2 );
 	}
 
 	///////////////////////////
@@ -36,29 +42,30 @@ class SI_Reporting extends SI_Dashboard {
 		if ( ! wp_verify_nonce( $nonce, self::AJAX_NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' ); }
 
-		// FUTURE segment and span
+		$segment = ( isset( $_REQUEST['segment'] ) ) ? $_REQUEST['segment'] : 'weeks' ;
+		$span = ( isset( $_REQUEST['span'] ) ) ? $_REQUEST['span'] : 'span' ;
 
 		switch ( $_REQUEST['data'] ) {
 			case 'invoice_payments':
-				self::invoice_payments_chart();
+				self::invoice_payments_chart( $segment, $span );
 				break;
 			case 'balance_invoiced':
-				self::balance_invoiced_chart();
+				self::balance_invoiced_chart( $segment, $span );
 				break;
 			case 'est_invoice_totals':
-				self::est_invoice_totals_chart();
+				self::est_invoice_totals_chart( $segment, $span );
 				break;
 			case 'req_to_inv_totals':
-				self::req_to_inv_totals_chart();
+				self::req_to_inv_totals_chart( $segment, $span );
 				break;
 			case 'payment_statuses':
-				self::payment_statuses_chart();
+				self::payment_statuses_chart( $segment, $span );
 				break;
 			case 'invoice_statuses':
-				self::invoice_statuses_chart();
+				self::invoice_statuses_chart( $segment, $span );
 				break;
 			case 'estimates_statuses':
-				self::estimate_statuses_chart();
+				self::estimate_statuses_chart( $segment, $span );
 				break;
 
 			default:
@@ -79,15 +86,13 @@ class SI_Reporting extends SI_Dashboard {
 				'invoices' => array(),
 				'payments' => array()
 			);
-		$data = self::total_invoice_data_by_date_segment();
-		foreach ( $data as $segment => $seg_data ) {
-			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+		$data = self::total_invoice_data_by_date_segment( $segment, $span );
+		foreach ( $data as $seg => $seg_data ) {
+			$return['labels'][] = self::get_segment_label( $seg, $segment );
 			$return['invoices'][] = $seg_data['totals'];
 			$return['payments'][] = $seg_data['paid'];
 		}
-		header( 'Content-type: application/json' );
-		echo wp_json_encode( $return );
-		exit();
+		wp_send_json_success( $return );
 	}
 
 	/**
@@ -102,15 +107,13 @@ class SI_Reporting extends SI_Dashboard {
 				'balances' => array(),
 				'paid' => array()
 			);
-		$data = self::total_invoice_data_by_date_segment();
-		foreach ( $data as $segment => $seg_data ) {
-			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+		$data = self::total_invoice_data_by_date_segment( $segment, $span );
+		foreach ( $data as $seg => $seg_data ) {
+			$return['labels'][] = self::get_segment_label( $seg, $segment );
 			$return['payments'][] = $seg_data['paid'];
 			$return['balances'][] = $seg_data['balance'];
 		}
-		header( 'Content-type: application/json' );
-		echo wp_json_encode( $return );
-		exit();
+		wp_send_json_success( $return );
 	}
 
 	/**
@@ -125,16 +128,14 @@ class SI_Reporting extends SI_Dashboard {
 				'estimates' => array(),
 				'invoices' => array()
 			);
-		$inv_data = self::total_invoice_data_by_date_segment();
-		$est_data = self::total_estimate_data_by_date_segment();
-		foreach ( $inv_data as $segment => $seg_data ) {
-			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+		$inv_data = self::total_invoice_data_by_date_segment( $segment, $span );
+		$est_data = self::total_estimate_data_by_date_segment( $segment, $span );
+		foreach ( $inv_data as $seg => $seg_data ) {
+			$return['labels'][] = self::get_segment_label( $seg, $segment );
 			$return['invoices'][] = $seg_data['invoices'];
-			$return['estimates'][] = $est_data[ $segment ]['estimates'];
+			$return['estimates'][] = $est_data[ $seg ]['estimates'];
 		}
-		header( 'Content-type: application/json' );
-		echo wp_json_encode( $return );
-		exit();
+		wp_send_json_success( $return );
 	}
 
 	/**
@@ -149,15 +150,13 @@ class SI_Reporting extends SI_Dashboard {
 				'requests' => array(),
 				'invoices' => array()
 			);
-		$est_data = self::total_estimate_data_by_date_segment();
-		foreach ( $est_data as $segment => $seg_data ) {
-			$return['labels'][] = date_i18n( 'M d', strtotime( date( 'Y' ) . 'W' . $segment ) );
+		$est_data = self::total_estimate_data_by_date_segment( $segment, $span );
+		foreach ( $est_data as $seg => $seg_data ) {
+			$return['labels'][] = self::get_segment_label( $seg, $segment );
 			$return['requests'][] = $seg_data['requests'];
 			$return['invoices_generated'][] = $seg_data['invoices_generated'];
 		}
-		header( 'Content-type: application/json' );
-		echo wp_json_encode( $return );
-		exit();
+		wp_send_json_success( $return );
 	}
 
 	/**
@@ -242,20 +241,22 @@ class SI_Reporting extends SI_Dashboard {
 	/////////////////////////
 
 	public static function total_invoice_data_by_date_segment( $segment = 'weeks', $span = 6 ) {
+
 		// Return cache if present.
 		$cache = self::get_cache( __FUNCTION__ . $segment . $span );
 		if ( $cache ) {
 			return $cache;
 		}
 
-		// FUTURE charts should be dynamic based on selected segment.
-		$weeks = self::walk_back_x_span( $span, $segment );
-		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
+		$frames = self::walk_back_x_span( $span, $segment );
+		$date_format = self::get_segment_date_format( $segment );
+		$year = date( 'Y', strtotime( $span . ' ' . $segment . ' ago' ) );
+		$start_date = date( 'Y-m-d', strtotime( $span . ' ' . $segment . ' ago' ) );
 
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
-		foreach ( $weeks as $week_num ) {
-			$data[ $week_num ] = array(
+		foreach ( $frames as $frame_date ) {
+			$data[ $frame_date ] = array(
 					'invoices' => 0,
 					'payments' => 0,
 					'totals' => 0,
@@ -277,37 +278,37 @@ class SI_Reporting extends SI_Dashboard {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
+						'after'     => $start_date,
 						'inclusive' => true,
-					)
+					),
 				)
 			);
 		$invoices = new WP_Query( $args );
 		foreach ( $invoices->posts as $invoice_id ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
-			$week = get_the_time( 'W', $invoice_id );
-			$data[ $week ]['invoices'] += 1;
-			$data[ $week ]['payments'] += count( $invoice->get_payments() );
-			$data[ $week ]['totals'] += si_get_invoice_calculated_total( $invoice_id );
-			$data[ $week ]['subtotals'] += si_get_invoice_subtotal( $invoice_id );
-			$data[ $week ]['paid'] += si_get_invoice_payments_total( $invoice_id );
-			$data[ $week ]['balance'] += si_get_invoice_balance( $invoice_id );
+			$frame = get_the_time( $date_format, $invoice_id );
+			$data[ $frame ]['invoices'] += 1;
+			$data[ $frame ]['payments'] += count( $invoice->get_payments() );
+			$data[ $frame ]['totals'] += si_get_invoice_calculated_total( $invoice_id );
+			$data[ $frame ]['subtotals'] += si_get_invoice_subtotal( $invoice_id );
+			$data[ $frame ]['paid'] += si_get_invoice_payments_total( $invoice_id );
+			$data[ $frame ]['balance'] += si_get_invoice_balance( $invoice_id );
 			switch ( get_post_status( $invoice_id ) ) {
 				case 'draft':
 				case SI_Invoice::STATUS_TEMP:
-					$data[ $week ]['status_temp'] += 1;
+					$data[ $frame ]['status_temp'] += 1;
 					break;
 				case SI_Invoice::STATUS_PENDING:
-					$data[ $week ]['status_pending'] += 1;
+					$data[ $frame ]['status_pending'] += 1;
 					break;
 				case SI_Invoice::STATUS_PARTIAL:
-					$data[ $week ]['status_partial'] += 1;
+					$data[ $frame ]['status_partial'] += 1;
 					break;
 				case SI_Invoice::STATUS_PAID:
-					$data[ $week ]['status_complete'] += 1;
+					$data[ $frame ]['status_complete'] += 1;
 					break;
 				case SI_Invoice::STATUS_WO:
-					$data[ $week ]['status_writeoff'] += 1;
+					$data[ $frame ]['status_writeoff'] += 1;
 					break;
 				default:
 					break;
@@ -448,14 +449,15 @@ class SI_Reporting extends SI_Dashboard {
 			return $cache;
 		}
 
-		// FUTURE charts should be dynamic based on selected segment.
-		$weeks = self::walk_back_x_span( $span, $segment );
-		$year = date( 'Y', strtotime( $span . ' weeks ago' ) );
+		$frames = self::walk_back_x_span( $span, $segment );
+		$date_format = self::get_segment_date_format( $segment );
+		$year = date( 'Y', strtotime( $span . ' ' . $segment . ' ago' ) );
+		$start_date = date( 'Y-m-d', strtotime( $span . ' ' . $segment . ' ago' ) );
 
 		// Build data array, without a explicit build segments without posts will not show.
 		$data = array();
-		foreach ( $weeks as $week_num ) {
-			$data[ $week_num ] = array(
+		foreach ( $frames as $frame_date ) {
+			$data[ $frame_date ] = array(
 					'estimates' => 0,
 					'requests' => 0,
 					'totals' => 0,
@@ -475,42 +477,42 @@ class SI_Reporting extends SI_Dashboard {
 			'fields' => 'ids',
 			'date_query' => array(
 					array(
-						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
+						'after'     => $start_date,
 						'inclusive' => true,
 					),
 				)
 			);
 		$estimates = new WP_Query( $args );
 		foreach ( $estimates->posts as $estimate_id ) {
-			$week = get_the_time( 'W', $estimate_id );
-			$data[ $week ]['estimates'] += 1;
-			$data[ $week ]['totals'] += si_get_estimate_total( $estimate_id );
-			$data[ $week ]['subtotals'] += si_get_estimate_subtotal( $estimate_id );
+			$frame = get_the_time( $date_format, $estimate_id );
+			$data[ $frame ]['estimates'] += 1;
+			$data[ $frame ]['totals'] += si_get_estimate_total( $estimate_id );
+			$data[ $frame ]['subtotals'] += si_get_estimate_subtotal( $estimate_id );
 			if ( si_get_estimate_invoice_id( $estimate_id ) ) {
-				$data[ $week ]['invoices_generated'] += 1;
+				$data[ $frame ]['invoices_generated'] += 1;
 			}
 			// If there are submission fields than it's a request
 			if ( si_is_estimate_submission( $estimate_id ) ) {
-				$data[ $week ]['requests'] += 1;
+				$data[ $frame ]['requests'] += 1;
 			}
 			switch ( get_post_status( $estimate_id ) ) {
 				case SI_Estimate::STATUS_REQUEST:
-					$data[ $week ]['status_request'] += 1;
+					$data[ $frame ]['status_request'] += 1;
 					break;
 				case SI_Estimate::STATUS_PENDING:
-					$data[ $week ]['status_pending'] += 1;
+					$data[ $frame ]['status_pending'] += 1;
 					break;
 				case SI_Estimate::STATUS_APPROVED:
-					$data[ $week ]['status_approved'] += 1;
+					$data[ $frame ]['status_approved'] += 1;
 					break;
 				case SI_Estimate::STATUS_DECLINED:
-					$data[ $week ]['status_declined'] += 1;
+					$data[ $frame ]['status_declined'] += 1;
 					break;
 				default:
 					break;
 			}
 		}
-		return self::set_cache( __FUNCTION__ . $segment . $span, $data );
+		return self::set_cache( __FUNCTION__ . $segment . $span, $data, self::CACHE_TIMEOUT );
 	}
 
 	public static function total_payment_data( $this = 'century' ) {
@@ -533,7 +535,7 @@ class SI_Reporting extends SI_Dashboard {
 			);
 		$args = array(
 			'post_type' => SI_Payment::POST_TYPE,
-			'post_status' => 'any', // Not Written-off?
+			'post_status' => 'any', // Totals are not tallied for voided payments below.
 			'posts_per_page' => -1,
 			'orderby' => 'date',
 			'fields' => 'ids',
@@ -631,6 +633,7 @@ class SI_Reporting extends SI_Dashboard {
 					break;
 			}
 		}
+
 		return self::set_cache( __FUNCTION__.$this, $data, $expire );
 	}
 
@@ -697,15 +700,23 @@ class SI_Reporting extends SI_Dashboard {
 					break;
 			}
 		}
-		return self::set_cache( __FUNCTION__ . $segment . $span, $data );
+		return self::set_cache( __FUNCTION__ . $segment . $span, $data, self::CACHE_TIMEOUT );
 	}
 
 	//////////////
 	// Caching //
 	//////////////
 
+	public static function maybe_refresh_cache( $js_object = array() ) {
+		$js_object['reports_refresh_cache'] = false;
+		if ( isset( $_GET['reports_refresh_cache'] ) ) {
+			$js_object['reports_refresh_cache'] = true;
+		}
+		return $js_object;
+	}
+
 	public static function get_cache( $data_name = '' ) {
-		if ( self::DEBUG || isset( $_GET['nocache'] ) ) { // If dev than don't cache.
+		if ( self::DEBUG || isset( $_REQUEST['reports_refresh_cache'] ) ) { // If dev than don't cache.
 			return false;
 		}
 
@@ -721,8 +732,9 @@ class SI_Reporting extends SI_Dashboard {
 	}
 
 	public static function set_cache( $data_name = '', $data = array(), $expire = 0 ) {
-		$timeout = ( $expire ) ? $expire : self::CACHE_TIMEOUT ;
+		$timeout = ( $expire > 0 ) ? $expire : self::CACHE_TIMEOUT ;
 		$key = self::get_hashed_transient_key( $data_name );
+
 		set_transient( $key, $data, $timeout ); // cache for a week.
 		return $data;
 	}
@@ -733,7 +745,21 @@ class SI_Reporting extends SI_Dashboard {
 	}
 
 	public static function get_hashed_transient_key( $data_name ) {
-		return self::CACHE_KEY_PREFIX.md5( $data_name );
+		$data_name = md5( $data_name );
+		return substr( self::CACHE_KEY_PREFIX . $data_name, 0, 45 );
+	}
+
+	public static function maybe_clear_report_cache( $post_id, $post ) {
+		if ( $post->post_status == 'auto-draft' ) {
+			return;
+		}
+		if ( in_array( $post->post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE, SI_Payment::POST_TYPE ) ) ) {
+			
+			global $wpdb;
+			$sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s";
+			$sql = $wpdb->prepare( $sql, $wpdb->esc_like( '_transient_' . self::CACHE_KEY_PREFIX ) . '%', $wpdb->esc_like( '_transient_timeout_' . self::CACHE_KEY_PREFIX ) . '%' );
+			$result = $wpdb->query( $sql );
+		}
 	}
 
 	//////////////
@@ -741,32 +767,19 @@ class SI_Reporting extends SI_Dashboard {
 	//////////////
 
 	public static function walk_back_x_span( $x = 6, $span = 'months' ) {
-		switch ( $span ) {
-			case 'months':
-				$stretch = array( date( 'Y-m' ) );
-				break;
-			case 'weeks':
-				$stretch = array( date( 'W' ) );
-				break;
-			case 'days':
-				$stretch = array( date( 'Y-m-d' ) );
-				break;
-
-			default:
-				$stretch = array();
-				break;
-		}
+		$date_format = self::get_segment_date_format( $span );
+		$stretch = array( date( $date_format ) );
 
 		for ( $i = 1; $i <= $x; $i++ ) {
 			switch ( $span ) {
 				case 'months':
-					$stretch[] = date( 'Y-m', strtotime( date( 'Y-m-01' ) . " -$i " . $span ) );
+					$stretch[] = date( $date_format, strtotime( date( 'Y-m-01' ) . " -$i " . $span ) );
 					break;
 				case 'weeks':
-					$stretch[] = date( 'W', strtotime( "-$i week" ) );
+					$stretch[] = date( $date_format, strtotime( "-$i week" ) );
 					break;
 				case 'days':
-					$stretch[] = date( 'Y-m-d', strtotime( date( 'Y-m-d' ) . " -$i " . $span ) );
+					$stretch[] = date( $date_format, strtotime( date( 'Y-m-d' ) . " -$i " . $span ) );
 					break;
 
 				default:
@@ -777,10 +790,55 @@ class SI_Reporting extends SI_Dashboard {
 		return array_reverse( $stretch );
 	}
 
+	public static function get_segment_date_format( $segment ) {
+		switch ( $segment ) {
+			case 'years':
+				$format = 'Y';
+				break;
+			case 'months':
+				$format = 'Y-m';
+				break;
+			case 'days':
+				$format = 'Y-m-d';
+				break;
+
+			case 'weeks':
+			default:
+				$format = 'W';
+				break;
+		}
+
+		return $format;
+	}
+
+	public static function get_segment_label( $current_segment = '', $segment = 'weeks' ) {
+		switch ( $segment ) {
+			case 'years':
+				$format = 'Y';
+				$current_segment_time = strtotime( 'Y' . $current_segment );
+				break;
+			case 'months':
+				$format = 'M y';
+				$current_segment_time = strtotime( date( 'Y' ) . 'M' . $current_segment );
+				break;
+			case 'weeks':
+				$format = 'M d';
+				$current_segment_time = strtotime( date( 'Y' ) . 'W' . $current_segment );
+				break;
+			case 'days':
+			default:
+				$format = 'M d';
+				$current_segment_time = strtotime( date( 'Y' ) . 'd' . $current_segment );
+				break;
+		}
+
+		return date_i18n( $format, $current_segment_time );
+	}
+
 	public static function add_link_to_admin_bar( $items ) {
 		$items[] = array(
 			'id' => 'si_dashboard',
-			'title' => self::__( 'Dashboard' ),
+			'title' => __( 'Dashboard', 'sprout-invoices' ),
 			'href' => admin_url( 'admin.php?page=sprout-apps/settings&tab=reporting' ),
 			'weight' => 0,
 		);
@@ -801,28 +859,28 @@ class SI_Reporting extends SI_Dashboard {
 
 		$screen->add_help_tab( array(
 				'id' => 'reports-about',
-				'title' => self::__( 'About Reports' ),
-				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__( 'The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.' ), self::__( '<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.' ), self::__( '<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.' ) )
+				'title' => __( 'About Reports', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', __( 'The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.', 'sprout-invoices' ), __( '<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.', 'sprout-invoices' ), __( '<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.', 'sprout-invoices' ) )
 			) );
 
 		$screen->add_help_tab( array(
 				'id' => 'reports-tables',
-				'title' => self::__( 'Report Tables' ),
-				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', self::__( '<b>Date filtering</b> is available and can be used to retrieve data in-between t, dates, or after a date, or before a date.' ), self::__( '<b>Modify columns</b> within the table with the “Show / hide columns” button.' ), self::__( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.' ), self::__( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.' ) )
+				'title' => __( 'Report Tables', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( '<b>Date filtering</b> is available and can be used to retrieve data between two dates, after a date, or before a date.', 'sprout-invoices' ), __( '<b>Modify columns</b> within the table with the “Show / hide columns” button.', 'sprout-invoices' ), __( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.', 'sprout-invoices' ), __( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.', 'sprout-invoices' ) )
 			) );
 
 		if ( ! isset( $_GET['report'] ) ) {
 			$screen->add_help_tab( array(
 					'id' => 'reports-refresh',
-					'title' => self::__( 'Dashboard Refresh' ),
-					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', si__( 'The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.' ), esc_url( add_query_arg( array( 'nocache' => 1 ) ) ), si__( 'Refresh' ) )
+					'title' => __( 'Dashboard Refresh', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', __( 'The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.', 'sprout-invoices' ), esc_url( add_query_arg( array( 'reports_refresh_cache' => 1 ) ) ), __( 'Refresh', 'sprout-invoices' ) )
 				) );
 		}
 
 		$screen->set_help_sidebar(
-			sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-			sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/', self::__( 'Documentation' ) ) .
-			sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+			sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+			sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/', __( 'Documentation', 'sprout-invoices' ) ) .
+			sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 		);
 	}
 

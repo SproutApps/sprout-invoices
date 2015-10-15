@@ -145,15 +145,15 @@ class SI_Checkouts extends SI_Controller {
 	private function load_pages() {
 		$pages = array(
 			self::PAYMENT_PAGE => array(
-				'title' => self::__( 'Payment' ),
+				'title' => __( 'Payment', 'sprout-invoices' ),
 				'weight' => 10,
 			),
 			self::REVIEW_PAGE => array(
-				'title' => self::__( 'Review' ),
+				'title' => __( 'Review', 'sprout-invoices' ),
 				'weight' => 1000,
 			),
 			self::CONFIRMATION_PAGE => array(
-				'title' => self::__( 'Confirmation' ),
+				'title' => __( 'Confirmation', 'sprout-invoices' ),
 				'weight' => PHP_INT_MAX, // this must go last
 			),
 		);
@@ -237,14 +237,14 @@ class SI_Checkouts extends SI_Controller {
 		}
 
 		if ( !$invoice_id || get_post_type( $invoice_id ) !== SI_Invoice::POST_TYPE ) {
-			self::set_message( self::__( 'Invoice ID invalid. Payments are disabled.' ), self::MESSAGE_STATUS_ERROR );
+			self::set_message( __( 'Invoice ID invalid. Payments are disabled.', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 			return;
 		}
 
 		$this->invoice = SI_Invoice::get_instance( $invoice_id );
 
 		if ( !$this->invoice && !$this->checkout_complete ) {
-			self::set_message( self::__( 'No invoice associated with this checkout.' ), self::MESSAGE_STATUS_ERROR );
+			self::set_message( __( 'No invoice associated with this checkout.', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 			wp_redirect( '/', 303 );
 			exit();
 		}

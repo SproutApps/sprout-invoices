@@ -31,10 +31,10 @@ class SI_Estimates_Records extends SI_Estimates {
 	 */
 	public static function maybe_create_status_update_record( SI_Estimate $estimate, $status = '', $original_status = '' ) {
 		do_action( 'si_new_record',
-			sprintf( si__( 'Status changed: %s to <b>%s</b>.' ), $estimate->get_status_label( $original_status ), $estimate->get_status_label( $status ) ),
+			sprintf( __( 'Status changed: %s to <b>%s</b>.', 'sprout-invoices' ), $estimate->get_status_label( $original_status ), $estimate->get_status_label( $status ) ),
 			self::HISTORY_STATUS_UPDATE,
 			$estimate->get_id(),
-			sprintf( si__( 'Status update for %s.' ), $estimate->get_id() ),
+			sprintf( __( 'Status update for %s.', 'sprout-invoices' ), $estimate->get_id() ),
 			0,
 		false );
 	}
@@ -50,10 +50,10 @@ class SI_Estimates_Records extends SI_Estimates {
 		if ( get_post_type( $cloned_post_id ) === SI_Estimate::POST_TYPE ) {
 			if ( SI_Invoice::POST_TYPE === $new_post_type ) {
 				do_action( 'si_new_record',
-					sprintf( si__( 'Invoice Created: <a href="%s">%s</a>.' ), get_edit_post_link( $new_post_id ), get_the_title( $new_post_id ) ),
+					sprintf( __( 'Invoice Created: <a href="%s">%s</a>.', 'sprout-invoices' ), get_edit_post_link( $new_post_id ), get_the_title( $new_post_id ) ),
 					self::HISTORY_INVOICE_CREATED,
 					$cloned_post_id,
-					sprintf( si__( 'Invoice Created: %s.' ), get_the_title( $new_post_id ) ),
+					sprintf( __( 'Invoice Created: %s.', 'sprout-invoices' ), get_the_title( $new_post_id ) ),
 					0,
 				false );
 			}
@@ -87,7 +87,7 @@ class SI_Estimates_Records extends SI_Estimates {
 			$_SERVER,
 			self::VIEWED_STATUS_UPDATE,
 			$estimate->get_id(),
-		sprintf( si__( 'Estimate viewed by %s.' ), esc_html( $whom ) ) );
+		sprintf( __( 'Estimate viewed by %s.', 'sprout-invoices' ), esc_html( $whom ) ) );
 	}
 
 }

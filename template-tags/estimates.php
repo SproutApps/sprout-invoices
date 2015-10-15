@@ -18,8 +18,7 @@ if ( ! function_exists( 'si_get_estimate_line_items' ) ) :
 	 */
 	function si_get_estimate_line_items( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_line_items', $estimate->get_line_items(), $estimate );
@@ -34,8 +33,7 @@ if ( ! function_exists( 'si_get_estimate_history' ) ) :
 	 */
 	function si_get_estimate_history( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_history', $estimate->get_history(), $estimate );
@@ -51,8 +49,7 @@ if ( ! function_exists( 'si_get_estimate_status' ) ) :
 	 */
 	function si_get_estimate_status( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		switch ( $estimate->get_status() ) {
@@ -82,8 +79,7 @@ if ( ! function_exists( 'si_estimate_status' ) ) :
 	 */
 	function si_estimate_status( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_status', si_get_estimate_status( $id ), $id );
 	}
@@ -97,8 +93,7 @@ if ( ! function_exists( 'si_is_estimate_approved' ) ) :
 	 */
 	function si_is_estimate_approved( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$bool = ( si_get_estimate_status( $id ) == 'approved' );
 		return apply_filters( 'si_is_estimate_approved', $bool, $id );
@@ -113,8 +108,7 @@ if ( ! function_exists( 'si_is_estimate_declined' ) ) :
 	 */
 	function si_is_estimate_declined( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$bool = ( si_get_estimate_status( $id ) == 'declined' );
 		return apply_filters( 'si_is_estimate_declined', $bool, $id );
@@ -130,8 +124,7 @@ if ( ! function_exists( 'si_get_estimatestatus_label' ) ) :
 	 */
 	function si_get_estimate_status_label( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_status_label', $estimate->get_status_label(), $estimate );
@@ -146,8 +139,7 @@ if ( ! function_exists( 'si_estimate_status_label' ) ) :
 	 */
 	function si_estimate_status_label( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_status_label', si_get_estimate_status_label( $id ), $id );
 	}
@@ -162,8 +154,7 @@ if ( ! function_exists( 'si_get_estimatesubmission_fields' ) ) :
 	 */
 	function si_get_estimate_submission_fields( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_submission_fields', $estimate->get_submission_fields(), $estimate );
@@ -178,8 +169,7 @@ if ( ! function_exists( 'si_is_estimate_submission' ) ) :
 	 */
 	function si_is_estimate_submission( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		$submission_fields = $estimate->get_submission_fields();
@@ -196,8 +186,7 @@ if ( ! function_exists( 'si_get_estimate_issue_date' ) ) :
 	 */
 	function si_get_estimate_issue_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_issue_date', $estimate->get_issue_date(), $estimate );
@@ -212,8 +201,7 @@ if ( ! function_exists( 'si_estimate_issue_date' ) ) :
 	 */
 	function si_estimate_issue_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_issue_date', date_i18n( get_option( 'date_format' ), si_get_estimate_issue_date( $id ) ), $id );
 	}
@@ -228,8 +216,7 @@ if ( ! function_exists( 'si_get_estimate_expiration_date' ) ) :
 	 */
 	function si_get_estimate_expiration_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_expiration_date', $estimate->get_expiration_date(), $estimate );
@@ -244,8 +231,7 @@ if ( ! function_exists( 'si_estimate_expiration_date' ) ) :
 	 */
 	function si_estimate_expiration_date( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_expiration_date', date_i18n( get_option( 'date_format' ), si_get_estimate_expiration_date( $id ) ), $id );
 	}
@@ -260,8 +246,7 @@ if ( ! function_exists( 'si_get_estimate_id' ) ) :
 	 */
 	function si_get_estimate_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		if ( $estimate->get_estimate_id() ) {
@@ -279,8 +264,7 @@ if ( ! function_exists( 'si_estimate_id' ) ) :
 	 */
 	function si_estimate_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_id', si_get_estimate_id( $id ), $id );
 	}
@@ -295,8 +279,7 @@ if ( ! function_exists( 'si_get_estimate_po_number' ) ) :
 	 */
 	function si_get_estimate_po_number( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_po_number', $estimate->get_po_number(), $estimate );
@@ -311,8 +294,7 @@ if ( ! function_exists( 'si_estimate_po_number' ) ) :
 	 */
 	function si_estimate_po_number( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_po_number', si_get_estimate_po_number( $id ), $id );
 	}
@@ -326,8 +308,7 @@ if ( ! function_exists( 'si_get_estimate_client_id' ) ) :
 	 */
 	function si_get_estimate_client_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_client_id', $estimate->get_client_id(), $estimate );
@@ -342,8 +323,7 @@ if ( ! function_exists( 'si_estimate_client_id' ) ) :
 	 */
 	function si_estimate_client_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_client_id', si_get_estimate_client_id( $id ), $id );
 	}
@@ -358,8 +338,7 @@ if ( ! function_exists( 'si_get_estimate_client' ) ) :
 	 */
 	function si_get_estimate_client( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return $estimate->get_client();
@@ -374,8 +353,7 @@ if ( ! function_exists( 'si_get_estimate_invoice_id' ) ) :
 	 */
 	function si_get_estimate_invoice_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_invoice_id', $estimate->get_invoice_id(), $estimate );
@@ -390,8 +368,7 @@ if ( ! function_exists( 'si_estimate_invoice_id' ) ) :
 	 */
 	function si_estimate_invoice_id( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_invoice_id', si_get_estimate_invoice_id( $id ), $id );
 	}
@@ -405,8 +382,7 @@ if ( ! function_exists( 'si_get_estimate_invoice' ) ) :
 	 */
 	function si_get_estimate_invoice( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 		return $invoice->get_invoice();
@@ -421,8 +397,7 @@ if ( ! function_exists( 'si_get_estimate_discount' ) ) :
 	 */
 	function si_get_estimate_discount( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_discount', $estimate->get_discount(), $estimate );
@@ -437,8 +412,7 @@ if ( ! function_exists( 'si_estimate_discount' ) ) :
 	 */
 	function si_estimate_discount( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_discount', si_get_estimate_discount( $id ), $id );
 	}
@@ -453,8 +427,7 @@ if ( ! function_exists( 'si_get_estimate_tax' ) ) :
 	 */
 	function si_get_estimate_tax( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_tax', $estimate->get_tax(), $estimate );
@@ -469,8 +442,7 @@ if ( ! function_exists( 'si_estimate_tax' ) ) :
 	 */
 	function si_estimate_tax( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_tax', si_get_estimate_tax( $id ), $id );
 	}
@@ -485,8 +457,7 @@ if ( ! function_exists( 'si_get_estimate_tax2' ) ) :
 	 */
 	function si_get_estimate_tax2( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_tax2', $estimate->get_tax2(), $estimate );
@@ -501,8 +472,7 @@ if ( ! function_exists( 'si_estimate_tax2' ) ) :
 	 */
 	function si_estimate_tax2( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_tax2', si_get_estimate_tax2( $id ), $id );
 	}
@@ -516,8 +486,7 @@ if ( ! function_exists( 'si_get_estimate_taxes_total' ) ) :
 	 */
 	function si_get_estimate_taxes_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_taxes_total', $estimate->get_tax_total() + $estimate->get_tax2_total(), $estimate );
@@ -532,8 +501,7 @@ if ( ! function_exists( 'si_get_estimate_total' ) ) :
 	 */
 	function si_get_estimate_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_total', $estimate->get_total(), $estimate );
@@ -548,8 +516,7 @@ if ( ! function_exists( 'si_estimate_total' ) ) :
 	 */
 	function si_estimate_total( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_total', sa_get_formatted_money( si_get_estimate_total( $id ), $id ), $id );
 	}
@@ -564,8 +531,7 @@ if ( ! function_exists( 'si_get_estimate_subtotal' ) ) :
 	 */
 	function si_get_estimate_subtotal( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_subtotal', $estimate->get_subtotal(), $estimate );
@@ -580,8 +546,7 @@ if ( ! function_exists( 'si_estimate_subtotal' ) ) :
 	 */
 	function si_estimate_subtotal( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_subtotal', sa_get_formatted_money( si_get_estimate_subtotal( $id ), $id ), $id );
 	}
@@ -596,8 +561,7 @@ if ( ! function_exists( 'si_get_estimate_terms' ) ) :
 	 */
 	function si_get_estimate_terms( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_terms', apply_filters( 'the_content', $estimate->get_terms() ), $estimate );
@@ -612,8 +576,7 @@ if ( ! function_exists( 'si_estimate_terms' ) ) :
 	 */
 	function si_estimate_terms( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_terms', si_get_estimate_terms( $id ), $id );
 	}
@@ -628,8 +591,7 @@ if ( ! function_exists( 'si_get_estimate_sender_note' ) ) :
 	 */
 	function si_get_estimate_sender_note( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_sender_note', $estimate->get_sender_note(), $estimate );
@@ -644,8 +606,7 @@ if ( ! function_exists( 'si_estimate_sender_note' ) ) :
 	 */
 	function si_estimate_sender_note( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_sender_note', si_get_estimate_sender_note( $id ), $id );
 	}
@@ -660,8 +621,7 @@ if ( ! function_exists( 'si_get_estimate_notes' ) ) :
 	 */
 	function si_get_estimate_notes( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_notes', apply_filters( 'the_content', $estimate->get_notes() ), $estimate );
@@ -676,8 +636,7 @@ if ( ! function_exists( 'si_estimate_notes' ) ) :
 	 */
 	function si_estimate_notes( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_notes', si_get_estimate_notes( $id ), $id );
 	}
@@ -692,8 +651,7 @@ if ( ! function_exists( 'si_get_estimate_currency' ) ) :
 	 */
 	function si_get_estimate_currency( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$estimate = SI_Estimate::get_instance( $id );
 		return apply_filters( 'si_get_estimate_currency', $estimate->get_currency(), $estimate );
@@ -708,8 +666,7 @@ if ( ! function_exists( 'si_estimate_currency' ) ) :
 	 */
 	function si_estimate_currency( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		echo apply_filters( 'si_estimate_currency', si_get_estimate_currency( $id ), $id );
 	}

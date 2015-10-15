@@ -106,19 +106,19 @@ class SI_Payments_Table extends WP_List_Table {
 		}
 		if ( is_a( $client, 'SI_Client' ) ) { // Check if purchase wasn't deleted
 			$actions += array(
-				'client'  => sprintf( '<a href="%s">'.si__( 'Client' ).'</a>', get_edit_post_link( $client->get_ID() ) ),
+				'client'  => sprintf( '<a href="%s">'.__( 'Client', 'sprout-invoices' ).'</a>', get_edit_post_link( $client->get_ID() ) ),
 			);
 		} 
 		if ( empty( $actions ) ) {
 			$actions = array(
-				'error'    => si__('Associated records cannot be found.'),
+				'error'    => __( 'Associated records cannot be found.', 'sprout-invoices' ),
 			);
 		}
 
 		//Return the title contents
 		return sprintf( '%1$s <span style="color:silver">(invoice&nbsp;id:%2$s)</span>%3$s',
 			$item->post_title,
-			( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : si__('unknown'),
+			( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : __( 'unknown', 'sprout-invoices' ),
 			$this->row_actions( $actions )
 		);
 	}
@@ -129,16 +129,16 @@ class SI_Payments_Table extends WP_List_Table {
 		if ( $invoice_id ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 			if ( is_a( $invoice, 'SI_Invoice' ) ) {
-				echo '<strong>'.si__( 'Payment Total' ).':</strong> '.sa_get_formatted_money( $payment->get_amount() ).'<br/>';
-				echo '<em>'.si__( 'Invoice Balance' ).': '.sa_get_formatted_money( $invoice->get_balance(), $invoice->get_id() ).'</em><br/>';
-				echo '<em>'.si__( 'Invoice Total' ).': '.sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ).'</em>';
+				echo '<strong>'.__( 'Payment Total', 'sprout-invoices' ).':</strong> '.sa_get_formatted_money( $payment->get_amount() ).'<br/>';
+				echo '<em>'.__( 'Invoice Balance', 'sprout-invoices' ).': '.sa_get_formatted_money( $invoice->get_balance(), $invoice->get_id() ).'</em><br/>';
+				echo '<em>'.__( 'Invoice Total', 'sprout-invoices' ).': '.sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ).'</em>';
 			}
 			else {
-				si_e('No invoice found');
+				_e( 'No invoice found', 'sprout-invoices' );
 			}
 		}
 		else {
-			printf( si__('No invoice associated with this payment.') );
+			printf( __( 'No invoice associated with this payment.', 'sprout-invoices' ) );
 		}
 	}
 
@@ -165,7 +165,7 @@ class SI_Payments_Table extends WP_List_Table {
 
 		//Build row actions
 		$actions = array(
-			'detail'    => sprintf( '<a href="#TB_inline?width=900&height=600&inlineId=data_id_%s" class="thickbox button" title="'.si__( 'Transaction Data' ).'">'.si__( 'Transaction Data' ).'</a><div id="data_id_%s" style="display:none;">%s</div>', $payment_id, $payment_id, $detail )
+			'detail'    => sprintf( '<a href="#TB_inline?width=900&height=600&inlineId=data_id_%s" class="thickbox button" title="'.__( 'Transaction Data', 'sprout-invoices' ).'">'.__( 'Transaction Data', 'sprout-invoices' ).'</a><div id="data_id_%s" style="display:none;">%s</div>', $payment_id, $payment_id, $detail )
 		);
 
 		//Return the title contents
@@ -178,18 +178,18 @@ class SI_Payments_Table extends WP_List_Table {
 		$actions = array();
 		if ( in_array( $item->post_status, array( SI_Payment::STATUS_PENDING, SI_Payment::STATUS_AUTHORIZED, SI_Payment::STATUS_COMPLETE, SI_Payment::STATUS_PARTIAL ) ) ) {
 			
-			$actions['trash'] = '<a href="#TB_inline?width=900&height=260&inlineId=void_payment_'.$payment_id.'" class="thickbox" id="void_link_'.$payment_id.'" title="'.si__('Void Payment').'">'.si__( 'Void Payment' ).'</a>';
+			$actions['trash'] = '<a href="#TB_inline?width=900&height=260&inlineId=void_payment_'.$payment_id.'" class="thickbox" id="void_link_'.$payment_id.'" title="'.__( 'Void Payment', 'sprout-invoices' ).'">'.__( 'Void Payment', 'sprout-invoices' ).'</a>';
 
 			if ( $item->post_status == SI_Payment::STATUS_AUTHORIZED ) {
-				$actions['attempt_capture'] = '<a href="javascript:void(0)" class="si_attempt_capture" ref="'.$payment_id.'">'.si__( 'Attempt Capture' ).'</a>';
+				$actions['attempt_capture'] = '<a href="javascript:void(0)" class="si_attempt_capture" ref="'.$payment_id.'">'.__( 'Attempt Capture', 'sprout-invoices' ).'</a>';
 			}
 
 			if ( $item->post_status == SI_Payment::STATUS_PENDING ) {
-				$actions['mark_complete'] = '<a href="javascript:void(0)" class="si_mark_complete" ref="'.$payment_id.'">'.si__( 'Mark Complete' ).'</a>';
+				$actions['mark_complete'] = '<a href="javascript:void(0)" class="si_mark_complete" ref="'.$payment_id.'">'.__( 'Mark Complete', 'sprout-invoices' ).'</a>';
 			}
 		}
 
-		$void_form = '<div id="void_payment_'.$payment_id.'" style="display:none;"><p><textarea name="transaction_data_'.$payment_id.'" id="transaction_data_'.$payment_id.'" style="width:99%" rows="10" placeholder="'.si__('These notes will be added to the transaction data.').'"></textarea><a href="javascript:void(0)" class="si_void_payment button" id="'.$payment_id.'_void" ref="'.$payment_id.'">'.si__( 'Void Payment' ).'</a></p></div>';
+		$void_form = '<div id="void_payment_'.$payment_id.'" style="display:none;"><p><textarea name="transaction_data_'.$payment_id.'" id="transaction_data_'.$payment_id.'" style="width:99%" rows="10" placeholder="'.__( 'These notes will be added to the transaction data.', 'sprout-invoices' ).'"></textarea><a href="javascript:void(0)" class="si_void_payment button" id="'.$payment_id.'_void" ref="'.$payment_id.'">'.__( 'Void Payment', 'sprout-invoices' ).'</a></p></div>';
 
 		$status = ucfirst( str_replace( 'publish', 'complete', $item->post_status ) );
 		$status .= '<br/><span style="color:silver">';
@@ -211,10 +211,10 @@ class SI_Payments_Table extends WP_List_Table {
 	 * */
 	function get_columns() {
 		$columns = array(
-			'status'  => si__( 'Status' ),
-			'title'  => si__( 'Payment' ),
-			'total'  => si__( 'Totals' ),
-			'data'  => si__( 'Data' )
+			'status'  => __( 'Status', 'sprout-invoices' ),
+			'title'  => __( 'Payment', 'sprout-invoices' ),
+			'total'  => __( 'Totals', 'sprout-invoices' ),
+			'data'  => __( 'Data', 'sprout-invoices' )
 		);
 		return apply_filters( 'si_mngt_payments_columns', $columns );
 	}

@@ -90,7 +90,7 @@ class SI_Admin_Settings extends SI_Controller {
 			'slug' => self::SETTINGS_PAGE,
 			'title' => 'Sprout Invoices Settings',
 			'menu_title' => 'Sprout Invoices',
-			'tab_title' => self::__( 'General Settings' ),
+			'tab_title' => __( 'General Settings', 'sprout-invoices' ),
 			'weight' => 10,
 			'reset' => false,
 			'section' => 'settings'
@@ -101,7 +101,7 @@ class SI_Admin_Settings extends SI_Controller {
 		$args = array(
 			'slug' => 'dashboard',
 			'title' => 'Sprout Invoices Dashboard',
-			'menu_title' => self::__( 'Getting Started' ),
+			'menu_title' => __( 'Getting Started', 'sprout-invoices' ),
 			'weight' => 1,
 			'reset' => false,
 			'tab_only' => true,
@@ -113,7 +113,7 @@ class SI_Admin_Settings extends SI_Controller {
 		// Settings
 		$settings = array(
 			'si_site_settings' => array(
-				'title' => self::__( 'Company Info' ),
+				'title' => __( 'Company Info', 'sprout-invoices' ),
 				'weight' => 200,
 				'tab' => 'settings',
 				'callback' => array( __CLASS__, 'display_general_section' ),
@@ -126,7 +126,7 @@ class SI_Admin_Settings extends SI_Controller {
 				)
 			),
 			'si_currency_settings' => array(
-				'title' => self::__( 'Currency Formatting' ),
+				'title' => __( 'Currency Formatting', 'sprout-invoices' ),
 				'weight' => 250,
 				'tab' => 'settings',
 				'callback' => array( __CLASS__, 'display_currency_section' ),
@@ -145,12 +145,12 @@ class SI_Admin_Settings extends SI_Controller {
 				'callback' => array( __CLASS__, 'display_internationalization_section' ),
 				'settings' => array(
 					self::STATES_OPTION => array(
-						'label' => self::__( 'States' ),
+						'label' => __( 'States', 'sprout-invoices' ),
 						'option' => array( __CLASS__, 'display_option_states' ),
 						'sanitize_callback' => array( __CLASS__, 'save_states' )
 					),
 					self::COUNTRIES_OPTION => array(
-						'label' => self::__( 'Countries' ),
+						'label' => __( 'Countries', 'sprout-invoices' ),
 						'description' => 'test',
 						'option' => array( __CLASS__, 'display_option_countries' ),
 						'sanitize_callback' => array( __CLASS__, 'save_countries' )
@@ -173,7 +173,7 @@ class SI_Admin_Settings extends SI_Controller {
 			// Flush the rewrite rules after SI is activated.
 			flush_rewrite_rules();
 			delete_option( 'si_do_activation_redirect' );
-			wp_redirect( admin_url( 'admin.php?page=' . self::TEXT_DOMAIN . '/settings&tab=dashboard' ) );
+			wp_redirect( admin_url( 'admin.php?page=' . self::APP_DOMAIN . '/settings&tab=dashboard' ) );
 		}
 	}
 
@@ -242,7 +242,7 @@ class SI_Admin_Settings extends SI_Controller {
 	//////////////////////
 
 	public static function display_general_section() {
-		echo '<p>'.self::_e( 'The company name and address will be shown on the estimates and invoices.' ).'</p>';
+		echo '<p>'._e( 'The company name and address will be shown on the estimates and invoices.', 'sprout-invoices' ).'</p>';
 	}
 
 	public static function display_address_fields() {
@@ -255,14 +255,14 @@ class SI_Admin_Settings extends SI_Controller {
 
 		$fields['name'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Company Name' ),
+			'label' => __( 'Company Name', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
 			'default' => ( isset(self::$address['name']) ) ? self::$address['name'] : get_bloginfo( 'name' )
 		);
 		$fields['email'] = array(
 			'weight' => 2,
-			'label' => self::__( 'Contact Email' ),
+			'label' => __( 'Contact Email', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
 			'default' => self::$address['email']
@@ -309,7 +309,7 @@ class SI_Admin_Settings extends SI_Controller {
 	///////////////////////
 
 	public static function display_currency_section() {
-		printf( self::__( '<p>Manually set your currency formatting. More information about these settings and using a filter can be found in the <a href="%s">documentation</a>.</p>' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/troubleshooting/troubleshooting-moneycurrency-issues/' );
+		printf( __( '<p>Manually set your currency formatting. More information about these settings and using a filter can be found in the <a href="%s">documentation</a>.</p>', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/troubleshooting/troubleshooting-moneycurrency-issues/' );
 	}
 
 	public static function display_currency_locale_fields() {
@@ -317,108 +317,108 @@ class SI_Admin_Settings extends SI_Controller {
 
 		$fields['int_curr_symbol'] = array(
 			'weight' => 1,
-			'label' => self::__( 'International Currency Symbol' ),
+			'label' => __( 'International Currency Symbol', 'sprout-invoices' ),
 			'type' => 'text',
 			'default' => ( isset( $localeconv['int_curr_symbol'] ) ) ? $localeconv['int_curr_symbol'] : '',
-			'description' => self::__( 'U.S. default is <code>USD</code>' )
+			'description' => __( 'U.S. default is <code>USD</code>', 'sprout-invoices' )
 		);
 		$fields['currency_symbol'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Currency Symbol' ),
+			'label' => __( 'Currency Symbol', 'sprout-invoices' ),
 			'type' => 'text',
 			'default' => ( isset( $localeconv['currency_symbol'] ) ) ? $localeconv['currency_symbol'] : '',
-			'description' => self::__( 'U.S. default is <code>$</code>' )
+			'description' => __( 'U.S. default is <code>$</code>', 'sprout-invoices' )
 		);
 		$fields['mon_decimal_point'] = array(
 			'weight' => 5,
-			'label' => self::__( 'Decimal Point' ),
+			'label' => __( 'Decimal Point', 'sprout-invoices' ),
 			'type' => 'text',
 			'default' => ( isset( $localeconv['mon_decimal_point'] ) ) ? $localeconv['mon_decimal_point'] : '.',
-			'description' => self::__( 'U.S. default is <code>.</code>' )
+			'description' => __( 'U.S. default is <code>.</code>', 'sprout-invoices' )
 		);
 		$fields['mon_thousands_sep'] = array(
 			'weight' => 10,
-			'label' => self::__( 'Thousands Separator' ),
+			'label' => __( 'Thousands Separator', 'sprout-invoices' ),
 			'type' => 'text',
 			'default' => ( isset( $localeconv['mon_thousands_sep'] ) ) ? $localeconv['mon_thousands_sep'] : ',',
-			'description' => self::__( 'U.S. default is <code>,</code>' )
+			'description' => __( 'U.S. default is <code>,</code>', 'sprout-invoices' )
 		);
 		$fields['positive_sign'] = array(
 			'weight' => 15,
-			'label' => self::__( 'Positive Sign' ),
+			'label' => __( 'Positive Sign', 'sprout-invoices' ),
 			'type' => 'text',
 			'default' => ( isset( $localeconv['positive_sign'] ) ) ? $localeconv['positive_sign'] : '',
-			'description' => self::__( 'U.S. default is blank' )
+			'description' => __( 'U.S. default is blank', 'sprout-invoices' )
 		);
 		$fields['negative_sign'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Negative Sign' ),
+			'label' => __( 'Negative Sign', 'sprout-invoices' ),
 			'type' => 'text',
 			'default' => ( isset( $localeconv['negative_sign'] ) ) ? $localeconv['negative_sign'] : '',
-			'description' => self::__( 'U.S. default is <code>-</code>' )
+			'description' => __( 'U.S. default is <code>-</code>', 'sprout-invoices' )
 		);
 		$fields['int_frac_digits'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Fraction Digits' ),
+			'label' => __( 'Fraction Digits', 'sprout-invoices' ),
 			'type' => 'text',
 			'default' => ( isset( $localeconv['int_frac_digits'] ) ) ? $localeconv['int_frac_digits'] : '',
-			'description' => self::__( 'U.S. default is <code>2</code>' )
+			'description' => __( 'U.S. default is <code>2</code>', 'sprout-invoices' )
 		);
 		$fields['mon_grouping'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Money Grouping' ),
+			'label' => __( 'Money Grouping', 'sprout-invoices' ),
 			'type' => 'checkbox',
 			'type' => 'text',
 			'default' => ( ! empty( $localeconv['mon_grouping'] ) ) ? implode( ',', $localeconv['mon_grouping'] ) : '3, 3',
-			'description' => self::__( 'U.S. default is <code>3, 3</code>' )
+			'description' => __( 'U.S. default is <code>3, 3</code>', 'sprout-invoices' )
 		);
 		$fields['p_cs_precedes'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Currency Symbol Precedes (Positive)' ),
+			'label' => __( 'Currency Symbol Precedes (Positive)', 'sprout-invoices' ),
 			'type' => 'checkbox',
 			'value' => '1',
 			'default' => ( isset( $localeconv['p_cs_precedes'] ) ) ? $localeconv['p_cs_precedes'] : 1,
-			'description' => self::__( 'U.S. default is checked.' )
+			'description' => __( 'U.S. default is checked.', 'sprout-invoices' )
 		);
 		$fields['p_sep_by_space'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Space Separation (Positive)' ),
+			'label' => __( 'Space Separation (Positive)', 'sprout-invoices'  ),
 			'type' => 'checkbox',
 			'value' => '1',
 			'default' => ( isset( $localeconv['p_sep_by_space'] ) ) ? $localeconv['p_sep_by_space'] : 0,
-			'description' => self::__( 'U.S. default is unchecked.' )
+			'description' => __( 'U.S. default is unchecked.', 'sprout-invoices' )
 		);
 		$fields['p_sign_posn'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Positive Position' ),
+			'label' => __( 'Positive Position', 'sprout-invoices' ),
 			'type' => 'checkbox',
 			'value' => '1',
 			'default' => ( isset( $localeconv['p_sign_posn'] ) ) ? $localeconv['p_sign_posn'] : 1,
-			'description' => self::__( 'U.S. default is checked.' )
+			'description' => __( 'U.S. default is checked.', 'sprout-invoices' )
 		);
 		$fields['n_cs_precedes'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Currency Symbol Precedes (Negative)' ),
+			'label' => __( 'Currency Symbol Precedes (Negative)', 'sprout-invoices'  ),
 			'type' => 'checkbox',
 			'value' => '1',
 			'default' => ( isset( $localeconv['n_cs_precedes'] ) ) ? $localeconv['n_cs_precedes'] : 1,
-			'description' => self::__( 'U.S. default is checked.' )
+			'description' => __( 'U.S. default is checked.', 'sprout-invoices' )
 		);
 		$fields['n_sep_by_space'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Space Separation (Negative)' ),
+			'label' => __( 'Space Separation (Negative)', 'sprout-invoices'  ),
 			'type' => 'checkbox',
 			'value' => '1',
 			'default' => ( isset( $localeconv['n_sep_by_space'] ) ) ? $localeconv['n_sep_by_space'] : 0,
-			'description' => self::__( 'U.S. default is unchecked.' )
+			'description' => __( 'U.S. default is unchecked.', 'sprout-invoices' )
 		);
 		$fields['n_sign_posn'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Positive Position' ),
+			'label' => __( 'Positive Position', 'sprout-invoices' ),
 			'type' => 'checkbox',
 			'value' => '1',
 			'default' => ( isset( $localeconv['n_sign_posn'] ) ) ? $localeconv['n_sign_posn'] : 1,
-			'description' => self::__( 'U.S. default is checked.' )
+			'description' => __( 'U.S. default is checked.', 'sprout-invoices' )
 		);
 		echo '<div id="currency_fields" class="split admin_fields clearfix">';
 		sa_admin_fields( $fields );
@@ -464,7 +464,7 @@ class SI_Admin_Settings extends SI_Controller {
 		////////////////////////////////
 
 		public static function display_internationalization_section() {
-			echo '<p>'.self::_e( 'Select the states and countries/provinces for all forms, e.g. purchase, estimates and registration.' ).'</p>';
+			echo '<p>'._e( 'Select the states and countries/provinces for all forms, e.g. purchase, estimates and registration.', 'sprout-invoices' ).'</p>';
 
 		}
 
@@ -566,7 +566,7 @@ class SI_Admin_Settings extends SI_Controller {
 			$wp_admin_bar->add_node( array(
 				'id' => self::MENU_ID,
 				'parent' => false,
-				'title' => '<span class="icon-sproutapps-flat ab-icon"></span>'.self::__( 'Sprout Invoices' ),
+				'title' => '<span class="icon-sproutapps-flat ab-icon"></span>'.__( 'Sprout Invoices', 'sprout-invoices' ),
 				'href' => admin_url( 'admin.php?page=sprout-apps/settings&tab=reporting' )
 			) );
 
@@ -575,7 +575,7 @@ class SI_Admin_Settings extends SI_Controller {
 				$wp_admin_bar->add_node( array(
 					'parent' => self::MENU_ID,
 					'id' => $item['id'],
-					'title' => self::__( $item['title'] ),
+					'title' => __( $item['title'], 'sprout-invoices' ),
 					'href' => $item['href'],
 				) );
 			}
@@ -591,7 +591,7 @@ class SI_Admin_Settings extends SI_Controller {
 				$wp_admin_bar->add_node( array(
 					'parent' => self::MENU_ID.'_options',
 					'id' => $item['id'],
-					'title' => self::__( $item['title'] ),
+					'title' => __( $item['title'], 'sprout-invoices' ),
 					'href' => $item['href'],
 				) );
 			}
@@ -614,44 +614,44 @@ class SI_Admin_Settings extends SI_Controller {
 
 				$screen->add_help_tab( array(
 					'id' => 'general-about',
-					'title' => self::__( 'License' ),
-					'content' => sprintf( '<p>%s</p>', self::__( 'Activate your license if you have not done so already.' ) )
+					'title' => __( 'License', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p>', __( 'Activate your license if you have not done so already.', 'sprout-invoices' ) )
 				) );
 
 				$screen->add_help_tab( array(
 					'id' => 'general-leads',
-					'title' => self::__( 'Credit Card Processing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'To get you started, Sprout Invoices provides a fully customizable form for estimate submissions. Add the shortcode below to a page to use this default form: <code>[estimate_submission]Thank you![/estimate_submission]</code>' ), self::__( 'Additional documentation is available to customize the default estimate form and using the integration add-on.' ) )
+					'title' => __( 'Credit Card Processing', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'To get you started, Sprout Invoices provides a fully customizable form for estimate submissions. Add the shortcode below to a page to use this default form: <code>[estimate_submission]Thank you![/estimate_submission]</code>', 'sprout-invoices' ), __( 'Additional documentation is available to customize the default estimate form and using the integration add-on.', 'sprout-invoices' ) )
 				) );
 
 				$screen->add_help_tab( array(
 					'id' => 'general-estimate',
-					'title' => self::__( 'Estimate/Invoice Settings' ),
-					'content' => sprintf( '<p>%s</p>', self::__( 'The Default Terms and Default Notes will be added to each estimate unless an estimate has customized Terms and/or Notes.' ) )
+					'title' => __( 'Estimate/Invoice Settings', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p>', __( 'The Default Terms and Default Notes will be added to each estimate unless an estimate has customized Terms and/or Notes.', 'sprout-invoices' ) )
 				) );
 
 				$screen->add_help_tab( array(
 					'id' => 'general-notification',
-					'title' => self::__( 'Notification Settings' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'The from name and from e-mail is used for all Sprout Invoice notifications. Example, “Joc Pederson” future@dodgers.com.' ), self::__( 'Changing the email format to “HTML” will make the default notifications unformatted and look like garbage; if you want to create some pretty HTML notifications make sure to modify all notification formatting.' ) )
+					'title' => __( 'Notification Settings', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The from name and from e-mail is used for all Sprout Invoice notifications. Example, “Joc Pederson” future@dodgers.com.', 'sprout-invoices' ), __( 'Changing the email format to “HTML” will make the default notifications unformatted and look like garbage; if you want to create some pretty HTML notifications make sure to modify all notification formatting.', 'sprout-invoices' ) )
 				) );
 
 				$screen->add_help_tab( array(
 					'id' => 'general-company',
-					'title' => self::__( 'Company Info' ),
-					'content' => sprintf( '<p>%s</p>', self::__( 'This information is used on all estimates and invoices. You’ll want to make sure to set this information before sending out any invoices/estimates.' ) )
+					'title' => __( 'Company Info', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p>', __( 'This information is used on all estimates and invoices. You’ll want to make sure to set this information before sending out any invoices/estimates.', 'sprout-invoices' ) )
 				) );
 
 				$screen->add_help_tab( array(
 					'id' => 'general-advanced',
-					'title' => self::__( 'Advanced' ),
-					'content' => sprintf( '<p>%s</p>', self::__( 'The option to Save Logs is for debugging purposes and not recommended, unless advised. It’s important to note that turning enabling this option on a live site may cause private transaction data to be saved in the DB unencrypted, i.e. CC data.' ) )
+					'title' => __( 'Advanced', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p>', __( 'The option to Save Logs is for debugging purposes and not recommended, unless advised. It’s important to note that turning enabling this option on a live site may cause private transaction data to be saved in the DB unencrypted, i.e. CC data.', 'sprout-invoices' ) )
 				) );
 
 				$screen->set_help_sidebar(
-					sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-					sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/', self::__( 'Documentation' ) ) .
-					sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+					sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+					sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/', __( 'Documentation', 'sprout-invoices' ) ) .
+					sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 				);
 			}
 		}

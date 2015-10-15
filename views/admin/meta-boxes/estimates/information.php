@@ -3,20 +3,20 @@
 global $action;
 $datef = __( 'M j, Y @ G:i' );
 if ( 0 != $post->ID ) {
-	$stamp = si__('Issued on: <b>%1$s</b>');
+	$stamp = __( 'Issued on: <b>%1$s</b>', 'sprout-invoices' );
 	$date = date_i18n( $datef, $issue_date );
 } else { // draft (no saves, and thus no date specified)
-	$stamp = si__('Issue <b>immediately</b>');
+	$stamp = __( 'Issue <b>immediately</b>', 'sprout-invoices' );
 	$date = date_i18n( $datef, strtotime( current_time('mysql') ) );
 } ?>
 
 <?php do_action( 'doc_information_meta_box_first', $estimate ) ?>
 
 <div class="misc-pub-section" data-edit-id="status" data-edit-type="select">
-	<span id="status" class="wp-media-buttons-icon"><?php si_e('Status:') ?> <b><?php echo esc_html( $status_options[$status] ) ?></b></span>
+	<span id="status" class="wp-media-buttons-icon"><?php _e( 'Status:', 'sprout-invoices' ) ?> <b><?php echo esc_html( $status_options[$status] ) ?></b></span>
 
 	<a href="#edit_status" class="edit-status hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different status') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Select different status', 'sprout-invoices' ) ?></span>
 	</a>
 
 	<div id="status_div" class="control_wrap hide-if-js">
@@ -28,8 +28,8 @@ if ( 0 != $post->ID ) {
 			</select>
  		</div>
 		<p>
-			<a href="#edit_status" class="save_control save-status hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_status" class="cancel_control cancel-status hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_status" class="save_control save-status hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_status" class="cancel_control cancel-status hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>
@@ -46,10 +46,10 @@ if ( 0 != $post->ID ) {
 
 <!-- expiration date -->
 <div class="misc-pub-section" data-edit-id="expiration_date" data-edit-type="date">
-	<span id="expiration_date" class="wp-media-buttons-icon"><?php si_e('Expire on:') ?> <b><?php echo date_i18n( 'M j, Y', $expiration_date ) ?></b></span>
+	<span id="expiration_date" class="wp-media-buttons-icon"><?php _e( 'Expire on:', 'sprout-invoices' ) ?> <b><?php echo date_i18n( 'M j, Y', $expiration_date ) ?></b></span>
 
 	<a href="#edit_expiration_date" class="edit-expiration_date hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit expiration date and time') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit expiration date and time', 'sprout-invoices' ) ?></span>
 	</a>
 
 	<div id="expiration_date_div" class="control_wrap hide-if-js">
@@ -71,8 +71,8 @@ if ( 0 != $post->ID ) {
  			<input type="text" id="exp_jj" name="expiration_j" value="<?php echo date( 'j', $expiration_date ) ?>" size="2" maxlength="2" autocomplete="off">, <input type="text" id="exp_o" name="expiration_o" value="<?php echo date( 'o', $expiration_date ) ?>" size="4" maxlength="4" autocomplete="off">
  		</div>
 		<p>
-			<a href="#edit_expiration_date" class="save_control save-expiration_date hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_expiration_date" class="cancel_control cancel-expiration_date hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_expiration_date" class="save_control save-expiration_date hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_expiration_date" class="cancel_control cancel-expiration_date hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>
@@ -87,29 +87,29 @@ if ( 0 != $post->ID ) {
 <!-- Client -->
 <div class="misc-pub-section" data-edit-id="client" data-edit-type="select">
 	<?php 
-		$client_name = ( $client_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $client_id ), get_the_title( $client_id ) ) : si__('Client N/A') ;
+		$client_name = ( $client_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $client_id ), get_the_title( $client_id ) ) : __( 'Client N/A', 'sprout-invoices' ) ;
 		 ?>
-	<span id="client" class="wp-media-buttons-icon"><?php si_e('Estimate for') ?> <b><?php echo $client_name ?></b></span>
+	<span id="client" class="wp-media-buttons-icon"><?php _e( 'Estimate for', 'sprout-invoices' ) ?> <b><?php echo $client_name ?></b></span>
 
 	<a href="#edit_client" class="edit-client hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Select different client') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Select different client', 'sprout-invoices' ) ?></span>
 	</a>
 
 	<div id="client_div" class="control_wrap hide-if-js">
 		<div class="client-wrap">
 			<select name="sa_metabox_client" class="select2">
-				<option value="create_client"><?php si_e('Create client') ?></option>
+				<option value="create_client"><?php _e( 'Create client', 'sprout-invoices' ) ?></option>
 				<?php foreach ( $client_options as $id => $client_name ): ?>
 					<?php printf( '<option value="%s" %s>%s</option>', $id, selected( $id, $client_id, false ), $client_name ) ?>
 				<?php endforeach ?>
 			</select>
 
-			<a href="#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox si_tooltip" title="<?php si_e('Create new client') ?>"></a>
+			<a href="#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="create_client_tb_link" class="thickbox si_tooltip" title="<?php _e( 'Create new client', 'sprout-invoices' ) ?>"></a>
 
  		</div>
 		<p>
-			<a href="#edit_client" class="save_control save-client hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_client" class="cancel_control cancel-client hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_client" class="save_control save-client hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_client" class="cancel_control cancel-client hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>
@@ -118,22 +118,22 @@ if ( 0 != $post->ID ) {
 <?php if ( $invoice_id ): ?>
 	<!-- Invoice -->
 	<div class="misc-pub-section" data-edit-id="invoice_id">
-		<span id="invoice_id" class="wp-media-buttons-icon"><?php si_e('Associated Invoice:') ?> <b><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a></b></span>
+		<span id="invoice_id" class="wp-media-buttons-icon"><?php _e( 'Associated Invoice:', 'sprout-invoices' ) ?> <b><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a></b></span>
 	</div>
 <?php elseif ( apply_filters( 'si_show_create_invoice_from_estimate_button', false ) ): ?>
 	<!-- Invoice -->
 	<div class="misc-pub-section" data-edit-id="invoice_id">
-		<a id="invoice_create" href="<?php echo self::get_clone_post_url( get_the_ID(), SI_INVOICE::POST_TYPE ) ?>" class="button si_tooltip" <?php if ( $status == SI_Estimate::STATUS_TEMP ) echo 'disabled'; ?> title="<?php si_e('Create an invoice from an approved estimate.') ?>"><span><?php si_e('Create Invoice') ?></span></a>
+		<a id="invoice_create" href="<?php echo self::get_clone_post_url( get_the_ID(), SI_INVOICE::POST_TYPE ) ?>" class="button si_tooltip" <?php if ( $status == SI_Estimate::STATUS_TEMP ) echo 'disabled'; ?> title="<?php _e( 'Create an invoice from an approved estimate.', 'sprout-invoices' ) ?>"><span><?php _e( 'Create Invoice', 'sprout-invoices' ) ?></span></a>
 	</div>
 <?php endif ?>
 
 
 <!-- ID -->
 <div class="misc-pub-section" data-edit-id="estimate_id">
-	<span id="estimate_id" class="wp-media-buttons-icon"><?php si_e('Estimate ID') ?> #<b><?php echo esc_html( $estimate_id ) ?></b></span>
+	<span id="estimate_id" class="wp-media-buttons-icon"><?php _e( 'Estimate ID', 'sprout-invoices' ) ?> #<b><?php echo esc_html( $estimate_id ) ?></b></span>
 
 	<a href="#edit_estimate_id" class="edit-estimate_id hide-if-no-js edit_control">
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit estimate id') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit estimate id', 'sprout-invoices' ) ?></span>
 	</a>
 
 	<div id="estimate_id_div" class="control_wrap hide-if-js">
@@ -141,8 +141,8 @@ if ( 0 != $post->ID ) {
 			<input type="text" name="estimate_id" value="<?php echo esc_attr( $estimate_id ) ?>" size="10">
  		</div>
 		<p>
-			<a href="#edit_estimate_id" class="save_control save-estimate_id button"><?php si_e('OK') ?></a>
-			<a href="#edit_estimate_id" class="cancel_control cancel-estimate_id button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_estimate_id" class="save_control save-estimate_id button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_estimate_id" class="cancel_control cancel-estimate_id button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>
@@ -155,10 +155,10 @@ if ( 0 != $post->ID ) {
 
 <!-- PO Number -->
 <div class="misc-pub-section" data-edit-id="po_number">
-	<span id="po_number" class="wp-media-buttons-icon"><?php si_e('PO Number') ?> #<b><?php echo esc_html( $po_number ) ?></b></span>
+	<span id="po_number" class="wp-media-buttons-icon"><?php _e( 'PO Number', 'sprout-invoices' ) ?> #<b><?php echo esc_html( $po_number ) ?></b></span>
 
 	<a href="#edit_po_number" class="edit-po_number hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit PO number') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit PO number', 'sprout-invoices' ) ?></span>
 	</a>
 
 	<div id="po_number_div" class="control_wrap hide-if-js">
@@ -166,18 +166,18 @@ if ( 0 != $post->ID ) {
 			<input type="text" name="po_number" value="<?php echo esc_attr( $po_number ) ?>" size="10">
  		</div>
 		<p>
-			<a href="#edit_po_number" class="save_control save-po_number hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_po_number" class="cancel_control cancel-po_number hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_po_number" class="save_control save-po_number hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_po_number" class="cancel_control cancel-po_number hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>
 
 <!-- Discount -->
 <div class="misc-pub-section update-total" data-edit-id="discount">
-	<span id="discount" class="wp-media-buttons-icon"><?php si_e('Discount') ?> <b><?php echo (float) $discount ?></b>%</span>
+	<span id="discount" class="wp-media-buttons-icon"><?php _e( 'Discount', 'sprout-invoices' ) ?> <b><?php echo (float) $discount ?></b>%</span>
 
 	<a href="#edit_discount" class="edit-discount hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit discount') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit discount', 'sprout-invoices' ) ?></span>
 	</a>
  	<span title="The discount is applied after tax." class="si_tooltip"></span>
 
@@ -186,18 +186,18 @@ if ( 0 != $post->ID ) {
 			<input type="text" name="discount" value="<?php echo (float) $discount ?>" size="3">%
  		</div>
 		<p>
-			<a href="#edit_discount" class="save_control save-discount hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_discount" class="cancel_control cancel-discount hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_discount" class="save_control save-discount hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_discount" class="cancel_control cancel-discount hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>
 
 <!-- Tax -->
 <div class="misc-pub-section update-total" data-edit-id="tax">
-	<span id="tax" class="wp-media-buttons-icon"><?php si_e('Tax') ?> <b><?php echo (float) $tax ?></b>%</span>
+	<span id="tax" class="wp-media-buttons-icon"><?php _e( 'Tax', 'sprout-invoices' ) ?> <b><?php echo (float) $tax ?></b>%</span>
 
 	<a href="#edit_tax" class="edit-tax hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit tax') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit tax', 'sprout-invoices' ) ?></span>
 	</a>
 	<span id="tax_tooltip" title="Tax is applied before the discount." class="si_tooltip"></span>
 
@@ -207,18 +207,18 @@ if ( 0 != $post->ID ) {
  		</div>
  		
 		<p>
-			<a href="#edit_tax" class="save_control save-tax hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_tax" class="cancel_control cancel-tax hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_tax" class="save_control save-tax hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_tax" class="cancel_control cancel-tax hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>
 
 <!-- Tax2 -->
 <div class="misc-pub-section update-total" data-edit-id="tax2">
-	<span id="tax2" class="wp-media-buttons-icon"><?php si_e('Tax') ?> <b><?php echo (float) $tax2 ?></b>%</span>
+	<span id="tax2" class="wp-media-buttons-icon"><?php _e( 'Tax', 'sprout-invoices' ) ?> <b><?php echo (float) $tax2 ?></b>%</span>
 
 	<a href="#edit_tax2" class="edit-tax2 hide-if-no-js edit_control" >
-		<span aria-hidden="true"><?php si_e('Edit') ?></span> <span class="screen-reader-text"><?php si_e('Edit tax') ?></span>
+		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit tax', 'sprout-invoices' ) ?></span>
 	</a>
 	<span title="Tax is applied before the discount." class="si_tooltip"></span>
 
@@ -228,8 +228,8 @@ if ( 0 != $post->ID ) {
  		</div>
  		
 		<p>
-			<a href="#edit_tax2" class="save_control save-tax2 hide-if-no-js button"><?php si_e('OK') ?></a>
-			<a href="#edit_tax2" class="cancel_control cancel-tax2 hide-if-no-js button-cancel"><?php si_e('Cancel') ?></a>
+			<a href="#edit_tax2" class="save_control save-tax2 hide-if-no-js button"><?php _e( 'OK', 'sprout-invoices' ) ?></a>
+			<a href="#edit_tax2" class="cancel_control cancel-tax2 hide-if-no-js button-cancel"><?php _e( 'Cancel', 'sprout-invoices' ) ?></a>
 		</p>
  	</div>
 </div>

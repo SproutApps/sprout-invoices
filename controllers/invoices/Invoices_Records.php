@@ -28,10 +28,10 @@ class SI_Invoices_Records extends SI_Invoices {
 	 */
 	public static function maybe_create_status_update_record( SI_Invoice $invoice, $status = '', $original_status = '' ) {
 		do_action( 'si_new_record',
-			sprintf( si__( 'Status changed: %s to <b>%s</b>.' ), SI_Invoice::get_status_label( $original_status ), SI_Invoice::get_status_label( $status ) ),
+			sprintf( __( 'Status changed: %s to <b>%s</b>.', 'sprout-invoices' ), SI_Invoice::get_status_label( $original_status ), SI_Invoice::get_status_label( $status ) ),
 			self::HISTORY_STATUS_UPDATE,
 			$invoice->get_id(),
-			sprintf( si__( 'Status update for %s.' ), $invoice->get_id() ),
+			sprintf( __( 'Status update for %s.', 'sprout-invoices' ), $invoice->get_id() ),
 			0,
 		false );
 	}

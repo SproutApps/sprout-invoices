@@ -47,7 +47,7 @@ class SI_Client extends SI_Post_Type {
 
 
 	public static function client_role() {
-		add_role( self::USER_ROLE, self::__( 'Client' ), array( 'read' => true, 'level_0' => true ) );
+		add_role( self::USER_ROLE, __( 'Client', 'sprout-invoices' ), array( 'read' => true, 'level_0' => true ) );
 	}
 
 	public function estimate_submenu() {
@@ -88,7 +88,7 @@ class SI_Client extends SI_Post_Type {
 	 */
 	public static function new_client( $passed_args ) {
 		$defaults = array(
-			'company_name' => sprintf( self::__( 'New Client: %s' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'company_name' => sprintf( __( 'New Client: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'website' => '',
 			'phone' => '',
 			'address' => array(),

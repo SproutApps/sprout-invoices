@@ -1,6 +1,3 @@
-<h3 class="dashboard_widget_title">
-	<span><?php self::_e('Payment Status') ?></span>
-</h3>
 <div class="dashboard_widget inside">
 	<div class="main">
 		<canvas id="payments_status_chart" min-height="300" max-height="500"></canvas>
@@ -19,6 +16,7 @@
 					action: '<?php echo SI_Reporting::AJAX_ACTION ?>', 
 					data: 'payment_statuses', 
 					segment: 'weeks', 
+					refresh_cache: si_js_object.reports_refresh_cache,
 					span: 6, 
 					security: '<?php echo wp_create_nonce( SI_Reporting::AJAX_NONCE ) ?>' 
 					},
@@ -52,6 +50,6 @@
 				payments_status_chart_data();
 			});
 		</script>
-		<p class="description"><?php self::_e('Statuses from payments from the last 3 weeks') ?></p>
+		<p class="description"><?php _e( 'Statuses from payments from the last 3 weeks', 'sprout-invoices' ) ?></p>
 	</div>
 </div>

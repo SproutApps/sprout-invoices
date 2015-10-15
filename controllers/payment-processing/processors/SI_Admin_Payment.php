@@ -73,7 +73,7 @@ class SI_Admin_Payment extends SI_Controller {
 		// invoice specific
 		$args = array(
 			'si_invoice_payment' => array(
-				'title' => si__( 'Admin Payment' ),
+				'title' => __( 'Admin Payment', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_payment_view' ),
 				'save_callback' => array( __CLASS__, 'save_admin_payment' ),
 				'context' => 'normal',
@@ -86,7 +86,7 @@ class SI_Admin_Payment extends SI_Controller {
 
 	public static function show_payment_view( $post, $metabox ) {
 		if ( $post->post_status == 'auto-draft' ) {
-			printf( '<p>%s</p>', si__( 'Save this invoice before adding any payments.' ) );
+			printf( '<p>%s</p>', __( 'Save this invoice before adding any payments.', 'sprout-invoices' ) );
 			return;
 		}
 		$invoice = SI_Invoice::get_instance( $post->ID );
@@ -103,7 +103,7 @@ class SI_Admin_Payment extends SI_Controller {
 			'payment_amount' => array(
 				'type' => 'text',
 				'weight' => 1,
-				'label' => self::__( 'Amount' ),
+				'label' => __( 'Amount', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				)
@@ -111,7 +111,7 @@ class SI_Admin_Payment extends SI_Controller {
 			'payment_transaction_id' => array(
 				'type' => 'text',
 				'weight' => 5,
-				'label' => self::__( 'ID' ),
+				'label' => __( 'ID', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				)
@@ -119,7 +119,7 @@ class SI_Admin_Payment extends SI_Controller {
 			'payment_date' => array(
 				'type' => 'date',
 				'weight' => 10,
-				'label' => self::__( 'Date Received' ),
+				'label' => __( 'Date Received', 'sprout-invoices' ),
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
@@ -128,7 +128,7 @@ class SI_Admin_Payment extends SI_Controller {
 			'payment_notes' => array(
 				'type' => 'textarea',
 				'weight' => 15,
-				'label' => self::__( 'Notes' ),
+				'label' => __( 'Notes', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				)
@@ -204,7 +204,7 @@ class SI_Admin_Payment extends SI_Controller {
 
 		header( 'Content-type: application/json' );
 		if ( self::DEBUG ) header( 'Access-Control-Allow-Origin: *' );
-		echo wp_json_encode( array( 'response' => si__('Payment Added') ) );
+		echo wp_json_encode( array( 'response' => __( 'Payment Added', 'sprout-invoices' ) ) );
 		exit();
 	}
 

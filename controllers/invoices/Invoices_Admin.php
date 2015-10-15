@@ -44,8 +44,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 
 	public static function status_change_dropdown( $id = 0 ) {
 		if ( ! $id ) {
-			global $post;
-			$id = $post->ID;
+			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
 
@@ -75,10 +74,10 @@ class SI_Invoices_Admin extends SI_Invoices {
 		unset( $columns['title'] );
 		unset( $columns['comments'] );
 		unset( $columns['author'] );
-		$columns['title'] = self::__( 'Invoice' );
-		$columns['status'] = self::__( 'Status' );
-		$columns['total'] = self::__( 'Paid' );
-		$columns['client'] = self::__( 'Client' );
+		$columns['title'] = __( 'Invoice', 'sprout-invoices' );
+		$columns['status'] = __( 'Status', 'sprout-invoices' );
+		$columns['total'] = __( 'Paid', 'sprout-invoices' );
+		$columns['client'] = __( 'Client', 'sprout-invoices' );
 		$columns['doc_link'] = '<div class="dashicons icon-sproutapps-estimates"></div>';
 		return $columns;
 	}
@@ -100,7 +99,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 			case 'doc_link':
 				$estimate_id = $invoice->get_estimate_id();
 				if ( $estimate_id ) {
-					printf( '<a class="doc_link" title="%s" href="%s">%s</a>', self::__( 'Invoice\'s Estimate' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
+					printf( '<a class="doc_link" title="%s" href="%s">%s</a>', __( 'Invoice\'s Estimate', 'sprout-invoices' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
 				}
 			break;
 			case 'status':
@@ -110,10 +109,10 @@ class SI_Invoices_Admin extends SI_Invoices {
 			break;
 
 			case 'total':
-				printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), self::__( 'of' ), sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ) );
+				printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), __( 'of', 'sprout-invoices' ), sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ) );
 
 				echo '<div class="row-actions">';
-				printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', self::__( 'Review payments.' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, self::__( 'Payments' ) );
+				printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', __( 'Review payments.', 'sprout-invoices' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, __( 'Payments', 'sprout-invoices' ) );
 
 			break;
 
@@ -123,7 +122,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 					printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
 				}
 				else {
-					printf( '<b>%s</b> ', si__( 'No client' ) );
+					printf( '<b>%s</b> ', __( 'No client', 'sprout-invoices' ) );
 				}
 
 			break;
@@ -197,7 +196,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 			$invoice = SI_Invoice::get_instance( $post->ID );
 			if ( $invoice->get_status() == SI_Invoice::STATUS_TEMP ) {
 				// FUTURE show "New" with some sort of logic
-				// $post_states[$invoice->get_status()] = si__('New');
+				// $post_states[$invoice->get_status()] = __( 'New', 'sprout-invoices' );
 			}
 		}
 		return $post_states;
@@ -225,7 +224,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 	public static function add_link_to_admin_bar( $items ) {
 		$items[] = array(
 			'id' => 'edit_invoices',
-			'title' => self::__( 'Invoices' ),
+			'title' => __( 'Invoices', 'sprout-invoices' ),
 			'href' => admin_url( 'edit.php?post_type='.SI_Invoice::POST_TYPE ),
 			'weight' => 0,
 		);
@@ -253,20 +252,20 @@ class SI_Invoices_Admin extends SI_Invoices {
 
 			$screen->add_help_tab( array(
 					'id' => 'manage-invoices',
-					'title' => self::__( 'Manage Invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', self::__( 'The status on the invoice table view can be updated without having to go the edit screen by click on the current status and selecting a new one.' ), self::__( 'Payments are tallied and shown in the Paid column. Hovering over the invoice row will show a Payments link.' ),  self::__( 'If the invoice has an associated estimate the icon linking to the edit page of the estimate will show in the last column.' ) )
+					'title' => __( 'Manage Invoices', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', __( 'The status on the invoice table view can be updated without having to go the edit screen by click on the current status and selecting a new one.', 'sprout-invoices' ), __( 'Payments are tallied and shown in the Paid column. Hovering over the invoice row will show a Payments link.', 'sprout-invoices' ),  __( 'If the invoice has an associated estimate the icon linking to the edit page of the estimate will show in the last column.', 'sprout-invoices' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'edit-invoices',
-					'title' => self::__( 'Editing Invoices' ),
-					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', self::__( 'Editing invoices is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__( 'Knowledgebase Article' ) ),
+					'title' => __( 'Editing Invoices', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', __( 'Editing invoices is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', __( 'Knowledgebase Article', 'sprout-invoices' ) ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', self::__( 'Documentation' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

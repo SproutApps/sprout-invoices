@@ -31,7 +31,7 @@ class SI_CSV_Import extends SI_Importer {
 	}
 
 	public static function register() {
-		self::add_importer( __CLASS__, self::__( 'CSV' ) );
+		self::add_importer( __CLASS__, __( 'CSV', 'sprout-invoices' ) );
 	}
 
 
@@ -48,40 +48,40 @@ class SI_CSV_Import extends SI_Importer {
 				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::CLIENT_FILE_OPTION => array(
-						'label' => self::__( 'Clients' ),
+						'label' => __( 'Clients', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'file',
-							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 clients at a time and import all of your clients before importing invoices or payments.' ), SI_URL . '/importers/csv-examples/clients.csv' ),
+							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 clients at a time and import all of your clients before importing invoices or payments.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/clients.csv' ),
 						)
 					),
 					self::ESTIMATE_FILE_OPTION => array(
-						'label' => self::__( 'Estimates' ),
+						'label' => __( 'Estimates', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'file',
-							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 estimates at a time and import all of your clients.' ), SI_URL . '/importers/csv-examples/estimates.csv' ),
+							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 estimates at a time and import all of your clients.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/estimates.csv' ),
 						)
 					),
 					self::INVOICE_FILE_OPTION => array(
-						'label' => self::__( 'Invoices' ),
+						'label' => __( 'Invoices', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'file',
-							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 invoices at a time, import all of your clients, and import before payments.' ), SI_URL . '/importers/csv-examples/invoices.csv' ),
+							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 invoices at a time, import all of your clients, and import before payments.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/invoices.csv' ),
 						)
 					),
 					self::PAYMENT_FILE_OPTION => array(
-						'label' => self::__( 'Payments' ),
+						'label' => __( 'Payments', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'file',
-							'description' => sprintf( self::__( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 payments at a time and make sure all your invoices are imported first.' ), SI_URL . '/importers/csv-examples/payments.csv' ),
+							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 payments at a time and make sure all your invoices are imported first.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/payments.csv' ),
 						)
 					),
 					self::DELETE_PROGRESS => array(
-						'label' => self::__( 'Clear Progress' ),
+						'label' => __( 'Clear Progress', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'checkbox',
 							'value' => 'restart',
-							'label' => self::__( 'Re-start the Import Process' ),
-							'description' => self::__( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.' )
+							'label' => __( 'Re-start the Import Process', 'sprout-invoices' ),
+							'description' => __( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.', 'sprout-invoices' )
 						)
 					),
 					self::PROCESS_ACTION => array(
@@ -185,15 +185,15 @@ class SI_CSV_Import extends SI_Importer {
 	public static function import_authentication() {
 		self::return_progress( array(
 					'authentication' => array(
-						'message' => self::__( 'Uploaded CSV files being processed...Hold on to your butts...' ),
+						'message' => __( 'Uploaded CSV files being processed...Hold on to your butts...', 'sprout-invoices' ),
 						'progress' => 10,
 					),
 					'clients' => array(
-						'message' => self::__( 'Preparing...' ),
+						'message' => __( 'Preparing...', 'sprout-invoices' ),
 						'progress' => 80,
 						),
 					'contacts' => array(
-						'message' => self::__( 'Preparing...' ),
+						'message' => __( 'Preparing...', 'sprout-invoices' ),
 						'progress' => 80,
 						'next_step' => 'clients'
 						),
@@ -214,20 +214,20 @@ class SI_CSV_Import extends SI_Importer {
 			// Completed previously
 			self::return_progress( array(
 						'authentication' => array(
-							'message' => self::__( 'Skipping clients without a CSV to process...' ),
+							'message' => __( 'Skipping clients without a CSV to process...', 'sprout-invoices' ),
 							'progress' => 25
 							),
 						'clients' => array(
-							'message' => self::__( 'Skipped...nothing to import.' ),
+							'message' => __( 'Skipped...nothing to import.', 'sprout-invoices' ),
 							'progress' => 100,
 							),
 						'contacts' => array(
-							'message' => self::__( 'Skipped...nothing to import.' ),
+							'message' => __( 'Skipped...nothing to import.', 'sprout-invoices' ),
 							'progress' => 100,
 							),
 						'estimates' => array(
 							'progress' => 80,
-							'message' => self::__( 'Preparing...' ),
+							'message' => __( 'Preparing...', 'sprout-invoices' ),
 							'next_step' => 'estimates'
 							),
 						) );
@@ -258,20 +258,20 @@ class SI_CSV_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 				'authentication' => array(
-					'message' => sprintf( self::__( 'Successfully imported %s contacts and their clients already, moving on...' ), $total_records ),
+					'message' => sprintf( __( 'Successfully imported %s contacts and their clients already, moving on...', 'sprout-invoices' ), $total_records ),
 					'progress' => 25
 					),
 				'clients' => array(
-					'message' => sprintf( self::__( 'Successfully imported %s clients.' ), $total_records ),
+					'message' => sprintf( __( 'Successfully imported %s clients.', 'sprout-invoices' ), $total_records ),
 					'progress' => 100,
 					),
 				'contacts' => array(
-					'message' => sprintf( self::__( 'Successfully imported more than %s contacts from their clients.' ), $total_records ),
+					'message' => sprintf( __( 'Successfully imported more than %s contacts from their clients.', 'sprout-invoices' ), $total_records ),
 					'progress' => 100,
 					),
 				'estimates' => array(
 					'progress' => 80,
-					'message' => self::__( 'Preparing...' ),
+					'message' => __( 'Preparing...', 'sprout-invoices' ),
 					'next_step' => 'estimates'
 					),
 				) );
@@ -294,16 +294,16 @@ class SI_CSV_Import extends SI_Importer {
 			// Completed previously
 			self::return_progress( array(
 						'authentication' => array(
-							'message' => self::__( 'Skipping estimate importing without a CSV to process...' ),
+							'message' => __( 'Skipping estimate importing without a CSV to process...', 'sprout-invoices' ),
 							'progress' => 80
 							),
 						'estimates' => array(
-							'message' => self::__( 'Skipped...nothing to import.' ),
+							'message' => __( 'Skipped...nothing to import.', 'sprout-invoices' ),
 							'progress' => 100,
 							),
 						'invoices' => array(
 							'progress' => 80,
-							'message' => self::__( 'Preparing...' ),
+							'message' => __( 'Preparing...', 'sprout-invoices' ),
 							'next_step' => 'invoices'
 							),
 						) );
@@ -332,16 +332,16 @@ class SI_CSV_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s estimates...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s estimates...', 'sprout-invoices' ), $total_records ),
 							'progress' => 75
 							),
 						'estimates' => array(
-							'message' => sprintf( self::__( 'Imported %s estimates!' ), $total_records ),
+							'message' => sprintf( __( 'Imported %s estimates!', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							),
 						'invoices' => array(
 							'progress' => 80,
-							'message' => self::__( 'Preparing...' ),
+							'message' => __( 'Preparing...', 'sprout-invoices' ),
 							'next_step' => 'invoices'
 							),
 						) );
@@ -350,16 +350,16 @@ class SI_CSV_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s estimates already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s estimates already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 75
 							),
 						'estimates' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s estimates already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s estimates already.', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							),
 						'invoices' => array(
 							'progress' => 80,
-							'message' => self::__( 'Preparing...' ),
+							'message' => __( 'Preparing...', 'sprout-invoices' ),
 							'next_step' => 'invoices'
 							),
 						) );
@@ -383,16 +383,16 @@ class SI_CSV_Import extends SI_Importer {
 			// Completed previously
 			self::return_progress( array(
 						'authentication' => array(
-							'message' => self::__( 'Skipping invoice importing without a CSV to process...' ),
+							'message' => __( 'Skipping invoice importing without a CSV to process...', 'sprout-invoices' ),
 							'progress' => 80
 							),
 						'invoices' => array(
-							'message' => self::__( 'Skipped...nothing to import.' ),
+							'message' => __( 'Skipped...nothing to import.', 'sprout-invoices' ),
 							'progress' => 100,
 							),
 						'payments' => array(
 							'progress' => 80,
-							'message' => self::__( 'Preparing...' ),
+							'message' => __( 'Preparing...', 'sprout-invoices' ),
 							'next_step' => 'payments'
 							),
 						) );
@@ -421,16 +421,16 @@ class SI_CSV_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s invoices...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s invoices...', 'sprout-invoices' ), $total_records ),
 							'progress' => 75
 							),
 						'invoices' => array(
-							'message' => sprintf( self::__( 'Imported %s invoices!' ), $total_records ),
+							'message' => sprintf( __( 'Imported %s invoices!', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							),
 						'payments' => array(
 							'progress' => 80,
-							'message' => self::__( 'Preparing...' ),
+							'message' => __( 'Preparing...', 'sprout-invoices' ),
 							'next_step' => 'payments'
 							),
 						) );
@@ -439,16 +439,16 @@ class SI_CSV_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s invoices already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s invoices already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 75
 							),
 						'invoices' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s invoices already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s invoices already.', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							),
 						'payments' => array(
 							'progress' => 80,
-							'message' => self::__( 'Preparing...' ),
+							'message' => __( 'Preparing...', 'sprout-invoices' ),
 							'next_step' => 'payments'
 							),
 						) );
@@ -472,11 +472,11 @@ class SI_CSV_Import extends SI_Importer {
 			// Completed previously
 			self::return_progress( array(
 						'authentication' => array(
-							'message' => self::__( 'Skipping payment importing without a CSV to process...' ),
+							'message' => __( 'Skipping payment importing without a CSV to process...', 'sprout-invoices' ),
 							'progress' => 100
 							),
 						'payments' => array(
-							'message' => self::__( 'Skipped...nothing to import.' ),
+							'message' => __( 'Skipped...nothing to import.', 'sprout-invoices' ),
 							'progress' => 100,
 							'next_step' => 'complete'
 							),
@@ -506,11 +506,11 @@ class SI_CSV_Import extends SI_Importer {
 			// Complete
 			self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s payments...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s payments...', 'sprout-invoices' ), $total_records ),
 							'progress' => 100
 							),
 						'payments' => array(
-							'message' => sprintf( self::__( 'Imported %s payments!' ), $total_records ),
+							'message' => sprintf( __( 'Imported %s payments!', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							'next_step' => 'complete'
 							),
@@ -520,11 +520,11 @@ class SI_CSV_Import extends SI_Importer {
 		// Completed previously
 		self::return_progress( array(
 						'authentication' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s estimates already, moving on...' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s estimates already, moving on...', 'sprout-invoices' ), $total_records ),
 							'progress' => 100
 							),
 						'payments' => array(
-							'message' => sprintf( self::__( 'Successfully imported %s payments already.' ), $total_records ),
+							'message' => sprintf( __( 'Successfully imported %s payments already.', 'sprout-invoices' ), $total_records ),
 							'progress' => 100,
 							'next_step' => 'complete'
 							),

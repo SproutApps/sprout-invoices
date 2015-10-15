@@ -75,7 +75,7 @@ class SI_Projects extends SI_Controller {
 		// estimate specific
 		$args = array(
 			'si_project_timetracking' => array(
-				'title' => si__( 'Time Tracking' ),
+				'title' => __( 'Time Tracking', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_upgrade_notice' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
@@ -83,7 +83,7 @@ class SI_Projects extends SI_Controller {
 				'save_priority' => 0
 			),
 			'si_project_information' => array(
-				'title' => si__( 'Information' ),
+				'title' => __( 'Information', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_information_meta_box' ),
 				'save_callback' => array( __CLASS__, 'save_meta_box_project_information' ),
 				'context' => 'normal',
@@ -98,7 +98,7 @@ class SI_Projects extends SI_Controller {
 				'priority' => 'high'
 			),
 			'si_project_history' => array(
-				'title' => si__( 'History' ),
+				'title' => __( 'History', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_project_history_view' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
@@ -237,7 +237,7 @@ class SI_Projects extends SI_Controller {
 	 */
 	public static function show_project_history_view( $post, $metabox ) {
 		if ( $post->post_status == 'auto-draft' ) {
-			printf( '<p>%s</p>', si__( 'No history available.' ) );
+			printf( '<p>%s</p>', __( 'No history available.', 'sprout-invoices' ) );
 			return;
 		}
 		$project = SI_Project::get_instance( $post->ID );
@@ -258,7 +258,7 @@ class SI_Projects extends SI_Controller {
 		$project_id = ( $doc ) ? $doc->get_project_id() : 0;
 		$project = ( $doc ) ? SI_Project::get_instance( $project_id ) : 0;
 
-		$title = ( is_a( $project, 'SI_Project' ) ) ? $project->get_title() : self::__('No Project Selected') ;
+		$title = ( is_a( $project, 'SI_Project' ) ) ? $project->get_title() : __( 'No Project Selected', 'sprout-invoices' ) ;
 
 		self::load_view( 'admin/meta-boxes/projects/information-doc-select', array(
 				'doc' => $doc,
@@ -295,7 +295,7 @@ class SI_Projects extends SI_Controller {
 
 		$fields['name'] = array(
 			'weight' => 1,
-			'label' => self::__( 'Project Name' ),
+			'label' => __( 'Project Name', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => true, // always necessary
 			'default' => ( $project ) ? $project->get_title() : ''
@@ -305,10 +305,10 @@ class SI_Projects extends SI_Controller {
 		$client_options[0] = '';
 		$client_options += SI_Client::get_all_clients();
 		
-		$description = ( $client_id ) ? sprintf( self::__( 'Edit <a href="%s">%s</a>, select another client or <a href="%s">create a new client</a>.' ), get_edit_post_link( $client_id ), get_the_title( $client_id ), '#TB_inline?width=600&height=450&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) : sprintf( self::__( 'Select an existing client or <a href="%s">create a new client</a>.' ), '#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) ;		
+		$description = ( $client_id ) ? sprintf( __( 'Edit <a href="%s">%s</a>, select another client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), get_edit_post_link( $client_id ), get_the_title( $client_id ), '#TB_inline?width=600&height=450&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) : sprintf( __( 'Select an existing client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), '#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) ;		
 		$fields['client'] = array(
 			'weight' => 3,
-			'label' => self::__( 'Client' ),
+			'label' => __( 'Client', 'sprout-invoices' ),
 			'type' => 'select',
 			'options' => $client_options,
 			'required' => true,
@@ -319,7 +319,7 @@ class SI_Projects extends SI_Controller {
 
 		$fields['start_date'] = array(
 			'weight' => 100,
-			'label' => self::__( 'Start Date' ),
+			'label' => __( 'Start Date', 'sprout-invoices' ),
 			'type' => 'date',
 			'required' => $required,
 			'default' => ( $project && $project->get_start_date() ) ? date( 'Y-m-d', $project->get_start_date() ) : '',
@@ -328,7 +328,7 @@ class SI_Projects extends SI_Controller {
 
 		$fields['end_date'] = array(
 			'weight' => 100,
-			'label' => self::__( 'End Date' ),
+			'label' => __( 'End Date', 'sprout-invoices' ),
 			'type' => 'date',
 			'required' => $required,
 			'default' => ( $project && $project->get_end_date() ) ? date( 'Y-m-d', $project->get_end_date() ) : '',
@@ -338,7 +338,7 @@ class SI_Projects extends SI_Controller {
 
 		$fields['website'] = array(
 			'weight' => 120,
-			'label' => self::__( 'Website' ),
+			'label' => __( 'Website', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
 			'default' => ( $project ) ? $project->get_website() : '',
@@ -382,10 +382,10 @@ class SI_Projects extends SI_Controller {
 		unset( $columns['title'] );
 		unset( $columns['comments'] );
 		unset( $columns['author'] );
-		$columns['title'] = self::__( 'Project' );
-		$columns['info'] = self::__( 'Info' );
-		$columns['invoices'] = self::__( 'Invoices' );
-		$columns['estimates'] = self::__( 'Estimates' );
+		$columns['title'] = __( 'Project', 'sprout-invoices' );
+		$columns['info'] = __( 'Info', 'sprout-invoices' );
+		$columns['invoices'] = __( 'Invoices', 'sprout-invoices' );
+		$columns['estimates'] = __( 'Estimates', 'sprout-invoices' );
 		return $columns;
 	}
 
@@ -408,7 +408,7 @@ class SI_Projects extends SI_Controller {
 			
 			$associated_clients = $project->get_associated_clients();
 			echo '<p>';
-			printf( '<b>%s</b>: ', si__('Client') );
+			printf( '<b>%s</b>: ', __( 'Client', 'sprout-invoices' ) );
 			if ( !empty( $associated_clients ) ) {
 				$clients_print = array();
 				foreach ( $associated_clients as $client_id ) {
@@ -419,12 +419,12 @@ class SI_Projects extends SI_Controller {
 				echo implode( ', ', $clients_print );
 			}
 			else {
-				echo si__('No associated clients');
+				echo __( 'No associated clients', 'sprout-invoices' );
 			}
 			echo '</p>';
 			
 			echo '<p>';
-			printf( '<b>%s</b>: ', si__('Site') );
+			printf( '<b>%s</b>: ', __( 'Site', 'sprout-invoices' ) );
 			echo make_clickable( esc_url( $project->get_website() ) );
 			echo '</p>';
 
@@ -442,11 +442,11 @@ class SI_Projects extends SI_Controller {
 				}
 				echo "</dl>";
 				if ( count( $invoices ) > $split ) {
-					printf( '<span class="description">' . si__('...%s of <a href="%s">%s</a> most recent shown') . '</span>', $split, get_edit_post_link( $id ), count( $invoices ) );
+					printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $invoices ) );
 				}
 			}
 			else {
-				printf( '<em>%s</em>', si__('No invoices') );
+				printf( '<em>%s</em>', __( 'No invoices', 'sprout-invoices' ) );
 			}
 			break;
 
@@ -462,11 +462,11 @@ class SI_Projects extends SI_Controller {
 				}
 				echo "</dl>";
 				if ( count( $estimates ) > $split ) {
-					printf( '<span class="description">' . si__('...%s of <a href="%s">%s</a> most recent shown') . '</span>', $split, get_edit_post_link( $id ), count( $estimates ) );
+					printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $estimates ) );
 				}
 			}
 			else {
-				printf( '<em>%s</em>', si__('No estimates') );
+				printf( '<em>%s</em>', __( 'No estimates', 'sprout-invoices' ) );
 			}
 			break;
 	
@@ -501,7 +501,7 @@ class SI_Projects extends SI_Controller {
 	public static function add_link_to_admin_bar( $items ) {
 		$items[] = array(
 			'id' => 'edit_projects',
-			'title' => self::__( 'Projects' ),
+			'title' => __( 'Projects', 'sprout-invoices' ),
 			'href' => admin_url( 'edit.php?post_type='.SI_Project::POST_TYPE ),
 			'weight' => 100,
 		);
@@ -529,14 +529,14 @@ class SI_Projects extends SI_Controller {
 
 			$screen->add_help_tab( array(
 					'id' => 'edit-projects',
-					'title' => self::__( 'Manage Projects' ),
+					'title' => __( 'Manage Projects', 'sprout-invoices' ),
 					'content' => sprintf( '<p>%s</p><p>%s</p>', '', '' ),
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__('For more information:') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/projects/', self::__('Documentation') ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__('Support') )
+				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/projects/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

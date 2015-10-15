@@ -138,8 +138,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		// Addon page
 		$args = array(
 			'slug' => self::get_settings_page( false ),
-			'title' => self::__( 'Sprout Invoices Payment Settings' ),
-			'menu_title' => self::__( 'Payment Settings' ),
+			'title' => __( 'Sprout Invoices Payment Settings', 'sprout-invoices' ),
+			'menu_title' => __( 'Payment Settings', 'sprout-invoices' ),
 			'weight' => 15,
 			'reset' => false,
 			'section' => 'settings',
@@ -158,15 +158,15 @@ abstract class SI_Payment_Processors extends SI_Controller {
 				'callback' => array( __CLASS__, 'settings_description' ),
 				'settings' => array(
 					self::ENABLED_PROCESSORS_OPTION => array(
-						'label' => self::__( 'Payment Processors' ),
+						'label' => __( 'Payment Processors', 'sprout-invoices' ),
 						'option' => array( __CLASS__, 'display_payment_methods_field' )
 						),
 					self::MONEY_FORMAT_OPTION => array(
-						'label' => self::__( 'Money Format' ),
+						'label' => __( 'Money Format', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'bypass',
 							'output' => get_option( self::MONEY_FORMAT_OPTION ),
-							'description' => sprintf( self::__( 'Money formatting is based on the local (%s) this WordPress install was configured with during installation. Please review the Sprout Invoices knowledgebase if this needs to be changed.' ), '<code>'.get_locale().'</code>' )
+							'description' => sprintf( __( 'Money formatting is based on the local (%s) this WordPress install was configured with during installation. Please review the Sprout Invoices knowledgebase if this needs to be changed.', 'sprout-invoices' ), '<code>'.get_locale().'</code>' )
 						)
 					)
 				)
@@ -195,15 +195,15 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		$enabled = self::enabled_processors();
 
 		if ( $offsite ) {
-			printf( '<p><strong>%s</strong></p>', self::__( 'Offsite Processors' ) );
+			printf( '<p><strong>%s</strong></p>', __( 'Offsite Processors', 'sprout-invoices' ) );
 			foreach ( $offsite as $class => $label ) {
 				printf( '<p><label><input type="checkbox" name="%s[]" value="%s" %s /> %s</label></p>', self::ENABLED_PROCESSORS_OPTION, esc_attr( $class ), checked( true, in_array( $class, $enabled ), false ), esc_html( $label ) );
 			}
 		}
 		if ( $credit ) {
-			printf( '<br/><p><strong>%s</strong></p>', self::__( 'Credit Card Processors' ) );
+			printf( '<br/><p><strong>%s</strong></p>', __( 'Credit Card Processors', 'sprout-invoices' ) );
 			printf( '<p><select name="%s[]" class="select2">', self::ENABLED_PROCESSORS_OPTION );
-			printf( '<option value="">%s</option>', self::__( '-- None --' ) );
+			printf( '<option value="">%s</option>', __( '-- None --', 'sprout-invoices' ) );
 			foreach ( $credit as $class => $label ) {
 				printf( '<option value="%s" %s>%s</option>', esc_attr( $class ), selected( true, in_array( $class, $enabled ), false ), esc_html( $label ) );
 			}
@@ -217,7 +217,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return string
 	 */
 	public static function get_settings_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
+		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
 	}
 
 	/*
@@ -470,7 +470,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		if ( $payment->get_status() != $status ) {
 			header( 'Content-type: application/json' );
-			echo wp_json_encode( array( 'response' => si__( 'Payment status updated.' ) ) );
+			echo wp_json_encode( array( 'response' => __( 'Payment status updated.', 'sprout-invoices' ) ) );
 			exit();
 		}
 		else {
@@ -506,7 +506,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		if ( $payment->get_status() != $status ) {
 			header( 'Content-type: application/json' );
-			echo wp_json_encode( array( 'response' => si__( 'Payment status updated.' ) ) );
+			echo wp_json_encode( array( 'response' => __( 'Payment status updated.', 'sprout-invoices' ) ) );
 			exit();
 		}
 		else {
@@ -523,18 +523,18 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 */
 	public static function get_month_options() {
 		$months = array(
-			1 => self::__( '01 - January' ),
-			2 => self::__( '02 - February' ),
-			3 => self::__( '03 - March' ),
-			4 => self::__( '04 - April' ),
-			5 => self::__( '05 - May' ),
-			6 => self::__( '06 - June' ),
-			7 => self::__( '07 - July' ),
-			8 => self::__( '08 - August' ),
-			9 => self::__( '09 - September' ),
-			10 => self::__( '10 - October' ),
-			11 => self::__( '11 - November' ),
-			12 => self::__( '12 - December' ),
+			1 => __( '01 - January', 'sprout-invoices' ),
+			2 => __( '02 - February', 'sprout-invoices' ),
+			3 => __( '03 - March', 'sprout-invoices' ),
+			4 => __( '04 - April', 'sprout-invoices' ),
+			5 => __( '05 - May', 'sprout-invoices' ),
+			6 => __( '06 - June', 'sprout-invoices' ),
+			7 => __( '07 - July', 'sprout-invoices' ),
+			8 => __( '08 - August', 'sprout-invoices' ),
+			9 => __( '09 - September', 'sprout-invoices' ),
+			10 => __( '10 - October', 'sprout-invoices' ),
+			11 => __( '11 - November', 'sprout-invoices' ),
+			12 => __( '12 - December', 'sprout-invoices' ),
 		);
 		return apply_filters( 'si_payment_month_options', $months );
 	}
@@ -570,32 +570,32 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 			$screen->add_help_tab( array(
 					'id' => 'payment-about',
-					'title' => self::__( 'About Payment Processing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'By default no payment processors are active. After selecting the Payment Settings tab you will find that there are two types of Payment Processors: Offsite Processors and Credit Card Processors.' ), self::__( 'After selecting the processors you want to accept for invoice payments and saving the processor options will be shown. Each payment process has its own settings, review and complete each option before saving again' ) )
+					'title' => __( 'About Payment Processing', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'By default no payment processors are active. After selecting the Payment Settings tab you will find that there are two types of Payment Processors: Offsite Processors and Credit Card Processors.', 'sprout-invoices' ), __( 'After selecting the processors you want to accept for invoice payments and saving the processor options will be shown. Each payment process has its own settings, review and complete each option before saving again', 'sprout-invoices' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'payment-cc',
-					'title' => self::__( 'Credit Card Processing' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', self::__( 'These are the credit card payment processors. You’ll notice that only one credit card processor can be activated at a time, this is by design since there’s no viable reason to accept CCs from multiple processors.' ), self::__( 'If you ware accepting credit card information on your site you will want to use SSL for your site to keep your client’s data secure. Having SSL on your site is highly recommended for more reasons than accepting CC information, since every WordPress site has at least a login form.' ) )
+					'title' => __( 'Credit Card Processing', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'These are the credit card payment processors. You’ll notice that only one credit card processor can be activated at a time, this is by design since there’s no viable reason to accept CCs from multiple processors.', 'sprout-invoices' ), __( 'If you ware accepting credit card information on your site you will want to use SSL for your site to keep your client’s data secure. Having SSL on your site is highly recommended for more reasons than accepting CC information, since every WordPress site has at least a login form.', 'sprout-invoices' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'payment-offsite',
-					'title' => self::__( 'Offsite Processing' ),
-					'content' => sprintf( '<p>%s</p>', self::__( 'Essentially a payment processed outside of your site. These payments can include external payment providers like Paypal and Check or P.O. payments. Virtually an unlimited amount of offsite processors can be activated.' ) )
+					'title' => __( 'Offsite Processing', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p>', __( 'Essentially a payment processed outside of your site. These payments can include external payment providers like Paypal and Check or P.O. payments. Virtually an unlimited amount of offsite processors can be activated.', 'sprout-invoices' ) )
 				) );
 
 			$screen->add_help_tab( array(
 					'id' => 'payment-currency',
-					'title' => self::__( 'Currency Symbol' ),
-					'content' => sprintf( '<p>%s</p>', self::__( 'If your currency is formatted wight the symbol after the amount, place a % before your currency symbol. For example, %£.' ) )
+					'title' => __( 'Currency Symbol', 'sprout-invoices' ),
+					'content' => sprintf( '<p>%s</p>', __( 'If your currency is formatted wight the symbol after the amount, place a % before your currency symbol. For example, %£.', 'sprout-invoices' ) )
 				) );
 
 			$screen->set_help_sidebar(
-				sprintf( '<p><strong>%s</strong></p>', self::__( 'For more information:' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payment-settings/', self::__( 'Documentation' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', self::__( 'Support' ) )
+				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payment-settings/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

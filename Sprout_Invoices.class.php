@@ -16,9 +16,14 @@ if ( ! defined( 'SI_DEV' ) ) {
 abstract class Sprout_Invoices {
 
 	/**
+	 * Application app-domain
+	 */
+	const APP_DOMAIN = 'sprout-apps';
+
+	/**
 	 * Application text-domain
 	 */
-	const TEXT_DOMAIN = 'sprout-apps';
+	const TEXT_DOMAIN = 'sprout-invoices';
 	/**
 	 * Application text-domain
 	 */
@@ -26,7 +31,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '8.7.1';
+	const SI_VERSION = '9.0';
 	/**
 	 * DB Version
 	 */
@@ -51,6 +56,8 @@ abstract class Sprout_Invoices {
 	 * @return string|void
 	 */
 	public static function __( $string ) {
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '__' );
 		return __( apply_filters( 'si_string_'.sanitize_title( $string ), $string ), self::TEXT_DOMAIN );
 	}
 
@@ -61,6 +68,8 @@ abstract class Sprout_Invoices {
 	 * @return void
 	 */
 	public static function _e( $string ) {
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '_e' );
 		return _e( apply_filters( 'si_string_'.sanitize_title( $string ), $string ), self::TEXT_DOMAIN );
 	}
 
@@ -70,6 +79,8 @@ abstract class Sprout_Invoices {
 	 * @return
 	 */
 	public static function esc__( $string ) {
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', 'esc__' );
 		return esc_attr__( $string, self::TEXT_DOMAIN );
 	}
 
@@ -79,6 +90,8 @@ abstract class Sprout_Invoices {
 	 * @return
 	 */
 	public static function esc_html__( $string ) {
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', 'esc_html__' );
 		return esc_html__( $string, self::TEXT_DOMAIN );
 	}
 
@@ -88,6 +101,8 @@ abstract class Sprout_Invoices {
 	 * @return
 	 */
 	public static function esc_e( $string ) {
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', 'esc_e' );
 		return esc_attr_e( $string, self::TEXT_DOMAIN );
 	}
 
@@ -97,6 +112,8 @@ abstract class Sprout_Invoices {
 	 * @return
 	 */
 	public static function esc_html_e( $string ) {
+		error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', 'esc_html_e' );
 		return esc_html_e( $string, self::TEXT_DOMAIN );
 	}
 }

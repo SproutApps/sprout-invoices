@@ -115,8 +115,8 @@ class SI_Dashboard extends SI_Controller {
 		// Option page
 		$args = array(
 			'slug' => self::SETTINGS_PAGE,
-			'title' => self::__( 'Reports Dashboard' ),
-			'menu_title' => self::__( 'Reports' ),
+			'title' => __( 'Reports Dashboard', 'sprout-invoices' ),
+			'menu_title' => __( 'Reports', 'sprout-invoices' ),
 			'weight' => 5,
 			'reset' => false,
 			'section' => 'settings',
@@ -138,7 +138,7 @@ class SI_Dashboard extends SI_Controller {
 	}
 
 	public static function add_dash_page() {
-		add_submenu_page( 'index.php', self::__( 'Sprout Apps' ), self::__( 'Sprout Invoices' ), 'manage_sprout_invoices_options', self::STATS_PAGE, array( __CLASS__, 'reports_dashboard' ) );
+		add_submenu_page( 'index.php', __( 'Sprout Apps', 'sprout-invoices' ), __( 'Sprout Invoices', 'sprout-invoices' ), 'manage_sprout_invoices_options', self::STATS_PAGE, array( __CLASS__, 'reports_dashboard' ) );
 	}
 
 	public static function add_stats_heading() {
@@ -149,9 +149,9 @@ class SI_Dashboard extends SI_Controller {
 			// loop through tabs and build markup
 			foreach ( $tabs as $key => $data ) :
 				if ( $data['section'] === $section ) {
-					$new_title = self::__( $data['tab_title'] );
+					$new_title = __( $data['tab_title'], 'sprout-invoices' );
 					$current = ( $data['slug'] === 'reporting' ) ? ' nav-tab-active' : '';
-					$url = ( $data['tab_only'] ) ? add_query_arg( array( 'page' => self::TEXT_DOMAIN . '/settings', 'tab' => $data['slug'] ), 'admin.php' ) : add_query_arg( array( 'page' => self::TEXT_DOMAIN . '/settings' ), 'admin.php' );
+					$url = ( $data['tab_only'] ) ? add_query_arg( array( 'page' => self::APP_DOMAIN . '/settings', 'tab' => $data['slug'] ), 'admin.php' ) : add_query_arg( array( 'page' => self::APP_DOMAIN . '/settings' ), 'admin.php' );
 					echo '<a href="' . esc_url( $url ) . '" class="nav-tab' . $current . '" id="si_options_tab_' . $data['slug'] . '">' . $new_title . '</a>';
 				}
 			endforeach;
@@ -212,11 +212,11 @@ class SI_Dashboard extends SI_Controller {
 			$current_report = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : 'dashboard' ;
 			?>
 				<ul class="subsubsub">
-					<li class="invoices"><a href="<?php echo esc_url( remove_query_arg( self::REPORT_QV ) ) ?>" <?php if ( $current_report == 'dashboard' ) { echo 'class="current"'; } ?>><?php self::_e( 'Dashboard' ) ?></a> |</li>
-					<li class="invoices"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'invoices' ) ) ?>" <?php if ( $current_report == 'invoices' ) { echo 'class="current"'; } ?>><?php self::_e( 'Invoices' ) ?></a> |</li>
-					<li class="estimates"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'estimates' ) ) ?>" <?php if ( $current_report == 'estimates' ) { echo 'class="current"'; } ?>><?php self::_e( 'Estimates' ) ?></a> |</li>
-					<li class="payments"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'payments' ) ) ?>" <?php if ( $current_report == 'payments' ) { echo 'class="current"'; } ?>><?php self::_e( 'Payments' ) ?></a> |</li>
-					<li class="clients"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'clients' ) ) ?>" <?php if ( $current_report == 'clients' ) { echo 'class="current"'; } ?>><?php self::_e( 'Clients' ) ?></a></li>
+					<li class="invoices"><a href="<?php echo esc_url( remove_query_arg( self::REPORT_QV ) ) ?>" <?php if ( $current_report == 'dashboard' ) { echo 'class="current"'; } ?>><?php _e( 'Dashboard', 'sprout-invoices' ) ?></a> |</li>
+					<li class="invoices"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'invoices' ) ) ?>" <?php if ( $current_report == 'invoices' ) { echo 'class="current"'; } ?>><?php _e( 'Invoices', 'sprout-invoices' ) ?></a> |</li>
+					<li class="estimates"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'estimates' ) ) ?>" <?php if ( $current_report == 'estimates' ) { echo 'class="current"'; } ?>><?php _e( 'Estimates', 'sprout-invoices' ) ?></a> |</li>
+					<li class="payments"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'payments' ) ) ?>" <?php if ( $current_report == 'payments' ) { echo 'class="current"'; } ?>><?php _e( 'Payments', 'sprout-invoices' ) ?></a> |</li>
+					<li class="clients"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'clients' ) ) ?>" <?php if ( $current_report == 'clients' ) { echo 'class="current"'; } ?>><?php _e( 'Clients', 'sprout-invoices' ) ?></a></li>
 				</ul>
 			<?php
 		}
@@ -260,7 +260,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'invoice_dashboard',
-			self::__( 'Invoices Dashboard' ),
+			__( 'Invoices Dashboard', 'sprout-invoices' ),
 			array( __CLASS__, 'invoices_dashboard' ),
 			$context,
 			'normal',
@@ -269,7 +269,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'estimates_dashboard',
-			self::__( 'Estimates Dashboard' ),
+			__( 'Estimates Dashboard', 'sprout-invoices' ),
 			array( __CLASS__, 'estimates_dashboard' ),
 			$context,
 			'side',
@@ -282,7 +282,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'payments_chart_dashboard',
-			self::__( 'Invoice Payments' ),
+			__( 'Invoice Payments', 'sprout-invoices' ),
 			array( __CLASS__, 'payments_chart_dashboard' ),
 			$context,
 			'normal',
@@ -291,7 +291,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'balances_chart_dashboard',
-			self::__( 'Invoice Balances' ),
+			__( 'Invoice Balances', 'sprout-invoices' ),
 			array( __CLASS__, 'balances_chart_dashboard' ),
 			$context,
 			'normal',
@@ -300,7 +300,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'payments_status_chart_dashboard',
-			self::__( 'Payments Status' ),
+			__( 'Payments Status', 'sprout-invoices' ),
 			array( __CLASS__, 'payments_status_chart_dashboard' ),
 			$context,
 			'normal',
@@ -309,7 +309,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'invoices_status_chart_dashboard',
-			self::__( 'Invoice Status' ),
+			__( 'Invoice Status', 'sprout-invoices' ),
 			array( __CLASS__, 'invoices_status_chart_dashboard' ),
 			$context,
 			'normal',
@@ -318,7 +318,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'estimates_invoices_chart_dashboard',
-			self::__( 'Estimates &amp; Invoices' ),
+			__( 'Estimates &amp; Invoices', 'sprout-invoices' ),
 			array( __CLASS__, 'estimates_invoices_chart_dashboard' ),
 			$context,
 			'side',
@@ -327,7 +327,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'requests_converted_chart_dashboard',
-			self::__( 'Estimate Requests Converted' ),
+			__( 'Estimate Requests Converted', 'sprout-invoices' ),
 			array( __CLASS__, 'requests_converted_chart_dashboard' ),
 			$context,
 			'side',
@@ -336,7 +336,7 @@ class SI_Dashboard extends SI_Controller {
 
 		add_meta_box(
 			'estimates_status_chart_dashboard',
-			self::__( 'Estimates Status' ),
+			__( 'Estimates Status', 'sprout-invoices' ),
 			array( __CLASS__, 'estimates_status_chart_dashboard' ),
 			$context,
 			'side',

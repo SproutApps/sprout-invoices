@@ -4,6 +4,6 @@
 		<?php sa_form_fields( $fields, 'user' ); ?>
 	</div>
 	<p>
-		<a href="javascript:void(0)" id="create_user" class="button button-large button-primary"><?php si_e('Create user') ?></a>
+		<a href="javascript:void(0)" id="create_user" class="button button-large button-primary"><?php _e( 'Create user', 'sprout-invoices' ) ?></a>
 	</p>
 </div>

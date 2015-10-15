@@ -110,7 +110,7 @@ class SA_Settings_API extends SI_Controller {
 		$parsed_args = wp_parse_args( $args, $defaults );
 		extract( $parsed_args );
 
-		$page = self::TEXT_DOMAIN.'/'.$slug;
+		$page = self::APP_DOMAIN.'/'.$slug;
 		self::$option_tabs[ $slug ] = array(
 			'slug' => $slug,
 			'title' => $menu_title,
@@ -167,16 +167,16 @@ class SA_Settings_API extends SI_Controller {
 	public static function add_admin_page() {
 
 		// Add parent menu for SI
-		self::$settings_page = add_menu_page( self::__( 'Sprout Apps' ), self::__( 'Sprout Apps' ), 'manage_sprout_invoices_options', self::TEXT_DOMAIN );
-		add_submenu_page( self::TEXT_DOMAIN, self::__( 'Sprout Apps' ), self::__( 'Updates' ), 'manage_sprout_invoices_options', self::TEXT_DOMAIN, array( __CLASS__, 'dashboard_page' ) );
+		self::$settings_page = add_menu_page( __( 'Sprout Apps', 'sprout-invoices' ), __( 'Sprout Apps', 'sprout-invoices' ), 'manage_sprout_invoices_options', self::APP_DOMAIN );
+		add_submenu_page( self::APP_DOMAIN, __( 'Sprout Apps', 'sprout-invoices' ), __( 'Updates', 'sprout-invoices' ), 'manage_sprout_invoices_options', self::APP_DOMAIN, array( __CLASS__, 'dashboard_page' ) );
 
 		// Sort submenus
 		uasort( self::$admin_pages, array( __CLASS__, 'sort_by_weight' ) );
 		// Add submenus
 		foreach ( self::$admin_pages as $page => $data ) {
-			$parent = ( $data['parent'] != '' ) ? $data['parent'] : self::TEXT_DOMAIN ;
+			$parent = ( $data['parent'] != '' ) ? $data['parent'] : self::APP_DOMAIN ;
 			$callback = ( is_callable( $data['callback'] ) ) ? $data['callback'] : array( __CLASS__, 'default_admin_page' ) ;
-			$hook = add_submenu_page( $parent, $data['title'], self::__( $data['menu_title'] ), $data['capability'], $page, $callback );
+			$hook = add_submenu_page( $parent, $data['title'], __( $data['menu_title'], 'sprout-invoices' ), $data['capability'], $page, $callback );
 			self::$admin_pages[$page]['hook'] = $hook;
 		}
 	}
@@ -215,7 +215,7 @@ class SA_Settings_API extends SI_Controller {
 					$section = isset($tabs['section'])?$tabs['section']:'';
 
 					self::load_view( 'admin/settings', array(
-						'title' => self::__( $title ),
+						'title' => __( $title, 'sprout-invoices' ),
 						'page' => $plugin_page,
 						'ajax' => $ajax,
 						'ajax_full_page' => $ajax_full_page,
@@ -234,7 +234,7 @@ class SA_Settings_API extends SI_Controller {
 		$section = isset(self::$admin_pages[$plugin_page]['section'])?self::$admin_pages[$plugin_page]['section']:'';
 
 		self::load_view( 'admin/settings', array(
-				'title' => self::__( $title ),
+				'title' => __( $title, 'sprout-invoices' ),
 				'page' => $plugin_page,
 				'ajax' => $ajax,
 				'ajax_full_page' => $ajax_full_page,
@@ -250,7 +250,7 @@ class SA_Settings_API extends SI_Controller {
 	 */
 	public static function display_settings_tabs( $plugin_page = 0 ) {
 		if ( ! $plugin_page ) {
-			$plugin_page = ( self::TEXT_DOMAIN === $_GET['page'] ) ? self::TEXT_DOMAIN . '/' . self::SETTINGS_PAGE : $_GET['page'] ;
+			$plugin_page = ( self::APP_DOMAIN === $_GET['page'] ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : $_GET['page'] ;
 		}
 		if ( ! isset( self::$admin_pages[ $plugin_page ]['section'] ) ) {
 			return;
@@ -263,8 +263,8 @@ class SA_Settings_API extends SI_Controller {
 		// loop through tabs and build markup
 		foreach ( $tabs as $key => $data ) :
 			if ( $data['section'] === $section ) {
-				$new_title = self::__( $data['tab_title'] );
-				$current = ( ( isset( $_GET['tab'] ) && $_GET['tab'] === $data['slug'] ) || ( ! isset( $_GET['tab'] ) && str_replace( self::TEXT_DOMAIN . '/', '', $plugin_page ) == $data['slug'] ) ) ? ' nav-tab-active' : '';
+				$new_title = __( $data['tab_title'], 'sprout-invoices' );
+				$current = ( ( isset( $_GET['tab'] ) && $_GET['tab'] === $data['slug'] ) || ( ! isset( $_GET['tab'] ) && str_replace( self::APP_DOMAIN . '/', '', $plugin_page ) == $data['slug'] ) ) ? ' nav-tab-active' : '';
 				$url = ( $data['tab_only'] ) ? add_query_arg( array( 'page' => $plugin_page, 'tab' => $data['slug'] ), 'admin.php' ) : add_query_arg( array( 'page' => $plugin_page ), 'admin.php' );
 				echo '<a href="'.$url.'" class="nav-tab'.$current.'" id="si_options_tab_'.$data['slug'].'">'.$new_title.'</a>';
 			}
@@ -293,7 +293,7 @@ class SA_Settings_API extends SI_Controller {
 			foreach ( $sections as $section_id => $section_args ) {
 				// Check to see if we're on a tab and try to figure out what settings to register
 				$tab = ( isset( $section_args['tab'] ) ) ? $section_args['tab'] : $page;
-				$tpage = self::TEXT_DOMAIN.'/'.$tab;
+				$tpage = self::APP_DOMAIN.'/'.$tab;
 				$display = ( isset( $section_args['callback'] ) && is_callable( $section_args['callback'] ) ) ? $section_args['callback'] : array( __CLASS__, 'display_settings_section' ) ;
 				$title = ( isset( $section_args['title'] ) ) ? $section_args['title'] : '' ;
 				add_settings_section( $section_id, $title, $display, $tpage );
@@ -416,7 +416,7 @@ class SA_Settings_API extends SI_Controller {
 				$defaults = array(
 					'name' => $name,
 					'echo' => 1,
-					'show_option_none' => self::__( '-- Select --' ),
+					'show_option_none' => __( '-- Select --', 'sprout-invoices' ),
 					'option_none_value' => '0',
 					'selected' => $data['default']
 					);
@@ -463,7 +463,7 @@ class SA_Settings_API extends SI_Controller {
 				}
 
 				self::update_options( $options, $option_page );
-				echo apply_filters( 'save_options_via_ajax_message', self::__( 'Saved' ), $option_page );
+				echo apply_filters( 'save_options_via_ajax_message', __( 'Saved', 'sprout-invoices' ), $option_page );
 				exit();
 			}
 		}
@@ -548,7 +548,7 @@ class SA_Settings_API extends SI_Controller {
 			foreach ( $meta_boxes as $metabox_name => $args ) {
 				$args = apply_filters( $metabox_name . '_meta_box_args', $args );
 				extract( $args );
-				add_meta_box( $metabox_name, self::__( $title ), $callback, $screen, $context, $priority, $args );
+				add_meta_box( $metabox_name, __( $title, 'sprout-invoices' ), $callback, $screen, $context, $priority, $args );
 			}
 		}
 	}

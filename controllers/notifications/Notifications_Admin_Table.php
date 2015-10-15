@@ -51,9 +51,9 @@ class SI_Notifications_Table extends WP_List_Table {
 	 */
 	function column_title( $item ) {
 		$notification_id = array_search( $item->ID, get_option( SI_Notifications::NOTIFICATIONS_OPTION_NAME, array() ) );
-		$name = ( $notification_id ) ? SI_Notifications::$notifications[$notification_id]['name'] : si__('Unassigned') ;
+		$name = ( $notification_id ) ? SI_Notifications::$notifications[$notification_id]['name'] : __( 'Unassigned', 'sprout-invoices' ) ;
 		$notification = SI_Notification::get_instance( $item->ID );
-		$status = ( $notification->get_disabled() ) ? '<span style="color:red">'.si__( 'disabled' ).'</span>' : '<span>'.si__( 'active' ).'</span>' ;
+		$status = ( $notification->get_disabled() ) ? '<span style="color:red">'.__( 'disabled', 'sprout-invoices' ).'</span>' : '<span>'.__( 'active', 'sprout-invoices' ).'</span>' ;
 
 		//Build row actions
 		$actions = array(
@@ -86,9 +86,9 @@ class SI_Notifications_Table extends WP_List_Table {
 	 * */
 	function get_columns() {
 		$columns = array(
-			'title' => si__('Type'),
-			'subject'  => si__('Subject'),
-			'message'  => si__('Message')
+			'title' => __( 'Type', 'sprout-invoices' ),
+			'subject'  => __( 'Subject', 'sprout-invoices' ),
+			'message'  => __( 'Message', 'sprout-invoices' )
 		);
 		return apply_filters( 'si_mngt_notification_columns', $columns );
 	}

@@ -6,6 +6,6 @@
 		<?php do_action( 'si_checks_form_controls', $checkout ) ?>
 		<?php do_action( 'si_checks_payment_controls', $checkout ) ?>
 		<input type="hidden" name="<?php echo SI_Checkouts::CHECKOUT_ACTION ?>" value="<?php echo SI_Checkouts::PAYMENT_PAGE ?>" />
-		<button type="submit" class="button button-primary"><?php si_e('Submit') ?></button>
+		<button type="submit" class="button button-primary"><?php _e( 'Submit', 'sprout-invoices' ) ?></button>
 	</form>
 </div><!-- #credit_card_checkout_wrap -->

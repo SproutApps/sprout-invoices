@@ -594,6 +594,7 @@ html[xmlns] .clearfix {
 }
 
 #header_logo {
+	position: relative;
 	margin-bottom: 25px;
 }
 
@@ -1640,7 +1641,7 @@ p.si_error {
 	content: '\f173'
 }
 #doc_history dt span.history_status.comment:before {
-	content: "\e614";
+	content: "\f101";
 }
 
 #doc_history dt span.payment:before {
