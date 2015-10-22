@@ -91,6 +91,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 ### Changelog
 
 
+**9.0.2**
+
+* FIX: AJAX callback errors, i.e. client creation.
+
 **9.0**
 
 * NEW: Estimate and Invoice shortcodes
@@ -722,7 +726,7 @@ Welcome! This is a big update and a big step for us.
 
 * Initial Release
 
-**0.9.0.1**
+**0.9.0.2.1**
 
 * Remove debugging logs from release branch.
 

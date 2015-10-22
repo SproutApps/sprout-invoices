@@ -736,7 +736,7 @@ class SI_CSV_Import extends SI_Importer {
 		$line_items = self::build_line_items( $invoice );
 		$args['line_items'] = $line_items;
 
-		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_TEMP );
+		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_PENDING );
 		update_post_meta( $new_invoice_id, self::CSV_ID, $invoice['Invoice ID'] );
 
 		$inv = SI_Invoice::get_instance( $new_invoice_id );

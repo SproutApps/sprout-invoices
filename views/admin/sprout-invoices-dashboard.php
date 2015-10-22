@@ -17,7 +17,7 @@
 						 <h4><?php _e( 'Get a free Sprout Apps license instantly...', 'sprout-invoices' ) ?></h4>
 					</div>
 					<div class="activation_inputs clearfix">
-						<input type="text" name="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" id="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" value="<?php echo SI_Free_License::license_key() ?>" class="fat-input <?php echo 'license_'.SI_Free_License::license_status() ?>" size="40" class="text-input" placeholder="<?php _e( 'Enter your email.', 'sprout-invoices' ) ?>">
+						<input type="text" name="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" id="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" value="<?php echo SI_Free_License::license_key() ?>" class="text-input fat-input <?php echo 'license_'.SI_Free_License::license_status() ?>" size="40" placeholder="<?php _e( 'Enter your email.', 'sprout-invoices' ) ?>">
 							<button id="free_license" class="button button-primary button-large"><?php _e( 'Get License', 'sprout-invoices' ) ?></button>
 						<div id="license_message" class="clearfix"></div>
 					</div>

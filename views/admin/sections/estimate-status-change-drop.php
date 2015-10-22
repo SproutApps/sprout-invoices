@@ -19,7 +19,7 @@
 	</span>
 
 	<div id="status_change_<?php echo (int) $id ?>" class="dropdown dropdown-tip dropdown-relative dropdown-anchor-right">
-		<ul class="dropdown-menu">
+		<ul class="si-dropdown-menu">
 			<?php if ( $status != SI_Estimate::STATUS_PENDING ) : ?>
 				<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', __( 'Mark Pending', 'sprout-invoices' ), get_edit_post_link( $id ), $id, SI_Estimate::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), __( '<b>Pending: </b> Waiting for Review', 'sprout-invoices' ) ); ?>
 			<?php endif ?>

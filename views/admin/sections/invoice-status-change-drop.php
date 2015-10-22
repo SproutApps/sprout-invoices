@@ -20,7 +20,7 @@
 		</span>
 	</span>
 	<div id="status_change_<?php echo (int) $id ?>" class="dropdown dropdown-tip dropdown-relative dropdown-anchor-right">
-		<ul class="dropdown-menu">
+		<ul class="si-dropdown-menu">
 			<?php if ( SI_Invoice::STATUS_FUTURE !== $status ) : ?>
 				<?php if ( $status != SI_Invoice::STATUS_PENDING ) : ?>
 					<?php printf( '<li><a class="doc_status_change pending" title="%s" href="%s" data-id="%s" data-status-change="%s" data-nonce="%s">%s</a></li>', __( 'Mark Pending Payment(s)', 'sprout-invoices'  ), get_edit_post_link( $id ), $id, SI_Invoice::STATUS_PENDING, wp_create_nonce( SI_Controller::NONCE ), __( '<b>Active:</b> Pending Payment(s)', 'sprout-invoices'  ) ); ?>

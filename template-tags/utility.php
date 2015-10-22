@@ -43,7 +43,7 @@ function si_esc__( $string ) {
  * @param string  $string
  * @return void
  */
-function esc_e( $string ) {
+function si_esc_e( $string ) {
 	return Sprout_Invoices::esc_e( $string );
 }
 

@@ -231,6 +231,8 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						</ul>
 					</aside>
 				</div><!-- #footer_wrap -->
+			
+			</div><!-- #document_wrap -->
 
 		</div><!-- #outer_doc_wrap -->
 		
@@ -271,6 +273,6 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 	</body>
 	<?php do_action( 'si_document_footer' ) ?>
 	<?php si_footer() ?>
-	<!-- Template Version 9.0 -->
+	<!-- Template Version 9.0.2 -->
 </html>
 <?php do_action( 'invoice_viewed' ) ?>

@@ -312,11 +312,11 @@ class SI_WPInvoice_Import extends SI_Importer {
 
 		// args to create new client
 		$address = array(
-			'street' => isset( $wp_invoice_user_data['streetaddress'] ) ? esc__( $wp_invoice_user_data['streetaddress'], 'sprout-invoices' ) : '',
-			'city' => isset( $wp_invoice_user_data['city'] ) ? esc__( $wp_invoice_user_data['city'], 'sprout-invoices' ) : '',
-			'zone' => isset( $wp_invoice_user_data['state'] ) ? esc__( $wp_invoice_user_data['state'], 'sprout-invoices' ) : '',
-			'postal_code' => isset( $wp_invoice_user_data['zip'] ) ? esc__( $wp_invoice_user_data['zip'], 'sprout-invoices' ) : '',
-			'country' => isset( $wp_invoice_user_data['country'] ) ? esc__( $wp_invoice_user_data['country'], 'sprout-invoices' ) : apply_filters( 'si_default_country_code', 'US' ),
+			'street' => isset( $wp_invoice_user_data['streetaddress'] ) ? esc_html( $wp_invoice_user_data['streetaddress'] ) : '',
+			'city' => isset( $wp_invoice_user_data['city'] ) ? esc_html( $wp_invoice_user_data['city'] ) : '',
+			'zone' => isset( $wp_invoice_user_data['state'] ) ? esc_html( $wp_invoice_user_data['state'] ) : '',
+			'postal_code' => isset( $wp_invoice_user_data['zip'] ) ? esc_html( $wp_invoice_user_data['zip'] ) : '',
+			'country' => isset( $wp_invoice_user_data['country'] ) ? esc_html( $wp_invoice_user_data['country'] ) : apply_filters( 'si_default_country_code', 'US' ),
 		);
 		$args = array(
 			'address' => $address,
@@ -389,7 +389,7 @@ class SI_WPInvoice_Import extends SI_Importer {
 		$args = array(
 			'subject' => ( $wp_invoice['post_title'] ) ? $wp_invoice['post_title'] : 'WPInvoice Import #' . $wp_invoice['ID']
 		);
-		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_TEMP );
+		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_PENDING );
 		update_post_meta( $new_invoice_id, self::WPINVOICE_ID, $wp_invoice['invoice_id'] );
 
 		$invoice = SI_Invoice::get_instance( $new_invoice_id );

@@ -78,7 +78,7 @@ if (jQuery) (function ($) {
         // Are we clicking anywhere in a dropdown?
         if (targetGroup && targetGroup.is('.dropdown')) {
             // Is it a dropdown menu?
-            if (targetGroup.is('.dropdown-menu')) {
+            if (targetGroup.is('.si-dropdown-menu')) {
                 // Did we click on an option? If so close it.
                 if (!targetGroup.is('A')) return;
             } else {

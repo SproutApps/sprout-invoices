@@ -706,7 +706,7 @@ class SI_Harvest_Import extends SI_Importer {
 		$args = array(
 			'subject' => ( $invoice->subject ) ? $invoice->subject : 'Harvest Import #' . $invoice->id
 		);
-		$inv_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_TEMP );
+		$inv_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_PENDING );
 		update_post_meta( $inv_id, self::HARVEST_ID, $invoice->id );
 
 		$inv = SI_Invoice::get_instance( $inv_id );

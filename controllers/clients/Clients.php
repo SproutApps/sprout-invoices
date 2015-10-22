@@ -256,13 +256,13 @@ class SI_Clients extends SI_Controller {
 		// Attempt to create a user
 		if ( isset( $_POST['sa_metabox_email'] ) && $_POST['sa_metabox_email'] != '' ) {
 			$user_args = array(
-				'user_login' => esc__( $_POST['sa_metabox_email'], 'sprout-invoices' ),
-				'display_name' => isset( $_POST['sa_metabox_name'] ) ? esc__( $_POST['sa_metabox_name'], 'sprout-invoices' ) : esc__( $_POST['sa_metabox_email'], 'sprout-invoices' ),
+				'user_login' => esc_html( $_POST['sa_metabox_email'], 'sprout-invoices' ),
+				'display_name' => isset( $_POST['sa_metabox_name'] ) ? esc_html( $_POST['sa_metabox_name'], 'sprout-invoices' ) : esc_html( $_POST['sa_metabox_email'], 'sprout-invoices' ),
 				'user_pass' => wp_generate_password(), // random password
-				'user_email' => isset( $_POST['sa_metabox_email'] ) ? esc__( $_POST['sa_metabox_email'], 'sprout-invoices' ) : '',
-				'first_name' => isset( $_POST['sa_metabox_first_name'] ) ? esc__( $_POST['sa_metabox_first_name'], 'sprout-invoices' ) : '',
-				'last_name' => isset( $_POST['sa_metabox_last_name'] ) ? esc__( $_POST['sa_metabox_last_name'], 'sprout-invoices' ) : '',
-				'user_url' => isset( $_POST['sa_metabox_website'] ) ? esc__( $_POST['sa_metabox_website'], 'sprout-invoices' ) : ''
+				'user_email' => isset( $_POST['sa_metabox_email'] ) ? esc_html( $_POST['sa_metabox_email'], 'sprout-invoices' ) : '',
+				'first_name' => isset( $_POST['sa_metabox_first_name'] ) ? esc_html( $_POST['sa_metabox_first_name'], 'sprout-invoices' ) : '',
+				'last_name' => isset( $_POST['sa_metabox_last_name'] ) ? esc_html( $_POST['sa_metabox_last_name'], 'sprout-invoices' ) : '',
+				'user_url' => isset( $_POST['sa_metabox_website'] ) ? esc_html( $_POST['sa_metabox_website'], 'sprout-invoices' ) : ''
 			);
 			$user_id = self::create_user( $user_args );
 		}
@@ -860,13 +860,13 @@ class SI_Clients extends SI_Controller {
 			// email is critical
 			if ( isset( $_REQUEST['sa_estimate_email'] ) && $_REQUEST['sa_estimate_email'] != '' ) {
 				$user_args = array(
-					'user_login' => esc__( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ),
-					'display_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? esc__( $_REQUEST['sa_estimate_client_name'], 'sprout-invoices' ) : esc__( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ),
+					'user_login' => esc_html( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ),
+					'display_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? esc_html( $_REQUEST['sa_estimate_client_name'], 'sprout-invoices' ) : esc_html( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ),
 					'user_pass' => wp_generate_password(), // random password
-					'user_email' => isset( $_REQUEST['sa_estimate_email'] ) ? esc__( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ) : '',
-					'first_name' => si_split_full_name( esc__( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'first' ),
-					'last_name' => si_split_full_name( esc__( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'last' ),
-					'user_url' => isset( $_REQUEST['sa_estimate_website'] ) ? esc__( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : ''
+					'user_email' => isset( $_REQUEST['sa_estimate_email'] ) ? esc_html( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ) : '',
+					'first_name' => si_split_full_name( esc_html( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'first' ),
+					'last_name' => si_split_full_name( esc_html( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'last' ),
+					'user_url' => isset( $_REQUEST['sa_estimate_website'] ) ? esc_html( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : ''
 				);
 				$user_id = self::create_user( $user_args );
 			}
@@ -875,16 +875,16 @@ class SI_Clients extends SI_Controller {
 		// create the client based on what's submitted.
 		if ( ! $client_id ) {
 			$address = array(
-				'street' => isset( $_REQUEST['sa_contact_street'] ) ?esc__( $_REQUEST['sa_contact_street'], 'sprout-invoices' ) : '',
-				'city' => isset( $_REQUEST['sa_contact_city'] ) ? esc__( $_REQUEST['sa_contact_city'], 'sprout-invoices' ) : '',
-				'zone' => isset( $_REQUEST['sa_contact_zone'] ) ? esc__( $_REQUEST['sa_contact_zone'], 'sprout-invoices' ) : '',
-				'postal_code' => isset( $_REQUEST['sa_contact_postal_code'] ) ? esc__( $_REQUEST['sa_contact_postal_code'], 'sprout-invoices' ) : '',
-				'country' => isset( $_REQUEST['sa_contact_country'] ) ? esc__( $_REQUEST['sa_contact_country'], 'sprout-invoices' ) : '',
+				'street' => isset( $_REQUEST['sa_contact_street'] ) ? esc_html( $_REQUEST['sa_contact_street'], 'sprout-invoices' ) : '',
+				'city' => isset( $_REQUEST['sa_contact_city'] ) ? esc_html( $_REQUEST['sa_contact_city'], 'sprout-invoices' ) : '',
+				'zone' => isset( $_REQUEST['sa_contact_zone'] ) ? esc_html( $_REQUEST['sa_contact_zone'], 'sprout-invoices' ) : '',
+				'postal_code' => isset( $_REQUEST['sa_contact_postal_code'] ) ? esc_html( $_REQUEST['sa_contact_postal_code'], 'sprout-invoices' ) : '',
+				'country' => isset( $_REQUEST['sa_contact_country'] ) ? esc_html( $_REQUEST['sa_contact_country'], 'sprout-invoices' ) : '',
 			);
 
 			$args = array(
-				'company_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? esc__( $_REQUEST['sa_estimate_client_name'], 'sprout-invoices' ) : '',
-				'website' => isset( $_REQUEST['sa_estimate_website'] ) ? esc__( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : '',
+				'company_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? esc_html( $_REQUEST['sa_estimate_client_name'], 'sprout-invoices' ) : '',
+				'website' => isset( $_REQUEST['sa_estimate_website'] ) ? esc_html( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : '',
 				'address' => $address,
 				'user_id' => $user_id
 			);
@@ -927,28 +927,28 @@ class SI_Clients extends SI_Controller {
 		// Attempt to create a user
 		if ( isset( $_REQUEST['sa_client_email'] ) && $_REQUEST['sa_client_email'] != '' ) {
 			$user_args = array(
-				'user_login' => esc__( $_REQUEST['sa_client_email'], 'sprout-invoices' ),
-				'display_name' => isset( $_REQUEST['sa_client_name'] ) ? esc__( $_REQUEST['sa_client_name'], 'sprout-invoices' ) : esc__( $_REQUEST['sa_client_email'], 'sprout-invoices' ),
+				'user_login' => esc_html( $_REQUEST['sa_client_email'] ),
+				'display_name' => isset( $_REQUEST['sa_client_name'] ) ? esc_html( $_REQUEST['sa_client_name'] ) : esc_html( $_REQUEST['sa_client_email'] ),
 				'user_pass' => wp_generate_password(), // random password
-				'user_email' => isset( $_REQUEST['sa_client_email'] ) ? esc__( $_REQUEST['sa_client_email'], 'sprout-invoices' ) : '',
-				'first_name' => isset( $_REQUEST['sa_client_first_name'] ) ? esc__( $_REQUEST['sa_client_first_name'], 'sprout-invoices' ) : '',
-				'last_name' => isset( $_REQUEST['sa_client_last_name'] ) ? esc__( $_REQUEST['sa_client_last_name'], 'sprout-invoices' ) : '',
-				'user_url' => isset( $_REQUEST['sa_client_website'] ) ? esc__( $_REQUEST['sa_client_website'], 'sprout-invoices' ) : ''
+				'user_email' => isset( $_REQUEST['sa_client_email'] ) ? esc_html( $_REQUEST['sa_client_email'] ) : '',
+				'first_name' => isset( $_REQUEST['sa_client_first_name'] ) ? esc_html( $_REQUEST['sa_client_first_name'] ) : '',
+				'last_name' => isset( $_REQUEST['sa_client_last_name'] ) ? esc_html( $_REQUEST['sa_client_last_name'] ) : '',
+				'user_url' => isset( $_REQUEST['sa_client_website'] ) ? esc_html( $_REQUEST['sa_client_website'] ) : ''
 			);
 			$user_id = self::create_user( $user_args );
 		}
 
 		// Create the client
 		$address = array(
-			'street' => isset( $_REQUEST['sa_client_street'] ) ? esc__( $_REQUEST['sa_client_street'], 'sprout-invoices' ) : '',
-			'city' => isset( $_REQUEST['sa_client_city'] ) ? esc__( $_REQUEST['sa_client_city'], 'sprout-invoices' ) : '',
-			'zone' => isset( $_REQUEST['sa_client_zone'] ) ? esc__( $_REQUEST['sa_client_zone'], 'sprout-invoices' ) : '',
-			'postal_code' => isset( $_REQUEST['sa_client_postal_code'] ) ? esc__( $_REQUEST['sa_client_postal_code'], 'sprout-invoices' ) : '',
-			'country' => isset( $_REQUEST['sa_client_country'] ) ? esc__( $_REQUEST['sa_client_country'], 'sprout-invoices' ) : '',
+			'street' => isset( $_REQUEST['sa_client_street'] ) ? esc_html( $_REQUEST['sa_client_street'] ) : '',
+			'city' => isset( $_REQUEST['sa_client_city'] ) ? esc_html( $_REQUEST['sa_client_city'] ) : '',
+			'zone' => isset( $_REQUEST['sa_client_zone'] ) ? esc_html( $_REQUEST['sa_client_zone'] ) : '',
+			'postal_code' => isset( $_REQUEST['sa_client_postal_code'] ) ? esc_html( $_REQUEST['sa_client_postal_code'] ) : '',
+			'country' => isset( $_REQUEST['sa_client_country'] ) ? esc_html( $_REQUEST['sa_client_country'] ) : '',
 		);
 		$args = array(
-			'company_name' => isset( $_REQUEST['sa_client_name'] ) ? esc__( $_REQUEST['sa_client_name'], 'sprout-invoices' ) : '',
-			'website' => isset( $_REQUEST['sa_client_website'] ) ? esc__( $_REQUEST['sa_client_website'], 'sprout-invoices' ) : '',
+			'company_name' => isset( $_REQUEST['sa_client_name'] ) ? esc_html( $_REQUEST['sa_client_name'] ) : '',
+			'website' => isset( $_REQUEST['sa_client_website'] ) ? esc_html( $_REQUEST['sa_client_website'] ) : '',
 			'address' => $address,
 			'user_id' => $user_id
 		);
@@ -1001,12 +1001,12 @@ class SI_Clients extends SI_Controller {
 		}
 
 		$user_args = array(
-			'user_login' => esc__( $_REQUEST['sa_user_email'], 'sprout-invoices' ),
-			'display_name' => isset( $_REQUEST['sa_user_display_name'] ) ? esc__( $_REQUEST['sa_user_display_name'], 'sprout-invoices' ) : esc__( $_REQUEST['sa_user_email'], 'sprout-invoices' ),
+			'user_login' => esc_html( $_REQUEST['sa_user_email'] ),
+			'display_name' => isset( $_REQUEST['sa_user_display_name'] ) ? esc_html( $_REQUEST['sa_user_display_name'] ) : esc_html( $_REQUEST['sa_user_email'] ),
 			'user_pass' => wp_generate_password(), // random password
-			'user_email' => isset( $_REQUEST['sa_user_email'] ) ? esc__( $_REQUEST['sa_user_email'], 'sprout-invoices' ) : '',
-			'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? esc__( $_REQUEST['sa_user_first_name'], 'sprout-invoices' ) : '',
-			'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? esc__( $_REQUEST['sa_user_last_name'], 'sprout-invoices' ) : ''
+			'user_email' => isset( $_REQUEST['sa_user_email'] ) ? esc_html( $_REQUEST['sa_user_email'] ) : '',
+			'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? esc_html( $_REQUEST['sa_user_first_name'] ) : '',
+			'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? esc_html( $_REQUEST['sa_user_last_name'] ) : ''
 		);
 		$user_id = self::create_user( $user_args );
 

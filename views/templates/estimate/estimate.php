@@ -48,7 +48,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						<?php do_action( 'si_doc_actions' ) ?>
 					</div><!-- #doc_actions -->
 				</header><!-- #header_title -->
-			</div><!-- #doc_header_wrap -->
+			</div><!-- #document_wrap -->
 
 			<div id="document_wrap">
 
@@ -197,6 +197,8 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						</ul>
 					</aside>
 				</div><!-- #footer_wrap -->
+			
+			</div><!-- #document_wrap -->
 
 		</div><!-- #outer_doc_wrap -->
 		
@@ -237,6 +239,6 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 	</body>
 	<?php do_action( 'si_document_footer' ) ?>
 	<?php si_footer() ?>
-	<!-- Template Version 9.0 -->
+	<!-- Template Version 9.0.2 -->
 </html>
 <?php do_action( 'estimate_viewed' ) ?>

@@ -607,11 +607,11 @@ class SI_Freshbooks_Import extends SI_Importer {
 		}
 		// args to create new client
 		$address = array(
-			'street' => ( isset( $client['contact_street'] ) && ! is_array( $client['p_street1'] ) ) ? esc__( $client['contact_street'], 'sprout-invoices' ) : '',
-			'city' => ( isset( $client['p_city'] ) && ! is_array( $client['p_city'] ) ) ? esc__( $client['p_city'], 'sprout-invoices' ) : '',
-			'zone' => ( isset( $client['p_state'] ) && ! is_array( $client['p_state'] ) ) ? esc__( $client['p_state'], 'sprout-invoices' ) : '',
-			'postal_code' => ( isset( $client['p_code'] ) && ! is_array( $client['p_code'] ) ) ? esc__( $client['p_code'], 'sprout-invoices' ) : '',
-			'country' => ( isset( $client['p_country'] ) && ! is_array( $client['p_country'] ) ) ? esc__( $client['p_country'], 'sprout-invoices' ) : '',
+			'street' => ( isset( $client['contact_street'] ) && ! is_array( $client['p_street1'] ) ) ? esc_html( $client['contact_street'] ) : '',
+			'city' => ( isset( $client['p_city'] ) && ! is_array( $client['p_city'] ) ) ? esc_html( $client['p_city'] ) : '',
+			'zone' => ( isset( $client['p_state'] ) && ! is_array( $client['p_state'] ) ) ? esc_html( $client['p_state'] ) : '',
+			'postal_code' => ( isset( $client['p_code'] ) && ! is_array( $client['p_code'] ) ) ? esc_html( $client['p_code'] ) : '',
+			'country' => ( isset( $client['p_country'] ) && ! is_array( $client['p_country'] ) ) ? esc_html( $client['p_country'] ) : '',
 		);
 		$args = array(
 			'address' => $address,
@@ -792,7 +792,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 		$args = array(
 			'subject' => ( isset( $invoice['description'] ) ) ? $invoice['description'] : 'Freshbooks Import #' . $invoice['invoice_id']
 		);
-		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_TEMP );
+		$new_invoice_id = SI_Invoice::create_invoice( $args, SI_Invoice::STATUS_PENDING );
 		update_post_meta( $new_invoice_id, self::FRESHBOOKS_ID, $invoice['invoice_id'] );
 
 		$inv = SI_Invoice::get_instance( $new_invoice_id );

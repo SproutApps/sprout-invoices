@@ -225,6 +225,8 @@ do_action( 'pre_si_invoice_paid_view' ); ?><!DOCTYPE html>
 						</ul>
 					</aside>
 				</div><!-- #footer_wrap -->
+			
+			</div><!-- #document_wrap -->
 
 		</div><!-- #outer_doc_wrap -->
 
