@@ -6,23 +6,23 @@
 		<?php
 			$invoice_data = SI_Reporting::total_invoice_data(); ?>
 		<dl>
-			<dt><?php esc_e( 'Outstanding', 'sprout-invoices' ) ?></dt>
+			<dt><?php esc_attr_e( 'Outstanding', 'sprout-invoices' ) ?></dt>
 			<dd><?php sa_formatted_money( $invoice_data['balance'] )  ?></dd>
 
-			<dt><?php esc_e( 'Paid (this week)', 'sprout-invoices' ) ?></dt>
-			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_attr_e( 'Paid (this week)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_attr_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php esc_e( 'Paid (last week)', 'sprout-invoices' ) ?></dt>
-			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_attr_e( 'Paid (last week)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_attr_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php esc_e( 'Paid (month to date)', 'sprout-invoices' ) ?></dt>
-			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_attr_e( 'Paid (month to date)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_attr_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php esc_e( 'Paid (last month)', 'sprout-invoices' ) ?></dt>
-			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_attr_e( 'Paid (last month)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_attr_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 
-			<dt><?php esc_e( 'Paid (year to date)', 'sprout-invoices' ) ?></dt>
-			<dd>N/A<span title="<?php esc_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
+			<dt><?php esc_attr_e( 'Paid (year to date)', 'sprout-invoices' ) ?></dt>
+			<dd>N/A<span title="<?php esc_attr_e( 'Data available with upgraded version of Sprout Invoices', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span></dd>
 		</dl>
 
 		
@@ -38,7 +38,7 @@
 			$invoices = new WP_Query( $args ); ?>
 
 		<?php if ( ! empty( $invoices->posts ) ) : ?>
-			<b><?php esc_e( 'Latest Updates', 'sprout-invoices' ) ?></b> 
+			<b><?php esc_attr_e( 'Latest Updates', 'sprout-invoices' ) ?></b> 
 			<ul>
 				<?php foreach ( $invoices->posts as $invoice_id ) : ?>
 					<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php echo date_i18n( get_option( 'date_format' ), get_post_modified_time( 'U', false, $invoice_id ) ) ?></li>
@@ -46,8 +46,8 @@
 			</ul>
 		<?php else : ?>
 			<p>
-				<b><?php esc_e( 'Latest Updates', 'sprout-invoices' ) ?></b><br/>
-				<?php esc_e( 'No invoices found.', 'sprout-invoices' ) ?>
+				<b><?php esc_attr_e( 'Latest Updates', 'sprout-invoices' ) ?></b><br/>
+				<?php esc_attr_e( 'No invoices found.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 
@@ -63,8 +63,8 @@
 			</ul>
 		<?php else : ?>
 			<p>
-				<b><?php esc_e( 'Overdue &amp; Unpaid', 'sprout-invoices' ) ?></b><br/>
-				<?php esc_e( 'No overdue or unpaid invoices.', 'sprout-invoices' ) ?>
+				<b><?php esc_attr_e( 'Overdue &amp; Unpaid', 'sprout-invoices' ) ?></b><br/>
+				<?php esc_attr_e( 'No overdue or unpaid invoices.', 'sprout-invoices' ) ?>
 			</p>
 		<?php endif ?>
 	</div>

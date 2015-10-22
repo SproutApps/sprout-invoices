@@ -13,7 +13,7 @@
 				<?php do_action( 'si_add_line_item' ) ?>
 
 				<?php if ( apply_filters( 'show_upgrade_messaging', true ) ) : ?>
-					<span title="<?php esc_e( 'Predefined line-items can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span>
+					<span title="<?php esc_attr_e( 'Predefined line-items can be created to help with estimate creation by adding default descriptions. This is a premium feature that will be added with a pro version upgrade.', 'sprout-invoices' ) ?>" class="helptip add_item_help"></span>
 				<?php endif ?>
 
 				<?php do_action( 'si_post_add_line_item' ) ?>

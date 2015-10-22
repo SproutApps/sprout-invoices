@@ -233,12 +233,12 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 		<div id="footer_credit">
 			<?php do_action( 'si_document_footer_credit' ) ?>
-			<!--<p><?php esc_e( 'Powered by Sprout Invoices', 'sprout-invoices' ) ?></p>-->
+			<!--<p><?php esc_attr_e( 'Powered by Sprout Invoices', 'sprout-invoices' ) ?></p>-->
 		</div><!-- #footer_messaging -->
 
 	</body>
 	<?php do_action( 'si_document_footer' ) ?>
 	<?php si_footer() ?>
-	<!-- Template Version 9.0.2 -->
+	<!-- Template Version 9.0.3 -->
 </html>
 <?php do_action( 'estimate_viewed' ) ?>

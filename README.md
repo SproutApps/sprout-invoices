@@ -91,9 +91,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 ### Changelog
 
 
-**9.0.2**
+**9.0.3**
 
 * FIX: AJAX callback errors, i.e. client creation.
+* FIX: Localization changes causing errors on free version.
 
 **9.0**
 
@@ -726,7 +727,7 @@ Welcome! This is a big update and a big step for us.
 
 * Initial Release
 
-**0.9.0.2.1**
+**0.9.0.3.1**
 
 * Remove debugging logs from release branch.
 
