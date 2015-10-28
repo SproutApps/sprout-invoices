@@ -46,16 +46,16 @@ class SI_Notifications extends SI_Notifications_Control {
 				'estimate_received' => array(
 					'name' => __( 'Lead Received', 'sprout-invoices' ),
 					'description' => __( 'Customize the email that is sent to a prospective client after a lead is submitted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'lead_entries', 'estimate_id', 'estimate_edit_url', 'client_name', 'client_edit_url', 'estimate_total', 'estimate_subtotal' ),
+					'shortcodes' => array( 'date', 'name', 'username', 'lead_entries', 'estimate_id', 'estimate_edit_url', 'client_name', 'client_edit_url', 'estimate_total', 'estimate_terms', 'estimate_notes', 'estimate_subtotal' ),
 					'default_title' => sprintf( __( '%s: Estimate Request Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/request-received', null ),
-					'always_disabled' => true
+					'always_disabled' => true,
 				),
 				// Estimates
 				'send_estimate' => array(
 					'name' => __( 'Estimate Available', 'sprout-invoices' ),
 					'description' => __( 'Customize the estimate email that is sent to selected recipients.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_total', 'estimate_subtotal', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name'  ),
 					'default_title' => sprintf( __( '%s: Your Estimate is Available', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/estimate', null )
 				),
@@ -63,7 +63,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_invoice' => array(
 					'name' => __( 'Invoice Available', 'sprout-invoices' ),
 					'description' => __( 'Customize the invoice email that is sent to selected recipients.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( __( '%s: Your Invoice is Available', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/invoice', null )
 				),
@@ -71,25 +71,25 @@ class SI_Notifications extends SI_Notifications_Control {
 				'deposit_payment' => array(
 					'name' => __( 'Deposit Payment Received', 'sprout-invoices' ),
 					'description' => __( 'Customize the payment email that is sent to the client recipients when a deposit is made.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( __( '%s: Deposit Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', null ),
-					'always_disabled' => true
+					'always_disabled' => true,
 				),
 				'final_payment' => array(
 					'name' => __( 'Invoice Paid', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the client recipients when the final payment for an invoice is made.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( __( '%s: Thank You', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-final', null )
 				),
 				'reminder_payment' => array(
 					'name' => __( 'Payment Reminder', 'sprout-invoices' ),
 					'description' => __( 'Customize the email that is sent to the client recipients in order to remind them that their payment is overdue.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number','invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
 					'default_title' => sprintf( __( '%s: Invoice Payment Overdue', 'sprout-invoices' ),  get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-reminder', null ),
-					'always_disabled' => true
+					'always_disabled' => true,
 				),
 				// Admin Notifications
 				'estimate_submitted' => array(
@@ -98,26 +98,26 @@ class SI_Notifications extends SI_Notifications_Control {
 					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( __( '%s: Estimate Request Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-request-submitted', null ),
-					'always_disabled' => true
+					'always_disabled' => true,
 				),
 				'accepted_estimate' => array(
 					'name' => __( 'Estimate Accepted', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the admin after an estimate is accepted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( __( '%s: Estimate Accepted', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-accepted', null )
 				),
 				'declined_estimate' => array(
 					'name' => __( 'Estimate Declined', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the admin after an estimate is accepted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( __( '%s: Estimate Declined', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-declined', null )
 				),
 				'payment_notification' => array(
 					'name' => __( 'Payment Received', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to an admin when any payment is received.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
 					'default_title' => sprintf( __( '%s: Payment Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-payment', null )
 				),
@@ -209,6 +209,14 @@ class SI_Notifications extends SI_Notifications_Control {
 						'description' => __( 'Used to display the invoice tax (2).', 'sprout-invoices' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax2' )
 					),
+				'invoice_notes' => array(
+						'description' => __( 'Used to display the invoice notes.', 'sprout-invoices' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_notes' )
+					),
+				'invoice_terms' => array(
+						'description' => __( 'Used to display the invoice terms.', 'sprout-invoices' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_terms' )
+					),
 				'invoice_total' => array(
 						'description' => __( 'Used to display the invoice total.', 'sprout-invoices' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total' )
@@ -284,6 +292,14 @@ class SI_Notifications extends SI_Notifications_Control {
 				'estimate_tax2' => array(
 						'description' => __( 'Used to display the estimate tax (2).', 'sprout-invoices' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax2' )
+					),
+				'estimate_notes' => array(
+						'description' => __( 'Used to display the estimate notes.', 'sprout-invoices' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_notes' )
+					),
+				'estimate_terms' => array(
+						'description' => __( 'Used to display the estimate terms.', 'sprout-invoices' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_terms' )
 					),
 				'lead_entries' => array(
 						'description' => __( 'Used to display the lead entries in HTML.', 'sprout-invoices' ),
@@ -849,7 +865,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$post_type_object = get_post_type_object( SI_Invoice::POST_TYPE );
 			$url = apply_filters( 'get_edit_post_link', admin_url( sprintf( $post_type_object->_edit_link . '&action=edit', $invoice_id ) ), $invoice_id, '' );
 		}
-		return apply_filters( 'shortcode_invoice_edit_url', esc_url( $url ), $data );
+		return apply_filters( 'shortcode_invoice_edit_url', esc_url_raw( $url ), $data );
 	}
 
 	/**
@@ -867,7 +883,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$invoice_id = $data['invoice']->get_id();
 			$url = get_permalink( $invoice_id );
 		}
-		return apply_filters( 'shortcode_invoice_url', esc_url( $url ), $data );
+		return apply_filters( 'shortcode_invoice_url', esc_url_raw( $url ), $data );
 	}
 
 	/**
@@ -994,6 +1010,42 @@ class SI_Notifications extends SI_Notifications_Control {
 			$amount = sa_get_formatted_money( $data['invoice']->get_tax2_total(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_invoice_tax', $amount, $data );
+	}
+
+
+	/**
+	 * Return the invoice terms
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
+	 * @return string          filtered
+	 */
+	public static function shortcode_invoice_terms( $atts, $content, $code, $data ) {
+		$terms = '';
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			$terms = $data['invoice']->get_terms();
+		}
+		return apply_filters( 'shortcode_invoice_terms', $terms, $data );
+	}
+
+
+	/**
+	 * Return the invoice notes
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
+	 * @return string          filtered
+	 */
+	public static function shortcode_invoice_notes( $atts, $content, $code, $data ) {
+		$notes = '';
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			$notes = $data['invoice']->get_notes();
+		}
+		return apply_filters( 'shortcode_invoice_notes', $notes, $data );
 	}
 
 	/**
@@ -1142,7 +1194,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$client_id = $data['client']->get_id();
 			$url = get_edit_post_link( $client_id );
 		}
-		return apply_filters( 'shortcode_client_edit_url', esc_url( $url ), $data );
+		return apply_filters( 'shortcode_client_edit_url', esc_url_raw( $url ), $data );
 	}
 
 
@@ -1197,7 +1249,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate_id = $data['estimate']->get_id();
 			$url = get_edit_post_link( $estimate_id );
 		}
-		return apply_filters( 'shortcode_estimate_edit_url', esc_url( $url ), $data );
+		return apply_filters( 'shortcode_estimate_edit_url', esc_url_raw( $url ), $data );
 	}
 
 	/**
@@ -1215,7 +1267,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate_id = $data['estimate']->get_id();
 			$url = get_permalink( $estimate_id );
 		}
-		return apply_filters( 'shortcode_estimate_url', esc_url( $url ), $data );
+		return apply_filters( 'shortcode_estimate_url', esc_url_raw( $url ), $data );
 	}
 
 	/**
@@ -1305,6 +1357,42 @@ class SI_Notifications extends SI_Notifications_Control {
 			$amount = sa_get_formatted_money( $data['estimate']->get_tax2_total(), $data['estimate']->get_id() );
 		}
 		return apply_filters( 'shortcode_estimate_tax', $amount, $data );
+	}
+
+
+	/**
+	 * Return the estimate terms
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
+	 * @return string          filtered
+	 */
+	public static function shortcode_estimate_terms( $atts, $content, $code, $data ) {
+		$terms = '';
+		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			$terms = $data['estimate']->get_terms();
+		}
+		return apply_filters( 'shortcode_estimate_terms', $terms, $data );
+	}
+
+
+	/**
+	 * Return the estimate notes
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
+	 * @return string          filtered
+	 */
+	public static function shortcode_estimate_notes( $atts, $content, $code, $data ) {
+		$notes = '';
+		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			$notes = $data['estimate']->get_notes();
+		}
+		return apply_filters( 'shortcode_estimate_notes', $notes, $data );
 	}
 
 	/**

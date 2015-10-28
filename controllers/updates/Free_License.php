@@ -28,6 +28,8 @@ class SI_Free_License extends SI_Controller {
 
 		// Messaging
 		add_action( 'si_settings_page',  array( __CLASS__, 'thank_for_registering' ), 10, 0 );
+
+		//add_action( 'admin_notices',  array( __CLASS__, 'my_promo_message' ), 10, 0 );
 	}
 
 	public static function license_key(){
@@ -85,7 +87,7 @@ class SI_Free_License extends SI_Controller {
 			$message = __( 'License not created.', 'sprout-invoices' );
 			$response = array(
 					'response' => $message,
-					'error' => 1
+					'error' => 1,
 				);
 		}
 
@@ -100,6 +102,16 @@ class SI_Free_License extends SI_Controller {
 		}
 	}
 
+	////////////
+	// Promos //
+	////////////
+
+	public static function my_promo_message() {
+		if ( false === SI_Free_License::license_status() ) {
+			return;
+		}
+		printf( '<div class="updated notice is-dismissible"><p><span class="icon-sproutapps-flat"></span><strong>Sprout Invoices Pro Discount</strong>: Just <a href="%s">generate a free license key</a> for your site and a discount will be sent to you instantly.</p></div>', admin_url( 'admin.php?page=sprout-apps%2Fsettings&tab=dashboard' ) );
+	}
 
 	//////////////
 	// Utility //
@@ -142,7 +154,7 @@ class SI_Free_License extends SI_Controller {
 		if ( ! self::$uid ) {
 			return $url;
 		}
-		return add_query_arg( array( 'uid' => self::$uid ), $url );
+		return add_query_arg( array( 'suid' => self::$uid ), $url );
 	}
 
 }

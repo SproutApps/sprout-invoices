@@ -11,7 +11,7 @@
 	<div class="welcome_content clearfix">
 		<div class="license-overview">
 
-			<?php if ( SI_Free_License::license_status() == false ) : ?>
+			<?php if ( false === SI_Free_License::license_status() ) : ?>
 				<div class="activate_message clearfix">
 					<div class="activation_msg clearfix">
 						 <h4><?php _e( 'Get a free Sprout Apps license instantly...', 'sprout-invoices' ) ?></h4>
@@ -23,7 +23,7 @@
 					</div>
 
 					<div class="activation_msg clearfix">
-						<?php _e( 'A free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key for your free version of Sprout Invoices.', 'sprout-invoices' ) ?></p>
+						<?php printf( __( 'Generating a free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key that will enable future features (i.e. easy add-on installs from <a href="%s">https://sproutapps.co</a>).', 'sprout-invoices' ), si_get_sa_link() ) ?></p>
 					</div>
 				</div>
 			<?php endif ?>

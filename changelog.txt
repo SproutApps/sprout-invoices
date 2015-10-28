@@ -1,3 +1,10 @@
+= 9.1 =
+
+* NEW: Notes and Terms notification shortcodes
+* FIX: Zapier routing issues
+* FIX: Pass estimates notes to newly created invoice from estimate
+* FIX: Time tracking load order fix
+
 = 9.0.3 =
 
 * FIX: AJAX callback errors, i.e. client creation.

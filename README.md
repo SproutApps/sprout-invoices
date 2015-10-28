@@ -91,6 +91,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 ### Changelog
 
 
+**9.1**
+
+* NEW: Notes and Terms notification shortcodes
+* FIX: Zapier routing issues
+* FIX: Pass estimates notes to newly created invoice from estimate
+* FIX: Time tracking load order fix
+
 **9.0.3**
 
 * FIX: AJAX callback errors, i.e. client creation.
@@ -727,7 +734,7 @@ Welcome! This is a big update and a big step for us.
 
 * Initial Release
 
-**0.9.0.3.1**
+**0.9.1.1**
 
 * Remove debugging logs from release branch.
 
