@@ -213,7 +213,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						<?php endif ?>
 
 					</section>
-				
+
 				</div><!-- #doc -->
 
 				<div id="footer_wrap">
