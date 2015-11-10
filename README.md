@@ -90,6 +90,9 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**9.1.1**
+
+* FIX: PayPal cart total errors with invoices that utilize discounts, deposits, and taxes with fractional totals.
 
 **9.1**
 

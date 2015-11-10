@@ -750,16 +750,21 @@ class SI_Reporting extends SI_Dashboard {
 	}
 
 	public static function maybe_clear_report_cache( $post_id, $post ) {
-		if ( $post->post_status == 'auto-draft' ) {
+		if ( 'auto-draft' === $post->post_status ) {
 			return;
 		}
-		if ( in_array( $post->post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE, SI_Payment::POST_TYPE ) ) ) {
-			
-			global $wpdb;
-			$sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s";
-			$sql = $wpdb->prepare( $sql, $wpdb->esc_like( '_transient_' . self::CACHE_KEY_PREFIX ) . '%', $wpdb->esc_like( '_transient_timeout_' . self::CACHE_KEY_PREFIX ) . '%' );
-			$result = $wpdb->query( $sql );
+		if ( ! in_array( $post->post_type, array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE, SI_Payment::POST_TYPE ) ) ) {
+			return;
 		}
+
+		self::clear_report_cache();
+	}
+
+	public static function clear_report_cache() {
+		global $wpdb;
+		$sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s";
+		$sql = $wpdb->prepare( $sql, $wpdb->esc_like( '_transient_' . self::CACHE_KEY_PREFIX ) . '%', $wpdb->esc_like( '_transient_timeout_' . self::CACHE_KEY_PREFIX ) . '%' );
+		$result = $wpdb->query( $sql );
 	}
 
 	//////////////
