@@ -12,15 +12,39 @@ function si_get_line_item_columns( $type = '' ) {
 
 function si_line_item_get_children( $position = 1.0, $items = array() ) {
 	$children = array();
-	foreach ( $items as $key => $data ) {
-		if ( (float) $key !== (float) $position ) {
-			if ( (int) floor( $key ) === (int) $position ) {
-				$children[ $key ] = $data;
+	if ( ! si_line_item_is_child( $position ) ) {
+		foreach ( $items as $key => $data ) {
+			if ( (float) $key !== (float) $position ) {
+				if ( (int) floor( $key ) === (int) $position ) {
+					$children[ $key ] = $data;
+				}
 			}
 		}
 	}
 	return apply_filters( 'si_line_item_get_children', $children, $position, $items );
 }
+
+function si_line_item_is_parent( $position = 1.0, $items = array() ) {
+	if ( si_line_item_is_child( $position ) ) {
+		return false;
+	}
+	foreach ( $items as $key => $data ) {
+		if ( (float) $key !== (float) $position ) {
+			if ( (int) floor( $key ) === (int) $position ) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function si_line_item_is_child( $position = 1.0 ) {
+	if ( ceil( $position ) > floor( $position ) ) {
+		return true;
+	}
+	return false;
+}
+
 
 function si_get_first_line_item( $doc_id = 0 ) {
 	if ( ! $doc_id ) {
@@ -96,14 +120,18 @@ function si_get_front_end_line_item( $item_data = array(), $position = 0, $prev_
 
 					<?php foreach ( $columns as $column_slug => $column ) : ?>
 						
-						<?php if ( 'hidden' !== $column['type'] ) : ?>
-							
-							<div class="column column_<?php echo esc_attr( $column_slug ) ?>">
-								<?php echo $column['label'] ?>
-							</div>
-							<!-- <?php echo esc_attr( $column_slug ) ?> -->
-
+						<?php if ( 'hidden' === $column['type'] ) : ?>
+							<?php continue; ?>
 						<?php endif ?>
+
+						<?php if ( $has_children && isset( $column['hide_if_parent'] ) && (bool) $column['hide_if_parent'] ) : ?>
+							<?php continue; ?>
+						<?php endif ?>
+
+						<div class="column column_<?php echo esc_attr( $column_slug ) ?>">
+							<?php echo $column['label'] ?>
+						</div>
+						<!-- <?php echo esc_attr( $column_slug ) ?> -->
 
 					<?php endforeach ?>
 
@@ -127,7 +155,7 @@ function si_get_front_end_line_item( $item_data = array(), $position = 0, $prev_
 					continue;
 				}
 
-				if ( $has_children && isset( $column['hide_if_parent'] ) && $column['hide_if_parent'] ) {
+				if ( $has_children && isset( $column['hide_if_parent'] ) && (bool) $column['hide_if_parent'] ) {
 					continue;
 				} ?>
 

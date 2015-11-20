@@ -2,13 +2,13 @@
 
 /**
  * Notification Model
- * 
+ *
  *
  * @package Sprout_Invoices
  * @subpackage Notification
  */
 class SI_Notification extends SI_Post_Type {
-	
+
 	const POST_TYPE = 'sa_notification';
 	private static $instances = array();
 
@@ -22,8 +22,10 @@ class SI_Notification extends SI_Post_Type {
 		$post_type_args = array(
 			'public' => false,
 			'has_archive' => false,
-			'show_ui' => false,
+			'show_ui' => true,
 			'show_in_menu' => 'sprout-invoice',
+			'show_in_nav_menus' => false,
+			'show_in_admin_bar' => false,
 			'supports' => array( 'title', 'editor', 'revisions' )
 		);
 		self::register_post_type( self::POST_TYPE, 'Notification', 'Notifications', $post_type_args );
@@ -41,18 +43,18 @@ class SI_Notification extends SI_Post_Type {
 	 * @return Sprout_Invoices_Notification
 	 */
 	public static function get_instance( $id = 0 ) {
-		if ( !$id )
-			return null;
-		
-		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
-			self::$instances[$id] = new self( $id );
+		if ( ! $id ) {
+			return null; }
 
-		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return null;
-		
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return null;
-		
+		if ( ! isset( self::$instances[$id] ) || ! self::$instances[$id] instanceof self ) {
+			self::$instances[$id] = new self( $id ); }
+
+		if ( ! isset( self::$instances[$id]->post->post_type ) ) {
+			return null; }
+
+		if ( self::$instances[$id]->post->post_type != self::POST_TYPE ) {
+			return null; }
+
 		return self::$instances[$id];
 	}
 

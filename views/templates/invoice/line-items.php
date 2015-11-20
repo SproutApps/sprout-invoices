@@ -1,14 +1,13 @@
 <ol id="items">
 
 	<?php do_action( 'si_document_line_items' ) ?>
-
 	<?php foreach ( $line_items as $position => $item_data ) : ?>
 
 		<?php if ( is_int( $position ) ) : // is not a child ?>
 
 			<?php
 				$children = si_line_item_get_children( $position, $line_items );
-				$has_children = ( ! empty( $children ) ) ? true : false ; 
+				$has_children = ( ! empty( $children ) ) ? true : false ;
 				$item_type = ( isset( $item_data['type'] ) ) ? $item_data['type'] : SI_Line_Items::DEFAULT_TYPE; ?>
 
 			<li class="item item_type_<?php echo esc_attr( $item_type ) ?> <?php if ( $has_children ) { echo esc_attr( 'line_item_has_children' ); } ?>" data-id="<?php echo (float) $position ?>">

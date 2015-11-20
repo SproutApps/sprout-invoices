@@ -279,12 +279,12 @@ class SI_Estimate extends SI_Post_Type {
 		$this->set_status( self::STATUS_DECLINED );
 	}
 
-	public function get_status_label( $status = '' ) {
-		if ( $status == '' ) {
+	public static function get_status_label( $status = '' ) {
+		if ( '' === $status ) {
 			$status = $this->get_status();
 		}
 		$statuses = self::get_statuses();
-		return $statuses[$status];
+		return $statuses[ $status ];
 	}
 
 	///////////
@@ -501,15 +501,19 @@ class SI_Estimate extends SI_Post_Type {
 	 * @return
 	 */
 	public function get_calculated_total() {
+		if ( isset( $this->calculated_total ) ) {
+			return $this->calculated_total;
+		}
 		$subtotal = $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
 		}
 		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$pre_disc_total = $subtotal + $tax_total + $tax2_total;
-		$total = $pre_disc_total * ( ( 100 - $this->get_discount() ) / 100 );
-		return $total;
+		$invoice_total = $subtotal + $tax_total + $tax2_total;
+		$total = $invoice_total - $this->get_discount_total();
+		$this->calculated_total = $total;
+		return si_get_number_format( $total );
 	}
 
 	public function set_calculated_total() {
@@ -521,16 +525,32 @@ class SI_Estimate extends SI_Post_Type {
 	}
 
 	public function get_subtotal() {
+		if ( isset( $this->subtotal ) ) {
+			return $this->subtotal;
+		}
 		$subtotal = 0;
 		$line_items = $this->get_line_items();
 		if ( ! empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
-				if ( isset( $data['rate'] ) && $data['rate'] ) {
-					$calc = ( $data['rate'] * $data['qty'] ) * ( ( 100 - $data['tax'] ) / 100 );
-					$subtotal += apply_filters( 'si_line_item_total', $calc, $data );
+				if ( isset( $data['rate'] ) ) {
+
+					if ( si_line_item_is_parent( $key, $line_items ) ) {
+						continue;
+					}
+
+					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
+					$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 1;
+					$line_total = ( $data['rate'] * $qty );
+					if ( isset( $data['tax'] ) ) {
+						$tax = $line_total * ( $data['tax'] / 100 );
+						$line_total = $line_total - si_get_number_format( $tax ); // convert so that rounding can occur before discount is removed.
+					}
+
+					$subtotal += apply_filters( 'si_line_item_total', $line_total, $data );
 				}
 			}
 		}
+		$this->subtotal = $subtotal;
 		return $subtotal;
 	}
 

@@ -17,9 +17,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title><?php wp_title( '|', true, 'right' ); ?></title>
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
-		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php si_head(); ?>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
@@ -273,6 +271,6 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 	</body>
 	<?php do_action( 'si_document_footer' ) ?>
 	<?php si_footer() ?>
-	<!-- Template Version 9.1.1 -->
+	<!-- Template Version 9.2 -->
 </html>
 <?php do_action( 'invoice_viewed' ) ?>

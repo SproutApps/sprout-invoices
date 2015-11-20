@@ -152,8 +152,10 @@
 					$totals += parseFloat($val);
 				});
 				var $parent_total_span = $(li).find('.column_total span').first(),
+					$parent_total_input = $(li).find('.column_total input').first(),
 					$parent_total = parseFloat( $totals ).toFixed(2);
 
+				$parent_total_input.val( parseFloat( $parent_total ).toFixed(2) );
 				si.lineItems.totalUpdate( $parent_total_span, $parent_total );
 			}
 		});

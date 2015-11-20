@@ -270,11 +270,11 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public static function get_status_label( $status = '' ) {
-		if ( $status == '' ) {
+		if ( '' === $status ) {
 			$status = $this->get_status();
 		}
 		$statuses = self::get_statuses();
-		return $statuses[$status];
+		return $statuses[ $status ];
 	}
 
 	///////////
@@ -597,6 +597,9 @@ class SI_Invoice extends SI_Post_Type {
 			// sometimes there's a delay/cache
 			$this->get_balance();
 		}
+		if ( isset( $this->calculated_total ) ) {
+			return $this->calculated_total;
+		}
 		$subtotal = $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
@@ -605,6 +608,7 @@ class SI_Invoice extends SI_Post_Type {
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
 		$invoice_total = $subtotal + $tax_total + $tax2_total;
 		$total = $invoice_total - $this->get_discount_total();
+		$this->calculated_total = $total;
 		return si_get_number_format( $total );
 	}
 
@@ -617,11 +621,19 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public function get_subtotal() {
+		if ( isset( $this->subtotal ) ) {
+			return $this->subtotal;
+		}
 		$subtotal = 0;
 		$line_items = $this->get_line_items();
 		if ( ! empty( $line_items ) ) {
 			foreach ( $line_items as $key => $data ) {
 				if ( isset( $data['rate'] ) ) {
+
+					if ( si_line_item_is_parent( $key, $line_items ) ) {
+						continue;
+					}
+
 					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
 					$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 1;
 					$line_total = ( $data['rate'] * $qty );
@@ -629,10 +641,12 @@ class SI_Invoice extends SI_Post_Type {
 						$tax = $line_total * ( $data['tax'] / 100 );
 						$line_total = $line_total - si_get_number_format( $tax ); // convert so that rounding can occur before discount is removed.
 					}
+
 					$subtotal += apply_filters( 'si_line_item_total', $line_total, $data );
 				}
 			}
 		}
+		$this->subtotal = $subtotal;
 		return $subtotal;
 	}
 
@@ -734,6 +748,7 @@ class SI_Invoice extends SI_Post_Type {
 		return $user_id;
 	}
 
+
 	//////////////
 	// Utility //
 	//////////////
@@ -744,6 +759,9 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public function get_payments_total( $pending = true ) {
+		if ( isset( $this->payments_total ) ) {
+			return $this->payments_total;
+		}
 		$payment_ids = self::get_payments();
 		$payment_total = 0;
 		foreach ( $payment_ids as $payment_id ) {
@@ -755,7 +773,7 @@ class SI_Invoice extends SI_Post_Type {
 				$payment_total += $payment->get_amount();
 			}
 		}
-
+		$this->payment_total = $payment_total;
 		return $payment_total;
 	}
 

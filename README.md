@@ -90,6 +90,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**9.2**
+
+* FIX: Parent line item totals
+* OPT: Slight optimization for estimates and invoices
+
 **9.1.1**
 
 * FIX: PayPal cart total errors with invoices that utilize discounts, deposits, and taxes with fractional totals.
