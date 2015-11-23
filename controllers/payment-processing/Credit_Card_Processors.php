@@ -93,46 +93,46 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
-				'required' => true
+				'required' => true,
 			),
 			'cc_number' => array(
 				'type' => 'text',
-				'weight' => 1,
+				'weight' => 5,
 				'label' => __( 'Card Number', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => true
+				'required' => true,
 			),
 			'cc_expiration_month' => array(
 				'type' => 'select',
-				'weight' => 2,
+				'weight' => 20,
 				'options' => self::get_month_options(),
 				'label' => __( 'Expiration Date', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => true
+				'required' => true,
 			),
 			'cc_expiration_year' => array(
 				'type' => 'select',
-				'weight' => 3,
+				'weight' => 21,
 				'options' => self::get_year_options(),
 				'label' => __( 'Expiration Date', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => true
+				'required' => true,
 			),
 			'cc_cvv' => array(
 				'type' => 'text',
 				'size' => 5,
-				'weight' => 10,
+				'weight' => 23,
 				'label' => __( 'Security Code', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
-				'required' => true
+				'required' => true,
 			)
 		);
 		$fields = apply_filters( 'sa_credit_card_fields', $fields, $checkout );

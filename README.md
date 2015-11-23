@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**9.2.0.1**
+
+* FIX: Estimates issue
+
 **9.2**
 
 * FIX: Parent line item totals

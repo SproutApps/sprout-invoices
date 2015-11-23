@@ -510,8 +510,7 @@ class SI_Estimate extends SI_Post_Type {
 		}
 		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
 		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$invoice_total = $subtotal + $tax_total + $tax2_total;
-		$total = $invoice_total - $this->get_discount_total();
+		$total = $subtotal + $tax_total + $tax2_total;
 		$this->calculated_total = $total;
 		return si_get_number_format( $total );
 	}
