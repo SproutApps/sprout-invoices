@@ -31,6 +31,10 @@ class SI_Compatibility extends SI_Controller {
 			add_action( 'do_meta_boxes', array( __CLASS__, 'remove_um_metabox' ), 9 );
 		}
 
+		// TC_back_pro_slider
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'deregister_select2_from_customizer' ), 100 );
+		add_filter( 'add_meta_boxes', array( __CLASS__, 'prevent_slider_pro_adding_metaboxes' ), 100 );
+
 		add_action( 'parse_query', array( __CLASS__, 'remove_seo_header_stuff' ) );
 	}
 
@@ -89,6 +93,24 @@ class SI_Compatibility extends SI_Controller {
 		if ( self::is_si_admin() ) {
 			wp_deregister_script( 'cf-select2minjs' );
 			wp_deregister_style( 'cf-select2css' );
+		}
+	}
+
+	public static function deregister_select2_from_customizer() {
+		if ( self::is_si_admin() ) {
+			wp_deregister_script( 'selecter-script' );
+			wp_deregister_style( 'tc-select2-css' );
+		}
+	}
+
+	public static function prevent_slider_pro_adding_metaboxes() {
+		if ( self::is_si_admin() ) {
+			// Disable Yoast metabox
+			$cpts = array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE );
+			foreach ( $cpts as $cpt ) {
+				remove_meta_box( 'layout_sectionid', $cpt, 'normal' );
+				remove_meta_box( 'slider_sectionid', $cpt, 'normal' );
+			}
 		}
 	}
 

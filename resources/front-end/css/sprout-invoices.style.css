@@ -852,9 +852,15 @@ div#vcards {
 	margin-right: 20px;
 }
 
+#line_items_totals span.money_amount {
+    display: inline-block;
+    min-width: 5em;
+}
+
 #line_items_totals div {
 	margin-bottom: 10px;
 }
+
 
 #line_item_add {
 	display: none;

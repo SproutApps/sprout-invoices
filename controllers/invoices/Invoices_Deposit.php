@@ -37,7 +37,7 @@ class SI_Invoices_Deposit extends SI_Invoices {
 		} elseif ( floatval( $total - $total_payments ) > 0.00 || 'auto-draft' === $status || 'temp' === $status  ) {
 			?>
 			<div id="deposit">
-				<b title="Set the amount due for the next payment&mdash;the amount due will be used if blank" class="helptip"><?php _e( 'Deposit Due', 'sprout-invoices' ) ?></b>
+				<b title="Set the amount due for the next payment&mdash;amount due will be used 0" class="helptip"><?php _e( 'Deposit Due', 'sprout-invoices' ) ?></b>
 				<input type="number" name="deposit" value="<?php echo (float) $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any">
 			</div>
 			<?php

@@ -289,10 +289,20 @@
 			var rand_num = Math.floor( Math.random() * 10000000 );
 			// change the unique id
 			$row.find('[name="line_item__id[]"]').val( rand_num );
+
+			// WYSIWYG
+			if ( si_js_object.redactor ) {
+				var $ta = $row.find('.sa_option_textarea').clone().removeClass('edited');
+				$row.find('.redactor-box').remove();
+				$row.find('.line_item_option_row .column_desc').append($ta);
+				$row.find('.column_desc textarea').redactor();
+			};
+
 			// add
 			$(this).closest('.items_list').append($row);
 			// update key
 			si.lineItems.modifyInputKey();
+
 			return false;
 		});
 

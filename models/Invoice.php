@@ -484,11 +484,13 @@ class SI_Invoice extends SI_Post_Type {
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
 		}
-		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
-		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$invoice_total = $subtotal + $tax_total + $tax2_total;
-		$discount = $invoice_total * ( $this->get_discount() / 100 );
+		if ( apply_filters( 'si_discount_after_taxes', true, $this ) ) {
+			$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
+			$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
+			$subtotal = $subtotal + $tax_total + $tax2_total;
+		}
 
+		$discount = $subtotal * ( $this->get_discount() / 100 );
 		return si_get_number_format( $discount );
 	}
 
@@ -604,9 +606,8 @@ class SI_Invoice extends SI_Post_Type {
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
 		}
-		$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
-		$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
-		$invoice_total = $subtotal + $tax_total + $tax2_total;
+
+		$invoice_total = $subtotal + $this->get_tax_total() + $this->get_tax2_total();
 		$total = $invoice_total - $this->get_discount_total();
 		$this->calculated_total = $total;
 		return si_get_number_format( $total );

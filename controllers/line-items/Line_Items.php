@@ -312,7 +312,15 @@ class SI_Line_Items extends SI_Controller {
 						'value' => si_get_estimate_taxes_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_estimate_taxes_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_estimate_taxes_total( $doc_id ) ),
-						'admin_hide' => true,
+						'admin_hide' => ( 0.01 > (float) si_get_estimate_taxes_total( $doc_id ) ),
+						'weight' => 20,
+					),
+				'discounts' => array(
+						'label' => __( 'Discount', 'sprout-invoices' ),
+						'value' => si_get_estimate_discount_total( $doc_id ),
+						'formatted' => sa_get_formatted_money( si_get_estimate_discount_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
+						'hide' => ( 0.01 > (float) si_get_estimate_discount_total( $doc_id ) ),
+						'admin_hide' => ( 0.01 > (float) si_get_estimate_discount_total( $doc_id ) ),
 						'weight' => 20,
 					),
 				'total' => array(
@@ -354,7 +362,15 @@ class SI_Line_Items extends SI_Controller {
 						'value' => si_get_invoice_taxes_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_invoice_taxes_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_invoice_taxes_total( $doc_id ) ),
-						'admin_hide' => true,
+						'admin_hide' => ( 0.01 > (float) si_get_invoice_taxes_total( $doc_id ) ),
+						'weight' => 20,
+					),
+				'discounts' => array(
+						'label' => __( 'Discount', 'sprout-invoices' ),
+						'value' => si_get_invoice_discount_total( $doc_id ),
+						'formatted' => sa_get_formatted_money( si_get_invoice_discount_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
+						'hide' => ( 0.01 > (float) si_get_invoice_discount_total( $doc_id ) ),
+						'admin_hide' => ( 0.01 > (float) si_get_invoice_discount_total( $doc_id ) ),
 						'weight' => 20,
 					),
 				'total' => array(
@@ -363,7 +379,7 @@ class SI_Line_Items extends SI_Controller {
 						'formatted' => sa_get_formatted_money( si_get_invoice_calculated_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'helptip' => __( 'Total includes discounts and other fees.', 'sprout-invoices' ),
 						'hide' => false,
-						'admin_hide' => true,
+						'admin_hide' => false,
 						'weight' => 30,
 					),
 				'payments' => array(
@@ -371,7 +387,7 @@ class SI_Line_Items extends SI_Controller {
 						'value' => si_get_invoice_payments_total( $doc_id ),
 						'formatted' => sa_get_formatted_money( si_get_invoice_payments_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
 						'hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id ) ),
-						'admin_hide' => false,
+						'admin_hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id ) ),
 						'weight' => 40,
 					),
 				'balance' => array(

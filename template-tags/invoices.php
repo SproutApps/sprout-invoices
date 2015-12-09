@@ -358,6 +358,21 @@ if ( ! function_exists( 'si_invoice_discount' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'si_get_invoice_discount_total' ) ) :
+	/**
+	 * Get the invoice tax
+	 * @param  integer $id
+	 * @return string
+	 */
+	function si_get_invoice_discount_total( $id = 0 ) {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+		$invoice = SI_Invoice::get_instance( $id );
+		return apply_filters( 'si_get_invoice_discount_total', $invoice->get_discount_total(), $invoice );
+	}
+endif;
+
 
 if ( ! function_exists( 'si_get_invoice_tax' ) ) :
 	/**

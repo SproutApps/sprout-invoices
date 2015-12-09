@@ -418,6 +418,21 @@ if ( ! function_exists( 'si_estimate_discount' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'si_get_estimate_discount_total' ) ) :
+	/**
+	 * Get the invoice tax
+	 * @param  integer $id
+	 * @return string
+	 */
+	function si_get_estimate_discount_total( $id = 0 ) {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+		$estimate = SI_Estimate::get_instance( $id );
+		return apply_filters( 'si_get_estimate_discount_total', $estimate->get_discount_total(), $estimate );
+	}
+endif;
+
 
 if ( ! function_exists( 'si_get_estimate_tax' ) ) :
 	/**

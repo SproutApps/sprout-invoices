@@ -1,3 +1,14 @@
+= 9.2.2 =
+
+* UPDATE: Added more line item totals within the admin
+* FIX: Cloning line items would result in descriptions that couldn't be saved.
+* FIX: Extreme edge case calculation issues
+
+= 9.2.1 =
+
+* UPDATE: Theme compatibility improvements, e.g select2
+* FIX: discount calculation improvements
+
 = 9.2.0.1 =
 
 * FIX: Estimates issue

@@ -36,7 +36,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 			<div id="doc_header_wrap" class="sticky_header">
 				<header id="header_title">
 					
-					<span class="header_id"><?php printf( esc_html__( 'Invoice %s', 'sprout-invoices' ), intval( si_get_invoice_id() ) ) ?></span>
+					<span class="header_id"><?php printf( esc_html__( 'Invoice %s', 'sprout-invoices' ), si_get_invoice_id() ) ?></span>
 					
 					<div id="doc_actions">
 
@@ -271,6 +271,6 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 	</body>
 	<?php do_action( 'si_document_footer' ) ?>
 	<?php si_footer() ?>
-	<!-- Template Version 9.2.0.1 -->
+	<!-- Template Version 9.2.2 -->
 </html>
 <?php do_action( 'invoice_viewed' ) ?>
