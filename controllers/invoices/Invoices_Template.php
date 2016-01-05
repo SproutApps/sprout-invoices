@@ -11,6 +11,7 @@
 class SI_Invoices_Template extends SI_Controller {
 
 	public static function init() {
+		add_filter( 'the_title', array( __CLASS__, 'prevent_auto_draft_title' ), 10, 2 );
 
 		add_action( 'si_invoice_payment_button', array( __CLASS__, 'show_payment_options' ), 100, 2 );
 
@@ -24,6 +25,18 @@ class SI_Invoices_Template extends SI_Controller {
 	/////////////
 	// Content //
 	/////////////
+
+	public static function prevent_auto_draft_title( $title = '', $post_id = 0 ) {
+		if ( __('Auto Draft') !== $title ) {
+			return $title;
+		}
+		if ( SI_Invoice::POST_TYPE !== get_post_type( $post_id ) ) {
+			return $title;
+		}
+		$invoice = SI_Invoice::get_instance( $post_id );
+		return apply_filters( 'si_default_invoice_title', sprintf( '#%s', $invoice->get_invoice_id() ), $invoice );
+
+	}
 
 	public static function line_item_content_filter( $description = '' ) {
 		if ( apply_filters( 'si_the_content_filter_line_item_descriptions', true ) ) {

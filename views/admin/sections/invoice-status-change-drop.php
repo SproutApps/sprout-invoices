@@ -5,7 +5,7 @@
 				$status_change_span = '&nbsp;<div class="dashicons dashicons-arrow-down"></div>';
 					?>
 			<?php if ( $status == SI_Invoice::STATUS_PENDING ) : ?>
-				<?php printf( '<span class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Pending payment(s)', 'sprout-invoices'  ), __( 'Pending Payment(s)' ), $status_change_span ); ?>
+				<?php printf( '<span class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Pending payment(s)', 'sprout-invoices'  ), __( 'Pending Payment(s)', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Invoice::STATUS_PAID ) : ?>
 				<?php printf( '<span class="si_status complete si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Fully Paid', 'sprout-invoices' ), __( 'Paid', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Invoice::STATUS_PARTIAL ) : ?>

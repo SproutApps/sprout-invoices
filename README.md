@@ -90,6 +90,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**9.3**
+
+* UPDATE: Default Invoice/Estimate Subject to ID
+* UPDATE: Localization update, including French translation
+
 **9.2.2**
 
 * UPDATE: Added more line item totals within the admin

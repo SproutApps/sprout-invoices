@@ -182,9 +182,11 @@ function sprout_invoices_load() {
 
 	// l18n
 	require_once SI_PATH.'/languages/SI_l10n.php';
+	require_once SI_PATH.'/languages/SI_Strings.php';
 
 	// i18n & l10n
 	SI_l10n::init();
+	SI_Strings::load_additional_strings();
 	SI_Locales::init();
 	SI_Countries_States::init();
 

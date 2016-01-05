@@ -173,7 +173,7 @@ if ( 0 != $post->ID ) {
 	<a href="#edit_discount" class="edit-discount hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit discount', 'sprout-invoices' ) ?></span>
 	</a>
- 	<span title="The discount is applied after tax." class="helptip"></span>
+ 	<span title="<?php _e( 'The discount is applied after tax.', 'sprout-invoices' ) ?>" class="helptip"></span>
 
 	<div id="discount_div" class="control_wrap hide-if-js">
 		<div class="discount-wrap">
@@ -193,7 +193,7 @@ if ( 0 != $post->ID ) {
 	<a href="#edit_tax" class="edit-tax hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit tax', 'sprout-invoices' ) ?></span>
 	</a>
-	<span title="Tax is applied before the discount." class="helptip"></span>
+	<span title="<?php _e( 'Tax is applied before the discount.', 'sprout-invoices' ) ?>" class="helptip"></span>
 
 	<div id="tax_div" class="control_wrap hide-if-js">
 		<div class="tax-wrap">
@@ -214,7 +214,7 @@ if ( 0 != $post->ID ) {
 	<a href="#edit_tax2" class="edit-tax2 hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Edit tax', 'sprout-invoices' ) ?></span>
 	</a>
-	<span title="Tax is applied before the discount." class="si_tooltip"></span>
+	<span title="<?php _e( 'Tax is applied before the discount.', 'sprout-invoices' ) ?>" class="si_tooltip"></span>
 
 	<div id="tax2_div" class="control_wrap hide-if-js">
 		<div class="tax2-wrap">

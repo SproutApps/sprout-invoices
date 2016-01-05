@@ -24,19 +24,26 @@
 		<main id="main" class="container site-main" role="main">
 			<div class="row">
 				<div class="products_grid">
-					<?php foreach ( $addons as $addon_id => $addon ) : ?>
+					<?php foreach ( $addons as $addon_id => $addon ) :
+					error_log( 'log' . print_r( $addon, TRUE ) );
+					 ?>
 						<article class="type-download <?php if ( $addon->bundled ) { echo 'bundled'; } ?>">
 							<div class="section">
 								<div class="pic">
-									<?php if ( $addon->bundled ) : ?>
+
+									<?php if ( 63999 === $addon->id ) : ?>
+										<span class="bundled_addon"><?php _e( 'Bundled w/ Business License Only', 'sprout-invoices' ) ?></span>
+									<?php elseif ( $addon->bundled ) : ?>
 										<span class="bundled_addon"><?php _e( 'Bundled Free w/ License', 'sprout-invoices' ) ?></span>
 									<?php endif ?>
 									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
 										<?php echo $addon->thumb; ?>
 									</a>
-									<div class="download_purchase_link">
-										<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price; ?>&nbsp;–&nbsp;<?php _e( 'Add to Cart', 'sprout-invoices' ) ?></span></a>
-									</div>
+									<?php if ( ! in_array( $addon->id, array( 63999 ) ) ): ?>
+										<div class="download_purchase_link">
+											<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price; ?>&nbsp;–&nbsp;<?php _e( 'Add to Cart', 'sprout-invoices' ) ?></span></a>
+										</div>
+									<?php endif ?>
 								</div>
 								<div class="info">
 									<strong><?php echo wp_kses( $addon->post_title, wp_kses_allowed_html( 'post' ) ); ?></strong>							
