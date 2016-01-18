@@ -4,22 +4,16 @@
  *
  * FUTURE Organize
  */
-
 /**
  * Font faces for sprout apps
  */
-
 @font-face {
 	font-family: "sproutapps-ff";
 	src: url("../../admin/css/sproutapps-ff/sproutapps-ff.eot");
-	src: url("../../admin/css/sproutapps-ff/sproutapps-ff.eot?#iefix") format("embedded-opentype"),
-       url("../../admin/css/sproutapps-ff/sproutapps-ff.woff") format("woff"),
-       url("../../admin/css/sproutapps-ff/sproutapps-ff.ttf") format("truetype"),
-       url("../../admin/css/sproutapps-ff/sproutapps-ff.svg#sproutapps-ff") format("svg");
+	src: url("../../admin/css/sproutapps-ff/sproutapps-ff.eot?#iefix") format("embedded-opentype"), url("../../admin/css/sproutapps-ff/sproutapps-ff.woff") format("woff"), url("../../admin/css/sproutapps-ff/sproutapps-ff.ttf") format("truetype"), url("../../admin/css/sproutapps-ff/sproutapps-ff.svg#sproutapps-ff") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
-
 
 .icon-register:before,
 .icon-vault:before,
@@ -47,7 +41,6 @@
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
-
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -148,7 +141,6 @@
 /**
  * HTML5 display definitions
  */
-
 article,
 aside,
 details,
@@ -184,7 +176,6 @@ audio:not([controls]) {
 /**
  * Base
  */
-
 html {
 	font-size: 100%;
 	-ms-text-size-adjust: 100%;
@@ -219,7 +210,6 @@ a:hover {
 /**
  * Primary Colors
  */
-
 #doc .doc_total,
 .button.primary_button {
 	background-color: #4D9FFF;
@@ -256,9 +246,8 @@ a:hover {
 /**
  * Typography
  */
-
 body {
-	font: 200 .9em/1.4 "Open Sans", sans-serif;
+	font: 200 0.9em / 1.4 "Open Sans", sans-serif;
 	text-rendering: optimizeLegibility;
 	background-color: #FAFAFA;
 	color: #363B4D;
@@ -323,7 +312,7 @@ hr {
 }
 
 mark {
-	background: #ff0;
+	background: #FF0;
 	color: #000;
 }
 
@@ -380,7 +369,6 @@ sub {
 /**
  * Lists
  */
-
 dl,
 menu,
 ol,
@@ -407,7 +395,6 @@ nav ol {
 /**
  * Embedded content
  */
-
 img {
 	border: 0;
 	-ms-interpolation-mode: bicubic;
@@ -420,13 +407,12 @@ svg:not(:root) {
 /**
  * Forms
  */
-
 form {
 	margin: 0;
 }
 
 fieldset {
-	border: 1px solid #c0c0c0;
+	border: 1px solid #C0C0C0;
 	margin: 0 2px;
 	padding: 0.35em 0.625em 0.75em;
 }
@@ -500,49 +486,45 @@ input::-moz-focus-inner {
 
 textarea {
 	overflow: auto;
+	/* 1 */
+	vertical-align: top;
+	/* 2
 	
-
-/* 1 */
-    vertical-align: top;
-/* 2
-
-*/
+	*/
 }
 
 /**
  * Clearfix
  */
-
 .clearfix:after {
 	content: ".";
 	display: block;
 	clear: both;
 	visibility: hidden;
 	line-height: 0;
-	height: 0
+	height: 0;
 }
 
 .clearfix {
-	display: inline-block
+	display: inline-block;
 }
 
 html[xmlns] .clearfix {
-	display: block
+	display: block;
 }
 
 * html .clearfix {
-	height: 1%
+	height: 1%;
 }
 
 /**
  * Paid Stamp
  */
-
 #status {
 	text-transform: uppercase;
 	text-align: center;
 	color: #099E1B;
-	font: bold 3em/1.1em Georgia, "Times New Roman", Times, serif;
+	font: bold 3em / 1.1em Georgia, "Times New Roman", Times, serif;
 	white-space: nowrap;
 	position: absolute;
 	top: 25%;
@@ -553,6 +535,7 @@ html[xmlns] .clearfix {
 	-ms-transform: rotate(-15deg);
 	-webkit-transform: rotate(-15deg);
 }
+
 #status.void {
 	color: #000;
 	border-color: #000;
@@ -561,7 +544,6 @@ html[xmlns] .clearfix {
 /**
  * Layout
  */
-
 #outer_doc_wrap {
 	width: 880px;
 	padding: 40px 0 65px;
@@ -577,7 +559,7 @@ html[xmlns] .clearfix {
 }
 
 .stuck #doc_header_wrap {
-	background-color: rgba(249,249,249,.8);
+	background-color: rgba(249, 249, 249, 0.8);
 	width: 874px;
 	border-bottom: 3px solid #363B3F;
 	z-index: 10;
@@ -609,7 +591,7 @@ html[xmlns] .clearfix {
 
 #logo {
 	float: right;
-	margin: 0px
+	margin: 0px;
 }
 
 #logo img {
@@ -649,11 +631,10 @@ div#vcards {
 /**
  * Invoice Payments
  */
-
 .purchase_button:after {
 	font-family: 'dashicons';
 	vertical-align: top;
-	content: " \f140"
+	content: " \f140";
 }
 
 .payment_option a {
@@ -668,7 +649,6 @@ div#vcards {
 /**
  * DD
  */
-
 #doc dl {
 	margin: 0;
 	padding: 0;
@@ -676,19 +656,19 @@ div#vcards {
 
 #doc dt {
 	margin: 0;
-	padding: .7em 0;
+	padding: 0.7em 0;
 	float: left;
 	clear: left;
 	width: 120px;
 	text-align: right;
-	font-size: .8em;
+	font-size: 0.8em;
 	line-height: 1.3em;
 	font-weight: 200;
 }
 
 #line_items_totals b,
 #doc dt {
-	font-size: .8em;
+	font-size: 0.8em;
 	line-height: 1.3em;
 	font-weight: 200;
 }
@@ -701,7 +681,7 @@ div#vcards {
 
 #doc dd {
 	margin: 0 0 0px 130px;
-	padding: .5em 0 .5em 10px;
+	padding: 0.5em 0 0.5em 10px;
 	border-left: 2px solid #363B3F;
 	font-weight: 200;
 }
@@ -723,7 +703,7 @@ div#vcards {
 }
 
 #doc .doc_details p {
-    margin-top: 0px;
+	margin-top: 0px;
 }
 
 .button {
@@ -736,23 +716,22 @@ div#vcards {
 }
 
 .button.print_button {
-	background-color: #ddd;
-	color: #7c7c7c;
+	background-color: #DDD;
+	color: #7C7C7C;
 }
 
 #header_additional_info {
-    padding: 1em;
-    background-color: #FAFAFA;
-    width: 100%;
-    margin-top: -50px;
+	padding: 1em;
+	background-color: #FAFAFA;
+	width: 100%;
+	margin-top: -50px;
 }
 
 /**
  * Footer
  */
-
 #footer_wrap {
-	background-color: #fafafa;
+	background-color: #FAFAFA;
 }
 
 #footer_wrap ul {
@@ -767,17 +746,16 @@ div#vcards {
 }
 
 #footer_wrap ul li strong {
-	color: #ccc;
+	color: #CCC;
 }
 
 #footer_credit {
-	color: #ddd;
+	color: #DDD;
 }
 
 /**
  * Line items
  */
-
 .helptip.rate_ico:after {
 	font-family: "sproutapps-ff";
 	content: '\e610';
@@ -796,7 +774,7 @@ div#vcards {
 .line_item_type:after {
 	content: '\f348';
 	color: #C7C7C7;
-	font: 400 20px/1 dashicons;
+	font: 400 20px / 1 dashicons;
 	speak: none;
 	display: inline-block;
 	padding: 0 2px 0 0;
@@ -806,11 +784,14 @@ div#vcards {
 	vertical-align: top;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-decoration: none!important
+	text-decoration: none !important;
 }
-#doc_line_items_wrap, #doc_line_items {
+
+#doc_line_items_wrap,
+#doc_line_items {
 	width: 100%;
 }
+
 #doc_line_items ol {
 	list-style: none;
 	padding-left: 0px;
@@ -824,7 +805,7 @@ div#vcards {
 }
 
 .child_items .line_items_header {
-    margin-left: 33px;
+	margin-left: 33px;
 }
 
 #line_items_footer {
@@ -853,14 +834,13 @@ div#vcards {
 }
 
 #line_items_totals span.money_amount {
-    display: inline-block;
-    min-width: 5em;
+	display: inline-block;
+	min-width: 5em;
 }
 
 #line_items_totals div {
 	margin-bottom: 10px;
 }
-
 
 #line_item_add {
 	display: none;
@@ -888,7 +868,7 @@ div#vcards {
 }
 
 #items .line_item .column {
-	background-color: #fafafa;
+	background-color: #FAFAFA;
 }
 
 #items .line_items_header .line_item .column {
@@ -896,7 +876,7 @@ div#vcards {
 }
 
 #items .items_list .line_item .column {
-	background-color: #fff;
+	background-color: #FFF;
 }
 
 #items .line_item .column.column_type {
@@ -931,7 +911,7 @@ div#vcards {
 }
 
 .line_item .column_type {
-	flex: .2;
+	flex: 0.2;
 	-webkit-flex: .2;
 	-moz-flex: .2;
 	-ms-flex: .2;
@@ -958,7 +938,6 @@ div#vcards {
 /**
  * Utility
  */
-
 .spinner {
 	background: url(../img/spinner.gif) no-repeat;
 	-webkit-background-size: 20px 20px;
@@ -974,32 +953,26 @@ div#vcards {
 
 .si_inline_spinner {
 	float: none;
-	margin: 0 5px -6px
+	margin: 0 5px -6px;
 }
 
 /**
  * HiDPI Displays
  */
-
-@media print,
-  (-o-min-device-pixel-ratio: 5/4),
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 120dpi) {
-
+@media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
 	.spinner {
 		background-image: url(../img/spinner-2x.gif);
 	}
-
 }
 
 .helptip:hover {
-	cursor: help
+	cursor: help;
 }
 
 .helptip:after {
 	content: '\f223';
 	color: #C7C7C7;
-	font: 400 20px/1 dashicons;
+	font: 400 20px / 1 dashicons;
 	speak: none;
 	display: inline-block;
 	padding: 0 2px 0 0;
@@ -1009,24 +982,23 @@ div#vcards {
 	vertical-align: top;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-decoration: none!important
+	text-decoration: none !important;
 }
 
 /**
  * Payment Form
  */
-
 #credit_card_checkout_wrap,
 #check_info_checkout_wrap {
 	background-color: #FFF;
 	margin: 0px -1000px 50px -1000px;
 	padding: 50px 1000px;
 	display: none;
-	border-bottom: 1px solid #fff;
-	border-top: 1px solid #fff;
+	border-bottom: 1px solid #FFF;
+	border-top: 1px solid #FFF;
 	-moz-box-shadow: inset 0 0 5px #ccc;
 	-webkit-box-shadow: inset 0 0 5px #ccc;
-	box-shadow: inset 0 0 5px #ccc;
+	box-shadow: inset 0 0 5px #CCC;
 	position: relative;
 	z-index: 10;
 }
@@ -1072,7 +1044,7 @@ div#vcards {
 #billing_cc_fields #sa_billing_country {
 	width: 45%;
 	float: left;
-	margin-right: 10px
+	margin-right: 10px;
 }
 
 #billing_cc_fields #sa_credit_cc_expiration_year,
@@ -1094,7 +1066,7 @@ div#vcards {
 
 #checks_fields input,
 #checks_fields textarea {
-	width: 50%
+	width: 50%;
 }
 
 #checks_fields input#sa_checks_mailed {
@@ -1106,10 +1078,12 @@ div#vcards {
 	margin-top: 3em;
 	margin-right: 2%;
 }
+
 .security_message.clearfix {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
 #check_info_checkout_wrap .button-primary {
 	float: none;
 	margin-left: 12em;
@@ -1118,7 +1092,6 @@ div#vcards {
 /**
  * Forms Utility
  */
-
 .sa-form input[type="text"],
 .sa-form input[type="password"],
 .sa-form input[type="email"],
@@ -1137,8 +1110,8 @@ div#vcards {
 .sa-form textarea {
 	padding: 0.5em 0.6em;
 	display: inline-block;
-	border: 1px solid #ccc;
-	box-shadow: inset 0 1px 3px #ddd;
+	border: 1px solid #CCC;
+	box-shadow: inset 0 1px 3px #DDD;
 	border-radius: 4px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -1149,12 +1122,11 @@ div#vcards {
 Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
 since IE8 won't execute CSS that contains a CSS3 selector.
 */
-
 .sa-form input:not([type]) {
 	padding: 0.5em 0.6em;
 	display: inline-block;
-	border: 1px solid #ccc;
-	box-shadow: inset 0 1px 3px #ddd;
+	border: 1px solid #CCC;
+	box-shadow: inset 0 1px 3px #DDD;
 	border-radius: 4px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -1162,9 +1134,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 
 /* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
-
 /* May be able to remove this tweak as color inputs become more standardized across browsers. */
-
 .sa-form input[type="color"] {
 	padding: 0.2em 0.5em;
 }
@@ -1187,28 +1157,23 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .sa-form textarea:focus {
 	outline: 0;
 	outline: thin dotted \9;
+	/* IE
 	
-
-/* IE
-
-6-9 */
-    border-color: #129FEA;
+	6-9 */
+	border-color: #129FEA;
 }
 
 /*
 Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
 since IE8 won't execute CSS that contains a CSS3 selector.
 */
-
 .sa-form input:not([type]):focus {
 	outline: 0;
 	outline: thin dotted \9;
+	/* IE
 	
-
-/* IE
-
-6-9 */
-    border-color: #129FEA;
+	6-9 */
+	border-color: #129FEA;
 }
 
 .sa-form input[type="file"]:focus,
@@ -1241,58 +1206,52 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .sa-form select[disabled],
 .sa-form textarea[disabled] {
 	cursor: not-allowed;
-	background-color: #eaeded;
-	color: #cad2d3;
+	background-color: #EAEDED;
+	color: #CAD2D3;
 }
 
 /*
 Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
 since IE8 won't execute CSS that contains a CSS3 selector.
 */
-
 .sa-form input:not([type])[disabled] {
 	cursor: not-allowed;
-	background-color: #eaeded;
-	color: #cad2d3;
+	background-color: #EAEDED;
+	color: #CAD2D3;
 }
 
 .sa-form input[readonly],
 .sa-form select[readonly],
 .sa-form textarea[readonly] {
-	background: #eee;
+	background: #EEE;
+	/*
 	
-
-/*
-
-menu hover bg color */
-    color: #777;
-	/
-
-* menu text color */
-    border-color: #ccc;
+	menu hover bg color */
+	color: #777;
+	/ * menu text color */ border-color: #ccc;
 }
 
 .sa-form input:focus:invalid,
 .sa-form textarea:focus:invalid,
 .sa-form select:focus:invalid {
-	color: #b94a48;
-	border-color: #ee5f5b;
+	color: #B94A48;
+	border-color: #EE5F5B;
 }
 
 .sa-form input:focus:invalid:focus,
 .sa-form textarea:focus:invalid:focus,
 .sa-form select:focus:invalid:focus {
-	border-color: #e9322d;
+	border-color: #E9322D;
 }
 
 .sa-form input[type="file"]:focus:invalid:focus,
 .sa-form input[type="radio"]:focus:invalid:focus,
 .sa-form input[type="checkbox"]:focus:invalid:focus {
-	outline-color: #e9322d;
+	outline-color: #E9322D;
 }
 
 .sa-form select {
-	border: 1px solid #ccc;
+	border: 1px solid #CCC;
 	background-color: white;
 }
 
@@ -1316,7 +1275,7 @@ menu hover bg color */
 	padding: 0.3em 0;
 	margin-bottom: 0.3em;
 	color: #333;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 1px solid #E5E5E5;
 }
 
 .sa-form-stacked input[type="text"],
@@ -1344,20 +1303,15 @@ menu hover bg color */
 Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
 since IE8 won't execute CSS that contains a CSS3 selector.
 */
-
 .sa-form-stacked input:not([type]) {
 	display: block;
 	margin: 0.25em 0;
 }
 
+/* NOTE: sa-help-inline is deprecated. Use .sa-form-message-inline instead. */
 .sa-form-aligned input,
 .sa-form-aligned textarea,
 .sa-form-aligned select,
-
-
-
-
-/* NOTE: sa-help-inline is deprecated. Use .sa-form-message-inline instead. */
 .sa-form-aligned .sa-help-inline,
 .sa-form-message-inline {
 	display: inline-block;
@@ -1371,7 +1325,6 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 
 /* Aligned Forms */
-
 .sa-form-aligned .sa-control-group {
 	margin-bottom: 0.5em;
 }
@@ -1389,7 +1342,6 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 
 /* Rounded Inputs */
-
 .sa-form input.sa-input-rounded,
 .sa-form .sa-input-rounded {
 	border-radius: 2em;
@@ -1397,7 +1349,6 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 
 /* Grouped Inputs */
-
 .sa-form .sa-group fieldset {
 	margin-bottom: 10px;
 }
@@ -1450,9 +1401,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 
 /* Inline help for forms */
-
 /* NOTE: sa-help-inline is deprecated. Use .sa-form-message-inline instead. */
-
 .sa-form .sa-help-inline,
 .sa-form-message-inline {
 	display: inline-block;
@@ -1463,88 +1412,86 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 
 /* Block help for forms */
-
 .sa-form-message {
 	display: block;
 	color: #666;
 	font-size: 0.875em;
 }
+
 p.si_error {
-    color: red;
-    font-weight: 400;
+	color: red;
+	font-weight: 400;
 	font-size: 0.875em;
 }
 
-@media only screen and (max-width : 480px) {
-
+@media only screen and (max-width: 480px) {
 	.sa-form button[type="submit"] {
 		margin: 0.7em 0 0;
 	}
-
+	
 	.sa-form input:not([type]),
-	    .sa-form input[type="text"],
-	    .sa-form input[type="password"],
-	    .sa-form input[type="email"],
-	    .sa-form input[type="url"],
-	    .sa-form input[type="date"],
-	    .sa-form input[type="month"],
-	    .sa-form input[type="time"],
-	    .sa-form input[type="datetime"],
-	    .sa-form input[type="datetime-local"],
-	    .sa-form input[type="week"],
-	    .sa-form input[type="number"],
-	    .sa-form input[type="search"],
-	    .sa-form input[type="tel"],
-	    .sa-form input[type="color"],
-	    .sa-form label {
+	.sa-form input[type="text"],
+	.sa-form input[type="password"],
+	.sa-form input[type="email"],
+	.sa-form input[type="url"],
+	.sa-form input[type="date"],
+	.sa-form input[type="month"],
+	.sa-form input[type="time"],
+	.sa-form input[type="datetime"],
+	.sa-form input[type="datetime-local"],
+	.sa-form input[type="week"],
+	.sa-form input[type="number"],
+	.sa-form input[type="search"],
+	.sa-form input[type="tel"],
+	.sa-form input[type="color"],
+	.sa-form label {
 		margin-bottom: 0.3em;
 		display: block;
 	}
-
+	
 	.sa-group input:not([type]),
-	    .sa-group input[type="text"],
-	    .sa-group input[type="password"],
-	    .sa-group input[type="email"],
-	    .sa-group input[type="url"],
-	    .sa-group input[type="date"],
-	    .sa-group input[type="month"],
-	    .sa-group input[type="time"],
-	    .sa-group input[type="datetime"],
-	    .sa-group input[type="datetime-local"],
-	    .sa-group input[type="week"],
-	    .sa-group input[type="number"],
-	    .sa-group input[type="search"],
-	    .sa-group input[type="tel"],
-	    .sa-group input[type="color"] {
+	.sa-group input[type="text"],
+	.sa-group input[type="password"],
+	.sa-group input[type="email"],
+	.sa-group input[type="url"],
+	.sa-group input[type="date"],
+	.sa-group input[type="month"],
+	.sa-group input[type="time"],
+	.sa-group input[type="datetime"],
+	.sa-group input[type="datetime-local"],
+	.sa-group input[type="week"],
+	.sa-group input[type="number"],
+	.sa-group input[type="search"],
+	.sa-group input[type="tel"],
+	.sa-group input[type="color"] {
 		margin-bottom: 0;
 	}
-
+	
 	.sa-form-aligned .sa-control-group label {
 		margin-bottom: 0.3em;
 		text-align: left;
 		display: block;
 		width: 100%;
 	}
-
+	
 	.sa-form-aligned .sa-controls {
 		margin: 1.5em 0 0 0;
 	}
+	
 	.sa-form .sa-help-inline,
-    .sa-form-message-inline,
-    .sa-form-message {
+	.sa-form-message-inline,
+	.sa-form-message {
 		display: block;
 		font-size: 0.75em;
 		padding: 0.2em 0 0.8em;
 	}
-
 }
 
 /**
  * History
  */
-
 #doc_history dl {
-	padding: .5em
+	padding: 0.5em;
 }
 
 #doc_history dt {
@@ -1552,11 +1499,11 @@ p.si_error {
 	clear: left;
 	width: 200px;
 	text-align: right;
-	font-weight: 700
+	font-weight: 700;
 }
 
 #doc_history dt:after {
-	content: ":"
+	content: ":";
 }
 
 #doc_history {
@@ -1567,47 +1514,47 @@ p.si_error {
 #doc_history dd {
 	margin-bottom: 15px;
 	padding-left: 20px;
-	border-left: 1px solid #ddd;
+	border-left: 1px solid #DDD;
 	min-height: 60px;
 	margin-left: 220px;
 }
 
 #doc_history dt {
-	padding-top: 20px
+	padding-top: 20px;
 }
 
 #doc_history dd:first-of-type p {
 	margin: 0;
-	margin-top: -15px
+	margin-top: -15px;
 }
 
 #doc_history dd {
-	padding-top: 8px
+	padding-top: 8px;
 }
 
 #doc_history dt:after {
-	content: ''
+	content: '';
 }
 
 #doc_history dd:after {
 	content: "\f140";
-	color: #ddd;
+	color: #DDD;
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
-	font: normal 2em/1 dashicons;
+	font: normal 2em / 1 dashicons;
 	vertical-align: top;
 	position: relative;
 	left: -36px;
-	bottom: -18px
+	bottom: -18px;
 }
 
 #doc_history dd:first-of-type:before {
 	font-family: "sproutapps-ff" !important;
 	content: '\e60a';
-	color: #ddd;
+	color: #DDD;
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
-	font: normal 2em/1 dashicons;
+	font: normal 2em / 1 dashicons;
 	vertical-align: top;
 	position: relative;
 	left: -35px;
@@ -1616,13 +1563,13 @@ p.si_error {
 
 #doc_history dt .history_date {
 	font-weight: 400;
-	font-size: .9em
+	font-size: 0.9em;
 }
 
 #doc_history dt span.history_status:before {
 	content: '\f464';
-	color: #ddd;
-	font: 400 20px/1 dashicons;
+	color: #DDD;
+	font: 400 20px / 1 dashicons;
 	speak: none;
 	display: inline-block;
 	padding: 0 2px 0 0;
@@ -1632,20 +1579,21 @@ p.si_error {
 	vertical-align: top;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-decoration: none!important
+	text-decoration: none !important;
 }
 
 #doc_history dt span.si_notification:before {
-	content: '\f466'
+	content: '\f466';
 }
 
 #doc_history dt span.si_viewed_status_update:before {
-	content: '\f177'
+	content: '\f177';
 }
 
 #doc_history dt span.si_history_status_update:before {
-	content: '\f173'
+	content: '\f173';
 }
+
 #doc_history dt span.history_status.comment:before {
 	content: "\f101";
 }
@@ -1663,69 +1611,67 @@ p.si_error {
 }
 
 #doc_history dt span.creation_event:before {
-	content: ''
+	content: '';
 }
 
 /**
  * Print
  */
-
 @media only print {
-
 	#wpadminbar {
 		display: none;
 	}
-
-	#doc_line_items_wrap, #doc_line_items {
+	
+	#doc_line_items_wrap,
+	#doc_line_items {
 		display: inline;
 	}
-
+	
 	#doc_header_wrap-sticky-wrapper,
-		#doc_history {
+	#doc_history {
 		display: none;
 	}
-
+	
 	#document_wrap {
 		border: none;
 	}
-
+	
 	#header_wrap {
 		margin-bottom: 10px;
 	}
-
+	
 	.line_item {
 		margin-bottom: 0px;
 		padding-bottom: 0px;
 	}
-
+	
 	#status {
 		top: 5%;
 		left: 30%;
 	}
-
+	
 	.li_comments_toggle {
 		display: none;
 	}
-
 }
 
 /**
  * Comments
  */
-
 .line_item_comments {
-    margin-top: -40px;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #F2F2F2;
-    border-top: 2px #D3D3D3 solid;
+	margin-top: -40px;
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #F2F2F2;
+	border-top: 2px #D3D3D3 solid;
 }
+
 ol ol .line_item_comments {
 	margin-left: 40px;
-    
 	border-top: 2px #E7E7E7 solid;
 	background-color: #FAFAFA;
 }
+
 .li_comments_toggle {
 	float: left;
 	padding-right: 5px;
@@ -1733,49 +1679,55 @@ ol ol .line_item_comments {
 	margin-top: 10px;
 	margin-left: -30px;
 }
+
 ol ol .li_comments_toggle {
 	margin-left: 0px;
 }
+
 .li_comments_toggle.has_comments {
 	color: #FF5B4D;
 }
 
 .line_item_comments .comment_meta.vcard {
-    float: left;
-    margin: 10px 10px 10px 0px;
+	float: left;
+	margin: 10px 10px 10px 0px;
 }
 
 .line_item_comments .comment {
-    display: block;
-    margin-bottom: 30px;
-    border-top: 1px solid #D3D3D3;
+	display: block;
+	margin-bottom: 30px;
+	border-top: 1px solid #D3D3D3;
 }
+
 .line_item_comments .comment.highlight {
 	background-color: #E5E5E5;
 	padding-left: 15px;
 }
+
 .line_item_comments span.comment_date {
-    float: right;
-    color: #363B3F;
-    font-size: 8px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 5px 10px;
-    /* margin-top: -27px; */
-    background-color: #D3D3D3;
-    white-space: nowrap;
+	float: right;
+	color: #363B3F;
+	font-size: 8px;
+	letter-spacing: 1px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	/* margin-top: -27px; */
+	background-color: #D3D3D3;
+	white-space: nowrap;
 }
+
 .line_item_comment_wrap {
 	width: 100%;
 }
+
 .line_item_comment_wrap textarea {
 	width: 80%;
 	height: 5em;
 	padding: 1em;
-	border: 1px solid #eee;
-
+	border: 1px solid #EEE;
 }
+
 .line_item_comment_wrap .submit.button {
 	float: left;
 	clear: both;
@@ -1785,53 +1737,55 @@ ol ol .li_comments_toggle {
 /**
  * Front-end Time Tracking
  */
-
 .front_end_form.clearfix {
-    width: 100%;
+	width: 100%;
 }
 
-#time_tracker #outer_doc_wrap, #time_tracker div#tt_save {
-    width: 90%;
-    margin-left: 5%;
+#time_tracker #outer_doc_wrap,
+#time_tracker div#tt_save {
+	width: 90%;
+	margin-left: 5%;
 }
 
 #time_tracker label {
-    display: none;
+	display: none;
 }
 
 #time_tracker .input_wrap {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 #time_tracker select#sa_time_project_id {
-    float: left;
-    width: 49%;
-    height: 3em;
+	float: left;
+	width: 49%;
+	height: 3em;
 }
 
 #time_tracker select#sa_time_activity_id {
-    float: left;
-    margin-left: 2%;
-    width: 49%;
-    height: 3em;
+	float: left;
+	margin-left: 2%;
+	width: 49%;
+	height: 3em;
 }
 
 #time_tracker input#sa_time_time_inc {
-    float: left;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    width: 49%;
-    height: 3em;
+	float: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	width: 49%;
+	height: 3em;
 }
+
 #time_tracker input#sa_time_date {
-    width: 49%;
-    margin-left: 2%;
-    margin-top: 10px;
-    height: 3em;
+	width: 49%;
+	margin-left: 2%;
+	margin-top: 10px;
+	height: 3em;
 }
+
 #time_tracker button#create_time_entry {
-    margin: 0px;
-  float: left;
-  width: 100%;
-  font-size: 1.5em;
+	margin: 0px;
+	float: left;
+	width: 100%;
+	font-size: 1.5em;
 }

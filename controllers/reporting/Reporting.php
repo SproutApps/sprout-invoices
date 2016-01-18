@@ -348,64 +348,8 @@ class SI_Reporting extends SI_Dashboard {
 
 		// If date filtered
 		if ( 'century' !== $this ) {
-			switch ( $this ) {
-				case 'week':
-					$args['date_query'] = array(
-						array(
-							'week' => date( 'W', strtotime( 'this week' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( date( 'Y-m-t' ), strtotime( 'this Sunday' ) ) -current_time( 'timestamp' );
-					break;
-				case 'lastweek':
-					$args['date_query'] = array(
-						array(
-							'week' => date( 'W', strtotime( '-1 week' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( date( 'Y-m-t' ), strtotime( 'this Sunday' ) ) -current_time( 'timestamp' );
-					break;
-				case 'month':
-					$args['date_query'] = array(
-						array(
-							'month' => date( 'm' ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( date( 'Y-m-t' ) ) -current_time( 'timestamp' );
-					break;
-				case 'lastmonth':
-					$args['date_query'] = array(
-						array(
-							'month' => date( 'm', strtotime( '-1 month' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( date( 'Y-m-t' ) ) -current_time( 'timestamp' );
-					break;
-				case 'year':
-					$args['date_query'] = array(
-						array(
-							'year' => date( 'Y' ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( date( 'Y-m-t' ), strtotime( '12/31' ) ) -current_time( 'timestamp' );
-					break;
-				case 'lastyear':
-					$args['date_query'] = array(
-						array(
-							'year' => date( 'Y', strtotime( '-1  year' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( date( 'Y-m-t' ), strtotime( '12/31' ) ) -current_time( 'timestamp' );
-					break;
-				default:
-					break;
-			}
+			$args = self::_get_date_query( $this, $args );
+			$expire = self::_get_date_query( $this, $args, true );
 		}
 		$invoices = new WP_Query( $args );
 		foreach ( $invoices->posts as $invoice_id ) {
@@ -543,68 +487,8 @@ class SI_Reporting extends SI_Dashboard {
 
 		// If date filtered
 		if ( 'century' !== $this ) {
-			switch ( $this ) {
-				case 'week':
-					$args['date_query'] = array(
-						array(
-							'week' => date( 'W', strtotime( 'this week' ) ),
-							'year' => date( 'o', strtotime( 'this week' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
-					break;
-				case 'lastweek':
-					$args['date_query'] = array(
-						array(
-							'week' => date( 'W', strtotime( '-1 week' ) ),
-							'year' => date( 'o', strtotime( '-1 week' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( 'next week' ) -current_time( 'timestamp' );
-					break;
-				case 'month':
-					$args['date_query'] = array(
-						array(
-							'month' => date( 'm', strtotime( 'first day of this month' ) ),
-							'year' => date( 'o', strtotime( 'first day of this month' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
-					break;
-				case 'lastmonth':
-					$args['date_query'] = array(
-						array(
-							'month' => date( 'm', strtotime( 'first day of previous month' ) ),
-							'year' => date( 'o', strtotime( 'first day of previous month' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( 'first day of next month' ) -current_time( 'timestamp' );
-					break;
-				case 'year':
-					$args['date_query'] = array(
-						array(
-							'year' => date( 'Y', strtotime( 'first day of this year' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
-					break;
-				case 'lastyear':
-					$args['date_query'] = array(
-						array(
-							'year' => date( 'Y', strtotime( 'first day of previous year' ) ),
-							'inclusive' => true,
-						),
-					);
-					$expire = strtotime( 'last day of year' ) -current_time( 'timestamp' );
-					break;
-				default:
-					break;
-			}
+			$args = self::_get_date_query( $this, $args );
+			$expire = self::_get_date_query( $this, $args, true );
 		}
 		$payments = new WP_Query( $args );
 		foreach ( $payments->posts as $payment_id ) {
@@ -635,6 +519,75 @@ class SI_Reporting extends SI_Dashboard {
 		}
 
 		return self::set_cache( __FUNCTION__.$this, $data, $expire );
+	}
+
+	public static function _get_date_query( $this = 'century', $args = array(), $return_expiration = false ) {
+		switch ( $this ) {
+			case 'week':
+				$args['date_query'] = array(
+					array(
+						'week' => date( 'W', strtotime( 'this week' ) ),
+						'year' => date( 'o', strtotime( 'this week' ) ),
+						'inclusive' => true,
+					),
+				);
+				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
+				break;
+			case 'lastweek':
+				$args['date_query'] = array(
+					array(
+						'week' => date( 'W', strtotime( '-1 week' ) ),
+						'year' => date( 'o', strtotime( '-1 week' ) ),
+						'inclusive' => true,
+					),
+				);
+				$expire = strtotime( 'next week' ) -current_time( 'timestamp' );
+				break;
+			case 'month':
+				$args['date_query'] = array(
+					array(
+						'month' => date( 'm', strtotime( 'first day of this month' ) ),
+						'year' => date( 'o', current_time( 'timestamp' ) ),
+						'inclusive' => true,
+					),
+				);
+				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
+				break;
+			case 'lastmonth':
+				$args['date_query'] = array(
+					array(
+						'month' => date( 'm', strtotime( 'first day of previous month' ) ),
+						'year' => date( 'o', strtotime( 'first day of previous month' ) ),
+						'inclusive' => true,
+					),
+				);
+				$expire = strtotime( 'first day of next month' ) -current_time( 'timestamp' );
+				break;
+			case 'year':
+				$args['date_query'] = array(
+					array(
+						'year' => date( 'Y', current_time( 'timestamp' ) ),
+						'inclusive' => true,
+					),
+				);
+				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
+				break;
+			case 'lastyear':
+				$args['date_query'] = array(
+					array(
+						'year' => date( 'Y', strtotime( 'first day of previous year' ) ),
+						'inclusive' => true,
+					),
+				);
+				$expire = strtotime( 'last day of year' ) -current_time( 'timestamp' );
+				break;
+			default:
+				break;
+		}
+		if ( $return_expiration ) {
+			return $expire;
+		}
+		return $args;
 	}
 
 	public static function total_payment_data_by_date_segment( $segment = 'weeks', $span = 6 ) {

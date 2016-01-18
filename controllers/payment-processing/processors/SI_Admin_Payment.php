@@ -10,6 +10,7 @@
 class SI_Admin_Payment extends SI_Controller {
 	const PAYMENT_METHOD = 'Admin Payment';
 	const PAYMENT_SLUG = 'admin_payment';
+	const NONCE = 'si_payments_nonce';
 	
 	public static function get_payment_method() {
 		return self::PAYMENT_METHOD;
@@ -140,7 +141,7 @@ class SI_Admin_Payment extends SI_Controller {
 			),
 			'payments_nonce' => array(
 				'type' => 'hidden',
-				'value' => wp_create_nonce( SI_Controller::NONCE ),
+				'value' => wp_create_nonce( self::NONCE ),
 				'weight' => 10001
 			)
 		);
@@ -177,15 +178,18 @@ class SI_Admin_Payment extends SI_Controller {
 				}
 			}
 		}
-		if ( !isset( $_REQUEST['sa_metabox_payments_nonce'] ) )
+		if ( ! isset( $_REQUEST['sa_metabox_payments_nonce'] ) ) {
 			self::ajax_fail( 'Forget something?' );
+		}
 
 		$nonce = $_REQUEST['sa_metabox_payments_nonce'];
-		if ( !wp_verify_nonce( $nonce, SI_Controller::NONCE ) )
+		if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
 			self::ajax_fail( 'Not going to fall for it!' );
+		}
 
-		if ( !isset( $_REQUEST['sa_metabox_invoice_id'] ) )
+		if ( !isset( $_REQUEST['sa_metabox_invoice_id'] ) ) {
 			self::ajax_fail( 'Forget something?' );
+		}
 
 		if ( get_post_type( $_REQUEST['sa_metabox_invoice_id'] ) != SI_Invoice::POST_TYPE ) {
 			self::ajax_fail( 'Error: Invoice PT mismatch.' );

@@ -480,6 +480,8 @@ class SI_Notifications_Control extends SI_Controller {
 			return false;
 		}
 
+		do_action( 'si_notification_sent', $notification_name, $data, $to );
+
 		// Mark the notification as sent.
 		self::mark_notification_sent( $notification_name, $data, $to );
 	}
@@ -807,12 +809,14 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return array        name and email
 	 */
 	public static function email_split( $email = '' ) {
-		$email .= ' ';
-		$pattern = '/([\w\s\'\"]+[\s]+)?(<)?(([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4}))?(>)?/';
-		preg_match( $pattern, $email, $match );
-		$name = ( isset( $match[1] ) ) ? $match[1] : '';
-		$email = ( isset( $match[3] ) ) ? $match[3] : '';
-		return array( 'name' => trim( $name ), 'email' => trim( $email ) );
+		$parts = explode( ' ', trim( $email ) );
+		$email = trim( array_pop( $parts ), "<> \t\n\r\0\x0B" );
+		$name = trim( implode( ' ', $parts ), "\"\' \t\n\r\0\x0B" );
+		if ( $name == "" && strpos( $email, "@" ) === false ) { // only single string - did not contain '@'
+			$name = $email;
+			$email = "";
+		}
+		return array( 'name' => $name, 'email' => $email );
 	}
 
 	public static function admin_email( $atts = array() ) {

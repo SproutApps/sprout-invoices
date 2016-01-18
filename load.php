@@ -60,7 +60,7 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/admin/Help.php';
 
 	// json api
-	require_once SI_PATH.'/controllers/api/JSON_API.php';
+	// require_once SI_PATH.'/controllers/api/JSON_API.php';
 
 	// checkouts
 	require_once SI_PATH.'/controllers/checkout/Checkouts.php';
@@ -225,7 +225,7 @@ function sprout_invoices_load() {
 	}
 
 	// api
-	SI_JSON_API::init();
+	// SI_JSON_API::init();
 
 	// reports
 	SI_Dashboard::init();

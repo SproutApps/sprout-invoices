@@ -90,6 +90,18 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**9.4**
+
+* Fix: Reporting fixes
+* Fix: Email address truncated on long top level domains.
+* New: Notifications action.
+
+Security updates:
+
+* Possible for anyone to save new importer options, including uploading CSVs.
+* Possible for anyone to create a payment
+* Security issue with unfinished (unreleased) JSON API.
+
 **9.3**
 
 * UPDATE: Default Invoice/Estimate Subject to ID
@@ -714,7 +726,7 @@ Welcome! This is a big update and a big step for us.
 * WP-Invoice Importer Bug fix: Fix devision by zero error
 * WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
-**0.9.9.3 - 1.0 GM**
+**0.9.9.4 - 1.0 GM**
 
 * Strict standards fixins
 

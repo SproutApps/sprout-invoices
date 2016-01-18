@@ -1,93 +1,15 @@
 <?php
 
 /**
-* Basic JSON implementation at the moment for reporting.
+ * Disabled
+ * Basic JSON implementation at the moment for reporting.
+ * TODO: Hook into new WP API.
  *
  * @package Sprout_Invoice
  * @subpackage API
  */
 class SI_JSON_API extends SI_Controller {
-	const API_QUERY_VAR = 'si_json_api';
-	const AUTH_NONCE = 'auth';
 
-	public static function init() {
-		self::register_query_var( self::API_QUERY_VAR, array( __CLASS__, 'api_callback' ) );
-	}
-
-	/**
-	 * Technically not an endpoint until we start using permalinks but it will work.
-	 *
-	 * @param  string $endpoint
-	 * @return
-	 */
-	public static function get_url( $endpoint = 'payments' ) {
-		return esc_url_raw( add_query_arg( array( self::API_QUERY_VAR => $endpoint ), home_url() ) );
-	}
-
-	/**
-	 * Set callback to endpoint
-	 *
-	 * @return
-	 */
-	public static function api_callback() {
-		if ( isset( $_REQUEST[ self::API_QUERY_VAR ] ) && '' !== $_REQUEST[ self::API_QUERY_VAR ] ) {
-
-			$data = $_REQUEST[ self::API_QUERY_VAR ];
-
-			if ( strpos( $data, 'create-' ) !== false ) {
-				self::authenticate_request();
-			}
-
-			$data = json_decode( file_get_contents( 'php://input' ) );
-
-			switch ( $data ) {
-
-				case 'get_token':
-					self::api_get_token();
-					break;
-				case 'ping':
-					$response = self::ping( $data );
-					break;
-				case 'invoice':
-					$response = self::invoice( $data );
-					break;
-				case 'estimate':
-					$response = self::estimate( $data );
-					break;
-				case 'payment':
-					$response = self::payment( $data );
-					break;
-				case 'client':
-					$response = self::client( $data );
-					break;
-				case 'create_invoice':
-					$response = self::create_invoice( $data );
-					break;
-				case 'create_estimate':
-					$response = self::create_estimate( $data );
-					break;
-				case 'create_payment':
-					$response = self::create_payment( $data );
-					break;
-				case 'create_client':
-					$response = self::create_client( $data );
-					break;
-
-				default:
-					self::fail( 'Not a valid endpoint.' );
-					break;
-
-			}
-
-			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
-			@header( 'Expires: '. gmdate( 'D, d M Y H:i:s', mktime( date( 'H' ) + 2, date( 'i' ), date( 's' ), date( 'm' ), date( 'd' ), date( 'Y' ) ) ) .' GMT' );
-			@header( 'Last-Modified: '. gmdate( 'D, d M Y H:i:s' ) .' GMT' );
-			@header( 'Cache-Control: no-cache, must-revalidate' );
-			@header( 'Pragma: no-cache' );
-
-			wp_send_json_success( $data );
-		}
-	}
 
 	///////////////
 	// Endpoints //
@@ -99,7 +21,7 @@ class SI_JSON_API extends SI_Controller {
 	 */
 	private static function ping() {
 		return array(
-			'status' => 'verified'
+			'status' => 'verified',
 		);
 	}
 
@@ -285,149 +207,7 @@ class SI_JSON_API extends SI_Controller {
 	}
 
 	public static function project_data( SI_Project $project ) {
-		$project_data = array(
-
-			);
+		$project_data = array();
 		return $project_data;
-	}
-
-
-
-	////////////////////////////
-	// Authentication Methods //
-	////////////////////////////
-
-	/**
-	 * Login the user and return a authentication token.
-	 *
-	 * @return string/error
-	 */
-	public static function api_get_token() {
-		if ( ! isset( $_REQUEST['user'] ) || ! isset( $_REQUEST['pwd'] ) ) {
-			status_header( 401 );
-			exit();
-		}
-		$user = wp_signon( array(
-				'user_login' => $_REQUEST['user'],
-				'user_password' => $_REQUEST['pwd'],
-				'remember' => false,
-			) );
-		if ( ! $user || is_wp_error( $user ) ) {
-			status_header( 401 );
-			exit();
-		}
-		$token = self::get_user_token( $user );
-		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
-		echo wp_json_encode( $token );
-		exit();
-	}
-
-	/**
-	 * Verify that the current request is valid and authenticated.
-	 * Check to see if the auth-nonce is being used before falling back
-	 * to the more advanced token based authentication.
-	 *
-	 * @param bool    $die If true, execution will stop on failure
-	 * @return int|bool The authenticated user's ID, or false on failure
-	 */
-	protected static function authenticate_request( $die = true ) {
-		if ( isset( $_REQUEST[ self::AUTH_NONCE ] ) ) {
-			check_ajax_referer( $_REQUEST[ self::AUTH_NONCE ], self::AUTH_NONCE );
-			return true;
-		}
-
-		$user = '';
-		$user_id = false;
-		if ( ! empty( $_REQUEST['user'] ) && ! empty( $_REQUEST['signature'] ) && ! empty( $_REQUEST['timestamp'] ) ) {
-			$user = self::get_user();
-			if ( ( time() - $_REQUEST['timestamp'] < self::TIMEOUT ) && $user ) {
-				$token = self::get_user_token( $user );
-
-				$hash = $_SERVER['REQUEST_URI'];
-				$request = $_REQUEST;
-				unset( $request['signature'] );
-				ksort( $request );
-				if ( $request ) {
-					$hash .= '?'.http_build_query( $request, '', '&' );
-				}
-				$hash .= $token;
-				$hash .= self::$private_key;
-				$hash = hash( 'sha256', $hash );
-				if ( $hash === $_REQUEST['signature'] ) {
-					$user_id = $user->ID;
-				}
-			}
-		}
-		$user_id = apply_filters( 'si_api_authenticate_request_user_id', $user_id, $_REQUEST, $user );
-		if ( $die && ! $user_id ) {
-			status_header( 401 );
-			if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
-			die( -1 );
-		}
-		return $user_id;
-	}
-
-	/**
-	 * Get (and create if necessary) an API token for the user
-	 *
-	 * @param WP_User|int $user
-	 * @return bool/string
-	 */
-	private static function get_user_token( $user = 0 ) {
-		$user = $user ? $user : wp_get_current_user();
-		if ( ! is_object( $user ) ) {
-			$user = new WP_User( $user );
-		}
-		if ( ! $user->ID ) {
-			return false;
-		}
-		$stored = get_user_option( 'si_api_token', $user->ID );
-		if ( $stored ) {
-			return $stored;
-		}
-
-		$now = time();
-		$token = md5( serialize( $user ).$now );
-		update_user_option( $user->ID, 'si_api_token', $token );
-		update_user_option( $user->ID, 'si_api_token_timestamp', $now );
-		return $token;
-	}
-
-	/**
-	 * Delete a user's stored token
-	 *
-	 * @param int     $user_id
-	 */
-	private static function revoke_user_token( $user_id = 0 ) {
-		$user_id = $user_id ? $user_id : get_current_user_id();
-		delete_user_option( $user_id, 'si_api_token' );
-	}
-
-	public function get_user() {
-		if ( ! isset( $_REQUEST['user'] ) ) {
-			return; }
-
-		return get_user_by( 'login', $_REQUEST['user'] );
-	}
-
-	public function get_user_id() {
-		$user = self::get_user();
-		return $user->ID;
-	}
-
-	/////////////
-	// Utility //
-	/////////////
-
-	/**
-	 * Failed
-	 * @param  string $message
-	 * @return json
-	 */
-	public static function fail( $message = '' ) {
-		if ( $message == '' ) {
-			$message = __( 'Something failed.', 'sprout-invoices' );
-		}
-		wp_send_json_error( $message );
 	}
 }

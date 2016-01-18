@@ -30,14 +30,14 @@ class SI_Invoices_Deposit extends SI_Invoices {
 		if ( apply_filters( 'show_upgrade_messaging', true, 'deposit-line-items' ) ) {
 			?>
 			<div id="deposit">
-				<b title="Upgrade Sprout Invoices to enable deposits." class="helptip"><?php _e( 'Deposit Due', 'sprout-invoices' ) ?></b>
+				<b title="<?php _e( 'Upgrade Sprout Invoices to enable deposits.', 'sprout-invoices' ) ?>" class="helptip"><?php _e( 'Deposit Due', 'sprout-invoices' ) ?></b>
 				<input type="number" name="deposit" min="0" max="0" step="any" disabled="disabled">
 			</div>
 			<?php
 		} elseif ( floatval( $total - $total_payments ) > 0.00 || 'auto-draft' === $status || 'temp' === $status  ) {
 			?>
 			<div id="deposit">
-				<b title="Set the amount due for the next payment&mdash;amount due will be used 0" class="helptip"><?php _e( 'Deposit Due', 'sprout-invoices' ) ?></b>
+				<b title="<?php _e( 'Set the amount due for the next payment&mdash;amount due will be used 0', 'sprout-invoices' ) ?>" class="helptip"><?php _e( 'Deposit Due', 'sprout-invoices' ) ?></b>
 				<input type="number" name="deposit" value="<?php echo (float) $deposit ?>" min="0" max="<?php echo floatval( $total - $total_payments ) ?>"  step="any">
 			</div>
 			<?php

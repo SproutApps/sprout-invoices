@@ -70,6 +70,10 @@ class SI_l10n extends SI_Controller {
 		require_once( ABSPATH . 'wp-admin/includes/translation-install.php' );
 		$translations = wp_get_available_translations();
 
+		if ( ! isset( $translations[ $language ] )) {
+			return;
+		}
+		
 		printf(
 			'<div id="si_language_detect_nag_dismiss" class="notice notice-info is-dismissible"><p>%s</p></div>',
 			sprintf(
