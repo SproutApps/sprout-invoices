@@ -11,7 +11,8 @@ if ( ! defined( 'SI_FREE_TEST' ) ) {
 	define( 'SI_FREE_TEST', false ); }
 
 if ( ! defined( 'SI_DEV' ) ) {
-	define( 'SI_DEV', false ); }
+	define( 'SI_DEV', false ); 
+}
 
 abstract class Sprout_Invoices {
 

@@ -2710,7 +2710,7 @@ msgstr "Aide"
 #: controllers/admin/Settings_API.php:171
 #: controllers/reporting/Dashboard.php:141
 msgid "Sprout Apps"
-msgstr "Sport Apps"
+msgstr "Sprout Apps"
 
 #: controllers/admin/Settings_API.php:171
 msgid "Updates"

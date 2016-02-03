@@ -85,7 +85,6 @@ class SI_Clients extends SI_Controller {
 				$project = SI_Project::get_instance( $project_id );
 				$project->set_associated_clients( array() );
 			}
-
 		}
 	}
 
@@ -115,7 +114,7 @@ class SI_Clients extends SI_Controller {
 				'show_callback' => array( __CLASS__, 'show_submit_meta_box' ),
 				'save_callback' => array( __CLASS__, 'save_submit_meta_box' ),
 				'context' => 'side',
-				'priority' => 'high'
+				'priority' => 'high',
 			),
 			'si_client_advanced' => array(
 				'title' => __( 'Advanced', 'sprout-invoices' ),
@@ -132,7 +131,7 @@ class SI_Clients extends SI_Controller {
 				'context' => 'normal',
 				'priority' => 'low',
 				'weight' => 100,
-			)
+			),
 		);
 		do_action( 'sprout_meta_box', $args, SI_Client::POST_TYPE );
 	}
@@ -160,8 +159,8 @@ class SI_Clients extends SI_Controller {
 			self::load_view( 'admin/meta-boxes/clients/name', array(
 					'client' => $client,
 					'id' => $post->ID,
-					'status' => $post->post_status
-				) );
+					'status' => $post->post_status,
+			) );
 		}
 	}
 
@@ -184,7 +183,7 @@ class SI_Clients extends SI_Controller {
 				'users' => $users,
 				'invoices' => $client->get_invoices(),
 				'estimates' => $client->get_estimates(),
-			), false );
+		), false );
 
 		add_thickbox();
 
@@ -207,8 +206,8 @@ class SI_Clients extends SI_Controller {
 					'associated_users' => $client->get_associated_users(),
 					'fields' => self::form_fields( false, $client ),
 					'address' => $client->get_address(),
-					'website' => $client->get_website()
-				) );
+					'website' => $client->get_website(),
+			) );
 		}
 	}
 
@@ -223,8 +222,8 @@ class SI_Clients extends SI_Controller {
 			self::load_view( 'admin/meta-boxes/clients/advanced', array(
 					'client' => $client,
 					'id' => $post->ID,
-					'fields' => self::adv_form_fields( false, $client )
-				) );
+					'fields' => self::adv_form_fields( false, $client ),
+			) );
 		}
 	}
 
@@ -262,7 +261,7 @@ class SI_Clients extends SI_Controller {
 				'user_email' => isset( $_POST['sa_metabox_email'] ) ? esc_html( $_POST['sa_metabox_email'], 'sprout-invoices' ) : '',
 				'first_name' => isset( $_POST['sa_metabox_first_name'] ) ? esc_html( $_POST['sa_metabox_first_name'], 'sprout-invoices' ) : '',
 				'last_name' => isset( $_POST['sa_metabox_last_name'] ) ? esc_html( $_POST['sa_metabox_last_name'], 'sprout-invoices' ) : '',
-				'user_url' => isset( $_POST['sa_metabox_website'] ) ? esc_html( $_POST['sa_metabox_website'], 'sprout-invoices' ) : ''
+				'user_url' => isset( $_POST['sa_metabox_website'] ) ? esc_html( $_POST['sa_metabox_website'], 'sprout-invoices' ) : '',
 			);
 			$user_id = self::create_user( $user_args );
 		}
@@ -346,7 +345,7 @@ class SI_Clients extends SI_Controller {
 				'post' => $post,
 				'estimate' => $client,
 				'historical_records' => array_reverse( $client->get_history() ),
-			), false );
+		), false );
 	}
 
 
@@ -436,8 +435,7 @@ class SI_Clients extends SI_Controller {
 				}
 				if ( ! empty( $users_print ) ) {
 					echo implode( ', ', $users_print );
-				}
-				else {
+				} else {
 					echo __( 'No associated users', 'sprout-invoices' );
 				}
 				echo '</p>';
@@ -458,8 +456,7 @@ class SI_Clients extends SI_Controller {
 					if ( count( $invoices ) > $split ) {
 						printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $invoices ) );
 					}
-				}
-				else {
+				} else {
 					printf( '<em>%s</em>', __( 'No invoices', 'sprout-invoices' ) );
 				}
 			break;
@@ -478,8 +475,7 @@ class SI_Clients extends SI_Controller {
 					if ( count( $estimates ) > $split ) {
 						printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $estimates ) );
 					}
-				}
-				else {
+				} else {
 					printf( '<em>%s</em>', __( 'No estimates', 'sprout-invoices' ) );
 				}
 			break;
@@ -565,7 +561,7 @@ class SI_Clients extends SI_Controller {
 			'label' => __( 'Company Name', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required, // always necessary
-			'default' => ''
+			'default' => '',
 		);
 
 		if ( ! $client ) {
@@ -575,7 +571,7 @@ class SI_Clients extends SI_Controller {
 				'type' => 'text',
 				'required' => $required,
 				'description' => __( 'This e-mail will be used to create a new client user. Leave blank if associating an existing user.', 'sprout-invoices' ),
-				'default' => ''
+				'default' => '',
 			);
 		}
 
@@ -585,21 +581,21 @@ class SI_Clients extends SI_Controller {
 			'type' => 'text',
 			'required' => $required,
 			'default' => ( $client ) ? $client->get_website() : '',
-			'placeholder' => 'http://'
+			'placeholder' => 'http://',
 		);
 
 		$fields['nonce'] = array(
 			'type' => 'hidden',
 			'value' => wp_create_nonce( self::SUBMISSION_NONCE ),
-			'weight' => 10000
+			'weight' => 10000,
 		);
 
 		$fields = array_merge( $fields, self::get_standard_address_fields( $required ) );
 
 		// Don't add fields to add new clients when the client exists
 		if ( $client ) {
-			unset($fields['first_name']);
-			unset($fields['last_name']);
+			unset( $fields['first_name'] );
+			unset( $fields['last_name'] );
 		}
 
 		$fields = apply_filters( 'si_client_form_fields', $fields );
@@ -621,7 +617,7 @@ class SI_Clients extends SI_Controller {
 			'label' => __( 'Email', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => false, // required but the modal will block updates
-			'default' => ''
+			'default' => '',
 		);
 
 		$fields['first_name'] = array(
@@ -642,13 +638,13 @@ class SI_Clients extends SI_Controller {
 		$fields['client_id'] = array(
 			'type' => 'hidden',
 			'value' => $client_id,
-			'weight' => 10000
+			'weight' => 10000,
 		);
 
 		$fields['nonce'] = array(
 			'type' => 'hidden',
 			'value' => wp_create_nonce( self::SUBMISSION_NONCE ),
-			'weight' => 10000
+			'weight' => 10000,
 		);
 
 		$fields = apply_filters( 'si_user_form_fields', $fields );
@@ -668,7 +664,7 @@ class SI_Clients extends SI_Controller {
 			'required' => $required,
 			'placeholder' => 'USD',
 			'attributes' => array( 'size' => '8' ),
-			'description' => __( 'This setting will override the setting for each payment processor that supports differing currency codes.', 'sprout-invoices' )
+			'description' => __( 'This setting will override the setting for each payment processor that supports differing currency codes.', 'sprout-invoices' ),
 		);
 
 		/*/
@@ -694,13 +690,13 @@ class SI_Clients extends SI_Controller {
 			'options' => $required,
 			'options' => array_flip( SI_Locales::$locales ),
 			'attributes' => array( 'class' => 'select2' ),
-			'description' => sprintf( __( 'Current format: %1$s. The default money formatting (%2$s) can be overridden for all client estimates and invoices here.', 'sprout-invoices' ), sa_get_formatted_money( rand( 11000, 9999999 ), get_the_id() ), '<code>'.$si_localeconv['int_curr_symbol'].'</code>' )
+			'description' => sprintf( __( 'Current format: %1$s. The default money formatting (%2$s) can be overridden for all client estimates and invoices here.', 'sprout-invoices' ), sa_get_formatted_money( rand( 11000, 9999999 ), get_the_id() ), '<code>'.$si_localeconv['int_curr_symbol'].'</code>' ),
 		);
 
 		$fields['nonce'] = array(
 			'type' => 'hidden',
 			'value' => wp_create_nonce( self::SUBMISSION_NONCE ),
-			'weight' => 10000
+			'weight' => 10000,
 		);
 
 		$fields = apply_filters( 'si_client_adv_form_fields', $fields, $client );
@@ -722,7 +718,7 @@ class SI_Clients extends SI_Controller {
 			'first_name' => '',
 			'last_name' => '',
 			'user_url' => '',
-			'role' => SI_Client::USER_ROLE
+			'role' => SI_Client::USER_ROLE,
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );
 
@@ -821,7 +817,7 @@ class SI_Clients extends SI_Controller {
 				unset( $fields['website'] );
 				$fields['client_id'] = array(
 					'type' => 'hidden',
-					'value' => $client_id
+					'value' => $client_id,
 				);
 			}
 		}
@@ -866,7 +862,7 @@ class SI_Clients extends SI_Controller {
 					'user_email' => isset( $_REQUEST['sa_estimate_email'] ) ? esc_html( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ) : '',
 					'first_name' => si_split_full_name( esc_html( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'first' ),
 					'last_name' => si_split_full_name( esc_html( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'last' ),
-					'user_url' => isset( $_REQUEST['sa_estimate_website'] ) ? esc_html( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : ''
+					'user_url' => isset( $_REQUEST['sa_estimate_website'] ) ? esc_html( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : '',
 				);
 				$user_id = self::create_user( $user_args );
 			}
@@ -886,7 +882,7 @@ class SI_Clients extends SI_Controller {
 				'company_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? esc_html( $_REQUEST['sa_estimate_client_name'], 'sprout-invoices' ) : '',
 				'website' => isset( $_REQUEST['sa_estimate_website'] ) ? esc_html( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : '',
 				'address' => $address,
-				'user_id' => $user_id
+				'user_id' => $user_id,
 			);
 
 			$client_id = SI_Client::new_client( $args );
@@ -905,7 +901,7 @@ class SI_Clients extends SI_Controller {
 		// form maybe be serialized
 		if ( isset( $_REQUEST['serialized_fields'] ) ) {
 			foreach ( $_REQUEST['serialized_fields'] as $key => $data ) {
-				$_REQUEST[$data['name']] = $data['value'];
+				$_REQUEST[ $data['name'] ] = $data['value'];
 			}
 		}
 
@@ -933,7 +929,7 @@ class SI_Clients extends SI_Controller {
 				'user_email' => isset( $_REQUEST['sa_client_email'] ) ? esc_html( $_REQUEST['sa_client_email'] ) : '',
 				'first_name' => isset( $_REQUEST['sa_client_first_name'] ) ? esc_html( $_REQUEST['sa_client_first_name'] ) : '',
 				'last_name' => isset( $_REQUEST['sa_client_last_name'] ) ? esc_html( $_REQUEST['sa_client_last_name'] ) : '',
-				'user_url' => isset( $_REQUEST['sa_client_website'] ) ? esc_html( $_REQUEST['sa_client_website'] ) : ''
+				'user_url' => isset( $_REQUEST['sa_client_website'] ) ? esc_html( $_REQUEST['sa_client_website'] ) : '',
 			);
 			$user_id = self::create_user( $user_args );
 		}
@@ -950,7 +946,7 @@ class SI_Clients extends SI_Controller {
 			'company_name' => isset( $_REQUEST['sa_client_name'] ) ? esc_html( $_REQUEST['sa_client_name'] ) : '',
 			'website' => isset( $_REQUEST['sa_client_website'] ) ? esc_html( $_REQUEST['sa_client_website'] ) : '',
 			'address' => $address,
-			'user_id' => $user_id
+			'user_id' => $user_id,
 		);
 		$client_id = SI_Client::new_client( $args );
 
@@ -974,7 +970,7 @@ class SI_Clients extends SI_Controller {
 		// form maybe be serialized
 		if ( isset( $_REQUEST['serialized_fields'] ) ) {
 			foreach ( $_REQUEST['serialized_fields'] as $key => $data ) {
-				$_REQUEST[$data['name']] = $data['value'];
+				$_REQUEST[ $data['name'] ] = $data['value'];
 			}
 		}
 
@@ -1006,7 +1002,7 @@ class SI_Clients extends SI_Controller {
 			'user_pass' => wp_generate_password(), // random password
 			'user_email' => isset( $_REQUEST['sa_user_email'] ) ? esc_html( $_REQUEST['sa_user_email'] ) : '',
 			'first_name' => isset( $_REQUEST['sa_user_first_name'] ) ? esc_html( $_REQUEST['sa_user_first_name'] ) : '',
-			'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? esc_html( $_REQUEST['sa_user_last_name'] ) : ''
+			'last_name' => isset( $_REQUEST['sa_user_last_name'] ) ? esc_html( $_REQUEST['sa_user_last_name'] ) : '',
 		);
 		$user_id = self::create_user( $user_args );
 
@@ -1105,28 +1101,28 @@ class SI_Clients extends SI_Controller {
 			$screen = get_current_screen();
 
 			$screen->add_help_tab( array(
-					'id' => 'edit-clients',
-					'title' => __( 'Manage Clients', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The information here is used for estimates and invoices and includes settings to: Edit Company Name, Edit the company address, and Edit their website url.', 'sprout-invoices' ), __( '<b>Important note:</b> when clients are created new WordPress users are also created and given the “client” role. Creating users will allow for future functionality, i.e. client dashboards.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'edit-clients',
+				'title' => __( 'Manage Clients', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The information here is used for estimates and invoices and includes settings to: Edit Company Name, Edit the company address, and Edit their website url.', 'sprout-invoices' ), __( '<b>Important note:</b> when clients are created new WordPress users are also created and given the “client” role. Creating users will allow for future functionality, i.e. client dashboards.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'associate-users',
-					'title' => __( 'Associated Users', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p>', __( 'When clients are created a WP user is created and associated and clients are not limited to a single user. Not limited a client to a single user allows for you to have multiple points of contact at/for a company/client. Example, the recipients for sending estimate and invoice notifications are these associated users.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'associate-users',
+				'title' => __( 'Associated Users', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p>', __( 'When clients are created a WP user is created and associated and clients are not limited to a single user. Not limited a client to a single user allows for you to have multiple points of contact at/for a company/client. Example, the recipients for sending estimate and invoice notifications are these associated users.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'client-history',
-					'title' => __( 'Client History', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p>', __( 'Important points are shown in the client history and just like estimate and invoices private notes can be added for only you and other team members to see.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'client-history',
+				'title' => __( 'Client History', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p>', __( 'Important points are shown in the client history and just like estimate and invoices private notes can be added for only you and other team members to see.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'client-invoices',
-					'title' => __( 'Invoices and Estimates', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p>', __( 'All invoices and estimates associated with the client are shown below the associated users option. This provides a quick way to jump to the record you need to see.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'client-invoices',
+				'title' => __( 'Invoices and Estimates', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p>', __( 'All invoices and estimates associated with the client are shown below the associated users option. This provides a quick way to jump to the record you need to see.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .

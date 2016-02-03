@@ -137,5 +137,4 @@ class SI_Compatibility extends SI_Controller {
 			remove_meta_box( 'um-admin-access-settings', $type, 'side' );
 		}
 	}
-
 }

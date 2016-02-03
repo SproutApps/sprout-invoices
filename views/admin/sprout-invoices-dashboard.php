@@ -66,7 +66,7 @@
 				<h4><?php _e( 'Where do I start?', 'sprout-invoices' ); ?></h4>
 				<p>
 					<ol>
-						<li><?php printf( __( "Start <a href='%s'>importing</a> your data from other services (i.e. WP-Invoice, Freshbooks or Harvest, 'sprout-invoices' )." ), admin_url( 'admin.php?page=sprout-apps/settings&tab=import' ) ); ?></li>
+						<li><?php printf( __( "Start <a href='%s'>importing</a> your data from other services (i.e. WP-Invoice, Freshbooks or Harvest).", 'sprout-invoices' ), admin_url( 'admin.php?page=sprout-apps/settings&tab=import' ) ); ?></li>
 						<li><?php printf( __( "Even with the defaults set in <a href='%s'>General Settings</a> the 'Company Info' should be filled out first.", 'sprout-invoices' ), admin_url( 'admin.php?page=sprout-apps/settings' ) ); ?></li>
 						<li><?php printf( __( "Review your <a href='%s'>Payment Settings</a> and provide different methods of payments for your clients. Don't let your client find out you've configured the payment processor incorrectly&mdash;make sure to test.", 'sprout-invoices' ), admin_url( 'admin.php?page=sprout-apps/settings&tab=payments' ) ); ?></li>
 						<li><?php printf( __( "There are a lot of <a href='%s'>notifications</a> sent throughout the entire client acquisition process, make sure they have your personality and represent your brand well. You can send HTML emails, check your <a href='%s'>General Settings</a> for more information.", 'sprout-invoices' ), admin_url( 'admin.php?page=sprout-apps/settings&tab=notifications' ), admin_url( 'admin.php?page=sprout-apps/settings' ) ); ?></li>

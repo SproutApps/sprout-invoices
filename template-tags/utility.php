@@ -115,7 +115,7 @@ if ( ! function_exists( 'si_format_address' ) ) :
 			return '';
 		}
 		$lines = array();
-		if ( ! empty($address['first_name']) || ! empty($address['last_name']) ) {
+		if ( ! empty( $address['first_name'] ) || ! empty( $address['last_name'] ) ) {
 			$lines[] = $address['first_name'].' '.$address['last_name'];
 		}
 		if ( ! empty( $address['street'] ) ) {
@@ -254,11 +254,11 @@ endif;
  * @param string  $thousands_sep Thousand separator
  * @return string
  */
-function si_get_number_format( $value = 1, $dec_point = '.' , $thousands_sep = '' ) {
+function si_get_number_format( $value = 1, $dec_point = '.', $thousands_sep = '' ) {
 	$fraction = ( is_null( $dec_point ) || ! $dec_point ) ? 0 : 2 ;
 	return apply_filters( 'si_get_number_format', number_format( floatval( $value ), $fraction, $dec_point, $thousands_sep ), $value );
 }
-function si_number_format( $value = 1, $dec_point = '.' , $thousands_sep = '', $fraction = 2 ) {
+function si_number_format( $value = 1, $dec_point = '.', $thousands_sep = '', $fraction = 2 ) {
 	echo apply_filters( 'si_number_format', si_get_number_format( $value, $dec_point, $thousands_sep ), $value );
 }
 
@@ -354,11 +354,9 @@ if ( ! function_exists( 'pp' ) ) {
 			foreach ( $vars as $var ) {
 				if ( is_bool( $var ) ) {
 					$msgs[] = ( $var ? 'true' : 'false' );
-				}
-				elseif ( is_scalar( $var ) ) {
+				} elseif ( is_scalar( $var ) ) {
 					$msgs[] = $var;
-				}
-				else {
+				} else {
 					switch ( $func ) {
 						case 'print_r':
 						case 'var_export':
@@ -428,6 +426,7 @@ if ( ! function_exists( 'si_localeconv' ) ) :
 			// attempt to get localeconv based on local
 			setlocale( LC_MONETARY, $locale );
 			$localeconv = ( function_exists( 'localeconv' ) ) ? localeconv() : array();
+
 			if ( isset( $localeconv['int_curr_symbol'] ) ) {
 				switch ( $localeconv['int_curr_symbol'] ) {
 					case 'AUS':
@@ -459,7 +458,7 @@ if ( ! function_exists( 'si_money_format' ) ) :
  * @param  float $number
  * @return
  */
-	function si_money_format( $format, $number, $doc_id = 0 )  {
+	function si_money_format( $format, $number, $doc_id = 0 ) {
 		$regex  = '/%((?:[\^!\-]|\+|\(|\=.)*)([0-9]+)?'.
 			  '(?:#([0-9]+))?(?:\.([0-9]+))?([in%])/';
 		$locale = si_localeconv( $doc_id );
@@ -478,11 +477,11 @@ if ( ! function_exists( 'si_money_format' ) ) :
 			'usesignal' => preg_match( '/\+|\(/', $fmatch[1], $match ) ?
 						   $match[0] : '+',
 			'nosimbol'  => preg_match( '/\!/', $fmatch[1] ) > 0,
-			'isleft'    => preg_match( '/\-/', $fmatch[1] ) > 0
+			'isleft'    => preg_match( '/\-/', $fmatch[1] ) > 0,
 			);
-			$width      = trim( $fmatch[2] ) ? (int)$fmatch[2] : 0;
-			$left       = trim( $fmatch[3] ) ? (int)$fmatch[3] : 0;
-			$right      = trim( $fmatch[4] ) ? (int)$fmatch[4] : $locale['int_frac_digits'];
+			$width      = trim( $fmatch[2] ) ? (int) $fmatch[2] : 0;
+			$left       = trim( $fmatch[3] ) ? (int) $fmatch[3] : 0;
+			$right      = trim( $fmatch[4] ) ? (int) $fmatch[4] : $locale['int_frac_digits'];
 			$conversion = $fmatch[5];
 
 			$positive = true;
@@ -496,20 +495,20 @@ if ( ! function_exists( 'si_money_format' ) ) :
 
 			$signal = $positive ? $locale['positive_sign'] : $locale['negative_sign'];
 			switch ( true ) {
-				case $locale["{$letter}_sign_posn"] == 1 && $flags['usesignal'] == '+':
+				case $locale[ "{$letter}_sign_posn" ] == 1 && $flags['usesignal'] == '+':
 					$prefix = $signal;
 					break;
-				case $locale["{$letter}_sign_posn"] == 2 && $flags['usesignal'] == '+':
+				case $locale[ "{$letter}_sign_posn" ] == 2 && $flags['usesignal'] == '+':
 					$suffix = $signal;
 					break;
-				case $locale["{$letter}_sign_posn"] == 3 && $flags['usesignal'] == '+':
+				case $locale[ "{$letter}_sign_posn" ] == 3 && $flags['usesignal'] == '+':
 					$cprefix = $signal;
 					break;
-				case $locale["{$letter}_sign_posn"] == 4 && $flags['usesignal'] == '+':
+				case $locale[ "{$letter}_sign_posn" ] == 4 && $flags['usesignal'] == '+':
 					$csuffix = $signal;
 					break;
 				case $flags['usesignal'] == '(':
-				case $locale["{$letter}_sign_posn"] == 0:
+				case $locale[ "{$letter}_sign_posn" ] == 0:
 					$prefix = '(';
 					$suffix = ')';
 					break;
@@ -521,7 +520,7 @@ if ( ! function_exists( 'si_money_format' ) ) :
 			} else {
 				$currency = '';
 			}
-			$space  = $locale["{$letter}_sep_by_space"] ? ' ' : '';
+			$space  = $locale[ "{$letter}_sep_by_space" ] ? ' ' : '';
 
 			$value = number_format($value, $right, $locale['mon_decimal_point'],
 			$flags['nogroup'] ? '' : $locale['mon_thousands_sep']);
@@ -532,7 +531,7 @@ if ( ! function_exists( 'si_money_format' ) ) :
 				$value[0] = str_repeat( $flags['fillchar'], $left - $n ) . $value[0];
 			}
 			$value = implode( $locale['mon_decimal_point'], $value );
-			if ( $locale["{$letter}_cs_precedes"] ) {
+			if ( $locale[ "{$letter}_cs_precedes" ] ) {
 				$value = $prefix . $currency . $space . $value . $suffix;
 			} else {
 				$value = $prefix . $value . $space . $currency . $suffix;

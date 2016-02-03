@@ -51,7 +51,7 @@ class SI_Line_Items extends SI_Controller {
 	 * @param  string $type string
 	 * @return array
 	 */
-	public static function line_item_columns( $type = '' ) {
+	public static function line_item_columns( $type = '', $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
 		if ( '' === $type ) {
 			$type = self::DEFAULT_TYPE;
 		}
@@ -210,7 +210,7 @@ class SI_Line_Items extends SI_Controller {
 					);
 				break;
 		}
-		$columns = apply_filters( 'si_line_item_columns', $columns, $type );
+		$columns = apply_filters( 'si_line_item_columns', $columns, $type, $item_data, $position, $prev_type, $has_children );
 		uasort( $columns, array( __CLASS__, 'sort_by_weight' ) );
 		return $columns;
 	}
@@ -255,8 +255,7 @@ class SI_Line_Items extends SI_Controller {
 			case 'tax':
 				if ( is_numeric( $value ) ) {
 					$value = $value . '%';
-				}
-				else {
+				} else {
 					$value = '';
 				}
 				break;
@@ -439,7 +438,7 @@ class SI_Line_Items extends SI_Controller {
 				'line_items' => $line_items,
 				'prev_type' => '',
 				'totals' => self::line_item_totals( $doc_id ),
-			), false );
+		), false );
 	}
 
 	public static function item_type_section( $doc_id = 0 ) {
@@ -475,7 +474,7 @@ class SI_Line_Items extends SI_Controller {
 			$item_data['type'] = self::DEFAULT_TYPE;
 		}
 		self::load_view( 'admin/sections/line-item-options', array(
-			'columns' => self::line_item_columns( $item_data['type'] ),
+			'columns' => self::line_item_columns( $item_data['type'], $item_data, $position ),
 			'item_data' => $item_data,
 			'has_children' => $has_children,
 			'items' => $items,
@@ -489,7 +488,7 @@ class SI_Line_Items extends SI_Controller {
 		self::load_view( 'admin/sections/add-line-item.php', array(
 				'types' => $types,
 				'default' => key( $types ),
-			), false );
+		), false );
 	}
 
 
@@ -520,5 +519,4 @@ class SI_Line_Items extends SI_Controller {
 			);
 		wp_send_json_success( $response );
 	}
-
 }

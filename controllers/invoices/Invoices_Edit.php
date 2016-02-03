@@ -89,9 +89,9 @@ class SI_Invoices_Edit extends SI_Invoices {
 							'default' => self::$default_notes,
 							'description' => __( 'These are the default notes public to a client reviewing their invoice.', 'sprout-invoices' ),
 						),
-					)
-				)
-			)
+					),
+				),
+			),
 		);
 		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
@@ -226,7 +226,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'context' => 'normal',
 				'priority' => 'low',
 				'weight' => 100,
-			)
+			),
 		);
 		do_action( 'sprout_meta_box', $args, SI_Invoice::POST_TYPE );
 	}
@@ -258,7 +258,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 					'status' => $status,
 					'statuses' => SI_Invoice::get_statuses(),
 					'invoice' => $invoice,
-				) );
+			) );
 		}
 	}
 
@@ -286,7 +286,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'subtotal' => $subtotal,
 				'deposit' => $deposit,
 				'line_items' => $line_items,
-			), false );
+		), false );
 	}
 
 	/**
@@ -388,7 +388,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'tax' => $tax,
 				'tax2' => $tax2,
 				'currency' => $currency,
-			), false );
+		), false );
 
 		// add the client modal
 		self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( false ) ) );
@@ -460,8 +460,8 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'post' => $post,
 				'invoice' => $invoice,
 				'fields' => self::sender_submission_fields( $invoice ),
-				'sender_notes' => $invoice->get_sender_note()
-			), false );
+				'sender_notes' => $invoice->get_sender_note(),
+		), false );
 	}
 
 	/**
@@ -525,7 +525,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'invoice' => $invoice,
 				'history' => si_doc_history_records( $post->ID, false ),
 				'submission_fields' => $invoice->get_submission_fields(),
-			), false );
+		), false );
 	}
 
 	/**
@@ -543,7 +543,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'invoice' => $invoice,
 				'terms' => $invoice->get_terms(),
 				'notes' => $invoice->get_notes(),
-			), false );
+		), false );
 	}
 
 	/**
@@ -619,7 +619,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 			'label' => __( 'Note', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'default' => $invoice->get_sender_note(),
-			'description' => __( 'This note will be added to the Invoice Notification via the [admin_note] shortcode.', 'sprout-invoices' )
+			'description' => __( 'This note will be added to the Invoice Notification via the [admin_note] shortcode.', 'sprout-invoices' ),
 		);
 
 		$fields['doc_id'] = array(
@@ -676,5 +676,4 @@ class SI_Invoices_Edit extends SI_Invoices {
 		}
 		return $notes;
 	}
-
 }

@@ -6,8 +6,8 @@
  * @return array
  * @since 8.0
  */
-function si_get_line_item_columns( $type = '' ) {
-	return SI_Line_Items::line_item_columns( $type );
+function si_get_line_item_columns( $type = '', $item_data = array(), $position = 1.0, $prev_type = '', $has_children = false ) {
+	return SI_Line_Items::line_item_columns( $type, $item_data, $position, $prev_type, $has_children );
 }
 
 function si_line_item_get_children( $position = 1.0, $items = array() ) {
@@ -92,11 +92,9 @@ function si_line_item_build( $position = 0, $line_items = array(), $children = a
 	$prev_type = '';
 	if ( strpos( $position, '.' ) !== false ) { // child items don't get the header
 		$prev_type = $item_data['type'];
-	}
-	elseif ( (int) $position === $first_key_position ) { // Don't add the header for the first line item since it was already added
+	} elseif ( (int) $position === $first_key_position ) { // Don't add the header for the first line item since it was already added
 		$prev_type = $item_data['type'];
-	}
-	elseif ( $first_key_position < (int) $position ) { // check to see what the previous line item was
+	} elseif ( $first_key_position < (int) $position ) { // check to see what the previous line item was
 		$prev_pos = (int) $position - 1;
 		$prev_type = $line_items[ $prev_pos ]['type'];
 	}
@@ -106,7 +104,7 @@ function si_line_item_build( $position = 0, $line_items = array(), $children = a
 
 function si_get_front_end_line_item( $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
 	$type = ( isset( $item_data['type'] ) ) ? $item_data['type'] : 'task' ;
-	$columns = si_get_line_item_columns( $type );
+	$columns = si_get_line_item_columns( $type, $item_data, $position, $prev_type, $has_children );
 	ob_start(); ?>
 	<div class="line_item_option_wrap line_item_type_<?php echo esc_attr( $type ) ?>" data-type="<?php echo esc_attr( $type ) ?>">
 
@@ -192,11 +190,9 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
 	$prev_type = '';
 	if ( strpos( $position, '.' ) !== false ) { // child items don't get the header
 		$prev_type = $item_data['type'];
-	}
-	elseif ( (int) $position === $first_key_position ) { // Don't add the header for the first line item since it was already added
+	} elseif ( (int) $position === $first_key_position ) { // Don't add the header for the first line item since it was already added
 		$prev_type = $item_data['type'];
-	}
-	elseif ( $first_key_position < (int) $position ) { // check to see what the previous line item was
+	} elseif ( $first_key_position < (int) $position ) { // check to see what the previous line item was
 		$prev_pos = (int) $position - 1;
 		$prev_type = $line_items[ $prev_pos ]['type'];
 	}
@@ -207,7 +203,7 @@ function si_line_item_build_plain( $position = 1.0, $items = array(), $children 
 
 function si_get_plain_text_line_item( $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
 	$type = ( isset( $item_data['type'] ) ) ? $item_data['type'] : 'task' ;
-	$columns = si_get_line_item_columns( $type );
+	$columns = si_get_line_item_columns( $type, $item_data, $position, $prev_type, $has_children );
 
 	$item = '';
 
@@ -227,8 +223,7 @@ function si_get_plain_text_line_item( $item_data = array(), $position = 0, $prev
 					$tab_child = "\t";
 				}
 				$label = $tab_child . $column['label'] . '.....';
-			}
-			else {
+			} else {
 				$value = $value . "\n";
 			}
 
