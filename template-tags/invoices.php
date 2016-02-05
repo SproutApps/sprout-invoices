@@ -782,7 +782,7 @@ if ( ! function_exists( 'si_payment_options' ) ) :
 			foreach ( $enabled_processors as $class ) {
 				if ( method_exists( $class, 'get_instance' ) ) {
 					$payment_processor = call_user_func( array( $class, 'get_instance' ) );
-					$processor_options[$payment_processor->get_slug()] = $payment_processor->checkout_options();
+					$processor_options[ $payment_processor->get_slug() ] = $payment_processor->checkout_options();
 				}
 			}
 			$enabled_processors = $processor_options; // overload with slugs
@@ -997,8 +997,7 @@ function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 			$returned_history[ $item_id ]['post_date'] = $r_post->post_date;
 			$returned_history[ $item_id ]['update_title'] = $r_post->post_title;
 			$returned_history[ $item_id ]['content'] = $r_post->post_content;
-		}
-		elseif ( get_post_type( $item_id ) == SI_Payment::POST_TYPE ) {
+		} elseif ( get_post_type( $item_id ) == SI_Payment::POST_TYPE ) {
 			$payment = SI_Payment::get_instance( $item_id );
 			$p_post = $payment->get_post();
 
@@ -1010,8 +1009,7 @@ function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 			$returned_history[ $item_id ]['content'] = '';
 			$returned_history[ $item_id ]['content'] .= '<span>'.$payment->get_payment_method().'</span><br/>';
 			$returned_history[ $item_id ]['content'] .= '<b>'.__( 'Payment Total', 'sprout-invoices' ).':</b> '.sa_get_formatted_money( $payment->get_amount(), $item_id );
-		}
-		else {
+		} else {
 			if ( $filtered ) {
 				$comment = get_comment( $item_id );
 				if ( ! is_wp_error( $comment ) ) {

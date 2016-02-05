@@ -25,8 +25,7 @@
 			<div class="row">
 				<div class="products_grid">
 					<?php foreach ( $addons as $addon_id => $addon ) :
-					error_log( 'log' . print_r( $addon, TRUE ) );
-					 ?>
+						?>
 						<article class="type-download <?php if ( $addon->bundled ) { echo 'bundled'; } ?>">
 							<div class="section">
 								<div class="pic">
@@ -39,7 +38,7 @@
 									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
 										<?php echo $addon->thumb; ?>
 									</a>
-									<?php if ( ! in_array( $addon->id, array( 63999 ) ) ): ?>
+									<?php if ( ! in_array( $addon->id, array( 63999 ) ) ) :  ?>
 										<div class="download_purchase_link">
 											<a href="<?php echo si_get_sa_link( $addon->purchase_url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php echo $addon->price; ?>&nbsp;–&nbsp;<?php _e( 'Add to Cart', 'sprout-invoices' ) ?></span></a>
 										</div>
