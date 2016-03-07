@@ -54,8 +54,8 @@ class SI_Estimates_Admin extends SI_Estimates {
 		}
 		self::load_view( 'admin/sections/estimate-status-change-drop', array(
 				'id' => $id,
-				'status' => $estimate->get_status()
-			), false );
+				'status' => $estimate->get_status(),
+		), false );
 
 	}
 
@@ -94,16 +94,16 @@ class SI_Estimates_Admin extends SI_Estimates {
 			$screen = get_current_screen();
 
 			$screen->add_help_tab( array(
-					'id' => 'manage-estimates',
-					'title' => __( 'Manage Estimates', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The status on the estimate table view can be updated without having to go the edit screen by click on the current status and selecting a new one.', 'sprout-invoices' ), __( 'If an invoice is associated an icon linking to the edit page will show in the last column.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'manage-estimates',
+				'title' => __( 'Manage Estimates', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The status on the estimate table view can be updated without having to go the edit screen by click on the current status and selecting a new one.', 'sprout-invoices' ), __( 'If an invoice is associated an icon linking to the edit page will show in the last column.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'edit-estimates',
-					'title' => __( 'Editing Estimates', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', __( 'Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', __( 'Knowledgebase Article', 'sprout-invoices' ) ),
-				) );
+				'id' => 'edit-estimates',
+				'title' => __( 'Editing Estimates', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', __( 'Editing estimates is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/estimates/', __( 'Knowledgebase Article', 'sprout-invoices' ) ),
+			) );
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
@@ -172,8 +172,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 				if ( $estimate->get_client_id() ) {
 					$client = $estimate->get_client();
 					printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
-				}
-				else {
+				} else {
 					printf( '<b>%s</b> ', __( 'No client', 'sprout-invoices' ) );
 				}
 
@@ -193,7 +192,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 	 * @return array
 	 */
 	public static function sortable_columns( $columns ) {
-		$columns['total'] = 'total';
+		//$columns['total'] = 'total';
 		return $columns;
 	}
 
@@ -242,7 +241,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 	 *                           'Private', 'Draft', 'Pending', and 'Sticky'.
 	 * @param int   $post        The post.
 	 */
-	public static function filter_post_states( $post_states = array(), WP_Post $post )	{
+	public static function filter_post_states( $post_states = array(), WP_Post $post ) {
 		if ( get_post_type( $post ) == SI_Estimate::POST_TYPE ) {
 			$post_states = array();
 			$estimate = SI_Estimate::get_instance( $post->ID );
@@ -268,5 +267,4 @@ class SI_Estimates_Admin extends SI_Estimates {
 		);
 		return $meta_search;
 	}
-
 }

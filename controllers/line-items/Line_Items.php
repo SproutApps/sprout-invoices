@@ -249,6 +249,9 @@ class SI_Line_Items extends SI_Controller {
 		switch ( $column_slug ) {
 			case 'total':
 			case 'subtotal':
+			case 'desc':
+				$value = apply_filters( 'the_content', $value );
+				break;
 			case 'rate':
 				$value = sa_get_formatted_money( $value );
 				break;

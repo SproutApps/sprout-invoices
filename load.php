@@ -81,6 +81,7 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/estimates/Estimates_Edit.php';
 	require_once SI_PATH.'/controllers/estimates/Estimates_Records.php';
 	require_once SI_PATH.'/controllers/estimates/Estimates_Template.php';
+	require_once SI_PATH.'/controllers/estimates/Estimates_Scheduled.php';
 	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/estimates/Estimates_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/estimates/Estimates_Premium.php';
 	}
@@ -92,6 +93,7 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/invoices/Invoices_Records.php';
 	require_once SI_PATH.'/controllers/invoices/Invoices_Template.php';
 	require_once SI_PATH.'/controllers/invoices/Invoices_Deposit.php';
+	require_once SI_PATH.'/controllers/invoices/Invoices_Scheduled.php';
 	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/invoices/Invoices_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/invoices/Invoices_Premium.php';
 	}
@@ -266,6 +268,7 @@ function sprout_invoices_load() {
 	SI_Estimate_Submissions::init();
 	SI_Estimates_Admin::init();
 	SI_Estimates_Edit::init();
+	SI_Estimates_Scheduled::init();
 	SI_Estimates_Template::init();
 	SI_Estimates_Records::init();
 
@@ -276,6 +279,7 @@ function sprout_invoices_load() {
 	SI_Invoices::init();
 	SI_Invoices_Admin::init();
 	SI_Invoices_Edit::init();
+	SI_Invoices_Scheduled::init();
 	SI_Invoices_Template::init();
 	SI_Invoices_Records::init();
 	SI_Invoices_Deposit::init();

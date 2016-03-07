@@ -484,8 +484,12 @@ class SI_Invoices_Edit extends SI_Invoices {
 		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
 
 		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
+			$submitted_recipients = explode( ',', trim( $_REQUEST['sa_metabox_custom_recipient'] ) );
+			foreach ( $submitted_recipients as $key => $email ) {
+				$email = trim( $email );
+				if ( is_email( $email ) ) {
+					$recipients[] = $email;
+				}
 			}
 		}
 
@@ -600,7 +604,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 			}
 		}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working since there is no client.', 'sprout-invoices' ) );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working, since it may not be assigned to a client.', 'sprout-invoices' ) );
 
 			// Send to me.
 			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );

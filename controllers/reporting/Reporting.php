@@ -49,6 +49,9 @@ class SI_Reporting extends SI_Dashboard {
 			case 'invoice_payments':
 				self::invoice_payments_chart( $segment, $span );
 				break;
+			case 'payments':
+				self::payments_chart( $segment, $span );
+				break;
 			case 'balance_invoiced':
 				self::balance_invoiced_chart( $segment, $span );
 				break;
@@ -84,7 +87,7 @@ class SI_Reporting extends SI_Dashboard {
 		$return = array(
 				'labels' => array(),
 				'invoices' => array(),
-				'payments' => array()
+				'payments' => array(),
 			);
 		$data = self::total_invoice_data_by_date_segment( $segment, $span );
 		foreach ( $data as $seg => $seg_data ) {
@@ -101,11 +104,32 @@ class SI_Reporting extends SI_Dashboard {
 	 * @param  integer $span
 	 * @return  json array
 	 */
+	public static function payments_chart( $segment = 'weeks', $span = 6 ) {
+		$return = array(
+				'labels' => array(),
+				'totals' => array(),
+				'payments' => array(),
+			);
+		$data = self::total_payment_data_by_date_segment( $segment, $span );
+		foreach ( $data as $seg => $seg_data ) {
+			$return['labels'][] = self::get_segment_label( $seg, $segment );
+			$return['totals'][] = $seg_data['totals'];
+			$return['payments'][] = $seg_data['payments'];
+		}
+		wp_send_json_success( $return );
+	}
+
+	/**
+	 * Return two data sets
+	 * @param  string  $segment
+	 * @param  integer $span
+	 * @return  json array
+	 */
 	public static function balance_invoiced_chart( $segment = 'weeks', $span = 6 ) {
 		$return = array(
 				'labels' => array(),
 				'balances' => array(),
-				'paid' => array()
+				'paid' => array(),
 			);
 		$data = self::total_invoice_data_by_date_segment( $segment, $span );
 		foreach ( $data as $seg => $seg_data ) {
@@ -126,7 +150,7 @@ class SI_Reporting extends SI_Dashboard {
 		$return = array(
 				'labels' => array(),
 				'estimates' => array(),
-				'invoices' => array()
+				'invoices' => array(),
 			);
 		$inv_data = self::total_invoice_data_by_date_segment( $segment, $span );
 		$est_data = self::total_estimate_data_by_date_segment( $segment, $span );
@@ -148,7 +172,7 @@ class SI_Reporting extends SI_Dashboard {
 		$return = array(
 				'labels' => array(),
 				'requests' => array(),
-				'invoices' => array()
+				'invoices' => array(),
 			);
 		$est_data = self::total_estimate_data_by_date_segment( $segment, $span );
 		foreach ( $est_data as $seg => $seg_data ) {
@@ -281,7 +305,7 @@ class SI_Reporting extends SI_Dashboard {
 						'after'     => $start_date,
 						'inclusive' => true,
 					),
-				)
+				),
 			);
 		$invoices = new WP_Query( $args );
 		foreach ( $invoices->posts as $invoice_id ) {
@@ -424,7 +448,7 @@ class SI_Reporting extends SI_Dashboard {
 						'after'     => $start_date,
 						'inclusive' => true,
 					),
-				)
+				),
 			);
 		$estimates = new WP_Query( $args );
 		foreach ( $estimates->posts as $estimate_id ) {
@@ -625,7 +649,7 @@ class SI_Reporting extends SI_Dashboard {
 						'after'     => date( 'Y-m-d', strtotime( $year . 'W' . array_shift( $weeks ) ) ),
 						'inclusive' => true,
 					),
-				)
+				),
 			);
 		$payments = new WP_Query( $args );
 		foreach ( $payments->posts as $payment_id ) {
@@ -816,23 +840,23 @@ class SI_Reporting extends SI_Dashboard {
 		$screen = get_current_screen();
 
 		$screen->add_help_tab( array(
-				'id' => 'reports-about',
-				'title' => __( 'About Reports', 'sprout-invoices' ),
-				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', __( 'The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.', 'sprout-invoices' ), __( '<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.', 'sprout-invoices' ), __( '<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.', 'sprout-invoices' ) )
-			) );
+			'id' => 'reports-about',
+			'title' => __( 'About Reports', 'sprout-invoices' ),
+			'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', __( 'The Reports dashboard links to the many single reports that Sprout Invoice provides, don’t miss them.', 'sprout-invoices' ), __( '<b>Dashboard</b> - Is the place to get a quick status overview. See what was recently updated, what’s currently overdue or unpaid, and other important information about your business.', 'sprout-invoices' ), __( '<b>Reports</b> - Reports have advanced filtering and are highly customizable. All data is dynamically updated without reloading.', 'sprout-invoices' ) ),
+		) );
 
 		$screen->add_help_tab( array(
-				'id' => 'reports-tables',
-				'title' => __( 'Report Tables', 'sprout-invoices' ),
-				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( '<b>Date filtering</b> is available and can be used to retrieve data between two dates, after a date, or before a date.', 'sprout-invoices' ), __( '<b>Modify columns</b> within the table with the “Show / hide columns” button.', 'sprout-invoices' ), __( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.', 'sprout-invoices' ), __( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.', 'sprout-invoices' ) )
-			) );
+			'id' => 'reports-tables',
+			'title' => __( 'Report Tables', 'sprout-invoices' ),
+			'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( '<b>Date filtering</b> is available and can be used to retrieve data between two dates, after a date, or before a date.', 'sprout-invoices' ), __( '<b>Modify columns</b> within the table with the “Show / hide columns” button.', 'sprout-invoices' ), __( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.', 'sprout-invoices' ), __( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.', 'sprout-invoices' ) ),
+		) );
 
 		if ( ! isset( $_GET['report'] ) ) {
 			$screen->add_help_tab( array(
-					'id' => 'reports-refresh',
-					'title' => __( 'Dashboard Refresh', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', __( 'The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.', 'sprout-invoices' ), esc_url( add_query_arg( array( 'reports_refresh_cache' => 1 ) ) ), __( 'Refresh', 'sprout-invoices' ) )
-				) );
+				'id' => 'reports-refresh',
+				'title' => __( 'Dashboard Refresh', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', __( 'The reports dashboard is cached and if new invoices or estimates were just created the values under "Invoice Dashboard" may be out of date. Use the refresh button below to flush the cache and get the latest stats.', 'sprout-invoices' ), esc_url( add_query_arg( array( 'reports_refresh_cache' => 1 ) ) ), __( 'Refresh', 'sprout-invoices' ) ),
+			) );
 		}
 
 		$screen->set_help_sidebar(
@@ -841,5 +865,4 @@ class SI_Reporting extends SI_Dashboard {
 			sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 		);
 	}
-
 }

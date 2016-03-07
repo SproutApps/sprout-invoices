@@ -53,8 +53,8 @@ class SI_Invoices_Admin extends SI_Invoices {
 		}
 		self::load_view( 'admin/sections/invoice-status-change-drop', array(
 				'id' => $id,
-				'status' => $invoice->get_status()
-			), false );
+				'status' => $invoice->get_status(),
+		), false );
 
 	}
 
@@ -120,8 +120,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 				if ( $invoice->get_client_id() ) {
 					$client = $invoice->get_client();
 					printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
-				}
-				else {
+				} else {
 					printf( '<b>%s</b> ', __( 'No client', 'sprout-invoices' ) );
 				}
 
@@ -141,7 +140,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 	 * @return array
 	 */
 	public static function sortable_columns( $columns ) {
-		$columns['total'] = 'total';
+		//$columns['total'] = 'total';
 		return $columns;
 	}
 
@@ -190,7 +189,7 @@ class SI_Invoices_Admin extends SI_Invoices {
 	 *                           'Private', 'Draft', 'Pending', and 'Sticky'.
 	 * @param int   $post        The post.
 	 */
-	public static function filter_post_states( $post_states = array(), WP_Post $post )	{
+	public static function filter_post_states( $post_states = array(), WP_Post $post ) {
 		if ( get_post_type( $post ) == SI_Invoice::POST_TYPE ) {
 			$post_states = array();
 			$invoice = SI_Invoice::get_instance( $post->ID );
@@ -251,16 +250,16 @@ class SI_Invoices_Admin extends SI_Invoices {
 			$screen = get_current_screen();
 
 			$screen->add_help_tab( array(
-					'id' => 'manage-invoices',
-					'title' => __( 'Manage Invoices', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', __( 'The status on the invoice table view can be updated without having to go the edit screen by click on the current status and selecting a new one.', 'sprout-invoices' ), __( 'Payments are tallied and shown in the Paid column. Hovering over the invoice row will show a Payments link.', 'sprout-invoices' ),  __( 'If the invoice has an associated estimate the icon linking to the edit page of the estimate will show in the last column.', 'sprout-invoices' ) )
-				) );
+				'id' => 'manage-invoices',
+				'title' => __( 'Manage Invoices', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', __( 'The status on the invoice table view can be updated without having to go the edit screen by click on the current status and selecting a new one.', 'sprout-invoices' ), __( 'Payments are tallied and shown in the Paid column. Hovering over the invoice row will show a Payments link.', 'sprout-invoices' ),  __( 'If the invoice has an associated estimate the icon linking to the edit page of the estimate will show in the last column.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'edit-invoices',
-					'title' => __( 'Editing Invoices', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', __( 'Editing invoices is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', __( 'Knowledgebase Article', 'sprout-invoices' ) ),
-				) );
+				'id' => 'edit-invoices',
+				'title' => __( 'Editing Invoices', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p><a href="%s">%s</a></p>', __( 'Editing invoices is intentionally easy to do but a review here would exhaust this limited space. Please review the knowledgebase for a complete overview.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/invoices/', __( 'Knowledgebase Article', 'sprout-invoices' ) ),
+			) );
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
@@ -269,5 +268,4 @@ class SI_Invoices_Admin extends SI_Invoices {
 			);
 		}
 	}
-
 }

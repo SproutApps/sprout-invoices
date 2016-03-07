@@ -1817,20 +1817,28 @@ legend.legend.form-heading {
 #si_report table#si_reports_table {
 	margin-top: 55px;
 }
-
-#si_report .dataTables_wrapper {
-	/* top: -32px; */
+div#si_reports_table_wrapper {
+    margin-top: -60px;
 }
-
-#si_report .dataTables_wrapper table#si_reports_table {
-	margin-top: 40px;
+.dt-buttons.btn-group {
+    float: right;
+    margin-bottom: 15px;
+}
+div#si_reports_table_length {
+    float: left;
+}
+div#si_reports_table_filter {
+    float: right;
+    margin-left: 25px;
 }
 
 #si_report .tablenav.top {
-	position: relative;
+	/* position: relative; */
 	z-index: 10000;
-	float: left;
-	margin-bottom: -25px;
+	/* float: left; */
+	margin-top: 25px;
+	height: 50px;
+	display: block;
 }
 
 input[type="date"]:before {
@@ -1870,6 +1878,7 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 .nav-tab-wrapper:empty {
    display: none;
 }
+
 
 /**
  * Import

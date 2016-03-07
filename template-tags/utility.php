@@ -119,7 +119,12 @@ if ( ! function_exists( 'si_format_address' ) ) :
 			$lines[] = $address['first_name'].' '.$address['last_name'];
 		}
 		if ( ! empty( $address['street'] ) ) {
-			$lines[] = $address['street'];
+			$street_lines = explode( "\n", $address['street'] );
+			if ( ! empty( $street_lines ) ) {
+				foreach ( $street_lines as $key => $street ) {
+					$lines[] = $street;
+				}
+			}
 		}
 		$city_line = '';
 		if ( ! empty( $address['city'] ) ) {

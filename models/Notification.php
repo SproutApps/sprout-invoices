@@ -26,7 +26,7 @@ class SI_Notification extends SI_Post_Type {
 			'show_in_menu' => 'sprout-invoice',
 			'show_in_nav_menus' => false,
 			'show_in_admin_bar' => false,
-			'supports' => array( 'title', 'editor', 'revisions' )
+			'supports' => array( 'title', 'editor', 'revisions' ),
 		);
 		self::register_post_type( self::POST_TYPE, 'Notification', 'Notifications', $post_type_args );
 	}
@@ -46,16 +46,16 @@ class SI_Notification extends SI_Post_Type {
 		if ( ! $id ) {
 			return null; }
 
-		if ( ! isset( self::$instances[$id] ) || ! self::$instances[$id] instanceof self ) {
-			self::$instances[$id] = new self( $id ); }
+		if ( ! isset( self::$instances[ $id ] ) || ! self::$instances[ $id ] instanceof self ) {
+			self::$instances[ $id ] = new self( $id ); }
 
-		if ( ! isset( self::$instances[$id]->post->post_type ) ) {
+		if ( ! isset( self::$instances[ $id ]->post->post_type ) ) {
 			return null; }
 
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE ) {
+		if ( self::$instances[ $id ]->post->post_type != self::POST_TYPE ) {
 			return null; }
 
-		return self::$instances[$id];
+		return self::$instances[ $id ];
 	}
 
 	public function is_disabled() {
@@ -73,8 +73,8 @@ class SI_Notification extends SI_Post_Type {
 
 	public function set_disabled( $disabled ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['disabled'] => $disabled
-			) );
+			self::$meta_keys['disabled'] => $disabled,
+		) );
 		return $disabled;
 	}
 

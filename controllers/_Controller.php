@@ -136,11 +136,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 		// qtip plugin
 		wp_register_style( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.css', null, self::SI_VERSION, false );
-		wp_register_script( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.js', array('jquery'), self::SI_VERSION, true );
+		wp_register_script( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.js', array( 'jquery' ), self::SI_VERSION, true );
 
 		// dropdown plugin
 		wp_register_style( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.css', null, self::SI_VERSION, false );
-		wp_register_script( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.min.js', array('jquery'), self::SI_VERSION, true );
+		wp_register_script( 'dropdown', SI_URL . '/resources/admin/plugins/dropdown/jquery.dropdown.min.js', array( 'jquery' ), self::SI_VERSION, true );
 
 		// Templates
 		wp_register_script( 'sprout_doc_scripts', SI_URL . '/resources/front-end/js/sprout-invoices.js', array( 'jquery', 'qtip' ), self::SI_VERSION );
@@ -159,7 +159,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'plugin_url' => SI_URL,
 			'thank_you_string' => __( 'Thank you', 'sprout-invoices' ),
 			'updating_string' => __( 'Updating...', 'sprout-invoices' ),
-			'sorry_string' => __( 'Bummer. Maybe next time?', 'sprout-invoices' ),
+			'sorry_string' => __( 'Maybe next time?', 'sprout-invoices' ),
 			'security' => wp_create_nonce( self::NONCE ),
 			'locale' => get_locale(),
 			'locale_standard' => str_replace( '_', '-', get_locale() ),
@@ -169,13 +169,13 @@ abstract class SI_Controller extends Sprout_Invoices {
 			$si_js_object += array(
 				'invoice_id' => get_the_ID(),
 				'invoice_amount' => si_get_invoice_calculated_total(),
-				'invoice_balance' => si_get_invoice_balance()
+				'invoice_balance' => si_get_invoice_balance(),
 			);
 		}
 		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Estimate::POST_TYPE ) ) {
 			$si_js_object += array(
 				'estimate_id' => get_the_ID(),
-				'estimate_total' => si_get_estimate_total()
+				'estimate_total' => si_get_estimate_total(),
 			);
 		}
 		return apply_filters( 'si_sprout_doc_scripts_localization', $si_js_object );
@@ -202,7 +202,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 			// add doc info
 			$add_to_js_object += array(
-				'doc_status' => get_post_status( get_the_id() )
+				'doc_status' => get_post_status( get_the_id() ),
 			);
 
 			self::enqueue_general_scripts_styles();
@@ -279,15 +279,15 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function si_cron_schedule( $schedules ) {
 		$schedules['minute'] = array(
 			'interval' => 60,
-			'display' => __( 'Once a Minute' )
+			'display' => __( 'Once a Minute' ),
 		);
 		$schedules['quarterhour'] = array(
 			'interval' => 900,
-			'display' => __( '15 Minutes' )
+			'display' => __( '15 Minutes' ),
 		);
 		$schedules['halfhour'] = array(
 			'interval' => 1800,
-			'display' => __( 'Twice Hourly' )
+			'display' => __( 'Twice Hourly' ),
 		);
 		return $schedules;
 	}
@@ -395,7 +395,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 */
 	protected static function register_query_var( $var, $callback = '' ) {
 		self::add_register_query_var_hooks();
-		self::$query_vars[$var] = $callback;
+		self::$query_vars[ $var ] = $callback;
 	}
 
 	/**
@@ -427,7 +427,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 */
 	public static function handle_callbacks( WP $wp ) {
 		foreach ( self::$query_vars as $var => $callback ) {
-			if ( isset( $wp->query_vars[$var] ) && $wp->query_vars[$var] && $callback && is_callable( $callback ) ) {
+			if ( isset( $wp->query_vars[ $var ] ) && $wp->query_vars[ $var ] && $callback && is_callable( $callback ) ) {
 				call_user_func( $callback, $wp );
 			}
 		}
@@ -447,10 +447,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 			self::load_messages();
 		}
 		$message = __( $message, 'sprout-invoices' );
-		if ( ! isset( self::$messages[$status] ) ) {
-			self::$messages[$status] = array();
+		if ( ! isset( self::$messages[ $status ] ) ) {
+			self::$messages[ $status ] = array();
 		}
-		self::$messages[$status][] = $message;
+		self::$messages[ $status ][] = $message;
 		if ( $save ) {
 			self::save_messages();
 		}
@@ -499,13 +499,13 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$type = ( isset( $_REQUEST['si_message_type'] ) ) ? $_REQUEST['si_message_type'] : $type ;
 		$statuses = array();
 		if ( $type == null ) {
-			if ( isset( self::$messages[self::MESSAGE_STATUS_INFO] ) ) {
+			if ( isset( self::$messages[ self::MESSAGE_STATUS_INFO ] ) ) {
 				$statuses[] = self::MESSAGE_STATUS_INFO;
 			}
-			if ( isset( self::$messages[self::MESSAGE_STATUS_ERROR] ) ) {
+			if ( isset( self::$messages[ self::MESSAGE_STATUS_ERROR ] ) ) {
 				$statuses[] = self::MESSAGE_STATUS_ERROR;
 			}
-		} elseif ( isset( self::$messages[$type] ) ) {
+		} elseif ( isset( self::$messages[ $type ] ) ) {
 			$statuses = array( $type );
 		}
 
@@ -513,13 +513,13 @@ abstract class SI_Controller extends Sprout_Invoices {
 			self::load_messages();
 		}
 		foreach ( $statuses as $status ) {
-			foreach ( self::$messages[$status] as $message ) {
+			foreach ( self::$messages[ $status ] as $message ) {
 				self::load_view( 'templates/messages', array(
 						'status' => $status,
 						'message' => $message,
-					), true );
+				), true );
 			}
-			self::$messages[$status] = array();
+			self::$messages[ $status ] = array();
 		}
 		self::save_messages();
 		if ( defined( 'DOING_AJAX' ) ) {
@@ -549,11 +549,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 		global $blog_id;
 
 		if ( empty( $blog_id ) || ! is_multisite() ) {
-			$url = get_option( 'home' ); }
-		else {
+			$url = get_option( 'home' ); } else {
 			$url = get_blog_option( $blog_id, 'home' ); }
 
-		return apply_filters( 'si_get_home_url_option', esc_url( $url ) );
+			return apply_filters( 'si_get_home_url_option', esc_url( $url ) );
 	}
 
 	/**
@@ -627,7 +626,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * @param  string $new_post_status
 	 * @return
 	 */
-	protected static function clone_post( $post_id, $new_post_status = 'draft', $new_post_type = '' ){
+	protected static function clone_post( $post_id, $new_post_status = 'draft', $new_post_type = '' ) {
 		$post = get_post( $post_id );
 		$new_post_id = 0;
 		if ( isset( $post ) && $post != null ) {
@@ -651,7 +650,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 				'post_title'     => $post->post_title,
 				'post_type'      => $new_post_type,
 				'to_ping'        => $post->to_ping,
-				'menu_order'     => $post->menu_order
+				'menu_order'     => $post->menu_order,
 			);
 
 			// clone the post
@@ -664,7 +663,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 					$post_terms = wp_get_object_terms( $post_id, $taxonomy, array( 'orderby' => 'term_order' ) );
 					$terms = array();
 					for ( $i = 0; $i < count( $post_terms ); $i++ ) {
-						$terms[] = $post_terms[$i]->slug;
+						$terms[] = $post_terms[ $i ]->slug;
 					}
 					wp_set_object_terms( $new_post_id, $terms, $taxonomy );
 				}
@@ -833,7 +832,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'content' => $_REQUEST['notes'],
 			'type' => __( 'Private Note', 'sprout-invoices' ),
 			'post_date' => __( 'Just now', 'sprout-invoices' ),
-			'error' => $error
+			'error' => $error,
 		);
 
 		header( 'Content-type: application/json' );
@@ -866,8 +865,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 				$doc->set_status( $new_status );
 				$view = self::load_view_to_string( 'admin/sections/invoice-status-change-drop', array(
 						'id' => $doc_id,
-						'status' => $doc->get_status()
-					), false );
+						'status' => $doc->get_status(),
+				), false );
 				break;
 			case SI_Estimate::POST_TYPE:
 				switch ( $new_status ) {
@@ -885,8 +884,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 				$doc->set_status( $new_status );
 				$view = self::load_view_to_string( 'admin/sections/estimate-status-change-drop', array(
 						'id' => $doc_id,
-						'status' => $doc->get_status()
-					), false );
+						'status' => $doc->get_status(),
+				), false );
 				break;
 
 			default:
@@ -931,8 +930,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 			if ( isset( $current_screen->post_type ) ) {
 				$post_type = $current_screen->post_type;
-			}
-			else {
+			} else {
 				// Trying hard to figure out the post type if not yet set.
 				$post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : false;
 				if ( $post_id ) {
@@ -955,8 +953,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$type = false;
 		if ( is_single() && ( get_post_type( get_the_ID() ) === SI_Invoice::POST_TYPE ) ) {
 			$type = SI_Invoice::POST_TYPE;
-		}
-		elseif ( is_single() && ( get_post_type( get_the_ID() ) === SI_Estimate::POST_TYPE ) ) {
+		} elseif ( is_single() && ( get_post_type( get_the_ID() ) === SI_Estimate::POST_TYPE ) ) {
 			$type = SI_Estimate::POST_TYPE;
 		}
 		return $type;
@@ -970,8 +967,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( self::DEBUG ) { header( 'Access-Control-Allow-Origin: *' ); }
 		if ( $json ) {
 			echo wp_json_encode( array( 'error' => 1, 'response' => esc_html( $message ) ) );
-		}
-		else {
+		} else {
 			echo $message;
 		}
 		exit();
@@ -984,11 +980,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	    if ( filter_var( $client, FILTER_VALIDATE_IP ) ) {
 	        $ip = $client;
-	    }
-	    elseif ( filter_var( $forward, FILTER_VALIDATE_IP ) ) {
+	    } elseif ( filter_var( $forward, FILTER_VALIDATE_IP ) ) {
 	        $ip = $forward;
-	    }
-	    else {
+	    } else {
 	        $ip = $remote;
 	    }
 	    return $ip;
@@ -1004,12 +998,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( ! $number ) {
 			return 'zero';
 		}
-		$ends = array('th','st','nd','rd','th','th','th','th','th','th');
+		$ends = array( 'th','st','nd','rd','th','th','th','th','th','th' );
 		if ( ($number % 100) >= 11 && ($number % 100) <= 13 ) {
 			$abbreviation = $number. 'th';
-		}
-		else {
-			$abbreviation = $number. $ends[$number % 10];
+		} else {
+			$abbreviation = $number. $ends[ $number % 10 ];
 		}
 		return $abbreviation;
 
@@ -1018,5 +1011,4 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function _save_null() {
 		__return_null();
 	}
-
 }

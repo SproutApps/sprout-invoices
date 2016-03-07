@@ -69,10 +69,9 @@ class SI_Invoices extends SI_Controller {
 		if ( isset( $_REQUEST['serialized_fields'] ) ) {
 			foreach ( $_REQUEST['serialized_fields'] as $key => $data ) {
 				if ( strpos( $data['name'], '[]' ) !== false ) {
-					$_REQUEST[str_replace( '[]', '', $data['name'] )][] = $data['value'];
-				}
-				else {
-					$_REQUEST[$data['name']] = $data['value'];
+					$_REQUEST[ str_replace( '[]', '', $data['name'] ) ][] = $data['value'];
+				} else {
+					$_REQUEST[ $data['name'] ] = $data['value'];
 				}
 			}
 		}
@@ -96,8 +95,12 @@ class SI_Invoices extends SI_Controller {
 		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
 
 		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
+			$submitted_recipients = explode( ',', trim( $_REQUEST['sa_metabox_custom_recipient'] ) );
+			foreach ( $submitted_recipients as $key => $email ) {
+				$email = trim( $email );
+				if ( is_email( $email ) ) {
+					$recipients[] = $email;
+				}
 			}
 		}
 
@@ -272,5 +275,4 @@ class SI_Invoices extends SI_Controller {
 		}
 		return false;
 	}
-
 }

@@ -3,12 +3,12 @@
 </h3>
 <div class="dashboard_widget inside">
 	<div class="main">
-		<canvas id="payments_chart" min-height="300" max-height="500"></canvas>
+		<canvas id="invoice_payments_chart" min-height="300" max-height="500"></canvas>
 		<script type="text/javascript" charset="utf-8">
 			var inv_data = {};
 
-			function payments_chart() {
-				var can = jQuery('#payments_chart');
+			function invoice_payments_chart() {
+				var can = jQuery('#invoice_payments_chart');
 				var ctx = can.get(0).getContext("2d");
 				var container = can.parent().parent();
 
@@ -26,7 +26,7 @@
 			var inv_chart_data = function () {
 				jQuery.post( ajaxurl, { 
 					action: '<?php echo SI_Reporting::AJAX_ACTION ?>', 
-					data: 'payments', 
+					data: 'invoice_payments', 
 					segment: 'weeks',
 					refresh_cache: si_js_object.reports_refresh_cache, 
 					span: 6, 
@@ -58,7 +58,7 @@
 								}
 							]
 						}
-						payments_chart();
+						invoice_payments_chart();
 					}
 				);
 			};

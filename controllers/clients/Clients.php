@@ -653,6 +653,8 @@ class SI_Clients extends SI_Controller {
 	}
 
 	public static function adv_form_fields( $required = true, $client = 0 ) {
+		$money_format = ( $client ) ? $client->get_money_format() : get_locale();
+		$si_localeconv = si_localeconv();
 
 		$fields = array();
 
@@ -662,7 +664,7 @@ class SI_Clients extends SI_Controller {
 			'type' => 'text',
 			'default' => ( $client ) ? $client->get_currency() : '',
 			'required' => $required,
-			'placeholder' => 'USD',
+			'placeholder' => $si_localeconv['int_curr_symbol'],
 			'attributes' => array( 'size' => '8' ),
 			'description' => __( 'This setting will override the setting for each payment processor that supports differing currency codes.', 'sprout-invoices' ),
 		);
@@ -680,8 +682,6 @@ class SI_Clients extends SI_Controller {
 		);
 		/**/
 
-		$money_format = ( $client ) ? $client->get_money_format() : get_locale();
-		$si_localeconv = si_localeconv();
 		$fields['money_format'] = array(
 			'weight' => 230,
 			'label' => __( 'Money Format', 'sprout-invoices' ),

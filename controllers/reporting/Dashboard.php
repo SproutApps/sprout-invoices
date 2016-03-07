@@ -84,6 +84,9 @@ class SI_Dashboard extends SI_Controller {
 		if ( ! in_array( $screen->id, array( 'dashboard', 'dashboard_page_sprout-invoices-stats' ) ) ) {
 			return;
 		}
+		if ( isset( $_GET['report'] ) && '' !== $_GET['report'] ) {
+			return;
+		}
 		if ( 'dashboard' === $screen->id && ! self::show_charts_on_wp_dash() ) {
 			return;
 		}
@@ -121,7 +124,7 @@ class SI_Dashboard extends SI_Controller {
 			'reset' => false,
 			'section' => 'settings',
 			'tab_only' => true,
-			'callback' => null
+			'callback' => null,
 			);
 		do_action( 'sprout_settings_page', $args );
 	}
@@ -160,7 +163,7 @@ class SI_Dashboard extends SI_Controller {
 
 	public static function si_dashboard_setup() {
 
-		require_once(ABSPATH . 'wp-admin/includes/dashboard.php');
+		require_once( ABSPATH . 'wp-admin/includes/dashboard.php' );
 
 		global $wp_registered_widgets, $wp_registered_widget_controls, $wp_dashboard_control_callbacks;
 
@@ -170,7 +173,7 @@ class SI_Dashboard extends SI_Controller {
 		do_action( 'si_dashboard_setup', $screen->id );
 		SI_Dashboard::add_dashboard_widgets( $screen->id );
 
-		if ( 'POST' == $_SERVER['REQUEST_METHOD'] && isset($_POST['widget_id']) ) {
+		if ( 'POST' == $_SERVER['REQUEST_METHOD'] && isset( $_POST['widget_id'] ) ) {
 			check_admin_referer( 'edit-dashboard-widget_' . $_POST['widget_id'], 'dashboard-widget-nonce' );
 			ob_start(); // hack - but the same hack wp-admin/widgets.php uses
 			wp_dashboard_trigger_widget_control( $_POST['widget_id'] );
@@ -187,7 +190,7 @@ class SI_Dashboard extends SI_Controller {
 	}
 
 	public static function reports_dashboard() {
-		$report_dash = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : false ;
+		$report_dash = ( isset( $_GET[ self::REPORT_QV ] ) ) ? $_GET[ self::REPORT_QV ] : false ;
 		switch ( $report_dash ) {
 			case 'invoices':
 				self::load_view( 'admin/reports/invoices.php', array() );
@@ -209,7 +212,7 @@ class SI_Dashboard extends SI_Controller {
 
 	public static function reports_subtitle() {
 		if ( self::is_report_page() ) {
-			$current_report = ( isset( $_GET[self::REPORT_QV] ) ) ? $_GET[self::REPORT_QV] : 'dashboard' ;
+			$current_report = ( isset( $_GET[ self::REPORT_QV ] ) ) ? $_GET[ self::REPORT_QV ] : 'dashboard' ;
 			?>
 				<ul class="subsubsub">
 					<li class="invoices"><a href="<?php echo esc_url( remove_query_arg( self::REPORT_QV ) ) ?>" <?php if ( $current_report == 'dashboard' ) { echo 'class="current"'; } ?>><?php _e( 'Dashboard', 'sprout-invoices' ) ?></a> |</li>
@@ -281,8 +284,17 @@ class SI_Dashboard extends SI_Controller {
 		}
 
 		add_meta_box(
+			'invoice_payments_chart_dashboard',
+			__( 'Invoiced Payments', 'sprout-invoices' ),
+			array( __CLASS__, 'invoice_payments_chart_dashboard' ),
+			$context,
+			'normal',
+			'high'
+		);
+
+		add_meta_box(
 			'payments_chart_dashboard',
-			__( 'Invoice Payments', 'sprout-invoices' ),
+			__( 'Payments', 'sprout-invoices' ),
 			array( __CLASS__, 'payments_chart_dashboard' ),
 			$context,
 			'normal',
@@ -348,6 +360,10 @@ class SI_Dashboard extends SI_Controller {
 		self::load_view( 'admin/dashboards/invoices.php', array() );
 	}
 
+	public static function invoice_payments_chart_dashboard() {
+		self::load_view( 'admin/dashboards/invoice-payments-chart.php', array() );
+	}
+
 	public static function payments_chart_dashboard() {
 		self::load_view( 'admin/dashboards/payments-chart.php', array() );
 	}
@@ -379,5 +395,4 @@ class SI_Dashboard extends SI_Controller {
 	public static function estimates_status_chart_dashboard() {
 		self::load_view( 'admin/dashboards/estimates-status-chart.php', array() );
 	}
-
 }

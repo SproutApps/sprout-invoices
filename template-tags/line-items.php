@@ -224,6 +224,9 @@ function si_get_plain_text_line_item( $item_data = array(), $position = 0, $prev
 				}
 				$label = $tab_child . $column['label'] . '.....';
 			} else {
+				$value = str_replace( '</p><p>', "\n  ", $value ); // newline the paragraphs
+				$value = str_replace( '<p>', '', $value ); // remove start
+				$value = str_replace( '</p>', '', $value ); // remove end
 				$value = $value . "\n";
 			}
 

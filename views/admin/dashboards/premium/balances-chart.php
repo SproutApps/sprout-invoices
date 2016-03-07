@@ -22,9 +22,9 @@
 				var ctx = can.get(0).getContext("2d");
 				// destroy current chart
 				if ( balance_total_chart !== null ) {
-					balance_totals_chart.destroy();
+					balance_total_chart.destroy();
 				};
-				balance_totals_chart = new Chart(ctx).Line( balance_data );
+				balance_total_chart = new Chart(ctx).Line( balance_data );
 			}
 
 			var balance_chart_data = function () {

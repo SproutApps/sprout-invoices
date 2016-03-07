@@ -20,6 +20,7 @@ class SI_Estimate extends SI_Post_Type {
 	const STATUS_FUTURE = 'future'; // invoice pending payment
 	const STATUS_APPROVED = 'approved'; // estimate was approved by client
 	const STATUS_DECLINED = 'declined'; // estimate was declined by client
+	const STATUS_ARCHIVED = 'archived'; // invoice is partially paid for
 
 	private static $instances = array();
 
@@ -60,7 +61,7 @@ class SI_Estimate extends SI_Post_Type {
 				'with_front' => false,
 			),
 			'supports' => array( '' ),
-			'show_in_nav_menus' => false
+			'show_in_nav_menus' => false,
 		);
 		self::register_post_type( self::POST_TYPE, 'Estimate', 'Estimates', $post_type_args );
 
@@ -70,7 +71,7 @@ class SI_Estimate extends SI_Post_Type {
 		$plural = 'Tasks';
 		$taxonomy_args = array(
 			'meta_box_cb' => false,
-			'hierarchical' => false
+			'hierarchical' => false,
 		);
 		self::register_taxonomy( self::LINE_ITEM_TAXONOMY, array(), $singular, $plural, $taxonomy_args );
 
@@ -85,6 +86,7 @@ class SI_Estimate extends SI_Post_Type {
 			self::STATUS_FUTURE => __( 'Scheduled', 'sprout-invoices' ),
 			self::STATUS_APPROVED => __( 'Approved', 'sprout-invoices' ),
 			self::STATUS_DECLINED => __( 'Declined', 'sprout-invoices' ),
+			self::STATUS_ARCHIVED => __( 'Archived', 'sprout-invoices' ),
 		);
 		return $statuses;
 	}
@@ -102,7 +104,7 @@ class SI_Estimate extends SI_Post_Type {
 				'exclude_from_search' => false,
 				'show_in_admin_all_list' => true,
 		  		'show_in_admin_status_list' => true,
-		  		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
+		  		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' ),
 			));
 		}
 	}
@@ -144,16 +146,16 @@ class SI_Estimate extends SI_Post_Type {
 		if ( ! $id ) {
 			return null; }
 
-		if ( ! isset( self::$instances[$id] ) || ! self::$instances[$id] instanceof self ) {
-			self::$instances[$id] = new self( $id ); }
+		if ( ! isset( self::$instances[ $id ] ) || ! self::$instances[ $id ] instanceof self ) {
+			self::$instances[ $id ] = new self( $id ); }
 
-		if ( ! isset( self::$instances[$id]->post->post_type ) ) {
+		if ( ! isset( self::$instances[ $id ]->post->post_type ) ) {
 			return null; }
 
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE ) {
+		if ( self::$instances[ $id ]->post->post_type != self::POST_TYPE ) {
 			return null; }
 
-		return self::$instances[$id];
+		return self::$instances[ $id ];
 	}
 
 	public static function create_estimate( $passed_args, $status = '' ) {
@@ -279,6 +281,10 @@ class SI_Estimate extends SI_Post_Type {
 		$this->set_status( self::STATUS_DECLINED );
 	}
 
+	public function set_archived() {
+		$this->set_status( self::STATUS_ARCHIVED );
+	}
+
 	public static function get_status_label( $status = '' ) {
 		if ( '' === $status ) {
 			$status = $this->get_status();
@@ -305,8 +311,8 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public function set_submission_fields( $fields = array() ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['submission'] => $fields,
-			) );
+			self::$meta_keys['submission'] => $fields,
+		) );
 		return $fields;
 	}
 
@@ -314,7 +320,7 @@ class SI_Estimate extends SI_Post_Type {
 	 * Issue date
 	 */
 	public function get_issue_date() {
-		$date = (int)$this->get_post_meta( self::$meta_keys['issue_date'] );
+		$date = (int) $this->get_post_meta( self::$meta_keys['issue_date'] );
 		if ( ! $date ) {
 			$date = strtotime( $this->post->post_date );
 		};
@@ -323,8 +329,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_issue_date( $issue_date = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['issue_date'] => $issue_date,
-			) );
+			self::$meta_keys['issue_date'] => $issue_date,
+		) );
 		return $issue_date;
 	}
 
@@ -332,7 +338,7 @@ class SI_Estimate extends SI_Post_Type {
 	 * Expiration date
 	 */
 	public function get_expiration_date() {
-		$date = (int)$this->get_post_meta( self::$meta_keys['expiration_date'] );
+		$date = (int) $this->get_post_meta( self::$meta_keys['expiration_date'] );
 		if ( ! $date ) {
 			$days = apply_filters( 'si_default_expiration_in_days', 30 );
 			$date = strtotime( $this->post->post_date ) + (60 * 60 * 24 * $days);
@@ -342,8 +348,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_expiration_date( $expiration_date = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['expiration_date'] => $expiration_date,
-			) );
+			self::$meta_keys['expiration_date'] => $expiration_date,
+		) );
 		return $expiration_date;
 	}
 
@@ -361,8 +367,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_estimate_id( $estimate_id = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['estimate_id'] => $estimate_id,
-			) );
+			self::$meta_keys['estimate_id'] => $estimate_id,
+		) );
 		return $estimate_id;
 	}
 
@@ -375,8 +381,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_po_number( $po_number = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['po'] => $po_number,
-			) );
+			self::$meta_keys['po'] => $po_number,
+		) );
 		return $po_number;
 	}
 
@@ -392,13 +398,13 @@ class SI_Estimate extends SI_Post_Type {
 	}
 
 	public function get_client_id() {
-		return (int)$this->get_post_meta( self::$meta_keys['client_id'] );
+		return (int) $this->get_post_meta( self::$meta_keys['client_id'] );
 	}
 
 	public function set_client_id( $client_id = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['client_id'] => $client_id,
-			) );
+			self::$meta_keys['client_id'] => $client_id,
+		) );
 		return $client_id;
 	}
 
@@ -406,13 +412,13 @@ class SI_Estimate extends SI_Post_Type {
 	 * discount
 	 */
 	public function get_discount() {
-		return (float)$this->get_post_meta( self::$meta_keys['discount'] );
+		return (float) $this->get_post_meta( self::$meta_keys['discount'] );
 	}
 
 	public function set_discount( $discount = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['discount'] => $discount,
-			) );
+			self::$meta_keys['discount'] => $discount,
+		) );
 		return $discount;
 	}
 
@@ -440,13 +446,13 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_tax( $tax = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['tax'] => $tax,
-			) );
+			self::$meta_keys['tax'] => $tax,
+		) );
 		return $tax;
 	}
 
 	public function get_tax_total() {
-		$tax = (float)$this->get_tax();
+		$tax = (float) $this->get_tax();
 		$subtotal = $this->get_subtotal();
 		$calculated_total = floatval( $subtotal * ( $tax / 100 ) );
 		return round( $calculated_total, 2 );
@@ -456,13 +462,13 @@ class SI_Estimate extends SI_Post_Type {
 	 * Tax
 	 */
 	public function get_tax2() {
-		return (float)$this->get_post_meta( self::$meta_keys['tax2'] );
+		return (float) $this->get_post_meta( self::$meta_keys['tax2'] );
 	}
 
 	public function set_tax2( $tax = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['tax2'] => $tax,
-			) );
+			self::$meta_keys['tax2'] => $tax,
+		) );
 		return $tax;
 	}
 
@@ -477,13 +483,13 @@ class SI_Estimate extends SI_Post_Type {
 	 * Project
 	 */
 	public function get_project_id() {
-		return (int)$this->get_post_meta( self::$meta_keys['project_id'] );
+		return (int) $this->get_post_meta( self::$meta_keys['project_id'] );
 	}
 
 	public function set_project_id( $project_id = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['project_id'] => $project_id,
-			) );
+			self::$meta_keys['project_id'] => $project_id,
+		) );
 		return $project_id;
 	}
 
@@ -506,8 +512,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_total( $total = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['total'] => $total,
-			) );
+			self::$meta_keys['total'] => $total,
+		) );
 		return $total;
 	}
 
@@ -532,8 +538,8 @@ class SI_Estimate extends SI_Post_Type {
 	public function set_calculated_total() {
 		$total = $this->get_calculated_total();
 		$this->save_post_meta( array(
-				self::$meta_keys['total'] => $total,
-			) );
+			self::$meta_keys['total'] => $total,
+		) );
 		return $total;
 	}
 
@@ -577,8 +583,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_terms( $terms = '' ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['terms'] => $terms,
-			) );
+			self::$meta_keys['terms'] => $terms,
+		) );
 		return $terms;
 	}
 
@@ -592,8 +598,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_notes( $notes = '' ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['notes'] => $notes,
-			) );
+			self::$meta_keys['notes'] => $notes,
+		) );
 		return $notes;
 	}
 
@@ -607,8 +613,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_sender_note( $send_notes = '' ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['send_notes'] => $send_notes,
-			) );
+			self::$meta_keys['send_notes'] => $send_notes,
+		) );
 		return $send_notes;
 	}
 
@@ -627,8 +633,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_line_items( $line_items = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['line_items'] => $line_items,
-			) );
+			self::$meta_keys['line_items'] => $line_items,
+		) );
 		return $line_items;
 	}
 
@@ -647,8 +653,8 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_currency( $currency = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['currency'] => $currency,
-			) );
+			self::$meta_keys['currency'] => $currency,
+		) );
 		return $currency;
 	}
 
@@ -657,13 +663,13 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 
 	public function get_user_id() {
-		return (int)$this->get_post_meta( self::$meta_keys['user_id'] );
+		return (int) $this->get_post_meta( self::$meta_keys['user_id'] );
 	}
 
 	public function set_user_id( $user_id = 0 ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['user_id'] => $user_id,
-			) );
+			self::$meta_keys['user_id'] => $user_id,
+		) );
 		return $user_id;
 	}
 
@@ -682,5 +688,4 @@ class SI_Estimate extends SI_Post_Type {
 	public function get_history( $type = '' ) {
 		return SI_Record::get_records_by_association( $this->ID );
 	}
-
 }

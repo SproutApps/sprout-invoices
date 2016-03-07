@@ -74,7 +74,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 								'class' => 'medium-text',
 							),
 							'default' => self::$estimates_slug,
-							'description' => sprintf( __( 'Example estimate url: %s/%s/045b41dd14ab8507d80a27b7357630a5/', 'sprout-invoices' ), site_url(), '<strong>'.self::$estimates_slug.'</strong>' )
+							'description' => sprintf( __( 'Example estimate url: %s/%s/045b41dd14ab8507d80a27b7357630a5/', 'sprout-invoices' ), site_url(), '<strong>'.self::$estimates_slug.'</strong>' ),
 						),
 
 					),
@@ -83,7 +83,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_terms,
-							'description' => __( 'These are the default terms for an estimate.', 'sprout-invoices' )
+							'description' => __( 'These are the default terms for an estimate.', 'sprout-invoices' ),
 						),
 					),
 					self::NOTES_OPTION => array(
@@ -91,11 +91,11 @@ class SI_Estimates_Edit extends SI_Estimates {
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_notes,
-							'description' => __( 'These are the default notes public to a client reviewing their estimate.', 'sprout-invoices' )
+							'description' => __( 'These are the default notes public to a client reviewing their estimate.', 'sprout-invoices' ),
 						),
-					)
-				)
-			)
+					),
+				),
+			),
 		);
 		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
@@ -229,7 +229,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'context' => 'normal',
 				'priority' => 'low',
 				'weight' => 100,
-			)
+			),
 		);
 		do_action( 'sprout_meta_box', $args, SI_Estimate::POST_TYPE );
 	}
@@ -260,8 +260,8 @@ class SI_Estimates_Edit extends SI_Estimates {
 					'post' => $post,
 					'status' => $status,
 					'statuses' => SI_Estimate::get_statuses(),
-					'estimate' => $estimate
-				) );
+					'estimate' => $estimate,
+			) );
 		}
 	}
 
@@ -285,7 +285,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'total' => $total,
 				'subtotal' => $subtotal,
 				'line_items' => $line_items,
-			), false );
+		), false );
 	}
 
 	/**
@@ -341,12 +341,12 @@ class SI_Estimates_Edit extends SI_Estimates {
 			'post_type' => SI_Client::POST_TYPE,
 			'post_status' => 'publish',
 			'posts_per_page' => -1,
-			'fields' => 'ids'
+			'fields' => 'ids',
 		);
 		$clients = get_posts( $args );
 		$client_options = array();
 		foreach ( $clients as $client_id ) {
-			$client_options[$client_id] = get_the_title( $client_id );
+			$client_options[ $client_id ] = get_the_title( $client_id );
 		}
 
 		$estimate = SI_Estimate::get_instance( $post->ID );
@@ -380,7 +380,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'tax' => $tax,
 				'tax2' => $tax2,
 				'currency' => $currency,
-			), false );
+		), false );
 
 		// add the client modal
 		self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( false ) ) );
@@ -450,8 +450,8 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'post' => $post,
 				'estimate' => $estimate,
 				'fields' => self::sender_submission_fields( $estimate ),
-				'sender_notes' => $estimate->get_sender_note()
-			), false );
+				'sender_notes' => $estimate->get_sender_note(),
+		), false );
 	}
 
 	/**
@@ -474,8 +474,12 @@ class SI_Estimates_Edit extends SI_Estimates {
 		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
 
 		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
+			$submitted_recipients = explode( ',', trim( $_REQUEST['sa_metabox_custom_recipient'] ) );
+			foreach ( $submitted_recipients as $key => $email ) {
+				$email = trim( $email );
+				if ( is_email( $email ) ) {
+					$recipients[] = $email;
+				}
 			}
 		}
 
@@ -515,7 +519,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'estimate' => $estimate,
 				'history' => si_doc_history_records( $post->ID, false ),
 				'submission_fields' => $estimate->get_submission_fields(),
-			), false );
+		), false );
 	}
 
 
@@ -535,7 +539,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'estimate' => $estimate,
 				'terms' => $estimate->get_terms(),
 				'notes' => $estimate->get_notes(),
-			), false );
+		), false );
 	}
 
 	/**
@@ -572,7 +576,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 			'type' => 'text',
 			'placeholder' => '',
 			'attributes' => array( 'readonly' => 'readonly' ),
-			'default' => $from_name . ' <' . $from_email . '>'
+			'default' => $from_name . ' <' . $from_email . '>',
 		);
 
 		// options for recipients
@@ -588,7 +592,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 			}
 		}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working since there is no client.', 'sprout-invoices' ) );
+			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working, since it may not be assigned to a client.', 'sprout-invoices' ) );
 
 			// Send to me.
 			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );
@@ -599,7 +603,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 			'weight' => 5,
 			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', __( 'Recipients', 'sprout-invoices' ), __( 'A notification will be sent if recipients are selected and this estimate is saved.', 'sprout-invoices' ) ),
 			'type' => 'bypass',
-			'output' => $recipient_options
+			'output' => $recipient_options,
 		);
 
 		$fields['sender_note'] = array(
@@ -607,19 +611,19 @@ class SI_Estimates_Edit extends SI_Estimates {
 			'label' => __( 'Note', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'default' => $estimate->get_sender_note(),
-			'description' => __( 'This note will be added to the Estimate Notification via the [admin_note] shortcode.', 'sprout-invoices' )
+			'description' => __( 'This note will be added to the Estimate Notification via the [admin_note] shortcode.', 'sprout-invoices' ),
 		);
 
 		$fields['doc_id'] = array(
 			'type' => 'hidden',
 			'value' => $estimate->get_id(),
-			'weight' => 10000
+			'weight' => 10000,
 		);
 
 		$fields['notification_nonce'] = array(
 			'type' => 'hidden',
 			'value' => wp_create_nonce( SI_Controller::NONCE ),
-			'weight' => 10001
+			'weight' => 10001,
 		);
 
 		$fields = apply_filters( 'si_sender_submission_fields', $fields );
@@ -662,6 +666,4 @@ class SI_Estimates_Edit extends SI_Estimates {
 		}
 		return $notes;
 	}
-
-
 }

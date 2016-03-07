@@ -90,6 +90,27 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.0**
+
+* New: Account credits and payment credits
+* New: Improved payment reminder (new reminder email)
+* New: Estimate approval reminder (new reminder email)
+* New: Client specific payment options
+* New: Archive status, removes from front-end views
+* New: Limit automtic recurring creation
+* New: Payments dashboard widget
+* Change: Automatically change status of scheduled docs
+* Change: Automatically send invoice/estimate when published from a schedule
+* Change: Send to multiple recipeints with comma seperated list
+* Change: Add user of time keeper
+* Change: Tax and discount are seperate line item totals
+* Change: Premium reports updated with HTML5 export options
+* Change: Remove visual editor from notification admin
+* Fix: New line adjustments for address
+* Fix: New line for plain text notifications
+* Fix: Code cleanup with WP coding standards (formatting)
+* Fix: Misc. minor bug fixes
+
 **9.4**
 
 * Fix: Reporting fixes
@@ -720,13 +741,13 @@ Welcome! This is a big update and a big step for us.
 
 * Subject line fix.
 
-**0.9.9.4 - 1.0 GM**
+**0.9.10.0 - 1.0 GM**
 
 * WP-Invoice Importer Bug fix: Import any type
 * WP-Invoice Importer Bug fix: Fix devision by zero error
 * WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
-**0.9.9.4 - 1.0 GM**
+**0.9.10.0 - 1.0 GM**
 
 * Strict standards fixins
 

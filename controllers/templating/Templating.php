@@ -65,14 +65,14 @@ class SI_Templating_API extends SI_Controller {
 	 */
 	public static function register_shortcode( $tag = '', $callback = array(), $args = array() ) {
 		// FUTURE $args
-		self::$shortcodes[$tag] = $callback;
+		self::$shortcodes[ $tag ] = $callback;
 	}
 
 	/**
 	 * Loop through registered shortcodes and use the WP function.
 	 * @return
 	 */
-	public static function add_shortcodes(){
+	public static function add_shortcodes() {
 		foreach ( self::$shortcodes as $tag => $callback ) {
 			add_shortcode( $tag, $callback );
 		}
@@ -165,17 +165,17 @@ class SI_Templating_API extends SI_Controller {
 		}
 
 		$context_stylesheet_path = self::locate_template( array(
-						$context . 's.css',
-						$context . '/' . $context . 's.css',
-					), false );
+			$context . 's.css',
+			$context . '/' . $context . 's.css',
+		), false );
 		if ( $context_stylesheet_path ) {
 			$stylesheet_url = _convert_content_file_path_to_url( $context_stylesheet_path );
 			printf( '<link rel="stylesheet" id="sprout_doc_style-%s-css" href="%s" type="text/css" media="all">', $context, esc_url_raw( $stylesheet_url ) );
 		}
 
 		$stylesheet_path = self::locate_template( array(
-						'sprout-invoices.css',
-					), false );
+			'sprout-invoices.css',
+		), false );
 
 		if ( $stylesheet_path ) {
 			$general_stylesheet_url = _convert_content_file_path_to_url( $stylesheet_path );
@@ -263,7 +263,7 @@ class SI_Templating_API extends SI_Controller {
 
 				if ( ! current_user_can( 'edit_sprout_invoices' ) && apply_filters( 'si_redirect_temp_status', true ) ) {
 					$status = get_post_status();
-					if ( SI_Invoice::STATUS_TEMP === $status ) {
+					if ( in_array( $status, array( SI_Invoice::STATUS_TEMP, SI_Invoice::STATUS_ARCHIVED ) ) ) {
 						wp_safe_redirect( add_query_arg( array( 'si_id' => get_the_id() ), get_home_url() ) );
 						exit();
 					}
@@ -272,19 +272,19 @@ class SI_Templating_API extends SI_Controller {
 				$custom_template = self::get_doc_current_template( get_the_id() );
 				$custom_path = ( $custom_template != '' ) ? 'invoice/'.$custom_template : '' ;
 				$template = self::locate_template( array(
-						$custom_path,
-						'invoice-'.get_locale().'.php',
-						'invoice.php',
-						'invoice/invoice.php',
-					), $template );
+					$custom_path,
+					'invoice-'.get_locale().'.php',
+					'invoice.php',
+					'invoice/invoice.php',
+				), $template );
 			} else {
 				$status = get_query_var( self::FILTER_QUERY_VAR );
 				$template = self::locate_template( array(
-						'invoice/'.$status.'-invoices.php',
-						$status.'-invoices.php',
-						'invoices.php',
-						'invoice/invoices.php'
-					), $template );
+					'invoice/'.$status.'-invoices.php',
+					$status.'-invoices.php',
+					'invoices.php',
+					'invoice/invoices.php',
+				), $template );
 			}
 			$template = apply_filters( 'si_doc_template', $template, 'invoice' );
 		}
@@ -296,7 +296,7 @@ class SI_Templating_API extends SI_Controller {
 
 				if ( ! current_user_can( 'edit_sprout_invoices' ) && apply_filters( 'si_redirect_temp_status', true ) ) {
 					$status = get_post_status();
-					if ( SI_Estimate::STATUS_TEMP === $status ) {
+					if ( in_array( $status, array( SI_Estimate::STATUS_TEMP, SI_Estimate::STATUS_ARCHIVED ) ) ) {
 						wp_safe_redirect( add_query_arg( array( 'si_id' => get_the_id() ), get_home_url() ) );
 						exit();
 					}
@@ -305,19 +305,19 @@ class SI_Templating_API extends SI_Controller {
 				$custom_template = self::get_doc_current_template( get_the_id() );
 				$custom_path = ( $custom_template != '' ) ? 'estimate/'.$custom_template : '' ;
 				$template = self::locate_template( array(
-						$custom_path,
-						'estimate-'.get_locale().'.php',
-						'estimate.php',
-						'estimate/estimate.php',
-					), $template );
+					$custom_path,
+					'estimate-'.get_locale().'.php',
+					'estimate.php',
+					'estimate/estimate.php',
+				), $template );
 			} else {
 				$status = get_query_var( self::FILTER_QUERY_VAR );
 				$template = self::locate_template( array(
-						'estimate/'.$status.'-estimates.php',
-						$status.'-estimates.php',
-						'estimates.php',
-						'estimate/estimates.php'
-					), $template );
+					'estimate/'.$status.'-estimates.php',
+					$status.'-estimates.php',
+					'estimates.php',
+					'estimate/estimates.php',
+				), $template );
 			}
 
 			$template = apply_filters( 'si_doc_template', $template, 'estimate' );
@@ -332,8 +332,7 @@ class SI_Templating_API extends SI_Controller {
 	public static function doc_template_selection( $doc ) {
 		if ( is_a( $doc, 'SI_Invoice' ) ) {
 			$template_options = self::get_invoice_templates();
-		}
-		elseif ( is_a( $doc, 'SI_Estimate' ) ) {
+		} elseif ( is_a( $doc, 'SI_Estimate' ) ) {
 			$template_options = self::get_estimate_templates();
 		}
 		if ( ! isset( $template_options ) || empty( $template_options ) ) {
@@ -342,7 +341,7 @@ class SI_Templating_API extends SI_Controller {
 		$doc_type_name = ( is_a( $doc, 'SI_Invoice' ) ) ? __( 'invoice', 'sprout-invoices' ) : __( 'estimate', 'sprout-invoices' );
 		$template = self::get_doc_current_template( $doc->get_id() ); ?>
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
-			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( __( 'Select a custom %s template.', 'sprout-invoices' ), $doc_type_name ) ?>" class="helptip"></span></span>
+			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[ $template ] ); ?></b> <span title="<?php printf( __( 'Select a custom %s template.', 'sprout-invoices' ), $doc_type_name ) ?>" class="helptip"></span></span>
 
 				<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
 					<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Select different template', 'sprout-invoices' ) ?></span>
@@ -380,14 +379,14 @@ class SI_Templating_API extends SI_Controller {
 			'label' => __( 'Invoice Template', 'sprout-invoices' ),
 			'type' => 'bypass',
 			'output' => self::client_template_options( 'invoice', get_the_ID() ),
-			'description' => __( 'This invoice template will override the default invoice template, unless another template is selected when creating/editing an invoice.', 'sprout-invoices' )
+			'description' => __( 'This invoice template will override the default invoice template, unless another template is selected when creating/editing an invoice.', 'sprout-invoices' ),
 		);
 		$adv_fields['est_template_options'] = array(
 			'weight' => 210,
 			'label' => __( 'Estimate Template', 'sprout-invoices' ),
 			'type' => 'bypass',
 			'output' => self::client_template_options( 'estimate', get_the_ID() ),
-			'description' => __( 'This estimate template will override the default estimate template, unless another template is selected when creating/editing an estimate.', 'sprout-invoices' )
+			'description' => __( 'This estimate template will override the default estimate template, unless another template is selected when creating/editing an estimate.', 'sprout-invoices' ),
 		);
 		return $adv_fields;
 	}
@@ -432,7 +431,7 @@ class SI_Templating_API extends SI_Controller {
 		$doc_type_name = ( $type != 'estimate' ) ? __( 'invoice', 'sprout-invoices' ) : __( 'estimate', 'sprout-invoices' );
 		$template = ( $type != 'estimate' ) ? self::get_client_invoice_template( $client_id ) : self::get_client_estimate_template( $client_id ); ?>
 		<div class="misc-pub-section" data-edit-id="template" data-edit-type="select">
-			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[$template] ); ?></b> <span title="<?php printf( __( 'Select a custom %s template.', 'sprout-invoices' ), $doc_type_name ) ?>" class="helptip"></span></span>
+			<span id="template" class="wp-media-buttons-icon"><b><?php echo esc_html( $template_options[ $template ] ); ?></b> <span title="<?php printf( __( 'Select a custom %s template.', 'sprout-invoices' ), $doc_type_name ) ?>" class="helptip"></span></span>
 
 			<a href="#edit_template" class="edit-template hide-if-no-js edit_control" >
 				<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Select different template', 'sprout-invoices' ) ?></span>
@@ -472,7 +471,7 @@ class SI_Templating_API extends SI_Controller {
 		$theme = wp_get_theme();
 		$files = (array) self::scandir( $theme->get_stylesheet_directory().'/'.self::get_template_path().$type, 'php', 1 );
 
-		if ( $theme->parent() ){
+		if ( $theme->parent() ) {
 			$files += (array) self::scandir( $theme->get_template_directory().'/'.self::get_template_path().$type, 'php', 1 );
 		}
 
@@ -573,6 +572,4 @@ class SI_Templating_API extends SI_Controller {
 	public static function blank_shortcode( $atts = array() ) {
 		return '';
 	}
-
-
 }

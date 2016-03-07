@@ -52,10 +52,10 @@ class SA_Addons extends SI_Controller {
 					self::ADDON_OPTION => array(
 						'label' => null,
 						'option' => array( get_class(), 'display_addons_options' ),
-						'sanitize_callback' => array( __CLASS__, 'save_active_addons' )
-					)
-				)
-			)
+						'sanitize_callback' => array( __CLASS__, 'save_active_addons' ),
+					),
+				),
+			),
 		);
 		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
@@ -118,14 +118,13 @@ class SA_Addons extends SI_Controller {
 		$addons = self::get_addons();
 		if ( ! empty( $addons ) && ! isset( $_GET['marketplace'] ) ) {
 			self::load_view( 'admin/addons/options-admin', array(
-					'addons' => self::get_addons()
-				), false );
-		}
-		else {
+					'addons' => self::get_addons(),
+			), false );
+		} else {
 			$addons = self::get_marketplace_addons();
 			self::load_view( 'admin/addons/marketplace', array(
 				'addons' => $addons,
-				), false );
+			), false );
 		}
 
 	}
@@ -165,7 +164,7 @@ class SA_Addons extends SI_Controller {
 		$si_addons = array();
 		$addon_root = SI_PATH . '/add-ons/';
 
-		if ( ! empty($addon_folder) ) {
+		if ( ! empty( $addon_folder ) ) {
 			$addon_root .= $addon_folder;
 		}
 
@@ -278,7 +277,7 @@ class SA_Addons extends SI_Controller {
 		$response = wp_safe_remote_get( add_query_arg( $api_params, self::API_CB . 'wp-admin/admin-ajax.php' ), array( 'timeout' => 15, 'sslverify' => false ) );
 
 		// make sure the response came back okay
-		if ( is_wp_error( $response ) ){
+		if ( is_wp_error( $response ) ) {
 			return false;
 		}
 
@@ -287,5 +286,4 @@ class SA_Addons extends SI_Controller {
 		set_transient( $cache_key, $marketplace_items, 60 * 60 * 24 * 5 );
 		return $marketplace_items;
 	}
-
 }

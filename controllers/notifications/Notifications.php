@@ -14,8 +14,17 @@ class SI_Notifications extends SI_Notifications_Control {
 		// Shortcodes
 		add_filter( 'sprout_notification_shortcodes', array( __CLASS__, 'register_shortcodes' ) );
 
+		add_filter( 'user_can_richedit', array( __CLASS__, 'disabled_wysiwyg_editor' ) );
+
 		// Hook actions that would send a notification
 		self::notification_hooks();
+	}
+
+	public static function disabled_wysiwyg_editor( $default ) {
+		if ( SI_Notification::POST_TYPE == get_post_type() ) {
+			return false;
+		}
+		return $default;
 	}
 
 	/**
@@ -55,23 +64,23 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_estimate' => array(
 					'name' => __( 'Estimate Available', 'sprout-invoices' ),
 					'description' => __( 'Customize the estimate email that is sent to selected recipients.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name' ),
 					'default_title' => sprintf( __( '%s: Your Estimate is Available', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/estimate', null )
+					'default_content' => self::load_view_to_string( 'notifications/estimate', null ),
 				),
 				// Invoices
 				'send_invoice' => array(
 					'name' => __( 'Invoice Available', 'sprout-invoices' ),
 					'description' => __( 'Customize the invoice email that is sent to selected recipients.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name' ),
 					'default_title' => sprintf( __( '%s: Your Invoice is Available', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/invoice', null )
+					'default_content' => self::load_view_to_string( 'notifications/invoice', null ),
 				),
 				// Payments
 				'deposit_payment' => array(
 					'name' => __( 'Deposit Payment Received', 'sprout-invoices' ),
 					'description' => __( 'Customize the payment email that is sent to the client recipients when a deposit is made.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name' ),
 					'default_title' => sprintf( __( '%s: Deposit Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', null ),
 					'always_disabled' => true,
@@ -79,14 +88,14 @@ class SI_Notifications extends SI_Notifications_Control {
 				'final_payment' => array(
 					'name' => __( 'Invoice Paid', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the client recipients when the final payment for an invoice is made.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name' ),
 					'default_title' => sprintf( __( '%s: Thank You', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/payment-final', null )
+					'default_content' => self::load_view_to_string( 'notifications/payment-final', null ),
 				),
 				'reminder_payment' => array(
 					'name' => __( 'Payment Reminder', 'sprout-invoices' ),
 					'description' => __( 'Customize the email that is sent to the client recipients in order to remind them that their payment is overdue.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name' ),
 					'default_title' => sprintf( __( '%s: Invoice Payment Overdue', 'sprout-invoices' ),  get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-reminder', null ),
 					'always_disabled' => true,
@@ -95,7 +104,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'estimate_submitted' => array(
 					'name' => __( 'Lead Submitted', 'sprout-invoices' ),
 					'description' => __( 'Customize the email that is sent to the site admin after an lead is submitted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url' ),
 					'default_title' => sprintf( __( '%s: Estimate Request Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-request-submitted', null ),
 					'always_disabled' => true,
@@ -103,23 +112,23 @@ class SI_Notifications extends SI_Notifications_Control {
 				'accepted_estimate' => array(
 					'name' => __( 'Estimate Accepted', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the admin after an estimate is accepted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url' ),
 					'default_title' => sprintf( __( '%s: Estimate Accepted', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-accepted', null )
+					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-accepted', null ),
 				),
 				'declined_estimate' => array(
 					'name' => __( 'Estimate Declined', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the admin after an estimate is accepted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url' ),
 					'default_title' => sprintf( __( '%s: Estimate Declined', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-declined', null )
+					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-declined', null ),
 				),
 				'payment_notification' => array(
 					'name' => __( 'Payment Received', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to an admin when any payment is received.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url'  ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url' ),
 					'default_title' => sprintf( __( '%s: Payment Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-payment', null )
+					'default_content' => self::load_view_to_string( 'notifications/admin-payment', null ),
 				),
 			);
 		return array_merge( $notifications, $default_notifications );
@@ -131,179 +140,179 @@ class SI_Notifications extends SI_Notifications_Control {
 		$default_shortcodes = array(
 				'date' => array(
 					'description' => __( 'Used to display the date.', 'sprout-invoices' ),
-					'callback' => array( 'SI_Notifications', 'shortcode_date' )
+					'callback' => array( 'SI_Notifications', 'shortcode_date' ),
 					),
 				'name' => array(
 					'description' => __( 'Used to display the user&rsquo;s name.', 'sprout-invoices' ),
-					'callback' => array( 'SI_Notifications', 'shortcode_sender_name' )
+					'callback' => array( 'SI_Notifications', 'shortcode_sender_name' ),
 					),
 				'username' => array(
 					'description' => __( 'Used to display the user&rsquo;s login.', 'sprout-invoices' ),
-					'callback' => array( 'SI_Notifications', 'shortcode_username' )
+					'callback' => array( 'SI_Notifications', 'shortcode_username' ),
 					),
 				'admin_note' => array(
 					'description' => __( 'Used to display the note created before sending.', 'sprout-invoices' ),
-					'callback' => array( 'SI_Notifications', 'shortcode_admin_note' )
+					'callback' => array( 'SI_Notifications', 'shortcode_admin_note' ),
 					),
 				'payment_total' => array(
 						'description' => __( 'Used to display the payment total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_payment_total' )
+						'callback' => array( 'SI_Notifications', 'shortcode_payment_total' ),
 					),
 				'payment_id' => array(
 						'description' => __( 'Used to display the .', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_payment_id' )
+						'callback' => array( 'SI_Notifications', 'shortcode_payment_id' ),
 					),
 				'line_item_table' => array(
 						'description' => __( 'Used to display the line items for an estimate or invoice in a table format (HTML).', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_line_item_table' )
+						'callback' => array( 'SI_Notifications', 'shortcode_line_item_table' ),
 					),
 				'line_item_list' => array(
 						'description' => __( 'Used to display the line items for an estimate or invoice in a list format (HTML).', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_line_item_list' )
+						'callback' => array( 'SI_Notifications', 'shortcode_line_item_list' ),
 					),
 				'line_item_plain_list' => array(
 						'description' => __( 'Used to display the line items for an estimate or invoice in a plain text list.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_line_item_plain_list' )
+						'callback' => array( 'SI_Notifications', 'shortcode_line_item_plain_list' ),
 					),
 				'invoice_subject' => array(
 						'description' => __( 'Used to display the invoice subject.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_subject' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_subject' ),
 					),
 				'invoice_id' => array(
 						'description' => __( 'Used to display the invoice id.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_id' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_id' ),
 					),
 				'invoice_edit_url' => array(
 						'description' => __( 'Used to display the invoice edit url.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_edit_url' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_edit_url' ),
 					),
 				'invoice_url' => array(
 						'description' => __( 'Used to display the invoice url.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_url' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_url' ),
 					),
 				'invoice_issue_date' => array(
 						'description' => __( 'Used to display the invoice issue date.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_issue_date' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_issue_date' ),
 					),
 				'invoice_due_date' => array(
 						'description' => __( 'Used to display the due date.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_due_date' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_due_date' ),
 					),
 				'invoice_past_due_date' => array(
 						'description' => __( 'Used to display how many days the invoice is past due.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_past_due_date' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_past_due_date' ),
 					),
 				'invoice_po_number' => array(
 						'description' => __( 'Used to display the invoice po number.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_po_number' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_po_number' ),
 					),
 				'invoice_tax_total' => array(
 						'description' => __( 'Used to display the invoice tax total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax_total' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax_total' ),
 					),
 				'invoice_tax' => array(
 						'description' => __( 'Used to display the invoice tax.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax' ),
 					),
 				'invoice_tax2' => array(
 						'description' => __( 'Used to display the invoice tax (2).', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax2' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_tax2' ),
 					),
 				'invoice_notes' => array(
 						'description' => __( 'Used to display the invoice notes.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_notes' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_notes' ),
 					),
 				'invoice_terms' => array(
 						'description' => __( 'Used to display the invoice terms.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_terms' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_terms' ),
 					),
 				'invoice_total' => array(
 						'description' => __( 'Used to display the invoice total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total' ),
 					),
 				'invoice_calculated_total' => array(
 						'description' => __( 'Used to display the invoice calculated total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_calculated_total' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_calculated_total' ),
 					),
 				'invoice_subtotal' => array(
 						'description' => __( 'Used to display the invoice sub total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_subtotal' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_subtotal' ),
 					),
 				'invoice_total_due' => array(
 						'description' => __( 'Used to display the total amount due, or deposit if set.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total_due' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total_due' ),
 					),
 				'invoice_deposit_amount' => array(
 						'description' => __( 'Used to display the deposit amount due.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_deposit_amount' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_deposit_amount' ),
 					),
 				'invoice_total_payments' => array(
 						'description' => __( 'Used to display the total of all payments.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total_payments' )
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total_payments' ),
 					),
 				'client_name' => array(
 						'description' => __( 'Used to display the client name.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_client_name' )
+						'callback' => array( 'SI_Notifications', 'shortcode_client_name' ),
 					),
 				'client_edit_url' => array(
 						'description' => __( 'Used to display the client edit url.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_client_edit_url' )
+						'callback' => array( 'SI_Notifications', 'shortcode_client_edit_url' ),
 					),
 				'estimate_subject' => array(
 						'description' => __( 'Used to display the estimate subject.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_subject' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_subject' ),
 					),
 				'estimate_id' => array(
 						'description' => __( 'Used to display the estimate id.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_id' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_id' ),
 					),
 				'estimate_edit_url' => array(
 						'description' => __( 'Used to display the edit url.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_edit_url' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_edit_url' ),
 					),
 				'estimate_url' => array(
 						'description' => __( 'Used to display the estimate url.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_url' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_url' ),
 					),
 				'estimate_issue_date' => array(
 						'description' => __( 'Used to display the estimate issue date.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_issue_date' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_issue_date' ),
 					),
 				'estimate_po_number' => array(
 						'description' => __( 'Used to display the estimate po number.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_po_number' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_po_number' ),
 					),
 				'estimate_total' => array(
 						'description' => __( 'Used to display the estimate total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_total' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_total' ),
 					),
 				'estimate_subtotal' => array(
 						'description' => __( 'Used to display the estimate total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_subtotal' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_subtotal' ),
 					),
 				'estimate_tax_total' => array(
 						'description' => __( 'Used to display the estimate tax total.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax_total' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax_total' ),
 					),
 				'estimate_tax' => array(
 						'description' => __( 'Used to display the estimate tax.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax' ),
 					),
 				'estimate_tax2' => array(
 						'description' => __( 'Used to display the estimate tax (2).', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax2' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_tax2' ),
 					),
 				'estimate_notes' => array(
 						'description' => __( 'Used to display the estimate notes.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_notes' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_notes' ),
 					),
 				'estimate_terms' => array(
 						'description' => __( 'Used to display the estimate terms.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_estimate_terms' )
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_terms' ),
 					),
 				'lead_entries' => array(
 						'description' => __( 'Used to display the lead entries in HTML.', 'sprout-invoices' ),
-						'callback' => array( 'SI_Notifications', 'shortcode_lead_entries' )
+						'callback' => array( 'SI_Notifications', 'shortcode_lead_entries' ),
 					),
 
 			);
@@ -319,6 +328,12 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $invoice_id = $estimate->get_invoice_id() ) {
 			$invoice = SI_Invoice::get_instance( $invoice_id );
 		}
+
+		// If status is temp than change to pending.
+		if ( SI_Estimate::STATUS_TEMP === $estimate->get_status() ) {
+			$estimate->set_pending();
+		}
+
 		foreach ( array_unique( $recipients ) as $user_id ) {
 			/**
 			 * sometimes the recipients list will pass an email instead of an id
@@ -328,19 +343,17 @@ class SI_Notifications extends SI_Notifications_Control {
 				if ( $user = get_user_by( 'email', $user_id ) ) {
 					$user_id = $user->ID;
 					$to = self::get_user_email( $user_id );
-				}
-				else { // no user found
+				} else { // no user found
 					$to = $user_id;
 				}
-			}
-			else {
+			} else {
 				$to = self::get_user_email( $user_id );
 			}
 			$data = array(
 				'user_id' => ( is_numeric( $user_id ) ) ? $user_id : '',
 				'estimate' => $estimate,
 				'invoice' => $invoice,
-				'to' => $to
+				'to' => $to,
 			);
 
 			self::send_notification( 'send_estimate', $data, $to, $from_email, $from_name );
@@ -352,6 +365,12 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( $estimate_id = $invoice->get_estimate_id() ) {
 			$estimate = SI_Estimate::get_instance( $estimate_id );
 		}
+
+		// If status is temp than change to pending.
+		if ( SI_Invoice::STATUS_TEMP === $invoice->get_status() ) {
+			$invoice->set_pending();
+		}
+
 		foreach ( array_unique( $recipients ) as $user_id ) {
 
 			/**
@@ -362,12 +381,10 @@ class SI_Notifications extends SI_Notifications_Control {
 				if ( $user = get_user_by( 'email', $user_id ) ) {
 					$user_id = $user->ID;
 					$to = self::get_user_email( $user_id );
-				}
-				else { // no user found
+				} else { // no user found
 					$to = $user_id;
 				}
-			}
-			else {
+			} else {
 				$to = self::get_user_email( $user_id );
 			}
 
@@ -395,7 +412,7 @@ class SI_Notifications extends SI_Notifications_Control {
 						'payment' => $payment,
 						'invoice' => $invoice,
 						'client' => ( is_a( $client, 'SI_Client' ) ) ? $client : 0,
-						'to' => $to
+						'to' => $to,
 					);
 					self::send_notification( 'final_payment', $data, $to );
 				}
@@ -586,8 +603,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		$sender_note = '';
 		if ( $data['invoice'] && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$sender_note = $data['invoice']->get_sender_note();
-		}
-		else {
+		} else {
 			if ( $data['estimate'] && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$sender_note = $data['estimate']->get_sender_note();
 			}
@@ -642,8 +658,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$line_items = $data['invoice']->get_line_items();
 			$doc_id = $data['invoice']->get_id();
-		}
-		else {
+		} else {
 			if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$line_items = $data['estimate']->get_line_items();
 				$doc_id = $data['estimate']->get_id();
@@ -705,8 +720,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$line_items = $data['invoice']->get_line_items();
 			$doc_id = $data['invoice']->get_id();
-		}
-		else {
+		} else {
 			if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$line_items = $data['estimate']->get_line_items();
 				$doc_id = $data['estimate']->get_id();
@@ -761,8 +775,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_line_item_list( $atts, $content, $code, $data ) {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$line_items = $data['invoice']->get_line_items();
-		}
-		else {
+		} else {
 			if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$line_items = $data['estimate']->get_line_items();
 			}
@@ -1113,8 +1126,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			if ( $data['invoice']->get_deposit() > 0.01 ) {
 				$amount = sa_get_formatted_money( $data['invoice']->get_deposit(), $data['invoice']->get_id() );
-			}
-			else {
+			} else {
 				$amount = sa_get_formatted_money( $data['invoice']->get_balance(), $data['invoice']->get_id() );
 			}
 		}
@@ -1464,5 +1476,4 @@ class SI_Notifications extends SI_Notifications_Control {
 		}
 		return apply_filters( 'shortcode_lead_entries', $entries, $data );
 	}
-
 }

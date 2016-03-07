@@ -1,6 +1,6 @@
 <?php
 
-if ( !class_exists( 'WP_List_Table' ) ) {
+if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 class SI_Notifications_Table extends WP_List_Table {
@@ -11,10 +11,10 @@ class SI_Notifications_Table extends WP_List_Table {
 
 		//Set parent defaults
 		parent::__construct( array(
-				'singular' => 'notification',     // singular name of the listed records
-				'plural' => 'notifications', // plural name of the listed records
-				'ajax' => false     // does this table support ajax?
-			) );
+			'singular' => 'notification',     // singular name of the listed records
+			'plural' => 'notifications', // plural name of the listed records
+			'ajax' => false,// does this table support ajax?
+		) );
 
 	}
 
@@ -36,7 +36,7 @@ class SI_Notifications_Table extends WP_List_Table {
 	 */
 	function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
-		default:
+			default:
 			return apply_filters( 'si_mngt_notification_column_'.$column_name, $item ); // do action for those columns that are filtered in
 		}
 	}
@@ -51,7 +51,7 @@ class SI_Notifications_Table extends WP_List_Table {
 	 */
 	function column_title( $item ) {
 		$notification_id = array_search( $item->ID, get_option( SI_Notifications::NOTIFICATIONS_OPTION_NAME, array() ) );
-		$name = ( $notification_id ) ? SI_Notifications::$notifications[$notification_id]['name'] : __( 'Unassigned', 'sprout-invoices' ) ;
+		$name = ( $notification_id && isset( SI_Notifications::$notifications[ $notification_id ] ) ) ? SI_Notifications::$notifications[ $notification_id ]['name'] : __( 'Unassigned', 'sprout-invoices' );
 		$notification = SI_Notification::get_instance( $item->ID );
 		$status = ( $notification->get_disabled() ) ? '<span style="color:red">'.__( 'disabled', 'sprout-invoices' ).'</span>' : '<span>'.__( 'active', 'sprout-invoices' ).'</span>' ;
 
@@ -88,7 +88,7 @@ class SI_Notifications_Table extends WP_List_Table {
 		$columns = array(
 			'title' => __( 'Type', 'sprout-invoices' ),
 			'subject'  => __( 'Subject', 'sprout-invoices' ),
-			'message'  => __( 'Message', 'sprout-invoices' )
+			'message'  => __( 'Message', 'sprout-invoices' ),
 		);
 		return apply_filters( 'si_mngt_notification_columns', $columns );
 	}
@@ -102,8 +102,7 @@ class SI_Notifications_Table extends WP_List_Table {
 	 * @return array An associative array containing all the columns that should be sortable: 'slugs'=>array('data_values',bool)
 	 * */
 	function get_sortable_columns() {
-		$sortable_columns = array(
-		);
+		$sortable_columns = array();
 		return apply_filters( 'si_mngt_notification_sortable_columns', $sortable_columns );
 	}
 
@@ -137,7 +136,6 @@ class SI_Notifications_Table extends WP_List_Table {
 		 */
 		$per_page = 25;
 
-
 		/**
 		 * Define our column headers.
 		 */
@@ -145,14 +143,13 @@ class SI_Notifications_Table extends WP_List_Table {
 		$hidden = array();
 		$sortable = $this->get_sortable_columns();
 
-
 		/**
 		 * REQUIRED. Build an array to be used by the class for column
 		 * headers.
 		 */
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 
-		$args=array(
+		$args = array(
 			'post_type' => SI_Notification::POST_TYPE,
 			'post_status' => 'publish',
 			'posts_per_page' => $per_page,
@@ -178,10 +175,9 @@ class SI_Notifications_Table extends WP_List_Table {
 		 * REQUIRED. Register our pagination options & calculations.
 		 */
 		$this->set_pagination_args( array(
-				'total_items' => $notifications->found_posts,                //WE have to calculate the total number of items
-				'per_page'  => $per_page,                    //WE have to determine how many items to show on a page
-				'total_pages' => $notifications->max_num_pages   //WE have to calculate the total number of pages
-			) );
+			'total_items' => $notifications->found_posts,                //WE have to calculate the total number of items
+			'per_page'  => $per_page,                    //WE have to determine how many items to show on a page
+			'total_pages' => $notifications->max_num_pages,//WE have to calculate the total number of pages
+		) );
 	}
-
 }

@@ -16,7 +16,7 @@ class SI_Estimates extends SI_Controller {
 	public static function init() {
 
 		// Unique urls
-		add_filter( 'wp_unique_post_slug', array( __CLASS__, 'post_slug'), 10, 4 );
+		add_filter( 'wp_unique_post_slug', array( __CLASS__, 'post_slug' ), 10, 4 );
 
 		// Adjust estimate id and status after clone
 		add_action( 'si_cloned_post',  array( __CLASS__, 'adjust_cloned_estimate' ), 10, 3 );
@@ -57,10 +57,9 @@ class SI_Estimates extends SI_Controller {
 		if ( isset( $_REQUEST['serialized_fields'] ) ) {
 			foreach ( $_REQUEST['serialized_fields'] as $key => $data ) {
 				if ( strpos( $data['name'], '[]' ) !== false ) {
-					$_REQUEST[str_replace( '[]', '', $data['name'] )][] = $data['value'];
-				}
-				else {
-					$_REQUEST[$data['name']] = $data['value'];
+					$_REQUEST[ str_replace( '[]', '', $data['name'] ) ][] = $data['value'];
+				} else {
+					$_REQUEST[ $data['name'] ] = $data['value'];
 				}
 			}
 		}
@@ -81,8 +80,12 @@ class SI_Estimates extends SI_Controller {
 		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
 
 		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-			if ( is_email( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-				$recipients[] = $_REQUEST['sa_metabox_custom_recipient'];
+			$submitted_recipients = explode( ',', trim( $_REQUEST['sa_metabox_custom_recipient'] ) );
+			foreach ( $submitted_recipients as $key => $email ) {
+				$email = trim( $email );
+				if ( is_email( $email ) ) {
+					$recipients[] = $email;
+				}
 			}
 		}
 
@@ -106,7 +109,7 @@ class SI_Estimates extends SI_Controller {
 		do_action( 'send_estimate', $estimate, $recipients, $from_email, $from_name );
 
 		// If status is temp than change to pending.
-		if ( $estimate->get_status() !== SI_Estimate::STATUS_APPROVED ) {
+		if ( ! in_array( $estimate->get_status(), array( SI_Estimate::STATUS_APPROVED, SI_Estimate::STATUS_PENDING ) ) ) {
 			$estimate->set_pending();
 		}
 
@@ -154,5 +157,4 @@ class SI_Estimates extends SI_Controller {
 		}
 		return false;
 	}
-
 }

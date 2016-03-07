@@ -37,7 +37,6 @@ class SI_Notifications_Control extends SI_Controller {
 		add_action( 'init', array( __CLASS__, 'notifications_and_shortcodes' ), 5 );
 
 		// register settings
-
 		self::register_settings();
 
 		// Meta boxes
@@ -81,7 +80,7 @@ class SI_Notifications_Control extends SI_Controller {
 			'reset' => false,
 			'section' => 'settings',
 			'tab_only' => true,
-			'callback' => array( __CLASS__, 'display_table' )
+			'callback' => array( __CLASS__, 'display_table' ),
 			);
 		do_action( 'sprout_settings_page', $args );
 
@@ -96,23 +95,23 @@ class SI_Notifications_Control extends SI_Controller {
 						'label' => __( 'From name', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
-							'default' => self::$notification_from_name
-							)
+							'default' => self::$notification_from_name,
+							),
 						),
 					self::EMAIL_FROM_EMAIL => array(
 						'label' => __( 'From email', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
-							'default' => self::$notification_from_email
-							)
+							'default' => self::$notification_from_email,
+							),
 						),
 					self::ADMIN_EMAIL => array(
 						'label' => __( 'Admin email', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
 							'default' => self::$admin_email,
-							'description' => __( 'E-mail address that receives the admin notifications (e.g. Payment Received ).', 'sprout-invoices' )
-							)
+							'description' => __( 'E-mail address that receives the admin notifications (e.g. Payment Received ).', 'sprout-invoices' ),
+							),
 						),
 					self::EMAIL_FORMAT => array(
 						'label' => __( 'Email format', 'sprout-invoices' ),
@@ -120,14 +119,14 @@ class SI_Notifications_Control extends SI_Controller {
 							'type' => 'select',
 							'options' => array(
 									'HTML' => __( 'HTML', 'sprout-invoices' ),
-									'TEXT' => __( 'Plain Text', 'sprout-invoices' )
+									'TEXT' => __( 'Plain Text', 'sprout-invoices' ),
 								),
 							'default' => self::$notification_format,
-							'description' => __( 'Default notifications are in plain text. If set to HTML, custom HTML notifications are required.', 'sprout-invoices' )
-							)
+							'description' => __( 'Default notifications are in plain text. If set to HTML, custom HTML notifications are required.', 'sprout-invoices' ),
+							),
 						),
-					)
-				)
+					),
+				),
 			);
 		do_action( 'sprout_settings', $settings, SI_Controller::SETTINGS_PAGE );
 	}
@@ -168,11 +167,11 @@ class SI_Notifications_Control extends SI_Controller {
 				$notification = self::get_notification_instance( $notification_id );
 				if ( is_null( $notification ) ) {
 					$post_id = wp_insert_post( array(
-							'post_status' => 'publish',
-							'post_type' => SI_Notification::POST_TYPE,
-							'post_title' => $data['default_title'],
-							'post_content' => $data['default_content']
-						) );
+						'post_status' => 'publish',
+						'post_type' => SI_Notification::POST_TYPE,
+						'post_title' => $data['default_title'],
+						'post_content' => $data['default_content'],
+					) );
 					$notification = SI_Notification::get_instance( $post_id );
 					self::save_meta_box_notification_submit( $post_id, $notification->get_post(), array(), $notification_id );
 					if ( isset( $data['default_disabled'] ) && $data['default_disabled'] ) {
@@ -216,15 +215,15 @@ class SI_Notifications_Control extends SI_Controller {
 					'show_callback' => array( __CLASS__, 'show_submit_meta_box' ),
 					'save_callback' => array( __CLASS__, 'save_meta_box_notification_submit' ),
 					'context' => 'side',
-					'priority' => 'high'
-				)
+					'priority' => 'high',
+				),
 			);
 
 		foreach ( self::$notifications as $notification => $data ) {
 			$name = ( isset( $data['name'] ) ) ? $data['name'] : __( 'N/A', 'sprout-invoices' );
-			$args[self::META_BOX_PREFIX . $notification] = array(
+			$args[ self::META_BOX_PREFIX . $notification ] = array(
 					'title' => sprintf( __( '%s Shortcodes', 'sprout-invoices' ), $name ),
-					'show_callback' => array( __CLASS__, 'show_shortcode_meta_box' )
+					'show_callback' => array( __CLASS__, 'show_shortcode_meta_box' ),
 				);
 		}
 		do_action( 'sprout_meta_box', $args, SI_Notification::POST_TYPE );
@@ -249,12 +248,12 @@ class SI_Notifications_Control extends SI_Controller {
 	 */
 	public static function show_shortcode_meta_box( $post, $metabox ) {
 		$id = preg_replace( '/^' . preg_quote( self::META_BOX_PREFIX ) . '/', '', $metabox['id'] );
-		if ( isset( self::$notifications[$id] ) ) {
+		if ( isset( self::$notifications[ $id ] ) ) {
 			self::load_view( 'admin/meta-boxes/notifications/shortcodes', array(
 					'id' => $id,
-					'type' => self::$notifications[$id],
-					'shortcodes' => self::$shortcodes
-				) );
+					'type' => self::$notifications[ $id ],
+					'shortcodes' => self::$shortcodes,
+			) );
 		}
 	}
 
@@ -271,8 +270,8 @@ class SI_Notifications_Control extends SI_Controller {
 				'notification_types' => self::$notifications,
 				'notifications_option' => get_option( self::NOTIFICATIONS_OPTION_NAME, array() ),
 				'post' => $post,
-				'disabled' => $notification->get_disabled()
-			), false );
+				'disabled' => $notification->get_disabled(),
+		), false );
 	}
 
 	/**
@@ -299,14 +298,14 @@ class SI_Notifications_Control extends SI_Controller {
 		$notification_set = get_option( self::NOTIFICATIONS_OPTION_NAME, array() );
 		foreach ( $notification_set as $op_type => $note_id ) {
 			if ( $note_id == $post_id ) {
-				unset( $notification_set[$post_id] );
+				unset( $notification_set[ $post_id ] );
 			}
 		}
 
-		if ( isset( self::$notifications[$notification_type] ) ) {
+		if ( isset( self::$notifications[ $notification_type ] ) ) {
 
 			// Associate this post with the given notification type
-			$notification_set[$notification_type] = $post_id;
+			$notification_set[ $notification_type ] = $post_id;
 			update_option( self::NOTIFICATIONS_OPTION_NAME, $notification_set );
 		}
 
@@ -330,10 +329,10 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return SI_Notification/false
 	 */
 	public static function get_notification_instance( $notification ) {
-		if ( isset( self::$notifications[$notification] ) ) {
+		if ( isset( self::$notifications[ $notification ] ) ) {
 			$notifications = get_option( self::NOTIFICATIONS_OPTION_NAME );
-			if ( isset( $notifications[$notification] ) ) {
-				$notification_id = $notifications[$notification];
+			if ( isset( $notifications[ $notification ] ) ) {
+				$notification_id = $notifications[ $notification ];
 				$notification = SI_Notification::get_instance( $notification_id );
 				if ( $notification != null ) {
 					$post = $notification->get_post();
@@ -375,8 +374,8 @@ class SI_Notifications_Control extends SI_Controller {
 			$notification_post = $notification->get_post();
 			$title = $notification_post->post_title;
 			$title = self::do_shortcodes( $notification_name, $title );
-		} elseif ( isset( self::$notifications[$notification_name] ) && isset( self::$notifications[$notification_name]['default_title'] ) ) {
-			$title = self::$notifications[$notification_name]['default_title'];
+		} elseif ( isset( self::$notifications[ $notification_name ] ) && isset( self::$notifications[ $notification_name ]['default_title'] ) ) {
+			$title = self::$notifications[ $notification_name ]['default_title'];
 			$title = self::do_shortcodes( $notification_name, $title );
 		}
 		return apply_filters( 'si_get_notification_instance_subject', $title, $notification_name, $data );
@@ -396,8 +395,8 @@ class SI_Notifications_Control extends SI_Controller {
 			$notification_post = $notification->get_post();
 			$content = $notification_post->post_content;
 			$content = self::do_shortcodes( $notification_name, $content );
-		} elseif ( isset( self::$notifications[$notification_name] ) && isset( self::$notifications[$notification_name]['default_content'] ) ) {
-			$content = self::$notifications[$notification_name]['default_content'];
+		} elseif ( isset( self::$notifications[ $notification_name ] ) && isset( self::$notifications[ $notification_name ]['default_content'] ) ) {
+			$content = self::$notifications[ $notification_name ]['default_content'];
 			$content = self::do_shortcodes( $notification_name, $content );
 		}
 		return apply_filters( 'si_get_notification_instance_content', $content, $notification_name, $data );
@@ -457,7 +456,7 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( $html ) {
 			$headers = array(
 				'From: '.$from_name.' <'.$from_email.'>',
-				'Content-Type: text/html'
+				'Content-Type: text/html',
 			);
 		} else {
 			$headers = array(
@@ -474,8 +473,7 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( $sent != false ) {
 			// Create notification record
 			self::notification_record( $notification_name, $data, $to, $notification_title, $notification_content );
-		}
-		else {
+		} else {
 			do_action( 'si_error', 'FAILED NOTIFICATION - Attempted e-mail: ' . $to, $data );
 			return false;
 		}
@@ -571,7 +569,7 @@ class SI_Notifications_Control extends SI_Controller {
 		foreach ( $data as $key => $value ) {
 			// many objects can't be serialized, so convert them to something else
 			if ( is_object( $value ) && method_exists( $value, 'get_id' ) ) {
-				$data[$key] = array( 'class' => get_class( $value ), 'id' => $value->get_id() );
+				$data[ $key ] = array( 'class' => get_class( $value ), 'id' => $value->get_id() );
 			}
 		}
 		return md5( serialize( $data ) );
@@ -652,8 +650,7 @@ class SI_Notifications_Control extends SI_Controller {
 		// get the user ids associated with this doc.
 		if ( ! is_wp_error( $client ) && is_a( $client, 'SI_Client' ) ) {
 			$client_users = $client->get_associated_users();
-		}
-		else { // no client associated
+		} else { // no client associated
 			$user_id = $doc->get_user_id(); // check to see if a user id is associated
 			if ( $user_id ) {
 				$client_users = array( $user_id );
@@ -679,11 +676,11 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return string
 	 */
 	public static function do_shortcodes( $notification_name, $content ) {
-		foreach ( self::$notifications[$notification_name]['shortcodes'] as $shortcode ) {
+		foreach ( self::$notifications[ $notification_name ]['shortcodes'] as $shortcode ) {
 			add_shortcode( $shortcode, array( __CLASS__, 'notification_shortcode' ) );
 		}
 		$content = do_shortcode( $content );
-		foreach ( self::$notifications[$notification_name]['shortcodes'] as $shortcode ) {
+		foreach ( self::$notifications[ $notification_name ]['shortcodes'] as $shortcode ) {
 			remove_shortcode( $shortcode );
 		}
 		return $content;
@@ -698,8 +695,8 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return string          filtered content
 	 */
 	public static function notification_shortcode( $atts, $content, $code ) {
-		if ( isset( self::$shortcodes[$code] ) ) {
-			$shortcode = call_user_func( self::$shortcodes[$code]['callback'], $atts, $content, $code, self::$data );
+		if ( isset( self::$shortcodes[ $code ] ) ) {
+			$shortcode = call_user_func( self::$shortcodes[ $code ]['callback'], $atts, $content, $code, self::$data );
 			return apply_filters( 'si_notification_shortcode_'.$code, $shortcode, $atts, $content, $code, self::$data );
 
 		}
@@ -762,34 +759,34 @@ class SI_Notifications_Control extends SI_Controller {
 			$screen = get_current_screen();
 
 			$screen->add_help_tab( array(
-					'id' => 'notification-customizations',
-					'title' => __( 'About Notifications', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'Notifications include the emails sent to you and your clients, including responses to prospective clients after submitting an estimate request.', 'sprout-invoices' ), __( 'Each one of your notifications can be customized; hover over the notification you want and click the edit link.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'notification-customizations',
+				'title' => __( 'About Notifications', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'Notifications include the emails sent to you and your clients, including responses to prospective clients after submitting an estimate request.', 'sprout-invoices' ), __( 'Each one of your notifications can be customized; hover over the notification you want and click the edit link.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'notification-disable',
-					'title' => __( 'Disable Notifications', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p>', __( 'The notifications edit screen will have an option next to the "Update" button to disable the notification from being sent.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'notification-disable',
+				'title' => __( 'Disable Notifications', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p>', __( 'The notifications edit screen will have an option next to the "Update" button to disable the notification from being sent.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'notification-editing',
-					'title' => __( 'Notification Editing', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( '<b>Subject</b> - The first input is for the notifications subject. If the notification is an e-mail than it would be subject line for that e-mail notification.', 'sprout-invoices' ), __( '<b>Message Body</b> - The main editor is the notification body. Use the available shortcodes to have dynamic information included when the notification is received. Make sure to change the Notification Setting if HTML formatting is added to your notifications.', 'sprout-invoices' ), __( '<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each.', 'sprout-invoices' ), __( '<b>Update</b> - The select list can be used if you want to change the current notification to a different type; it’s recommended you go to the notification you want to edit instead of using this option. The Disabled option available to prevent this notification from sending.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'notification-editing',
+				'title' => __( 'Notification Editing', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( '<b>Subject</b> - The first input is for the notifications subject. If the notification is an e-mail than it would be subject line for that e-mail notification.', 'sprout-invoices' ), __( '<b>Message Body</b> - The main editor is the notification body. Use the available shortcodes to have dynamic information included when the notification is received. Make sure to change the Notification Setting if HTML formatting is added to your notifications.', 'sprout-invoices' ), __( '<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each.', 'sprout-invoices' ), __( '<b>Update</b> - The select list can be used if you want to change the current notification to a different type; it’s recommended you go to the notification you want to edit instead of using this option. The Disabled option available to prevent this notification from sending.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'notification-advanced',
-					'title' => __( 'Advanced', 'sprout-invoices' ),
-					'content' => sprintf( '<p><b>HTML Emails</b> - Enable HTML notifications within the <a href="%s">General Settings</a> page. Make sure to change use HTML on all notifications.</p>', admin_url( 'admin.php?page=sprout-apps/settings' ) ),
-				) );
+				'id' => 'notification-advanced',
+				'title' => __( 'Advanced', 'sprout-invoices' ),
+				'content' => sprintf( '<p><b>HTML Emails</b> - Enable HTML notifications within the <a href="%s">General Settings</a> page. Make sure to change use HTML on all notifications.</p>', admin_url( 'admin.php?page=sprout-apps/settings' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'notification-refresh',
-					'title' => __( 'Notifications Cleanup', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', __( 'In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.', 'sprout-invoices' ), esc_url( add_query_arg( array( 'refresh-notifications' => 1 ) ) ), __( 'Clean', 'sprout-invoices' ) )
-				) );
+				'id' => 'notification-refresh',
+				'title' => __( 'Notifications Cleanup', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p><span class="cache_button_wrap casper clearfix"><a href="%s">%s</a></span></p></p>', __( 'In an earlier version of Sprout Invoices numerous notifications were improperly created. Click refresh below to delete all extraneous notifications. Backup any modifications that you might have made to your notifications before continuing.', 'sprout-invoices' ), esc_url( add_query_arg( array( 'refresh-notifications' => 1 ) ) ), __( 'Clean', 'sprout-invoices' ) ),
+			) );
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
@@ -812,9 +809,9 @@ class SI_Notifications_Control extends SI_Controller {
 		$parts = explode( ' ', trim( $email ) );
 		$email = trim( array_pop( $parts ), "<> \t\n\r\0\x0B" );
 		$name = trim( implode( ' ', $parts ), "\"\' \t\n\r\0\x0B" );
-		if ( $name == "" && strpos( $email, "@" ) === false ) { // only single string - did not contain '@'
+		if ( $name == '' && strpos( $email, '@' ) === false ) { // only single string - did not contain '@'
 			$name = $email;
-			$email = "";
+			$email = '';
 		}
 		return array( 'name' => $name, 'email' => $email );
 	}
@@ -857,5 +854,4 @@ class SI_Notifications_Control extends SI_Controller {
 			}
 		}
 	}
-
 }

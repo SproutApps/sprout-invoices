@@ -787,7 +787,7 @@ if ( ! function_exists( 'si_payment_options' ) ) :
 			}
 			$enabled_processors = $processor_options; // overload with slugs
 		}
-		return apply_filters( 'si_payment_options', $enabled_processors );
+		return apply_filters( 'si_payment_options', $enabled_processors, $return );
 
 	}
 endif;
