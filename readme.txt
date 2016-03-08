@@ -3,7 +3,7 @@ Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
-Tested up to: 4.4
+Tested up to: 4.5
 Stable tag: 10.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -137,6 +137,7 @@ Woocommerce, Stats dashboard, time tracking updates and more.
 * Change: Premium reports updated with HTML5 export options
 * Change: Remove visual editor from notification admin
 * Fix: New line adjustments for address
+* Fix: Dynamic text
 * Fix: New line for plain text notifications
 * Fix: Code cleanup with WP coding standards (formatting)
 * Fix: Misc. minor bug fixes

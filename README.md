@@ -107,6 +107,7 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 * Change: Premium reports updated with HTML5 export options
 * Change: Remove visual editor from notification admin
 * Fix: New line adjustments for address
+* Fix: Dynamic text
 * Fix: New line for plain text notifications
 * Fix: Code cleanup with WP coding standards (formatting)
 * Fix: Misc. minor bug fixes
