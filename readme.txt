@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.5
-Stable tag: 10.0
+Stable tag: 10.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Woocommerce, Stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 10.0.5 =
+
+* Fix: PayPal transation error when parent line items are used.
+* Fix: Line item totals not formatted
+* Fix: Select2 should not be loaded everywhere
+* Fix: PHP7 compatibility
+* Fix: Client payment processor limits fix
 
 = 10.0 =
 
@@ -849,13 +857,13 @@ Welcome! This is a big update and a big step for us.
 
 * Subject line fix.
 
-= 0.9.10.0 - 1.0 GM =
+= 0.9.10.0.5 - 1.0 GM =
 
 * WP-Invoice Importer Bug fix: Import any type
 * WP-Invoice Importer Bug fix: Fix devision by zero error
 * WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
-= 0.9.10.0 - 1.0 GM =
+= 0.9.10.0.5 - 1.0 GM =
 
 * Strict standards fixins
 

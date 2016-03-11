@@ -1,3 +1,11 @@
+= 10.0.5 =
+
+* Fix: PayPal transation error when parent line items are used.
+* Fix: Line item totals not formatted
+* Fix: Select2 should not be loaded everywhere
+* Fix: PHP7 compatibility
+* Fix: Client payment processor limits fix
+
 = 10.0 =
 
 * New: Account credits and payment credits

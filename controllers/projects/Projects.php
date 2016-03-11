@@ -2,7 +2,7 @@
 
 /**
  * Projects Controller
- * 	
+ *
  *
  * @package Sprout_Invoice
  * @subpackage Projects
@@ -10,7 +10,7 @@
 class SI_Projects extends SI_Controller {
 	const SUBMISSION_NONCE = 'si_project_submission';
 	const HISTORY_STATUS_UPDATE = 'si_history_status_update';
-	
+
 	public static function init() {
 
 		// add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ), 20 );
@@ -51,7 +51,7 @@ class SI_Projects extends SI_Controller {
 
 	/**
 	 * Enqueue resources on admin pages
-	 * 
+	 *
 	 */
 	public static function admin_enqueue() {
 		$screen = get_current_screen();
@@ -80,7 +80,7 @@ class SI_Projects extends SI_Controller {
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
 				'priority' => 'high',
-				'save_priority' => 0
+				'save_priority' => 0,
 			),
 			'si_project_information' => array(
 				'title' => __( 'Information', 'sprout-invoices' ),
@@ -88,22 +88,22 @@ class SI_Projects extends SI_Controller {
 				'save_callback' => array( __CLASS__, 'save_meta_box_project_information' ),
 				'context' => 'normal',
 				'priority' => 'high',
-				'save_priority' => 0
+				'save_priority' => 0,
 			),
 			'si_project_submit' => array(
 				'title' => 'Update',
 				'show_callback' => array( __CLASS__, 'show_submit_meta_box' ),
 				'save_callback' => array( __CLASS__, 'save_submit_meta_box' ),
 				'context' => 'side',
-				'priority' => 'high'
+				'priority' => 'high',
 			),
 			'si_project_history' => array(
 				'title' => __( 'History', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_project_history_view' ),
 				'save_callback' => array( __CLASS__, '_save_null' ),
 				'context' => 'normal',
-				'priority' => 'low'
-			)
+				'priority' => 'low',
+			),
 		);
 		do_action( 'sprout_meta_box', $args, SI_Project::POST_TYPE );
 	}
@@ -130,8 +130,8 @@ class SI_Projects extends SI_Controller {
 			self::load_view( 'admin/meta-boxes/projects/name', array(
 					'project' => $project,
 					'id' => $post->ID,
-					'status' => $post->post_status
-				) );
+					'status' => $post->post_status,
+			) );
 		}
 	}
 
@@ -143,9 +143,9 @@ class SI_Projects extends SI_Controller {
 
 	/**
 	 * Show custom submit box.
-	 * @param  WP_Post $post         
-	 * @param  array $metabox      
-	 * @return                
+	 * @param  WP_Post $post
+	 * @param  array $metabox
+	 * @return
 	 */
 	public static function show_submit_meta_box( $post, $metabox ) {
 		$project = SI_Project::get_instance( $post->ID );
@@ -155,7 +155,7 @@ class SI_Projects extends SI_Controller {
 				'post' => $post,
 				'invoices' => $project->get_invoices(),
 				'estimates' => $project->get_estimates(),
-			), false );
+		), false );
 	}
 
 	/**
@@ -170,7 +170,7 @@ class SI_Projects extends SI_Controller {
 					'project' => $project,
 					'id' => $post->ID,
 					'fields' => self::form_fields( $project ),
-				) );
+			) );
 
 			// For client creation
 			add_thickbox();
@@ -182,11 +182,11 @@ class SI_Projects extends SI_Controller {
 
 	/**
 	 * Saving info meta
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_meta_box_project_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		// name is set by update_post_data
@@ -194,7 +194,7 @@ class SI_Projects extends SI_Controller {
 		$website = ( isset( $_POST['sa_metabox_website'] ) && $_POST['sa_metabox_website'] != '' ) ? $_POST['sa_metabox_website'] : '' ;
 		$start_date = ( isset( $_POST['sa_metabox_start_date'] ) && $_POST['sa_metabox_start_date'] != '' ) ? $_POST['sa_metabox_start_date'] : '' ;
 		$end_date = ( isset( $_POST['sa_metabox_end_date'] ) && $_POST['sa_metabox_end_date'] != '' ) ? $_POST['sa_metabox_end_date'] : '' ;
-		
+
 		$project = SI_Project::get_instance( $post_id );
 		$project->set_website( $website );
 		$project->set_start_date( $start_date );
@@ -216,14 +216,13 @@ class SI_Projects extends SI_Controller {
 
 	/**
 	 * Saving submit meta
-	 * @param  int $post_id       
-	 * @param  object $post          
-	 * @param  array $callback_args 
-	 * @param  int $estimate_id   
-	 * @return                 
+	 * @param  int $post_id
+	 * @param  object $post
+	 * @param  array $callback_args
+	 * @param  int $estimate_id
+	 * @return
 	 */
 	public static function save_submit_meta_box( $post_id, $post, $callback_args, $estimate_id = null ) {
-		
 
 	}
 
@@ -246,7 +245,7 @@ class SI_Projects extends SI_Controller {
 				'post' => $post,
 				'project' => $project,
 				'historical_records' => array_reverse( $project->get_history() ),
-			), false );
+		), false );
 	}
 
 	/////////////////////
@@ -258,21 +257,21 @@ class SI_Projects extends SI_Controller {
 		$project_id = ( $doc ) ? $doc->get_project_id() : 0;
 		$project = ( $doc ) ? SI_Project::get_instance( $project_id ) : 0;
 
-		$title = ( is_a( $project, 'SI_Project' ) ) ? $project->get_title() : __( 'No Project Selected', 'sprout-invoices' ) ;
+		$title = ( is_a( $project, 'SI_Project' ) ) ? $project->get_title() : __( 'No Project Selected', 'sprout-invoices' );
 
 		self::load_view( 'admin/meta-boxes/projects/information-doc-select', array(
 				'doc' => $doc,
 				'project_id' => $project_id,
 				'title' => $title,
 				'client_id' => $client_id,
-			), false );
+		), false );
 	}
 
 	/**
 	 * Save the template selection for a doc by post id
-	 * @param  integer $post_id      
-	 * @param  string  $doc_template 
-	 * @return                 
+	 * @param  integer $post_id
+	 * @param  string  $doc_template
+	 * @return
 	 */
 	public static function save_doc_project_selection( $post_id = 0 ) {
 		$doc_project = ( isset( $_POST['doc_project'] ) ) ? $_POST['doc_project'] : '' ;
@@ -298,14 +297,14 @@ class SI_Projects extends SI_Controller {
 			'label' => __( 'Project Name', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => true, // always necessary
-			'default' => ( $project ) ? $project->get_title() : ''
+			'default' => ( $project ) ? $project->get_title() : '',
 		);
 
 		$client_options = array();
 		$client_options[0] = '';
 		$client_options += SI_Client::get_all_clients();
-		
-		$description = ( $client_id ) ? sprintf( __( 'Edit <a href="%s">%s</a>, select another client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), get_edit_post_link( $client_id ), get_the_title( $client_id ), '#TB_inline?width=600&height=450&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) : sprintf( __( 'Select an existing client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), '#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) ;		
+
+		$description = ( $client_id ) ? sprintf( __( 'Edit <a href="%s">%s</a>, select another client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), get_edit_post_link( $client_id ), get_the_title( $client_id ), '#TB_inline?width=600&height=450&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) : sprintf( __( 'Select an existing client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), '#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' );
 		$fields['client'] = array(
 			'weight' => 3,
 			'label' => __( 'Client', 'sprout-invoices' ),
@@ -314,7 +313,7 @@ class SI_Projects extends SI_Controller {
 			'required' => true,
 			'default' => $client_id,
 			'attributes' => array( 'class' => 'select2' ),
-			'description' => $description
+			'description' => $description,
 		);
 
 		$fields['start_date'] = array(
@@ -323,7 +322,7 @@ class SI_Projects extends SI_Controller {
 			'type' => 'date',
 			'required' => $required,
 			'default' => ( $project && $project->get_start_date() ) ? date( 'Y-m-d', $project->get_start_date() ) : '',
-			'placeholder' => ''
+			'placeholder' => '',
 		);
 
 		$fields['end_date'] = array(
@@ -332,9 +331,8 @@ class SI_Projects extends SI_Controller {
 			'type' => 'date',
 			'required' => $required,
 			'default' => ( $project && $project->get_end_date() ) ? date( 'Y-m-d', $project->get_end_date() ) : '',
-			'placeholder' => ''
+			'placeholder' => '',
 		);
-
 
 		$fields['website'] = array(
 			'weight' => 120,
@@ -342,13 +340,13 @@ class SI_Projects extends SI_Controller {
 			'type' => 'text',
 			'required' => $required,
 			'default' => ( $project ) ? $project->get_website() : '',
-			'placeholder' => 'http://'
+			'placeholder' => 'http://',
 		);
 
 		$fields['nonce'] = array(
 			'type' => 'hidden',
 			'value' => wp_create_nonce( self::SUBMISSION_NONCE ),
-			'weight' => 10000
+			'weight' => 10000,
 		);
 
 		$fields = apply_filters( 'si_project_form_fields', $fields );
@@ -362,8 +360,8 @@ class SI_Projects extends SI_Controller {
 
 	public static function add_projects_to_clients_admin() {
 		echo self::load_view( 'admin/meta-boxes/projects/client-submit', array(
-				'projects' => SI_Project::get_projects_by_client( get_the_id() )
-			) );
+				'projects' => SI_Project::get_projects_by_client( get_the_id() ),
+		) );
 	}
 
 	////////////////////
@@ -399,80 +397,76 @@ class SI_Projects extends SI_Controller {
 	public static function column_display( $column_name, $id ) {
 		$project = SI_Project::get_instance( $id );
 
-		if ( !is_a( $project, 'SI_Project' ) )
+		if ( ! is_a( $project, 'SI_Project' ) ) {
 			return; // return for that temp post
-
+		}
 		switch ( $column_name ) {
-		
-		case 'info':
-			
-			$associated_clients = $project->get_associated_clients();
-			echo '<p>';
-			printf( '<b>%s</b>: ', __( 'Client', 'sprout-invoices' ) );
-			if ( !empty( $associated_clients ) ) {
-				$clients_print = array();
-				foreach ( $associated_clients as $client_id ) {
-					$clients_print[] = sprintf( '<span class="associated_client"><a href="%s">%s</a></span>', get_edit_post_link( $client_id ) , get_the_title( $client_id ) );
+
+			case 'info':
+
+				$associated_clients = $project->get_associated_clients();
+				echo '<p>';
+				printf( '<b>%s</b>: ', __( 'Client', 'sprout-invoices' ) );
+				if ( ! empty( $associated_clients ) ) {
+					$clients_print = array();
+					foreach ( $associated_clients as $client_id ) {
+						$clients_print[] = sprintf( '<span class="associated_client"><a href="%s">%s</a></span>', get_edit_post_link( $client_id ) , get_the_title( $client_id ) );
+					}
 				}
-			}
-			if ( !empty( $clients_print ) ) {
-				echo implode( ', ', $clients_print );
-			}
-			else {
-				echo __( 'No associated clients', 'sprout-invoices' );
-			}
-			echo '</p>';
-			
-			echo '<p>';
-			printf( '<b>%s</b>: ', __( 'Site', 'sprout-invoices' ) );
-			echo make_clickable( esc_url( $project->get_website() ) );
-			echo '</p>';
+				if ( ! empty( $clients_print ) ) {
+					echo implode( ', ', $clients_print );
+				} else {
+					echo __( 'No associated clients', 'sprout-invoices' );
+				}
+				echo '</p>';
+
+				echo '<p>';
+				printf( '<b>%s</b>: ', __( 'Site', 'sprout-invoices' ) );
+				echo make_clickable( esc_url( $project->get_website() ) );
+				echo '</p>';
 
 			break;
 
-		case 'invoices':
+			case 'invoices':
 
-			$invoices = $project->get_invoices();
-			$split = 2;
-			$split_invoices = array_slice( $invoices, 0, $split );
-			if ( !empty( $split_invoices ) ) {
-				echo "<dl>";
-				foreach ($split_invoices as $invoice_id) {
-					printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option('date_format'), false, $invoice_id ), get_edit_post_link( $invoice_id ), get_the_title( $invoice_id ) );
+				$invoices = $project->get_invoices();
+				$split = 2;
+				$split_invoices = array_slice( $invoices, 0, $split );
+				if ( ! empty( $split_invoices ) ) {
+					echo '<dl>';
+					foreach ( $split_invoices as $invoice_id ) {
+						printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option( 'date_format' ), false, $invoice_id ), get_edit_post_link( $invoice_id ), get_the_title( $invoice_id ) );
+					}
+					echo '</dl>';
+					if ( count( $invoices ) > $split ) {
+						printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $invoices ) );
+					}
+				} else {
+					printf( '<em>%s</em>', __( 'No invoices', 'sprout-invoices' ) );
 				}
-				echo "</dl>";
-				if ( count( $invoices ) > $split ) {
-					printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $invoices ) );
-				}
-			}
-			else {
-				printf( '<em>%s</em>', __( 'No invoices', 'sprout-invoices' ) );
-			}
 			break;
 
-		case 'estimates':
+			case 'estimates':
 
-			$estimates = $project->get_estimates();
-			$split = 2;
-			$split_estimates = array_slice( $estimates, 0, $split );
-			if ( !empty( $split_estimates ) ) {
-				echo "<dl>";
-				foreach ($split_estimates as $estimate_id) {
-					printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option('date_format'), false, $estimate_id ), get_edit_post_link( $estimate_id ), get_the_title( $estimate_id ) );
+				$estimates = $project->get_estimates();
+				$split = 2;
+				$split_estimates = array_slice( $estimates, 0, $split );
+				if ( ! empty( $split_estimates ) ) {
+					echo '<dl>';
+					foreach ( $split_estimates as $estimate_id ) {
+						printf( '<dt>%s</dt><dd><a href="%s">%s</a></dd>', get_post_time( get_option( 'date_format' ), false, $estimate_id ), get_edit_post_link( $estimate_id ), get_the_title( $estimate_id ) );
+					}
+					echo '</dl>';
+					if ( count( $estimates ) > $split ) {
+						printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $estimates ) );
+					}
+				} else {
+					printf( '<em>%s</em>', __( 'No estimates', 'sprout-invoices' ) );
 				}
-				echo "</dl>";
-				if ( count( $estimates ) > $split ) {
-					printf( '<span class="description">' . __( '...%s of <a href="%s">%s</a> most recent shown', 'sprout-invoices' ) . '</span>', $split, get_edit_post_link( $id ), count( $estimates ) );
-				}
-			}
-			else {
-				printf( '<em>%s</em>', __( 'No estimates', 'sprout-invoices' ) );
-			}
 			break;
-	
 
-		default:
-			// code...
+			default:
+				// code...
 			break;
 		}
 
@@ -528,10 +522,10 @@ class SI_Projects extends SI_Controller {
 			$screen = get_current_screen();
 
 			$screen->add_help_tab( array(
-					'id' => 'edit-projects',
-					'title' => __( 'Manage Projects', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', '', '' ),
-				) );
+				'id' => 'edit-projects',
+				'title' => __( 'Manage Projects', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p>', '', '' ),
+			) );
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .

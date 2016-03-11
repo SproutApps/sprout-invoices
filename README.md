@@ -90,6 +90,14 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.0.5**
+
+* Fix: PayPal transation error when parent line items are used.
+* Fix: Line item totals not formatted
+* Fix: Select2 should not be loaded everywhere
+* Fix: PHP7 compatibility
+* Fix: Client payment processor limits fix
+
 **10.0**
 
 * New: Account credits and payment credits
@@ -742,13 +750,13 @@ Welcome! This is a big update and a big step for us.
 
 * Subject line fix.
 
-**0.9.10.0 - 1.0 GM**
+**0.9.10.0.5 - 1.0 GM**
 
 * WP-Invoice Importer Bug fix: Import any type
 * WP-Invoice Importer Bug fix: Fix devision by zero error
 * WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code.
 
-**0.9.10.0 - 1.0 GM**
+**0.9.10.0.5 - 1.0 GM**
 
 * Strict standards fixins
 
