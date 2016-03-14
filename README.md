@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.0.6**
+
+* Fix: Select2 Compatibility issues
+
 **10.0.5**
 
 * Fix: PayPal transation error when parent line items are used.
