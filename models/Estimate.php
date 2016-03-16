@@ -633,7 +633,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	public function set_line_items( $line_items = 0 ) {
 		$this->save_post_meta( array(
-			self::$meta_keys['line_items'] => $line_items,
+			self::$meta_keys['line_items'] => apply_filters( 'si_set_line_items', $line_items, $this ),
 		) );
 		return $line_items;
 	}

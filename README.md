@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.0.7**
+
+* Change: Option to help improve sprout invoices.
+
 **10.0.6**
 
 * Fix: Select2 Compatibility issues

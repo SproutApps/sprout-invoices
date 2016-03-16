@@ -30,17 +30,18 @@ class SI_Free_License extends SI_Controller {
 		add_action( 'si_settings_page',  array( __CLASS__, 'thank_for_registering' ), 10, 0 );
 
 		//add_action( 'admin_notices',  array( __CLASS__, 'my_promo_message' ), 10, 0 );
+
 	}
 
-	public static function license_key(){
+	public static function license_key() {
 		return self::$license_key;
 	}
 
-	public static function uid(){
+	public static function uid() {
 		return self::$uid;
 	}
 
-	public static function license_status(){
+	public static function license_status() {
 		return ( self::$license_key ) ? true : false;
 	}
 
@@ -77,13 +78,12 @@ class SI_Free_License extends SI_Controller {
 					'license' => $license_response->license_key,
 					'uid' => $license_response->uid,
 					'response' => $message,
-					'error' => ! isset( $license_response->license_key )
+					'error' => ! isset( $license_response->license_key ),
 				);
 
 			update_option( self::LICENSE_KEY_OPTION, $license_response->license_key );
 			update_option( self::LICENSE_UID_OPTION, $license_response->uid );
-		}
-		else {
+		} else {
 			$message = __( 'License not created.', 'sprout-invoices' );
 			$response = array(
 					'response' => $message,
@@ -156,5 +156,4 @@ class SI_Free_License extends SI_Controller {
 		}
 		return add_query_arg( array( 'suid' => self::$uid ), $url );
 	}
-
 }
