@@ -93,6 +93,9 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 **10.0.7**
 
 * Change: Option to help improve sprout invoices.
+* Fix: Fields error when no payment options are available
+* Fix: Account credits doesn't have an admin bar option
+* Fix: Slow loading servers need feedback on AJAX requests
 
 **10.0.6**
 
