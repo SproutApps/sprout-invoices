@@ -1,7 +1,7 @@
-=== Sprout Invoices - Client Invoicing & Estimates ===
+=== Sprout Invoices - Client Invoicing & Estimates / Quotes ===
 Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
-Tags: invoicing, estimates, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
+Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.5
 Stable tag: 10.0.7
