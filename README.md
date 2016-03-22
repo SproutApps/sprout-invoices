@@ -90,7 +90,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
-**10.0.7**
+**10.0.8**
+
+* Free updates
+
+= 10.0.7 =
 
 * Change: Option to help improve sprout invoices.
 * Fix: Fields error when no payment options are available

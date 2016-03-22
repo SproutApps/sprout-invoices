@@ -31,6 +31,9 @@ class SI_Free_License extends SI_Controller {
 
 		//add_action( 'admin_notices',  array( __CLASS__, 'my_promo_message' ), 10, 0 );
 
+		// callback for license
+		add_action( 'admin_init', array( __CLASS__, 'init_si_fs_callback' ) );
+
 	}
 
 	public static function license_key() {
@@ -155,5 +158,29 @@ class SI_Free_License extends SI_Controller {
 			return $url;
 		}
 		return add_query_arg( array( 'suid' => self::$uid ), $url );
+	}
+
+	public static function init_si_fs_callback() {
+		if ( ! function_exists( 'si_fs' ) ) {
+			return;
+		}
+		if ( ! self::$uid && si_fs()->is_registered() ) {
+			self::after_si_account_connection( si_fs()->get_user() );
+		}
+	}
+
+	public static function after_si_account_connection( FS_User $user ) {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$email = $user->email;
+
+		if ( '' === $email ) {
+			return;
+		}
+		$license = self::get_free_license( $email );
+		update_option( self::LICENSE_KEY_OPTION, $license->license_key );
+		update_option( self::LICENSE_UID_OPTION, $license->uid );
 	}
 }
