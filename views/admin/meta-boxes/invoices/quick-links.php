@@ -1,8 +1,4 @@
 <?php
-	$current_status = '';
-	$disabled = ''; ?>
-
-<?php
 	$num_posts = wp_count_posts( SI_Invoice::POST_TYPE );
 	$num_posts->{'auto-draft'} = 0; // remove auto-drafts
 	$total_posts = array_sum( (array) $num_posts );

@@ -432,7 +432,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			return;
 		}
 		// Check if status changed was to approved.
-		if ( $doc->get_status() != SI_Estimate::STATUS_APPROVED ) {
+		if ( $doc->get_status() !== SI_Estimate::STATUS_APPROVED ) {
 			return;
 		}
 		$estimate = $doc;

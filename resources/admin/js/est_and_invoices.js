@@ -482,6 +482,7 @@
 		/**
 		 * Manage users for client list
 		 */
+		$('#associated_users').select2();
 		$('#associated_users').live('change', function(e) {
 			var $data = $(this).select2('data')[0],
 				$option = $(this).find("option:selected"),

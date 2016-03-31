@@ -122,7 +122,8 @@ Woocommerce, Stats dashboard, time tracking updates and more.
 
 = 10.0.8 =
 
-* Free updates
+* Fix: Selection of of users from client admin
+* Change: Free updates
 
 = 10.0.7 =
 

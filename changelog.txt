@@ -1,5 +1,10 @@
 = 10.0.8 =
 
+* Fix: Selection of of users from client admin
+* Change: Free updates
+
+= 10.0.7 =
+
 * Change: Option to help improve sprout invoices.
 * Fix: Fields error when no payment options are available
 * Fix: Account credits doesn't have an admin bar option
