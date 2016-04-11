@@ -15,9 +15,9 @@ abstract class SI_Offsite_Processors extends SI_Payment_Processors {
 	}
 
 	/**
-	 * Add action when the payment page is complete and before the review page. 
-	 * @param  SI_Checkouts $checkout 
-	 * @return                  
+	 * Add action when the payment page is complete and before the review page.
+	 * @param  SI_Checkouts $checkout
+	 * @return
 	 */
 	public function processed_payment_page( SI_Checkouts $checkout ) {
 		if ( $checkout->is_page_complete( SI_Checkouts::PAYMENT_PAGE ) ) { // Make sure to send offsite when it's okay to do so.
@@ -27,8 +27,8 @@ abstract class SI_Offsite_Processors extends SI_Payment_Processors {
 
 	/**
 	 * Add additional action for offsite payments on review page.
-	 * @param  SI_Checkouts $checkout 
-	 * @return                  
+	 * @param  SI_Checkouts $checkout
+	 * @return
 	 */
 	public function process_review_page( SI_Checkouts $checkout ) {
 		do_action( 'si_send_offsite_for_payment_after_review', $checkout );

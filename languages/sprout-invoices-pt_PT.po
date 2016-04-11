@@ -1,0 +1,4852 @@
+# Translation of Development (trunk) in Portuguese (Brazil)
+# This file is distributed under the same license as the Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-04-09 19:19+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+"Project-Id-Version: Development (trunk)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Jorge Peixinho <jorge.peixinho@outlook.com>\n"
+"Language-Team: \n"
+"Language: pt_PT\n"
+
+#: controllers/invoices/Invoices_Deposit.php:33
+msgid "Upgrade Sprout Invoices to enable deposits."
+msgstr "Faça Upgrade de Sprout Invoices para permitir depósitos."
+
+#: controllers/invoices/Invoices_Deposit.php:40
+msgid "Set the amount due for the next payment&mdash;amount due will be used 0"
+msgstr ""
+"Defina a quantia devida para o próximo pagamento &mdash; montante devido será usado "
+"0"
+
+#: controllers/payment-processing/Payment_Processors.php:181
+msgid ""
+"<strong>Missing Paypal Express Checkout?</strong> The add-on is available for "
+"<b>free</b> on the <a href=\"%s\">Sprout Apps marketplace</a>."
+msgstr ""
+"<strong>Faltando Paypal Express Checkout?</strong> O add-on está disponível "
+"<b>gratuitamente</b> na <a href=\\”%s\\”>Sprout Apps Marketplace </a>."
+
+#: controllers/payment-processing/Payment_Processors.php:184
+msgid "More Payment Gateways Available:"
+msgstr "Mais portais de pagamento disponíveis:"
+
+#: controllers/payment-processing/Payment_Processors.php:184
+msgid "Checkout the Sprout Apps <a href=\"%s\">marketplace</a>."
+msgstr "Veja as Sprout Apps em <a href=\\”%s\\”>marketplace</a>."
+
+#: languages/SI_Strings.php:81
+msgid "No Time found in Trash"
+msgstr "Nenhum Tempo encontrado no Lixo"
+
+#: languages/SI_Strings.php:82
+msgid "Search Invoices"
+msgstr "Pesquisar Facturas"
+
+#: languages/SI_Strings.php:83
+msgid "Search Estimates"
+msgstr "Pesquisar Orçamentos"
+
+#: languages/SI_Strings.php:84
+msgid "Search Clients"
+msgstr "Pesquisar Clientes"
+
+#: languages/SI_Strings.php:85
+msgid "Search Projects"
+msgstr "Pesquisar projetos"
+
+#: languages/SI_Strings.php:86
+msgid "Search Payments"
+msgstr "Pesquisar Pagamentos"
+
+#: languages/SI_Strings.php:87
+msgid "Search Notifications"
+msgstr "Pesquisar notificações"
+
+#: languages/SI_Strings.php:88
+msgid "Search Time"
+msgstr "Pesquisar Tempo"
+
+#: languages/SI_l10n.php:80
+msgid ""
+"<span class=\"dashicons dashicons-megaphone\"></span> <b>%1$s</b> does not have a "
+"translation for <b>%2$s</b>, please help the community translate at <a href=\"%3$s"
+"\" target=\"_blank\">%3$s</a>. Supporting translators receive major discounts on <a "
+"href=\"%4$s\" target=\"_blank\">pro licenses</a> and <a href=\"%5$s\" target="
+"\"_blank\">add-ons</a>."
+msgstr ""
+"<span class=“dashicons dashicons-megaphone”></span>Não tem uma tradução para <b>"
+"%2$s</b> <b>%1$s</b> , por favor, ajude a Comunidade de tradução em <a href=“%3$s” "
+"target=“_blank”>%3$s</a>. Tradutores de apoio recebem grandes descontos em <a "
+"href=“%4$s” target=“_blank”>licenças pro</a> e <a href=“%5$s” "
+"target=“_blank”>Complementos</a>."
+
+#: views/admin/addons/marketplace.php:34 views/admin/sprout-apps-dashboard.php:57
+msgid "Bundled w/ Business License Only"
+msgstr "Incluso apenas para Licenças Comerciais"
+
+#: views/admin/meta-boxes/estimates/information.php:182
+#: views/admin/meta-boxes/invoices/information.php:176
+msgid "The discount is applied after tax."
+msgstr "O desconto é aplicado depois de impostos."
+
+#: views/admin/meta-boxes/estimates/information.php:202
+#: views/admin/meta-boxes/estimates/information.php:223
+#: views/admin/meta-boxes/invoices/information.php:196
+#: views/admin/meta-boxes/invoices/information.php:217
+msgid "Tax is applied before the discount."
+msgstr "O imposto é aplicado antes do desconto."
+
+#: languages/SI_Strings.php:76
+msgid "No Estimate found in Trash"
+msgstr "Nenhum orçamento encontrado no Lixo"
+
+#: languages/SI_Strings.php:77
+msgid "No Client found in Trash"
+msgstr "Nenhum cliente encontrado no lixo"
+
+#: languages/SI_Strings.php:78
+msgid "No Project found in Trash"
+msgstr "Nenhum Projeto encontrado no Lixo"
+
+#: languages/SI_Strings.php:79
+msgid "No Payment found in Trash"
+msgstr "Nenhum Pagamento encontrado no Lixo"
+
+#: languages/SI_Strings.php:80
+msgid "No Notification found in Trash"
+msgstr "Nenhuma Notificação encontrada no Lixo"
+
+#: languages/SI_Strings.php:65
+msgid "View Payment"
+msgstr "Visualizar Pagamento"
+
+#: languages/SI_Strings.php:66
+msgid "View Notification"
+msgstr "Ver notificação"
+
+#: languages/SI_Strings.php:67 languages/SI_Strings.php:74
+msgid "No Time found"
+msgstr "Nenhum tempo encontrado"
+
+#: languages/SI_Strings.php:68
+msgid "No Invoice found"
+msgstr "Nenhuma Factura encontrada"
+
+#: languages/SI_Strings.php:69
+msgid "No Estimate found"
+msgstr "Nenhum orçamento encontrado"
+
+#: languages/SI_Strings.php:70
+msgid "No Client found"
+msgstr "Nenhum cliente encontrado"
+
+#: languages/SI_Strings.php:71
+msgid "No Project found"
+msgstr "Nenhum projeto encontrado"
+
+#: languages/SI_Strings.php:72
+msgid "No Payment found"
+msgstr "Nenhum pagamento encontrado"
+
+#: languages/SI_Strings.php:73
+msgid "No Notification found"
+msgstr "Nenhuma notificação Encontrada"
+
+#: languages/SI_Strings.php:75
+msgid "No Invoice found in Trash"
+msgstr "Nenhuma Factura encontrada no Lixo"
+
+#: languages/SI_Strings.php:58
+msgid "New Payment"
+msgstr "Novo Pagamento"
+
+#: languages/SI_Strings.php:59
+msgid "New Notification"
+msgstr "Nova notificação"
+
+#: languages/SI_Strings.php:60
+msgid "New Time"
+msgstr "Novo Tempo"
+
+#: languages/SI_Strings.php:63
+msgid "View Client"
+msgstr "Ver Cliente"
+
+#: languages/SI_Strings.php:64
+msgid "View Project"
+msgstr "Ver projeto"
+
+#: languages/SI_Strings.php:54
+msgid "New Invoice"
+msgstr "Nova Factura"
+
+#: languages/SI_Strings.php:55
+msgid "New Estimate"
+msgstr "Novo orçamento"
+
+#: languages/SI_Strings.php:56
+msgid "New Client"
+msgstr "Novo Cliente"
+
+#: languages/SI_Strings.php:57
+msgid "New Project"
+msgstr "Novo projeto"
+
+#: languages/SI_Strings.php:45
+msgid "Add New Notification"
+msgstr "Adicionar nova notificação"
+
+#: languages/SI_Strings.php:46
+msgid "Add New Time"
+msgstr "Adicionar Novo Tempo"
+
+#: languages/SI_Strings.php:47
+msgid "Edit Invoice"
+msgstr "Editar Factura"
+
+#: languages/SI_Strings.php:48
+msgid "Edit Estimate"
+msgstr "Editar Orçamento"
+
+#: languages/SI_Strings.php:49
+msgid "Edit Client"
+msgstr "Editar Cliente"
+
+#: languages/SI_Strings.php:50
+msgid "Edit Project"
+msgstr "Editar Projeto"
+
+#: languages/SI_Strings.php:51
+msgid "Edit Payment"
+msgstr "Editar Pagamento"
+
+#: languages/SI_Strings.php:52
+msgid "Edit Notification"
+msgstr "Editar notificação"
+
+#: languages/SI_Strings.php:53
+msgid "Edit Time"
+msgstr "Editar o tempo"
+
+#: languages/SI_Strings.php:33
+msgid "Add Invoice"
+msgstr "Adicionar Factura"
+
+#: languages/SI_Strings.php:34
+msgid "Add Estimate"
+msgstr "Adicionar Orçamento"
+
+#: languages/SI_Strings.php:35
+msgid "Add Client"
+msgstr "Adicionar Cliente"
+
+#: languages/SI_Strings.php:36
+msgid "Add Project"
+msgstr "Adicionar projeto"
+
+#: languages/SI_Strings.php:37
+msgid "Add Payment"
+msgstr "Adicionar Pagamento"
+
+#: languages/SI_Strings.php:38
+msgid "Add Notification"
+msgstr "Adicionar Notificação"
+
+#: languages/SI_Strings.php:39
+msgid "Add Time"
+msgstr "Adicionar Tempo"
+
+#: languages/SI_Strings.php:40
+msgid "Add New Invoice"
+msgstr "Adicionar Nova Factura"
+
+#: languages/SI_Strings.php:41
+msgid "Add New Estimate"
+msgstr "Adicionar novo Orçamento"
+
+#: languages/SI_Strings.php:42
+msgid "Add New Client"
+msgstr "Adicionar Novo Cliente"
+
+#: languages/SI_Strings.php:43
+msgid "Add New Project"
+msgstr "Adicionar projeto"
+
+#: languages/SI_Strings.php:44
+msgid "Add New Payment"
+msgstr "Adicionar Novo Pagamento"
+
+#: languages/SI_Strings.php:25
+msgid "Time Type"
+msgstr "Tipo de Tempo"
+
+#: languages/SI_Strings.php:32
+msgid "Time"
+msgstr "Horário"
+
+#: views/templates/checkout/confirmation.php:117
+#: views/templates/invoice/invoice.php:136
+msgid "Invoice Number"
+msgstr "Factura Nº"
+
+#: views/templates/checkout/confirmation.php:131
+#: views/templates/invoice/invoice.php:150
+msgid "Invoice Due"
+msgstr "Total Fatura"
+
+#: views/templates/checkout/confirmation.php:145
+#: views/templates/invoice/invoice.php:164
+msgid "Deposit Total"
+msgstr "Total Depositado"
+
+#: views/templates/checkout/confirmation.php:231
+#: views/templates/estimate/estimate.php:234 views/templates/invoice/invoice.php:268
+msgid "Powered by Sprout Invoices"
+msgstr "Desenvolvido por Sprout Invoques"
+
+#: views/templates/checkout/credit-card/form.php:7
+msgid "Billing"
+msgstr "Cobrança"
+
+#: views/templates/checkout/credit-card/form.php:12
+msgid "Credit Card"
+msgstr "Cartão de Crédito"
+
+#: views/templates/checkout/credit-card/review.php:5
+msgid "Your Payment Information"
+msgstr "Suas Informações de Pagamento"
+
+#: views/templates/checkout/credit-card/review.php:31
+msgid "Submit Order"
+msgstr "Enviar pedido"
+
+#: views/templates/estimate/estimate.php:33
+msgid "Estimate %s"
+msgstr "Orçamento %s"
+
+#: views/templates/estimate/estimate.php:37
+msgid "Accept Estimate"
+msgstr "Aprovar Orçamento"
+
+#: views/templates/estimate/estimate.php:39
+msgid "Accepted"
+msgstr "Aceite"
+
+#: views/templates/estimate/estimate.php:42
+msgid "Decline Estimate"
+msgstr "Recusar Orçamento"
+
+#: views/templates/estimate/estimate.php:116
+msgid "Estimate Number"
+msgstr "Orçamento Nº"
+
+#: views/templates/estimate/estimate.php:138
+msgid "Estimate Total"
+msgstr "Total: "
+
+#: views/templates/invoice/invoice.php:88
+msgid "Payment Pending"
+msgstr "Pagamento Pendente"
+
+#: views/templates/invoice/invoice.php:92
+msgid "TEMP"
+msgstr "Temporário"
+
+#. Plugin URI of the plugin/theme
+msgid "https://sproutapps.co/sprout-invoices/"
+msgstr "https://sproutapps.co/sprout-invoices/"
+
+#. Description of the plugin/theme
+msgid ""
+"App allows for any WordPress site to accept estimates, create invoices and receive "
+"invoice payments. Learn more at <a href=\"https://sproutapps.co\">Sprout Apps</a>."
+msgstr ""
+"App permite qualquer site WordPress aceitar os orçamentos, criar facturas e receber "
+"pagamentos de fatura. Saiba mais em <a href=“https://sproutapps.co”>Apps Sprout</a>."
+
+#. Author URI of the plugin/theme
+msgid "https://sproutapps.co"
+msgstr "https://sproutapps.co"
+
+#: views/templates/checkout/confirmation.php:36 views/templates/invoice/invoice.php:39
+msgid "Invoice %s"
+msgstr "Factura %s"
+
+#: views/templates/checkout/confirmation.php:40
+#: views/templates/checkout/confirmation.php:72
+msgid "Deposit Made"
+msgstr "Depósito Efetuado"
+
+#: views/templates/checkout/confirmation.php:40
+msgid "Paid in Full"
+msgstr "Pago Integralmente"
+
+#: views/templates/checkout/confirmation.php:82
+#: views/templates/estimate/estimate.php:81 views/templates/invoice/invoice.php:101
+msgid "From"
+msgstr "De"
+
+#: views/templates/checkout/confirmation.php:92
+#: views/templates/estimate/estimate.php:91 views/templates/invoice/invoice.php:111
+msgid "To"
+msgstr "Para"
+
+#: views/admin/sprout-invoices-dashboard.php:66
+msgid "Where do I start?"
+msgstr "Por onde eu começo?"
+
+#: views/admin/sprout-invoices-dashboard.php:69
+msgid ""
+"Start <a href='%s'>importing</a> your data from other services (i.e. WP-Invoice, "
+"Freshbooks or Harvest)."
+msgstr ""
+"Comece <a href=‘%s’>importando</a> seus dados de outros serviços (E.: WP-Invoice, "
+"Freshbooks ou Harvest)."
+
+#: views/admin/sprout-invoices-dashboard.php:70
+msgid ""
+"Even with the defaults set in <a href='%s'>General Settings</a> the 'Company Info' "
+"should be filled out first."
+msgstr ""
+"Mesmo com os padrões pré definidos nas <a href='%s'>Configurações Gerais</a>, as "
+"\"Informações da Empresa\" devem ser preenchidas em primeiro lugar."
+
+#: views/admin/sprout-invoices-dashboard.php:71
+msgid ""
+"Review your <a href='%s'>Payment Settings</a> and provide different methods of "
+"payments for your clients. Don't let your client find out you've configured the "
+"payment processor incorrectly&mdash;make sure to test."
+msgstr ""
+"Reveja suas <a href='%s'>Configurações de pagamento</a> e forneça diferentes "
+"métodos de pagamentos para seus clientes. Não deixe seu cliente saber que você "
+"configurou o processador de pagamento incorretamente &mdash;, certifique-se de "
+"testar."
+
+#: views/admin/sprout-invoices-dashboard.php:72
+msgid ""
+"There are a lot of <a href='%s'>notifications</a> sent throughout the entire client "
+"acquisition process, make sure they have your personality and represent your brand "
+"well. You can send HTML emails, check your <a href='%s'>General Settings</a> for "
+"more information."
+msgstr ""
+"Há um monte de <a href='%s'>notificações</a> a serem enviadas ao longo de todo o "
+"processo de aquisição do cliente, verifique se elas têm sua personalidade e "
+"representam bem a sua marca. Você pode enviar e-mails HTML, verifique suas <a "
+"href='%s'>Configurações Gerais</a> para mais informações."
+
+#: views/admin/sprout-invoices-dashboard.php:73
+msgid ""
+"Grow your business while not forgetting about your loved ones...and the occasional "
+"round of golf."
+msgstr ""
+"Expanda seus negócios, sem esquecer dos seus entes queridos... e a rodada ocasional "
+"de golf."
+
+#: views/admin/sprout-invoices-dashboard.php:79
+msgid "How well am I doing?"
+msgstr "Quão bem eu estou indo?"
+
+#: views/admin/sprout-invoices-dashboard.php:80
+msgid ""
+"The <a href='%s'>Reports Dashboard</a> should key you on how well your're growing "
+"your business. There are reports for the estimates, invoices, payments and clients "
+"available for filtering and exporting."
+msgstr ""
+"O <a href='%s'>Painel de Relatórios</a> deve introduzir-lo sobre o quão bem seu "
+"está crescendo o seu negócio. Existem relatórios para os orçamentos, facturas, "
+"pagamentos e clientes disponíveis para filtragem e exportação."
+
+#: views/admin/sprout-invoices-dashboard.php:85
+msgid "Clients &amp; WordPress Users?"
+msgstr "Clientes &amp; Utilizadores WordPress?"
+
+#: views/admin/sprout-invoices-dashboard.php:86
+msgid ""
+"<a href='%s'>Clients</a> have WordPress users associated with them and clients are "
+"not limited to a single user either. This allows for you to have multiple points of "
+"contact for a company/client."
+msgstr ""
+"<a href='%s'>Clientes</a> têm os utilizadores do WordPress associados e os clientes "
+"não estão limitados a um único utilizador. Isso permite que você tenha vários "
+"pontos de contacto numa empresa/cliente."
+
+#: views/admin/sprout-invoices-dashboard.php:90
+msgid "What are Predefined Line Items?"
+msgstr "O que são itens de linha pré definidos?"
+
+#: views/admin/sprout-invoices-dashboard.php:91
+msgid ""
+"Predefined line-tems help with the creation of your estimates and invoices by pre-"
+"filling line items. Create some tasks that matter to your business before creating "
+"your first estimate or invoice and you'll see how they can save you a lot of time."
+msgstr ""
+"Itens predefinidos ajudam com a criação de seus orçamentos e facturas ao auto "
+"preencherem itens de linha. Crie algumas tarefas que são importantes para o seu "
+"negócio antes de criar seu primeiro orçamento ou factura e você vai ver como eles "
+"podem poupar-lhe muito tempo."
+
+#: views/admin/sprout-invoices-dashboard.php:96
+msgid "Can I import from X service or WP-Invoice?"
+msgstr "Posso importar do X service ou WP-Invoice?"
+
+#: views/admin/sprout-invoices-dashboard.php:97
+msgid "Yes! WP-Invoice, Harvest and Freshbooks importers are now available."
+msgstr "Sim! Agora estão disponíveis importadores WP-Invoice, Harvest e FreshBooks."
+
+#: views/admin/sprout-invoices-dashboard.php:100
+msgid "I need help! Where is the support?"
+msgstr "Eu preciso de ajuda! Onde está suporte?"
+
+#: views/admin/sprout-invoices-dashboard.php:101
+msgid ""
+"We want to make sure using Sprout Invoices is enjoyable and not a hassle. Sprout "
+"Apps has some pretty awesome <a href='%s'>support</a> and a budding <a "
+"href='%s'>knowledgebase</a> that will help you get anything resolved. Support and "
+"documentation is limited for this free version."
+msgstr ""
+"Queremos ter certeza que usar Sprout Invoices é agradável e não um aborrecimento. "
+"Sprout Apps tem um <a href='%s'>suporte</a> bastante impressionante e uma<a "
+"href='%s'>base de conhecimento</a> (para membros pagos) que irá ajudá-lo a obter "
+"soluções. Suporte e documentação limitado para a versão gratuita."
+
+#: views/templates/checkout/checks/form.php:9
+#: views/templates/checkout/credit-card/form.php:19
+#: views/templates/estimate/estimate-submission-form.php:18
+msgid "Submit"
+msgstr "Submeter"
+
+#: views/admin/sections/estimate-status-change-drop.php:8
+msgid "Currently Pending."
+msgstr "Atualmente pendente."
+
+#: views/admin/sections/estimate-status-change-drop.php:10
+msgid "Currently Approved."
+msgstr "Atualmente Aprovado."
+
+#: views/admin/sections/estimate-status-change-drop.php:12
+msgid "Currently Declined."
+msgstr "Atualmente recusado."
+
+#: views/admin/sections/estimate-status-change-drop.php:14
+msgid "New Estimate Request"
+msgstr "Novo Pedido de Orçamento."
+
+#: views/admin/sections/estimate-status-change-drop.php:14
+msgid "Submission"
+msgstr "Envio"
+
+#: views/admin/sections/estimate-status-change-drop.php:16
+msgid "Pending Estimate Request."
+msgstr "Pedido de orçamento pendente."
+
+#: views/admin/sections/estimate-status-change-drop.php:24
+msgid "Mark Pending"
+msgstr "Marcar como Pendente"
+
+#: views/admin/sections/estimate-status-change-drop.php:24
+msgid "<b>Pending: </b> Waiting for Review"
+msgstr "<b>Pendente:</b> Aguarda Revisão"
+
+#: views/admin/sections/estimate-status-change-drop.php:27
+msgid "Mark Approved"
+msgstr "Marcar como Aprovado"
+
+#: views/admin/sections/estimate-status-change-drop.php:27
+msgid "<b>Complete:</b> Estimate Approved"
+msgstr "<b>Completo:</b> Orçamento Aprovado"
+
+#: views/admin/sections/estimate-status-change-drop.php:30
+msgid "Mark Declined"
+msgstr "Marcar como Recusado"
+
+#: views/admin/sections/estimate-status-change-drop.php:30
+msgid "<b>Void:</b> Estimate Declined"
+msgstr "Orçamento Recusado"
+
+#: views/admin/sections/estimate-status-change-drop.php:35
+msgid "Delete Estimate"
+msgstr "Apagar Orçamento"
+
+#: views/admin/sections/estimate-status-change-drop.php:35
+msgid "<b>Delete:</b> Trash Estimate"
+msgstr "<b>Apagar:</b> Orçamento para o lixo"
+
+#: views/admin/sections/invoice-status-change-drop.php:8
+msgid "Pending payment(s)"
+msgstr "Pagamento pendente(s)"
+
+#: views/admin/sections/invoice-status-change-drop.php:8
+msgid "Pending Payment(s)"
+msgstr "Pagamento(s) pendente(s)"
+
+#: views/admin/sections/invoice-status-change-drop.php:10
+msgid "Fully Paid"
+msgstr "Pago Integralmente"
+
+#: views/admin/sections/invoice-status-change-drop.php:14
+msgid "Written-off"
+msgstr "Anular"
+
+#: views/admin/sections/invoice-status-change-drop.php:16
+#: views/admin/sections/invoice-status-change-drop.php:18
+msgid "Temp Invoice"
+msgstr "Factura temporária"
+
+#: views/admin/sections/invoice-status-change-drop.php:26
+msgid "Mark Pending Payment(s)"
+msgstr "Marcar Pagamento(s) como Pendente"
+
+#: views/admin/sections/invoice-status-change-drop.php:26
+msgid "<b>Active:</b> Pending Payment(s)"
+msgstr "<b>Ativo:</b> Pagamentos Pendentes"
+
+#: views/admin/sections/invoice-status-change-drop.php:30
+msgid "Outstanding Balance."
+msgstr "Saldo pendente."
+
+#: views/admin/sections/invoice-status-change-drop.php:30
+msgid "<b>Active:</b> Partial Payment Received"
+msgstr "<b>Ativo:</b> Pagamento Parcial Recebido"
+
+#: views/admin/sections/invoice-status-change-drop.php:33
+msgid "Mark as Paid."
+msgstr "Marcar como Pago."
+
+#: views/admin/sections/invoice-status-change-drop.php:33
+msgid "<b>Complete:</b> Paid in Full"
+msgstr "<b>Completo:</b> Pago Integralmente"
+
+#: views/admin/sections/invoice-status-change-drop.php:37
+msgid "Make Temporary"
+msgstr "Tornar Temporária"
+
+#: views/admin/sections/invoice-status-change-drop.php:37
+msgid "<b>Temp:</b> Drafted Invoice"
+msgstr "<b>Temp:</b> Factura Rascunho"
+
+#: views/admin/sections/invoice-status-change-drop.php:41
+msgid "Write-off Invoice"
+msgstr "Anular Factura"
+
+#: views/admin/sections/invoice-status-change-drop.php:41
+msgid "<b>Void:</b> Write-off Invoice"
+msgstr "<b>Desabilitar:</b> Anular Factura"
+
+#: views/admin/sections/invoice-status-change-drop.php:45
+msgid "Delete Invoice"
+msgstr "Apagar Factura"
+
+#: views/admin/sections/invoice-status-change-drop.php:45
+msgid "<b>Delete:</b> Trash Invoice"
+msgstr "<b>Apagar:</b> Factura Lixo"
+
+#: views/admin/settings.php:22
+msgid "Reset Defaults"
+msgstr "Restaurar Configurações Padrão"
+
+#: views/admin/sprout-apps-dashboard.php:5
+msgid "Welcome to <a href=\"%s\">Sprout Apps</a>!"
+msgstr "Bem vindo ao <a href=\"%s\"> Sprout Apps</a>!"
+
+#: views/admin/sprout-apps-dashboard.php:7
+msgid ""
+"Our mission is to build a suite of apps to help small businesses and freelancers "
+"work more efficiently by reducing the tedious business tasks associated with client "
+"management...<em>seriously though</em>, I'm trying to build something awesome that "
+"you will love. Thank you for your support."
+msgstr ""
+"Nossa missão é construir conjunto de aplicações para ajudar pequenas empresas e "
+"profissionais liberais a trabalhar de forma mais eficiente, reduzindo as tarefas "
+"tediosas de negócios associadas a administração de clientes... <em>seriamente</em>, "
+"estamos tentando construir algo impressionante que você vai adorar. Obrigado pelo "
+"seu apoio!"
+
+#: views/admin/sprout-apps-dashboard.php:11
+msgid "Sprout Apps News and Updates"
+msgstr "Sprout Apps Notícias e Atualizações"
+
+#: views/admin/sprout-apps-dashboard.php:23
+msgid "Could not connect to SIserver for updates."
+msgstr "Não foi possível conectar-se a SIserver para atualizações."
+
+#: views/admin/sprout-apps-dashboard.php:41
+msgid "Sprout Apps Marketplace"
+msgstr "Sprout Apps Marketplace"
+
+#: views/admin/sprout-apps-dashboard.php:42 views/admin/sprout-apps-dashboard.php:81
+msgid "View More Add-ons"
+msgstr "Ver mais Add-ons"
+
+#: views/admin/sprout-invoices-dashboard.php:3
+msgid "Thanks for using <a href=\"%s\">Sprout Invoices</a>!"
+msgstr "Obrigado por usar <a href=\"%s\">Sprout Invoices </a>!"
+
+#: views/admin/sprout-invoices-dashboard.php:5
+msgid ""
+"The future of <a href=\"%s\">Sprout Invoices</a> relies on happy customers "
+"supporting Sprout Apps by purchasing upgraded versions. If you like this free "
+"version of Sprout Invoices please consider <a href=\"%s\">purchasing an upgrade</a>."
+msgstr ""
+"O futuro de <a href=\"%s\">Sprout Invoices </a> depende de clientes felizes que "
+"apoiam Sprout Apps através da compra de versões pro. Se você gosta da versão "
+"gratuita do Sprout Invoices, por favor, considere a compra de um <a href=\"%s"
+"\">upgrade para a versão pro</a>."
+
+#: views/admin/sprout-invoices-dashboard.php:17
+msgid "Get a free Sprout Apps license instantly..."
+msgstr "Obter uma licença livre Sprout Apps instantaneamente..."
+
+#: views/admin/sprout-invoices-dashboard.php:20
+msgid "Enter your email."
+msgstr "Insira seu email."
+
+#: views/admin/sprout-invoices-dashboard.php:21
+msgid "Get License"
+msgstr "Obter licença"
+
+#: views/admin/sprout-invoices-dashboard.php:26
+msgid ""
+"Generating a free license key is not required but takes seconds! Your email will be "
+"used to create a unique Sprout Apps license key that will enable future features (i."
+"e. easy add-on installs from <a href=\"%s\">https://sproutapps.co</a>)."
+msgstr ""
+"Gerar uma chave de licença livre não é necessário, mas só leva alguns segundos! Seu "
+"e-mail será usado para criar uma chave de licença Sprout Apps única que permitirá "
+"futuros recursos (Ex.: instalar add-on facilmente a partir de <a href=\\”%s"
+"\\”>https://sproutapps.co</a>)."
+
+#: views/admin/sprout-invoices-dashboard.php:33
+msgid "The Sprout Invoices Flow"
+msgstr "O Fluxo Sprout Invoices"
+
+#: views/admin/sprout-invoices-dashboard.php:39
+msgid ""
+"Receiving estimate requests on your site is simplified with Sprout Invoices. <a "
+"href='%s'>General Settings</a> has more information on how to add a form to your "
+"site as well as settings to integrate with an advanced form plugin, e.g. Gravity "
+"Forms or Ninja Forms."
+msgstr ""
+"Receber pedidos de orçamento em seu site é simples com Sprout Invoices. Em <a "
+"href='%s'>Configurações Gerais</a> há mais informações sobre como adicionar um "
+"formulário para o seu site, bem como as definições para integrar com um plug-in de "
+"formulários avançado, como por exemplo, Gravity Forms ou Ninja Forms."
+
+#: views/admin/sprout-invoices-dashboard.php:44
+msgid "Estimating"
+msgstr "Orçamentando"
+
+#: views/admin/sprout-invoices-dashboard.php:45
+msgid ""
+"A new <a href='%s'>estimate</a> is automatically created and notifications are sent "
+"after every estimate request submission. The <a href='%s'>notification</a> to you "
+"will provide a link to this new estimate; allowing you to review, update, and send "
+"the estimate to your prospective client without having to communicate via email."
+msgstr ""
+"Um novo <a href='%s'>orçamento</a> é criado automaticamente e as notificações são "
+"enviadas depois de cada orçamento solicitado. A <a href='%s'>notificação</a> "
+"fornece um link para esta nova orçamento, o que lhe permite rever, atualizar e "
+"enviar a orçamento para o seu cliente em potencial, sem ter de se comunicar via e-"
+"mail."
+
+#: views/admin/sprout-invoices-dashboard.php:50
+msgid "Invoicing"
+msgstr "Facturação"
+
+#: views/admin/sprout-invoices-dashboard.php:51
+msgid ""
+"An <a href='%s'>invoice</a> is automatically created from an accepted estimate. By "
+"default these newly created invoices are <em>not</em> sent to the client, instead "
+"you  will need to review them before sending. Your <a href='%s'>notifications</a> "
+"are meant to be setup to help review, mark, and send them out quickly."
+msgstr ""
+"Uma <a href='%s'>factura</a> é automaticamente criada a partir de uma orçamento "
+"aceite. Por defeito, estas facturas recém criadas <em>não são</ em> enviadas para o "
+"cliente, em vez disso você terá que revê-las antes de enviar. Suas <a "
+"href='%s'>notificações</a> são configuradas para ajudar a rever, desmarque essa "
+"opção para enviá-las imediatamente."
+
+#: views/admin/sprout-invoices-dashboard.php:62
+msgid "FAQs"
+msgstr "FAQs"
+
+#: views/admin/reports/premium/clients.php:68
+#: views/admin/reports/premium/estimates.php:60
+#: views/admin/reports/premium/invoices.php:61
+#: views/admin/reports/premium/payments.php:62
+msgid "%o records(s) of %o added."
+msgstr "%o registro(s) de %o adicionados."
+
+#: views/admin/reports/premium/estimates.php:22
+#: views/admin/reports/premium/invoices.php:22
+msgid "Issue Date"
+msgstr "Data de Emissão"
+
+#: views/admin/reports/premium/payments.php:13
+msgid "From... mm/dd/yyy "
+msgstr "Desde... dd/mm/yyyy"
+
+#: views/admin/reports/premium/payments.php:23
+msgid "Method"
+msgstr "Método"
+
+#: views/admin/reports/premium/payments.php:30
+msgid "Voided Total"
+msgstr "Total Anulado"
+
+#: views/admin/sections/add-line-item.php:3
+msgid "Add"
+msgstr "Adicionar"
+
+#: views/admin/reports/premium/clients.php:23
+msgid "#Estimates"
+msgstr "#Orçamentos"
+
+#: views/admin/reports/premium/clients.php:24
+msgid "#Accepted"
+msgstr "#Aceito"
+
+#: views/admin/reports/premium/clients.php:25
+msgid "#Invoices"
+msgstr "#Facturas"
+
+#: views/admin/reports/premium/clients.php:26
+msgid "#Paid"
+msgstr "#Pago"
+
+#: views/admin/reports/premium/clients.php:27
+msgid "Total Invoiced"
+msgstr "Total Facturado"
+
+#: views/admin/reports/premium/clients.php:28
+msgid "Total Payments"
+msgstr "Total dos pagamentos"
+
+#: views/admin/reports/premium/clients.php:29
+msgid "Total Outstanding"
+msgstr "Total Pendente"
+
+#: views/admin/reports/premium/clients.php:30
+msgid "Total Written-off"
+msgstr "Total Anulado"
+
+#: views/admin/reports/premium/clients.php:56
+#: views/admin/reports/premium/estimates.php:47
+#: views/admin/reports/premium/invoices.php:48
+#: views/admin/reports/premium/payments.php:50
+msgid "Preparing rows..."
+msgstr "Preparando linhas..."
+
+#: views/admin/meta-boxes/projects/info.php:6
+msgid "Project Brief"
+msgstr "Resumo do projeto"
+
+#: views/admin/meta-boxes/projects/info.php:6
+msgid "General project brief."
+msgstr "Resumo Geral do projeto."
+
+#: views/admin/meta-boxes/projects/information-doc-select.php:2
+msgid "Select an existing project."
+msgstr "Selecione um projeto existente."
+
+#: views/admin/meta-boxes/projects/information-doc-select.php:5
+msgid "Select different project"
+msgstr "Selecione um projeto diferente"
+
+#: views/admin/meta-boxes/projects/submit.php:21
+msgid "Invoices: "
+msgstr "Facturas:"
+
+#: views/admin/meta-boxes/projects/submit.php:35
+msgid "Estimates: "
+msgstr "Orçamentos:"
+
+#: views/admin/meta-boxes/projects/submit.php:64
+msgid "Create"
+msgstr "Criar"
+
+#: views/admin/reports/premium/clients.php:13
+#: views/admin/reports/premium/estimates.php:13
+#: views/admin/reports/premium/invoices.php:13
+#: views/admin/reports/premium/payments.php:13
+msgid "From: "
+msgstr "De:"
+
+#: views/admin/reports/premium/clients.php:14
+#: views/admin/reports/premium/estimates.php:14
+#: views/admin/reports/premium/invoices.php:14
+#: views/admin/reports/premium/payments.php:14
+msgid "To: "
+msgstr "Para: "
+
+#: views/admin/reports/premium/clients.php:21
+msgid "Name"
+msgstr "Nome"
+
+#: languages/SI_Strings.php:62 views/admin/meta-boxes/estimates/quick-links.php:44
+msgid "View Estimate"
+msgstr "Visualizar Orçamento"
+
+#: views/admin/meta-boxes/estimates/quick-links.php:46
+#: views/admin/meta-boxes/invoices/quick-links.php:39
+msgid "<span class=\"helptip\" title=\"Upgrade for Private URLs\"></span>"
+msgstr ""
+"<span class=\"helptip\" title=\"Faça Upgrade para usar URLs privadas\"></span>"
+
+#: views/admin/meta-boxes/estimates/send.php:6
+msgid "Make sure to save all information before sending your estimate."
+msgstr "Certifique-se de salvar todas as informações antes de enviar seu orçamento."
+
+#: views/admin/meta-boxes/invoices/information.php:49
+msgid "Due by:"
+msgstr "Vencimento:"
+
+#: views/admin/meta-boxes/invoices/information.php:52
+msgid "Edit due date and time"
+msgstr "Editar data e hora"
+
+#: views/admin/meta-boxes/invoices/information.php:91
+msgid "Invoice for"
+msgstr "Factura para"
+
+#: views/admin/meta-boxes/invoices/information.php:120
+msgid "Associated Estimate:"
+msgstr "Orçamento associado:"
+
+#: views/admin/meta-boxes/invoices/information.php:127
+msgid "Invoice ID"
+msgstr "Factura ID"
+
+#: views/admin/meta-boxes/invoices/information.php:130
+msgid "Edit invoice id"
+msgstr "Editar id da factura"
+
+#: views/admin/meta-boxes/invoices/line-items.php:16
+msgid ""
+"Predefined line-items can be created to help with invoice creation by adding "
+"default descriptions. This is a premium feature that will be added with a pro "
+"version upgrade."
+msgstr ""
+"Itens de linha predefinidos podem ser criados para ajudar com a criação de "
+"facturas, adicionando descrições por defeito. Esta é uma característica premium que "
+"será adicionada com um upgrade para a versão pro."
+
+#: views/admin/meta-boxes/invoices/line-items.php:19
+msgid ""
+"Any billable time can be imported from your projects into your invoices dynamically "
+"with a pro version upgrade."
+msgstr ""
+"Qualquer tempo imputável a clientes pode ser importado a partir de seus projetos em "
+"suas facturas de forma dinâmica com uma atualização para a versão pro."
+
+#: views/admin/meta-boxes/invoices/line-items.php:19
+msgid "Import Time"
+msgstr "Importar Tempo"
+
+#: views/admin/meta-boxes/invoices/notes.php:9
+msgid "Terms will be shown on the invoice."
+msgstr "Termos serão mostrados na factura."
+
+#: views/admin/meta-boxes/invoices/notes.php:13
+msgid "These notes will be shown on the invoice."
+msgstr "Essas notas serão mostrados na factura."
+
+#: views/admin/meta-boxes/invoices/payments.php:6
+msgid "Quick Add"
+msgstr "Adição Rápida"
+
+#: views/admin/meta-boxes/invoices/payments.php:6
+msgid "Add the payment now or save/update the invoice above"
+msgstr "Adicione o pagamento agora ou grave/actualize a fatura acima"
+
+#: views/admin/meta-boxes/invoices/quick-links.php:25
+msgid "Send this invoice"
+msgstr "Enviar esta factura"
+
+#: views/admin/meta-boxes/invoices/quick-links.php:27
+msgid "Duplicate this invoice"
+msgstr "Duplicar esta factura"
+
+#: languages/SI_Strings.php:61 views/admin/meta-boxes/invoices/quick-links.php:37
+msgid "View Invoice"
+msgstr "Ver Factura"
+
+#: views/admin/meta-boxes/invoices/send.php:6
+msgid "Make sure to save all information before sending your invoice."
+msgstr "Certifique-se de gravar todas as informações antes de enviar sua factura."
+
+#: views/admin/meta-boxes/notifications/shortcodes.php:2
+msgid "Use the following shortcodes to customize the email sent."
+msgstr "Utilize os seguintes códigos curtos para personalizar o email enviado."
+
+#: views/admin/meta-boxes/notifications/submit.php:43
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: views/admin/meta-boxes/projects/client-submit.php:16
+msgid "No start and/or end date set."
+msgstr "Nenhuma data inicial e/ou final definida."
+
+#: views/admin/meta-boxes/projects/client-submit.php:23
+msgid "No projects"
+msgstr "Nenhum projeto"
+
+#: views/admin/meta-boxes/estimates/information.php:126
+msgid "Create an invoice from an approved estimate."
+msgstr "Criar uma factura quando uma orçamento for aprovada."
+
+#: views/admin/meta-boxes/estimates/information.php:126
+msgid "Create Invoice"
+msgstr "Criar factura"
+
+#: views/admin/meta-boxes/estimates/information.php:133
+msgid "Estimate ID"
+msgstr "Orçamento ID"
+
+#: views/admin/meta-boxes/estimates/information.php:136
+msgid "Edit estimate id"
+msgstr "Editar ID da orçamento"
+
+#: views/admin/meta-boxes/estimates/information.php:158
+#: views/admin/meta-boxes/invoices/information.php:152
+#: views/templates/checkout/confirmation.php:124
+#: views/templates/estimate/estimate.php:123 views/templates/invoice/invoice.php:143
+msgid "PO Number"
+msgstr "Número OC"
+
+#: views/admin/meta-boxes/estimates/information.php:161
+#: views/admin/meta-boxes/invoices/information.php:155
+msgid "Edit PO number"
+msgstr "Editar Número OC"
+
+#: controllers/line-items/Line_Items.php:318 controllers/line-items/Line_Items.php:368
+#: views/admin/meta-boxes/estimates/information.php:177
+#: views/admin/meta-boxes/invoices/information.php:171
+msgid "Discount"
+msgstr "Desconto"
+
+#: views/admin/meta-boxes/estimates/information.php:180
+#: views/admin/meta-boxes/invoices/information.php:174
+msgid "Edit discount"
+msgstr "Editar desconto"
+
+#: views/admin/meta-boxes/estimates/information.php:197
+#: views/admin/meta-boxes/estimates/information.php:218
+#: views/admin/meta-boxes/invoices/information.php:191
+#: views/admin/meta-boxes/invoices/information.php:212
+msgid "Tax"
+msgstr "Taxas"
+
+#: views/admin/meta-boxes/estimates/information.php:200
+#: views/admin/meta-boxes/estimates/information.php:221
+#: views/admin/meta-boxes/invoices/information.php:194
+#: views/admin/meta-boxes/invoices/information.php:215
+msgid "Edit tax"
+msgstr "Editar taxas"
+
+#: views/admin/meta-boxes/estimates/line-items.php:16
+msgid ""
+"Predefined line-items can be created to help with estimate creation by adding "
+"default descriptions. This is a premium feature that will be added with a pro "
+"version upgrade."
+msgstr ""
+"Itens de linha predefinidos podem ser criados para ajudar com a criação de "
+"facturas, adicionando descrições por defeito. Esta é uma característica premium que "
+"será adicionada com um upgrade para a versão pro."
+
+#: views/admin/meta-boxes/estimates/notes.php:9
+#: views/admin/meta-boxes/invoices/notes.php:9
+#: views/templates/checkout/confirmation.php:199
+#: views/templates/estimate/estimate.php:173 views/templates/invoice/invoice.php:207
+msgid "Terms"
+msgstr "Termos"
+
+#: views/admin/meta-boxes/estimates/notes.php:9
+msgid "Terms will be shown on the estimate."
+msgstr "Termos serão mostrados na orçamento."
+
+#: views/admin/meta-boxes/estimates/notes.php:13
+msgid "These notes will be shown on the estimate."
+msgstr "Essas notas serão mostrados na orçamento."
+
+#: views/admin/meta-boxes/estimates/quick-links.php:18
+#: views/admin/meta-boxes/invoices/quick-links.php:17
+msgid "Subject..."
+msgstr "Assunto..."
+
+#: views/admin/meta-boxes/estimates/quick-links.php:27
+msgid "Send this estimate."
+msgstr "Enviar este Orçamento"
+
+#: views/admin/meta-boxes/estimates/quick-links.php:29
+msgid "Duplicate this estimate"
+msgstr "Duplicar essa orçamento"
+
+#: views/admin/meta-boxes/estimates/quick-links.php:33
+msgid "Delete this estimate permanently"
+msgstr "Excluir orçamento permanentemente"
+
+#: views/admin/meta-boxes/estimates/quick-links.php:42
+#: views/admin/meta-boxes/invoices/quick-links.php:35
+msgid "Permalink"
+msgstr "Permalink"
+
+#: views/admin/meta-boxes/estimates/information.php:19
+#: views/admin/meta-boxes/invoices/information.php:19
+msgid "Select different status"
+msgstr "Selecione um status diferente"
+
+#: views/admin/meta-boxes/estimates/information.php:41
+#: views/admin/meta-boxes/invoices/information.php:41
+msgid "Edit date and time"
+msgstr "Editar data e hora "
+
+#: views/admin/meta-boxes/estimates/information.php:49
+msgid "Expire on:"
+msgstr "Expira em:"
+
+#: views/admin/meta-boxes/estimates/information.php:52
+msgid "Edit expiration date and time"
+msgstr "Editar data e hora de expiração"
+
+#: views/admin/meta-boxes/estimates/information.php:92
+msgid "Estimate for"
+msgstr "Orçamento para"
+
+#: views/admin/meta-boxes/estimates/information.php:95
+#: views/admin/meta-boxes/invoices/information.php:94
+msgid "Select different client"
+msgstr "Selecione um cliente diferente"
+
+#: views/admin/meta-boxes/estimates/information.php:107
+#: views/admin/meta-boxes/invoices/information.php:106
+msgid "Create new client"
+msgstr "Criar novo cliente"
+
+#: views/admin/meta-boxes/estimates/information.php:121
+msgid "Associated Invoice:"
+msgstr "Factura associada:"
+
+#: views/admin/meta-boxes/estimates/history.php:11
+#: views/admin/meta-boxes/invoices/history.php:11
+msgid "Submitted by <a href=\"%s\">%s</a>"
+msgstr "Enviado por <a href=\"%s\">%s</a>"
+
+#: views/admin/meta-boxes/estimates/history.php:17
+#: views/admin/meta-boxes/invoices/history.php:17
+msgid "Added by %s"
+msgstr "Adicionado por %s"
+
+#: views/admin/meta-boxes/estimates/history.php:19
+#: views/admin/meta-boxes/invoices/history.php:19
+msgid "Added by SI"
+msgstr "﻿Adicionado por SI"
+
+#: views/admin/meta-boxes/estimates/history.php:63
+#: views/admin/meta-boxes/invoices/history.php:63
+#: views/admin/meta-boxes/projects/history.php:60
+msgid "<span class=\"helptip\" title=\"Upgrade for Private Notes\"></span>"
+msgstr ""
+"<span class=\"helptip\" title=\"Faça Upgrade para usar notas privadas\"></span>"
+
+#: views/admin/meta-boxes/estimates/history.php:71
+msgid "Form Submission"
+msgstr "Formulário de Envio"
+
+#: views/admin/meta-boxes/estimates/history.php:96
+msgid "Attachments"
+msgstr "Attachments"
+
+#: views/admin/meta-boxes/estimates/information.php:6
+#: views/admin/meta-boxes/invoices/information.php:6
+msgid "Issued on: <b>%1$s</b>"
+msgstr "Emitido em: <b>%1$s</b>"
+
+#: views/admin/meta-boxes/estimates/information.php:9
+#: views/admin/meta-boxes/invoices/information.php:9
+msgid "Issue <b>immediately</b>"
+msgstr "Emitir <b>imediatamente</b>"
+
+#: views/admin/meta-boxes/estimates/information.php:16
+#: views/admin/meta-boxes/invoices/information.php:16
+msgid "Status:"
+msgstr "Situação"
+
+#: views/admin/meta-boxes/clients/submit.php:106
+#: views/admin/meta-boxes/clients/submit.php:107
+#: views/admin/meta-boxes/estimates/line-items.php:40
+#: views/admin/meta-boxes/invoices/line-items.php:41
+#: views/admin/meta-boxes/notifications/submit.php:63
+#: views/admin/meta-boxes/notifications/submit.php:64
+#: views/admin/meta-boxes/projects/submit.php:70
+#: views/admin/meta-boxes/projects/submit.php:71
+msgid "Update"
+msgstr "Atualização"
+
+#: views/admin/meta-boxes/clients/submit.php:102
+#: views/admin/meta-boxes/clients/submit.php:103
+#: views/admin/meta-boxes/estimates/line-items.php:36
+#: views/admin/meta-boxes/estimates/line-items.php:37
+#: views/admin/meta-boxes/invoices/line-items.php:37
+#: views/admin/meta-boxes/invoices/line-items.php:38
+#: views/admin/meta-boxes/notifications/submit.php:59
+#: views/admin/meta-boxes/notifications/submit.php:60
+#: views/admin/meta-boxes/projects/submit.php:66
+#: views/admin/meta-boxes/projects/submit.php:67
+msgid "Submit for Review"
+msgstr "Enviar para Análise"
+
+#: views/admin/meta-boxes/clients/submit.php:99
+#: views/admin/meta-boxes/clients/submit.php:100
+#: views/admin/meta-boxes/estimates/line-items.php:33
+#: views/admin/meta-boxes/invoices/line-items.php:34
+#: views/admin/meta-boxes/notifications/submit.php:56
+#: views/admin/meta-boxes/notifications/submit.php:57
+#: views/admin/meta-boxes/projects/submit.php:63
+msgid "Publish"
+msgstr "Publicados"
+
+#: views/admin/meta-boxes/clients/history.php:77
+#: views/admin/meta-boxes/projects/history-premium.php:64
+msgid "These private notes will be added to the history."
+msgstr "Essas notas privadas serão adicionado ao histórico."
+
+#: views/admin/meta-boxes/clients/submit.php:21
+msgid ""
+"Clients can have multiple users associated. Each user will receive notifications."
+msgstr ""
+"Os clientes podem ter vários utilizadores associados. Todos os utilizadores "
+"receberão notificações."
+
+#: views/admin/meta-boxes/clients/submit.php:51
+msgid "Create new user for this client"
+msgstr "Criar novo utilizador para esse cliente"
+
+#: views/admin/meta-boxes/clients/submit.php:51
+msgid "New User"
+msgstr "Novo utilizador"
+
+#: views/admin/meta-boxes/clients/submit.php:91
+#: views/admin/meta-boxes/notifications/submit.php:48
+#: views/admin/meta-boxes/projects/submit.php:55
+msgid "Delete"
+msgstr "Apagar"
+
+#: views/admin/dashboards/premium/requests-converted-chart.php:64
+msgid "Invoices Generated"
+msgstr "Facturas Geradas"
+
+#: views/admin/dashboards/premium/requests-converted-chart.php:93
+msgid "Shows total estimate requests and the total converted into invoices."
+msgstr "Mostra total de pedidos de orçamentos e o total convertido em facturas."
+
+#: views/admin/dashboards/requests-converted-chart.php:2
+msgid "Requests &amp; Converted Requests"
+msgstr "Solicitações &amp; Solicitações Convertidas"
+
+#: views/admin/importer/importing.php:16
+msgid "Import Clients, Users, Estimates, Invoices and Payments"
+msgstr "Importar clientes, utilizadores, orçamentos, facturas e pagamentos"
+
+#: views/admin/importer/importing.php:21
+msgid "Select Import Source"
+msgstr "Selecione a Fonte da Importação"
+
+#: views/admin/importer/importing.php:39
+msgid "Start Import"
+msgstr "Iniciar Importação"
+
+#: views/admin/importer/importing.php:97
+msgid "Attempting to validate credentials..."
+msgstr "Tentando validar as credenciais..."
+
+#: views/admin/importer/importing.php:104
+msgid "No clients imported yet..."
+msgstr "Nenhum cliente importado ainda..."
+
+#: views/admin/importer/importing.php:111
+msgid "No contacts imported yet..."
+msgstr "Nenhum contato importado ainda..."
+
+#: views/admin/importer/importing.php:118
+msgid "No estimates imported yet..."
+msgstr "Nenhuma orçamento importada ainda..."
+
+#: views/admin/importer/importing.php:125
+msgid "No invoices imported yet..."
+msgstr "Nenhuma factura importada ainda..."
+
+#: views/admin/importer/importing.php:132
+msgid "No payments imported yet..."
+msgstr "Nenhum pagamento importado ainda..."
+
+#: views/admin/meta-boxes/clients/create-user-modal.php:7
+msgid "Create user"
+msgstr "Criar utilizador"
+
+#: views/admin/meta-boxes/clients/creation-modal.php:7
+#: views/admin/meta-boxes/estimates/information.php:101
+#: views/admin/meta-boxes/invoices/information.php:100
+msgid "Create client"
+msgstr "Criar cliente"
+
+#: views/admin/meta-boxes/clients/history.php:4
+#: views/admin/meta-boxes/estimates/history.php:4
+#: views/admin/meta-boxes/invoices/history.php:4
+#: views/admin/meta-boxes/projects/history-premium.php:4
+#: views/admin/meta-boxes/projects/history.php:4
+msgid "Created"
+msgstr "Criado"
+
+#: views/admin/meta-boxes/clients/history.php:25
+msgid "Estimate Updated"
+msgstr "Orçamento atualizado"
+
+#: views/admin/meta-boxes/clients/history.php:29
+msgid "Estimate Viewed"
+msgstr "Orçamento Visualizado"
+
+#: views/admin/meta-boxes/clients/history.php:56
+#: views/admin/meta-boxes/estimates/history.php:34
+#: views/admin/meta-boxes/invoices/history.php:33
+#: views/admin/meta-boxes/projects/history-premium.php:43
+#: views/admin/meta-boxes/projects/history.php:43
+#: views/templates/estimate/estimate.php:215 views/templates/invoice/invoice.php:249
+msgid "View Message"
+msgstr "Ver Mensagem"
+
+#: views/admin/meta-boxes/clients/history.php:64
+#: views/admin/meta-boxes/projects/history-premium.php:51
+msgid "Edit Note"
+msgstr "﻿Editar nota"
+
+#: views/admin/meta-boxes/clients/history.php:77
+#: views/admin/meta-boxes/clients/submit.php:16
+#: views/admin/meta-boxes/estimates/line-items.php:34
+#: views/admin/meta-boxes/estimates/line-items.php:41
+#: views/admin/meta-boxes/invoices/line-items.php:35
+#: views/admin/meta-boxes/invoices/line-items.php:42
+#: views/admin/meta-boxes/notifications/submit.php:16
+#: views/admin/meta-boxes/projects/history-premium.php:64
+#: views/admin/meta-boxes/projects/submit.php:16
+msgid "Save"
+msgstr "Guardar"
+
+#: views/admin/dashboards/premium/balances-chart.php:93
+msgid "Shows total outstanding balance and payments by week"
+msgstr "Mostra saldo devedor total e pagamentos por semana"
+
+#: views/admin/dashboards/premium/estimates-status-chart.php:62
+msgid "Statuses from estimates from the last 3 weeks"
+msgstr "Status para orçamentos das últimas 3 semanas"
+
+#: views/admin/dashboards/premium/invoices-status-chart.php:29
+#: views/admin/sections/invoice-status-change-drop.php:18
+msgid "Temp"
+msgstr "Temporário"
+
+#: views/admin/dashboards/premium/invoices-status-chart.php:47
+msgid "Complete"
+msgstr "Completo"
+
+#: views/admin/dashboards/premium/invoices-status-chart.php:65
+msgid "Statuses from invoices from the last 3 weeks"
+msgstr "Status das facturas das últimas 3 semanas"
+
+#: views/admin/dashboards/premium/invoices.php:33
+msgid "Paid (last year)"
+msgstr "Pago (último ano)"
+
+#: views/admin/dashboards/premium/payments-status-chart.php:53
+msgid "Statuses from payments from the last 3 weeks"
+msgstr "Status de pagamentos das últimas 3 semanas"
+
+#: views/admin/dashboards/premium/requests-converted-chart.php:54
+msgid "Requests"
+msgstr "Solicitações"
+
+#: views/admin/dashboards/invoices.php:2
+msgid "Invoice Dashboard"
+msgstr "Painel de Controlo de Facturas"
+
+#: views/admin/dashboards/invoices.php:9
+#: views/admin/dashboards/premium/invoices.php:15
+msgid "Outstanding"
+msgstr "Excelente"
+
+#: views/admin/dashboards/invoices.php:12
+#: views/admin/dashboards/premium/invoices.php:18
+msgid "Paid (this week)"
+msgstr "Pago (essa semana)"
+
+#: views/admin/dashboards/invoices.php:13 views/admin/dashboards/invoices.php:16
+#: views/admin/dashboards/invoices.php:19 views/admin/dashboards/invoices.php:22
+#: views/admin/dashboards/invoices.php:25
+msgid "Data available with upgraded version of Sprout Invoices"
+msgstr "Dados disponíveis com a versão atualizada do Sprout Invoices"
+
+#: views/admin/dashboards/invoices.php:15
+#: views/admin/dashboards/premium/invoices.php:21
+msgid "Paid (last week)"
+msgstr "Pago (última semana)"
+
+#: views/admin/dashboards/invoices.php:18
+#: views/admin/dashboards/premium/invoices.php:24
+msgid "Paid (month to date)"
+msgstr "Pago (esse mês)"
+
+#: views/admin/dashboards/invoices.php:21
+#: views/admin/dashboards/premium/invoices.php:27
+msgid "Paid (last month)"
+msgstr "Pago (último mês)"
+
+#: views/admin/dashboards/invoices.php:24
+#: views/admin/dashboards/premium/invoices.php:30
+msgid "Paid (year to date)"
+msgstr "Pago (esse ano)"
+
+#: views/admin/dashboards/invoices.php:50
+#: views/admin/dashboards/premium/invoices.php:57
+msgid "No invoices found."
+msgstr "Nenhuma factura encontrada."
+
+#: views/admin/dashboards/invoices.php:58 views/admin/dashboards/invoices.php:66
+#: views/admin/dashboards/premium/invoices.php:65
+#: views/admin/dashboards/premium/invoices.php:73
+msgid "Overdue &amp; Unpaid"
+msgstr "Atrasado &amp; Não pago"
+
+#: views/admin/dashboards/invoices.php:61
+#: views/admin/dashboards/premium/invoices.php:68
+msgid "Due: %s"
+msgstr "Devido: %s"
+
+#: views/admin/dashboards/invoices.php:67
+#: views/admin/dashboards/premium/invoices.php:74
+msgid "No overdue or unpaid invoices."
+msgstr "Não há facturas atrasadas ou não pagas."
+
+#: views/admin/dashboards/payments-chart.php:2
+msgid "Invoiced &amp; Payments"
+msgstr "Facturas &amp; Pagamentos"
+
+#: views/admin/dashboards/payments-chart.php:40
+#: views/admin/dashboards/premium/payments-chart.php:54
+#: views/admin/reports/premium/invoices.php:25
+#: views/admin/reports/premium/payments.php:26
+msgid "Invoiced"
+msgstr "Facturado"
+
+#: views/admin/dashboards/payments-chart.php:70
+#: views/admin/dashboards/premium/payments-chart.php:94
+msgid "Compares total invoiced and the total payments."
+msgstr "Comparação de total facturado e os pagamentos totais."
+
+#: views/admin/dashboards/payments-status-chart.php:2
+msgid "Payment Status"
+msgstr "Status do pagamento"
+
+#: views/admin/dashboards/premium/balances-chart.php:7
+#: views/admin/dashboards/premium/estimates-invoices-chart.php:7
+#: views/admin/dashboards/premium/payments-chart.php:7
+#: views/admin/dashboards/premium/requests-converted-chart.php:7
+msgid "Weeks"
+msgstr "Semanas"
+
+#: views/admin/dashboards/premium/balances-chart.php:8
+#: views/admin/dashboards/premium/estimates-invoices-chart.php:8
+#: views/admin/dashboards/premium/payments-chart.php:8
+#: views/admin/dashboards/premium/requests-converted-chart.php:8
+msgid "Months"
+msgstr "Meses"
+
+#: views/admin/dashboards/premium/balances-chart.php:10
+#: views/admin/dashboards/premium/estimates-invoices-chart.php:10
+#: views/admin/dashboards/premium/payments-chart.php:10
+#: views/admin/dashboards/premium/requests-converted-chart.php:10
+msgid "Show"
+msgstr "Exibição"
+
+#: views/admin/addons/options-admin.php:16 views/admin/settings.php:12
+msgid "Saving..."
+msgstr "A guardar…"
+
+#: views/admin/dashboards/balances-chart.php:2
+msgid "Outstanding Balances &amp; Payments"
+msgstr "Saldos em aberto &amp; Pagamentos"
+
+#: views/admin/dashboards/estimates-invoices-chart.php:68
+#: views/admin/dashboards/premium/estimates-invoices-chart.php:95
+msgid "Shows total estimates and invoices by week."
+msgstr "Exibe total de orçamentos e facturas por semana."
+
+#: views/admin/dashboards/estimates-status-chart.php:2
+msgid "Estimate Status"
+msgstr "Status do Orçamento"
+
+#: views/admin/dashboards/estimates.php:2
+msgid "Estimate Dashboard"
+msgstr "Painel de orçamentos"
+
+#: views/admin/dashboards/estimates.php:17 views/admin/dashboards/estimates.php:25
+#: views/admin/dashboards/invoices.php:41 views/admin/dashboards/invoices.php:49
+#: views/admin/dashboards/premium/estimates.php:14
+#: views/admin/dashboards/premium/estimates.php:22
+#: views/admin/dashboards/premium/invoices.php:48
+#: views/admin/dashboards/premium/invoices.php:56
+msgid "Latest Updates"
+msgstr "Últimas Atualizações"
+
+#: views/admin/dashboards/estimates.php:26
+#: views/admin/dashboards/premium/estimates.php:23
+msgid "No recent estimates found."
+msgstr "Nenhuma orçamento recente encontrada."
+
+#: views/admin/dashboards/estimates.php:40 views/admin/dashboards/estimates.php:48
+#: views/admin/dashboards/premium/estimates.php:37
+#: views/admin/dashboards/premium/estimates.php:45
+msgid "Recent Requests"
+msgstr "Solicitações Recentes"
+
+#: views/admin/dashboards/estimates.php:49
+#: views/admin/dashboards/premium/estimates.php:46
+msgid "No recently requested estimates."
+msgstr "Não há orçamentos solicitadas recentemente."
+
+#: views/admin/dashboards/estimates.php:63 views/admin/dashboards/estimates.php:71
+#: views/admin/dashboards/premium/estimates.php:61
+#: views/admin/dashboards/premium/estimates.php:69
+msgid "Recent Declined"
+msgstr "Recusado Recentemente"
+
+#: views/admin/dashboards/estimates.php:72
+#: views/admin/dashboards/premium/estimates.php:70
+msgid "No recently declined estimates."
+msgstr "Não há orçamentos recusadas recentemente."
+
+#: views/admin/dashboards/estimates.php:93 views/admin/dashboards/estimates.php:101
+#: views/admin/dashboards/premium/estimates.php:91
+#: views/admin/dashboards/premium/estimates.php:99
+msgid "Expired &amp; Pending"
+msgstr "Expirado &amp;  Pendente"
+
+#: views/admin/dashboards/estimates.php:96
+#: views/admin/dashboards/premium/estimates.php:94
+msgid "Expired: %s"
+msgstr "Expirado: %s"
+
+#: views/admin/dashboards/estimates.php:102
+#: views/admin/dashboards/premium/estimates.php:100
+msgid "No recently expired or pending estimates."
+msgstr "Não há orçamentos recentes expiradas ou pendentes."
+
+#: template-tags/invoices.php:972
+msgid "Viewed"
+msgstr "Visualizado"
+
+#: languages/SI_Strings.php:31 template-tags/invoices.php:976
+#: views/admin/meta-boxes/clients/history.php:33
+#: views/admin/meta-boxes/projects/history-premium.php:25
+#: views/admin/meta-boxes/projects/history.php:25
+msgid "Notification"
+msgstr "Aviso"
+
+#: template-tags/invoices.php:980 views/admin/meta-boxes/clients/history.php:37
+msgid "Invoice Created"
+msgstr "Factura Criada"
+
+#: template-tags/invoices.php:984 views/admin/meta-boxes/estimates/history.php:13
+#: views/admin/meta-boxes/invoices/history.php:13
+msgid "Submitted"
+msgstr "Enviada"
+
+#: template-tags/invoices.php:988
+msgid "Imported"
+msgstr "Importado"
+
+#: template-tags/invoices.php:993 views/admin/meta-boxes/clients/history.php:42
+#: views/admin/meta-boxes/projects/history-premium.php:30
+#: views/admin/meta-boxes/projects/history.php:30
+msgid "Status Update"
+msgstr "Atualizar Status"
+
+#: template-tags/projects.php:40 views/admin/meta-boxes/estimates/information.php:90
+#: views/admin/meta-boxes/invoices/information.php:89
+msgid "Client N/A"
+msgstr "Cliente N/H"
+
+#: template-tags/projects.php:49
+msgid "Select Project"
+msgstr "Selecione o Projeto"
+
+#: template-tags/projects.php:61
+msgid "No <a href=\"%s\" target=\"_blank\">projects</a> found"
+msgstr "Nenhum <a href=\"%s\" target=\"_blank\">projeto</a> encontrado"
+
+#: views/admin/addons/marketplace.php:10
+msgid "Addons from the Sprout Invoices Marketplace"
+msgstr "Complementos a partir do Sprout Invoices Marketplace"
+
+#: views/admin/addons/marketplace.php:14 views/admin/addons/options-admin.php:10
+msgid "Manage Bundled Addons"
+msgstr "Administrar Addons Inclusos"
+
+#: views/admin/addons/marketplace.php:15 views/admin/addons/options-admin.php:11
+msgid "Marketplace"
+msgstr "﻿Marketplace"
+
+#: views/admin/addons/marketplace.php:36 views/admin/sprout-apps-dashboard.php:59
+msgid "Bundled Free w/ License"
+msgstr "Incluido grátis com Licença Pro"
+
+#: views/admin/addons/marketplace.php:43 views/admin/sprout-apps-dashboard.php:66
+msgid "Add to Cart"
+msgstr "Adicionar ao Carrinho"
+
+#: views/admin/addons/marketplace.php:52 views/admin/sprout-apps-dashboard.php:75
+msgid "View Details"
+msgstr "﻿Ver Detalhes"
+
+#: models/_Model.php:193
+msgid "%s submitted."
+msgstr "%s enviado."
+
+#: models/_Model.php:194
+msgid "%s scheduled for: <strong>%1$s</strong>."
+msgstr "%s agendado para: <strong>%1$s</strong>."
+
+#: models/_Model.php:195
+msgid "%s draft updated."
+msgstr "%s rascunho atualizado."
+
+#: controllers/estimates/Estimates_Template.php:26
+#: controllers/invoices/Invoices_Template.php:30 models/_Model.php:421
+#: views/admin/meta-boxes/estimates/quick-links.php:17
+#: views/admin/meta-boxes/invoices/quick-links.php:16
+#: views/admin/meta-boxes/projects/name.php:4
+msgid "Auto Draft"
+msgstr "Rascunho automático"
+
+#: template-tags/invoices.php:968
+msgid "Updated"
+msgstr "Atualizado"
+
+#: models/_Model.php:172 models/_Model.php:185 models/_Model.php:188
+msgid "%s updated."
+msgstr "%s actualizado."
+
+#. translators: %s: date and time of the revision
+#: models/_Model.php:174 models/_Model.php:190
+msgid "%s restored to revision from %s"
+msgstr "%s restaurado para revisão de %s"
+
+#: models/_Model.php:175
+msgid "%s published. <a href=\"%s\">View %s</a>"
+msgstr "%s publicado. <a href=\"%s\">Ver %s</a>"
+
+#: models/_Model.php:176 models/_Model.php:192
+msgid "%s saved."
+msgstr "%s gravado(s)."
+
+#: models/_Model.php:177
+msgid "%s submitted. <a target=\"_blank\" href=\"%s\">Preview %s</a>"
+msgstr "%s enviado. <a target=\"_blank\" href=\"%s\">Visualizar %s</a>"
+
+#: models/_Model.php:178
+msgid ""
+"%s scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview "
+"%s</a>"
+msgstr ""
+"%s agendado para: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Visualizar %s</a>"
+
+#: models/_Model.php:178 models/_Model.php:194
+#: views/admin/meta-boxes/estimates/information.php:4
+#: views/admin/meta-boxes/invoices/information.php:4
+msgid "M j, Y @ G:i"
+msgstr "j de M de Y @ G:i"
+
+#: models/_Model.php:179
+msgid "%s draft updated. <a target=\"_blank\" href=\"%s\">Preview %s</a>"
+msgstr "%s rascunho atualizado. <a target=\"_blank\" href=\"%s\">Visualizar %s</a>"
+
+#: models/_Model.php:191
+msgid "%s published."
+msgstr "%s publicado."
+
+#: models/_Model.php:171 models/_Model.php:187
+msgid "Custom field deleted."
+msgstr "Campo personalizado deletado."
+
+#: models/Payment.php:56
+msgid "Partial Payment"
+msgstr "Pagamento Parcial"
+
+#: models/Payment.php:57 views/templates/invoice/invoice.php:86
+msgid "Void"
+msgstr "Anulado"
+
+#: models/Payment.php:59
+msgid "Recurring"
+msgstr "Recorrente"
+
+#: models/Payment.php:104
+msgid "API"
+msgstr "API"
+
+#: models/Payment.php:113 models/Payment.php:123
+msgid "Payment #%d"
+msgstr "Pagamento #%d"
+
+#: models/Project.php:80
+msgid "New Project: %s"
+msgstr "Novo projeto: %s"
+
+#: models/_Model.php:169
+msgid "%s updated. <a href=\"%s\">View %s</a>"
+msgstr "%s actualizado. <a href=\"%s\">Ver %s</a>"
+
+#: models/_Model.php:170 models/_Model.php:186
+msgid "Custom field updated."
+msgstr "O campo personalizado foi atualizado."
+
+#: models/Estimate.php:86 views/admin/dashboards/premium/estimates-status-chart.php:44
+#: views/admin/sections/estimate-status-change-drop.php:10
+msgid "Approved"
+msgstr "Aprovado"
+
+#: models/Estimate.php:87 views/admin/dashboards/premium/estimates-status-chart.php:50
+#: views/admin/sections/estimate-status-change-drop.php:12
+#: views/templates/estimate/estimate.php:44
+msgid "Declined"
+msgstr "Recusado"
+
+#: models/Estimate.php:161
+msgid "New Estimate: %s"
+msgstr "Nova orçamento: %s"
+
+#: models/Estimate.php:246
+msgid "approve"
+msgstr "aprovar"
+
+#: models/Estimate.php:247
+msgid "accept"
+msgstr "aceitar"
+
+#: models/Estimate.php:250
+msgid "decline"
+msgstr "recusar"
+
+#: models/Estimate.php:251
+msgid "pushback"
+msgstr "empurrar"
+
+#: models/Estimate.php:389 models/Invoice.php:432
+msgid "No client associated with this invoice."
+msgstr "Nenhum cliente associado com esta factura."
+
+#: models/Invoice.php:76 views/admin/sections/invoice-status-change-drop.php:12
+msgid "Outstanding Balance"
+msgstr "Saldo pendente"
+
+#: models/Invoice.php:78 views/admin/dashboards/premium/invoices-status-chart.php:53
+#: views/admin/sections/invoice-status-change-drop.php:14
+msgid "Written Off"
+msgstr "Anulada"
+
+#: models/Invoice.php:152
+msgid "New Invoice: %s"
+msgstr "Nova Factura: %s"
+
+#: models/Payment.php:54
+msgid "Authorized"
+msgstr "Autorizado"
+
+#: models/Payment.php:55
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#: models/Estimate.php:83 views/admin/dashboards/premium/estimates-status-chart.php:32
+msgid "Request"
+msgstr "Solicitação"
+
+#: models/Estimate.php:84 models/Invoice.php:74
+#: views/admin/dashboards/premium/estimates-status-chart.php:38
+#: views/admin/dashboards/premium/invoices-status-chart.php:35
+#: views/admin/sections/estimate-status-change-drop.php:8
+#: views/templates/checkout/confirmation.php:72
+msgid "Pending"
+msgstr "Pendendo"
+
+#: models/Estimate.php:85 models/Invoice.php:75
+#: views/admin/sections/invoice-status-change-drop.php:16
+msgid "Scheduled"
+msgstr "Agendada"
+
+#: importers/Importer.php:159
+msgid "About Importing"
+msgstr "Sobre a Importação"
+
+#: importers/Importer.php:160
+msgid ""
+"This feature provides a way for you to import data from external invoicing "
+"services, including Harvest, Freshbooks, or WP-Invoice."
+msgstr ""
+"Este recurso fornece uma maneira para você importar dados de serviços de facturação "
+"externos, incluindo Harvest, Freshbooks ou WP-Invoice."
+
+#: importers/Importer.php:160
+msgid ""
+" If you have your data in one of these systems you can import all of your clients, "
+"contacts, estimates, invoices, and payments into Sprout Invoices."
+msgstr ""
+"Se você tem seus dados em um desses sistemas você pode importar todos os seus "
+"clientes, contactos, orçamentos, facturas e pagamentos para Sprout Invoices."
+
+#: importers/Importer.php:160
+msgid "More Information"
+msgstr "Mais informações"
+
+#: importers/WP-Invoice.php:32
+msgid "WP-Invoice"
+msgstr "WP-Invoice"
+
+#: importers/WP-Invoice.php:49
+msgid "Delete WP-Invoices"
+msgstr "Excluir WP-Invoices"
+
+#: importers/WP-Invoice.php:54
+msgid ""
+"You must really love us to delete those WP-Invoices, since you can't go back. "
+"Settings and the log table (sigh) will be kept."
+msgstr ""
+"Você deve realmente amar-nos para apagar esses WP-Invoice, uma vez que você não "
+"poderá voltar atrás. Configurações e tabelas de log (suspiro) serão mantidas."
+
+#: importers/WP-Invoice.php:99
+msgid "WP-Invoices needs to be activated before proceeding."
+msgstr "WP-Invoices precisa ser ativado antes de prosseguir."
+
+#: importers/WP-Invoice.php:112
+msgid "We couldn't fine any WP-Invoices to import."
+msgstr "Nós não conseguimos encontrar WP-Invoices para importar."
+
+#: importers/WP-Invoice.php:127 importers/WP-Invoice.php:273
+msgid "Preparing to import from %s invoices..."
+msgstr "Preparando para importar %s facturas..."
+
+#: importers/WP-Invoice.php:131
+msgid "Importing clients from %s WP-Invoice records..."
+msgstr "Importando clientes de %s registros WP-Invoice..."
+
+#: importers/WP-Invoice.php:135
+msgid "Importing contacts from %s WP-Invoice records..."
+msgstr "Importando contactos de %s registros WP-Invoice..."
+
+#: importers/WP-Invoice.php:139
+msgid "No estimates will be imported, unfortunately..."
+msgstr "Nenhum orçamento será importado, infelizmente..."
+
+#: importers/WP-Invoice.php:143
+msgid "Importing invoices from %s WP-Invoice records..."
+msgstr "Importando %s facturas de registros  WP-Invoice..."
+
+#: importers/WP-Invoice.php:147
+msgid "Importing payments from %s WP-Invoice records..."
+msgstr "Importando %s pagamentos de registros WP-Invoice..."
+
+#: importers/WP-Invoice.php:197 importers/WP-Invoice.php:277
+msgid "Importing %s clients from %s WP-Invoice records..."
+msgstr "Importando %s clientes de %s registros WP-Invoice..."
+
+#: importers/WP-Invoice.php:201 importers/WP-Invoice.php:281
+msgid "Importing %s contacts from %s WP-Invoice records..."
+msgstr "Importando %s contactos de %s registros WP-Invoice..."
+
+#: importers/WP-Invoice.php:205 importers/WP-Invoice.php:285
+msgid "No estimates were imported"
+msgstr "Nenhum orçamento foi importado."
+
+#: importers/WP-Invoice.php:209 importers/WP-Invoice.php:289
+msgid "Importing %s invoices from %s WP-Invoice records..."
+msgstr "Importando %s facturas de %s registros WP-Invoice..."
+
+#: importers/WP-Invoice.php:213 importers/WP-Invoice.php:293
+msgid "Importing %s payments from %s WP-Invoice records..."
+msgstr "Importando %s pagamentos de %s registros WP-Invoice..."
+
+#: importers/WP-Invoice.php:472
+msgid "Notification content was not stored by WP-Invoice."
+msgstr "Conteúdo de Notificação não foi armazenado por WP-Invoice."
+
+#: models/Client.php:91
+msgid "New Client: %s"
+msgstr "Novo Cliente: %s"
+
+#: models/Estimate.php:82 models/Invoice.php:73
+#: views/admin/sections/estimate-status-change-drop.php:16
+msgid "Draft"
+msgstr "Rascunho"
+
+#: importers/Harvest.php:447
+msgid "The Harvest API does not permit access to your estimates."
+msgstr "A API Harvest não permite acesso aos seus orçamentos."
+
+#: importers/Harvest.php:494
+msgid "Attempting to import your invoices and their payments..."
+msgstr "Tentando importar as suas facturas e pagamentos ..."
+
+#: importers/Harvest.php:498
+msgid ""
+"Currently importing invoices and their payments in increments of %s. Thank you for "
+"your patience, this is a very slow process."
+msgstr ""
+"Atualmente importando facturas e seus pagamentos em intervalos de %s. Obrigado pela "
+"sua paciência, este é um processo um pouco lento."
+
+#: importers/Harvest.php:502
+msgid "Payments will be imported with new invoices"
+msgstr "Pagamentos serão importados com novas facturas"
+
+#: importers/Harvest.php:523
+msgid "Invoice import error."
+msgstr "Erro ao importar facturas."
+
+#: importers/Harvest.php:585
+msgid "Attempting to import %s new invoices and their payments..."
+msgstr "Tentando importar %s novas facturas e seus pagamentos..."
+
+#: importers/Harvest.php:589
+msgid "Just imported %s more payments."
+msgstr "Importado apenas mais %s pagamentos."
+
+#: importers/Harvest.php:593
+msgid ""
+"Importing invoices in increments of %s. Thank you for your patience, this is a very "
+"slow process."
+msgstr ""
+"Importação de facturas é feita em intervalos de %s. Obrigado pela sua paciência, "
+"este é um processo um pouco lento."
+
+#: importers/Harvest.php:608
+msgid "Successfully imported a bunch of invoices..."
+msgstr "Importados com sucesso um “monte” de facturas..."
+
+#: importers/Harvest.php:612
+msgid "Successfully imported a bunch of payments."
+msgstr "Importados com sucesso um bocado de pagamentos."
+
+#: importers/Harvest.php:616
+msgid "Finished importing your invoices!"
+msgstr "Finalizada a importação de suas facturas!"
+
+#: importers/Harvest.php:626
+msgid "Successfully imported invoices already, moving on..."
+msgstr "Facturas importadas com sucesso, avançando..."
+
+#: importers/Harvest.php:630
+msgid "Successfully imported a bunch of payments already."
+msgstr "Importados com sucesso um bocado de pagamentos até agora."
+
+#: importers/Harvest.php:635
+msgid "Imported all the invoices already!"
+msgstr "Todas as facturas importadas!"
+
+#: importers/Importer.php:46
+msgid "Sprout Invoices Importing"
+msgstr "Sprout Invoices importando"
+
+#: importers/Importer.php:47
+msgid "Import"
+msgstr "Importar"
+
+#: importers/Harvest.php:76
+msgid "password"
+msgstr "senha"
+
+#: importers/Harvest.php:91
+msgid "https://[subdomain].harvest.com"
+msgstr "https://[subdomain].harvest.com"
+
+#: importers/Harvest.php:100
+msgid "Import inactive clients."
+msgstr "Importar clientes inativos."
+
+#: importers/Harvest.php:215
+msgid "Communicating with the Harvest API..."
+msgstr "Comunicando-se com a API Harvest..."
+
+#: importers/Harvest.php:254
+msgid "Client import error."
+msgstr "Erro ao importar clientes"
+
+#: importers/Harvest.php:277
+msgid "Attempting to import %s clients..."
+msgstr "Tentando importar %s clientes..."
+
+#: importers/Harvest.php:295
+msgid "Successfully imported %s clients..."
+msgstr "Importados com sucesso %s clientes..."
+
+#: importers/Harvest.php:299
+msgid "Imported %s clients!"
+msgstr "Importados %s clientes!"
+
+#: importers/Harvest.php:309
+msgid "Successfully imported %s clients already, moving on..."
+msgstr "Importados com sucesso %s clientes até agora, avançando..."
+
+#: importers/Harvest.php:356
+msgid "Contact import error."
+msgstr "Erro ao importar contatos."
+
+#: importers/Harvest.php:379
+msgid "Attempting to import %s contacts..."
+msgstr "Tentando importar %s contatos..."
+
+#: importers/Harvest.php:383
+msgid "Imported about %s contacts so far."
+msgstr "Importado cerca de %s contatos até agora."
+
+#: importers/Harvest.php:397
+msgid "Successfully imported %s contacts..."
+msgstr "Importados com sucesso %s contatos..."
+
+#: importers/Harvest.php:401
+msgid "Imported %s contacts!"
+msgstr "Importado %s contatos!"
+
+#: importers/Harvest.php:411
+msgid "Successfully imported %s contacts already, moving on..."
+msgstr "Importados com sucesso %s contatos até agora, avançando..."
+
+#: importers/Harvest.php:416
+msgid "Successfully imported %s contacts already."
+msgstr "Importados com sucesso %s contatos até agora."
+
+#: importers/Harvest.php:442
+msgid "Attempting to get your Harvest estimates..."
+msgstr "Tentando obter seus orçamentos Harvest..."
+
+#: importers/Harvest.php:64
+msgid "user@gmail.com"
+msgstr "utilizador@gmail.com"
+
+#: importers/Harvest.php:71
+msgid "Password"
+msgstr "Password"
+
+#: importers/CSV.php:192
+msgid "Uploaded CSV files being processed...Hold on to your butts..."
+msgstr "Arquivos CSV enviados sendo processado ... Mantenha-se na cadeira..."
+
+#: importers/CSV.php:196 importers/CSV.php:200 importers/CSV.php:234
+#: importers/CSV.php:278 importers/CSV.php:310 importers/CSV.php:348
+#: importers/CSV.php:366 importers/CSV.php:399 importers/CSV.php:437
+#: importers/CSV.php:455
+msgid "Preparing..."
+msgstr "Preparando..."
+
+#: importers/CSV.php:221
+msgid "Skipping clients without a CSV to process..."
+msgstr "Ignorando clientes sem um CSV para processar..."
+
+#: importers/CSV.php:225 importers/CSV.php:229 importers/CSV.php:305
+#: importers/CSV.php:394 importers/CSV.php:483
+msgid "Skipped...nothing to import."
+msgstr "Ignorados... nada a importar."
+
+#: importers/CSV.php:265 importers/Freshbooks.php:291
+msgid "Successfully imported %s contacts and their clients already, moving on..."
+msgstr "Já importados com êxito %s contatos e seus respectivos clientes, avançando..."
+
+#: importers/CSV.php:269
+msgid "Successfully imported %s clients."
+msgstr "Importados com sucesso %s clientes."
+
+#: importers/CSV.php:273
+msgid "Successfully imported more than %s contacts from their clients."
+msgstr "Importados com sucesso mais de %s contatos de seus clientes."
+
+#: importers/CSV.php:301
+msgid "Skipping estimate importing without a CSV to process..."
+msgstr "Ignorando orçamentos importados sem um CSV para processar..."
+
+#: importers/CSV.php:339 importers/Freshbooks.php:379
+msgid "Successfully imported %s estimates..."
+msgstr "Importados com sucesso %s orçamentos..."
+
+#: importers/CSV.php:343 importers/Freshbooks.php:383
+msgid "Imported %s estimates!"
+msgstr "Importados %s orçamentos!"
+
+#: importers/CSV.php:357 importers/CSV.php:527 importers/Freshbooks.php:393
+#: importers/Freshbooks.php:589
+msgid "Successfully imported %s estimates already, moving on..."
+msgstr "Importados com sucesso %s orçamentos até agora, avançando..."
+
+#: importers/CSV.php:361 importers/Freshbooks.php:398
+msgid "Successfully imported %s estimates already."
+msgstr "Importados com sucesso %s orçamentos até agora."
+
+#: importers/CSV.php:390
+msgid "Skipping invoice importing without a CSV to process..."
+msgstr "Ignorando importação de fatura sem um CSV para processar..."
+
+#: importers/CSV.php:428 importers/Freshbooks.php:477
+msgid "Successfully imported %s invoices..."
+msgstr "%s facturas foram importadas com sucesso ..."
+
+#: importers/CSV.php:432 importers/Freshbooks.php:481 importers/WP-Invoice.php:193
+msgid "Imported %s invoices!"
+msgstr "Importadas %s facturas!"
+
+#: importers/CSV.php:446 importers/Freshbooks.php:491
+msgid "Successfully imported %s invoices already, moving on..."
+msgstr "Facturas importadas com sucesso até agora, avançando..."
+
+#: importers/CSV.php:450 importers/Freshbooks.php:495
+msgid "Successfully imported %s invoices already."
+msgstr "Importadas com sucesso %s facturas até agora."
+
+#: importers/CSV.php:479
+msgid "Skipping payment importing without a CSV to process..."
+msgstr "Ignorando importação de pagamento, sem um arquivo CSV para processar ..."
+
+#: importers/CSV.php:513 importers/Freshbooks.php:575
+msgid "Successfully imported %s payments..."
+msgstr "Importados com sucesso %s pagamentos..."
+
+#: importers/CSV.php:517 importers/Freshbooks.php:579
+msgid "Imported %s payments!"
+msgstr "%s Pagamentos Importados!"
+
+#: importers/CSV.php:531 importers/Freshbooks.php:593
+msgid "Successfully imported %s payments already."
+msgstr "Importados com sucesso %s pagamentos até agora."
+
+#: importers/Freshbooks.php:39
+msgid "Freshbooks"
+msgstr "Freshbooks"
+
+#: importers/Freshbooks.php:56
+msgid "Token"
+msgstr "Token"
+
+#: importers/Freshbooks.php:61
+msgid "6c4384e426e4b560d1227f4ad0f88b2c"
+msgstr "6c4384e426e4b560d1227f4ad0f88b2c"
+
+#: importers/Freshbooks.php:64
+msgid "Get your token form My Account > Freshbooks API "
+msgstr "Obtenha seu formulário de token em My Account > Freshbooks API"
+
+#: importers/Freshbooks.php:68 importers/Harvest.php:83
+msgid "Account/Sub-domain"
+msgstr "Conta/Subdomínio"
+
+#: importers/Freshbooks.php:73 importers/Harvest.php:88
+msgid "your-subdomain"
+msgstr "seu-domínio"
+
+#: importers/Freshbooks.php:76
+msgid "https://[subdomain].freshbooks.com"
+msgstr "https://[subdomain].freshbooks.com"
+
+#: importers/Freshbooks.php:81 importers/Harvest.php:96
+msgid "Import Archived"
+msgstr "Importar arquivados"
+
+#: importers/Freshbooks.php:85
+msgid "Import archived clients."
+msgstr "Importar clientes arquivados."
+
+#: importers/Freshbooks.php:188 importers/Freshbooks.php:229
+#: importers/Freshbooks.php:339 importers/Freshbooks.php:437
+#: importers/Freshbooks.php:535 importers/Harvest.php:211
+msgid "Authentication error."
+msgstr "Erro de autenticação."
+
+#: importers/Freshbooks.php:193
+msgid "Communicating with the Freshbooks API..."
+msgstr "Comunicando-se com a API Freshbooks..."
+
+#: importers/Freshbooks.php:251
+msgid "Attempting to import %s contacts and their clients..."
+msgstr "Tentando importar %s contatos e os seus clientes..."
+
+#: importers/Freshbooks.php:255 importers/Harvest.php:281
+msgid "Imported about %s clients so far."
+msgstr "Importado %s clientes até agora."
+
+#: importers/Freshbooks.php:259
+msgid "Imported more than %s contacts from imported clients."
+msgstr "Importado mais de %s contatos de clientes importadas."
+
+#: importers/Freshbooks.php:273
+msgid "Successfully imported %s contacts and their clients..."
+msgstr "Importados com êxito %s contatos e seus clientes..."
+
+#: importers/Freshbooks.php:277
+msgid "Imported more than %s clients!"
+msgstr "Importado mais de %s clientes!"
+
+#: importers/Freshbooks.php:281
+msgid "More than %s contacts were added and assigned to their clients!"
+msgstr "Mais de %s contactos foram adicionados e atribuídos a seus clientes!"
+
+#: importers/Freshbooks.php:295 importers/Harvest.php:314
+msgid "Successfully imported %s clients already."
+msgstr "Já importados com sucesso %s clientes."
+
+#: importers/Freshbooks.php:299
+msgid "Successfully imported more than %s contacts from their clients already."
+msgstr "Importados com sucesso mais de %s contatos de seus clientes até agora."
+
+#: importers/Freshbooks.php:361
+msgid "Attempting to import %s estimates..."
+msgstr "Tentando importar %s orçamentos..."
+
+#: importers/Freshbooks.php:365
+msgid "Imported about %s estimates so far."
+msgstr "Importado cerca de %s orçamentos até agora."
+
+#: importers/Freshbooks.php:459
+msgid "Attempting to import %s invoices..."
+msgstr "Tentando importar %s facturas..."
+
+#: importers/Freshbooks.php:463
+msgid "Imported about %s invoices so far."
+msgstr "Importado cerca de %s faturas até agora."
+
+#: importers/Freshbooks.php:557
+msgid "Attempting to import %s payments..."
+msgstr "Tentando importar %s pagamentos..."
+
+#: importers/Freshbooks.php:561
+msgid "Imported about %s payments so far."
+msgstr "Importado cerca de %s pagamentos até agora."
+
+#: importers/Freshbooks.php:782
+msgid "Estimate Imported"
+msgstr "Orçamento importado"
+
+#: importers/Freshbooks.php:865 importers/Harvest.php:741 importers/WP-Invoice.php:486
+msgid "Invoice Imported"
+msgstr "Factura importada"
+
+#: importers/Harvest.php:42
+msgid "Harvest"
+msgstr "Harvest"
+
+#: importers/Harvest.php:59
+msgid "User"
+msgstr "Utilizador"
+
+#: controllers/templating/Templating.php:380
+msgid "Invoice Template"
+msgstr "Modelo de Factura"
+
+#: controllers/templating/Templating.php:383
+msgid ""
+"This invoice template will override the default invoice template, unless another "
+"template is selected when creating/editing an invoice."
+msgstr ""
+"Este modelo de fatura irá substituir o modelo de fatura padrão, a menos que outro "
+"modelo for selecionado ao criar/editar uma fatura."
+
+#: controllers/templating/Templating.php:387
+msgid "Estimate Template"
+msgstr "Modelo do Orçamento"
+
+#: controllers/templating/Templating.php:390
+msgid ""
+"This estimate template will override the default estimate template, unless another "
+"template is selected when creating/editing an estimate."
+msgstr ""
+"Este modelo de orçamento irá substituir o modelo de orçamento padrão, a menos que "
+"outro modelo for selecionado ao criar / editar um orçamento."
+
+#: controllers/updates/Free_License.php:75
+msgid "Thank you for registering Sprout Invoices with Sprout Apps."
+msgstr "Obrigado por registrar Sprout Invoices com Sprout Apps."
+
+#: controllers/updates/Free_License.php:87
+msgid "License not created."
+msgstr "Licença não criada."
+
+#: importers/CSV.php:34
+msgid "CSV"
+msgstr "CSV"
+
+#: importers/CSV.php:54
+msgid ""
+"Example CSV <a href=\"%s\" target=\"_blank\">here</a>. To be safe import no more "
+"than 100 clients at a time and import all of your clients before importing invoices "
+"or payments."
+msgstr ""
+"Exemplo CSV <a href=\"%s\" target=\"_blank\">aqui</a>. Por segurança, não importe "
+"mais de 100 clientes ao mesmo tempo e importe todos os seus clientes antes de "
+"importar facturas ou pagamentos."
+
+#: importers/CSV.php:61
+msgid ""
+"Example CSV <a href=\"%s\" target=\"_blank\">here</a>. To be safe import no more "
+"than 250 estimates at a time and import all of your clients."
+msgstr ""
+"Exemplo CSV <a href=\"%s\" target=\"_blank\">aqui</a>. Por segurança, não importe "
+"mais de 250 orçamentos de cada vez e importe todos os seus clientes antes."
+
+#: importers/CSV.php:68
+msgid ""
+"Example CSV <a href=\"%s\" target=\"_blank\">here</a>. To be safe import no more "
+"than 250 invoices at a time, import all of your clients, and import before payments."
+msgstr ""
+"Exemplo CSV <a href=\"%s\" target=\"_blank\">aqui</a>. Por segurança, não importe "
+"mais de 250 faturas de cada vez, importe todos os seus clientes antes e de importe "
+"faturas antes dos pagamentos."
+
+#: importers/CSV.php:75
+msgid ""
+"Example CSV <a href=\"%s\" target=\"_blank\">here</a>. To be safe import no more "
+"than 100 payments at a time and make sure all your invoices are imported first."
+msgstr ""
+"Exemplo CSV <a href=\"%s\" target=\"_blank\">aqui</a>. Por segurança, não importe "
+"mais de 100 pagamentos de cada vez e certifique-se que todas as suas faturas já "
+"foram importadas pela primeira vez."
+
+#: importers/CSV.php:79 importers/Freshbooks.php:90 importers/Harvest.php:105
+msgid "Clear Progress"
+msgstr "Limpar Progresso"
+
+#: importers/CSV.php:83 importers/Freshbooks.php:94
+msgid "Re-start the Import Process"
+msgstr "Re-iniciar o processo de importação"
+
+#: importers/CSV.php:84 importers/Freshbooks.php:95 importers/Harvest.php:110
+msgid ""
+"This will start the import process from the start. Any records already imported "
+"will not be duplicated but any new records will."
+msgstr ""
+"Isto irá ativar o processo de importação desde o início. Todos os registros já "
+"importados não serão duplicados, mas quaisquer novos registros serão."
+
+#: controllers/templating/Templating.php:365 controllers/templating/Templating.php:455
+#: views/admin/meta-boxes/estimates/information.php:32
+#: views/admin/meta-boxes/estimates/information.php:75
+#: views/admin/meta-boxes/estimates/information.php:112
+#: views/admin/meta-boxes/estimates/information.php:145
+#: views/admin/meta-boxes/estimates/information.php:170
+#: views/admin/meta-boxes/estimates/information.php:190
+#: views/admin/meta-boxes/estimates/information.php:211
+#: views/admin/meta-boxes/estimates/information.php:232
+#: views/admin/meta-boxes/invoices/information.php:32
+#: views/admin/meta-boxes/invoices/information.php:75
+#: views/admin/meta-boxes/invoices/information.php:111
+#: views/admin/meta-boxes/invoices/information.php:139
+#: views/admin/meta-boxes/invoices/information.php:164
+#: views/admin/meta-boxes/invoices/information.php:184
+#: views/admin/meta-boxes/invoices/information.php:205
+#: views/admin/meta-boxes/invoices/information.php:226
+#: views/admin/meta-boxes/projects/information-doc-select.php:14
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: controllers/templating/Templating.php:348 controllers/templating/Templating.php:438
+msgid "Select different template"
+msgstr "Selecione um modelo diferente"
+
+#: controllers/templating/Templating.php:360 controllers/templating/Templating.php:450
+msgid "No <a href=\"%s\" target=\"_blank\">Custom Templates</a> Found"
+msgstr "Nenhum <a href=\"%s\" target=\"_blank\">Template Personalizado</a> Encontrado"
+
+#: controllers/templating/Templating.php:364 controllers/templating/Templating.php:454
+#: views/admin/meta-boxes/estimates/information.php:31
+#: views/admin/meta-boxes/estimates/information.php:74
+#: views/admin/meta-boxes/estimates/information.php:111
+#: views/admin/meta-boxes/estimates/information.php:144
+#: views/admin/meta-boxes/estimates/information.php:169
+#: views/admin/meta-boxes/estimates/information.php:189
+#: views/admin/meta-boxes/estimates/information.php:210
+#: views/admin/meta-boxes/estimates/information.php:231
+#: views/admin/meta-boxes/invoices/information.php:31
+#: views/admin/meta-boxes/invoices/information.php:74
+#: views/admin/meta-boxes/invoices/information.php:110
+#: views/admin/meta-boxes/invoices/information.php:138
+#: views/admin/meta-boxes/invoices/information.php:163
+#: views/admin/meta-boxes/invoices/information.php:183
+#: views/admin/meta-boxes/invoices/information.php:204
+#: views/admin/meta-boxes/invoices/information.php:225
+#: views/admin/meta-boxes/projects/information-doc-select.php:13
+msgid "OK"
+msgstr "OK"
+
+#: controllers/templating/Templating.php:342 controllers/templating/Templating.php:432
+msgid "invoice"
+msgstr "factura"
+
+#: controllers/templating/Templating.php:342 controllers/templating/Templating.php:432
+msgid "estimate"
+msgstr "orçamento"
+
+#: controllers/templating/Templating.php:345 controllers/templating/Templating.php:435
+msgid "Select a custom %s template."
+msgstr "Selecione um %s template personalizado."
+
+#: controllers/templating/Templating.php:348 controllers/templating/Templating.php:438
+#: views/admin/meta-boxes/clients/history.php:64
+#: views/admin/meta-boxes/estimates/information.php:19
+#: views/admin/meta-boxes/estimates/information.php:41
+#: views/admin/meta-boxes/estimates/information.php:52
+#: views/admin/meta-boxes/estimates/information.php:95
+#: views/admin/meta-boxes/estimates/information.php:136
+#: views/admin/meta-boxes/estimates/information.php:161
+#: views/admin/meta-boxes/estimates/information.php:180
+#: views/admin/meta-boxes/estimates/information.php:200
+#: views/admin/meta-boxes/estimates/information.php:221
+#: views/admin/meta-boxes/invoices/information.php:19
+#: views/admin/meta-boxes/invoices/information.php:41
+#: views/admin/meta-boxes/invoices/information.php:52
+#: views/admin/meta-boxes/invoices/information.php:94
+#: views/admin/meta-boxes/invoices/information.php:130
+#: views/admin/meta-boxes/invoices/information.php:155
+#: views/admin/meta-boxes/invoices/information.php:174
+#: views/admin/meta-boxes/invoices/information.php:194
+#: views/admin/meta-boxes/invoices/information.php:215
+#: views/admin/meta-boxes/projects/history-premium.php:51
+#: views/admin/meta-boxes/projects/information-doc-select.php:5
+#: views/admin/sections/edit-private-note.php:7
+msgid "Edit"
+msgstr "Editar"
+
+#: controllers/templating/Customizer.php:61
+msgid "Upload a logo to replace the default estimate/invoice logo."
+msgstr ""
+"Faça upload de um logotipo para substituir o logotipo padrão de orçamentos/faturas."
+
+#: controllers/templating/Customizer.php:70
+msgid "Invoice & Estimate Logo"
+msgstr "Logo da Factura & Orçamento"
+
+#: controllers/templating/Customizer.php:83
+msgid "Invoice Highlight Color"
+msgstr "Cor de Realce da Factura"
+
+#: controllers/templating/Customizer.php:96
+msgid "Estimate Highlight Color"
+msgstr "Cor de Realce do Orçamento"
+
+#: controllers/templating/Templating.php:91 controllers/templating/Templating.php:101
+msgid "Default Template"
+msgstr "Modelo Padrão"
+
+#: controllers/templating/Customizer.php:29
+msgid "Customize"
+msgstr "Personalize"
+
+#: controllers/reporting/Dashboard.php:263
+msgid "Invoices Dashboard"
+msgstr "Painel de Facturas"
+
+#: controllers/reporting/Dashboard.php:272
+msgid "Estimates Dashboard"
+msgstr "Painel de Orçamentos"
+
+#: controllers/reporting/Dashboard.php:294
+#: views/admin/dashboards/premium/balances-chart.php:54
+msgid "Invoice Balances"
+msgstr "Saldos da Factura"
+
+#: controllers/reporting/Dashboard.php:303
+msgid "Payments Status"
+msgstr "Status de pagamentos"
+
+#: controllers/reporting/Dashboard.php:312
+#: views/admin/dashboards/invoices-status-chart.php:2
+msgid "Invoice Status"
+msgstr "Status da Factura"
+
+#: controllers/reporting/Dashboard.php:321
+#: views/admin/dashboards/estimates-invoices-chart.php:2
+msgid "Estimates &amp; Invoices"
+msgstr "Orçamentos &amp; Facturas"
+
+#: controllers/reporting/Dashboard.php:330
+msgid "Estimate Requests Converted"
+msgstr "Solicitações de orçamentos convertidas"
+
+#: controllers/reporting/Dashboard.php:339
+msgid "Estimates Status"
+msgstr "Status dos Orçamentos"
+
+#: controllers/reporting/Reporting.php:820
+msgid "About Reports"
+msgstr "Sobre os Relatórios"
+
+#: controllers/reporting/Reporting.php:821
+msgid ""
+"The Reports dashboard links to the many single reports that Sprout Invoice "
+"provides, don’t miss them."
+msgstr ""
+"O painel de relatórios liga para os muitos relatórios individuais que Sprout "
+"Invoices fornece, não perca-os."
+
+#: controllers/reporting/Reporting.php:821
+msgid ""
+"<b>Dashboard</b> - Is the place to get a quick status overview. See what was "
+"recently updated, what’s currently overdue or unpaid, and other important "
+"information about your business."
+msgstr ""
+"<b>Painel de controlo</b> - é o lugar para obter uma visão geral rápida do status. "
+"Veja o que foi recentemente atualizado, o que atualmente está em atraso ou não pago "
+"e outras informações importantes sobre seu negócio."
+
+#: controllers/reporting/Reporting.php:821
+msgid ""
+"<b>Reports</b> - Reports have advanced filtering and are highly customizable. All "
+"data is dynamically updated without reloading."
+msgstr ""
+"<b>Relatórios</b> - relatórios têm filtragem avançada e são altamente "
+"personalizáveis. Todos os dados são atualizados dinamicamente sem precisar "
+"recarregar."
+
+#: controllers/reporting/Reporting.php:826
+msgid "Report Tables"
+msgstr "Tabelas de relatório"
+
+#: controllers/reporting/Reporting.php:827
+msgid ""
+"<b>Date filtering</b> is available and can be used to retrieve data between two "
+"dates, after a date, or before a date."
+msgstr ""
+"<b>Filtragem de datas</b> está disponível e pode ser usada para recuperar dados "
+"entre duas datas, depois de uma data, ou antes de uma data."
+
+#: controllers/reporting/Reporting.php:827
+msgid "<b>Modify columns</b> within the table with the “Show / hide columns” button."
+msgstr ""
+"<b>Modificar colunas</b> dentro da tabela com o botão “Mostrar / ocultar colunas”."
+
+#: controllers/reporting/Reporting.php:827
+msgid ""
+"<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, "
+"PDF or your computers clipboard."
+msgstr ""
+"<b>Exportar</b> a tabela, filtrada ou não, em vários formatos, incluindo CSV, "
+"Excel, PDF ou para a memória do seu computador."
+
+#: controllers/reporting/Reporting.php:827
+msgid ""
+"Records are <em>limited to 2,500 items</em>. If you want to return more use the "
+"‘si_reports_show_records’ filter."
+msgstr ""
+"Os registros são <em>limitado a 2.500 itens</em>. Se você quiser alterar esse "
+"valor, use o filtro \"si_reports_show_records\"."
+
+#: controllers/reporting/Reporting.php:833
+msgid "Dashboard Refresh"
+msgstr "Atualizar Painel"
+
+#: controllers/reporting/Reporting.php:834
+msgid ""
+"The reports dashboard is cached and if new invoices or estimates were just created "
+"the values under \"Invoice Dashboard\" may be out of date. Use the refresh button "
+"below to flush the cache and get the latest stats."
+msgstr ""
+"No painel, relatórios são armazenados em cache e se novas faturas ou orçamentos "
+"foram criados os valores sob \"Invoice Dashboard\" podem estar desatualizados. Use "
+"o botão de atualizar abaixo para liberar o cache e visualize as últimas "
+"estatísticas."
+
+#: controllers/reporting/Reporting.php:834
+msgid "Refresh"
+msgstr "Atualizar"
+
+#: controllers/reporting/Dashboard.php:215 controllers/reporting/Reporting.php:799
+msgid "Dashboard"
+msgstr "Painel de controle"
+
+#: controllers/records/Records_Admin_Table.php:205
+msgid "Association"
+msgstr "Associação"
+
+#: controllers/reporting/Dashboard.php:118
+msgid "Reports Dashboard"
+msgstr "Painel de relatórios"
+
+#: controllers/reporting/Dashboard.php:119
+msgid "Reports"
+msgstr "Relatórios"
+
+#: controllers/records/Records_Admin_Table.php:99
+msgid "View all types"
+msgstr "Ver todos os tipos"
+
+#: controllers/records/Records_Admin_Table.php:116
+msgid "Purge"
+msgstr "Expurgar"
+
+#: controllers/records/Records_Admin_Table.php:118
+msgid "Purge All Types"
+msgstr "Expurgar todos os tipos"
+
+#: controllers/records/Records_Admin_Table.php:182
+#: views/admin/meta-boxes/estimates/history.php:42
+#: views/admin/meta-boxes/invoices/history.php:41
+msgid "View Data"
+msgstr "Ver dados"
+
+#: controllers/records/Records_Admin_Table.php:202
+#: views/admin/reports/premium/clients.php:22
+#: views/admin/reports/premium/payments.php:22
+#: views/templates/checkout/confirmation.php:111
+#: views/templates/estimate/estimate.php:110 views/templates/invoice/invoice.php:130
+msgid "Date"
+msgstr "Data Emissão"
+
+#: controllers/records/Internal_Records.php:98
+msgid "Preparing purge..."
+msgstr "Preparando para expurgar..."
+
+#: controllers/records/Internal_Records.php:128
+msgid "%o records(s) of %o deleted."
+msgstr "%o registros de %o apagados."
+
+#: controllers/records/Internal_Records.php:138
+msgid "Complete. %o deleted."
+msgstr "Complete. %o delegado."
+
+#: controllers/records/Internal_Records.php:273
+msgid "Sprout Invoices Records"
+msgstr "Sprout Invoices Registros"
+
+#: controllers/records/Records_Admin_Table.php:42
+msgctxt "posts"
+msgid "Mine <span class=\"count\">(%s)</span>"
+msgid_plural "Mine <span class=\"count\">(%s)</span>"
+msgstr[0] "Meu <span class=\"count\">(%s)</span>"
+msgstr[1] "Meus <span class=\"count\">(%s)</span>"
+
+#: controllers/records/Records_Admin_Table.php:75
+msgctxt "posts"
+msgid "Sticky <span class=\"count\">(%s)</span>"
+msgid_plural "Sticky <span class=\"count\">(%s)</span>"
+msgstr[0] "Fixo <span class=\"count\">(%s)</span>"
+msgstr[1] "Fixos <span class=\"count\">(%s)</span>"
+
+#: controllers/projects/Projects.php:385 languages/SI_Strings.php:29
+msgid "Project"
+msgstr "Projeto"
+
+#: controllers/projects/Projects.php:422
+msgid "No associated clients"
+msgstr "Nenhum cliente associado"
+
+#: controllers/projects/Projects.php:427
+msgid "Site"
+msgstr "Site"
+
+#: controllers/projects/Projects.php:504 languages/SI_Strings.php:22
+#: views/admin/meta-boxes/projects/client-submit.php:2
+msgid "Projects"
+msgstr "Projetos"
+
+#: controllers/projects/Projects.php:532
+msgid "Manage Projects"
+msgstr "Gerenciar Projetos"
+
+#: controllers/records/Internal_Records.php:47
+msgid "Sprout Invoices Records and Logs"
+msgstr "Sprout Invoices Registros e Logs"
+
+#: controllers/records/Internal_Records.php:48
+msgid "Sprout Records"
+msgstr "Sprout Registros"
+
+#: controllers/projects/Projects.php:331
+msgid "End Date"
+msgstr "Data do Fim"
+
+#: controllers/payments/Payments_Admin_Table.php:132 template-tags/invoices.php:1011
+#: views/admin/reports/premium/payments.php:29
+msgid "Payment Total"
+msgstr "Pagamento Total"
+
+#: controllers/payments/Payments_Admin_Table.php:133
+#: views/admin/reports/premium/payments.php:28
+msgid "Invoice Balance"
+msgstr "Saldo da Factura"
+
+#: controllers/payments/Payments_Admin_Table.php:134
+#: views/templates/checkout/confirmation.php:140
+#: views/templates/checkout/confirmation.php:150
+#: views/templates/invoice/invoice.php:159 views/templates/invoice/invoice.php:169
+msgid "Invoice Total"
+msgstr "Total da Factura"
+
+#: controllers/payments/Payments_Admin_Table.php:137
+msgid "No invoice found"
+msgstr "Nenhuma fatura encontrada"
+
+#: controllers/payments/Payments_Admin_Table.php:141
+msgid "No invoice associated with this payment."
+msgstr "Sem faturas associadas a este pagamento."
+
+#: controllers/payments/Payments_Admin_Table.php:168
+msgid "Transaction Data"
+msgstr "Dados da transação"
+
+#: controllers/payments/Payments_Admin_Table.php:181
+#: controllers/payments/Payments_Admin_Table.php:192
+msgid "Void Payment"
+msgstr "﻿Anular pagamento"
+
+#: controllers/payments/Payments_Admin_Table.php:184
+msgid "Attempt Capture"
+msgstr "Tentativa de captura"
+
+#: controllers/payments/Payments_Admin_Table.php:188
+msgid "Mark Complete"
+msgstr "Marcar como completo"
+
+#: controllers/payments/Payments_Admin_Table.php:192
+msgid "These notes will be added to the transaction data."
+msgstr "Essas notas serão adicionadas aos dados da transação."
+
+#: controllers/payments/Payments_Admin_Table.php:216
+#: views/admin/reports/premium/clients.php:150
+#: views/admin/reports/premium/estimates.php:88
+#: views/admin/reports/premium/invoices.php:89
+#: views/admin/reports/premium/payments.php:107
+msgid "Totals"
+msgstr "Totais"
+
+#: controllers/payments/Payments_Admin_Table.php:217
+#: controllers/records/Records_Admin_Table.php:182
+#: controllers/records/Records_Admin_Table.php:204
+msgid "Data"
+msgstr "Dado"
+
+#: controllers/projects/Projects.php:78
+msgid "Time Tracking"
+msgstr "Controle de Tempo"
+
+#: controllers/projects/Projects.php:261
+msgid "No Project Selected"
+msgstr "Nenhum projeto selecionado"
+
+#: controllers/projects/Projects.php:298
+msgid "Project Name"
+msgstr "Nome do projeto"
+
+#: controllers/projects/Projects.php:308
+msgid ""
+"Edit <a href=\"%s\">%s</a>, select another client or <a href=\"%s\">create a new "
+"client</a>."
+msgstr ""
+"Editar <a href=\"%s\">%s</a>, selecionar outro cliente ou <a href=\"%s\">criar um "
+"novo cliente</a>."
+
+#: controllers/projects/Projects.php:308
+msgid "Select an existing client or <a href=\"%s\">create a new client</a>."
+msgstr "Selecione um cliente existente ou  <a href=\"%s\">crie um novo cliente</a>"
+
+#: controllers/projects/Projects.php:322
+msgid "Start Date"
+msgstr "Data de Inicio"
+
+#: controllers/payments/Payments_Admin_Table.php:114
+msgid "Associated records cannot be found."
+msgstr "Registros associados não foram encontrados."
+
+#: controllers/payments/Payments_Admin_Table.php:121
+msgid "unknown"
+msgstr "Desconhecido"
+
+#: controllers/payments/Payments.php:207
+msgid "About Payments"
+msgstr "Sobre Pagamentos"
+
+#: controllers/payments/Payments.php:208
+msgid "Payment statuses include:"
+msgstr "Status de pagamento incluem:"
+
+#: controllers/payments/Payments.php:208
+msgid ""
+"<b>Pending</b> - the payment could be waiting for admin approval or waiting for the "
+"payment processor.<br/><b>Authorized</b> – a payment status set for signifying that "
+"the payment was authorized by the processor and a capture of the payment will be "
+"attempted later.<br/><b>Void</b> - payment was voided by the admin or declined by "
+"the payment processor after it was authorized or pending."
+msgstr ""
+"<b>Pendente</b> - o pagamento pode ser à espera de aprovação do administrador ou "
+"esperando o processador de pagamentos.<br><b>Autorizado</b> – um status de "
+"pagamento definido, significando que o pagamento foi autorizado pelo processador e "
+"uma captura do pagamento será tentada mais tarde.<br><b>Anulado</b> - pagamento foi "
+"anulada pelo administrador ou recusado pelo processador de pagamento depois que "
+"este ter sido autorizado ou pendente."
+
+#: controllers/payments/Payments.php:213
+msgid "Managing Payments"
+msgstr "Gerenciar Pagamentos"
+
+#: controllers/payments/Payments.php:214
+msgid "Hovering over a payment brings up multiple links and options:"
+msgstr "Pairando o mouse sobre um pagamento você verá vários links e opções:"
+
+#: controllers/payments/Payments.php:214
+msgid ""
+"<b>Void Payment</b> - Allows you to void a payment and add a note that will be "
+"added to the Transaction Data."
+msgstr ""
+"<b>Pagamento Anulado</b> - permite-lhe anular um pagamento e adicionar uma nota que "
+"será adicionada aos dados da transação."
+
+#: controllers/payments/Payments.php:214
+msgid ""
+"<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw data "
+"stored by a payment processor."
+msgstr ""
+"<b>Dados da transação</b> – Usado para solucionar problemas de um pagamento, isto "
+"são os dados brutos armazenados por o processador de pagamentos."
+
+#: controllers/payments/Payments.php:214
+msgid ""
+"<b>Invoice and Client</b> – A link to the associated invoice and client edit pages."
+msgstr ""
+"<b>Factura e Cliente</b> – um link para a editar páginas do cliente e a factura(s) "
+"associada(s)."
+
+#: controllers/payments/Payments.php:214
+msgid ""
+"The payment totals are current and are not at the moment of the payment. The "
+"payment type is shown under the Data column."
+msgstr ""
+"Os totais de pagamento são atuais ou não, no momento do pagamento. O tipo de "
+"pagamento é mostrado na coluna Dados."
+
+#: controllers/payments/Payments_Admin_Table.php:34
+#: controllers/records/Records_Admin_Table.php:53
+msgctxt "posts"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] "Todos <span class=\"count\">(%s)</span>"
+msgstr[1] "Todos <span class=\"count\">(%s)</span>"
+
+#: controllers/payments/Payments_Admin_Table.php:62
+#: controllers/records/Records_Admin_Table.php:110
+msgid "Filter"
+msgstr "Filtre"
+
+#: controllers/payments/Payments.php:65 models/Payment.php:58
+msgid "Refunded"
+msgstr "Reembolsado"
+
+#: controllers/payments/Payments.php:97
+msgid "Admin Void"
+msgstr "Anulado pelo Admin"
+
+#: controllers/payments/Payments.php:99
+msgid "Voided by User #%s on %s"
+msgstr "Anulado por #%s em %s"
+
+#: controllers/payments/Payments.php:119 controllers/payments/Payments.php:132
+#: controllers/payments/Payments.php:145
+msgid "Working..."
+msgstr "Trabalhando..."
+
+#: controllers/payments/Payments.php:129
+msgid "Are you sure? This will force a capture attempt on this payment."
+msgstr ""
+"Você tem certeza? Isso vai forçar uma tentativa de captura sobre este pagamento."
+
+#: controllers/payments/Payments.php:142
+msgid "Are you sure? This will mark the payment as complete."
+msgstr "Você tem certeza? Isto marcará o pagamento como concluído."
+
+#: controllers/payments/Payments.php:158 controllers/reporting/Dashboard.php:285
+#: views/admin/reports/premium/payments.php:81
+msgid "Invoice Payments"
+msgstr "Pagamentos de Facturas"
+
+#: controllers/payments/Payments.php:165
+msgid "Search"
+msgstr "na Busca"
+
+#: controllers/payment-processing/processors/SI_Admin_Payment.php:211
+msgid "Payment Added"
+msgstr "Pagamento adicionado"
+
+#: controllers/payment-processing/processors/SI_Checks.php:43
+msgid "Check/PO Payment"
+msgstr "Cheque/PO Pagamento"
+
+#: controllers/payment-processing/processors/SI_Checks.php:47
+msgid "Check/PO"
+msgstr "Cheque/PO"
+
+#: controllers/payment-processing/processors/SI_Checks.php:53
+msgid "Check"
+msgstr "Cheque"
+
+#: controllers/payment-processing/processors/SI_Checks.php:118
+msgid "Check/PO Number"
+msgstr "Cheque/PO Número"
+
+#: controllers/payment-processing/processors/SI_Checks.php:127
+msgid "Date Mailed"
+msgstr "Data do envio"
+
+#: controllers/payment-processing/processors/SI_Checks.php:146
+msgid "Skip this unless you are not human."
+msgstr "﻿Pule esta menos que você não é humano."
+
+#: controllers/payments/Payments.php:56
+msgid "Authorized/Temp"
+msgstr "Autorizado/Temp"
+
+#: controllers/payments/Payments.php:59
+#: views/admin/dashboards/premium/invoices-status-chart.php:41
+msgid "Partial"
+msgstr "Parcial"
+
+#: controllers/payments/Payments.php:62
+msgid "Voided"
+msgstr "Anulado"
+
+#: controllers/payment-processing/processors/SI_Admin_Payment.php:123
+msgid "Date Received"
+msgstr "Data de recebimento"
+
+#: controllers/payment-processing/processors/SI_Admin_Payment.php:132
+#: controllers/payment-processing/processors/SI_Checks.php:137
+#: views/admin/meta-boxes/estimates/notes.php:13
+#: views/admin/meta-boxes/invoices/notes.php:13
+#: views/templates/checkout/confirmation.php:189
+#: views/templates/estimate/estimate.php:163 views/templates/invoice/invoice.php:198
+msgid "Notes"
+msgstr "Notas"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:373
+#: controllers/payment-processing/Credit_Card_Processors.php:396
+msgid "\"%s\" field is required."
+msgstr "\"%s\" é necessário."
+
+#: controllers/payment-processing/Credit_Card_Processors.php:402
+msgid "Invalid credit card number"
+msgstr "Número de cartão de crédito inválido"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:409
+msgid "Invalid credit card security code"
+msgstr "Código de segurança do cartão de crédito inválido"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:416
+msgid "Credit card is expired."
+msgstr "Cartão de Crédito Expirado"
+
+#: controllers/payment-processing/Payment_Processors.php:141
+msgid "Sprout Invoices Payment Settings"
+msgstr "Configurações de pagamento Sprout Invoices"
+
+#: controllers/payment-processing/Payment_Processors.php:142
+msgid "Payment Settings"
+msgstr "Configurações de pagamento"
+
+#: controllers/payment-processing/Payment_Processors.php:161
+msgid "Payment Processors"
+msgstr "Processadores de pagamento"
+
+#: controllers/payment-processing/Payment_Processors.php:169
+msgid ""
+"Money formatting is based on the local (%s) this WordPress install was configured "
+"with during installation. Please review the Sprout Invoices knowledgebase if this "
+"needs to be changed."
+msgstr ""
+"Formatação da moeda baseia-se no local (%s) configurado durante a instalação do "
+"WordPress. Por favor, reveja o base de conhecimento Sprout Invoices se isso precisa "
+"ser mudado."
+
+#: controllers/payment-processing/Payment_Processors.php:198
+msgid "Offsite Processors"
+msgstr "Processadores Externos"
+
+#: controllers/payment-processing/Payment_Processors.php:204
+msgid "Credit Card Processors"
+msgstr "Processadores de Cartão de Crédito"
+
+#: controllers/payment-processing/Payment_Processors.php:206
+msgid "-- None --"
+msgstr "-- Nada --"
+
+#: controllers/payment-processing/Payment_Processors.php:473
+#: controllers/payment-processing/Payment_Processors.php:509
+msgid "Payment status updated."
+msgstr "Status de Pagamento Atualizado."
+
+#: controllers/payment-processing/Payment_Processors.php:526
+msgid "01 - January"
+msgstr "01 - Janeiro"
+
+#: controllers/payment-processing/Payment_Processors.php:527
+msgid "02 - February"
+msgstr "02 - Fevereiro"
+
+#: controllers/payment-processing/Payment_Processors.php:528
+msgid "03 - March"
+msgstr "03 - Março"
+
+#: controllers/payment-processing/Payment_Processors.php:529
+msgid "04 - April"
+msgstr "04 - Abril"
+
+#: controllers/payment-processing/Payment_Processors.php:530
+msgid "05 - May"
+msgstr "05 - Maio"
+
+#: controllers/payment-processing/Payment_Processors.php:531
+msgid "06 - June"
+msgstr "06 - Junho"
+
+#: controllers/payment-processing/Payment_Processors.php:532
+msgid "07 - July"
+msgstr "07 - Julho"
+
+#: controllers/payment-processing/Payment_Processors.php:533
+msgid "08 - August"
+msgstr "08 - Agosto"
+
+#: controllers/payment-processing/Payment_Processors.php:534
+msgid "09 - September"
+msgstr "09 - Setembro"
+
+#: controllers/payment-processing/Payment_Processors.php:535
+msgid "10 - October"
+msgstr "10 - Outubro"
+
+#: controllers/payment-processing/Payment_Processors.php:536
+msgid "11 - November"
+msgstr "11 - Novembro"
+
+#: controllers/payment-processing/Payment_Processors.php:537
+msgid "12 - December"
+msgstr "12 - Dezembro"
+
+#: controllers/payment-processing/Payment_Processors.php:573
+msgid "About Payment Processing"
+msgstr "Sobre o Processamento de Pagamentos"
+
+#: controllers/payment-processing/Payment_Processors.php:574
+msgid ""
+"By default no payment processors are active. After selecting the Payment Settings "
+"tab you will find that there are two types of Payment Processors: Offsite "
+"Processors and Credit Card Processors."
+msgstr ""
+"Por padrão não há processadores de pagamento ativos. Depois de selecionar a aba "
+"Configurações de Pagamento você vai descobrir que existem dois tipos de métodos de "
+"pagamento: Processadores Externos e Processadores de Cartões de Crédito."
+
+#: controllers/payment-processing/Payment_Processors.php:574
+msgid ""
+"After selecting the processors you want to accept for invoice payments and saving "
+"the processor options will be shown. Each payment process has its own settings, "
+"review and complete each option before saving again"
+msgstr ""
+"Depois de selecionar os processadores que você deseja aceitar para pagamentos de "
+"faturas e salvar, as opções de processador serão exibidas. Cada processo de "
+"pagamento tem as suas próprias definições, reveja e complete cada opção antes de "
+"salvar novamente"
+
+#: controllers/payment-processing/Payment_Processors.php:580
+msgid ""
+"These are the credit card payment processors. You’ll notice that only one credit "
+"card processor can be activated at a time, this is by design since there’s no "
+"viable reason to accept CCs from multiple processors."
+msgstr ""
+"Estes são os processadores de pagamento de cartão de crédito. Você vai notar que só "
+"um processador de cartão de crédito pode ser ativado por vez, isso é por design, já "
+"que não há motivo viável para aceitar CCs a partir de múltiplos processadores."
+
+#: controllers/payment-processing/Payment_Processors.php:580
+msgid ""
+"If you ware accepting credit card information on your site you will want to use SSL "
+"for your site to keep your client’s data secure. Having SSL on your site is highly "
+"recommended for more reasons than accepting CC information, since every WordPress "
+"site has at least a login form."
+msgstr ""
+"Se você aceitar cartão de crédito diretamente em seu site que você vai precisar "
+"usar SSL para manter os dados dos seus clientes seguros. Ter SSL em seu site é "
+"altamente recomendado por muitas razões, desde aceitar informações de CC, até a "
+"proteção dos formulários de login."
+
+#: controllers/payment-processing/Payment_Processors.php:585
+msgid "Offsite Processing"
+msgstr "Processador Externo"
+
+#: controllers/payment-processing/Payment_Processors.php:586
+msgid ""
+"Essentially a payment processed outside of your site. These payments can include "
+"external payment providers like Paypal and Check or P.O. payments. Virtually an "
+"unlimited amount of offsite processors can be activated."
+msgstr ""
+"Basicamente um pagamento processado fora do seu site. Esses pagamentos podem "
+"incluir provedores de pagamento externos, como Paypal e Check ou PO pagamentos. "
+"Praticamente uma quantidade ilimitada de processadores externos podem ser ativados."
+
+#: controllers/payment-processing/Payment_Processors.php:592
+msgid ""
+"If your currency is formatted wight the symbol after the amount, place a % before "
+"your currency symbol. For example, %£."
+msgstr ""
+"Se a sua moeda é formatada com o símbolo após a quantidade, coloque um % antes de "
+"seu símbolo de moeda. Exemplo: %£."
+
+#: controllers/payment-processing/processors/SI_Admin_Payment.php:77
+msgid "Admin Payment"
+msgstr "Pagamento de Administrador"
+
+#: controllers/payment-processing/processors/SI_Admin_Payment.php:90
+msgid "Save this invoice before adding any payments."
+msgstr "Salve esta fatura antes de adicionar algum pagamento."
+
+#: controllers/payment-processing/processors/SI_Admin_Payment.php:115
+#: views/admin/reports/premium/clients.php:20
+#: views/admin/reports/premium/estimates.php:20
+#: views/admin/reports/premium/invoices.php:20
+#: views/admin/reports/premium/payments.php:20
+msgid "ID"
+msgstr "Identificação"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:304
+msgid "CVV"
+msgstr "CV"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:323
+msgid "Full Name"
+msgstr "Nome completo"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:328
+msgid "Address"
+msgstr "Endereço"
+
+#: controllers/notifications/Notifications_Control.php:226
+msgid "%s Shortcodes"
+msgstr "%s Códigos Curtos (Shortcodes)"
+
+#: controllers/notifications/Notifications_Control.php:513
+msgid "Notification sent to %s."
+msgstr "Notificação enviada para %s."
+
+#: controllers/notifications/Notifications_Control.php:766
+msgid "About Notifications"
+msgstr "Sobre as notificações"
+
+#: controllers/notifications/Notifications_Control.php:767
+msgid ""
+"Notifications include the emails sent to you and your clients, including responses "
+"to prospective clients after submitting an estimate request."
+msgstr ""
+"Notificações incluem os e-mails enviados para você e seus clientes, incluindo "
+"respostas a clientes em potencial após a solicitação de um orçamento."
+
+#: controllers/notifications/Notifications_Control.php:767
+msgid ""
+"Each one of your notifications can be customized; hover over the notification you "
+"want and click the edit link."
+msgstr ""
+"Cada uma das suas notificações pode ser personalizadas, passe o mouse sobre a "
+"notificação que você deseja e clique no link editar."
+
+#: controllers/notifications/Notifications_Control.php:772
+msgid "Disable Notifications"
+msgstr "Desativar Notificações"
+
+#: controllers/notifications/Notifications_Control.php:773
+msgid ""
+"The notifications edit screen will have an option next to the \"Update\" button to "
+"disable the notification from being sent."
+msgstr ""
+"A tela de edição de notificações tem uma opção ao lado do botão “Actualizar” para "
+"desativar a notificação."
+
+#: controllers/notifications/Notifications_Control.php:778
+msgid "Notification Editing"
+msgstr "Edição de Notificação"
+
+#: controllers/notifications/Notifications_Control.php:779
+msgid ""
+"<b>Subject</b> - The first input is for the notifications subject. If the "
+"notification is an e-mail than it would be subject line for that e-mail "
+"notification."
+msgstr ""
+"<b>Assunto</b> - a primeira entrada é para o assunto notificações. Se a notificação "
+"for um e-mail, então será a linha de assunto para essa notificação por email."
+
+#: controllers/notifications/Notifications_Control.php:779
+msgid ""
+"<b>Message Body</b> - The main editor is the notification body. Use the available "
+"shortcodes to have dynamic information included when the notification is received. "
+"Make sure to change the Notification Setting if HTML formatting is added to your "
+"notifications."
+msgstr ""
+"<b>Corpo da Mensagem</b> - o editor principal é o corpo da notificação. Use os "
+"códigos de acesso disponíveis para ter informação dinâmica incluída quando a "
+"notificação é recebida. Certifique-se de alterar a configuração de notificação se "
+"formatação HTML for adicionada ás suas notificações."
+
+#: controllers/notifications/Notifications_Control.php:779
+msgid ""
+"<b>Shortcodes</b> – A list of shortcodes is provided with descriptions for each."
+msgstr ""
+"<b>Códigos curtos (Shortcodes )</b> – É uma lista de códigos curtos (Shortcodes) é "
+"fornecida com descrições para cada um."
+
+#: controllers/notifications/Notifications_Control.php:779
+msgid ""
+"<b>Update</b> - The select list can be used if you want to change the current "
+"notification to a different type; it’s recommended you go to the notification you "
+"want to edit instead of using this option. The Disabled option available to prevent "
+"this notification from sending."
+msgstr ""
+"<b>Atualização</b> - A lista selecionada pode ser usada se você desejar alterar a "
+"notificação atual para um tipo diferente; é recomendável que vá á notificação que "
+"você deseja editar em vez de usar esta opção. A opção desativada está disponível "
+"para evitar esta notificação de enviar."
+
+#: controllers/notifications/Notifications_Control.php:790
+msgid "Notifications Cleanup"
+msgstr "Limpar Notificações"
+
+#: controllers/notifications/Notifications_Control.php:791
+msgid ""
+"In an earlier version of Sprout Invoices numerous notifications were improperly "
+"created. Click refresh below to delete all extraneous notifications. Backup any "
+"modifications that you might have made to your notifications before continuing."
+msgstr ""
+"Em uma versão anterior do Sprout Invoices inúmeras notificações foram indevidamente "
+"criado. Clique em Atualizar abaixo para apagar todas as notificações estranhos. "
+"Faça backup de quaisquer modificações que você poderia ter feito para suas "
+"notificações antes de continuar."
+
+#: controllers/notifications/Notifications_Control.php:791
+msgid "Clean"
+msgstr "Clean"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:92
+msgid "Cardholder Name"
+msgstr "Nome do Titular do Cartão"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:101
+#: controllers/payment-processing/Credit_Card_Processors.php:294
+msgid "Card Number"
+msgstr "Número do cartão de crédito"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:111
+#: controllers/payment-processing/Credit_Card_Processors.php:121
+#: controllers/payment-processing/Credit_Card_Processors.php:299
+#: views/templates/estimate/estimate.php:130
+msgid "Expiration Date"
+msgstr "Expira em"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:131
+msgid "Security Code"
+msgstr "Código de Segurança"
+
+#: controllers/payment-processing/Credit_Card_Processors.php:289
+msgid "Cardholder"
+msgstr "Titular do cartão"
+
+#: controllers/notifications/Notifications_Control.php:96
+msgid "From name"
+msgstr "Nome do remetente"
+
+#: controllers/notifications/Notifications_Control.php:103
+msgid "From email"
+msgstr "Email do remetente"
+
+#: controllers/notifications/Notifications_Control.php:110
+msgid "Admin email"
+msgstr "Emal do administrador"
+
+#: controllers/notifications/Notifications_Control.php:114
+msgid "E-mail address that receives the admin notifications (e.g. Payment Received )."
+msgstr ""
+"Endereço de e-mail que recebe as notificações de administrador (E.: Pagamento "
+"Recebido)."
+
+#: controllers/notifications/Notifications_Control.php:118
+msgid "Email format"
+msgstr "Formato do email"
+
+#: controllers/notifications/Notifications_Control.php:122
+msgid "HTML"
+msgstr "HTML"
+
+#: controllers/notifications/Notifications_Control.php:123
+msgid "Plain Text"
+msgstr "Texto simples"
+
+#: controllers/notifications/Notifications_Control.php:126
+msgid ""
+"Default notifications are in plain text. If set to HTML, custom HTML notifications "
+"are required."
+msgstr ""
+"Por padrão, notificações são enviadas em texto simples. Se definido como HTML, é "
+"necessário personalizar o HTML dos emails/notificações."
+
+#: controllers/notifications/Notifications_Control.php:224
+#: views/admin/reports/premium/estimates.php:66
+#: views/admin/reports/premium/estimates.php:67
+#: views/admin/reports/premium/invoices.php:68
+#: views/admin/reports/premium/payments.php:82
+#: views/admin/reports/premium/payments.php:83
+msgid "N/A"
+msgstr "N/H"
+
+#: controllers/notifications/Notifications_Admin_Table.php:91
+msgid "Message"
+msgstr "Mensagem"
+
+#: controllers/notifications/Notifications_Control.php:78
+#: controllers/notifications/Notifications_Control.php:79 languages/SI_Strings.php:24
+msgid "Notifications"
+msgstr "Notificações"
+
+#: controllers/notifications/Notifications_Admin_Table.php:54
+msgid "Unassigned"
+msgstr "Não Atribuído"
+
+#: controllers/notifications/Notifications_Admin_Table.php:56
+msgid "disabled"
+msgstr "desativado"
+
+#: controllers/notifications/Notifications_Admin_Table.php:56
+msgid "active"
+msgstr "activo"
+
+#: controllers/notifications/Notifications_Admin_Table.php:90
+#: controllers/records/Records_Admin_Table.php:203
+#: views/admin/reports/premium/estimates.php:23
+#: views/admin/reports/premium/invoices.php:23
+msgid "Subject"
+msgstr "Assunto"
+
+#: controllers/notifications/Notifications.php:671
+msgid "Quantity"
+msgstr "Quantidade"
+
+#: controllers/notifications/Notifications.php:672
+msgid "% Adjustment"
+msgstr "% Ajuste"
+
+#: controllers/notifications/Notifications.php:1449
+#: controllers/notifications/Notifications_Admin_Table.php:89
+#: controllers/records/Records_Admin_Table.php:116
+#: controllers/records/Records_Admin_Table.php:206
+#: views/admin/meta-boxes/estimates/history.php:77
+msgid "Type"
+msgstr "Tipo"
+
+#: controllers/notifications/Notifications.php:233
+msgid "Used to display the total amount due, or deposit if set."
+msgstr "Usado para exibir o valor total devido, ou depósitado se definido."
+
+#: controllers/notifications/Notifications.php:237
+msgid "Used to display the deposit amount due."
+msgstr "Usado para exibir o valor de depósito devido."
+
+#: controllers/notifications/Notifications.php:241
+msgid "Used to display the total of all payments."
+msgstr "Usado para exibir o total de todos os pagamentos."
+
+#: controllers/notifications/Notifications.php:245
+msgid "Used to display the client name."
+msgstr "Usado para exibir o nome do cliente."
+
+#: controllers/notifications/Notifications.php:249
+msgid "Used to display the client edit url."
+msgstr "Usado para exibir a url de edição do cliente."
+
+#: controllers/notifications/Notifications.php:253
+msgid "Used to display the estimate subject."
+msgstr "Usado para exibir o assunto da orçamento."
+
+#: controllers/notifications/Notifications.php:257
+msgid "Used to display the estimate id."
+msgstr "Usado para exibir o ID da orçamento."
+
+#: controllers/notifications/Notifications.php:261
+msgid "Used to display the edit url."
+msgstr "Usado para exibir o url de edição."
+
+#: controllers/notifications/Notifications.php:265
+msgid "Used to display the estimate url."
+msgstr "Usado para exibir o url da orçamento."
+
+#: controllers/notifications/Notifications.php:269
+msgid "Used to display the estimate issue date."
+msgstr "Usado para exibir a data de emissão da orçamento."
+
+#: controllers/notifications/Notifications.php:273
+msgid "Used to display the estimate po number."
+msgstr "Usado para exibir o número po da orçamento."
+
+#: controllers/notifications/Notifications.php:277
+#: controllers/notifications/Notifications.php:281
+msgid "Used to display the estimate total."
+msgstr "Usado para exibir o total da orçamento."
+
+#: controllers/notifications/Notifications.php:285
+msgid "Used to display the estimate tax total."
+msgstr "Usado para exibir o total do de taxas."
+
+#: controllers/notifications/Notifications.php:289
+msgid "Used to display the estimate tax."
+msgstr "Usado para exibir taxas da orçamento"
+
+#: controllers/notifications/Notifications.php:293
+msgid "Used to display the estimate tax (2)."
+msgstr "Usado para exibir taxas da orçamento (2)."
+
+#: controllers/notifications/Notifications.php:297
+msgid "Used to display the estimate notes."
+msgstr "Usado para exibir as notas do orçamento."
+
+#: controllers/notifications/Notifications.php:301
+msgid "Used to display the estimate terms."
+msgstr "Usado para exibir os termos do orçamento."
+
+#: controllers/notifications/Notifications.php:305
+msgid "Used to display the lead entries in HTML."
+msgstr "Usado para exibir as entradas de um lead em HTML."
+
+#: controllers/notifications/Notifications.php:668
+msgid "#"
+msgstr "#"
+
+#: controllers/notifications/Notifications.php:669
+msgid "Description"
+msgstr "Descrição"
+
+#: controllers/line-items/Line_Items.php:506
+msgid "No item given!"
+msgstr "Nenhum item dado."
+
+#: controllers/notifications/Notifications.php:47
+msgid "Lead Received"
+msgstr "Pedido recebido"
+
+#: controllers/notifications/Notifications.php:48
+msgid ""
+"Customize the email that is sent to a prospective client after a lead is submitted."
+msgstr ""
+"Personalize o e-mail que é enviado para um cliente em potencial, após um pedido ser "
+"enviado."
+
+#: controllers/notifications/Notifications.php:50
+#: controllers/notifications/Notifications.php:99
+msgid "%s: Estimate Request Received"
+msgstr "%s: Pedido de Orçamento Recebido."
+
+#: controllers/notifications/Notifications.php:56
+msgid "Estimate Available"
+msgstr "Orçamento disponível"
+
+#: controllers/notifications/Notifications.php:57
+msgid "Customize the estimate email that is sent to selected recipients."
+msgstr ""
+"Personalize o email de orçamento que é enviado para os destinatários selecionados."
+
+#: controllers/notifications/Notifications.php:59
+msgid "%s: Your Estimate is Available"
+msgstr "%s: Seu Orçamento está disponível"
+
+#: controllers/notifications/Notifications.php:64
+msgid "Invoice Available"
+msgstr "Factura disponível"
+
+#: controllers/notifications/Notifications.php:65
+msgid "Customize the invoice email that is sent to selected recipients."
+msgstr ""
+"Personalize o email de fatura que é enviada para os destinatários selecionados."
+
+#: controllers/notifications/Notifications.php:67
+msgid "%s: Your Invoice is Available"
+msgstr "%s: Sua Factura está disponível"
+
+#: controllers/notifications/Notifications.php:72
+msgid "Deposit Payment Received"
+msgstr "Depósito de pagamento recebido"
+
+#: controllers/notifications/Notifications.php:73
+msgid ""
+"Customize the payment email that is sent to the client recipients when a deposit is "
+"made."
+msgstr ""
+"Personalize o email de pagamento que é enviado aos destinatários dos clientes "
+"quando um depósito é feito."
+
+#: controllers/notifications/Notifications.php:75
+msgid "%s: Deposit Received"
+msgstr "%s: Depósito Recebido"
+
+#: controllers/notifications/Notifications.php:80
+msgid "Invoice Paid"
+msgstr "Factura Paga"
+
+#: controllers/notifications/Notifications.php:81
+msgid ""
+"Customize the email sent to the client recipients when the final payment for an "
+"invoice is made."
+msgstr ""
+"Personalize o email enviado para os destinatários do cliente quando o pagamento "
+"final de uma fatura é feita."
+
+#: controllers/notifications/Notifications.php:83
+msgid "%s: Thank You"
+msgstr "%s: Obrigado!"
+
+#: controllers/notifications/Notifications.php:87
+msgid "Payment Reminder"
+msgstr "Lembrete de Pagamento"
+
+#: controllers/notifications/Notifications.php:88
+msgid ""
+"Customize the email that is sent to the client recipients in order to remind them "
+"that their payment is overdue."
+msgstr ""
+"Personalize o e-mail que é enviado para os destinatários do cliente, a fim de "
+"lembrá-los que o seu pagamento está atrasado."
+
+#: controllers/notifications/Notifications.php:90
+msgid "%s: Invoice Payment Overdue"
+msgstr "%s: Factura de Pagamento em Atraso"
+
+#: controllers/notifications/Notifications.php:96
+msgid "Lead Submitted"
+msgstr "Pedido Enviado"
+
+#: controllers/notifications/Notifications.php:97
+msgid "Customize the email that is sent to the site admin after an lead is submitted."
+msgstr ""
+"Personalize o email que é enviado para o administrador do site depois que um lead é "
+"enviado."
+
+#: controllers/notifications/Notifications.php:104
+msgid "Estimate Accepted"
+msgstr "Orçamento Aceite"
+
+#: controllers/notifications/Notifications.php:105
+#: controllers/notifications/Notifications.php:112
+msgid "Customize the email sent to the admin after an estimate is accepted."
+msgstr ""
+"Personalize o email enviado para o administrador após uma orçamento ser aceita."
+
+#: controllers/notifications/Notifications.php:107
+msgid "%s: Estimate Accepted"
+msgstr "%s: Orçamento Aceite"
+
+#: controllers/notifications/Notifications.php:111
+msgid "Estimate Declined"
+msgstr "Orçamento Recusado"
+
+#: controllers/notifications/Notifications.php:114
+msgid "%s: Estimate Declined"
+msgstr "%s: Orçamento Recusado"
+
+#: controllers/notifications/Notifications.php:118
+msgid "Payment Received"
+msgstr "Pagamento Recebido"
+
+#: controllers/notifications/Notifications.php:119
+msgid "Customize the email sent to an admin when any payment is received."
+msgstr ""
+"Personalize o email enviado a um administrador quando algum pagamento é recebido."
+
+#: controllers/notifications/Notifications.php:121
+msgid "%s: Payment Received"
+msgstr "%s: Pagamento Recebido"
+
+#: controllers/notifications/Notifications.php:133
+msgid "Used to display the date."
+msgstr "Usado para exibir a data."
+
+#: controllers/notifications/Notifications.php:137
+msgid "Used to display the user&rsquo;s name."
+msgstr "Usado para exibir o nome de utilizador."
+
+#: controllers/notifications/Notifications.php:141
+msgid "Used to display the user&rsquo;s login."
+msgstr "Usado para exibir o login do utilizador."
+
+#: controllers/notifications/Notifications.php:145
+msgid "Used to display the note created before sending."
+msgstr "Usado para exibir a nota criada antes de enviar."
+
+#: controllers/notifications/Notifications.php:149
+msgid "Used to display the payment total."
+msgstr "Usado para exibir o pagamento total."
+
+#: controllers/notifications/Notifications.php:153
+msgid "Used to display the ."
+msgstr "Usado para exibir o ."
+
+#: controllers/notifications/Notifications.php:157
+msgid ""
+"Used to display the line items for an estimate or invoice in a table format (HTML)."
+msgstr ""
+"Usado para exibir os itens de linha para uma orçamento ou fatura em formato de "
+"tabela (HTML)."
+
+#: controllers/notifications/Notifications.php:161
+msgid ""
+"Used to display the line items for an estimate or invoice in a list format (HTML)."
+msgstr ""
+"Usado para exibir os itens de linha para uma orçamento ou fatura em formato de "
+"lista (HTML)."
+
+#: controllers/notifications/Notifications.php:165
+msgid ""
+"Used to display the line items for an estimate or invoice in a plain text list."
+msgstr ""
+"Usado para exibir os itens de linha para uma orçamento ou fatura em uma lista de "
+"texto simples."
+
+#: controllers/notifications/Notifications.php:169
+msgid "Used to display the invoice subject."
+msgstr "Usado para exibir o assunto da factura."
+
+#: controllers/notifications/Notifications.php:173
+msgid "Used to display the invoice id."
+msgstr "Usado para exibir o ID de fatura."
+
+#: controllers/notifications/Notifications.php:177
+msgid "Used to display the invoice edit url."
+msgstr "Usado para exibir a url para editar a fatura."
+
+#: controllers/notifications/Notifications.php:181
+msgid "Used to display the invoice url."
+msgstr "Usado para exibir o url da factura."
+
+#: controllers/notifications/Notifications.php:185
+msgid "Used to display the invoice issue date."
+msgstr "Usado para exibir a data de emissão da factura."
+
+#: controllers/notifications/Notifications.php:189
+msgid "Used to display the due date."
+msgstr "Usado para exibir a data de vencimento."
+
+#: controllers/notifications/Notifications.php:193
+msgid "Used to display how many days the invoice is past due."
+msgstr "Usado para exibir quantos dias a fatura está atrasada."
+
+#: controllers/notifications/Notifications.php:197
+msgid "Used to display the invoice po number."
+msgstr "Usado para exibir o número po fatura."
+
+#: controllers/notifications/Notifications.php:201
+msgid "Used to display the invoice tax total."
+msgstr "Usado para exibir o total em taxas da factura."
+
+#: controllers/notifications/Notifications.php:205
+msgid "Used to display the invoice tax."
+msgstr "Usado para exibir taxas da factura."
+
+#: controllers/notifications/Notifications.php:209
+msgid "Used to display the invoice tax (2)."
+msgstr "Usado para exibir taxas da factura (2)."
+
+#: controllers/notifications/Notifications.php:213
+msgid "Used to display the invoice notes."
+msgstr "Usado para exibir as notas da factura."
+
+#: controllers/notifications/Notifications.php:217
+msgid "Used to display the invoice terms."
+msgstr "Usado para exibir os termos de factura."
+
+#: controllers/notifications/Notifications.php:221
+msgid "Used to display the invoice total."
+msgstr "Usado para exibir o total da factura."
+
+#: controllers/notifications/Notifications.php:225
+msgid "Used to display the invoice calculated total."
+msgstr "Usado para exibir o total da factura calculado."
+
+#: controllers/notifications/Notifications.php:229
+msgid "Used to display the invoice sub total."
+msgstr "Usado para exibir o subtotal da factura."
+
+#: controllers/line-items/Line_Items.php:303 controllers/line-items/Line_Items.php:352
+#: views/admin/reports/premium/estimates.php:27
+msgid "Subtotal"
+msgstr "Sub-total"
+
+#: controllers/line-items/Line_Items.php:310 controllers/line-items/Line_Items.php:360
+msgid "Taxes"
+msgstr "Taxas"
+
+#: controllers/line-items/Line_Items.php:329 controllers/line-items/Line_Items.php:379
+msgid "Total includes discounts and other fees."
+msgstr "Total inclui descontos e outras taxas."
+
+#: controllers/line-items/Line_Items.php:393
+#: views/admin/reports/premium/invoices.php:27
+#: views/templates/checkout/confirmation.php:156
+#: views/templates/invoice/invoice.php:175
+msgid "Balance"
+msgstr "Em aberto"
+
+#: controllers/line-items/Line_Items.php:97 controllers/line-items/Line_Items.php:145
+#: controllers/line-items/Line_Items.php:195
+msgid "A percentage adjustment per line item, i.e. tax or discount"
+msgstr "Um percentual de reajuste por item, ou seja, imposto ou desconto"
+
+#: controllers/line-items/Line_Items.php:104 controllers/line-items/Line_Items.php:152
+#: controllers/line-items/Line_Items.php:203
+#: controllers/payment-processing/processors/SI_Admin_Payment.php:107
+#: controllers/payment-processing/processors/SI_Checks.php:109
+msgid "Amount"
+msgstr "Total"
+
+#: controllers/line-items/Line_Items.php:116
+msgid "Products"
+msgstr "Produtos"
+
+#: controllers/line-items/Line_Items.php:123
+msgid "SKU"
+msgstr "Código"
+
+#: controllers/line-items/Line_Items.php:138 controllers/line-items/Line_Items.php:187
+msgid "Qty"
+msgstr "Qtd"
+
+#: controllers/line-items/Line_Items.php:165
+msgid "Tasks"
+msgstr "Tarefas"
+
+#: controllers/line-items/Line_Items.php:179
+#: controllers/notifications/Notifications.php:670
+msgid "Rate"
+msgstr "Taxa"
+
+#: controllers/invoices/Invoices_Edit.php:64
+msgid "Invoice Permalink Slug"
+msgstr "Formato do link da Factura"
+
+#: controllers/invoices/Invoices_Edit.php:72
+msgid "Example invoice url: %s/%s/045b41dd14ab8507d80a27b7357630a5/"
+msgstr "Exemplo de link de fatura: %s/%s/045b41dd14ab8507d80a27b7357630a5/"
+
+#: controllers/invoices/Invoices_Edit.php:81
+msgid "These are the default terms for an invoice."
+msgstr "Estes são os termos padrão para uma fatura."
+
+#: controllers/invoices/Invoices_Edit.php:90
+msgid "These are the default notes public to a client reviewing their invoice."
+msgstr "Estas são as notas públicas padrão, para um cliente a rever sua fatura."
+
+#: controllers/invoices/Invoices_Edit.php:206
+#: views/admin/meta-boxes/invoices/send.php:6
+msgid "Send Invoice"
+msgstr "Enviar Factura"
+
+#: controllers/invoices/Invoices_Edit.php:215
+msgid "Invoice History"
+msgstr "Histórico da Factura"
+
+#: controllers/invoices/Invoices_Edit.php:437
+msgid "Invoice updated by %s."
+msgstr "Factura atualizada por %s."
+
+#: controllers/invoices/Invoices_Edit.php:454
+msgid "Save this invoice before sending."
+msgstr "Salve esta fatura antes de enviar."
+
+#: controllers/invoices/Invoices_Edit.php:612
+msgid ""
+"A notification will be sent if recipients are selected and this invoice is saved."
+msgstr ""
+"A notificação só será enviada se os destinatários forem selecionados e esta factura "
+"for gravada."
+
+#: controllers/invoices/Invoices_Edit.php:622
+msgid ""
+"This note will be added to the Invoice Notification via the [admin_note] shortcode."
+msgstr ""
+"Esta nota será adicionada à Notificação de Factura via o código curto [admin_note]."
+
+#: controllers/invoices/Invoices_Template.php:67
+#: views/templates/invoice/invoice.php:48
+msgid "Pay Deposit"
+msgstr "Pagar Agora"
+
+#: controllers/invoices/Invoices_Template.php:67
+#: views/templates/invoice/invoice.php:48
+msgid "Pay Invoice"
+msgstr "Pagar Factura"
+
+#: controllers/line-items/Line_Items.php:39
+msgid "Task"
+msgstr "Tarefa"
+
+#: controllers/line-items/Line_Items.php:40
+msgid "Service"
+msgstr "Serviço"
+
+#: controllers/line-items/Line_Items.php:41
+msgid "Product"
+msgstr "Produto"
+
+#: controllers/line-items/Line_Items.php:69
+msgid "Services"
+msgstr "Serviços"
+
+#: controllers/line-items/Line_Items.php:83 controllers/line-items/Line_Items.php:131
+msgid "Price"
+msgstr "Preço"
+
+#: controllers/invoices/Invoices_Admin.php:115
+msgid "Review payments."
+msgstr "Revisão de pagamentos."
+
+#: controllers/invoices/Invoices_Admin.php:115
+#: controllers/line-items/Line_Items.php:385 controllers/payments/Payments.php:45
+#: controllers/payments/Payments.php:46 controllers/payments/Payments.php:189
+#: controllers/reporting/Dashboard.php:218 importers/CSV.php:72
+#: languages/SI_Strings.php:23 views/admin/dashboards/payments-chart.php:50
+#: views/admin/dashboards/premium/balances-chart.php:64
+#: views/admin/dashboards/premium/payments-chart.php:64
+msgid "Payments"
+msgstr "Pagamentos"
+
+#: controllers/invoices/Invoices_Admin.php:255
+msgid "Manage Invoices"
+msgstr "Gerenciar Facturas"
+
+#: controllers/invoices/Invoices_Admin.php:256
+msgid ""
+"The status on the invoice table view can be updated without having to go the edit "
+"screen by click on the current status and selecting a new one."
+msgstr ""
+"O status das Facturas pode ser atualizado sem ter que ir à tela de edição, basta "
+"clicar no status atual e selecionar um novo."
+
+#: controllers/invoices/Invoices_Admin.php:256
+msgid ""
+"Payments are tallied and shown in the Paid column. Hovering over the invoice row "
+"will show a Payments link."
+msgstr ""
+"Os pagamentos são calculados e mostrados na coluna pago. Pairando o mouse sobre a "
+"linha da factura, será exibido um link de Pagamentos."
+
+#: controllers/invoices/Invoices_Admin.php:256
+msgid ""
+"If the invoice has an associated estimate the icon linking to the edit page of the "
+"estimate will show in the last column."
+msgstr ""
+"Se a Factura tem um Orçamento associado, o ícone de conexão com a página de edição "
+"do Orçamento será exibido na última coluna."
+
+#: controllers/invoices/Invoices_Admin.php:261
+msgid "Editing Invoices"
+msgstr "Edição de faturas"
+
+#: controllers/invoices/Invoices_Admin.php:262
+msgid ""
+"Editing invoices is intentionally easy to do but a review here would exhaust this "
+"limited space. Please review the knowledgebase for a complete overview."
+msgstr ""
+"Editar futuras é algo intencionalmente fácil de fazer, mas um comentário aqui "
+"esgotaria este espaço limitado. Por favor, reveja a base de conhecimento para uma "
+"visão completa."
+
+#: controllers/invoices/Invoices_Deposit.php:33
+#: controllers/invoices/Invoices_Deposit.php:40
+msgid "Deposit Due"
+msgstr "Saldo Positivo"
+
+#: controllers/invoices/Invoices_Edit.php:59
+msgid "Invoice Settings"
+msgstr "Configurações de Facturas"
+
+#: controllers/invoices/Invoices.php:169
+msgid ""
+"This payment was automatically added to settle the balance after it was marked as "
+"\"Paid\"."
+msgstr ""
+"﻿Este pagamento foi adicionado automaticamente para ajustar o saldo depois que ele "
+"foi marcado como \"Paid\"."
+
+#: controllers/invoices/Invoices_Admin.php:77 languages/SI_Strings.php:26
+#: views/admin/reports/premium/estimates.php:24
+#: views/admin/reports/premium/payments.php:24
+#: views/templates/checkout/confirmation.php:57 views/templates/invoice/invoice.php:72
+msgid "Invoice"
+msgstr "Factura"
+
+#: controllers/invoices/Invoices_Admin.php:79 models/Invoice.php:77
+#: views/admin/reports/premium/invoices.php:26
+#: views/admin/reports/premium/payments.php:27
+#: views/admin/sections/invoice-status-change-drop.php:10
+#: views/templates/checkout/confirmation.php:70 views/templates/invoice/invoice.php:90
+msgid "Paid"
+msgstr "Pago"
+
+#: controllers/invoices/Invoices_Admin.php:102
+msgid "Invoice's Estimate"
+msgstr "Orçamento da Factura."
+
+#: controllers/invoices/Invoices_Admin.php:112
+msgid "of"
+msgstr "de"
+
+#: controllers/estimates/Estimates_Edit.php:591
+#: controllers/invoices/Invoices_Edit.php:603
+msgid "client@email.com"
+msgstr "cliente@email.com"
+
+#: controllers/estimates/Estimates_Edit.php:591
+#: controllers/invoices/Invoices_Edit.php:603
+msgid ""
+"Entering an email will prevent some notification shortcodes from working since "
+"there is no client."
+msgstr ""
+"﻿Inserir um e-mail evitará que alguns códigos de acesso de notificação trabalhem se "
+"não houver nenhum cliente."
+
+#: controllers/estimates/Estimates_Edit.php:594
+#: controllers/invoices/Invoices_Edit.php:606
+msgid "Send me a copy"
+msgstr "Envie-me uma cópia"
+
+#: controllers/estimates/Estimates_Edit.php:600
+#: controllers/invoices/Invoices_Edit.php:612
+msgid "Recipients"
+msgstr "Destinatários"
+
+#: controllers/estimates/Estimates_Edit.php:600
+msgid ""
+"A notification will be sent if recipients are selected and this estimate is saved."
+msgstr ""
+"A notificação só será enviada se os destinatários forem selecionados e este "
+"orçamento for gravado."
+
+#: controllers/estimates/Estimates_Edit.php:607
+#: controllers/invoices/Invoices_Edit.php:619
+msgid "Note"
+msgstr "Observação"
+
+#: controllers/estimates/Estimates_Edit.php:610
+msgid ""
+"This note will be added to the Estimate Notification via the [admin_note] shortcode."
+msgstr ""
+"Esta nota será adicionada à Notificação do Orçamento via o shortcode [admin_note]."
+
+#: controllers/estimates/Estimates_Records.php:34
+#: controllers/invoices/Invoices_Records.php:31
+msgid "Status changed: %s to <b>%s</b>."
+msgstr "Status alterado de %s para %s."
+
+#: controllers/estimates/Estimates_Records.php:37
+#: controllers/invoices/Invoices_Records.php:34
+msgid "Status update for %s."
+msgstr "Status atualizado para %s."
+
+#: controllers/estimates/Estimates_Records.php:53
+msgid "Invoice Created: <a href=\"%s\">%s</a>."
+msgstr "Factura criada: <a href=\"%s\">%s</a>."
+
+#: controllers/estimates/Estimates_Records.php:56
+msgid "Invoice Created: %s."
+msgstr "Factura criada: %s."
+
+#: controllers/estimates/Estimates_Records.php:90
+msgid "Estimate viewed by %s."
+msgstr "Orçamento visualizado por %s."
+
+#: controllers/i18n/Countries_States.php:578
+msgid "Select"
+msgstr "Selecione"
+
+#: controllers/estimates/Estimates_Admin.php:136
+#: controllers/line-items/Line_Items.php:326 controllers/line-items/Line_Items.php:376
+#: controllers/notifications/Notifications.php:673
+#: views/admin/reports/premium/estimates.php:26
+msgid "Total"
+msgstr "Total"
+
+#: controllers/estimates/Estimates_Admin.php:160
+msgid "Invoice for this estimate."
+msgstr "Factura para essa orçamento."
+
+#: controllers/estimates/Estimates_Admin.php:177
+#: controllers/invoices/Invoices_Admin.php:125
+msgid "No client"
+msgstr "Nenhum cliente"
+
+#: controllers/estimates/Estimates_Edit.php:64
+msgid "Estimate Settings"
+msgstr "Configurações de orçamento"
+
+#: controllers/estimates/Estimates_Edit.php:69
+msgid "Estimate Permalink Slug"
+msgstr "Formato do link do Orçamento"
+
+#: controllers/estimates/Estimates_Edit.php:77
+msgid "Example estimate url: %s/%s/045b41dd14ab8507d80a27b7357630a5/"
+msgstr "Exemplo de url de orçamento: %s/%s/045b41dd14ab8507d80a27b7357630a5/"
+
+#: controllers/estimates/Estimates_Edit.php:82
+#: controllers/invoices/Invoices_Edit.php:77
+msgid "Default Terms"
+msgstr "Termos padrão"
+
+#: controllers/estimates/Estimates_Edit.php:86
+msgid "These are the default terms for an estimate."
+msgstr "Estes são os termos padrão para uma orçamento."
+
+#: controllers/estimates/Estimates_Edit.php:90
+#: controllers/invoices/Invoices_Edit.php:86
+msgid "Default Note"
+msgstr "Nota padrão"
+
+#: controllers/estimates/Estimates_Edit.php:94
+msgid "These are the default notes public to a client reviewing their estimate."
+msgstr "Estas são as notas públicas padrão para um cliente a rever a sua orçamento."
+
+#: controllers/estimates/Estimates_Edit.php:191
+#: controllers/invoices/Invoices_Edit.php:188
+msgid "Management"
+msgstr "Administração"
+
+#: controllers/estimates/Estimates_Edit.php:209
+#: views/admin/meta-boxes/estimates/send.php:6
+msgid "Send Estimate"
+msgstr "Enviar Orçamento"
+
+#: controllers/estimates/Estimates_Edit.php:218
+msgid "Estimate History"
+msgstr "Histórico da orçamento"
+
+#: controllers/estimates/Estimates_Edit.php:226
+#: controllers/invoices/Invoices_Edit.php:223
+msgid "Terms & Notes"
+msgstr "Termos & Notas"
+
+#: controllers/estimates/Estimates_Edit.php:427
+msgid "Estimate updated by %s."
+msgstr "Orçamento atualizado por %s."
+
+#: controllers/estimates/Estimates_Edit.php:430
+#: controllers/invoices/Invoices_Edit.php:440
+msgid "Data updated for %s."
+msgstr "Dados atualizados por %s."
+
+#: controllers/estimates/Estimates_Edit.php:444
+msgid "Save this estimate before sending."
+msgstr "Salve esta orçamento antes de enviar."
+
+#: controllers/estimates/Estimates_Edit.php:571
+#: controllers/invoices/Invoices_Edit.php:581
+msgid "Sender"
+msgstr "Remetente"
+
+#: controllers/estimates/Estimates_Admin.php:134 languages/SI_Strings.php:27
+#: views/templates/estimate/estimate.php:61
+msgid "Estimate"
+msgstr "Orçamento"
+
+#: controllers/estimates/Estimates_Admin.php:135
+#: controllers/invoices/Invoices_Admin.php:78
+#: controllers/payments/Payments_Admin_Table.php:214
+#: views/admin/reports/premium/estimates.php:21
+#: views/admin/reports/premium/invoices.php:21
+#: views/admin/reports/premium/payments.php:21
+msgid "Status"
+msgstr "Estado"
+
+#: controllers/clients/Clients.php:610
+msgid "Full Name & Title"
+msgstr "Nome completo & Título"
+
+#: controllers/clients/Clients.php:661
+msgid "Currency Code"
+msgstr "Código da moeda"
+
+#: controllers/clients/Clients.php:667
+msgid ""
+"This setting will override the setting for each payment processor that supports "
+"differing currency codes."
+msgstr ""
+"Esta definição irá substituir a configuração para cada processador de pagamento que "
+"suporta diferentes códigos de moedas."
+
+#: controllers/clients/Clients.php:687
+#: controllers/payment-processing/Payment_Processors.php:165
+msgid "Money Format"
+msgstr "Formato de valores"
+
+#: controllers/clients/Clients.php:693
+msgid ""
+"Current format: %1$s. The default money formatting (%2$s) can be overridden for all "
+"client estimates and invoices here."
+msgstr ""
+"Formato atual: %1$s. Aqui, a formatação de valores padrão (%2$s) pode ser "
+"substituída para todas as orçamentos do cliente e faturas."
+
+#: controllers/clients/Clients.php:1077 controllers/reporting/Dashboard.php:219
+#: importers/CSV.php:51 languages/SI_Strings.php:21
+msgid "Clients"
+msgstr "Clientes"
+
+#: controllers/clients/Clients.php:1105
+msgid "Manage Clients"
+msgstr "Gerenciar Clientes"
+
+#: controllers/clients/Clients.php:1106
+msgid ""
+"The information here is used for estimates and invoices and includes settings to: "
+"Edit Company Name, Edit the company address, and Edit their website url."
+msgstr ""
+"As informações daqui são utilizadas para as orçamentos e faturas, incluem as "
+"configurações: Nome da empresa, Endereço da empresa, Site/URL da empresa."
+
+#: controllers/clients/Clients.php:1106
+msgid ""
+"<b>Important note:</b> when clients are created new WordPress users are also "
+"created and given the “client” role. Creating users will allow for future "
+"functionality, i.e. client dashboards."
+msgstr ""
+"<b>Nota importante:</b> quando os clientes são criados, novos utilizadores do "
+"WordPress também são criados e dado o nível de “cliente”. Criar Utilizadores "
+"permitirá funcionalidade futura, i.e. painéis de controle de cliente."
+
+#: controllers/clients/Clients.php:1111 views/admin/meta-boxes/clients/submit.php:21
+msgid "Associated Users"
+msgstr "Utilizadores associados"
+
+#: controllers/clients/Clients.php:1112
+msgid ""
+"When clients are created a WP user is created and associated and clients are not "
+"limited to a single user. Not limited a client to a single user allows for you to "
+"have multiple points of contact at/for a company/client. Example, the recipients "
+"for sending estimate and invoice notifications are these associated users."
+msgstr ""
+"Quando clientes são criados um utilizador WP é criada e associada aos clientes, mas "
+"não estão limitados a um único utilizador. Não limitar um cliente a um único "
+"utilizador permite que você tenha vários pontos de contacto com uma empresa/"
+"cliente. Exemplo: os destinatários para o envio de orçamentos, facturas e "
+"notificações são esses utilizadores associados."
+
+#: controllers/clients/Clients.php:1117
+msgid "Client History"
+msgstr "Histórico do cliente"
+
+#: controllers/clients/Clients.php:1118
+msgid ""
+"Important points are shown in the client history and just like estimate and "
+"invoices private notes can be added for only you and other team members to see."
+msgstr ""
+"Pontos importantes são mostrados no histórico do cliente e, assim como em "
+"orçamentos e faturas, notas privadas podem ser adicionadas por você e outros "
+"membros da equipe, que só vocês podem ver."
+
+#: controllers/clients/Clients.php:1123
+msgid "Invoices and Estimates"
+msgstr "Facturas e Orçamentos"
+
+#: controllers/clients/Clients.php:1124
+msgid ""
+"All invoices and estimates associated with the client are shown below the "
+"associated users option. This provides a quick way to jump to the record you need "
+"to see."
+msgstr ""
+"Todas as facturas e orçamentos associados ao cliente são mostrados abaixo na opção "
+"de utilizadores associados. Isso fornece uma maneira rápida de saltar para o "
+"registro que você precisa ver."
+
+#: controllers/developer/Logs.php:50
+msgid "Save Logs"
+msgstr "Salvar Logs"
+
+#: controllers/developer/Logs.php:52
+msgid "Save all logs as a sprout apps records (dev_log)."
+msgstr "Guarde todos os registros sprout apps (dev_log)."
+
+#: controllers/developer/Logs.php:56
+msgid ""
+"Note: This should only be used for testing and troubleshooting. Records are found "
+"under Tools."
+msgstr ""
+"Nota: Este deve ser utilizado apenas para testes e solução de problemas. Registros "
+"são encontrados em Ferramentas."
+
+#: controllers/estimates/Estimate_Submission.php:33
+#: views/admin/sprout-invoices-dashboard.php:38
+msgid "Lead Generation"
+msgstr "Geração de liderança"
+
+#: controllers/estimates/Estimate_Submission.php:39
+msgid "Default Submission Form"
+msgstr "Formulário de solicitação padrão"
+
+#: controllers/estimates/Estimate_Submission.php:42
+msgid "N/A in free version"
+msgstr "N/H na versão gratuita"
+
+#: controllers/estimates/Estimate_Submission.php:43
+msgid ""
+"To get you started, Sprout Invoices provides a <a href=\"%s\" target=\"_blank"
+"\">fully customizable form</a> for estimate submissions. Simply add this shortcode "
+"to a page and an estimate submission form will be available to prospective clients. "
+"Notifications will be sent for each submission and a new estimate (and client) will "
+"be generated."
+msgstr ""
+"Para começar, Sprout Invoices fornece um  <a href=\"%s\" target=\"_blank"
+"\">formulário completamente personalizáveis</a> para solicitar orçamentos. Basta "
+"adicionar este shortcode para numa página e um formulário de solicitação de "
+"orçamento estará disponível para clientes em potencial. As notificações serão "
+"enviadas para cada apresentação e uma nova orçamento (e cliente) será gerado."
+
+#: controllers/estimates/Estimate_Submission.php:47
+msgid "Gravity Forms and Ninja Forms Integration"
+msgstr "Integração Gravity Forms e Ninja Forms"
+
+#: controllers/estimates/Estimate_Submission.php:51
+msgid ""
+"Instead of creating our own advanced form builder we've integrated with the top "
+"WordPress form plugins. Make sure to read the <a href=\"%s\" target=\"_blank"
+"\">integration guide</a> to make the best use of your custom forms."
+msgstr ""
+"Em vez de criar o nosso próprio construtor de formulário avançado, integramos com "
+"os melhores plugins de formulário WordPress. Certifique-se de ler o <a href=\"%s\" "
+"target=\"_blank\">guia de integração</a> para fazer o melhor uso de seus "
+"formulários personalizados."
+
+#: controllers/estimates/Estimate_Submission.php:63
+msgid ""
+"<strong>Upgrade Available:</strong> Enable Estimate Submission integrations and "
+"support the future of Sprout Invoices by <a href=\"%s\">upgrading</a>."
+msgstr ""
+"<strong>Atualização disponível:</strong> Ative a Integração de Envio de Orçamento e "
+"apoie o futuro de Sprout Invoices fazendo um <a href=\"%s\">upgrade.</a>."
+
+#: controllers/estimates/Estimate_Submission.php:65
+msgid ""
+"<p>Estimate submissions is the start of the <a href=\"%s\">Sprout Invoices "
+"workflow</a>.</p>"
+msgstr ""
+"<p>Solicitações de orçamentos são o início do <a href=\"%s\">fluxo de trabalho "
+"Sprout Invoices</a>.</p>"
+
+#: controllers/estimates/Estimate_Submission.php:75
+msgid "$0-5"
+msgstr "$0-5"
+
+#: controllers/estimates/Estimate_Submission.php:77
+msgid "Advanced Form Integration with Gravity and Ninja Forms"
+msgstr "Integração avançada com Gravity e Ninja Forms"
+
+#: controllers/estimates/Estimates.php:115 controllers/invoices/Invoices.php:130
+msgid "Notification Queued"
+msgstr "Notificação na fila de espera"
+
+#: controllers/estimates/Estimates_Admin.php:98
+msgid "Manage Estimates"
+msgstr "Administrar Orçamentos"
+
+#: controllers/estimates/Estimates_Admin.php:99
+msgid ""
+"The status on the estimate table view can be updated without having to go the edit "
+"screen by click on the current status and selecting a new one."
+msgstr ""
+"O status do Orçamento pode ser atualizado sem ter que ir ao écran de edição, basta "
+"clicar no status atual e selecionar um novo."
+
+#: controllers/estimates/Estimates_Admin.php:99
+msgid ""
+"If an invoice is associated an icon linking to the edit page will show in the last "
+"column."
+msgstr ""
+"Se uma fatura estiver associada, um ícone de conexão com a página de edição será "
+"exibido na última coluna."
+
+#: controllers/estimates/Estimates_Admin.php:104
+msgid "Editing Estimates"
+msgstr "Editar Orçamentos"
+
+#: controllers/estimates/Estimates_Admin.php:105
+msgid ""
+"Editing estimates is intentionally easy to do but a review here would exhaust this "
+"limited space. Please review the knowledgebase for a complete overview."
+msgstr ""
+"Edição de orçamentos é algo extremamente fácil de fazer, mas um comentário aqui "
+"esgotaria este espaço limitado. Por favor, reveja a base de conhecimento para uma "
+"visão completa."
+
+#: controllers/estimates/Estimates_Admin.php:105
+#: controllers/invoices/Invoices_Admin.php:262
+msgid "Knowledgebase Article"
+msgstr "Artigo da base de conhecimento"
+
+#: controllers/clients/Clients.php:573
+msgid ""
+"This e-mail will be used to create a new client user. Leave blank if associating an "
+"existing user."
+msgstr ""
+"Este endereço de e-mail será usado para criar um novo utilizador do cliente. Deixe "
+"em branco se associar um utilizador existente."
+
+#: controllers/clients/Clients.php:580 controllers/projects/Projects.php:341
+msgid "Website"
+msgstr "Website"
+
+#: controllers/clients/Clients.php:439
+msgid "No associated users"
+msgstr "Nenhum utilizador associado"
+
+#: controllers/clients/Clients.php:457 controllers/clients/Clients.php:476
+#: controllers/projects/Projects.php:445 controllers/projects/Projects.php:465
+msgid "...%s of <a href=\"%s\">%s</a> most recent shown"
+msgstr "...%s de <a href=\"%s\">%s</a> mais recente exibido"
+
+#: controllers/clients/Clients.php:460 controllers/projects/Projects.php:449
+#: views/admin/meta-boxes/clients/submit.php:65
+#: views/admin/meta-boxes/projects/submit.php:30
+msgid "No invoices"
+msgstr "Não há Facturas"
+
+#: controllers/clients/Clients.php:479 controllers/projects/Projects.php:469
+#: views/admin/meta-boxes/clients/submit.php:80
+#: views/admin/meta-boxes/projects/submit.php:44
+msgid "No estimates"
+msgstr "Não há orçamentos"
+
+#: controllers/clients/Clients.php:515
+msgid "<a class=\"doc_link\" title=\"%s\" href=\"%s\">%s</a>"
+msgstr "<a class=\"doc_link\" title=\"%s\" href=\"%s\">%s</a>"
+
+#: controllers/clients/Clients.php:570 controllers/clients/Clients.php:617
+msgid "Email"
+msgstr "E-mail"
+
+#: controllers/clients/Clients.php:392 controllers/projects/Projects.php:386
+msgid "Info"
+msgstr "Informações"
+
+#: controllers/clients/Clients.php:393 controllers/invoices/Invoices_Admin.php:227
+#: controllers/projects/Projects.php:387 controllers/reporting/Dashboard.php:216
+#: importers/CSV.php:65 languages/SI_Strings.php:19
+#: views/admin/dashboards/estimates-invoices-chart.php:47
+#: views/admin/dashboards/premium/estimates-invoices-chart.php:66
+#: views/admin/meta-boxes/clients/submit.php:56
+msgid "Invoices"
+msgstr "Facturas"
+
+#: controllers/clients/Clients.php:394 controllers/estimates/Estimates_Admin.php:69
+#: controllers/projects/Projects.php:388 controllers/reporting/Dashboard.php:217
+#: importers/CSV.php:58 languages/SI_Strings.php:20
+#: views/admin/dashboards/estimates-invoices-chart.php:37
+#: views/admin/dashboards/premium/estimates-invoices-chart.php:56
+#: views/admin/meta-boxes/clients/submit.php:71
+msgid "Estimates"
+msgstr "Orçamentos"
+
+#: controllers/clients/Clients.php:426
+msgid "Users"
+msgstr "Assinantes"
+
+#: controllers/checkout/Checkouts.php:156
+msgid "Confirmation"
+msgstr "Confirmação"
+
+#: controllers/checkout/Checkouts.php:240
+msgid "Invoice ID invalid. Payments are disabled."
+msgstr "ID de fatura inválido. Pagamentos estão desativados."
+
+#: controllers/checkout/Checkouts.php:247
+msgid "No invoice associated with this checkout."
+msgstr "Nenhuma fatura associada a este checkout."
+
+#: controllers/clients/Clients.php:104 controllers/estimates/Estimates_Edit.php:200
+#: controllers/invoices/Invoices_Edit.php:197 controllers/projects/Projects.php:86
+msgid "Information"
+msgstr "Informação"
+
+#: controllers/clients/Clients.php:128 controllers/projects/Projects.php:101
+msgid "History"
+msgstr "História"
+
+#: controllers/clients/Clients.php:339 controllers/estimates/Estimates_Edit.php:508
+#: controllers/invoices/Invoices_Edit.php:518 controllers/projects/Projects.php:240
+msgid "No history available."
+msgstr "Nenhum histórico disponível."
+
+#: controllers/clients/Clients.php:391 controllers/estimates/Estimates_Admin.php:137
+#: controllers/invoices/Invoices_Admin.php:80
+#: controllers/notifications/Notifications.php:534
+#: controllers/notifications/Notifications.php:548
+#: controllers/notifications/Notifications.php:573
+#: controllers/payments/Payments_Admin_Table.php:109
+#: controllers/projects/Projects.php:311 controllers/projects/Projects.php:411
+#: importers/WP-Invoice.php:240 languages/SI_Strings.php:28 models/Client.php:50
+#: views/admin/reports/premium/estimates.php:25
+#: views/admin/reports/premium/invoices.php:24
+#: views/admin/reports/premium/payments.php:25
+msgid "Client"
+msgstr "Cliente"
+
+#: controllers/admin/Settings_API.php:466
+msgid "Saved"
+msgstr "Gravado"
+
+#: controllers/checkout/Checkouts.php:148
+#: controllers/payments/Payments_Admin_Table.php:215 languages/SI_Strings.php:30
+#: template-tags/invoices.php:1004 views/admin/reports/premium/payments.php:80
+msgid "Payment"
+msgstr "Pagamento"
+
+#: controllers/checkout/Checkouts.php:152
+msgid "Review"
+msgstr "Revisão"
+
+#: controllers/admin/Settings_API.php:462
+msgid "Cheatin&#8217; uh?"
+msgstr "Trapaceando é???"
+
+#. Author of the plugin/theme
+#: controllers/admin/Settings_API.php:170 controllers/admin/Settings_API.php:171
+#: controllers/reporting/Dashboard.php:141
+msgid "Sprout Apps"
+msgstr "Sprout Apps"
+
+#: controllers/admin/Settings_API.php:171
+msgid "Updates"
+msgstr "Atualizações"
+
+#: controllers/admin/Settings_API.php:419
+msgid "-- Select --"
+msgstr "-- Selecione --"
+
+#: controllers/admin/Settings.php:654 controllers/clients/Clients.php:1130
+#: controllers/estimates/Estimates_Admin.php:111
+#: controllers/invoices/Invoices_Admin.php:268
+#: controllers/notifications/Notifications_Control.php:797
+#: controllers/payment-processing/Payment_Processors.php:598
+#: controllers/payments/Payments.php:220 controllers/projects/Projects.php:539
+#: controllers/reporting/Reporting.php:841 importers/Importer.php:166
+#: views/admin/sprout-invoices-dashboard.php:103
+msgid "Support"
+msgstr "Suporte"
+
+#: controllers/admin/Settings.php:653 controllers/clients/Clients.php:1129
+#: controllers/estimates/Estimates_Admin.php:110
+#: controllers/invoices/Invoices_Admin.php:267
+#: controllers/notifications/Notifications_Control.php:796
+#: controllers/payment-processing/Payment_Processors.php:597
+#: controllers/payments/Payments.php:219 controllers/projects/Projects.php:538
+#: controllers/reporting/Reporting.php:840 importers/Importer.php:165
+#: views/admin/sprout-invoices-dashboard.php:40
+#: views/admin/sprout-invoices-dashboard.php:46
+#: views/admin/sprout-invoices-dashboard.php:52
+#: views/admin/sprout-invoices-dashboard.php:75
+#: views/admin/sprout-invoices-dashboard.php:82
+#: views/admin/sprout-invoices-dashboard.php:88
+#: views/admin/sprout-invoices-dashboard.php:93
+#: views/admin/sprout-invoices-dashboard.php:98
+#: views/admin/sprout-invoices-dashboard.php:103
+msgid "Documentation"
+msgstr "Documentação"
+
+#: controllers/admin/Settings.php:648
+msgid ""
+"The option to Save Logs is for debugging purposes and not recommended, unless "
+"advised. It’s important to note that turning enabling this option on a live site "
+"may cause private transaction data to be saved in the DB unencrypted, i.e. CC data."
+msgstr ""
+"A opção para guardar os logs é para fins de depuração e não é recomendado, a não "
+"ser que esteja com problemas. É importante notar que, habilitar essa opção em um "
+"site online pode fazer com que dados de transações privadas sejam salvos na base de "
+"dados não criptografada, ou seja, dados de clientes poderão ficar vulneráveis."
+
+#: controllers/admin/Settings.php:652 controllers/clients/Clients.php:1128
+#: controllers/estimates/Estimates_Admin.php:109
+#: controllers/invoices/Invoices_Admin.php:266
+#: controllers/notifications/Notifications_Control.php:795
+#: controllers/payment-processing/Payment_Processors.php:596
+#: controllers/payments/Payments.php:218 controllers/projects/Projects.php:537
+#: controllers/reporting/Reporting.php:839 importers/Importer.php:164
+msgid "For more information:"
+msgstr "Para mais informações:"
+
+#: controllers/admin/Settings.php:618
+msgid "Activate your license if you have not done so already."
+msgstr "Ative sua licença se você ainda não fez isso."
+
+#: controllers/admin/Settings.php:623
+#: controllers/payment-processing/Payment_Processors.php:579
+msgid "Credit Card Processing"
+msgstr "Processando Cartão de Crédito"
+
+#: controllers/admin/Settings.php:624
+msgid ""
+"To get you started, Sprout Invoices provides a fully customizable form for estimate "
+"submissions. Add the shortcode below to a page to use this default form: "
+"<code>[estimate_submission]Thank you![/estimate_submission]</code>"
+msgstr ""
+"Para você começar, Sprout Invoices proporciona uma forma totalmente personalizável "
+"para criar formulários de solicitação de orçamentos. Adicione o shortcode abaixo "
+"numa página para usar o formulário padrão: <code>[estimate_submission]Obrigado![/"
+"estimate_submission]</code>"
+
+#: controllers/admin/Settings.php:624
+msgid ""
+"Additional documentation is available to customize the default estimate form and "
+"using the integration add-on."
+msgstr ""
+"Documentação adicional está disponível para personalizar o formulário de pedido de "
+"orçamento padrão usando add-on de integração."
+
+#: controllers/admin/Settings.php:629
+msgid "Estimate/Invoice Settings"
+msgstr "Configurações de Orçamentos/Facturas"
+
+#: controllers/admin/Settings.php:630
+msgid ""
+"The Default Terms and Default Notes will be added to each estimate unless an "
+"estimate has customized Terms and/or Notes."
+msgstr ""
+"Os Termos e Notas padrão serão adicionados a cada orçamento, a não ser que o "
+"orçamento tenha os Termos e Notas customizados."
+
+#: controllers/admin/Settings.php:635
+#: controllers/notifications/Notifications_Control.php:91
+msgid "Notification Settings"
+msgstr "Configurações de notificação"
+
+#: controllers/admin/Settings.php:636
+msgid ""
+"The from name and from e-mail is used for all Sprout Invoice notifications. "
+"Example, “Joc Pederson” future@dodgers.com."
+msgstr ""
+"Nome e email padrão usado para todas as notificações.Exemplo: “Joc Pederson” "
+"future@dodgers.com."
+
+#: controllers/admin/Settings.php:636
+msgid ""
+"Changing the email format to “HTML” will make the default notifications unformatted "
+"and look like garbage; if you want to create some pretty HTML notifications make "
+"sure to modify all notification formatting."
+msgstr ""
+"Alterar o formato de e-mail para \"HTML\" fará com que as notificações padrão não "
+"formatadas parecer lixo; se você quiser criar algum HTML bastante notificações "
+"certifique-se de modificar toda a formatação notificação."
+
+#: controllers/admin/Settings.php:642
+msgid ""
+"This information is used on all estimates and invoices. You’ll want to make sure to "
+"set this information before sending out any invoices/estimates."
+msgstr ""
+"Esta informação é usada em todas os orçamentos e faturas. Certifique-se de definir "
+"essas informações antes de enviar faturas/orçamentos."
+
+#: controllers/admin/Settings.php:647 controllers/clients/Clients.php:120
+#: controllers/developer/Logs.php:45
+#: controllers/notifications/Notifications_Control.php:784
+msgid "Advanced"
+msgstr "Avançadas"
+
+#: controllers/admin/Settings.php:320
+msgid "International Currency Symbol"
+msgstr "Símbolo Monetário Internacional"
+
+#: controllers/admin/Settings.php:323
+msgid "U.S. default is <code>USD</code>"
+msgstr "Em Portugal o padrão é <code>EUR</code>"
+
+#: controllers/admin/Settings.php:327
+#: controllers/payment-processing/Payment_Processors.php:591
+msgid "Currency Symbol"
+msgstr "Símbolo da Moeda"
+
+#: controllers/admin/Settings.php:330
+msgid "U.S. default is <code>$</code>"
+msgstr "Em Portugal o padrão é <code>€</code>"
+
+#: controllers/admin/Settings.php:334
+msgid "Decimal Point"
+msgstr "Separador de decimais"
+
+#: controllers/admin/Settings.php:337
+msgid "U.S. default is <code>.</code>"
+msgstr "Em Portugal o padrão é <code>,</code>"
+
+#: controllers/admin/Settings.php:341
+msgid "Thousands Separator"
+msgstr "Separador de Milhares"
+
+#: controllers/admin/Settings.php:344
+msgid "U.S. default is <code>,</code>"
+msgstr "Em Portugal o padrão é <code>.</code>"
+
+#: controllers/admin/Settings.php:348
+msgid "Positive Sign"
+msgstr "Symbol positivo"
+
+#: controllers/admin/Settings.php:351
+msgid "U.S. default is blank"
+msgstr "Em Portugal o padrão é em branco"
+
+#: controllers/admin/Settings.php:355
+msgid "Negative Sign"
+msgstr "Símbolo negativo"
+
+#: controllers/admin/Settings.php:358
+msgid "U.S. default is <code>-</code>"
+msgstr "Em Portugal o padrão é <code>-</code>"
+
+#: controllers/admin/Settings.php:362
+msgid "Fraction Digits"
+msgstr "Dígitos após a vírgula"
+
+#: controllers/admin/Settings.php:365
+msgid "U.S. default is <code>2</code>"
+msgstr "Em Portugal o padrão é <code>2</code>"
+
+#: controllers/admin/Settings.php:369
+msgid "Money Grouping"
+msgstr "Agrupando de zeros"
+
+#: controllers/admin/Settings.php:373
+msgid "U.S. default is <code>3, 3</code>"
+msgstr "Em Portugal o padrão é  <code>3, 3</code>"
+
+#: controllers/admin/Settings.php:377
+msgid "Currency Symbol Precedes (Positive)"
+msgstr "Símbolo da moeda precede valor (nº Positivo)"
+
+#: controllers/admin/Settings.php:381 controllers/admin/Settings.php:397
+#: controllers/admin/Settings.php:405 controllers/admin/Settings.php:421
+msgid "U.S. default is checked."
+msgstr "Por defeito está selecionado Modelo Padrão E.U.A."
+
+#: controllers/admin/Settings.php:385
+msgid "Space Separation (Positive)"
+msgstr "Espaço entre o símbolo (nº Positivo)"
+
+#: controllers/admin/Settings.php:389 controllers/admin/Settings.php:413
+msgid "U.S. default is unchecked."
+msgstr "Portugal o padrão é não selecionado."
+
+#: controllers/admin/Settings.php:393 controllers/admin/Settings.php:417
+msgid "Positive Position"
+msgstr "Posição de nº positivo"
+
+#: controllers/admin/Settings.php:401
+msgid "Currency Symbol Precedes (Negative)"
+msgstr "Symbol da moeda precede (Negativo)"
+
+#: controllers/admin/Settings.php:409
+msgid "Space Separation (Negative)"
+msgstr "Separação por Espaço (Negativo)"
+
+#: controllers/admin/Settings.php:467
+msgid ""
+"Select the states and countries/provinces for all forms, e.g. purchase, estimates "
+"and registration."
+msgstr ""
+"Selecione os países e estados para todos os formulários, por exemplo, compras, "
+"orçamentos e registros."
+
+#. Plugin Name of the plugin/theme
+#: controllers/admin/Settings.php:569 controllers/reporting/Dashboard.php:141
+#: controllers/templating/Customizer.php:59
+msgid "Sprout Invoices"
+msgstr "Sprout Invoices"
+
+#: controllers/admin/Settings.php:617
+msgid "License"
+msgstr "Licensa"
+
+#: controllers/admin/Settings.php:104
+msgid "Getting Started"
+msgstr "Começando"
+
+#: controllers/admin/Settings.php:116 controllers/admin/Settings.php:641
+msgid "Company Info"
+msgstr "Informações da empresa"
+
+#: controllers/admin/Settings.php:129
+msgid "Currency Formatting"
+msgstr "Formatação Atual"
+
+#: controllers/admin/Settings.php:245
+msgid "The company name and address will be shown on the estimates and invoices."
+msgstr "O nome e endereço da empresa serão mostrados nas orçamentos e faturas."
+
+#: controllers/admin/Settings.php:258 controllers/clients/Clients.php:561
+msgid "Company Name"
+msgstr "Razão Social"
+
+#: controllers/admin/Settings.php:265
+msgid "Contact Email"
+msgstr "Email de contato"
+
+#: controllers/admin/Settings.php:312
+msgid ""
+"<p>Manually set your currency formatting. More information about these settings and "
+"using a filter can be found in the <a href=\"%s\">documentation</a>.</p>"
+msgstr ""
+"<p>Defina manualmente  a formatação da moeda. Mais informações sobre essas "
+"configurações usando um filtro podem ser encontradas na <a href=\"%s"
+"\">documentação</a>.</p>"
+
+#: controllers/_Controller.php:830
+msgid "Private note failed to save, try again."
+msgstr "Falha ao salvar nota privada, tente novamente."
+
+#: controllers/_Controller.php:834 controllers/records/Internal_Records.php:217
+#: template-tags/invoices.php:964 views/admin/meta-boxes/clients/history.php:21
+#: views/admin/meta-boxes/projects/history-premium.php:21
+#: views/admin/meta-boxes/projects/history.php:21
+msgid "Private Note"
+msgstr "Nota Pessoal"
+
+#: controllers/_Controller.php:835
+msgid "Just now"
+msgstr "Agora mesmo"
+
+#: controllers/_Controller.php:967
+msgid "Something failed."
+msgstr "Algo falhou."
+
+#: controllers/admin/Help.php:25
+msgid ""
+"Please support the future of <strong>Sprout Invoices</strong> by rating the free "
+"version <a href=\"%1$s\" target=\"_blank\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> "
+"on <a href=\"%1$s\" target=\"_blank\">WordPress.org</a>. Have an awesome %2$s!"
+msgstr ""
+"Por favor apóie o futuro de <strong>Sprout Invoices</strong> classificando a versão "
+"gratuita no ranking <a href=\"%1$s\" target=\"_blank\">&#9733;&#9733;&#9733;&#9733;"
+"&#9733;</a> on <a href=\"%1$s\" target=\"_blank\">WordPress.org</a>.  Já possui uma "
+"impressionante %2$s!"
+
+#: controllers/admin/Help.php:137 controllers/admin/Help.php:155
+msgid "Nested Line Items"
+msgstr "Itens de linha aninhados"
+
+#: controllers/admin/Help.php:138 controllers/admin/Help.php:156
+msgid ""
+"Line items can be nested. Use this handle and drag the line item around to re-order "
+"or make it a sub-item."
+msgstr ""
+"Os itens de linha podem ser aninhadas. Utilize este identificador e arraste o item "
+"de linha em torno de re-ordem ou torná-lo um sub-item."
+
+#: controllers/admin/Help.php:203
+msgid "Need Help?"
+msgstr "Necessita de ajuda?"
+
+#: controllers/admin/Help.php:204
+msgid ""
+"This help tab has a lot of great information for you to learn all about the options "
+"and settings on this page."
+msgstr ""
+"Esta aba de ajuda tem um grande lote de informações para você aprender tudo sobre "
+"as opções e configurações nesta página."
+
+#: controllers/admin/Settings.php:93
+msgid "General Settings"
+msgstr "Configurações"
+
+#: controllers/_Controller.php:760 controllers/_Controller.php:761
+msgid "ZIP Code"
+msgstr "Código Postal (CP)"
+
+#: controllers/_Controller.php:768 controllers/_Controller.php:770
+msgid "State"
+msgstr "Região"
+
+#: controllers/_Controller.php:777 controllers/_Controller.php:780
+msgid "Country"
+msgstr "País"
+
+#: controllers/_Controller.php:744 controllers/_Controller.php:745
+msgid "Street Address"
+msgstr "Endereço"
+
+#: controllers/_Controller.php:752 controllers/_Controller.php:753
+msgid "City"
+msgstr "Cidade"
+
+#: controllers/_Controller.php:737 controllers/_Controller.php:738
+#: controllers/clients/Clients.php:632 controllers/clients/Clients.php:633
+msgid "Last Name"
+msgstr "Último Nome"
+
+#: controllers/_Controller.php:162
+msgid "Bummer. Maybe next time?"
+msgstr "Que pena. Quem sabe na próxima vez?"
+
+#: controllers/_Controller.php:282
+msgid "Once a Minute"
+msgstr "A cada minuto"
+
+#: controllers/_Controller.php:286
+msgid "15 Minutes"
+msgstr "15 Minutos"
+
+#: controllers/_Controller.php:290
+msgid "Twice Hourly"
+msgstr "Duas vezes por hora"
+
+#: controllers/_Controller.php:730 controllers/_Controller.php:731
+#: controllers/clients/Clients.php:625 controllers/clients/Clients.php:626
+msgid "First Name"
+msgstr "Primeiro nome"
+
+#: controllers/_Controller.php:160
+msgid "Thank you"
+msgstr "Obrigado!"
+
+#: controllers/_Controller.php:161
+msgid "Updating..."
+msgstr "Atualizando..."
+
+#: add-ons/updates/edd_plugin_updater.class.php:175
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class=\"thickbox\" "
+"href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+"Há uma nova versão de %1$s disponível. <a target=\"_blank\" class=\"thickbox\" href="
+"\"%2$s\">Ver detalhes da versão %3$s </a>."
+
+#: add-ons/updates/edd_plugin_updater.class.php:182
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class=\"thickbox\" "
+"href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s\">update now</a>."
+msgstr ""
+"Esta é a nova versão de %1$s disponível. <a target=\"_blank\" class=\"thickbox\" "
+"href=\"%2$s\">Ver detalhes da versão %3$s</a> ou <a href=\"%4$s\">atualizar agora</"
+"a>."
+
+#: add-ons/updates/edd_plugin_updater.class.php:327
+msgid "You do not have permission to install plugin updates"
+msgstr "Você não tem permissão para instalar atualizações do plugin."
+
+#: add-ons/updates/edd_plugin_updater.class.php:327
+msgid "Error"
+msgstr "Erro"
+
+#: add-ons/Addons.php:35
+msgid "Sprout Invoices Add-ons"
+msgstr "Extensões Sprout Invoices"
+
+#: add-ons/Addons.php:36
+msgid "Add-ons"
+msgstr "Adicionar Extensões"
+

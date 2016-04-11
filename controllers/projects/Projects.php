@@ -104,6 +104,13 @@ class SI_Projects extends SI_Controller {
 				'context' => 'normal',
 				'priority' => 'low',
 			),
+			'psp_project_info' => array(
+				'title' => 'Project Panorama',
+				'show_callback' => array( __CLASS__, 'show_psp_meta_box' ),
+				'save_callback' => array( __CLASS__, '_save_null' ),
+				'context' => 'side',
+				'priority' => 'low',
+			),
 		);
 		do_action( 'sprout_meta_box', $args, SI_Project::POST_TYPE );
 	}
@@ -178,6 +185,15 @@ class SI_Projects extends SI_Controller {
 			// add the client modal
 			self::load_view( 'admin/meta-boxes/clients/creation-modal', array( 'fields' => SI_Clients::form_fields( false ) ) );
 		}
+	}
+
+	/**
+	 * Project Panaorama
+	 * @param  object $post
+	 * @return
+	 */
+	public static function show_psp_meta_box( $post ) {
+		printf( '<p class="description help_block"><a href="%s"><img src="%s" /></a><br/>%s</p>', 'https://sproutapps.co/sprout-invoices/integrations/', SI_RESOURCES . 'admin/img/project-panorama-logo.png', __( 'SI now integrates with <a href="https://sproutapps.co/sprout-invoices/integrations/">Project Panorama</a>.', 'sprout-invoices' ) );
 	}
 
 	/**
