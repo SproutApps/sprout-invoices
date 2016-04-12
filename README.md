@@ -90,6 +90,13 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.1**
+
+* New: Project Panorama Integration
+* Fix: WooCommerce Integration Update Mechanism fix
+* Fix: UI for Recurring 
+* Update: Translations
+
 **10.0.8**
 
 * Fix: Selection of of users from client admin
