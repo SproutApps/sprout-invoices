@@ -28,11 +28,11 @@ abstract class Sprout_Invoices {
 	/**
 	 * Application text-domain
 	 */
-	const PLUGIN_URL = 'https://sproutapps.co';
+	const PLUGIN_URL = 'https://sproutapps.co/sprout-invoices/';
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '10.1';
+	const SI_VERSION = '10.2';
 	/**
 	 * DB Version
 	 */

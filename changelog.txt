@@ -1,3 +1,7 @@
+= 10.2 =
+
+* Fix: Dont' allow non editors to log credits.
+
 = 10.1 =
 
 * New: Project Panorama Integration
@@ -659,7 +663,7 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 * _Bug Fixes:_
 	* Few error prevention updates
 
-= 1.0.10.1 =
+= 1.0.10.2 =
 
 * _Bug Fixes_
 	* Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)

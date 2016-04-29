@@ -90,6 +90,9 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.2**
+* Fix: Dont' allow non editors to log credits.
+
 **10.1**
 
 * New: Project Panorama Integration

@@ -376,6 +376,7 @@
 				$si_tooltip = $parent.find('.si_tooltip');
 			$(this).hide();
 			$si_tooltip.show();
+			$('.select2').select2();
 			$controls.slideDown('fast');
 		});
 

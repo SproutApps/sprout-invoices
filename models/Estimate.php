@@ -285,7 +285,7 @@ class SI_Estimate extends SI_Post_Type {
 		$this->set_status( self::STATUS_ARCHIVED );
 	}
 
-	public static function get_status_label( $status = '' ) {
+	public function get_status_label( $status = '' ) {
 		if ( '' === $status ) {
 			$status = $this->get_status();
 		}

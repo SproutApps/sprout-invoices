@@ -256,11 +256,8 @@
 			$all_plugins_paths[] = fs_normalize_path( realpath( WP_PLUGIN_DIR . '/' . $relative_path ) );
 		}
 
-		error_log( 'plugins: ' . print_r( $all_plugins_paths, TRUE ) );
-		error_log( 'bt: ' . print_r( debug_backtrace(), TRUE ) );
 		$plugin_file = null;
 		for ( $i = 1, $bt = debug_backtrace(), $len = count( $bt ); $i < $len; $i ++ ) {
-			error_log( 'normalized path: ' . print_r( fs_normalize_path( $bt[ $i ]['file'] ), TRUE ) );
 			if ( in_array( fs_normalize_path( $bt[ $i ]['file'] ), $all_plugins_paths ) ) {
 				$plugin_file = $bt[ $i ]['file'];
 				break;

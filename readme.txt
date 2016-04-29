@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.5
-Stable tag: 10.1
+Stable tag: 10.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ Our mission at [Sprout Apps](https://sproutapps.co/?utm_medium=link&utm_campaign
 
 Reduce the time spent fielding project requests, estimating projects & getting paid. Processes are heavily automated and highly customizable to fit your business workflow and brand.
 
-Make sure to review the [Sprout Invoices](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) features page for more detailed information. As well as the full featured [demo](https://sproutapps.co/demo/playground).
+> The future of [Sprout Invoices](https://sproutapps.co/sprout-clients/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) relies on happy customers supporting Sprout Apps by purchasing upgraded versions. If you like this free version of Sprout Clients please consider [purchasing an upgrade](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
 
 * An awesome [estimate & invoice workflow](https://sproutapps.co/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org). 
 * The best [payment experience](https://sproutapps.co/news/sprout-invoices-payment-options-deposits-checks-authorizations/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutapps.co/marketplace/paypal-payments-express-checkout/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (additional gateways available).
@@ -54,7 +54,9 @@ Pro Features
 * [Pre-defined Line Items](https://sproutapps.co/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
 * [Dynamic Text](https://sproutapps.co/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) (premium upgrade).
 
-**A [fully featured upgrade](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) and [add-on marketplace](https://sproutapps.co/marketplace/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) are available.**
+Make sure to review the [Sprout Invoices](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) features page for more detailed information. As well as the full featured [demo](https://sproutapps.co/demo/playground).
+
+> A [fully featured upgrade](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) and [add-on marketplace](https://sproutapps.co/marketplace/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) are available.
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
@@ -120,7 +122,7 @@ Woocommerce, Stats dashboard, time tracking updates and more.
 
 == Changelog ==
 
-= 10.1 =
+= 10.2 =
 
 * New: Project Panorama Integration
 * Fix: WooCommerce Integration Update Mechanism fix
@@ -800,7 +802,7 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 * _Fix:_
 	* Few error prevention updates
 
-= 1.0.10.1 =
+= 1.0.10.2 =
 
 * _Fix_
 	* Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)

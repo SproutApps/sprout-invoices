@@ -40,8 +40,7 @@ if ( ! function_exists( 'si_who_is_paying' ) ) :
 		if ( is_user_logged_in() ) {
 			$user_id = get_current_user_id();
 			$user = get_userdata( $user_id );
-		}
-		elseif ( ! is_wp_error( $invoice ) ) {
+		} elseif ( ! is_wp_error( $invoice ) ) {
 			$client = $invoice->get_client();
 			if ( ! is_wp_error( $client ) ) {
 				$client_users = $client->get_associated_users();

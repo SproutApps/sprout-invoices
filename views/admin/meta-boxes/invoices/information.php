@@ -7,13 +7,13 @@ if ( 0 != $post->ID ) {
 	$date = date_i18n( $datef, $issue_date );
 } else { // draft (no saves, and thus no date specified)
 	$stamp = __( 'Issue <b>immediately</b>', 'sprout-invoices' );
-	$date = date_i18n( $datef, strtotime( current_time('mysql') ) );
+	$date = date_i18n( $datef, strtotime( current_time( 'mysql' ) ) );
 } ?>
 
 <?php do_action( 'doc_information_meta_box_first', $invoice ) ?>
 
 <div class="misc-pub-section" data-edit-id="status" data-edit-type="select">
-	<span id="status" class="wp-media-buttons-icon"><?php _e( 'Status:', 'sprout-invoices' ) ?> <b><?php echo esc_html( $status_options[$status] ) ?></b></span>
+	<span id="status" class="wp-media-buttons-icon"><?php _e( 'Status:', 'sprout-invoices' ) ?> <b><?php echo esc_html( $status_options[ $status ] ) ?></b></span>
 
 	<a href="#edit_status" class="edit-status hide-if-no-js edit_control" >
 		<span aria-hidden="true"><?php _e( 'Edit', 'sprout-invoices' ) ?></span> <span class="screen-reader-text"><?php _e( 'Select different status', 'sprout-invoices' ) ?></span>
@@ -22,7 +22,7 @@ if ( 0 != $post->ID ) {
 	<div id="status_div" class="control_wrap hide-if-js">
 		<div class="status-wrap">
 			<select name="post_status">
-				<?php foreach ( $status_options as $status_key => $status_name ): ?>
+				<?php foreach ( $status_options as $status_key => $status_name ) :  ?>
 					<?php printf( '<option value="%s" %s>%s</option>', $status_key, selected( $status_key, $status, false ), $status_name ) ?>
 				<?php endforeach ?>
 			</select>
@@ -39,7 +39,7 @@ if ( 0 != $post->ID ) {
 		<span id="timestamp"><?php printf( $stamp, $date ); ?></span>
 
 		<a href="#edit_timestamp" class="edit-timestamp hide-if-no-js"><span aria-hidden="true"><?php _e( 'Edit' ); ?></span> <span class="screen-reader-text"><?php _e( 'Edit date and time' ); ?></span></a>
-		<div id="timestampdiv" class="hide-if-js"><?php touch_time(($action == 'edit'), 1); ?></div>
+		<div id="timestampdiv" class="hide-if-js"><?php touch_time( ($action == 'edit'), 1 ); ?></div>
 	</div>
 </div>
 
@@ -85,9 +85,9 @@ if ( 0 != $post->ID ) {
 
 <!-- Client -->
 <div class="misc-pub-section" data-edit-id="client" data-edit-type="select">
-	<?php 
-		$client_name = ( $client_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $client_id ), get_the_title( $client_id ) ) : __( 'Client N/A', 'sprout-invoices' ) ;
-		 ?>
+	<?php
+		$client_name = ( $client_id ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( $client_id ), get_the_title( $client_id ) ) : __( 'Client N/A', 'sprout-invoices' );
+			?>
 	<span id="client" class="wp-media-buttons-icon"><?php _e( 'Invoice for', 'sprout-invoices' ) ?> <b><?php echo $client_name ?></b></span>
 
 	<a href="#edit_client" class="edit-client hide-if-no-js edit_control" >
@@ -98,7 +98,7 @@ if ( 0 != $post->ID ) {
 		<div class="client-wrap">
 			<select name="sa_metabox_client" class="select2">
 				<option value="create_client"><?php _e( 'Create client', 'sprout-invoices' ) ?></option>
-				<?php foreach ( $client_options as $id => $client_name ): ?>
+				<?php foreach ( $client_options as $id => $client_name ) :  ?>
 					<?php printf( '<option value="%s" %s>%s</option>', $id, selected( $id, $client_id, false ), $client_name ) ?>
 				<?php endforeach ?>
 			</select>
@@ -114,7 +114,7 @@ if ( 0 != $post->ID ) {
 </div>
 <?php do_action( 'doc_information_meta_box_client_row_after_client', $invoice ) ?>
 
-<?php if ( $estimate_id ): ?>
+<?php if ( $estimate_id ) :  ?>
 	<!-- Invoice -->
 	<div class="misc-pub-section" data-edit-id="estimate_id">
 		<span id="estimate_id" class="wp-media-buttons-icon"><?php _e( 'Associated Estimate:', 'sprout-invoices' ) ?> <b><a href="<?php echo get_edit_post_link( $estimate_id ) ?>"><?php echo get_the_title( $estimate_id ) ?></a></b></span>
