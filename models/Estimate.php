@@ -320,17 +320,15 @@ class SI_Estimate extends SI_Post_Type {
 	 * Issue date
 	 */
 	public function get_issue_date() {
-		$date = (int) $this->get_post_meta( self::$meta_keys['issue_date'] );
-		if ( ! $date ) {
-			$date = strtotime( $this->post->post_date );
-		};
+		$date = strtotime( $this->post->post_date );
 		return $date;
 	}
 
 	public function set_issue_date( $issue_date = 0 ) {
-		$this->save_post_meta( array(
-			self::$meta_keys['issue_date'] => $issue_date,
-		) );
+		if ( is_integer( $issue_date ) ) {
+			$issue_date = date( 'Y-m-d h:i:s', $issue_date );
+		}
+		$this->post->post_date = $issue_date;
 		return $issue_date;
 	}
 

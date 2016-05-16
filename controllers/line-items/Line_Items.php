@@ -227,7 +227,7 @@ class SI_Line_Items extends SI_Controller {
 		foreach ( $columns as $key => $column ) {
 			$has_column = false;
 			foreach ( $line_items as $position => $data ) {
-				if ( ! isset( $data['type'] ) ) {
+				if ( ! isset( $data['type'] ) || '' === $data['type'] ) {
 					$data['type'] = self::DEFAULT_TYPE;
 				}
 				if ( $data['type'] !== $type ) {
@@ -475,7 +475,7 @@ class SI_Line_Items extends SI_Controller {
 
 		$item_data = ( ! empty( $items ) && isset( $items[ $position ] ) ) ? $items[ $position ] : array();
 		$has_children = ( empty( $children ) ) ? false : true ;
-		if ( ! isset( $item_data['type'] ) ) {
+		if ( ! isset( $item_data['type'] ) || '' === $item_data['type'] ) {
 			$item_data['type'] = self::DEFAULT_TYPE;
 		}
 		self::load_view( 'admin/sections/line-item-options', array(

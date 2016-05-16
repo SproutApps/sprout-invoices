@@ -345,17 +345,15 @@ class SI_Invoice extends SI_Post_Type {
 	 * Issue date
 	 */
 	public function get_issue_date() {
-		$date = (int) $this->get_post_meta( self::$meta_keys['issue_date'] );
-		if ( ! $date ) {
-			$date = strtotime( $this->post->post_date );
-		};
+		$date = strtotime( $this->post->post_date );
 		return $date;
 	}
 
 	public function set_issue_date( $issue_date = 0 ) {
-		$this->save_post_meta( array(
-			self::$meta_keys['issue_date'] => $issue_date,
-		) );
+		if ( is_integer( $issue_date ) ) {
+			$issue_date = date( 'Y-m-d h:i:s', $issue_date );
+		}
+		$this->post->post_date = $issue_date;
 		return $issue_date;
 	}
 
@@ -807,10 +805,15 @@ class SI_Invoice extends SI_Post_Type {
 	 * @param int     $timestamp
 	 * @return array
 	 */
-	public static function get_overdue_invoices( $timestamp = 0, $delay = 0 ) {
-		if ( ! $delay ) {
-			$delay = apply_filters( 'si_get_overdue_yesterday_timestamp', current_time( 'timestamp' ) - 60 * 60 * 24 );
+	public static function get_overdue_invoices( $after = 0, $before = 0 ) {
+		if ( ! $after ) {
+			$after = apply_filters( 'si_get_overdue_yesterday_timestamp', strtotime( 'Yesterday',  current_time( 'timestamp' ) ) );
 		}
+
+		if ( ! $before ) {
+			$before = $after + 86399; // 24 hours
+		}
+
 		$args = array(
 				'post_type' => self::POST_TYPE,
 				'post_status' => array( self::STATUS_PENDING, self::STATUS_PARTIAL ),
@@ -820,14 +823,13 @@ class SI_Invoice extends SI_Post_Type {
 					array(
 						'key' => self::$meta_keys['due_date'],
 						'value' => array(
-							$timestamp,
-							$delay,
+							$after,
+							$before,
 							), // yesterday
 						'compare' => 'BETWEEN',
 						),
 					),
 			);
-
 		return get_posts( $args );
 	}
 }

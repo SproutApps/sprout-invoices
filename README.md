@@ -90,6 +90,18 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.3.1**
+
+* Fix: Overdue invoices within widgets
+
+= 10.3 =
+
+* NEW: Add WooCommerce product import compatibility
+* Fix: Line item fix
+* Fix: Payment reminder refactored
+* Update: Redactor updated
+* Fix: PHP warning
+
 **10.2**
 * Fix: Dont' allow non editors to log credits.
 

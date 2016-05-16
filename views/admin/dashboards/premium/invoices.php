@@ -59,10 +59,10 @@
 		<?php endif ?>
 
 		<?php
-			$invoices = SI_Invoice::get_overdue_invoices(); ?>
+			$invoices = SI_Invoice::get_overdue_invoices( apply_filters( 'si_dashboard_get_overdue_invoices_from', current_time( 'timestamp' ) - ( 86400 * 14 ) ), apply_filters( 'si_dashboard_get_overdue_invoices_to', current_time( 'timestamp' ) ) ); ?>
 
 		<?php if ( ! empty( $invoices ) ) : ?>
-			<b><?php _e( 'Overdue &amp; Unpaid', 'sprout-invoices' ) ?></b> 
+			<b><?php _e( 'Recently Overdue &amp; Unpaid', 'sprout-invoices' ) ?></b> 
 			<ul>
 				<?php foreach ( $invoices as $invoice_id ) : ?>
 					<li><a href="<?php echo get_edit_post_link( $invoice_id ) ?>"><?php echo get_the_title( $invoice_id ) ?></a> &mdash; <?php printf( __( 'Due: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ), si_get_invoice_due_date( $invoice_id ) ) ) ?></li>
