@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.5
-Stable tag: 10.3.1
+Stable tag: 10.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,6 +121,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Woocommerce, Stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 10.3.2 =
+
+* Fix: PayPal issues with advanced tax add-ons
 
 = 10.3.1 =
 
@@ -814,7 +818,7 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 * _Fix:_
 	* Few error prevention updates
 
-= 1.0.10.3.1 =
+= 1.0.10.3.2 =
 
 * _Fix_
 	* Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)

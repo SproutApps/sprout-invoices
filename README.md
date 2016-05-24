@@ -90,6 +90,10 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Changelog
 
+**10.3.2**
+
+* Fix: PayPal issues with advanced tax add-ons
+
 **10.3.1**
 
 * Fix: Overdue invoices within widgets
