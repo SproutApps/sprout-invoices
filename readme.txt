@@ -12,6 +12,9 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 == Description ==
 
+> <strong>Sprout Apps Family</strong><br>
+> Sprout Invoices is a standalone Invoicing and Estimates plugin, and is complimentary to [Sprout Clients](https://wordpress.org/plugins/sprout-clients/), another free business centric plugin from [Sprout Apps](https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+
 = Sprout Invoices – Premium WordPress Invoicing Plugin =
 
 Our mission at [Sprout Apps](https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) is to build a suite of apps (aka plugins) to help us all work more efficiently & provide complete control the WordPress way. Our latest Sprout Apps are Sprout Invoices and Help Scout Desk, with many more to come.
