@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Controller
@@ -10,7 +10,6 @@ class SI_Customizer extends SI_Controller {
 		add_action( 'customize_register', array( __CLASS__, 'customizer' ) );
 		add_action( 'customize_preview_init', array( __CLASS__, 'customizer_js' ) );
 		add_action( 'wp_head', array( __CLASS__, 'inject_css' ) );
-
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 10, 1 );
@@ -59,18 +58,18 @@ class SI_Customizer extends SI_Controller {
 			'title'       => __( 'Sprout Invoices', 'sprout-invoices' ),
 			'priority'    => 300,
 			'description' => __( 'Upload a logo to replace the default estimate/invoice logo.', 'sprout-invoices' ),
-			) );
+		) );
 
 		$wp_customize->add_setting( 'si_logo', array(
 			'sanitize_callback' => 'esc_url_raw',
 			//'transport' => 'postMessage',
-			) );
+		) );
 
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'si_logo', array(
 			'label'    => __( 'Invoice & Estimate Logo', 'sprout-invoices' ),
 			'section'  => 'si_custommizer_section',
 			'settings' => 'si_logo',
-			) ) );
+		) ) );
 
 		// Highlight and link color
 		$wp_customize->add_setting( 'si_invoices_color', array(
@@ -100,6 +99,9 @@ class SI_Customizer extends SI_Controller {
 	}
 
 	public static function inject_css() {
+		if ( ! is_customize_preview() ) {
+			return;
+		}
 		$inv_color = self::sanitize_hex_color( get_theme_mod( 'si_invoices_color' ) );
 		$est_color = self::sanitize_hex_color( get_theme_mod( 'si_estimates_color' ) );
 		?>
@@ -144,10 +146,9 @@ class SI_Customizer extends SI_Controller {
 			return '';
 		}
 		// 3 or 6 hex digits, or the empty string.
-		if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
+		if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
 			return $color;
 		}
 		return null;
 	}
-
 }

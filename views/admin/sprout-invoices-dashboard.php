@@ -28,8 +28,6 @@
 				</div>
 			<?php endif ?>
 
-			<div class="upgrade_message clearfix"><p><strong>Upgrade Discount Available:</strong> Write a <a href="https://wordpress.org/support/view/plugin-reviews/sprout-invoices">plugin review</a> about this free version and <a href="<?php echo si_get_sa_link( 'https://sproutapps.co/sprout-invoices/sprout-invoices-discount-code/', 'plugin-review' ) ?>">send us the link</a>.</p></div>
-
 			<h2 class="headline_callout"><?php _e( 'The Sprout Invoices Flow', 'sprout-invoices' ) ?></h2>
 
 			<div class="feature-section col three-col clearfix">
