@@ -3,7 +3,7 @@
 	$num_posts->{'auto-draft'} = 0; // remove auto-drafts
 	$total_posts = array_sum( (array) $num_posts );
 if ( $total_posts >= 10 && apply_filters( 'show_upgrade_messaging', true ) ) {
-	printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Congrats on your %s Invoice!</strong> Please consider supporting the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', self::number_ordinal_suffix( $total_posts ), si_get_purchase_link() );
+	printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Congrats on your %s Invoice!</strong> Please consider supporting the future of Sprout Invoices by: <a href="%s">upgrading</a> or writing a &#9733;&#9733;&#9733;&#9733;&#9733; <a href="%s">review</a>.</p></div>', self::number_ordinal_suffix( $total_posts ), si_get_purchase_link(), 'http://wordpress.org/support/view/plugin-reviews/sprout-invoices?filter=5' );
 } ?>
 
 <div id="subject_header" class="clearfix">
