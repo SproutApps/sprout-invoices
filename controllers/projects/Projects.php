@@ -216,6 +216,8 @@ class SI_Projects extends SI_Controller {
 		$project->set_start_date( $start_date );
 		$project->set_end_date( $end_date );
 		$project->add_associated_client( $client );
+
+		do_action( 'project_meta_saved', $project );
 	}
 
 	public static function update_post_data( $data = array(), $post = array() ) {

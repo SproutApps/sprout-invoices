@@ -40,19 +40,19 @@ class SI_Estimate_Submissions extends SI_Controller {
 						'option' => array(
 							'type' => 'bypass',
 							'output' => sprintf( '<code>%s</code>', __( 'N/A in free version', 'sprout-invoices' ) ),
-							'description' => sprintf( __( 'To get you started, Sprout Invoices provides a <a href="%s" target="_blank">fully customizable form</a> for estimate submissions. Simply add this shortcode to a page and an estimate submission form will be available to prospective clients. Notifications will be sent for each submission and a new estimate (and client) will be generated.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' )
-							)
+							'description' => sprintf( __( 'To get you started, Sprout Invoices provides a <a href="%s" target="_blank">fully customizable form</a> for estimate submissions. Simply add this shortcode to a page and an estimate submission form will be available to prospective clients. Notifications will be sent for each submission and a new estimate (and client) will be generated.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' ),
+							),
 						),
 					'advanced_submission_integration_addon' => array(
 						'label' => __( 'Gravity Forms and Ninja Forms Integration', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'bypass',
 							'output' => self::advanced_form_integration_view(),
-							'description' => sprintf( __( 'Instead of creating our own advanced form builder we\'ve integrated with the top WordPress form plugins. Make sure to read the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.', 'sprout-invoices' ), self::PLUGIN_URL.'/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' )
-							)
+							'description' => sprintf( __( 'Instead of creating our own advanced form builder we\'ve integrated with the top WordPress form plugins. Make sure to read the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.', 'sprout-invoices' ), self::PLUGIN_URL.'/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' ),
+							),
 						),
-					)
-				)
+					),
+				),
 			);
 		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 
@@ -62,7 +62,7 @@ class SI_Estimate_Submissions extends SI_Controller {
 		echo '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span>';
 		printf( __( '<strong>Upgrade Available:</strong> Enable Estimate Submission integrations and support the future of Sprout Invoices by <a href="%s">upgrading</a>.', 'sprout-invoices' ), si_get_purchase_link() );
 		echo '</p></div>';
-		printf( __( '<p>Estimate submissions is the start of the <a href="%s">Sprout Invoices workflow</a>.</p>', 'sprout-invoices' ), self::PLUGIN_URL.'/sprout-invoices/' );
+		printf( __( '<p>Estimate submissions is the start of the <a href="%s">Sprout Invoices workflow</a>.</p>', 'sprout-invoices' ), self::PLUGIN_URL );
 	}
 
 	public static function advanced_form_integration_view() {
@@ -79,5 +79,4 @@ class SI_Estimate_Submissions extends SI_Controller {
 		<?php
 		return ob_get_clean();
 	}
-
 }

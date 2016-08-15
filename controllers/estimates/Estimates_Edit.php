@@ -422,6 +422,8 @@ class SI_Estimates_Edit extends SI_Estimates {
 		// Last thing to do is set the total based on the options set, including the line items.
 		$estimate->set_calculated_total();
 
+		do_action( 'estimate_meta_saved', $estimate );
+
 		$user = get_userdata( get_current_user_id() );
 		do_action( 'si_new_record',
 			sprintf( __( 'Estimate updated by %s.', 'sprout-invoices' ), $user->display_name ),
