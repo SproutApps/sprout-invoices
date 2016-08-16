@@ -12,7 +12,7 @@
 			<?php
 				$maxitems = 0;
 				include_once( ABSPATH . WPINC . '/feed.php' );
-				$rss = fetch_feed( self::PLUGIN_URL.'/feed/' ); // FUTURE use feedburner
+				$rss = fetch_feed( 'https://sproutapps.co/feed/' ); // FUTURE use feedburner
 			if ( ! is_wp_error( $rss ) ) :
 				$maxitems = $rss->get_item_quantity( 3 );
 				$rss_items = $rss->get_items( 0, $maxitems );

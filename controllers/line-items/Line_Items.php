@@ -268,8 +268,11 @@ class SI_Line_Items extends SI_Controller {
 			default:
 				break;
 		}
-		if ( apply_filters( 'si_filter_zerod_decimals', '__return_true' ) ) {
-			$value = str_replace( '.00', '', $value );
+		$localeconv = SI_Admin_Settings::localeconv_options();
+		if ( isset( $localeconv['mon_decimal_point'] ) && '.' === $localeconv['mon_decimal_point'] ) {
+			if ( apply_filters( 'si_filter_zerod_decimals', true ) ) {
+				$value = str_replace( '.00', '', $value );
+			}
 		}
 		return $value;
 	}
@@ -386,12 +389,20 @@ class SI_Line_Items extends SI_Controller {
 						'admin_hide' => false,
 						'weight' => 30,
 					),
+				'pending_payments' => array(
+						'label' => __( 'Pending Payments', 'sprout-invoices' ),
+						'value' => si_get_invoice_pending_payments_total( $doc_id ),
+						'formatted' => sa_get_formatted_money( si_get_invoice_pending_payments_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
+						'hide' => ( 0.01 > (float) si_get_invoice_pending_payments_total( $doc_id ) ),
+						'admin_hide' => ( 0.01 > (float) si_get_invoice_pending_payments_total( $doc_id ) ),
+						'weight' => 40,
+					),
 				'payments' => array(
 						'label' => __( 'Payments', 'sprout-invoices' ),
-						'value' => si_get_invoice_payments_total( $doc_id ),
-						'formatted' => sa_get_formatted_money( si_get_invoice_payments_total( $doc_id ), $doc_id, '<span class="money_amount">%s</span>' ),
-						'hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id ) ),
-						'admin_hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id ) ),
+						'value' => si_get_invoice_payments_total( $doc_id, false ),
+						'formatted' => sa_get_formatted_money( si_get_invoice_payments_total( $doc_id, false ), $doc_id, '<span class="money_amount">%s</span>' ),
+						'hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id, false ) ),
+						'admin_hide' => ( 0.01 > (float) si_get_invoice_payments_total( $doc_id, false ) ),
 						'weight' => 40,
 					),
 				'balance' => array(
@@ -501,10 +512,14 @@ class SI_Line_Items extends SI_Controller {
 		if ( ! current_user_can( 'publish_sprout_invoices' ) ) {
 			self::ajax_fail( 'User cannot create an item!' );
 		}
-
 		$item_type = '';
 		if ( isset( $_REQUEST['item_type'] ) ) {
 			$item_type = $_REQUEST['item_type'];
+		}
+
+		$doc_id = '';
+		if ( isset( $_REQUEST['doc_id'] ) ) {
+			$doc_id = $_REQUEST['doc_id'];
 		}
 
 		if ( ! $item_type ) {
@@ -512,7 +527,7 @@ class SI_Line_Items extends SI_Controller {
 		}
 
 		ob_start();
-		$line_items = array( array( 'type' => $item_type ) );
+		$line_items = array( array( 'type' => $item_type, 'doc_id' => $doc_id ) );
 		self::item_build_option( 0, $line_items );
 		$option = ob_get_clean();
 

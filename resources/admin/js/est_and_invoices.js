@@ -182,6 +182,84 @@
 		);
 	};
 
+	/**
+	 * Expenses
+	 */
+	
+
+
+	si.docEdit.expenseImportingButton = function( button ) {
+		var $select_wrap = $('#expense_importing_project_selection'),
+			$expense_help = $('.add_expense_help');
+		$(button).hide();
+		$expense_help.hide();
+		$select_wrap.fadeIn();
+	};
+
+	si.docEdit.expenseImportingProjectSelected = function( select ) {
+		var $select = $(select),
+			project_id = $select.val(),
+			nonce = $('#expense_tracking_nonce').val(),
+			$info_project_span = $('#project b'),
+			$info_project_select = $('[name="doc_project"]');
+
+		$('span.inline_error_message').hide();
+		$select.after(si_js_object.inline_spinner);
+		$.post( ajaxurl, { action: 'sa_projects_expense', project_id: project_id, nonce: nonce, billable: true },
+			function( response ) {
+				$('.spinner').hide();
+				if ( response.error ) {
+					$select.after('<span class="inline_error_message">' + response.response + '</span>');	
+				}
+				else {
+					$.each( response, function(i, expense) {
+						si.docEdit.expenseAddItem( expense );
+					});
+					$('#expense_importing_project_selection').hide();
+					$('#expense_import_question_answer').fadeIn();
+				}
+			}
+		);
+
+		// Update project dropdown if not other project is selected.
+		// This will cause the dropdown to default to the first project.
+		if ( $info_project_select.val() < 1 ) {
+			$info_project_select.val( project_id );
+			$info_project_span.text( $select.find('option:selected').text() );
+		};
+	};
+
+	si.docEdit.expenseAddItem = function( expense ) {
+		var $type_list = $('ol#line_item_list'),
+			$type_header = $('#line_items_header');
+
+		$type_list.after(si_js_object.inline_spinner);
+		$.post( ajaxurl, { action: 'sa_get_expense_item', expense: expense },
+			function( response ) {
+				if ( response.success ) {
+					var $row = $(response.data.option);
+
+					$('.spinner').hide();
+					
+					// append the row to the list.
+					$type_list.append($row);
+
+					// update key
+					si.lineItems.modifyInputKey();
+					si.lineItems.calculateEachLineItemTotal();
+					
+					// Add the redactor
+					if ( si_js_object.redactor ) {
+						$row.find('.column_desc [name="line_item_desc[]"]').redactor();
+					};
+				}
+				else {
+					$type_list.append('<span class="inline_message inline_error_message">' + response.data.message + '</span>');
+				}
+			}
+		);
+	};
+
 	si.docEdit.createNote = function( $add_button ) {
 		var $post_id = $add_button.data( 'post-id' ),
 			$nonce = $add_button.data( 'nonce' ),
@@ -275,6 +353,18 @@
 		$('#time_importing_project_selection select').live( 'change', function(e) {
 			e.preventDefault();
 			si.docEdit.timeImportingProjectSelected( this );
+		});
+
+		// Expense importing
+		$('#expense_import_question_answer').live( 'click', function(e) {
+			e.preventDefault();
+			si.docEdit.expenseImportingButton( this );
+		});
+
+		// Expense importing
+		$('#expense_importing_project_selection select').live( 'change', function(e) {
+			e.preventDefault();
+			si.docEdit.expenseImportingProjectSelected( this );
 		});
 
 		// Create private note
@@ -376,7 +466,7 @@
 				$si_tooltip = $parent.find('.si_tooltip');
 			$(this).hide();
 			$si_tooltip.show();
-			$('.select2').select2();
+			$('.misc-pub-section .select2').select2();
 			$controls.slideDown('fast');
 		});
 

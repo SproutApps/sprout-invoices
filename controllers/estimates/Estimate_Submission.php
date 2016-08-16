@@ -48,7 +48,7 @@ class SI_Estimate_Submissions extends SI_Controller {
 						'option' => array(
 							'type' => 'bypass',
 							'output' => self::advanced_form_integration_view(),
-							'description' => sprintf( __( 'Instead of creating our own advanced form builder we\'ve integrated with the top WordPress form plugins. Make sure to read the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.', 'sprout-invoices' ), self::PLUGIN_URL.'/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' ),
+							'description' => sprintf( __( 'Instead of creating our own advanced form builder we\'ve integrated with the top WordPress form plugins. Make sure to read the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' ),
 							),
 						),
 					),
@@ -72,7 +72,7 @@ class SI_Estimate_Submissions extends SI_Controller {
 			<div class="sa_addon">
 				<div class="add_on_img_wrap">
 					<img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/gravity-ninja.png' ?>" />
-					<a class="purchase_button button button-primary button-large" href="<?php echo self::PLUGIN_URL.'/marketplace/advanced-form-integration-gravity-ninja-forms/' ?>"><?php _e( '$0-5', 'sprout-invoices' ) ?></a>
+					<a class="purchase_button button button-primary button-large" href="<?php echo 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ?>"><?php _e( '$0-5', 'sprout-invoices' ) ?></a>
 				</div>
 				<h4><?php _e( 'Advanced Form Integration with Gravity and Ninja Forms', 'sprout-invoices' ) ?></h4>
 			</div>

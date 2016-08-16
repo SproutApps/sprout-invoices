@@ -343,7 +343,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 			'posts_per_page' => -1,
 			'fields' => 'ids',
 		);
-		$clients = get_posts( $args );
+		$clients = get_posts( apply_filters( 'si_clients_select_get_posts_args', $args ) );
 		$client_options = array();
 		foreach ( $clients as $client_id ) {
 			$client_options[ $client_id ] = get_the_title( $client_id );

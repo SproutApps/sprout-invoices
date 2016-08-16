@@ -6,17 +6,18 @@
 	};
 
 	si.lineItems.addLineItem = function( $link ) {
-		var item_type = $link.data('item-id');
-		si.lineItems.addNewItemRow( item_type );
+		var item_type = $link.data('item-id'),
+			doc_id = $link.data('doc-id');
+		si.lineItems.addNewItemRow( item_type, doc_id );
 	};
 
 
-	si.lineItems.addNewItemRow = function( item_type ) {
+	si.lineItems.addNewItemRow = function( item_type, doc_id ) {
 		var $type_list = $('ol#line_item_list'),
 			$type_header = $('#line_items_header');
 
 		$type_list.after(si_js_object.inline_spinner);
-		$.post( ajaxurl, { action: 'sa_get_item_option', item_type: item_type },
+		$.post( ajaxurl, { action: 'sa_get_item_option', item_type: item_type, doc_id: doc_id },
 			function( response ) {
 				if ( response.success ) {
 					var $row = $(response.data.option);

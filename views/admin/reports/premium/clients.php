@@ -140,13 +140,13 @@
 							<td><?php echo (int) $number_estimate_complete ?></td>
 							<td><?php echo (int) $number_invoices ?></td>
 							<td><?php echo (int) $number_invoices_complete ?></td>
-							<td><?php sa_formatted_money( $total_invoiced ) ?></td>
-							<td><?php sa_formatted_money( $total_payments ) ?></td>
-							<td><?php sa_formatted_money( $total_outstanding ) ?></td>
+							<td><?php echo sa_get_formatted_money( $total_invoiced ) ?></td>
+							<td><?php echo sa_get_formatted_money( $total_payments ) ?></td>
+							<td><?php echo sa_get_formatted_money( $total_outstanding ) ?></td>
 							<?php if ( class_exists( 'SI_Account_Credits' ) ) :  ?>	
-								<td><?php sa_formatted_money( $total_balance ) ?></td>
+								<td><?php echo sa_get_formatted_money( $total_balance ) ?></td>
 							<?php endif ?>
-							<td><?php sa_formatted_money( $total_written_off ) ?></td>
+							<td><?php echo sa_get_formatted_money( $total_written_off ) ?></td>
 						</tr> 
 						<?php
 						// Send output to browser immediately
@@ -159,19 +159,172 @@
 			<tfoot>
 				<tr>
 					<th colspan="3"><?php _e( 'Totals', 'sprout-invoices' ) ?></th>
-					<th><?php echo (int) $table_total_estimate_count ?></th>
-					<th><?php echo (int) $table_total_estimate_complete_count ?></th>
-					<th><?php echo (int) $table_total_invoice_count ?></th>
-					<th><?php echo (int) $table_total_invoices_complete_count ?></th>
-					<th><?php sa_formatted_money( $table_total_invoiced ) ?></th>
-					<th><?php sa_formatted_money( $table_total_payments ) ?></th>
-					<th><?php sa_formatted_money( $table_total_outstanding ) ?></th>
+					<th><span id="footer_estimate_count"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), si_get_number_format( (int) $table_total_estimate_count ) ) ?></th>
+					<th><span id="footer_estimate_complete_count"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), si_get_number_format( (int) $table_total_estimate_complete_count ) ) ?></th>
+					<th><span id="footer_total_invoice_count"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), si_get_number_format( (int) $table_total_invoice_count ) ) ?></th>
+					<th><span id="footer_invoices_complete_count"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), si_get_number_format( (int) $table_total_invoices_complete_count ) ) ?></th>
+					<th><span id="footer_total_invoiced"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_invoiced ) ) ?></th>
+					<th><span id="footer_total_payments"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_payments ) ) ?></th>
+					<th><span id="footer_total_outstanding"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_outstanding ) ) ?></th>
 					<?php if ( class_exists( 'SI_Account_Credits' ) ) :  ?>	
-						<th><?php sa_formatted_money( $table_total_balance ) ?></th>
+						<th><span id="footer_total_balance"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_balance ) ) ?></th>
 					<?php endif ?>
-					<th><?php sa_formatted_money( $table_total_written_off ) ?></th>
+					<th><span id="footer_total_written_off"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_written_off ) ) ?></th>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+	jQuery(function($) {
+		$(document).ready(function() {
+			var table = $('#si_reports_table').dataTable( {
+				stateSave: true,
+				responsive: true,
+				dom: 'B<"clearfix">lfrtip',
+				buttons: [ 'copy', 'csv', 'pdf' ],
+				footerCallback: function ( row, data, start, end, display ) {
+					var api = this.api(), data;
+		 
+					// Remove the formatting to get integer data for summation
+					var intVal = function ( i ) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '')*1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+		 
+
+					footer_estimate_count = api
+						.column( 3, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_estimate_count' ).html(
+						footer_estimate_count.toFixed(2)
+					);
+
+					footer_estimate_complete_count = api
+						.column( 4, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_estimate_complete_count' ).html(
+						si_js_object.currency_symbol + footer_estimate_complete_count.toFixed(2)
+					);
+
+					footer_total_invoice_count = api
+						.column( 5, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_total_invoice_count' ).html(
+						footer_total_invoice_count.toFixed(2)
+					);
+
+					footer_invoices_complete_count = api
+						.column( 6, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_invoices_complete_count' ).html(
+						footer_invoices_complete_count.toFixed(2)
+					);
+
+					footer_total_invoiced = api
+						.column( 7, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_total_invoiced' ).html(
+						si_js_object.currency_symbol + footer_total_invoiced.toFixed(2)
+					);
+
+					footer_total_payments = api
+						.column( 8, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_total_payments' ).html(
+						si_js_object.currency_symbol + footer_total_payments.toFixed(2)
+					);
+
+					footer_total_outstanding = api
+						.column( 9, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_total_outstanding' ).html(
+						si_js_object.currency_symbol + footer_total_outstanding.toFixed(2)
+					);
+
+					footer_total_balance = api
+						.column( 10, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_total_balance' ).html(
+						si_js_object.currency_symbol + footer_total_balance.toFixed(2)
+					);
+
+					footer_total_written_off = api
+						.column( 10, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+					$( '#footer_total_written_off' ).html(
+						si_js_object.currency_symbol + footer_total_written_off.toFixed(2)
+					);
+				}
+			} );
+
+			$("#start_date").change(function() {	
+				minDateFilter = new Date( this.value ).getTime();
+				table.fnDraw();
+			});
+
+			$("#end_date").change(function() {
+				maxDateFilter = new Date( this.value ).getTime();
+				table.fnDraw();
+			});
+
+			// Date range filter
+			minDateFilter = '';
+			maxDateFilter = '';
+
+			$.fn.dataTableExt.afnFiltering.push(
+				function(oSettings, aData, iDataIndex) {
+					if (typeof aData._date == 'undefined') {
+						aData._date = new Date( aData[2] ).getTime()-(new Date( aData[2] ).getTimezoneOffset()*60000);
+					}
+
+					if (minDateFilter && !isNaN(minDateFilter)) {
+						if (aData._date < minDateFilter) {
+							return false;
+						}
+					}
+
+					if (maxDateFilter && !isNaN(maxDateFilter)) {
+						if (aData._date > maxDateFilter) {
+							return false;
+						}
+					}
+
+					return true;
+				}
+			);
+
+		} );
+	});
+</script>
+

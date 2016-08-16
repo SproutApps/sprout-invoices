@@ -59,7 +59,10 @@ if ( ! function_exists( 'si_get_invoice_status' ) ) :
 				$status = SI_Invoice::STATUS_TEMP;
 				break;
 			case SI_Invoice::STATUS_PENDING:
-				$status = 'pending';
+				$status = __( 'pending', 'sprout-invoices' );
+				if ( si_get_invoice_issue_date( $id ) < current_time( 'timestamp' ) ) {
+					$status = __( 'past-due', 'sprout-invoices' );
+				}
 				break;
 
 			default:
@@ -373,6 +376,20 @@ if ( ! function_exists( 'si_get_invoice_discount_total' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'si_get_invoice_fees_total' ) ) :
+	/**
+	 * Get the invoice tax
+	 * @param  integer $id
+	 * @return string
+	 */
+	function si_get_invoice_fees_total( $id = 0 ) {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+		$invoice = SI_Invoice::get_instance( $id );
+		return apply_filters( 'si_get_invoice_fees_total', $invoice->get_fees_total(), $invoice );
+	}
+endif;
 
 if ( ! function_exists( 'si_get_invoice_tax' ) ) :
 	/**
@@ -447,18 +464,33 @@ if ( ! function_exists( 'si_get_invoice_taxes_total' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'si_get_invoice_pending_payments_total' ) ) :
+	/**
+	 * Get the invoice total
+	 * @param  integer $id
+	 * @return string
+	 */
+	function si_get_invoice_pending_payments_total( $id = 0 ) {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+		$invoice = SI_Invoice::get_instance( $id );
+		return apply_filters( 'si_get_invoice_pending_payments_total', $invoice->get_pending_payments_total(), $invoice );
+	}
+endif;
+
 if ( ! function_exists( 'si_get_invoice_payments_total' ) ) :
 	/**
 	 * Get the invoice total
 	 * @param  integer $id
 	 * @return string
 	 */
-	function si_get_invoice_payments_total( $id = 0 ) {
+	function si_get_invoice_payments_total( $id = 0, $pending = true ) {
 		if ( ! $id ) {
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
-		return apply_filters( 'si_get_invoice_payments_total', $invoice->get_payments_total(), $invoice );
+		return apply_filters( 'si_get_invoice_payments_total', $invoice->get_payments_total( $pending ), $invoice );
 	}
 endif;
 

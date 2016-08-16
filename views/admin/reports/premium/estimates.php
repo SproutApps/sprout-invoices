@@ -34,12 +34,12 @@
 
 					$filter = ( isset( $_REQUEST['post_status'] ) ) ? $_REQUEST['post_status'] : 'any';
 
-					$showpage = ( isset( $_GET['showpage'] ) ) ? (int)$_GET['showpage'] + 1 : 1 ;
+					$showpage = ( isset( $_GET['showpage'] ) ) ? (int) $_GET['showpage'] + 1 : 1 ;
 					$args = array(
 						'post_type' => SI_Estimate::POST_TYPE,
 						'post_status' => $filter,
 						'posts_per_page' => apply_filters( 'si_reports_show_records', 2500, 'estimates' ),
-						'paged' => $showpage
+						'paged' => $showpage,
 						);
 
 					set_time_limit( 0 ); // run script forever
@@ -86,10 +86,93 @@
 			<tfoot>
 				<tr>
 					<th colspan="6"><?php _e( 'Totals', 'sprout-invoices' ) ?></th>
-					<th><?php sa_formatted_money( $table_total_estimated ) ?></th>
-					<th><?php sa_formatted_money( $table_subtotal ) ?></th>
+					<th><span id="footer_total_estimated"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_estimated ) ) ?></th>
+					<th><span id="footer_total_subtotal"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_subtotal ) ) ?></th>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+	jQuery(function($) {
+		$(document).ready(function() {
+			var table = $('#si_reports_table').dataTable( {
+				stateSave: true,
+				responsive: true,
+				dom: 'B<"clearfix">lfrtip',
+				buttons: [ 'copy', 'csv', 'pdf' ],
+				footerCallback: function ( row, data, start, end, display ) {
+					var api = this.api(), data;
+		 
+					// Remove the formatting to get integer data for summation
+					var intVal = function ( i ) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '')*1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+		 
+					footer_total_estimated = api
+						.column( 6, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+
+					footer_total_subtotal = api
+						.column( 7, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+		 
+					// Update footer
+					$( '#footer_total_estimated' ).html(
+						si_js_object.currency_symbol + footer_total_estimated.toFixed(2)
+					);
+					$( '#footer_total_subtotal' ).html(
+						si_js_object.currency_symbol + footer_total_subtotal.toFixed(2)
+					);
+				}
+			} );
+
+			$("#start_date").change(function() {	
+				minDateFilter = new Date( this.value ).getTime();
+				table.fnDraw();
+			});
+
+			$("#end_date").change(function() {
+				maxDateFilter = new Date( this.value ).getTime();
+				table.fnDraw();
+			});
+
+			// Date range filter
+			minDateFilter = '';
+			maxDateFilter = '';
+
+			$.fn.dataTableExt.afnFiltering.push(
+				function(oSettings, aData, iDataIndex) {
+					if (typeof aData._date == 'undefined') {
+						aData._date = new Date( aData[2] ).getTime()-(new Date( aData[2] ).getTimezoneOffset()*60000);
+					}
+
+					if (minDateFilter && !isNaN(minDateFilter)) {
+						if (aData._date < minDateFilter) {
+							return false;
+						}
+					}
+
+					if (maxDateFilter && !isNaN(maxDateFilter)) {
+						if (aData._date > maxDateFilter) {
+							return false;
+						}
+					}
+
+					return true;
+				}
+			);
+
+		} );
+	});
+</script>

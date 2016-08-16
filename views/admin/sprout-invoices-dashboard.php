@@ -96,7 +96,7 @@
 				<p><?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/' target='_blank' class='button'>%s</a>", __( 'Documentation', 'sprout-invoices' ) ); ?></p>
 
 				<h4><?php _e( 'I need help! Where is the support?', 'sprout-invoices' ); ?></h4>
-				<p><?php printf( __( "We want to make sure using Sprout Invoices is enjoyable and not a hassle. Sprout Apps has some pretty awesome <a href='%s'>support</a> and a budding <a href='%s'>knowledgebase</a> that will help you get anything resolved. Support and documentation is limited for this free version.", 'sprout-invoices' ), self::PLUGIN_URL.'/support/', self::PLUGIN_URL.'/support/knowledgebase/' ); ?></p>
+				<p><?php printf( __( "We want to make sure using Sprout Invoices is enjoyable and not a hassle. Sprout Apps has some pretty awesome <a href='%s'>support</a> and a budding <a href='%s'>knowledgebase</a> that will help you get anything resolved. Support and documentation is limited for this free version.", 'sprout-invoices' ), 'https://sproutapps.co/support/', 'https://sproutapps.co/support/knowledgebase/' ); ?></p>
 
 				<p><?php printf( "<a href='https://sproutapps.co/support/' target='_blank' class='button'>%s</a>", __( 'Support', 'sprout-invoices' ) ); ?>&nbsp;<?php printf( "<a href='https://sproutapps.co/support/knowledgebase/sprout-invoices/' target='_blank' class='button'>%s</a>", __( 'Documentation', 'sprout-invoices' ) ); ?></p>
 

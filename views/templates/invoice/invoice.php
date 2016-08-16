@@ -84,7 +84,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 							<?php if ( 'write-off' === si_get_invoice_status() ) : ?>
 								<span id="status" class="void"><span class="inner_status"><?php esc_html_e( 'Void', 'sprout-invoices' ) ?></span></span>
-							<?php elseif ( ( si_get_invoice_balance() > 0.00 ) && ( si_get_invoice_balance() <= si_get_invoice_payments_total() ) ) : ?>
+							<?php elseif ( si_get_invoice_balance() && ( si_get_invoice_pending_payments_total() > 0.00 ) ) : ?>
 								<span id="status" class="void"><span class="inner_status"><?php esc_html_e( 'Payment Pending', 'sprout-invoices' ) ?></span></span>
 							<?php elseif ( ! si_get_invoice_balance() ) : ?>
 								<span id="status" class="paid"><span class="inner_status"><?php esc_html_e( 'Paid', 'sprout-invoices' ) ?></span></span>

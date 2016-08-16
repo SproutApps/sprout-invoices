@@ -101,6 +101,9 @@ function sprout_invoices_load() {
 	// Line Items
 	require_once SI_PATH.'/controllers/line-items/Line_Items.php';
 
+	// Fees
+	require_once SI_PATH.'/controllers/fees/Fees.php';
+
 	// notifications
 	require_once SI_PATH.'/controllers/notifications/Notifications_Control.php';
 	require_once SI_PATH.'/controllers/notifications/Notifications.php';
@@ -286,6 +289,9 @@ function sprout_invoices_load() {
 	if ( ! SI_FREE_TEST && class_exists( 'SI_Invoices_Premium' ) ) {
 		SI_Invoices_Premium::init();
 	}
+
+	// Fees
+	SI_Fees::init();
 
 	// Line items
 	SI_Line_Items::init();

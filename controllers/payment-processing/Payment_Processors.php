@@ -181,7 +181,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		if ( ! in_array( 'SI_Paypal_EC', array_keys( $processors ) ) ) {
 			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span>%s</p></div>', sprintf( __( '<strong>Missing Paypal Express Checkout?</strong> The add-on is available for <b>free</b> on the <a href="%s">Sprout Apps marketplace</a>.', 'sprout-invoices' ), si_get_purchase_link( self::PLUGIN_URL . '/marketplace/paypal-payments-express-checkout/' ) ) );
 		} else {
-			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>%s</strong> %s</p></div>', __( 'More Payment Gateways Available:', 'sprout-invoices' ), sprintf( __( 'Checkout the Sprout Apps <a href="%s">marketplace</a>.', 'sprout-invoices' ), self::PLUGIN_URL . '/marketplace/' ) );
+			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>%s</strong> %s</p></div>', __( 'More Payment Gateways Available:', 'sprout-invoices' ), sprintf( __( 'Checkout the Sprout Apps <a href="%s">marketplace</a>.', 'sprout-invoices' ), 'https://sproutapps.co/marketplace/' ) );
 		}
 	}
 

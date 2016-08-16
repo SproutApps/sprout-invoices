@@ -31,6 +31,7 @@ class SI_Estimate extends SI_Post_Type {
 		'discount' => '_doc_discount', // int
 		'estimate_id' => '_estimate_id', // int
 		'expiration_date' => '_expiration_date', // int
+		'fees' => '_fees', // array
 		'issue_date' => '_estimate_issue_date', // int
 		'line_items' => '_doc_line_items', // array
 		'notes' => '_estimate_notes', // string
@@ -178,6 +179,7 @@ class SI_Estimate extends SI_Post_Type {
 			'issue_date' => time(),
 			'expiration_date' => 0,
 			'line_items' => array(),
+			'fees' => array(),
 			'fields' => array(),
 		);
 		$args = wp_parse_args( $passed_args, $defaults );
@@ -223,6 +225,8 @@ class SI_Estimate extends SI_Post_Type {
 		$estimate->set_expiration_date( $expiration_date );
 
 		$estimate->set_line_items( $args['line_items'] );
+
+		$estimate->set_fees( $args['fees'] );
 
 		do_action( 'sa_new_estimate', $estimate, $args );
 		return $id;
@@ -527,9 +531,14 @@ class SI_Estimate extends SI_Post_Type {
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
 			$subtotal = $this->get_total();
 		}
-		$estimate_total = $subtotal + $this->get_tax_total() + $this->get_tax2_total();
-		$total = $estimate_total - $this->get_discount_total();
+
+		$invoice_total = $subtotal + $this->get_tax_total() + $this->get_tax2_total();
+		$total = $invoice_total - $this->get_discount_total();
+
+		$total = $total + $this->get_fees_total();
+
 		$this->calculated_total = $total;
+
 		return si_get_number_format( $total );
 	}
 
@@ -569,6 +578,27 @@ class SI_Estimate extends SI_Post_Type {
 		}
 		$this->subtotal = $subtotal;
 		return $subtotal;
+	}
+
+	public function get_fees_total() {
+		if ( isset( $this->fees_total ) ) {
+			return $this->fees_total;
+		}
+		$fees_total = 0;
+		$fees = $this->get_fees();
+		if ( ! empty( $fees ) ) {
+			foreach ( $fees as $fee_key => $data ) {
+
+				if ( isset( $data['total_callback'] ) && is_callable( $data['total_callback'] ) ) {
+					$fee_total = call_user_func_array( $data['total_callback'], array( $this, $data ) );
+					$fees_total += apply_filters( 'si_fee_total', $fee_total, $data, true );
+				} elseif ( $data['total'] ) {
+					$fees_total += apply_filters( 'si_fee_total', $data['total'], $data );
+				}
+			}
+		}
+		$this->fees_total = $fees_total;
+		return $fees_total;
 	}
 
 	/**
@@ -634,6 +664,24 @@ class SI_Estimate extends SI_Post_Type {
 			self::$meta_keys['line_items'] => apply_filters( 'si_set_line_items', $line_items, $this ),
 		) );
 		return $line_items;
+	}
+
+	/**
+	 * Fees
+	 */
+	public function get_fees() {
+		$fees = $this->get_post_meta( self::$meta_keys['fees'] );
+		if ( ! is_array( $fees ) ) {
+			$fees = array();
+		}
+		return apply_filters( 'si_doc_fees', $fees, $this );
+	}
+
+	public function set_fees( $fees = 0 ) {
+		$this->save_post_meta( array(
+			self::$meta_keys['fees'] => apply_filters( 'si_set_fees', $fees, $this ),
+		) );
+		return $fees;
 	}
 
 	/**

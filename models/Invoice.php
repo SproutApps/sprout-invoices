@@ -31,6 +31,7 @@ class SI_Invoice extends SI_Post_Type {
 		'due_date' => '_due_date', // int
 		'estimate_id' => '_estimate_id',
 		'expiration_date' => '_expiration_date', // int
+		'fees' => '_fees', // array
 		'id' => '_invoice_id', // string
 		'invoice_id' => '_invoice_id',
 		'issue_date' => '_invoice_issue_date', // int
@@ -171,6 +172,7 @@ class SI_Invoice extends SI_Post_Type {
 			'due_date' => 0,
 			'expiration_date' => 0,
 			'line_items' => array(),
+			'fees' => array(),
 			'fields' => array(),
 		);
 		$args = wp_parse_args( $passed_args, $defaults );
@@ -221,6 +223,8 @@ class SI_Invoice extends SI_Post_Type {
 		$invoice->set_expiration_date( $expiration_date );
 
 		$invoice->set_line_items( $args['line_items'] );
+
+		$invoice->set_fees( $args['fees'] );
 
 		do_action( 'sa_new_invoice', $invoice, $args );
 		return $id;
@@ -613,7 +617,15 @@ class SI_Invoice extends SI_Post_Type {
 
 		$invoice_total = $subtotal + $this->get_tax_total() + $this->get_tax2_total();
 		$total = $invoice_total - $this->get_discount_total();
+
+		$total = $total + $this->get_fees_total();
+
 		$this->calculated_total = $total;
+
+		if ( $total !== $this->get_total() ) {
+			$this->set_total( si_get_number_format( $total ) );
+		}
+
 		return si_get_number_format( $total );
 	}
 
@@ -653,6 +665,27 @@ class SI_Invoice extends SI_Post_Type {
 		}
 		$this->subtotal = $subtotal;
 		return $subtotal;
+	}
+
+	public function get_fees_total() {
+		if ( isset( $this->fees_total ) ) {
+			return $this->fees_total;
+		}
+		$fees_total = 0;
+		$fees = $this->get_fees();
+		if ( ! empty( $fees ) ) {
+			foreach ( $fees as $fee_key => $data ) {
+
+				if ( isset( $data['total_callback'] ) && is_callable( $data['total_callback'] ) ) {
+					$fee_total = call_user_func_array( $data['total_callback'], array( $this, $data ) );
+					$fees_total += apply_filters( 'si_fee_total', $fee_total, $data, true );
+				} elseif ( $data['total'] ) {
+					$fees_total += apply_filters( 'si_fee_total', $data['total'], $data );
+				}
+			}
+		}
+		$this->fees_total = $fees_total;
+		return $fees_total;
 	}
 
 	/**
@@ -719,6 +752,24 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	/**
+	 * Fees
+	 */
+	public function get_fees() {
+		$fees = $this->get_post_meta( self::$meta_keys['fees'] );
+		if ( ! is_array( $fees ) ) {
+			$fees = array();
+		}
+		return apply_filters( 'si_doc_fees', $fees, $this );
+	}
+
+	public function set_fees( $fees = 0 ) {
+		$this->save_post_meta( array(
+			self::$meta_keys['fees'] => apply_filters( 'si_set_fees', $fees, $this ),
+		) );
+		return $fees;
+	}
+
+	/**
 	 * Currency
 	 */
 
@@ -758,27 +809,74 @@ class SI_Invoice extends SI_Post_Type {
 	// Utility //
 	//////////////
 
+	public function reset_totals( $calculate = false ) {
+		unset( $this->subtotal );
+		unset( $this->fees_total );
+		unset( $this->calculated_total );
+		unset( $this->payment_ids );
+		unset( $this->payments_total );
+		unset( $this->complete_payment_total );
+		unset( $this->pending_payments_total );
+		if ( $calculate ) {
+			$this->get_subtotal();
+			$this->get_fees_total();
+			$this->get_calculated_total();
+			$this->get_payments();
+			$this->get_pending_payments_total();
+			$this->get_payments_total();
+		}
+	}
+
 	public function get_payments() {
+		if ( isset( $this->payment_ids ) ) {
+			return $this->payment_ids;
+		}
+
 		$payment_ids = SI_Payment::get_payments( array( 'invoices' => $this->ID ) );
+		$this->payment_ids = $payment_ids;
 		return $payment_ids;
 	}
 
-	public function get_payments_total( $pending = true ) {
-		if ( isset( $this->payments_total ) ) {
-			return $this->payments_total;
+	public function get_pending_payments_total() {
+		if ( isset( $this->pending_payments_total ) ) {
+			return $this->pending_payments_total;
 		}
-		$payment_ids = self::get_payments();
+		$payment_ids = $this->get_payments();
 		$payment_total = 0;
 		foreach ( $payment_ids as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
-			if ( ! $pending && $payment->get_status() == SI_Payment::STATUS_PENDING ) {
-				continue;
-			}
-			if ( ! in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
+			if ( SI_Payment::STATUS_PENDING === $payment->get_status() ) {
 				$payment_total += $payment->get_amount();
 			}
 		}
-		$this->payment_total = $payment_total;
+
+		$this->pending_payments_total = $payment_total;
+		return $payment_total;
+	}
+
+	public function get_payments_total( $pending = true ) {
+		if ( $pending && isset( $this->payments_total ) ) {
+			return $this->payments_total;
+		}
+		if ( ! $pending && isset( $this->complete_payment_total ) ) {
+			return $this->complete_payment_total;
+		}
+
+		$payment_ids = $this->get_payments();
+		$payment_total = 0;
+		foreach ( $payment_ids as $payment_id ) {
+			$payment = SI_Payment::get_instance( $payment_id );
+			if ( ! $pending && SI_Payment::STATUS_PENDING === $payment->get_status() ) {
+				continue;
+			} elseif ( ! in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
+				$payment_total += $payment->get_amount();
+			}
+		}
+		if ( $pending ) {
+			$this->payments_total = $payment_total;
+		} else {
+			$this->complete_payment_total = $payment_total;
+		}
 		return $payment_total;
 	}
 

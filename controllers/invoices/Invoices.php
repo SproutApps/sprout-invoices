@@ -22,8 +22,12 @@ class SI_Invoices extends SI_Controller {
 		add_action( 'doc_status_changed',  array( __CLASS__, 'create_invoice_on_est_acceptance' ), 0 ); // fire before any others
 		add_action( 'doc_status_changed',  array( __CLASS__, 'create_payment_when_invoice_marked_as_paid' ) );
 
+		// reset invoice object caches
+		add_action( 'si_new_payment',  array( __CLASS__, 'reset_invoice_totals_cache' ), -100 );
+
 		// Mark paid or partial after payment
-		add_action( 'si_new_payment',  array( __CLASS__, 'change_status_after_payment' ) );
+		add_action( 'si_new_payment',  array( __CLASS__, 'change_status_after_payment_status_update' ) );
+		add_action( 'si_payment_status_updated',  array( __CLASS__, 'change_status_after_payment_status_update' ) );
 
 		// Cloning from estimates
 		add_action( 'si_cloned_post',  array( __CLASS__, 'associate_invoice_after_clone' ), 10, 3 );
@@ -138,18 +142,56 @@ class SI_Invoices extends SI_Controller {
 	// Misc. //
 	////////////
 
-	public static function change_status_after_payment( SI_Payment $payment ) {
+	public static function reset_invoice_totals_cache( SI_Payment $payment ) {
+
 		$invoice_id = $payment->get_invoice_id();
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			return;
 		}
-		// If the invoice has a balance the status should be changed to partial.
-		if ( $invoice->get_balance() >= 0.01 ) {
-			$invoice->set_as_partial();
-		} else { // else there's no balance
-			$invoice->set_as_paid();
+
+		$invoice->reset_totals( true );
+
+	}
+
+	public static function change_status_after_payment_status_update( SI_Payment $payment ) {
+
+		$invoice_id = $payment->get_invoice_id();
+		$invoice = SI_Invoice::get_instance( $invoice_id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return;
 		}
+
+		switch ( $payment->get_status() ) {
+
+			case SI_Payment::STATUS_PENDING:
+			case SI_Payment::STATUS_AUTHORIZED:
+
+				$invoice->set_pending();
+
+				break;
+
+			case SI_Payment::STATUS_COMPLETE:
+			case SI_Payment::STATUS_VOID:
+			case SI_Payment::STATUS_REFUND:
+
+				if ( $invoice->get_balance() >= 0.01 ) {
+					$invoice->set_as_partial();
+				} else { // else there's no balance
+					$invoice->set_as_paid();
+				}
+
+				break;
+
+			case SI_Payment::STATUS_RECURRING:
+			case SI_Payment::STATUS_CANCELLED:
+			default:
+
+				// no nothing at this time.
+
+				break;
+		}
+
 	}
 
 	/**

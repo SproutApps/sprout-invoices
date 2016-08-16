@@ -3,8 +3,8 @@ Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
-Tested up to: 4.5
-Stable tag: 10.3.2
+Tested up to: 4.6
+Stable tag: 11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

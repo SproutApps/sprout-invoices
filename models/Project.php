@@ -2,7 +2,7 @@
 
 /**
  * Project Model
- * 
+ *
  *
  * @package Sprout_Invoices
  * @subpackage Project
@@ -16,7 +16,9 @@ class SI_Project extends SI_Post_Type {
 		'associated_clients' => '_clients',
 		'associated_invoices' => '_invoice_ids', // associated invoices
 		'associated_time' => '_assoc_time_records',
+		'associated_expenses' => '_assoc_expense_records',
 		'clocked_time' => '_clocked_time',
+		'expensed_time' => '_expensed_time',
 		'start_date' => 'start_date',
 		'end_date' => 'end_date',
 		'website' => '_website',
@@ -34,7 +36,7 @@ class SI_Project extends SI_Post_Type {
 				'slug' => self::REWRITE_SLUG,
 				'with_front' => false,
 			),
-			'supports' => array( '' )
+			'supports' => array( '' ),
 		);
 		self::register_post_type( self::POST_TYPE, 'Project', 'Projects', $post_type_args );
 	}
@@ -55,31 +57,31 @@ class SI_Project extends SI_Post_Type {
 	 * @return Sprout_Invoices_Project
 	 */
 	public static function get_instance( $id = 0 ) {
-		if ( !$id )
-			return null;
-		
-		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
-			self::$instances[$id] = new self( $id );
+		if ( ! $id ) {
+			return null; }
 
-		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return null;
-		
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return null;
-		
-		return self::$instances[$id];
+		if ( ! isset( self::$instances[ $id ] ) || ! self::$instances[ $id ] instanceof self ) {
+			self::$instances[ $id ] = new self( $id ); }
+
+		if ( ! isset( self::$instances[ $id ]->post->post_type ) ) {
+			return null; }
+
+		if ( self::$instances[ $id ]->post->post_type != self::POST_TYPE ) {
+			return null; }
+
+		return self::$instances[ $id ];
 	}
 
 	/**
 	 * Create a project
-	 * @param  array $args 
-	 * @return int       
+	 * @param  array $args
+	 * @return int
 	 */
 	public static function new_project( $args ) {
 		$defaults = array(
 			'project_name' => sprintf( __( 'New Project: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'associated_clients' => array(),
-			'project_description' => ''
+			'project_description' => '',
 		);
 		$parsed_args = wp_parse_args( $args, $defaults );
 
@@ -87,8 +89,7 @@ class SI_Project extends SI_Post_Type {
 			'post_status' => 'publish',
 			'post_type' => self::POST_TYPE,
 			'post_title' => $parsed_args['project_name'],
-			'post_content' => $parsed_args['project_description']
-
+			'post_content' => $parsed_args['project_description'],
 		) );
 		if ( is_wp_error( $id ) ) {
 			return 0;
@@ -96,7 +97,7 @@ class SI_Project extends SI_Post_Type {
 
 		$project = self::get_instance( $id );
 
-		if ( is_numeric( $parsed_args['associated_clients'] ) ) {	
+		if ( is_numeric( $parsed_args['associated_clients'] ) ) {
 			$parsed_args['associated_clients'] = array( $parsed_args['associated_clients'] );
 		}
 		$project->set_associated_clients( $parsed_args['associated_clients'] );
@@ -112,14 +113,14 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Get the associated clients with this project
-	 * @return array 
+	 * @return array
 	 */
 	public function get_associated_clients() {
 		$clients = $this->get_post_meta( self::$meta_keys['associated_clients'], false );
-		if ( !is_array( $clients ) ) {
+		if ( ! is_array( $clients ) ) {
 			$clients = array();
 		}
-		return array_unique($clients);
+		return array_unique( $clients );
 	}
 
 	/**
@@ -128,8 +129,8 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function set_associated_clients( $clients = array() ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['associated_clients'] => $clients,
-			) );
+			self::$meta_keys['associated_clients'] => $clients,
+		) );
 		return $clients;
 	}
 
@@ -139,26 +140,26 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function clear_associated_clients() {
 		$this->delete_post_meta( array(
-				self::$meta_keys['associated_clients'] => ''
-			) );
+			self::$meta_keys['associated_clients'] => '',
+		) );
 	}
 
 	/**
 	 * Add single client to associated array
-	 * @param integer $client_id 
+	 * @param integer $client_id
 	 */
 	public function add_associated_client( $client_id = 0 ) {
-		if ( $client_id && !$this->is_client_associated( $client_id ) ) {
+		if ( $client_id && ! $this->is_client_associated( $client_id ) ) {
 			$this->clear_associated_clients(); // only single user ATM
 			$this->add_post_meta( array(
-					self::$meta_keys['associated_clients'] => $client_id
-				) );
+				self::$meta_keys['associated_clients'] => array( $client_id ),
+			) );
 		}
 	}
 
 	public function is_client_associated( $client_id ) {
 		$associated_clients = $this->get_associated_clients();
-		if ( empty( $associated_clients ) ) return;
+		if ( empty( $associated_clients ) ) { return; }
 		return in_array( $client_id, $associated_clients );
 	}
 
@@ -181,8 +182,8 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function set_associated_times( $times = array() ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['associated_time'] => $times,
-			) );
+			self::$meta_keys['associated_time'] => $times,
+		) );
 		return $times;
 	}
 
@@ -192,20 +193,20 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function clear_associated_times() {
 		$this->delete_post_meta( array(
-				self::$meta_keys['associated_time'] => '',
-			) );
+			self::$meta_keys['associated_time'] => '',
+		) );
 	}
 
 	/**
 	 * Add single time to associated array
-	 * @param array $time_data 
+	 * @param array $time_data
 	 */
 	public function create_associated_time( $time_data = array() ) {
 		$time = false;
 		if ( isset( $time_data['activity_id'] ) ) {
 			$time = SI_Time::get_instance( $time_data['activity_id'] );
 		}
-		if ( !$time || !is_a( $time, 'SI_Time' ) ) {
+		if ( ! $time || ! is_a( $time, 'SI_Time' ) ) {
 			// get default time to clock time to.
 			$activity_id = SI_Time::default_time();
 			$time = SI_Time::get_instance( $activity_id );
@@ -220,17 +221,17 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Add single time to associated array
-	 * @param int $time_id 
+	 * @param int $time_id
 	 */
 	public function add_associated_time( $time_id = 0 ) {
 		$times = $this->get_associated_times();
 		$times[] = $time_id;
 		$this->set_associated_times( $times );
 	}
-	
+
 	/**
 	 * Remove single time to associated array
-	 * @param int $time_id 
+	 * @param int $time_id
 	 */
 	public function remove_time_associated( $time_id = 0 ) {
 		// Delete time record
@@ -242,15 +243,15 @@ class SI_Project extends SI_Post_Type {
 		}
 		// Remove from associated array
 		$times = $this->get_associated_times();
-		if( ( $key = array_search($time_id, $times) ) !== false ) {
-			unset( $times[$key] );
+		if ( ( $key = array_search( $time_id, $times ) ) !== false ) {
+			unset( $times[ $key ] );
 		}
 		$this->set_associated_times( $times );
 	}
-	
+
 	/**
 	 * Remove single time to associated array
-	 * @param array $time_data 
+	 * @param array $time_data
 	 */
 	public function update_time_with_invoice_id( $time_data = array() ) {
 		// Invoice id will show as billed
@@ -259,17 +260,117 @@ class SI_Project extends SI_Post_Type {
 		update_post_meta( $this->ID, 'time_invoice_id', $time_data, $original_data );
 	}
 
+	/////////////
+	// Expense //
+	/////////////
+
+	/**
+	 * Get the associated expenses with this project
+	 * @return array
+	 */
+	public function get_associated_expenses() {
+		$expenses = $this->get_post_meta( self::$meta_keys['associated_expenses'] );
+		if ( ! is_array( $expenses ) ) {
+			$expenses = array();
+		}
+		return array_filter( $expenses );
+	}
+
+	/**
+	 * Save the associated expenses with this project
+	 * @param array $expenses
+	 */
+	public function set_associated_expenses( $expenses = array() ) {
+		$this->save_post_meta( array(
+			self::$meta_keys['associated_expenses'] => $expenses,
+		) );
+		return $expenses;
+	}
+
+	/**
+	 * Clear out the associated expenses
+	 * @param array $expenses
+	 */
+	public function clear_associated_expenses() {
+		$this->delete_post_meta( array(
+			self::$meta_keys['associated_expenses'] => '',
+		) );
+	}
+
+	/**
+	 * Add single expense to associated array
+	 * @param array $expense_data
+	 */
+	public function create_associated_expense( $expense_data = array() ) {
+		$expense = false;
+		if ( isset( $expense_data['activity_id'] ) ) {
+			$expense = SI_Expense::get_instance( $expense_data['activity_id'] );
+		}
+		if ( ! $expense || ! is_a( $expense, 'SI_Expense' ) ) {
+			// get default expense to track expense to.
+			$activity_id = SI_Expense::default_expense();
+			$expense = SI_Expense::get_instance( $activity_id );
+		}
+		// Create expense entry record
+		$new_expense_id = $expense->new_expense( $expense_data );
+		// Add to the associated array on this project
+		$this->add_associated_expense( $new_expense_id );
+		$this->save_post(); // update modified expense.
+		return $new_expense_id;
+	}
+
+	/**
+	 * Add single expense to associated array
+	 * @param int $expense_id
+	 */
+	public function add_associated_expense( $expense_id = 0 ) {
+		$expenses = $this->get_associated_expenses();
+		$expenses[] = $expense_id;
+		$this->set_associated_expenses( $expenses );
+	}
+
+	/**
+	 * Remove single expense to associated array
+	 * @param int $expense_id
+	 */
+	public function remove_expense_associated( $expense_id = 0 ) {
+		// Delete expense record
+		$expense = SI_Record::get_instance( $expense_id );
+		if ( is_a( $expense, 'SI_Record' ) ) {
+			$activity_id = $expense->get_associate_id();
+			$activity = SI_Expense::get_instance( $activity_id );
+			$activity->delete_expense( $expense_id );
+		}
+		// Remove from associated array
+		$expenses = $this->get_associated_expenses();
+		if ( ( $key = array_search( $expense_id, $expenses ) ) !== false ) {
+			unset( $expenses[ $key ] );
+		}
+		$this->set_associated_expenses( $expenses );
+	}
+
+	/**
+	 * Remove single expense to associated array
+	 * @param array $expense_data
+	 */
+	public function update_expense_with_invoice_id( $expense_data = array() ) {
+		// Invoice id will show as billed
+		$original_data = $expense_data;
+		unset( $original_data['invoice_id'] );
+		update_post_meta( $this->ID, 'expense_invoice_id', $expense_data, $original_data );
+	}
+
 
 	/**
 	 * Get the associated invoices with this project
-	 * @return array 
+	 * @return array
 	 */
 	public function get_associated_invoices() {
 		$invoices = $this->get_post_meta( self::$meta_keys['associated_invoices'], false );
-		if ( !is_array( $invoices ) ) {
+		if ( ! is_array( $invoices ) ) {
 			$invoices = array();
 		}
-		return array_filter($invoices);
+		return array_filter( $invoices );
 	}
 
 	/**
@@ -278,8 +379,8 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function set_associated_invoices( $invoices = array() ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['associated_invoices'] => $invoices,
-			) );
+			self::$meta_keys['associated_invoices'] => $invoices,
+		) );
 		return $invoices;
 	}
 
@@ -289,25 +390,25 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function clear_associated_invoices() {
 		$this->delete_post_meta( array(
-				self::$meta_keys['associated_invoices'] => ''
-			) );
+			self::$meta_keys['associated_invoices'] => '',
+		) );
 	}
 
 	/**
 	 * Add single invoice to associated array
-	 * @param integer $invoice_id 
+	 * @param integer $invoice_id
 	 */
 	public function add_associated_invoice( $invoice_id = 0 ) {
-		if ( $invoice_id && !$this->is_invoice_associated( $invoice_id ) ) {
+		if ( $invoice_id && ! $this->is_invoice_associated( $invoice_id ) ) {
 			$this->add_post_meta( array(
-					self::$meta_keys['associated_invoices'] => $invoice_id
-				) );
+				self::$meta_keys['associated_invoices'] => $invoice_id,
+			) );
 		}
 	}
 
 	public function is_invoice_associated( $invoice_id ) {
 		$associated_invoices = $this->get_associated_invoices();
-		if ( empty( $associated_invoices ) ) return;
+		if ( empty( $associated_invoices ) ) { return; }
 		return in_array( $invoice_id, $associated_invoices );
 	}
 
@@ -316,7 +417,7 @@ class SI_Project extends SI_Post_Type {
 	}
 
 	public function set_start_date( $start_date ) {
-		if ( !is_numeric( $start_date ) ) {
+		if ( ! is_numeric( $start_date ) ) {
 			$start_date = strtotime( $start_date );
 		}
 		return $this->save_post_meta( array( self::$meta_keys['start_date'] => $start_date ) );
@@ -327,7 +428,7 @@ class SI_Project extends SI_Post_Type {
 	}
 
 	public function set_end_date( $end_date ) {
-		if ( !is_numeric( $end_date ) ) {
+		if ( ! is_numeric( $end_date ) ) {
 			$end_date = strtotime( $end_date );
 		}
 		return $this->save_post_meta( array( self::$meta_keys['end_date'] => $end_date ) );
@@ -348,7 +449,7 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Get the associated invoices by all associated clients.
-	 * @return array 
+	 * @return array
 	 */
 	public function get_invoices() {
 		$invoices = self::find_by_meta( SI_Invoice::POST_TYPE, array( '_project_id' => $this->ID ) );
@@ -357,7 +458,7 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Get the associated estimates by all associated clients.
-	 * @return array 
+	 * @return array
 	 */
 	public function get_estimates() {
 		$estimates = self::find_by_meta( SI_Estimate::POST_TYPE, array( '_project_id' => $this->ID ) );
@@ -366,8 +467,8 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Get the projects that are associated with the invoice
-	 * @param  integer $invoice_id 
-	 * @return array           
+	 * @param  integer $invoice_id
+	 * @return array
 	 */
 	public static function get_projects_by_invoice( $invoice_id = 0 ) {
 		$projects = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_invoices'] => $invoice_id ) );
@@ -376,21 +477,11 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Get the projects that are associated with the client
-	 * @param  integer $client_id 
-	 * @return array           
+	 * @param  integer $client_id
+	 * @return array
 	 */
 	public static function get_projects_by_client( $client_id = 0 ) {
 		$projects = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_clients'] => $client_id ) );
-		return $projects;
-	}
-
-	/**
-	 * Get the projects that are associated with the time type
-	 * @param  integer $client_id 
-	 * @return array           
-	 */
-	public static function get_projects_by_time_type( $time_id = 0 ) {
-		$projects = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_time_types'] => $time_id ) );
 		return $projects;
 	}
 
@@ -406,8 +497,8 @@ class SI_Project extends SI_Post_Type {
 
 	/**
 	 * Get all payments from this project.
-	 * @param  integer $project_id 
-	 * @return              
+	 * @param  integer $project_id
+	 * @return
 	 */
 	public static function get_payments_by_project( $project_id = 0 ) {
 		$project = self::get_instance( $project_id );
@@ -418,5 +509,4 @@ class SI_Project extends SI_Post_Type {
 	public function get_history( $type = '' ) {
 		return SI_Record::get_records_by_association( $this->ID );
 	}
-
 }

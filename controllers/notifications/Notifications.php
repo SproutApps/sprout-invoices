@@ -118,7 +118,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				),
 				'declined_estimate' => array(
 					'name' => __( 'Estimate Declined', 'sprout-invoices' ),
-					'description' => __( 'Customize the email sent to the admin after an estimate is accepted.', 'sprout-invoices' ),
+					'description' => __( 'Customize the email sent to the admin after an estimate is declined.', 'sprout-invoices' ),
 					'shortcodes' => array( 'date', 'name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url' ),
 					'default_title' => sprintf( __( '%s: Estimate Declined', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-declined', null, false ),
@@ -159,7 +159,7 @@ class SI_Notifications extends SI_Notifications_Control {
 						'callback' => array( 'SI_Notifications', 'shortcode_payment_total' ),
 					),
 				'payment_id' => array(
-						'description' => __( 'Used to display the .', 'sprout-invoices' ),
+						'description' => __( 'Used to display the payment id (post_id).', 'sprout-invoices' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_payment_id' ),
 					),
 				'line_item_table' => array(

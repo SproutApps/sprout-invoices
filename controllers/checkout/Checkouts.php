@@ -3,7 +3,7 @@
 /**
  * Checkouts Controller
  *
- * At the moment the checkout is 
+ * At the moment the checkout is
  *
  * @package Sprout_Invoice
  * @subpackage Checkouts
@@ -21,7 +21,7 @@ class SI_Checkouts extends SI_Controller {
 	const PAYMENT_PAGE = 'payment';
 	const REVIEW_PAGE = 'review';
 	const CONFIRMATION_PAGE = 'confirmation';
-	
+
 	// controller and pages
 	private static $checkout_controller = null;
 	private $pages = array();
@@ -50,7 +50,7 @@ class SI_Checkouts extends SI_Controller {
 	}
 
 	public static function is_checkout_page() {
-		return isset( $_GET[self::CHECKOUT_QUERY_VAR] );
+		return isset( $_GET[ self::CHECKOUT_QUERY_VAR ] );
 	}
 
 	/*
@@ -66,7 +66,7 @@ class SI_Checkouts extends SI_Controller {
 		trigger_error( __CLASS__.' may not be serialized', E_USER_ERROR );
 	}
 	public static function get_instance() {
-		if ( !( self::$checkout_controller && is_a( self::$checkout_controller, __CLASS__ ) ) ) {
+		if ( ! ( self::$checkout_controller && is_a( self::$checkout_controller, __CLASS__ ) ) ) {
 			self::$checkout_controller = new self();
 		}
 		return self::$checkout_controller;
@@ -78,7 +78,7 @@ class SI_Checkouts extends SI_Controller {
 		$this->load_invoice();
 		$this->payment_processor = SI_Payment_Processors::get_payment_processor();
 		$this->load_pages();
-		$this->handle_action( isset($_REQUEST[self::CHECKOUT_ACTION])?$_REQUEST[self::CHECKOUT_ACTION]:'' );
+		$this->handle_action( isset( $_REQUEST[ self::CHECKOUT_ACTION ] )?$_REQUEST[ self::CHECKOUT_ACTION ]:'' );
 	}
 
 	public function checkout_url( $processor_slug = '1' ) {
@@ -95,23 +95,23 @@ class SI_Checkouts extends SI_Controller {
 
 	/**
 	 * Override the template and use something custom.
-	 * @param  string $template 
+	 * @param  string $template
 	 * @return string           full path.
 	 */
 	public static function override_template( $template ) {
-		if ( isset( $_REQUEST[self::CHECKOUT_QUERY_VAR] ) ) {
+		if ( isset( $_REQUEST[ self::CHECKOUT_QUERY_VAR ] ) ) {
 			if ( SI_Invoice::is_invoice_query() ) {
 				$checkout = self::get_instance();
 				$current = $checkout->get_current_page();
 				$template = self::locate_template( array(
-						'checkout/'.$current.'.php',
-						'checkout-'.$current.'.php',
-						'checkout.php',
-						'invoice/checkout-'.$current.'.php',
-						'invoice/checkout.php',
-						'invoice.php',
-						'invoice/invoice.php',
-					), $template );
+					'checkout/'.$current.'.php',
+					'checkout-'.$current.'.php',
+					'checkout.php',
+					'invoice/checkout-'.$current.'.php',
+					'invoice/checkout.php',
+					'invoice.php',
+					'invoice/invoice.php',
+				), $template );
 			}
 		}
 		return $template;
@@ -120,7 +120,7 @@ class SI_Checkouts extends SI_Controller {
 	private function handle_action( $action ) {
 		// do the callback for the just-submitted checkout page
 		if ( $action ) {
-			if ( !$this->checkout_complete ) {
+			if ( ! $this->checkout_complete ) {
 				// save state in case we're redirected elsewhere
 				add_filter( 'wp_redirect', array( $this, 'save_cache_on_redirect' ), 10, 1 );
 
@@ -132,7 +132,7 @@ class SI_Checkouts extends SI_Controller {
 				$this->save_cache();
 			}
 			$current = $this->get_current_page( true );
-			if ( $current == self::CONFIRMATION_PAGE && !$this->checkout_complete ) {
+			if ( $current == self::CONFIRMATION_PAGE && ! $this->checkout_complete ) {
 				$this->complete_checkout();
 			}
 		} else {
@@ -158,7 +158,7 @@ class SI_Checkouts extends SI_Controller {
 			),
 		);
 		$this->pages = apply_filters( 'si_checkout_pages', $pages );
-		$this->pages[self::CONFIRMATION_PAGE]['weight'] = PHP_INT_MAX; // in case anything stupid happened
+		$this->pages[ self::CONFIRMATION_PAGE ]['weight'] = PHP_INT_MAX; // in case anything stupid happened
 		uasort( $pages, array( $this, 'sort_by_weight' ) );
 
 		$this->register_payment_page();
@@ -174,7 +174,7 @@ class SI_Checkouts extends SI_Controller {
 	private function load_cache() {
 		global $blog_id;
 		$this->cache = get_user_meta( get_current_user_id(), $blog_id.'_'.self::CACHE_META_KEY, true );
-		if ( !is_array( $this->cache ) ) {
+		if ( ! is_array( $this->cache ) ) {
 			$this->cache = array();
 		}
 		if ( isset( $this->cache['payment_id'] ) && $this->cache['payment_id'] ) {
@@ -194,8 +194,8 @@ class SI_Checkouts extends SI_Controller {
 
 	/**
 	 * Before a redirect save the cache.
-	 * @param  [type] $location 
-	 * @return            
+	 * @param  [type] $location
+	 * @return
 	 */
 	public function save_cache_on_redirect( $location ) {
 		$this->save_cache();
@@ -214,36 +214,35 @@ class SI_Checkouts extends SI_Controller {
 	}
 
 	private function load_invoice() {
-		
+
 		$invoice_id = 0;
-		if ( isset( $_GET['sa_invoice'] ) && !self::using_permalinks() ) {
+		if ( isset( $_GET['sa_invoice'] ) && ! self::using_permalinks() ) {
 			if ( is_numeric( $_GET['sa_invoice'] ) ) {
 				$invoice_id = (int) $_GET['sa_invoice'];
-			}
-			// slugs are used in some strange circumstances
+			} // slugs are used in some strange circumstances
 			else {
 				$posts = get_posts(array(
 					'name' => $_GET['sa_invoice'],
 					'posts_per_page' => 1,
-					'post_type' => SI_Invoice::POST_TYPE
+					'post_type' => SI_Invoice::POST_TYPE,
 				) );
 				$post = $posts[0];
 				$invoice_id = $post->ID;
 			}
 		}
 		// If permalinks are used this is the default method of finding the post id.
-		if ( !$invoice_id ) {
+		if ( ! $invoice_id ) {
 			$invoice_id = url_to_postid( esc_url_raw( $_SERVER['REQUEST_URI'] ) );
 		}
 
-		if ( !$invoice_id || get_post_type( $invoice_id ) !== SI_Invoice::POST_TYPE ) {
+		if ( ! $invoice_id || get_post_type( $invoice_id ) !== SI_Invoice::POST_TYPE ) {
 			self::set_message( __( 'Invoice ID invalid. Payments are disabled.', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 			return;
 		}
 
 		$this->invoice = SI_Invoice::get_instance( $invoice_id );
 
-		if ( !$this->invoice && !$this->checkout_complete ) {
+		if ( ! $this->invoice && ! $this->checkout_complete ) {
 			self::set_message( __( 'No invoice associated with this checkout.', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 			wp_redirect( '/', 303 );
 			exit();
@@ -253,7 +252,7 @@ class SI_Checkouts extends SI_Controller {
 
 	/**
 	 * Get private invoice
-	 * @return  
+	 * @return
 	 */
 	public function get_invoice() {
 		return $this->invoice;
@@ -261,7 +260,7 @@ class SI_Checkouts extends SI_Controller {
 
 	/**
 	 * Get private invoice
-	 * @return  
+	 * @return
 	 */
 	public function get_processor() {
 		return $this->payment_processor;
@@ -269,7 +268,7 @@ class SI_Checkouts extends SI_Controller {
 
 	/**
 	 * Get private payment object added after a complete payment
-	 * @return  
+	 * @return
 	 */
 	public function get_payment_id() {
 		return $this->cache['payment_id'];
@@ -284,7 +283,7 @@ class SI_Checkouts extends SI_Controller {
 		if ( isset( $this->cache['completed'] ) && is_array( $this->cache['completed'] ) ) {
 			foreach ( $this->pages as $key => $info ) {
 				// get the next page that is not completed
-				if ( !$this->is_page_complete( $key ) ) {
+				if ( ! $this->is_page_complete( $key ) ) {
 					$this->current_page = $key;
 					return $this->current_page;
 				}
@@ -303,7 +302,7 @@ class SI_Checkouts extends SI_Controller {
 	 * @return mixed The key of the current page
 	 */
 	public function get_current_page( $reload = false ) {
-		if ( !$this->current_page || $reload ) {
+		if ( ! $this->current_page || $reload ) {
 			$this->set_current_page();
 		}
 		return $this->current_page;
@@ -316,10 +315,10 @@ class SI_Checkouts extends SI_Controller {
 	 * @return void
 	 */
 	public function mark_page_complete( $page ) {
-		if ( !isset( $this->cache['completed'] ) || !is_array( $this->cache['completed'] ) ) {
+		if ( ! isset( $this->cache['completed'] ) || ! is_array( $this->cache['completed'] ) ) {
 			$this->cache['completed'] = array();
 		}
-		if ( !in_array( $page, $this->cache['completed'] ) ) {
+		if ( ! in_array( $page, $this->cache['completed'] ) ) {
 			$this->cache['completed'][] = $page;
 		}
 	}
@@ -333,7 +332,7 @@ class SI_Checkouts extends SI_Controller {
 	 */
 	public function mark_page_incomplete( $page ) {
 		// if there are no completed page, there's nothing to do
-		if ( !isset( $this->cache['completed'] ) || !is_array( $this->cache['completed'] ) ) {
+		if ( ! isset( $this->cache['completed'] ) || ! is_array( $this->cache['completed'] ) ) {
 			$this->cache['completed'] = array();
 			return;
 		}
@@ -354,7 +353,7 @@ class SI_Checkouts extends SI_Controller {
 	 * @return bool
 	 */
 	public function is_page_complete( $page ) {
-		if ( !isset( $this->cache['completed'] ) || !is_array( $this->cache['completed'] ) ) {
+		if ( ! isset( $this->cache['completed'] ) || ! is_array( $this->cache['completed'] ) ) {
 			$this->cache['completed'] = array();
 		}
 		return in_array( $page, $this->cache['completed'] );
@@ -425,7 +424,7 @@ class SI_Checkouts extends SI_Controller {
 		do_action( 'checkout_process_payment', $this, $payment );
 		do_action( 'si_log', __CLASS__ . '::' . __FUNCTION__ . ' - complete_checkout payment', $payment );
 
-		if ( !is_a( $payment, 'SI_Payment' ) ) {
+		if ( ! is_a( $payment, 'SI_Payment' ) ) {
 			// payment wasn't successful; delete the purchase and go back to the payment page
 			$this->mark_page_incomplete( self::PAYMENT_PAGE );
 			$this->get_current_page( true );
@@ -440,5 +439,4 @@ class SI_Checkouts extends SI_Controller {
 		$this->checkout_complete = true;
 		do_action( 'checkout_completed', $this, $payment );
 	}
-
 }

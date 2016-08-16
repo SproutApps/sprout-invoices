@@ -632,7 +632,7 @@ class SI_Notifications_Control extends SI_Controller {
 		}
 
 		// compensate for strange bug where the name came through but the email wasn't.
-		if ( strpos( $to, $user_email ) !== false ) {
+		if ( $to !== '' && strpos( $to, $user_email ) !== false ) {
 			$to = $user_email;
 		}
 

@@ -160,6 +160,14 @@ a.sa_icon_link {
 	content: "\f321"
 }
 
+#expense_import_question_answer_upgrade:before,
+#expense_import_question_answer:before {
+	font-family: 'dashicons';
+	vertical-align: top;
+    margin-right: 4px;
+	content: "\f546"
+}
+
 
 #wpadminbar #wp-admin-bar-si_menu .icon-sproutapps-flat.ab-icon {
 	font-size: 2em !important;
@@ -698,6 +706,10 @@ span.inline_success_message {
 .postbox span#tax:before,
 .postbox span#tax2:before {
 	content: '\f184'
+}
+
+.postbox span#shipping:before {
+	content: '\f480'
 }
 
 .postbox span#currency:before {
@@ -2072,6 +2084,10 @@ dd .add_item_help {
 	margin-left: 30px;
 }
 
+#expense_importing {
+	margin-left: 30px;
+}
+
 .select2-drop, .select2-dropdown {
 	z-index: 1000000;
 }
@@ -2363,6 +2379,22 @@ input#sa_recurring_invoice_custom_freq {
     width: 100%;
 }
 
+#expense_tracker.postbox #expense_tracker_wrap .label_wrap {
+    width: 15%;
+}
+
+#expense_tracker.postbox #expense_tracker_wrap .input_wrap {
+    width: 80%;
+}
+#expense_tracker.postbox #expense_tracker_wrap input {
+    width: 30%;
+}
+#expense_tracker.postbox #expense_tracker_wrap select {
+    width: 60%;
+}
+#expense_tracker.postbox #expense_tracker_wrap textarea {
+    width: 100%;
+}
 #dashboard-widgets h3.dashboard_widget_title a {
     text-decoration: none;
 }
@@ -2376,6 +2408,18 @@ input#sa_recurring_invoice_custom_freq {
 }
 #dashboard-widgets #time_tracking thead,
 #dashboard-widgets #unbilled_time_tracking thead {
+    background-color: #f9f9f9;
+}
+
+#dashboard-widgets #expense_tracking h3.dashboard_widget_title,
+#dashboard-widgets #unbilled_expense_tracking h3.dashboard_widget_title {
+    padding: 10px;
+    margin-bottom: 0px;
+    background-color: #f9f9f9;
+    float: right;
+}
+#dashboard-widgets #expense_tracking thead,
+#dashboard-widgets #unbilled_expense_tracking thead {
     background-color: #f9f9f9;
 }
 
@@ -2394,4 +2438,9 @@ input#sa_recurring_invoice_custom_freq {
 }
 #dashboard-widgets .dashboard_widget .chart_filter button {
 	float: left;
+}
+
+#expense_entries .expense_attachments img {
+	width: 25px;
+	height: auto;
 }

@@ -10,6 +10,8 @@
 class SI_Projects extends SI_Controller {
 	const SUBMISSION_NONCE = 'si_project_submission';
 	const HISTORY_STATUS_UPDATE = 'si_history_status_update';
+	const LINE_ITEM_TYPE = 'project';
+	const DEFAULT_RATE_META = 'si_default_project_rate';
 
 	public static function init() {
 
@@ -42,6 +44,10 @@ class SI_Projects extends SI_Controller {
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 25, 1 );
+
+		// Add Time Type
+		add_filter( 'si_line_item_types',  array( __CLASS__, 'add_time_line_item_type' ) );
+		add_filter( 'si_line_item_columns',  array( __CLASS__, 'add_time_line_item_type_columns' ), -10, 3 );
 	}
 
 	//////////////
@@ -210,12 +216,15 @@ class SI_Projects extends SI_Controller {
 		$website = ( isset( $_POST['sa_metabox_website'] ) && $_POST['sa_metabox_website'] != '' ) ? $_POST['sa_metabox_website'] : '' ;
 		$start_date = ( isset( $_POST['sa_metabox_start_date'] ) && $_POST['sa_metabox_start_date'] != '' ) ? $_POST['sa_metabox_start_date'] : '' ;
 		$end_date = ( isset( $_POST['sa_metabox_end_date'] ) && $_POST['sa_metabox_end_date'] != '' ) ? $_POST['sa_metabox_end_date'] : '' ;
+		$default_rate = ( isset( $_POST['sa_metabox_default_rate'] ) && $_POST['sa_metabox_default_rate'] != '' ) ? $_POST['sa_metabox_default_rate'] : '' ;
 
 		$project = SI_Project::get_instance( $post_id );
 		$project->set_website( $website );
 		$project->set_start_date( $start_date );
 		$project->set_end_date( $end_date );
 		$project->add_associated_client( $client );
+
+		update_post_meta( $post_id, self::DEFAULT_RATE_META, (float) $default_rate );
 
 		do_action( 'project_meta_saved', $project );
 	}
@@ -323,13 +332,14 @@ class SI_Projects extends SI_Controller {
 		$client_options += SI_Client::get_all_clients();
 
 		$description = ( $client_id ) ? sprintf( __( 'Edit <a href="%s">%s</a>, select another client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), get_edit_post_link( $client_id ), get_the_title( $client_id ), '#TB_inline?width=600&height=450&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' ) : sprintf( __( 'Select an existing client or <a href="%s">create a new client</a>.', 'sprout-invoices' ), '#TB_inline?width=600&height=420&inlineId=client_creation_modal" id="client_creation_modal_link" class="thickbox' );
+
 		$fields['client'] = array(
 			'weight' => 3,
 			'label' => __( 'Client', 'sprout-invoices' ),
 			'type' => 'select',
 			'options' => $client_options,
 			'required' => true,
-			'default' => $client_id,
+			'default' => ( $client_id ) ? $client_id : 0,
 			'attributes' => array( 'class' => 'select2' ),
 			'description' => $description,
 		);
@@ -359,6 +369,16 @@ class SI_Projects extends SI_Controller {
 			'required' => $required,
 			'default' => ( $project ) ? $project->get_website() : '',
 			'placeholder' => 'http://',
+		);
+
+		$fields['default_rate'] = array(
+			'weight' => 200,
+			'label' => __( 'Default Rate', 'sprout-invoices' ),
+			'type' => 'text',
+			'required' => $required,
+			'default' => ( $project ) ? get_post_meta( $project->get_id(), self::DEFAULT_RATE_META, true ) : '',
+			'placeholder' => '120.00',
+			'description' => __( 'Default rate for the "Project" line item, shown only if the invoice/estimate has a project associated first.', 'sprout-invoices' ),
 		);
 
 		$fields['nonce'] = array(
@@ -551,5 +571,89 @@ class SI_Projects extends SI_Controller {
 				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
 			);
 		}
+	}
+
+	///////////////
+	// Line Item //
+	///////////////
+
+	public static function add_time_line_item_type( $types = array() ) {
+		$project_id = si_get_docs_project_id( get_the_id() );
+		if ( ! $project_id ) {
+			return $types;
+		}
+		$default_rate = get_post_meta( $project_id, self::DEFAULT_RATE_META, true );
+		if ( ! is_numeric( $default_rate ) || ! $default_rate ) {
+			return $types;
+		}
+		$types = array_merge( $types, array( self::LINE_ITEM_TYPE => __( 'Project', 'sprout-invoices' ) ) );
+		return $types;
+	}
+
+	public static function add_time_line_item_type_columns( $columns = array(), $type = '', $item_data = array() ) {
+		if ( self::LINE_ITEM_TYPE !== $type ) {
+			return $columns;
+		}
+
+		$default_rate = '';
+		if ( isset( $item_data['doc_id'] ) ) {
+			$project_id = si_get_docs_project_id( $item_data['doc_id'] );
+			$default_rate = get_post_meta( $project_id, self::DEFAULT_RATE_META, true );
+		}
+		$columns = array(
+			'desc' => array(
+					'label' => __( 'Project', 'sprout-invoices' ),
+					'type' => 'textarea',
+					'calc' => false,
+					'hide_if_parent' => false,
+					'weight' => 1,
+				),
+			'rate' => array(
+					'label' => __( 'Rate', 'sprout-invoices' ),
+					'type' => 'small-input',
+					'placeholder' => '120',
+					'value' => ( is_numeric( $default_rate ) ) ? $default_rate : '',
+					'calc' => false,
+					'hide_if_parent' => true,
+					'weight' => 5,
+				),
+			'qty' => array(
+					'label' => __( 'Qty', 'sprout-invoices' ),
+					'type' => 'small-input',
+					'placeholder' => 1,
+					'calc' => true,
+					'hide_if_parent' => true,
+					'weight' => 10,
+				),
+			'tax' => array(
+					'label' => sprintf( '&#37; <span class="helptip" title="%s"></span>', __( 'A percentage adjustment per line item, i.e. tax or discount', 'sprout-invoices' ) ),
+					'type' => 'small-input',
+					'placeholder' => 0,
+					'calc' => false,
+					'hide_if_parent' => true,
+					'weight' => 15,
+				),
+			'total' => array(
+					'label' => __( 'Amount', 'sprout-invoices' ),
+					'type' => 'total',
+					'placeholder' => sa_get_formatted_money( 0 ),
+					'calc' => true,
+					'hide_if_parent' => false,
+					'weight' => 50,
+				),
+			'sku' => array(
+					'type' => 'hidden',
+					'placeholder' => '',
+					'calc' => false,
+					'weight' => 50,
+				),
+			'project_id' => array(
+					'type' => 'hidden',
+					'placeholder' => '',
+					'calc' => false,
+					'weight' => 50,
+				),
+		);
+		return $columns;
 	}
 }

@@ -3,7 +3,7 @@
 		<?php do_action( 'sprout_settings_tabs' ); ?>
 	</h2>
 	<div class="clearfix">
-		<?php 
+		<?php
 			$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '' ;
 			do_action( 'si_settings_page_sub_heading_'.$page ); ?>
 	</div>

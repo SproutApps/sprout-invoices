@@ -16,7 +16,7 @@ class SI_Payment extends SI_Post_Type {
 	const STATUS_PARTIAL = 'payment-partial'; // payment has been authorized and partially captured
 	const STATUS_VOID = 'void'; // payment has been voided
 	const STATUS_REFUND = 'refunded'; // payment has been voided
-	
+
 	const STATUS_RECURRING = 'recurring'; // a recurring payment has been created and is ongoing
 	const STATUS_CANCELLED = 'cancelled'; // a recurring payment has been cancelled
 	private static $instances = array();
@@ -47,7 +47,7 @@ class SI_Payment extends SI_Post_Type {
 
 	/**
 	 * Post statuses for payments
-	 * @return  
+	 * @return
 	 */
 	private static function register_post_statuses() {
 		$statuses = array(
@@ -64,8 +64,8 @@ class SI_Payment extends SI_Post_Type {
 				'public' => true,
 				'exclude_from_search' => false,
 				'show_in_admin_all_list' => true,
-          		'show_in_admin_status_list' => true,
-          		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' )
+		  		'show_in_admin_status_list' => true,
+		  		'label_count' => _n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' ),
 			));
 		}
 	}
@@ -82,19 +82,19 @@ class SI_Payment extends SI_Post_Type {
 	 * @return SI_Payment
 	 */
 	public static function get_instance( $id = 0 ) {
-		if ( !$id )
-			return null;
-		
-		if ( !isset( self::$instances[$id] ) || !self::$instances[$id] instanceof self )
-			self::$instances[$id] = new self( $id );
+		if ( ! $id ) {
+			return null; }
 
-		if ( !isset( self::$instances[$id]->post->post_type ) )
-			return null;
-		
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE )
-			return null;
-		
-		return self::$instances[$id];
+		if ( ! isset( self::$instances[ $id ] ) || ! self::$instances[ $id ] instanceof self ) {
+			self::$instances[ $id ] = new self( $id ); }
+
+		if ( ! isset( self::$instances[ $id ]->post->post_type ) ) {
+			return null; }
+
+		if ( self::$instances[ $id ]->post->post_type != self::POST_TYPE ) {
+			return null; }
+
+		return self::$instances[ $id ];
 	}
 
 	public static function new_payment( $passed_args, $status = self::STATUS_COMPLETE ) {
@@ -119,22 +119,25 @@ class SI_Payment extends SI_Post_Type {
 		}
 
 		$payment = self::get_instance( $id );
-		
+
 		$payment->set_title( sprintf( __( 'Payment #%d', 'sprout-invoices' ), $id ) );
 		$payment->set_transaction_id( $args['transaction_id'] );
 		$payment->set_payment_method( $args['payment_method'] );
 		$payment->set_amount( $args['amount'] );
 		$payment->set_status( $args['status'] );
 		$payment->set_data( $args['data'] );
-		
+
 		if ( $args['invoice'] ) {
+			if ( is_a( $args['invoice'], 'SI_Invoice' ) ) {
+				$args['invoice'] = $args['invoice']->get_id();
+			}
 			$payment->set_invoice_id( $args['invoice'] );
 		} elseif ( $args['invoice_id'] ) {
 			$payment->set_invoice_id( $args['invoice_id'] );
 		} else {
 			do_action( 'si_error', 'Payment created without an invoice associated!', $args );
 		}
-		
+
 		do_action( 'si_new_payment', $payment, $args );
 		return $id;
 	}
@@ -158,17 +161,17 @@ class SI_Payment extends SI_Post_Type {
 			'posts_per_page' => -1,
 			'fields' => 'ids',
 			'sa_bypass_filter' => true,
-			'suppress_filters' => $suppress_filters
+			'suppress_filters' => $suppress_filters,
 		);
 		if ( $method ) {
 			$args['meta_query'] = array(
 				array(
 					'key' => self::$meta_keys['payment_method'],
-					'value' => $method
+					'value' => $method,
 				),
 			);
 		}
-		$posts = get_posts($args);
+		$posts = get_posts( $args );
 		return $posts;
 	}
 
@@ -179,12 +182,13 @@ class SI_Payment extends SI_Post_Type {
 	public function set_status( $status ) {
 		$this->post->post_status = $status;
 		$this->save_post();
+		do_action( 'si_payment_status_updated', $this, $status );
 	}
 
 	public function set_purchase( $purchase_id ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['purchase_id'] => $purchase_id,
-			) );
+			self::$meta_keys['purchase_id'] => $purchase_id,
+		) );
 	}
 
 	public function get_purchase() {
@@ -193,8 +197,8 @@ class SI_Payment extends SI_Post_Type {
 
 	public function set_payment_method( $method ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['payment_method'] => $method,
-			) );
+			self::$meta_keys['payment_method'] => $method,
+		) );
 	}
 
 	public function get_payment_method() {
@@ -203,8 +207,8 @@ class SI_Payment extends SI_Post_Type {
 
 	public function set_amount( $amount ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['amount'] => sa_get_unformatted_money( $amount ),
-			) );
+			self::$meta_keys['amount'] => sa_get_unformatted_money( $amount ),
+		) );
 	}
 
 	public function get_amount() {
@@ -213,8 +217,8 @@ class SI_Payment extends SI_Post_Type {
 
 	public function set_invoice_id( $invoice ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['invoice'] => $invoice,
-			) );
+			self::$meta_keys['invoice'] => $invoice,
+		) );
 	}
 
 	public function get_invoice_id() {
@@ -222,12 +226,12 @@ class SI_Payment extends SI_Post_Type {
 	}
 
 	public function set_data( $data ) {
-		if ( !is_array( $data ) ) {
+		if ( ! is_array( $data ) ) {
 			$data = array( $data );
 		}
 		$this->save_post_meta( array(
-				self::$meta_keys['data'] => $data,
-			) );
+			self::$meta_keys['data'] => $data,
+		) );
 	}
 
 	public function get_data() {
@@ -236,8 +240,8 @@ class SI_Payment extends SI_Post_Type {
 
 	public function set_source( $source ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['source'] => $source,
-			) );
+			self::$meta_keys['source'] => $source,
+		) );
 	}
 
 	public function get_source() {
@@ -246,8 +250,8 @@ class SI_Payment extends SI_Post_Type {
 
 	public function set_transaction_id( $trans_id ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['transaction_id'] => $trans_id,
-			) );
+			self::$meta_keys['transaction_id'] => $trans_id,
+		) );
 	}
 
 	public function get_transaction_id() {
@@ -256,8 +260,8 @@ class SI_Payment extends SI_Post_Type {
 
 	public function set_shipping_address( $shipping_address ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['shipping_address'] => $shipping_address,
-			) );
+			self::$meta_keys['shipping_address'] => $shipping_address,
+		) );
 	}
 
 	public function get_shipping_address() {
@@ -265,12 +269,12 @@ class SI_Payment extends SI_Post_Type {
 	}
 
 	public function set_tracking( $tracking ) {
-		if ( !is_array( $tracking ) ) {
+		if ( ! is_array( $tracking ) ) {
 			$tracking = array( $tracking );
 		}
 		$this->save_post_meta( array(
-				self::$meta_keys['tracking'] => $tracking,
-			) );
+			self::$meta_keys['tracking'] => $tracking,
+		) );
 	}
 
 	public function get_tracking() {
@@ -279,11 +283,11 @@ class SI_Payment extends SI_Post_Type {
 
 	public function get_client() {
 		$invoice_id = $this->get_invoice_id();
-		if ( !$invoice_id ) {
+		if ( ! $invoice_id ) {
 			return null;
 		}
 		$invoice = SI_Invoice::get_instance( $invoice_id );
-		if ( !is_a( $invoice, 'SI_Invoice' ) ) {
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			return null;
 		}
 		return $invoice->get_client();
@@ -303,7 +307,7 @@ class SI_Payment extends SI_Post_Type {
 	 * @return bool
 	 */
 	public function is_active( $refresh = false ) {
-		if ( !$this->is_recurring() ) {
+		if ( ! $this->is_recurring() ) {
 			return false; // non-recurring payments are never active
 		}
 		if ( $this->get_status() == self::STATUS_CANCELLED ) {
@@ -357,16 +361,15 @@ class SI_Payment extends SI_Post_Type {
 			if ( is_array( $args['invoices'] ) ) {
 				$payment_ids = array();
 				foreach ( $args['invoices'] as $invoice_id ) {
-					$meta[self::$meta_keys['invoice']] = $invoice_id;
+					$meta[ self::$meta_keys['invoice'] ] = $invoice_id;
 					$payment_ids = array_merge( $payment_ids, self::find_by_meta( self::POST_TYPE, $meta ) );
 				}
 				return $payment_ids; // End early since we're returning an array.
 			} else {
-				$meta[self::$meta_keys['invoice']] = $args['invoices'];
+				$meta[ self::$meta_keys['invoice'] ] = $args['invoices'];
 			}
 		}
 		$payment_ids = self::find_by_meta( self::POST_TYPE, $meta );
 		return $payment_ids;
 	}
-
 }
