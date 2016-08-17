@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 11
+Stable tag: 11.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,6 +124,20 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 Woocommerce, Stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 11 =
+
+* NEW: Compatibility with expense tracking add-on
+* NEW: Create new invoices for subscriptions payments.
+* NEW: Fees API!
+* NEW: Shipping fee option.
+* NEW: Footer counts dynamically update on reports.
+* NEW: Invoices sent when new invoices are created from recurring settings.
+* NEW: Default rate for projects.
+* Fix: Predefined option disapears under some conditions.
+* Fix: ".00" removed from line item totals has a condition for site currency settings.
+* Fix: Payment calculations within some dashboard widgets
+* Fix: Invoice status updates for void/complete
 
 = 10.3.2 =
 

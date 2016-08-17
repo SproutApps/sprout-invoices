@@ -1,3 +1,17 @@
+= 11 =
+
+* NEW: Compatibility with expense tracking add-on
+* NEW: Create new invoices for subscriptions payments.
+* NEW: Fees API!
+* NEW: Shipping fee option.
+* NEW: Footer counts dynamically update on reports.
+* NEW: Invoices sent when new invoices are created from recurring settings.
+* NEW: Default rate for projects.
+* Fix: Predefined option disapears under some conditions.
+* Fix: ".00" removed from line item totals has a condition for site currency settings.
+* Fix: Payment calculations within some dashboard widgets
+* Fix: Invoice status updates for void/complete
+
 = 10.3.2 =
 
 * Fix: PayPal issues with advanced tax add-ons

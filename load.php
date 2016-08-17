@@ -103,6 +103,9 @@ function sprout_invoices_load() {
 
 	// Fees
 	require_once SI_PATH.'/controllers/fees/Fees.php';
+	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/fees/Shipping_Fee.php' ) ) {
+		require_once SI_PATH.'/controllers/fees/Shipping_Fee.php';
+	}
 
 	// notifications
 	require_once SI_PATH.'/controllers/notifications/Notifications_Control.php';
@@ -292,6 +295,9 @@ function sprout_invoices_load() {
 
 	// Fees
 	SI_Fees::init();
+	if ( ! SI_FREE_TEST && class_exists( 'SI_Shipping_Fee' ) ) {
+		SI_Shipping_Fee::init();
+	}
 
 	// Line items
 	SI_Line_Items::init();

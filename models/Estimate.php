@@ -439,6 +439,21 @@ class SI_Estimate extends SI_Post_Type {
 		return si_get_number_format( $discount );
 	}
 
+
+	/**
+	 * Shipping
+	 */
+	public function get_shipping() {
+		return (float) $this->get_post_meta( self::$meta_keys['shipping'] );
+	}
+
+	public function set_shipping( $shipping = 0 ) {
+		$this->save_post_meta( array(
+			self::$meta_keys['shipping'] => $shipping,
+		) );
+		return $shipping;
+	}
+
 	/**
 	 * Tax
 	 */
