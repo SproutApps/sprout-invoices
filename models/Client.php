@@ -37,7 +37,7 @@ class SI_Client extends SI_Post_Type {
 				'slug' => self::REWRITE_SLUG,
 				'with_front' => false,
 			),
-			'supports' => array( '' )
+			'supports' => array( '' ),
 		);
 		self::register_post_type( self::POST_TYPE, 'Client', 'Clients', $post_type_args );
 
@@ -69,16 +69,16 @@ class SI_Client extends SI_Post_Type {
 		if ( ! $id ) {
 			return null; }
 
-		if ( ! isset( self::$instances[$id] ) || ! self::$instances[$id] instanceof self ) {
-			self::$instances[$id] = new self( $id ); }
+		if ( ! isset( self::$instances[ $id ] ) || ! self::$instances[ $id ] instanceof self ) {
+			self::$instances[ $id ] = new self( $id ); }
 
-		if ( ! isset( self::$instances[$id]->post->post_type ) ) {
+		if ( ! isset( self::$instances[ $id ]->post->post_type ) ) {
 			return null; }
 
-		if ( self::$instances[$id]->post->post_type != self::POST_TYPE ) {
+		if ( self::$instances[ $id ]->post->post_type != self::POST_TYPE ) {
 			return null; }
 
-		return self::$instances[$id];
+		return self::$instances[ $id ];
 	}
 
 	/**
@@ -93,14 +93,14 @@ class SI_Client extends SI_Post_Type {
 			'phone' => '',
 			'address' => array(),
 			'currency' => '',
-			'user_id' => 0
+			'user_id' => 0,
 		);
 		$args = wp_parse_args( $passed_args, $defaults );
 
 		$id = wp_insert_post( array(
 			'post_status' => 'publish',
 			'post_type' => self::POST_TYPE,
-			'post_title' => $args['company_name']
+			'post_title' => $args['company_name'],
 		) );
 		if ( is_wp_error( $id ) ) {
 			return 0;
@@ -151,8 +151,8 @@ class SI_Client extends SI_Post_Type {
 	 */
 	public function set_associated_users( $users = array() ) {
 		$this->save_post_meta( array(
-				self::$meta_keys['associated_users'] => $users,
-			) );
+			self::$meta_keys['associated_users'] => $users,
+		) );
 		return $users;
 	}
 
@@ -162,8 +162,8 @@ class SI_Client extends SI_Post_Type {
 	 */
 	public function clear_associated_users() {
 		$this->delete_post_meta( array(
-				self::$meta_keys['associated_users'] => ''
-			) );
+			self::$meta_keys['associated_users'] => '',
+		) );
 	}
 
 	/**
@@ -173,8 +173,8 @@ class SI_Client extends SI_Post_Type {
 	public function add_associated_user( $user_id = 0 ) {
 		if ( is_numeric( $user_id ) && ! $this->is_user_associated( $user_id ) ) {
 			$this->add_post_meta( array(
-					self::$meta_keys['associated_users'] => $user_id
-				) );
+				self::$meta_keys['associated_users'] => $user_id,
+			) );
 		}
 	}
 
@@ -185,8 +185,8 @@ class SI_Client extends SI_Post_Type {
 	public function remove_associated_user( $user_id = 0 ) {
 		if ( is_numeric( $user_id ) && $this->is_user_associated( $user_id ) ) {
 			$this->delete_post_meta( array(
-					self::$meta_keys['associated_users'] => $user_id,
-				) );
+				self::$meta_keys['associated_users'] => $user_id,
+			) );
 		}
 	}
 
@@ -292,9 +292,8 @@ class SI_Client extends SI_Post_Type {
 		$clients = self::find_by_meta( self::POST_TYPE );
 		$aa = array();
 		foreach ( $clients as $client_id ) {
-			$aa[$client_id] = get_the_title( $client_id );
+			$aa[ $client_id ] = get_the_title( $client_id );
 		}
 		return $aa;
 	}
-
 }

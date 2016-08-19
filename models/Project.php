@@ -116,7 +116,7 @@ class SI_Project extends SI_Post_Type {
 	 * @return array
 	 */
 	public function get_associated_clients() {
-		$clients = $this->get_post_meta( self::$meta_keys['associated_clients'], false );
+		$clients = $this->get_post_meta( self::$meta_keys['associated_clients'], true );
 		if ( ! is_array( $clients ) ) {
 			$clients = array();
 		}
