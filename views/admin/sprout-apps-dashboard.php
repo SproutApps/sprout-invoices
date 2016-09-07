@@ -53,7 +53,7 @@
 							<div class="section">
 								<div class="pic">
 
-									<?php if ( 63999 === $addon->id ) : ?>
+									<?php if ( in_array( $addon->id, array( 63999, 413528 ) ) ) : ?>
 										<span class="bundled_addon"><?php _e( 'Bundled w/ Business License Only', 'sprout-invoices' ) ?></span>
 									<?php elseif ( $addon->bundled ) : ?>
 										<span class="bundled_addon"><?php _e( 'Bundled Free w/ License', 'sprout-invoices' ) ?></span>

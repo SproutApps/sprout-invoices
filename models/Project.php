@@ -118,7 +118,11 @@ class SI_Project extends SI_Post_Type {
 	public function get_associated_clients() {
 		$clients = $this->get_post_meta( self::$meta_keys['associated_clients'], true );
 		if ( ! is_array( $clients ) ) {
-			$clients = array();
+			if ( is_numeric( $clients ) ) {
+				$clients = array( $clients );
+			} else {
+				$clients = array();
+			}
 		}
 		return array_unique( $clients );
 	}
@@ -147,6 +151,8 @@ class SI_Project extends SI_Post_Type {
 	/**
 	 * Add single client to associated array
 	 * @param integer $client_id
+	 *
+	 * TODO Use non-unique meta instead of an array.
 	 */
 	public function add_associated_client( $client_id = 0 ) {
 		if ( $client_id && ! $this->is_client_associated( $client_id ) ) {
@@ -471,7 +477,7 @@ class SI_Project extends SI_Post_Type {
 	 * @return array
 	 */
 	public static function get_projects_by_invoice( $invoice_id = 0 ) {
-		$projects = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_invoices'] => $invoice_id ) );
+		$projects = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_invoices'] => $invoice_id ), true );
 		return $projects;
 	}
 
@@ -481,7 +487,7 @@ class SI_Project extends SI_Post_Type {
 	 * @return array
 	 */
 	public static function get_projects_by_client( $client_id = 0 ) {
-		$projects = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_clients'] => $client_id ) );
+		$projects = self::find_by_meta( self::POST_TYPE, array( self::$meta_keys['associated_clients'] => $client_id ), true );
 		return $projects;
 	}
 

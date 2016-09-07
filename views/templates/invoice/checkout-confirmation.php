@@ -4,5 +4,5 @@
 // the default template. This limits confusion with the templates. However, you can always create a custom template below...
 
 do_action( 'pre_si_invoice_paid_view' );
-wp_redirect( remove_query_arg( 'nonce' ) );
+wp_redirect( remove_query_arg( array( 'nonce', 'invoice_payment' ) ) );
 exit();

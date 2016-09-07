@@ -100,15 +100,15 @@ if ( ! function_exists( 'sa_get_form_field' ) ) :
 		if ( ! isset( $data['default'] ) ) {
 			$data['default'] = '';
 		}
-		if ( empty($data['default']) && isset( $_REQUEST['sa_'.$category.'_'.$key] ) && $_REQUEST['sa_'.$category.'_'.$key] != '' ) {
-			$data['default'] = $_REQUEST['sa_'.$category.'_'.$key];
+		if ( empty( $data['default'] ) && isset( $_REQUEST[ 'sa_'.$category.'_'.$key ] ) && $_REQUEST[ 'sa_'.$category.'_'.$key ] != '' ) {
+			$data['default'] = $_REQUEST[ 'sa_'.$category.'_'.$key ];
 		}
 		if ( ! isset( $data['attributes'] ) || ! is_array( $data['attributes'] ) ) {
 			$data['attributes'] = array();
 		}
 		foreach ( array_keys( $data['attributes'] ) as $attr ) {
 			if ( in_array( $attr, array( 'name', 'type', 'id', 'rows', 'cols', 'value', 'placeholder', 'size', 'checked' ) ) ) {
-				unset( $data['attributes'][$attr] ); // certain attributes are dealt with in other ways
+				unset( $data['attributes'][ $attr ] ); // certain attributes are dealt with in other ways
 			}
 		}
 		ob_start();
@@ -220,8 +220,7 @@ if ( ! function_exists( 'sa_get_form_label' ) ) :
 	function sa_get_form_label( $key, $data, $category ) {
 		if ( $data['type'] == 'hidden' ) {
 			$out = '';
-		}
-		else {
+		} else {
 			if ( ! isset( $data['label'] ) ) {
 				$data['label'] = '';
 			}

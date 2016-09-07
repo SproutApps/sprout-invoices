@@ -49,11 +49,11 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			'labels' => self::post_type_labels( $singular, $plural ),
 		);
 		$args = wp_parse_args( $args, $defaults );
-		if ( isset( self::$post_types_to_register[$post_type] ) ) {
+		if ( isset( self::$post_types_to_register[ $post_type ] ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Attempting to re-register post type', $post_type );
 			return;
 		}
-		self::$post_types_to_register[$post_type] = $args;
+		self::$post_types_to_register[ $post_type ] = $args;
 	}
 
 	/**
@@ -77,7 +77,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			'search_items' => __( 'Search ' . $plural, 'sprout-invoices' ),
 			'not_found' => __( 'No ' . $plural . ' found', 'sprout-invoices' ),
 			'not_found_in_trash' => __( 'No ' . $plural . ' found in Trash', 'sprout-invoices' ),
-			'menu_name' => __( $plural, 'sprout-invoices' )
+			'menu_name' => __( $plural, 'sprout-invoices' ),
 		);
 	}
 
@@ -143,7 +143,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 
 	public static function update_messages( $messages ) {
 		foreach ( self::$post_types_to_register as $post_type => $args ) {
-			$messages[$post_type] = self::post_type_messages( $post_type, $args );
+			$messages[ $post_type ] = self::post_type_messages( $post_type, $args );
 		}
 
 		return $messages;
@@ -171,15 +171,14 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 				3 => __( 'Custom field deleted.', 'sprout-invoices' ),
 				4 => sprintf( __( '%s updated.', 'sprout-invoices' ), ucfirst( $name ) ),
 				/* translators: %s: date and time of the revision */
-				5 => isset($_GET['revision']) ? sprintf( __( '%s restored to revision from %s', 'sprout-invoices' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				5 => isset( $_GET['revision'] ) ? sprintf( __( '%s restored to revision from %s', 'sprout-invoices' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
 				6 => sprintf( __( '%s published. <a href="%s">View %s</a>', 'sprout-invoices' ), ucfirst( $name ), esc_url( get_permalink( $post_id ) ), $name ),
 				7 => sprintf( __( '%s saved.', 'sprout-invoices' ), ucfirst( $name ) ),
 				8 => sprintf( __( '%s submitted. <a target="_blank" href="%s">Preview %s</a>', 'sprout-invoices' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
 				9 => sprintf( __( '%s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %s</a>', 'sprout-invoices' ), $name, date_i18n( __( 'M j, Y @ G:i', 'sprout-invoices' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), $name ),
 				10 => sprintf( __( '%s draft updated. <a target="_blank" href="%s">Preview %s</a>', 'sprout-invoices' ), ucfirst( $name ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), $name ),
 			);
-		}
-		else { // post types that are not public should not have links to a post
+		} else { // post types that are not public should not have links to a post
 			$messages = array(
 				0 => '', // Unused. Messages start at index 1.
 				1 => sprintf( __( '%s updated.', 'sprout-invoices' ), ucfirst( $name ) ),
@@ -187,7 +186,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 				3 => __( 'Custom field deleted.', 'sprout-invoices' ),
 				4 => sprintf( __( '%s updated.', 'sprout-invoices' ), ucfirst( $name ) ),
 				/* translators: %s: date and time of the revision */
-				5 => isset($_GET['revision']) ? sprintf( __( '%s restored to revision from %s', 'sprout-invoices' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				5 => isset( $_GET['revision'] ) ? sprintf( __( '%s restored to revision from %s', 'sprout-invoices' ), ucfirst( $name ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
 				6 => sprintf( __( '%s published.', 'sprout-invoices' ), ucfirst( $name ) ),
 				7 => sprintf( __( '%s saved.', 'sprout-invoices' ), ucfirst( $name ) ),
 				8 => sprintf( __( '%s submitted.', 'sprout-invoices' ), ucfirst( $name ) ),
@@ -227,13 +226,13 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			'show_in_nav_menus' => false,
 		);
 		$args = wp_parse_args( $args, $defaults );
-		if ( isset( self::$taxonomies_to_register[$taxonomy] ) ) {
+		if ( isset( self::$taxonomies_to_register[ $taxonomy ] ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Attempting to re-register taxonomy', $taxonomy );
 			return;
 		}
-		self::$taxonomies_to_register[$taxonomy] = array(
+		self::$taxonomies_to_register[ $taxonomy ] = array(
 			'post_types' => $post_types,
-			'args' => $args
+			'args' => $args,
 		);
 	}
 
@@ -539,23 +538,21 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	public function set_attachement( $files, $key = '' ) {
 		if ( function_exists( 'ga_load_wp_media' ) ) { // Allow for easy overrides.
 			ga_load_wp_media();
-		}
-		elseif ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
+		} elseif ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
 			require_once ABSPATH . 'wp-admin' . '/includes/image.php';
 			require_once ABSPATH . 'wp-admin' . '/includes/file.php';
 			require_once ABSPATH . 'wp-admin' . '/includes/media.php';
 		}
 		$attach_ids = array();
 		foreach ( $files as $file => $array ) {
-			if ( $files[$file]['error'] !== UPLOAD_ERR_OK ) {
+			if ( $files[ $file ]['error'] !== UPLOAD_ERR_OK ) {
 				// show error?
 			}
 			if ( $key !== '' ) {
 				if ( $key == $file  ) {
 					$attach_ids[] = media_handle_upload( $file, $this->ID );
 				}
-			}
-			else {
+			} else {
 				$attach_ids[] = media_handle_upload( $file, $this->ID );
 			}
 		}
@@ -575,10 +572,10 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			$return = array();
 			foreach ( $value as $k => $v ) {
 				if ( is_object( $v ) ) {
-					$return[$k] = $v;
+					$return[ $k ] = $v;
 					continue;
 				}
-				$return[$k] = is_array( $v ) ? self::trim_input( $v ) : trim( $v );
+				$return[ $k ] = is_array( $v ) ? self::trim_input( $v ) : trim( $v );
 			}
 			return $return;
 		}
@@ -593,7 +590,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 * @param array   $meta
 	 * @return array
 	 */
-	public static function find_by_meta( $post_type, $meta = array() ) {
+	public static function find_by_meta( $post_type, $meta = array(), $serialized_value = false ) {
 		$cache = array();
 		$cache_index = 0;
 		$cache_key = 0;
@@ -605,8 +602,8 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 			$cache_index = reset( $array_values );
 			if ( $cache_index ) {
 				$cache = wp_cache_get( $cache_key, 'si' );
-				if ( is_array( $cache ) && isset( $cache[$cache_index] ) ) {
-					return $cache[$cache_index];
+				if ( is_array( $cache ) && isset( $cache[ $cache_index ] ) ) {
+					return $cache[ $cache_index ];
 				}
 			}
 		}
@@ -620,23 +617,34 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 				'post_status' => 'any',
 				'posts_per_page' => -1,
 				'fields' => 'ids',
-				'si_bypass_filter' => true
+				'si_bypass_filter' => true,
 			);
 
-			if ( ! empty( $meta ) ) {
-				foreach ( $meta as $key => $value ) {
-					$args['meta_query'][] = array(
-						'key' => $key,
-						'value' => $value,
-					);
+			if ( ! $serialized_value ) {
+				if ( ! empty( $meta ) ) {
+					foreach ( $meta as $key => $value ) {
+						$args['meta_query'][] = array(
+							'key' => $key,
+							'value' => $value,
+						);
+					}
+				}
+			} else {
+				if ( ! empty( $meta ) ) {
+					foreach ( $meta as $key => $value ) {
+						$args['meta_query'][] = array(
+							'key' => $key,
+							'value' => sprintf( ':"%s";', $value ),
+							'compare' => 'LIKE',
+						);
+					}
 				}
 			}
-
 			$result = get_posts( $args );
 		}
 
 		if ( count( $meta ) == 1 && $cache_index ) {
-			$cache[$cache_index] = $result;
+			$cache[ $cache_index ] = $result;
 			wp_cache_set( $cache_key, $cache, 'si' );
 		}
 
