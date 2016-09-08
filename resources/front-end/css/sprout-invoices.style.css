@@ -1084,6 +1084,17 @@ div#vcards {
 	margin-top: 20px;
 }
 
+#outer_doc_wrap .sa-message {
+    text-align: left;
+    font-weight: bold;
+    padding: 10px 15px;
+    background: #91ffd1;
+}
+
+#outer_doc_wrap .sa-message.error {
+    background: #ffa091;
+}
+
 #check_info_checkout_wrap .button-primary {
 	float: none;
 	margin-left: 12em;

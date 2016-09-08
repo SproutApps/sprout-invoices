@@ -434,6 +434,8 @@ class SI_Checkouts extends SI_Controller {
 		$this->cache['payment_id'] = $payment->get_id();
 		do_action( 'processed_payment', $payment, $this );
 
+		self::set_message( __( 'Payment processed. Cheers!', 'sprout-invoices' ), self::MESSAGE_STATUS_INFO );
+
 		// wrap up checkout and tell the purchase we're done
 		do_action( 'completing_checkout', $this, $payment );
 		$this->checkout_complete = true;
