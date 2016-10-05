@@ -8,7 +8,7 @@
  * @subpackage Reporting
  */
 class SI_Reporting extends SI_Dashboard {
-	const CACHE_KEY_PREFIX = 'si_rprt_v2_';
+	const CACHE_KEY_PREFIX = 'si_rprt_v3_';
 	const AJAX_ACTION = 'si_report_data';
 	const AJAX_NONCE = 'si_report_nonce';
 	const CACHE_TIMEOUT = 172800; // 48 hours
@@ -518,7 +518,7 @@ class SI_Reporting extends SI_Dashboard {
 		foreach ( $payments->posts as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
 			$data['payments'] += 1;
-			if ( $payment->get_status() !== SI_Payment::STATUS_VOID ) {
+			if ( ! in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_REFUND, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
 				$data['totals'] += $payment->get_amount();
 			}
 			switch ( get_post_status( $payment_id ) ) {
@@ -535,6 +535,7 @@ class SI_Reporting extends SI_Dashboard {
 					$data['status_partial'] += 1;
 					break;
 				case SI_Payment::STATUS_VOID:
+				case SI_Payment::STATUS_REFUND:
 					$data['status_void'] += 1;
 					break;
 				default:
@@ -654,6 +655,9 @@ class SI_Reporting extends SI_Dashboard {
 		$payments = new WP_Query( $args );
 		foreach ( $payments->posts as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
+			if ( in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_REFUND, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
+				continue;
+			}
 			$week = get_the_time( 'W', $payment_id );
 			$data[ $week ]['payments'] += 1;
 			$data[ $week ]['totals'] += $payment->get_amount();

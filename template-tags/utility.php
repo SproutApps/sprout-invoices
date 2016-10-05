@@ -297,6 +297,29 @@ if ( ! function_exists( 'sa_get_truncate' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'sa_day_ordinal_formatter' ) ) :
+	/**
+	 * Formats numbers with th or whatever.
+	 * @param  integer $number
+	 * @return string
+	 */
+	function sa_day_ordinal_formatter( $day = 0 ) {
+		if ( class_exists( 'NumberFormatter' ) ) {
+			$nf = new NumberFormatter( get_locale(), NumberFormatter::ORDINAL );
+			$formatted_day = $nf->format( $day );
+		} else {
+			$ends = array( 'th','st','nd','rd','th','th','th','th','th','th' );
+			if ( (($day % 100) >= 11) && (($day % 100) <= 13) ) {
+				$formatted_day = $day. 'th';
+			} else {
+				$formatted_day = $day. $ends[ $day % 10 ];
+			}
+		}
+		return apply_filters( 'sa_day_ordinal_formatter', $formatted_day, $day );
+	}
+
+endif;
+
 /////////////////////
 // Developer Tools //
 /////////////////////

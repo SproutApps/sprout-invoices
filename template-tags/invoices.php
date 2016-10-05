@@ -60,7 +60,7 @@ if ( ! function_exists( 'si_get_invoice_status' ) ) :
 				break;
 			case SI_Invoice::STATUS_PENDING:
 				$status = __( 'pending', 'sprout-invoices' );
-				if ( si_get_invoice_issue_date( $id ) < current_time( 'timestamp' ) ) {
+				if ( si_get_invoice_due_date( $id ) < current_time( 'timestamp' ) ) {
 					$status = __( 'past-due', 'sprout-invoices' );
 				}
 				break;
