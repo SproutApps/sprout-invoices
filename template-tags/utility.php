@@ -67,39 +67,41 @@ function si_esc_html_e( $string ) {
 	return Sprout_Invoices::esc_html_e( $string );
 }
 
-/**
- * Return a part of a name when a full name is provided
- * @param  string $full_name
- * @param  string $return    first, _first, last or return an array.
- * @return string/array
- */
-function si_split_full_name( $full_name = '', $return = '' ) {
-	$name = array();
-	preg_match( '#^(\w+\.)?\s*([\'\’\w]+)\s+([\'\’\w]+)\s*(\w+\.?)?$#', $full_name, $name );
-	switch ( $return ) {
-		case 'first':
-			return $name[1] .  ' ' . $name[2];
-			break;
+if ( ! function_exists( 'si_split_full_name' ) ) :
+	/**
+	 * Return a part of a name when a full name is provided
+	 * @param  string $full_name
+	 * @param  string $return    first, _first, last or return an array.
+	 * @return string/array
+	 */
+	function si_split_full_name( $full_name = '', $return = '' ) {
+		$name = array();
+		preg_match( '#^(\w+\.)?\s*([\'\’\w]+)\s+([\'\’\w]+)\s*(\w+\.?)?$#', $full_name, $name );
+		switch ( $return ) {
+			case 'first':
+				return $name[1] .  ' ' . $name[2];
+				break;
 
-		case '_first': // without prefix
-			return $name[2];
-			break;
+			case '_first': // without prefix
+				return $name[2];
+				break;
 
-		case 'last':
-			return $name[3];
-			break;
+			case 'last':
+				return $name[3];
+				break;
 
-		case 'suffix':
-			if ( isset( $name[4] ) ) {
-				return $name[4];
-			}
-			break;
+			case 'suffix':
+				if ( isset( $name[4] ) ) {
+					return $name[4];
+				}
+				break;
 
-		default:
-			return $name;
-			break;
+			default:
+				return $name;
+				break;
+		}
 	}
-}
+endif;
 
 if ( ! function_exists( 'si_format_address' ) ) :
 
