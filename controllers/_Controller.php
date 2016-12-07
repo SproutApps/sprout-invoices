@@ -155,7 +155,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 	public static function get_localized_js() {
 		// Localization
 		$si_js_object = array(
-			'ajax_url' => get_admin_url().'/admin-ajax.php',
+			'ajax_url' => get_admin_url().'admin-ajax.php',
 			'plugin_url' => SI_URL,
 			'thank_you_string' => __( 'Thank you', 'sprout-invoices' ),
 			'updating_string' => __( 'Updating...', 'sprout-invoices' ),

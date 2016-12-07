@@ -420,8 +420,8 @@ class SI_Projects extends SI_Controller {
 		unset( $columns['author'] );
 		$columns['title'] = __( 'Project', 'sprout-invoices' );
 		$columns['info'] = __( 'Info', 'sprout-invoices' );
-		$columns['invoices'] = __( 'Invoices', 'sprout-invoices' );
 		$columns['estimates'] = __( 'Estimates', 'sprout-invoices' );
+		$columns['invoices'] = __( 'Invoices', 'sprout-invoices' );
 		return $columns;
 	}
 
@@ -468,6 +468,13 @@ class SI_Projects extends SI_Controller {
 			case 'invoices':
 
 				$invoices = $project->get_invoices();
+				$invoiced_total = 0;
+				$outstanding_balance = 0;
+				foreach ( $invoices as $invoice_id ) {
+					$invoice = SI_Invoice::get_instance( $invoice_id );
+					$invoiced_total += $invoice->get_calculated_total();
+					$outstanding_balance += $invoice->get_balance();
+				}
 				$split = 2;
 				$split_invoices = array_slice( $invoices, 0, $split );
 				if ( ! empty( $split_invoices ) ) {
@@ -482,6 +489,16 @@ class SI_Projects extends SI_Controller {
 				} else {
 					printf( '<em>%s</em>', __( 'No invoices', 'sprout-invoices' ) );
 				}
+
+				echo '<hr/>';
+
+				printf( '<p><b>%s</b>: %s</p>', __( 'Total Invoiced ', 'sprout-invoices' ), sa_get_formatted_money( $invoiced_total ) );
+
+				if ( 0.00 < $outstanding_balance ) {
+
+					printf( '<p><b>%s</b>: %s</p>', __( 'Outstanding Balance ', 'sprout-invoices' ), sa_get_formatted_money( $outstanding_balance ) );
+				}
+
 			break;
 
 			case 'estimates':

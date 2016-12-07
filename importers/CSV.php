@@ -754,16 +754,21 @@ class SI_CSV_Import extends SI_Importer {
 			do_action( 'si_error', 'No Invoice ID given within payment import', $payment );
 			return;
 		}
-		// Find the associated invoice
-		$invoices = SI_Post_Type::find_by_meta( SI_Invoice::POST_TYPE, array( self::CSV_ID => $payment['Invoice ID'] ) );
 
-		// Can't assign a payment without an invoice
-		if ( empty( $invoices ) ) {
-			do_action( 'si_error', 'No invoice found for this payment', $payment['Payment ID'] );
-			return;
-		}
-		$invoice = SI_Invoice::get_instance( $invoices[0] );
+		// Find if invoice id is the post id first
+		$invoice = SI_Invoice::get_instance( $payment['Invoice ID'] );
+
+		// Find based on given id from import
 		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+
+			// Find the associated invoice
+			$invoices = SI_Post_Type::find_by_meta( SI_Invoice::POST_TYPE, array( self::CSV_ID => $payment['Invoice ID'] ) );
+
+			$invoice = SI_Invoice::get_instance( $invoices[0] );
+		}
+
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			do_action( 'si_error', 'No invoice found for this payment', $payment['Payment ID'] );
 			return;
 		}
 

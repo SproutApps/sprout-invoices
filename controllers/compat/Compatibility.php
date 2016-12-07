@@ -10,8 +10,11 @@ class SI_Compatibility extends SI_Controller {
 
 	public static function init() {
 		// WP SEO
-		add_filter( 'init', array( __CLASS__, 'prevent_wpseo_from_being_assholes_about_admin_columns' ), 10 );
+		add_filter( 'init', array( __CLASS__, 'prevent_wpseo_from_being_assholes_about_admin_columns' ), 10000 );
 		add_filter( 'add_meta_boxes', array( __CLASS__, 'prevent_wpseo_from_being_assholes_about_private_cpts_metaboxes' ), 10 );
+		add_filter( 'manage_edit-'.SI_Invoice::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
+		add_filter( 'manage_edit-'.SI_Estimate::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
+
 		// Gravity Forms fix
 		add_filter( 'gform_display_add_form_button', array( __CLASS__, 'si_maybe_remove_gravity_forms_add_button' ), 10, 1 );
 
@@ -53,6 +56,15 @@ class SI_Compatibility extends SI_Controller {
 			// Disable Yoast admin columns.
 			add_filter( 'wpseo_use_page_analysis', '__return_false' );
 		}
+	}
+
+	public static function deregister_columns( $columns ) {
+		unset( $columns['wpseo-score'] );
+		unset( $columns['wpseo-title'] );
+		unset( $columns['wpseo-metadesc'] );
+		unset( $columns['wpseo-focuskw'] );
+		unset( $columns['wpseo-score-readability'] );
+		return $columns;
 	}
 
 	public static function prevent_wpseo_from_being_assholes_about_private_cpts_metaboxes() {
