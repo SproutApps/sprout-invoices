@@ -9,6 +9,9 @@
 class SI_Compatibility extends SI_Controller {
 
 	public static function init() {
+		// attempt to fill all select2 registrations on si_admin pages
+		add_action( 'init', array( __CLASS__, 'deregister_select2' ), PHP_INT_MAX );
+
 		// WP SEO
 		add_filter( 'init', array( __CLASS__, 'prevent_wpseo_from_being_assholes_about_admin_columns' ), 10000 );
 		add_filter( 'add_meta_boxes', array( __CLASS__, 'prevent_wpseo_from_being_assholes_about_private_cpts_metaboxes' ), 10 );
@@ -39,6 +42,16 @@ class SI_Compatibility extends SI_Controller {
 		add_filter( 'add_meta_boxes', array( __CLASS__, 'prevent_slider_pro_adding_metaboxes' ), 100 );
 
 		add_action( 'parse_query', array( __CLASS__, 'remove_seo_header_stuff' ) );
+
+		// Jetpack Related Posts
+		add_filter( 'jetpack_relatedposts_filter_options', array( __CLASS__, 'si_maybe_remove_related_posts' ), 10, 1 );
+	}
+
+	public static function deregister_select2() {
+		if ( self::is_si_admin() ) {
+			wp_deregister_script( 'select2' );
+			wp_deregister_style( 'select2' );
+		}
 	}
 
 	public static function remove_seo_header_stuff() {
@@ -148,5 +161,15 @@ class SI_Compatibility extends SI_Controller {
 		foreach ( $post_types as $type ) {
 			remove_meta_box( 'um-admin-access-settings', $type, 'side' );
 		}
+	}
+
+	public static function si_maybe_remove_related_posts( $options ) {
+		$filtered_post_types = array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Notification::POST_TYPE );
+
+		if ( is_singular( $filtered_post_types ) ) {
+			$options['enabled'] = false;
+		}
+
+		return $options;
 	}
 }

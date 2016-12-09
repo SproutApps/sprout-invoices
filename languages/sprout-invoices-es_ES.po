@@ -4861,31 +4861,31 @@ msgstr "Gracias!"
 msgid "Updating..."
 msgstr "Actualizando ..."
 
-#: add-ons/updates/edd_plugin_updater.class.php:175
+#: bundles/updates/edd_plugin_updater.class.php:175
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
 "\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
 msgstr ""
 
-#: add-ons/updates/edd_plugin_updater.class.php:182
+#: bundles/updates/edd_plugin_updater.class.php:182
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
 "\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
 "\">update now</a>."
 msgstr ""
 
-#: add-ons/updates/edd_plugin_updater.class.php:327
+#: bundles/updates/edd_plugin_updater.class.php:327
 msgid "You do not have permission to install plugin updates"
 msgstr "Usted no tiene permiso para instalar actualizaciones de plugins"
 
-#: add-ons/updates/edd_plugin_updater.class.php:327
+#: bundles/updates/edd_plugin_updater.class.php:327
 msgid "Error"
 msgstr "Título de error"
 
-#: add-ons/Addons.php:35
+#: bundles/Addons.php:35
 msgid "Sprout Invoices Add-ons"
 msgstr "Sprout Apps Complementos"
 
-#: add-ons/Addons.php:36
+#: bundles/Addons.php:36
 msgid "Add-ons"
 msgstr "Extras"

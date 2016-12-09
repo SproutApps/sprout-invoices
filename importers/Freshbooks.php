@@ -231,15 +231,21 @@ class SI_Freshbooks_Import extends SI_Importer {
 			}
 
 			$response = $fb->getResponse();
-
 			$pages = $response['clients']['@attributes']['pages'];
 			$total_records = $response['clients']['@attributes']['total'];
 			$total_imported = ($total_records / $pages) * $progress[ $progress_key ];
 
 			if ( $progress[ $progress_key ] <= $pages ) {
-				foreach ( $response['clients']['client'] as $key => $client ) {
+				// If there's a single contact than it's not an array of clients...lame.
+				if ( ! isset( $response['clients']['client'][0] ) ) {
+					$client = $response['clients']['client'];
 					$new_client_id = self::create_client( $client );
 					self::create_contacts( $client, $new_client_id );
+				} else {
+					foreach ( $response['clients']['client'] as $key => $client ) {
+						$new_client_id = self::create_client( $client );
+						self::create_contacts( $client, $new_client_id );
+					}
 				}
 
 				$progress[ $progress_key ]++;
@@ -348,8 +354,12 @@ class SI_Freshbooks_Import extends SI_Importer {
 
 			if ( $progress[ $progress_key ] <= $pages ) {
 
-				foreach ( $response['estimates']['estimate'] as $key => $estimate ) {
-					self::create_estimate( $estimate );
+				if ( isset( $response['estimates']['estimate'][0] ) ) {
+					foreach ( $response['estimates']['estimate'] as $key => $estimate ) {
+						self::create_estimate( $estimate );
+					}
+				} else {
+					self::create_estimate( $response['estimates']['estimate'] );
 				}
 
 				$progress[ $progress_key ]++;
@@ -446,8 +456,12 @@ class SI_Freshbooks_Import extends SI_Importer {
 
 			if ( $progress[ $progress_key ] <= $pages ) {
 
-				foreach ( $response['invoices']['invoice'] as $key => $invoice ) {
-					self::create_invoice( $invoice );
+				if ( isset( $response['invoices']['invoice'][0] ) ) {
+					foreach ( $response['invoices']['invoice'] as $key => $invoice ) {
+						self::create_invoice( $invoice );
+					}
+				} else {
+					self::create_invoice( $response['invoices']['invoice'] );
 				}
 
 				$progress[ $progress_key ]++;
@@ -544,8 +558,12 @@ class SI_Freshbooks_Import extends SI_Importer {
 
 			if ( $progress[ $progress_key ] <= $pages ) {
 
-				foreach ( $response['payments']['payment'] as $key => $payment ) {
-					self::create_payment( $payment );
+				if ( isset( $response['payments']['payment'][0] ) ) {
+					foreach ( $response['payments']['payment'] as $key => $payment ) {
+						self::create_payment( $payment );
+					}
+				} else {
+					self::create_payment( $response['payments']['payment'] );
 				}
 
 				$progress[ $progress_key ]++;
@@ -617,19 +635,22 @@ class SI_Freshbooks_Import extends SI_Importer {
 		}
 		// args to create new client
 		$address = array(
-			'street' => ( isset( $client['contact_street'] ) && ! is_array( $client['p_street1'] ) ) ? esc_html( $client['contact_street'] ) : '',
+			'street' => ( isset( $client['p_street1'] ) && ! is_array( $client['p_street1'] ) ) ? esc_html( $client['p_street1'] ) : '',
 			'city' => ( isset( $client['p_city'] ) && ! is_array( $client['p_city'] ) ) ? esc_html( $client['p_city'] ) : '',
 			'zone' => ( isset( $client['p_state'] ) && ! is_array( $client['p_state'] ) ) ? esc_html( $client['p_state'] ) : '',
 			'postal_code' => ( isset( $client['p_code'] ) && ! is_array( $client['p_code'] ) ) ? esc_html( $client['p_code'] ) : '',
 			'country' => ( isset( $client['p_country'] ) && ! is_array( $client['p_country'] ) ) ? esc_html( $client['p_country'] ) : '',
 		);
+		if ( isset( $client['p_street2'] ) && ! is_array( $client['p_street2'] ) ) {
+			$address['street'] .= '/n' . esc_html( $client['p_street2'] );
+		}
 		$args = array(
 			'address' => $address,
-			'company_name' => ( isset( $client['company_name'] ) && ! is_array( $client['company_name'] ) ) ? $client['company_name'] : '',
+			'company_name' => ( isset( $client['organization'] ) && ! is_array( $client['organization'] ) ) ? $client['organization'] : '',
 			'website' => ( isset( $client['website'] ) && ! is_array( $client['website'] ) ) ? $client['website'] : '',
 			'currency' => ( isset( $client['currency_code'] ) && ! is_array( $client['currency_code'] ) ) ? $client['currency_code'] : '',
 		);
-		if ( isset( $client['company_name'] ) && $args['company_name'] == '' ) {
+		if ( '' === $args['company_name'] ) {
 			if ( is_array( $client['first_name'] ) || is_array( $client['last_name'] ) ) {
 				do_action( 'si_error', 'Client creation error', $client['client_id'] );
 				return;
@@ -638,7 +659,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 		}
 		$client_id = SI_Client::new_client( $args );
 		// notes
-		if ( isset( $client['notes'] ) && $client['notes'] != '' ) {
+		if ( isset( $client['notes'] ) && ! is_array( $client['notes'] ) ) {
 			SI_Internal_Records::new_record( $client['notes'], SI_Controller::PRIVATE_NOTES_TYPE, $client_id, '', 0 );
 		}
 		// create import record
@@ -659,9 +680,9 @@ class SI_Freshbooks_Import extends SI_Importer {
 		$contacts_created[] = self::create_contact( $contact_by_client, $client_id );
 
 		// Any additional contacts will be part of an array.
-		if ( isset( $client['contacts']['contact'] ) && ! empty( $client['contacts']['contact'] ) ) {
-			// for some reason FB
-			if ( isset( $client['contacts']['contact'][0] ) ) {
+		if ( is_array( $client['contacts']['contact'] ) ) {
+			// for some reason FB API does this shit
+			if ( isset( $client['contacts']['contact'][0] ) ) { // array of contacts
 				foreach ( $client['contacts']['contact'] as $key => $contact ) {
 					$contacts_created[] = self::create_contact( $contact, $client_id );
 				}
@@ -683,11 +704,10 @@ class SI_Freshbooks_Import extends SI_Importer {
 			return;
 		}
 		$args = array(
-			'user_login' => ( ! is_array( $contact['username'] ) ) ? $contact['username'] : $contact['email'],
-			'display_name' => $client->get_title(),
+			'user_login' => ( ! is_array( $contact['email'] ) ) ? $contact['email'] : $contact['email'],
 			'user_email' => $contact['email'],
 			'first_name' => ( ! is_array( $contact['first_name'] ) ) ? $contact['first_name'] : '',
-			'last_name' => ( ! is_array( $contact['first_name'] ) ) ? $contact['first_name'] : '',
+			'last_name' => ( ! is_array( $contact['last_name'] ) ) ? $contact['last_name'] : '',
 		);
 		$user_id = SI_Clients::create_user( $args );
 		update_user_meta( $user_id, self::FRESHBOOKS_ID, $contact['contact_id'] );

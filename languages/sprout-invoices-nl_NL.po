@@ -4943,7 +4943,7 @@ msgstr "Dank u wel"
 msgid "Updating..."
 msgstr "Updaten..."
 
-#: add-ons/updates/edd_plugin_updater.class.php:175
+#: bundles/updates/edd_plugin_updater.class.php:175
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
 "\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
@@ -4951,7 +4951,7 @@ msgstr ""
 "Er is een nieuwe versie beschikbaar van %1$s beschikbaar. <a target=\"_blank"
 "\" class=\"thickbox\" href=\"%2$s\">Bekijk versie %3$s details</a>."
 
-#: add-ons/updates/edd_plugin_updater.class.php:182
+#: bundles/updates/edd_plugin_updater.class.php:182
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
 "\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
@@ -4961,18 +4961,18 @@ msgstr ""
 "\" class=\"thickbox\" href=\"%2$s\">Bekijk versie %3$s details</a> van <a "
 "href=\"%4$s\">update nu</a>."
 
-#: add-ons/updates/edd_plugin_updater.class.php:327
+#: bundles/updates/edd_plugin_updater.class.php:327
 msgid "You do not have permission to install plugin updates"
 msgstr "Je hebt geen toestemming om plugin updates te installeren"
 
-#: add-ons/updates/edd_plugin_updater.class.php:327
+#: bundles/updates/edd_plugin_updater.class.php:327
 msgid "Error"
 msgstr "Error"
 
-#: add-ons/Addons.php:35
+#: bundles/Addons.php:35
 msgid "Sprout Invoices Add-ons"
 msgstr "Sprout Facturen Add-ons"
 
-#: add-ons/Addons.php:36
+#: bundles/Addons.php:36
 msgid "Add-ons"
 msgstr "Add-ons"

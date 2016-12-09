@@ -33,12 +33,18 @@ class SI_Fees extends SI_Controller {
 				$fee_total = $data['total'];
 			}
 
+			if ( isset( $data['label_callback'] ) && is_callable( $data['label_callback'] ) ) {
+					$label = call_user_func_array( $data['label_callback'], array( $doc, $data ) );
+			} elseif ( $data['label'] ) {
+				$label = $data['label'];
+			}
+
 			$hide = ( isset( $data['always_show'] ) && $data['always_show'] ) ? false : ( 0.01 > (float) $fee_total );
 
 			$weight = ( isset( $data['weight'] ) ) ? $data['weight'] : $count;
 
 			$totals[ 'fee_' . $fee_key ] = array(
-					'label' => $data['label'],
+					'label' => $label,
 					'value' => $fee_total,
 					'formatted' => sa_get_formatted_money( $fee_total, $doc_id, '<span class="money_amount">%s</span>' ),
 					'hide' => $hide,

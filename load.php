@@ -115,6 +115,8 @@ function sprout_invoices_load() {
 	}
 	require_once SI_PATH.'/controllers/notifications/Notifications_Admin_Table.php';
 
+	require_once SI_PATH.'/controllers/notifications/Notifications_Test.php';
+
 	// payment processing
 	require_once SI_PATH.'/controllers/payment-processing/Payment_Processors.php';
 	require_once SI_PATH.'/controllers/payment-processing/Credit_Card_Processors.php';
@@ -128,6 +130,7 @@ function sprout_invoices_load() {
 		require_once SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_Pro.php';
 	}
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_Checks.php';
+	require_once SI_PATH.'/controllers/payment-processing/processors/SI_BACS.php';
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_Admin_Payment.php';
 	do_action( 'si_payment_processors_loaded' );
 
@@ -173,6 +176,7 @@ function sprout_invoices_load() {
 
 	// Fix others problems
 	require_once SI_PATH.'/controllers/compat/Compatibility.php';
+	require_once SI_PATH.'/controllers/admin/Destroyer_of_Worlds.php';
 
 	// all done
 	do_action( 'si_require_controller_classes' );
@@ -259,6 +263,7 @@ function sprout_invoices_load() {
 		SI_Notifications_Premium::init();
 	}
 	SI_Notifications_Control::init();
+	SI_Notifications_Test::init();
 
 	// clients
 	SI_Clients::init();
@@ -318,9 +323,11 @@ function sprout_invoices_load() {
 	SI_Compatibility::init();
 
 	// addons
-	require_once SI_PATH.'/add-ons/Addons.php';
-	require_once SI_PATH.'/add-ons/updates/edd_plugin_updater.class.php';
+	require_once SI_PATH.'/bundles/Addons.php';
+	require_once SI_PATH.'/bundles/updates/edd_plugin_updater.class.php';
 	SA_Addons::init();
+
+	SI_Killing_Machine::init();
 
 	do_action( 'sprout_invoices_loaded' );
 }

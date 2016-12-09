@@ -57,13 +57,22 @@ jQuery(function($) {
 	jQuery("#doc_actions a.cc_processor").on('click', function(e) {
 		e.preventDefault();
 		$('#check_info_checkout_wrap').slideUp('fast');
+		$('#bacs_info_checkout_wrap').slideUp('fast');
 		$('#credit_card_checkout_wrap').slideDown();
 	});
 
 	jQuery("#doc_actions a.checks").on('click', function(e) {
 		e.preventDefault();
 		$('#credit_card_checkout_wrap').slideUp('fast');
+		$('#bacs_info_checkout_wrap').slideUp('fast');
 		$('#check_info_checkout_wrap').slideDown();
+	});
+
+	jQuery("#doc_actions a.bacs").on('click', function(e) {
+		e.preventDefault();
+		$('#credit_card_checkout_wrap').slideUp('fast');
+		$('#check_info_checkout_wrap').slideUp('fast');
+		$('#bacs_info_checkout_wrap').slideDown();
 	});
 
 });

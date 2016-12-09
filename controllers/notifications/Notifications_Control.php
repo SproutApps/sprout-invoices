@@ -413,6 +413,13 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return
 	 */
 	public static function send_notification( $notification_name, $data = array(), $to, $from_email = null, $from_name = null, $html = null ) {
+
+		// Allow for a notification to be suppressed based on data
+		if ( apply_filters( 'si_is_test_notification', false, $data, $to ) ) {
+			self::test_send_notification( $notification_name, $data, $to, $from_email, $from_name, $html );
+			return;
+		}
+
 		// Allow for a notification to be suppressed based on data
 		if ( apply_filters( 'si_disable_this_notification', false, $data, $to ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Suppressed', $data );
@@ -482,6 +489,62 @@ class SI_Notifications_Control extends SI_Controller {
 
 		// Mark the notification as sent.
 		self::mark_notification_sent( $notification_name, $data, $to );
+	}
+
+	/**
+	 * Send the notification to the current user/admin
+	 * @param  string $notification_name
+	 * @param  array  $data
+	 * @param  string $to
+	 * @param  string $from_email
+	 * @param  string $from_name
+	 * @param  bool $html
+	 * @return
+	 */
+	public static function test_send_notification( $notification_name, $data = array(), $to = '', $from_email = null, $from_name = null, $html = null ) {
+
+		// override the to address, since this is a test and we don't want to send it to the actual recipient.
+		$admin_email = ( current_user_can( 'manage_sprout_invoices_options' ) ) ? self::get_user_email() : self::$admin_email ;
+		$to = apply_filters( 'si_test_send_notification_to_address', $admin_email );
+
+		// So shortcode handlers know whether the email is being sent as html or plaintext
+		if ( null == $html ) {
+			$html = ( self::$notification_format == 'HTML' ) ? true : false ;
+		}
+		$data['html'] = $html;
+
+		$notification_title = self::get_notification_instance_subject( $notification_name, $data );
+		$notification_content = self::get_notification_instance_content( $notification_name, $data );
+
+		$from_email = ( null === $from_email ) ? self::$notification_from_email : $from_email ;
+		$from_name = ( null === $from_name ) ? self::$notification_from_name : $from_name ;
+
+		if ( $html ) {
+			$headers = array(
+				'From: '.$from_name.' <'.$from_email.'>',
+				'Content-Type: text/html',
+			);
+		} else {
+			$headers = array(
+				'From: '.$from_name.' <'.$from_email.'>',
+			);
+		}
+		$headers = implode( "\r\n", $headers ) . "\r\n";
+		$filtered_headers = apply_filters( 'si_notification_headers', $headers, $notification_name, $data, $from_email, $from_name, $html );
+		$attachments = apply_filters( 'si_notification_attachments', array(), $notification_name, $data, $from_email, $from_name, $html );
+
+		// Use the wp_email function
+		$sent = wp_mail( $to, $notification_title, $notification_content, $filtered_headers, $attachments );
+
+		if ( $sent != false ) {
+			// Create notification record
+			self::notification_record( $notification_name, $data, $to, $notification_title, $notification_content );
+		} else {
+			do_action( 'si_error', 'FAILED NOTIFICATION - Attempted e-mail: ' . $to, $data );
+			return false;
+		}
+
+		do_action( 'si_notification_sent', $notification_name, $data, $to );
 	}
 
 	/**

@@ -31,6 +31,7 @@ class SI_Payment extends SI_Post_Type {
 		'source' => '_source', // int|float Another tracking method, used for affiliate.
 		'transaction_id' => '_trans_id', // int for the payment gateway's transaction id.
 		'tracking' => '_tracking', // array - Misc info for later tracking.
+		'type' => '_type', // standard, deposit, or term
 	); // A list of meta keys this class cares about. Try to keep them in alphabetical order.
 
 	public static function init() {
@@ -106,6 +107,7 @@ class SI_Payment extends SI_Post_Type {
 			'invoice_id' => 0,
 			'invoice' => 0,
 			'data' => array(),
+			'type' => 'standard',
 		);
 		$args = wp_parse_args( $passed_args, $defaults );
 
@@ -279,6 +281,19 @@ class SI_Payment extends SI_Post_Type {
 
 	public function get_tracking() {
 		return $this->get_post_meta( self::$meta_keys['tracking'] );
+	}
+
+	public function get_type() {
+		return $this->get_post_meta( self::$meta_keys['type'] );
+	}
+
+	public function set_type( $type ) {
+		if ( ! is_array( $type ) ) {
+			$type = array( $type );
+		}
+		$this->save_post_meta( array(
+			self::$meta_keys['type'] => $type,
+		) );
 	}
 
 	public function get_client() {

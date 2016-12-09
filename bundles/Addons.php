@@ -145,7 +145,7 @@ class SA_Addons extends SI_Controller {
 		foreach ( $addons as $path => $data ) {
 			$key = self::get_addon_key( $path, $data );
 			if ( in_array( $key, self::$active_addons ) ) {
-				require SI_PATH.'/add-ons/' . $path;
+				require SI_PATH.'/bundles/' . $path;
 			}
 		}
 
@@ -162,7 +162,7 @@ class SA_Addons extends SI_Controller {
 			return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], true ); }
 
 		$si_addons = array();
-		$addon_root = SI_PATH . '/add-ons/';
+		$addon_root = SI_PATH . '/bundles/';
 
 		if ( ! empty( $addon_folder ) ) {
 			$addon_root .= $addon_folder;

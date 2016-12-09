@@ -25,62 +25,62 @@ msgstr ""
 "X-Poedit-SearchPath-1: plugins/sprout-invoices-addon-paypal-ec\n"
 "X-Poedit-SearchPath-2: plugins/sprout-invoices-addon-stripe-payments\n"
 
-#: plugins/sprout-invoices-pro/add-ons/Addons.php:35
+#: plugins/sprout-invoices-pro/bundles/Addons.php:35
 msgid "Sprout Invoices Add-ons"
 msgstr "Додатки Sprout Invoices"
 
-#: plugins/sprout-invoices-pro/add-ons/Addons.php:36
+#: plugins/sprout-invoices-pro/bundles/Addons.php:36
 msgid "Add-ons"
 msgstr "Додатки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:49
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:49
 msgid "Filter due date"
 msgstr "Фільтр по терміну"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:51
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:51
 msgid "All due dates"
 msgstr "Усі терміни"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:63
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:63
 #, php-format
 msgid "%1$s %2$d"
 msgstr "%1$s %2$d"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:77
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:77
 msgid "Filter by client"
 msgstr "Фільтр по клієнту"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:79
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:79
 msgid "All clients"
 msgstr "Всі клієнти"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:177
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:178
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:177
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:178
 msgid "Send invoice"
 msgstr "Відправити Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:240
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-admin-filtering/inc/Admin_Filtering.php:240
 msgid "Notifications Sent"
 msgstr "Cповіщення Відправлені"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-advanced-tax/inc/SI_Advanced_Tax.php:25
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:166
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-advanced-tax/inc/SI_Advanced_Tax.php:25
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:166
 msgid "HST"
 msgstr "HST"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-advanced-tax/inc/SI_Advanced_Tax.php:33
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:174
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-advanced-tax/inc/SI_Advanced_Tax.php:33
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:174
 msgid "PST"
 msgstr "PST"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:53
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:83
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:208
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:253
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:154
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:218
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:131
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:17
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:53
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:208
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:253
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:154
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:218
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:131
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:17
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:137
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:309
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:351
@@ -89,9 +89,9 @@ msgstr "PST"
 msgid "Total"
 msgstr "Усього"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:56
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:157
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:111
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:56
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:157
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:111
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:97
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:144
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:194
@@ -100,16 +100,16 @@ msgstr "Усього"
 msgid "Amount"
 msgstr "Кількість"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:65
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:182
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:65
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:182
 msgid "GST"
 msgstr "GST"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:82
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:187
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:263
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:217
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:130
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:82
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:187
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:263
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:217
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:130
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:368
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/invoices.php:27
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:160
@@ -117,33 +117,33 @@ msgstr "GST"
 msgid "Balance"
 msgstr "Баланс"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:89
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/inc/SA_Hearts_Australia.php:89
 msgid "Total (Inclusive of GST)"
 msgstr "Усього (включаючи GST)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:35
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:35
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:35
 #, php-format
 msgid "Estimate %s"
 msgstr "Кошторис %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:39
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:39
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:39
 msgid "Accept Estimate"
 msgstr "Ухвалити Кошторис"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:41
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:41
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:41
 msgid "Accepted"
 msgstr "Ухвалене"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:44
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:44
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:44
 msgid "Decline Estimate"
 msgstr "Зниження Кошторису"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:46
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:666
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:46
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:666
 #: plugins/sprout-invoices-pro/models/Estimate.php:87
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-status-chart.php:52
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:12
@@ -151,32 +151,32 @@ msgstr "Зниження Кошторису"
 msgid "Declined"
 msgstr "Відхилено"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:63
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:19
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:63
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:19
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:135
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:63
 msgid "Estimate"
 msgstr "Кошторис"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:83
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:113
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:113
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:86
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:83
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:100
 msgid "From"
 msgstr "Від"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:93
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:123
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:93
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:123
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:96
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:93
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:110
 msgid "To"
 msgstr "До"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:112
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:142
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:406
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:112
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:142
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:406
 #: plugins/sprout-invoices-pro/controllers/records/Records_Admin_Table.php:202
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/clients.php:22
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:22
@@ -186,13 +186,13 @@ msgstr "До"
 msgid "Date"
 msgstr "Дата"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:118
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:118
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:118
 msgid "Estimate Number"
 msgstr "Номер Кошторису"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:125
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:155
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:125
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:155
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:158
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/information.php:152
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:128
@@ -201,7 +201,7 @@ msgstr "Номер Кошторису"
 msgid "PO Number"
 msgstr "Номер замовлення"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:132
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:132
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Credit_Card_Processors.php:111
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Credit_Card_Processors.php:121
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Credit_Card_Processors.php:299
@@ -209,39 +209,39 @@ msgstr "Номер замовлення"
 msgid "Expiration Date"
 msgstr "Термін придатності"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:140
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:140
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:140
 msgid "Estimate Total"
 msgstr "Усього за кошторисом"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:196
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:243
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:226
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:140
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:13
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:196
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:243
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:226
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:140
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:13
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:294
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:335
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:27
 msgid "Subtotal"
 msgstr "Разом"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:202
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:248
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:235
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:202
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:248
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:235
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:301
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:343
 msgid "Taxes"
 msgstr "Податки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:208
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:253
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:208
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:253
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:312
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:354
 msgid "Total includes discounts and other fees."
 msgstr "Усього включає у собі знижки та інші збори."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:223
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:277
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:223
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:277
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Admin_Payment.php:131
 #: plugins/sprout-invoices-pro/controllers/payment-processing/processors/SI_Checks.php:137
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/notes.php:13
@@ -252,8 +252,8 @@ msgstr "Усього включає у собі знижки та інші зб�
 msgid "Notes"
 msgstr "Примітки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:233
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:286
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:233
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:286
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/notes.php:9
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/notes.php:9
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:203
@@ -262,8 +262,8 @@ msgstr "Примітки"
 msgid "Terms"
 msgstr "Умови"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:273
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:326
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:273
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:326
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:56
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history-premium.php:34
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/history.php:34
@@ -276,35 +276,35 @@ msgstr "Умови"
 msgid "View Message"
 msgstr "Подивитися повідомлення"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:292
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:345
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/estimate/estimate.php:292
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:345
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:233
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate.php:234
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:265
 msgid "Powered by Sprout Invoices"
 msgstr "Працює на Sprout Invoices"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:39
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:39
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:38
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:41
 #, php-format
 msgid "Invoice %s"
 msgstr "Рахунок %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:43
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:43
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:48
 #: plugins/sprout-invoices-pro/views/templates/invoice/payment-options.php:2
 msgid "Pay Deposit"
 msgstr "Сплатити Завдаток"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:43
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:43
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:48
 #: plugins/sprout-invoices-pro/views/templates/invoice/payment-options.php:2
 msgid "Pay Invoice"
 msgstr "Сплатити Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:89
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:89
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:7
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:78
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:24
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/payments.php:24
@@ -313,13 +313,13 @@ msgstr "Сплатити Рахунок"
 msgid "Invoice"
 msgstr "Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:102
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:102
 #: plugins/sprout-invoices-pro/models/Payment.php:57
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:87
 msgid "Void"
 msgstr "Ануляція"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:104
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:104
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:80
 #: plugins/sprout-invoices-pro/models/Invoice.php:77
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/invoices.php:26
@@ -330,20 +330,20 @@ msgstr "Ануляція"
 msgid "Paid"
 msgstr "Сплачено"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:148
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:148
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:121
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:135
 msgid "Invoice Number"
 msgstr "Номер Рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:162
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:162
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:135
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:149
 msgid "Invoice Due"
 msgstr "Рахунок до"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:171
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:181
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:171
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:181
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:134
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:144
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:154
@@ -352,16 +352,16 @@ msgstr "Рахунок до"
 msgid "Invoice Total"
 msgstr "Сума Рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:176
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:176
 #: plugins/sprout-invoices-pro/views/templates/checkout/confirmation.php:149
 #: plugins/sprout-invoices-pro/views/templates/invoice/invoice.php:163
 msgid "Deposit Total"
 msgstr "Сума завдатку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:259
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:151
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:215
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:86
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-australian-requirements/views/templates/invoice/invoice.php:259
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:151
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:215
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:86
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:116
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:360
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:45
@@ -375,24 +375,24 @@ msgstr "Сума завдатку"
 msgid "Payments"
 msgstr "Платежі"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:51
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:65
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:51
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:65
 msgid "Additional Company Info"
 msgstr "Додаткова інформація про компанію"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:57
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:73
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:57
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:73
 msgid "Business Number"
 msgstr "Бизнес Номер"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:97
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:287
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:318
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:97
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:287
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:318
 msgid "VAT"
 msgstr "ПДВ"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:102
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:323
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:102
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:323
 msgid ""
 "A value added tax identification number or VAT identification number (VATIN) "
 "is used in many countries, for value added tax purposes...but you knew "
@@ -402,30 +402,30 @@ msgstr ""
 "платника ПДВ використовується в багатьох країнах, для цілей податку на "
 "додану вартість ... але це ви вже знали."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:142
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:363
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:142
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:363
 #, php-format
 msgid "<em>VAT: %s</em>"
 msgstr "<em>ПДВ: %s</em>"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:243
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-canadian-requirements/inc/SI_Heart_CA.php:243
 msgid "Total (Inclusive of Taxes)"
 msgstr "Всього (з урахуванням податків)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:112
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:161
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:112
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:161
 msgid "Error: No Dashboard Found (code: 002)."
 msgstr "Помилка: Майстерня не знайдена (код: 002)."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:240
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard.php:240
 msgid "Client Dashboard (auto generated)"
 msgstr "Кабінет Клієнта (створений автоматично)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:49
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:49
 msgid "User Created"
 msgstr "Користувача Створено"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:50
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:50
 msgid ""
 "Customize the email that is sent to a client after their user account is "
 "created."
@@ -433,12 +433,12 @@ msgstr ""
 "Налаштування електронної пошти, яка відправляється клієнту після створення "
 "облікового запису користувача."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:52
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:52
 #, php-format
 msgid "%s: Client Account Created"
 msgstr "%s: Облікова Запис Клієнта Створена"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:85
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:85
 msgid ""
 "Used to provide the client with a private url for them to view their private "
 "dashboard without logging in. Without this private link the user/client will "
@@ -448,7 +448,7 @@ msgstr ""
 "його особистого кабінету без реєстрації. Без цього посилання користувач/"
 "клієнт муситимуть увійти під паролем."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:89
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:89
 msgid ""
 "Used to provide the client with a their login. This is only used on the User "
 "Created notification which is disabled by default since the client should "
@@ -460,8 +460,8 @@ msgstr ""
 "повинен просто отримати [dashboard_link] замість всіх повідомлень. Відправка "
 "паролів має потенційний ризик безпеки для ваших користувачів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:123
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:152
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/inc/Client_Dashboard_Notifications.php:123
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:152
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Control.php:224
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:66
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:67
@@ -471,18 +471,18 @@ msgstr ""
 msgid "N/A"
 msgstr "непридатний"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:17
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:4
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:17
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:4
 msgid "Issued"
 msgstr "Видано"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:18
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:6
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:18
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:6
 msgid "Number"
 msgstr "Номер"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:20
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:5
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:20
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:5
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:136
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:79
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:214
@@ -492,27 +492,27 @@ msgstr "Номер"
 msgid "Status"
 msgstr "Статус"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:66
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:66
 msgid "Accept/Decline"
 msgstr "Прийняти/Відхилити"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:69
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:69
 #, php-format
 msgid "<b>Expiration:</b> %s"
 msgstr "<b>Cпливає:</b> %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:74
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:68
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:74
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:68
 msgid "<b>Pending</b> Review"
 msgstr "<b>Чекає</b> Розгляду"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:80
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-estimates.php:80
 msgid "No estimates pending action."
 msgstr "Немає кошторисів в очікуванні дії."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:8
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:99
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:97
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:8
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:99
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:97
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:216
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/clients.php:150
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/estimates.php:88
@@ -521,97 +521,97 @@ msgstr "Немає кошторисів в очікуванні дії."
 msgid "Totals"
 msgstr "Разом"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:73
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:73
 msgid "Pay"
 msgstr "Сплатити"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:76
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:76
 #, php-format
 msgid "<b>Due:</b> %s"
 msgstr "<b>До сплати:</b> %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:83
 msgid "<b>Paid</b> in full"
 msgstr "<b>Сплачено</b> у повному обсязі"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:102
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:102
 #, php-format
 msgid "<b>%s:</b> %s"
 msgstr "<b>%s:</b> %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:111
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:111
 msgid "No invoices available."
 msgstr "Немає доступних рахунків."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:118
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/dashboard-invoices.php:118
 #, php-format
 msgid "Balance Due: <b>%s</b>"
 msgstr "Заборгованість: <b>%s</b>"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/login-form.php:2
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/login-form.php:2
 msgid "Welcome. Please sign-in to view your client dashboard."
 msgstr ""
 "Ласкаво просимо. Будь ласка, увійдіть в систему, щоб переглядати кабінет "
 "клієнта."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/login-form.php:7
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:51
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/login-form.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/login/force-login.php:51
 msgid "E-Mail"
 msgstr "Електронна пошта"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/login-form.php:8
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:135
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:52
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/login-form.php:8
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:135
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/login/force-login.php:52
 #: plugins/sprout-invoices-pro/importers/Harvest.php:69
 msgid "Password"
 msgstr "Пароль"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/section/login-form.php:9
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:53
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/section/login-form.php:9
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/login/force-login.php:53
 msgid "Sign-in"
 msgstr "Увійти в систему"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-dash/views/shortcodes/dashboard-blank.php:1
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/views/shortcodes/dashboard-blank.php:1
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-dash/views/shortcodes/dashboard-blank.php:1
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/views/shortcodes/dashboard-blank.php:1
 msgid "No invoices or estimates available."
 msgstr "Немає доступних рахунків або кошторисів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-set-payments/inc/Client_Set_Price.php:116
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-set-payments/inc/Client_Set_Price.php:116
 msgid "Not going to fall for it!"
 msgstr "Не впаде для цього!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-set-payments/inc/Client_Set_Price.php:120
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-set-payments/inc/Client_Set_Price.php:120
 msgid "Missing critical info!"
 msgstr "Відсутня критична інформація!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-set-payments/inc/Client_Set_Price.php:129
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-set-payments/inc/Client_Set_Price.php:129
 #, php-format
 msgid "Payment amount updated: %s"
 msgstr "Сума платежу оновлена: %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-set-payments/views/invoices/price-option.php:68
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-set-payments/views/invoices/price-option.php:68
 msgid "Click to change the deposit amount."
 msgstr "Натисніть, щоб змінити суму завдатку."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-set-payments/views/invoices/price-option.php:68
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-set-payments/views/invoices/price-option.php:68
 #, php-format
 msgid "Payment amount: %s"
 msgstr "Сума платежу: %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-client-set-payments/views/invoices/price-option.php:71
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-client-set-payments/views/invoices/price-option.php:71
 msgid "Save Payment Amount"
 msgstr "Зберегти суму платежу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:2
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:2
 msgid "No Department"
 msgstr "Немає Відділу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:5
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:5
 msgid "Select an invoicing department."
 msgstr "Оберіть відділ виставлення рахунків."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:8
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:14
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:8
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:14
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:306
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:396
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/clients/history.php:64
@@ -641,18 +641,18 @@ msgstr "Оберіть відділ виставлення рахунків."
 msgid "Edit"
 msgstr "Редагувати"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:8
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:8
 msgid "Select different department"
 msgstr "Оберіть інший відділ"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:20
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:20
 #, php-format
 msgid "No <a href=\"%s\" target=\"_blank\">Invoicing Departments</a> Found"
 msgstr ""
 "<a href=\"%s\" target=\"_blank\">Відділи виставлення рахунків</a> не знайдені"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:25
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:22
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:25
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:22
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:322
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:412
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:31
@@ -675,8 +675,8 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:26
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:23
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/meta-boxes/invoices/select-department.php:26
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:23
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:323
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:413
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/information.php:32
@@ -699,61 +699,61 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/admin/sections/reporting-tabs.php:2
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/admin/sections/reporting-tabs.php:2
 msgid "All Departments"
 msgstr "Усі відділи"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:30
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:30
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:2
 msgid "Invoice Dashboard"
 msgstr "Дошка рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:46
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:46
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:9
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:18
 msgid "Outstanding"
 msgstr "Несплачений"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:49
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:49
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:12
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:21
 msgid "Paid (this week)"
 msgstr "Сплачених (на цьому тижні)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:52
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:52
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:15
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:24
 msgid "Paid (last week)"
 msgstr "Сплачених (минулого тижня)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:55
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:55
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:18
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:27
 msgid "Paid (month to date)"
 msgstr "Сплачених (з початку місяця)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:58
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:58
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:21
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:30
 msgid "Paid (last month)"
 msgstr "Сплачених (минулого місяця)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:61
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:61
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:24
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:33
 msgid "Paid (year to date)"
 msgstr "Сплачених (з початку року)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:64
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:64
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:36
 msgid "Paid (last year)"
 msgstr "Сплачених (торік)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:79
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:87
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:393
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:401
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:79
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:393
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:401
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:17
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:25
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:41
@@ -765,14 +765,14 @@ msgstr "Сплачених (торік)"
 msgid "Latest Updates"
 msgstr "Останні Оновлення"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:88
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:88
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:50
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:60
 msgid "No invoices found."
 msgstr "Рахунків не знайдено."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:96
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:104
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:96
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:104
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:58
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:66
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:68
@@ -780,26 +780,26 @@ msgstr "Рахунків не знайдено."
 msgid "Overdue &amp; Unpaid"
 msgstr "Прострочені та Несплачені"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:99
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:99
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:61
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:71
 #, php-format
 msgid "Due: %s"
 msgstr "До сплати: %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:105
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:105
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices.php:67
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices.php:77
 msgid "No overdue or unpaid invoices."
 msgstr "Немає прострочених або несплачених рахунків."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:113
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:113
 #: plugins/sprout-invoices-pro/views/admin/dashboards/payments-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/payments-chart.php:2
 msgid "Invoiced &amp; Payments"
 msgstr "Виставлені рахунки та Платежі"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:141
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:141
 #: plugins/sprout-invoices-pro/views/admin/dashboards/payments-chart.php:39
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/payments-chart.php:30
 #: plugins/sprout-invoices-pro/views/admin/reports/premium/invoices.php:25
@@ -807,55 +807,55 @@ msgstr "Виставлені рахунки та Платежі"
 msgid "Invoiced"
 msgstr "За рахунками"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:171
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:171
 #: plugins/sprout-invoices-pro/views/admin/dashboards/payments-chart.php:69
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/payments-chart.php:60
 msgid "Compares total invoiced and the total payments."
 msgstr "Порівнює загальну нараховану та підсумкову суму платежів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:178
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:178
 #: plugins/sprout-invoices-pro/views/admin/dashboards/balances-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/balances-chart.php:2
 msgid "Outstanding Balances &amp; Payments"
 msgstr "Заборгованість та Платежі"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:205
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:205
 #: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:294
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/balances-chart.php:29
 msgid "Invoice Balances"
 msgstr "Залишки по рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:235
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:235
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/balances-chart.php:59
 msgid "Shows total outstanding balance and payments by week"
 msgstr "Показує загальну заборгованість та платежі за тиждень"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:242
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:242
 #: plugins/sprout-invoices-pro/views/admin/dashboards/payments-status-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/payments-status-chart.php:2
 msgid "Payment Status"
 msgstr "Статус Платежу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:295
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:295
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/payments-status-chart.php:55
 msgid "Statuses from payments from the last 3 weeks"
 msgstr "Стан платежів за останні 3 тижні"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:302
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:302
 #: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:312
 #: plugins/sprout-invoices-pro/views/admin/dashboards/invoices-status-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:2
 msgid "Invoice Status"
 msgstr "Стан Рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:331
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:331
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:31
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:18
 msgid "Temp"
 msgstr "Тимчасовий"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:337
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:654
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:337
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:654
 #: plugins/sprout-invoices-pro/models/Estimate.php:84
 #: plugins/sprout-invoices-pro/models/Invoice.php:74
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-status-chart.php:40
@@ -865,43 +865,43 @@ msgstr "Тимчасовий"
 msgid "Pending"
 msgstr "В Очікуванні"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:343
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:343
 #: plugins/sprout-invoices-pro/controllers/payments/Payments.php:59
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:43
 msgid "Partial"
 msgstr "Частковий"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:349
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:349
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:49
 msgid "Complete"
 msgstr "Завершений"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:355
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:355
 #: plugins/sprout-invoices-pro/models/Invoice.php:78
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:55
 #: plugins/sprout-invoices-pro/views/admin/sections/invoice-status-change-drop.php:14
 msgid "Written Off"
 msgstr "Виписаний"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:367
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:367
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/invoices-status-chart.php:67
 msgid "Statuses from invoices from the last 3 weeks"
 msgstr "Стан рахунків за останні 3 тижні"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:378
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:378
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:2
 msgid "Estimate Dashboard"
 msgstr "Дошка кошторису"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:402
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:402
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:26
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:26
 msgid "No recent estimates found."
 msgstr "Останніх кошторисів, не знайдено."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:416
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:424
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:416
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:424
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:40
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:48
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:40
@@ -909,14 +909,14 @@ msgstr "Останніх кошторисів, не знайдено."
 msgid "Recent Requests"
 msgstr "Останні Запити"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:425
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:425
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:49
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:49
 msgid "No recently requested estimates."
 msgstr "Немає нещодавно замовлених кошторисів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:440
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:448
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:440
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:448
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:64
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:72
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:64
@@ -924,14 +924,14 @@ msgstr "Немає нещодавно замовлених кошторисів.
 msgid "Recent Declined"
 msgstr "Останні Відхилено"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:449
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:449
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:73
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:73
 msgid "No recently declined estimates."
 msgstr "Немає нещодавно відхилених кошторисів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:470
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:478
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:470
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:478
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:94
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:102
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:94
@@ -939,28 +939,28 @@ msgstr "Немає нещодавно відхилених кошторисів.
 msgid "Expired &amp; Pending"
 msgstr "Прострочених і В очікуванні"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:473
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:473
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:97
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:97
 #, php-format
 msgid "Expired: %s"
 msgstr "Прострочене: %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:479
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:479
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates.php:103
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates.php:103
 msgid "No recently expired or pending estimates."
 msgstr "Немає нещодавно прострочених кошторисів або що очікують."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:487
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:487
 #: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:321
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates-invoices-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-invoices-chart.php:2
 msgid "Estimates &amp; Invoices"
 msgstr "Кошториси та Рахунки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:516
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:85
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:516
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:85
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:367
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Admin.php:70
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:388
@@ -972,8 +972,8 @@ msgstr "Кошториси та Рахунки"
 msgid "Estimates"
 msgstr "Кошториси"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:526
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:84
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:526
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:84
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:366
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Admin.php:228
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:387
@@ -985,71 +985,71 @@ msgstr "Кошториси"
 msgid "Invoices"
 msgstr "Рахунки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:546
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:546
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates-invoices-chart.php:67
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-invoices-chart.php:61
 msgid "Shows total estimates and invoices by week."
 msgstr "Показує загальну кількість кошторисів та рахунків за тиждень."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:552
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:552
 #: plugins/sprout-invoices-pro/views/admin/dashboards/requests-converted-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/requests-converted-chart.php:2
 msgid "Requests &amp; Converted Requests"
 msgstr "Запити та Перетворені Запити"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:579
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:579
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/requests-converted-chart.php:29
 msgid "Requests"
 msgstr "Запити"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:589
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:589
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/requests-converted-chart.php:39
 msgid "Invoices Generated"
 msgstr "Згенеровані Рахунки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:609
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:609
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/requests-converted-chart.php:59
 msgid "Shows total estimate requests and the total converted into invoices."
 msgstr ""
 "Показує загальне число запитів кошторису, і загальне перетворених в рахунки."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:616
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:616
 #: plugins/sprout-invoices-pro/views/admin/dashboards/estimates-status-chart.php:2
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-status-chart.php:2
 msgid "Estimate Status"
 msgstr "Стан Кошторису"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:648
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:648
 #: plugins/sprout-invoices-pro/models/Estimate.php:83
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-status-chart.php:34
 msgid "Request"
 msgstr "Запит"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:660
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:660
 #: plugins/sprout-invoices-pro/models/Estimate.php:86
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-status-chart.php:46
 #: plugins/sprout-invoices-pro/views/admin/sections/estimate-status-change-drop.php:10
 msgid "Approved"
 msgstr "Затверджено"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:678
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-departments/views/reports/premium/dashboard.php:678
 #: plugins/sprout-invoices-pro/views/admin/dashboards/premium/estimates-status-chart.php:64
 msgid "Statuses from estimates from the last 3 weeks"
 msgstr "Статуси кошторисів за останні 3 тижні"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-dynamic-text/inc/Dynamic_Text.php:30
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-dynamic-text/inc/Dynamic_Text.php:30
 msgid "Missing shortcode type: e.g. ["
 msgstr "Відсутній тип шорткоду: наприклад ["
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:40
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:40
 msgid "Estimate Acceptance Actions"
 msgstr "Дії з приймання кошторису"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:73
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:73
 msgid "Disable Invoice Creation"
 msgstr "Вимкнути Створення Рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:77
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:77
 msgid ""
 "After an estimate is accepted an invoice is created. Checking this option "
 "will disable that action."
@@ -1057,11 +1057,11 @@ msgstr ""
 "Після приймання кошторису створюється рахунок. Включення цієї опції вимкне "
 "цю дію."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:83
 msgid "Redirect to Invoice"
 msgstr "Перенапрямок до рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:87
 msgid ""
 "After an estimate is accepted an invoice is created. This will redirect the "
 "client to the new invoice."
@@ -1069,11 +1069,11 @@ msgstr ""
 "Після приймання кошторису створюється рахунок. Це переспрямує клієнта до "
 "нового рахунку."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:94
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:94
 msgid "Invoice Deposit"
 msgstr "Завдаток за рахунком"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:99
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-estimate-acceptance-actions/inc/Estimate_Acceptance.php:99
 msgid ""
 "This will be used when the invoice is created to set the deposit for the "
 "initial payment."
@@ -1081,15 +1081,15 @@ msgstr ""
 "Буде використовуватися при створенні рахунку для установки початкового "
 "внеску завдатку."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:71
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:71
 msgid "VAT Number"
 msgstr "Номер платника ПДВ"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:78
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:78
 msgid "Additional Info for Invoices/Estimates"
 msgstr "Додаткова інформація для Рахунків/Кошторисів"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:82
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:82
 msgid ""
 "Additional info displayed on Invoices and Estimates. Example information: "
 "TVA identification, Banking info."
@@ -1097,85 +1097,85 @@ msgstr ""
 "Додаткова інформація відображається на рахунках і кошторисах. Приклад "
 "інформації: номер платника ПДВ, платіжні реквізити."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:86
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:86
 msgid "Invoice Numbering: Prefix"
 msgstr "Нумерація Рахунку: Префікс"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:93
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:93
 msgid "Invoice Numbering: Start"
 msgstr "Нумерація Рахунку: Початок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:112
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:112
 msgid "Exclusive of Taxes"
 msgstr "Не враховуючи податки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:115
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:115
 msgid "TVA Rate, e.g. 0, 6, 12, 21."
 msgstr "Ставка ПДВ, наприклад 0, 6, 12, 21."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:151
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:151
 #, php-format
 msgid "Tax: %s&#37;"
 msgstr "Податок: %s&#37;"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:161
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:161
 msgid "TVA"
 msgstr "ПДВ"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:169
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-eu-requirements/inc/SI_Hearts_EU.php:169
 msgid "Inclusive of Taxes"
 msgstr "З урахуванням податків"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:69
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:90
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:112
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:31
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:33
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:27
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:69
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:90
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:112
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:31
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:33
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:27
 msgid "No forms found"
 msgstr "Форм не знайдено"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:79
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:44
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:79
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:44
 msgid "GravityForms ID"
 msgstr "Ідентифікатор GravityForms"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:84
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:49
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:84
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:49
 #, php-format
 msgid "Select the submission form built with <a href=\"%s\">Gravity Forms</a>."
 msgstr "Оберіть форму подання, побудовану з <a href=\"%s\">Gravity Forms</a>."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:101
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:101
 msgid "NinjaForms ID"
 msgstr "Ідентифікатор NinjaForms"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:106
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:45
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:106
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:45
 #, php-format
 msgid "Select the submission form built with <a href=\"%s\">Ninja Forms</a>."
 msgstr "Оберіть форму подання, побудовану з <a href=\"%s\">NinjaForms</a>."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:117
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:36
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:117
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:36
 msgid "(no title)"
 msgstr "(без назви)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:123
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:42
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:123
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:42
 msgid "Formidable ID"
 msgstr "Ідентифікатор Formidable"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:128
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:128
 #, php-format
 msgid "Select the submission form built with <a href=\"%s\">Formidable</a>."
 msgstr "Оберіть форму подання, побудовану з <a href=\"%s\">Formidable</a>."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:137
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:137
 msgid "Integration Error"
 msgstr "Помилка інтеграції"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:140
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:140
 #, php-format
 msgid ""
 "It looks like neither <a href=\"%s\">Gravity Forms</a> or <a href=\"%s"
@@ -1184,59 +1184,59 @@ msgstr ""
 "Схоже, <a href=\"%s\">Gravity Forms</a> або <a href=\"%s\">Ninja Forms</a> "
 "або <a href=\"%s\">Formidable</a> не активні."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:152
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:152
 msgid "Form ID Mapping"
 msgstr "Відображення Ідентифікатора Форми"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:180
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:79
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:81
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:77
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:180
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:79
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:81
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:77
 msgid "Subject/Title"
 msgstr "Тема/Назва"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:181
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:181
 msgid "Requirements"
 msgstr "Потрібно"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:182
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:81
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:83
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:79
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:182
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:81
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:79
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:546
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:593
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:191
 msgid "Email"
 msgstr "Електронна Пошта"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:183
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:82
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:84
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:80
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:183
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:82
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:84
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:80
 msgid "Client/Company Name"
 msgstr "Клієнт/Назва компанії"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:184
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:184
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:556
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:199
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:341
 msgid "Website"
 msgstr "Сайт"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:187
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:187
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:87
 #: plugins/sprout-invoices-pro/controllers/payment-processing/Credit_Card_Processors.php:323
 msgid "Full Name"
 msgstr "Повне Ім'я"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:188
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:88
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:188
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:88
 msgid "Address Fields"
 msgstr "Поля Адресів"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:192
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:83
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:81
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:192
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:81
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:730
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:731
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:601
@@ -1244,9 +1244,9 @@ msgstr "Поля Адресів"
 msgid "First Name"
 msgstr "Ім'я"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:192
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:84
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:82
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:192
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:84
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:82
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:737
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:738
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:608
@@ -1254,87 +1254,87 @@ msgstr "Ім'я"
 msgid "Last Name"
 msgstr "Прізвище"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:193
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:87
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:85
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:193
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:85
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:744
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:745
 msgid "Street Address"
 msgstr "Адреса Вулиці"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:194
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:88
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:86
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:194
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:88
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:86
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:752
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:753
 msgid "City"
 msgstr "Місто"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:195
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:89
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:195
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:89
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:87
 msgid "State/Province"
 msgstr "Штат/Провінція"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:196
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:196
 msgid "Postal Code"
 msgstr "Поштовий Індекс"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:197
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:91
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:89
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:197
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:91
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:89
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:777
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:780
 msgid "Country"
 msgstr "Країна"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:202
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/Submission.php:34
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:202
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/Submission.php:34
 msgid "Map the field IDs of your form to the data name."
 msgstr "Карта ідентифікаторів полів вашої форми з ім'ям даних."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:379
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:379
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:285
 #: plugins/sprout-invoices-pro/models/Estimate.php:161
 #, php-format
 msgid "New Estimate: %s"
 msgstr "Новий кошторис: %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:380
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:380
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimate_Submission_Premium.php:286
 msgid ""
 "No requirements submitted. Check to make sure the \"requirements\" field is "
 "required."
 msgstr "Немає відправлених вимог. Переконайтеся, що поле \"вимоги\" необхідно."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:398
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:401
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:398
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-form-integrations/SI_Form_Integrations.php:401
 #, php-format
 msgid "Estimate Submitted: Form %s."
 msgstr "Кошторис Відправлено: Форма %s."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:83
 #: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:215
 #: plugins/sprout-invoices-pro/controllers/reporting/Reporting.php:783
 msgid "Dashboard"
 msgstr "Майстерня"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:87
 #: plugins/sprout-invoices-pro/controllers/clients/Clients.php:1053
 #: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:219
 #: plugins/sprout-invoices-pro/importers/CSV.php:51
 msgid "Clients"
 msgstr "Клієнти"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:149
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-frontend-reports/inc/Frontend_Reports.php:149
 msgid "Reports Dashboard (auto generated)"
 msgstr "Дошка Звітів (авто генерована)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:38
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:38
 msgid "HTML Notifications"
 msgstr "HTML Cповіщення"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:42
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:42
 msgid ""
 "Loading the templates will delete the content of your existing notifications "
 "with pretty HTML templates."
@@ -1342,11 +1342,11 @@ msgstr ""
 "Завантаження шаблонів видалить вміст з ваших існуючих cповіщення з красивими "
 "шаблонами HTML."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:54
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:54
 msgid "Load HTML Templates"
 msgstr "Завантажити HTML Шаблони"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:62
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:62
 msgid ""
 "Are you sure? This will delete any customized notifications and replace them "
 "with the default HTML templates."
@@ -1354,190 +1354,190 @@ msgstr ""
 "Ви впевнені? Це призведе до видалення всіх налаштованих Cповіщень і замінить "
 "їх типовими HTML шаблонами."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:66
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/inc/HTML_Notifications.php:66
 msgid "All done"
 msgstr "Усе зроблено"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:20
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-html-notifications/views/notifications/shortcodes/line_item_table.php:20
 msgid "Total Due"
 msgstr "Всьго до сплати"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/Submission.php:78
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/Submission.php:81
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/Submission.php:78
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/Submission.php:81
 #, php-format
 msgid "Invoice Submitted: Form %s."
 msgstr "Рахунок Відправлено: Форма %s."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:47
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:47
 #, php-format
 msgid "Select the submission form built with <a href=\"%s\">Formidables</a>."
 msgstr "Оберіть форму подання, побудовану з <a href=\"%s\">Formidables</a>."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:51
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:51
 msgid "Formidable ID Mapping"
 msgstr "Відображення Ідентифікатор Formidable"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:59
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:61
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:57
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:59
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:61
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:57
 msgid "Invoice Submission"
 msgstr "Надсилання Рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:80
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:82
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:80
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:82
 msgid "Pre-defined Item Selection (Checkboxes Field)"
 msgstr "Вибір визначених елементів (Область чекбоксів)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:90
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:88
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:90
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:88
 msgid "Zip/Postal"
 msgstr "Поштовий індекс"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:101
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Formidable.php:101
 msgid "SI Line Items"
 msgstr "SI позиції"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:53
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Gravity_Forms.php:53
 msgid "Gravity Form ID Mapping"
 msgstr "Ідентифікаційна картка Gravity Form"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:40
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:40
 msgid "Ninja Forms ID"
 msgstr "Ідентифікатор Ninja Forms"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:49
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:49
 msgid "Ninja Form ID Mapping"
 msgstr "Ідентифікаційна картка Ninja Form"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:78
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:96
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:78
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:96
 msgid "Invoice Items"
 msgstr "Елементи Рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:112
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:112
 msgid "Show This"
 msgstr "Показати Це"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:117
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-invoice-submissions/inc/integrations/Ninja_Forms.php:117
 msgid "Hide This"
 msgstr "Приховати"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:47
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:47
 msgid "Comment Added for Estimate"
 msgstr "До Кошторису додано коментар"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:48
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:55
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:48
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:55
 msgid "Customize the email that is sent to the client when a comment is added."
 msgstr ""
 "Налаштування електронної пошти, яка відправляється клієнтові, коли додано "
 "коментар."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:50
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:50
 #, php-format
 msgid "%s: We responded to your Estimate"
 msgstr "%s: Ми відповіли на Ваш Кошторис"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:54
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:54
 msgid "Comment Added for Invoice"
 msgstr "До рахунку додано коментар"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:57
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:57
 #, php-format
 msgid "%s: We responded to your Invoice"
 msgstr "%s: Ми відповіли на ваш Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:62
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:62
 msgid "Admin Notification: Comment Added for Estimate"
 msgstr "Адмін Cповіщення: До Кошторису додано коментар"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:63
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:70
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:63
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:70
 msgid "Customize the email that is sent to you when a comment is added."
 msgstr ""
 "Налаштування електронної пошти, яка буде надіслана до вас, при додаванні "
 "коментаря."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:65
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:65
 #, php-format
 msgid "%s: Client Responded to an Estimate"
 msgstr "%s: Клієнт відповів на Кошторис"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:69
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:69
 msgid "Admin Notification: Comment Added for Invoice"
 msgstr "Адмін Cповіщення: До рахунку додано коментар"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:72
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:72
 #, php-format
 msgid "%s: Client Responded to an Invoice"
 msgstr "%s: Клієнт відповів на Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:82
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comment_Notifications.php:82
 msgid "Used to show the comment that was submitted."
 msgstr "Використовується для перегляду відправлених коментарів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:194
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:194
 msgid "Line Item Discussion"
 msgstr "Обговорення Позиції"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:196
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:196
 msgid "Comment Added!"
 msgstr "Коментар додано!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:243
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:243
 msgid "Comment N/A"
 msgstr "Коментар без відповіді"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:302
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:303
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:304
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:302
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:303
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:304
 #: plugins/sprout-invoices-pro/controllers/payments/Payments_Admin_Table.php:121
 msgid "unknown"
 msgstr "невідомий"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:379
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/inc/Doc_Comments.php:379
 msgid "Comment Received"
 msgstr "Отримано коментар"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/views/admin/meta-boxes/doc/comments.php:13
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/views/admin/meta-boxes/doc/comments.php:13
 #, php-format
 msgid "Line Item #%s"
 msgstr "Позиція №%s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/views/admin/meta-boxes/doc/comments.php:18
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/views/admin/section/comments-modal.php:29
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/views/admin/meta-boxes/doc/comments.php:18
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/views/admin/section/comments-modal.php:29
 msgid "Submit Response"
 msgstr "Надіслати відповідь"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/views/public/line-items-comments.php:38
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/views/public/line-items-comments.php:38
 msgid "Anything we can add/change on this line item?"
 msgstr "Все, що ми можемо додати/змінити на цій позиції?"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-line-item-comments/views/public/line-items-comments.php:42
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-line-item-comments/views/public/line-items-comments.php:42
 msgid "Submit Comment"
 msgstr "Надіслати Коментар"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:89
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:89
 msgid "Force Login"
 msgstr "Примусовий вхід"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:91
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:91
 msgid "Force Login By Default on All Estimates and Invoices"
 msgstr "Примусовий Вхід Погоджено для всіх Кошторисів і Рахунків"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:95
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:95
 msgid "Force logins by default for all invoices and estimates."
 msgstr "Примусовий вхід погоджено для всіх кошторисів і рахунків"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:128
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:128
 msgid "Force the client to login."
 msgstr "Примусовий вхід для клієнта."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:139
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:139
 msgid "Password protection supersedes requiring the client login."
 msgstr "Захист паролем замінює потребу входу клієнта."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:217
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:217
 msgid ""
 "Used to provide the client with the password, if one is set. Format if "
 "password present: \"Password: private-key-123\""
@@ -1545,54 +1545,54 @@ msgstr ""
 "Використовується для забезпечення клієнта паролем, якщо він встановлений. "
 "Формат, якщо пароль присутній: \"Пароль: приватний ключ-123\""
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/inc/Login.php:236
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/inc/Login.php:236
 #, php-format
 msgid "Password: %s"
 msgstr "Пароль: %s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:2
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:2
 msgid "Not Restricted"
 msgstr "Без обмежень"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:4
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:4
 msgid "Password Required"
 msgstr "Потрібно Пароль"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:7
 msgid "Login Required"
 msgstr "Потрібно вхід"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:11
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:14
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:11
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/admin/meta-boxes/force-login.php:14
 msgid "Require a password or the client to login to view this document."
 msgstr "Вимагати пароль або реєстрації клієнта, щоб подивитися цей документ."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:34
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/login/force-login.php:34
 msgid "<b>Welcome!</b><br/>This document is password protected."
 msgstr "<b>Ласкаво просимо!</b><br/> Цей документ захищений паролем."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:37
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/login/force-login.php:37
 msgid "Enter Password"
 msgstr "Введіть Пароль"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:40
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/login/force-login.php:40
 #: plugins/sprout-invoices-pro/views/templates/checkout/checks/form.php:9
 #: plugins/sprout-invoices-pro/views/templates/checkout/credit-card/form.php:19
 #: plugins/sprout-invoices-pro/views/templates/estimate/estimate-submission-form.php:18
 msgid "Submit"
 msgstr "Надіслати"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-login/views/login/force-login.php:45
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-login/views/login/force-login.php:45
 msgid "<b>Welcome!</b><br/>Please sign-in to view your document."
 msgstr ""
 "<b>Ласкаво просимо!</b><br/> Будь ласка, увійдіть в систему, для перегляду "
 "вашого документа."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Item.php:78
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Item.php:78
 msgid "Pre-defined Example"
 msgstr "Передвстановлений Приклад"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Item.php:79
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Item.php:79
 msgid ""
 "Amazing Spider-Man is the cornerstone of the Marvel Universe. This is where "
 "you'll find all the big-time action, major storylines and iconic Spider-Man "
@@ -1602,15 +1602,15 @@ msgstr ""
 "все, захоплюючий бойовик, основні сюжетні лінії і знакову магію Людини-"
 "павука, все, що ми звикли очікувати від Wall-Crawler."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:79
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:79
 msgid "Item Label"
 msgstr "Позначка елементу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:85
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:85
 msgid "Default Description"
 msgstr "Типовий Опис"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:93
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:93
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:1361
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications_Admin_Table.php:89
 #: plugins/sprout-invoices-pro/controllers/records/Records_Admin_Table.php:116
@@ -1620,96 +1620,96 @@ msgstr "Типовий Опис"
 msgid "Type"
 msgstr "Тип"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:100
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:439
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:100
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:439
 msgid "Default Rate"
 msgstr "Типова Вартість"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:107
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:107
 msgid "Default Qty"
 msgstr "Типова Кількість"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:114
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:114
 msgid "Default %"
 msgstr "Типово %"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:121
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:121
 msgid "Default SKU (if product)"
 msgstr "Типовий Артикул (якщо продукт)"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:148
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:259
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:343
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:277
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:148
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:259
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:343
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:277
 msgid "User cannot create an item!"
 msgstr "Користувач не може створити елемент!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:153
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:153
 msgid "Not secure!"
 msgstr "Небезпечно!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:157
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:157
 msgid "No id given!"
 msgstr "Немає Ідентифікатору!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:161
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:161
 msgid "Something is wrong!"
 msgstr "Щось не так!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:268
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:352
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:268
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:352
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:481
 msgid "No item given!"
 msgstr "Немає елементу!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:307
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:307
 msgid "Create Pre-defined Item"
 msgstr "Створити зумовлений елемент"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:309
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:309
 msgid "Manage Pre-defined Items"
 msgstr "Керування зумовленими елементами"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:311
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/inc/Predefined_Items.php:311
 msgid "Edit a Pre-defined Item"
 msgstr "Редагувати зумовлений елемент"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/meta-boxes/invoices/add-task-or-product.php:21
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/meta-boxes/invoices/add-task-or-product.php:21
 msgid "Admin"
 msgstr "Адмін"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/meta-boxes/invoices/add-task-or-product.php:23
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/sections/items-creation-form.php:8
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/sections/items-edit-form.php:8
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/meta-boxes/invoices/add-task-or-product.php:23
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/sections/items-creation-form.php:8
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/sections/items-edit-form.php:8
 msgid "Manage Items"
 msgstr "Керування елементами"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/meta-boxes/invoices/add-task-or-product.php:24
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/sections/items-creation-form.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/meta-boxes/invoices/add-task-or-product.php:24
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/sections/items-creation-form.php:7
 msgid "Create Item"
 msgstr "Створити елемент"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/sections/items-admin.php:38
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:29
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/sections/items-admin.php:38
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:29
 #, php-format
 msgid "<a href=\"%s\">Create New</a>"
 msgstr "<a href=\"%s\">Створити Новий</a>"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-predefined-items/views/admin/sections/items-edit-form.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-predefined-items/views/admin/sections/items-edit-form.php:7
 msgid "Edit Item"
 msgstr "Редагувати елемент"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:64
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:64
 msgid "Recurring Invoice Creation"
 msgstr "Регулярне Створення Рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:87
 #, php-format
 msgid ""
 "This invoice was created from a recurring invoice: <a href=\"%s\">%s</a>"
 msgstr "Цей рахунок був створений з регулярного рахунку: <a href=\"%s\">%s</a>"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:135
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:135
 msgid ""
 "Check if this invoice should be recurring and be cloned on the frequency "
 "below."
@@ -1717,75 +1717,75 @@ msgstr ""
 "Відзначте, якщо цей рахунок повинен бути регулярним і клонований із "
 "зазначеною нижче частотою."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:142
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:142
 msgid "Recurring Invoice"
 msgstr "Регулярний Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:151
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:151
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:322
 msgid "Start Date"
 msgstr "Дата Початку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:158
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:158
 msgid "Frequency"
 msgstr "Частота"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:161
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:161
 msgid "Weekly"
 msgstr "Щотижня"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:162
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:162
 msgid "Monthly"
 msgstr "Щомісяця"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:164
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:164
 msgid "Yearly"
 msgstr "Щорічно"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:165
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:165
 msgid "Custom"
 msgstr "Користувацька"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:176
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:176
 #, php-format
 msgid "Created Every %s Days"
 msgstr "Створювати кожні %s днів"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:449
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/inc/Invoices_Recurring.php:449
 msgid "Recurring Invoice Settings"
 msgstr "Налаштування Регулярних Рахунків"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/views/admin/meta-boxes/invoices/recurring.php:6
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-recurring-invoices/views/admin/meta-boxes/invoices/recurring.php:13
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/views/admin/meta-boxes/invoices/recurring.php:6
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-recurring-invoices/views/admin/meta-boxes/invoices/recurring.php:13
 msgid "Generation History"
 msgstr "Історія генерування"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:66
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:66
 msgid "Recurring Invoice Payment"
 msgstr "Регулярна сплата рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:125
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/views/admin/meta-boxes/invoices/subscription-payments.php:5
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:125
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/views/admin/meta-boxes/invoices/subscription-payments.php:5
 msgid "Recurring Payment"
 msgstr "Регулярний платіж"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:129
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:129
 msgid "This will enable recurring payments."
 msgstr "Дозволить регулярні платежі."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:134
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:134
 msgid "Term"
 msgstr "Термін"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:144
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:144
 msgid "Unit for billing during this subscription period."
 msgstr "Одиниця для виставлення рахунків протягом цього періоду передплати."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:149
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:149
 msgid "Duration"
 msgstr "Тривалість"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:153
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:153
 msgid ""
 "Number of billing periods that make up one billing cycle. Note: If the "
 "billing period is SemiMonth, the billing frequency must be 1."
@@ -1794,51 +1794,51 @@ msgstr ""
 "Примітка: Якщо розрахунковий період напів Щомісяця, частота рахунків повинні "
 "бути 1."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:342
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/inc/Subscription_Payments.php:342
 msgid "Subscription Payments Settings"
 msgstr "Налаштування платних підписок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-subscription-payments/views/admin/meta-boxes/invoices/subscription-payments.php:5
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-subscription-payments/views/admin/meta-boxes/invoices/subscription-payments.php:5
 msgid "Review Payment"
 msgstr "Розгляд платежу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time.php:77
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time.php:77
 msgid "Billable Work"
 msgstr "Оплачувана Робота"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:70
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:80
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:392
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:70
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:80
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:392
 msgid "Time"
 msgstr "Час"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:87
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:87
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:170
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:654
 msgid "Rate"
 msgstr "Ставка"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:95
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:95
 msgid "Hours"
 msgstr "Годин"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:103
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:103
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:90
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:137
 #: plugins/sprout-invoices-pro/controllers/line-items/Line_Items.php:186
 msgid "A percentage adjustment per line item, i.e. tax or discount"
 msgstr "Коригування відсотку за рядком, тобто податку або знижки"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:161
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:161
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:78
 msgid "Time Tracking"
 msgstr "Відстеження часу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:286
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:286
 msgid "No time given!"
 msgstr "Немає часу!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:369
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:369
 #: plugins/sprout-invoices-pro/models/_Model.php:421
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/estimates/quick-links.php:17
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/quick-links.php:16
@@ -1846,16 +1846,16 @@ msgstr "Немає часу!"
 msgid "Auto Draft"
 msgstr "Авто Чернетка"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:369
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:369
 msgid "Current Project"
 msgstr "Поточний Проект"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:374
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:374
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:385
 msgid "Project"
 msgstr "Проект"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:379
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:379
 #, php-format
 msgid ""
 "Select an activity, <a href=\"%s\">create a new activity</a> or <a class="
@@ -1866,124 +1866,124 @@ msgstr ""
 "\"thickbox\" href=\"%s\" title=\"Редагувати Діяльність\">управління існуючою "
 "діяльністю</a>."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:384
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:6
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:384
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:6
 msgid "Activity"
 msgstr "Діяльність"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:394
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:394
 msgid "In hours, e.g. 1.25 for 75 minutes."
 msgstr "У годинах, наприклад, 1,25 для 75 хвилин."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:399
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:399
 #: plugins/sprout-invoices-pro/controllers/estimates/Estimates_Edit.php:607
 #: plugins/sprout-invoices-pro/controllers/invoices/Invoices_Edit.php:619
 msgid "Note"
 msgstr "Примітка"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:427
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:427
 msgid "Activity Name"
 msgstr "Назва Діяльності"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:433
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:433
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:7
 msgid "Billable"
 msgstr "Оплачувана"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:445
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:445
 msgid "Default Percentage"
 msgstr "Типовий Відсоток"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:683
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-creation-form.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:683
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/sections/time-creation-form.php:7
 msgid "Create Activity"
 msgstr "Створити Діяльність"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:685
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:685
 msgid "Track Time"
 msgstr "Відстежувати Час"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:687
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:687
 msgid "Time saved!"
 msgstr "Час Збережено!"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:812
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:812
 msgid "Time Tracking Dashboard"
 msgstr "Панель Відстеження часу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:822
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:822
 msgid "Unbilled Time Dashboard"
 msgstr "Панель неврахованого часу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:832
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:832
 msgid "Time Tracker"
 msgstr "Трекер часу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:852
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:884
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:852
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:884
 msgid "No new projects."
 msgstr "Немає нових проектів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:869
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:869
 msgid "No time tracked from your most recent projects."
 msgstr "Немає часу відстеження ваших найостанніших проектів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:901
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/inc/Time_Tracking.php:901
 msgid "No unbilled time from your most recent projects."
 msgstr "Немає неврахованого часу ваших найостанніших проектів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking-unbilled.php:80
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking-unbilled.php:80
 msgid "Import Time into an Invoice"
 msgstr "Імпортувати Час у Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:73
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:67
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:73
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:67
 msgid "Time is yet to be billed."
 msgstr "Час ще не оголошено."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:84
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:82
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:84
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:82
 msgid "Billed"
 msgstr "Оголошений"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:90
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:88
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/dashboards/project-time-tracking.php:90
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:88
 msgid "Not Invoiced"
 msgstr "Не виставлених у рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/dashboards/time-tracker.php:7
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-tracker.php:7
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/public/time-tracker.php:26
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/dashboards/time-tracker.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/sections/time-tracker.php:7
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/public/time-tracker.php:26
 msgid "Log Time"
 msgstr "Журнал Часу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/invoices/time-invoicing.php:3
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/invoices/time-invoicing.php:3
 #: plugins/sprout-invoices-pro/views/admin/meta-boxes/invoices/line-items.php:19
 msgid "Import Time"
 msgstr "Імпорт Часу"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:75
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/meta-boxes/projects/time-entries.php:75
 msgid "No time entries for this project."
 msgstr "Немає записів часу для цього проекту."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:25
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking/views/admin/sections/time-admin.php:25
 msgid "No activities found."
 msgstr "Не знайдено діяльності."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:48
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:48
 msgid "Default"
 msgstr "Типово"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:65
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:65
 msgid "Toggl Settings"
 msgstr "Налаштування Toggl"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:70
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:52
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:70
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:52
 msgid "API Key"
 msgstr "Ключ API"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:74
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:74
 msgid ""
 "This is your API token found on your profile page, not the Workspace API "
 "Token."
@@ -1991,40 +1991,40 @@ msgstr ""
 "Це ваш API маркер, який знаходиться на сторінці вашого профілю, а не "
 "Workspace API Token."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:78
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:78
 msgid "Workspace"
 msgstr "Робоче середовище"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:83
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:83
 msgid "You can select a different workspace after saving your API Token."
 msgstr ""
 "Ви можете обрати інше робоче середовище після збереження вашого API маркера."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:99
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:99
 msgid "Toggl Time Tracking"
 msgstr "Відстеження Часу через Toggl"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:155
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:155
 msgid "None"
 msgstr "Жодної"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:155
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:155
 msgid "Create Project at Toggl"
 msgstr "Створити проект на Toggl"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:162
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:162
 msgid "Toggl Project"
 msgstr "Проект Toggl"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:164
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:164
 msgid "Link a project at toggl or create a new one."
 msgstr "Посилання на проект в Toggl або створити новий."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:172
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:172
 msgid "Sync Time with Toggl"
 msgstr "Синхронізація часу з Toggl"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:175
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:175
 msgid ""
 "Automatically send time created here to Toggle and delete any time at Toggl "
 "if deleted here."
@@ -2032,12 +2032,12 @@ msgstr ""
 "Автоматично надсилати час створений тут для Toggle і видаляти будь-який час "
 "на Toggl при видаленні тут."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:180
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:180
 msgid "Retrieve Project Time from Toggl"
 msgstr "Отримати Час Проекту від Toggl"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:182
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:192
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:182
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:192
 msgid ""
 "Check, then save to import time for this project. Time does not import "
 "automatically (yet)."
@@ -2045,118 +2045,118 @@ msgstr ""
 "Перевірте, а потім збережіть для імпорту часу цього проекту. Час не "
 "імпортувати автоматично (поки)."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:188
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-time-tracking-toggl/inc/Toggl_Settings.php:188
 msgid "Activity for Imported Time"
 msgstr "Діяльність по часу що імпортується"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Integration.php:31
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Integration.php:31
 msgid "Invoice payment complete"
 msgstr "Платіж за рахунком завершений"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Integration.php:34
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Integration.php:34
 msgid "Invoice written-off"
 msgstr "Рахунок списано"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:23
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:23
 #: plugins/sprout-invoices-pro/controllers/admin/Settings.php:569
 #: plugins/sprout-invoices-pro/controllers/reporting/Dashboard.php:141
 #: plugins/sprout-invoices-pro/controllers/templating/Customizer.php:59
 msgid "Sprout Invoices"
 msgstr "Sprout Invoices"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:24
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:24
 msgid "Allows an invoice to be created for Sprout Invoices."
 msgstr "Дозволяє відкриття рахунків для Sprout Invoices."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:50
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:50
 msgid "Enable/Disable"
 msgstr "Увімкнути/Вимкнути"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:52
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:52
 msgid "Enable Sprout Invoices Payment"
 msgstr "Увімкнути Платіж Sprout Invoices"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:56
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:56
 msgid "Title"
 msgstr "Назва"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:58
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:58
 msgid "This controls the title which the user sees during checkout."
 msgstr "Контролює назву, яку користувач бачить при оформленні замовлення."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:59
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:59
 msgid "Sprout Invoices Payment"
 msgstr "Платіж Sprout Invoices"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:63
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:63
 #: plugins/sprout-invoices-pro/controllers/notifications/Notifications.php:653
 msgid "Description"
 msgstr "Опис"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:65
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:65
 msgid "Payment method description that the customer will see on your checkout."
 msgstr ""
 "Опис методу платежу, який клієнт буде бачити під час оформлення замовлення."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:66
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:66
 msgid "An invoice will be created for later payment after checkout."
 msgstr "Рахунок буде створений для наступного платежу після перевірки."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:70
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:70
 msgid "Instructions"
 msgstr "Інструкції"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:72
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:72
 msgid "Instructions that will be added to the thank you page and emails."
 msgstr "Інструкції, які будуть додані до сторінці подяки і листів."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:73
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:73
 msgid "Your invoice can be found at {invoice_url}."
 msgstr "Ваш рахунок може бути знайдений в {invoice_url}."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:113
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:113
 msgid "Awaiting invoice payment"
 msgstr "В очікуванні оплати рахунку"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:150
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:150
 msgid "Shipping"
 msgstr "Доставка"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:174
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:174
 #, php-format
 msgid "Order #%s"
 msgstr "Замовлення №%s"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:242
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-woocommerce-payments/inc/Woo_Payments.php:242
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:300
 #: plugins/sprout-invoices-pro/controllers/templating/Templating.php:390
 msgid "invoice"
 msgstr "Рахунок"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-zapier/inc/Zapier_Routes.php:258
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-zapier/inc/Zapier_Routes.php:258
 #: plugins/sprout-invoices-pro/controllers/_Controller.php:967
 #: plugins/sprout-invoices-pro/controllers/api/JSON_API.php:429
 msgid "Something failed."
 msgstr "Щось не вдалося."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:47
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:47
 msgid "Zapier API"
 msgstr "Zapier API"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:56
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:56
 msgid "This is the API token to allow Zapier to integrate with your site."
 msgstr "Це API маркер, який дозволяє Zapier інтеграцію з вашим сайтом."
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:60
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:60
 msgid "API URL"
 msgstr "API URL"
 
-#: plugins/sprout-invoices-pro/add-ons/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:64
+#: plugins/sprout-invoices-pro/bundles/sprout-invoices-addon-zapier/inc/Zapier_Settings.php:64
 msgid "This is the API url you will give Zapier to integrate with your site."
 msgstr ""
 "Це API гіперпосилання що передається Zapier для інтеграції з вашим сайтом."
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:175
+#: plugins/sprout-invoices-pro/bundles/updates/edd_plugin_updater.class.php:175
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
@@ -2165,7 +2165,7 @@ msgstr ""
 "Доступна найсвіжіша версія %1$s. <a target=\"_blank\" class=\"thickbox\" "
 "href=\"%2$s\"> Переглянути детальну інформацію про версію %3$s</a>."
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:182
+#: plugins/sprout-invoices-pro/bundles/updates/edd_plugin_updater.class.php:182
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
@@ -2176,11 +2176,11 @@ msgstr ""
 "href=\"%2$s\"> Переглянути детальну інформацію про версію %3$s</a> або <a "
 "href=\"%4$s\">оновити зараз</a>."
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:327
+#: plugins/sprout-invoices-pro/bundles/updates/edd_plugin_updater.class.php:327
 msgid "You do not have permission to install plugin updates"
 msgstr "Ви не маєте дозволу для встановлення плагінів поновлення"
 
-#: plugins/sprout-invoices-pro/add-ons/updates/edd_plugin_updater.class.php:327
+#: plugins/sprout-invoices-pro/bundles/updates/edd_plugin_updater.class.php:327
 msgid "Error"
 msgstr "Помилка"
 

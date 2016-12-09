@@ -19,9 +19,10 @@
  * @package SI
  * @subpackage Payment Processing_Processor
  */
-class SI_Checks extends SI_Offsite_Processors {
-	const PAYMENT_METHOD = 'Check';
-	const PAYMENT_SLUG = 'checks';
+class SI_BACSs extends SI_Offsite_Processors {
+	const PAYMENT_METHOD = 'BACS';
+	const PAYMENT_SLUG = 'bacs';
+	const BACS_INFO = 'si_bacs_info';
 	protected static $instance;
 
 	public static function get_instance() {
@@ -40,29 +41,59 @@ class SI_Checks extends SI_Offsite_Processors {
 	}
 
 	public static function register() {
-		self::add_payment_processor( __CLASS__, __( 'Check/PO Payment', 'sprout-invoices' ) );
+		self::add_payment_processor( __CLASS__, __( 'BACS', 'sprout-invoices' ) );
 	}
 
 	public static function public_name() {
-		return __( 'Check/PO', 'sprout-invoices' );
+		return __( 'BACS', 'sprout-invoices' );
 	}
 
 	public static function checkout_options() {
 		$option = array(
-			'icons' => array( SI_URL . '/resources/front-end/img/check.png', SI_URL . '/resources/front-end/img/po.png' ),
-			'label' => __( 'Check', 'sprout-invoices' ),
+			'icons' => array( SI_URL . '/resources/front-end/img/bacs.jpg' ),
+			'label' => __( 'BACS', 'sprout-invoices' ),
 			'cc' => array(),
 			);
-		return apply_filters( 'si_checks_checkout_options', $option );
+		return apply_filters( 'si_bacs_checkout_options', $option );
 	}
 
 	protected function __construct() {
 		parent::__construct();
 
+		if ( is_admin() ) {
+			add_action( 'init', array( get_class(), 'register_options' ) );
+		}
+
 		// Remove pages
 		add_filter( 'si_checkout_pages', array( $this, 'remove_checkout_pages' ) );
 
 		add_action( 'checkout_completed', array( $this, 'post_checkout_redirect' ), 10, 2 );
+	}
+
+	/**
+	 * Hooked on init add the settings page and options.
+	 *
+	 */
+	public static function register_options() {
+		$bacs_info = get_option( self::BACS_INFO, '' );
+		// Settings
+		$settings = array(
+			'si_bacs_settings' => array(
+				'title' => __( 'BACS', 'sprout-invoices' ),
+				'weight' => 200,
+				'tab' => self::get_settings_page( false ),
+				'settings' => array(
+					self::BACS_INFO => array(
+						'label' => __( 'Provide BACS Info', 'sprout-invoices' ),
+						'option' => array(
+							'type' => 'textarea',
+							'default' => $bacs_info,
+							),
+						),
+					),
+				),
+			);
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 
@@ -73,10 +104,14 @@ class SI_Checks extends SI_Offsite_Processors {
 	 * @return
 	 */
 	public function payments_pane( SI_Checkouts $checkout ) {
-		self::load_view( 'templates/checkout/checks/form', array(
+
+		$bacs_info = get_option( self::BACS_INFO, '' );
+
+		self::load_view( 'templates/checkout/bacs/form', array(
 				'checkout' => $checkout,
 				'type' => self::PAYMENT_SLUG,
-				'check_fields' => $this->check_info_fields( $checkout ),
+				'bacs_info' => $bacs_info,
+				'bacs_fields' => $this->bac_info_fields( $checkout ),
 		), true );
 	}
 
@@ -88,34 +123,38 @@ class SI_Checks extends SI_Offsite_Processors {
 	 * @return
 	 */
 	public function invoice_pane( SI_Checkouts $checkout ) {
-		self::load_view( 'templates/checkout/checks/form', array(
+
+		$bacs_info = get_option( self::BACS_INFO, '' );
+
+		self::load_view( 'templates/checkout/bacs/form', array(
 				'checkout' => null,
 				'type' => self::PAYMENT_SLUG,
-				'check_fields' => self::check_info_fields( $checkout ),
+				'bacs_info' => $bacs_info,
+				'bacs_fields' => self::bac_info_fields( $checkout ),
 		), true );
 	}
 
 	/**
-	 * An array of fields for check payments
+	 * An array of fields for bac payments
 	 *
 	 * @static
 	 * @return array
 	 */
-	public static function check_info_fields( $checkout = '' ) {
+	public static function bac_info_fields( $checkout = '' ) {
 		$fields = array(
 			'amount' => array(
 				'type' => 'text',
 				'weight' => 1,
-				'label' => __( 'Amount', 'sprout-invoices' ),
+				'label' => __( 'Total Paid', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
 				'required' => true,
 			),
-			'check_number' => array(
+			'bac_number' => array(
 				'type' => 'text',
 				'weight' => 5,
-				'label' => __( 'Check/PO Number', 'sprout-invoices' ),
+				'label' => __( 'BACS Number', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),
@@ -124,7 +163,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'mailed' => array(
 				'type' => 'date',
 				'weight' => 10,
-				'label' => __( 'Date Mailed', 'sprout-invoices' ),
+				'label' => __( 'Date Sent', 'sprout-invoices' ),
 				'attributes' => array(
 					'autocomplete' => 'off',
 				),
@@ -148,7 +187,7 @@ class SI_Checks extends SI_Offsite_Processors {
 				'value' => wp_create_nonce( SI_Controller::NONCE ),
 			),
 		);
-		$fields = apply_filters( 'sa_checks_fields', $fields, $checkout );
+		$fields = apply_filters( 'sa_bacs_fields', $fields, $checkout );
 		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
 		return $fields;
 	}
@@ -172,12 +211,12 @@ class SI_Checks extends SI_Offsite_Processors {
 	 * @return SI_Payment|bool false if the payment failed, otherwise a Payment object
 	 */
 	public function process_payment( SI_Checkouts $checkout, SI_Invoice $invoice ) {
-		$amount = ( isset( $_POST['sa_checks_amount'] ) ) ? $_POST['sa_checks_amount'] : false ;
-		$number = ( isset( $_POST['sa_checks_check_number'] ) ) ? $_POST['sa_checks_check_number'] : false ;
-		$date = ( isset( $_POST['sa_checks_mailed'] ) ) ? $_POST['sa_checks_mailed'] : false ;
-		$notes = ( isset( $_POST['sa_checks_notes'] ) ) ? $_POST['sa_checks_notes'] : '' ;
+		$amount = ( isset( $_POST['sa_bacs_amount'] ) ) ? $_POST['sa_bacs_amount'] : false ;
+		$number = ( isset( $_POST['sa_bacs_bac_number'] ) ) ? $_POST['sa_bacs_bac_number'] : false ;
+		$date = ( isset( $_POST['sa_bacs_mailed'] ) ) ? $_POST['sa_bacs_mailed'] : false ;
+		$notes = ( isset( $_POST['sa_bacs_notes'] ) ) ? $_POST['sa_bacs_notes'] : '' ;
 
-		if ( ! isset( $_POST['sa_checks_nonce'] ) || ! wp_verify_nonce( $_POST['sa_checks_nonce'], self::NONCE ) ) {
+		if ( ! isset( $_POST['sa_bacs_nonce'] ) || ! wp_verify_nonce( $_POST['sa_bacs_nonce'], self::NONCE ) ) {
 			return false;
 		}
 
@@ -193,7 +232,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'transaction_id' => $number,
 			'data' => array(
 			'amount' => $amount,
-			'check_number' => $number,
+			'bac_number' => $number,
 			'date' => strtotime( $date ),
 			'notes' => $notes,
 			),
@@ -232,4 +271,4 @@ class SI_Checks extends SI_Offsite_Processors {
 		}
 	}
 }
-SI_Checks::register();
+SI_BACSs::register();

@@ -66,6 +66,31 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		return apply_filters( 'si_enabled_processors', array_filter( $enabled ) );
 	}
 
+	public static function get_payment_classname( $payment_id = 0 ) {
+		$payment_gateways = SI_Payment_Processors::enabled_processors();
+		if ( 1 < count( $payment_gateways ) ) {
+			return '';
+		}
+
+		$gw_methods = array();
+		foreach ( $payment_gateways as $class_name ) {
+			if ( method_exists( $class_name, 'get_instance' ) ) {
+				$payment_processor = call_user_func( array( $class_name, 'get_instance' ) );
+				$gw_methods[ $payment_processor->get_payment_method() ] = $class_name;
+			}
+		}
+
+		$payment = SI_Payment::get_instance( $payment_id );
+		if ( ! is_a( $payment, 'SI_Payment' ) ) {
+			return '';
+		}
+		$payment_method = $payment->get_payment_method();
+		if ( ! isset( $gw_methods[ $payment_method ] ) ) {
+			return '';
+		}
+		return $gw_methods[ $payment_method ];
+	}
+
 	/**
 	 * Get an instance of the active payment processor
 	 * Used during checkout where the payment processor is active/selected and defaults to the option

@@ -852,7 +852,7 @@ class SI_Reporting extends SI_Dashboard {
 		$screen->add_help_tab( array(
 			'id' => 'reports-tables',
 			'title' => __( 'Report Tables', 'sprout-invoices' ),
-			'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( '<b>Date filtering</b> is available and can be used to retrieve data between two dates, after a date, or before a date.', 'sprout-invoices' ), __( '<b>Modify columns</b> within the table with the “Show / hide columns” button.', 'sprout-invoices' ), __( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.', 'sprout-invoices' ), __( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.', 'sprout-invoices' ) ),
+			'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p>', __( '<b>Date filtering</b> is available and can be used to retrieve data between two dates, after a date, or before a date.', 'sprout-invoices' ), __( '<b>Export</b> the table, filtered or not, to many formats, including CSV, Excel, PDF or your computers clipboard.', 'sprout-invoices' ), __( 'Records are <em>limited to 2,500 items</em>. If you want to return more use the ‘si_reports_show_records’ filter.', 'sprout-invoices' ) ),
 		) );
 
 		if ( ! isset( $_GET['report'] ) ) {

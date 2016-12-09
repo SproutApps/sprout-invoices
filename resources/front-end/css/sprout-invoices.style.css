@@ -989,7 +989,8 @@ div#vcards {
  * Payment Form
  */
 #credit_card_checkout_wrap,
-#check_info_checkout_wrap {
+#check_info_checkout_wrap,
+#bacs_info_checkout_wrap {
 	background-color: #FFF;
 	margin: 0px -1000px 50px -1000px;
 	padding: 50px 1000px;

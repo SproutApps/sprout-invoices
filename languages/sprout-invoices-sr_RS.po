@@ -1352,12 +1352,12 @@ msgstr "Новије издање (%s) је постављено"
 msgid "Install Now"
 msgstr "Instalirati sada"
 
-#: add-ons/updates/edd_plugin_updater.class.php:189
+#: bundles/updates/edd_plugin_updater.class.php:189
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
 
-#: add-ons/updates/edd_plugin_updater.class.php:197
+#: bundles/updates/edd_plugin_updater.class.php:197
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
@@ -1676,19 +1676,19 @@ msgstr ""
 msgid "Time"
 msgstr "Time"
 
-#: add-ons/Addons.php:35
+#: bundles/Addons.php:35
 msgid "Sprout Invoices Add-ons"
 msgstr ""
 
-#: add-ons/Addons.php:36
+#: bundles/Addons.php:36
 msgid "Add-ons"
 msgstr "Додаци"
 
-#: add-ons/updates/edd_plugin_updater.class.php:339
+#: bundles/updates/edd_plugin_updater.class.php:339
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: add-ons/updates/edd_plugin_updater.class.php:339
+#: bundles/updates/edd_plugin_updater.class.php:339
 #: controllers/updates/freemius-sdk/includes/i18n.php:80
 msgid "Error"
 msgstr "Error"

@@ -24,6 +24,7 @@
 					<th><?php _e( 'Client', 'sprout-invoices' ) ?></th>
 					<th><?php _e( 'Invoiced', 'sprout-invoices' ) ?></th>
 					<th><?php _e( 'Paid', 'sprout-invoices' ) ?></th>
+					<th><?php _e( 'Tax', 'sprout-invoices' ) ?></th>
 					<th><?php _e( 'Balance', 'sprout-invoices' ) ?></th>
 				</tr>
 			</thead>
@@ -31,6 +32,7 @@
 				<?php
 					$table_total_invoiced = 0;
 					$table_total_paid = 0;
+					$table_total_tax = 0;
 					$table_total_balance = 0;
 
 					$filter = ( isset( $_REQUEST['post_status'] ) ) ? $_REQUEST['post_status'] : 'any';
@@ -64,6 +66,7 @@
 
 						$table_total_invoiced += si_get_invoice_calculated_total();
 						$table_total_paid += si_get_invoice_payments_total();
+						$table_total_tax += si_get_invoice_taxes_total();
 						$table_total_balance += si_get_invoice_balance();
 						$client_name = ( si_get_invoice_client_id() ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_invoice_client_id() ), get_the_title( si_get_invoice_client_id() ) ) : __( 'N/A', 'sprout-invoices' ); ?>
 						<tr> 
@@ -74,6 +77,7 @@
 							<td><?php echo $client_name; ?></td>
 							<td><?php si_invoice_calculated_total() ?></td>
 							<td><?php si_invoice_payments_total() ?></td>
+							<td><?php sa_formatted_money( si_get_invoice_taxes_total() ) ?></td>
 							<td><?php si_invoice_balance() ?></td>
 						</tr>
 						<?php
@@ -89,6 +93,7 @@
 					<th colspan="5"><?php _e( 'Totals', 'sprout-invoices' ) ?></th>
 					<th><span id="footer_total_invoices"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_invoiced ) ) ?></th>
 					<th><span id="footer_total_paid"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_paid ) ) ?></th>
+					<th><span id="footer_total_tax"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_tax ) ) ?></th>
 					<th><span id="footer_total_balance"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_balance ) ) ?></th>
 				</tr>
 			</tfoot>
@@ -131,9 +136,17 @@
 							return intVal(a) + intVal(b);
 						}, 0 );
 
+					// Tax over this page
+					pageTax = api
+						.column( 7, { page: 'current'} )
+						.data()
+						.reduce( function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0 );
+
 					// Balance over this page
 					pageBalance = api
-						.column( 7, { page: 'current'} )
+						.column( 8, { page: 'current'} )
 						.data()
 						.reduce( function (a, b) {
 							return intVal(a) + intVal(b);
@@ -145,6 +158,9 @@
 					);
 					$( '#footer_total_paid' ).html(
 						si_js_object.currency_symbol + pagePaid.toFixed(2)
+					);
+					$( '#footer_total_tax' ).html(
+						si_js_object.currency_symbol + pageTax.toFixed(2)
 					);
 					$( '#footer_total_balance' ).html(
 						si_js_object.currency_symbol + pageBalance.toFixed(2)

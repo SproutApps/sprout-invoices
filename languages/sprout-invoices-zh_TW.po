@@ -1340,12 +1340,12 @@ msgstr "已安裝最新版本（%s）"
 msgid "Install Now"
 msgstr "立刻安裝"
 
-#: add-ons/updates/edd_plugin_updater.class.php:189
+#: bundles/updates/edd_plugin_updater.class.php:189
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
 
-#: add-ons/updates/edd_plugin_updater.class.php:197
+#: bundles/updates/edd_plugin_updater.class.php:197
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
@@ -1664,19 +1664,19 @@ msgstr ""
 msgid "Time"
 msgstr "時間"
 
-#: add-ons/Addons.php:35
+#: bundles/Addons.php:35
 msgid "Sprout Invoices Add-ons"
 msgstr ""
 
-#: add-ons/Addons.php:36
+#: bundles/Addons.php:36
 msgid "Add-ons"
 msgstr "附加元件"
 
-#: add-ons/updates/edd_plugin_updater.class.php:339
+#: bundles/updates/edd_plugin_updater.class.php:339
 msgid "You do not have permission to install plugin updates"
 msgstr "你沒有權限安裝外掛的更新"
 
-#: add-ons/updates/edd_plugin_updater.class.php:339
+#: bundles/updates/edd_plugin_updater.class.php:339
 #: controllers/updates/freemius-sdk/includes/i18n.php:80
 msgid "Error"
 msgstr "錯誤"

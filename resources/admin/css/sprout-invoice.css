@@ -2444,3 +2444,9 @@ input#sa_recurring_invoice_custom_freq {
 	width: 25px;
 	height: auto;
 }
+
+span.si_admin_show_recurring {
+    padding: 5px 10px;
+    /* margin-top: 10px; */
+    display: inline-block;
+}

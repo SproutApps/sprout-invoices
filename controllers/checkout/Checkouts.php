@@ -434,7 +434,15 @@ class SI_Checkouts extends SI_Controller {
 		$this->cache['payment_id'] = $payment->get_id();
 		do_action( 'processed_payment', $payment, $this );
 
-		self::set_message( __( 'Payment processed. Cheers!', 'sprout-invoices' ), self::MESSAGE_STATUS_INFO );
+		$invoice_id = $payment->get_invoice_id();
+		$invoice = SI_Invoice::get_instance( $invoice_id );
+
+		// Messaging
+		if ( $invoice->get_balance() < 0.01 ) {
+			self::set_message( __( 'Payment Received & Invoice Paid!', 'sprout-invoices' ), self::MESSAGE_STATUS_INFO );
+		} else {
+			self::set_message( sprintf( __( 'Partial Payment Received. Current Balance: %s', 'sprout-invoices' ), sa_get_formatted_money( $invoice->get_balance() ) ), self::MESSAGE_STATUS_INFO );
+		}
 
 		// wrap up checkout and tell the purchase we're done
 		do_action( 'completing_checkout', $this, $payment );
