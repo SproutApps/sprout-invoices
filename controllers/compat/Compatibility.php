@@ -27,6 +27,7 @@ class SI_Compatibility extends SI_Controller {
 
 			add_action( 'init', array( __CLASS__, 'replace_older_select2_with_new' ), 5 );
 		}
+		add_filter( 'acf/settings/select2_version', array( __CLASS__, '__return_four' ) );
 
 		if ( class_exists( 'Caldera_Forms' ) ) {
 			add_action( 'init', array( __CLASS__, 'deregister_select2_for_caldera' ), 15 );
@@ -97,6 +98,10 @@ class SI_Compatibility extends SI_Controller {
 		    }
 		}
 		return $is_post_edit_page;
+	}
+
+	public static function __return_four() {
+		return 4;
 	}
 
 	public static function _acf_post_submitbox_start() {
