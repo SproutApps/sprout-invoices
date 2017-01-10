@@ -9,8 +9,10 @@
 class SI_Compatibility extends SI_Controller {
 
 	public static function init() {
-		// attempt to fill all select2 registrations on si_admin pages
+		// attempt to kill all select2 registrations on si_admin pages
 		add_action( 'init', array( __CLASS__, 'deregister_select2' ), PHP_INT_MAX );
+		// atttempt to kill all select2 registrations on si_admin pages REALLY LATE
+		add_action( 'wp_print_scripts', array( __CLASS__, 'deenqueue_select2' ), PHP_INT_MAX );
 
 		// WP SEO
 		add_filter( 'init', array( __CLASS__, 'prevent_wpseo_from_being_assholes_about_admin_columns' ), 10000 );
@@ -52,6 +54,29 @@ class SI_Compatibility extends SI_Controller {
 		if ( self::is_si_admin() ) {
 			wp_deregister_script( 'select2' );
 			wp_deregister_style( 'select2' );
+			// Register the SI version with the old handle
+			wp_register_style( 'select2', SI_URL . '/resources/admin/plugins/select2/css/select2.min.css', null, self::SI_VERSION, false );
+			wp_register_script( 'select2', SI_URL . '/resources/admin/plugins/select2/js/select2.min.js', array( 'jquery' ), self::SI_VERSION, false );
+		}
+	}
+
+	public static function deenqueue_select2() {
+		if ( self::is_si_admin() ) {
+			foreach ( wp_scripts()->queue as $handle ) {
+				if ( strpos( $handle, 'select2' ) !== false && 'select2_4.0' !== $handle ) {
+					wp_dequeue_script( $handle );
+					// Register the SI version with the old handle
+					wp_enqueue_script( $handle, SI_URL . '/resources/admin/plugins/select2/js/select2.min.js', array( 'jquery' ), self::SI_VERSION, false );
+
+				}
+			}
+
+			foreach ( wp_styles()->queue as $handle ) {
+				if ( strpos( $handle, 'select2' ) !== false && 'select2_4.0_css' !== $handle ) {
+					wp_dequeue_style( $handle );
+					wp_enqueue_style( $handle, SI_URL . '/resources/admin/plugins/select2/css/select2.min.css', null, self::SI_VERSION, false );
+				}
+			}
 		}
 	}
 

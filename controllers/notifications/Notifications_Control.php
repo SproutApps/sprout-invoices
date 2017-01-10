@@ -682,7 +682,6 @@ class SI_Notifications_Control extends SI_Controller {
 		}
 		if ( ! is_a( $user, 'WP_User' ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Get User Email FAILED', $user );
-			wpbt();
 			return false;
 		}
 		$user_email = $user->user_email;
