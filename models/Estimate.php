@@ -425,18 +425,18 @@ class SI_Estimate extends SI_Post_Type {
 	}
 
 	public function get_discount_total() {
-		$subtotal = $this->get_subtotal();
+		$subtotal = (float) $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
-			$subtotal = $this->get_total();
+			$subtotal = (float) $this->get_total();
 		}
 		if ( apply_filters( 'si_discount_after_taxes', true, $this ) ) {
-			$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
-			$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
+			$tax_total = $subtotal * ( ( (float) $this->get_tax() ) / 100 );
+			$tax2_total = $subtotal * ( ( (float) $this->get_tax2() ) / 100 );
 			$subtotal = $subtotal + $tax_total + $tax2_total;
 		}
 
-		$discount = $subtotal * ( $this->get_discount() / 100 );
-		return si_get_number_format( $discount );
+		$discount = $subtotal * ( (float) $this->get_discount() / 100 );
+		return si_get_number_format( (float) $discount );
 	}
 
 
@@ -540,21 +540,21 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public function get_calculated_total() {
 		if ( isset( $this->calculated_total ) ) {
-			return $this->calculated_total;
+			return (float) $this->calculated_total;
 		}
-		$subtotal = $this->get_subtotal();
+		$subtotal = (float) $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
-			$subtotal = $this->get_total();
+			$subtotal = (float) $this->get_total();
 		}
 
-		$invoice_total = $subtotal + $this->get_tax_total() + $this->get_tax2_total();
-		$total = $invoice_total - $this->get_discount_total();
+		$estimate_total = $subtotal + (float) $this->get_tax_total() + (float) $this->get_tax2_total();
+		$total = $estimate_total - (float) $this->get_discount_total();
 
-		$total = $total + $this->get_fees_total();
+		$total = $total + (float) $this->get_fees_total();
 
-		$this->calculated_total = $total;
+		$this->calculated_total = (float) $total;
 
-		return si_get_number_format( $total );
+		return si_get_number_format( (float) $total );
 	}
 
 	public function set_calculated_total() {

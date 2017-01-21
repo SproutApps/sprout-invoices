@@ -341,9 +341,9 @@ class SI_Reporting extends SI_Dashboard {
 		return self::set_cache( __FUNCTION__ . $segment . $span, $data );
 	}
 
-	public static function total_invoice_data( $this = 'century' ) {
+	public static function total_invoice_data( $span = 'century' ) {
 		// Return cache if present.
-		$cache = self::get_cache( __FUNCTION__ . $this );
+		$cache = self::get_cache( __FUNCTION__ . $span );
 		if ( $cache ) {
 			return $cache;
 		}
@@ -371,9 +371,9 @@ class SI_Reporting extends SI_Dashboard {
 			);
 
 		// If date filtered
-		if ( 'century' !== $this ) {
-			$args = self::_get_date_query( $this, $args );
-			$expire = self::_get_date_query( $this, $args, true );
+		if ( 'century' !== $span ) {
+			$args = self::_get_date_query( $span, $args );
+			$expire = self::_get_date_query( $span, $args, true );
 		}
 		$invoices = new WP_Query( $args );
 		foreach ( $invoices->posts as $invoice_id ) {
@@ -407,7 +407,7 @@ class SI_Reporting extends SI_Dashboard {
 			unset( $invoice );
 
 		}
-		return self::set_cache( __FUNCTION__ . $this, $data, $expire );
+		return self::set_cache( __FUNCTION__ . $span, $data, $expire );
 	}
 
 	public static function total_estimate_data_by_date_segment( $segment = 'weeks', $span = 6 ) {
@@ -483,9 +483,9 @@ class SI_Reporting extends SI_Dashboard {
 		return self::set_cache( __FUNCTION__ . $segment . $span, $data, self::CACHE_TIMEOUT );
 	}
 
-	public static function total_payment_data( $this = 'century' ) {
+	public static function total_payment_data( $span = 'century' ) {
 		// Return cache if present.
-		$cache = self::get_cache( __FUNCTION__.$this );
+		$cache = self::get_cache( __FUNCTION__.$span );
 		if ( $cache ) {
 			return $cache;
 		}
@@ -510,9 +510,9 @@ class SI_Reporting extends SI_Dashboard {
 			);
 
 		// If date filtered
-		if ( 'century' !== $this ) {
-			$args = self::_get_date_query( $this, $args );
-			$expire = self::_get_date_query( $this, $args, true );
+		if ( 'century' !== $span ) {
+			$args = self::_get_date_query( $span, $args );
+			$expire = self::_get_date_query( $span, $args, true );
 		}
 		$payments = new WP_Query( $args );
 		foreach ( $payments->posts as $payment_id ) {
@@ -543,11 +543,11 @@ class SI_Reporting extends SI_Dashboard {
 			}
 		}
 
-		return self::set_cache( __FUNCTION__.$this, $data, $expire );
+		return self::set_cache( __FUNCTION__.$span, $data, $expire );
 	}
 
-	public static function _get_date_query( $this = 'century', $args = array(), $return_expiration = false ) {
-		switch ( $this ) {
+	public static function _get_date_query( $span = 'century', $args = array(), $return_expiration = false ) {
+		switch ( $span ) {
 			case 'week':
 				$args['date_query'] = array(
 					array(

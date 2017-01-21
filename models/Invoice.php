@@ -488,18 +488,18 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public function get_discount_total() {
-		$subtotal = $this->get_subtotal();
+		$subtotal = (float) $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
-			$subtotal = $this->get_total();
+			$subtotal = (float) $this->get_total();
 		}
 		if ( apply_filters( 'si_discount_after_taxes', true, $this ) ) {
-			$tax_total = $subtotal * ( ( $this->get_tax() ) / 100 );
-			$tax2_total = $subtotal * ( ( $this->get_tax2() ) / 100 );
+			$tax_total = $subtotal * ( ( (float) $this->get_tax() ) / 100 );
+			$tax2_total = $subtotal * ( ( (float) $this->get_tax2() ) / 100 );
 			$subtotal = $subtotal + $tax_total + $tax2_total;
 		}
 
-		$discount = $subtotal * ( $this->get_discount() / 100 );
-		return si_get_number_format( $discount );
+		$discount = $subtotal * ( (float) $this->get_discount() / 100 );
+		return si_get_number_format( (float) $discount );
 	}
 
 	/**
@@ -608,29 +608,29 @@ class SI_Invoice extends SI_Post_Type {
 			$this->get_balance();
 		}
 		if ( isset( $this->calculated_total ) ) {
-			return $this->calculated_total;
+			return (float) $this->calculated_total;
 		}
-		$subtotal = $this->get_subtotal();
+		$subtotal = (float) $this->get_subtotal();
 		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
-			$subtotal = $this->get_total();
+			$subtotal = (float) $this->get_total();
 		}
 
-		$invoice_total = $subtotal + $this->get_tax_total() + $this->get_tax2_total();
-		$total = $invoice_total - $this->get_discount_total();
+		$invoice_total = $subtotal + (float) $this->get_tax_total() + (float) $this->get_tax2_total();
+		$total = $invoice_total - (float) $this->get_discount_total();
 
-		$total = $total + $this->get_fees_total();
+		$total = (float) $total + (float) $this->get_fees_total();
 
-		$this->calculated_total = $total;
+		$this->calculated_total = (float) $total;
 
 		if ( $total !== $this->get_total() ) {
-			$this->set_total( si_get_number_format( $total ) );
+			$this->set_total( si_get_number_format( (float) $total ) );
 		}
 
-		return si_get_number_format( $total );
+		return si_get_number_format( (float) $total );
 	}
 
 	public function set_calculated_total() {
-		$total = $this->get_calculated_total();
+		$total = (float) $this->get_calculated_total();
 		$this->save_post_meta( array(
 			self::$meta_keys['total'] => $total,
 		) );
@@ -639,7 +639,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	public function get_subtotal() {
 		if ( isset( $this->subtotal ) ) {
-			return $this->subtotal;
+			return (float) $this->subtotal;
 		}
 		$subtotal = 0;
 		$line_items = $this->get_line_items();
@@ -651,11 +651,11 @@ class SI_Invoice extends SI_Post_Type {
 						continue;
 					}
 
-					$data['rate'] = ( isset( $data['rate'] ) ) ? $data['rate'] : 0 ;
-					$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 1;
-					$line_total = ( $data['rate'] * $qty );
+					$data['rate'] = ( isset( $data['rate'] ) ) ? (float) $data['rate'] : 0 ;
+					$qty = ( isset( $data['qty'] ) ) ? (float) $data['qty'] : 1;
+					$line_total = (float) ( $data['rate'] * $qty );
 					if ( isset( $data['tax'] ) ) {
-						$tax = $line_total * ( $data['tax'] / 100 );
+						$tax = $line_total * ( (float) $data['tax'] / 100 );
 						$line_total = $line_total - si_get_number_format( $tax ); // convert so that rounding can occur before discount is removed.
 					}
 
@@ -869,7 +869,7 @@ class SI_Invoice extends SI_Post_Type {
 			if ( ! $pending && SI_Payment::STATUS_PENDING === $payment->get_status() ) {
 				continue;
 			} elseif ( ! in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
-				$payment_total += $payment->get_amount();
+				$payment_total += (float) $payment->get_amount();
 			}
 		}
 		if ( $pending ) {
