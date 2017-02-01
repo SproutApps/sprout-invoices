@@ -13,6 +13,7 @@ class SI_CSV_Import extends SI_Importer {
 	const INVOICE_FILE_OPTION = 'si_invoice_csv_upload';
 	const ESTIMATE_FILE_OPTION = 'si_estimate_csv_upload';
 	const PAYMENT_FILE_OPTION = 'si_payment_csv_upload';
+	const UPLOAD_ERROR_OPTION = 'si_csv_upload_error';
 	const PAYMENT_METHOD = 'CSV Imported';
 	const DELETE_PROGRESS = 'remove_progress_option';
 	const PROGRESS_OPTION = 'current_import_progress_csv';
@@ -114,31 +115,43 @@ class SI_CSV_Import extends SI_Importer {
 			require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		}
 
-		$upload_overrides = array( 'test_form' => false, 'mimes' => array( 'csv' => 'text/csv' ) );
-		if ( isset( $_FILES[ self::CLIENT_FILE_OPTION ] ) ) {
+		$upload_overrides = array( 'test_form' => false, 'test_type' => false, 'mimes' => array( 'csv' => 'text/csv' ) );
+		if ( isset( $_FILES[ self::CLIENT_FILE_OPTION ] ) && ! $_FILES[ self::CLIENT_FILE_OPTION ]['error'] ) {
 			$client_csv_file = $_FILES[ self::CLIENT_FILE_OPTION ];
 			$client_csv = wp_handle_upload( $client_csv_file, $upload_overrides );
+			if ( isset( $client_csv['error'] ) ) {
+				update_option( self::UPLOAD_ERROR_OPTION, $client_csv['error'] );
+			}
 			if ( isset( $client_csv['file'] ) && $client_csv['file'] != '' ) {
 				update_option( self::CLIENT_FILE_OPTION, $client_csv['file'] );
 			}
 		}
-		if ( isset( $_FILES[ self::INVOICE_FILE_OPTION ] ) ) {
+		if ( isset( $_FILES[ self::INVOICE_FILE_OPTION ] ) && ! $_FILES[ self::INVOICE_FILE_OPTION ]['error'] ) {
 			$invoice_csv_file = $_FILES[ self::INVOICE_FILE_OPTION ];
 			$invoice_csv = wp_handle_upload( $invoice_csv_file, $upload_overrides );
+			if ( isset( $invoice_csv['error'] ) ) {
+				update_option( self::UPLOAD_ERROR_OPTION, $invoice_csv['error'] );
+			}
 			if ( isset( $invoice_csv['file'] ) && $invoice_csv['file'] != '' ) {
 				update_option( self::INVOICE_FILE_OPTION, $invoice_csv['file'] );
 			}
 		}
-		if ( isset( $_FILES[ self::ESTIMATE_FILE_OPTION ] ) ) {
+		if ( isset( $_FILES[ self::ESTIMATE_FILE_OPTION ] ) && ! $_FILES[ self::ESTIMATE_FILE_OPTION ]['error'] ) {
 			$estimate_csv_file = $_FILES[ self::ESTIMATE_FILE_OPTION ];
 			$estimate_csv = wp_handle_upload( $estimate_csv_file, $upload_overrides );
+			if ( isset( $estimate_csv['error'] ) ) {
+				update_option( self::UPLOAD_ERROR_OPTION, $estimate_csv['error'] );
+			}
 			if ( isset( $estimate_csv['file'] ) && $estimate_csv['file'] != '' ) {
 				update_option( self::ESTIMATE_FILE_OPTION, $estimate_csv['file'] );
 			}
 		}
-		if ( isset( $_FILES[ self::PAYMENT_FILE_OPTION ] ) ) {
+		if ( isset( $_FILES[ self::PAYMENT_FILE_OPTION ] ) && ! $_FILES[ self::PAYMENT_FILE_OPTION ]['error'] ) {
 			$payment_csv_file = $_FILES[ self::PAYMENT_FILE_OPTION ];
 			$payment_csv = wp_handle_upload( $payment_csv_file, $upload_overrides );
+			if ( isset( $payment_csv['error'] ) ) {
+				update_option( self::UPLOAD_ERROR_OPTION, $payment_csv['error'] );
+			}
 			if ( isset( $payment_csv['file'] ) && $payment_csv['file'] != '' ) {
 				update_option( self::PAYMENT_FILE_OPTION, $payment_csv['file'] );
 			}
@@ -187,6 +200,20 @@ class SI_CSV_Import extends SI_Importer {
 	 * @return
 	 */
 	public static function import_authentication() {
+
+		$error = get_option( self::UPLOAD_ERROR_OPTION );
+		if ( '' !== $error ) {
+			delete_option( self::UPLOAD_ERROR_OPTION );
+			self::return_progress( array(
+				'authentication' => array(
+				'message' => $error,
+				'progress' => 100,
+				'next_step' => 'complete',
+				),
+			) );
+			return;
+		}
+
 		self::return_progress( array(
 			'authentication' => array(
 			'message' => __( 'Uploaded CSV files being processed...Hold on to your butts...', 'sprout-invoices' ),

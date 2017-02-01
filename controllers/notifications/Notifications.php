@@ -420,6 +420,7 @@ class SI_Notifications extends SI_Notifications_Control {
 						'payment' => $payment,
 						'invoice' => $invoice,
 						'client' => ( is_a( $client, 'SI_Client' ) ) ? $client : 0,
+						'user_id' => $user_id,
 						'to' => $to,
 					);
 					self::send_notification( 'final_payment', $data, $to );
@@ -631,7 +632,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	public static function shortcode_payment_total( $atts, $content, $code, $data ) {
 		$amount = sa_get_formatted_money( 0 );
 		if ( isset( $data['payment'] ) ) {
-			$amount = sa_get_formatted_money( $data['payment']->get_amount(), $data['payment']->get_id() );
+			$amount = sa_get_formatted_money( $data['payment']->get_amount(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_payment_total', $amount, $data );
 	}

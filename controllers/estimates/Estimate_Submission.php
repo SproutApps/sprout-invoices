@@ -72,7 +72,7 @@ class SI_Estimate_Submissions extends SI_Controller {
 			<div class="sa_addon">
 				<div class="add_on_img_wrap">
 					<img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/gravity-ninja.png' ?>" />
-					<a class="purchase_button button button-primary button-large" href="<?php echo 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ?>"><?php _e( '$0-5', 'sprout-invoices' ) ?></a>
+					<a class="purchase_button button button-primary button-large" href="<?php sa_link( 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ) ?>"><?php _e( '$0-5', 'sprout-invoices' ) ?></a>
 				</div>
 				<h4><?php _e( 'Advanced Form Integration with Gravity and Ninja Forms', 'sprout-invoices' ) ?></h4>
 			</div>

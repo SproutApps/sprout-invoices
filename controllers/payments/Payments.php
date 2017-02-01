@@ -46,7 +46,7 @@ class SI_Payments extends SI_Controller {
 			'menu_title' => __( 'Payments', 'sprout-invoices' ),
 			'weight' => 14,
 			'reset' => false,
-			'callback' => array( __CLASS__, 'display_table' )
+			'callback' => array( __CLASS__, 'display_table' ),
 			);
 		do_action( 'sprout_settings_page', $args );
 	}
@@ -203,21 +203,21 @@ class SI_Payments extends SI_Controller {
 		$screen = get_current_screen();
 		if ( $screen->base == 'sa_invoice_page_sprout-apps/invoice_payments' ) {
 			$screen->add_help_tab( array(
-					'id' => 'about-payments',
-					'title' => __( 'About Payments', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'Payment statuses include:', 'sprout-invoices' ), __( '<b>Pending</b> - the payment could be waiting for admin approval or waiting for the payment processor.<br/><b>Authorized</b> – a payment status set for signifying that the payment was authorized by the processor and a capture of the payment will be attempted later.<br/><b>Void</b> - payment was voided by the admin or declined by the payment processor after it was authorized or pending.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'about-payments',
+				'title' => __( 'About Payments', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'Payment statuses include:', 'sprout-invoices' ), __( '<b>Pending</b> - the payment could be waiting for admin approval or waiting for the payment processor.<br/><b>Authorized</b> – a payment status set for signifying that the payment was authorized by the processor and a capture of the payment will be attempted later.<br/><b>Void</b> - payment was voided by the admin or declined by the payment processor after it was authorized or pending.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->add_help_tab( array(
-					'id' => 'mng-payments',
-					'title' => __( 'Managing Payments', 'sprout-invoices' ),
-					'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( 'Hovering over a payment brings up multiple links and options:', 'sprout-invoices' ), __( '<b>Void Payment</b> - Allows you to void a payment and add a note that will be added to the Transaction Data.', 'sprout-invoices' ), __( '<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw data stored by a payment processor.', 'sprout-invoices' ), __( '<b>Invoice and Client</b> – A link to the associated invoice and client edit pages.', 'sprout-invoices' ), __( 'The payment totals are current and are not at the moment of the payment. The payment type is shown under the Data column.', 'sprout-invoices' ) ),
-				) );
+				'id' => 'mng-payments',
+				'title' => __( 'Managing Payments', 'sprout-invoices' ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p>%s</p><p>%s</p><p>%s</p>', __( 'Hovering over a payment brings up multiple links and options:', 'sprout-invoices' ), __( '<b>Void Payment</b> - Allows you to void a payment and add a note that will be added to the Transaction Data.', 'sprout-invoices' ), __( '<b>Transaction Data</b> – Used to troubleshoot a payment, this is the raw data stored by a payment processor.', 'sprout-invoices' ), __( '<b>Invoice and Client</b> – A link to the associated invoice and client edit pages.', 'sprout-invoices' ), __( 'The payment totals are current and are not at the moment of the payment. The payment type is shown under the Data column.', 'sprout-invoices' ) ),
+			) );
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
 				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/', __( 'Documentation', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/', __( 'Support', 'sprout-invoices' ) )
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutapps.co/support/' ), __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

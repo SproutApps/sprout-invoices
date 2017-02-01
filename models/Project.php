@@ -309,13 +309,13 @@ class SI_Project extends SI_Post_Type {
 	 */
 	public function create_associated_expense( $expense_data = array() ) {
 		$expense = false;
-		if ( isset( $expense_data['activity_id'] ) ) {
-			$expense = SI_Expense::get_instance( $expense_data['activity_id'] );
+		if ( isset( $expense_data['category_id'] ) ) {
+			$expense = SI_Expense::get_instance( $expense_data['category_id'] );
 		}
 		if ( ! $expense || ! is_a( $expense, 'SI_Expense' ) ) {
 			// get default expense to track expense to.
-			$activity_id = SI_Expense::default_expense();
-			$expense = SI_Expense::get_instance( $activity_id );
+			$category_id = SI_Expense::default_expense();
+			$expense = SI_Expense::get_instance( $category_id );
 		}
 		// Create expense entry record
 		$new_expense_id = $expense->new_expense( $expense_data );

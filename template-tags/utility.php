@@ -434,6 +434,11 @@ function si_get_purchase_link( $url = '', $campaign = 'free' ) {
 	return apply_filters( 'si_get_purchase_link', esc_url_raw( $url ) );
 }
 
+
+function sa_link( $url = '', $campaign = 'free' ) {
+	echo si_get_sa_link( $url, $campaign );
+}
+
 /**
  * URL to purchase this app
  * @return string
