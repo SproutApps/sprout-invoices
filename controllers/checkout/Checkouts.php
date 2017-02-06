@@ -438,10 +438,18 @@ class SI_Checkouts extends SI_Controller {
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 
 		// Messaging
-		if ( $invoice->get_balance() < 0.01 ) {
-			self::set_message( __( 'Payment Received & Invoice Paid!', 'sprout-invoices' ), self::MESSAGE_STATUS_INFO );
+		if ( $payment->get_status() === SI_Payment::STATUS_PENDING ) {
+			if ( $invoice->get_balance() < 0.01 ) {
+				self::set_message( __( 'Payment Pending', 'sprout-invoices' ), self::MESSAGE_STATUS_INFO );
+			} else {
+				self::set_message( sprintf( __( 'Pending Payment Received. Current Balance: %s', 'sprout-invoices' ), sa_get_formatted_money( $invoice->get_balance() ) ), self::MESSAGE_STATUS_INFO );
+			}
 		} else {
-			self::set_message( sprintf( __( 'Partial Payment Received. Current Balance: %s', 'sprout-invoices' ), sa_get_formatted_money( $invoice->get_balance() ) ), self::MESSAGE_STATUS_INFO );
+			if ( $invoice->get_balance() < 0.01 ) {
+				self::set_message( __( 'Payment Received & Invoice Paid!', 'sprout-invoices' ), self::MESSAGE_STATUS_INFO );
+			} else {
+				self::set_message( sprintf( __( 'Partial Payment Received. Current Balance: %s', 'sprout-invoices' ), sa_get_formatted_money( $invoice->get_balance() ) ), self::MESSAGE_STATUS_INFO );
+			}
 		}
 
 		// wrap up checkout and tell the purchase we're done

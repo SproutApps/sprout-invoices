@@ -201,7 +201,7 @@ class SI_CSV_Import extends SI_Importer {
 	 */
 	public static function import_authentication() {
 
-		$error = get_option( self::UPLOAD_ERROR_OPTION );
+		$error = get_option( self::UPLOAD_ERROR_OPTION, '' );
 		if ( '' !== $error ) {
 			delete_option( self::UPLOAD_ERROR_OPTION );
 			self::return_progress( array(

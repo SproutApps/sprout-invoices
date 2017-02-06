@@ -1,4 +1,4 @@
-jQuery.noConflict();
+var $ = jQuery.noConflict();
 
 function si_format_money ( value ) {
 

@@ -40,16 +40,16 @@ class SI_Checks extends SI_Offsite_Processors {
 	}
 
 	public static function register() {
-		self::add_payment_processor( __CLASS__, __( 'Check/PO Payment', 'sprout-invoices' ) );
+		self::add_payment_processor( __CLASS__, __( 'Check (onsite submission)', 'sprout-invoices' ) );
 	}
 
 	public static function public_name() {
-		return __( 'Check/PO', 'sprout-invoices' );
+		return __( 'Check', 'sprout-invoices' );
 	}
 
 	public static function checkout_options() {
 		$option = array(
-			'icons' => array( SI_URL . '/resources/front-end/img/check.png', SI_URL . '/resources/front-end/img/po.png' ),
+			'icons' => array( SI_URL . '/resources/front-end/img/check.png' ),
 			'label' => __( 'Check', 'sprout-invoices' ),
 			'cc' => array(),
 			);
@@ -115,7 +115,7 @@ class SI_Checks extends SI_Offsite_Processors {
 			'check_number' => array(
 				'type' => 'text',
 				'weight' => 5,
-				'label' => __( 'Check/PO Number', 'sprout-invoices' ),
+				'label' => __( 'Check Number', 'sprout-invoices' ),
 				'attributes' => array(
 					//'autocomplete' => 'off',
 				),

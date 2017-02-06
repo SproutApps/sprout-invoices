@@ -1,5 +1,4 @@
-jQuery.noConflict();
-
+var $ = jQuery.noConflict();
 jQuery(function($) {
 	
 	/**
@@ -58,6 +57,7 @@ jQuery(function($) {
 		e.preventDefault();
 		$('#check_info_checkout_wrap').slideUp('fast');
 		$('#bacs_info_checkout_wrap').slideUp('fast');
+		$('#popayment_info_checkout_wrap').slideUp('fast');
 		$('#credit_card_checkout_wrap').slideDown();
 	});
 
@@ -65,13 +65,23 @@ jQuery(function($) {
 		e.preventDefault();
 		$('#credit_card_checkout_wrap').slideUp('fast');
 		$('#bacs_info_checkout_wrap').slideUp('fast');
+		$('#popayment_info_checkout_wrap').slideUp('fast');
 		$('#check_info_checkout_wrap').slideDown();
+	});
+
+	jQuery("#doc_actions a.popayment").on('click', function(e) {
+		e.preventDefault();
+		$('#credit_card_checkout_wrap').slideUp('fast');
+		$('#check_info_checkout_wrap').slideUp('fast');
+		$('#bacs_info_checkout_wrap').slideUp('fast');
+		$('#popayment_info_checkout_wrap').slideDown();
 	});
 
 	jQuery("#doc_actions a.bacs").on('click', function(e) {
 		e.preventDefault();
 		$('#credit_card_checkout_wrap').slideUp('fast');
 		$('#check_info_checkout_wrap').slideUp('fast');
+		$('#popayment_info_checkout_wrap').slideUp('fast');
 		$('#bacs_info_checkout_wrap').slideDown();
 	});
 

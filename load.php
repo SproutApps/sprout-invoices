@@ -130,6 +130,7 @@ function sprout_invoices_load() {
 		require_once SI_PATH.'/controllers/payment-processing/processors/SI_Paypal_Pro.php';
 	}
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_Checks.php';
+	require_once SI_PATH.'/controllers/payment-processing/processors/SI_PO.php';
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_BACS.php';
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_Admin_Payment.php';
 	do_action( 'si_payment_processors_loaded' );

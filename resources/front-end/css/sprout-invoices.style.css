@@ -990,6 +990,7 @@ div#vcards {
  */
 #credit_card_checkout_wrap,
 #check_info_checkout_wrap,
+#popayment_info_checkout_wrap,
 #bacs_info_checkout_wrap {
 	background-color: #FFF;
 	margin: 0px -1000px 50px -1000px;
@@ -1061,15 +1062,23 @@ div#vcards {
 	display: none;
 }
 
-#checks_fields .required {
+#popayment_fields .required,
+#checks_fields .required,
+#bacs_fields .required  {
 	display: none;
 }
 
+
+#bacs_fields input,
+#bacs_fields textarea,
+#popayment_fields input,
+#popayment_fields textarea,
 #checks_fields input,
 #checks_fields textarea {
 	width: 50%;
 }
 
+#checks_fields input#sa_popayments_mailed,
 #checks_fields input#sa_checks_mailed {
 	width: auto;
 }
@@ -1096,7 +1105,9 @@ div#vcards {
     background: #ffa091;
 }
 
-#check_info_checkout_wrap .button-primary {
+#check_info_checkout_wrap .button-primary,
+#popayment_info_checkout_wrap .button-primary,
+#bacs_info_checkout_wrap .button-primary {
 	float: none;
 	margin-left: 12em;
 }
