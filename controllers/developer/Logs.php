@@ -18,7 +18,7 @@ class SI_Dev_Logs extends SI_Controller {
 
 	public static function init() {
 		// Admin option
-		self::$record_logs = (bool)get_option( self::LOG_OPTION, 0 );
+		self::$record_logs = (bool) get_option( self::LOG_OPTION, 0 );
 
 		// Register settings
 		self::register_settings();
@@ -53,11 +53,11 @@ class SI_Dev_Logs extends SI_Controller {
 							'type' => 'checkbox',
 							'default' => self::$record_logs,
 							'value' => '1',
-							'description' => __( 'Note: This should only be used for testing and troubleshooting. Records are found under Tools.', 'sprout-invoices' )
-							)
-						)
-					)
-				)
+							'description' => __( 'Note: This should only be used for testing and troubleshooting. Records are found under Tools.', 'sprout-invoices' ),
+							),
+						),
+					),
+				),
 			);
 		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
@@ -84,9 +84,8 @@ class SI_Dev_Logs extends SI_Controller {
 		if ( self::$record_logs ) {
 			if ( function_exists( 'wp_get_current_user' ) ) {
 				self::record_log( $subject, $data );
-			}
-			else {
-				self::$recorded_logs[$subject] = $data;
+			} else {
+				self::$recorded_logs[ $subject ] = $data;
 			}
 		}
 	}
@@ -112,9 +111,8 @@ class SI_Dev_Logs extends SI_Controller {
 		if ( $record_error ) {
 			if ( function_exists( 'wp_get_current_user' ) ) {
 				self::record_log( $subject, $data, true );
-			}
-			else {
-				self::$recorded_errors[$subject] = $data;
+			} else {
+				self::$recorded_errors[ $subject ] = $data;
 			}
 		}
 	}
@@ -176,9 +174,9 @@ class SI_Dev_Logs extends SI_Controller {
 							array(
 								'taxonomy' => SI_Record::TAXONOMY,
 								'field' => 'id',
-								'terms' => self::LOG_TYPE
-							)
-						)
+								'terms' => self::LOG_TYPE,
+							),
+						),
 		);
 
 		add_filter( 'posts_where', array( __CLASS__, 'filter_where_with_when' ) ); // add filter to base return on dates
@@ -200,5 +198,4 @@ class SI_Dev_Logs extends SI_Controller {
 		$where .= " AND post_date <= '" . $offset . "'";
 		return $where;
 	}
-
 }

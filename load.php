@@ -133,6 +133,9 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_PO.php';
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_BACS.php';
 	require_once SI_PATH.'/controllers/payment-processing/processors/SI_Admin_Payment.php';
+
+	require_once SI_PATH.'/bundles/Addon_Payment_Processors.php';
+
 	do_action( 'si_payment_processors_loaded' );
 
 	// payments
@@ -255,6 +258,7 @@ function sprout_invoices_load() {
 	SI_Admin_Settings::init();
 
 	// payments and processing
+	SA_Init_Addon_Processors::init();
 	SI_Payment_Processors::init();
 	SI_Payments::init();
 

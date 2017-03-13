@@ -633,7 +633,7 @@ div#vcards {
  */
 .purchase_button:after {
 	font-family: 'dashicons';
-	vertical-align: top;
+	vertical-align: middle;
 	content: " \f140";
 }
 
@@ -1811,4 +1811,22 @@ ol ol .li_comments_toggle {
 	float: left;
 	width: 100%;
 	font-size: 1.5em;
+}
+.button.signature_button {
+	background-color: #B43D3D;
+	color: #FFFFFF;
+}
+.button.signature_preview_button {
+	background-color: #78B43D;
+	color: #FFFFFF;
+}
+.button.signature_preview_button:before,
+.button.signature_button:before {
+	font-family: 'dashicons';
+	vertical-align: middle;
+	margin-right: 4px;
+	content: "\f147";
+}
+.button.signature_button:before {
+	content: "\f534";
 }

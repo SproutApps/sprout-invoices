@@ -1,3 +1,19 @@
+= 13.0.1 =
+
+* FIX: Customizer not saving colors correctly
+* UPDATE: IP address method global use
+
+= 13.0.0 =
+
+* NEW: Notification status indicators
+* NEW: Digital signature support
+* FIX: Multiple bug fixes, including the escaping of notes
+
+= 12.1.1 =
+
+* FIX: Saving error for new PO payment processor
+* NEW: New method for is_processor_enabled.
+
 = 12.1 =
 
 * NEW: New PO processor

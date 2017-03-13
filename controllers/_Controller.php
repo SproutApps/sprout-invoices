@@ -465,7 +465,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 		global $blog_id;
 		$user_id = get_current_user_id();
 		if ( ! $user_id ) {
-			set_transient( 'si_messaging_for_'.$_SERVER['REMOTE_ADDR'], self::$messages, 300 );
+			if ( '' !== self::get_user_ip() ) {
+				set_transient( 'si_messaging_for_'.self::get_user_ip(), self::$messages, 300 );
+			}
 		}
 		update_user_meta( $user_id, $blog_id.'_'.self::MESSAGE_META_KEY, self::$messages );
 	}
@@ -481,8 +483,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$user_id = get_current_user_id();
 		$messages = false;
 		if ( ! $user_id ) {
-			if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
-				$messages = get_transient( 'si_messaging_for_'.$_SERVER['REMOTE_ADDR'] );
+			if ( '' !== self::get_user_ip() ) {
+				$messages = get_transient( 'si_messaging_for_'.self::get_user_ip() );
 			}
 		} else {
 			global $blog_id;

@@ -132,6 +132,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 		unset( $columns['comments'] );
 		unset( $columns['author'] );
 		$columns['title'] = __( 'Estimate', 'sprout-invoices' );
+		$columns['notification_status'] = sprintf( '<mark class="helptip notification_status_wrap column_title" title="%s">&nbsp;</mark>', __( 'Notification Status', 'sprout-invoices' ) );
 		$columns['status'] = __( 'Status', 'sprout-invoices' );
 		$columns['total'] = __( 'Total', 'sprout-invoices' );
 		$columns['client'] = __( 'Client', 'sprout-invoices' );
@@ -162,6 +163,20 @@ class SI_Estimates_Admin extends SI_Estimates {
 			break;
 			case 'status':
 				self::status_change_dropdown( $id );
+			break;
+
+			case 'notification_status':
+
+				if ( ! si_doc_notification_sent() ) {
+					printf( '<mark class="helptip notification_status_wrap %1$s" title="%2$s">&nbsp;</mark>', 'not_sent', __( 'Not Sent', 'sprout-invoices' ) );
+				} elseif ( si_doc_notification_sent() && ! si_was_doc_viewed() ) {
+					printf( '<mark class="helptip notification_status_wrap %s" title="%2$s">&nbsp;</mark>', 'sent', __( 'Sent, Invoice Not Viewed', 'sprout-invoices' ) );
+				} elseif ( si_doc_notification_sent() && si_was_doc_viewed() ) {
+					printf( '<mark class="helptip notification_status_wrap %s" title="%2$s">&nbsp;</mark>', 'sent_viewed', __( 'Sent, and Viewed', 'sprout-invoices' ) );
+				} else {
+					printf( '<mark class="helptip notification_status_wrap %s" title="%2$s">&nbsp;</mark>', 'danger', __( 'Not Sure', 'sprout-invoices' ) );
+				}
+
 			break;
 
 			case 'total':

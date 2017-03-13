@@ -152,10 +152,10 @@ class SA_Settings_API extends SI_Controller {
 		if ( $page == '' ) {
 			$page = self::SETTINGS_PAGE;
 		}
-		if ( ! isset( self::$options[$page] ) ) {
-			self::$options[$page] = array();
+		if ( ! isset( self::$options[ $page ] ) ) {
+			self::$options[ $page ] = array();
 		}
-		self::$options[$page] = wp_parse_args( self::$options[$page], $settings );
+		self::$options[ $page ] = wp_parse_args( self::$options[ $page ], $settings );
 	}
 
 	/**
@@ -177,7 +177,7 @@ class SA_Settings_API extends SI_Controller {
 			$parent = ( $data['parent'] != '' ) ? $data['parent'] : self::APP_DOMAIN ;
 			$callback = ( is_callable( $data['callback'] ) ) ? $data['callback'] : array( __CLASS__, 'default_admin_page' ) ;
 			$hook = add_submenu_page( $parent, $data['title'], __( $data['menu_title'], 'sprout-invoices' ), $data['capability'], $page, $callback );
-			self::$admin_pages[$page]['hook'] = $hook;
+			self::$admin_pages[ $page ]['hook'] = $hook;
 		}
 	}
 
@@ -201,18 +201,17 @@ class SA_Settings_API extends SI_Controller {
 		}
 		if ( isset( $_GET['tab'] ) && $_GET['tab'] != '' ) {
 			$tabs = apply_filters( 'si_option_tabs', self::$option_tabs );
-			if ( isset( $tabs[$_GET['tab']] ) ) {
-				$tab_args = $tabs[$_GET['tab']];
+			if ( isset( $tabs[ $_GET['tab'] ] ) ) {
+				$tab_args = $tabs[ $_GET['tab'] ];
 				if ( isset( $tab_args['callback'] ) && is_callable( $tab_args['callback'] ) ) {
 					call_user_func_array( $tab_args['callback'], array() );
-				}
-				else {
+				} else {
 					$plugin_page = $_GET['page'];
 					$title = ( isset( $tabs['title'] ) ) ? $tabs['title'] : '' ;
-					$ajax = isset($tabs['ajax'])?$tabs['ajax']:'';
-					$ajax_full_page = isset($tabs['ajax_full_page'])?$tabs['ajax_full_page']:'';
-					$reset = isset($tabs['reset'])?$tabs['reset']:'';
-					$section = isset($tabs['section'])?$tabs['section']:'';
+					$ajax = isset( $tabs['ajax'] )?$tabs['ajax']:'';
+					$ajax_full_page = isset( $tabs['ajax_full_page'] )?$tabs['ajax_full_page']:'';
+					$reset = isset( $tabs['reset'] )?$tabs['reset']:'';
+					$section = isset( $tabs['section'] )?$tabs['section']:'';
 
 					self::load_view( 'admin/settings', array(
 						'title' => __( $title, 'sprout-invoices' ),
@@ -220,18 +219,18 @@ class SA_Settings_API extends SI_Controller {
 						'ajax' => $ajax,
 						'ajax_full_page' => $ajax_full_page,
 						'reset' => $reset,
-						'section' => $section
+						'section' => $section,
 					), false );
 				}
 				return;
 			}
 		}
 		$plugin_page = $_GET['page'];
-		$title = ( isset( self::$admin_pages[$plugin_page]['title'] ) ) ? self::$admin_pages[$plugin_page]['title'] : '' ;
-		$ajax = isset(self::$admin_pages[$plugin_page]['ajax'])?self::$admin_pages[$plugin_page]['ajax']:'';
-		$ajax_full_page = isset(self::$admin_pages[$plugin_page]['ajax_full_page'])?self::$admin_pages[$plugin_page]['ajax_full_page']:'';
-		$reset = isset(self::$admin_pages[$plugin_page]['reset'])?self::$admin_pages[$plugin_page]['reset']:'';
-		$section = isset(self::$admin_pages[$plugin_page]['section'])?self::$admin_pages[$plugin_page]['section']:'';
+		$title = ( isset( self::$admin_pages[ $plugin_page ]['title'] ) ) ? self::$admin_pages[ $plugin_page ]['title'] : '' ;
+		$ajax = isset( self::$admin_pages[ $plugin_page ]['ajax'] )?self::$admin_pages[ $plugin_page ]['ajax']:'';
+		$ajax_full_page = isset( self::$admin_pages[ $plugin_page ]['ajax_full_page'] )?self::$admin_pages[ $plugin_page ]['ajax_full_page']:'';
+		$reset = isset( self::$admin_pages[ $plugin_page ]['reset'] )?self::$admin_pages[ $plugin_page ]['reset']:'';
+		$section = isset( self::$admin_pages[ $plugin_page ]['section'] )?self::$admin_pages[ $plugin_page ]['section']:'';
 
 		self::load_view( 'admin/settings', array(
 				'title' => __( $title, 'sprout-invoices' ),
@@ -239,8 +238,8 @@ class SA_Settings_API extends SI_Controller {
 				'ajax' => $ajax,
 				'ajax_full_page' => $ajax_full_page,
 				'reset' => $reset,
-				'section' => $section
-			), false );
+				'section' => $section,
+		), false );
 		return;
 	}
 	/**
@@ -333,8 +332,7 @@ class SA_Settings_API extends SI_Controller {
 		if ( $args['option']['type'] != 'checkbox' ) {
 			$out .= self::setting_form_label( $name, $args['option'] );
 			$out .= self::setting_form_field( $name, $args['option'] );
-		}
-		else {
+		} else {
 			$label = ( isset( $args['option']['label'] ) ) ? $args['option']['label'] : '' ;
 			$out .= '<label for="'.$name.'">'.self::setting_form_field( $name, $args['option'] ).' '.$label.'</label>';
 			if ( ! empty( $args['option']['description'] ) ) {
@@ -418,7 +416,7 @@ class SA_Settings_API extends SI_Controller {
 					'echo' => 1,
 					'show_option_none' => __( '-- Select --', 'sprout-invoices' ),
 					'option_none_value' => '0',
-					'selected' => $data['default']
+					'selected' => $data['default'],
 					);
 				$parsed_args = wp_parse_args( $data['args'], $defaults );
 				wp_dropdown_pages( $parsed_args ); ?>
@@ -478,11 +476,11 @@ class SA_Settings_API extends SI_Controller {
 	public static function update_options( $submission = array(), $option_page = '' ) {
 		global $wp_settings_fields;
 
-		if ( ! isset( $wp_settings_fields[$option_page] ) ) {
+		if ( ! isset( $wp_settings_fields[ $option_page ] ) ) {
 			return; }
 
-		if ( isset( $wp_settings_fields[$option_page] ) && ! empty( $wp_settings_fields[$option_page] ) ) {
-			foreach ( $wp_settings_fields[$option_page] as $section ) {
+		if ( isset( $wp_settings_fields[ $option_page ] ) && ! empty( $wp_settings_fields[ $option_page ] ) ) {
+			foreach ( $wp_settings_fields[ $option_page ] as $section ) {
 				foreach ( $section as $option => $values ) {
 					$option = trim( $option );
 					$value = null;
@@ -522,16 +520,16 @@ class SA_Settings_API extends SI_Controller {
 					'priority' => 'high',
 					'callback_args' => array(),
 					'weight' => 10,
-					'save_priority' => 10
+					'save_priority' => 10,
 				);
 
-			if ( ! isset( self::$meta_boxes[$post_type] ) ) {
-				self::$meta_boxes[$post_type] = array();
+			if ( ! isset( self::$meta_boxes[ $post_type ] ) ) {
+				self::$meta_boxes[ $post_type ] = array();
 			}
 			foreach ( $registered_boxes as $box_name => $args ) {
-				$registered_boxes[$box_name] = wp_parse_args( $args, $defaults );
+				$registered_boxes[ $box_name ] = wp_parse_args( $args, $defaults );
 			}
-			self::$meta_boxes[$post_type] = wp_parse_args( self::$meta_boxes[$post_type], $registered_boxes );
+			self::$meta_boxes[ $post_type ] = wp_parse_args( self::$meta_boxes[ $post_type ], $registered_boxes );
 		}
 	}
 
@@ -609,8 +607,7 @@ class SA_Settings_API extends SI_Controller {
 							$callback_args = ( ! isset( $args['save_callback_args'] ) ) ? array() : $args['save_callback_args'] ;
 							call_user_func_array( $args['save_callback'], array( $post_id, $post, $callback_args ) );
 							do_action( implode( '::', $args['save_callback'] ), $post_id, $post, $callback_args );
-						}
-						elseif ( method_exists( $args['save_callback'][0], $args['save_callback'][1] ) ) {
+						} elseif ( method_exists( $args['save_callback'][0], $args['save_callback'][1] ) ) {
 							do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - callback may be private.', $args );
 						}
 					}
@@ -631,5 +628,4 @@ class SA_Settings_API extends SI_Controller {
 		}
 		return ( $a['save_priority'] < $b['save_priority'] ) ? -1 : 1;
 	}
-
 }

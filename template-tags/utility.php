@@ -587,3 +587,27 @@ function _convert_content_file_path_to_url( $file_path = '' ) {
 	$url = str_replace( 'replace-this-with-content-url', content_url(), $file_path );
 	return $url;
 }
+function si_set_img_transparency( $image ) {
+
+	$img_w = imagesx( $image );
+	$img_h = imagesy( $image );
+
+	$new_image = imagecreatetruecolor( $img_w, $img_h );
+	imagesavealpha( $new_image, true );
+	$rgb = imagecolorallocatealpha( $new_image, 0, 0, 0, 127 );
+	imagefill( $new_image, 0, 0, $rgb );
+
+	$color = imagecolorat( $image, $img_w -1, 1 );
+
+	for ( $x = 0; $x < $img_w; $x++ ) {
+		for ( $y = 0; $y < $img_h; $y++ ) {
+			$c = imagecolorat( $image, $x, $y );
+			if ( $color != $c ) {
+					imagesetpixel( $new_image, $x, $y,    $c );
+			}
+		}
+	}
+
+	imagedestroy( $image );
+	return $new_image;
+}

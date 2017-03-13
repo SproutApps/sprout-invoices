@@ -9,7 +9,7 @@ class SI_Customizer extends SI_Controller {
 	public static function init() {
 		add_action( 'customize_register', array( __CLASS__, 'customizer' ) );
 		add_action( 'customize_preview_init', array( __CLASS__, 'customizer_js' ) );
-		add_action( 'wp_head', array( __CLASS__, 'inject_css' ) );
+		add_action( 'si_head', array( __CLASS__, 'inject_css' ) );
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 10, 1 );
@@ -99,9 +99,6 @@ class SI_Customizer extends SI_Controller {
 	}
 
 	public static function inject_css() {
-		if ( ! is_customize_preview() ) {
-			return;
-		}
 		$inv_color = self::sanitize_hex_color( get_theme_mod( 'si_invoices_color' ) );
 		$est_color = self::sanitize_hex_color( get_theme_mod( 'si_estimates_color' ) );
 		?>

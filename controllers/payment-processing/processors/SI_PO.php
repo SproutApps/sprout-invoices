@@ -1,7 +1,6 @@
 <?php
 
 /**
- * Paypal offsite payment processor.
  *
  * These actions are fired for each checkout page.
  *
@@ -42,7 +41,7 @@ class SI_PO extends SI_Offsite_Processors {
 	public static function register() {
 		self::add_payment_processor( __CLASS__, __( 'PO Payment (onsite submission)', 'sprout-invoices' ) );
 
-		if ( is_admin() ) {
+		if ( is_admin() && self::is_processor_enabled( __CLASS__ ) ) {
 			// Meta boxes
 			add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ) );
 
@@ -252,10 +251,9 @@ class SI_PO extends SI_Offsite_Processors {
 	public static function register_meta_boxes() {
 		// invoice specific
 		$args = array(
-			'si_attachments' => array(
+			'si_po_payment_attachments' => array(
 				'title' => __( 'Payment Attachments', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_attachments_meta_box' ),
-				'save_callback' => '__return_null',
 				'context' => 'normal',
 				'priority' => 'low',
 				'weight' => 0,

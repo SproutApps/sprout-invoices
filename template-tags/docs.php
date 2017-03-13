@@ -85,3 +85,60 @@ if ( ! function_exists( 'si_get_doc_line_items' ) ) :
 		return si_get_invoice_line_items( $id );
 	}
 endif;
+
+if ( ! function_exists( 'si_doc_notification_sent' ) ) :
+
+	function si_doc_notification_sent( $id = 0 ) {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+
+		$sent = false;
+
+		$doc = si_get_doc_object( $id );
+		$history = $doc->get_history();
+		foreach ( $history as $item_id ) {
+			$record = SI_Record::get_instance( $item_id );
+			if ( SI_Notifications::RECORD === $record->get_type() ) {
+				// TODO learn regex
+				$email = str_replace( __( 'Notification sent to ', 'sprout-invoices' ), '', $record->get_title() );
+				$email = substr( $email, 0, -1 );
+				if ( $email !== SI_Notifications::get_user_email() ) {
+					$sent = true;
+				}
+			}
+		}
+
+		return apply_filters( 'si_doc_notification_sent', $sent, $id );
+	}
+endif;
+
+if ( ! function_exists( 'si_was_doc_viewed' ) ) :
+
+	function si_was_doc_viewed( $id = 0 ) {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+
+		$viewed = false;
+
+		$doc = si_get_doc_object( $id );
+		$history = $doc->get_history();
+		foreach ( $history as $item_id ) {
+			$record = SI_Record::get_instance( $item_id );
+			if ( 'si_viewed_status_update' === $record->get_type() ) {
+				if ( 'Estimate viewed by ::1.' !== $record->get_title() ) {
+					$viewed = true;
+				}
+			}
+		}
+
+		// If there was a payment than it should have been viewed.
+		if ( ! $viewed && in_array( $doc->get_status(), array( SI_Invoice::STATUS_PAID, SI_Invoice::STATUS_PARTIAL, SI_Estimate::STATUS_APPROVED ) ) ) {
+			$viewed = true;
+		}
+
+		return apply_filters( 'si_was_doc_viewed', $viewed, $id );
+	}
+endif;
+

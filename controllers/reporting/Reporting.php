@@ -518,21 +518,22 @@ class SI_Reporting extends SI_Dashboard {
 		foreach ( $payments->posts as $payment_id ) {
 			$payment = SI_Payment::get_instance( $payment_id );
 			$data['payments'] += 1;
-			if ( ! in_array( $payment->get_status(), array( SI_Payment::STATUS_VOID, SI_Payment::STATUS_REFUND, SI_Payment::STATUS_RECURRING, SI_Payment::STATUS_CANCELLED ) ) ) {
-				$data['totals'] += $payment->get_amount();
-			}
-			switch ( get_post_status( $payment_id ) ) {
+			switch ( $payment->get_status() ) {
 				case SI_Payment::STATUS_PENDING:
 					$data['status_pending'] += 1;
+					$data['totals'] += $payment->get_amount();
 					break;
 				case SI_Payment::STATUS_AUTHORIZED:
 					$data['status_authorized'] += 1;
+					$data['totals'] += $payment->get_amount();
 					break;
 				case SI_Payment::STATUS_COMPLETE:
 					$data['status_complete'] += 1;
+					$data['totals'] += $payment->get_amount();
 					break;
 				case SI_Payment::STATUS_PARTIAL:
 					$data['status_partial'] += 1;
+					$data['totals'] += $payment->get_amount();
 					break;
 				case SI_Payment::STATUS_VOID:
 				case SI_Payment::STATUS_REFUND:
@@ -581,8 +582,8 @@ class SI_Reporting extends SI_Dashboard {
 			case 'lastmonth':
 				$args['date_query'] = array(
 					array(
-						'month' => date( 'm', strtotime( 'first day of previous month' ) ),
-						'year' => date( 'o', strtotime( 'first day of previous month' ) ),
+						'month' => date( 'm', strtotime( '-1 month' ) ),
+						'year' => date( 'o', strtotime( '-1 month' ) ),
 						'inclusive' => true,
 					),
 				);

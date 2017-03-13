@@ -129,12 +129,11 @@ class SA_Addons extends SI_Controller {
 
 	}
 
-
-
 	public static function load_addons() {
 		if ( SI_FREE_TEST ) {
 			return;
 		}
+
 		/**
 		 * `!apply_filters( 'is_bundle_addon', false )` is used within plugins
 		 * to determine if the add-on is a plugin or loaded as a bundle.

@@ -583,7 +583,7 @@ class SI_Estimate extends SI_Post_Type {
 					$qty = ( isset( $data['qty'] ) ) ? $data['qty'] : 1;
 					$line_total = ( $data['rate'] * $qty );
 					if ( isset( $data['tax'] ) ) {
-						$tax = $line_total * ( $data['tax'] / 100 );
+						$tax = (float) $line_total * ( (float) $data['tax'] / 100 );
 						$line_total = $line_total - si_get_number_format( $tax ); // convert so that rounding can occur before discount is removed.
 					}
 

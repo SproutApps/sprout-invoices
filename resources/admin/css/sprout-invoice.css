@@ -2450,3 +2450,42 @@ span.si_admin_show_recurring {
     /* margin-top: 10px; */
     display: inline-block;
 }
+
+.widefat .manage-column.column-notification_status {
+    width: 45px;
+    text-align: center;
+}
+.widefat .column-notification_status mark {
+    position: relative;
+    height: 1em;
+    width: 1em;
+    background: 0 0;
+    font-size: 1.4em;
+    margin: 0 auto;
+    text-align: center;
+}
+.widefat .column-notification_status mark.helptip.column_title:after {
+	content: '\f466';
+	font: 400 20px/1 dashicons;
+	margin-left: 0px;
+}
+.widefat .column-notification_status mark.helptip:after {
+	font: 400 26px/1 dashicons;
+	margin-left: 6px;
+}
+.widefat .column-notification_status mark.helptip.not_sent:after {
+	content: '\f534';
+	color: #ffa500;
+}
+.widefat .column-notification_status mark.helptip.sent:after {
+	content: '\f530';
+	color: #dddddd;
+}
+.widefat .column-notification_status mark.helptip.sent_viewed:after {
+	content: '\f177';
+	color: #86bd48;
+}
+.widefat .column-notification_status mark.helptip.danger:after {
+	content: '\f177';
+	color: #C7C7C7;
+}

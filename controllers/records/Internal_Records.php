@@ -48,7 +48,7 @@ class SI_Internal_Records extends SI_Controller {
 			'menu_title' => __( 'Sprout Records', 'sprout-invoices' ),
 			'weight' => 10,
 			'reset' => false,
-			'callback' => array( __CLASS__, 'display_table' )
+			'callback' => array( __CLASS__, 'display_table' ),
 			);
 		do_action( 'sprout_settings_page', $args );
 	}
@@ -64,7 +64,7 @@ class SI_Internal_Records extends SI_Controller {
 			'post_author' => $author_id,
 			'post_status' => 'pending',
 			'post_type' => SI_Record::POST_TYPE,
-			'post_parent' => $associate_id
+			'post_parent' => $associate_id,
 		);
 		$id = wp_insert_post( $post );
 
@@ -80,10 +80,10 @@ class SI_Internal_Records extends SI_Controller {
 	}
 
 	public static function maybe_purge_records() {
-		if ( ! isset( $_REQUEST[self::RECORD_PURGE_NONCE] ) ) {
+		if ( ! isset( $_REQUEST[ self::RECORD_PURGE_NONCE ] ) ) {
 			return; }
 
-		if ( ! wp_verify_nonce( $_REQUEST[self::RECORD_PURGE_NONCE], self::RECORD_PURGE_NONCE ) ) {
+		if ( ! wp_verify_nonce( $_REQUEST[ self::RECORD_PURGE_NONCE ], self::RECORD_PURGE_NONCE ) ) {
 			return; }
 
 		if ( isset( $_GET['purge_records'] ) ) {
@@ -101,7 +101,7 @@ class SI_Internal_Records extends SI_Controller {
 			'post_type' => SI_Record::POST_TYPE,
 			'post_status' => 'any',
 			'posts_per_page' => 2500,
-			'fields' => 'ids'
+			'fields' => 'ids',
 		);
 		if ( $type ) {
 			$tax_query = array(
@@ -109,9 +109,9 @@ class SI_Internal_Records extends SI_Controller {
 							array(
 								'taxonomy' => SI_Record::TAXONOMY,
 								'field' => 'id',
-								'terms' => $type
-							)
-						)
+								'terms' => $type,
+							),
+						),
 				);
 			$args = array_merge( $args, $tax_query );
 		}
@@ -216,7 +216,7 @@ class SI_Internal_Records extends SI_Controller {
 			'weight' => 0,
 			'label' => __( 'Private Note', 'sprout-invoices' ),
 			'type' => 'textarea',
-			'default' => $record_post->post_content,
+			'default' => stripslashes_from_strings_only( $record_post->post_content ),
 		);
 		$fields['record_id'] = array(
 			'weight' => 50,
@@ -226,7 +226,7 @@ class SI_Internal_Records extends SI_Controller {
 		self::load_view( 'admin/sections/edit-private-note', array(
 				'fields' => $fields,
 				'record_id' => $record_id,
-			), false );
+		), false );
 		exit();
 	}
 
@@ -280,5 +280,4 @@ class SI_Internal_Records extends SI_Controller {
 	</div>
 	<?php
 	}
-
 }

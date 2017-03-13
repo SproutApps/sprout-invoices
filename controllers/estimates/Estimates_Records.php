@@ -78,16 +78,32 @@ class SI_Estimates_Records extends SI_Estimates {
 			$user = get_userdata( get_current_user_id() );
 			$name = $user->first_name . ' ' . $user->last_name;
 			$whom = $name . ' (' . $user->user_login. ')';
-		}
-		else {
+		} else {
 			$whom = self::get_user_ip();
 		}
+		if ( in_array( $whom, array( '127.0.0.1', '::1' ) ) ) {
+			return;
+		}
+
 		$estimate = SI_Estimate::get_instance( $post->ID );
+		$title = sprintf( __( 'Estimate viewed by %s for the first time.', 'sprout-invoices' ), esc_html( $whom ) );
+
+		$found = false;
+		$view_logs = SI_Record::get_records_by_type_and_association( $estimate->get_id(), self::VIEWED_STATUS_UPDATE );
+		foreach ( $view_logs as $record_id ) {
+			if ( ! $found && $title === get_the_title( $record_id ) ) {
+				$found = true;
+			}
+		}
+		// Record exists
+		if ( $found ) {
+			return;
+		}
+
 		do_action( 'si_new_record',
 			$_SERVER,
 			self::VIEWED_STATUS_UPDATE,
-			$estimate->get_id(),
-		sprintf( __( 'Estimate viewed by %s.', 'sprout-invoices' ), esc_html( $whom ) ) );
+			$invoice->get_id(),
+		$title );
 	}
-
 }

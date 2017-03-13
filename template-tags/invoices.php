@@ -1020,6 +1020,10 @@ function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 					$returned_history[ $item_id ]['type'] = __( 'Imported', 'sprout-invoices' );
 					break;
 
+				case 'si_esignature':
+					$returned_history[ $item_id ]['type'] = __( 'Signature', 'sprout-invoices' );
+					break;
+
 				case SI_Estimates::HISTORY_STATUS_UPDATE:
 				default:
 					$returned_history[ $item_id ]['type'] = __( 'Status Update', 'sprout-invoices' );

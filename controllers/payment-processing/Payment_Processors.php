@@ -156,6 +156,24 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	}
 
 	/**
+	 * Is the processor enabled
+	 * @param  string  $class Processor Class Name
+	 * @return boolean
+	 */
+	public static function is_processor_enabled( $class ) {
+		if ( ! is_array( self::$active_payment_processors ) ) {
+			self::$active_payment_processors = self::enabled_processors();
+		}
+
+		$enabled = false;
+		if ( in_array( $class, self::$active_payment_processors ) ) {
+			$enabled = true;
+		}
+
+		return $enabled;
+	}
+
+	/**
 	 * Register the payment settings
 	 * @return
 	 */
