@@ -409,6 +409,14 @@ table.sa_table {
 .sa_table .tfoot_total_desc {
 	text-align: right;
 }
+.sa_table th.skinny_col {
+    width: 100px;
+    max-width: 20%;
+}
+.sa_table th.real_skinny_col {
+    width: 2em;
+    max-width: 4em;
+}
 /**
  * Copy of button-large
  */
@@ -2059,6 +2067,20 @@ dd .add_item_help {
 /**
  * Misc.
  */
+
+.postbox-container .si_notice {
+	display: inline-block;
+	line-height: 19px;
+	padding: 11px 15px;
+	font-size: 14px;
+	text-align: left;
+	/* margin: 25px 20px 0 2px; */
+	background-color: #f5f5f5;
+	border-left: 4px solid #05aeff;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+
 #poststuff .sa-form-field.sa-form-field-bypass h3 {
     padding: 16px 0px 8px;
 }

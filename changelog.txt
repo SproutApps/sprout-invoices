@@ -1,3 +1,17 @@
+= 14.0 =
+
+* NEW FEATURE: Payment Terms
+* FIX: Minor bug fixes all around
+
+= 13.0.4 =
+
+* FIX: WooCommerce Payments
+
+= 13.0.3 =
+
+* UPDATE: WooCommerce Tools Update
+* UPDATE: Ninja Forms THREES support
+
 = 13.0.1 =
 
 * FIX: Customizer not saving colors correctly

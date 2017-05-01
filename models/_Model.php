@@ -483,6 +483,7 @@ abstract class SI_Post_Type extends Sprout_Invoices {
 	 */
 	public function set_post_date( $post_date ) {
 		$this->post->post_date = $post_date;
+		$this->post->post_date_gmt = get_gmt_from_date( $post_date );
 		$this->save_post();
 	}
 

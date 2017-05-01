@@ -103,7 +103,7 @@ class SI_Estimates_Records extends SI_Estimates {
 		do_action( 'si_new_record',
 			$_SERVER,
 			self::VIEWED_STATUS_UPDATE,
-			$invoice->get_id(),
+			$estimate->get_id(),
 		$title );
 	}
 }

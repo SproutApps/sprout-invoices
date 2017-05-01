@@ -59,20 +59,23 @@ class SI_Internal_Records extends SI_Controller {
 			$author_id = get_current_user_id();
 		}
 
+		$status = ( isset( $data['status'] ) && '' !== $data['status'] ) ? $data['status'] : 'publish' ;
+		$post_date = ( isset( $data['post_date'] ) && $data['post_date'] ) ? (int) $data['post_date'] : current_time( 'timestamp' );
+
 		$post = array(
 			'post_title' => $title,
 			'post_author' => $author_id,
-			'post_status' => 'pending',
+			'post_status' => $status,
 			'post_type' => SI_Record::POST_TYPE,
 			'post_parent' => $associate_id,
 		);
 		$id = wp_insert_post( $post );
-
 		if ( $id && ! is_wp_error( $id ) ) {
 			$record = SI_Record::get_instance( $id );
 			$record->set_data( $data, $encoded );
 			$record->set_associate_id( $associate_id );
 			$record->set_type( $type );
+			$record->set_post_date( date( 'Y-m-d H:i:s', $post_date ) );
 			$record->activate();
 		}
 		do_action( 'si_record_created', $record );

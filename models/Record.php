@@ -20,7 +20,7 @@ class SI_Record extends SI_Post_Type {
 			'has_archive' => false,
 			'show_in_menu' => false,
 			'rewrite' => false,
-			'supports' => array()
+			'supports' => array(),
 		);
 		self::register_post_type( self::POST_TYPE, 'Record', 'Records', $post_type_args );
 
@@ -68,9 +68,12 @@ class SI_Record extends SI_Post_Type {
 		return self::$instances[ $id ];
 	}
 
+	/**
+	 * Executed after all the records data has been completed.
+	 */
 	public function activate() {
-		$this->post->post_status = 'publish';
-		$this->save_post();
+		//$this->post->post_status = 'publish';
+		//$this->save_post();
 		do_action( 'record_activated', $this );
 	}
 
@@ -103,7 +106,7 @@ class SI_Record extends SI_Post_Type {
 	 */
 	public function get_data() {
 		$content = json_decode( $this->post->post_content );
-		if ( $content === NULL ) { // isn't json
+		if ( $content === null ) { // isn't json
 			return $this->post->post_content;
 		}
 		return (array) $content;
@@ -201,9 +204,7 @@ class SI_Record extends SI_Post_Type {
 			'si_bypass_filter' => true,
 			self::TAXONOMY => $type,
 		);
-
 		$result = get_posts( $args );
-
 		// Set cache
 		$cache[ $cache_index ] = $result;
 		wp_cache_set( $cache_key, $cache, 'si' );
@@ -304,5 +305,4 @@ class SI_Record extends SI_Post_Type {
 		wp_cache_delete( 'si_find_records_by_type', 'si' );
 		wp_cache_delete( 'si_find_records_by_assoc_id', 'si' );
 	}
-
 }

@@ -800,7 +800,6 @@ endif;
 //////////////
 // Payments //
 //////////////
-
 if ( ! function_exists( 'si_payment_options' ) ) :
 	/**
 	 * The payment link for invoices

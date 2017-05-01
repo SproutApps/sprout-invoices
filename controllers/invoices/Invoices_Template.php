@@ -27,7 +27,7 @@ class SI_Invoices_Template extends SI_Controller {
 	/////////////
 
 	public static function prevent_auto_draft_title( $title = '', $post_id = 0 ) {
-		if ( __('Auto Draft') !== $title ) {
+		if ( __( 'Auto Draft' ) !== $title ) {
 			return $title;
 		}
 		if ( SI_Invoice::POST_TYPE !== get_post_type( $post_id ) ) {
@@ -41,8 +41,7 @@ class SI_Invoices_Template extends SI_Controller {
 	public static function line_item_content_filter( $description = '' ) {
 		if ( apply_filters( 'si_the_content_filter_line_item_descriptions', true ) ) {
 			$content = apply_filters( 'the_content', $description );
-		}
-		else {
+		} else {
 			$content = wpautop( $description );
 		}
 		return $content;
@@ -66,11 +65,12 @@ class SI_Invoices_Template extends SI_Controller {
 		if ( '' === $payment_string ) {
 			$payment_string = ( si_has_invoice_deposit( $invoice_id ) ) ? __( 'Pay Deposit', 'sprout-invoices' ) : __( 'Pay Invoice', 'sprout-invoices' );
 		}
+
 		self::load_view( 'templates/invoice/payment-options', array(
 				'id' => $invoice_id,
 				'payment_options' => si_payment_options(),
 				'payment_string' => $payment_string,
-			), false );
+		), false );
 	}
 
 	/**
@@ -99,21 +99,18 @@ class SI_Invoices_Template extends SI_Controller {
 				$allowed_admin_scripts = apply_filters( 'si_allowed_admin_doc_scripts', array_merge( array( 'admin-bar' ), $allowed_scripts ) );
 				if ( current_user_can( 'edit_sprout_invoices' ) ) {
 					$wp_scripts->queue = $allowed_admin_scripts;
-				}
-				else {
+				} else {
 					$wp_scripts->queue = $allowed_scripts;
 				}
 				$allowed_styles = apply_filters( 'si_allowed_doc_styles', array( 'sprout_doc_style', 'qtip', 'dropdown' ) );
 				$allowed_admin_styles = apply_filters( 'si_allowed_admin_doc_styles', array_merge( array( 'admin-bar' ), $allowed_styles ) );
 				if ( current_user_can( 'edit_sprout_invoices' ) ) {
 					$wp_styles->queue = $allowed_admin_styles;
-				}
-				else {
+				} else {
 					$wp_styles->queue = $allowed_styles;
 				}
 				do_action( 'si_doc_enqueue_filtered' );
-			}
-			else {
+			} else {
 				// scripts
 				wp_enqueue_script( 'sprout_doc_scripts' );
 				wp_enqueue_script( 'dropdown' );
@@ -125,5 +122,4 @@ class SI_Invoices_Template extends SI_Controller {
 			}
 		}
 	}
-
 }

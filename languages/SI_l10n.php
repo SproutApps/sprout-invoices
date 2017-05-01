@@ -33,13 +33,13 @@ class SI_l10n extends SI_Controller {
 		$mofile_global = WP_LANG_DIR . '/' . self::TEXT_DOMAIN . '/' . $mofile;
 
 		if ( file_exists( $mofile_plugins_global ) ) {
-			// Look in global /wp-content/languages/plugins/sprout-apps folder
+			// Look in global /wp-content/languages/plugins/sprout-invoices folder
 			load_textdomain( self::TEXT_DOMAIN, $mofile_plugins_global );
 		} elseif ( file_exists( $mofile_global ) ) {
-			// Look in global /wp-content/languages/sprout-apps folder
+			// Look in global /wp-content/languages/sprout-invoices folder
 			load_textdomain( self::TEXT_DOMAIN, $mofile_global );
 		} elseif ( file_exists( $mofile_local ) ) {
-			// Look in local /wp-content/plugins/sprout-invoices{-pro}/languages/ folder
+			// Look in local /wp-content/plugins/sprout-invoices/languages/ folder
 			load_textdomain( self::TEXT_DOMAIN, $mofile_local );
 		} else {
 			// Load the default language files
@@ -70,10 +70,10 @@ class SI_l10n extends SI_Controller {
 		require_once( ABSPATH . 'wp-admin/includes/translation-install.php' );
 		$translations = wp_get_available_translations();
 
-		if ( ! isset( $translations[ $language ] )) {
+		if ( ! isset( $translations[ $language ] ) ) {
 			return;
 		}
-		
+
 		printf(
 			'<div id="si_language_detect_nag_dismiss" class="notice notice-info is-dismissible"><p>%s</p></div>',
 			sprintf(
@@ -120,7 +120,7 @@ class SI_l10n extends SI_Controller {
 		wp_die();
 	}
 
-	public static function has_language_detector_dismissed(){
+	public static function has_language_detector_dismissed() {
 		$language = get_locale();
 		$option = get_option( self::TEXT_DOMAIN . '_language_help_message_' . $language );
 		return $option;

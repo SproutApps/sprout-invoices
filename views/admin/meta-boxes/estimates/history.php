@@ -44,7 +44,7 @@
 				<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">
 					<?php prp( json_decode( stripslashes_from_strings_only( $data['content'] ) ) ); ?>
 				</div>
-			<?php elseif ( $data['status_type'] == SI_Invoices::VIEWED_STATUS_UPDATE ) : ?>
+			<?php elseif ( $data['status_type'] == SI_Estimates::VIEWED_STATUS_UPDATE ) : ?>
 				<p>
 					<?php echo esc_html( $data['update_title'] ) ?>
 				</p>
