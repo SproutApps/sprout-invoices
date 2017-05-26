@@ -59,6 +59,10 @@ class SI_Internal_Records extends SI_Controller {
 			$author_id = get_current_user_id();
 		}
 
+		if ( is_object( $data ) ) {
+			$data = json_decode( json_encode( $data ), true );
+		}
+
 		$status = ( isset( $data['status'] ) && '' !== $data['status'] ) ? $data['status'] : 'publish' ;
 		$post_date = ( isset( $data['post_date'] ) && $data['post_date'] ) ? (int) $data['post_date'] : current_time( 'timestamp' );
 

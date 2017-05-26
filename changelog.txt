@@ -1,3 +1,9 @@
+= 14.0.1 =
+
+* FIX: Reset totals on submission
+* FIX: WooCommerce integration fixes for VAT
+* FIX: Payment obejct sent and interpreted as array
+
 = 14.0 =
 
 * NEW FEATURE: Payment Terms

@@ -20,6 +20,9 @@ if ( ! function_exists( 'si_get_invoice_line_items' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_line_items', $invoice->get_line_items(), $invoice );
 	}
 endif;
@@ -35,6 +38,9 @@ if ( ! function_exists( 'si_get_invoice_history' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_history', $invoice->get_history(), $invoice );
 	}
 endif;
@@ -51,6 +57,9 @@ if ( ! function_exists( 'si_get_invoice_status' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			return '';
 		}
@@ -99,6 +108,9 @@ if ( ! function_exists( 'si_get_invoice_status_label' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $post_id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_status_label', $invoice->get_status_label(), $invoice );
 	}
 endif;
@@ -129,6 +141,9 @@ if ( ! function_exists( 'si_get_invoicesubmission_fields' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_submission_fields', $invoice->get_submission_fields(), $invoice );
 	}
 endif;
@@ -146,6 +161,9 @@ if ( ! function_exists( 'si_get_invoiceissue_date' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_issue_date', $invoice->get_issue_date(), $invoice );
 	}
 endif;
@@ -175,6 +193,9 @@ if ( ! function_exists( 'si_get_invoice_due_date' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_due_date', $invoice->get_due_date(), $invoice );
 	}
 endif;
@@ -204,6 +225,9 @@ if ( ! function_exists( 'si_get_invoice_expiration_date' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_expiration_date', $invoice->get_expiration_date(), $invoice );
 	}
 endif;
@@ -234,6 +258,9 @@ if ( ! function_exists( 'si_get_invoice_id' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		if ( $invoice->get_invoice_id() ) {
 			$id = $invoice->get_invoice_id();
 		}
@@ -267,6 +294,9 @@ if ( ! function_exists( 'si_get_invoice_po_number' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_po_number', $invoice->get_po_number(), $invoice );
 	}
 endif;
@@ -297,6 +327,9 @@ if ( ! function_exists( 'si_get_invoice_client_id' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return apply_filters( 'si_get_invoice_client_id', $invoice->get_client_id(), $invoice );
 	}
 endif;
@@ -327,6 +360,9 @@ if ( ! function_exists( 'si_get_invoice_client' ) ) :
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
+		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
+			return false;
+		}
 		return $invoice->get_client();
 	}
 endif;
