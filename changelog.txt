@@ -1,3 +1,7 @@
+= 14.0.2 =
+
+* COMPAT: WPSEO compatibility
+
 = 14.0.1 =
 
 * FIX: Reset totals on submission

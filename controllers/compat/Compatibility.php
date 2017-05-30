@@ -7,6 +7,7 @@
  * @subpackage Compatibility
  */
 class SI_Compatibility extends SI_Controller {
+	private static $updated_post_id;
 
 	public static function init() {
 		// attempt to kill all select2 registrations on si_admin pages
@@ -19,6 +20,9 @@ class SI_Compatibility extends SI_Controller {
 		add_filter( 'add_meta_boxes', array( __CLASS__, 'prevent_wpseo_from_being_assholes_about_private_cpts_metaboxes' ), 10 );
 		add_filter( 'manage_edit-'.SI_Invoice::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
 		add_filter( 'manage_edit-'.SI_Estimate::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
+
+		add_action( 'post_updated', array( __CLASS__, 'set_updated_post_id' ) );
+		add_action( 'wpseo_premium_post_redirect_slug_change', array( __CLASS__, 'wpseo_premium_post_redirect_slug_change' ) );
 
 		// Gravity Forms fix
 		add_filter( 'gform_display_add_form_button', array( __CLASS__, 'si_maybe_remove_gravity_forms_add_button' ), 10, 1 );
@@ -48,6 +52,18 @@ class SI_Compatibility extends SI_Controller {
 
 		// Jetpack Related Posts
 		add_filter( 'jetpack_relatedposts_filter_options', array( __CLASS__, 'si_maybe_remove_related_posts' ), 10, 1 );
+	}
+
+	public static function set_updated_post_id( $post_id ) {
+		self::$updated_post_id = $post_id;
+	}
+
+	public static function wpseo_premium_post_redirect_slug_change( $slug_changed_flag ) {
+		$cpts = array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE );
+		if ( null !== self::$updated_post_id && in_array( get_post_type( self::$updated_post_id ), $cpts ) ) {
+			return true;
+		}
+		return $slug_changed_flag;
 	}
 
 	public static function deregister_select2() {
