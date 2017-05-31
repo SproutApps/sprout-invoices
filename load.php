@@ -336,3 +336,7 @@ function sprout_invoices_load() {
 
 	do_action( 'sprout_invoices_loaded' );
 }
+
+function sprout_invoices_delayed_load() {
+	do_action( 'si_delayed_load' );
+}
