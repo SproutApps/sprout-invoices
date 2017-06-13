@@ -285,17 +285,13 @@ class SI_Admin_Settings extends SI_Controller {
 	}
 
 	public static function save_address( $address = array() ) {
-		$address = array(
-			'name' => isset( $_POST['sa_metabox_name'] ) ? $_POST['sa_metabox_name'] : '',
-			'first_name' => isset( $_POST['sa_metabox_first_name'] ) ? $_POST['sa_metabox_first_name'] : '',
-			'last_name' => isset( $_POST['sa_metabox_last_name'] ) ? $_POST['sa_metabox_last_name'] : '',
-			'email' => isset( $_POST['sa_metabox_email'] ) ? $_POST['sa_metabox_email'] : '',
-			'street' => isset( $_POST['sa_metabox_street'] ) ? $_POST['sa_metabox_street'] : '',
-			'city' => isset( $_POST['sa_metabox_city'] ) ? $_POST['sa_metabox_city'] : '',
-			'zone' => isset( $_POST['sa_metabox_zone'] ) ? $_POST['sa_metabox_zone'] : '',
-			'postal_code' => isset( $_POST['sa_metabox_postal_code'] ) ? $_POST['sa_metabox_postal_code'] : '',
-			'country' => isset( $_POST['sa_metabox_country'] ) ? $_POST['sa_metabox_country'] : '',
-		);
+		$fields = self::address_form_fields( false );
+		$address = array();
+
+		foreach ($fields as $key => $value) {
+			$address[$key] = isset( $_POST[ 'sa_metabox_' . $key ] ) ? $_POST[ 'sa_metabox_' . $key ] : '';
+		}
+
 		return stripslashes_deep( $address );
 	}
 
