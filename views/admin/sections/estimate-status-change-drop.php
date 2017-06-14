@@ -5,17 +5,17 @@
 				$status_change_span = '&nbsp;<div class="dashicons dashicons-arrow-down"></div>';
 					?>
 			<?php if ( $status == SI_Estimate::STATUS_PENDING ) : ?>
-				<?php printf( '<button class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', __( 'Currently Pending.', 'sprout-invoices' ), __( 'Pending', 'sprout-invoices' ), $status_change_span ); ?>
+				<?php printf( '<span class="si_status publish si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Currently Pending.', 'sprout-invoices' ), __( 'Pending', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Estimate::STATUS_APPROVED ) : ?>
-				<?php printf( '<button class="si_status complete si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', __( 'Currently Approved.', 'sprout-invoices' ), __( 'Approved', 'sprout-invoices' ), $status_change_span ); ?>
+				<?php printf( '<span class="si_status complete si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Currently Approved.', 'sprout-invoices' ), __( 'Approved', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Estimate::STATUS_DECLINED ) : ?>
-				<?php printf( '<button class="si_status declined si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', __( 'Currently Declined.', 'sprout-invoices' ), __( 'Declined', 'sprout-invoices' ), $status_change_span ); ?>
+				<?php printf( '<span class="si_status declined si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Currently Declined.', 'sprout-invoices' ), __( 'Declined', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php elseif ( $status == SI_Estimate::STATUS_REQUEST ) : ?>
-				<?php printf( '<button class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', __( 'New Estimate Request', 'sprout-invoices' ), __( 'Submission', 'sprout-invoices' ), $status_change_span ); ?>
+				<?php printf( '<span class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'New Estimate Request', 'sprout-invoices' ), __( 'Submission', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php elseif ( $status === SI_Estimate::STATUS_ARCHIVED ) : ?>
-				<?php printf( '<button class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', __( 'Archive Estimate', 'sprout-invoices' ), __( 'Archive', 'sprout-invoices' ), $status_change_span ); ?>
+				<?php printf( '<span class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Archive Estimate', 'sprout-invoices' ), __( 'Archive', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php else : ?>
-				<?php printf( '<button class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</button>', __( 'Pending Estimate Request.', 'sprout-invoices' ), __( 'Draft', 'sprout-invoices' ), $status_change_span ); ?>
+				<?php printf( '<span class="si_status draft si_tooltip button current_status" title="%s" disabled><span>%s</span>%s</span>', __( 'Pending Estimate Request.', 'sprout-invoices' ), __( 'Draft', 'sprout-invoices' ), $status_change_span ); ?>
 			<?php endif ?>
 		</span>
 	</span>

@@ -36,8 +36,8 @@ class SI_Notifications_Test extends SI_Notifications {
 	public static function register_settings() {
 		// Settings
 		$settings = array(
-			'notifications' => array(
-				'weight' => 40,
+			'html_notifications' => array(
+				'weight' => 30.1,
 				'tab' => 'settings',
 				'settings' => array(
 					'load_html_templates' => array(
