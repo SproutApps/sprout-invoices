@@ -37,10 +37,10 @@ class SI_Notifications_Test extends SI_Notifications {
 		// Settings
 		$settings = array(
 			'html_notifications' => array(
-				'weight' => 30.1,
+				'weight' => 30.2,
 				'tab' => 'settings',
 				'settings' => array(
-					'load_html_templates' => array(
+					'test_notifications' => array(
 						'label' => __( 'Test Notification', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'bypass',

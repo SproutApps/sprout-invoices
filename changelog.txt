@@ -1,3 +1,10 @@
+= 14.0.5 =
+
+* FIX: Firefox support
+* UPDATE: EU Region name update
+* FIX: HTML Notifications add-on conflict with Test Notifications
+* FEATURE: CA GST Report Support
+
 = 14.0.4 =
 
 * FIX: Payment Term Notifications Disabled

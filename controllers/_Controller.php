@@ -75,7 +75,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( is_admin() ) {
 			return $query;
 		}
-		if ( is_single() ) {
+		if ( $query->is_single() ) {
 			return $query;
 		}
 		if ( $query->is_main_query() ) {

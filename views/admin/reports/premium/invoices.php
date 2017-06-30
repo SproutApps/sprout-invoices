@@ -25,6 +25,9 @@
 					<th><?php _e( 'Invoiced', 'sprout-invoices' ) ?></th>
 					<th><?php _e( 'Paid', 'sprout-invoices' ) ?></th>
 					<th><?php _e( 'Tax', 'sprout-invoices' ) ?></th>
+					<?php if ( apply_filters( 'si_show_gst_in_reports', class_exists( 'SI_Hearts_Canada' ) ) ) :  ?>
+						<th><?php _e( 'GST', 'sprout-invoices' ) ?></th>
+					<?php endif ?>
 					<th><?php _e( 'Balance', 'sprout-invoices' ) ?></th>
 				</tr>
 			</thead>
@@ -33,6 +36,7 @@
 					$table_total_invoiced = 0;
 					$table_total_paid = 0;
 					$table_total_tax = 0;
+					$table_gst_total_tax = 0;
 					$table_total_balance = 0;
 
 					$filter = ( isset( $_REQUEST['post_status'] ) ) ? $_REQUEST['post_status'] : 'any';
@@ -68,7 +72,20 @@
 						$table_total_paid += si_get_invoice_payments_total();
 						$table_total_tax += si_get_invoice_taxes_total();
 						$table_total_balance += si_get_invoice_balance();
-						$client_name = ( si_get_invoice_client_id() ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_invoice_client_id() ), get_the_title( si_get_invoice_client_id() ) ) : __( 'N/A', 'sprout-invoices' ); ?>
+						$client_name = ( si_get_invoice_client_id() ) ? sprintf( '<a href="%s">%s</a>', get_edit_post_link( si_get_invoice_client_id() ), get_the_title( si_get_invoice_client_id() ) ) : __( 'N/A', 'sprout-invoices' );
+
+						if ( apply_filters( 'si_show_gst_in_reports', class_exists( 'SI_Hearts_Canada' ) ) ) {
+							$gst_for_line_item = 0;
+							$line_items = si_get_doc_line_items();
+							if ( ! empty( $line_items ) ) {
+								foreach ( $line_items as $position => $data ) {
+									if ( isset( $data['tax_gst'] ) && $data['tax_gst'] ) {
+										$gst_for_line_item = SI_Hearts_Canada::calculate_tax( $data, 'tax_gst' );
+										$table_gst_total_tax += $gst_for_line_item;
+									}
+								}
+							}
+						} ?>
 						<tr> 
 							<td><?php echo si_get_invoice_id( get_the_id() ) ?></td>
 							<td><span class="si_status <?php si_invoice_status() ?>"><?php si_invoice_status() ?></span></td>
@@ -78,6 +95,9 @@
 							<td><?php si_invoice_calculated_total() ?></td>
 							<td><?php si_invoice_payments_total() ?></td>
 							<td><?php sa_formatted_money( si_get_invoice_taxes_total() ) ?></td>
+							<?php if ( apply_filters( 'si_show_gst_in_reports', class_exists( 'SI_Hearts_Canada' ) ) ) :  ?>
+								<th><?php sa_formatted_money( $gst_for_line_item ) ?></th>
+							<?php endif ?>
 							<td><?php si_invoice_balance() ?></td>
 						</tr>
 						<?php
@@ -94,6 +114,9 @@
 					<th><span id="footer_total_invoices"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_invoiced ) ) ?></th>
 					<th><span id="footer_total_paid"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_paid ) ) ?></th>
 					<th><span id="footer_total_tax"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_tax ) ) ?></th>
+					<?php if ( apply_filters( 'si_show_gst_in_reports', class_exists( 'SI_Hearts_Canada' ) ) ) :  ?>
+						<th><span id="footer_total_tax"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_gst_total_tax ) ) ?></th>
+					<?php endif ?>
 					<th><span id="footer_total_balance"></span>&nbsp;<?php printf( __( '(of %s)', 'sprout-invoices' ), sa_get_formatted_money( $table_total_balance ) ) ?></th>
 				</tr>
 			</tfoot>

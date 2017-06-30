@@ -394,7 +394,7 @@ class SI_Countries_States extends SI_Controller {
 		'Rutland' => 'Rutland',
 		'Shropshire' => 'Shropshire',
 		'Somerset' => 'Somerset',
-		'South Glamorgan' => 'South Glamorgan',
+		'South Glamorgan' => 'Vale of Glamorgan',
 		'South Yorkshire' => 'South Yorkshire',
 		'Staffordshire' => 'Staffordshire',
 		'Strathclyde' => 'Strathclyde',
@@ -545,7 +545,7 @@ class SI_Countries_States extends SI_Controller {
 			'Rutland' => 'Rutland',
 			'Shropshire' => 'Shropshire',
 			'Somerset' => 'Somerset',
-			'South Glamorgan' => 'South Glamorgan',
+			'South Glamorgan' => 'Vale of Glamorgan',
 			'South Yorkshire' => 'South Yorkshire',
 			'Staffordshire' => 'Staffordshire',
 			'Strathclyde' => 'Strathclyde',
@@ -594,5 +594,4 @@ class SI_Countries_States extends SI_Controller {
 		$countries = apply_filters( 'sprout_country_options', $countries, $args );
 		return $countries;
 	}
-
 }

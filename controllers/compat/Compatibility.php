@@ -21,8 +21,7 @@ class SI_Compatibility extends SI_Controller {
 		add_filter( 'manage_edit-'.SI_Invoice::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
 		add_filter( 'manage_edit-'.SI_Estimate::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
 
-		add_action( 'post_updated', array( __CLASS__, 'set_updated_post_id' ) );
-		add_action( 'wpseo_premium_post_redirect_slug_change', array( __CLASS__, 'wpseo_premium_post_redirect_slug_change' ) );
+		add_action( 'post_updated', array( __CLASS__, 'set_updated_post_id' ), -100 );
 
 		// Gravity Forms fix
 		add_filter( 'gform_display_add_form_button', array( __CLASS__, 'si_maybe_remove_gravity_forms_add_button' ), 10, 1 );
@@ -55,11 +54,12 @@ class SI_Compatibility extends SI_Controller {
 	}
 
 	public static function set_updated_post_id( $post_id ) {
+		add_filter( 'wpseo_premium_post_redirect_slug_change', array( __CLASS__, 'wpseo_premium_post_redirect_slug_change' ) );
 		self::$updated_post_id = $post_id;
 	}
 
 	public static function wpseo_premium_post_redirect_slug_change( $slug_changed_flag ) {
-		$cpts = array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE );
+		$cpts = array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE, SI_Record::POST_TYPE, SI_Payment::POST_TYPE );
 		if ( null !== self::$updated_post_id && in_array( get_post_type( self::$updated_post_id ), $cpts ) ) {
 			return true;
 		}
