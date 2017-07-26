@@ -1,0 +1,21 @@
+
+/* Body
+---------------------------------------------------------------------------------------------------- */
+
+body {
+  background-color: $color-blue;
+}
+
+.row {
+  width: 100%;
+  float: left;
+  position: relative;
+
+  .inner {
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    margin: 0px auto;
+    overflow: hidden;
+  }
+}

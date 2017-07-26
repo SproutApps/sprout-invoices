@@ -7,10 +7,10 @@ if ( ! function_exists( 'si_doc_header_logo' ) ) :
  */
 	function si_doc_header_logo_url() {
 		$fullpath = si_locate_file( array(
-					'logo.png',
-					'logo.jpg',
-					'logo.gif',
-				) );
+			'logo.png',
+			'logo.jpg',
+			'logo.gif',
+		) );
 		$path = str_replace( WP_CONTENT_DIR, '', $fullpath );
 		return content_url( $path );
 	}

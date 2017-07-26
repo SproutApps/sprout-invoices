@@ -72,7 +72,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_invoice' => array(
 					'name' => __( 'Invoice Available', 'sprout-invoices' ),
 					'description' => __( 'Customize the invoice email that is sent to selected recipients.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name', 'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_payments_list', 'invoice_payments_list_html', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_deposit_amount', 'invoice_total_due', 'invoice_total_payments', 'client_name', 'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Your Invoice is Available', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/invoice', null ),
 				),
@@ -80,7 +80,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'deposit_payment' => array(
 					'name' => __( 'Deposit Payment Received', 'sprout-invoices' ),
 					'description' => __( 'Customize the payment email that is sent to the client recipients when a deposit is made.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name',  'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_payments_list', 'invoice_payments_list_html', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name',  'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Deposit Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', null, false ),
 					'always_disabled' => true,
@@ -88,14 +88,14 @@ class SI_Notifications extends SI_Notifications_Control {
 				'final_payment' => array(
 					'name' => __( 'Invoice Paid', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the client recipients when the final payment for an invoice is made.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name',  'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_payments_list', 'invoice_payments_list_html', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name',  'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Thank You', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-final', null, false ),
 				),
 				'reminder_payment' => array(
 					'name' => __( 'Payment Reminder', 'sprout-invoices' ),
 					'description' => __( 'Customize the email that is sent to the client recipients in order to remind them that their payment is overdue.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_payments_list', 'invoice_payments_list_html', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Invoice Payment Overdue', 'sprout-invoices' ),  get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/payment-reminder', null, false ),
 					'always_disabled' => true,
@@ -126,7 +126,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'payment_notification' => array(
 					'name' => __( 'Payment Received', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to an admin when any payment is received.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url', 'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_payments_list', 'invoice_payments_list_html', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name', 'client_edit_url', 'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Payment Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-payment', null, false ),
 				),
@@ -229,6 +229,14 @@ class SI_Notifications extends SI_Notifications_Control {
 				'invoice_total' => array(
 						'description' => __( 'Used to display the invoice total.', 'sprout-invoices' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_invoice_total' ),
+					),
+				'invoice_payments_list' => array(
+						'description' => __( 'Used to display the invoice payments.', 'sprout-invoices' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_payments_list' ),
+					),
+				'invoice_payments_list_html' => array(
+						'description' => __( 'Used to display the invoice payments (in html).', 'sprout-invoices' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_invoice_payments_list_html' ),
 					),
 				'invoice_calculated_total' => array(
 						'description' => __( 'Used to display the invoice calculated total.', 'sprout-invoices' ),
@@ -1174,6 +1182,73 @@ class SI_Notifications extends SI_Notifications_Control {
 			$amount = sa_get_formatted_money( $data['invoice']->get_payments_total(), $data['invoice']->get_id() );
 		}
 		return apply_filters( 'shortcode_invoice_total_payments', $amount, $data );
+	}
+
+
+
+	/**
+	 * Return the invoice get_payments_total
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
+	 * @return string          filtered
+	 */
+	public static function shortcode_invoice_payments_list( $atts, $content, $code, $data ) {
+		if ( ! isset( $data['invoice'] ) || ! is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			return;
+		}
+		$invoice_id = $data['invoice']->get_id();
+		$payments = $data['invoice']->get_payments();
+		if ( empty( $payments ) ) {
+			return;
+		}
+
+		$payments_list = '';
+
+		foreach ( $payments as $payment_id ) {
+			$payment = SI_Payment::get_instance( $payment_id );
+			$method = ( strpos( strtolower( $payment->get_payment_method() ), 'credit' ) !== false && $payment->get_payment_method() !== 'Credit' ) ? __( 'Credit Card', 'sprout-invoices' ) : $payment->get_payment_method();
+			$method_name = apply_filters( 'si_display_payment_name', $method, $payment );
+
+			$payments_list = sprintf( __( '%1$s: %2$s on %3$s\\n', 'sprout-invoices' ), $method_name, sa_get_formatted_money( $payment->get_amount(), $invoice_id ), date( get_option( 'date_format' ), strtotime( $payment->get_post_date() ) ) );
+		}
+
+		return apply_filters( 'shortcode_invoice_payments_list', $payments_list, $data );
+	}
+
+
+	/**
+	 * Return the invoice get_payments_total
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
+	 * @return string          filtered
+	 */
+	public static function shortcode_invoice_payments_list_html( $atts, $content, $code, $data ) {
+		if ( ! isset( $data['invoice'] ) || ! is_a( $data['invoice'], 'SI_Invoice' ) ) {
+			return;
+		}
+		$invoice_id = $data['invoice']->get_id();
+		$payments = $data['invoice']->get_payments();
+		if ( empty( $payments ) ) {
+			return;
+		}
+
+		$payments_list = '';
+
+		foreach ( $payments as $payment_id ) {
+			$payment = SI_Payment::get_instance( $payment_id );
+			$method = ( strpos( strtolower( $payment->get_payment_method() ), 'credit' ) !== false && $payment->get_payment_method() !== 'Credit' ) ? __( 'Credit Card', 'sprout-invoices' ) : $payment->get_payment_method();
+			$method_name = apply_filters( 'si_display_payment_name', $method, $payment );
+
+			$payments_list = sprintf( __( '<strong>%1$s</strong>: %2$s on %3$s<br/>', 'sprout-invoices' ), $method_name, sa_get_formatted_money( $payment->get_amount(), $invoice_id ), date( get_option( 'date_format' ), strtotime( $payment->get_post_date() ) ) );
+		}
+
+		return apply_filters( 'shortcode_invoice_payments_list_html', $payments_list, $data );
 	}
 
 	/**

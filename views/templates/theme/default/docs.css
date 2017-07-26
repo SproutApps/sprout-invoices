@@ -1,0 +1,800 @@
+/* Helpers
+---------------------------------------------------------------------------------------------------- */
+/* Import Everything
+---------------------------------------------------------------------------------------------------- */
+/* Reset: Primary reset for everything.
+---------------------------------------------------------------------------------------------------- */
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-tap-highlight-color: transparent; }
+
+ol,
+ul {
+  list-style: none; }
+
+blockquote {
+  quotes: none; }
+
+blockquote:before,
+blockquote:after {
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html,
+body {
+  width: 100%;
+  height: 100%; }
+
+a,
+a img,
+a:before,
+a:after {
+  text-decoration: none;
+  transition-duration: .25s; }
+
+button {
+  cursor: pointer; }
+
+canvas {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none; }
+
+video::-webkit-media-controls-start-playback-button {
+  display: none !important; }
+
+input {
+  border: none;
+  border-radius: 0;
+  background: none;
+  outline: none;
+  resize: none;
+  position: relative;
+  padding: 0;
+  -webkit-appearance: none; }
+
+*:focus {
+  outline: 0; }
+
+/* Base Typography
+---------------------------------------------------------------------------------------------------- */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.75);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility; }
+  body strong {
+    font-weight: 700; }
+
+/* Buttons
+---------------------------------------------------------------------------------------------------- */
+.button {
+  border: none;
+  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(255, 255, 255, 0.85);
+  height: 50px;
+  display: inline-block;
+  padding: 0 20px;
+  cursor: pointer;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s; }
+
+/* Body
+---------------------------------------------------------------------------------------------------- */
+body {
+  background-color: #4086b0; }
+
+.row {
+  width: 100%;
+  float: left;
+  position: relative; }
+  .row .inner {
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    margin: 0px auto; }
+
+/* The Main Header
+---------------------------------------------------------------------------------------------------- */
+#header {
+  background-color: #438cb7;
+  text-align: center; }
+  #header .inner {
+    padding: 30px 0 50px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.75);
+    overflow: hidden;
+    }
+    @media (max-width: 480px) {
+      #header .inner {
+        padding: 50px 0 43px; } }
+    #header .inner img {
+      height: 10vw;
+      display: inline-block;
+      margin-bottom: 12px; }
+      @media (max-width: 900px) {
+        #header .inner img {
+          height: 20vw;
+          margin-bottom: 15px; } }
+    #header .inner .intro h1 {
+      font-size: 32px;
+      line-height: 1.2;
+      margin-bottom: 14px; }
+      @media (max-width: 900px) {
+        #header .inner .intro h1 {
+          font-size: 22px; } }
+      @media (max-width: 900px) {
+        #header .inner .intro h1 {
+          font-size: 22px; } }
+    #header .inner .intro span {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 22px; }
+    #header .inner .history_message .open {
+      height: 30px;
+      display: inline-block;
+      padding: 0 12px;
+      margin-bottom: 60px ;
+      background-color: #4086b0;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.75);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 30px;
+      text-transform: uppercase;
+      color: #4086b0; }
+
+/* The Invoice Intro
+---------------------------------------------------------------------------------------------------- */
+#intro .inner {
+  padding: 42px 0 29px; }
+  #intro .inner .column {
+    width: 50%;
+    float: left; }
+    #intro .inner .column:last-of-type {
+      text-align: right; }
+    @media (max-width: 480px) {
+      #intro .inner .column {
+        width: 100%;
+        text-align: center; }
+        #intro .inner .column:last-of-type {
+          margin-top: 35px;
+          text-align: center; } }
+    #intro .inner .column span {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.25);
+      font-weight: 400;
+      text-transform: uppercase; }
+    #intro .inner .column h2 {
+      width: 100%;
+      float: left;
+      padding-bottom: 7px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 18px;
+      font-weight: 900; }
+    #intro .inner .column ul li:first-of-type {
+      font-weight: 400;
+      color: #ffffff; }
+    #intro .inner .column a {
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-weight: 400; }
+
+/* Invoice Section Titles
+---------------------------------------------------------------------------------------------------- */
+.invoice .title {
+  height: 30px;
+  margin-bottom: 11px;
+  overflow: hidden;
+  text-align: center; }
+  .invoice .title:after {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: -1;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 6px;
+    content: ''; }
+  .invoice .title h2 {
+    height: 30px;
+    display: inline-block;
+    padding: 0 12px;
+    background-color: #4086b0;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 28px;
+    text-transform: uppercase; }
+
+.invoice .unit {
+  height: 19px;
+  position: absolute;
+  top: -1px;
+  padding: 0 8px;
+  margin-left: 10px;
+  border-radius: 9.5px;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-size: 10px;
+  line-height: 20px;
+  color: #4086b0; }
+
+/* Import Work and Totals
+---------------------------------------------------------------------------------------------------- */
+/* Items
+---------------------------------------------------------------------------------------------------- */
+#items {
+  margin-bottom: 29px; }
+  #items .title {
+    margin-bottom: 7px; }
+  #items .items .item {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 21px; }
+  #items .items .item.sub_item {
+    margin: 0 10px 20px 10px; }
+    #items .items .item .column {
+      flex: 1; }
+      #items .items .item .column:first-of-type {
+        flex: 3; }
+      #items .items .item .column:not(:first-of-type) {
+        text-align: right; }
+      #items .items .item .column h3 {
+        width: 100%;
+        float: left;
+        padding-bottom: 8px;
+        margin-bottom: 3px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        line-height: 1;
+        font-weight: 700; }
+      #items .items .item .column h4 {
+        font-weight: 700; }
+      #items .items .item .column p {
+        font-size: 12px; }
+
+/* Totals
+---------------------------------------------------------------------------------------------------- */
+#totals {
+  margin-bottom: 79px; }
+  @media (max-width: 480px) {
+    #totals {
+      margin-bottom: 49px; } }
+  #totals .items .item {
+    padding: 16px 0 3px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+    #totals .items .item h3 {
+      float: left; }
+    #totals .items .item .total {
+      float: right; }
+
+/* Notes and Terms
+---------------------------------------------------------------------------------------------------- */
+#notes {
+  padding-bottom: 170px; }
+  @media (max-width: 480px) {
+    #notes {
+      padding-bottom: 120px; } }
+  #notes .item {
+    margin-bottom: 24px; }
+    @media (max-width: 480px) {
+      #notes .item {
+        margin-bottom: 42px; } }
+    #notes .item .header {
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      #notes .item .header h3 {
+        float: left;
+        padding: 0 17px 8px 0;
+        margin-bottom: -1px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+        font-size: 12px;
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75); }
+
+/* The Pay Bar
+---------------------------------------------------------------------------------------------------- */
+#paybar {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  line-height: 50px;
+  color: #4086b0; }
+  #paybar .inner {
+    padding: 25px 0; }
+    #paybar .inner .button {
+      float: right;
+      background-color: #4086b0; }
+    @media (max-width: 480px) {
+      #paybar .inner span {
+        display: none; }
+      #paybar .inner .button {
+        width: 100%;
+        text-align: center; } }
+
+/* Panels
+---------------------------------------------------------------------------------------------------- */
+.panel {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  overflow: scroll;
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.75);
+  animation-fill-mode: both;
+  animation-duration: .5s; }
+  .panel.closed {
+    visibility: hidden;
+    transform: translate3d(0, 100%, 0); }
+  .panel.closing {
+    animation-name: slide-out; }
+  .panel.opening {
+    animation-name: slide-in; }
+  .panel .close {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 19px;
+    right: 19px;
+    z-index: 20; }
+    .panel .close:hover {
+      opacity: 0.5; }
+    .panel .close svg {
+      height: 100%;
+      fill: #000000; }
+  .panel .inner {
+    width: 80%;
+    max-width: 600px;
+    margin: 0px auto;
+    padding: 92px 0 100px; }
+    .panel .inner h2 {
+      font-size: 32px;
+      line-height: 1.2;
+      margin-bottom: 14px; }
+      @media (max-width: 900px) {
+        .panel .inner h2 {
+          font-size: 22px; } }
+      @media (max-width: 900px) {
+        .panel .inner h2 {
+          font-size: 22px; } }
+    .panel .inner p {
+      margin-bottom: 18px; }
+    .panel .inner input[type="text"],
+    .panel .inner input[type="email"] {
+      float: left;
+      padding: 16px 0 3px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.75);
+      max-width: 300px }
+      .panel .inner input[type="text"].half,
+      .panel .inner input[type="email"].half {
+        width: 50%; }
+        @media (max-width: 480px) {
+          .panel .inner input[type="text"].half,
+          .panel .inner input[type="email"].half {
+            width: 100%; } }
+      .panel .inner input[type="text"].whole,
+      .panel .inner input[type="email"].whole {
+        width: 100%; }
+    .panel .inner .toggle {
+      height: 30px;
+      float: left;
+      padding: 0 15px;
+      margin-right: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.75);
+      border-radius: 15px;
+      font-size: 12px;
+      line-height: 28px;
+      color: rgba(0, 0, 0, 0.75);
+      transition-duration: 0.25s; }
+      .panel .inner .toggle.inactive {
+        border-color: rgba(0, 0, 0, 0.25);
+        color: rgba(0, 0, 0, 0.25); }
+    .panel .inner .button {
+      margin-top: 25px;
+      background-color: rgba(0, 0, 0, 0.75); }
+    .panel .inner .paytypes {
+      position: relative; }
+      .panel .inner .paytypes .paytype {
+        animation-fill-mode: both;
+        animation-duration: .25s; }
+        .panel .inner .paytypes .paytype.inactive {
+          animation-name: fade-out;
+          position: absolute; }
+        .panel .inner .paytypes .paytype.active {
+          animation-name: fade-in;
+          animation-delay: .25s;
+          position: relative;
+          float: left; }
+
+/* Animations
+---------------------------------------------------------------------------------------------------- */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    visibility: hidden; }
+  to {
+    opacity: 1;
+    visibility: visible; } }
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    visibility: visible; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
+@keyframes slide-in {
+  0% {
+    transform: translate3d(0, 100%, 0); }
+  100% {
+    transform: translate3d(0, 0, 0); } }
+
+@keyframes slide-out {
+  0% {
+    transform: translate3d(0, 0, 0); }
+  100% {
+    transform: translate3d(0, 100%, 0); } }
+
+
+/* Admin Member Timeline: On the right.
+---------------------------------------------------------------------------------------------------- */
+.history {
+  width: 100%;
+  float: left;
+  margin-bottom: 100px; }
+
+/* Items: Update article items. */
+.history article {
+  width: 100%;
+  float: left;
+  position: relative;
+  padding: 0 0 49px 125px; }
+
+.history article {
+  padding-top: 6px;
+  padding-bottom: 12px; }
+
+.history article.si_history_update {
+    opacity: .35;
+}
+.history article.si_history_update:hover {
+    opacity: 1.0;
+}
+
+.history article:last-of-type {
+  padding-bottom: 0; }
+
+/* Timeline Marker: For each update. */
+.history article:before {
+  width: 9px;
+  height: 9px;
+  position: absolute;
+  top: 15px;
+  left: 96px;
+  content: '';
+  background-color: #ebebeb;
+  border-radius: 50%; }
+
+/* Timeline Lines: The line between each items. */
+.history article:not(:last-of-type):after {
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 16px;
+  left: 100px;
+  content: '';
+  background-color: #ebebeb; }
+
+/* Posted/Today: The posted date displayed as time ago. */
+.history article .posted {
+  height: 20px;
+  position: absolute;
+  top: 9px;
+  right: calc(100% - 75px);
+  padding: 0 5px;
+  background-color: #4086b0;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  white-space: nowrap; }
+
+.history article .posted:after {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 5px;
+  right: -6px;
+  content: '';
+  border-style: solid;
+  border-width: 5px 0 5px 6px;
+  border-color: transparent transparent transparent #4086b0; }
+
+/* Mods
+---------------------------------------------------------------------------------------------------- */
+
+.column_desc h3 small {
+    font-weight: 100;
+    font-size: .8em;
+}
+.panel .inner span.label_wrap {
+    display: none;
+}
+
+.panel .inner textarea,
+.panel .inner input[type="date"] {
+    float: left;
+    position: relative;
+    margin: 10px 0px;
+    border-bottom: 1px solid #ececec;
+    width: auto;
+    padding: 16px 0 3px 0;
+    font-size: 14px;
+    color: rgba(0,0,0,0.75);
+    clear: both;
+}
+.panel .inner textarea {
+    width: 80%;
+}
+.panel .inner input[type="file"] {
+    margin: 20px 0px;
+}
+
+.panel .inner select {
+    float: left;
+    position: relative;
+    margin: 10px 0px;
+    padding: 16px 0 3px 0;
+    width: auto;
+    font-size: 14px;
+    color: rgba(0,0,0,0.75);
+}
+.panel .inner .paytype p.description {
+     margin: 10px 0px;
+}
+.panel .inner select#sa_billing_zone,
+.panel .inner select#sa_credit_cc_expiration_month {
+    width: 40%;
+}
+.panel .inner select {
+    margin: 25px 20px 25px 0;
+}
+.panel .inner #sa_credit_cc_cvv {
+    width: 20%;
+    margin-top: 5px;
+}
+.row.toggles {
+    margin-bottom: 20px;
+}
+a.payment_option.toggle.active {
+    background: rgba(0,0,0,0.75);
+    color: rgb(255, 255, 255);
+}
+
+#paybar .inner a.decline_estimate {
+    float: right;
+    margin-left: 25px;
+    color: inherit;
+}
+
+#paybar .inner a#print_to_pdf_button {
+    height: 40px;
+    width: 40px;
+    float: right;
+    margin: 8px 0 0 20px;
+}
+#paybar .inner a#print_to_pdf_button:hover svg {
+  opacity: 0.5;
+}
+
+#payment #stripe_pop_form.button {
+  float: none;
+  padding: 0;
+  margin-top: 0px;
+  margin-left: 10px;
+  height: auto;
+}
+#header .messages {
+  display: block;
+  min-height: 100px;
+}
+#header .sa-message {
+    width: auto;
+    padding: 0 12px;
+    display: block;
+    margin-bottom: 40px;
+    background-color: #4086b0;
+    border-radius: 15px;
+    border: 2px solid rgb(207, 225, 235);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 28px;
+    text-transform: uppercase;
+}
+#header .inner .sa-message:last-of-type {
+    margin-bottom: 75px;
+}
+#header .sa-message.error {
+    border: 3px solid rgb(255, 255, 255);
+}
+
+#save_signature_via_ajax {
+    display: inline-block;
+    padding: 0 12px;
+    margin-bottom: 60px;
+    background-color: #4086b0;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.75);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: #4086b0;
+}
+body > .service_fee_message { display: none !important; }
+
+/**
+ * Base Elements
+ */
+.cloak {
+  display: none
+}
+.spinner {
+    background: url(../../../../../resources/front-end/img/spinner.gif) no-repeat;
+    -webkit-background-size: 20px 20px;
+    background-size: 20px 20px;
+    display: none;
+    float: right;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    width: 20px;
+    height: 20px;
+    margin: 2px 5px 0;
+}
+
+.si_inline_spinner {
+    float: none;
+    margin: 0 5px -6px;
+}
+
+@media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+    .spinner {
+        background-image: url(../../../../resources/front-end/img/spinner-2x.gif);
+    }
+}
+
+b {font-weight: bold;}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0
+}
+
+.clearfix {
+  display: inline-block
+}
+
+html[xmlns] .clearfix {
+  display: block
+}
+
+* html .clearfix {
+  height: 1%
+}
+
+
+
+/**
+ * Comments
+ */
+.line_item_comments {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-top: 2px rgba(255, 255, 255, 0.2) solid;
+}
+
+#items .items .item .line_item_comments {
+  margin-left: 40px;
+  border-top: 2px rgba(255, 255, 255, 0.2) solid;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.li_comments_toggle {
+  float: left;
+  padding-right: 5px;
+  margin-top: 20px;
+  margin-left: -30px;
+  fill: #dce9f0;
+}
+
+#items .items .item .li_comments_toggle {
+  margin-left: 0px;
+}
+
+.li_comments_toggle.has_comments {
+  fill: #FF5B4D;
+}
+
+.line_item_comments .comment_meta.vcard {
+  float: left;
+  margin: 10px 10px 10px 0px;
+}
+
+.line_item_comments .comment {
+  display: block;
+  margin-bottom: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.line_item_comments .comment.highlight {
+  background-color: #E5E5E5;
+  padding-left: 15px;
+}
+
+.line_item_comments span.comment_date {
+  float: right;
+  color: #363B3F;
+  font-size: 8px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  /* margin-top: -27px; */
+  background-color: rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+.line_item_comment_wrap {
+  width: 100%;
+}
+
+.line_item_comment_wrap textarea {
+  width: 80%;
+  height: 5em;
+  padding: 1em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.line_item_comment_wrap .submit.button {
+  float: left;
+  clear: both;
+  margin: 10px 10px 0px 0px;
+}
+.dashicons-format-chat:after {
+  content: 'asdf'; 
+}

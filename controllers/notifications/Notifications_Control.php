@@ -471,7 +471,7 @@ class SI_Notifications_Control extends SI_Controller {
 			);
 		}
 		$headers = implode( "\r\n", $headers ) . "\r\n";
-		$filtered_headers = apply_filters( 'si_notification_headers', $headers, $notification_name, $data, $from_email, $from_name, $html );
+		$filtered_headers = apply_filters( 'si_notification_headers', stripslashes_deep( $headers ), $notification_name, $data, $from_email, $from_name, $html );
 		$attachments = apply_filters( 'si_notification_attachments', array(), $notification_name, $data, $from_email, $from_name, $html );
 
 		// Use the wp_email function
@@ -530,7 +530,7 @@ class SI_Notifications_Control extends SI_Controller {
 			);
 		}
 		$headers = implode( "\r\n", $headers ) . "\r\n";
-		$filtered_headers = apply_filters( 'si_notification_headers', $headers, $notification_name, $data, $from_email, $from_name, $html );
+		$filtered_headers = apply_filters( 'si_notification_headers', stripslashes_deep( $headers ), $notification_name, $data, $from_email, $from_name, $html );
 		$attachments = apply_filters( 'si_notification_attachments', array(), $notification_name, $data, $from_email, $from_name, $html );
 
 		// Use the wp_email function

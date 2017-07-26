@@ -8,8 +8,6 @@ class SI_Customizer extends SI_Controller {
 
 	public static function init() {
 		add_action( 'customize_register', array( __CLASS__, 'customizer' ) );
-		add_action( 'customize_preview_init', array( __CLASS__, 'customizer_js' ) );
-		add_action( 'si_head', array( __CLASS__, 'inject_css' ) );
 
 		// Admin bar
 		add_filter( 'si_admin_bar', array( get_class(), 'add_link_to_admin_bar' ), 10, 1 );
@@ -33,26 +31,7 @@ class SI_Customizer extends SI_Controller {
 		return $items;
 	}
 
-
-	public static function customizer_js() {
-		wp_enqueue_script(
-			'si_customizer',
-			SI_URL . '/resources/admin/js/customizer.js',
-			array( 'jquery', 'customize-preview' ),
-			'0.3.0',
-			true
-		);
-		add_filter( 'si_allowed_admin_doc_scripts', array( __CLASS__, 'allow_customizer_js' ) );
-	}
-
-	public static function allow_customizer_js( $queue = array() ) {
-		$queue[] = 'customize-preview';
-		$queue[] = 'si_customizer';
-		return $queue;
-	}
-
 	public static function customizer( $wp_customize ) {
-
 		// Logo uploader
 		$wp_customize->add_section( 'si_custommizer_section' , array(
 			'title'       => __( 'Sprout Invoices', 'sprout-invoices' ),
@@ -71,63 +50,6 @@ class SI_Customizer extends SI_Controller {
 			'settings' => 'si_logo',
 		) ) );
 
-		// Highlight and link color
-		$wp_customize->add_setting( 'si_invoices_color', array(
-		    'default'           => '#FF5B4D',
-		    'sanitize_callback' => 'sanitize_hex_color',
-		    //'transport' => 'postMessage',
-		) );
-
-		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'si_invoices_color', array(
-		    'label'	   => __( 'Invoice Highlight Color', 'sprout-invoices' ),
-		    'section'  => 'si_custommizer_section',
-		    'settings' => 'si_invoices_color',
-		) ) );
-
-		// Highlight and link color
-		$wp_customize->add_setting( 'si_estimates_color', array(
-		    'default'           => '#4D9FFF',
-		    'sanitize_callback' => 'sanitize_hex_color',
-		    //'transport' => 'postMessage',
-		) );
-
-		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'si_estimates_color', array(
-		    'label'	   => __( 'Estimate Highlight Color', 'sprout-invoices' ),
-		    'section'  => 'si_custommizer_section',
-		    'settings' => 'si_estimates_color',
-		) ) );
-	}
-
-	public static function inject_css() {
-		$inv_color = self::sanitize_hex_color( get_theme_mod( 'si_invoices_color' ) );
-		$est_color = self::sanitize_hex_color( get_theme_mod( 'si_estimates_color' ) );
-		?>
-			<!-- Debut customizer CSS -->
-			<style>
-			#doc .doc_total,
-			.button.primary_button {
-				background-color: <?php echo esc_attr( $est_color ); ?>;
-			}
-
-			#invoice #doc .doc_total,
-			#invoice .button.primary_button {
-				background-color: <?php echo esc_attr( $inv_color ); ?>;
-			}
-
-			#invoice.paid #doc .doc_total,
-			#invoice .button.deposit_paid {
-				background-color: <?php echo esc_attr( $est_color ); ?>;
-			}
-
-			#line_total {
-				color: <?php echo esc_attr( $est_color ); ?>;
-			}
-
-			#invoice #line_total {
-				color: <?php echo esc_attr( $inv_color ); ?>;
-			}
-			</style>
-		<?php
 	}
 
 	/**
@@ -147,5 +69,9 @@ class SI_Customizer extends SI_Controller {
 			return $color;
 		}
 		return null;
+	}
+
+	public static function sanitize_checkbox( $checked = false ) {
+		 return ( ( isset( $checked ) && true == $checked ) ? true : false );
 	}
 }

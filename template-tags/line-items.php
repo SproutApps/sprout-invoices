@@ -261,3 +261,53 @@ function si_get_line_item_value( $doc_id, $position, $data_slug ) {
 
 	return $value;
 }
+
+
+function si_front_end_line_item_columns( $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
+	print si_get_front_end_line_item_columns( $item_data, $position, $prev_type, $has_children );
+}
+
+function si_get_front_end_line_item_columns( $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
+	$item_type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::DEFAULT_TYPE ;
+	$columns = si_get_line_item_columns( $item_type, $item_data, $position, $prev_type, $has_children );
+
+	ob_start(); ?>
+
+		<?php do_action( 'si_get_front_end_line_item_column_pre_row', $item_data, $position, $prev_type, $has_children ) ?>
+
+		<?php foreach ( $columns as $column_slug => $column ) {
+
+			$value = ( isset( $item_data[ $column_slug ] ) ) ? $item_data[ $column_slug ] : '' ;
+
+			$column_type = ( isset( $column['type'] ) ) ? $column['type'] : 0 ;
+
+			if ( ! $column_type || 'hidden' === $column_type ) {
+				continue;
+			}
+
+			if ( $has_children && isset( $column['hide_if_parent'] ) && (bool) $column['hide_if_parent'] ) {
+				continue;
+			} ?>
+
+			<div class="column column_<?php echo esc_attr( $column_slug ) ?>">
+				<?php if ( 'textarea' === $column_type ) :  ?>
+					<h3><?php printf( __( '%2$s <small>%1$s</small>', 'sprout-invoices' ), number_format( (float) $position, 1, '.', '' ), $column['label'] ) ?></h3>
+				<?php else : ?>
+					<h3><?php echo $column['label'] ?></h3>	
+				<?php endif ?>
+				
+
+				<div class="content">
+					<?php echo apply_filters( 'si_format_front_end_line_item_value', $value, $column_slug, $item_data ) ?>
+				</div>
+			</div><!-- <?php echo esc_attr( $column_slug ) ?> -->
+			
+		<?php } // end foreach ?>
+
+	<?php do_action( 'si_get_front_end_line_item_column_post_row', $item_data, $position, $prev_type, $has_children ) ?>
+
+	<?php
+	$view = ob_get_contents();
+	ob_end_clean();
+	return apply_filters( 'si_get_front_end_line_item_column', $view, $item_data, $position );
+}

@@ -12,9 +12,18 @@ class SI_Templating_API extends SI_Controller {
 	const TEMPLATE_OPTION = '_doc_template_option';
 	const FILTER_QUERY_VAR = 'filter_doc';
 	const BLANK_SHORTCODE = 'si_blank';
+	const INV_THEME_OPION = 'si_inv_theme_template';
+	const EST_THEME_OPION = 'si_est_theme_template';
 
 	private static $pages = array();
 	private static $shortcodes = array();
+	private static $inv_theme_option = '';
+	private static $est_theme_option = '';
+	private static $themes = array(
+			'default' => 'Default',
+			'slate' => 'Slate',
+			'original' => 'Original',
+		);
 
 	public static function get_template_pages() {
 		return self::$pages;
@@ -24,7 +33,29 @@ class SI_Templating_API extends SI_Controller {
 		return self::$shortcodes;
 	}
 
+	public static function theme_templates() {
+		return self::$themes;
+	}
+
+	public static function get_invoice_theme_option() {
+		// defaults to old theme but new installs get a default saved when activated
+		$option = get_option( self::INV_THEME_OPION, 'original' );
+		return $option;
+	}
+
+	public static function get_estimate_theme_option() {
+		// defaults to old theme but new installs get a default saved when activated
+		$option = get_option( self::EST_THEME_OPION, 'original' );
+		return $option;
+	}
+
 	public static function init() {
+
+		// Theme Selection
+		self::$inv_theme_option = get_option( self::INV_THEME_OPION, 'original' );
+		self::$est_theme_option = get_option( self::EST_THEME_OPION, 'original' );
+		self::register_settings();
+
 		// Register Shortcodes
 		add_action( 'sprout_shortcode', array( __CLASS__, 'register_shortcode' ), 0, 3 );
 		// Add shortcodes
@@ -36,6 +67,10 @@ class SI_Templating_API extends SI_Controller {
 
 		// Determine template for estimates or invoices
 		add_filter( 'template_include', array( __CLASS__, 'override_template' ) );
+		add_action( 'init', array( __CLASS__, 'add_theme_functions' ), 1000 );
+
+		add_filter( 'sprout_invoice_template_possibilities', array( __CLASS__, 'add_theme_template_possibilities' ) );
+		add_filter( 'si_locate_file_possibilites', array( __CLASS__, 'add_theme_template_possibilities' ) );
 
 		add_action( 'doc_information_meta_box_client_row_last', array( __CLASS__, 'doc_template_selection' ) );
 		add_action( 'si_save_line_items_meta_box', array( __CLASS__, 'save_doc_template_selection' ) );
@@ -49,8 +84,19 @@ class SI_Templating_API extends SI_Controller {
 		add_action( 'SI_Clients::save_meta_box_client_adv_information', array( __CLASS__, 'save_client_options' ) );
 
 		// blank shortcode
-		do_action( 'sprout_shortcode', self::BLANK_SHORTCODE, array( __CLASS__, 'blank_shortcode' ) );
+		do_action( 'si_version_upgrade', self::BLANK_SHORTCODE, array( __CLASS__, 'blank_shortcode' ) );
 
+		// set defaults for new installs
+		add_action( 'si_plugin_activation_hook', array( __CLASS__, 'set_defaults' ), 0 );
+
+	}
+
+	public static function set_defaults( $upgraded_from ) {
+		$si_version = get_option( 'si_current_version', false );
+		if ( ! $si_version ) { // wasn't activated before
+			update_option( self::INV_THEME_OPION, 'default' );
+			update_option( self::EST_THEME_OPION, 'default' );
+		}
 	}
 
 	/////////////////
@@ -133,28 +179,35 @@ class SI_Templating_API extends SI_Controller {
 		return $template_id;
 	}
 
-	public static function head_scripts() {
-		global $wp_scripts;
+	public static function head_scripts( $v2_theme = false ) {
 		?>
-			<link rel="stylesheet" id="open-sans-css" href="//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext" type="text/css" media="all">
-			<link rel="stylesheet" id="dashicons-css" href="<?php echo site_url() ?>/wp-includes/css/dashicons.min.css" type="text/css" media="all">
-			<link rel="stylesheet" id="qtip-css" href="<?php echo SI_RESOURCES ?>admin/plugins/qtip/jquery.qtip.min.css" type="text/css" media="">
-			<link rel="stylesheet" id="dropdown-css" href="<?php echo SI_RESOURCES ?>admin/plugins/dropdown/jquery.dropdown.css" type="text/css" media="">
+			<?php if ( ! $v2_theme ) :  ?>
+				<link rel="stylesheet" id="open-sans-css" href="//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext" type="text/css" media="all">
+				<link rel="stylesheet" id="dashicons-css" href="<?php echo site_url() ?>/wp-includes/css/dashicons.min.css" type="text/css" media="all">
+				<link rel="stylesheet" id="qtip-css" href="<?php echo SI_RESOURCES ?>admin/plugins/qtip/jquery.qtip.min.css" type="text/css" media="">
+				<link rel="stylesheet" id="dropdown-css" href="<?php echo SI_RESOURCES ?>admin/plugins/dropdown/jquery.dropdown.css" type="text/css" media="">
 
-			<link rel="stylesheet" id="sprout_doc_style-css" href="<?php echo SI_RESOURCES ?>front-end/css/sprout-invoices.style.css" type="text/css" media="all">
-			<?php SI_Customizer::inject_css() ?>
+				<link rel="stylesheet" id="sprout_doc_style-css" href="<?php echo SI_RESOURCES ?>deprecated-front-end/css/sprout-invoices.style.css" type="text/css" media="all">
+			<?php endif ?>
+			
 			<?php self::load_custom_stylesheet() ?>
 
-			<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery.js"></script>
-			<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
-			<script type="text/javascript" src="<?php echo SI_RESOURCES ?>admin/plugins/qtip/jquery.qtip.min.js"></script>
-			<script type="text/javascript" src="<?php echo SI_RESOURCES ?>admin/plugins/dropdown/jquery.dropdown.min.js"></script>
-			<script type="text/javascript" src="<?php echo SI_RESOURCES ?>front-end/js/sprout-invoices.js"></script>
+			<?php if ( ! $v2_theme ) :  ?>
+				<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery.js"></script>
+				<script type="text/javascript" src="<?php echo site_url() ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+				<script type="text/javascript" src="<?php echo SI_RESOURCES ?>admin/plugins/qtip/jquery.qtip.min.js"></script>
+				<script type="text/javascript" src="<?php echo SI_RESOURCES ?>admin/plugins/dropdown/jquery.dropdown.min.js"></script>
+				<script type="text/javascript" src="<?php echo SI_RESOURCES ?>deprecated-front-end/js/sprout-invoices.js"></script>
+			<?php endif ?>
+
+			<?php self::load_custom_js() ?>
+
 			<script type="text/javascript">
 				/* <![CDATA[ */
 				var si_js_object = <?php echo wp_json_encode( SI_Controller::get_localized_js() ); ?>;
 				/* ]]> */
 			</script>
+			
 		<?php
 	}
 
@@ -164,10 +217,24 @@ class SI_Templating_API extends SI_Controller {
 			return;
 		}
 
+		$theme_option = ( 'invoice' === $context ) ? self::$inv_theme_option : self::$est_theme_option ;
+
+		$base_stylesheet_path = self::locate_template( array(
+			'theme/' . $theme_option . '/docs.css',
+			$theme_option . '.css',
+		), false );
+
+		if ( $base_stylesheet_path ) {
+			$stylesheet_url = _convert_content_file_path_to_url( $base_stylesheet_path );
+			printf( '<link rel="stylesheet" id="sprout_doc_style-%s-css" href="%s" type="text/css" media="all">', $theme_option, esc_url_raw( $stylesheet_url ) );
+		}
+
 		$context_stylesheet_path = self::locate_template( array(
+			'theme/' . $theme_option . '/' . $context . '/' . $context . 's.css',
 			$context . 's.css',
 			$context . '/' . $context . 's.css',
 		), false );
+
 		if ( $context_stylesheet_path ) {
 			$stylesheet_url = _convert_content_file_path_to_url( $context_stylesheet_path );
 			printf( '<link rel="stylesheet" id="sprout_doc_style-%s-css" href="%s" type="text/css" media="all">', $context, esc_url_raw( $stylesheet_url ) );
@@ -183,10 +250,50 @@ class SI_Templating_API extends SI_Controller {
 		}
 	}
 
+	public static function load_custom_js() {
+		$context = si_get_doc_context();
+		if ( '' === $context ) {
+			return;
+		}
+
+		$theme_option = ( 'invoice' === $context ) ? self::$inv_theme_option : self::$est_theme_option ;
+
+		$base_js_path = self::locate_template( array(
+			'theme/' . $theme_option . '/docs.js',
+			$theme_option . '.js',
+		), false );
+
+		if ( $base_js_path ) {
+			$js_url = _convert_content_file_path_to_url( $base_js_path );
+			printf( '<script type="text/javascript" id="sprout_doc_style-%s-css" src="%s"></script>', $theme_option, esc_url_raw( $js_url ) );
+		}
+
+		$context_js_path = self::locate_template( array(
+			'theme/' . $theme_option . '/' . $context . '/' . $context . 's.js',
+			$context . 's.js',
+			$context . '/' . $context . 's.js',
+		), false );
+
+		if ( $context_js_path ) {
+			$js_url = _convert_content_file_path_to_url( $context_js_path );
+			printf( '<script type="text/javascript" id="sprout_doc_style-%s-css" src="%s"></script>', $context, esc_url_raw( $js_url ) );
+		}
+
+		$js_path = self::locate_template( array(
+			'sprout-invoices.js',
+		), false );
+
+		if ( $js_path ) {
+			$general_js_url = _convert_content_file_path_to_url( $js_path );
+			printf( '<script type="text/javascript" id="sprout_doc_style-%s-css" src="%s"></script>', 'general', esc_url_raw( $js_url ) );
+		}
+	}
+
 	public static function footer_scripts() {
 		?>
 			<?php if ( current_user_can( 'edit_post', get_the_id() ) ) : ?>
 				<link rel="stylesheet" id="admin-bar-css" href="<?php echo site_url() ?>/wp-includes/css/admin-bar.min.css" type="text/css" media="all">
+				<link rel="stylesheet" id="dashicons-css" href="<?php echo site_url() ?>/wp-includes/css/dashicons.min.css" type="text/css" media="all">
 				<?php wp_admin_bar_render() ?>
 			
 				<!-- TODO get customizer to be live -->
@@ -273,10 +380,12 @@ class SI_Templating_API extends SI_Controller {
 				$custom_path = ( $custom_template != '' ) ? 'invoice/'.$custom_template : '' ;
 				$template = self::locate_template( array(
 					$custom_path,
+					'theme/' . self::$inv_theme_option . '/invoice/invoice.php',
 					'invoice-'.get_locale().'.php',
 					'invoice.php',
 					'invoice/invoice.php',
 				), $template );
+
 			} else {
 				$status = get_query_var( self::FILTER_QUERY_VAR );
 				$template = self::locate_template( array(
@@ -306,6 +415,7 @@ class SI_Templating_API extends SI_Controller {
 				$custom_path = ( $custom_template != '' ) ? 'estimate/'.$custom_template : '' ;
 				$template = self::locate_template( array(
 					$custom_path,
+					'theme/' . self::$est_theme_option . '/estimate/estimate.php',
 					'estimate-'.get_locale().'.php',
 					'estimate.php',
 					'estimate/estimate.php',
@@ -323,6 +433,73 @@ class SI_Templating_API extends SI_Controller {
 			$template = apply_filters( 'si_doc_template', $template, 'estimate' );
 		}
 		return $template;
+	}
+
+	public static function add_theme_functions() {
+		$theme = ( SI_Invoice::is_invoice_query() ) ? self::$inv_theme_option : self::$est_theme_option ;
+		$template = SI_Controller::locate_template( array(
+			'theme/'.$theme.'/functions.php',
+		) );
+		include $template;
+	}
+
+	public static function add_theme_template_possibilities( $possibilities ) {
+		$possibilities = array_filter( $possibilities );
+		$theme = ( SI_Invoice::is_invoice_query() ) ? self::$inv_theme_option : self::$est_theme_option ;
+
+		$new_possibilities = array();
+		foreach ( $possibilities as $key => $path ) {
+			if ( '' === $path ) {
+				continue;
+			}
+			$new_possibilities[] = 'theme/' . $theme . '/' . str_replace( 'templates/', '', $path );
+		}
+		return array_merge( $new_possibilities, $possibilities );
+	}
+
+	////////////
+	// admin //
+	////////////
+
+	/**
+	 * Hooked on init add the settings page and options.
+	 *
+	 */
+	public static function register_settings() {
+		// Settings
+		$settings = array(
+			'invoice_template_selection' => array(
+				'weight' => 20, // Add-on settings are 1000 plus
+				'tab' => 'settings',
+				'settings' => array(
+					self::INV_THEME_OPION => array(
+						'label' => __( 'Invoice Theme', 'sprout-invoices' ),
+						'option' => array(
+							'type' => 'select',
+							'options' => self::theme_templates(),
+							'default' => self::$inv_theme_option,
+							'description' => __( 'Select the theme your invoices should use.', 'sprout-invoices' ),
+							),
+						),
+					),
+				),
+			'estimate_template_selection' => array(
+				'weight' => 25, // Add-on settings are 1000 plus
+				'tab' => 'settings',
+				'settings' => array(
+					self::EST_THEME_OPION => array(
+						'label' => __( 'Estimate Theme', 'sprout-invoices' ),
+						'option' => array(
+							'type' => 'select',
+							'options' => self::theme_templates(),
+							'default' => self::$est_theme_option,
+							'description' => __( 'Select the theme your estimate should use.', 'sprout-invoices' ),
+							),
+						),
+					),
+				),
+			);
+		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
 	}
 
 	/////////////////

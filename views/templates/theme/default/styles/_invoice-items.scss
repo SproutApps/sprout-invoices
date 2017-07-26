@@ -1,0 +1,49 @@
+
+/* Items
+---------------------------------------------------------------------------------------------------- */
+
+#items {
+  margin-bottom: 29px;
+
+  .title {
+    margin-bottom: 7px;
+  }
+
+  .items {
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 21px;
+
+      .column {
+        flex: 1;
+
+        &:first-of-type {
+          flex: 3;
+        }
+
+        &:not(:first-of-type) {
+          text-align: right;
+        }
+
+        h3 {
+          width: 100%;
+          float: left;
+          padding-bottom: 8px;
+          margin-bottom: 3px;
+          border-bottom: 1px solid rgba(#ffffff, 0.5);
+          line-height: 1;
+          font-weight: 700;
+        }
+
+        h4 {
+          font-weight: 700;
+        }
+
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

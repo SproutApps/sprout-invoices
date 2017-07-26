@@ -1,0 +1,17 @@
+
+/* Buttons
+---------------------------------------------------------------------------------------------------- */
+
+.button {
+  border: none;
+  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(#ffffff, .85);
+  height: 50px;
+  display: inline-block;
+  padding: 0 20px;
+  cursor: pointer;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}

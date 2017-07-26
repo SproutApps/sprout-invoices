@@ -1830,3 +1830,13 @@ ol ol .li_comments_toggle {
 .button.signature_button:before {
 	content: "\f534";
 }
+
+p.service_fee_message {
+    float: right;
+    text-align: right;
+    line-height: 1.6em;
+    font-size: 0.8em;
+    margin: 0;
+    padding: 1em;
+    background-color: #fafafa;
+}

@@ -1097,6 +1097,18 @@ function si_doc_history_records( $doc_id = 0, $filtered = true ) {
 	return $returned_history;
 }
 
+function si_doc_last_updated( $doc_id = 0, $filtered = true ) {
+	$history = si_doc_history_records( $doc_id, $filtered );
+
+	// Sort in descending order
+	rsort( $history );
+
+	if ( ! isset( $history[0] ) ) {
+		return false;
+	}
+	return strtotime( $history[0]['post_date'] );
+}
+
 ///////////////
 // Recurring //
 ///////////////

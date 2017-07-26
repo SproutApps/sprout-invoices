@@ -53,12 +53,12 @@ if ( ! function_exists( 'sa_form_fields' ) ) :
 				<?php if ( $data['type'] == 'heading' ) : ?>
 				<legend class="legend form-heading <?php echo $context . $key . ' ' . $wrap_class ?>" ><?php echo esc_html( $data['label'] ) ?></legend>
 			<?php elseif ( $data['type'] != 'checkbox' ) : ?>
-				<div class="sa-control-group <?php echo $context . $key . ' ' . $wrap_class ?>">
+				<div class="sa-control-group <?php echo $context . $key . ' ' . $wrap_class ?> <?php esc_attr_e( $data['type'] ) ?>">
 					<span class="label_wrap"><?php sa_form_label( $key, $data, $context ); ?></span>
 					<span class="input_wrap"><?php sa_form_field( $key, $data, $context ); ?></span>
 				</div>
 			<?php else : ?>
-				<div class="sa-control-group <?php echo $context . $key . ' ' . $wrap_class ?>">
+				<div class="sa-control-group <?php echo $context . $key . ' ' . $wrap_class ?> <?php esc_attr_e( $data['type'] ) ?>">
 					<div class="sa-controls input_wrap">
 						<label for="sa_<?php echo esc_attr( $context ) ?>_<?php echo esc_attr( $key ) ?>" class="sa-checkbox">
 							<?php

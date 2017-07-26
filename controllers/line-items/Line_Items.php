@@ -66,7 +66,7 @@ class SI_Line_Items extends SI_Controller {
 			case 'service':
 				$columns += array(
 						'desc' => array(
-								'label' => __( 'Services', 'sprout-invoices' ),
+								'label' => __( 'Service', 'sprout-invoices' ),
 								'type' => 'textarea',
 								'calc' => false,
 								'hide_if_parent' => false,
@@ -113,7 +113,7 @@ class SI_Line_Items extends SI_Controller {
 			case 'product':
 				$columns += array(
 						'desc' => array(
-								'label' => __( 'Products', 'sprout-invoices' ),
+								'label' => __( 'Product', 'sprout-invoices' ),
 								'type' => 'textarea',
 								'calc' => false,
 								'hide_if_parent' => false,
@@ -162,7 +162,7 @@ class SI_Line_Items extends SI_Controller {
 			default:
 				$columns += array(
 						'desc' => array(
-								'label' => __( 'Tasks', 'sprout-invoices' ),
+								'label' => __( 'Task', 'sprout-invoices' ),
 								'type' => 'textarea',
 								'calc' => false,
 								'hide_if_parent' => false,
@@ -442,14 +442,20 @@ class SI_Line_Items extends SI_Controller {
 	// View //
 	//////////
 
-	public static function front_end_line_items( $doc_id = 0 ) {
+	public static function front_end_line_items( $doc_id = 0, $theme = '' ) {
 		if ( ! $doc_id ) {
 			$doc_id = get_the_id();
 		}
 		$doc = si_get_doc_object( $doc_id );
 		$line_items = $doc->get_line_items();
 		$context = ( is_a( $doc, 'SI_Invoice' ) ) ? 'invoice' : 'estimate' ;
-		self::load_view( 'templates/' . si_get_doc_context( $doc_id ) . '/line-items', array(
+
+		$template_path = self::locate_template( array(
+			$context . '/line-items.php',
+			'/line-items.php',
+		), false );
+
+		self::load_view( $template_path, array(
 				'id' => $doc_id,
 				'line_items' => $line_items,
 				'prev_type' => '',

@@ -1,3 +1,13 @@
+= 15.0 =
+
+* NEW: New Default Theme!!!!
+* NEW: Updates to support the new Service Fee add-on.
+* NEW: Fees are added to reports.
+* NEW: Support for Square payments, new add-on will be released soon.
+* NEW: Added info for recurring invoice on the invoice admin.
+* NEW: Notification shortcode to show payments
+* FIX: Bulk edit causing lost client association.
+
 = 14.0.5 =
 
 * FIX: Firefox support

@@ -1,0 +1,36 @@
+
+/* Base Typography
+---------------------------------------------------------------------------------------------------- */
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(#ffffff, 0.75);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+// Font large
+
+@mixin font-large() {
+  font-size: 32px;
+  line-height: 1.2;
+
+  @media ('max-width: 900px') {
+    font-size: 22px;
+  }
+}
+
+@mixin font-medium() {
+  font-size: 18px;
+
+  @media ('max-width: 900px') {
+    font-size: 18px;
+  }
+}

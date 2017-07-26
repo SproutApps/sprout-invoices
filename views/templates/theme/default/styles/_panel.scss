@@ -1,0 +1,186 @@
+
+/* Panels
+---------------------------------------------------------------------------------------------------- */
+
+.panel {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  overflow: scroll;
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.75);
+  animation-fill-mode: both;
+  animation-duration: .5s;
+
+  &.inactive {
+    animation-name: slide-out;
+  }
+
+  &.active {
+    animation-name: slide-in;
+  }
+
+  .close {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 19px;
+    right: 19px;
+    z-index: 20;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    svg {
+      height: 100%;
+      fill: #000000;
+    }
+  }
+
+  .inner {
+    width: 80%;
+    max-width: 600px;
+    margin: 0px auto;
+    padding: 92px 0 100px;
+
+    h2 {
+      @include font-large();
+      margin-bottom: 14px;
+
+      @media ('max-width: 900px') {
+        font-size: 22px;
+      }
+    }
+
+    p {
+      margin-bottom: 18px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      float: left;
+      padding: 16px 0 3px 0;
+      border-bottom: 1px solid rgba(#000000, 0.075);
+      font-size: 14px;
+      color: rgba(#000000, 0.75);
+
+      &.half {
+        width: 50%;
+
+        @media ('max-width: 480px') {
+          width: 100%;
+        }
+      }
+
+      &.whole {
+        width: 100%;
+      }
+    }
+
+    .toggle {
+      height: 30px;
+      float: left;
+      padding: 0 15px;
+      margin-right: 5px;
+
+      border: 1px solid rgba(#000000, 0.75);
+      border-radius: 15px;
+
+      font-size: 12px;
+      line-height: 28px;
+      color: rgba(#000000, 0.75);
+
+      transition-duration: 0.25s;
+
+      &.inactive {
+        border-color: rgba(#000000, 0.25);
+        color: rgba(#000000, 0.25);
+      }
+    }
+
+    .button {
+      margin-top: 25px;
+      background-color: rgba(#000000, 0.75);
+    }
+
+    .paytypes {
+      position: relative;
+
+      .paytype {
+        animation-fill-mode: both;
+        animation-duration: .25s;
+
+        &.inactive {
+          animation-name: fade-out;
+          position: absolute;
+        }
+
+        &.active {
+          animation-name: fade-in;
+          animation-delay: .25s;
+          position: relative;
+          float: left;
+        }
+      }
+    }
+  }
+}
+
+/* Animations
+---------------------------------------------------------------------------------------------------- */
+
+// Fade in
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// Fade out
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+// Slide in
+
+@keyframes slide-in {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// Slide out
+
+@keyframes slide-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 100%, 0);
+  }
+}

@@ -1,13 +1,13 @@
 <?php
 
 
-function si_head() {
-	do_action( 'si_head' );
+function si_head( $v2_theme = false ) {
+	do_action( 'si_head', $v2_theme );
 }
 
 
-function si_footer() {
-	do_action( 'si_footer' );
+function si_footer( $v2_theme = false ) {
+	do_action( 'si_footer', $v2_theme );
 }
 
 /**

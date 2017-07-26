@@ -1,0 +1,36 @@
+
+/* Notes and Terms
+---------------------------------------------------------------------------------------------------- */
+
+#notes {
+  padding-bottom: 170px;
+
+  @media ('max-width: 480px') {
+    padding-bottom: 120px;
+  }
+
+  .item {
+    margin-bottom: 24px;
+
+    @media ('max-width: 480px') {
+      margin-bottom: 42px;
+    }
+
+    .header {
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(#ffffff, 0.1);
+
+      h3 {
+        float: left;
+        padding: 0 17px 8px 0;
+        margin-bottom: -1px;
+        border-bottom: 1px solid rgba(#ffffff, 0.75);
+        font-size: 12px;
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+        color: rgba(#ffffff, 0.75);
+      }
+    }
+  }
+}

@@ -89,7 +89,7 @@ class SI_Estimate extends SI_Post_Type {
 			self::STATUS_DECLINED => __( 'Declined', 'sprout-invoices' ),
 			self::STATUS_ARCHIVED => __( 'Archived', 'sprout-invoices' ),
 		);
-		return $statuses;
+		return apply_filters( 'si_estimate_statuses', $statuses );
 	}
 
 	/**

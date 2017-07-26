@@ -1,0 +1,44 @@
+
+/* The Main Header
+---------------------------------------------------------------------------------------------------- */
+
+#header {
+  background-color: lighten($color-blue, 2);
+  text-align: center;
+
+  .inner {
+    padding: 100px 0 93px;
+    border-bottom: 1px dashed rgba(#ffffff, .75);
+
+    @media ('max-width: 480px') {
+      padding: 50px 0 43px;
+    }
+
+    img {
+      height: 10vw;
+      display: inline-block;
+      margin-bottom: 12px;
+
+      @media ('max-width: 900px') {
+        height: 20vw;
+        margin-bottom: 15px;
+      }
+    }
+
+    .intro {
+      h1 {
+        @include font-large();
+        margin-bottom: 14px;
+
+        @media ('max-width: 900px') {
+          font-size: 22px;
+        }
+      }
+
+      span {
+        font-size: 18px;
+        font-weight: 900;
+      }
+    }
+  }
+}

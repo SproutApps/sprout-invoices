@@ -322,6 +322,20 @@ if ( ! function_exists( 'sa_day_ordinal_formatter' ) ) :
 
 endif;
 
+if ( ! function_exists( 'si_get_days_ago' ) ) :
+	/**
+	 * Get the days since based on today
+	 * @param  integer $number
+	 * @return string
+	 */
+	function si_get_days_ago( $last_updated = 0 ) {
+		$time_between_update = current_time( 'timestamp' ) - $last_updated;
+		$days_since = round( (($time_between_update / 24) / 60) / 60 );
+		return apply_filters( 'si_get_days_ago', $days_since );
+	}
+
+endif;
+
 /////////////////////
 // Developer Tools //
 /////////////////////

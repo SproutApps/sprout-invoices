@@ -157,7 +157,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		$si_js_object = array(
 			'ajax_url' => get_admin_url().'admin-ajax.php',
 			'plugin_url' => SI_URL,
-			'thank_you_string' => __( 'Thank you', 'sprout-invoices' ),
+			'thank_you_string' => __( 'Thank you!', 'sprout-invoices' ),
 			'updating_string' => __( 'Updating...', 'sprout-invoices' ),
 			'sorry_string' => __( 'Maybe next time?', 'sprout-invoices' ),
 			'security' => wp_create_nonce( self::NONCE ),
@@ -326,6 +326,9 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( substr( $view, -4 ) != '.php' ) {
 			$view .= '.php';
 		}
+		// in case locate template was used
+		$view = str_replace( SI_PATH.'/views/', '', $view );
+
 		$path = apply_filters( 'si_views_path', SI_PATH.'/views/' );
 		$file = $path.$view;
 		if ( $allow_theme_override && defined( 'TEMPLATEPATH' ) ) {

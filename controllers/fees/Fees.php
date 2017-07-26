@@ -30,7 +30,7 @@ class SI_Fees extends SI_Controller {
 			$fee_total = 0.00;
 			if ( isset( $data['total_callback'] ) && is_callable( $data['total_callback'] ) ) {
 					$fee_total = call_user_func_array( $data['total_callback'], array( $doc, $data ) );
-			} elseif ( $data['total'] ) {
+			} elseif ( isset( $data['total'] ) ) {
 				$fee_total = $data['total'];
 			}
 

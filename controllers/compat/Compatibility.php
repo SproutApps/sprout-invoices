@@ -21,6 +21,8 @@ class SI_Compatibility extends SI_Controller {
 		add_filter( 'manage_edit-'.SI_Invoice::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
 		add_filter( 'manage_edit-'.SI_Estimate::POST_TYPE.'_columns', array( __CLASS__, 'deregister_columns' ) );
 
+		add_filter( 'wpseo_enable_notification_post_slug_change', '__return_false' );
+
 		add_action( 'post_updated', array( __CLASS__, 'set_updated_post_id' ), -100 );
 
 		// Gravity Forms fix

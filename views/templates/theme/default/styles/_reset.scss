@@ -1,0 +1,78 @@
+
+/* Reset: Primary reset for everything.
+---------------------------------------------------------------------------------------------------- */
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.0);
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after {
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+a,
+a img,
+a:before,
+a:after {
+  text-decoration: none;
+  transition-duration: .25s;
+}
+
+button {
+  cursor: pointer;
+}
+
+canvas {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}
+
+input {
+  border: none;
+  border-radius: 0;
+  background: none;
+  outline: none;
+  resize: none;
+  position: relative;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+*:focus {
+  outline: 0;
+}

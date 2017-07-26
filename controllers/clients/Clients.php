@@ -599,7 +599,7 @@ class SI_Clients extends SI_Controller {
 			unset( $fields['last_name'] );
 		}
 
-		$fields = apply_filters( 'si_client_form_fields', $fields );
+		$fields = apply_filters( 'si_client_form_fields', $fields, $client );
 		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
 		return $fields;
 	}

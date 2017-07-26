@@ -1,0 +1,31 @@
+
+/* Totals
+---------------------------------------------------------------------------------------------------- */
+
+#totals {
+  margin-bottom: 79px;
+
+  @media ('max-width: 480px') {
+    margin-bottom: 49px;
+  }
+
+  .items {
+    
+    .item {
+      padding: 16px 0 3px 0;
+      border-bottom: 1px solid rgba(#ffffff, 0.5);
+
+      &:first-of-type {
+        
+      }  
+      
+      h3 {
+        float: left;
+      }
+
+      .total {
+        float: right;
+      }
+    }
+  }
+}

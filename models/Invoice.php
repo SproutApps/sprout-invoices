@@ -80,7 +80,7 @@ class SI_Invoice extends SI_Post_Type {
 			self::STATUS_WO => __( 'Written Off', 'sprout-invoices' ),
 			self::STATUS_ARCHIVED => __( 'Archived', 'sprout-invoices' ),
 		);
-		return $statuses;
+		return apply_filters( 'si_invoice_statuses', $statuses );
 	}
 
 	/**
@@ -679,7 +679,7 @@ class SI_Invoice extends SI_Post_Type {
 				if ( isset( $data['total_callback'] ) && is_callable( $data['total_callback'] ) ) {
 					$fee_total = call_user_func_array( $data['total_callback'], array( $this, $data ) );
 					$fees_total += apply_filters( 'si_fee_total', $fee_total, $data, true );
-				} elseif ( $data['total'] ) {
+				} elseif ( isset( $data['total'] ) ) {
 					$fees_total += apply_filters( 'si_fee_total', $data['total'], $data );
 				}
 			}

@@ -2511,3 +2511,6 @@ span.si_admin_show_recurring {
 	content: '\f177';
 	color: #C7C7C7;
 }
+.si_recurring_status {
+	padding-top: 10px;
+}

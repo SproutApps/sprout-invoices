@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.8
-Stable tag: 14.0.5
+Stable tag: 15.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,17 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Woocommerce integrations, payment terms, stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 15.0 =
+
+* NEW: Default Theme!!!!
+* NEW: Theme selection
+* NEW: Updates to support the new Service Fee add-on.
+* NEW: Fees are added to reports.
+* NEW: Support for Square payments, new add-on will be released soon.
+* NEW: Added info for recurring invoice on the invoice admin.
+* NEW: Notification shortcode to show payments
+* FIX: Bulk edit causing lost client association.
 
 = 14.0.5 =
 
