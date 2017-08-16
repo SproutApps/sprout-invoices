@@ -73,8 +73,8 @@ do_action( 'pre_si_pdf_estimate_view' ); ?><!DOCTYPE html>
 												 
 						<?php si_client_address( si_get_estimate_client_id() ) ?>					
 					<?php else : ?>
-						<span><?php _e( 'Due:', 'sprout-invoices' ) ?></span>
-						<h2><?php si_estimate_due_date() ?></h2>
+						<span><?php _e( 'Expires:', 'sprout-invoices' ) ?></span>
+						<h2><?php si_get_estimate_expiration_date() ?></h2>
 					<?php endif ?>
 
 				</div>

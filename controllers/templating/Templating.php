@@ -67,7 +67,8 @@ class SI_Templating_API extends SI_Controller {
 
 		// Determine template for estimates or invoices
 		add_filter( 'template_include', array( __CLASS__, 'override_template' ) );
-		add_action( 'init', array( __CLASS__, 'add_theme_functions' ), 1000 );
+		add_action( 'template_redirect', array( __CLASS__, 'add_theme_functions' ), 0 );
+		add_action( 'init', array( __CLASS__, 'add_theme_customizer_options' ), 0 );
 
 		add_filter( 'sprout_invoice_template_possibilities', array( __CLASS__, 'add_theme_template_possibilities' ) );
 		add_filter( 'si_locate_file_possibilites', array( __CLASS__, 'add_theme_template_possibilities' ) );
@@ -437,15 +438,33 @@ class SI_Templating_API extends SI_Controller {
 
 	public static function add_theme_functions() {
 		$theme = ( SI_Invoice::is_invoice_query() ) ? self::$inv_theme_option : self::$est_theme_option ;
+
 		$template = SI_Controller::locate_template( array(
 			'theme/'.$theme.'/functions.php',
 		) );
 		include $template;
 	}
 
+	public static function add_theme_customizer_options() {
+		// add both if the theme's are different
+		if ( self::$inv_theme_option !== self::$est_theme_option ) {
+
+			$template = SI_Controller::locate_template( array(
+				'theme/'.self::$est_theme_option.'/customizer.php',
+			) );
+			include $template;
+
+		}
+
+		$template = SI_Controller::locate_template( array(
+			'theme/'.self::$inv_theme_option.'/customizer.php',
+		) );
+		include $template;
+	}
+
 	public static function add_theme_template_possibilities( $possibilities ) {
 		$possibilities = array_filter( $possibilities );
-		$theme = ( SI_Invoice::is_invoice_query() ) ? self::$inv_theme_option : self::$est_theme_option ;
+		$theme = ( SI_Invoice::is_invoice_query() ) ? self::$inv_theme_option : self::$est_theme_option;
 
 		$new_possibilities = array();
 		foreach ( $possibilities as $key => $path ) {

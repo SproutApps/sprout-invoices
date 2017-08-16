@@ -117,6 +117,13 @@ class SI_Estimate extends SI_Post_Type {
 	 */
 	public static function is_estimate_query( WP_Query $query = null ) {
 		if ( is_null( $query ) ) {
+
+			if ( function_exists( 'get_post_type' ) ) {
+				if ( '' !== get_post_type() && self::POST_TYPE === get_post_type() ) {
+					return true;
+				}
+			}
+
 			global $wp_query;
 			$query = $wp_query;
 		}

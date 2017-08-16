@@ -108,6 +108,13 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 	public static function is_invoice_query( WP_Query $query = null ) {
 		if ( is_null( $query ) ) {
+
+			if ( function_exists( 'get_post_type' ) ) {
+				if ( '' !== get_post_type() && self::POST_TYPE === get_post_type() ) {
+					return true;
+				}
+			}
+
 			global $wp_query;
 			$query = $wp_query;
 		}

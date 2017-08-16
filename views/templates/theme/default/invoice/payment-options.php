@@ -50,7 +50,11 @@
 
 		<?php else : ?>
 
-			<p><?php _e( 'Select your payment type and then enter your payment information below to pay this invoice. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
+			<?php if ( count( $payment_options ) > 1 ) : ?>
+				<p><?php _e( 'Please select your payment type and then enter your payment information below to pay this invoice. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
+			<?php else : ?>
+				<p><?php _e( 'Please enter your payment information below to pay this invoice. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
+			<?php endif; ?>
 
 			<?php do_action( 'si_default_theme_payment_options_desc' ) ?>
 
@@ -75,5 +79,15 @@
 
 		<?php do_action( 'si_default_theme_pre_payment_panes' ) ?>
 		
+
+		<?php if ( count( $payment_options ) === 1 ) : ?>
+			<script type="text/javascript">
+				//<![CDATA[
+				jQuery(document).ready( function($) {
+					$(".toggles > a").trigger( "click" );
+				});
+				//]]>
+			</script>
+		<?php endif; ?>
 	</div>
 </section>

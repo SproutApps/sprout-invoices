@@ -61,8 +61,7 @@ input {
   outline: none;
   resize: none;
   position: relative;
-  padding: 0;
-  -webkit-appearance: none; }
+  padding: 0; }
 
 *:focus {
   outline: 0; }
@@ -417,7 +416,7 @@ body {
         border-color: rgba(0, 0, 0, 0.25);
         color: rgba(0, 0, 0, 0.25); }
     .panel .inner .button {
-      margin-top: 25px;
+      margin: 25px 0px;
       background-color: rgba(0, 0, 0, 0.75); }
     .panel .inner .paytypes {
       position: relative; }
@@ -797,4 +796,66 @@ html[xmlns] .clearfix {
 }
 .dashicons-format-chat:after {
   content: 'asdf'; 
+}
+
+.paytypes .sa-checkbox {
+    float: left;
+    clear: both;
+    width: 100%;
+}
+
+.paytypes .sa-form-field-radio {
+    float: left;
+    clear: both;
+    margin-bottom: 10px;
+}
+.paytypes span.sa-form-field-radio.clearfix {
+    display: block;
+    width: 100%;
+}
+
+.paytypes a.cim_delete_card {
+    display: inline-flex;
+    align-self: center;
+    position: relative;
+    height: 1em;
+    width: 1em;
+}
+
+.paytypes a.cim_delete_card svg {
+    height: 1em;
+    width: 1em;
+    bottom: -0.125em;
+    position: absolute;
+}
+
+.paytypes .row.description {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px #ececec solid;
+}
+
+.paytypes .row.description {
+    margin-top: 50px;
+    padding: 30px 0 15px 0;
+    border-top: 1px #ececec solid;
+    text-transform: uppercasel
+}
+.paytypes .row.description > p {
+    font-weight: 500;
+
+}
+
+.paytypes input#si_payment_amount_input_option {
+    float: none;
+    display: inline-block;
+}
+
+.paytypes input#si_payment_amount_input_option {
+    float: none;
+    display: inline-block;
+}
+
+.paytypes #modify_invoice_start_date_wrap select {
+    float: none;
 }
