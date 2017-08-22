@@ -1,3 +1,13 @@
+= 15.1.4 =
+
+* Fix: Notification shortcodes bug
+* Fix: Lineitem template overrides
+
+= 15.1.3 =
+
+* Fix: Jetpack compatibility issue
+* Fix: Avada Theme compat
+
 = 15.1.2 =
 
 * Fix: Estimate template function typo

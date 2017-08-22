@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.8
-Stable tag: 15.1.2
+Stable tag: 15.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,16 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Woocommerce integrations, payment terms, stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 15.1.4 =
+
+* Fix: Notification shortcodes bug
+* Fix: Lineitem template overrides
+
+= 15.1.3 =
+
+* Fix: Jetpack compatibility issue
+* Fix: Avada Theme compat
 
 = 15.1.2 =
 

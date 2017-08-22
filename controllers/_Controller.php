@@ -326,14 +326,23 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( substr( $view, -4 ) != '.php' ) {
 			$view .= '.php';
 		}
+
 		// in case locate template was used
 		$view = str_replace( SI_PATH.'/views/', '', $view );
 
-		$path = apply_filters( 'si_views_path', SI_PATH.'/views/' );
-		$file = $path.$view;
-		if ( $allow_theme_override && defined( 'TEMPLATEPATH' ) ) {
-			$file = self::locate_template( array( $view ), $file );
+		// In case locate template was used and a theme file was returned.
+		if ( file_exists( $view ) ) {
+			$file = $view;
+			$view = substr( strrchr( $view, '/' ), 1 );
+		} else {
+			$path = apply_filters( 'si_views_path', SI_PATH.'/views/' );
+
+			$file = $path.$view;
+			if ( $allow_theme_override && defined( 'TEMPLATEPATH' ) ) {
+				$file = self::locate_template( array( $view ), $file );
+			}
 		}
+
 		$file = apply_filters( 'sprout_invoice_template_'.$view, $file );
 		$args = apply_filters( 'load_view_args_'.$view, $args, $allow_theme_override );
 		if ( ! empty( $args ) ) { extract( $args ); }

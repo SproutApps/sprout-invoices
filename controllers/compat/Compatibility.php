@@ -53,6 +53,10 @@ class SI_Compatibility extends SI_Controller {
 
 		// Jetpack Related Posts
 		add_filter( 'jetpack_relatedposts_filter_options', array( __CLASS__, 'si_maybe_remove_related_posts' ), 10, 1 );
+
+		// AVADA
+		add_filter( 'avada_hide_page_options', array( __CLASS__, 'prevent_avada_adding_metaboxes' ), 100 );
+
 	}
 
 	public static function set_updated_post_id( $post_id ) {
@@ -185,6 +189,17 @@ class SI_Compatibility extends SI_Controller {
 				remove_meta_box( 'slider_sectionid', $cpt, 'normal' );
 			}
 		}
+	}
+
+	public static function prevent_avada_adding_metaboxes( $filter = array() ) {
+
+		$cpts = array( SI_Invoice::POST_TYPE, SI_Estimate::POST_TYPE, SI_Client::POST_TYPE, SI_Project::POST_TYPE );
+
+		foreach ( $cpts as $cpt ) {
+			$filter[] = $cpt;
+		}
+
+		return $filter;
 	}
 
 	public static function replace_older_select2_with_new() {

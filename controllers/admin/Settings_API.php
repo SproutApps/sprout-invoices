@@ -590,11 +590,6 @@ class SA_Settings_API extends SI_Controller {
 			return;
 		}
 
-		// don't re-run and prevent looping
-		if ( did_action( 'save_post' ) > 1 ) {
-			return;
-		}
-
 		foreach ( self::$meta_boxes as $post_type => $post_meta_boxes ) {
 			// Only save the meta boxes that count
 			if ( $post->post_type == $post_type ) {
@@ -605,8 +600,15 @@ class SA_Settings_API extends SI_Controller {
 					if ( isset( $args['save_callback'] ) && is_array( $args['save_callback'] ) ) {
 						if ( is_callable( $args['save_callback'] ) ) {
 							$callback_args = ( ! isset( $args['save_callback_args'] ) ) ? array() : $args['save_callback_args'] ;
+
+							$action_name = implode( '::', $args['save_callback'] );
+							if ( did_action( $action_name ) >= 1 ) {
+								return;
+							}
+							// execute
 							call_user_func_array( $args['save_callback'], array( $post_id, $post, $callback_args ) );
-							do_action( implode( '::', $args['save_callback'] ), $post_id, $post, $callback_args );
+							// action
+							do_action( $action_name, $post_id, $post, $callback_args );
 						} elseif ( method_exists( $args['save_callback'][0], $args['save_callback'][1] ) ) {
 							do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - callback may be private.', $args );
 						}

@@ -145,16 +145,33 @@ class SI_Notifications_Control extends SI_Controller {
 
 	public static function notifications_and_shortcodes() {
 		if ( ! isset( self::$notifications ) ) {
-			// Notification types include a name and a list of shortcodes
-			$default_notifications = array(); // defaults are in the hooks class
-			self::$notifications = apply_filters( 'sprout_notifications', $default_notifications );
+			$notification_cache = get_transient( 'sprout_notifications' );
+			if ( is_array( $notification_cache ) && ! empty( $notification_cache ) ) {
+				self::$notifications = $notification_cache;
+			} else {
+				// Notification types include a name and a list of shortcodes
+				$default_notifications = array(); // defaults are in the hooks class
+				self::$notifications = apply_filters( 'sprout_notifications', $default_notifications );
+				set_transient( 'sprout_notifications', self::$notifications, 60 * 60 );
+			}
 		}
 		if ( ! isset( self::$shortcodes ) ) {
-			// Notification shortcodes include the code, a description, and a callback
-			// Most shortcodes should be defined by a different controller using the 'si_notification_shortcodes' filter
-			$default_shortcodes = array(); // Default shortcodes are in the hooks class
-			self::$shortcodes = apply_filters( 'sprout_notification_shortcodes', $default_shortcodes );
+			$shortcode_cache = get_transient( 'sprout_notification_shortcodes' );
+			if ( is_array( $shortcode_cache ) && ! empty( $shortcode_cache ) ) {
+				self::$shortcodes = $shortcode_cache;
+			} else {
+				// Notification shortcodes include the code, a description, and a callback
+				// Most shortcodes should be defined by a different controller using the 'si_notification_shortcodes' filter
+				$default_shortcodes = array(); // Default shortcodes are in the hooks class
+				self::$shortcodes = apply_filters( 'sprout_notification_shortcodes', $default_shortcodes );
+				set_transient( 'sprout_notification_shortcodes', self::$shortcodes, 60 * 60 );
+			}
 		}
+	}
+
+	public static function delete_trans_cache() {
+		delete_transient( 'sprout_notifications' );
+		delete_transient( 'sprout_notification_shortcodes' );
 	}
 
 	/**
@@ -281,6 +298,9 @@ class SI_Notifications_Control extends SI_Controller {
 	 * @return
 	 */
 	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_type = null ) {
+
+		self::delete_trans_cache();
+
 		if ( $notification_type === null && isset( $_POST['notification_type'] ) ) {
 			$notification_type = $_POST['notification_type'];
 		}
@@ -914,6 +934,8 @@ class SI_Notifications_Control extends SI_Controller {
 			foreach ( $posts as $post_id ) {
 				wp_delete_post( $post_id, true );
 			}
+
+			self::delete_trans_cache();
 		}
 	}
 }
