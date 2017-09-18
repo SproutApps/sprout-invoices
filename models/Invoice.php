@@ -394,7 +394,7 @@ class SI_Invoice extends SI_Post_Type {
 		$date = (int) $this->get_post_meta( self::$meta_keys['due_date'] );
 		if ( ! $date ) {
 			$days = apply_filters( 'si_default_due_in_days', 14 );
-			$date = strtotime( $this->post->post_date ) + (60 * 60 * 24 * $days);
+			$date = strtotime( $this->post->post_date ) + (DAY_IN_SECONDS * $days);
 		};
 		return $date;
 	}
@@ -412,7 +412,7 @@ class SI_Invoice extends SI_Post_Type {
 	public function get_expiration_date() {
 		$date = (int) $this->get_post_meta( self::$meta_keys['expiration_date'] );
 		if ( ! $date ) {
-			$date = strtotime( $this->post->post_date ) + (60 * 60 * 24 * 30);
+			$date = strtotime( $this->post->post_date ) + (DAY_IN_SECONDS * 30);
 		};
 		return $date;
 	}

@@ -7,66 +7,6 @@
  * @category Template Tags
  */
 
-/**
- * A wrapper around WP's __() to add the plugin's text domain
- * @see Sprout_Invoices::__()
- * @param string  $string
- * @return string|void
- */
-function si__( $string ) {
-	return Sprout_Invoices::__( $string );
-}
-
-/**
- * A wrapper around WP's _e() to add the plugin's text domain
- * @see Sprout_Invoices::_e()
- * @param string  $string
- * @return void
- */
-function si_e( $string ) {
-	return Sprout_Invoices::_e( $string );
-}
-
-/**
- * A wrapper around WP's __() to add the plugin's text domain
- * @see Sprout_Invoices::__()
- * @param string  $string
- * @return string|void
- */
-function si_esc__( $string ) {
-	return Sprout_Invoices::esc__( $string );
-}
-
-/**
- * A wrapper around WP's _e() to add the plugin's text domain
- * @see Sprout_Invoices::_e()
- * @param string  $string
- * @return void
- */
-function si_esc_e( $string ) {
-	return Sprout_Invoices::esc_e( $string );
-}
-
-/**
- * A wrapper around WP's __() to add the plugin's text domain
- * @see Sprout_Invoices::__()
- * @param string  $string
- * @return string|void
- */
-function si_esc_html__( $string ) {
-	return Sprout_Invoices::esc_html__( $string );
-}
-
-/**
- * A wrapper around WP's _e() to add the plugin's text domain
- * @see Sprout_Invoices::_e()
- * @param string  $string
- * @return void
- */
-function si_esc_html_e( $string ) {
-	return Sprout_Invoices::esc_html_e( $string );
-}
-
 if ( ! function_exists( 'si_split_full_name' ) ) :
 	/**
 	 * Return a part of a name when a full name is provided

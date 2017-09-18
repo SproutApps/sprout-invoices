@@ -32,7 +32,7 @@ abstract class Sprout_Invoices {
 	/**
 	 * Current version. Should match sprout-invoices.php plugin version.
 	 */
-	const SI_VERSION = '15.1.4';
+	const SI_VERSION = '15.1.8';
 	/**
 	 * DB Version
 	 */
@@ -50,83 +50,4 @@ abstract class Sprout_Invoices {
 	 */
 	const DEBUG = SI_DEV;
 
-	/**
-	 * A wrapper around WP's __() to add the plugin's text domain
-	 *
-	 * @param string  $string
-	 * @return string|void
-	 */
-	public static function __( $string ) {
-		if ( self::DEBUG ) {
-			error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '__' );
-		}
-		return __( apply_filters( 'si_string_'.sanitize_title( $string ), $string ), self::TEXT_DOMAIN );
-	}
-
-	/**
-	 * A wrapper around WP's _e() to add the plugin's text domain
-	 *
-	 * @param string  $string
-	 * @return void
-	 */
-	public static function _e( $string ) {
-		if ( self::DEBUG ) {
-			error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '__' );
-		}
-		return _e( apply_filters( 'si_string_'.sanitize_title( $string ), $string ), self::TEXT_DOMAIN );
-	}
-
-	/**
-	 * Wrapper around esc_attr__
-	 * @param  string $string
-	 * @return
-	 */
-	public static function esc__( $string ) {
-		if ( self::DEBUG ) {
-			error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '__' );
-		}
-		return esc_attr__( $string, self::TEXT_DOMAIN );
-	}
-
-	/**
-	 * Wrapper around esc_html__
-	 * @param  string $string
-	 * @return
-	 */
-	public static function esc_html__( $string ) {
-		if ( self::DEBUG ) {
-			error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '__' );
-		}
-		return esc_html__( $string, self::TEXT_DOMAIN );
-	}
-
-	/**
-	 * Wrapper around esc_attr__
-	 * @param  string $string
-	 * @return
-	 */
-	public static function esc_e( $string ) {
-		if ( self::DEBUG ) {
-			error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '__' );
-		}
-		return esc_attr_e( $string, self::TEXT_DOMAIN );
-	}
-
-	/**
-	 * Wrapper around esc_html__
-	 * @param  string $string
-	 * @return
-	 */
-	public static function esc_html_e( $string ) {
-		if ( self::DEBUG ) {
-			error_log( 'backtrace: ' . print_r( wp_debug_backtrace_summary( null, 0, false ), true ) );
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '9.0', '__' );
-		}
-		return esc_html_e( $string, self::TEXT_DOMAIN );
-	}
 }

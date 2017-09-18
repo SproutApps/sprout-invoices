@@ -123,10 +123,13 @@ class SI_Invoices_Admin extends SI_Invoices {
 			break;
 
 			case 'total':
-				printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $invoice->get_payments_total() ), __( 'of', 'sprout-invoices' ), sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ) );
+				$total = $invoice->get_payments_total();
+				printf( '%s <span class="description">(%s %s)</span>', sa_get_formatted_money( $total ), __( 'of', 'sprout-invoices' ), sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ) );
 
-				echo '<div class="row-actions">';
-				printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', __( 'Review payments.', 'sprout-invoices' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, __( 'Payments', 'sprout-invoices' ) );
+				if ( 0.00 < $total ) {
+					echo '<div class="row-actions">';
+					printf( '<a class="payments_link" title="%s" href="%s&s=%s">%s</a>', __( 'Review payments.', 'sprout-invoices' ), get_admin_url( '','/edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments' ), $id, __( 'Payments', 'sprout-invoices' ) );
+				}
 
 			break;
 

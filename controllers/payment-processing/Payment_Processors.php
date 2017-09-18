@@ -117,9 +117,23 @@ abstract class SI_Payment_Processors extends SI_Controller {
 				}
 			}
 		} else {
+			// load up and get enabled
 			self::load_enabled_processors();
 			self::$active_payment_processors = self::enabled_processors();
-			$default = ( isset( self::$active_payment_processors[0] ) ) ? self::$active_payment_processors[0] : array() ;
+
+			if ( empty( self::$active_payment_processors ) ) {
+				return;
+			}
+
+			// get class and load
+			$class = ( isset( self::$active_payment_processors[0] ) ) ? self::$active_payment_processors[0] : array() ;
+
+			if ( ! class_exists( $class ) ) {
+				return;
+			}
+
+			$default = self::load_processor( $class );
+
 			return apply_filters( 'si_default_get_payment_processor', $default, self::$active_payment_processors );
 		}
 	}
@@ -156,7 +170,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return SI_Payment_Processors|null
 	 */
 	private static function load_processor( $class ) {
-		if ( class_exists( $class ) ) {
+		if ( is_string( $class ) && class_exists( $class ) ) {
 			$processor = call_user_func( array( $class, 'get_instance' ) );
 			return $processor;
 		}

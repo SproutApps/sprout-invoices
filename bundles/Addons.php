@@ -176,6 +176,10 @@ class SA_Addons extends SI_Controller {
 				if ( substr( $file, 0, 1 ) == '.' ) {
 					continue;
 				}
+				// payment processors are not add-ons, and are loaded separatly.
+				if ( false !== strpos( $file, 'sprout-invoices-payments' ) ) {
+					continue;
+				}
 				if ( is_dir( $addon_root.'/'.$file ) ) {
 					$addons_subdir = @ opendir( $addon_root.'/'.$file );
 					if ( $addons_subdir ) {
@@ -282,7 +286,7 @@ class SA_Addons extends SI_Controller {
 
 		// decode the license data
 		$marketplace_items = json_decode( wp_remote_retrieve_body( $response ) );
-		set_transient( $cache_key, $marketplace_items, 60 * 60 * 24 * 5 );
+		set_transient( $cache_key, $marketplace_items, DAY_IN_SECONDS * 5 );
 		return $marketplace_items;
 	}
 }

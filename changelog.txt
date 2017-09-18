@@ -1,3 +1,20 @@
+= 15.1.8 =
+
+* Fix: Payment term notifications not being sent.
+
+= 15.1.7 =
+
+* Fix: Payment processor object not returned, causing CRON to fail under certain circumstances.
+
+= 15.1.6 =
+
+* Fix: Localazation
+
+= 15.1.5 =
+
+* Fix: Recurring Invoices dups created with pre-startdate save.
+* Fix: CA Tax error
+
 = 15.1.4 =
 
 * Fix: Notification shortcodes bug

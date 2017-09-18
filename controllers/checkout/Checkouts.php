@@ -428,7 +428,7 @@ class SI_Checkouts extends SI_Controller {
 			// payment wasn't successful; delete the purchase and go back to the payment page
 			$this->mark_page_incomplete( self::PAYMENT_PAGE );
 			$this->get_current_page( true );
-			do_action( 'checkout_failed' );
+			do_action( 'checkout_failed', $this );
 			return;
 		}
 		$this->cache['payment_id'] = $payment->get_id();

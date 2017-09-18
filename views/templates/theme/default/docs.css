@@ -41,7 +41,8 @@ a img,
 a:before,
 a:after {
   text-decoration: none;
-  transition-duration: .25s; }
+  transition-duration: .25s;
+  color: inherit; }
 
 button {
   cursor: pointer; }
@@ -269,6 +270,27 @@ body {
         font-weight: 700; }
       #items .items .item .column p {
         font-size: 12px; }
+
+#items .items .item .column .content ul { 
+   list-style-type: disc; 
+   list-style-position: inside;
+   margin-left: 15px;
+}
+#items .items .item .column .content ol { 
+   list-style-type: decimal; 
+   list-style-position: inside;
+   margin-left: 15px;
+}
+#items .items .item .column .content ul ul, #items .items .item .column .content ol ul { 
+   list-style-type: circle; 
+   list-style-position: inside; 
+   margin-left: 15px; 
+}
+#items .items .item .column .content ol ol, #items .items .item .column .content ul ol { 
+   list-style-type: lower-latin; 
+   list-style-position: inside; 
+   margin-left: 15px; 
+}
 
 /* Totals
 ---------------------------------------------------------------------------------------------------- */

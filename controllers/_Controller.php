@@ -344,6 +344,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		$file = apply_filters( 'sprout_invoice_template_'.$view, $file );
+
 		$args = apply_filters( 'load_view_args_'.$view, $args, $allow_theme_override );
 		if ( ! empty( $args ) ) { extract( $args ); }
 		include $file;

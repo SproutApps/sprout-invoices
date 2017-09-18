@@ -966,7 +966,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$due_date = $data['invoice']->get_due_date();
 			$pastdue = current_time( 'timestamp' ) -$due_date;
-			$days = floor( $pastdue / (60 * 60 * 24) );
+			$days = floor( $pastdue / (DAY_IN_SECONDS) );
 		}
 		return apply_filters( 'shortcode_invoice_past_due_date', $days, $data );
 	}

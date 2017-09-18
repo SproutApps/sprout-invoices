@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.8
-Stable tag: 15.1.4
+Stable tag: 15.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,23 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Woocommerce integrations, payment terms, stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 15.1.8 =
+
+* Fix: Payment term notifications not being sent.
+
+= 15.1.7 =
+
+* Fix: Payment processor object not returned, causing CRON to fail under certain circumstances.
+
+= 15.1.6 =
+
+* Fix: Localazation
+
+= 15.1.5 =
+
+* Fix: Recurring Invoices dups created with pre-startdate save.
+* Fix: CA Tax error
 
 = 15.1.4 =
 
