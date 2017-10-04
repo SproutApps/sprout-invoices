@@ -18,6 +18,13 @@
 
 
 /**
+ * Check if pro version installed
+ */
+if ( function_exists( 'sprout_invoices_load' ) ) {
+	return;
+}
+
+/**
  * SI directory
  */
 define( 'SI_PATH', WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) );

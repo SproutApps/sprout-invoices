@@ -340,6 +340,7 @@ class SI_Estimate extends SI_Post_Type {
 			$issue_date = date( 'Y-m-d h:i:s', $issue_date );
 		}
 		$this->post->post_date = $issue_date;
+		$this->save_post();
 		return $issue_date;
 	}
 

@@ -134,7 +134,7 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 **10.0.5**
 
-* Fix: PayPal transation error when parent line items are used.
+* Fix: PayPal transaction error when parent line items are used.
 * Fix: Line item totals not formatted
 * Fix: Select2 should not be loaded everywhere
 * Fix: PHP7 compatibility
@@ -147,11 +147,11 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 * New: Estimate approval reminder (new reminder email)
 * New: Client specific payment options
 * New: Archive status, removes from front-end views
-* New: Limit automtic recurring creation
+* New: Limit automatic recurring creation
 * New: Payments dashboard widget
 * Change: Automatically change status of scheduled docs
 * Change: Automatically send invoice/estimate when published from a schedule
-* Change: Send to multiple recipeints with comma seperated list
+* Change: Send to multiple recipients with comma separated list
 * Change: Add user of time keeper
 * Change: Tax and discount are seperate line item totals
 * Change: Premium reports updated with HTML5 export options
@@ -494,7 +494,7 @@ https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
 
 **5.1**
 
-* New: Compatibility class to resolve other plugins problems, e.g. Gravity Forms erring out js on cusotm post type pages
+* New: Compatibility class to resolve other plugins problems, e.g. Gravity Forms erring out js on custom post type pages
 * FIX: More error reports for missing notifications.
 * FIX: Customizer filter should only be for the front-end
 * FIX: Client Dashboard was blank when a non-client was logged in
@@ -804,7 +804,7 @@ Welcome! This is a big update and a big step for us.
 
 **0.9.9.2 - 1.0 GM**
 
-* Some versions of PHP will bomb when checking if method_exists on a non existant class. Silly...
+* Some versions of PHP will bomb when checking if method_exists on a nonexistant class. Silly...
 
 
 **0.9.9.1**
