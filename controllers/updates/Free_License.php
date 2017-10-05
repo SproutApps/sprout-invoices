@@ -32,7 +32,7 @@ class SI_Free_License extends SI_Controller {
 		//add_action( 'admin_notices',  array( __CLASS__, 'my_promo_message' ), 10, 0 );
 
 		// callback for license
-		add_action( 'admin_init', array( __CLASS__, 'init_si_fs_callback' ) );
+		//add_action( 'admin_init', array( __CLASS__, 'init_si_fs_callback' ) );
 
 	}
 
