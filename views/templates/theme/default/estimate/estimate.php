@@ -32,7 +32,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
 
-	<body>
+	<body id="estimate" <?php body_class( 'si_og_theme' ); ?>>
 		<header class="row" id="header">
 			<div class="inner">
 

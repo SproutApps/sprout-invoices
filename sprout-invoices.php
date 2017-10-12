@@ -2,7 +2,7 @@
 
 /**
  * @package Sprout_Invoices
- * @version 15.1.8
+ * @version 15.2
  */
 
 /*
@@ -10,7 +10,7 @@
  * Plugin URI: https://sproutapps.co/sprout-invoices/
  * Description: App allows for any WordPress site to accept estimates, create invoices and receive invoice payments. Learn more at <a href="https://sproutapps.co">Sprout Apps</a>.
  * Author: Sprout Apps
- * Version: 15.1.8
+ * Version: 15.2
  * Author URI: https://sproutapps.co
  * Text Domain: sprout-invoices
  * Domain Path: languages
@@ -50,6 +50,10 @@ define( 'SI_SUPPORTED_WP_VERSION', version_compare( get_bloginfo( 'version' ), '
  * Minimum supported version of PHP
  */
 define( 'SI_SUPPORTED_PHP_VERSION', version_compare( phpversion(), '5.2.4', '>=' ) );
+/**
+ * Flag for Free and Pro
+ */
+define( 'SI_PRO', false );
 
 function si_fs() {
 

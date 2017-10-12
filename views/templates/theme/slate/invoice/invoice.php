@@ -23,7 +23,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
 
-	<body id="invoice" <?php body_class( 'web_view' ); ?>>
+	<body id="invoice" <?php body_class( 'web_view si_slate_theme' ); ?>>
 
 		<div id="outer_doc_wrap">
 
