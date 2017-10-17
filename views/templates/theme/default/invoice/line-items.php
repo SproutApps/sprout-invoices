@@ -24,7 +24,7 @@
 					<?php
 						$children = si_line_item_get_children( $position, $line_items );
 						$has_children = ( ! empty( $children ) ) ? true : false ;
-						$item_type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::DEFAULT_TYPE; ?>
+						$item_type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::get_default_type(); ?>
 
 					<?php do_action( 'si_get_front_end_line_item_pre_row', $item_data, $position, $prev_type, $has_children ) ?>
 

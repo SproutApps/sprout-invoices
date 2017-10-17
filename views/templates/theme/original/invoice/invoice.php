@@ -239,11 +239,12 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						</ul>
 					</aside>
 				</div><!-- #footer_wrap -->
-			
+				
 			</div><!-- #document_wrap -->
 
 		</div><!-- #outer_doc_wrap -->
 		
+
 		<div id="doc_history">
 			<?php do_action( 'si_document_history' ) ?>
 			<?php foreach ( si_doc_history_records() as $item_id => $data ) : ?>

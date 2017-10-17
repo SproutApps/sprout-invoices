@@ -3,8 +3,8 @@ Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
-Tested up to: 4.8
-Stable tag: 15.2
+Tested up to: 4.9
+Stable tag: 16.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,21 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Woocommerce integrations, payment terms, stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 16.0 =
+
+* New: Zapier Support
+* New: Recurring invoices re-write
+* New: ApproveMe integration support for Default Theme
+* New: Client set payments supoort for new Default Theme
+* New: Allow to easily filter default line item
+* New: Square support
+* Updated: Subscription payments, new information
+* Updated: PO, Localization
+* Updated: Free version now necessary
+* Fix: WooCommerce customer not logged in
+* Fix: Payment terms display issue
+* Fix: WooCommerce Checkout w/ Shipping
 
 = 15.2 =
 

@@ -63,8 +63,15 @@ function _si_default_theme_print_to_pdf_button( $button = '' ) {
 }
 add_filter( 'si_print_to_pdf_button', '_si_default_theme_print_to_pdf_button' );
 
-function _si_signature_required_button( $button = '' ) {
-	$button = '<style type="text/css">
+function _si_signature_required_button( $button = '', $doc_id, $url ) {
+	$signed = ApproveMe_Controller::is_doc_agreement_signed( $doc_id );
+
+	$new_button = '';
+	$message = __( 'Signature Required', 'sprout-invoices' );
+	if ( $signed ) {
+		$message = __( 'Signed', 'sprout-invoices' );
+	} else {
+		$new_button .= '<style type="text/css">
 				#paybar .inner .button.open,
 				#paybar .button.accept_estimate.status_change {
 				    display: none;
@@ -72,12 +79,14 @@ function _si_signature_required_button( $button = '' ) {
 				#paybar .inner .button.status_change[data-status-change="decline"] {
 				    display: inline-block !important;
 				}
-			</style>
-			<a id="sign_doc" class="button signature_button" href="javascript:void(0)">'. __( 'Signature Required', 'sprout-invoices' ) .'</a>';
+			</style>';
+	}
 
-	return $button;
+	$new_button .= '<a id="sign_doc" class="button signature_button" href="'.esc_url( $url ).'">'. $message .'</a>';
+
+	return $new_button;
 }
-add_filter( 'si_signature_required_button', '_si_signature_required_button' );
+add_filter( 'si_signature_required_button', '_si_signature_required_button', 1, 3 );
 
 
 function _si_toggle_line_item_comments( $button = '' ) {

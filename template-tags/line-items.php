@@ -103,7 +103,7 @@ function si_line_item_build( $position = 0, $line_items = array(), $children = a
 }
 
 function si_get_front_end_line_item( $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
-	$type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::DEFAULT_TYPE ;
+	$type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::get_default_type();
 	$columns = si_get_line_item_columns( $type, $item_data, $position, $prev_type, $has_children );
 	ob_start(); ?>
 	<div class="line_item_option_wrap line_item_type_<?php echo esc_attr( $type ) ?>" data-type="<?php echo esc_attr( $type ) ?>">
@@ -268,7 +268,7 @@ function si_front_end_line_item_columns( $item_data = array(), $position = 0, $p
 }
 
 function si_get_front_end_line_item_columns( $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
-	$item_type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::DEFAULT_TYPE ;
+	$item_type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::get_default_type();
 	$columns = si_get_line_item_columns( $item_type, $item_data, $position, $prev_type, $has_children );
 
 	ob_start(); ?>

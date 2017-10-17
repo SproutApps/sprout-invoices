@@ -347,7 +347,8 @@ body {
     padding: 25px 0; }
     #paybar .inner .button {
       float: right;
-      background-color: #4086b0; }
+      background-color: #4086b0;
+      margin-left: 15px; }
     @media (max-width: 480px) {
       #paybar .inner span {
         display: none; }

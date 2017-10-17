@@ -9,7 +9,7 @@
 			<?php
 				$children = si_line_item_get_children( $position, $line_items );
 				$has_children = ( ! empty( $children ) ) ? true : false ;
-				$item_type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::DEFAULT_TYPE; ?>
+				$item_type = ( isset( $item_data['type'] ) && '' !== $item_data['type'] ) ? $item_data['type'] : SI_Line_Items::get_default_type(); ?>
 
 			<li class="item item_type_<?php echo esc_attr( $item_type ) ?> <?php if ( $has_children ) { echo esc_attr( 'line_item_has_children' ); } ?>" data-id="<?php echo (float) $position ?>">
 

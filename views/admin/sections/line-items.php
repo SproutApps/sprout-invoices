@@ -3,7 +3,7 @@
 		<?php if ( is_int( $position ) ) : // is not a child ?>
 			<?php
 			if ( ! isset( $data['type'] ) ) {
-				$data['type'] = SI_Line_Items::DEFAULT_TYPE;
+				$data['type'] = SI_Line_Items::get_default_type();
 			} ?>
 			<li class="item item_type_<?php echo esc_attr( $data['type'] ) ?>" data-id="<?php echo (float) $position ?>">
 				<?php

@@ -7,7 +7,6 @@
  * @subpackage Line_Item_Types
  */
 class SI_Line_Items extends SI_Controller {
-	const DEFAULT_TYPE = 'task';
 
 	public static function init() {
 
@@ -34,9 +33,14 @@ class SI_Line_Items extends SI_Controller {
 
 	}
 
+	public static function get_default_type() {
+		$default_type = 'task';
+		return apply_filters( 'si_get_default_line_item_type', $default_type, self::line_item_types() );
+	}
+
 	public static function line_item_types() {
 		$types = array(
-				self::DEFAULT_TYPE => __( 'Task', 'sprout-invoices' ),
+				'task' => __( 'Task', 'sprout-invoices' ),
 				'service' => __( 'Service', 'sprout-invoices' ),
 				'product' => __( 'Product', 'sprout-invoices' ),
 			);
@@ -53,7 +57,7 @@ class SI_Line_Items extends SI_Controller {
 	 */
 	public static function line_item_columns( $type = '', $item_data = array(), $position = 0, $prev_type = '', $has_children = false ) {
 		if ( '' === $type ) {
-			$type = self::DEFAULT_TYPE;
+			$type = self::get_default_type();
 		}
 		$columns = array(
 				'_id' => array(
@@ -228,7 +232,7 @@ class SI_Line_Items extends SI_Controller {
 			$has_column = false;
 			foreach ( $line_items as $position => $data ) {
 				if ( ! isset( $data['type'] ) || '' === $data['type'] ) {
-					$data['type'] = self::DEFAULT_TYPE;
+					$data['type'] = self::get_default_type();
 				}
 				if ( $data['type'] !== $type ) {
 					continue;
@@ -493,7 +497,7 @@ class SI_Line_Items extends SI_Controller {
 		$item_data = ( ! empty( $items ) && isset( $items[ $position ] ) ) ? $items[ $position ] : array();
 		$has_children = ( empty( $children ) ) ? false : true ;
 		if ( ! isset( $item_data['type'] ) || '' === $item_data['type'] ) {
-			$item_data['type'] = self::DEFAULT_TYPE;
+			$item_data['type'] = self::get_default_type();
 		}
 		self::load_view( 'admin/sections/line-item-options', array(
 			'columns' => self::line_item_columns( $item_data['type'], $item_data, $position ),
@@ -509,7 +513,7 @@ class SI_Line_Items extends SI_Controller {
 		$types = self::line_item_types();
 		self::load_view( 'admin/sections/add-line-item.php', array(
 				'types' => $types,
-				'default' => key( $types ),
+				'default' => self::get_default_type(),
 		), false );
 	}
 

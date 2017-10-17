@@ -27,6 +27,13 @@ class SA_Init_Addon_Processors extends SI_Controller {
 			require_once SI_PATH.'/bundles/sprout-invoices-payments-stripe/SA_Stripe.php';
 		}
 
+		if ( file_exists( SI_PATH.'/bundles/sprout-invoices-payments-offsite-url/inc/SA_Offsite_URL.php' ) ) {
+			if ( ! defined( 'SA_ADDON_PAYMENTREDIRECT_URL' ) ) {
+				define( 'SA_ADDON_PAYMENTREDIRECT_URL', plugins_url( '/sprout-invoices-payments-offsite-url', __FILE__ ) );
+			}
+			require_once SI_PATH.'/bundles/sprout-invoices-payments-offsite-url/inc/SA_Offsite_URL.php';
+		}
+
 		if ( file_exists( SI_PATH.'/bundles/sprout-invoices-payments-squareup/inc/Square_Up.php' ) ) {
 			if ( ! defined( 'SA_ADDON_SQUARE_URL' ) ) {
 				define( 'SA_ADDON_SQUARE_URL', plugins_url( '/sprout-invoices-payments-squareup', __FILE__ ) );
