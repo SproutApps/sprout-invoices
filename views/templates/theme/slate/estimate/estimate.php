@@ -99,20 +99,20 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							<?php do_action( 'si_document_details_pre' ) ?>
 
 							<dl class="date">
-								<dt><span class="dt_heading"><span class="dashicons dashicons-calendar-alt"></span><?php esc_html_e( 'Date', 'sprout-estimates' ) ?></span></dt>
+								<dt><span class="dt_heading"><span class="dashicons dashicons-calendar-alt"></span><?php esc_html_e( 'Date', 'sprout-invoices' ) ?></span></dt>
 								<dd><?php si_estimate_issue_date() ?></dd>
 							</dl>
 
 							<?php if ( si_get_estimate_id() ) : ?>
 								<dl class="estimate_number">
-									<dt><span class="dt_heading"><span class="dashicons dashicons-tag"></span><?php esc_html_e( 'Estimate Number', 'sprout-estimates' ) ?></span></dt>
+									<dt><span class="dt_heading"><span class="dashicons dashicons-tag"></span><?php esc_html_e( 'Estimate Number', 'sprout-invoices' ) ?></span></dt>
 									<dd><?php si_estimate_id() ?></dd>
 								</dl>
 							<?php endif ?>
 
 							<?php if ( si_get_estimate_expiration_date() ) : ?>
 								<dl class="date">
-									<dt><span class="dt_heading"><span class="dashicons dashicons-flag"></span><?php esc_html_e( 'Estimate Due', 'sprout-estimates' ) ?></span></dt>
+									<dt><span class="dt_heading"><span class="dashicons dashicons-flag"></span><?php esc_html_e( 'Estimate Due', 'sprout-invoices' ) ?></span></dt>
 									<dd><?php si_estimate_expiration_date() ?></dd>
 								</dl>
 							<?php endif ?>
@@ -120,7 +120,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							<?php do_action( 'si_document_details_totals' ) ?>
 
 							<dl class="doc_total doc_balance">
-								<dt><span class="dt_heading"><span class="dashicons dashicons-money"></span><?php esc_html_e( 'Estimate Total', 'sprout-estimates' ) ?></span></dt>
+								<dt><span class="dt_heading"><span class="dashicons dashicons-money"></span><?php esc_html_e( 'Estimate Total', 'sprout-invoices' ) ?></span></dt>
 								<dd><?php sa_formatted_money( si_get_estimate_total() ) ?></dd>
 							</dl>
 
@@ -143,7 +143,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						<?php if ( strlen( si_get_estimate_notes() ) > 1 ) : ?>
 						<?php do_action( 'si_document_notes' ) ?>
 						<div id="doc_notes">
-							<h2><?php esc_html_e( 'Notes', 'sprout-estimates' ) ?></h2>
+							<h2><?php esc_html_e( 'Notes', 'sprout-invoices' ) ?></h2>
 							<?php si_estimate_notes() ?>
 						</div><!-- #doc_notes -->
 						
@@ -152,7 +152,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 						<?php if ( strlen( si_get_estimate_terms() ) > 1 ) : ?>
 						<?php do_action( 'si_document_terms' ) ?>
 						<div id="doc_terms">
-							<h2><?php esc_html_e( 'Terms', 'sprout-estimates' ) ?></h2>
+							<h2><?php esc_html_e( 'Terms', 'sprout-invoices' ) ?></h2>
 							<?php si_estimate_terms() ?>
 						</div><!-- #doc_terms -->
 						
@@ -196,7 +196,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 					<?php if ( SI_Notifications::RECORD === $data['status_type'] ) : ?>
 						<p>
 							<?php echo esc_html( $update_title ) ?>
-							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php esc_html_e( 'View Message', 'sprout-estimates' ) ?>"><?php esc_html_e( 'View Message', 'sprout-estimates' ) ?></a>
+							<br/><a href="#TB_inline?width=600&height=380&inlineId=notification_message_<?php echo (int) $item_id ?>" id="show_notification_tb_link_<?php echo (int) $item_id ?>" class="thickbox si_tooltip notification_message" title="<?php esc_html_e( 'View Message', 'sprout-invoices' ) ?>"><?php esc_html_e( 'View Message', 'sprout-invoices' ) ?></a>
 						</p>
 						<div id="notification_message_<?php echo (int) $item_id ?>" class="cloak">
 							<?php echo wpautop( $data['content'] ) ?>
@@ -215,7 +215,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 		<div id="footer_credit">
 			<?php do_action( 'si_document_footer_credit' ) ?>
-			<!--<p><?php esc_html_e( 'Powered by Sprout Estimates', 'sprout-estimates' ) ?></p>-->
+			<!--<p><?php esc_html_e( 'Powered by Sprout Estimates', 'sprout-invoices' ) ?></p>-->
 		</div><!-- #footer_messaging -->
 
 	</body>

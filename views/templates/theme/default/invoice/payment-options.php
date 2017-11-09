@@ -1,18 +1,31 @@
 <section class="row" id="paybar">
 	<div class="inner">
 		<?php do_action( 'si_default_theme_inner_paybar' ) ?>
+		
 		<?php
 			$time_left = si_get_invoice_due_date() - current_time( 'timestamp' );
 			$days_left = round( (($time_left / 24) / 60) / 60 );
 				?>
 		<?php if ( $time_left > 0 ) :  ?>
+
 			<?php if ( 1 === $days_left ) :  ?>
-				<?php printf( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Day</strong>', sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+				
+				<?php printf( 'Balance of <strong>%1$s</strong> is Due', sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+
 			<?php else : ?>
-				<?php printf( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Days</strong>', sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+
+				<?php if ( si_has_invoice_deposit() ) : ?>
+					<?php printf( 'Balance of <strong>%2$s</strong> Due in <strong>%3$s Days</strong> & Deposit of <strong>%1$s</strong> Due <strong>Now</strong>', sa_get_formatted_money( si_get_invoice_deposit() ), sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+				<?php else : ?>
+					<?php printf( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Days</strong>', sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+				<?php endif; ?>
+
 			<?php endif ?>
+
 		<?php else : ?>
+			
 			<?php printf( 'Balance of <strong>%1$s</strong> is <strong>Overdue</strong>', sa_get_formatted_money( si_get_invoice_total() ) ); ?>
+
 		<?php endif ?>
 
 		<?php do_action( 'si_default_theme_pre_payment_button' ) ?>
@@ -21,7 +34,11 @@
 
 		<?php do_action( 'si_signature_button' ) ?>
 
-		<a class="open button" href="#payment"><?php _e( 'Make a <strong>Payment</strong>', 'sprout-invoices' ) ?></a> 
+		<?php if ( si_has_invoice_deposit() ) : ?>
+			<a class="open button" href="#payment"><?php _e( 'Make a <strong>Deposit Payment</strong>', 'sprout-invoices' ) ?></a> 
+		<?php else : ?>
+			<a class="open button" href="#payment"><?php _e( 'Make a <strong>Payment</strong>', 'sprout-invoices' ) ?></a> 
+		<?php endif; ?>
 		
 		<?php do_action( 'si_default_theme_payment_button' ) ?>
 	</div>

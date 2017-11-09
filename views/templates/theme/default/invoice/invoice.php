@@ -92,6 +92,14 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 			</div>
 		</section>
 
+		<section class="row" id="details">
+			<div class="inner">
+				<div class="row item">
+					<?php do_action( 'si_document_more_details' ) ?>
+				</div>
+			</div>
+		</section>
+
 		<?php do_action( 'si_doc_line_items', get_the_id() ) ?>
 
 		<section class="row" id="signature">

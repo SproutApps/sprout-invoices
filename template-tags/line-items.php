@@ -290,10 +290,13 @@ function si_get_front_end_line_item_columns( $item_data = array(), $position = 0
 			} ?>
 
 			<div class="column column_<?php echo esc_attr( $column_slug ) ?>">
-				<?php if ( 'textarea' === $column_type ) :  ?>
-					<h3><?php printf( __( '%2$s <small>%1$s</small>', 'sprout-invoices' ), number_format( (float) $position, 1, '.', '' ), $column['label'] ) ?></h3>
-				<?php else : ?>
-					<h3><?php echo $column['label'] ?></h3>	
+
+				<?php if ( $prev_type !== $item_type || apply_filters( 'si_show_all_line_item_headers', true ) ) :  ?>
+					<?php if ( 'textarea' === $column_type ) :  ?>
+						<h3><?php printf( __( '%2$s <small>%1$s</small>', 'sprout-invoices' ), number_format( (float) $position, 1, '.', '' ), $column['label'] ) ?></h3>
+					<?php else : ?>
+						<h3><?php echo $column['label'] ?></h3>	
+					<?php endif ?>
 				<?php endif ?>
 				
 

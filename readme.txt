@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.0
+Stable tag: 16.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,8 @@ Reduce the time spent fielding project requests, estimating projects & getting p
 * [Advanced Taxes for your region](https://sproutapps.co/marketplace/category/free/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org)
 * Client records with multiple points of contact
 * No extra database tables!
+
+https://www.youtube.com/watch?v=n1pP_hQSKlQ
 
 *Pro Features*
 
@@ -142,7 +144,25 @@ Woocommerce integrations, payment terms, stats dashboard, time tracking updates 
 
 == Changelog ==
 
-= 16.0 =
+= 16.0.5 =
+
+* Fix: date warnings displayed above recurring payments section
+* Updated: Adjust recurring invoice editing, so the start date is updated after every change.
+* Updated: Prevent future invoices from being generated.
+* New: New filter when clients are created, si_create_user_args
+* New: Don't repeat line item headers via filter: si_show_all_line_item_headers
+* New: Payment Term notifications have new shortcodes
+* Fix: Localization issues for estimates template
+
+= 16.0.4 =
+
+* Updated: New action for Default theme to show more info
+* Fix: Subscription payment method using wrong object param
+* Fix: Prevent error for non WP object
+* Updated: Better show the deposit payment with the Default theme
+* Updated: Woo integration updates for cached product
+
+= 16.0.1 =
 
 * New: Zapier Support
 * New: Recurring invoices re-write

@@ -460,7 +460,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @param SI_Payment $payment
 	 * @return void
 	 */
-	public function verify_recurring_payment( SI_Invoice $invoice ) {
+	public function verify_recurring_payment( SI_Payment $payment ) {
 		// default implementation does nothing
 		// it's up to the individual payment processor to verify
 	}

@@ -607,10 +607,10 @@ class SI_Invoices_Edit extends SI_Invoices {
 			}
 		}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working, since it may not be assigned to a client.', 'sprout-invoices' ) );
+		$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working, since it may not be assigned to a client.', 'sprout-invoices' ) );
 
-			// Send to me.
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );
+		// Send to me.
+		$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );
 
 		$recipient_options .= '</div></div>';
 

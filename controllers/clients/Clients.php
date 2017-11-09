@@ -721,7 +721,7 @@ class SI_Clients extends SI_Controller {
 			'user_url' => '',
 			'role' => SI_Client::USER_ROLE,
 		);
-		$parsed_args = wp_parse_args( $args, $defaults );
+		$parsed_args = wp_parse_args( apply_filters( 'si_create_user_args', $args ), $defaults );
 
 		// check if the user already exists.
 		if ( $user = get_user_by( 'email', $parsed_args['user_email'] ) ) {

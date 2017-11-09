@@ -882,3 +882,22 @@ html[xmlns] .clearfix {
 .paytypes #modify_invoice_start_date_wrap select {
     float: none;
 }
+
+
+/**
+ * Attachements
+ */
+
+#header_attachments_info {
+    padding: 0;
+    padding-top: 0em;
+    background-color: inherit;
+    width: 100%;
+    margin: 2em 0;
+}
+#header_attachments_info .attachments_info h2 {
+  font-size: 1.2em;
+  font-weight: 800;
+  padding-bottom: 7px;
+
+}
