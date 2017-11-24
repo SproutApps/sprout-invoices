@@ -1,10 +1,10 @@
 === Sprout Invoices - Client Invoicing & Estimates / Quotes ===
 Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
-Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
+Tags: invoice, invoicing, estimates, quotes, payments, billing, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.5
+Stable tag: 16.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,16 +12,12 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 
 == Description ==
 
-> <strong>Sprout Apps Family</strong><br>
-> Sprout Invoices is a standalone Invoicing and Estimates plugin, and is complimentary to [Sprout Clients](https://wordpress.org/plugins/sprout-clients/), another free business centric plugin from [Sprout Apps](https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+= Take control of your invoicing! Fully customizable, no limits, and features you can't get anywhere else. =
 
-= Sprout Invoices – Premium WordPress Invoicing Plugin =
+Reduce the time spent getting paid! Improve your business workflow with automated tasks for fielding project requests, estimating projects & getting paid.
 
-Our mission at [Sprout Apps](https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) is to build a suite of plugins (aka apps) to help us all work more efficiently under the WordPress way of complete control. 
 
-> [Sprout Invoices](https://sproutapps.co/sprout-clients/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) relies on happy customers supporting its future by purchasing upgraded versions. If you like this free version of Sprout Invoices please consider [purchasing a fully featured upgrade](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
-
-= Sprout Invoice Features =
+= Sprout Invoices Features =
 
 Reduce the time spent fielding project requests, estimating projects & getting paid.
 
@@ -48,7 +44,7 @@ Reduce the time spent fielding project requests, estimating projects & getting p
 
 https://www.youtube.com/watch?v=n1pP_hQSKlQ
 
-*Pro Features*
+= Pro Features =
 
 All of the popular paid add-ons listed below are bundled [in pro purchases](https://sproutapps.co/sprout-invoices/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org), so you may want to consider (like many others) to upgrade.
 
@@ -74,6 +70,9 @@ Make sure to review the [Sprout Invoices](https://sproutapps.co/sprout-invoices/
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
+> <strong>Sprout Apps Family</strong><br>
+> Sprout Invoices is a standalone Invoicing and Estimates plugin, and is complimentary to [Sprout Clients](https://wordpress.org/plugins/sprout-clients/), another free business centric plugin from [Sprout Apps](https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org).
+
 = Flexibility built in =
 
 While Sprout Invoices automates many of the tasks to improve workflow the power comes from customization.
@@ -95,24 +94,6 @@ Integrate with over 300 other apps around the web, including Quickbooks Online a
 
 *Hundreds of Hooks*
 Over two hundred filters and actions allow you to hook into Sprout Invoices and alter whatever you'd like or build some awesome features like those in the marketplace.
-
-
-= The Sprout Invoices Process =
-
-Sprout Invoices helps streamline the complex workflow of accepting estimates and getting invoices paid.
-
-= Requests =
-
-Receiving estimate requests on your site is simplified with Sprout Invoices. Use the customizable default form or integrate with an existing form built a favorite form builder plugin, e.g. Gravity Forms or Ninja Forms.
-
-= Estimating =
-
-Estimates are automatically created based on estimate request submissions from your site. Review, update, and send the estimate to your new client without having to depend on communicating via email first.
-
-
-= Invoicing =
-
-Invoices are automatically generated from accepted estimates speeding up the process of getting paid. Sprout Invoices understands deposit payments and doesn't have the same hoops other invoice services require.
 
 
 == Installation ==
@@ -144,9 +125,15 @@ Woocommerce integrations, payment terms, stats dashboard, time tracking updates 
 
 == Changelog ==
 
+= 16.5.1 =
+
+* Fix: Latest version of WordPress handles taxonomy queries differently which may have resulted in some records being purged.
+
 = 16.5 =
 
 New pricing plans for all pro licenses
+
+* Updated: Minor updates including EU and VAT importing
 
 = 16.0.4 =
 

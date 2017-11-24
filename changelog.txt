@@ -1,3 +1,7 @@
+= 16.5.1 =
+
+* Fix: Latest version of WordPress handles taxonomy queries differently which may have resulted in some records being purged.
+
 = 16.5 =
 
 New pricing plans for all pro licenses

@@ -170,20 +170,23 @@ class SI_Dev_Logs extends SI_Controller {
 			'post_status' => 'any',
 			'posts_per_page' => -1,
 			'fields' => 'ids',
-			'tax_query' => array(
-							array(
-								'taxonomy' => SI_Record::TAXONOMY,
-								'field' => 'id',
-								'terms' => self::LOG_TYPE,
-							),
-						),
+				'tax_query' => array(
+					array(
+						'taxonomy' => SI_Record::TAXONOMY,
+						'field'    => 'slug',
+						'terms'    => self::LOG_TYPE,
+					),
+				),
 		);
 
 		add_filter( 'posts_where', array( __CLASS__, 'filter_where_with_when' ) ); // add filter to base return on dates
 		$records = new WP_Query( $args );
+
 		remove_filter( 'posts_where', array( __CLASS__, 'filter_where_with_when' ) ); // Remove filter
 		foreach ( $records->posts as $record_id ) {
-			wp_delete_post( $record_id, true );
+			if ( has_term( self::LOG_TYPE, SI_Record::TAXONOMY, $record_id ) ) { // confirm
+				wp_delete_post( $record_id, true );
+			}
 		}
 	}
 
@@ -194,7 +197,7 @@ class SI_Dev_Logs extends SI_Controller {
 	 */
 	public static function filter_where_with_when( $where = '' ) {
 		// posts 15+ old
-		$offset = apply_filters( 'si_logs_purge_filter_delay', date_i18n( 'Y-m-d', strtotime( '-15 days' ) ), $where );
+		$offset = apply_filters( 'si_logs_purge_filter_delay', date_i18n( 'Y-m-d', strtotime( '-1 days' ) ), $where );
 		$where .= " AND post_date <= '" . $offset . "'";
 		return $where;
 	}
