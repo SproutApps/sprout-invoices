@@ -6,7 +6,7 @@
 */
 class SA_Addons extends SI_Controller {
 	const SETTINGS_PAGE = 'addons';
-	const ADDON_OPTION = 'si_active_addons_v2';
+	const ADDON_OPTION = 'si_active_addons_v3';
 	const API_CB = 'https://sproutapps.co/';
 	private static $active_addons = array();
 
@@ -87,8 +87,10 @@ class SA_Addons extends SI_Controller {
 		$addons = self::get_addons();
 		$active_addons = array();
 		foreach ( $addons as $path => $details ) {
-			$key = self::get_addon_key( $path, $details );
-			$active_addons[] = $key;
+			if ( isset( $details['AutoActive'] ) && true == $details['AutoActive'] ) {
+				$key = self::get_addon_key( $path, $details );
+				$active_addons[] = $key;
+			}
 		}
 		return $active_addons;
 	}
@@ -234,6 +236,7 @@ class SA_Addons extends SI_Controller {
 			'Description' => 'Description',
 			'Author' => 'Author',
 			'AuthorURI' => 'Author URI',
+			'AutoActive' => 'Auto Active',
 		);
 
 		$addon_data = get_file_data( $addon_file, $default_headers, 'plugin' );

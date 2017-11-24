@@ -51,7 +51,6 @@ do_action( 'pre_si_pdf_estimate_view' ); ?><!DOCTYPE html>
 				<div class="row intro">
 					<h1><?php the_title() ?></h1>
 					<span><?php printf( __( 'Estimate %1$s', 'sprout-invoices' ), si_get_estimate_id() ) ?></span>
-					<?php si_display_messages(); ?>
 				</div>
 			</div>
 		</header>

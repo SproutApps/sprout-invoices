@@ -592,6 +592,7 @@ class SI_CSV_Import extends SI_Importer {
 		if ( isset( $client['Notes'] ) && $client['Notes'] != '' ) {
 			SI_Internal_Records::new_record( $client['Notes'], SI_Controller::PRIVATE_NOTES_TYPE, $client_id, '', 0 );
 		}
+		do_action( 'si_csv_client_import', $client_id, $client );
 		return $client_id;
 	}
 
@@ -700,6 +701,8 @@ class SI_CSV_Import extends SI_Importer {
 			$est->set_post_date( date( 'Y-m-d H:i:s', strtotime( $estimate['Estimate Date'] ) ) );
 		}
 
+		do_action( 'si_csv_estimate_import', $new_estimate_id, $estimate );
+
 		return $est;
 	}
 
@@ -772,6 +775,8 @@ class SI_CSV_Import extends SI_Importer {
 		if ( isset( $invoice['Invoice Date'] ) ) {
 			$inv->set_post_date( date( 'Y-m-d H:i:s', strtotime( $invoice['Invoice Date'] ) ) );
 		}
+
+		do_action( 'si_csv_invoice_import', $new_invoice_id, $invoice );
 
 		return $inv;
 	}

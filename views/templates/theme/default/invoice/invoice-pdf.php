@@ -51,7 +51,6 @@ do_action( 'pre_si_pdf_invoice_view' ); ?><!DOCTYPE html>
 				<div class="row intro">
 					<h1><?php the_title() ?></h1>
 					<span><?php printf( __( 'Invoice %1$s', 'sprout-invoices' ), si_get_invoice_id() ) ?></span>
-					<?php si_display_messages(); ?>
 				</div>
 			</div>
 		</header>

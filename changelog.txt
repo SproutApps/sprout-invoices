@@ -1,4 +1,8 @@
-= 16.0.5 =
+= 16.5 =
+
+New pricing plans for all pro licenses
+
+= 16.0.4 =
 
 * Fix: date warnings displayed above recurring payments section
 * Updated: Adjust recurring invoice editing, so the start date is updated after every change.

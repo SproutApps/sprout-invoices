@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoicing, estimates, quotes, payments, web invoice, bill, paypal, invoice, pay, online payment, send invoice, time tracking, invoice billing, bill clients, credit cards, stripe, freshbooks, Harvest, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.0.5
+Stable tag: 16.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,7 +144,11 @@ Woocommerce integrations, payment terms, stats dashboard, time tracking updates 
 
 == Changelog ==
 
-= 16.0.5 =
+= 16.5 =
+
+New pricing plans for all pro licenses
+
+= 16.0.4 =
 
 * Fix: date warnings displayed above recurring payments section
 * Updated: Adjust recurring invoice editing, so the start date is updated after every change.
