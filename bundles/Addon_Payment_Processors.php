@@ -113,7 +113,7 @@ class SA_Init_Addon_Processors extends SI_Controller {
 				if ( ! defined( 'SA_ADDON_EWAY_URL' ) ) {
 					define( 'SA_ADDON_EWAY_URL', plugins_url( '/sprout-invoices-payments-eway', __FILE__ ) );
 				}
-				require_once SI_PATH.'/bundles/sprout-invoices-payments-eway/sprout-invoices-eway.php';
+				require_once SI_PATH.'/bundles/sprout-invoices-payments-eway/inc/SA_eWay.php';
 			}
 		}
 

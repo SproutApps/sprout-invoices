@@ -1,4 +1,4 @@
-= 16.5.1 =
+= 16.5.2 =
 
 * Fix: Latest version of WordPress handles taxonomy queries differently which may have resulted in some records being purged.
 

@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoice, invoicing, estimates, quotes, payments, billing, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.5.1
+Stable tag: 16.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,9 +17,9 @@ Create estimates and invoices within your WordPress site. Accept invoice payment
 Reduce the time spent getting paid! Improve your business workflow with automated tasks for fielding project requests, estimating projects & getting paid.
 
 
-= Sprout Invoices Features =
+= Invoice, Estimate / Quote, & Online Payments with these Sprout Invoices Features =
 
-Reduce the time spent fielding project requests, estimating projects & getting paid.
+Reduce the time spent fielding project requests, estimating projects, invoicing clients, & getting paid.
 
 * An awesome [estimate & invoice workflow](https://sproutapps.co/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org). 
 * The best [payment experience](https://sproutapps.co/news/sprout-invoices-payment-options-deposits-checks-authorizations/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutapps.co/marketplace/paypal-payments-express-checkout/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) ([additional gateways available](https://sproutapps.co/marketplace/category/payment-gateway/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org)).
@@ -125,7 +125,7 @@ Woocommerce integrations, payment terms, stats dashboard, time tracking updates 
 
 == Changelog ==
 
-= 16.5.1 =
+= 16.5.2 =
 
 * Fix: Latest version of WordPress handles taxonomy queries differently which may have resulted in some records being purged.
 
