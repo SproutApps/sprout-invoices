@@ -1,3 +1,22 @@
+= 16.5.7 =
+
+* Udpate: Point of Contact add-on will no longer force itself if unused.
+* Udpate: Use GMT offset everywhere
+* Fix: Signature add-on errors for default theme
+
+= 16.5.6 =
+
+* Fix: Some payment processsors were executing filters/actions without being active.
+
+= 16.5.5 =
+
+* Fix: Extraneous callback for updates on every load.
+* Fix: NMI bundle fix
+
+= 16.5.3 =
+
+* Fix: Pushing an update because business license holders were not receiving the proper bundle
+
 = 16.5.2 =
 
 * Fix: Latest version of WordPress handles taxonomy queries differently which may have resulted in some records being purged.
@@ -29,7 +48,7 @@ New pricing plans for all pro licenses
 * New: Zapier Support
 * New: Recurring invoices re-write
 * New: ApproveMe integration support for Default Theme
-* New: Client set payments supoort for new Default Theme
+* New: Client set payments support for new Default Theme
 * New: Allow to easily filter default line item
 * New: Square support
 * Updated: Subscription payments, new information
@@ -55,17 +74,17 @@ New pricing plans for all pro licenses
 
 = 15.1.6 =
 
-* Fix: Localazation
+* Fix: Localization
 
 = 15.1.5 =
 
-* Fix: Recurring Invoices dups created with pre-startdate save.
+* Fix: Recurring Invoices dups created with pre-start date save.
 * Fix: CA Tax error
 
 = 15.1.4 =
 
 * Fix: Notification shortcodes bug
-* Fix: Lineitem template overrides
+* Fix: Line item template overrides
 
 = 15.1.3 =
 

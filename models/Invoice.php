@@ -159,7 +159,7 @@ class SI_Invoice extends SI_Post_Type {
 
 	public static function create_invoice( $passed_args, $status = '' ) {
 		$defaults = array(
-			'subject' => sprintf( __( 'New Invoice: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
+			'subject' => sprintf( __( 'New Invoice: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp', true ) ) ),
 			'user_id' => '',
 			'invoice_id' => '',
 			'estimate_id' => '',
@@ -913,7 +913,7 @@ class SI_Invoice extends SI_Post_Type {
 	 */
 	public static function get_overdue_invoices( $after = 0, $before = 0 ) {
 		if ( ! $after ) {
-			$after = apply_filters( 'si_get_overdue_yesterday_timestamp', strtotime( 'Yesterday',  current_time( 'timestamp' ) ) );
+			$after = apply_filters( 'si_get_overdue_yesterday_timestamp', strtotime( 'Yesterday',  current_time( 'timestamp', true ) ) );
 		}
 
 		if ( ! $before ) {

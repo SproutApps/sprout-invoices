@@ -98,7 +98,7 @@ class SA_Init_Addon_Processors extends SI_Controller {
 
 			if ( file_exists( SI_PATH.'/bundles/sprout-invoices-payments-braintree/inc/SA_Braintree.php' ) ) {
 				if ( ! defined( 'SA_ADDON_BRAINTREE_PATH' ) ) {
-					define( 'SA_ADDON_BRAINTREE_PATH', __FILE__ . '/sprout-invoices-payments-braintree/' );
+					define( 'SA_ADDON_BRAINTREE_PATH', dirname( __FILE__ ) . '/sprout-invoices-payments-braintree/' );
 				}
 				if ( ! defined( 'SA_ADDON_BRAINTREE_URL' ) ) {
 					define( 'SA_ADDON_BRAINTREE_URL', plugins_url( '/sprout-invoices-payments-braintree', __FILE__ ) );
@@ -140,7 +140,10 @@ class SA_Init_Addon_Processors extends SI_Controller {
 		if ( ! class_exists( 'SA_NMI' ) ) {
 			if ( file_exists( SI_PATH.'/bundles/sprout-invoices-payments-nmi/SA_NMI.php' ) ) {
 				if ( ! defined( 'SA_ADDON_NMI_URL' ) ) {
-					define( 'SA_ADDON_NMI_URL', plugins_url( '/sprout-invoices-payments-offsite-url', __FILE__ ) );
+					define( 'SA_ADDON_NMI_URL', plugins_url( '/sprout-invoices-payments-nmi', __FILE__ ) );
+				}
+				if ( ! defined( 'SA_ADDON_NMI_PATH' ) ) {
+					define( 'SA_ADDON_NMI_PATH', dirname( __FILE__ ) . '/sprout-invoices-payments-nmi' );
 				}
 				require_once SI_PATH.'/bundles/sprout-invoices-payments-nmi/SA_NMI.php';
 			}

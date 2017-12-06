@@ -1,14 +1,14 @@
-=== Sprout Invoices - Client Invoicing & Estimates / Quotes ===
+=== Sprout Invoices - Invoice & Estimate your Clients ===
 Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/
-Tags: invoice, invoicing, estimates, quotes, payments, billing, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
+Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.5.2
+Stable tag: 16.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create estimates and invoices within your WordPress site. Accept invoice payments from multiple payment processors.
+Provide an estimate and automatically invoice your client after approval, accept billing payments from multiple payment processors; all from your WordPress site.
 
 == Description ==
 
@@ -121,9 +121,28 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 
 == Upgrade Notice ==
 
-Woocommerce integrations, payment terms, stats dashboard, time tracking updates and more.
+WooCommerce integrations, payment terms, stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 16.5.7 =
+
+* Udpate: Point of Contact add-on will no longer force itself if unused.
+* Udpate: Use GMT offset everywhere
+* Fix: Signature add-on errors for default theme
+
+= 16.5.6 =
+
+* Fix: Some payment processsors were executing filters/actions without being active.
+
+= 16.5.5 =
+
+* Fix: Extraneous callback for updates on every load.
+* Fix: NMI bundle fix
+
+= 16.5.3 =
+
+* Fix: Pushing an update because business license holders were not receiving the proper bundle
 
 = 16.5.2 =
 

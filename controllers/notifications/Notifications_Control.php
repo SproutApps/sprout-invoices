@@ -441,7 +441,7 @@ class SI_Notifications_Control extends SI_Controller {
 		}
 
 		// Allow for a notification to be suppressed based on data
-		if ( apply_filters( 'si_disable_this_notification', false, $data, $to ) ) {
+		if ( apply_filters( 'si_disable_this_notification', false, $data, $to, $notification_name ) ) {
 			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Suppressed', $data );
 			return;
 		}

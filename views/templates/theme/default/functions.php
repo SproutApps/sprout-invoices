@@ -63,8 +63,13 @@ function _si_default_theme_print_to_pdf_button( $button = '' ) {
 }
 add_filter( 'si_print_to_pdf_button', '_si_default_theme_print_to_pdf_button' );
 
-function _si_signature_required_button( $button = '', $doc_id, $url ) {
-	$signed = ApproveMe_Controller::is_doc_agreement_signed( $doc_id );
+function _si_signature_required_button( $button = '', $doc_id = 0, $url = '' ) {
+	$signed = false;
+	if ( class_exists( 'ApproveMe_Controller' ) ) {
+		$signed = ApproveMe_Controller::is_doc_agreement_signed( $doc_id );
+	} elseif ( class_exists( 'eSignature_Controller' ) ) {
+		$signed = eSignature_Controller::doc_needs_sig( $doc_id );
+	}
 
 	$new_button = '';
 	$message = __( 'Signature Required', 'sprout-invoices' );

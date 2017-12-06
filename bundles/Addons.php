@@ -264,7 +264,7 @@ class SA_Addons extends SI_Controller {
 		$cached_addons = get_transient( $cache_key );
 		if ( $cached_addons ) {
 			if ( ! empty( $cached_addons ) ) {
-				return $cached_addons;
+				//return $cached_addons;
 			}
 		}
 
@@ -281,7 +281,6 @@ class SA_Addons extends SI_Controller {
 
 		// Call the custom API.
 		$response = wp_safe_remote_get( add_query_arg( $api_params, self::API_CB . 'wp-admin/admin-ajax.php' ), array( 'timeout' => 15, 'sslverify' => false ) );
-
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) ) {
 			return false;
@@ -289,6 +288,27 @@ class SA_Addons extends SI_Controller {
 
 		// decode the license data
 		$marketplace_items = json_decode( wp_remote_retrieve_body( $response ) );
+
+		// sort
+		$biz_addons = array();
+		$free_addons = array();
+		$corp_addons = array();
+
+		foreach ( $marketplace_items as $addon_id => $addon ) {
+			if ( $addon->id === 44588 ) {
+				$corp_addons[ $addon_id ] = $addon;
+			} elseif ( $addon->biz_bundled ) {
+				$biz_addons[ $addon_id ] = $addon;
+			} else {
+				$free_addons[ $addon_id ] = $addon;
+			}
+		}
+
+		asort( $biz_addons );
+		asort( $free_addons );
+
+		$marketplace_items = array_merge( $corp_addons, $free_addons, $biz_addons );
+
 		set_transient( $cache_key, $marketplace_items, DAY_IN_SECONDS * 5 );
 		return $marketplace_items;
 	}

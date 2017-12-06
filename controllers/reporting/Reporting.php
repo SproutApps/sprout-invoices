@@ -557,7 +557,7 @@ class SI_Reporting extends SI_Dashboard {
 						'inclusive' => true,
 					),
 				);
-				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
+				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp', true );
 				break;
 			case 'lastweek':
 				$args['date_query'] = array(
@@ -567,17 +567,17 @@ class SI_Reporting extends SI_Dashboard {
 						'inclusive' => true,
 					),
 				);
-				$expire = strtotime( 'next week' ) -current_time( 'timestamp' );
+				$expire = strtotime( 'next week' ) -current_time( 'timestamp', true );
 				break;
 			case 'month':
 				$args['date_query'] = array(
 					array(
 						'month' => date( 'm', strtotime( 'first day of this month' ) ),
-						'year' => date( 'o', current_time( 'timestamp' ) ),
+						'year' => date( 'o', current_time( 'timestamp', true ) ),
 						'inclusive' => true,
 					),
 				);
-				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
+				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp', true );
 				break;
 			case 'lastmonth':
 				$args['date_query'] = array(
@@ -587,16 +587,16 @@ class SI_Reporting extends SI_Dashboard {
 						'inclusive' => true,
 					),
 				);
-				$expire = strtotime( 'first day of next month' ) -current_time( 'timestamp' );
+				$expire = strtotime( 'first day of next month' ) -current_time( 'timestamp', true );
 				break;
 			case 'year':
 				$args['date_query'] = array(
 					array(
-						'year' => date( 'Y', current_time( 'timestamp' ) ),
+						'year' => date( 'Y', current_time( 'timestamp', true ) ),
 						'inclusive' => true,
 					),
 				);
-				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp' );
+				$expire = strtotime( 'tomorrow' ) -current_time( 'timestamp', true );
 				break;
 			case 'lastyear':
 				$args['date_query'] = array(
@@ -605,7 +605,7 @@ class SI_Reporting extends SI_Dashboard {
 						'inclusive' => true,
 					),
 				);
-				$expire = strtotime( 'last day of year' ) -current_time( 'timestamp' );
+				$expire = strtotime( 'last day of year' ) -current_time( 'timestamp', true );
 				break;
 			default:
 				break;

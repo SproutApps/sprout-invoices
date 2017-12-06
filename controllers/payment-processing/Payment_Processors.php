@@ -99,6 +99,11 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		return $gw_methods[ $payment_method ];
 	}
 
+	public static function is_active() {
+		$enabled = SI_Payment_Processors::enabled_processors();
+		return in_array( get_called_class(), $enabled );
+	}
+
 	/**
 	 * Get an instance of the active payment processor
 	 * Used during checkout where the payment processor is active/selected and defaults to the option

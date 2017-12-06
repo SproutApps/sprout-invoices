@@ -551,7 +551,7 @@ class SI_Notifications extends SI_Notifications_Control {
 	 */
 	public static function shortcode_date( $atts, $content, $code, $data ) {
 		$atts = shortcode_atts( array( 'format' => get_option( 'date_format' ) ), $atts );
-		$date = date_i18n( $atts['format'], current_time( 'timestamp' ) );
+		$date = date_i18n( $atts['format'], current_time( 'timestamp', true ) );
 		return apply_filters( 'shortcode_date', $date, $data );
 	}
 
@@ -965,7 +965,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		$days = 0;
 		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$due_date = $data['invoice']->get_due_date();
-			$pastdue = current_time( 'timestamp' ) -$due_date;
+			$pastdue = current_time( 'timestamp', true ) -$due_date;
 			$days = floor( $pastdue / (DAY_IN_SECONDS) );
 		}
 		return apply_filters( 'shortcode_invoice_past_due_date', $days, $data );
