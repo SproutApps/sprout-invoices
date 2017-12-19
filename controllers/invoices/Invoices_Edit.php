@@ -358,8 +358,8 @@ class SI_Invoices_Edit extends SI_Invoices {
 
 		$invoice = SI_Invoice::get_instance( $post->ID );
 		$status = ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_status() !== 'auto-draft' ) ? $invoice->get_status() : SI_Invoice::STATUS_TEMP ;
-		$due_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_due_date() : current_time( 'timestamp', true ) + (DAY_IN_SECONDS * 30);
-		$expiration_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_expiration_date() : current_time( 'timestamp', true ) + (DAY_IN_SECONDS * 30);
+		$due_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_due_date() : current_time( 'timestamp' ) + (DAY_IN_SECONDS * 30);
+		$expiration_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_expiration_date() : current_time( 'timestamp' ) + (DAY_IN_SECONDS * 30);
 		$issue_date = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_issue_date() : strtotime( $post->post_date );
 		$estimate_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_estimate_id() : 0 ;
 		$invoice_id = ( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : '00001';

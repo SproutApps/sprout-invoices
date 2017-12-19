@@ -1118,14 +1118,21 @@ div#invoice_status_updates-sticky-wrapper {
 }
 
 #line_items_totals {
-	text-align: right
+	text-align: right;
+}
+#line_items_totals > div {
+	margin-top: 10px;
 }
 
 #line_items_totals b {
 	margin-right: 20px;
 	float: left;
 	text-align: right;
-	width: 10em
+	width: 15em;
+	white-space: nowrap;
+}
+#line_items_totals b.helptip:after {
+	margin-right: -5px;
 }
 
 #line_item_add {

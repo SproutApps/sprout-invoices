@@ -11,9 +11,10 @@ class SA_Addons extends SI_Controller {
 	private static $active_addons = array();
 
 	public static function init() {
-		self::$active_addons = get_option( self::ADDON_OPTION, self::default_active_addons() );
-		if ( ! is_array( self::$active_addons ) ) {
+		self::$active_addons = get_option( self::ADDON_OPTION, false );
+		if ( ! self::$active_addons || empty( self::$active_addons ) ) {
 			self::$active_addons = self::default_active_addons();
+			update_option( self::ADDON_OPTION, self::$active_addons );
 		}
 		self::register_addons_admin();
 		self::load_addons();
