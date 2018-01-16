@@ -10,33 +10,107 @@ function si_default_theme_inject_css() {
 
 	$primary_color = SI_Customizer::sanitize_hex_color( get_theme_mod( 'si_'.$context.'_primary_color' ) );
 	$secondary_color = SI_Customizer::sanitize_hex_color( get_theme_mod( 'si_'.$context.'_secondary_color' ) );
+
+	$primary_text_color = SI_Customizer::sanitize_hex_color( get_theme_mod( 'si_'.$context.'_text_color' ) );
+
+	$accent_text_color = SI_Customizer::sanitize_hex_color( get_theme_mod( 'si_'.$context.'_title_text_color' ) );
+
+	$paybar_background_color = SI_Customizer::sanitize_hex_color( get_theme_mod( 'si_'.$context.'_paybar_background_color' ) );
+	$paybar_color = SI_Customizer::sanitize_hex_color( get_theme_mod( 'si_'.$context.'_paybar_color' ) );
+
 	$top = ( (bool) get_theme_mod( 'si_paybar_top' ) ) ? true : false ;
 	?>
 		<!-- Debut customizer CSS -->
 		<style>
 		<?php if ( $primary_color ) :  ?>
 			body,
-			.invoice .title h2,
-			#paybar .inner .button,
-			.history article .posted,
-			.line_item_comments span.comment_date,
-			.line_item_comment_wrap .submit.button {
+			body#estimate,
+			body#invoice,
+			.invoice .title h2 {
 				background-color: <?php echo esc_attr( $primary_color ); ?>;
 			}
 			.invoice .unit,
-			#paybar,
 			#header .inner .intro .open,
 			#save_signature_via_ajax,
-			body a {
+			body a,
+			.history article .posted, .line_item_comments span.comment_date, .line_item_comment_wrap .submit.button {
 				color: <?php echo esc_attr( $primary_color ); ?>;
 			}
+
 		<?php endif ?>
 		<?php if ( $secondary_color ) :  ?>
 			#header {
 				background-color: <?php echo esc_attr( $secondary_color ); ?>;
 			}
+			.history article .posted, .line_item_comments span.comment_date, .line_item_comment_wrap .submit.button {
+				background-color: <?php echo esc_attr( $secondary_color ); ?>;
+			}
+		<?php endif ?>
+		<?php if ( $primary_text_color ) :  ?>
+			body,
+			body#invoice,
+			body#estimate {
+			    color: <?php echo esc_attr( $primary_text_color ); ?>;
+			}
+		<?php endif ?>
+		<?php if ( $accent_text_color ) :  ?>
+			#intro .inner .column span,
+			#notes .item .header h3 {
+			    color: <?php echo esc_attr( $accent_text_color ); ?>;
+			}
+			.li_comments_toggle {
+				fill: <?php echo esc_attr( $accent_text_color ); ?>;
+			}
+		<?php endif ?>
+		<?php if ( $paybar_background_color ) :  ?>
+			.estimate .title h2,
+			.invoice .title h2 {
+			    background-color: <?php echo esc_attr( $paybar_background_color ); ?>;
+			    border-color: <?php echo esc_attr( $paybar_background_color ); ?>;
+			}
+			.estimate .title:after,
+			.invoice .title:after {
+			    border-color: <?php echo esc_attr( $paybar_background_color ); ?>;
+			}
+			#header .inner .history_message .open,
+			.button {
+				color: <?php echo esc_attr( $paybar_background_color ); ?>;
+			}
+			section#paybar {
+			    background-color: <?php echo esc_attr( $paybar_background_color ); ?>;
+			}
+			#header .inner,
+			#notes .item .header h3 {
+			    border-bottom-color: <?php echo esc_attr( $paybar_background_color ); ?>;
+			}
+			.li_comments_toggle.has_comments {
+				fill: <?php echo esc_attr( $paybar_background_color ); ?>;
+			}
+		<?php endif ?>
+		<?php if ( $paybar_color ) :  ?>
+			.estimate .title h2,
+			.invoice .title h2 {
+			    color: <?php echo esc_attr( $paybar_color ); ?>;
+			}
+			.history article .posted,
+			#paybar .inner .button,
+			#header .inner .history_message .open,
+			.button {
+				background-color: <?php echo esc_attr( $paybar_color ); ?>;
+			}
+			.history article .posted:after {
+				border-color: transparent transparent transparent <?php echo esc_attr( $paybar_color ); ?>;
+			}
+			#items .items .item .column h3,
+			#totals .items .item {
+				border-color: <?php echo esc_attr( $paybar_color ); ?>;
+			}
+			#paybar,
+			section#paybar {
+			    color: <?php echo esc_attr( $paybar_color ); ?>;
+			}
 			#paybar .inner a#print_to_pdf_button svg {
-				fill: <?php echo esc_attr( $primary_color ); ?>;
+				fill: <?php echo esc_attr( $paybar_color ); ?>;
 			}
 		<?php endif ?>
 		<?php if ( $top ) : ?>

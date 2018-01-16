@@ -269,7 +269,7 @@ if ( ! function_exists( 'si_get_days_ago' ) ) :
 	 * @return string
 	 */
 	function si_get_days_ago( $last_updated = 0 ) {
-		$time_between_update = current_time( 'timestamp', true ) - $last_updated;
+		$time_between_update = current_time( 'timestamp' ) - $last_updated;
 		$days_since = round( (($time_between_update / 24) / 60) / 60 );
 		return apply_filters( 'si_get_days_ago', $days_since );
 	}

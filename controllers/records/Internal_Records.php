@@ -64,7 +64,7 @@ class SI_Internal_Records extends SI_Controller {
 		}
 
 		$status = ( isset( $data['status'] ) && '' !== $data['status'] ) ? $data['status'] : 'publish' ;
-		$post_date = ( isset( $data['post_date'] ) && $data['post_date'] ) ? (int) $data['post_date'] : current_time( 'timestamp', true );
+		$post_date = ( isset( $data['post_date'] ) && $data['post_date'] ) ? (int) $data['post_date'] : current_time( 'timestamp' );
 
 		$post = array(
 			'post_title' => $title,

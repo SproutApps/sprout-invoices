@@ -38,7 +38,7 @@ do_action( 'pre_si_pdf_estimate_view' ); ?><!DOCTYPE html>
 		</style>
 	</head>
 
-	<body>
+	<body id="estimate" class="si_og_theme">
 		<header class="row" id="header">
 			<div class="inner">
 

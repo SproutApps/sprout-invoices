@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.5.7
+Stable tag: 16.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,8 @@ Reduce the time spent getting paid! Improve your business workflow with automate
 = Invoice, Estimate / Quote, & Online Payments with these Sprout Invoices Features =
 
 Reduce the time spent fielding project requests, estimating projects, invoicing clients, & getting paid.
+
+https://www.youtube.com/watch?v=-Q3uxmLwlQs
 
 * An awesome [estimate & invoice workflow](https://sproutapps.co/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org). 
 * The best [payment experience](https://sproutapps.co/news/sprout-invoices-payment-options-deposits-checks-authorizations/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutapps.co/marketplace/paypal-payments-express-checkout/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org) ([additional gateways available](https://sproutapps.co/marketplace/category/payment-gateway/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org)).
@@ -41,8 +43,6 @@ Reduce the time spent fielding project requests, estimating projects, invoicing 
 * [Advanced Taxes for your region](https://sproutapps.co/marketplace/category/free/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org)
 * Client records with multiple points of contact
 * No extra database tables!
-
-https://www.youtube.com/watch?v=n1pP_hQSKlQ
 
 = Pro Features =
 
@@ -95,6 +95,7 @@ Integrate with over 300 other apps around the web, including Quickbooks Online a
 *Hundreds of Hooks*
 Over two hundred filters and actions allow you to hook into Sprout Invoices and alter whatever you'd like or build some awesome features like those in the marketplace.
 
+https://www.youtube.com/watch?v=n1pP_hQSKlQ
 
 == Installation ==
 
@@ -125,10 +126,25 @@ WooCommerce integrations, payment terms, stats dashboard, time tracking updates 
 
 == Changelog ==
 
+= 16.7 =
+
+* NEW: More options to change the colors for the default theme in the customizer
+* Update: Adjustments for better PDF add-on support
+
+= 16.6.0.1 =
+
+* Update: Reverting GMT offset changes from last release. Needs more testing.
+* Update: Offsite payment processor update
+* New: Filtering for checkboxes
+* Update: Line items totals display updated for the admin.
+* New: Save a default list of add-ons to be active on setup.
+* Update/Fix: WooCommerce exclusive/inclusive tax updates
+* Update: WooCommerce compatibility update
+
 = 16.5.7 =
 
-* Udpate: Point of Contact add-on will no longer force itself if unused.
-* Udpate: Use GMT offset everywhere
+* Update: Point of Contact add-on will no longer force itself if unused.
+* Update: Use GMT offset everywhere
 * Fix: Signature add-on errors for default theme
 
 = 16.5.6 =

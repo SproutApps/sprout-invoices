@@ -168,7 +168,7 @@ class SI_Estimate extends SI_Post_Type {
 
 	public static function create_estimate( $passed_args, $status = '' ) {
 		$defaults = array(
-			'subject' => sprintf( __( 'New Estimate: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp', true ) ) ),
+			'subject' => sprintf( __( 'New Estimate: %s', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ).' @ '.get_option( 'time_format' ), current_time( 'timestamp' ) ) ),
 			'user_id' => '',
 			'estimate_id' => '',
 			'invoice_id' => '',

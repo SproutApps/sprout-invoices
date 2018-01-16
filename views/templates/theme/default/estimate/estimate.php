@@ -131,7 +131,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 		<section class="row" id="paybar">
 			<div class="inner">
 				<?php
-					$time_left = si_get_estimate_expiration_date() - current_time( 'timestamp', true );
+					$time_left = si_get_estimate_expiration_date() - current_time( 'timestamp' );
 					$days_left = round( (($time_left / 24) / 60) / 60 );
 						?>
 				<?php if ( $time_left > 0 ) :  ?>

@@ -59,8 +59,14 @@
 						$option .= sprintf( '<input class="sa_option_hidden" type="hidden" name="line_item_%2$s[]" value="%1$s">', esc_attr( $value ), $column_slug );
 						break;
 					case 'checkbox':
+
+						$checked = checked( $value, $val, false );
+						if ( isset( $column['check_by_default'] ) && ! isset( $item_data[ $column_slug ] ) ) {
+							$checked = ( $column['check_by_default'] ) ? checked( true, true, false ) : checked( false, true, false );
+						}
 						$option .= sprintf( '<input class="sa_option_checkbox" type="hidden" name="line_item_%2$s[]" value="%1$s">', $value, $column_slug );
-						$option .= sprintf( '<input class="%2$s_decoy_checkbox sa_option_checkbox" type="checkbox" name="line_item_%2$s_decoy_checkbox" value="%1$s" %3$s>', $val, $column_slug, checked( $value, $val, false ) );
+
+						$option .= sprintf( '<input class="%2$s_decoy_checkbox sa_option_checkbox" type="checkbox" name="line_item_%2$s_decoy_checkbox" value="%1$s" %3$s>', $val, $column_slug, $checked );
 						break;
 					case 'money':
 					case 'total':
@@ -77,8 +83,7 @@
 
 				if ( $wrap ) {
 					printf( '<div class="column %3$s column_%2$s">%1$s</div><!-- / column_%2$s -->', $option, $column_slug, $hide_if_parent, $column['label'] );
-				}
-				else {
+				} else {
 					print $option;
 				}
 			} ?>

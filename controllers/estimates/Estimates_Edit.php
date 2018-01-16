@@ -351,7 +351,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 
 		$estimate = SI_Estimate::get_instance( $post->ID );
 		$status = ( is_a( $estimate, 'SI_Estimate' ) && $estimate->get_status() != 'auto-draft' ) ? $estimate->get_status() : SI_Estimate::STATUS_TEMP ;
-		$expiration_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_expiration_date() : current_time( 'timestamp', true ) + (DAY_IN_SECONDS * 30);
+		$expiration_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_expiration_date() : current_time( 'timestamp' ) + (DAY_IN_SECONDS * 30);
 		$issue_date = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_issue_date() : strtotime( $post->post_date );
 		$invoice_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_invoice_id() : 0 ;
 		$estimate_id = ( is_a( $estimate, 'SI_Estimate' ) ) ? $estimate->get_estimate_id() : '00001';

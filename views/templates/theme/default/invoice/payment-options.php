@@ -3,7 +3,7 @@
 		<?php do_action( 'si_default_theme_inner_paybar' ) ?>
 		
 		<?php
-			$time_left = si_get_invoice_due_date() - current_time( 'timestamp', true );
+			$time_left = si_get_invoice_due_date() - current_time( 'timestamp' );
 			$days_left = round( (($time_left / 24) / 60) / 60 );
 				?>
 		<?php if ( $time_left > 0 ) :  ?>
