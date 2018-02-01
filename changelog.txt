@@ -1,3 +1,12 @@
+= 16.7.5 =
+
+* Update: PO updates
+* Update: Remove Ready Status add-on because of incompatibilities
+* Fix: Recurring (more) fail checks
+* Update: Plaid filter for enviroment
+* Fix: Project time tracking meta box redundancy
+* Fix: Fees should not be doubled up
+
 = 16.7 =
 
 * NEW: More options to change the colors for the default theme in the customizer

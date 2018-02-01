@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.7
+Stable tag: 16.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -125,6 +125,15 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 WooCommerce integrations, payment terms, stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 16.7.5 =
+
+* Update: PO updates
+* Update: Remove Ready Status add-on because of incompatibilities
+* Fix: Recurring (more) fail checks
+* Update: Plaid filter for enviroment
+* Fix: Project time tracking meta box redundancy
+* Fix: Fees should not be doubled up
 
 = 16.7 =
 

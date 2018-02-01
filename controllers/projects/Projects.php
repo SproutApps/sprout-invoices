@@ -80,14 +80,6 @@ class SI_Projects extends SI_Controller {
 	public static function register_meta_boxes() {
 		// estimate specific
 		$args = array(
-			'si_project_timetracking' => array(
-				'title' => __( 'Time Tracking', 'sprout-invoices' ),
-				'show_callback' => array( __CLASS__, 'show_upgrade_notice' ),
-				'save_callback' => array( __CLASS__, '_save_null' ),
-				'context' => 'normal',
-				'priority' => 'high',
-				'save_priority' => 0,
-			),
 			'si_project_information' => array(
 				'title' => __( 'Information', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_information_meta_box' ),
