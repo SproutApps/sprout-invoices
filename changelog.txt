@@ -1,3 +1,12 @@
+= 16.8 =
+
+* Update: Remove all form integrations add-ons since they're now in the .org repo for free
+
+= 16.7.6 =
+
+* Update: Freemius updated for free versions
+* Fix: Removed private bundled add-on
+
 = 16.7.5 =
 
 * Update: PO updates

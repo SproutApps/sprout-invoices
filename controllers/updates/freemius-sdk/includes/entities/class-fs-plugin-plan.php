@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.0.5
 	 */
 
@@ -10,6 +10,11 @@
 		exit;
 	}
 
+	/**
+	 * Class FS_Plugin_Plan
+	 *
+	 * @property FS_Pricing[] $pricing
+	 */
 	class FS_Plugin_Plan extends FS_Entity {
 
 		#region Properties
@@ -109,6 +114,22 @@
 		 */
 		function is_free() {
 			return ( 'free' === $this->name );
+		}
+
+		/**
+		 * Checks if this plan supports "Technical Support".
+		 *
+		 * @author Leo Fajardo (leorw)
+		 * @since 1.2.0
+		 *
+		 * @return bool
+		 */
+		function has_technical_support() {
+			return ( ! empty( $this->support_email ) ||
+			     ! empty( $this->support_skype ) ||
+			     ! empty( $this->support_phone ) ||
+			     ! empty( $this->is_success_manager )
+			);
 		}
 
 		/**

@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.0.4
 	 */
 
@@ -41,7 +41,7 @@
 		private static $_clock_diff;
 
 		/**
-		 * @var Freemius_Api
+		 * @var Freemius_Api_WordPress
 		 */
 		private $_api;
 
@@ -83,18 +83,18 @@
 				return;
 			}
 
-			if ( ! class_exists( 'Freemius_Api' ) ) {
-				require_once( WP_FS__DIR_SDK . '/Freemius.php' );
+			if ( ! class_exists( 'Freemius_Api_WordPress' ) ) {
+				require_once WP_FS__DIR_SDK . '/FreemiusWordPress.php';
 			}
 
 			self::$_options = FS_Option_Manager::get_manager( WP_FS__OPTIONS_OPTION_NAME, true );
 			self::$_cache   = FS_Cache_Manager::get_manager( WP_FS__API_CACHE_OPTION_NAME );
 
 			self::$_clock_diff = self::$_options->get_option( 'api_clock_diff', 0 );
-			Freemius_Api::SetClockDiff( self::$_clock_diff );
+			Freemius_Api_WordPress::SetClockDiff( self::$_clock_diff );
 
 			if ( self::$_options->get_option( 'api_force_http', false ) ) {
-				Freemius_Api::SetHttp();
+				Freemius_Api_WordPress::SetHttp();
 			}
 		}
 
@@ -107,7 +107,7 @@
 		 * @param bool        $is_sandbox
 		 */
 		private function __construct( $slug, $scope, $id, $public_key, $secret_key, $is_sandbox ) {
-			$this->_api = new Freemius_Api( $scope, $id, $public_key, $secret_key, $is_sandbox );
+			$this->_api = new Freemius_Api_WordPress( $scope, $id, $public_key, $secret_key, $is_sandbox );
 
 			$this->_slug   = $slug;
 			$this->_logger = FS_Logger::get_logger( WP_FS__SLUG . '_' . $slug . '_api', WP_FS__DEBUG_SDK, WP_FS__ECHO_DEBUG_SDK );
@@ -125,7 +125,7 @@
 
 			// Sync clock and store.
 			$new_clock_diff = ( false === $diff ) ?
-				Freemius_Api::FindClockDiff() :
+				Freemius_Api_WordPress::FindClockDiff() :
 				$diff;
 
 			if ( $new_clock_diff === self::$_clock_diff ) {
@@ -135,7 +135,7 @@
 			self::$_clock_diff = $new_clock_diff;
 
 			// Update API clock's diff.
-			Freemius_Api::SetClockDiff( self::$_clock_diff );
+			Freemius_Api_WordPress::SetClockDiff( self::$_clock_diff );
 
 			// Store new clock diff in storage.
 			self::$_options->set_option( 'api_clock_diff', self::$_clock_diff, true );
@@ -180,9 +180,9 @@
 				}
 			}
 
-			if ( null !== $result && isset( $result->error ) && isset( $result->error->message ) ) {
+			if ( $this->_logger->is_on() && self::is_api_error( $result ) ) {
 				// Log API errors.
-				$this->_logger->error( $result->error->message );
+				$this->_logger->api_error( $result );
 			}
 
 			return $result;
@@ -232,7 +232,7 @@
 
 			$cached_result = self::$_cache->get( $cache_key );
 
-			if ( $flush || ! self::$_cache->has_valid( $cache_key ) ) {
+			if ( $flush || ! self::$_cache->has_valid( $cache_key, $expiration ) ) {
 				$result = $this->call( $path );
 
 				if ( ! is_object( $result ) || isset( $result->error ) ) {
@@ -243,6 +243,10 @@
 						// If there was an error during a newer data fetch,
 						// fallback to older data version.
 						$result = $cached_result;
+
+						if ( $this->_logger->is_on() ) {
+							$this->_logger->warn( 'Fallback to cached API result: ' . var_export( $cached_result, true ) );
+						}
 					} else {
 						// If no older data version, return result without
 						// caching the error.
@@ -253,16 +257,62 @@
 				self::$_cache->set( $cache_key, $result, $expiration );
 
 				$cached_result = $result;
+			} else {
+				$this->_logger->log( 'Using cached API result.' );
 			}
 
 			return $cached_result;
 		}
 
+		/**
+		 * Check if there's a cached version of the API request.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1
+		 *
+		 * @param string $path
+		 * @param string $method
+		 * @param array  $params
+		 *
+		 * @return bool
+		 */
+		function is_cached( $path, $method = 'GET', $params = array() ) {
+			$cache_key = $this->get_cache_key( $path, $method, $params );
+
+			return self::$_cache->has_valid( $cache_key );
+		}
+
+		/**
+		 * Invalidate a cached version of the API request.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1.5
+		 *
+		 * @param string $path
+		 * @param string $method
+		 * @param array  $params
+		 */
+		function purge_cache( $path, $method = 'GET', $params = array() ) {
+			$this->_logger->entrance( "{$method}:{$path}" );
+
+			$cache_key = $this->get_cache_key( $path, $method, $params );
+
+			self::$_cache->purge( $cache_key );
+		}
+
+		/**
+		 * @param string $path
+		 * @param string $method
+		 * @param array  $params
+		 *
+		 * @return string
+		 * @throws \Freemius_Exception
+		 */
 		private function get_cache_key( $path, $method = 'GET', $params = array() ) {
 			$canonized = $this->_api->CanonizePath( $path );
 //			$exploded = explode('/', $canonized);
 //			return $method . '_' . array_pop($exploded) . '_' . md5($canonized . json_encode($params));
-			return $method . ':' . $canonized . ( ! empty( $params ) ? '#' . md5( json_encode( $params ) ) : '' );
+			return strtolower( $method . ':' . $canonized ) . ( ! empty( $params ) ? '#' . md5( json_encode( $params ) ) : '' );
 		}
 
 		/**
@@ -283,15 +333,15 @@
 			$test = self::$_cache->get_valid( $cache_key, null );
 
 			if ( is_null( $test ) ) {
-				$test = Freemius_Api::Test();
+				$test = Freemius_Api_WordPress::Test();
 
-				if ( false === $test && Freemius_Api::IsHttps() ) {
+				if ( false === $test && Freemius_Api_WordPress::IsHttps() ) {
 					// Fallback to HTTP, since HTTPS fails.
-					Freemius_Api::SetHttp();
+					Freemius_Api_WordPress::SetHttp();
 
 					self::$_options->set_option( 'api_force_http', true, true );
 
-					$test = Freemius_Api::Test();
+					$test = Freemius_Api_WordPress::Test();
 
 					if ( false === $test ) {
 						/**
@@ -334,7 +384,7 @@
 		 */
 		private function get_temporary_unavailable_error() {
 			return (object) array(
-				'error' => array(
+				'error' => (object) array(
 					'type'    => 'TemporaryUnavailable',
 					'message' => 'API is temporary unavailable, please retry in ' . ( self::$_cache->get_record_expiration( 'ping_test' ) - WP_FS__SCRIPT_START_TIME ) . ' sec.',
 					'code'    => 'temporary_unavailable',
@@ -362,10 +412,11 @@
 			}
 
 			$pong = is_null( $unique_anonymous_id ) ?
-				Freemius_Api::Ping() :
-				$this->_call( 'ping.json?' . http_build_query( array_merge( $params, array(
-						'uid' => $unique_anonymous_id,
-					) ) ) );
+				Freemius_Api_WordPress::Ping() :
+				$this->_call( 'ping.json?' . http_build_query( array_merge(
+						array( 'uid' => $unique_anonymous_id ),
+						$params
+					) ) );
 
 			if ( $this->is_valid_ping( $pong ) ) {
 				return $pong;
@@ -373,15 +424,16 @@
 
 			if ( self::should_try_with_http( $pong ) ) {
 				// Fallback to HTTP, since HTTPS fails.
-				Freemius_Api::SetHttp();
+				Freemius_Api_WordPress::SetHttp();
 
 				self::$_options->set_option( 'api_force_http', true, true );
 
 				$pong = is_null( $unique_anonymous_id ) ?
-					Freemius_Api::Ping() :
-					$this->_call( 'ping.json?' . http_build_query( array_merge( $params, array(
-							'uid' => $unique_anonymous_id,
-						) ) ) );
+					Freemius_Api_WordPress::Ping() :
+					$this->_call( 'ping.json?' . http_build_query( array_merge(
+							array( 'uid' => $unique_anonymous_id ),
+							$params
+						) ) );
 
 				if ( ! $this->is_valid_ping( $pong ) ) {
 					self::$_options->set_option( 'api_force_http', false, true );
@@ -403,7 +455,7 @@
 		 * @return bool
 		 */
 		private static function should_try_with_http( $result ) {
-			if ( ! Freemius_Api::IsHttps() ) {
+			if ( ! Freemius_Api_WordPress::IsHttps() ) {
 				return false;
 			}
 
@@ -431,11 +483,11 @@
 		 * @return bool
 		 */
 		function is_valid_ping( $pong ) {
-			return Freemius_Api::Test( $pong );
+			return Freemius_Api_WordPress::Test( $pong );
 		}
 
 		function get_url( $path = '' ) {
-			return Freemius_Api::GetUrl( $path, $this->_api->IsSandbox() );
+			return Freemius_Api_WordPress::GetUrl( $path, $this->_api->IsSandbox() );
 		}
 
 		/**
@@ -448,6 +500,59 @@
 			self::_init();
 
 			self::$_cache = FS_Cache_Manager::get_manager( WP_FS__API_CACHE_OPTION_NAME );
-			self::$_cache->clear( true );
+			self::$_cache->clear();
 		}
+
+		#----------------------------------------------------------------------------------
+		#region Error Handling
+		#----------------------------------------------------------------------------------
+
+		/**
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1.5
+		 *
+		 * @param mixed $result
+		 *
+		 * @return bool Is API result contains an error.
+		 */
+		static function is_api_error( $result ) {
+			return ( is_object( $result ) && isset( $result->error ) ) ||
+			       is_string( $result );
+		}
+
+		/**
+		 * Checks if given API result is a non-empty and not an error object.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1.5
+		 *
+		 * @param mixed       $result
+		 * @param string|null $required_property Optional property we want to verify that is set.
+		 *
+		 * @return bool
+		 */
+		static function is_api_result_object( $result, $required_property = null ) {
+			return (
+				is_object( $result ) &&
+				! isset( $result->error ) &&
+				( empty( $required_property ) || isset( $result->{$required_property} ) )
+			);
+		}
+
+		/**
+		 * Checks if given API result is a non-empty entity object with non-empty ID.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1.5
+		 *
+		 * @param mixed $result
+		 *
+		 * @return bool
+		 */
+		static function is_api_result_entity( $result ) {
+			return self::is_api_result_object( $result, 'id' ) &&
+			       FS_Entity::is_valid_id( $result->id );
+		}
+
+		#endregion
 	}

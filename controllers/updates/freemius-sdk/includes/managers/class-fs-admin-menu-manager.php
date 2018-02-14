@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.1.3
 	 */
 
@@ -15,9 +15,25 @@
 		#region Properties
 
 		/**
+		 * @since 1.2.2
+		 *
 		 * @var string
 		 */
-		protected $_plugin_slug;
+		protected $_module_unique_affix;
+
+		/**
+		 * @since 1.2.2
+		 *
+		 * @var number
+		 */
+		protected $_module_id;
+
+		/**
+		 * @since 1.2.2
+		 *
+		 * @var string
+		 */
+		protected $_module_type;
 
 		/**
 		 * @since 1.0.6
@@ -58,7 +74,7 @@
 		/**
 		 * @since 1.1.3
 		 *
-		 * @var string[]bool
+		 * @var array<string,bool>
 		 */
 		private $_default_submenu_items;
 		/**
@@ -67,6 +83,12 @@
 		 * @var string
 		 */
 		private $_first_time_path;
+		/**
+		 * @since 1.2.2
+		 *
+		 * @var bool
+		 */
+		private $_menu_exists;
 
 		#endregion Properties
 
@@ -83,22 +105,28 @@
 		private static $_instances = array();
 
 		/**
-		 * @param string $plugin_slug
+		 * @param number $module_id
+		 * @param string $module_type
+		 * @param string $module_unique_affix
 		 *
-		 * @return FS_Admin_Notice_Manager
+		 * @return FS_Admin_Menu_Manager
 		 */
-		static function instance( $plugin_slug ) {
-			if ( ! isset( self::$_instances[ $plugin_slug ] ) ) {
-				self::$_instances[ $plugin_slug ] = new FS_Admin_Menu_Manager( $plugin_slug );
+		static function instance( $module_id, $module_type, $module_unique_affix ) {
+			$key = 'm_' . $module_id;
+
+			if ( ! isset( self::$_instances[ $key ] ) ) {
+				self::$_instances[ $key ] = new FS_Admin_Menu_Manager( $module_id, $module_type, $module_unique_affix );
 			}
 
-			return self::$_instances[ $plugin_slug ];
+			return self::$_instances[ $key ];
 		}
 
-		protected function __construct( $plugin_slug ) {
-			$this->_logger = FS_Logger::get_logger( WP_FS__SLUG . '_' . $plugin_slug . '_admin_menu', WP_FS__DEBUG_SDK, WP_FS__ECHO_DEBUG_SDK );
+		protected function __construct( $module_id, $module_type, $module_unique_affix ) {
+			$this->_logger = FS_Logger::get_logger( WP_FS__SLUG . '_' . $module_id . '_admin_menu', WP_FS__DEBUG_SDK, WP_FS__ECHO_DEBUG_SDK );
 
-			$this->_plugin_slug = $plugin_slug;
+			$this->_module_id           = $module_id;
+			$this->_module_type         = $module_type;
+			$this->_module_unique_affix = $module_unique_affix;
 		}
 
 		#endregion Singleton
@@ -110,7 +138,7 @@
 		}
 
 		private function get_bool_option( &$options, $key, $default = false ) {
-			return isset( $options[ $key ] ) &&is_bool( $options[ $key ] )  ? $options[ $key ] : $default;
+			return isset( $options[ $key ] ) && is_bool( $options[ $key ] ) ? $options[ $key ] : $default;
 		}
 
 		#endregion Helpers
@@ -120,7 +148,9 @@
 		 * @param bool  $is_addon
 		 */
 		function init( $menu, $is_addon = false ) {
-			$this->_menu_slug = $menu['slug'];
+			$this->_menu_exists = ( isset( $menu['slug'] ) && ! empty( $menu['slug'] ) );
+
+			$this->_menu_slug = ( $this->_menu_exists ? $menu['slug'] : $this->_module_unique_affix );
 
 			$this->_default_submenu_items = array();
 			// @deprecated
@@ -133,11 +163,12 @@
 
 			if ( ! $is_addon && isset( $menu ) ) {
 				$this->_default_submenu_items = array(
-					'contact' => $this->get_bool_option( $menu, 'contact', true ),
-					'support' => $this->get_bool_option( $menu, 'support', true ),
-					'account' => $this->get_bool_option( $menu, 'account', true ),
-					'pricing' => $this->get_bool_option( $menu, 'pricing', true ),
-					'addons'  => $this->get_bool_option( $menu, 'addons', true ),
+					'contact'     => $this->get_bool_option( $menu, 'contact', true ),
+					'support'     => $this->get_bool_option( $menu, 'support', true ),
+                    'affiliation' => $this->get_bool_option( $menu, 'affiliation', true ),
+					'account'     => $this->get_bool_option( $menu, 'account', true ),
+					'pricing'     => $this->get_bool_option( $menu, 'pricing', true ),
+					'addons'      => $this->get_bool_option( $menu, 'addons', true ),
 				);
 
 				// @deprecated
@@ -220,14 +251,14 @@
 		}
 
 		/**
-		 * @author Vova Feldman (@svovaf)
-		 * @since  1.1.3
+		 * @author Leo Fajardo (@leorw)
+		 * @since  1.2.2
 		 *
-		 * @return string
+		 * @return bool
 		 */
-//		function slug(){
-//			return $this->_menu_slug;
-//		}
+		function has_menu() {
+			return $this->_menu_exists;
+		}
 
 		/**
 		 * @author Vova Feldman (@svovaf)
@@ -235,12 +266,17 @@
 		 *
 		 * @param string $id
 		 * @param bool   $default
+		 * @param bool   $ignore_menu_existence Since 1.2.2.7 If true, check if the submenu item visible even if there's no parent menu.
 		 *
 		 * @return bool
 		 */
-		function is_submenu_item_visible( $id, $default = true ) {
+		function is_submenu_item_visible( $id, $default = true, $ignore_menu_existence = false ) {
+			if ( ! $ignore_menu_existence && ! $this->has_menu() ) {
+				return false;
+			}
+
 			return fs_apply_filter(
-				$this->_plugin_slug,
+				$this->_module_unique_affix,
 				'is_submenu_visible',
 				$this->get_bool_option( $this->_default_submenu_items, $id, $default ),
 				$id
@@ -261,7 +297,7 @@
 		function get_slug( $page = '' ) {
 			return ( ( false === strpos( $this->_menu_slug, '.php?' ) ) ?
 				$this->_menu_slug :
-				$this->_plugin_slug ) . ( empty( $page ) ? '' : ( '-' . $page ) );
+				$this->_module_unique_affix ) . ( empty( $page ) ? '' : ( '-' . $page ) );
 		}
 
 		/**
@@ -335,7 +371,7 @@
 			if ( false === strpos( $this->_menu_slug, '.php?' ) ) {
 				return $this->_menu_slug;
 			} else {
-				return $this->_plugin_slug;
+				return $this->_module_unique_affix;
 			}
 		}
 
@@ -359,10 +395,30 @@
 		 *
 		 * @return bool
 		 */
-		function is_activation_page() {
-			return isset( $_GET['page'] ) &&
-			       ( ( strtolower( $this->_menu_slug ) === strtolower( $_GET['page'] ) ) ||
-			         ( strtolower( $this->_plugin_slug ) === strtolower( $_GET['page'] ) ) );
+		function is_main_settings_page() {
+			if ( $this->_menu_exists &&
+			     ( fs_is_plugin_page( $this->_menu_slug ) || fs_is_plugin_page( $this->_module_unique_affix ) )
+			) {
+				/**
+				 * Module has a settings menu and the context page is the main settings page, so assume it's in
+				 * activation (doesn't really check if already opted-in/skipped or not).
+				 *
+				 * @since 1.2.2
+				 */
+				return true;
+			}
+
+			global $pagenow;
+			if ( ( WP_FS__MODULE_TYPE_THEME === $this->_module_type ) && Freemius::is_themes_page() ) {
+				/**
+				 * In activation only when show_optin query string param is given.
+				 *
+				 * @since 1.2.2
+				 */
+				return fs_request_get_bool( $this->_module_unique_affix . '_show_optin' );
+			}
+
+			return false;
 		}
 
 		#region Submenu Override
@@ -454,6 +510,49 @@
 		}
 
 		/**
+		 * Find plugin's admin dashboard main submenu item.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1.6
+		 *
+		 * @return array|false
+		 */
+		private function find_main_submenu() {
+			global $submenu;
+
+			$top_level_menu_slug = $this->get_top_level_menu_slug();
+
+			if ( ! isset( $submenu[ $top_level_menu_slug ] ) ) {
+				return false;
+			}
+
+			$submenu_slug = $this->get_raw_slug();
+
+			$position   = - 1;
+			$found_submenu = false;
+
+			$hook_name = get_plugin_page_hookname( $submenu_slug, '' );
+
+			foreach ( $submenu[ $top_level_menu_slug ] as $pos => $sub ) {
+				if ( $submenu_slug === $sub[2] ) {
+					$position   = $pos;
+					$found_submenu = $sub;
+				}
+			}
+
+			if ( false === $found_submenu ) {
+				return false;
+			}
+
+			return array(
+				'menu'        => $found_submenu,
+				'parent_slug' => $top_level_menu_slug,
+				'position'    => $position,
+				'hook_name'   => $hook_name
+			);
+		}
+
+		/**
 		 * Remove all sub-menu items.
 		 *
 		 * @author Vova Feldman (@svovaf)
@@ -470,7 +569,16 @@
 				return false;
 			}
 
-			$submenu[ $menu_slug ] = array();
+			/**
+			 * This method is NOT executed for WordPress.org themes.
+			 * Since we maintain only one version of the SDK we added this small
+			 * hack to avoid the error from Theme Check since it's a false-positive.
+			 *
+			 * @author Vova Feldman (@svovaf)
+			 * @since  1.2.2.7
+			 */
+			$submenu_ref               = &$submenu;
+			$submenu_ref[ $menu_slug ] = array();
 
 			return true;
 		}
@@ -480,7 +588,7 @@
 		 * @author Vova Feldman (@svovaf)
 		 * @since  1.0.9
 		 *
-		 * @return array[string]mixed
+		 * @return false|array[string]mixed
 		 */
 		function remove_menu_item() {
 			$this->_logger->entrance();
@@ -502,13 +610,38 @@
 		}
 
 		/**
+		 * Get module's main admin setting page URL.
 		 *
+		 * @todo This method was only tested for wp.org compliant themes with a submenu item. Need to test for plugins with top level, submenu, and CPT top level, menu items.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.2.7
+		 *
+		 * @return string
+		 */
+		function main_menu_url() {
+			$this->_logger->entrance();
+
+			if ( $this->_is_top_level ) {
+				$menu = $this->find_top_level_menu();
+			} else {
+				$menu = $this->find_main_submenu();
+			}
+
+			$parent_slug = isset( $menu['parent_slug'] ) ?
+                $menu['parent_slug'] :
+                'admin.php';
+
+			return admin_url( $parent_slug . '?page=' . $menu['menu'][2] );
+		}
+
+		/**
 		 * @author Vova Feldman (@svovaf)
 		 * @since  1.1.4
 		 *
 		 * @param callable $function
 		 *
-		 * @return array[string]mixed
+		 * @return false|array[string]mixed
 		 */
 		function override_menu_item( $function ) {
 			$found_menu = $this->remove_menu_item();
@@ -527,8 +660,11 @@
 			} else {
 				global $menu;
 
+				// Remove original CPT menu.
+				unset( $menu[ $found_menu['position'] ] );
+
 				// Create new top-level menu action.
-				$hookname = add_menu_page(
+				$hookname = self::add_page(
 					$found_menu['menu'][3],
 					$found_menu['menu'][0],
 					'manage_options',
@@ -537,13 +673,178 @@
 					$found_menu['menu'][6],
 					$found_menu['position']
 				);
-
-				// Remove original CPT menu.
-				unset( $menu[ $found_menu['position'] ] );
 			}
 
 			return $hookname;
 		}
 
+		/**
+		 * Adds a counter to the module's top level menu item.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1.5
+		 *
+		 * @param int    $counter
+		 * @param string $class
+		 */
+		function add_counter_to_menu_item( $counter = 1, $class = '' ) {
+			global $menu, $submenu;
+
+			$mask = '%s <span class="update-plugins %s count-%3$s" aria-hidden="true"><span>%3$s<span class="screen-reader-text">%3$s notifications</span></span></span>';
+
+			/**
+			 * This method is NOT executed for WordPress.org themes.
+			 * Since we maintain only one version of the SDK we added this small
+			 * hack to avoid the error from Theme Check since it's a false-positive.
+			 *
+			 * @author Vova Feldman (@svovaf)
+			 * @since  1.2.2.7
+			 */
+			$menu_ref    = &$menu;
+			$submenu_ref = &$submenu;
+
+			if ( $this->_is_top_level ) {
+				// Find main menu item.
+				$found_menu = $this->find_top_level_menu();
+
+				if ( false !== $found_menu ) {
+					// Override menu label.
+					$menu_ref[ $found_menu['position'] ][0] = sprintf(
+						$mask,
+						$found_menu['menu'][0],
+						$class,
+						$counter
+					);
+				}
+			} else {
+				$found_submenu = $this->find_main_submenu();
+
+				if ( false !== $found_submenu ) {
+					// Override menu label.
+					$submenu_ref[ $found_submenu['parent_slug'] ][ $found_submenu['position'] ][0] = sprintf(
+						$mask,
+						$found_submenu['menu'][0],
+						$class,
+						$counter
+					);
+				}
+			}
+		}
+
 		#endregion Top level menu Override
+
+		/**
+		 * Add a top-level menu page.
+		 *
+		 * Note for WordPress.org Theme/Plugin reviewer:
+		 *
+		 *  This is a replication of `add_menu_page()` to avoid Theme Check warning.
+		 *
+		 *  Why?
+		 *  ====
+		 *  Freemius is an SDK for plugin and theme developers. Since the core
+		 *  of the SDK is relevant both for plugins and themes, for obvious reasons,
+		 *  we only develop and maintain one code base.
+		 *
+		 *  This method will not run for wp.org themes (only plugins) since theme
+		 *  admin settings/options are now only allowed in the customizer.
+		 *
+		 *  If you have any questions or need clarifications, please don't hesitate
+		 *  pinging me on slack, my username is @svovaf.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.2
+		 *
+		 * @param string          $page_title The text to be displayed in the title tags of the page when the menu is
+		 *                                    selected.
+		 * @param string          $menu_title The text to be used for the menu.
+		 * @param string          $capability The capability required for this menu to be displayed to the user.
+		 * @param string          $menu_slug  The slug name to refer to this menu by (should be unique for this menu).
+		 * @param callable|string $function   The function to be called to output the content for this page.
+		 * @param string          $icon_url   The URL to the icon to be used for this menu.
+		 *                                    * Pass a base64-encoded SVG using a data URI, which will be colored to
+		 *                                    match the color scheme. This should begin with
+		 *                                    'data:image/svg+xml;base64,'.
+		 *                                    * Pass the name of a Dashicons helper class to use a font icon,
+		 *                                    e.g. 'dashicons-chart-pie'.
+		 *                                    * Pass 'none' to leave div.wp-menu-image empty so an icon can be added
+		 *                                    via CSS.
+		 * @param int             $position   The position in the menu order this one should appear.
+		 *
+		 * @return string The resulting page's hook_suffix.
+		 */
+		static function add_page(
+			$page_title,
+			$menu_title,
+			$capability,
+			$menu_slug,
+			$function = '',
+			$icon_url = '',
+			$position = null
+		) {
+			$fn = 'add_menu' . '_page';
+
+			return $fn(
+				$page_title,
+				$menu_title,
+				$capability,
+				$menu_slug,
+				$function,
+				$icon_url,
+				$position
+			);
+		}
+
+		/**
+		 * Add a submenu page.
+		 *
+		 * Note for WordPress.org Theme/Plugin reviewer:
+		 *
+		 *  This is a replication of `add_submenu_page()` to avoid Theme Check warning.
+		 *
+		 *  Why?
+		 *  ====
+		 *  Freemius is an SDK for plugin and theme developers. Since the core
+		 *  of the SDK is relevant both for plugins and themes, for obvious reasons,
+		 *  we only develop and maintain one code base.
+		 *
+		 *  This method will not run for wp.org themes (only plugins) since theme
+		 *  admin settings/options are now only allowed in the customizer.
+		 *
+		 *  If you have any questions or need clarifications, please don't hesitate
+		 *  pinging me on slack, my username is @svovaf.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.2
+		 *
+		 * @param string          $parent_slug The slug name for the parent menu (or the file name of a standard
+		 *                                     WordPress admin page).
+		 * @param string          $page_title  The text to be displayed in the title tags of the page when the menu is
+		 *                                     selected.
+		 * @param string          $menu_title  The text to be used for the menu.
+		 * @param string          $capability  The capability required for this menu to be displayed to the user.
+		 * @param string          $menu_slug   The slug name to refer to this menu by (should be unique for this menu).
+		 * @param callable|string $function    The function to be called to output the content for this page.
+		 *
+		 * @return false|string The resulting page's hook_suffix, or false if the user does not have the capability
+		 *                      required.
+		 */
+		static function add_subpage(
+			$parent_slug,
+			$page_title,
+			$menu_title,
+			$capability,
+			$menu_slug,
+			$function = ''
+		) {
+			$fn = 'add_submenu' . '_page';
+
+			return $fn( $parent_slug,
+				$page_title,
+				$menu_title,
+				$capability,
+				$menu_slug,
+				$function
+			);
+		}
 	}

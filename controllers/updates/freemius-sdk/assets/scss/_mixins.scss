@@ -78,13 +78,13 @@ $useIEFilters: 0;
 }
 
 // requires sass 3.2
-//@mixin keyframes {
-//     @-moz-keyframes { @content; }
-//      @-ms-keyframes { @content; }
-//       @-o-keyframes { @content; }
-//  @-webkit-keyframes { @content; }
-//          @keyframes { @content; }
-//}
+@mixin keyframes($name){
+     @-moz-keyframes #{$name} { @content; }
+      @-ms-keyframes #{$name} { @content; }
+       @-o-keyframes #{$name} { @content; }
+  @-webkit-keyframes #{$name} { @content; }
+          @keyframes #{$name} { @content; }
+}
 
 @mixin linear-gradient($from, $to, $ie: $useIEFilters) {
   @if $ie != 1 { background-color: $to; }
@@ -131,19 +131,6 @@ $useIEFilters: 0;
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}', GradientType=1); /* IE6-9 fallback on horizontal gradient */
     }
 }
-
-/*@mixin rgba-bg ($hex, $alpha, $ie: $useIEFilters) {
-  @if $ie == 1 { 
-    background-color: none;
-    $hexopac: ie-hex-str(rgba($hex, $alpha));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$hexopac}',EndColorStr='#{$hexopac}}');
-    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$hexopac}',EndColorStr='#{$hexopac}'));
-  }
-  @else {
-    background-color: $hex;
-    background-color: rgba($hex, $alpha);
-  }
-}*/
 
 @mixin perspective($perspective) {
      -moz-perspective: $perspective;
@@ -192,20 +179,68 @@ $useIEFilters: 0;
           transition: $value;
 }
 
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+}
+
+@mixin animation-name($str) {
+    -webkit-animation-name: #{$str};
+    -moz-animation-name: #{$str};
+    -ms-animation-name: #{$str};
+    -o-animation-name: #{$str};
+    animation-name: #{$str};
+}
+
+@mixin animation-duration($str) {
+    -webkit-animation-duration: #{$str};
+    -moz-animation-duration: #{$str};
+    -ms-animation-duration: #{$str};
+    -o-animation-duration: #{$str};
+    animation-duration: #{$str};
+}
+
+@mixin animation-direction($str) {
+    -webkit-animation-direction: #{$str};
+    -moz-animation-direction: #{$str};
+    -ms-animation-direction: #{$str};
+    -o-animation-direction: #{$str};
+    animation-direction: #{$str};
+}
+
+@mixin animation-delay($str) {
+    animation-delay:#{$str};
+    -o-animation-delay:#{$str};
+    -ms-animation-delay:#{$str};
+    -webkit-animation-delay:#{$str};
+    -moz-animation-delay:#{$str};
+}
+
+@mixin animation-iteration-count($str) {
+    animation-iteration-count:#{$str};
+    -o-animation-iteration-count:#{$str};
+    -ms-animation-iteration-count:#{$str};
+    -webkit-animation-iteration-count:#{$str};
+    -moz-animation-iteration-count:#{$str};
+}
+
+@mixin animation-timing-function($str) {
+    -webkit-animation-timing-function: #{$str};
+    -moz-animation-timing-function: #{$str};
+    -ms-animation-timing-function: #{$str};
+    -o-animation-timing-function: #{$str};
+    animation-timing-function: #{$str};
+}
+
 // ==== /CSS3 SASS MIXINS ====
 
 @mixin opacity($opacity) {
     opacity: $opacity;
     $opacity-ie: $opacity * 100;
     filter: alpha(opacity=$opacity-ie); //IE8
-}
-
-@mixin sprite($img, $width, $height: $width, $display: block)
-{
-    display: $display;
-    background-image: url('#{$img}');
-
-    @include size($width, $height);
 }
 
 @mixin size($width, $height: $width)
@@ -221,4 +256,15 @@ $useIEFilters: 0;
         display: table;
         clear: both;
     }
+}
+
+// Placeholder text
+@mixin placeholder($color: $input-color-placeholder) {
+    // Firefox
+    &::-moz-placeholder {
+        color: $color;
+        opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+    }
+    &:-ms-input-placeholder { color: $color; } // Internet Explorer 10+
+    &::-webkit-input-placeholder  { color: $color; } // Safari and Chrome
 }

@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 16.7.5
+Stable tag: 16.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -125,6 +125,15 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 WooCommerce integrations, payment terms, stats dashboard, time tracking updates and more.
 
 == Changelog ==
+
+= 16.8 =
+
+* Update: Remove all form integrations add-ons since they're now in the .org repo for free
+
+= 16.7.6 =
+
+* Update: Freemius updated for free versions
+* Fix: Removed private bundled add-on
 
 = 16.7.5 =
 

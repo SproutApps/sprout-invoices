@@ -310,7 +310,7 @@ class SA_Addons extends SI_Controller {
 
 		$marketplace_items = array_merge( $corp_addons, $free_addons, $biz_addons );
 
-		set_transient( $cache_key, $marketplace_items, DAY_IN_SECONDS * 5 );
+		set_transient( $cache_key, $marketplace_items, DAY_IN_SECONDS * 3 );
 		return $marketplace_items;
 	}
 }

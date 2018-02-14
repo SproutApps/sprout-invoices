@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.0.3
 	 */
 
@@ -52,6 +52,15 @@
 		 */
 		public $platform_version;
 		/**
+		 * Freemius SDK version
+		 *
+		 * @author Leo Fajardo (@leorw)
+		 * @since  1.2.2
+		 *
+		 * @var string SDK version (e.g.: 1.2.2)
+		 */
+		public $sdk_version;
+		/**
 		 * @var string Programming language version (e.g PHP version).
 		 */
 		public $programming_language_version;
@@ -77,6 +86,14 @@
 		 * @var bool
 		 */
 		public $is_premium = false;
+		/**
+		 * @author Leo Fajardo (@leorw)
+		 *
+		 * @since  1.2.1.5
+		 *
+		 * @var bool
+		 */
+		public $is_disconnected = false;
 
 		/**
 		 * @param stdClass|bool $site
@@ -88,6 +105,10 @@
 
 			if ( is_object( $site ) ) {
 				$this->plan->id = $site->plan_id;
+			}
+
+			if ( ! is_bool( $this->is_disconnected ) ) {
+				$this->is_disconnected = false;
 			}
 		}
 

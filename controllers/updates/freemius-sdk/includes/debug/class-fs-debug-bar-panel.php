@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.1.7.3
 	 */
 
@@ -24,8 +24,8 @@
 		}
 
 		static function requests_count() {
-			if ( class_exists( 'Freemius_Api' ) ) {
-				$logger = Freemius_Api::GetLogger();
+			if ( class_exists( 'Freemius_Api_WordPress' ) ) {
+				$logger = Freemius_Api_WordPress::GetLogger();
 			} else {
 				$logger = array();
 			}
@@ -34,8 +34,8 @@
 		}
 
 		static function total_time() {
-			if ( class_exists( 'Freemius_Api' ) ) {
-				$logger = Freemius_Api::GetLogger();
+			if ( class_exists( 'Freemius_Api_WordPress' ) ) {
+				$logger = Freemius_Api_WordPress::GetLogger();
 			} else {
 				$logger = array();
 			}
@@ -45,7 +45,7 @@
 				$total_time += $l['total'];
 			}
 
-			return number_format( 100 * $total_time, 2 ) . ' ' . __fs( 'ms' );
+			return number_format( 100 * $total_time, 2 ) . ' ' . fs_text_x_inline( 'ms', 'milliseconds' );
 		}
 
 		function render() {
@@ -54,6 +54,8 @@
 				<?php fs_require_template( '/debug/api-calls.php' ) ?>
 				<br>
 				<?php fs_require_template( '/debug/scheduled-crons.php' ) ?>
+				<br>
+				<?php fs_require_template( '/debug/plugins-themes-sync.php' ) ?>
 				<br>
 				<?php fs_require_template( '/debug/logger.php' ) ?>
 			</div>

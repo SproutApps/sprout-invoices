@@ -44,11 +44,11 @@ class SI_Estimate_Submissions extends SI_Controller {
 							),
 						),
 					'advanced_submission_integration_addon' => array(
-						'label' => __( 'Gravity Forms and Ninja Forms Integration', 'sprout-invoices' ),
+						'label' => __( 'Gravity Forms, Ninja Forms, Formidable, and WP Forms Integrations', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'bypass',
 							'output' => self::advanced_form_integration_view(),
-							'description' => sprintf( __( 'Instead of creating our own advanced form builder we\'ve integrated with the top WordPress form plugins. Make sure to read the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/' ),
+							'description' => sprintf( __( 'Sprout Invoices has integrated with the top WordPress form builder plugins and made those integrations free to use. Please read through the <a href="%s" target="_blank">integration guide</a> to make the best use of your custom forms.', 'sprout-invoices' ), 'http://docs.sproutapps.co/article/8-integrating-gravity-forms-ninja-forms-or-custom-estimate-submissions' ),
 							),
 						),
 					),
@@ -69,12 +69,11 @@ class SI_Estimate_Submissions extends SI_Controller {
 		// FUTURE pull add-on dynamically
 		ob_start();
 		?>
-			<div class="sa_addon">
+			<div class="sa_addon" style="padding: 1%;">
 				<div class="add_on_img_wrap">
-					<img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/gravity-ninja.png' ?>" />
-					<a class="purchase_button button button-primary button-large" href="<?php sa_link( 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ) ?>"><?php _e( '$0-5', 'sprout-invoices' ) ?></a>
+					<a class="" href="<?php sa_link( 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ) ?>"><img class="sa_addon_img" src="<?php echo SI_RESOURCES . 'admin/img/gravity-ninja-formidible-wpforms.png' ?>" /></a>
+					<a class="purchase_button button button-primary button-large" href="<?php sa_link( 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ) ?>"><?php _e( 'Download Free', 'sprout-invoices' ) ?></a>
 				</div>
-				<h4><?php _e( 'Advanced Form Integration with Gravity and Ninja Forms', 'sprout-invoices' ) ?></h4>
 			</div>
 		<?php
 		return ob_get_clean();

@@ -15,9 +15,15 @@
 	 * under the License.
 	 */
 
-	define( 'FS_API__VERSION', '1' );
-	define( 'FS_SDK__PATH', dirname( __FILE__ ) );
-	define( 'FS_SDK__EXCEPTIONS_PATH', FS_SDK__PATH . '/Exceptions/' );
+	if ( ! defined( 'FS_API__VERSION' ) ) {
+		define( 'FS_API__VERSION', '1' );
+	}
+	if ( ! defined( 'FS_SDK__PATH' ) ) {
+		define( 'FS_SDK__PATH', dirname( __FILE__ ) );
+	}
+	if ( ! defined( 'FS_SDK__EXCEPTIONS_PATH' ) ) {
+		define( 'FS_SDK__EXCEPTIONS_PATH', FS_SDK__PATH . '/Exceptions/' );
+	}
 
 	if ( ! function_exists( 'json_decode' ) ) {
 		throw new Exception( 'Freemius needs the JSON PHP extension.' );
@@ -33,7 +39,11 @@
 	);
 
 	foreach ( $exceptions as $e ) {
-		require FS_SDK__EXCEPTIONS_PATH . $e . '.php';
+		require_once FS_SDK__EXCEPTIONS_PATH . $e . '.php';
+	}
+
+	if ( class_exists( 'Freemius_Api_Base' ) ) {
+		return;
 	}
 
 	abstract class Freemius_Api_Base {
@@ -47,7 +57,7 @@
 		protected $_isSandbox;
 
 		/**
-		 * @param string $pScope     'app', 'developer', 'user' or 'install'.
+		 * @param string $pScope     'app', 'developer', 'plugin', 'user' or 'install'.
 		 * @param number $pID        Element's id.
 		 * @param string $pPublic    Public key.
 		 * @param string $pSecret    Element's secret key.
@@ -144,35 +154,62 @@
 		}
 
 		/**
-		 * Base64 encoding that does not need to be urlencode()ed.
-		 * Exactly the same as base64_encode except it uses
-		 *   - instead of +
-		 *   _ instead of /
+		 * Base64 decoding that does not need to be urldecode()-ed.
+		 *
+		 * Exactly the same as PHP base64 encode except it uses
+		 *   `-` instead of `+`
+		 *   `_` instead of `/`
 		 *   No padded =
 		 *
-		 * @param string $input base64UrlEncoded string
+		 * @param string $input Base64UrlEncoded() string
 		 *
 		 * @return string
 		 */
 		protected static function Base64UrlDecode( $input ) {
-			return base64_decode( strtr( $input, '-_', '+/' ) );
+			/**
+			 * IMPORTANT NOTE:
+			 * This is a hack suggested by @otto42 and @greenshady from
+			 * the theme's review team. The usage of base64 for API
+			 * signature encoding was approved in a Slack meeting
+			 * held on Tue (10/25 2016).
+			 *
+			 * @todo Remove this hack once the base64 error is removed from the Theme Check.
+			 *
+			 * @since 1.2.2
+			 * @author Vova Feldman (@svovaf)
+			 */
+			$fn = 'base64' . '_decode';
+			return $fn( strtr( $input, '-_', '+/' ) );
 		}
 
 		/**
 		 * Base64 encoding that does not need to be urlencode()ed.
-		 * Exactly the same as base64_encode except it uses
-		 *   - instead of +
-		 *   _ instead of /
+		 *
+		 * Exactly the same as base64 encode except it uses
+		 *   `-` instead of `+
+		 *   `_` instead of `/`
 		 *
 		 * @param string $input string
 		 *
-		 * @return string base64Url encoded string
+		 * @return string Base64 encoded string
 		 */
 		protected static function Base64UrlEncode( $input ) {
-			$str = strtr( base64_encode( $input ), '+/', '-_' );
+			/**
+			 * IMPORTANT NOTE:
+			 * This is a hack suggested by @otto42 and @greenshady from
+			 * the theme's review team. The usage of base64 for API
+			 * signature encoding was approved in a Slack meeting
+			 * held on Tue (10/25 2016).
+			 *
+			 * @todo Remove this hack once the base64 error is removed from the Theme Check.
+			 *
+			 * @since 1.2.2
+			 * @author Vova Feldman (@svovaf)
+			 */
+			$fn = 'base64' . '_encode';
+			$str = strtr( $fn( $input ), '+/', '-_' );
 			$str = str_replace( '=', '', $str );
 
 			return $str;
 		}
-
 	}

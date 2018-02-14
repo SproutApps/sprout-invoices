@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.0.3
 	 */
 
@@ -10,16 +10,18 @@
 		exit;
 	}
 
-	$slug = $VARS['slug'];
 	/**
+	 * @var array $VARS
 	 * @var Freemius $fs
 	 */
-	$fs = freemius( $slug );
+	$fs   = freemius( $VARS['id'] );
+
+	$slug = $fs->get_slug();
 
 	/**
 	 * @var FS_Plugin_Tag $update
 	 */
-	$update = $fs->get_update( false, false );
+	$update = $fs->get_update( false, false, WP_FS__TIME_24_HOURS_IN_SEC / 24 );
 
 	$is_paying              = $fs->is_paying();
 	$user                   = $fs->get_user();
@@ -30,589 +32,755 @@
 	$plan                   = $fs->get_plan();
 	$is_active_subscription = ( is_object( $subscription ) && $subscription->is_active() );
 	$is_paid_trial          = $fs->is_paid_trial();
-	$show_upgrade           = ( ! $is_paying && ! $is_paid_trial );
+	$show_upgrade           = ( $fs->has_paid_plan() && ! $is_paying && ! $is_paid_trial );
+
+	if ( $fs->has_paid_plan() ) {
+		$fs->_add_license_activation_dialog_box();
+	}
+
+	if ( fs_request_get_bool( 'auto_install' ) ) {
+		$fs->_add_auto_installation_dialog_box();
+	}
+
+	$has_tabs = $fs->_add_tabs_before_content();
+
+	if ( $has_tabs ) {
+		$query_params['tabs'] = 'true';
+	}
+
+    // Aliases.
+    $download_latest_text              = fs_text_x_inline( 'Download Latest', 'as download latest version', 'download-latest', $slug );
+    $downgrade_x_confirm_text          = fs_text_inline( 'Downgrading your plan will immediately stop all future recurring payments and your %s plan license will expire in %s.', 'downgrade-x-confirm', $slug );
+    $cancel_trial_confirm_text         = fs_text_inline( 'Cancelling the trial will immediately block access to all premium features. Are you sure?', 'cancel-trial-confirm', $slug );
+    $after_downgrade_non_blocking_text = fs_text_inline( 'You can still enjoy all %s features but you will not have access to %s updates and support.', 'after-downgrade-non-blocking', $slug );
+    $after_downgrade_blocking_text     = fs_text_inline( 'Once your license expires you can still use the Free version but you will NOT have access to the %s features.', 'after-downgrade-blocking', $slug );
+    /* translators: %s: Plan title (e.g. "Professional") */
+    $activate_plan_text = fs_text_inline( 'Activate %s Plan', 'activate-x-plan', $slug );
+    $version_text       = fs_text_x_inline( 'Version', 'product version', 'version', $slug );
+    /* translators: %s: Time period (e.g. Auto renews in "2 months") */
+    $renews_in_text     = fs_text_inline( 'Auto renews in %s', 'renews-in', $slug );
+    /* translators: %s: Time period (e.g. Expires in "2 months") */
+    $expires_in_text    = fs_text_inline( 'Expires in %s', 'expires-in', $slug );
+    $sync_license_text  = fs_text_x_inline( 'Sync License', 'as synchronize license', 'sync-license', $slug );
+    $cancel_trial_text  = fs_text_inline( 'Cancel Trial', 'cancel-trial', $slug );
+    $change_plan_text   = fs_text_inline( 'Change Plan', 'change-plan', $slug );
+    $upgrade_text       = fs_text_x_inline( 'Upgrade', 'verb', 'upgrade', $slug );
+    $addons_text        = fs_text_inline( 'Add-Ons', 'add-ons', $slug );
+    $downgrade_text     = fs_text_x_inline( 'Downgrade', 'verb', 'downgrade', $slug );
+	$trial_text         = fs_text_x_inline( 'Trial', 'trial period', 'trial', $slug );
+	$free_text          = fs_text_inline( 'Free', 'free', $slug );
+	$activate_text      = fs_text_inline( 'Activate', 'activate', $slug );
+	$plan_text          = fs_text_x_inline( 'Plan', 'as product pricing plan', 'plan', $slug );
 ?>
-
-	<div class="wrap">
-	<h2 class="nav-tab-wrapper">
-		<a href="<?php $fs->get_account_url() ?>" class="nav-tab nav-tab-active"><?php _efs( 'account', $slug ) ?></a>
-		<?php if ( $fs->has_addons() ) : ?>
-			<a href="<?php echo $fs->_get_admin_page_url( 'addons' ) ?>"
-			   class="nav-tab"><?php _efs( 'add-ons', $slug ) ?></a>
-		<?php endif ?>
-		<?php if ( $fs->is_not_paying() && $fs->has_paid_plan() ) : ?>
-			<a href="<?php echo $fs->get_upgrade_url() ?>" class="nav-tab"><?php _efs( 'upgrade', $slug ) ?></a>
-			<?php if ( ! $fs->is_trial_utilized() && $fs->has_trial_plan() ) : ?>
-				<a href="<?php echo $fs->get_trial_url() ?>" class="nav-tab"><?php _efs( 'free-trial', $slug ) ?></a>
+	<div class="wrap fs-section">
+		<?php if ( ! $has_tabs && ! $fs->apply_filters( 'hide_account_tabs', false ) ) : ?>
+		<h2 class="nav-tab-wrapper">
+			<a href="<?php echo $fs->get_account_url() ?>"
+			   class="nav-tab nav-tab-active"><?php fs_esc_html_echo_inline( 'Account', 'account', $slug ) ?></a>
+			<?php if ( $fs->has_addons() ) : ?>
+				<a href="<?php echo $fs->_get_admin_page_url( 'addons' ) ?>"
+				   class="nav-tab"><?php echo esc_html( $addons_text ) ?></a>
 			<?php endif ?>
-		<?php endif ?>
-	</h2>
-
-	<div id="poststuff">
-	<div id="fs_account">
-	<div class="has-sidebar has-right-sidebar">
-	<div class="has-sidebar-content">
-	<div class="postbox">
-	<h3><?php _efs( 'account-details', $slug ) ?></h3>
-
-	<div class="fs-header-actions">
-		<ul>
-			<li>
-				<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
-					<input type="hidden" name="fs_action" value="delete_account">
-					<?php wp_nonce_field( 'delete_account' ) ?>
-					<a href="#" onclick="if (confirm('<?php
-						if ( $is_active_subscription ) {
-							echo esc_attr( sprintf( __fs( 'delete-account-x-confirm', $slug ), $plan->title ) );
-						} else {
-							_efs( 'delete-account-confirm', $slug );
-						}
-					?>'))  this.parentNode.submit(); return false;"><i
-							class="dashicons dashicons-no"></i> <?php _efs( 'delete-account', $slug ) ?></a>
-				</form>
-			</li>
-			<?php if ( $is_paying ) : ?>
-				<li>
-					&nbsp;•&nbsp;
-					<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
-						<input type="hidden" name="fs_action" value="deactivate_license">
-						<?php wp_nonce_field( 'deactivate_license' ) ?>
-						<a href="#"
-						   onclick="if (confirm('<?php _efs( 'deactivate-license-confirm', $slug ) ?>')) this.parentNode.submit(); return false;"><i
-								class="dashicons dashicons-admin-network"></i> <?php _efs( 'deactivate-license', $slug ) ?>
-						</a>
-					</form>
-				</li>
-				<?php if ( ! $license->is_lifetime() &&
-				           $is_active_subscription
-				) : ?>
-					<li>
-						&nbsp;•&nbsp;
-						<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
-							<input type="hidden" name="fs_action" value="downgrade_account">
-							<?php wp_nonce_field( 'downgrade_account' ) ?>
-							<a href="#"
-							   onclick="if (confirm('<?php printf( __fs( 'downgrade-x-confirm', $slug ), $plan->title, human_time_diff( time(), strtotime( $license->expiration ) ) ) ?> <?php if ( ! $license->is_block_features ) {
-								   printf( __fs( 'after-downgrade-non-blocking', $slug ), $plan->title );
-							   } else {
-								   printf( __fs( 'after-downgrade-blocking', $slug ), $plan->title );
-							   }?> <?php _efs( 'proceed-confirmation', $slug ) ?>')) this.parentNode.submit(); return false;"><i
-									class="dashicons dashicons-download"></i> <?php _efs( 'downgrade', $slug ) ?></a>
-						</form>
-					</li>
+			<?php if ( $show_upgrade ) : ?>
+				<a href="<?php echo $fs->get_upgrade_url() ?>" class="nav-tab"><?php echo esc_html( $upgrade_text ) ?></a>
+				<?php if ( $fs->apply_filters( 'show_trial', true ) && ! $fs->is_trial_utilized() && $fs->has_trial_plan() ) : ?>
+					<a href="<?php echo $fs->get_trial_url() ?>" class="nav-tab"><?php fs_esc_html_echo_inline( 'Free Trial', 'free-trial', $slug ) ?></a>
 				<?php endif ?>
-				<li>
-					&nbsp;•&nbsp;
-					<a href="<?php echo $fs->get_upgrade_url() ?>"><i
-							class="dashicons dashicons-grid-view"></i> <?php _efs( 'change-plan', $slug ) ?></a>
-				</li>
-			<?php elseif ( $is_paid_trial ) : ?>
-				<li>
-					&nbsp;•&nbsp;
-					<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
-						<input type="hidden" name="fs_action" value="cancel_trial">
-						<?php wp_nonce_field( 'cancel_trial' ) ?>
-						<a href="#"
-						   onclick="if (confirm('<?php _efs( 'cancel-trial-confirm' ) ?>')) this.parentNode.submit(); return false;"><i
-								class="dashicons dashicons-download"></i> <?php _efs( 'cancel-trial', $slug ) ?></a>
-					</form>
-				</li>
 			<?php endif ?>
-			<li>
-				&nbsp;•&nbsp;
-				<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
-					<input type="hidden" name="fs_action" value="<?php echo $slug ?>_sync_license">
-					<?php wp_nonce_field( $slug . '_sync_license' ) ?>
-					<a href="#" onclick="this.parentNode.submit(); return false;"><i
-							class="dashicons dashicons-image-rotate"></i> <?php _efs( 'sync', $slug ) ?></a>
-				</form>
-			</li>
+		</h2>
+		<?php endif ?>
 
-		</ul>
-	</div>
-	<div class="inside">
-		<table id="fs_account_details" cellspacing="0" class="fs-key-value-table">
-			<?php
-				$profile   = array();
-				$profile[] = array(
-					'id'    => 'user_name',
-					'title' => __fs( 'name', $slug ),
-					'value' => $name
-				);
-				//					if (isset($user->email) && false !== strpos($user->email, '@'))
-				$profile[] = array(
-					'id'    => 'email',
-					'title' => __fs( 'email', $slug ),
-					'value' => $user->email
-				);
-				if ( is_numeric( $user->id ) ) {
-					$profile[] = array(
-						'id'    => 'user_id',
-						'title' => __fs( 'user-id', $slug ),
-						'value' => $user->id
-					);
-				}
-
-				$profile[] = array(
-					'id'    => 'site_id',
-					'title' => __fs( 'site-id', $slug ),
-					'value' => is_string( $site->id ) ?
-						$site->id :
-						__fs( 'no-id', $slug )
-				);
-
-				$profile[] = array(
-					'id'    => 'site_public_key',
-					'title' => __fs( 'public-key', $slug ),
-					'value' => $site->public_key
-				);
-
-				$profile[] = array(
-					'id'    => 'site_secret_key',
-					'title' => __fs( 'secret-key', $slug ),
-					'value' => ( ( is_string( $site->secret_key ) ) ?
-						$site->secret_key :
-						__fs( 'no-secret', $slug )
-					)
-				);
-
-				if ( $fs->has_paid_plan() ) {
-					if ( $fs->is_trial() ) {
-						$trial_plan = $fs->get_trial_plan();
-
-						$profile[] = array(
-							'id'    => 'plan',
-							'title' => __fs( 'plan', $slug ),
-							'value' => ( is_string( $trial_plan->name ) ?
-								strtoupper( $trial_plan->title ) :
-								__fs( 'trial', $slug ) )
-						);
-					} else {
-						$profile[] = array(
-							'id'    => 'plan',
-							'title' => __fs( 'plan', $slug ),
-							'value' => is_string( $site->plan->name ) ?
-								strtoupper( $site->plan->title ) :
-								strtoupper( __fs( 'free', $slug ) )
-						);
-					}
-				}
-
-				$profile[] = array(
-					'id'    => 'version',
-					'title' => __fs( 'version', $slug ),
-					'value' => $fs->get_plugin_version()
-				);
-			?>
-			<?php $odd = true;
-				foreach ( $profile as $p ) : ?>
-					<?php
-					if ( 'plan' === $p['id'] && ! $fs->has_paid_plan() ) {
-						// If plugin don't have any paid plans, there's no reason
-						// to show current plan.
-						continue;
-					}
-					?>
-					<tr class="fs-field-<?php echo $p['id'] ?><?php if ( $odd ) : ?> alternate<?php endif ?>">
-						<td>
-							<nobr><?php echo $p['title'] ?>:</nobr>
-						</td>
-						<td>
-							<code><?php echo htmlspecialchars( $p['value'] ) ?></code>
-							<?php if ( 'email' === $p['id'] && ! $user->is_verified() ) : ?>
-								<label class="fs-tag fs-warn"><?php _efs( 'not-verified', $slug ) ?></label>
-							<?php endif ?>
-							<?php if ( 'plan' === $p['id'] ) : ?>
-								<?php if ( $fs->is_trial() ) : ?>
-									<label class="fs-tag fs-success"><?php _efs( 'trial', $slug ) ?></label>
-								<?php endif ?>
-								<?php if ( is_object( $license ) && ! $license->is_lifetime() ) : ?>
-									<?php if ( ! $is_active_subscription && ! $license->is_first_payment_pending() ) : ?>
-										<label
-											class="fs-tag fs-warn"><?php printf( __fs( 'expires-in', $slug ), human_time_diff( time(), strtotime( $license->expiration ) ) ) ?></label>
-									<?php elseif ( $is_active_subscription && ! $subscription->is_first_payment_pending() ) : ?>
-										<label
-											class="fs-tag fs-success"><?php printf( __fs( 'renews-in', $slug ), human_time_diff( time(), strtotime( $subscription->next_payment ) ) ) ?></label>
+		<div id="poststuff">
+			<div id="fs_account">
+				<div class="has-sidebar has-right-sidebar">
+					<div class="has-sidebar-content">
+						<div class="postbox">
+							<h3><span class="dashicons dashicons-businessman"></span> <?php fs_esc_html_echo_inline( 'Account Details', 'account-details', $slug ) ?></h3>
+							<div class="fs-header-actions">
+								<ul>
+									<?php if ( ! $is_paying ) : ?>
+										<li>
+											<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
+												<input type="hidden" name="fs_action" value="delete_account">
+												<?php wp_nonce_field( 'delete_account' ) ?>
+												<a href="#" onclick="if (confirm('<?php
+													if ( $is_active_subscription ) {
+														echo esc_attr( sprintf( fs_text_inline( 'Deleting the account will automatically deactivate your %s plan license so you can use it on other sites. If you want to terminate the recurring payments as well, click the "Cancel" button, and first "Downgrade" your account. Are you sure you would like to continue with the deletion?', 'delete-account-x-confirm', $slug ), $plan->title ) );
+													} else {
+														echo esc_attr( sprintf( fs_text_inline( 'Deletion is not temporary. Only delete if you no longer want to use this %s anymore. Are you sure you would like to continue with the deletion?', 'delete-account-confirm', $slug ), $fs->get_module_label( true ) ) );
+													}
+												?>'))  this.parentNode.submit(); return false;"><i
+														class="dashicons dashicons-no"></i> <?php fs_esc_html_echo_inline( 'Delete Account', 'delete-account', $slug ) ?></a>
+											</form>
+										</li>
+										<li>&nbsp;&bull;&nbsp;</li>
 									<?php endif ?>
-								<?php elseif ( $fs->is_trial() ) : ?>
-									<label
-										class="fs-tag fs-warn"><?php printf( __fs( 'expires-in', $slug ), human_time_diff( time(), strtotime( $site->trial_ends ) ) ) ?></label>
-								<?php endif ?>
-							<?php endif ?>
-							<?php if ( 'version' === $p['id'] && $fs->has_paid_plan() ) : ?>
-								<?php if ( $fs->is_premium() ) : ?>
-									<label
-										class="fs-tag fs-<?php echo $fs->can_use_premium_code() ? 'success' : 'warn' ?>"><?php _efs( 'premium-version' ) ?></label>
-								<?php elseif ( $fs->can_use_premium_code() ) : ?>
-									<label class="fs-tag fs-warn"><?php _efs( 'free-version' ) ?></label>
-								<?php endif ?>
-							<?php endif ?>
-						</td>
-						<td class="fs-right">
-							<?php if ( 'email' === $p['id'] && ! $user->is_verified() ) : ?>
-								<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
-									<input type="hidden" name="fs_action" value="verify_email">
-									<?php wp_nonce_field( 'verify_email' ) ?>
-									<input type="submit" class="button button-small"
-									       value="<?php _efs( 'verify-email', $slug ) ?>">
-								</form>
-							<?php endif ?>
-							<?php if ( 'plan' === $p['id'] ) : ?>
-								<div class="button-group">
-									<?php $license = $fs->is_free_plan() ? $fs->_get_available_premium_license() : false ?>
-									<?php if ( false !== $license && ( $license->left() > 0 || ( $site->is_localhost() && $license->is_free_localhost ) ) ) : ?>
-										<?php $premium_plan = $fs->_get_plan_by_id( $license->plan_id ) ?>
-										<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>"
-										      method="POST">
-											<input type="hidden" name="fs_action" value="activate_license">
-											<input type="hidden" name="license_id" value="<?php echo $license->id ?>">
-											<?php wp_nonce_field( 'activate_license' ) ?>
-											<input type="submit" class="button button-primary"
-											       value="<?php printf(
-												       __fs( 'activate-x-plan', $slug ),
-												       $premium_plan->title,
-												       ( $site->is_localhost() && $license->is_free_localhost ) ?
-													       '[' . __fs( 'localhost', $slug ) . ']' :
-													       ( 1 < $license->left() ? $license->left() . ' left' : '' )
-											       ) ?> ">
-										</form>
-									<?php else : ?>
-										<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>"
-										      method="POST" class="button-group">
-											<input type="submit" class="button"
-											       value="<?php _efs( 'sync-license', $slug ) ?>">
-											<input type="hidden" name="fs_action"
-											       value="<?php echo $slug ?>_sync_license">
-											<?php wp_nonce_field( $slug . '_sync_license' ) ?>
-											<a href="<?php echo $fs->get_upgrade_url() ?>"
-											   class="button<?php if ( $show_upgrade ) {
-												   echo ' button-primary';
-											   } ?> button-upgrade"><i
-													class="dashicons dashicons-cart"></i> <?php ( $show_upgrade ) ?
-													_efs( 'upgrade', $slug ) :
-													_efs( 'change-plan', $slug )
-												?></a>
-										</form>
-									<?php endif ?>
-								</div>
-							<?php elseif ( 'version' === $p['id'] ) : ?>
-								<div class="button-group">
-									<?php if ( $is_paying || $fs->is_trial() ) : ?>
-										<?php if ( ! $fs->is_allowed_to_install() ) : ?>
-											<a target="_blank" class="button button-primary"
-											   href="<?php echo $fs->_get_latest_download_local_url() ?>"><?php echo sprintf( __fs( 'download-x-version', $slug ), $site->plan->title ) . ( is_object( $update ) ? ' [' . $update->version . ']' : '' ) ?></a>
-										<?php elseif ( is_object( $update ) ) : ?>
-											<a class="button button-primary"
-											   href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . $fs->get_plugin_basename() ), 'upgrade-plugin_' . $fs->get_plugin_basename() ) ?>"><?php echo __fs( 'install-update-now', $slug ) . ' [' . $update->version . ']' ?></a>
+									<?php if ( $is_paying ) : ?>
+										<li>
+											<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
+												<input type="hidden" name="fs_action" value="deactivate_license">
+												<?php wp_nonce_field( 'deactivate_license' ) ?>
+												<a href="#"
+												   onclick="if (confirm('<?php fs_esc_attr_echo_inline( 'Deactivating your license will block all premium features, but will enable you to activate the license on another site. Are you sure you want to proceed?', 'deactivate-license-confirm', $slug ) ?>')) this.parentNode.submit(); return false;"><i
+														class="dashicons dashicons-admin-network"></i> <?php fs_echo_inline( 'Deactivate License', 'deactivate-license', $slug ) ?>
+												</a>
+											</form>
+										</li>
+										<li>&nbsp;&bull;&nbsp;</li>
+										<?php if ( ! $license->is_lifetime() &&
+										           $is_active_subscription
+										) : ?>
+											<li>
+												<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
+													<input type="hidden" name="fs_action" value="downgrade_account">
+													<?php wp_nonce_field( 'downgrade_account' ) ?>
+													<a href="#"
+													   onclick="if ( confirm('<?php echo esc_attr( sprintf( $downgrade_x_confirm_text, $plan->title, human_time_diff( time(), strtotime( $license->expiration ) ) ) ) ?> <?php if ( ! $license->is_block_features ) {
+														   echo esc_attr( sprintf( $after_downgrade_non_blocking_text, $plan->title, $fs->get_module_label( true ) ) );
+													   } else {
+                                                           echo esc_attr( sprintf( $after_downgrade_blocking_text, $plan->title ) );
+													   }?> <?php fs_esc_attr_echo_inline( 'Are you sure you want to proceed?', 'proceed-confirmation', $slug ) ?>') ) this.parentNode.submit(); return false;"><i class="dashicons dashicons-download"></i> <?php echo esc_html( $fs->is_only_premium() ? fs_text_inline( 'Cancel Subscription', 'cancel-subscription', $slug ) : $downgrade_text ) ?></a>
+												</form>
+											</li>
+											<li>&nbsp;&bull;&nbsp;</li>
 										<?php endif ?>
-									<?php endif; ?>
-								</div>
-							<?php
-							elseif (/*in_array($p['id'], array('site_secret_key', 'site_id', 'site_public_key')) ||*/
-							( is_string( $user->secret_key ) && in_array( $p['id'], array(
-									'email',
-									'user_name'
-								) ) )
-							) : ?>
-								<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST"
-								      onsubmit="var val = prompt('<?php printf( __fs( 'what-is-your-x', $slug ), $p['title'] ) ?>', '<?php echo $p['value'] ?>'); if (null == val || '' === val) return false; jQuery('input[name=fs_<?php echo $p['id'] ?>_<?php echo $slug ?>]').val(val); return true;">
-									<input type="hidden" name="fs_action" value="update_<?php echo $p['id'] ?>">
-									<input type="hidden" name="fs_<?php echo $p['id'] ?>_<?php echo $slug ?>"
-									       value="">
-									<?php wp_nonce_field( 'update_' . $p['id'] ) ?>
-									<input type="submit" class="button button-small"
-									       value="<?php _ex( 'Edit', 'verb', 'freemius' ) ?>">
-								</form>
-							<?php endif ?>
-						</td>
-					</tr>
-					<?php $odd = ! $odd; endforeach ?>
-		</table>
-	</div>
-	</div>
-	<?php
-		$account_addons = $fs->get_account_addons();
-		if ( ! is_array( $account_addons ) ) {
-			$account_addons = array();
-		}
+										<?php if ( ! $fs->is_single_plan() ) : ?>
+											<li>
+												<a href="<?php echo $fs->get_upgrade_url() ?>"><i
+														class="dashicons dashicons-grid-view"></i> <?php echo esc_html( $change_plan_text ) ?></a>
+											</li>
+											<li>&nbsp;&bull;&nbsp;</li>
+										<?php endif ?>
+									<?php elseif ( $is_paid_trial ) : ?>
+										<li>
+											<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
+												<input type="hidden" name="fs_action" value="cancel_trial">
+												<?php wp_nonce_field( 'cancel_trial' ) ?>
+												<a href="#"
+												   onclick="if (confirm('<?php echo esc_attr( $cancel_trial_confirm_text ) ?>')) this.parentNode.submit(); return false;"><i
+														class="dashicons dashicons-download"></i> <?php echo esc_html( $cancel_trial_text ) ?></a>
+											</form>
+										</li>
+										<li>&nbsp;&bull;&nbsp;</li>
+									<?php endif ?>
+									<li>
+										<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
+											<input type="hidden" name="fs_action" value="<?php echo $fs->get_unique_affix() ?>_sync_license">
+											<?php wp_nonce_field( $fs->get_unique_affix() . '_sync_license' ) ?>
+											<a href="#" onclick="this.parentNode.submit(); return false;"><i
+													class="dashicons dashicons-image-rotate"></i> <?php fs_esc_html_echo_x_inline( 'Sync', 'as synchronize', 'sync', $slug ) ?></a>
+										</form>
+									</li>
 
-		$installed_addons     = $fs->get_installed_addons();
-		$installed_addons_ids = array();
-		foreach ( $installed_addons as $fs_addon ) {
-			$installed_addons_ids[] = $fs_addon->get_id();
-		}
+								</ul>
+							</div>
+							<div class="inside">
+								<table id="fs_account_details" cellspacing="0" class="fs-key-value-table">
+									<?php
+										$hide_license_key = $fs->apply_filters( 'hide_license_key', false );
 
-		$addons_to_show = array_unique( array_merge( $installed_addons_ids, $account_addons ) );
-	?>
-	<?php if ( 0 < count( $addons_to_show ) ) : ?>
-		<div class="postbox">
-		<div class="">
-		<!--				<div class="inside">-->
-		<table id="fs_addons" class="widefat">
-		<thead>
-		<tr>
-			<th><h3><?php _efs( 'add-ons', $slug ) ?></h3></th>
-			<th><?php _efs( 'id', $slug ) ?></th>
-			<th><?php _efs( 'version', $slug ) ?></th>
-			<th><?php _efs( 'plan', $slug ) ?></th>
-			<th><?php _efs( 'license', $slug ) ?></th>
-			<th></th>
-			<?php if ( defined( 'WP_FS__DEV_MODE' ) && WP_FS__DEV_MODE ) : ?>
-				<th></th>
-			<?php endif ?>
-		</tr>
-		</thead>
-		<tbody>
-		<?php $odd = true;
-			foreach ( $addons_to_show as $addon_id ) : ?>
-				<?php
-				$addon              = $fs->get_addon( $addon_id );
-				$is_addon_activated = $fs->is_addon_activated( $addon->slug );
-				$is_addon_connected = $fs->is_addon_connected( $addon->slug );
-
-				$fs_addon = $is_addon_connected ? freemius( $addon->slug ) : false;
-				if ( is_object( $fs_addon ) ) {
-					$is_paying                  = $fs_addon->is_paying();
-					$user                       = $fs_addon->get_user();
-					$site                       = $fs_addon->get_site();
-					$license                    = $fs_addon->_get_license();
-					$subscription               = $fs_addon->_get_subscription();
-					$plan                       = $fs_addon->get_plan();
-					$is_active_subscription     = ( is_object( $subscription ) && $subscription->is_active() );
-					$is_paid_trial              = $fs_addon->is_paid_trial();
-					$show_upgrade               = ( ! $is_paying && ! $is_paid_trial && ! $fs_addon->_has_premium_license() );
-					$is_current_license_expired = is_object( $license ) && $license->is_expired();
-				}
-
-//					var_dump( $is_paid_trial, $license, $site, $subscription );
-
-				?>
-				<tr<?php if ( $odd ) {
-					echo ' class="alternate"';
-				} ?>>
-				<td>
-					<!-- Title -->
-					<?php echo $addon->title ?>
-				</td>
-				<?php if ( $is_addon_connected ) : ?>
-					<?php // Add-on Installed ?>
-					<?php $addon_site = $fs_addon->get_site(); ?>
-					<td>
-						<!-- ID -->
-						<?php echo $addon_site->id ?>
-					</td>
-					<td>
-						<!-- Version -->
-						<?php echo $fs_addon->get_plugin_version() ?>
-					</td>
-					<td>
-						<!-- Plan Title -->
-						<?php echo is_string( $addon_site->plan->name ) ? strtoupper( $addon_site->plan->title ) : 'FREE' ?>
-					</td>
-					<td>
-						<!-- Expiration -->
-						<?php
-							$tags = array();
-
-							if ( $fs_addon->is_trial() ) {
-								$tags[] = array( 'label' => __fs( 'trial', $slug ), 'type' => 'success' );
-
-								$tags[] = array(
-									'label' => sprintf( __fs( ( $is_paid_trial ? 'renews-in' : 'expires-in' ), $slug ), human_time_diff( time(), strtotime( $site->trial_ends ) ) ),
-									'type'  => ( $is_paid_trial ? 'success' : 'warn' )
-								);
-							} else {
-								if ( is_object( $license ) ) {
-									if ( $license->is_cancelled ) {
-										$tags[] = array(
-											'label' => __fs( 'cancelled', $slug ),
-											'type'  => 'error'
+										$profile   = array();
+										$profile[] = array(
+											'id'    => 'user_name',
+											'title' => fs_text_inline( 'Name', 'name', $slug ),
+											'value' => $name
 										);
-									} else if ( $license->is_expired() ) {
-										$tags[] = array(
-											'label' => __fs( 'expired', $slug ),
-											'type'  => 'error'
+										//					if (isset($user->email) && false !== strpos($user->email, '@'))
+										$profile[] = array(
+											'id'    => 'email',
+											'title' => fs_text_inline( 'Email', 'email', $slug ),
+											'value' => $user->email
 										);
-									} else if ( $license->is_lifetime() ) {
-										$tags[] = array(
-											'label' => __fs( 'no-expiration', $slug ),
-											'type'  => 'success'
+
+										if ( is_numeric( $user->id ) ) {
+											$profile[] = array(
+												'id'    => 'user_id',
+												'title' => fs_text_inline( 'User ID', 'user-id', $slug ),
+												'value' => $user->id
+											);
+										}
+
+										$profile[] = array(
+											'id'    => 'site_id',
+											'title' => fs_text_inline( 'Site ID', 'site-id', $slug ),
+											'value' => is_string( $site->id ) ?
+												$site->id :
+												fs_text_inline( 'No ID', 'no-id', $slug )
 										);
-									} else if ( ! $is_active_subscription && ! $license->is_first_payment_pending() ) {
-										$tags[] = array(
-											'label' => sprintf( __fs( 'expires-in', $slug ), human_time_diff( time(), strtotime( $license->expiration ) ) ),
-											'type'  => 'warn'
+
+										$profile[] = array(
+											'id'    => 'site_public_key',
+											'title' => fs_text_inline( 'Public Key', 'public-key', $slug ),
+											'value' => $site->public_key
 										);
-									} else if ( $is_active_subscription && ! $subscription->is_first_payment_pending() ) {
-										$tags[] = array(
-											'label' => sprintf( __fs( 'renews-in', $slug ), human_time_diff( time(), strtotime( $subscription->next_payment ) ) ),
-											'type'  => 'success'
+
+										$profile[] = array(
+											'id'    => 'site_secret_key',
+											'title' => fs_text_inline( 'Secret Key', 'secret-key', $slug ),
+											'value' => ( ( is_string( $site->secret_key ) ) ?
+												$site->secret_key :
+												fs_text_x_inline( 'No Secret', 'as secret encryption key missing', 'no-secret', $slug )
+											)
 										);
-									}
-								}
-							}
 
-							foreach ( $tags as $t ) {
-								printf( '<label class="fs-tag fs-%s">%s</label>' . "\n", $t['type'], $t['label'] );
-							}
-						?>
-					</td>
-					<?php
-					$buttons = array();
-					if ( $is_addon_activated ) {
-						if ( $is_paying ) {
-							$buttons[] = fs_ui_get_action_button(
-								$slug,
-								'account',
-								'deactivate_license',
-								__fs( 'deactivate-license', $slug ),
-								array( 'plugin_id' => $addon_id ),
-								false
-							);
-						} else if ( $is_paid_trial ) {
-							$buttons[] = fs_ui_get_action_button(
-								$slug,
-								'account',
-								'cancel_trial',
-								__fs( 'cancel-trial', $slug ),
-								array( 'plugin_id' => $addon_id ),
-								false,
-								'dashicons dashicons-download',
-								__fs( 'cancel-trial-confirm', $slug ),
-								'POST'
-							);
-						} else {
-							$premium_license = $fs_addon->_get_available_premium_license();
+										$profile[] = array(
+											'id'    => 'version',
+											'title' => $version_text,
+											'value' => $fs->get_plugin_version()
+										);
 
-							if ( is_object( $premium_license ) ) {
-								$site = $fs_addon->get_site();
+										if ( $fs->has_paid_plan() ) {
+											if ( $fs->is_trial() ) {
+												$trial_plan = $fs->get_trial_plan();
 
-								$buttons[] = fs_ui_get_action_button(
-									$slug,
-									'account',
-									'activate_license',
-									sprintf( __fs( 'activate-x-plan', $slug ), $fs_addon->get_plan_title(), ( $site->is_localhost() && $premium_license->is_free_localhost ) ? '[localhost]' : ( 1 < $premium_license->left() ? $premium_license->left() . ' left' : '' ) ),
-									array(
-										'plugin_id'  => $addon_id,
-										'license_id' => $premium_license->id,
-									)
-								);
-							}
-						}
+												$profile[] = array(
+													'id'    => 'plan',
+													'title' => $plan_text,
+													'value' => ( is_string( $trial_plan->name ) ?
+														strtoupper( $trial_plan->title ) :
+														fs_text_inline( 'Trial', 'trial', $slug ) )
+												);
+											} else {
+												$profile[] = array(
+													'id'    => 'plan',
+													'title' => $plan_text,
+													'value' => strtoupper( is_string( $site->plan->name ) ?
+														$site->plan->title :
+														strtoupper( $free_text )
+													)
+												);
 
-						if ( 0 == count( $buttons ) ) {
-							// Add sync license only if non of the other CTAs are visible.
-							$buttons[] = fs_ui_get_action_button(
-								$slug,
-								'account',
-								$slug . '_sync_license',
-								__fs( 'sync-license', $slug ),
-								array( 'plugin_id' => $addon_id ),
-								false
-							);
-
-						}
-					} else if ( ! $show_upgrade ) {
-						if ( $fs->is_addon_installed( $addon->slug ) ) {
-							$addon_file = $fs->get_addon_basename( $addon->slug );
-							$buttons[]  = sprintf(
-								'<a class="button button-primary" href="%s" title="%s" class="edit">%s</a>',
-								wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $addon_file, 'activate-plugin_' . $addon_file ),
-								esc_attr( __fs( 'activate-this-addon', $slug ) ),
-								__fs( 'activate', $slug )
-							);
-						} else {
-							if ( $fs->is_allowed_to_install() ) {
-								$buttons[] = sprintf(
-									'<a class="button button-primary" href="%s" class="edit">%s</a>',
-									wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $addon->slug ), 'install-plugin_' . $addon->slug ),
-									__fs( 'install-now', $slug )
-								);
-							} else {
-								$buttons[] = sprintf(
-									'<a target="_blank" class="button button-primary" href="%s" class="edit">%s</a>',
-									$fs->_get_latest_download_local_url( $addon_id ),
-									__fs( 'download-latest', $slug )
-								);
-							}
-						}
-					}
-
-					if ( $show_upgrade ) {
-						$buttons[] = sprintf( '<a href="%s" class="thickbox button button-primary" aria-label="%s" data-title="%s"><i class="dashicons dashicons-cart"></i> %s</a>',
-							esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&parent_plugin_id=' . $fs->get_id() . '&plugin=' . $addon->slug .
-							                            '&TB_iframe=true&width=600&height=550' ) ),
-							esc_attr( sprintf( __fs( 'more-information-about-x', $slug ), $addon->title ) ),
-							esc_attr( $addon->title ),
-							__fs( ( $fs_addon->has_free_plan() ? 'upgrade' : 'purchase' ), $slug )
-						);
-					}
-
-					$buttons_count = count( $buttons );
-					?>
-
-					<td>
-						<!-- Actions -->
-						<?php if ($buttons_count > 1) : ?>
-						<div class="button-group">
-							<?php endif ?>
-							<?php foreach ( $buttons as $button ) : ?>
-								<?php echo $button ?>
-							<?php endforeach ?>
-							<?php if ($buttons_count > 1) : ?>
+												if ( is_object( $license ) ) {
+													if ( ! $hide_license_key ) {
+														$profile[] = array(
+															'id'    => 'license_key',
+															'title' => fs_text_inline( 'License Key', $slug ),
+															'value' => $license->secret_key,
+														);
+													}
+												}
+											}
+										}
+									?>
+									<?php $odd = true;
+										foreach ( $profile as $p ) : ?>
+											<?php
+											if ( 'plan' === $p['id'] && ! $fs->has_paid_plan() ) {
+												// If plugin don't have any paid plans, there's no reason
+												// to show current plan.
+												continue;
+											}
+											?>
+											<tr class="fs-field-<?php echo $p['id'] ?><?php if ( $odd ) : ?> alternate<?php endif ?>">
+												<td>
+													<nobr><?php echo $p['title'] ?>:</nobr>
+												</td>
+												<td<?php if ( 'plan' === $p['id'] ) { echo ' colspan="2"'; }?>>
+													<?php if ( in_array( $p['id'], array( 'license_key', 'site_secret_key' ) ) ) : ?>
+														<code><?php echo htmlspecialchars( substr( $p['value'], 0, 6 ) ) . str_pad( '', 23 * 6, '&bull;' ) . htmlspecialchars( substr( $p['value'], - 3 ) ) ?></code>
+														<input type="text" value="<?php echo htmlspecialchars( $p['value'] ) ?>" style="display: none"
+														       readonly/>
+													<?php else : ?>
+														<code><?php echo htmlspecialchars( $p['value'] ) ?></code>
+													<?php endif ?>
+													<?php if ( 'email' === $p['id'] && ! $user->is_verified() ) : ?>
+														<label class="fs-tag fs-warn"><?php fs_esc_html_echo_inline( 'not verified', 'not-verified', $slug ) ?></label>
+													<?php endif ?>
+													<?php if ( 'plan' === $p['id'] ) : ?>
+														<?php if ( $fs->is_trial() ) : ?>
+															<label class="fs-tag fs-success"><?php echo esc_html( $trial_text ) ?></label>
+														<?php endif ?>
+														<?php if ( is_object( $license ) && ! $license->is_lifetime() ) : ?>
+															<?php if ( ! $is_active_subscription && ! $license->is_first_payment_pending() ) : ?>
+																<label
+																	class="fs-tag fs-warn"><?php echo esc_html( sprintf( $expires_in_text, human_time_diff( time(), strtotime( $license->expiration ) ) ) ) ?></label>
+															<?php elseif ( $is_active_subscription && ! $subscription->is_first_payment_pending() ) : ?>
+																<label class="fs-tag fs-success"><?php echo esc_html( sprintf( $renews_in_text, human_time_diff( time(), strtotime( $subscription->next_payment ) ) ) ) ?></label>
+															<?php endif ?>
+														<?php elseif ( $fs->is_trial() ) : ?>
+															<label class="fs-tag fs-warn"><?php echo esc_html( sprintf( $expires_in_text, human_time_diff( time(), strtotime( $site->trial_ends ) ) ) ) ?></label>
+														<?php endif ?>
+														<div class="button-group">
+															<?php $available_license = $fs->is_free_plan() ? $fs->_get_available_premium_license() : false ?>
+															<?php if ( false !== $available_license && ( $available_license->left() > 0 || ( $site->is_localhost() && $available_license->is_free_localhost ) ) ) : ?>
+																<?php $premium_plan = $fs->_get_plan_by_id( $available_license->plan_id ) ?>
+																<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>"
+																      method="POST">
+																	<input type="hidden" name="fs_action" value="activate_license">
+																	<input type="hidden" name="license_id" value="<?php echo $available_license->id ?>">
+																	<?php wp_nonce_field( 'activate_license' ) ?>
+																	<input type="submit" class="button button-primary"
+																	       value="<?php echo esc_attr( sprintf(
+                                                                               $activate_plan_text . '%s',
+																		       $premium_plan->title,
+																		       ( $site->is_localhost() && $available_license->is_free_localhost ) ?
+																			       ' [' . fs_text_inline( 'Localhost', 'localhost', $slug ) . ']' :
+																			       ( $available_license->is_single_site() ?
+																				       '' :
+																				       ' [' . ( 1 < $available_license->left() ?
+																					       sprintf( fs_text_x_inline( '%s left', 'as 5 licenses left', 'x-left', $slug ), $available_license->left() ) :
+																					       strtolower( fs_text_inline( 'Last license', 'last-license', $slug ) ) ) . ']'
+																			       )
+																	       ) ) ?> ">
+																</form>
+															<?php else : ?>
+																<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>"
+																      method="POST" class="button-group">
+																	<?php if ( $show_upgrade && $fs->is_premium() ) : ?>
+																		<a class="button activate-license-trigger <?php echo $fs->get_unique_affix() ?>" href="#"><?php fs_esc_html_echo_inline( 'Activate License', 'activate-license', $slug ) ?></a>
+																	<?php endif ?>
+																	<input type="submit" class="button"
+																	       value="<?php echo esc_attr( $sync_license_text ) ?>">
+																	<input type="hidden" name="fs_action"
+																	       value="<?php echo $fs->get_unique_affix() ?>_sync_license">
+																	<?php wp_nonce_field( $fs->get_unique_affix() . '_sync_license' ) ?>
+																	<?php if ( $show_upgrade || ! $fs->is_single_plan() ) : ?>
+																	<a href="<?php echo $fs->get_upgrade_url() ?>"
+																	   class="button<?php
+																		   echo $show_upgrade ?
+																			   ' button-primary fs-upgrade' :
+																			   ' fs-change-plan'; ?> button-upgrade"><i
+																			class="dashicons dashicons-cart"></i> <?php echo esc_html( $show_upgrade ? $upgrade_text : $change_plan_text ) ?></a>
+																	<?php endif ?>
+																</form>
+															<?php endif ?>
+														</div>
+													<?php elseif ( 'version' === $p['id'] && $fs->has_paid_plan() ) : ?>
+														<?php if ( $fs->has_premium_version() ) : ?>
+															<?php if ( $fs->is_premium() ) : ?>
+																<label
+																	class="fs-tag fs-<?php echo $fs->can_use_premium_code() ? 'success' : 'warn' ?>"><?php fs_esc_html_echo_inline( 'Premium version', 'premium-version', $slug ) ?></label>
+															<?php elseif ( $fs->can_use_premium_code() ) : ?>
+																<label class="fs-tag fs-warn"><?php fs_esc_html_echo_inline( 'Free version', 'free-version', $slug ) ?></label>
+															<?php endif ?>
+														<?php endif ?>
+													<?php endif ?>
+												</td>
+												<?php if ( 'plan' !== $p['id'] ) : ?>
+													<td class="fs-right">
+														<?php if ( 'email' === $p['id'] && ! $user->is_verified() ) : ?>
+															<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST">
+																<input type="hidden" name="fs_action" value="verify_email">
+																<?php wp_nonce_field( 'verify_email' ) ?>
+																<input type="submit" class="button button-small"
+																       value="<?php fs_esc_attr_echo_inline( 'Verify Email', 'verify-email', $slug ) ?>">
+															</form>
+														<?php endif ?>
+														<?php if ( 'version' === $p['id'] ) : ?>
+															<?php if ( $fs->has_release_on_freemius() ) : ?>
+																<div class="button-group">
+																	<?php if ( $is_paying || $fs->is_trial() ) : ?>
+																		<?php if ( ! $fs->is_allowed_to_install() ) : ?>
+																			<a target="_blank" class="button button-primary"
+																			   href="<?php echo $fs->_get_latest_download_local_url() ?>"><?php echo sprintf(
+																			       /* translators: %s: plan name (e.g. Download "Professional" Version) */
+																			       fs_text_inline( 'Download %s Version', 'download-x-version', $slug ),
+                                                                                                                                                                                                                                     ( $fs->is_trial() ? $trial_plan->title : $site->plan->title ) ) . ( is_object( $update ) ? ' [' . $update->version . ']' : '' ) ?></a>
+																		<?php elseif ( is_object( $update ) ) : ?>
+																			<?php
+																			$module_type = $fs->get_module_type();
+																			?>
+																			<a class="button button-primary"
+																			   href="<?php echo wp_nonce_url( self_admin_url( "update.php?action=upgrade-{$module_type}&{$module_type}=" . $fs->get_plugin_basename() ), "upgrade-{$module_type}_" . $fs->get_plugin_basename() ) ?>"><?php echo fs_esc_html_inline( 'Install Update Now', 'install-update-now', $slug ) . ' [' . $update->version . ']' ?></a>
+																		<?php endif ?>
+																	<?php endif; ?>
+																</div>
+															<?php endif ?>
+															<?php
+														elseif ( in_array( $p['id'], array( 'license_key', 'site_secret_key' ) ) ) : ?>
+															<button class="button button-small fs-toggle-visibility"><?php fs_esc_html_echo_x_inline( 'Show', 'verb', 'show', $slug ) ?></button>
+															<?php if ('license_key' === $p['id']) : ?>
+																<button class="button button-small activate-license-trigger <?php echo $fs->get_unique_affix() ?>"><?php fs_esc_html_echo_inline( 'Change License', 'change-license', $slug ) ?></button>
+															<?php endif ?>
+															<?php
+														elseif (/*in_array($p['id'], array('site_secret_key', 'site_id', 'site_public_key')) ||*/
+														( is_string( $user->secret_key ) && in_array( $p['id'], array(
+																'email',
+																'user_name'
+															) ) )
+														) : ?>
+															<form action="<?php echo $fs->_get_admin_page_url( 'account' ) ?>" method="POST"
+															      onsubmit="var val = prompt('<?php echo esc_attr( sprintf(
+                                                                      /* translators: %s: User's account property (e.g. name, email) */
+															          fs_text_inline( 'What is your %s?', 'what-is-your-x', $slug ),
+                                                                      $p['title']
+                                                                  ) ) ?>', '<?php echo $p['value'] ?>'); if (null == val || '' === val) return false; jQuery('input[name=fs_<?php echo $p['id'] ?>_<?php echo $fs->get_unique_affix() ?>]').val(val); return true;">
+																<input type="hidden" name="fs_action" value="update_<?php echo $p['id'] ?>">
+																<input type="hidden" name="fs_<?php echo $p['id'] ?>_<?php echo $fs->get_unique_affix() ?>"
+																       value="">
+																<?php wp_nonce_field( 'update_' . $p['id'] ) ?>
+																<input type="submit" class="button button-small"
+																       value="<?php echo fs_esc_attr_x_inline( 'Edit', 'verb', 'edit', $slug ) ?>">
+															</form>
+														<?php endif ?>
+													</td>
+												<?php endif ?>
+											</tr>
+											<?php $odd = ! $odd;
+										endforeach ?>
+								</table>
+							</div>
 						</div>
-					<?php endif ?>
-					</td>
-				<?php else : ?>
-					<?php // Add-on NOT Installed or was never connected.
-					?>
-					<td colspan="4">
-						<!-- Action -->
-						<?php if ( $fs->is_addon_installed( $addon->slug ) ) : ?>
-							<?php $addon_file = $fs->get_addon_basename( $addon->slug ) ?>
-							<a class="button button-primary"
-							   href="<?php echo wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $addon_file, 'activate-plugin_' . $addon_file ) ?>"
-							   title="<?php esc_attr( __fs( 'activate-this-addon', $slug ) ) ?>"
-							   class="edit"><?php _efs( 'activate', $slug ) ?></a>
-						<?php else : ?>
-							<?php if ( $fs->is_allowed_to_install() ) : ?>
-								<a class="button button-primary"
-								   href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $addon->slug ), 'install-plugin_' . $addon->slug ) ?>"><?php _efs( 'install-now', $slug ) ?></a>
-							<?php else : ?>
-								<a target="_blank" class="button button-primary"
-								   href="<?php echo $fs->_get_latest_download_local_url( $addon_id ) ?>"><?php _efs( 'download-latest', $slug ) ?></a>
-							<?php endif ?>
-						<?php endif ?>
-					</td>
-				<?php endif ?>
-				<?php if ( defined( 'WP_FS__DEV_MODE' ) && WP_FS__DEV_MODE ) : ?>
-					<td>
-						<!-- Optional Delete Action -->
-						<?php
-							if ( $is_addon_activated ) {
-								fs_ui_action_button(
-									$slug, 'account',
-									'delete_account',
-									__fs( 'delete', $slug ),
-									array( 'plugin_id' => $addon_id ),
-									false
-								);
-							}
-						?>
-					</td>
-				<?php endif ?>
-				</tr>
-				<?php $odd = ! $odd; endforeach ?>
-		</tbody>
-		</table>
-		</div>
-		</div>
-	<?php endif ?>
+						<script type="text/javascript">
+							(function ($) {
+								$('.fs-toggle-visibility').click(function () {
+									var
+										$this = $(this),
+										$parent = $this.closest('tr'),
+										$input = $parent.find('input');
 
-	<?php $fs->do_action( 'after_account_details' ) ?>
+									$parent.find('code').toggle();
+									$input.toggle();
+
+									if ($input.is(':visible')) {
+										$this.html('<?php fs_esc_js_echo_x_inline( 'Hide', 'verb', 'hide', $slug ) ?>');
+										setTimeout(function () {
+											$input.select().focus();
+										}, 100);
+									}
+									else {
+										$this.html( '<?php fs_esc_js_echo_x_inline( 'Show', 'verb', 'show', $slug ) ?>' );
+									}
+								});
+							}(jQuery));
+
+						</script>
+
+						<?php
+							$account_addons = $fs->get_account_addons();
+							if ( ! is_array( $account_addons ) ) {
+								$account_addons = array();
+							}
+
+							$installed_addons     = $fs->get_installed_addons();
+							$installed_addons_ids = array();
+							foreach ( $installed_addons as $fs_addon ) {
+								$installed_addons_ids[] = $fs_addon->get_id();
+							}
+
+							$addons_to_show = array_unique( array_merge( $installed_addons_ids, $account_addons ) );
+						?>
+						<?php if ( 0 < count( $addons_to_show ) ) : ?>
+							<!-- Add-Ons -->
+							<div class="postbox">
+								<div class="">
+									<!--				<div class="inside">-->
+									<table id="fs_addons" class="widefat">
+										<thead>
+										<tr>
+											<th><h3><?php echo esc_html( $addons_text ) ?></h3></th>
+											<th><?php fs_esc_html_echo_inline( 'ID', 'id', $slug ) ?></th>
+											<th><?php echo esc_html( $version_text ) ?></th>
+											<th><?php echo esc_html( $plan_text ) ?></th>
+											<th><?php fs_esc_html_echo_x_inline( 'License', 'as software license', 'license', $slug ) ?></th>
+											<th></th>
+											<?php if ( defined( 'WP_FS__DEV_MODE' ) && WP_FS__DEV_MODE ) : ?>
+												<th></th>
+											<?php endif ?>
+										</tr>
+										</thead>
+										<tbody>
+										<?php $odd = true;
+											foreach ( $addons_to_show as $addon_id ) : ?>
+												<?php
+												$addon              = $fs->get_addon( $addon_id );
+												$is_addon_activated = $fs->is_addon_activated( $addon_id );
+												$is_addon_connected = $fs->is_addon_connected( $addon_id );
+
+												$fs_addon = $is_addon_connected ? freemius( $addon_id ) : false;
+												if ( is_object( $fs_addon ) ) {
+													$is_paying                  = $fs_addon->is_paying();
+													$user                       = $fs_addon->get_user();
+													$site                       = $fs_addon->get_site();
+													$license                    = $fs_addon->_get_license();
+													$subscription               = $fs_addon->_get_subscription();
+													$plan                       = $fs_addon->get_plan();
+													$is_active_subscription     = ( is_object( $subscription ) && $subscription->is_active() );
+													$is_paid_trial              = $fs_addon->is_paid_trial();
+													$show_upgrade               = ( ! $is_paying && ! $is_paid_trial && ! $fs_addon->_has_premium_license() );
+													$is_current_license_expired = is_object( $license ) && $license->is_expired();
+												}
+
+												//					var_dump( $is_paid_trial, $license, $site, $subscription );
+
+												?>
+												<tr<?php if ( $odd ) {
+													echo ' class="alternate"';
+												} ?>>
+													<td>
+														<!-- Title -->
+														<?php echo $addon->title ?>
+													</td>
+													<?php if ( $is_addon_connected ) : ?>
+														<?php // Add-on Installed ?>
+														<?php $addon_site = $fs_addon->get_site(); ?>
+														<td>
+															<!-- ID -->
+															<?php echo $addon_site->id ?>
+														</td>
+														<td>
+															<!-- Version -->
+															<?php echo $fs_addon->get_plugin_version() ?>
+														</td>
+														<td>
+															<!-- Plan Title -->
+															<?php echo strtoupper( is_string( $addon_site->plan->name ) ? $addon_site->plan->title : $free_text ) ?>
+														</td>
+														<td>
+															<!-- Expiration -->
+															<?php
+																$tags = array();
+
+																if ( $fs_addon->is_trial() ) {
+																	$tags[] = array( 'label' => $trial_text, 'type' => 'success' );
+
+																	$tags[] = array(
+																		'label' => sprintf(
+                                                                            ( $is_paid_trial ?
+                                                                                $renews_in_text :
+                                                                                $expires_in_text ),
+                                                                            human_time_diff( time(), strtotime( $site->trial_ends ) )
+                                                                        ),
+																		'type'  => ( $is_paid_trial ? 'success' : 'warn' )
+																	);
+																} else {
+																	if ( is_object( $license ) ) {
+																		if ( $license->is_cancelled ) {
+																			$tags[] = array(
+																				'label' => fs_text_inline( 'Cancelled', 'cancelled', $slug ),
+																				'type'  => 'error'
+																			);
+																		} else if ( $license->is_expired() ) {
+																			$tags[] = array(
+																				'label' => fs_text_inline( 'Expired', 'expired', $slug ),
+																				'type'  => 'error'
+																			);
+																		} else if ( $license->is_lifetime() ) {
+																			$tags[] = array(
+																				'label' => fs_text_inline( 'No expiration', 'no-expiration', $slug ),
+																				'type'  => 'success'
+																			);
+																		} else if ( ! $is_active_subscription && ! $license->is_first_payment_pending() ) {
+																			$tags[] = array(
+																				'label' => sprintf( $expires_in_text, human_time_diff( time(), strtotime( $license->expiration ) ) ),
+																				'type'  => 'warn'
+																			);
+																		} else if ( $is_active_subscription && ! $subscription->is_first_payment_pending() ) {
+																			$tags[] = array(
+																				'label' => sprintf( $renews_in_text, human_time_diff( time(), strtotime( $subscription->next_payment ) ) ),
+																				'type'  => 'success'
+																			);
+																		}
+																	}
+																}
+
+																foreach ( $tags as $t ) {
+																	printf( '<label class="fs-tag fs-%s">%s</label>' . "\n", $t['type'], $t['label'] );
+																}
+															?>
+														</td>
+														<?php
+														$buttons = array();
+														if ( $is_addon_activated ) {
+															if ( $is_paying ) {
+																$buttons[] = fs_ui_get_action_button(
+																	$fs->get_id(),
+																	'account',
+																	'deactivate_license',
+																	fs_text_inline( 'Deactivate License', 'deactivate-license', $slug ),
+																	array( 'plugin_id' => $addon_id ),
+																	false
+																);
+
+																$human_readable_license_expiration = human_time_diff( time(), strtotime( $license->expiration ) );
+																$downgrade_confirmation_message    = sprintf(
+                                                                    $downgrade_x_confirm_text,
+																	$plan->title,
+																	$human_readable_license_expiration
+																);
+
+																$after_downgrade_message = ! $license->is_block_features ?
+																	sprintf( $after_downgrade_non_blocking_text, $plan->title, $fs_addon->get_module_label( true ) ) :
+																	sprintf( $after_downgrade_blocking_text, $plan->title );
+
+																if ( ! $license->is_lifetime() && $is_active_subscription ) {
+																	$buttons[] = fs_ui_get_action_button(
+																		$fs->get_id(),
+																		'account',
+																		'downgrade_account',
+                                                                        $downgrade_text,
+																		array( 'plugin_id' => $addon_id ),
+																		false,
+																		false,
+																		( $downgrade_confirmation_message . ' ' . $after_downgrade_message ),
+																		'POST'
+																	);
+																}
+															} else if ( $is_paid_trial ) {
+																$buttons[] = fs_ui_get_action_button(
+																	$fs->get_id(),
+																	'account',
+																	'cancel_trial',
+                                                                    $cancel_trial_text,
+																	array( 'plugin_id' => $addon_id ),
+																	false,
+																	'dashicons dashicons-download',
+                                                                    $cancel_trial_confirm_text,
+																	'POST'
+																);
+															} else {
+																$premium_license = $fs_addon->_get_available_premium_license();
+
+																if ( is_object( $premium_license ) ) {
+																	$site = $fs_addon->get_site();
+
+																	$buttons[] = fs_ui_get_action_button(
+																		$fs->get_id(),
+																		'account',
+																		'activate_license',
+																		sprintf( $activate_plan_text, $fs_addon->get_plan_title(), ( $site->is_localhost() && $premium_license->is_free_localhost ) ? '[localhost]' : ( 1 < $premium_license->left() ? $premium_license->left() . ' left' : '' ) ),
+																		array(
+																			'plugin_id'  => $addon_id,
+																			'license_id' => $premium_license->id,
+																		)
+																	);
+																}
+															}
+
+															if ( 0 == count( $buttons ) ) {
+																// Add sync license only if non of the other CTAs are visible.
+																$buttons[] = fs_ui_get_action_button(
+																	$fs->get_id(),
+																	'account',
+																	$fs->get_unique_affix() . '_sync_license',
+                                                                    $sync_license_text,
+																	array( 'plugin_id' => $addon_id ),
+																	false
+																);
+
+															}
+														} else if ( ! $show_upgrade ) {
+															if ( $fs->is_addon_installed( $addon_id ) ) {
+																$addon_file = $fs->get_addon_basename( $addon_id );
+																$buttons[]  = sprintf(
+																	'<a class="button button-primary edit" href="%s" title="%s">%s</a>',
+																	wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $addon_file, 'activate-plugin_' . $addon_file ),
+																	fs_esc_attr_inline( 'Activate this add-on', 'activate-this-addon', $slug ),
+																	$activate_text
+																);
+															} else {
+																if ( $fs->is_allowed_to_install() ) {
+																	$buttons[] = sprintf(
+																		'<a class="button button-primary edit" href="%s">%s</a>',
+																		wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $addon->slug ), 'install-plugin_' . $addon->slug ),
+																		fs_text_inline( 'Install Now', 'install-now', $slug )
+																	);
+																} else {
+																	$buttons[] = sprintf(
+																		'<a target="_blank" class="button button-primary edit" href="%s">%s</a>',
+																		$fs->_get_latest_download_local_url( $addon_id ),
+																		esc_html( $download_latest_text )
+																	);
+																}
+															}
+														}
+
+														if ( $show_upgrade ) {
+															$buttons[] = sprintf( '<a href="%s" class="thickbox button button-primary" aria-label="%s" data-title="%s"><i class="dashicons dashicons-cart"></i> %s</a>',
+																esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&parent_plugin_id=' . $fs->get_id() . '&plugin=' . $addon->slug .
+																                            '&TB_iframe=true&width=600&height=550' ) ),
+																esc_attr( sprintf( fs_text_inline( 'More information about %s', 'more-information-about-x', $slug ), $addon->title ) ),
+																esc_attr( $addon->title ),
+																( $fs_addon->has_free_plan() ?
+                                                                    $upgrade_text :
+																	fs_text_x_inline( 'Purchase', 'verb', 'purchase', $slug ) )
+															);
+														}
+
+														$buttons_count = count( $buttons );
+														?>
+
+														<td>
+															<!-- Actions -->
+															<?php if ($buttons_count > 1) : ?>
+															<div class="button-group">
+																<?php endif ?>
+																<?php foreach ( $buttons as $button ) : ?>
+																	<?php echo $button ?>
+																<?php endforeach ?>
+																<?php if ($buttons_count > 1) : ?>
+															</div>
+														<?php endif ?>
+														</td>
+													<?php else : ?>
+														<?php // Add-on NOT Installed or was never connected.
+														?>
+														<td colspan="4">
+															<!-- Action -->
+															<?php if ( $fs->is_addon_installed( $addon_id ) ) : ?>
+																<?php $addon_file = $fs->get_addon_basename( $addon_id ) ?>
+																<a class="button button-primary"
+																   href="<?php echo wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $addon_file, 'activate-plugin_' . $addon_file ) ?>"
+																   title="<?php fs_esc_attr_echo_inline( 'Activate this add-on', 'activate-this-addon', $slug ) ?>"
+																   class="edit"><?php echo esc_html( $activate_text ) ?></a>
+															<?php else : ?>
+																<?php if ( $fs->is_allowed_to_install() ) : ?>
+																	<a class="button button-primary"
+																	   href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $addon->slug ), 'install-plugin_' . $addon->slug ) ?>"><?php fs_esc_html_echo_inline( 'Install Now', 'install-now', $slug ) ?></a>
+																<?php else : ?>
+																	<a target="_blank" class="button button-primary"
+																	   href="<?php echo $fs->_get_latest_download_local_url( $addon_id ) ?>"><?php echo esc_html( $download_latest_text ) ?></a>
+																<?php endif ?>
+															<?php endif ?>
+														</td>
+													<?php endif ?>
+													<?php if ( ! $is_paying && defined( 'WP_FS__DEV_MODE' ) && WP_FS__DEV_MODE ) : ?>
+														<td>
+															<!-- Optional Delete Action -->
+															<?php
+																if ( $is_addon_activated ) {
+																	fs_ui_action_button(
+																		$fs->get_id(), 'account',
+																		'delete_account',
+																		fs_text_x_inline( 'Delete', 'verb', 'delete', $slug ),
+																		array( 'plugin_id' => $addon_id ),
+																		false
+																	);
+																}
+															?>
+														</td>
+													<?php endif ?>
+												</tr>
+												<?php $odd = ! $odd;
+											endforeach ?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						<?php endif ?>
+
+						<?php $fs->do_action( 'after_account_details' ) ?>
+
+						<?php
+							$view_params = array( 'id' => $VARS['id'] );
+							fs_require_once_template( 'account/billing.php', $view_params );
+							fs_require_once_template( 'account/payments.php', $view_params );
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-<?php fs_require_template( 'powered-by.php' ) ?>
+<?php
+	if ( $has_tabs ) {
+		$fs->_add_tabs_after_content();
+	}
+
+	$params = array(
+		'page'           => 'account',
+		'module_id'      => $fs->get_id(),
+		'module_type'    => $fs->get_module_type(),
+		'module_slug'    => $slug,
+		'module_version' => $fs->get_plugin_version(),
+	);
+	fs_require_template( 'powered-by.php', $params );
