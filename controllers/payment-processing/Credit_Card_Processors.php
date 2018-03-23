@@ -68,9 +68,8 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				if ( isset( $_POST['sa_credit_cc_number'] ) && strlen( $_POST['sa_credit_cc_number'] ) > 0 ) {
 					$this->cc_cache['cc_number'] = preg_replace( '/\D+/', '', $_POST['sa_credit_cc_number'] );
 				}
-			}
-			elseif ( isset( $_POST['sa_credit_'.$key] ) && strlen( $_POST['sa_credit_'.$key] ) > 0 ) {
-				$this->cc_cache[$key] = $_POST['sa_credit_'.$key];
+			} elseif ( isset( $_POST[ 'sa_credit_'.$key ] ) && strlen( $_POST[ 'sa_credit_'.$key ] ) > 0 ) {
+				$this->cc_cache[ $key ] = $_POST[ 'sa_credit_'.$key ];
 			}
 		}
 		$valid = $this->validate_billing( $checkout );
@@ -133,7 +132,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 					//'autocomplete' => 'off',
 				),
 				'required' => true,
-			)
+			),
 		);
 		$fields = apply_filters( 'sa_credit_card_fields', $fields, $checkout );
 		uasort( $fields, array( __CLASS__, 'sort_by_weight' ) );
@@ -209,8 +208,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	public static function is_expired( $year, $month ) {
 		if ( $year < date( 'Y' ) ) {
 			return true;
-		}
-		elseif ( $year == date( 'Y' ) ) {
+		} elseif ( $year == date( 'Y' ) ) {
 			if ( $month < date( 'n' ) ) {
 				return true;
 			}
@@ -239,7 +237,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 	 * @return array
 	 */
 	protected function payment_billing_fields( SI_Checkouts $checkout ) {
-		$billing_fields = self::get_standard_address_fields();
+		$billing_fields = self::get_standard_address_fields( true, get_current_user_id() );
 		$billing_fields = apply_filters( 'si_payment_billing_fields', $billing_fields, __CLASS__, $checkout );
 		uasort( $billing_fields, array( __CLASS__, 'sort_by_weight' ) );
 		return $billing_fields;
@@ -273,7 +271,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				'billing_fields' => $this->payment_billing_fields( $checkout ),
 				'cc_fields' => $this->payment_fields( $checkout ),
 				'checkout' => $checkout,
-			), true );
+		), true );
 	}
 
 	public function review_pane( SI_Checkouts $checkout ) {
@@ -282,7 +280,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			'cc_number' => '',
 			'cc_expiration_month' => '',
 			'cc_expiration_year' => '',
-			'cc_cvv' => ''
+			'cc_cvv' => '',
 		));
 		$cc_fields = array(
 			'cc_name' => array(
@@ -316,7 +314,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 			'city' => '',
 			'zone' => '',
 			'postal_code' => '',
-			'country' => ''
+			'country' => '',
 		));
 		$bill_fields = array(
 			'full_name' => array(
@@ -346,15 +344,15 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		self::load_view( 'templates/checkout/credit-card/review', array(
 				'billing_fields' => $bill_fields,
 				'cc_fields' => $cc_fields,
-				'checkout' => $checkout
-			), true );
+				'checkout' => $checkout,
+		), true );
 	}
 
 	public function confirmation_pane( SI_Checkouts $checkout ) {
 		self::load_view( 'templates/checkout/credit-card/confirmation', array(
 				'checkout' => $checkout,
-				'payment_id' => $checkout->get_payment_id()
-			), true );
+				'payment_id' => $checkout->get_payment_id(),
+		), true );
 	}
 
 	/**
@@ -367,8 +365,8 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		if ( apply_filters( 'si_valid_process_payment_page_fields', true ) ) {
 			$fields = $this->payment_billing_fields( $checkout );
 			foreach ( $fields as $key => $data ) {
-				$checkout->cache['billing'][$key] = isset( $_POST['sa_billing_'.$key] )?$_POST['sa_billing_'.$key]:'';
-				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $checkout->cache['billing'][$key] ) && $checkout->cache['billing'][$key] != '' ) ) {
+				$checkout->cache['billing'][ $key ] = isset( $_POST[ 'sa_billing_'.$key ] )?$_POST[ 'sa_billing_'.$key ]:'';
+				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $checkout->cache['billing'][ $key ] ) && $checkout->cache['billing'][ $key ] != '' ) ) {
 					$valid = false;
 					self::set_message( sprintf( __( '"%s" field is required.', 'sprout-invoices' ), $data['label'] ), self::MESSAGE_STATUS_ERROR );
 				}
@@ -392,8 +390,8 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 		if ( apply_filters( 'si_valid_process_payment_page_fields', true ) ) {
 			$cc_fields = $this->payment_fields( $checkout );
 			foreach ( $cc_fields as $key => $data ) {
-				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $cc_data[$key] ) && strlen( $cc_data[$key] ) > 0 ) ) {
-					self::set_message( sprintf( __( '"%s" field is required.', 'sprout-invoices' ), $cc_fields[$key]['label'] ), self::MESSAGE_STATUS_ERROR );
+				if ( isset( $data['required'] ) && $data['required'] && ! ( isset( $cc_data[ $key ] ) && strlen( $cc_data[ $key ] ) > 0 ) ) {
+					self::set_message( sprintf( __( '"%s" field is required.', 'sprout-invoices' ), $cc_fields[ $key ]['label'] ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;
 				}
 			}
@@ -411,7 +409,7 @@ abstract class SI_Credit_Card_Processors extends SI_Payment_Processors {
 				}
 			}
 
-			if ( ! empty($fields['cc_expiration_year']['required']) && isset( $cc_data['cc_expiration_year'] ) ) {
+			if ( ! empty( $fields['cc_expiration_year']['required'] ) && isset( $cc_data['cc_expiration_year'] ) ) {
 				if ( self::is_expired( $cc_data['cc_expiration_year'], $cc_data['cc_expiration_month'] ) ) {
 					self::set_message( __( 'Credit card is expired.', 'sprout-invoices' ), self::MESSAGE_STATUS_ERROR );
 					$valid = false;

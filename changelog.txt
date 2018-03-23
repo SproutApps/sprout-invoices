@@ -1,3 +1,31 @@
+= 17.0.6 =
+
+* Update: Improved error messaging for PDF Service.
+
+= 17.0.5 =
+
+* Fix: PDF Service caching issue
+* Update: Reporting totals and column adjustments
+
+= 17.0.3 =
+
+* Fix/Update: Password protection compat for new PDF Service
+* Fix/Update: Ability to view PDF after invoice is paid (default theme)
+* Fix: Add-on caching issue
+
+= 17.0 =
+
+* NEW: PDF Service for better PDF creation!
+* Fix/Update: Status for records being updated irregularly
+* Update: Stripe API fixes
+* Update: Fix for client types
+* Update: Show the client's stored address info when using a credit card payment
+* Update: Minor updates and bug fixes
+
+= 16.8.1 =
+
+* Update: New Stripe API Changes
+
 = 16.8 =
 
 * Update: Remove all form integrations add-ons since they're now in the .org repo for free

@@ -24,6 +24,7 @@ class SI_Invoices extends SI_Controller {
 
 		// reset invoice object caches
 		add_action( 'si_new_payment',  array( __CLASS__, 'reset_invoice_totals_cache' ), -100 );
+		add_action( 'si_payment_status_updated',  array( __CLASS__, 'reset_invoice_totals_cache' ), -100 );
 
 		// Mark paid or partial after payment
 		add_action( 'si_new_payment',  array( __CLASS__, 'change_status_after_payment_status_update' ) );
@@ -128,7 +129,7 @@ class SI_Invoices extends SI_Controller {
 		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name );
 
 		// If status is temp than change to pending.
-		if ( ! in_array( $invoice->get_status(), array( SI_Invoice::STATUS_PARTIAL, SI_Invoice::STATUS_PAID ) ) ) {
+		if ( ! in_array( $invoice->get_status(), array( SI_Invoice::STATUS_PENDING, SI_Invoice::STATUS_PARTIAL, SI_Invoice::STATUS_PAID ) ) ) {
 			$invoice->set_pending();
 		}
 
@@ -150,6 +151,7 @@ class SI_Invoices extends SI_Controller {
 			return;
 		}
 
+		// reset the totals since payment totals are new.
 		$invoice->reset_totals( true );
 
 	}
@@ -167,16 +169,30 @@ class SI_Invoices extends SI_Controller {
 			case SI_Payment::STATUS_PENDING:
 			case SI_Payment::STATUS_AUTHORIZED:
 
-				$invoice->set_pending();
+				// payments are not retroactivly set to pending or authorized, so don't downgrade the status.
+				if ( SI_Invoice::STATUS_TEMP === $invoice->get_status() ) {
+					$invoice->set_pending();
+				}
 
 				break;
 
 			case SI_Payment::STATUS_COMPLETE:
+
+				if ( $invoice->get_balance() >= 0.01 ) {
+					$invoice->set_as_partial();
+				} else { // else there's no balance
+					$invoice->set_as_paid();
+				}
+
 			case SI_Payment::STATUS_VOID:
 			case SI_Payment::STATUS_REFUND:
 
 				if ( $invoice->get_balance() >= 0.01 ) {
-					$invoice->set_as_partial();
+					if ( $invoice->get_payments_total( false ) >= 0.01 ) {
+						$invoice->set_as_partial();
+					} else {
+						$invoice->set_pending();
+					}
 				} else { // else there's no balance
 					$invoice->set_as_paid();
 				}

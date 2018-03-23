@@ -611,8 +611,7 @@ class SI_Invoice extends SI_Post_Type {
 	public function get_calculated_total( $check_balance = true ) {
 		if ( $check_balance ) {
 		 	// allow for the status to be updated on the fly.
-			// SI_Invoices::change_status_after_payment attempts to do this, however
-			// sometimes there's a delay/cache
+			// SI_Invoices::change_status_after_payment attempts to do this, however sometimes there's a delay/cache
 			$this->get_balance();
 		}
 		if ( isset( $this->calculated_total ) ) {
@@ -817,7 +816,7 @@ class SI_Invoice extends SI_Post_Type {
 	// Utility //
 	//////////////
 
-	public function reset_totals( $calculate = false ) {
+	public function reset_totals( $calculate = true ) {
 		unset( $this->subtotal );
 		unset( $this->fees_total );
 		unset( $this->calculated_total );
@@ -828,7 +827,7 @@ class SI_Invoice extends SI_Post_Type {
 		if ( $calculate ) {
 			$this->get_subtotal();
 			$this->get_fees_total();
-			$this->get_calculated_total();
+			$this->get_calculated_total( false );
 			$this->get_payments();
 			$this->get_pending_payments_total();
 			$this->get_payments_total();

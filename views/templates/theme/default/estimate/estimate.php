@@ -112,19 +112,24 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 
 		<section class="row" id="notes">
 			<div class="inner">
-				<div class="row item">
-					<div class="row header">
-						<h3><?php esc_html_e( 'Info &amp; Notes', 'sprout-invoices' ) ?></h3>
+				<?php if ( strlen( si_get_estimate_notes() ) > 1 ) : ?>
+					<div class="row item">
+						<div class="row header">
+							<h3><?php esc_html_e( 'Info &amp; Notes', 'sprout-invoices' ) ?></h3>
+						</div>
+						<?php si_estimate_notes() ?>
 					</div>
-					<?php si_estimate_notes() ?>
-				</div>
+				<?php endif ?>
 
-				<div class="row item">
-					<div class="row header">
-						<h3><?php esc_html_e( 'Terms &amp; Conditions', 'sprout-invoices' ) ?></h3>
+				<?php if ( strlen( si_get_estimate_terms() ) > 1 ) : ?>
+
+					<div class="row item">
+						<div class="row header">
+							<h3><?php esc_html_e( 'Terms &amp; Conditions', 'sprout-invoices' ) ?></h3>
+						</div>
+						<?php si_estimate_terms() ?>
 					</div>
-					<?php si_estimate_terms() ?>
-				</div>
+				<?php endif; ?>
 			</div>
 		</section>
 		

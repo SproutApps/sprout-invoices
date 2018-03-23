@@ -16,7 +16,7 @@
 				</ul>
 			</div>
 		<?php endif ?>
-		<?php printf( '<div class="upgrade_message clearfix"><p><strong>Exclusive Add-ons:</strong> The <a href="%1$s">pro version of Sprout Invoices</a> bundles a lot of add-ons. For a complete breakdown checkout <a href="%1$s">the pricing page</a>.</p></div>', si_get_purchase_link() ); ?>
+		<?php printf( '<div class="upgrade_message clearfix"><p><strong>Exclusive Add-ons:</strong> Each <a href="%1$s">pro version of Sprout Invoices</a> bundles a lot of free add-ons. For a complete breakdown checkout <a href="%1$s">the pricing page</a>.</p></div>', si_get_purchase_link() ); ?>
 		<?php do_action( 'si_settings_page_sub_heading_'.$page ); ?>
 	</div>
 
@@ -30,11 +30,11 @@
 								<div class="pic">
 
 									<?php if ( $addon->id === 44588 ) : ?>
-										<span class="bundled_addon"><?php _e( 'Exclusive w/ Corporate Only', 'sprout-invoices' ) ?></span>
+										<span class="bundled_addon"><?php _e( 'Exclusive to Corporate License', 'sprout-invoices' ) ?></span>
 									<?php elseif ( $addon->biz_bundled ) : ?>
 										<span class="bundled_addon"><?php _e( 'Exclusive w/ Business and Corp', 'sprout-invoices' ) ?></span>
 									<?php elseif ( $addon->pro_bundled ) : ?>
-										<span class="bundled_addon"><?php _e( 'Bundled Free w/ All Pro Version', 'sprout-invoices' ) ?></span>
+										<span class="bundled_addon"><?php _e( 'Bundled Free w/ a Pro License', 'sprout-invoices' ) ?></span>
 									<?php endif ?>
 									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
 										<?php echo $addon->thumb; ?>

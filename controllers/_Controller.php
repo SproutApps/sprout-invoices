@@ -738,12 +738,24 @@ abstract class SI_Controller extends Sprout_Invoices {
 	 * @return array
 	 */
 	public static function get_standard_address_fields( $required = true, $user_id = 0 ) {
+		$client = 0;
+		$user = 0;
+		$address = array();
+		if ( $user_id ) {
+			$client_ids = SI_Client::get_clients_by_user( $user_id );
+			$client = ( ! empty( $client_ids ) && isset( $client_ids[0] ) ) ? SI_Client::get_instance( $client_ids[0] ) : 0 ;
+			if ( is_a( $client, 'SI_Client' ) ) {
+				$address = $client->get_address();
+			}
+			$user = get_userdata( $user_id );
+		}
 		$fields = array();
 		$fields['first_name'] = array(
 			'weight' => 50,
 			'label' => __( 'First Name', 'sprout-invoices' ),
 			'placeholder' => __( 'First Name', 'sprout-invoices' ),
 			'type' => 'text',
+			'default' => ( is_a( $user, 'WP_User' ) ) ? $user->first_name : '',
 			'required' => $required,
 		);
 		$fields['last_name'] = array(
@@ -751,6 +763,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'label' => __( 'Last Name', 'sprout-invoices' ),
 			'placeholder' => __( 'Last Name', 'sprout-invoices' ),
 			'type' => 'text',
+			'default' => ( is_a( $user, 'WP_User' ) ) ? $user->last_name : '',
 			'required' => $required,
 		);
 		$fields['street'] = array(
@@ -759,6 +772,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'placeholder' => __( 'Street Address', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'rows' => 2,
+			'default' => ( isset( $address['street'] ) ) ? $address['street'] : '',
 			'required' => $required,
 		);
 		$fields['city'] = array(
@@ -766,6 +780,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'label' => __( 'City', 'sprout-invoices' ),
 			'placeholder' => __( 'City', 'sprout-invoices' ),
 			'type' => 'text',
+			'default' => ( isset( $address['city'] ) ) ? $address['city'] : '',
 			'required' => $required,
 		);
 
@@ -774,6 +789,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'label' => __( 'ZIP Code', 'sprout-invoices' ),
 			'placeholder' => __( 'ZIP Code', 'sprout-invoices' ),
 			'type' => 'text',
+			'default' => ( isset( $address['postal_code'] ) ) ? $address['postal_code'] : '',
 			'required' => $required,
 		);
 
@@ -784,6 +800,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'options' => SI_Countries_States::get_state_options( array( 'include_option_none' => ' -- '.__( 'State', 'sprout-invoices' ).' -- ' ) ),
 			'attributes' => array( 'class' => 'select2' ),
 			'required' => $required,
+			'default' => ( isset( $address['zone'] ) ) ? $address['zone'] : '',
 		); // FUTURE: Add some JavaScript to switch between select box/text-field depending on country
 
 		$fields['country'] = array(
@@ -792,6 +809,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 			'type' => 'select',
 			'required' => $required,
 			'options' => SI_Countries_States::get_country_options( array( 'include_option_none' => ' -- '.__( 'Country', 'sprout-invoices' ).' -- ' ) ),
+			'default' => ( isset( $address['country'] ) ) ? $address['country'] : '',
 			'attributes' => array( 'class' => 'select2' ),
 		);
 		$billing_fields = apply_filters( 'si_get_standard_address_fields', $fields, $required, $user_id );

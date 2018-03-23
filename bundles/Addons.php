@@ -161,7 +161,18 @@ class SA_Addons extends SI_Controller {
 		}
 
 		if ( isset( $cache_addons[ $addon_folder ] ) ) {
-			return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], true ); }
+			$valid_cache = true;
+			foreach ( $cache_addons as $path => $data ) {
+				if ( ! file_exists( SI_PATH.'/bundles/' . $path ) ) {
+					wp_cache_delete( 'si_addons', 'si_addons' );
+					$valid_cache = false;
+					break;
+				}
+			}
+			if ( $valid_cache ) {
+				return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], true );
+			}
+		}
 
 		$si_addons = array();
 		$addon_root = SI_PATH . '/bundles/';

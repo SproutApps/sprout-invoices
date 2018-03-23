@@ -58,7 +58,7 @@
 									<?php elseif ( $addon->biz_bundled ) : ?>
 										<span class="bundled_addon"><?php _e( 'Exclusive w/ Business and Corp', 'sprout-invoices' ) ?></span>
 									<?php elseif ( $addon->pro_bundled ) : ?>
-										<span class="bundled_addon"><?php _e( 'Bundled Free w/ All Pro Version', 'sprout-invoices' ) ?></span>
+										<span class="bundled_addon"><?php _e( 'Bundled Free w/ All Pro Licenses', 'sprout-invoices' ) ?></span>
 									<?php endif ?>
 									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
 										<?php echo $addon->thumb; ?>

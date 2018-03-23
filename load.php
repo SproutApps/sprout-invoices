@@ -177,8 +177,10 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/importers/Importer.php';
 	require_once SI_PATH.'/importers/Freshbooks.php';
 	require_once SI_PATH.'/importers/Harvest.php';
+	require_once SI_PATH.'/importers/Sliced-Invoices.php';
 	require_once SI_PATH.'/importers/WP-Invoice.php';
 	require_once SI_PATH.'/importers/CSV.php';
+
 	do_action( 'si_importers_loaded' );
 
 	// Fix others problems
