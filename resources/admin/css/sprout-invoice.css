@@ -182,7 +182,9 @@ a.sa_icon_link {
  * Misc
  */
 
-.clearfix {
+.post-type-sa_invoice .clearfix,
+.toplevel_page_sprout-apps .clearfix,
+.sprout-apps_page_sprout-apps-settings .clearfix {
 	overflow: auto;
 }
 

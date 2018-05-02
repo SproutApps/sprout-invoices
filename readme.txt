@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 17.0.6
+Stable tag: 17.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,17 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Form integrations for everyone!
 
 == Changelog ==
+
+= 17.0.7 =
+
+* Fix: Prevent non existant users from being attributed to possible payments
+* Fix: CSS Updates
+* NEW: Notification shortcode for first_name
+* Fix: Notes not saving for estimates before sending
+* Update: PHP version check for WooCommerce integration
+* Fix: Estimate acceptance actions bug fix for invoice creation
+* Update: GMT for all history
+
 
 = 17.0.6 =
 

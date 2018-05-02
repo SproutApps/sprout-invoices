@@ -125,6 +125,7 @@ body {
         padding: 50px 0 43px; } }
     #header .inner img {
       height: 10vw;
+      max-width: 100%;
       display: inline-block;
       margin-bottom: 12px; }
       @media (max-width: 900px) {

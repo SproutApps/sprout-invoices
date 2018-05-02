@@ -44,8 +44,13 @@ if ( ! function_exists( 'si_who_is_paying' ) ) :
 			$client = $invoice->get_client();
 			if ( ! is_wp_error( $client ) ) {
 				$client_users = $client->get_associated_users();
-				$client_user_id = array_shift( $client_users );
-				$user = get_userdata( $client_user_id );
+				foreach ( $client_users as $user_id ) {
+					$temp_user = get_userdata( $client_user_id );
+					if ( is_a( $temp_user, 'WP_User' ) ) {
+						$user = $temp_user;
+						break;
+					}
+				}
 			}
 		}
 		// Default to the admin if no other user is associated

@@ -467,9 +467,9 @@ class SI_Estimates_Edit extends SI_Estimates {
 	public static function save_estimate_note( $post_id, $post, $callback_args, $estimate_id = null ) {
 		$estimate = SI_Estimate::get_instance( $post_id );
 
-		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] != '' ) ? $_POST['sender_notes'] : '' ;
-		if ( $sender_notes == '' ) { // check to make sure the sender note option wasn't updated for the send.
-			$sender_notes = ( isset( $_POST['sa_send_metabox_sender_note'] ) && $_POST['sa_send_metabox_sender_note'] != '' ) ? $_POST['sa_send_metabox_sender_note'] : '' ;
+		$sender_notes = ( isset( $_POST['sender_notes'] ) && $_POST['sender_notes'] !== '' ) ? $_POST['sender_notes'] : '' ;
+		if ( $sender_notes === '' ) { // check to make sure the sender note option wasn't updated for the send.
+			$sender_notes = ( isset( $_POST['sa_send_metabox_sender_note'] ) && $_POST['sa_send_metabox_sender_note'] !== '' ) ? $_POST['sa_send_metabox_sender_note'] : '' ;
 		}
 		$estimate->set_sender_note( $sender_notes );
 
