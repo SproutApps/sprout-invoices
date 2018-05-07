@@ -1,3 +1,8 @@
+= 17.0.9 =
+
+* Update: All Pro versions of Sprout Invoices include the advanced numbering add-on.
+* Fix: Stored PDF for notifications may not be stored with the correct file names.
+
 = 17.0.7 =
 
 * Fix: Prevent non existant users from being attributed to possible payments
