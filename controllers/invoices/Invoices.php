@@ -26,6 +26,9 @@ class SI_Invoices extends SI_Controller {
 		add_action( 'si_new_payment',  array( __CLASS__, 'reset_invoice_totals_cache' ), -100 );
 		add_action( 'si_payment_status_updated',  array( __CLASS__, 'reset_invoice_totals_cache' ), -100 );
 
+		// reset cached totals
+		add_action( 'save_post', array( __CLASS__, 'reset_totals_cache' ) );
+
 		// Mark paid or partial after payment
 		add_action( 'si_new_payment',  array( __CLASS__, 'change_status_after_payment_status_update' ) );
 		add_action( 'si_payment_status_updated',  array( __CLASS__, 'change_status_after_payment_status_update' ) );
@@ -143,9 +146,7 @@ class SI_Invoices extends SI_Controller {
 	// Misc. //
 	////////////
 
-	public static function reset_invoice_totals_cache( SI_Payment $payment ) {
-
-		$invoice_id = $payment->get_invoice_id();
+	public static function reset_totals_cache( $invoice_id = 0 ) {
 		$invoice = SI_Invoice::get_instance( $invoice_id );
 		if ( ! is_a( $invoice, 'SI_Invoice' ) ) {
 			return;
@@ -153,6 +154,12 @@ class SI_Invoices extends SI_Controller {
 
 		// reset the totals since payment totals are new.
 		$invoice->reset_totals( true );
+	}
+
+	public static function reset_invoice_totals_cache( SI_Payment $payment ) {
+
+		$invoice_id = $payment->get_invoice_id();
+		self::reset_totals_cache( $invoice_id );
 
 	}
 

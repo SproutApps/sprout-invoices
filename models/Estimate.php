@@ -743,10 +743,20 @@ class SI_Estimate extends SI_Post_Type {
 	}
 
 
-
 	//////////////
 	// Utility //
 	//////////////
+
+	public function reset_totals( $calculate = true ) {
+		unset( $this->subtotal );
+		unset( $this->fees_total );
+		unset( $this->calculated_total );
+		if ( $calculate ) {
+			$this->get_subtotal();
+			$this->get_fees_total();
+			$this->get_calculated_total( false );
+		}
+	}
 
 	public function get_invoice_id() {
 		$invoice_ids = SI_Invoice::get_invoices_by_estimate_id( $this->ID );

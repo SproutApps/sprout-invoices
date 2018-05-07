@@ -1,3 +1,8 @@
+= 17.0.10 =
+
+* Fix: elements collapsing instead of auto flowing 
+* Update: Alow for estimate totals cache to be reset
+
 = 17.0.9 =
 
 * Update: All Pro versions of Sprout Invoices include the advanced numbering add-on.

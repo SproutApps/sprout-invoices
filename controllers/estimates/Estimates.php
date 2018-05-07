@@ -21,6 +21,9 @@ class SI_Estimates extends SI_Controller {
 		// Adjust estimate id and status after clone
 		add_action( 'si_cloned_post',  array( __CLASS__, 'adjust_cloned_estimate' ), 10, 3 );
 
+		// reset cached totals
+		add_action( 'save_post', array( __CLASS__, 'reset_totals_cache' ) );
+
 		// Notifications
 		add_filter( 'wp_ajax_sa_send_est_notification', array( __CLASS__, 'maybe_send_notification' ) );
 
@@ -122,6 +125,16 @@ class SI_Estimates extends SI_Controller {
 	////////////
 	// Misc. //
 	////////////
+
+	public static function reset_totals_cache( $estimate_id = 0 ) {
+		$estimate = SI_Estimate::get_instance( $estimate_id );
+		if ( ! is_a( $estimate, 'SI_Estimate' ) ) {
+			return;
+		}
+
+		// reset the totals since payment totals are new.
+		$estimate->reset_totals( true );
+	}
 
 	/**
 	 * Adjust the estimate id
