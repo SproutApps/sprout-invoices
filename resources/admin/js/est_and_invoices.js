@@ -86,6 +86,25 @@
 		);
 	};
 
+	si.docEdit.deleteFee = function( button ) {
+		var $button = $(button),
+			fee_id = $button.data( 'fee-id' ),
+			doc_id = $button.data( 'doc-id' ),
+			$fee_wrap = $( '#line_' + fee_id ),
+			nonce = si_js_object.security;
+
+		$.post( ajaxurl, { action: 'si_delete_fee', fee_id: fee_id, doc_id: doc_id, nonce: nonce },
+			function( response ) {
+				if ( response.error ) {
+					console.log( response.error );
+				}
+				else {
+					$fee_wrap.fadeOut();
+				}
+			}
+		);
+	};
+
 	/**
 	 * Prevent collapse of line items
 	 * @return {} 
@@ -393,6 +412,13 @@
 			e.stopPropagation();
 			e.preventDefault();
 			si.docEdit.deleteRecord( this );
+		});
+
+		// delete a fee
+		$('.si_delete_fee').live( 'click', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			si.docEdit.deleteFee( this );
 		});
 
 		// edit private note

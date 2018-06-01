@@ -707,6 +707,16 @@ class SI_Estimate extends SI_Post_Type {
 		return $fees;
 	}
 
+	public function remove_fee( $fee_id = '' ) {
+		$fees = $this->get_fees();
+		if ( isset( $fees[ $fee_id ] ) ) {
+			unset( $fees[ $fee_id ] );
+			$this->set_fees( $fees );
+		}
+		$this->reset_totals();
+		return $fees;
+	}
+
 	/**
 	 * Currency
 	 */

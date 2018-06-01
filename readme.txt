@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 17.0.10
+Stable tag: 17.1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,10 +136,15 @@ Form integrations for everyone!
 
 == Changelog ==
 
+= 17.1.0.1 =
+
+* Fix: Stripe user defaulting to admin under specific circumstances
+* Update: Better PDF Formatting and additional filters
+
 = 17.0.10 =
 
 * Fix: elements collapsing instead of auto flowing 
-* Update: Alow for estimate totals cache to be reset
+* Update: Allow for estimate totals cache to be reset
 
 = 17.0.9 =
 
@@ -148,7 +153,7 @@ Form integrations for everyone!
 
 = 17.0.7 =
 
-* Fix: Prevent non existant users from being attributed to possible payments
+* Fix: Prevent non existent users from being attributed to possible payments
 * Fix: CSS Updates
 * NEW: Notification shortcode for first_name
 * Fix: Notes not saving for estimates before sending

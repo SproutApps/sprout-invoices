@@ -3,6 +3,7 @@
 	<?php do_action( 'si_line_item_totals_section_start', $id ) ?>
 
 	<?php if ( ! empty( $totals ) ) :  ?>
+
 		<?php foreach ( $totals as $slug => $items_total ) : ?>
 
 			<?php if ( isset( $items_total['admin_hide'] ) && $items_total['admin_hide'] ) : ?>
@@ -10,11 +11,13 @@
 			<?php endif ?>
 
 			<div id="line_<?php echo esc_attr( $slug ) ?>">
-				
+				<?php
+					$delete_option = ( isset( $items_total['delete_option'] ) ) ? sprintf( '&nbsp;<a href="javascript:void(0)" class="si_delete_fee del_button" data-fee-id="%s" data-doc-id="%s">X</a>', $slug, $id ) : '' ;
+						?>
 				<?php if ( isset( $items_total['helptip'] ) ) : ?>
-					<b title="<?php echo esc_attr( $items_total['helptip'] ) ?>" class="helptip"><?php echo $items_total['label'] ?></b>
+					<b title="<?php echo esc_attr( $items_total['helptip'] ) ?>" class="helptip"><?php echo $items_total['label'] ?><?php echo $delete_option ?></b>
 				<?php else : ?>
-					<b><?php echo $items_total['label'] ?></b>
+					<b><?php echo $items_total['label'] ?><?php echo $delete_option ?></b>
 				<?php endif ?>
 
 				<?php echo $items_total['formatted'] ?>

@@ -12,6 +12,8 @@ class SI_Fees extends SI_Controller {
 		// filter the line item totals
 		add_filter( 'invoice_line_item_totals', array( __CLASS__, 'modify_line_item_totals' ), 10, 2 );
 		add_filter( 'estimate_line_item_totals', array( __CLASS__, 'modify_line_item_totals' ), 10, 2 );
+
+		add_action( 'wp_ajax_si_delete_fee',  array( get_class(), 'maybe_delete_fee' ), 10, 0 );
 	}
 
 	public static function modify_line_item_totals( $totals = array(), $doc_id = 0 ) {
@@ -44,11 +46,12 @@ class SI_Fees extends SI_Controller {
 
 			$weight = ( isset( $data['weight'] ) ) ? $data['weight'] : $count;
 
-			$totals[ 'fee_' . $fee_key ] = array(
+			$totals[ $fee_key ] = array(
 					'label' => $label,
 					'value' => $fee_total,
 					'formatted' => sa_get_formatted_money( $fee_total, $doc_id, '<span class="money_amount">%s</span>' ),
 					'hide' => $hide,
+					'delete_option' => true,
 					'admin_hide' => $hide,
 					'weight' => $weight,
 				);
@@ -57,5 +60,33 @@ class SI_Fees extends SI_Controller {
 		}
 
 		return $totals;
+	}
+
+
+	///////////
+	// AJAX //
+	///////////
+
+	public static function maybe_delete_fee() {
+		if ( ! isset( $_REQUEST['nonce'] ) ) {
+			wp_die( 'Forget something?' );
+		}
+
+		$nonce = $_REQUEST['nonce'];
+		if ( ! wp_verify_nonce( $nonce, SI_Controller::NONCE ) ) {
+			wp_die( 'Not going to fall for it!' );
+		}
+
+		$doc_id = $_REQUEST['doc_id'];
+		$fee_id = $_REQUEST['fee_id'];
+
+		$doc = si_get_doc_object( $doc_id );
+
+		if ( ! method_exists( $doc, 'remove_fee' ) || $fee_id == '' ) {
+			wp_send_json_error( array( 'message' => 'remove_fee method does not exist, or the fee id was not passed.' ) );
+		}
+		$fees = $doc->remove_fee( $fee_id );
+
+		return wp_send_json_success( $fees );
 	}
 }

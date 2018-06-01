@@ -1,7 +1,12 @@
+= 17.1.0.1 =
+
+* Fix: Stripe user defaulting to admin under specific circumstances
+* Update: Better PDF Formatting and additional filters
+
 = 17.0.10 =
 
 * Fix: elements collapsing instead of auto flowing 
-* Update: Alow for estimate totals cache to be reset
+* Update: Allow for estimate totals cache to be reset
 
 = 17.0.9 =
 
@@ -10,7 +15,7 @@
 
 = 17.0.7 =
 
-* Fix: Prevent non existant users from being attributed to possible payments
+* Fix: Prevent non existent users from being attributed to possible payments
 * Fix: CSS Updates
 * NEW: Notification shortcode for first_name
 * Fix: Notes not saving for estimates before sending
@@ -61,7 +66,7 @@
 * Update: PO updates
 * Update: Remove Ready Status add-on because of incompatibilities
 * Fix: Recurring (more) fail checks
-* Update: Plaid filter for enviroment
+* Update: Plaid filter for environment
 * Fix: Project time tracking meta box redundancy
 * Fix: Fees should not be doubled up
 

@@ -33,6 +33,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 						<?php
 							$u = get_userdata( $a_user_id );
 						if ( ! is_a( $u, 'WP_User' ) ) {
+							$client->remove_associated_user( $a_user_id );
 							continue;
 						} ?>
 						<li id="list_user_id-<?php echo (int) $a_user_id ?>"><?php printf( '<a href="%s" class="si_tooltip" title="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $a_user_id ), $u->user_email, $u->display_name ) ?>  <a data-id="<?php echo (int) $a_user_id ?>" class="remove_user del_button">X</a> <?php do_action( 'client_associated_user_list', $a_user_id ) ?></li>
@@ -94,7 +95,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 
 		<div id="publishing-action">
 			<?php
-			if ( ! in_array( $post->post_status, array('publish', 'future', 'private') ) || 0 == $post->ID ) {
+			if ( ! in_array( $post->post_status, array( 'publish', 'future', 'private' ) ) || 0 == $post->ID ) {
 				if ( $can_publish ) : ?>
 					<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e( 'Publish' ) ?>" />
 					<?php submit_button( __( 'Publish' ), 'primary button-large', 'publish', false, array( 'accesskey' => 'p' ) ); ?>

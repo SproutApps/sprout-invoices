@@ -185,8 +185,14 @@ a.sa_icon_link {
 .post-type-sa_estimate .clearfix,
 .post-type-sa_invoice .clearfix,
 .toplevel_page_sprout-apps .clearfix,
-.sprout-apps_page_sprout-apps-settings .clearfix {
+.sprout-apps_page_sprout-apps-settings .clearfix,
+#si_admin_field_send_metabox_recipients .clearfix,
+.sa-control-group.clearfix {
 	overflow: auto;
+}
+
+#si_admin_field_send_metabox_recipients .clearfix {
+	display: block;
 }
 
 input[type=date] {
@@ -249,6 +255,7 @@ form.si_settings_form table .wp-editor-wrap {
 	text-indent: 0;
 	overflow: hidden;
 	position: absolute;
+	text-decoration: none;
 }
 .del_button:before {
 	background: 0 0;
