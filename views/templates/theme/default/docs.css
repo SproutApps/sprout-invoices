@@ -63,6 +63,12 @@ input {
   resize: none;
   position: relative;
   padding: 0; }
+  
+textarea:disabled,
+input:disabled,
+select:disabled {
+  background: rgba(0,0,0,0.05);
+}
 
 *:focus {
   outline: 0; }
@@ -365,7 +371,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 101;
   overflow: scroll;
   background-color: #ffffff;
   color: rgba(0, 0, 0, 0.75);

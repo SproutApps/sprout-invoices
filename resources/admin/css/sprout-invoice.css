@@ -1241,6 +1241,16 @@ div#invoice_status_updates-sticky-wrapper {
     padding-bottom: 0px;
 }
 
+.redactor-air a.re-button-icon, .redactor-toolbar a.re-button-icon {
+    font-size:  14px;
+    padding: 5px;
+}
+
+.redactor-box.redactor-styles-on .redactor-toolbar {
+    padding: 8px 10px 5px;
+    border-bottom: 1px #ececec solid;
+}
+
 .line_item .column_total.column {
 	text-align: right
 }

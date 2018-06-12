@@ -18,9 +18,11 @@
 
 	});
 	jQuery('#si_payment_option_wrap').live('click', function(e) {
-		var selection = jQuery('#si_payment_amount_option');
+		var selection = jQuery('#si_payment_amount_option'),
+			payment_option = jQuery('#si_payment_amount_input_option');
 
-		selection.attr( 'checked', true ).trigger('change');
+		selection.attr( 'checked', true );
+		payment_option.removeAttr( 'disabled' );
 	});
 	jQuery('[name="si_payment_amount_option"]').live( 'keyup', function(e) {
 		var payment = parseFloat( jQuery( this ).val() ),

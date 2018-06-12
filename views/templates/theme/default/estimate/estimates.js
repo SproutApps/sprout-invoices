@@ -11,6 +11,11 @@
 		$('.open').on('click', function(e) {
 			var myelement = $(this).attr('href');
 
+			$('html').css('overflow', 'hidden');
+			$('body').bind('touchmove', function(e) {
+				e.preventDefault()
+			});
+
 			$(myelement).removeClass('closed closing');
 			$(myelement).addClass('opening');
 
@@ -21,6 +26,9 @@
 
 		$('.close').on('click', function(e) {
 			var myelement = $(this).attr('href');
+
+			$('html').css('overflow', 'scroll');
+			$('body').unbind('touchmove');
 
 			$(myelement).removeClass('opening');
 			$(myelement).addClass('closing');

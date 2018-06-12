@@ -1,3 +1,8 @@
+= 17.2 =
+
+* Update/New/Fix: New WYSIWYG Editor 
+* Update: Sprout Billings styling updates 
+
 = 17.1.0.1 =
 
 * Fix: Stripe user defaulting to admin under specific circumstances

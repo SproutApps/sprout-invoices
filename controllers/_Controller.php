@@ -127,7 +127,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		// Redactor
 		if ( ! SI_FREE_TEST && file_exists( SI_PATH . '/resources/admin/plugins/redactor/redactor.min.js' ) ) {
 			wp_register_script( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.min.js', array( 'jquery' ), self::SI_VERSION );
-			wp_register_style( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.css', array(), self::SI_VERSION );
+			wp_register_style( 'redactor', SI_URL . '/resources/admin/plugins/redactor/redactor.min.css', array(), self::SI_VERSION );
 		}
 
 		// Select2

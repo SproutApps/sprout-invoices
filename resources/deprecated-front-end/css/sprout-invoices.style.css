@@ -510,8 +510,8 @@ textarea {
 	font: bold 3em / 1.1em Georgia, "Times New Roman", Times, serif;
 	white-space: nowrap;
 	position: absolute;
-	top: 25%;
-	left: 30%;
+	top: 8%;
+    left: 25%;
 	border: 5px solid #099E1B;
 	padding: 0 10px;
 	transform: rotate(-15deg);
@@ -559,13 +559,13 @@ textarea {
 }
 
 #header_logo {
-	position: relative;
 	margin-bottom: 25px;
 }
 
 #header_wrap {
 	margin-bottom: 50px;
 	width: 100%;
+    position: relative;
 }
 
 .header_info {
