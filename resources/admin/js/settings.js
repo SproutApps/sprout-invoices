@@ -23,7 +23,7 @@ new Vue( {
 		var self = this;
 		// after vue is completed
 		this.$nextTick(function () {
-			$(function() {
+			jQuery(function() {
 				if ( si_js_object.redactor ) {
 					// setup redactor
 					jQuery('.si_wysiwyg').redactor({

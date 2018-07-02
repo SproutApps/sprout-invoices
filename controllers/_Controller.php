@@ -183,6 +183,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function admin_enqueue() {
 		$add_to_js_object = array();
+
 		// doc admin templates
 		$screen = get_current_screen();
 		$screen_post_type = str_replace( 'edit-', '', $screen->id );

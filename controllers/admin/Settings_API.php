@@ -273,9 +273,9 @@ class SI_Settings_API extends SI_Controller {
 			wp_enqueue_script( 'sprout-invoices-vue', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), self::SI_VERSION, false );
 
 			// SI plugin settings
-			wp_enqueue_script( 'sprout-invoices-settings', SI_URL . '/resources/admin/js/settings.js', array( 'sprout-invoices-vue', 'jquery' ), self::SI_VERSION, true );
+			wp_enqueue_script( 'sprout-invoices-settings', SI_URL . '/resources/admin/js/settings.js', array( 'sprout-invoices-vue', 'jquery', 'si_admin' ), self::SI_VERSION, true );
 
-			wp_enqueue_style( 'sprout-invoices-settings', SI_URL . '/resources/admin/css/settings.css', array(), self::SI_VERSION );
+			wp_enqueue_style( 'sprout-invoices-settings', SI_URL . '/resources/admin/css/settings.css', array( 'sprout_invoice_admin_css' ), self::SI_VERSION );
 		}
 	}
 
