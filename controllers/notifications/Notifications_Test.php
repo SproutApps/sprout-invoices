@@ -11,7 +11,7 @@ class SI_Notifications_Test extends SI_Notifications {
 
 	public static function init() {
 		// register settings
-		add_action( 'init', array( __CLASS__, 'register_settings' ) );
+		add_filter( 'si_notification_settings', array( __CLASS__, 'register_settings' ) );
 
 		// enqueue javascript
 		if ( is_admin() ) {
@@ -33,10 +33,10 @@ class SI_Notifications_Test extends SI_Notifications {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
+	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'html_notifications' => array(
+		$settings['html_notifications'] = array(
+				'title' => __( 'Test Notifications', 'sprout-invoices' ),
 				'weight' => 30.2,
 				'tab' => 'settings',
 				'settings' => array(
@@ -48,9 +48,8 @@ class SI_Notifications_Test extends SI_Notifications {
 							),
 						),
 					),
-				),
-			);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+				);
+		return $settings;
 	}
 
 	//////////////

@@ -51,8 +51,12 @@ function sprout_invoices_load() {
 	// settings
 	require_once SI_PATH.'/controllers/admin/Settings.php';
 
-	if ( ! class_exists( 'SA_Settings_API' ) ) {
+	if ( ! class_exists( 'SI_Settings_API' ) ) {
 		require_once SI_PATH.'/controllers/admin/Settings_API.php';
+	}
+
+	if ( ! class_exists( 'SI_Metabox_API' ) ) {
+		require_once SI_PATH.'/controllers/admin/Metabox_API.php';
 	}
 
 	require_once SI_PATH.'/controllers/admin/Capabilities.php';
@@ -113,7 +117,6 @@ function sprout_invoices_load() {
 	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/notifications/Notifications_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/notifications/Notifications_Premium.php';
 	}
-	require_once SI_PATH.'/controllers/notifications/Notifications_Admin_Table.php';
 
 	require_once SI_PATH.'/controllers/notifications/Notifications_Test.php';
 
@@ -175,11 +178,11 @@ function sprout_invoices_load() {
 
 	// importers
 	require_once SI_PATH.'/importers/Importer.php';
-	require_once SI_PATH.'/importers/Freshbooks.php';
+	require_once SI_PATH.'/importers/CSV.php';
 	require_once SI_PATH.'/importers/Harvest.php';
+	require_once SI_PATH.'/importers/Freshbooks.php';
 	require_once SI_PATH.'/importers/Sliced-Invoices.php';
 	require_once SI_PATH.'/importers/WP-Invoice.php';
-	require_once SI_PATH.'/importers/CSV.php';
 
 	do_action( 'si_importers_loaded' );
 
@@ -231,7 +234,8 @@ function sprout_invoices_load() {
 	/////////////////////////
 	do_action( 'si_controllers_init' );
 	SI_Controller::init();
-	SA_Settings_API::init();
+	SI_Settings_API::init();
+	SI_Metabox_API::init();
 	SI_Templating_API::init();
 	SI_Customizer::init();
 

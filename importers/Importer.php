@@ -8,15 +8,18 @@
  */
 class SI_Importer extends SI_Controller {
 	const SETTINGS_PAGE = 'import';
+	const PROCESS_ACTION = 'start_import';
+	const IMPORTER_OPTION = 'import_selection';
 	const RECORD = 'si_import';
 	const USER_META_PHONE = 'sa_phone_number';
 	const USER_META_OFFICE_PHONE = 'sa_office_phone_number';
 	const USER_META_TITLE = 'sa_title';
+	const PROGRESS_TRACKER = 'si_import_progress';
 	private static $importers = array(); // added by each importer processor
 
 	public static function init() {
 		// Admin
-		self::register_importer_admin();
+		add_filter( 'si_sub_admin_pages', array( __CLASS__, 'register_admin_page' ) );
 
 		// Hook into form submission
 		add_action( 'init', array( __CLASS__, 'process_importer' ) );
@@ -33,25 +36,71 @@ class SI_Importer extends SI_Controller {
 		return apply_filters( 'si_importers', self::$importers );
 	}
 
-	/**
-	 * Register the payment settings
-	 *
-	 * @return
-	 */
-	public static function register_importer_admin() {
 
-		// Addon page
-		$args = array(
-			'slug' => self::get_settings_page( false ),
-			'title' => __( 'Sprout Invoices Importing', 'sprout-invoices' ),
+
+	////////////
+	// admin //
+	////////////
+
+	public static function register_admin_page( $admin_pages = array() ) {
+		$admin_pages[ self::SETTINGS_PAGE ] = array(
+			'slug' => self::SETTINGS_PAGE,
+			'title' => __( 'Import', 'sprout-invoices' ),
 			'menu_title' => __( 'Import', 'sprout-invoices' ),
-			'weight' => 50,
-			'section' => 'settings',
+			'weight' => 25,
+			'section' => 'import',
+			'callback' => array( __CLASS__, 'render_importer_page' ),
 			'tab_only' => true,
-			'callback' => array( __CLASS__, 'importer_page' ),
-			'capability' => 'manage_sprout_invoices_importer',
 			);
-		do_action( 'sprout_settings_page', $args );
+		return $admin_pages;
+	}
+
+	public static function render_importer_page() {
+		$settings = self::importer_options();
+		uasort( $settings, array( __CLASS__, 'sort_by_weight' ) );
+		$args = array(
+			'settings' => $settings,
+		);
+		self::load_view( 'admin/importer/admin', $args );
+	}
+
+	public static function importer_options() {
+		// Settings
+		$options = array(
+			'si_importer_selection' => array(
+				'weight' => 0,
+				'settings' => array(
+					self::IMPORTER_OPTION => array(
+						'label' => null,
+						'option' => array( get_class(), 'display_importer_options' ),
+					),
+				),
+			),
+		);
+		return apply_filters( 'si_importer_options', $options );
+	}
+
+	public static function display_importer_options() {
+		$importer_options = self::importer_options();
+		$importers = self::get_importers();
+		uasort( $importers, array( __CLASS__, 'sort_by_weight' ) );
+
+		$importing = false;
+		if ( isset( $_POST[ self::PROCESS_ACTION ] ) && wp_verify_nonce( $_POST[ self::PROCESS_ACTION ], self::PROCESS_ACTION ) ) {
+			$importing = apply_filters( 'si_importing_action', true );
+		}
+
+		if ( ! $importing ) {
+			self::load_view( 'admin/importer/settings', array(
+				'importer_options' => $importer_options,
+				'importers' => $importers,
+			), false );
+		} else {
+			self::load_view( 'admin/importer/importing', array(
+				'importer_options' => $importer_options,
+				'importers' => $importers,
+			), false );
+		}
 	}
 
 	/**
@@ -74,12 +123,6 @@ class SI_Importer extends SI_Controller {
 		self::$importers[ $class ] = $label;
 	}
 
-	public static function importer_page() {
-		self::load_view( 'admin/importer/importing', array(
-				'importers' => self::get_importers(),
-		), false );
-	}
-
 	/**
 	 * After importer is selected this will hook into the class method to
 	 * start the import process
@@ -87,6 +130,10 @@ class SI_Importer extends SI_Controller {
 	public static function process_importer() {
 		if ( ! current_user_can( 'manage_sprout_invoices_importer' ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 			return;
+		}
+
+		if ( isset( $_GET['page'] ) && 'sprout-invoices-import' === $_GET['page'] ) {
+			update_option( self::PROGRESS_TRACKER, true );
 		}
 
 		if ( isset( $_POST['importer'] ) && '' !== $_POST['importer'] ) {

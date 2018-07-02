@@ -60,10 +60,6 @@ class SI_BACSs extends SI_Offsite_Processors {
 	protected function __construct() {
 		parent::__construct();
 
-		if ( is_admin() ) {
-			add_action( 'init', array( get_class(), 'register_options' ) );
-		}
-
 		// Remove pages
 		add_filter( 'si_checkout_pages', array( $this, 'remove_checkout_pages' ) );
 
@@ -74,14 +70,13 @@ class SI_BACSs extends SI_Offsite_Processors {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_options() {
+	public static function register_settings( $settings = array() ) {
 		$bacs_info = get_option( self::BACS_INFO, '' );
 		// Settings
-		$settings = array(
+		$settings['payments'] = array(
 			'si_bacs_settings' => array(
 				'title' => __( 'BACS', 'sprout-invoices' ),
 				'weight' => 200,
-				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::BACS_INFO => array(
 						'label' => __( 'Provide BACS Info', 'sprout-invoices' ),
@@ -93,7 +88,7 @@ class SI_BACSs extends SI_Offsite_Processors {
 					),
 				),
 			);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
 	}
 
 

@@ -8,7 +8,7 @@
  */
 class SI_Freshbooks_Import extends SI_Importer {
 	const SETTINGS_PAGE = 'import';
-	const PROCESS_ACTION = 'start_import';
+	const IMPORTER_ID = 'freshbooks';
 	const FRESHBOOKS_TOKEN_OPTION = 'si_freshbooks_token_option';
 	const FRESHBOOKS_ACCOUNT_OPTION = 'si_freshbooks_domain_option';
 	const PROCESS_ARCHIVED = 'import_archived';
@@ -28,15 +28,16 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Settings
 		self::$freshbooks_token = get_option( self::FRESHBOOKS_TOKEN_OPTION, '' );
 		self::$freshbooks_account = self::sanitize_subdomain( get_option( self::FRESHBOOKS_ACCOUNT_OPTION, '' ) );
-		self::register_payment_settings();
-		self::save_options();
 
-		// Maybe process import
-		self::maybe_process_import();
+		self::save_options();
 	}
 
 	public static function register() {
 		self::add_importer( __CLASS__, __( 'Freshbooks', 'sprout-invoices' ) );
+	}
+
+	public static function get_id() {
+		return self::IMPORTER_ID;
 	}
 
 
@@ -44,19 +45,19 @@ class SI_Freshbooks_Import extends SI_Importer {
 	 * Register the payment settings
 	 * @return
 	 */
-	public static function register_payment_settings() {
+	public static function get_options( $settings = array() ) {
 		// Settings
 		$settings = array(
 			'si_freshbooks_importer_settings' => array(
-				'title' => 'Freshbooks Import Settings',
+				'title' => __( 'Freshbooks Import Settings', 'sprout-invoices' ),
+				'description' => __( 'Use your Freshbooks API credentials to import your records for Sprout Invoices.', 'sprout-invoices' ),
 				'weight' => 0,
-				'tab' => self::get_settings_page( false ),
 				'settings' => array(
 					self::FRESHBOOKS_TOKEN_OPTION => array(
 						'label' => __( 'Token', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
-							'default' => self::$freshbooks_token,
+							'default' => get_option( self::FRESHBOOKS_TOKEN_OPTION, '' ),
 							'attributes' => array(
 		'placeholder' => __(
 		'6c4384e426e4b560d1227f4ad0f88b2c', 'sprout-invoices' ),
@@ -68,7 +69,7 @@ class SI_Freshbooks_Import extends SI_Importer {
 						'label' => __( 'Account/Sub-domain', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'text',
-							'default' => self::$freshbooks_account,
+							'default' => self::sanitize_subdomain( get_option( self::FRESHBOOKS_ACCOUNT_OPTION, '' ) ),
 							'attributes' => array(
 					'placeholder' => __(
 					'your-subdomain', 'sprout-invoices' ),
@@ -104,11 +105,12 @@ class SI_Freshbooks_Import extends SI_Importer {
 				),
 			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
 	}
 
 	public static function save_options() {
 		if ( ! current_user_can( 'manage_sprout_invoices_importer' ) ) {
+			error_log( 'failed user can' . print_r( false, true ) );
 			return;
 		}
 
@@ -124,16 +126,6 @@ class SI_Freshbooks_Import extends SI_Importer {
 		// Clear out progress
 		if ( isset( $_POST[ self::DELETE_PROGRESS ] ) && $_POST[ self::DELETE_PROGRESS ] == 'restart' ) {
 			delete_option( self::PROGRESS_OPTION );
-		}
-	}
-
-	/**
-	 * Check to see if it's time to start the import process.
-	 * @return
-	 */
-	public static function maybe_process_import() {
-		if ( isset( $_POST[ self::PROCESS_ACTION ] ) && wp_verify_nonce( $_POST[ self::PROCESS_ACTION ], self::PROCESS_ACTION ) ) {
-			add_filter( 'si_show_importer_settings', '__return_false' );
 		}
 	}
 

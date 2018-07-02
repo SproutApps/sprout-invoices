@@ -11,11 +11,15 @@ class SI_Killing_Machine extends SI_Controller {
 	const NONCE = 'si_destroy_everything';
 
 	public static function init() {
-		// register settings
-		add_action( 'init', array( __CLASS__, 'register_settings' ) );
+
+		// Register Settings
+		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
+
+		add_filter( 'si_admin_scripts_localization',  array( __CLASS__, 'ajax_l10n' ) );
 
 		// AJAX action to handle test request
 		add_action( 'wp_ajax_' . self::SEND_ACTION, array( __CLASS__, 'maybe_destroy_everything' ) );
+
 	}
 
 
@@ -27,25 +31,30 @@ class SI_Killing_Machine extends SI_Controller {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
+	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'destroy_everything' => array(
+		$settings['destroy_everything'] = array(
 				'weight' => PHP_INT_MAX,
-				'tab' => 'settings',
+				'tab' => 'advanced',
+				'title' => __( 'Destroyer of Worlds', 'sprout-invoices' ),
+				'description' => __( 'This will delete all posts that are attributed to Sprout Invoices and their meta data.', 'sprout-invoices' ),
 				'settings' => array(
 					'destroy_everything' => array(
-						'label' => __( 'Destroyer of Worlds', 'sprout-invoices' ),
-						'description' => __( 'This will delete all posts that are attributed to Sprout Invoices and their meta data.', 'sprout-invoices' ),
 						'option' => array(
 							'type' => 'bypass',
 							'output' => self::destroy_option(),
 							),
 						),
 					),
-				),
 			);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
+	}
+
+	public static function ajax_l10n( $js_object = array() ) {
+		$js_object['destroy_action'] = self::SEND_ACTION;
+		$js_object['destroy_nonce'] = wp_create_nonce( self::NONCE );
+		$js_object['destroy_confirm'] = __( 'Are you sure? This will delete everything that Sprout Invoices ever created.', 'sprout-invoices' );
+		return $js_object;
 	}
 
 	public static function destroy_option() {

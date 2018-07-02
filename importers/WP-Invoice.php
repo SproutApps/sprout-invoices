@@ -9,6 +9,7 @@
 class SI_WPInvoice_Import extends SI_Importer {
 	const SETTINGS_PAGE = 'import';
 	const PROCESS_ACTION = 'start_import';
+	const IMPORTER_ID = 'wpinvoice';
 	const DELETE_WPINVOICE_DATA = 'import_archived';
 	const PAYMENT_METHOD = 'WPInvoice Imported';
 	const PROGRESS_OPTION = 'current_import_progress_wpinvoice_v3';
@@ -21,15 +22,14 @@ class SI_WPInvoice_Import extends SI_Importer {
 	public static function init() {
 		// Settings
 		self::$wpinvoice_delete = get_option( self::DELETE_WPINVOICE_DATA, '' );
-		self::register_payment_settings();
-		self::save_options();
-
-		// Maybe process import
-		self::maybe_process_import();
 	}
 
 	public static function register() {
 		self::add_importer( __CLASS__, __( 'WP-Invoice', 'sprout-invoices' ) );
+	}
+
+	public static function get_id() {
+		return self::IMPORTER_ID;
 	}
 
 
@@ -37,47 +37,41 @@ class SI_WPInvoice_Import extends SI_Importer {
 	 * Register the payment settings
 	 * @return
 	 */
-	public static function register_payment_settings() {
+	public static function get_options( $settings = array() ) {
+
+		$description = __( 'Use these options before importing all of your sliced invoice records to Sprout Invoices.', 'sprout-invoices' );
+		if ( ! class_exists( 'WPI_Invoice' ) ) {
+			$description = sprintf( '<b>' . __( 'Please <a href="%s">activate WP-Invoice</a> before proceeding.', 'sprout-invoices' ) . '</b>', admin_url( 'plugins.php' ) );
+		}
+
 		// Settings
-		$settings = array(
-			'si_wpinvoice_importer_settings' => array(
-				'title' => 'WPInvoice Import Settings',
-				'weight' => 0,
-				'tab' => self::get_settings_page( false ),
-				'settings' => array(
-					self::DELETE_WPINVOICE_DATA => array(
-						'label' => __( 'Delete WP-Invoices', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'checkbox',
-							'value' => 'remove',
-							'label' => 'Cleanup some WP-Invoice during the import.',
-							'description' => __( 'You must really love us to delete those WP-Invoices, since you can\'t go back. Settings and the log table (sigh) will be kept.', 'sprout-invoices' ),
-						),
+		$settings['si_wpinvoice_importer_settings'] = array(
+			'title' => 'WPInvoice Import Settings',
+			'description' => $description,
+			'weight' => 0,
+			'settings' => array(
+				self::DELETE_WPINVOICE_DATA => array(
+					'label' => __( 'Delete WP-Invoices', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'checkbox',
+						'value' => 'remove',
+						'label' => 'Cleanup some WP-Invoice during the import.',
+						'description' => __( 'You must really love us to delete those WP-Invoices, since you can\'t go back. Settings and the log table (sigh) will be kept.', 'sprout-invoices' ),
 					),
-					self::PROCESS_ACTION => array(
-						'option' => array(
-							'type' => 'hidden',
-							'value' => wp_create_nonce( self::PROCESS_ACTION ),
-						),
+				),
+				self::PROCESS_ACTION => array(
+					'option' => array(
+						'type' => 'hidden',
+						'value' => wp_create_nonce( self::PROCESS_ACTION ),
 					),
 				),
 			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
 	}
 
 	public static function save_options() {
 		// no options to save
-	}
-
-	/**
-	 * Check to see if it's time to start the import process.
-	 * @return
-	 */
-	public static function maybe_process_import() {
-		if ( isset( $_POST[ self::PROCESS_ACTION ] ) && wp_verify_nonce( $_POST[ self::PROCESS_ACTION ], self::PROCESS_ACTION ) ) {
-			add_filter( 'si_show_importer_settings', '__return_false' );
-		}
 	}
 
 	/**

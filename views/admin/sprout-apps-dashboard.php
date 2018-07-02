@@ -1,4 +1,6 @@
-<div id="si_dashboard" class="sprout_apps_dash wrap about-wrap">
+<?php do_action( 'sprout_settings_header' ); ?>
+
+<div id="si_dashboard" class="si_settings sprout_apps_dash wrap about-wrap">
 
 	<img class="header_sa_logo" src="<?php echo SI_RESOURCES . 'admin/icons/sproutapps.png' ?>" />
 
@@ -37,50 +39,5 @@
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 	</div>
-
-	<h2 class="headline_callout"><?php _e( 'Sprout Apps Marketplace', 'sprout-invoices' ) ?></h2>
-			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php _e( 'View More Add-ons', 'sprout-invoices' ) ?></span></a>
-	<!-- FUTURE make this entirely dynamic and add the ability to purchase from the backend. -->
-	<div id="marketplace_view">
-		<main id="main" class="container site-main" role="main">
-			<div class="row">
-				<div class="products_grid">
-					<?php
-						$all_addons = (array) SA_Addons::get_marketplace_addons();
-						$addons = array_slice( $all_addons, 0, 6 ); ?>
-					<?php foreach ( $addons as $addon_id => $addon ) : ?>
-						<article class="type-download bundled <?php if ( $addon->biz_bundled ) { echo 'biz'; } ?>">
-							<div class="section">
-								<div class="pic">
-
-									<?php if ( $addon->id === 44588 ) : ?>
-										<span class="bundled_addon"><?php _e( 'Exclusive w/ Corporate Only', 'sprout-invoices' ) ?></span>
-									<?php elseif ( $addon->biz_bundled ) : ?>
-										<span class="bundled_addon"><?php _e( 'Exclusive w/ Business and Corp', 'sprout-invoices' ) ?></span>
-									<?php elseif ( $addon->pro_bundled ) : ?>
-										<span class="bundled_addon"><?php _e( 'Bundled Free w/ All Pro Licenses', 'sprout-invoices' ) ?></span>
-									<?php endif ?>
-									<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>">
-										<?php echo $addon->thumb; ?>
-									</a>
-									<div class="download_purchase_link">
-										<a href="<?php echo si_get_sa_link( $addon->url, 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php _e( 'View Details', 'sprout-invoices' ) ?></span></a>
-									</div>
-								</div>
-								<div class="info">
-									<strong><?php echo wp_kses( $addon->post_title, wp_kses_allowed_html( 'post' ) ); ?></strong>							
-									<div class="product-info">
-										<?php echo wp_kses( $addon->excerpt, wp_kses_allowed_html( 'post' ) ); ?>
-									</div>
-								</div>
-							</div>
-						</article>
-					<?php endforeach ?>
-				</div>
-			<a href="<?php echo si_get_sa_link( 'https://sproutapps.co/marketplace/', 'add-ons' ) ?>" class="button"><span class="edd-add-to-cart-label"><?php _e( 'View More Add-ons', 'sprout-invoices' ) ?></span></a>
-			</div>
-		</main>
-	</div>
-
 </div>
 

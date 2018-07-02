@@ -23,7 +23,8 @@ class SI_Invoices_Edit extends SI_Invoices {
 		self::$default_notes = get_option( self::NOTES_OPTION, 'Thank you; we really appreciate your business.' );
 		self::$invoices_slug = get_option( self::SLUG_OPTION, SI_Invoice::REWRITE_SLUG );
 
-		self::register_settings();
+		// Register Settings
+		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
 
 		if ( is_admin() ) {
 
@@ -52,13 +53,12 @@ class SI_Invoices_Edit extends SI_Invoices {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
+	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'si_invoice_settings' => array(
+		$settings['si_invoice_settings'] = array(
 				'title' => __( 'Invoice Settings', 'sprout-invoices' ),
 				'weight' => 20,
-				'tab' => 'settings',
+				'tab' => 'general',
 				'settings' => array(
 					self::SLUG_OPTION => array(
 						'label' => __( 'Invoice Permalink Slug', 'sprout-invoices' ),
@@ -78,7 +78,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_terms,
-							'description' => __( 'These are the default terms for an invoice.', 'sprout-invoices' ),
+							'description' => __( 'These are the default terms for an invoice. <code>Tip: HTML accepted.</code>', 'sprout-invoices' ),
 						),
 
 					),
@@ -87,13 +87,12 @@ class SI_Invoices_Edit extends SI_Invoices {
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_notes,
-							'description' => __( 'These are the default notes public to a client reviewing their invoice.', 'sprout-invoices' ),
+							'description' => __( 'These are the default notes public to a client reviewing their invoice. <code>Tip: HTML accepted.</code>', 'sprout-invoices' ),
 						),
 					),
 				),
-			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
 	}
 
 	public static function get_default_terms() {
@@ -203,7 +202,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'save_priority' => 50,
 			),
 			'si_doc_send' => array(
-				'title' => __( 'Send Invoice', 'sprout-invoices' ),
+				'title' => __( 'Send Notification', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_invoice_send_view' ),
 				'save_callback' => array( __CLASS__, 'save_invoice_note' ),
 				'context' => 'normal',
@@ -481,33 +480,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 		}
 		$invoice->set_sender_note( $sender_notes );
 
-		$recipients = ( isset( $_REQUEST['sa_metabox_recipients'] ) ) ? $_REQUEST['sa_metabox_recipients'] : array();
-
-		if ( isset( $_REQUEST['sa_metabox_custom_recipient'] ) && '' !== trim( $_REQUEST['sa_metabox_custom_recipient'] ) ) {
-			$submitted_recipients = explode( ',', trim( $_REQUEST['sa_metabox_custom_recipient'] ) );
-			foreach ( $submitted_recipients as $key => $email ) {
-				$email = trim( $email );
-				if ( is_email( $email ) ) {
-					$recipients[] = $email;
-				}
-			}
-		}
-
-		if ( empty( $recipients ) ) {
-			return;
-		}
-
-		$from_email = null;
-		$from_name = null;
-		if ( isset( $_REQUEST['sa_send_metabox_send_as'] ) ) {
-			$name_and_email = SI_Notifications_Control::email_split( $_REQUEST['sa_send_metabox_send_as'] );
-			if ( is_email( $name_and_email['email'] ) ) {
-				$from_name = $name_and_email['name'];
-				$from_email = $name_and_email['email'];
-			}
-		}
-
-		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name );
+		// no longer send on save
 	}
 
 	/**
@@ -618,12 +591,22 @@ class SI_Invoices_Edit extends SI_Invoices {
 			'output' => $recipient_options,
 		);
 
+		$types = apply_filters( 'si_invoice_notifications_manually_send', array( 'send_invoice' => __( 'Invoice Available', 'sprout-invoices' ), 'reminder_payment' => __( 'Payment Reminder', 'sprout-invoices' ), 'deposit_payment' => __( 'Deposit Payment Received', 'sprout-invoices' ), 'final_payment' => __( 'Invoice Paid', 'sprout-invoices' ) ) );
+		$fields['type'] = array(
+			'weight' => 8,
+			'label' => __( 'Notification', 'sprout-invoices' ),
+			'type' => 'select',
+			'options' => $types,
+			'default' => 'send_invoice',
+			'description' => __( 'Select the notification that you want to send.', 'sprout-invoices' ),
+		);
+
 		$fields['sender_note'] = array(
 			'weight' => 10,
 			'label' => __( 'Note', 'sprout-invoices' ),
 			'type' => 'textarea',
 			'default' => $invoice->get_sender_note(),
-			'description' => __( 'This note will be added to the Invoice Notification via the [admin_note] shortcode.', 'sprout-invoices' ),
+			'description' => __( 'This note will be added to the Invoice Notification via the [admin_note] shortcode. Note: the [admin_note] shortcode is limited to the "Invoice Available" notification.', 'sprout-invoices' ),
 		);
 
 		$fields['doc_id'] = array(

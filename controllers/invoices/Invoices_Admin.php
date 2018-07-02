@@ -30,6 +30,8 @@ class SI_Invoices_Admin extends SI_Invoices {
 			add_action( 'bulk_actions-edit-sa_invoice', array( __CLASS__, 'modify_bulk_actions' ) );
 			add_action( 'post_row_actions', array( __CLASS__, 'modify_row_actions' ), 10, 2 );
 
+			add_filter( 'post_row_actions', array( __CLASS__, 'si_add_duplication_link' ), 10, 2 );
+
 			// Improve admin search
 			add_filter( 'si_admin_meta_search', array( __CLASS__, 'filter_admin_search' ), 10, 2 );
 		}
@@ -62,6 +64,13 @@ class SI_Invoices_Admin extends SI_Invoices {
 	// Admin Columns //
 	////////////////////
 
+	public static function si_add_duplication_link( $actions, $post ) {
+		if ( $post->post_type == SI_Invoice::POST_TYPE ) {
+			$actions['duplicate_link'] = sprintf( '<a href="%s"  id="duplicate_estimate_quick_link" class="pr_duplicate" title="%s">%s</a>', SI_Controller::get_clone_post_url( $post->ID ), __( 'Duplicate this invoice', 'sprout-invoices' ), __( 'Duplicate', 'sprout-invoices' ) );
+		}
+		return $actions;
+	}
+
 	/**
 	 * Overload the columns for the invoice post type admin
 	 *
@@ -74,9 +83,11 @@ class SI_Invoices_Admin extends SI_Invoices {
 		unset( $columns['title'] );
 		unset( $columns['comments'] );
 		unset( $columns['author'] );
-		$columns['title'] = __( 'Invoice', 'sprout-invoices' );
 		$columns['notification_status'] = sprintf( '<mark class="helptip notification_status_wrap column_title" title="%s">&nbsp;</mark>', __( 'Notification Status', 'sprout-invoices' ) );
+		$columns['title'] = __( 'Invoice', 'sprout-invoices' );
 		$columns['status'] = __( 'Status', 'sprout-invoices' );
+		$columns['number'] = __( 'Invoice #', 'sprout-invoices' );
+		$columns['dates'] = __( 'Dates', 'sprout-invoices' );
 		$columns['total'] = __( 'Paid', 'sprout-invoices' );
 		$columns['client'] = __( 'Client', 'sprout-invoices' );
 		$columns['doc_link'] = '<div class="dashicons icon-sproutapps-estimates"></div>';
@@ -102,6 +113,21 @@ class SI_Invoices_Admin extends SI_Invoices {
 				if ( $estimate_id ) {
 					printf( '<a class="doc_link" title="%s" href="%s">%s</a>', __( 'Invoice\'s Estimate', 'sprout-invoices' ), get_edit_post_link( $estimate_id ), '<div class="dashicons icon-sproutapps-estimates"></div>' );
 				}
+			break;
+			case 'dates':
+
+				printf( __( '<time>Issued: <b>%s</b></time>', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ), $invoice->get_issue_date() ) );
+				echo '<br/>';
+				$due_date = $invoice->get_due_date();
+				if ( $due_date ) {
+					printf( __( '<small><time>Due: <b>%s</b></time></small>', 'sprout-invoices' ), date_i18n( get_option( 'date_format' ), $due_date ) );
+				}
+
+			break;
+			case 'number':
+
+				printf( '<a title="%s" href="%s">%s</a>', __( 'View Invoice', 'sprout-invoices' ), get_edit_post_link( $id ), $invoice->get_invoice_id() );
+
 			break;
 			case 'status':
 
@@ -134,7 +160,8 @@ class SI_Invoices_Admin extends SI_Invoices {
 			break;
 
 			case 'client':
-				if ( $invoice->get_client_id() ) {
+				$client = ( $invoice->get_client_id() ) ? $invoice->get_client() : false ;
+				if ( is_a( $client, 'SI_Client' ) ) {
 					$client = $invoice->get_client();
 					printf( '<b><a href="%s">%s</a></b><br/><em>%s</em>', get_edit_post_link( $client->get_ID() ), get_the_title( $client->get_ID() ), $client->get_website() );
 				} else {

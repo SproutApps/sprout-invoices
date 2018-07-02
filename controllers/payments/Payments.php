@@ -16,7 +16,7 @@ class SI_Payments extends SI_Controller {
 
 	public static function init() {
 
-		self::register_settings();
+		add_action( 'admin_menu', array( __CLASS__, 'register_subpage' ), 0, 0 );
 
 		// Help Sections
 		add_action( 'in_admin_header', array( get_class(), 'help_sections' ) );
@@ -36,7 +36,7 @@ class SI_Payments extends SI_Controller {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
+	public static function register_subpage() {
 
 		// Option page
 		$args = array(
@@ -44,11 +44,12 @@ class SI_Payments extends SI_Controller {
 			'slug' => self::SETTINGS_PAGE,
 			'title' => __( 'Payments', 'sprout-invoices' ),
 			'menu_title' => __( 'Payments', 'sprout-invoices' ),
-			'weight' => 14,
+			'weight' => 200,
 			'reset' => false,
 			'callback' => array( __CLASS__, 'display_table' ),
 			);
-		do_action( 'sprout_settings_page', $args );
+
+		add_submenu_page( $args['parent'], $args['title'], $args['menu_title'], 'manage_options', self::APP_DOMAIN . '/' . self::SETTINGS_PAGE, $args['callback'] );
 	}
 
 	public function modify_views( $views ) {

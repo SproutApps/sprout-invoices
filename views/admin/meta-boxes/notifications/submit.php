@@ -22,7 +22,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 				<option></option>
 				<?php foreach ( $notification_types as $notification_slug => $data ) : ?>
 					<?php $notification_name = esc_html( $data['name'] ); ?>
-					<option value="<?php echo esc_attr( $notification_slug ) ?>" <?php selected( isset( $notifications_option[$notification_slug] ) ? $notifications_option[$notification_slug] : '', $id ) ?>><?php echo esc_html( $data['name'] ) ?></option>
+					<option value="<?php echo esc_attr( $notification_slug ) ?>" <?php selected( isset( $notifications_option[ $notification_slug ] ) ? $notifications_option[ $notification_slug ] : '', $id ) ?>><?php echo esc_html( $data['name'] ) ?></option>
 				<?php endforeach ?>
 			</select>
 		</span>
@@ -32,16 +32,17 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 			</p>
 		<?php } ?>
 
-		<div class="clear"></div>
+		<p>
+			<span id="notification_type_disabled_wrap">
+				<input type="checkbox" id="notification_type_disabled" name="notification_type_disabled" value="TRUE" <?php checked( 'TRUE', $disabled ) ?> />&nbsp;<?php _e( 'Disabled', 'sprout-invoices' ) ?>
+			</span>
+		</p>
+
 	</div><!-- #minor-publishing -->
 
 	<div id="major-publishing-actions">
 		<?php do_action( 'post_submitbox_start' ); ?>
 		<div id="delete-action">
-
-			<span id="notification_type_disabled_wrap">
-				<input type="checkbox" id="notification_type_disabled" name="notification_type_disabled" value="TRUE" <?php checked( 'TRUE', $disabled ) ?> />&nbsp;<?php _e( 'Disabled', 'sprout-invoices' ) ?>
-			</span>
 
 			<?php
 			if ( current_user_can( 'delete_post', $post->ID ) ) { ?>
@@ -51,7 +52,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 
 		<div id="publishing-action">
 			<?php
-			if ( ! in_array( $post->post_status, array('publish', 'future', 'private') ) || 0 == $post->ID ) {
+			if ( ! in_array( $post->post_status, array( 'publish', 'future', 'private' ) ) || 0 == $post->ID ) {
 				if ( $can_publish ) : ?>
 					<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e( 'Publish' ) ?>" />
 					<?php submit_button( __( 'Publish' ), 'primary button-large', 'publish', false, array( 'accesskey' => 'p' ) ); ?>

@@ -23,7 +23,8 @@ class SI_Estimates_Edit extends SI_Estimates {
 		self::$default_notes = get_option( self::NOTES_OPTION, 'Thank you; we really appreciate your business.' );
 		self::$estimates_slug = get_option( self::SLUG_OPTION, SI_Estimate::REWRITE_SLUG );
 
-		self::register_settings();
+		// Register Settings
+		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
 
 		if ( is_admin() ) {
 
@@ -57,13 +58,12 @@ class SI_Estimates_Edit extends SI_Estimates {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
+	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'si_estimate_settings' => array(
+		$settings['si_estimate_settings'] = array(
 				'title' => __( 'Estimate Settings', 'sprout-invoices' ),
 				'weight' => 25,
-				'tab' => 'settings',
+				'tab' => 'general',
 				'settings' => array(
 					self::SLUG_OPTION => array(
 						'label' => __( 'Estimate Permalink Slug', 'sprout-invoices' ),
@@ -83,7 +83,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_terms,
-							'description' => __( 'These are the default terms for an estimate.', 'sprout-invoices' ),
+							'description' => __( 'These are the default terms for an estimate. <code>Tip: HTML accepted.</code>', 'sprout-invoices' ),
 						),
 					),
 					self::NOTES_OPTION => array(
@@ -91,13 +91,12 @@ class SI_Estimates_Edit extends SI_Estimates {
 						'option' => array(
 							'type' => 'wysiwyg',
 							'default' => self::$default_notes,
-							'description' => __( 'These are the default notes public to a client reviewing their estimate.', 'sprout-invoices' ),
+							'description' => __( 'These are the default notes public to a client reviewing their estimate. <code>Tip: HTML accepted.</code>', 'sprout-invoices' ),
 						),
 					),
 				),
-			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
 	}
 
 	public static function get_default_terms() {
@@ -206,7 +205,7 @@ class SI_Estimates_Edit extends SI_Estimates {
 				'save_priority' => 50,
 			),
 			'si_doc_send' => array(
-				'title' => __( 'Send Estimate', 'sprout-invoices' ),
+				'title' => __( 'Send Notification', 'sprout-invoices' ),
 				'show_callback' => array( __CLASS__, 'show_estimate_send_view' ),
 				'save_callback' => array( __CLASS__, 'save_estimate_note' ),
 				'context' => 'normal',
@@ -594,10 +593,10 @@ class SI_Estimates_Edit extends SI_Estimates {
 			}
 		}
 
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working, since it may not be assigned to a client.', 'sprout-invoices' ) );
+		$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_custom_recipient_check" disabled="disabled"><input type="text" name="sa_metabox_custom_recipient" placeholder="%1$s"><span class="helptip" title="%2$s"></span></label>', __( 'client@email.com', 'sprout-invoices' ), __( 'Entering an email will prevent some notification shortcodes from working, since it may not be assigned to a client.', 'sprout-invoices' ) );
 
-			// Send to me.
-			$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );
+		// Send to me.
+		$recipient_options .= sprintf( '<label class="clearfix"><input type="checkbox" name="sa_metabox_recipients[]" value="%1$s"> %2$s</label>', get_current_user_id(), __( 'Send me a copy', 'sprout-invoices' ) );
 
 		$recipient_options .= '</div></div>';
 
@@ -606,6 +605,16 @@ class SI_Estimates_Edit extends SI_Estimates {
 			'label' => sprintf( '%s <span class="helptip" title="%s"></span>', __( 'Recipients', 'sprout-invoices' ), __( 'A notification will be sent if recipients are selected and this estimate is saved.', 'sprout-invoices' ) ),
 			'type' => 'bypass',
 			'output' => $recipient_options,
+		);
+
+		$types = apply_filters( 'si_estimate_notifications_manually_send', array( 'send_estimate' => __( 'Estimate Available', 'sprout-invoices' ) ) );
+		$fields['type'] = array(
+			'weight' => 8,
+			'label' => __( 'Notification', 'sprout-invoices' ),
+			'type' => 'select',
+			'options' => $types,
+			'default' => 'send_invoice',
+			'description' => __( 'Select the notification that you want to send.', 'sprout-invoices' ),
 		);
 
 		$fields['sender_note'] = array(

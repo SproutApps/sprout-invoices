@@ -1,10 +1,5 @@
 <?php
 
-if ( class_exists( 'SA_Settings_API' ) ) {
-	// Another Sprout App is active
-	return;
-}
-
 /**
  * Admin settings controller.
  *
@@ -30,8 +25,12 @@ class SI_Admin_Settings extends SI_Controller {
 		self::$option_states = get_option( self::STATES_OPTION, false );
 		self::$localeconv_options = get_option( self::CURRENCY_FORMAT_OPTION, array() );
 
-		// Register Settings
-		self::register_settings();
+		// register settings
+		add_action( 'admin_menu', array( __CLASS__, 'add_admin_page' ), 10, 0 );
+		add_filter( 'si_sub_admin_pages', array( __CLASS__, 'register_admin_pages' ) );
+		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
+		add_filter( 'si_settings_options', array( __CLASS__, 'add_settings_options' ) );
+		add_action( 'si_settings_saved', array( get_class(), 'save_specialties' ) );
 
 		// Help Sections
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
@@ -39,13 +38,34 @@ class SI_Admin_Settings extends SI_Controller {
 		// Redirect after activation
 		add_action( 'admin_init', array( __CLASS__, 'redirect_on_activation' ), 20, 0 );
 
-		// Check if site is using ssl.
-		// add_action( 'parse_request', array( __CLASS__, 'ssl_check' ), 0, 1 );
-
 		// Admin bar
 		add_action( 'admin_bar_menu', array( get_class(), 'sa_admin_bar' ), 62 );
 
 		add_filter( 'si_localeconv', array( __CLASS__, 'localeconv_options' ), 0 );
+
+		// plugin menu
+		add_filter( 'plugin_action_links', array( __CLASS__, 'plugin_action_links' ), 10, 2 );
+	}
+
+	public static function plugin_action_links( $actions, $plugin_file ) {
+		static $si;
+
+		if ( ! isset( $plugin ) ) {
+			$si = plugin_basename( SI_PLUGIN_FILE );
+		}
+		if ( $si == $plugin_file ) {
+
+			$settings = array( 'settings' => '<a href="admin.php?page=sprout-invoices-settings">' . __( 'Settings', 'General' ) . '</a>' );
+			$support_link = array( 'support' => sprintf( '<a href="%s">%s</a>', si_get_sa_link( 'https://sproutapps.co/support/' ), __( 'Support', 'sprout-invoices' ) ) );
+			$site_link = array( 'site' => sprintf( '<a href="%s">%s</a>', si_get_purchase_link(), __( 'Add-ons', 'sprout-invoices' ) ) );
+
+			$actions = array_merge( $support_link, $actions );
+			$actions = array_merge( $site_link, $actions );
+			$actions = array_merge( $settings, $actions );
+
+		}
+
+		return $actions;
 	}
 
 	public static function localeconv_options() {
@@ -80,86 +100,86 @@ class SI_Admin_Settings extends SI_Controller {
 	// Settings //
 	//////////////
 
+
+	public static function add_admin_page() {
+
+		$icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIzNnB4IiBoZWlnaHQ9IjM0cHgiIHZpZXdCb3g9IjAgMCAxMTkwLjU1IDg0MS44OSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTE5MC41NSA4NDEuODkiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik01MDAuMTczLDYxNC4zNjRjLTI1LjQ5OS0xNDEuMjAxLDE0Ni44ODktMjc5LjQ0MSwxNDYuODg5LTI3OS40NDFjLTE0Ni4xODgsNzguMDcyLTE3MS4yNTYsMTg3LjA5Ny0xNzIuMzg4LDI0OC4zOTZjMS4yMjcsNDIuOTI2LDIyLjcwNCw4MS4zNTIsMzMuMjc1LDk3LjYzNGw5OC45MzgsMTE4LjI5MWwyMzYuMTM0LTI4Mi4zMzVjODUuNjcyLTExNS4yMjYsNzYuNTktMjc4LjU3Ni0yNy44NTQtMzgzLjEwNEM3MjQuMTcyLDQyLjk4Myw1ODguNzI1LDI0LjI0OSw0NzkuMjEyLDc3LjEyNkM1OTQuNDgzLDQxLjI4LDY5OC40MSw5Ny4wNDIsNzQxLjM3NSwxOTQuNDk0YzEyLjIyNCwyNy43NzQsMTkuMzg1LDU2LjI0NiwyMy40ODUsODIuOTYxYzAuMzUyLDIuNzU3LDAuNzg4LDUuNDYsMS4xMzIsOC4yMTFjMC44NzUsNi43MjksMS41NzksMTMuMzYxLDIuMTA0LDE5LjczMmMyLjA5OSwyMi4wNTgsMi4zNTcsNDMuNzU4LDAuMTc3LDY0LjkzMWMtMS4zMDgsMjAuMzExLTMuNzY0LDMyLjk3My0zLjc2NCwzMi45NzNsMC4wNTktMC4xNjJjLTguNjQ1LDQwLjU3LTI2LjY4Nyw3Ny4xNzktNTMuMDYsMTA5Ljc1MkM2NjAuOTQ1LDU3NS40NjQsNTg1LjE0NSw2MDkuMDksNTAwLjE3Myw2MTQuMzY0eiIvPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik03MTQuMzIsMTk3LjUzNGMtMjIuNjA1LTQ2LjI2LTYwLjY1MS03OS45MTctMTA2LjA3MS05NS42MjJDNTU2LjMwOSw4NS4xNjcsMzkxLjQ5LDc0LjMwMSwzMjQuODA4LDI1OC43M2MtMjUuOSw4OC42NzgtOS4xODMsMTg3LjE3Nyw1MC4wNDksMjYzLjM4M2w3Ny43NjcsOTIuODI3Yy0yLjA3MS05Ljg4MS0zLjQ0Ni0yMC4yMzgtMy43NS0zMC44NzlsLTAuMDE4LTAuNjA5bDAuMDExLTAuNjA4YzAuMDg0LTQuNTUyLDAuMjk2LTkuMzkzLDAuNjYyLTE0LjQ3OWMtMC4wOTMtMC40NTQtMC4xODEtMC45MDgtMC4yNjQtMS4zMjlDMzgyLjA0NiwyODEuNDc3LDU5OC41NzEsMjEzLjQ5OSw3MTQuMzIsMTk3LjUzNHoiLz48L2c+PC9zdmc+';
+
+		$page_title = __( 'SI Settings', 'sprout-invoices' );
+		$menu_title = __( 'Sprout Invoices', 'sprout-invoices' );
+		$capability = 'manage_sprout_invoices_options';
+		$menu_slug = self::TEXT_DOMAIN;
+		$callback = array( __CLASS__, 'si_settings_render_welcome_page' );
+
+		add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $callback, $icon_svg );
+
+		add_submenu_page( $menu_slug, __( 'Getting Started', 'sprout-invoices' ), __( 'Getting Started', 'sprout-invoices' ), $capability, $menu_slug );
+	}
+
+	public static function register_admin_pages( $admin_pages = array() ) {
+
+		// Dashboard
+		$admin_pages['settings'] = array(
+			'slug' => 'dashboard',
+			'title' => 'Settings',
+			'menu_title' => __( 'General Settings', 'sprout-invoices' ),
+			'weight' => -PHP_INT_MAX,
+			'reset' => false,
+			'section' => 'settings',
+			);
+
+		$admin_pages[ self::APP_DOMAIN ] = array(
+			'slug' => self::APP_DOMAIN,
+			'title' => __( 'Sprout Apps', 'sprout-invoices' ),
+			'menu_title' => __( 'Sprout Apps', 'sprout-invoices' ),
+			'weight' => PHP_INT_MAX,
+			'section' => 'getting_started',
+			'menu_only' => false,
+			'callback' => array( __CLASS__, 'si_settings_render_dashboard_page' ),
+			);
+
+		return $admin_pages;
+	}
+
+	public static function add_settings_options( $options = array() ) {
+		$settings = array();
+		$addy_fields = self::address_form_fields( false );
+		$currency_fields = self::$localeconv_options;
+		$fields = array_merge( $addy_fields, $currency_fields );
+		foreach ( $fields as $key => $data ) {
+			$default = ( isset( $data['option']['default'] ) ) ? $data['option']['default'] : '' ;
+			$settings[ SI_Settings_API::_sanitize_input_for_vue( 'sa_metabox_' . $key ) ] = $default;
+		}
+		return array_merge( $settings, $options );
+	}
+
+	public static function save_specialties() {
+		self::save_address();
+		self::save_currency_locale();
+	}
+
 	/**
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
-		// Option page
-		$args = array(
-			'slug' => self::SETTINGS_PAGE,
-			'title' => 'Sprout Invoices Settings',
-			'menu_title' => 'Sprout Invoices',
-			'tab_title' => __( 'General Settings', 'sprout-invoices' ),
-			'weight' => 10,
-			'reset' => false,
-			'section' => 'settings',
-			);
-		do_action( 'sprout_settings_page', $args );
-
-		// Dashboard
-		$args = array(
-			'slug' => 'dashboard',
-			'title' => 'Sprout Invoices Dashboard',
-			'menu_title' => __( 'Getting Started', 'sprout-invoices' ),
-			'weight' => 1,
-			'reset' => false,
-			'tab_only' => true,
-			'section' => 'settings',
-			'callback' => array( __CLASS__, 'welcome_page' ),
-			);
-		do_action( 'sprout_settings_page', $args );
-
+	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'si_site_settings' => array(
+		$settings['si_site_settings'] = array(
 				'title' => __( 'Company Info', 'sprout-invoices' ),
-				'weight' => 200,
-				'tab' => 'settings',
-				'callback' => array( __CLASS__, 'display_general_section' ),
-				'settings' => array(
-					self::ADDRESS_OPTION => array(
-						'label' => null,
-						'option' => array( __CLASS__, 'display_address_fields' ),
-						'sanitize_callback' => array( __CLASS__, 'save_address' ),
-					),
-				),
-			),
-			'si_currency_settings' => array(
+				'weight' => 20,
+				'tab' => 'start',
+				'description' => __( 'The company name and address will be shown on the estimates and invoices.', 'sprout-invoices' ),
+				'settings' => self::settings_address_fields(),
+			);
+
+		$settings['si_currency_settings'] = array(
 				'title' => __( 'Currency Formatting', 'sprout-invoices' ),
 				'weight' => 250,
-				'tab' => 'settings',
-				'callback' => array( __CLASS__, 'display_currency_section' ),
-				'settings' => array(
-					self::CURRENCY_FORMAT_OPTION => array(
-						'label' => null,
-						'option' => array( __CLASS__, 'display_currency_locale_fields' ),
-						'sanitize_callback' => array( __CLASS__, 'save_currency_locale' ),
-					),
-				),
-			),
-			/*/
-			'si_form_settings' => array(
-				'title' => 'Form Settings',
-				'weight' => 500,
-				'callback' => array( __CLASS__, 'display_internationalization_section' ),
-				'settings' => array(
-					self::STATES_OPTION => array(
-						'label' => __( 'States', 'sprout-invoices' ),
-						'option' => array( __CLASS__, 'display_option_states' ),
-						'sanitize_callback' => array( __CLASS__, 'save_states' )
-					),
-					self::COUNTRIES_OPTION => array(
-						'label' => __( 'Countries', 'sprout-invoices' ),
-						'description' => 'test',
-						'option' => array( __CLASS__, 'display_option_countries' ),
-						'sanitize_callback' => array( __CLASS__, 'save_countries' )
-					)
-				)
-			)
-			/**/
-		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+				'tab' => 'advanced',
+				'description' => sprintf( __( '<p>Manually set your currency formatting. More information about these settings and using a filter can be found in the <a href="%s">documentation</a>.</p>', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/troubleshooting/troubleshooting-moneycurrency-issues/' ),
+				'settings' => self::settings_currency_locale_fields(),
+			);
+		return apply_filters( 'si_general_settings', $settings );
 	}
 
 	/**
@@ -173,44 +193,7 @@ class SI_Admin_Settings extends SI_Controller {
 			// Flush the rewrite rules after SI is activated.
 			flush_rewrite_rules();
 			delete_option( 'si_do_activation_redirect' );
-			wp_redirect( admin_url( 'admin.php?page=' . self::APP_DOMAIN . '/settings&tab=dashboard' ) );
-		}
-	}
-
-	/**
-	 * Check if SSL is being used
-	 * @param  WP     $wp
-	 * @return bool
-	 */
-	public static function ssl_check( WP $wp ) {
-		if ( apply_filters( 'si_require_ssl', false, $wp ) ) {
-			self::ssl_required();
-		} else {
-			self::no_ssl();
-		}
-	}
-
-	protected static function ssl_required() {
-		if ( ! is_ssl() ) {
-			if ( 0 === strpos( $_SERVER['REQUEST_URI'], 'http' ) ) {
-				wp_redirect( preg_replace( '|^http://|', 'https://', $_SERVER['REQUEST_URI'] ) );
-				exit();
-			} else {
-				wp_redirect( 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
-				exit();
-			}
-		}
-	}
-
-	protected static function no_ssl() {
-		if ( is_ssl() && strpos( self::si_get_home_url_option(), 'https' ) === false && apply_filters( 'si_no_ssl_redirect', false ) ) {
-			if ( 0 === strpos( $_SERVER['REQUEST_URI'], 'https' ) ) {
-				wp_redirect( preg_replace( '|^https://|', 'http://', $_SERVER['REQUEST_URI'] ) );
-				exit();
-			} else {
-				wp_redirect( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
-				exit();
-			}
+			wp_redirect( admin_url( 'admin.php?page=sprout-invoices' ) );
 		}
 	}
 
@@ -222,37 +205,30 @@ class SI_Admin_Settings extends SI_Controller {
 	 * Dashboard
 	 * @return string
 	 */
-	public static function welcome_page() {
-		// TODO REMOVE - don't flush the rewrite rules every time this page is loaded,
-		// this will help those that have already installed though.
-		flush_rewrite_rules();
+	public static function si_settings_render_welcome_page() {
+		$view = ( ! SI_FREE_TEST && ( SA_Addons::is_pro_installed() || SA_Addons::is_biz_installed() ) ) ? 'admin/sprout-invoices-dashboard-premium.php' : 'admin/sprout-invoices-dashboard.php' ;
+		self::load_view( $view, array() );
+	}
 
-		// Determine if this is a premium install.
-		// TODO abstract this and use a filter in another file.
-		$premium = ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/updates/Updates.php' ) ) ? '-premium' : '' ;
-		if ( isset( $_GET['whats-new'] ) ) {
-			self::load_view( 'admin/whats-new/'.$_GET['whats-new'].$premium.'.php', array() );
-			return;
-		}
-		self::load_view( 'admin/sprout-invoices-dashboard'.$premium.'.php', array() );
+	public static function si_settings_render_dashboard_page() {
+		self::load_view( 'admin/sprout-apps-dashboard.php', array() );
 	}
 
 	//////////////////////
 	// General Settings //
 	//////////////////////
 
-	public static function display_general_section() {
-		echo '<p>'._e( 'The company name and address will be shown on the estimates and invoices.', 'sprout-invoices' ).'</p>';
-	}
-
-	public static function display_address_fields() {
-		echo '<div id="client_fields" class="split admin_fields clearfix">';
-		sa_admin_fields( self::address_form_fields( false ) );
-		echo '</div>';
+	public static function settings_address_fields() {
+		$fields = array();
+		foreach ( self::address_form_fields( false ) as $key => $data ) {
+			$data['option'] = $data;
+			$fields[ 'sa_metabox_' . $key ] = $data;
+		}
+		return $fields;
 	}
 
 	public static function address_form_fields( $required = true ) {
-
+		$fields = array();
 		$fields['name'] = array(
 			'weight' => 1,
 			'label' => __( 'Company Name', 'sprout-invoices' ),
@@ -286,12 +262,12 @@ class SI_Admin_Settings extends SI_Controller {
 
 	public static function save_address( $address = array() ) {
 		$fields = self::address_form_fields( false );
-
 		$address = array();
 		foreach ( $fields as $key => $value ) {
 			$address[ $key ] = isset( $_POST[ 'sa_metabox_' . $key ] ) ? $_POST[ 'sa_metabox_' . $key ] : '';
 		}
-		return stripslashes_deep( $address );
+		$address = stripslashes_deep( $address );
+		update_option( self::ADDRESS_OPTION, $address );
 	}
 
 	public static function get_site_address() {
@@ -303,59 +279,64 @@ class SI_Admin_Settings extends SI_Controller {
 	// Currency options //
 	///////////////////////
 
-	public static function display_currency_section() {
-		printf( __( '<p>Manually set your currency formatting. More information about these settings and using a filter can be found in the <a href="%s">documentation</a>.</p>', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/troubleshooting/troubleshooting-moneycurrency-issues/' );
+	public static function settings_currency_locale_fields() {
+		$fields = array();
+		foreach ( self::currency_locale_fields() as $key => $data ) {
+			$data['option'] = $data;
+			$fields[ 'sa_metabox_' . $key ] = $data;
+		}
+		return $fields;
 	}
 
-	public static function display_currency_locale_fields() {
+	public static function currency_locale_fields() {
 		$localeconv = self::localeconv_options();
 
 		$fields['int_curr_symbol'] = array(
 			'weight' => 1,
 			'label' => __( 'International Currency Symbol', 'sprout-invoices' ),
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( isset( $localeconv['int_curr_symbol'] ) ) ? $localeconv['int_curr_symbol'] : '',
 			'description' => __( 'U.S. default is <code>USD</code>', 'sprout-invoices' ),
 		);
 		$fields['currency_symbol'] = array(
 			'weight' => 1,
 			'label' => __( 'Currency Symbol', 'sprout-invoices' ),
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( isset( $localeconv['currency_symbol'] ) ) ? $localeconv['currency_symbol'] : '',
 			'description' => __( 'U.S. default is <code>$</code>', 'sprout-invoices' ),
 		);
 		$fields['mon_decimal_point'] = array(
 			'weight' => 5,
 			'label' => __( 'Decimal Point', 'sprout-invoices' ),
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( isset( $localeconv['mon_decimal_point'] ) ) ? $localeconv['mon_decimal_point'] : '.',
 			'description' => __( 'U.S. default is <code>.</code>', 'sprout-invoices' ),
 		);
 		$fields['mon_thousands_sep'] = array(
 			'weight' => 10,
 			'label' => __( 'Thousands Separator', 'sprout-invoices' ),
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( isset( $localeconv['mon_thousands_sep'] ) ) ? $localeconv['mon_thousands_sep'] : ',',
 			'description' => __( 'U.S. default is <code>,</code>', 'sprout-invoices' ),
 		);
 		$fields['positive_sign'] = array(
 			'weight' => 15,
 			'label' => __( 'Positive Sign', 'sprout-invoices' ),
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( isset( $localeconv['positive_sign'] ) ) ? $localeconv['positive_sign'] : '',
 			'description' => __( 'U.S. default is blank', 'sprout-invoices' ),
 		);
 		$fields['negative_sign'] = array(
 			'weight' => 1,
 			'label' => __( 'Negative Sign', 'sprout-invoices' ),
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( isset( $localeconv['negative_sign'] ) ) ? $localeconv['negative_sign'] : '',
 			'description' => __( 'U.S. default is <code>-</code>', 'sprout-invoices' ),
 		);
 		$fields['int_frac_digits'] = array(
 			'weight' => 1,
 			'label' => __( 'Fraction Digits', 'sprout-invoices' ),
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( isset( $localeconv['int_frac_digits'] ) ) ? $localeconv['int_frac_digits'] : '',
 			'description' => __( 'U.S. default is <code>2</code>', 'sprout-invoices' ),
 		);
@@ -363,7 +344,7 @@ class SI_Admin_Settings extends SI_Controller {
 			'weight' => 1,
 			'label' => __( 'Money Grouping', 'sprout-invoices' ),
 			'type' => 'checkbox',
-			'type' => 'text',
+			'type' => 'small-input',
 			'default' => ( ! empty( $localeconv['mon_grouping'] ) ) ? implode( ',', $localeconv['mon_grouping'] ) : '3, 3',
 			'description' => __( 'U.S. default is <code>3, 3</code>', 'sprout-invoices' ),
 		);
@@ -415,9 +396,7 @@ class SI_Admin_Settings extends SI_Controller {
 			'default' => ( isset( $localeconv['n_sign_posn'] ) ) ? $localeconv['n_sign_posn'] : 1,
 			'description' => __( 'U.S. default is checked.', 'sprout-invoices' ),
 		);
-		echo '<div id="currency_fields" class="split admin_fields clearfix">';
-		sa_admin_fields( $fields );
-		echo '</div>';
+		return $fields;
 	}
 
 	public static function save_currency_locale( $locale = array() ) {
@@ -443,6 +422,12 @@ class SI_Admin_Settings extends SI_Controller {
 			   'mon_grouping' => array( 3, 3 ),
 		   );
 	 	foreach ( $lc_options as $key => $default ) {
+	 		if ( isset( $_POST[ 'sa_metabox_'.$key ] ) && 'false' === $_POST[ 'sa_metabox_'.$key ] ) {
+	 			$_POST[ 'sa_metabox_'.$key ] = 0;
+	 		}
+	 		if ( isset( $_POST[ 'sa_metabox_'.$key ] ) && 'true' === $_POST[ 'sa_metabox_'.$key ] ) {
+	 			$_POST[ 'sa_metabox_'.$key ] = 1;
+	 		}
 	 		$localeconv[ $key ] = isset( $_POST[ 'sa_metabox_'.$key ] ) ? $_POST[ 'sa_metabox_'.$key ] : '';
 	 	}
 	 	if ( isset( $_POST['sa_metabox_mon_grouping'] ) ) {
@@ -451,19 +436,19 @@ class SI_Admin_Settings extends SI_Controller {
 		 		$localeconv['mon_grouping'] = array_map( 'trim', $mon_grouping );
 	 		}
 	 	}
-		return $localeconv;
+		update_option( self::CURRENCY_FORMAT_OPTION, $localeconv );
 	}
 
-		////////////////////////////////
-		// State and Country Settings //
-		////////////////////////////////
+	////////////////////////////////
+	// State and Country Settings //
+	////////////////////////////////
 
 	public static function display_internationalization_section() {
 		echo '<p>'._e( 'Select the states and countries/provinces for all forms, e.g. purchase, estimates and registration.', 'sprout-invoices' ).'</p>';
 
 	}
 
-		/**
+	/**
 	 * Display for countries option
 	 * @return string
 	 */
@@ -482,7 +467,7 @@ class SI_Admin_Settings extends SI_Controller {
 		echo '</div>';
 	}
 
-		/**
+	/**
 	 * Display for countries option
 	 * @return string
 	 */
@@ -563,7 +548,7 @@ class SI_Admin_Settings extends SI_Controller {
 			'id' => self::MENU_ID,
 			'parent' => false,
 			'title' => '<span class="icon-sproutapps-flat ab-icon"></span>'.__( 'Sprout Invoices', 'sprout-invoices' ),
-			'href' => admin_url( 'admin.php?page=sprout-apps/settings&tab=reporting' ),
+			'href' => admin_url( 'admin.php?page=sprout-invoices-reports' ),
 		) );
 
 		uasort( $menu_items, array( get_class(), 'sort_by_weight' ) );
@@ -629,7 +614,7 @@ class SI_Admin_Settings extends SI_Controller {
 			$screen->add_help_tab( array(
 				'id' => 'general-notification',
 				'title' => __( 'Notification Settings', 'sprout-invoices' ),
-				'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The from name and from e-mail is used for all Sprout Invoice notifications. Example, “Joc Pederson” future@dodgers.com.', 'sprout-invoices' ), __( 'Changing the email format to “HTML” will make the default notifications unformatted and look like garbage; if you want to create some pretty HTML notifications make sure to modify all notification formatting.', 'sprout-invoices' ) ),
+				'content' => sprintf( '<p>%s</p><p>%s</p>', __( 'The from name and from e-mail is used for all Sprout Invoice notifications. Example, “Walker Bueler future@dodgers.com.', 'sprout-invoices' ), __( 'Changing the email format to “HTML” will make the default notifications unformatted and look like garbage; if you want to create some pretty HTML notifications make sure to modify all notification formatting.', 'sprout-invoices' ) ),
 			) );
 
 			$screen->add_help_tab( array(

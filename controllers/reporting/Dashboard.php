@@ -9,7 +9,7 @@
  */
 class SI_Dashboard extends SI_Controller {
 	const SETTINGS_PAGE = 'reporting';
-	const STATS_PAGE = 'sprout-invoices-stats';
+	const STATS_PAGE = 'reports';
 	const REPORT_QV = 'report';
 	const CACHE_KEY_PREFIX = 'si_rprt_';
 	const AJAX_ACTION = 'si_report_data';
@@ -17,18 +17,10 @@ class SI_Dashboard extends SI_Controller {
 	const CACHE_TIMEOUT = 172800; // 48 hours
 
 	public static function init() {
-		// register settings
-		self::register_settings();
-
-		// Dashboards
-		add_filter( 'si_settings_page_sub_heading_sprout-apps/settings', array( get_class(), 'reports_subtitle' ) );
 
 		// Add reports to Dashboard
-		add_action( 'admin_menu', array( __CLASS__, 'add_dash_page' ), 10, 0 );
-		add_action( 'sprout_settings_tabs', array( __CLASS__, 'add_stats_heading' ), 10, 0 );
-		add_filter( 'si_settings_page_sub_heading_sprout-invoices-stats', array( __CLASS__, 'reports_subtitle' ) );
-
-		add_action( 'admin_init', array( __CLASS__, 'redirect_to_stats' ) );
+		// add_action( 'admin_init', array( __CLASS__, 'redirect_to_stats' ) );
+		add_filter( 'si_sub_admin_pages', array( __CLASS__, 'register_admin_page' ) );
 
 		// Enqueue
 		add_action( 'admin_init', array( __CLASS__, 'register_resources' ) );
@@ -110,54 +102,29 @@ class SI_Dashboard extends SI_Controller {
 	// admin //
 	////////////
 
-	/**
-	 * Hooked on init add the settings page and options.
-	 *
-	 */
-	public static function register_settings() {
-		// Option page
-		$args = array(
-			'slug' => self::SETTINGS_PAGE,
-			'title' => __( 'Reports Dashboard', 'sprout-invoices' ),
+	public static function register_admin_page( $admin_pages = array() ) {
+		$admin_pages[ self::STATS_PAGE ] = array(
+			'slug' => self::STATS_PAGE,
+			'title' => __( 'Reports', 'sprout-invoices' ),
 			'menu_title' => __( 'Reports', 'sprout-invoices' ),
-			'weight' => 5,
+			'weight' => 25,
 			'reset' => false,
 			'section' => 'settings',
 			'tab_only' => true,
-			'callback' => null,
+			'callback' => array( __CLASS__, 'reports_dashboard' ),
 			);
-		do_action( 'sprout_settings_page', $args );
+		return $admin_pages;
 	}
 
 	//////////////////////
 	// Stats Dashboard //
 	//////////////////////
 
+
 	public static function redirect_to_stats() {
 		if ( isset( $_GET['tab'] ) && self::SETTINGS_PAGE === $_GET['tab'] && ! isset( $_GET[ self::REPORT_QV ] ) ) {
-			wp_redirect( admin_url() . 'index.php?page=' . self::STATS_PAGE );
+			wp_redirect( admin_url() . 'index.php?page=sprout-invoices-' . self::STATS_PAGE );
 			exit;
-		}
-	}
-
-	public static function add_dash_page() {
-		add_submenu_page( 'index.php', __( 'Sprout Apps', 'sprout-invoices' ), __( 'Sprout Invoices', 'sprout-invoices' ), 'manage_sprout_invoices_options', self::STATS_PAGE, array( __CLASS__, 'reports_dashboard' ) );
-	}
-
-	public static function add_stats_heading() {
-		if ( isset( $_GET['page'] ) && self::STATS_PAGE === $_GET['page'] ) {
-			$section = 'settings';
-			$tabs = apply_filters( 'si_option_tabs', SA_Settings_API::get_option_tabs() );
-			uasort( $tabs, array( __CLASS__, 'sort_by_weight' ) );
-			// loop through tabs and build markup
-			foreach ( $tabs as $key => $data ) :
-				if ( $data['section'] === $section ) {
-					$new_title = __( $data['tab_title'], 'sprout-invoices' );
-					$current = ( $data['slug'] === 'reporting' ) ? ' nav-tab-active' : '';
-					$url = ( $data['tab_only'] ) ? add_query_arg( array( 'page' => self::APP_DOMAIN . '/settings', 'tab' => $data['slug'] ), 'admin.php' ) : add_query_arg( array( 'page' => self::APP_DOMAIN . '/settings' ), 'admin.php' );
-					echo '<a href="' . esc_url( $url ) . '" class="nav-tab' . $current . '" id="si_options_tab_' . $data['slug'] . '">' . $new_title . '</a>';
-				}
-			endforeach;
 		}
 	}
 
@@ -191,38 +158,31 @@ class SI_Dashboard extends SI_Controller {
 
 	public static function reports_dashboard() {
 		$report_dash = ( isset( $_GET[ self::REPORT_QV ] ) ) ? $_GET[ self::REPORT_QV ] : false ;
+
 		switch ( $report_dash ) {
 			case 'invoices':
-				self::load_view( 'admin/reports/invoices.php', array() );
+				$report = 'admin/reports/invoices.php';
 				break;
 			case 'estimates':
-				self::load_view( 'admin/reports/estimates.php', array() );
+				$report = 'admin/reports/estimates.php';
 				break;
 			case 'payments':
-				self::load_view( 'admin/reports/payments.php', array() );
+				$report = 'admin/reports/payments.php';
 				break;
 			case 'clients':
-				self::load_view( 'admin/reports/clients.php', array() );
+				$report = 'admin/reports/clients.php';
 				break;
 			default:
-				self::load_view( 'admin/reports/dashboard.php', array() );
+				$report = 'admin/reports/dashboard.php';
 				break;
 		}
-	}
 
-	public static function reports_subtitle() {
-		if ( self::is_report_page() ) {
-			$current_report = ( isset( $_GET[ self::REPORT_QV ] ) ) ? $_GET[ self::REPORT_QV ] : 'dashboard' ;
-			?>
-				<ul class="subsubsub">
-					<li class="invoices"><a href="<?php echo esc_url( remove_query_arg( self::REPORT_QV ) ) ?>" <?php if ( $current_report == 'dashboard' ) { echo 'class="current"'; } ?>><?php _e( 'Dashboard', 'sprout-invoices' ) ?></a> |</li>
-					<li class="invoices"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'invoices' ) ) ?>" <?php if ( $current_report == 'invoices' ) { echo 'class="current"'; } ?>><?php _e( 'Invoices', 'sprout-invoices' ) ?></a> |</li>
-					<li class="estimates"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'estimates' ) ) ?>" <?php if ( $current_report == 'estimates' ) { echo 'class="current"'; } ?>><?php _e( 'Estimates', 'sprout-invoices' ) ?></a> |</li>
-					<li class="payments"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'payments' ) ) ?>" <?php if ( $current_report == 'payments' ) { echo 'class="current"'; } ?>><?php _e( 'Payments', 'sprout-invoices' ) ?></a> |</li>
-					<li class="clients"><a href="<?php echo esc_url( add_query_arg( self::REPORT_QV, 'clients' ) ) ?>" <?php if ( $current_report == 'clients' ) { echo 'class="current"'; } ?>><?php _e( 'Clients', 'sprout-invoices' ) ?></a></li>
-				</ul>
-			<?php
-		}
+		$args = array(
+			'view' => $report,
+			'query_var' => self::REPORT_QV,
+			'current_report' => $report_dash,
+			);
+		self::load_view( 'admin/reports/admin.php', $args );
 	}
 
 	//////////////
@@ -234,6 +194,9 @@ class SI_Dashboard extends SI_Controller {
 		if ( isset( $_GET['page'] ) && self::STATS_PAGE === $_GET['page'] ) {
 			return true;
 		}
+		if ( isset( $_GET['page'] ) &&  self::TEXT_DOMAIN . '-' . self::STATS_PAGE === $_GET['page'] ) {
+			return true;
+		}
 		if ( isset( $_GET['tab'] ) && self::SETTINGS_PAGE === $_GET['tab'] ) {
 			return true;
 		}
@@ -242,10 +205,13 @@ class SI_Dashboard extends SI_Controller {
 
 	public static function is_si_dash() {
 		if ( isset( $_GET[ self::REPORT_QV ] ) ) {
-			return false;
+			false;
 		}
 		$screen = get_current_screen();
-		return in_array( $screen->id, array( 'dashboard', 'dashboard_page_sprout-invoices-stats', 'sprout-apps_page_sprout-apps/settings' ) );
+		if ( ! isset( $screen->id ) ) {
+			return false;
+		}
+		return in_array( $screen->id, array( 'sprout-invoices_page_sprout-invoices-reports' ) );
 	}
 
 	public static function show_charts_on_wp_dash() {

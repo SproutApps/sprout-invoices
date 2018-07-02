@@ -42,6 +42,7 @@ class SI_Notifications extends SI_Notifications_Control {
 		// invoices
 		add_action( 'send_invoice', array( __CLASS__, 'invoice_notification' ), 10, 4 );
 		add_action( 'payment_complete', array( __CLASS__, 'paid_notification' ) );
+		add_action( 'payment_marked_complete', array( __CLASS__, 'payment_cleared_notification' ) );
 
 		// Admin
 		add_action( 'doc_status_changed', array( __CLASS__, 'admin_estimate_accepted' ), 10, 2 );
@@ -51,15 +52,6 @@ class SI_Notifications extends SI_Notifications_Control {
 
 	public static function register_notifications( $notifications = array() ) {
 		$default_notifications = array(
-				// Lead Generation
-				'estimate_received' => array(
-					'name' => __( 'Lead Received', 'sprout-invoices' ),
-					'description' => __( 'Customize the email that is sent to a prospective client after a lead is submitted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'lead_entries', 'estimate_id', 'estimate_edit_url', 'client_name', 'client_address', 'client_company_website', 'client_edit_url', 'estimate_total', 'estimate_terms', 'estimate_notes', 'estimate_subtotal' ),
-					'default_title' => sprintf( __( '%s: Estimate Request Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/request-received', null, false ),
-					'always_disabled' => true,
-				),
 				// Estimates
 				'send_estimate' => array(
 					'name' => __( 'Estimate Available', 'sprout-invoices' ),
@@ -85,6 +77,14 @@ class SI_Notifications extends SI_Notifications_Control {
 					'default_content' => self::load_view_to_string( 'notifications/payment-deposit', null, false ),
 					'always_disabled' => true,
 				),
+				'payment_cleared' => array(
+					'name' => __( 'Payment Cleared', 'sprout-invoices' ),
+					'description' => __( 'Customize the email that is sent when a payment is changes from pending to complete.', 'sprout-invoices' ),
+					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'payment_total', 'payment_id', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'invoice_subject', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'invoice_issue_date', 'invoice_due_date', 'invoice_past_due_date', 'invoice_po_number', 'invoice_tax_total', 'invoice_tax', 'invoice_tax2', 'invoice_terms', 'invoice_notes', 'invoice_total', 'invoice_payments_list', 'invoice_payments_list_html', 'invoice_subtotal', 'invoice_calculated_total', 'invoice_total_due', 'invoice_deposit_amount', 'invoice_total_payments', 'client_name',  'client_address', 'client_company_website' ),
+					'default_title' => sprintf( __( '%s: Payment Cleared', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
+					'default_content' => self::load_view_to_string( 'notifications/payment-cleared', null, false ),
+					'always_disabled' => true,
+				),
 				'final_payment' => array(
 					'name' => __( 'Invoice Paid', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the client recipients when the final payment for an invoice is made.', 'sprout-invoices' ),
@@ -101,14 +101,6 @@ class SI_Notifications extends SI_Notifications_Control {
 					'always_disabled' => true,
 				),
 				// Admin Notifications
-				'estimate_submitted' => array(
-					'name' => __( 'Lead Submitted', 'sprout-invoices' ),
-					'description' => __( 'Customize the email that is sent to the site admin after an lead is submitted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url', 'client_address', 'client_company_website' ),
-					'default_title' => sprintf( __( '%s: Estimate Request Received', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
-					'default_content' => self::load_view_to_string( 'notifications/admin-request-submitted', null, false ),
-					'always_disabled' => true,
-				),
 				'accepted_estimate' => array(
 					'name' => __( 'Estimate Accepted', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the admin after an estimate is accepted.', 'sprout-invoices' ),
@@ -441,6 +433,28 @@ class SI_Notifications extends SI_Notifications_Control {
 		}
 	}
 
+	public static function payment_cleared_notification( SI_Payment $payment ) {
+		$invoice_id = $payment->get_invoice_id();
+		$invoice = SI_Invoice::get_instance( $invoice_id );
+		if ( is_a( $invoice, 'SI_Invoice' ) && $invoice->get_balance() < 0.01 ) { // leave a bit of room for floating point arithmetic
+			$client = $invoice->get_client();
+			$client_users = self::get_document_recipients( $invoice );
+			foreach ( array_unique( $client_users ) as $user_id ) {
+				if ( ! is_wp_error( $user_id ) ) {
+					$to = self::get_user_email( $user_id );
+					$data = array(
+						'payment' => $payment,
+						'invoice' => $invoice,
+						'client' => ( is_a( $client, 'SI_Client' ) ) ? $client : 0,
+						'user_id' => $user_id,
+						'to' => $to,
+					);
+					self::send_notification( 'payment_cleared', $data, $to );
+				}
+			}
+		}
+	}
+
 	/**
 	 * Estimate accepted notification
 	 * @param  object $doc  SI_Invoice or SI_Estimate
@@ -655,10 +669,10 @@ class SI_Notifications extends SI_Notifications_Control {
 	 */
 	public static function shortcode_admin_note( $atts, $content, $code, $data ) {
 		$sender_note = '';
-		if ( $data['invoice'] && is_a( $data['invoice'], 'SI_Invoice' ) ) {
+		if ( isset( $data['invoice'] ) && is_a( $data['invoice'], 'SI_Invoice' ) ) {
 			$sender_note = $data['invoice']->get_sender_note();
 		} else {
-			if ( $data['estimate'] && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
 				$sender_note = $data['estimate']->get_sender_note();
 			}
 		}

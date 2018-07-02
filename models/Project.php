@@ -41,10 +41,6 @@ class SI_Project extends SI_Post_Type {
 		self::register_post_type( self::POST_TYPE, 'Project', 'Projects', $post_type_args );
 	}
 
-	public function estimate_submenu() {
-		add_submenu_page( 'edit.php?post_type='.SI_Estimate::POST_TYPE, 'Projects', 'Projects', 'edit_posts', 'edit.php?post_type='.self::POST_TYPE );
-	}
-
 	protected function __construct( $id ) {
 		parent::__construct( $id );
 	}

@@ -9,6 +9,7 @@
 class SI_CSV_Import extends SI_Importer {
 	const SETTINGS_PAGE = 'import';
 	const PROCESS_ACTION = 'start_import';
+	const IMPORTER_ID = 'csv';
 	const CLIENT_FILE_OPTION = 'si_client_csv_upload';
 	const INVOICE_FILE_OPTION = 'si_invoice_csv_upload';
 	const ESTIMATE_FILE_OPTION = 'si_estimate_csv_upload';
@@ -24,15 +25,15 @@ class SI_CSV_Import extends SI_Importer {
 	private static $start_progress_over;
 
 	public static function init() {
-		self::register_settings();
 		self::save_options();
-
-		// Maybe process import
-		self::maybe_process_import();
 	}
 
 	public static function register() {
 		self::add_importer( __CLASS__, __( 'CSV', 'sprout-invoices' ) );
+	}
+
+	public static function get_id() {
+		return self::IMPORTER_ID;
 	}
 
 
@@ -40,61 +41,59 @@ class SI_CSV_Import extends SI_Importer {
 	 * Register the payment settings
 	 * @return
 	 */
-	public static function register_settings() {
+	public static function get_options( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'si_csv_importer_settings' => array(
-				'title' => 'CSV Import Settings',
-				'weight' => 0,
-				'tab' => self::get_settings_page( false ),
-				'settings' => array(
-					self::CLIENT_FILE_OPTION => array(
-						'label' => __( 'Clients', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'file',
-							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 clients at a time and import all of your clients before importing invoices or payments.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/clients.csv' ),
-						),
+		$settings['csv_import'] = array(
+			'title' => 'CSV Import Settings',
+			'description' => __( 'Use the example CSVs for each record type, any variation from those examples could cause malformed records to be created or simply fail to import.', 'sprout-invoices' ),
+			'weight' => 0,
+			'settings' => array(
+				self::CLIENT_FILE_OPTION => array(
+					'label' => __( 'Clients', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'file',
+						'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 clients at a time and import all of your clients before importing invoices or payments.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/clients.csv' ),
 					),
-					self::ESTIMATE_FILE_OPTION => array(
-						'label' => __( 'Estimates', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'file',
-							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 estimates at a time and import all of your clients.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/estimates.csv' ),
-						),
+				),
+				self::ESTIMATE_FILE_OPTION => array(
+					'label' => __( 'Estimates', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'file',
+						'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 estimates at a time and import all of your clients.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/estimates.csv' ),
 					),
-					self::INVOICE_FILE_OPTION => array(
-						'label' => __( 'Invoices', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'file',
-							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 invoices at a time, import all of your clients, and import before payments.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/invoices.csv' ),
-						),
+				),
+				self::INVOICE_FILE_OPTION => array(
+					'label' => __( 'Invoices', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'file',
+						'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 250 invoices at a time, import all of your clients, and import before payments.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/invoices.csv' ),
 					),
-					self::PAYMENT_FILE_OPTION => array(
-						'label' => __( 'Payments', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'file',
-							'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 payments at a time and make sure all your invoices are imported first.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/payments.csv' ),
-						),
+				),
+				self::PAYMENT_FILE_OPTION => array(
+					'label' => __( 'Payments', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'file',
+						'description' => sprintf( __( 'Example CSV <a href="%s" target="_blank">here</a>. To be safe import no more than 100 payments at a time and make sure all your invoices are imported first.', 'sprout-invoices' ), SI_URL . '/importers/csv-examples/payments.csv' ),
 					),
-					self::DELETE_PROGRESS => array(
-						'label' => __( 'Clear Progress', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'checkbox',
-							'value' => 'restart',
-							'label' => __( 'Re-start the Import Process', 'sprout-invoices' ),
-							'description' => __( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.', 'sprout-invoices' ),
-						),
+				),
+				self::DELETE_PROGRESS => array(
+					'label' => __( 'Clear Progress', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'checkbox',
+						'value' => 'restart',
+						'label' => __( 'Re-start the Import Process', 'sprout-invoices' ),
+						'description' => __( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.', 'sprout-invoices' ),
 					),
-					self::PROCESS_ACTION => array(
-						'option' => array(
-							'type' => 'hidden',
-							'value' => wp_create_nonce( self::PROCESS_ACTION ),
-						),
+				),
+				self::PROCESS_ACTION => array(
+					'option' => array(
+						'type' => 'hidden',
+						'value' => wp_create_nonce( self::PROCESS_ACTION ),
 					),
 				),
 			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
 	}
 
 	public static function save_options() {
@@ -157,16 +156,6 @@ class SI_CSV_Import extends SI_Importer {
 			}
 		}
 
-	}
-
-	/**
-	 * Check to see if it's time to start the import process.
-	 * @return
-	 */
-	public static function maybe_process_import() {
-		if ( isset( $_POST[ self::PROCESS_ACTION ] ) && wp_verify_nonce( $_POST[ self::PROCESS_ACTION ], self::PROCESS_ACTION ) ) {
-			add_filter( 'si_show_importer_settings', '__return_false' );
-		}
 	}
 
 	/**
@@ -409,7 +398,7 @@ class SI_CSV_Import extends SI_Importer {
 		set_time_limit( 0 );
 
 		$csv_file = get_option( self::INVOICE_FILE_OPTION );
-
+		error_log( 'csv: ' . print_r( $csv_file, true ) );
 		if ( ! $csv_file ) {
 			// Completed previously
 			self::return_progress( array(

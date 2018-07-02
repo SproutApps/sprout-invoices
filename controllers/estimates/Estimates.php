@@ -109,7 +109,43 @@ class SI_Estimates extends SI_Controller {
 			}
 		}
 
-		do_action( 'send_estimate', $estimate, $recipients, $from_email, $from_name );
+		$types = apply_filters( 'si_estimate_notifications_manually_send', array( 'send_estimate' => __( 'Estimate Available', 'sprout-invoices' ) ) );
+
+		$type = ( isset( $_REQUEST['sa_send_metabox_type'] ) && array_key_exists( $_REQUEST['sa_send_metabox_type'], $types ) ) ? $_REQUEST['sa_send_metabox_type'] : 'send_invoice' ;
+
+		$data = array(
+			'estimate' => $estimate,
+			'client' => $estimate->get_client(),
+		);
+
+		// Set Invoice
+		$invoice = '';
+		if ( $invoice_id = $estimate->get_invoice_id() ) {
+			$invoice = SI_Invoice::get_instance( $invoice_id );
+			$data['invoice'] = $invoice;
+		}
+
+		// send to user
+		foreach ( array_unique( $recipients ) as $user_id ) {
+			/**
+			 * sometimes the recipients list will pass an email instead of an id
+			 * attempt to find a user first.
+			 */
+			if ( is_email( $user_id ) ) {
+				if ( $user = get_user_by( 'email', $user_id ) ) {
+					$user_id = $user->ID;
+					$to = SI_Notifications::get_user_email( $user_id );
+				} else { // no user found
+					$to = $user_id;
+				}
+			} else {
+				$to = SI_Notifications::get_user_email( $user_id );
+			}
+
+			$data['to'] = $to;
+			$data['user_id'] = $user_id;
+			SI_Notifications::send_notification( $type, $data, $to );
+		}
 
 		// If status is temp than change to pending.
 		if ( ! in_array( $estimate->get_status(), array( SI_Estimate::STATUS_APPROVED, SI_Estimate::STATUS_PENDING ) ) ) {

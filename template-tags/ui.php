@@ -2,9 +2,9 @@
 
 if ( ! function_exists( 'si_doc_header_logo' ) ) :
 	/**
- * Get the document logo from the theme or the default logo from the plugin.
- * @return  string
- */
+	 * Get the document logo from the theme or the default logo from the plugin.
+	 * @return  string
+	 */
 	function si_doc_header_logo_url() {
 		$fullpath = si_locate_file( array(
 			'logo.png',

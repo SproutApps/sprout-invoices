@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 17.2
+Stable tag: 18.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,21 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Form integrations for everyone!
 
 == Changelog ==
+
+= 18.0 =
+
+* New: Completely New Admin
+* New: Integrated Support
+* New: Manual Notifications
+* New: Improved Invoices List Admin
+* New: New Notifications: Payment Cleared, and Recurring Invoice
+* New: Additional Importer (Sliced)
+
+More information found [here](https://sproutapps.co/news/summer-update-brings-all-new-sprout-invoices-admin/).
+
+= 17.2.1 =
+
+* Update/Fix: Reset totals after invoices are cloned for subscriptions and recurring. This should address when servers cache the balance and it's not reset before the invoice is viewed.
 
 = 17.2 =
 

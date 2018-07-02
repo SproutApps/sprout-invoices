@@ -826,7 +826,7 @@ class SI_Reporting extends SI_Dashboard {
 		$items[] = array(
 			'id' => 'si_dashboard',
 			'title' => __( 'Dashboard', 'sprout-invoices' ),
-			'href' => admin_url( 'admin.php?page=sprout-apps/settings&tab=reporting' ),
+			'href' => admin_url( 'admin.php?page=sprout-invoices-reports' ),
 			'weight' => 0,
 		);
 		return $items;

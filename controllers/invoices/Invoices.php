@@ -129,7 +129,56 @@ class SI_Invoices extends SI_Controller {
 			}
 		}
 
-		do_action( 'send_invoice', $invoice, $recipients, $from_email, $from_name );
+		$types = apply_filters( 'si_invoice_notifications_manually_send', array( 'send_invoice' => __( 'Invoice Available', 'sprout-invoices' ), 'reminder_payment' => __( 'Payment Reminder', 'sprout-invoices' ), 'deposit_payment' => __( 'Deposit Payment Received', 'sprout-invoices' ), 'final_payment' => __( 'Invoice Paid', 'sprout-invoices' ) ) );
+
+		$type = ( isset( $_REQUEST['sa_send_metabox_type'] ) && array_key_exists( $_REQUEST['sa_send_metabox_type'], $types ) ) ? $_REQUEST['sa_send_metabox_type'] : 'send_invoice' ;
+
+		$data = array(
+			'invoice' => $invoice,
+			'client' => $invoice->get_client(),
+		);
+
+		// Set Estimate
+		$estimate = '';
+		if ( $estimate_id = $invoice->get_estimate_id() ) {
+			$estimate = SI_Estimate::get_instance( $estimate_id );
+			$data['estimate'] = $estimate;
+		}
+
+		// Set Payment
+		$payment = false;
+		$inv_payments = $invoice->get_payments();
+		if ( ! empty( $inv_payments ) ) {
+			$payment = SI_Payment::get_instance( $inv_payments[0] );
+			$data['payment'] = $payment;
+		}
+
+		if ( ! $payment && in_array( $type, array( 'deposit_payment', 'final_payment' ) ) ) {
+			self::ajax_fail( 'Invoice has no payments yet.' );
+		}
+
+		// send to user
+		foreach ( array_unique( $recipients ) as $user_id ) {
+			/**
+			 * sometimes the recipients list will pass an email instead of an id
+			 * attempt to find a user first.
+			 */
+			if ( is_email( $user_id ) ) {
+				if ( $user = get_user_by( 'email', $user_id ) ) {
+					$user_id = $user->ID;
+					$to = SI_Notifications::get_user_email( $user_id );
+				} else { // no user found
+					$to = $user_id;
+				}
+			} else {
+				$to = SI_Notifications::get_user_email( $user_id );
+			}
+
+			$data['to'] = $to;
+			$data['user_id'] = $user_id;
+			error_log( 'type: ' . print_r( $type, true ) );
+			SI_Notifications::send_notification( $type, $data, $to );
+		}
 
 		// If status is temp than change to pending.
 		if ( ! in_array( $invoice->get_status(), array( SI_Invoice::STATUS_PENDING, SI_Invoice::STATUS_PARTIAL, SI_Invoice::STATUS_PAID ) ) ) {
@@ -255,6 +304,7 @@ class SI_Invoices extends SI_Controller {
 		}
 		$invoice_post_id = self::clone_post( $doc->get_id(), SI_Invoice::STATUS_PENDING, SI_Invoice::POST_TYPE );
 		$invoice = SI_Invoice::get_instance( $invoice_post_id );
+		$invoice->reset_totals();
 
 		// blank
 		$invoice->set_sender_note();

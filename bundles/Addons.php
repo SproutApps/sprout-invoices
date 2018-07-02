@@ -8,6 +8,7 @@ class SA_Addons extends SI_Controller {
 	const SETTINGS_PAGE = 'addons';
 	const ADDON_OPTION = 'si_active_addons_v3';
 	const API_CB = 'https://sproutapps.co/';
+	const PROGRESS_TRACKER = 'si_addons_progress';
 	private static $active_addons = array();
 
 	public static function init() {
@@ -16,68 +17,98 @@ class SA_Addons extends SI_Controller {
 			self::$active_addons = self::default_active_addons();
 			update_option( self::ADDON_OPTION, self::$active_addons );
 		}
-		self::register_addons_admin();
+
+		// register settings
+		add_filter( 'si_sub_admin_pages', array( __CLASS__, 'register_admin_page' ) );
+
+		add_filter( 'si_settings_options', array( __CLASS__, 'add_settings_options' ) );
+
 		self::load_addons();
+	}
+
+	public static function is_pro_installed() {
+		return file_exists( SI_PATH . '/bundles/sprout-invoices-addon-client-dash/client-dashboard.php' );
+	}
+
+	public static function is_biz_installed() {
+		return file_exists( SI_PATH . '/bundles/sprout-invoices-addon-custom-numbering/sprout-invoice-custom-ids.php' );
+	}
+
+	public static function is_corp_installed() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+		return is_plugin_active( 'sprout-invoices-addon-auto-billing/auto-billing.php ' );
 	}
 
 	////////////
 	// Admin //
 	////////////
 
-	/**
-	 * Register the addons management screen
-	 * @return
-	 */
-	public static function register_addons_admin() {
-
-		// Addon page
-		$args = array(
-			'slug' => self::get_settings_page( false ),
-			'title' => __( 'Sprout Invoices Add-ons', 'sprout-invoices' ),
+	public static function register_admin_page( $admin_pages = array() ) {
+		$admin_pages[ self::SETTINGS_PAGE ] = array(
+			'slug' => self::SETTINGS_PAGE,
+			'title' => __( 'Add-ons', 'sprout-invoices' ),
 			'menu_title' => __( 'Add-ons', 'sprout-invoices' ),
-			'weight' => 30,
-			'section' => 'settings',
+			'weight' => 20,
+			'section' => 'add-ons',
+			'callback' => array( __CLASS__, 'render_settings_page' ),
 			'tab_only' => true,
-			'ajax' => true,
-			'callback' => array( __CLASS__, 'addons_admin' ),
 			);
-		do_action( 'sprout_settings_page', $args );
-
-		// Settings
-		$settings = array(
-			'si_addons_mngt' => array(
-				'title' => null,
-				'weight' => 0,
-				'tab' => self::get_settings_page( false ),
-				'settings' => array(
-					self::ADDON_OPTION => array(
-						'label' => null,
-						'option' => array( get_class(), 'display_addons_options' ),
-						'sanitize_callback' => array( __CLASS__, 'save_active_addons' ),
-					),
-				),
-			),
-		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $admin_pages;
 	}
 
-	public static function display_addons_options() {
+	public static function render_settings_page() {
+		$addons = self::get_addons();
+		$args = array(
+			'addons' => $addons,
+			'option' => self::ADDON_OPTION,
+			'mp_addons' => self::get_marketplace_addons(),
+		);
+		if ( empty( $addons ) ) {
+			self::load_view( 'admin/addons/free-settings.php', $args );
+		} else {
+			self::load_view( 'admin/addons/settings.php', $args );
+		}
+	}
+
+	public static function add_settings_options( $options = array() ) {
+		$addon_options = array();
 		$addons = self::get_addons();
 		foreach ( $addons as $path => $details ) {
 			$key = self::get_addon_key( $path, $details );
-			$value = self::ADDON_OPTION.'['.$key.']';
-			$title = ( isset( $details['PluginURI'] ) && $details['PluginURI'] !== '' ) ? '<b><a href="'.esc_url( $details['PluginURI'] ).'" target="_blank">'.esc_html( $details['Name'] ).'</a></b>' : '<b>'.esc_html( $details['Name'] ).'</b>';
-			$title = str_replace( 'Sprout Invoices Add-on - ', '', $title );
-			printf( '<span class="check_slider"><input type="checkbox" name="%1$s" id="%2$s" value="%1$s" %3$s /> <label for="%2$s" ></label></span> %4$s<p class="description">%5$s</p>', esc_attr( $value ), esc_attr( $key ), checked( true, self::is_enabled( $key ), false ), $title, $details['Description'] );
+			$addon_options[ SI_Settings_API::_sanitize_input_for_vue( $key ) ] = self::is_enabled( $key );
 		}
+		return array_merge( $addon_options, $options );
 	}
 
-	public static function save_active_addons( $active_addons = array() ) {
-		$sanitized_active_addons = array();
-		foreach ( $active_addons as $key => $value ) {
-			$sanitized_active_addons[] = $key;
+	public static function activate_addon( $addon_key = '' ) {
+		update_option( self::PROGRESS_TRACKER, $addon_key );
+		$active_addons = get_option( self::ADDON_OPTION, false );
+		if ( ! is_array( $active_addons ) ) {
+			$active_addons = array();
 		}
-		return $sanitized_active_addons;
+
+		$active_addons[] = $addon_key;
+		$active_addons = array_unique( array_filter( $active_addons ) );
+
+		update_option( self::ADDON_OPTION, $active_addons );
+
+		do_action( 'si_addon_activated', $addon_key );
+	}
+
+	public static function deactivate_addon( $addon_key = '' ) {
+		update_option( self::PROGRESS_TRACKER, $addon_key );
+		$active_addons = get_option( self::ADDON_OPTION, false );
+		if ( ! is_array( $active_addons ) ) {
+			return;
+		}
+		$array_key = array_search( $addon_key, $active_addons );
+		unset( $active_addons[ $array_key ] );
+		$active_addons = array_unique( array_filter( $active_addons ) );
+		update_option( self::ADDON_OPTION, $active_addons );
+
+		do_action( 'si_addon_deactivated', $addon_key );
 	}
 
 	/**
@@ -106,30 +137,6 @@ class SA_Addons extends SI_Controller {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * Settings page
-	 * @param  boolean $prefixed
-	 * @return string
-	 */
-	public static function get_settings_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
-	}
-
-	public static function addons_admin() {
-		$addons = self::get_addons();
-		if ( ! empty( $addons ) && ! isset( $_GET['marketplace'] ) ) {
-			self::load_view( 'admin/addons/options-admin', array(
-					'addons' => self::get_addons(),
-			), false );
-		} else {
-			$addons = self::get_marketplace_addons();
-			self::load_view( 'admin/addons/marketplace', array(
-				'addons' => $addons,
-			), false );
-		}
-
 	}
 
 	public static function load_addons() {
@@ -247,6 +254,7 @@ class SA_Addons extends SI_Controller {
 			'Version' => 'Version',
 			'Description' => 'Description',
 			'Author' => 'Author',
+			'ID' => 'ID',
 			'AuthorURI' => 'Author URI',
 			'AutoActive' => 'Auto Active',
 		);
@@ -272,11 +280,11 @@ class SA_Addons extends SI_Controller {
 	//////////////////
 
 	public static function get_marketplace_addons() {
-		$cache_key = '_si_marketplace_addons_v'.self::SI_VERSION;
+		$cache_key = '_si_marketplace_addons_v18'.self::SI_VERSION;
 		$cached_addons = get_transient( $cache_key );
 		if ( $cached_addons ) {
 			if ( ! empty( $cached_addons ) ) {
-				//return $cached_addons;
+				return $cached_addons;
 			}
 		}
 

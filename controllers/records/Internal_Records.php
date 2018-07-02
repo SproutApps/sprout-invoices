@@ -32,25 +32,19 @@ class SI_Internal_Records extends SI_Controller {
 		add_action( 'wp_ajax_si_edit_private_note',  array( get_class(), 'maybe_update_private_note' ), 10, 0 );
 		// ajax views
 		add_action( 'wp_ajax_si_edit_private_note_view',  array( __CLASS__, 'edit_private_note' ), 10, 0 );
-
-		self::add_admin_page();
 	}
 
 	/**
 	 * Add menu under tools.
 	 */
 	public static function add_admin_page() {
-		// Option page
-		$args = array(
-			'parent' => 'tools.php',
-			'slug' => self::SETTINGS_PAGE,
-			'title' => __( 'Sprout Invoices Records and Logs', 'sprout-invoices' ),
-			'menu_title' => __( 'Sprout Records', 'sprout-invoices' ),
-			'weight' => 10,
-			'reset' => false,
-			'callback' => array( __CLASS__, 'display_table' ),
-			);
-		do_action( 'sprout_settings_page', $args );
+		$sub_page_title = __( 'Sprout Invoices Records and Logs', 'sprout-invoices' );
+		$sub_menu_title = __( 'Sprout Records', 'sprout-invoices' );
+		$sub_capability = 'manage_sprout_invoices_options';
+		$sub_menu_slug = self::SETTINGS_PAGE;
+		$sub_callback = array( __CLASS__, 'display_table' );
+
+		add_submenu_page( 'tools.php', $sub_page_title, $sub_menu_title, $sub_capability, $sub_menu_slug, $sub_callback );
 	}
 
 	public static function new_record( $data = array(), $type = 'mixed', $associate_id = -1, $title = '', $author_id = 0, $encoded = true ) {

@@ -20,8 +20,8 @@ class SI_Dev_Logs extends SI_Controller {
 		// Admin option
 		self::$record_logs = (bool) get_option( self::LOG_OPTION, 0 );
 
-		// Register settings
-		self::register_settings();
+		// Register Settings
+		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
 
 		// after
 		add_action( 'init', array( __CLASS__, 'record_stored_logs_and_errors' ), PHP_INT_MAX );
@@ -38,13 +38,13 @@ class SI_Dev_Logs extends SI_Controller {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
+	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'si_developer' => array(
-				'title' => __( 'Advanced', 'sprout-invoices' ),
+		$settings['si_developer'] = array(
+				'title' => __( 'Logs', 'sprout-invoices' ),
+				'description' => __( 'Developer settings.', 'sprout-invoices' ),
 				'weight' => 2000,
-				'tab' => 'settings',
+				'tab' => 'advanced',
 				'settings' => array(
 					self::LOG_OPTION => array(
 						'label' => __( 'Save Logs', 'sprout-invoices' ),
@@ -57,9 +57,8 @@ class SI_Dev_Logs extends SI_Controller {
 							),
 						),
 					),
-				),
-			);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+				);
+		return $settings;
 	}
 
 	/**

@@ -29,6 +29,9 @@ class SI_Free_License extends SI_Controller {
 		// Messaging
 		add_action( 'si_settings_page',  array( __CLASS__, 'thank_for_registering' ), 10, 0 );
 
+		// upgrade messaging for free
+		add_action( 'sprout_settings_inner_header', array( __CLASS__, 'maybe_show_upgrade_messaging' ), 10, 0 );
+
 		//add_action( 'admin_notices',  array( __CLASS__, 'my_promo_message' ), 10, 0 );
 
 		// callback for license
@@ -113,7 +116,13 @@ class SI_Free_License extends SI_Controller {
 		if ( false === SI_Free_License::license_status() ) {
 			return;
 		}
-		printf( '<div class="updated notice is-dismissible"><p><span class="icon-sproutapps-flat"></span><strong>Sprout Invoices Pro Discount</strong>: Just <a href="%s">generate a free license key</a> for your site and a discount will be sent to you instantly.</p></div>', admin_url( 'admin.php?page=sprout-apps%2Fsettings&tab=dashboard' ) );
+		printf( '<div class="updated notice is-dismissible"><p><span class="icon-sproutapps-flat"></span><strong>Sprout Invoices Pro Discount</strong>: Just <a href="%s">generate a free license key</a> for your site and a discount will be sent to you instantly.</p></div>', admin_url( 'admin.php?page=sprout-invoices-reports' ) );
+	}
+
+	public static function maybe_show_upgrade_messaging() {
+		if ( apply_filters( 'show_upgrade_messaging', true ) ) {
+			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>Upgrade Available:</strong> Add awesome reporting and support the future of Sprout Invoices by <a href="%s">upgrading</a>.</p></div>', si_get_purchase_link() );
+		}
 	}
 
 	//////////////

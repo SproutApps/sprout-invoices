@@ -37,7 +37,8 @@ class SI_Payment extends SI_Post_Type {
 	public static function init() {
 		$post_type_args = array(
 			'public' => false,
-			'show_ui' => false,
+			'show_ui' => true,
+			//'show_in_menu' => 'edit.php?post_type='.SI_Invoice::POST_TYPE,
 			'rewrite' => false,
 			'has_archive' => false,
 			'supports' => array( 'title' ),

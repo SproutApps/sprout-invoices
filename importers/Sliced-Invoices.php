@@ -9,6 +9,7 @@
 class SI_Sliced_Invoices_Import extends SI_Importer {
 	const SETTINGS_PAGE = 'import';
 	const PROCESS_ACTION = 'start_import';
+	const IMPORTER_ID = 'sliced';
 	const DELETE_SLICEDINVOICES_DATA = 'import_archived';
 	const PAYMENT_METHOD = 'Sliced Invoices Imported';
 	const PROGRESS_OPTION = 'current_import_progress_slicedinvoices_v1';
@@ -19,17 +20,15 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 	private static $slicedinvoices_delete;
 
 	public static function init() {
-		// Settings
-		self::$slicedinvoices_delete = get_option( self::DELETE_SLICEDINVOICES_DATA, '' );
-		self::register_payment_settings();
-		self::save_options();
-
-		// Maybe process import
-		self::maybe_process_import();
+		self::add_importer( __CLASS__, __( 'Sliced Invoices', 'sprout-invoices' ) );
 	}
 
 	public static function register() {
-		self::add_importer( __CLASS__, __( 'Sliced Invoices', 'sprout-invoices' ) );
+		self::add_importer( __CLASS__, __( 'Sliced', 'sprout-invoices' ) );
+	}
+
+	public static function get_id() {
+		return self::IMPORTER_ID;
 	}
 
 
@@ -37,48 +36,37 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 	 * Register the payment settings
 	 * @return
 	 */
-	public static function register_payment_settings() {
+	public static function get_options( $settings = array() ) {
+
+		$description = __( 'Use these options before importing all of your sliced invoice records to Sprout Invoices.', 'sprout-invoices' );
+		if ( ! class_exists( 'Sliced_Invoices' ) ) {
+			$description = sprintf( '<b>' . __( 'Please <a href="%s">activate Sliced Invoices</a> before proceeding.', 'sprout-invoices' ) . '</b>', admin_url( 'plugins.php' ) );
+		}
+
 		// Settings
-		$settings = array(
-			'si_slicedinvoices_importer_settings' => array(
-				'title' => 'Sliced Invoices Import Settings',
-				'weight' => 0,
-				'tab' => self::get_settings_page( false ),
-				'settings' => array(
-					self::DELETE_SLICEDINVOICES_DATA => array(
-						'label' => __( 'Delete Sliced Invoices', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'checkbox',
-							'value' => 'remove',
-							'label' => 'Cleanup Sliced Invoices during the import.',
-							'description' => __( 'You must really love us to delete those Sliced Invoices, since you can\'t go back. Settings and the log table (sigh) will be kept.', 'sprout-invoices' ),
-						),
+		$settings['si_importer_sliced'] = array(
+			'title' => __( 'Sliced Invoice Import Options', 'sprout-invoices' ),
+			'description' => $description,
+			'weight' => 0,
+			'settings' => array(
+				self::DELETE_SLICEDINVOICES_DATA => array(
+					'label' => __( 'Delete Sliced Invoices', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'checkbox',
+						'value' => 'remove',
+						'label' => 'Cleanup Sliced Invoices during the import.',
+						'description' => __( 'You must really love us to delete those Sliced Invoices, since you can\'t go back. Settings and the log table (sigh) will be kept.', 'sprout-invoices' ),
 					),
-					self::PROCESS_ACTION => array(
-						'option' => array(
-							'type' => 'hidden',
-							'value' => wp_create_nonce( self::PROCESS_ACTION ),
-						),
+				),
+				self::PROCESS_ACTION => array(
+					'option' => array(
+						'type' => 'hidden',
+						'value' => wp_create_nonce( self::PROCESS_ACTION ),
 					),
 				),
 			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
-	}
-
-	public static function save_options() {
-		// For testing
-		delete_option( self::PROGRESS_OPTION );
-	}
-
-	/**
-	 * Check to see if it's time to start the import process.
-	 * @return
-	 */
-	public static function maybe_process_import() {
-		if ( isset( $_POST[ self::PROCESS_ACTION ] ) && wp_verify_nonce( $_POST[ self::PROCESS_ACTION ], self::PROCESS_ACTION ) ) {
-			add_filter( 'si_show_importer_settings', '__return_false' );
-		}
+		return $settings;
 	}
 
 	/**
@@ -99,6 +87,9 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 		if ( ! class_exists( 'Sliced_Invoices' ) ) {
 			self::return_error( __( 'Sliced Invoices needs to be activated before proceeding.', 'sprout-invoices' ) );
 		}
+
+		// always start over
+		delete_option( self::PROGRESS_OPTION );
 
 		$args = array(
 				'post_type' => 'sliced_invoice',
@@ -154,6 +145,7 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 	}
 
 	public static function import_invoices() {
+
 		// Store the import progress
 		$progress = get_option( self::PROGRESS_OPTION, 1 );
 		$progress_tally = get_option( self::PROGRESS_OPTION.'tally', array() );
@@ -173,7 +165,6 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 			);
 
 		$sliced_invoices_ids = get_posts( $args );
-
 		if ( empty( $progress_tally ) ) {
 			$progress_tally['clients_tally'] = 0;
 			$progress_tally['contacts_tally'] = 0;
@@ -222,8 +213,6 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 
 			$id = Sliced_Shared::get_item_id( $sliced_invoice_id );
 
-			// prp($sliced_invoices);
-			// continue;
 			/////////////
 			// Clients //
 			/////////////
@@ -298,9 +287,11 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 
 		$client = Sliced_Shared::get_client_details( $sliced_invoice_id );
 
+		// the client id is the user id
 		$client_id = $client['id'];
 
 		$possible_dups = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::SLICEDINVOICES_ID => $client_id ) );
+
 		// Don't create a duplicate if this was already imported.
 		if ( ! empty( $possible_dups ) ) {
 			do_action( 'si_error', 'Client imported already', $client_id );
@@ -320,6 +311,7 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 			'website' => ( isset( $client['website'] ) ) ? $client['website'] : '',
 			'address' => $address,
 			'currency' => sliced_get_invoice_currency( $sliced_invoice_id ),
+			'user_id' => $client_id,
 		);
 		if ( $args['company_name'] == '' ) {
 			if ( is_array( $client['first_name'] ) || is_array( $client['last_name'] ) ) {
@@ -334,12 +326,11 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 		$record_id = SI_Internal_Records::new_record( $client['extra_info'], SI_Controller::PRIVATE_NOTES_TYPE, $si_client_id, '', 0, false );
 
 		// create import record
-		update_post_meta( $client_id, self::SLICEDINVOICES_ID, $client_id );
-		return $client_id;
+		update_post_meta( $client_id, self::SLICEDINVOICES_ID, $si_client_id );
+		return $si_client_id;
 	}
 
 	public static function create_contact( $sliced_invoice_id = 0, $si_client_id = 0 ) {
-		// modify the current role
 		$client = Sliced_Shared::get_client_details( $sliced_invoice_id );
 		$user_id = wp_update_user( array( 'ID' => $client['id'], 'role' => SI_Client::USER_ROLE ) );
 		return $user_id;
@@ -356,14 +347,6 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 			$invoice = SI_Invoice::get_instance( $possible_dups[0] );
 			do_action( 'si_error', 'Invoice imported already', $sliced_invoice_id );
 			return $invoice;
-		}
-
-		// Get client
-		if ( ! $si_client_id ) {
-			$clients = SI_Post_Type::find_by_meta( SI_Client::POST_TYPE, array( self::SLICEDINVOICES_ID => $sliced_invoice_id ) );
-			// Get client and confirm it's validity
-			$client = SI_Client::get_instance( $clients[0] );
-			$client_id = ( is_a( $client, 'SI_Client' ) ) ? $client->get_id() : 0 ;
 		}
 
 		$args = array(
@@ -401,24 +384,25 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 		$invoice->set_notes( sliced_get_invoice_description( $sliced_invoice_id ) );
 		$invoice->set_terms( sliced_get_invoice_terms( $sliced_invoice_id ) );
 
-		error_log( 'line items: ' . print_r( sliced_get_invoice_line_items( $sliced_invoice_id ), true ) );
-
-		$output = Sliced_Shared::get_totals( $id );
+		$tax = Sliced_Shared::get_tax_amount();
 
 		// line items
 		$line_items = array();
-		foreach ( sliced_get_invoice_line_items( $sliced_invoice_id ) as $array_key => $item ) {
-			$subtotal = $item['amount'] * $item['qty'];
-			$line_items[] = array(
-				'rate' => ( isset( $item['amount'] ) ) ? $item['amount'] : '',
-				'qty' => ( isset( $item['qty'] ) ) ? $item['qty'] : '',
-				'desc' => ( '' !== $item['description'] ) ? $item['description'] : '',
-				'tax' => ( 'on' === $item['taxable'] ) ? $output['tax'] : '',
-				'total' => ( $subtotal ) + ( ($output['tax'] / 100) * $subtotal ),
-			);
+		foreach ( sliced_get_invoice_line_items( $sliced_invoice_id ) as $array_key => $lis ) {
+			foreach ( $lis as $key => $item ) {
+				$subtotal = $item['amount'] * $item['qty'];
+				$line_items[] = array(
+					'rate' => ( isset( $item['amount'] ) ) ? $item['amount'] : '',
+					'qty' => ( isset( $item['qty'] ) ) ? $item['qty'] : '',
+					'desc' => ( '' !== $item['description'] ) ? $item['description'] : '',
+					'tax' => ( isset( $item['taxable'] ) ) ? -$tax : 0,
+					'total' => ( isset( $item['taxable'] ) ) ? ( $subtotal ) + ( ($tax / 100) * $subtotal ): $subtotal,
+				);
+			}
 		}
 
 		$invoice->set_line_items( $line_items );
+		$invoice->reset_totals();
 
 		do_action( 'si_new_record',
 			$sliced_invoice_id, // content
@@ -490,4 +474,4 @@ class SI_Sliced_Invoices_Import extends SI_Importer {
 		exit();
 	}
 }
-//SI_Sliced_Invoices_Import::register();
+SI_Sliced_Invoices_Import::init();

@@ -54,7 +54,9 @@ class SI_Templating_API extends SI_Controller {
 		// Theme Selection
 		self::$inv_theme_option = get_option( self::INV_THEME_OPION, 'original' );
 		self::$est_theme_option = get_option( self::EST_THEME_OPION, 'original' );
-		self::register_settings();
+
+		// Register Settings
+		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
 
 		// Register Shortcodes
 		add_action( 'sprout_shortcode', array( __CLASS__, 'register_shortcode' ), 0, 3 );
@@ -484,12 +486,13 @@ class SI_Templating_API extends SI_Controller {
 	 * Hooked on init add the settings page and options.
 	 *
 	 */
-	public static function register_settings() {
+	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'invoice_template_selection' => array(
-				'weight' => 20, // Add-on settings are 1000 plus
-				'tab' => 'settings',
+		$settings['invoice_template_selection'] = array(
+				'title' => __( 'Invoice & Estimate Template', 'sprout-invoices' ),
+				'description' => self::theme_selection_desc(),
+				'weight' => 100,
+				'tab' => 'start',
 				'settings' => array(
 					self::INV_THEME_OPION => array(
 						'label' => __( 'Invoice Theme', 'sprout-invoices' ),
@@ -500,12 +503,6 @@ class SI_Templating_API extends SI_Controller {
 							'description' => __( 'Select the theme your invoices should use.', 'sprout-invoices' ),
 							),
 						),
-					),
-				),
-			'estimate_template_selection' => array(
-				'weight' => 25, // Add-on settings are 1000 plus
-				'tab' => 'settings',
-				'settings' => array(
 					self::EST_THEME_OPION => array(
 						'label' => __( 'Estimate Theme', 'sprout-invoices' ),
 						'option' => array(
@@ -515,10 +512,51 @@ class SI_Templating_API extends SI_Controller {
 							'description' => __( 'Select the theme your estimate should use.', 'sprout-invoices' ),
 							),
 						),
+					'customizer' => array(
+						'label' => __( 'Logo & Color Styling', 'sprout-invoices' ),
+						'option' => array(
+							'type' => 'bypass',
+							'output' => self::how_to_style(),
+							),
+						),
 					),
-				),
+				);
+		return $settings;
+	}
+
+	public static function theme_selection_desc() {
+		$desc = '<div class="si_theme_previews">';
+		$desc .= sprintf( '<div class="default_theme"><img src="%s"/>%s</div>', SI_RESOURCES . 'admin/img/default.png', __( 'Default Theme', 'sprout-invoices' ) );
+
+		$desc .= sprintf( '<div class="original_theme"><img src="%s"/>%s</div>', SI_RESOURCES . 'admin/img/original.png', __( 'Original Theme', 'sprout-invoices' ) );
+
+		$desc .= sprintf( '<div class="slate_theme"><img src="%s"/>%s</div>', SI_RESOURCES . 'admin/img/slate.png', __( 'Slate Theme', 'sprout-invoices' ) );
+		$desc .= '</div>';
+		return $desc;
+	}
+
+	public static function how_to_style() {
+		$args = array(
+				'post_type' => SI_Invoice::POST_TYPE,
+				'post_status' => 'any',
+				'posts_per_page' => 1,
+				'fields' => 'ids',
 			);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		$invoices = get_posts( $args );
+
+		$args = array(
+				'post_type' => SI_Estimate::POST_TYPE,
+				'post_status' => 'any',
+				'posts_per_page' => 1,
+				'fields' => 'ids',
+			);
+		$estimates = get_posts( $args );
+
+		$args = array(
+			'invoice_id' => ( empty( $invoices ) ) ? false : $invoices[0],
+			'estimate_id' => ( empty( $estimates ) ) ? false : $estimates[0],
+		);
+		return self::load_view_to_string( 'admin/options/how-to-style', $args );
 	}
 
 	/////////////////

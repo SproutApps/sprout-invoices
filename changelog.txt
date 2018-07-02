@@ -1,7 +1,23 @@
+= 18.0 =
+
+* New: Completely New Admin
+* New: Integrated Support
+* New: Manual Notifications
+* New: Improved Invoices List Admin
+* New: New Notifications: Payment Cleared, and Recurring Invoice
+* New: Additional Importer (Sliced)
+
+More information found [here](https://sproutapps.co/news/summer-update-brings-all-new-sprout-invoices-admin/).
+
+= 17.2.1 =
+
+* Update/Fix: Reset totals after invoices are cloned for subscriptions and recurring. This should address when servers cache the balance and it's not reset before the invoice is viewed.
+
 = 17.2 =
 
 * Update/New/Fix: New WYSIWYG Editor 
 * Update: Sprout Billings styling updates 
+* New: Duplication link
 
 = 17.1.0.1 =
 

@@ -926,7 +926,7 @@ class SI_Invoice extends SI_Post_Type {
 		}
 
 		if ( ! $before ) {
-			$before = apply_filters( 'si_get_overdue_before_timestamp', $after + 86399 ); // 24 hours
+			$before = apply_filters( 'si_get_overdue_before_timestamp', $after + ( DAY_IN_SECONDS - 1 ) ); // 24 hours
 		}
 
 		$args = array(

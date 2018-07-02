@@ -1,44 +1,7 @@
-<?php require ABSPATH . 'wp-admin/options-head.php'; // not a general options page, so it must be included here ?>
-<?php
-	$page = ( ! isset( $_GET['tab'] ) ) ? $page : self::APP_DOMAIN.'/'.$_GET['tab'] ; ?>
+<div id="addons_admin">
+	
+	<main id="main" class="container site-main" role="main">
 
-<div id="<?php echo esc_attr( $page ); ?>" class="wrap">
-
-	<h2 class="nav-tab-wrapper">
-		<?php do_action( 'sprout_settings_tabs' ); ?>
-	</h2>
-	<div class="clearfix">
-		<?php do_action( 'si_settings_page_sub_heading_'.$page ); ?>
-	</div>
-
-	<?php if ( apply_filters( 'si_show_importer_settings', '__return_true' ) ) : ?>
-		<form method="post" class="si_settings_form" enctype="multipart/form-data">
-			<h3><?php _e( 'Import Clients, Users, Estimates, Invoices and Payments', 'sprout-invoices' ) ?></h3>
-			<?php settings_fields( $page ); ?>
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th scope="row"><?php _e( 'Select Import Source', 'sprout-invoices' ) ?></th>
-						<td>
-							<select name="importer">
-								<?php foreach ( $importers as $key => $name ) : ?>
-									<?php
-										$current = ( isset( $_POST['importer'] ) && $_POST['importer'] != '' ) ? $_POST['importer'] : '' ;
-											?>
-									<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $current ) ?>><?php echo esc_html( $name ) ?></option>
-								<?php endforeach ?>
-							</select>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<table class="form-table">
-				<?php do_settings_fields( $page, 'default' ); ?> 
-			</table>
-			<?php do_settings_sections( $page ); ?>
-			<?php submit_button( __( 'Start Import', 'sprout-invoices' ) ); ?>
-		</form>
-	<?php else : ?>
 		<script type="text/javascript">
 			jQuery(function($) {
 				
@@ -137,12 +100,9 @@
 
 			<div id="complete_import" class="cloak"><?php printf( '<a href="%s">All Done!</a>', admin_url( 'edit.php?post_type=sa_invoice' ) ) ?></div>
 
-			<?php do_action( 'si_import_progress', $page ) ?>
+			<?php do_action( 'si_import_progress' ) ?>
 
 		</div>
-	<?php endif ?>
-
-
-	<?php do_action( 'si_settings_page', $page ) ?>
-	<?php do_action( 'si_settings_page_'.$page, $page ) ?>
+	
+	</main>
 </div>

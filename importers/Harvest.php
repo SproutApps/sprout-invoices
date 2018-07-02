@@ -9,6 +9,7 @@
 class SI_Harvest_Import extends SI_Importer {
 	const SETTINGS_PAGE = 'import';
 	const PROCESS_ACTION = 'start_import';
+	const IMPORTER_ID = 'harvest';
 	const HARVEST_USER_OPTION = 'si_harvest_user_option';
 	const HARVEST_PASS_OPTION = 'si_harvest_pass_option';
 	const HARVEST_ACCOUNT_OPTION = 'si_harvest_account_option';
@@ -31,15 +32,16 @@ class SI_Harvest_Import extends SI_Importer {
 		self::$harvest_user = get_option( self::HARVEST_USER_OPTION, '' );
 		self::$harvest_pass = get_option( self::HARVEST_PASS_OPTION, '' );
 		self::$harvest_account = self::sanitize_subdomain( get_option( self::HARVEST_ACCOUNT_OPTION, '' ) );
-		self::register_payment_settings();
-		self::save_options();
 
-		// Maybe process import
-		self::maybe_process_import();
+		self::save_options();
 	}
 
 	public static function register() {
 		self::add_importer( __CLASS__, __( 'Harvest', 'sprout-invoices' ) );
+	}
+
+	public static function get_id() {
+		return self::IMPORTER_ID;
 	}
 
 
@@ -47,79 +49,77 @@ class SI_Harvest_Import extends SI_Importer {
 	 * Register the payment settings
 	 * @return
 	 */
-	public static function register_payment_settings() {
+	public static function get_options( $settings = array() ) {
 		// Settings
-		$settings = array(
-			'si_harvest_importer_settings' => array(
-				'title' => 'Harvest Import Settings',
-				'weight' => 0,
-				'tab' => self::get_settings_page( false ),
-				'settings' => array(
-					self::HARVEST_USER_OPTION => array(
-						'label' => __( 'User', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'text',
-							'default' => self::$harvest_user,
-							'attributes' => array(
+		$settings['si_harvest_importer_settings'] = array(
+			'title' => 'Harvest Import Settings',
+			'description' => __( 'Use your Harvest API credentials to import your records for Sprout Invoices.', 'sprout-invoices' ),
+			'weight' => 0,
+			'settings' => array(
+				self::HARVEST_USER_OPTION => array(
+					'label' => __( 'User', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'text',
+						'default' => get_option( self::HARVEST_USER_OPTION, '' ),
+						'attributes' => array(
 		'placeholder' => __(
 		'user@gmail.com', 'sprout-invoices' ),
-							),
-							'description' => '',
 						),
+						'description' => '',
 					),
-					self::HARVEST_PASS_OPTION => array(
-						'label' => __( 'Password', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'password',
-							'default' => self::$harvest_pass,
-							'attributes' => array(
-					'placeholder' => __(
-					'password', 'sprout-invoices' ),
-							),
-							'description' => '',
+				),
+				self::HARVEST_PASS_OPTION => array(
+					'label' => __( 'Password', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'password',
+						'default' => get_option( self::HARVEST_PASS_OPTION, '' ),
+						'attributes' => array(
+				'placeholder' => __(
+				'password', 'sprout-invoices' ),
 						),
+						'description' => '',
 					),
-					self::HARVEST_ACCOUNT_OPTION => array(
-						'label' => __( 'Account/Sub-domain', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'text',
-							'default' => self::$harvest_account,
-							'attributes' => array(
-					'placeholder' => __(
-					'your-subdomain', 'sprout-invoices' ),
-							),
-							'description' => __( 'https://[subdomain].harvest.com', 'sprout-invoices' ),
-							'sanitize_callback' => array( __CLASS__, 'sanitize_subdomain' ),
+				),
+				self::HARVEST_ACCOUNT_OPTION => array(
+					'label' => __( 'Account/Sub-domain', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'text',
+						'default' => get_option( self::HARVEST_ACCOUNT_OPTION, '' ),
+						'attributes' => array(
+				'placeholder' => __(
+				'your-subdomain', 'sprout-invoices' ),
 						),
+						'description' => __( 'https://[subdomain].harvest.com', 'sprout-invoices' ),
+						'sanitize_callback' => array( __CLASS__, 'sanitize_subdomain' ),
 					),
-					self::PROCESS_ARCHIVED => array(
-						'label' => __( 'Import Archived', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'checkbox',
-							'value' => 'archived',
-							'label' => __( 'Import inactive clients.', 'sprout-invoices' ),
-							'description' => '',
-						),
+				),
+				self::PROCESS_ARCHIVED => array(
+					'label' => __( 'Import Archived', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'checkbox',
+						'value' => 'archived',
+						'label' => __( 'Import inactive clients.', 'sprout-invoices' ),
+						'description' => '',
 					),
-					self::DELETE_PROGRESS => array(
-						'label' => __( 'Clear Progress', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'checkbox',
-							'value' => 'restart',
-							'label' => 'Re-start the Import Process',
-							'description' => __( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.', 'sprout-invoices' ),
-						),
+				),
+				self::DELETE_PROGRESS => array(
+					'label' => __( 'Clear Progress', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'checkbox',
+						'value' => 'restart',
+						'label' => 'Re-start the Import Process',
+						'description' => __( 'This will start the import process from the start. Any records already imported will not be duplicated but any new records will.', 'sprout-invoices' ),
 					),
-					self::PROCESS_ACTION => array(
-						'option' => array(
-							'type' => 'hidden',
-							'value' => wp_create_nonce( self::PROCESS_ACTION ),
-						),
+				),
+				self::PROCESS_ACTION => array(
+					'option' => array(
+						'type' => 'hidden',
+						'value' => wp_create_nonce( self::PROCESS_ACTION ),
 					),
 				),
 			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
+		return $settings;
 	}
 
 	public static function save_options() {
@@ -143,16 +143,6 @@ class SI_Harvest_Import extends SI_Importer {
 		// Clear out progress
 		if ( isset( $_POST[ self::DELETE_PROGRESS ] ) && $_POST[ self::DELETE_PROGRESS ] == 'restart' ) {
 			delete_option( self::PROGRESS_OPTION );
-		}
-	}
-
-	/**
-	 * Check to see if it's time to start the import process.
-	 * @return
-	 */
-	public static function maybe_process_import() {
-		if ( isset( $_POST[ self::PROCESS_ACTION ] ) && wp_verify_nonce( $_POST[ self::PROCESS_ACTION ], self::PROCESS_ACTION ) ) {
-			add_filter( 'si_show_importer_settings', '__return_false' );
 		}
 	}
 

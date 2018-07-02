@@ -13,9 +13,6 @@ class SI_Clients extends SI_Controller {
 
 	public static function init() {
 
-		add_filter( 'si_submission_form_fields', array( __CLASS__, 'filter_estimate_submission_fields' ) );
-		add_action( 'estimate_submitted',  array( __CLASS__, 'create_client_from_submission' ), 10, 2 );
-
 		if ( is_admin() ) {
 
 			// Help Sections
@@ -794,105 +791,6 @@ class SI_Clients extends SI_Controller {
 		return $money_format;
 	}
 
-	//////////////////
-	// Submissions //
-	//////////////////
-
-	/**
-	 * Filter the submission fields if the user is logged in and a client is already created.
-	 * @param  array  $fields
-	 * @return array
-	 */
-	public static function filter_estimate_submission_fields( $fields = array() ) {
-		if ( is_user_logged_in() ) {
-			$client_id = 0;
-			$client_ids = SI_Client::get_clients_by_user( get_current_user_id() );
-			if ( ! empty( $client_ids ) ) {
-				$client_id = array_pop( $client_ids );
-			}
-			if ( get_post_type( $client_id ) == SI_Client::POST_TYPE ) {
-				// If the client exists don't show the client fields
-				unset( $fields['name'] );
-				unset( $fields['client_name'] );
-				unset( $fields['email'] );
-				unset( $fields['website'] );
-				$fields['client_id'] = array(
-					'type' => 'hidden',
-					'value' => $client_id,
-				);
-			}
-		}
-		return $fields;
-	}
-
-
-	/**
-	 * Hooked into the estimate submission form. Create a client
-	 * if one already doesn't exist.
-	 * @param  SI_Estimate $estimate
-	 * @param  array       $parsed_args
-	 * @return
-	 */
-	public static function create_client_from_submission( SI_Estimate $estimate, $parsed_args = array() ) {
-		$client_id = ( isset( $_REQUEST['client_id'] ) && get_post_type( $_REQUEST['client_id'] ) == SI_Client::POST_TYPE ) ? $_REQUEST['client_id'] : 0;
-		$user_id = get_current_user_id();
-
-		// check to see if the user exists by email
-		if ( isset( $_REQUEST['sa_estimate_email'] ) && $_REQUEST['sa_estimate_email'] != '' ) {
-			if ( $user = get_user_by( 'email', $_REQUEST['sa_estimate_email'] ) ) {
-				$user_id = $user->ID;
-			}
-		}
-
-		// Check to see if the user is assigned to a client already
-		if ( ! $client_id ) {
-			$client_ids = SI_Client::get_clients_by_user( $user_id );
-			if ( ! empty( $client_ids ) ) {
-				$client_id = array_pop( $client_ids );
-			}
-		}
-
-		// Create a user for the submission if an email is provided.
-		if ( ! $user_id ) {
-			// email is critical
-			if ( isset( $_REQUEST['sa_estimate_email'] ) && $_REQUEST['sa_estimate_email'] != '' ) {
-				$user_args = array(
-					'user_login' => esc_html( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ),
-					'display_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? esc_html( $_REQUEST['sa_estimate_client_name'], 'sprout-invoices' ) : esc_html( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ),
-					'user_pass' => wp_generate_password(), // random password
-					'user_email' => isset( $_REQUEST['sa_estimate_email'] ) ? esc_html( $_REQUEST['sa_estimate_email'], 'sprout-invoices' ) : '',
-					'first_name' => si_split_full_name( esc_html( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'first' ),
-					'last_name' => si_split_full_name( esc_html( $_REQUEST['sa_estimate_name'], 'sprout-invoices' ), 'last' ),
-					'user_url' => isset( $_REQUEST['sa_estimate_website'] ) ? esc_html( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : '',
-				);
-				$user_id = self::create_user( $user_args );
-			}
-		}
-
-		// create the client based on what's submitted.
-		if ( ! $client_id ) {
-			$address = array(
-				'street' => isset( $_REQUEST['sa_contact_street'] ) ? esc_html( $_REQUEST['sa_contact_street'], 'sprout-invoices' ) : '',
-				'city' => isset( $_REQUEST['sa_contact_city'] ) ? esc_html( $_REQUEST['sa_contact_city'], 'sprout-invoices' ) : '',
-				'zone' => isset( $_REQUEST['sa_contact_zone'] ) ? esc_html( $_REQUEST['sa_contact_zone'], 'sprout-invoices' ) : '',
-				'postal_code' => isset( $_REQUEST['sa_contact_postal_code'] ) ? esc_html( $_REQUEST['sa_contact_postal_code'], 'sprout-invoices' ) : '',
-				'country' => isset( $_REQUEST['sa_contact_country'] ) ? esc_html( $_REQUEST['sa_contact_country'], 'sprout-invoices' ) : '',
-			);
-
-			$args = array(
-				'company_name' => isset( $_REQUEST['sa_estimate_client_name'] ) ? esc_html( $_REQUEST['sa_estimate_client_name'], 'sprout-invoices' ) : '',
-				'website' => isset( $_REQUEST['sa_estimate_website'] ) ? esc_html( $_REQUEST['sa_estimate_website'], 'sprout-invoices' ) : '',
-				'address' => $address,
-				'user_id' => $user_id,
-			);
-
-			$client_id = SI_Client::new_client( $args );
-		}
-
-		// Set the estimates client
-		$estimate->set_client_id( $client_id );
-
-	}
 
 	/**
 	 * AJAX submission from admin.

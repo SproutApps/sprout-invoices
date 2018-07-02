@@ -32,7 +32,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		self::$currency_symbol = get_option( self::CURRENCY_SYMBOL_OPTION, '$' );
 		self::$money_format = get_option( self::MONEY_FORMAT_OPTION, '%0.2f' );
 
-		self::register_payment_settings();
+		// register settings
+		add_filter( 'si_sub_admin_pages', array( __CLASS__, 'register_admin_page' ) );
+		add_filter( 'si_settings_options', array( __CLASS__, 'add_settings_options' ) );
 
 		// Help Sections
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
@@ -49,7 +51,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	}
 
 	public static function store_format_option() {
-		if ( isset( $_GET['page'] ) && $_GET['page'] == 'sprout-apps/settings' ) {
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'sprout-invoices-payments' ) {
 			update_option( self::MONEY_FORMAT_OPTION, sa_get_formatted_money( rand( 11000, 9999999 ) ) );
 		}
 	}
@@ -72,6 +74,39 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			$enabled = array();
 		}
 		return apply_filters( 'si_doc_enabled_processors', array_filter( $enabled ), $doc_id );
+	}
+
+	public static function activate_pp( $addon_key = '', $update_cc = false ) {
+		$active_pp = get_option( self::ENABLED_PROCESSORS_OPTION, false );
+		if ( ! is_array( $active_pp ) ) {
+			$active_pp = array();
+		}
+
+		if ( $update_cc ) {
+			foreach ( $active_pp as $index => $pp ) {
+				$processor = self::load_processor( $pp );
+				if ( self::is_cc_processor( $processor ) ) {
+					unset( $active_pp[ $index ] );
+				}
+			}
+		}
+
+		$active_pp[] = $addon_key;
+		$active_pp = array_unique( array_filter( $active_pp ) );
+		update_option( self::ENABLED_PROCESSORS_OPTION, $active_pp );
+		return $active_pp;
+	}
+
+	public static function deactivate_pp( $addon_key = '' ) {
+		$active_pp = get_option( self::ENABLED_PROCESSORS_OPTION, false );
+		if ( ! is_array( $active_pp ) ) {
+			return;
+		}
+		$array_key = array_search( $addon_key, $active_pp );
+		unset( $active_pp[ $array_key ] );
+		$active_pp = array_unique( array_filter( $active_pp ) );
+		update_option( self::ENABLED_PROCESSORS_OPTION, $active_pp );
+		return $active_pp;
 	}
 
 	public static function get_payment_classname( $payment_id = 0 ) {
@@ -131,9 +166,9 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			}
 
 			// get class and load
-			$class = ( isset( self::$active_payment_processors[0] ) ) ? self::$active_payment_processors[0] : array() ;
+			$class = ( isset( self::$active_payment_processors[0] ) ) ? self::$active_payment_processors[0] : false ;
 
-			if ( ! class_exists( $class ) ) {
+			if ( ! $class || ! class_exists( $class ) ) {
 				return;
 			}
 
@@ -200,85 +235,146 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		return $enabled;
 	}
 
+
+	////////////
+	// admin //
+	////////////
+
+	public static function register_admin_page( $admin_pages = array() ) {
+		$admin_pages[ self::SETTINGS_PAGE ] = array(
+			'slug' => self::SETTINGS_PAGE,
+			'title' => __( 'Payment Settings', 'sprout-invoices' ),
+			'menu_title' => __( 'Payment Settings', 'sprout-invoices' ),
+			'weight' => 20,
+			'section' => 'payments',
+			'callback' => array( __CLASS__, 'render_settings_page' ),
+			'tab_only' => true,
+			);
+		return $admin_pages;
+	}
+
+
+	public static function render_settings_page() {
+		$offsite = self::get_registered_processors( 'offsite' );
+		$credit = self::get_registered_processors( 'credit' );
+		$enabled = self::enabled_processors();
+		$settings = self::payment_settings();
+		uasort( $settings, array( __CLASS__, 'sort_by_weight' ) );
+
+		$all_offsite = array(
+				'SI_Paypal_EC' 			=> 'PayPal Payments Standard',
+				'SI_Checks' 			=> 'Check',
+				'SI_PO' 				=> 'PO Payment (onsite submission)',
+				'SI_BACSs' 				=> 'BACS',
+				'SA_Payment_Redirect' 	=> 'Custom Redirect URL',
+				'SA_2Checkout' 			=> '2CO',
+				'SA_eWAY' 				=> 'eWay',
+				'SI_Mercadopago' 		=> 'Mercadopago',
+				'SA_PagSeguro' 			=> 'PagSeguro',
+				'SA_Square_Cash' 		=> 'Square Cash',
+		);
+
+		$all_credit = array(
+				'SI_Paypal_Pro' 		=> 'PayPal Payments Pro',
+				'SA_Stripe' 			=> 'Stripe',
+				'SA_Square' 			=> 'Square',
+				'SA_AuthorizeNet' 		=> 'Authorize.net',
+				'SA_BeanStream' 		=> 'BeanStream',
+				'SA_BluePay' 			=> 'BluePay',
+				'SA_Braintree' 			=> 'Braintree',
+				'SA_PaymentExpressCC' 	=> 'PaymentExpress CC',
+				'SA_NMI'	 			=> 'NMI',
+		);
+
+		$active_cc = false;
+		foreach ( self::$active_payment_processors as $class ) {
+			if ( self::is_cc_processor( $class ) ) {
+				$active_cc = $class;
+			}
+		}
+
+		$args = array(
+			'settings' => $settings,
+			'offsite' => $offsite,
+			'all_offsite' => $all_offsite,
+			'credit' => $credit,
+			'all_credit' => $all_credit,
+			'active_cc' => $active_cc,
+			'enabled' => $enabled,
+		);
+
+		if ( ! SI_FREE_TEST && ( SA_Addons::is_pro_installed() || SA_Addons::is_biz_installed() ) ) {
+			self::load_view( 'admin/payment-processors/admin.php', $args );
+		} else {
+			self::load_view( 'admin/payment-processors/admin-free.php', $args );
+		}
+
+	}
+
+	public static function add_settings_options( $options = array() ) {
+		$processor_options = array();
+		$settings = self::payment_settings();
+		$enabled = self::enabled_processors();
+
+		$offsite = self::get_registered_processors( 'offsite' );
+		foreach ( $offsite as $class_name => $label ) {
+			$options[ $class_name ] = in_array( $class_name, $enabled );
+			if ( method_exists( $class_name, 'register_settings' ) ) {
+				$processor = call_user_func( array( $class_name, 'get_instance' ) );
+				$pp_settings = $processor->register_settings();
+				$settings = array_merge( reset( $pp_settings ), $settings );
+			}
+		}
+
+		$credit = self::get_registered_processors( 'credit' );
+		foreach ( $credit as $class_name => $label ) {
+			$options[ $class_name ] = in_array( $class_name, $enabled );
+			if ( method_exists( $class_name, 'register_settings' ) ) {
+				$ccprocessor = call_user_func( array( $class_name, 'get_instance' ) );
+				$pp_cc_settings = $processor->register_settings();
+				$settings = array_merge( reset( $pp_cc_settings ), $settings );
+			}
+		}
+
+		$san_settings = SI_Settings_API::_build_settings_array( $settings );
+		$processor_options = array_merge( $san_settings, $processor_options );
+
+		// Credit card select
+		$active_cc = false;
+		foreach ( self::$active_payment_processors as $class ) {
+			if ( self::is_cc_processor( $class ) ) {
+				$active_cc = $class;
+			}
+		}
+		$processor_options['si_cc_pp_select'] = $active_cc;
+		return array_merge( $processor_options, $options );
+	}
+
 	/**
 	 * Register the payment settings
 	 * @return
 	 */
-	public static function register_payment_settings() {
-
-		// Addon page
-		$args = array(
-			'slug' => self::get_settings_page( false ),
-			'title' => __( 'Sprout Invoices Payment Settings', 'sprout-invoices' ),
-			'menu_title' => __( 'Payment Settings', 'sprout-invoices' ),
-			'weight' => 15,
-			'reset' => false,
-			'section' => 'settings',
-			'tab_only' => true,
-			'ajax' => true,
-			'ajax_full_page' => true,
-			);
-		do_action( 'sprout_settings_page', $args );
+	public static function payment_settings() {
 
 		// Settings
-		$settings = array(
-			'si_general_settings' => array(
-				'title' => '',
-				'weight' => 0,
-				'tab' => self::get_settings_page( false ),
-				'callback' => array( __CLASS__, 'settings_description' ),
-				'settings' => array(
-					self::ENABLED_PROCESSORS_OPTION => array(
-						'label' => __( 'Payment Processors', 'sprout-invoices' ),
-						'option' => array( __CLASS__, 'display_payment_methods_field' ),
-						),
-					self::MONEY_FORMAT_OPTION => array(
-						'label' => __( 'Money Format', 'sprout-invoices' ),
-						'option' => array(
-							'type' => 'bypass',
-							'output' => get_option( self::MONEY_FORMAT_OPTION ),
-							'description' => sprintf( __( 'Money formatting is based on the local (%s) this WordPress install was configured with during installation. Please review the Sprout Invoices knowledgebase if this needs to be changed.', 'sprout-invoices' ), '<code>'.get_locale().'</code>' ),
-						),
+		$settings['default_settings'] = array(
+			'title' => __( 'General Payment Settings', 'sprout-invoices' ),
+			'weight' => 0,
+			'tab' => 'start',
+			//'description' => 'say something!',
+			'settings' => array(
+				self::MONEY_FORMAT_OPTION => array(
+					'label' => __( 'Money Format', 'sprout-invoices' ),
+					'option' => array(
+						'type' => 'input',
+						'default' => get_option( self::MONEY_FORMAT_OPTION ),
+						'attributes' => array( 'class' => 'si_input si_disabled_input si_tooltip', 'disabled' => 'disabled', 'aria-label' => __( 'Tip: currency formatting can be adjusted per client', 'sprout-invoices' ) ),
+						'description' => sprintf( __( 'Default money formatting is based on the local (<code>%s</code>) this WordPress install was configured with during installation. Please <a href="%s">review the Sprout Invoices knowledgebase</a> if this needs to be changed.', 'sprout-invoices' ), get_locale(), 'https://docs.sproutapps.co/article/49-troubleshooting-money-currency-issues' ),
 					),
 				),
 			),
 		);
-		do_action( 'sprout_settings', $settings, self::SETTINGS_PAGE );
-	}
-
-	public static function settings_description() {
-		$processors = self::get_registered_processors( 'offsite' );
-		if ( ! in_array( 'SI_Paypal_EC', array_keys( $processors ) ) ) {
-			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span>%s</p></div>', sprintf( __( '<strong>Missing Paypal Express Checkout?</strong> The add-on is available for <b>free</b> on the <a href="%s">Sprout Apps marketplace</a>.', 'sprout-invoices' ), si_get_sa_link( 'https://sproutapps.co/marketplace/paypal-payments-express-checkout/' ) ) );
-		} else {
-			printf( '<div class="upgrade_message clearfix"><p><span class="icon-sproutapps-flat"></span><strong>%s</strong> %s</p></div>', __( 'More Payment Gateways Available:', 'sprout-invoices' ), sprintf( __( 'Checkout the Sprout Apps <a href="%s">marketplace</a>.', 'sprout-invoices' ), si_get_sa_link( 'https://sproutapps.co/marketplace/' ) ) );
-		}
-	}
-
-	/**
-	 * Show the payment options
-	 * @return null
-	 */
-	public static function display_payment_methods_field() {
-		$offsite = self::get_registered_processors( 'offsite' );
-		$credit = self::get_registered_processors( 'credit' );
-		$enabled = self::enabled_processors();
-
-		if ( $offsite ) {
-			printf( '<p><strong>%s</strong></p>', __( 'Offsite Processors', 'sprout-invoices' ) );
-			foreach ( $offsite as $class => $label ) {
-				printf( '<p><label><input type="checkbox" name="%s[]" value="%s" %s /> %s</label></p>', self::ENABLED_PROCESSORS_OPTION, esc_attr( $class ), checked( true, in_array( $class, $enabled ), false ), esc_html( $label ) );
-			}
-		}
-		if ( $credit ) {
-			printf( '<br/><p><strong>%s</strong></p>', __( 'Credit Card Processors', 'sprout-invoices' ) );
-			printf( '<p><select name="%s[]" class="select2">', self::ENABLED_PROCESSORS_OPTION );
-			printf( '<option value="">%s</option>', __( '-- None --', 'sprout-invoices' ) );
-			foreach ( $credit as $class => $label ) {
-				printf( '<option value="%s" %s>%s</option>', esc_attr( $class ), selected( true, in_array( $class, $enabled ), false ), esc_html( $label ) );
-			}
-			echo '</select>';
-		}
+		return apply_filters( 'si_payment_settings', $settings );
 	}
 
 	/**
@@ -287,7 +383,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 	 * @return string
 	 */
 	public static function get_settings_page( $prefixed = true ) {
-		return ( $prefixed ) ? self::APP_DOMAIN . '/' . self::SETTINGS_PAGE : self::SETTINGS_PAGE ;
+		error_log( 'DEPRECATED: ' . __CLASS__ . '::' . __FUNCTION__ );
 	}
 
 	/*
@@ -572,6 +668,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 		$payment->set_status( SI_Payment::STATUS_COMPLETE );
 		do_action( 'payment_complete', $payment );
+		do_action( 'payment_marked_complete', $payment );
 
 		if ( $payment->get_status() != $status ) {
 			header( 'Content-type: application/json' );

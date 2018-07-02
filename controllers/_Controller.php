@@ -223,6 +223,14 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		if ( self::is_si_admin() ) {
+			if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/resources/admin/plugins/redactor/redactor.min.js' ) ) {
+
+				$add_to_js_object['redactor'] = true;
+
+				wp_enqueue_script( 'redactor' );
+				wp_enqueue_style( 'redactor' );
+			}
+
 			self::enqueue_general_scripts_styles();
 		}
 
@@ -948,6 +956,10 @@ abstract class SI_Controller extends Sprout_Invoices {
 			return $bool;
 		}
 
+		if ( isset( $_GET['page'] ) && strpos( $_GET['page'] , self::TEXT_DOMAIN ) !== false ) {
+			$bool = true;
+		}
+
 		// Options
 		if ( isset( $_GET['page'] ) && strpos( $_GET['page'] , self::APP_DOMAIN ) !== false ) {
 			$bool = true;
@@ -1043,5 +1055,44 @@ abstract class SI_Controller extends Sprout_Invoices {
 
 	public static function _save_null() {
 		__return_null();
+	}
+
+
+
+	/**
+	 * Check if SSL is being used
+	 * @param  WP     $wp
+	 * @return bool
+	 */
+	public static function ssl_check( WP $wp ) {
+		if ( apply_filters( 'si_require_ssl', false, $wp ) ) {
+			self::ssl_required();
+		} else {
+			self::no_ssl();
+		}
+	}
+
+	protected static function ssl_required() {
+		if ( ! is_ssl() ) {
+			if ( 0 === strpos( $_SERVER['REQUEST_URI'], 'http' ) ) {
+				wp_redirect( preg_replace( '|^http://|', 'https://', $_SERVER['REQUEST_URI'] ) );
+				exit();
+			} else {
+				wp_redirect( 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+				exit();
+			}
+		}
+	}
+
+	protected static function no_ssl() {
+		if ( is_ssl() && strpos( self::si_get_home_url_option(), 'https' ) === false && apply_filters( 'si_no_ssl_redirect', false ) ) {
+			if ( 0 === strpos( $_SERVER['REQUEST_URI'], 'https' ) ) {
+				wp_redirect( preg_replace( '|^https://|', 'http://', $_SERVER['REQUEST_URI'] ) );
+				exit();
+			} else {
+				wp_redirect( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+				exit();
+			}
+		}
 	}
 }

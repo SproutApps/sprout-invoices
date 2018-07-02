@@ -1,28 +1,84 @@
-<?php require ABSPATH . 'wp-admin/options-head.php'; // not a general options page, so it must be included here ?>
-<?php
-	$page = ( ! isset( $_GET['tab'] ) ) ? $page : self::APP_DOMAIN.'/'.$_GET['tab'] ; ?>
-<div id="<?php echo esc_attr( $page ) ?>" class="wrap">
-	<h2 class="nav-tab-wrapper">
-		<?php do_action( 'sprout_settings_tabs' ); ?>
-	</h2>
-	<div class="clearfix">
-		<?php do_action( 'si_settings_page_sub_heading_'.$page ); ?>
+<?php do_action( 'sprout_settings_header' ); ?>
+
+<div id="si_general_settings_admin" class="si_settings">
+
+	<div id="si_settings"  class="si_settings_tabs">
+
+		<?php do_action( 'sprout_settings_messages' ) ?>
+
+		<div id="general_settings_admin">
+
+			<div id="si_settings_subnav">
+
+				<?php foreach ( $tabs as $tab => $label ) :  ?>
+					<a href='#<?php echo $tab ?>' v-on:click="makeTabActive('<?php echo $tab ?>')" class="si_tab_<?php echo $tab ?>" v-bind:class="{ active : isActiveTab('<?php echo $tab ?>') == true }"> <?php echo $label ?></a>
+				<?php endforeach ?>
+				
+			</div>
+			
+			<main id="main" role="main">
+
+				<div class="si_settings_tabs">
+
+					<?php foreach ( $tabs as $tab => $label ) :  ?>
+						
+						<div id="<?php echo esc_attr( $tab ) ?>" class="row" v-show="isActiveTab('<?php echo esc_attr( $tab ) ?>')">
+
+							<?php uasort( $allsettings, array( 'SI_Controller', 'sort_by_weight' ) ); ?>
+
+							<?php foreach ( $allsettings as $key => $section_settings ) : ?>
+
+								<?php
+									// all settings for this tab
+								if ( $tab !== $section_settings['tab'] ) :
+									continue;
+									endif; ?>
+
+								<section id="section_<?php echo $key ?>">
+
+									<?php if ( isset( $section_settings['title'] ) && '' !== $section_settings['title'] ) :  ?>
+										
+										<h1><?php echo $section_settings['title']  ?></h1>
+										
+									<?php endif ?>
+
+
+									<?php if ( isset( $section_settings['description'] ) && '' !== $section_settings['description'] ) :  ?>
+										
+										<p><?php echo $section_settings['description']  ?></p>
+										
+									<?php endif ?>
+
+									<?php if ( ! empty( $section_settings['settings'] ) ) :  ?>
+										
+										<?php do_action( 'si_display_settings', $section_settings['settings'], true ) ?>
+										
+									<?php endif ?>
+								
+								</section><!-- #section_php -->
+
+							<?php endforeach ?>
+
+						</div>
+
+					<?php endforeach ?>
+
+				</div>
+
+			</main>
+
+		</div>
+
+		<div class="si-controls">
+			<button
+				@click='saveOptions'
+				:disabled='isSaving'
+				id='si-submit-settings' class="si_admin_button lg"><?php _e( 'Save', 'sprout-invoices' ) ?></button>
+				<img
+				v-if='isSaving == true'
+				id='loading-indicator' src='<?php get_site_url() ?>/wp-admin/images/wpspin_light-2x.gif' alt='Loading indicator' />
+		</div>
+		
+		<p v-if='message'>{{ message }}</p>
 	</div>
-
-	<span id="ajax_saving" style="display:none" data-message="<?php _e( 'Saving...', 'sprout-invoices' ) ?>"></span>
-	
-	<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'options.php' ); ?>" class="si_settings_form <?php echo esc_attr( $page ); if ( $ajax ) { echo ' ajax_save'; } if ( $ajax_full_page ) { echo ' full_page_ajax'; }  ?>">
-		<?php settings_fields( $page ); ?>
-		<table class="form-table">
-			<?php do_settings_fields( $page, 'default' ); ?>
-		</table>
-		<?php do_settings_sections( $page ); ?>
-		<?php submit_button(); ?>
-		<?php if ( $reset ) : ?>
-			<?php submit_button( __( 'Reset Defaults', 'sprout-invoices' ), 'secondary', $page.'-reset', false ); ?>
-		<?php endif ?>
-	</form>
-
-	<?php do_action( 'si_settings_page', $page ) ?>
-	<?php do_action( 'si_settings_page_'.$page, $page ) ?>
 </div>

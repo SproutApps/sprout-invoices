@@ -12,7 +12,6 @@ jQuery(document).ready(function($){
 	// Remove add new button
 	$('h2 a[href*="post-new.php?post_type=sa_notification"]').remove();
 
-	$('#notification_type_disabled_wrap').hide();
 	function show_hide_notification_type_descriptions( type ) {
 		$('#normal-sortables .postbox').each(function(){
 			var $this = $(this);
@@ -22,7 +21,6 @@ jQuery(document).ready(function($){
 				// If it is the selected notification type, show it. Otherwise, hide it.
 				if ( id.match( new RegExp('^si_notification_shortcodes_' + type + '$') ) ) {
 					$this.show();
-					$('#notification_type_disabled_wrap').show();
 					$('.submitdelete').hide();
 				} else {
 					$this.hide();
