@@ -176,7 +176,6 @@ class SI_Invoices extends SI_Controller {
 
 			$data['to'] = $to;
 			$data['user_id'] = $user_id;
-			error_log( 'type: ' . print_r( $type, true ) );
 			SI_Notifications::send_notification( $type, $data, $to );
 		}
 

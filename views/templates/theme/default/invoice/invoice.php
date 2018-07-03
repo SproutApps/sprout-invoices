@@ -32,7 +32,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
 
-	<body id="invoice" <?php body_class( 'si_og_theme' ); ?>>
+	<body id="invoice" <?php body_class( 'si_default_theme' ); ?>>
 		<header class="row" id="header">
 			<div class="inner">
 

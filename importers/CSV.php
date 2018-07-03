@@ -398,7 +398,6 @@ class SI_CSV_Import extends SI_Importer {
 		set_time_limit( 0 );
 
 		$csv_file = get_option( self::INVOICE_FILE_OPTION );
-		error_log( 'csv: ' . print_r( $csv_file, true ) );
 		if ( ! $csv_file ) {
 			// Completed previously
 			self::return_progress( array(

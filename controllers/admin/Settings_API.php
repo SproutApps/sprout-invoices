@@ -270,7 +270,7 @@ class SI_Settings_API extends SI_Controller {
 		if ( strpos( $page, self::TEXT_DOMAIN ) !== false ) {
 
 			// Vue.js
-			wp_enqueue_script( 'sprout-invoices-vue', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), self::SI_VERSION, false );
+			wp_enqueue_script( 'sprout-invoices-vue', SI_URL . '/resources/admin/js/vue.js', array(), self::SI_VERSION, false );
 
 			// SI plugin settings
 			wp_enqueue_script( 'sprout-invoices-settings', SI_URL . '/resources/admin/js/settings.js', array( 'sprout-invoices-vue', 'jquery', 'si_admin' ), self::SI_VERSION, true );
@@ -301,6 +301,9 @@ class SI_Settings_API extends SI_Controller {
 				$options = self::_sanitize_input_array_for_vue( $setting_section['settings'] );
 				$opts = array_merge( $options, $opts );
 			} else {
+				if ( ! is_array( $setting_section ) ) {
+					continue;
+				}
 				foreach ( $setting_section as $key => $set_sec ) {
 					if ( isset( $set_sec['settings'] ) ) {
 						$options = self::_sanitize_input_array_for_vue( $set_sec['settings'] );

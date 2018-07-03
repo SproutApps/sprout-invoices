@@ -24,7 +24,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
 
-	<body id="estimate" <?php body_class( 'si_default_theme' ); ?>>
+	<body id="estimate" <?php body_class( 'si_og_theme' ); ?>>
 		
 		<div id="outer_doc_wrap">
 

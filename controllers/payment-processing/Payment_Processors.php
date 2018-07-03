@@ -331,7 +331,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 			$options[ $class_name ] = in_array( $class_name, $enabled );
 			if ( method_exists( $class_name, 'register_settings' ) ) {
 				$ccprocessor = call_user_func( array( $class_name, 'get_instance' ) );
-				$pp_cc_settings = $processor->register_settings();
+				$pp_cc_settings = $ccprocessor->register_settings();
 				$settings = array_merge( reset( $pp_cc_settings ), $settings );
 			}
 		}
