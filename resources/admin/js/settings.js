@@ -209,12 +209,12 @@ new Vue( {
 		// Save the options to the database
 		activatePP: function( event ) {
 
-			var $processor = event.target.value,
-				action = { 'activate': $processor };
+			var processor = event.target.name,
+				action = { 'activate': processor };
 
 			// deactivate if not checked
 			if ( ! event.target.checked ) {
-				action = { 'deactivate': $processor };
+				action = { 'deactivate': processor };
 			}
 
 			// set the state so that another save cannot happen while processing
@@ -249,7 +249,7 @@ new Vue( {
 		// Save the options to the database
 		activateAddOn: function( addOn, event ) {
 
-			var addOnEl = $(event.target),
+			var addOnEl = jQuery(event.target),
 				action = { 'activate': addOn };
 
 			// Don't enable an add-on that was already enabled.

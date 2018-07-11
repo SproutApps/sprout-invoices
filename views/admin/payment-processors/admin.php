@@ -122,7 +122,11 @@
 								<?php unset( $processor_settings ) ?>
 
 							<?php else : ?>
-								<?php include 'no-settings.php'; ?>
+								<?php if ( in_array( $class_name, array_keys( $credit ) ) ) : ?>
+									<?php include 'cc-no-settings.php'; ?>
+								<?php else : ?>
+									<?php include 'no-settings.php'; ?>
+								<?php endif ?>
 							<?php endif ?>
 
 							<div class="si-controls">

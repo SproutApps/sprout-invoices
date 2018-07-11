@@ -1,4 +1,12 @@
-= 18.0.1 =
+= 18.0.4 =
+
+* Fixed: CC Settings not saving
+* Fixed: Some js admin callbacks not working under some setups
+* Fixed: More Responize Admin
+* Fixed: Deprecated PHP Support
+* Fixed: Typos
+
+= 18.0 =
 
 * New: Completely New Admin
 * New: Integrated Support

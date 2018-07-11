@@ -2,9 +2,9 @@
 Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
-Requires at least: 3.8
+Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 18.0.1
+Stable tag: 18.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,7 +136,15 @@ Form integrations for everyone!
 
 == Changelog ==
 
-= 18.0.1 =
+= 18.0.4 =
+
+* Fixed: CC Settings not saving
+* Fixed: Some js admin callbacks not working under some setups
+* Fixed: More Responize Admin
+* Fixed: Deprecated PHP Support
+* Fixed: Typos
+
+= 18.0 =
 
 * New: Completely New Admin
 * New: Integrated Support

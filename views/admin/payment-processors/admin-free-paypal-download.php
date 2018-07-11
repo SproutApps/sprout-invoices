@@ -12,7 +12,7 @@
 				<div class="addon_description">
 					<?php printf( __( 'Accept Paypal Express payments for your invoices. Including invoice deposits.', 'sprout-invoices' ), si_get_sa_link( 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ) ) ?>
 					<div class="addon_info_link">
-						<a href="<?php sa_link( 'https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/' ) ?>" class="si-button" target="_blank"><?php _e( 'Learn More', 'sprout-invoices' ) ?></a>
+						<a href="<?php sa_link( 'https://sproutapps.co/marketplace/paypal-payments-express-checkout/' ) ?>" class="si-button" target="_blank"><?php _e( 'Learn More', 'sprout-invoices' ) ?></a>
 					</div>
 				</div>
 			</div>

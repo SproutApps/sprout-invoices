@@ -187,6 +187,8 @@ class SI_Settings_API extends SI_Controller {
 			$license_active = SI_Free_License::license_status();
 		}
 
+		$address = get_option( SI_Admin_Settings::ADDRESS_OPTION, array() );
+		$enabled_pps = get_option( SI_Payment_Processors::ENABLED_PROCESSORS_OPTION, array() );
 		$progress = array(
 				array(
 					'label' => __( 'Activate License', 'sprout-invoices' ),
@@ -199,7 +201,7 @@ class SI_Settings_API extends SI_Controller {
 					'aria-label' =>
 				__( 'Update your business information for display on your invoices and estimates.', 'sprout-invoices' ),
 					'link' => admin_url( 'admin.php?page=sprout-invoices-settings' ),
-					'status' => ( empty( get_option( SI_Admin_Settings::ADDRESS_OPTION, array() ) ) ) ? false : true,
+					'status' => ( empty( $address ) ) ? false : true,
 				),
 				array(
 					'label' => __( 'Create an Estimate', 'sprout-invoices' ),
@@ -241,24 +243,24 @@ class SI_Settings_API extends SI_Controller {
 					'aria-label' =>
 				__( 'Enable ways for you to get paid!', 'sprout-invoices' ),
 					'link' => admin_url( 'admin.php?page=sprout-invoices-payments' ),
-					'status' => ( ! empty( get_option( SI_Payment_Processors::ENABLED_PROCESSORS_OPTION, array() ) ) ) ? true : false,
-				),
-				array(
+					'status' => ( ! empty( $enabled_pps ) ) ? true : false,
+					),
+					array(
 					'label' => __( 'Integrate with a Form Builder', 'sprout-invoices' ),
 					'aria-label' =>
-				__( 'Mark this complete by installing one of our free integration add-ons from the WordPress.org repo.', 'sprout-invoices' ),
+					__( 'Mark this complete by installing one of our free integration add-ons from the WordPress.org repo.', 'sprout-invoices' ),
 					'link' => admin_url( 'admin.php?page=sprout-invoices-settings' ),
 					'status' => ( class_exists( 'NF_SproutInvoices' ) || class_exists( 'SI_GF_Integration_Addon_Bootstrap' ) || class_exists( 'SI_Formidable' ) || class_exists( 'SI_WPForms' ) ) ? true : false,
-				),
-				array(
+					),
+					array(
 					'label' => __( 'Review Import Methods', 'sprout-invoices' ),
 					'aria-label' =>
-				__( 'If not starting fresh you can import from another source.', 'sprout-invoices' ),
+					__( 'If not starting fresh you can import from another source.', 'sprout-invoices' ),
 					'link' => admin_url( 'admin.php?page=sprout-invoices-import' ),
 					'status' => ( '' !== get_option( SI_Importer::PROGRESS_TRACKER, '' ) ) ? true : false,
-				),
-			);
-		return apply_filters( 'si_setup_tracker', $progress );
+					),
+				);
+				return apply_filters( 'si_setup_tracker', $progress );
 	}
 
 	/////////////

@@ -26,7 +26,7 @@ body[class*='sprout-invoices'] div.updated {
 
 .si_settings_tabs .row {
     display: inline-block;
-    width: 70%;
+    width: 60%;
     max-width: 800px;
 }
 #si_report .si_settings_tabs .row {
@@ -283,6 +283,7 @@ body[class*='sprout-invoices'] {
 
 .si_settings.si-settings-admin-header {
 	position: sticky;
+	/* overflow: initial; */
 	top: 32px;
 	z-index: 100;
 	margin-bottom: 50px;
@@ -300,10 +301,14 @@ header.si_header {
 }
 
 .si-header-nav {
-	margin: -20px 0 0 -20px;
 	background-color: #e9f2ff;
-	height: 50px;
-	margin-bottom: 20px;
+	overflow: auto;
+	display: block;
+	margin-left: -20px;
+}
+.si-header-nav ul {
+	overflow: auto;
+	margin: 0;
 }
 
 .si-header-nav .nav-item {
@@ -392,9 +397,10 @@ body[class*='sprout-invoices'] #wpfooter {
 #si_settings_subnav {
 	float: left;
 	display: inline-block;
-	margin-right: 50px;
+	margin-right: 5%;
 	position: sticky;
 	top: 180px;
+	max-width: 20%;
 }
 
 .non_stick_subnav #si_settings_subnav {
