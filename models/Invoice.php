@@ -609,6 +609,9 @@ class SI_Invoice extends SI_Post_Type {
 	 * @return
 	 */
 	public function get_calculated_total( $check_balance = true ) {
+		if ( apply_filters( 'si_use_total_for_calculated_total', false ) ) {
+			return (float) $this->get_total();
+		}
 		if ( $check_balance ) {
 		 	// allow for the status to be updated on the fly.
 			// SI_Invoices::change_status_after_payment attempts to do this, however sometimes there's a delay/cache

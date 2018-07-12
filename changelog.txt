@@ -1,6 +1,16 @@
-= 18.0.4 =
+= 18.0.5 =
+
+* NEW: New filter for invoice total - si_use_total_for_calculated_total
+* NEW: Add-ons settings no longer blank
+* Fixed: License key being reset after certain conditions
+* Fixed: Account Credits add-on unavailable
+
+= 18.0.6 =
 
 * Fixed: CC Settings not saving
+
+= 18.0.4 =
+
 * Fixed: Some js admin callbacks not working under some setups
 * Fixed: More Responize Admin
 * Fixed: Deprecated PHP Support

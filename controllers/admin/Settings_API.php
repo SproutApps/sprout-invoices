@@ -272,8 +272,11 @@ class SI_Settings_API extends SI_Controller {
 		if ( strpos( $page, self::TEXT_DOMAIN ) !== false ) {
 
 			// Vue.js
-			wp_enqueue_script( 'sprout-invoices-vue', SI_URL . '/resources/admin/js/vue.js', array(), self::SI_VERSION, false );
-
+			if ( SI_DEV ) {
+				wp_enqueue_script( 'sprout-invoices-vue', 'https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js', array(), self::SI_VERSION, false );
+			} else {
+				wp_enqueue_script( 'sprout-invoices-vue', SI_URL . '/resources/admin/js/vue.js', array(), self::SI_VERSION, false );
+			}
 			// SI plugin settings
 			wp_enqueue_script( 'sprout-invoices-settings', SI_URL . '/resources/admin/js/settings.js', array( 'sprout-invoices-vue', 'jquery', 'si_admin' ), self::SI_VERSION, true );
 

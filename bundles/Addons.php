@@ -23,6 +23,8 @@ class SA_Addons extends SI_Controller {
 
 		add_filter( 'si_settings_options', array( __CLASS__, 'add_settings_options' ) );
 
+		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
+
 		self::load_addons();
 	}
 
@@ -56,6 +58,22 @@ class SA_Addons extends SI_Controller {
 			'tab_only' => true,
 			);
 		return $admin_pages;
+	}
+
+		/**
+	 * Hooked on init add the settings page and options.
+	 *
+	 */
+	public static function register_settings( $settings = array() ) {
+
+		// Settings
+		$settings['intro'] = array(
+				'title' => __( 'Sprout Invoices Add-on Settings', 'sprout-invoices' ),
+				'weight' => -PHP_INT_MAX,
+				'tab' => 'addons',
+				'description' => sprintf( __( 'Below you\'ll find the settings/options for your active <a href="%s">Sprout Invoices add-ons</a>.', 'sprout-invoices' ), admin_url( 'admin.php?page=sprout-invoices-addons' ) ),
+			);
+		return $settings;
 	}
 
 	public static function render_settings_page() {

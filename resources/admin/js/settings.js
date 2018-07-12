@@ -77,6 +77,8 @@ new Vue( {
 
 			this.isSaving = true;
 
+			this.vm['si_license_key'] = $license_key;
+
 			jQuery.ajax( {
 
 					url: ajaxurl,
