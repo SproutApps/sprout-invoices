@@ -1,11 +1,16 @@
-= 18.0.5 =
+= 18.0.7 =
+
+* Update: Test notifications brought back
+* Fixed: WooCommerce Add-on description updated
+
+= 18.0.6 =
 
 * NEW: New filter for invoice total - si_use_total_for_calculated_total
 * NEW: Add-ons settings no longer blank
 * Fixed: License key being reset after certain conditions
 * Fixed: Account Credits add-on unavailable
 
-= 18.0.6 =
+= 18.0.5 =
 
 * Fixed: CC Settings not saving
 

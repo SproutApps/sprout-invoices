@@ -35,7 +35,7 @@ class SI_Notifications_Test extends SI_Notifications {
 	 */
 	public static function register_settings( $settings = array() ) {
 		// Settings
-		$settings['html_notifications'] = array(
+		$settings['test_notifications'] = array(
 				'title' => __( 'Test Notifications', 'sprout-invoices' ),
 				'weight' => 30.2,
 				'tab' => 'settings',

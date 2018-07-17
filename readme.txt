@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 18.0.6
+Stable tag: 18.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,14 +136,19 @@ Form integrations for everyone!
 
 == Changelog ==
 
-= 18.0.5 =
+= 18.0.7 =
+
+* Update: Test notifications brought back
+* Fixed: WooCommerce Add-on description updated
+
+= 18.0.6 =
 
 * NEW: New filter for invoice total - si_use_total_for_calculated_total
 * NEW: Add-ons settings no longer blank
 * Fixed: License key being reset after certain conditions
 * Fixed: Account Credits add-on unavailable
 
-= 18.0.6 =
+= 18.0.5 =
 
 * Fixed: CC Settings not saving
 
