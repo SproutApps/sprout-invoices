@@ -72,8 +72,8 @@ new Vue( {
 		activateLicense: function( action ) {
 			
 			var response = '',
-				$license_key = $('#si_license_key').val(),
-				$license_message = $('#license_message');
+				$license_key = jQuery('#si_license_key').val(),
+				$license_message = jQuery('#license_message');
 
 			this.isSaving = true;
 
@@ -121,6 +121,12 @@ new Vue( {
 					// when our request is complete (successful or not), reset the state to indicate we are no longer saving
 					complete: () => this.isSaving = false,
 				});
+		},
+
+		refreshNotificationViews: function () {
+			jQuery( ".notification_content iframe" ).each(function() {
+				jQuery( this ).attr('src', function () { return jQuery(this).contents().get(0).location.href });
+			});
 		},
 
 		refreshProgress: function( ) {
@@ -346,6 +352,7 @@ new Vue( {
 				// callback to run upon successful completion of our request
 				success: () => {
 					this.refreshProgress();
+					this.refreshNotificationViews();
 					this.message = 'Options saved';
 					setTimeout( () => this.message = '', 1000 );
 				},
@@ -366,7 +373,6 @@ new Vue( {
 
 ;( function( $, window, document, undefined )
 {
-
 	$("#destroy_everything").on('click', function(event) {
 		if( confirm( si_js_object.destroy_confirm ) ) {
 			si_destroy_everything( 0 );

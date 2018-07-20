@@ -1,3 +1,7 @@
+= 18.0.8 =
+
+* Update: Notification previews respect which format is selected
+
 = 18.0.7 =
 
 * Update: Test notifications brought back

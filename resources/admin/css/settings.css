@@ -667,10 +667,11 @@ input[type=checkbox].si_addon_checkbox + label {
  */
 
 .notification_content {
-	width: 100%;
+	/* width: 100%; */
 	min-width: 500px;
 	padding: 10px;
-	background: #d0d0d0;
+	background: #f9f9f9;
+	border: 15px solid #d0d0d0;
 }
 .notification_content iframe {
 	width: 100%;

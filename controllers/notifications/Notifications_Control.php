@@ -1022,7 +1022,13 @@ class SI_Notifications_Control extends SI_Controller {
 				return;
 			}
 
-			print html_entity_decode( $si_notification->get_content() );
+			if ( self::html_notifications() ) {
+				header( 'Content-Type: text/html' );
+				print html_entity_decode( $si_notification->get_content() );
+			} else {
+				header( 'Content-Type: text/plain' );
+				print $si_notification->get_content();
+			}
 
 			exit();
 
