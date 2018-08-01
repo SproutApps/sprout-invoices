@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 18.0.9
+Stable tag: 18.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,14 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Form integrations for everyone!
 
 == Changelog ==
+
+= 18.1 =
+
+* Update: Stripe SDK Updated
+* Fix: Account Credit Types
+* Update: Payment options template is using the invoice balance
+* Update: Try to not record bot/se visits
+* Fix: Update old admin urls 
 
 = 18.0.9 =
 

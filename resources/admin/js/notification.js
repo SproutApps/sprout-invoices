@@ -5,9 +5,9 @@
 jQuery(document).ready(function($){
 
 	// Apply classes to list items for highlighting
-	$('#toplevel_page_sprout-apps').removeClass('wp-not-current-submenu').addClass('wp-has-current-submenu wp-menu-open');
-	$('#toplevel_page_sprout-apps a[href="admin.php?page=sprout-apps"]').removeClass('wp-not-current-submenu').addClass('wp-has-current-submenu wp-menu-open');
-	$('#toplevel_page_sprout-apps li a[href*="admin.php?page=sprout-apps/settings"]').addClass('current').parent().addClass('current');
+	$('#toplevel_page_sprout-invoices').removeClass('wp-not-current-submenu').addClass('wp-has-current-submenu wp-menu-open');
+	$('#toplevel_page_sprout-invoices a[href="admin.php?page=sprout-apps"]').removeClass('wp-not-current-submenu').addClass('wp-has-current-submenu wp-menu-open');
+	$('#toplevel_page_sprout-invoices li a[href*="admin.php?page=sprout-invoices-notifications"]').addClass('current').parent().addClass('current');
 
 	// Remove add new button
 	$('h2 a[href*="post-new.php?post_type=sa_notification"]').remove();

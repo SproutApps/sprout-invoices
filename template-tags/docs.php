@@ -127,8 +127,8 @@ if ( ! function_exists( 'si_was_doc_viewed' ) ) :
 		foreach ( $history as $item_id ) {
 			$record = SI_Record::get_instance( $item_id );
 			if ( 'si_viewed_status_update' === $record->get_type() ) {
-				if ( 'Estimate viewed by ::1.' !== $record->get_title() ) {
-					$viewed = true;
+				if ( strpos( $record->get_title(), 'viewed by ::1' ) !== false ) {
+					$viewed = apply_filters( 'si_was_doc_viewed_record', true, $id, $record );
 				}
 			}
 		}

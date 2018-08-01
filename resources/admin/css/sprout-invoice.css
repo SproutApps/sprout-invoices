@@ -190,7 +190,6 @@ a.sa_icon_link {
 body[class*='sprout-invoices'] .clearfix,
 .post-type-sa_estimate .clearfix,
 .post-type-sa_invoice .clearfix,
-.toplevel_page_sprout-apps .clearfix,
 .sprout-apps_page_sprout-apps-settings .clearfix,
 #si_admin_field_send_metabox_recipients .clearfix,
 .sa-control-group.clearfix {
@@ -661,10 +660,6 @@ form table .sa_addon {
 
 #adminmenu li#toplevel_page_sprout-invoices div.wp-menu-image.svg {
     background-size: inherit;
-}
-
-#toplevel_page_sprout-apps li.wp-first-item {
-	display: none;
 }
 
 .si_inline_spinner {

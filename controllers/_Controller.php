@@ -1019,6 +1019,11 @@ abstract class SI_Controller extends Sprout_Invoices {
 	}
 
 	public static function get_user_ip() {
+
+		if ( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider|mediapartners/i', $_SERVER['HTTP_USER_AGENT'] )
+		) {
+			return false;
+		}
 		$client  = @$_SERVER['HTTP_CLIENT_IP'];
 		$forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
 		$remote  = $_SERVER['REMOTE_ADDR'];

@@ -1,3 +1,11 @@
+= 18.1 =
+
+* Update: Stripe SDK Updated
+* Fix: Account Credit Types
+* Update: Payment options template is using the invoice balance
+* Update: Try to not record bot/se visits
+* Fix: Update old admin urls 
+
 = 18.0.9 =
 
 * Update: Double check some meta for recurring and subscription payment invoice duplication, in case the WP_Query meta query is being hijacked.

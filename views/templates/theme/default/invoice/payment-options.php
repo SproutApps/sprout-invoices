@@ -10,21 +10,21 @@
 
 			<?php if ( 1 === $days_left ) :  ?>
 				
-				<?php printf( 'Balance of <strong>%1$s</strong> is Due', sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+				<?php printf( 'Balance of <strong>%1$s</strong> is Due', sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 
 			<?php else : ?>
 
 				<?php if ( si_has_invoice_deposit() ) : ?>
-					<?php printf( 'Balance of <strong>%2$s</strong> Due in <strong>%3$s Days</strong> & Deposit of <strong>%1$s</strong> Due <strong>Now</strong>', sa_get_formatted_money( si_get_invoice_deposit() ), sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+					<?php printf( 'Balance of <strong>%2$s</strong> Due in <strong>%3$s Days</strong> & Deposit of <strong>%1$s</strong> Due <strong>Now</strong>', sa_get_formatted_money( si_get_invoice_deposit() ), sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 				<?php else : ?>
-					<?php printf( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Days</strong>', sa_get_formatted_money( si_get_invoice_total() ), $days_left ); ?>
+					<?php printf( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Days</strong>', sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 				<?php endif; ?>
 
 			<?php endif ?>
 
 		<?php else : ?>
 			
-			<?php printf( 'Balance of <strong>%1$s</strong> is <strong>Overdue</strong>', sa_get_formatted_money( si_get_invoice_total() ) ); ?>
+			<?php printf( 'Balance of <strong>%1$s</strong> is <strong>Overdue</strong>', sa_get_formatted_money( si_get_invoice_balance() ) ); ?>
 
 		<?php endif ?>
 
