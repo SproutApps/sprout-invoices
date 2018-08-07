@@ -34,16 +34,22 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 					<span class="header_id"><?php printf( esc_html__( 'Estimate %s', 'sprout-invoices' ), si_get_estimate_id() ) ?></span>
 					<div id="doc_actions">
 						<?php do_action( 'si_doc_actions_pre' ) ?>
-						<?php if ( ! si_is_estimate_approved() ) : ?>
-							<a href="#accept" class="button primary_button status_change" data-status-change="accept" data-id="<?php the_ID() ?>" data-nonce="<?php esc_attr_e( wp_create_nonce( SI_Controller::NONCE ) ) ?>"><?php esc_html_e( 'Accept Estimate', 'sprout-invoices' ) ?></a>
+
+						<?php if ( si_get_estimate_expiration_date() && si_get_estimate_expiration_date() < current_time( 'timestamp' ) ) : ?>
+							<a href="javascript:void(0)" class="button disabled"><?php esc_html_e( 'Expired', 'sprout-invoices' ) ?></a>
 						<?php else : ?>
-							<a href="javascript:void(0)" class="button primary_button disabled"><?php esc_html_e( 'Accepted', 'sprout-invoices' ) ?></a>
+							<?php if ( ! si_is_estimate_approved() ) : ?>
+								<a href="#accept" class="button primary_button status_change" data-status-change="accept" data-id="<?php the_ID() ?>" data-nonce="<?php esc_attr_e( wp_create_nonce( SI_Controller::NONCE ) ) ?>"><?php esc_html_e( 'Accept Estimate', 'sprout-invoices' ) ?></a>
+							<?php else : ?>
+								<a href="javascript:void(0)" class="button primary_button disabled"><?php esc_html_e( 'Accepted', 'sprout-invoices' ) ?></a>
+							<?php endif ?>
+							<?php if ( ! si_is_estimate_declined() ) : ?>
+								<a href="#decline" class="button status_change" data-status-change="decline" data-id="<?php the_ID() ?>" data-nonce="<?php esc_attr_e( wp_create_nonce( SI_Controller::NONCE ) ) ?>"><?php esc_html_e( 'Decline Estimate', 'sprout-invoices' ) ?></a>
+							<?php else : ?>
+								<a href="javascript:void(0)" class="button disabled"><?php esc_html_e( 'Declined', 'sprout-invoices' ) ?></a>
+							<?php endif ?>	
 						<?php endif ?>
-						<?php if ( ! si_is_estimate_declined() ) : ?>
-							<a href="#decline" class="button status_change" data-status-change="decline" data-id="<?php the_ID() ?>" data-nonce="<?php esc_attr_e( wp_create_nonce( SI_Controller::NONCE ) ) ?>"><?php esc_html_e( 'Decline Estimate', 'sprout-invoices' ) ?></a>
-						<?php else : ?>
-							<a href="javascript:void(0)" class="button disabled"><?php esc_html_e( 'Declined', 'sprout-invoices' ) ?></a>
-						<?php endif ?>
+						
 						<?php do_action( 'si_doc_actions' ) ?>
 					</div><!-- #doc_actions -->
 				</header><!-- #header_title -->

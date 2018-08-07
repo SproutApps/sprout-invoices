@@ -321,6 +321,7 @@ class SI_Settings_API extends SI_Controller {
 	}
 
 	public static function _sanitize_input_array_for_vue( $settings = array() ) {
+		$options = array();
 		foreach ( $settings as $key => $data ) {
 			$default = ( isset( $data['option']['default'] ) ) ? $data['option']['default'] : '' ;
 			$options[ SI_Settings_API::_sanitize_input_for_vue( $key ) ] = $default;
@@ -368,6 +369,8 @@ class SI_Settings_API extends SI_Controller {
 		register_rest_route( 'si-settings/v1', '/save', array(
 			'methods' => 'POST',
 			'callback' => function() {
+				$_POST = stripslashes_deep( $_POST );
+				error_log( 'post: ' . print_r( $_POST, true ) );
 				foreach ( $_POST as $option_key => $value ) {
 
 					if ( substr( $option_key, 0, strlen( 'si_' ) ) === 'si_' ) {
@@ -391,6 +394,8 @@ class SI_Settings_API extends SI_Controller {
 			'methods' => 'POST',
 			'callback' => function() {
 
+				$_POST = stripslashes_deep( $_POST );
+
 				if ( isset( $_POST['activate'] ) ) {
 					SA_Addons::activate_addon( $_POST['activate'] );
 				}
@@ -408,6 +413,8 @@ class SI_Settings_API extends SI_Controller {
 		register_rest_route( 'si-settings/v1', '/manage-pp', array(
 			'methods' => 'POST',
 			'callback' => function() {
+
+				$_POST = stripslashes_deep( $_POST );
 
 				$update_cc = ( isset( $_POST['update_cc'] ) && $_POST['update_cc'] ) ? true : false ;
 				if ( isset( $_POST['activate'] ) ) {
