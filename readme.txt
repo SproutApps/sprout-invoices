@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 18.1.1
+Stable tag: 18.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,12 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Form integrations for everyone!
 
 == Changelog ==
+
+= 18.1.3 =
+
+* Fix: Improved PHP 7.1 Support
+* Fix: Stripe error section shown when there are no errors
+* Fix: Stripe settings not saving correctly
 
 = 18.1.1 =
 

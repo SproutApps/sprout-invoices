@@ -370,7 +370,6 @@ class SI_Settings_API extends SI_Controller {
 			'methods' => 'POST',
 			'callback' => function() {
 				$_POST = stripslashes_deep( $_POST );
-				error_log( 'post: ' . print_r( $_POST, true ) );
 				foreach ( $_POST as $option_key => $value ) {
 
 					if ( substr( $option_key, 0, strlen( 'si_' ) ) === 'si_' ) {
