@@ -66,7 +66,7 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 							
 							<header role="banner">
 								<div class="header_info">
-									<h2 class="doc_type"><?php esc_html__( 'Estimate', 'sprout-invoices' ) ?></h2>
+									<h2 class="doc_type"><?php esc_html_e( 'Estimate', 'sprout-invoices' ) ?></h2>
 									<p class="title"><?php the_title() ?></p>
 								</div>
 

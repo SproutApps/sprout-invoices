@@ -1,3 +1,10 @@
+= 18.1.4 =
+
+* Temp: Temporarily removing comments add-on
+* Fix: PDF CSS not showing terms/info titles
+* Fix: GST not calculated on reports correctly
+* Fix: Title of Invoice/Estimate not shown
+
 = 18.1.3 =
 
 * Fix: Improved PHP 7.1 Support
