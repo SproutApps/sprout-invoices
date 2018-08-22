@@ -86,7 +86,7 @@
 
 							<p class="si_setting_message" v-if='message'>{{ message }}</p>
 						</div>
-
+							<?php $shown = array(); ?>
 							<?php foreach ( $notifications as $notification_key => $data ) :  ?>
 								
 								<?php
@@ -96,6 +96,7 @@
 									$notification_id = $data['post_id'];
 									$name = SI_Notifications::$notifications[ $notification_key ]['name'];
 									$notification = SI_Notification::get_instance( $notification_id );
+									$shown[] = $data['post_id'];
 									?>
 
 									<div id="<?php echo $notification_key ?>" class="row" v-show="isActiveTab('<?php echo $notification_key ?>')" style="display: none;">
@@ -104,7 +105,7 @@
 
 											<div class="title_and_actions">
 												<h1><?php echo esc_html( $name ) ?></h1>
-												<a class="si_admin_button" href="<?php echo get_edit_post_link( $notification_id ) ?>"><?php _e( 'Edit Notification', 'sprout-invoices' ) ?></a>&nbsp;<a class="si_admin_button si_muted si_tooltip" href="<?php echo add_query_arg( array( 'refresh-notification' => $notification_key ) ) ?>" aria-label="<?php _e( 'This will reset the notification to the default template', 'sprout-invoices' ) ?>"><?php _e( 'Reset', 'sprout-invoices' ) ?></a>
+												<a class="si_admin_button" href="<?php echo get_edit_post_link( $notification_id ) ?>"><?php _e( 'Edit Notification', 'sprout-invoices' ) ?></a>&nbsp;<a class="si_admin_button si_muted si_tooltip" href="<?php echo add_query_arg( array( 'refresh-notification' => $notification_id ) ) ?>" aria-label="<?php _e( 'This will reset the notification to the default template', 'sprout-invoices' ) ?>"><?php _e( 'Reset', 'sprout-invoices' ) ?></a>
 											</div>
 											
 											<h2><?php echo esc_html( $notification->get_title() ) ?></h2>
@@ -122,6 +123,10 @@
 							<?php foreach ( $notification_posts as $notification_post_id ) :  ?>
 								
 								<?php
+
+								if ( in_array( $notification_post_id, $shown ) ) {
+									continue;
+								}
 
 									$name = __( 'Archived & Unassigned', 'sprout-invoices' );
 									$status = '<span class="si_status_icon dashicons dashicons-no"></span>' ;

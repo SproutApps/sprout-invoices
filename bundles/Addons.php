@@ -172,7 +172,9 @@ class SA_Addons extends SI_Controller {
 		foreach ( $addons as $path => $data ) {
 			$key = self::get_addon_key( $path, $data );
 			if ( in_array( $key, self::$active_addons ) ) {
-				require SI_PATH.'/bundles/' . $path;
+				if ( file_exists( SI_PATH.'/bundles/' . $path ) ) {
+					require SI_PATH.'/bundles/' . $path;
+				}
 			}
 		}
 

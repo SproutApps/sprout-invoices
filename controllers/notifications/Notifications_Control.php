@@ -58,7 +58,7 @@ class SI_Notifications_Control extends SI_Controller {
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
 
 		if ( is_admin() ) {
-			add_action( 'admin_init', array( get_class(), 'maybe_refresh_notifications' ) );
+			//add_action( 'admin_init', array( get_class(), 'maybe_refresh_notifications' ) );
 			add_action( 'admin_init', array( get_class(), 'maybe_refresh_notification' ) );
 			add_action( 'admin_init', array( get_class(), 'return_notification_html' ) );
 		}
@@ -956,22 +956,27 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( ! current_user_can( 'delete_sprout_invoices' ) ) {
 			return;
 		}
-		if ( isset( $_GET['refresh-notification'] ) && $_GET['refresh-notification'] ) { // If dev than don't cache.
+
+		if ( isset( $_GET['refresh-notification'] ) && is_numeric( $_GET['refresh-notification'] ) ) { // If dev than don't cache.
 
 			if ( get_post_type( $_GET['refresh-notification'] ) !== SI_Notification::POST_TYPE ) {
 				return;
 			}
 
-			$notification_key = $_GET['refresh-notification'];
+			$notification_id = $_GET['refresh-notification'];
+			//error_log( 'log' . print_r( self::$notifications, true ) );
+			$notification_ids = array_flip( wp_list_pluck( self::$notifications, 'post_id' ) );
+			$notification_key = $notification_ids[ $notification_id ];
 
-			if ( ! isset( SI_Notifications::$notifications[ $notification_key ] ) ) {
-				return;
-			}
+			$notification = SI_Notification::get_instance( $notification_id );
 
-			$si_notification = SI_Notification::get_instance( $id );
-			$si_notification->set_title( SI_Notifications::$notifications[ $notification_key ]['default_title'] );
-			$si_notification->set_content( SI_Notifications::$notifications[ $notification_key ]['default_content'] );
-			$si_notification->set_disabled( 0 );
+			$notification_defaults = self::$notifications[ $notification_key ];
+
+			$notification->set_title( $notification_defaults['default_title'] );
+			$notification->set_content( $notification_defaults['default_content'] );
+			$notification->set_disabled( 0 );
+
+			do_action( 'si_refresh_notification', $notification, $notification_key );
 
 			self::clear_notification_cache( false );
 
