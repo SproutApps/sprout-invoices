@@ -168,14 +168,14 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 							<?php do_action( 'si_doc_line_items', get_the_id() ) ?>
 
 							<div id="header_status" class="clearfix">
-									<?php if ( 'write-off' === si_get_invoice_status() ) : ?>
-										<span id="status" class="void"><span class="inner_status"><?php esc_html_e( 'Void', 'sprout-invoices' ) ?></span></span>
-									<?php elseif ( ! si_get_invoice_balance() ) : ?>
-										<span id="status" class="paid"><span class="inner_status"><?php esc_html_e( 'Paid', 'sprout-invoices' ) ?></span></span>
-									<?php else : ?>
-										<span id="status" class="void"><span class="inner_status"><?php esc_html_e( 'Payment Pending', 'sprout-invoices' ) ?></span></span>
-									<?php endif ?>
-								</div><!-- #header_status -->
+								<?php if ( 'write-off' === si_get_invoice_status() ) : ?>
+									<span id="status" class="void"><span class="inner_status"><?php esc_html_e( 'Void', 'sprout-invoices' ) ?></span></span>
+								<?php elseif ( ! si_get_invoice_balance() ) : ?>
+									<span id="status" class="paid"><span class="inner_status"><?php esc_html_e( 'Paid', 'sprout-invoices' ) ?></span></span>
+								<?php else : ?>
+									<span id="status" class="void"><span class="inner_status"><?php esc_html_e( 'Payment Pending', 'sprout-invoices' ) ?></span></span>
+								<?php endif ?>
+							</div><!-- #header_status -->
 
 						</div><!-- #doc_line_items -->
 

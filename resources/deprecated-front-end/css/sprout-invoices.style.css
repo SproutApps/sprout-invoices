@@ -1682,8 +1682,9 @@ ol ol .line_item_comments {
 	float: left;
 	padding-right: 5px;
 	color: #D8D8D8;
-	margin-top: 10px;
-	margin-left: -30px;
+	margin-top: -5px;
+	margin-left: -11px;
+	position: absolute;
 }
 
 ol ol .li_comments_toggle {
@@ -1691,7 +1692,7 @@ ol ol .li_comments_toggle {
 }
 
 .li_comments_toggle.has_comments {
-	color: #FF5B4D;
+	fill: #FF5B4D;
 }
 
 .line_item_comments .comment_meta.vcard {

@@ -14,8 +14,8 @@ body {
 }
 #status {
 	font: bold 3em / 1.1em monospace;
-	left: 10%;
-	top: 92%;
+	left: 4%;
+	top: 63%;
 	background-color: #fff;
 }
 #outer_doc_wrap {
@@ -263,7 +263,9 @@ div#vcards address {
 	color: #707C8A;
 }
 .li_comments_toggle.has_comments {
-	color: #70B9EC;
+	fill: #70B9EC;
+	margin-top: 35px;
+	margin-left: 10px;
 }
 
 #doc_history dt {
