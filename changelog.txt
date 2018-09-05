@@ -1,3 +1,11 @@
+= 18.1.7 =
+
+* Fix: WooCommerce correctly updating invoice after order status changed.
+* Update: Service line item type has no qty, and manage admin prevents its use.
+* Fix: Service fee not automatically added if single processor is active
+* Fix: PayPal Pro and Standard mode conflicts. 
+* Update: Updated messaging for free users
+
 = 18.1.6 =
 
 * Fix/Refactor: Line item commenting

@@ -14,12 +14,12 @@
 
 				<div class="activate_message clearfix">
 					
-					<h4><?php _e( 'Get a free Sprout Apps license instantly...', 'sprout-invoices' ) ?></h4>
+					<h4><?php _e( 'Free Sprout Apps license...', 'sprout-invoices' ) ?></h4>
 					
 					<div class="activation_inputs clearfix">
 						<input type="text" name="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" id="<?php echo SI_Free_License::LICENSE_KEY_OPTION ?>" value="<?php echo SI_Free_License::license_key() ?>" class="text-input fat-input <?php echo 'license_'.SI_Free_License::license_status() ?>" size="40" placeholder="<?php echo get_option( 'admin_email' ) ?>">
 						
-						<button id="activate_license" class="si_admin_button lg" @click="activateLicense('si_get_license')" :disabled='isSaving'><?php _e( 'Get License', 'sprout-invoices' ) ?></button>
+						<button id="activate_license" class="si_admin_button lg" @click="activateLicense('si_get_license')" :disabled='isSaving'><?php _e( 'Generate License', 'sprout-invoices' ) ?></button>
 
 						<img
 							v-if='isSaving == true'
@@ -29,7 +29,7 @@
 					</div>
 
 					<p class="activation_msg clearfix">
-						<?php printf( __( 'Generating a free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key that will enable future features (i.e. easy add-on updates from <a href="%s">https://sproutapps.co</a>).', 'sprout-invoices' ), si_get_sa_link() ) ?></p>
+						<?php printf( __( 'Generating a free license key is not required but takes seconds! Your email will <em>only</em> be used to create a unique Sprout Apps license key that will allow for some future advanced features, and <u>one</u> email to help you get started from the founder.', 'sprout-invoices' ), si_get_sa_link( 'https://sproutapps.co/support/terms/' ) ) ?></p>
 					</p>
 				</div>
 			<?php endif ?>

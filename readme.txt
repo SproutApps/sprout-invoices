@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 18.1.6
+Stable tag: 18.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,14 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Form integrations for everyone!
 
 == Changelog ==
+
+= 18.1.7 =
+
+* Fix: WooCommerce correctly updating invoice after order status changed.
+* Update: Service line item type has no qty, and manage admin prevents its use.
+* Fix: Service fee not automatically added if single processor is active
+* Fix: PayPal Pro and Standard mode conflicts. 
+* Update: Updated messaging for free users
 
 = 18.1.6 =
 

@@ -79,6 +79,11 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		if ( ! is_array( $enabled ) ) {
 			$enabled = array();
 		}
+		foreach ( $enabled as $key => $class_name ) {
+			if ( ! class_exists( $class_name ) ) {
+				unset( $enabled[ $key ] );
+			}
+		}
 		return apply_filters( 'si_doc_enabled_processors', array_filter( $enabled ), $doc_id );
 	}
 
