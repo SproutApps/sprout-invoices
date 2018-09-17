@@ -520,7 +520,7 @@ class SI_Notifications_Control extends SI_Controller {
 		$notification_content = self::get_notification_instance_content( $notification_name, $data );
 		// Don't send notifications with empty titles or content
 		if ( empty( $notification_title ) || empty( $notification_content ) ) {
-			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' - Notifications: Message Has no Content', $data );
+			do_action( 'si_error', __CLASS__ . '::' . __FUNCTION__ . ' (' . $notification_name . ') - Notifications: Message Has No Content', $data );
 			return;
 		}
 

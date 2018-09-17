@@ -56,7 +56,7 @@ class SI_Notifications extends SI_Notifications_Control {
 				'send_estimate' => array(
 					'name' => __( 'Estimate Available', 'sprout-invoices' ),
 					'description' => __( 'Customize the estimate email that is sent to selected recipients.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'admin_note', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_expire_date', 'estimate_issue_date', 'estimate_po_number', 'estimate_tax_total', 'estimate_tax', 'estimate_tax2', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Your Estimate is Available', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/estimate', null, false ),
 				),
@@ -104,14 +104,14 @@ class SI_Notifications extends SI_Notifications_Control {
 				'accepted_estimate' => array(
 					'name' => __( 'Estimate Accepted', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the admin after an estimate is accepted.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url', 'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'invoice_id', 'invoice_edit_url', 'invoice_url', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_expire_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url', 'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Estimate Accepted', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-accepted', null, false ),
 				),
 				'declined_estimate' => array(
 					'name' => __( 'Estimate Declined', 'sprout-invoices' ),
 					'description' => __( 'Customize the email sent to the admin after an estimate is declined.', 'sprout-invoices' ),
-					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url', 'client_address', 'client_company_website' ),
+					'shortcodes' => array( 'date', 'name', 'first_name', 'username', 'line_item_table', 'line_item_list', 'line_item_plain_list', 'estimate_subject', 'estimate_id', 'estimate_edit_url', 'estimate_url', 'estimate_issue_date', 'estimate_expire_date', 'estimate_po_number', 'estimate_terms', 'estimate_notes', 'estimate_total', 'estimate_subtotal', 'client_name', 'client_edit_url', 'client_address', 'client_company_website' ),
 					'default_title' => sprintf( __( '%s: Estimate Declined', 'sprout-invoices' ), get_bloginfo( 'name' ) ),
 					'default_content' => self::load_view_to_string( 'notifications/admin-estimate-declined', null, false ),
 				),
@@ -285,6 +285,10 @@ class SI_Notifications extends SI_Notifications_Control {
 				'estimate_url' => array(
 						'description' => __( 'Used to display the estimate url.', 'sprout-invoices' ),
 						'callback' => array( 'SI_Notifications', 'shortcode_estimate_url' ),
+					),
+				'estimate_expire_date' => array(
+						'description' => __( 'Used to display the estimate expiration date.', 'sprout-invoices' ),
+						'callback' => array( 'SI_Notifications', 'shortcode_estimate_expire_date' ),
 					),
 				'estimate_issue_date' => array(
 						'description' => __( 'Used to display the estimate issue date.', 'sprout-invoices' ),
@@ -1465,6 +1469,23 @@ class SI_Notifications extends SI_Notifications_Control {
 			$url = get_permalink( $estimate_id );
 		}
 		return apply_filters( 'shortcode_estimate_url', esc_url_raw( $url ), $data );
+	}
+	/**
+	 * Return the estimate expire date
+	 *
+	 * @param  array $atts
+	 * @param  string $content
+	 * @param  string $code
+	 * @param  array $data
+	 * @return string          filtered
+	 */
+	public static function shortcode_estimate_expire_date( $atts, $content, $code, $data ) {
+		$date = '';
+		if ( isset( $data['estimate'] ) && is_a( $data['estimate'], 'SI_Estimate' ) ) {
+			$timestamp = $data['estimate']->get_expiration_date();
+			$date = date_i18n( get_option( 'date_format' ), $timestamp );
+		}
+		return apply_filters( 'shortcode_estimate_expire_date', $date, $data );
 	}
 
 	/**

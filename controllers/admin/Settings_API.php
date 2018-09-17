@@ -322,6 +322,9 @@ class SI_Settings_API extends SI_Controller {
 
 	public static function _sanitize_input_array_for_vue( $settings = array() ) {
 		$options = array();
+		if ( ! is_array( $settings ) ) {
+			return $options;
+		}
 		foreach ( $settings as $key => $data ) {
 			$default = ( isset( $data['option']['default'] ) ) ? $data['option']['default'] : '' ;
 			$options[ SI_Settings_API::_sanitize_input_for_vue( $key ) ] = $default;

@@ -1,3 +1,12 @@
+= 19.0 =
+
+* New: A lot of change to how Partial Payments and Deposits works. They're now an add-on that can be enabled/disabled.
+* New: Estimate Ranges Add-on
+* New: Manual recurring/payment-receipts creation
+* New: Estimate expiration shortcode
+* Fix: Payment Term notification shortcodes
+* Fix: Payment Term notification status
+
 = 18.1.7 =
 
 * Fix: WooCommerce correctly updating invoice after order status changed.

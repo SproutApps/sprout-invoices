@@ -50,7 +50,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 						<?php if ( si_get_invoice_balance() && 'write-off' !== si_get_invoice_status() ) : ?>
 							
 							<?php
-								$payment_string = ( si_has_invoice_deposit() ) ? __( 'Pay Deposit', 'sprout-invoices' ) : __( 'Pay Invoice', 'sprout-invoices' );
+								$payment_string = ( si_has_invoice_deposit( get_the_id(), true ) ) ? __( 'Pay Deposit', 'sprout-invoices' ) : __( 'Pay Invoice', 'sprout-invoices' );
 								?>
 							<?php do_action( 'si_invoice_payment_button', get_the_ID(), $payment_string ) ?>
 							
@@ -134,7 +134,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 							<?php do_action( 'si_document_details_totals' ) ?>
 
-							<?php if ( si_has_invoice_deposit() ) : ?>
+							<?php if ( si_has_invoice_deposit( get_the_id(), true ) ) : ?>
 								<dl class="doc_total_with_deposit doc_total doc_balance">
 									<dt><span class="dt_heading"><span class="dashicons dashicons-money"></span><?php esc_html_e( 'Invoice Total', 'sprout-invoices' ) ?></span></dt>
 									<dd><?php sa_formatted_money( si_get_invoice_total() ) ?></dd>
@@ -142,7 +142,7 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 								<dl class="doc_total doc_balance">
 									<dt><span class="dt_heading"><span class="dashicons dashicons-warning"></span><?php esc_html_e( 'Payment Due', 'sprout-invoices' ) ?></span></dt>
-									<dd><?php sa_formatted_money( si_get_invoice_deposit() ) ?></dd>
+									<dd><?php sa_formatted_money( si_get_invoice_deposit( get_the_id(), true ) ) ?></dd>
 								</dl>
 							<?php else : ?>
 								<dl class="doc_total doc_balance">

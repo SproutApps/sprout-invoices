@@ -317,13 +317,16 @@ class SI_Invoice extends SI_Post_Type {
 	/**
 	 * Deposit Adjustment
 	 */
-	public function get_deposit() {
+	public function get_deposit( $unfiltered = false ) {
 		$balance = $this->get_balance();
 		$deposit = floatval( $this->get_post_meta( self::$meta_keys['deposit'] ) );
 		if ( $deposit > $balance ) { // check if deposit is more than what's due.
 			$deposit = floatval( $balance );
 		}
-		return apply_filters( 'si_get_invoice_deposit', round( $deposit, 2 ), $this );
+		if ( ! $unfiltered ) {
+			$deposit = apply_filters( 'si_get_invoice_deposit', $deposit, $this );
+		}
+		return round( $deposit, 2 );
 	}
 
 	public function set_deposit( $deposit = 0 ) {

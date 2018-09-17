@@ -14,8 +14,8 @@
 
 			<?php else : ?>
 
-				<?php if ( si_has_invoice_deposit() ) : ?>
-					<?php printf( 'Balance of <strong>%2$s</strong> Due in <strong>%3$s Days</strong> & Deposit of <strong>%1$s</strong> Due <strong>Now</strong>', sa_get_formatted_money( si_get_invoice_deposit() ), sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
+				<?php if ( si_has_invoice_deposit( get_the_id(), true ) ) : ?>
+					<?php printf( 'Balance of <strong>%2$s</strong> Due in <strong>%3$s Days</strong> & Deposit of <strong>%1$s</strong> Due <strong>Now</strong>', sa_get_formatted_money( si_get_invoice_deposit( get_the_id(), true ) ), sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 				<?php else : ?>
 					<?php printf( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Days</strong>', sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 				<?php endif; ?>
@@ -34,7 +34,7 @@
 
 		<?php do_action( 'si_signature_button' ) ?>
 
-		<?php if ( si_has_invoice_deposit() ) : ?>
+		<?php if ( si_has_invoice_deposit( get_the_id(), true ) ) : ?>
 			<a class="open button" href="#payment"><?php _e( 'Make a <strong>Deposit Payment</strong>', 'sprout-invoices' ) ?></a> 
 		<?php else : ?>
 			<a class="open button" href="#payment"><?php _e( 'Make a <strong>Payment</strong>', 'sprout-invoices' ) ?></a> 
@@ -61,21 +61,25 @@
 
 		<?php if ( count( $payment_options ) === 0 ) : ?>
 			
-			<p><?php _e( 'Oh no! So sorry. There are no payment options available for you to make a payment. Please contact let me know so I can figure out why.', 'sprout-invoices' ) ?></p>
+			<p class="make_payment_desc"><?php _e( 'Oh no! So sorry. There are no payment options available for you to make a payment. Please let me know so I can figure out why.', 'sprout-invoices' ) ?></p>
 
 			<?php do_action( 'si_default_theme_no_payment_options_desc' ) ?>
 
 		<?php else : ?>
 
 			<?php if ( count( $payment_options ) > 1 ) : ?>
-				<p><?php _e( 'Please select your payment type and then enter your payment information below to pay this invoice. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
+				<p class="make_payment_desc"><?php _e( 'Please select your payment type and enter your payment information to pay this invoice. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
 			<?php else : ?>
-				<p><?php _e( 'Please enter your payment information below to pay this invoice. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
+				<?php if ( 'paypal' === key( $payment_options ) ) :  ?>
+					<p class="make_payment_desc"><?php _e( 'Select the PayPal button below to be redirected for payment. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
+				<?php else : ?>
+					<p class="make_payment_desc"><?php _e( 'Please enter your payment information to pay this invoice. A receipt for your records will be sent to you. Thank you very much!', 'sprout-invoices' ) ?></p>
+				<?php endif ?>
 			<?php endif; ?>
 
 			<?php do_action( 'si_default_theme_payment_options_desc' ) ?>
 
-			<div class="row toggles">
+			<div class="row toggles<?php if ( count( $payment_options ) < 2 ) { echo ' single_payment_option'; } ?>">
 				<?php foreach ( $payment_options as $slug => $options ) : ?>
 					<?php if ( isset( $options['purchase_button_callback'] ) ) : ?>
 						<?php call_user_func_array( $options['purchase_button_callback'], array( get_the_ID() ) ) ?>

@@ -197,7 +197,7 @@ class SA_Addons extends SI_Controller {
 				}
 			}
 			if ( $valid_cache ) {
-				return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], true );
+				//return apply_filters( 'si_get_addons', $cache_addons[ $addon_folder ], true );
 			}
 		}
 
@@ -247,6 +247,8 @@ class SA_Addons extends SI_Controller {
 			return apply_filters( 'si_get_addons', $si_addons );
 		}
 
+		$active_addons = array();
+		$inactive_addons = array();
 		foreach ( $addon_files as $addon_file ) {
 			if ( ! is_readable( "$addon_root/$addon_file" ) ) {
 				continue;
@@ -258,8 +260,21 @@ class SA_Addons extends SI_Controller {
 				continue;
 			}
 
-			$si_addons[ plugin_basename( $addon_file ) ] = $addon_data;
+			$path = plugin_basename( $addon_file );
+			$key = self::get_addon_key( $path, $addon_data );
+			if ( self::is_enabled( $key ) ) {
+				$addon_data['active'] = 1;
+				$active_addons[ $path ] = $addon_data;
+			} else {
+				$addon_data['active'] = 0;
+				$inactive_addons[ $path ] = $addon_data;
+			}
 		}
+
+		uasort( $active_addons, array( __CLASS__, 'add_on_sort' ) );
+		uasort( $inactive_addons, array( __CLASS__, 'add_on_sort' ) );
+
+		$si_addons = array_merge( $active_addons, $inactive_addons );
 
 		$cache_addons[ $addon_folder ] = $si_addons;
 		wp_cache_set( 'si_addons', $cache_addons, 'si_addons' );
@@ -344,12 +359,21 @@ class SA_Addons extends SI_Controller {
 			}
 		}
 
-		asort( $biz_addons );
-		asort( $free_addons );
-
 		$marketplace_items = array_merge( $corp_addons, $free_addons, $biz_addons );
-
+		uasort( $marketplace_items, array( __CLASS__, 'mp_add_on_sort' ) );
 		set_transient( $cache_key, $marketplace_items, DAY_IN_SECONDS * 3 );
 		return $marketplace_items;
+	}
+
+	public static function add_on_sort_by_active( $a, $b ) {
+		return $b['active'] - $a['active'];
+	}
+
+	public static function mp_add_on_sort( $a, $b ) {
+		return strcmp( $a->post_title, $b->post_title );
+	}
+
+	public static function add_on_sort( $a, $b ) {
+		return strcmp( $a['Title'], $b['Title'] );
 	}
 }

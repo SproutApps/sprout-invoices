@@ -39,9 +39,6 @@ class SI_Invoices extends SI_Controller {
 		// Adjust invoice id and status after clone
 		add_action( 'si_cloned_post',  array( __CLASS__, 'adjust_cloned_invoice' ), 10, 3 );
 
-		// Invoice Payment Remove deposit
-		add_filter( 'processed_payment', array( __CLASS__, 'maybe_remove_deposit' ), 10, 2 );
-
 		// Notifications
 		add_filter( 'wp_ajax_sa_send_est_notification', array( __CLASS__, 'maybe_send_notification' ) );
 
@@ -353,17 +350,6 @@ class SI_Invoices extends SI_Controller {
 
 			// Adjust status
 			$invoice->set_as_temp();
-		}
-	}
-
-	public static function maybe_remove_deposit( SI_Payment $payment, SI_Checkouts $checkout ) {
-		$invoice_id = $payment->get_invoice_id();
-		$invoice = SI_Invoice::get_instance( $invoice_id );
-		$payment_amount = $payment->get_amount();
-		$invoice_deposit = $invoice->get_deposit();
-		if ( $payment_amount >= $invoice_deposit ) {
-			// Reset the deposit since the payment made covers it.
-			$invoice->set_deposit( '' );
 		}
 	}
 

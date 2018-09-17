@@ -698,7 +698,8 @@ div#vcards {
 	border: none;
 }
 
-.button.print_button {
+.button.print_button,
+.button.change_payment_amount {
 	background-color: #DDD;
 	color: #7C7C7C;
 }
@@ -972,6 +973,7 @@ div#vcards {
  * Payment Form
  */
 #credit_card_checkout_wrap,
+#si_pp_payment_amount_wrap,
 #check_info_checkout_wrap,
 #popayment_info_checkout_wrap,
 #bacs_info_checkout_wrap {
@@ -1823,4 +1825,93 @@ p.service_fee_message {
     margin: 0;
     padding: 1em;
     background-color: #fafafa;
+}
+
+
+#si_pp_payment_amount_wrap .si_pp_option_wrap {
+    display: block;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 1.5em;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none; /* Chrome, Opera, Safari */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
+#si_pp_payment_amount_wrap h1 {
+	margin-bottom: 5px;
+}
+#si_pp_payment_amount_wrap p {
+	margin-bottom: 30px;
+}
+#si_pp_payment_amount_wrap span.payment_amount {
+    font-size: 1.5em;
+  font-weight: 800;
+}
+#si_pp_payment_amount_wrap span.payment_desc,
+#si_pp_payment_amount_wrap span.more_payment_desc {
+    display: block;
+    font-size: .7em;
+    text-transform: uppercase;
+}
+#si_pp_payment_amount_wrap span.more_payment_desc {
+  font-style: italic;
+  font-weight: inherit;
+  opacity: .5;
+}
+
+#si_pp_payment_amount_wrap .si_pp_option_wrap {
+	margin-left: 20px;
+}
+
+#si_pp_payment_amount_wrap .si_pp_option_wrap #modify_deposit_amount_input {
+  border: 1px solid #d2d2d2;
+  margin: 5px;
+  padding-left: 10px;
+}
+/* Create a custom radio button */
+#si_pp_payment_amount_wrap .si_pp_option_wrap .radiobtn{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+  margin-top: .8em;
+}
+
+/* On mouse-over, add a grey background color */
+#si_pp_payment_amount_wrap .si_pp_option_wrap:hover .radiobtn {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+#si_pp_payment_amount_wrap .radiobtn.selected {
+  background-color: #4086b0;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+#si_pp_payment_amount_wrap .radiobtn:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+#si_pp_payment_amount_wrap .radiobtn.selected:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+#si_pp_payment_amount_wrap .radiobtn:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }

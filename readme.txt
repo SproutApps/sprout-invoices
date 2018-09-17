@@ -4,7 +4,7 @@ Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 18.1.7
+Stable tag: 19.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,15 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Form integrations for everyone!
 
 == Changelog ==
+
+= 19.0 =
+
+* New: A lot of change to how Partial Payments and Deposits works. They're now an add-on that can be enabled/disabled.
+* New: Estimate Ranges Add-on
+* New: Manual recurring/payment-receipts creation
+* New: Estimate expiration shortcode
+* Fix: Payment Term notification shortcodes
+* Fix: Payment Term notification status
 
 = 18.1.7 =
 

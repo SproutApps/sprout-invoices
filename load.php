@@ -96,7 +96,6 @@ function sprout_invoices_load() {
 	require_once SI_PATH.'/controllers/invoices/Invoices_Edit.php';
 	require_once SI_PATH.'/controllers/invoices/Invoices_Records.php';
 	require_once SI_PATH.'/controllers/invoices/Invoices_Template.php';
-	require_once SI_PATH.'/controllers/invoices/Invoices_Deposit.php';
 	require_once SI_PATH.'/controllers/invoices/Invoices_Scheduled.php';
 	if ( ! SI_FREE_TEST && file_exists( SI_PATH.'/controllers/invoices/Invoices_Premium.php' ) ) {
 		require_once SI_PATH.'/controllers/invoices/Invoices_Premium.php';
@@ -310,7 +309,6 @@ function sprout_invoices_load() {
 	SI_Invoices_Scheduled::init();
 	SI_Invoices_Template::init();
 	SI_Invoices_Records::init();
-	SI_Invoices_Deposit::init();
 	if ( ! SI_FREE_TEST && class_exists( 'SI_Invoices_Premium' ) ) {
 		SI_Invoices_Premium::init();
 	}

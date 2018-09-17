@@ -100,11 +100,18 @@ if ( ! function_exists( 'si_doc_notification_sent' ) ) :
 		foreach ( $history as $item_id ) {
 			$record = SI_Record::get_instance( $item_id );
 			if ( SI_Notifications::RECORD === $record->get_type() ) {
-				// TODO learn regex
-				$email = str_replace( __( 'Notification sent to ', 'sprout-invoices' ), '', $record->get_title() );
-				$email = substr( $email, 0, -1 );
-				if ( $email !== SI_Notifications::get_user_email() ) {
-					$sent = true;
+
+				preg_match( '/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/i', $record->get_title(), $matches );
+
+				$possible_email = $matches[0];
+
+				$email = filter_var( filter_var( $possible_email, FILTER_SANITIZE_EMAIL ), FILTER_VALIDATE_EMAIL );
+
+				if ( $email !== false ) {
+
+					if ( $email !== SI_Notifications::from_email() ) {
+						$sent = true;
+					}
 				}
 			}
 		}
@@ -127,7 +134,7 @@ if ( ! function_exists( 'si_was_doc_viewed' ) ) :
 		foreach ( $history as $item_id ) {
 			$record = SI_Record::get_instance( $item_id );
 			if ( 'si_viewed_status_update' === $record->get_type() ) {
-				if ( strpos( $record->get_title(), 'viewed by ::1' ) !== false ) {
+				if ( strpos( $record->get_title(), 'viewed by ::1' ) === false ) {
 					$viewed = apply_filters( 'si_was_doc_viewed_record', true, $id, $record );
 				}
 			}

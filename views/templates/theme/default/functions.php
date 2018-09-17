@@ -53,7 +53,7 @@ function si_default_theme_inject_css() {
 		<?php if ( $accent_text_color ) :  ?>
 			#intro .inner .column span,
 			.history article .posted, .line_item_comments span.comment_date,
-			#notes .item .header h3, .line_item_comment_wrap .submit.button {
+			#notes .item .header h3, .line_item_comment_wrap .submit.button, #si_pp_payment_amount .radiobtn.selected  {
 			    color: <?php echo esc_attr( $accent_text_color ); ?>;
 			}
 			.li_comments_toggle {

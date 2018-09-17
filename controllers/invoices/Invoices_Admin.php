@@ -136,11 +136,11 @@ class SI_Invoices_Admin extends SI_Invoices {
 			break;
 			case 'notification_status':
 
-				if ( ! si_doc_notification_sent() ) {
+				if ( ! si_doc_notification_sent( $id ) ) {
 					printf( '<mark class="helptip notification_status_wrap %1$s" title="%2$s">&nbsp;</mark>', 'not_sent', __( 'Not Sent', 'sprout-invoices' ) );
-				} elseif ( si_doc_notification_sent() && ! si_was_doc_viewed() ) {
+				} elseif ( si_doc_notification_sent( $id ) && ! si_was_doc_viewed( $id ) ) {
 					printf( '<mark class="helptip notification_status_wrap %s" title="%2$s">&nbsp;</mark>', 'sent', __( 'Sent, Invoice Not Viewed', 'sprout-invoices' ) );
-				} elseif ( si_doc_notification_sent() && si_was_doc_viewed() ) {
+				} elseif ( si_doc_notification_sent( $id ) && si_was_doc_viewed( $id ) ) {
 					printf( '<mark class="helptip notification_status_wrap %s" title="%2$s">&nbsp;</mark>', 'sent_viewed', __( 'Sent, and Viewed', 'sprout-invoices' ) );
 				} else {
 					printf( '<mark class="helptip notification_status_wrap %s" title="%2$s">&nbsp;</mark>', 'danger', __( 'Not Sure', 'sprout-invoices' ) );

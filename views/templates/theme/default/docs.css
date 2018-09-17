@@ -411,6 +411,16 @@ body {
       @media (max-width: 900px) {
         .panel .inner h2 {
           font-size: 22px; } }
+    .panel .inner h3 {
+      font-size: 26px;
+      line-height: 1.1;
+      margin-bottom: 10px; }
+      @media (max-width: 900px) {
+        .panel .inner h3 {
+          font-size: 18px; } }
+      @media (max-width: 900px) {
+        .panel .inner h3 {
+          font-size: 18px; } }
     .panel .inner p {
       margin-bottom: 18px; }
     .panel .inner input[type="text"],
@@ -441,7 +451,11 @@ body {
       font-size: 12px;
       line-height: 28px;
       color: rgba(0, 0, 0, 0.75);
-      transition-duration: 0.25s; }
+      transition-duration: 0.25s;
+      zoom: 1.3; }
+      .panel .inner .single_payment_option .toggle {
+        zoom: 2;
+      }
       .panel .inner .toggle.inactive {
         border-color: rgba(0, 0, 0, 0.25);
         color: rgba(0, 0, 0, 0.25); }
@@ -890,4 +904,83 @@ b {font-weight: bold;}
   font-weight: 800;
   padding-bottom: 7px;
 
+}
+
+#si_pp_payment_amount .si_pp_option_wrap {
+    display: block;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 1.5em;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none; /* Chrome, Opera, Safari */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
+#si_pp_payment_amount span.payment_amount {
+    font-size: 1.5em;
+  font-weight: 800;
+}
+#si_pp_payment_amount span.payment_desc,
+#si_pp_payment_amount span.more_payment_desc {
+    display: block;
+    font-size: .7em;
+    text-transform: uppercase;
+}
+#si_pp_payment_amount span.more_payment_desc {
+  font-style: italic;
+  font-weight: inherit;
+  opacity: .5;
+}
+
+
+#si_pp_payment_amount .si_pp_option_wrap #modify_deposit_amount_input {
+  border: 1px solid #d2d2d2;
+  margin: 5px;
+  padding-left: 10px;
+}
+/* Create a custom radio button */
+#si_pp_payment_amount .si_pp_option_wrap .radiobtn{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+  margin-top: .8em;
+}
+
+/* On mouse-over, add a grey background color */
+#si_pp_payment_amount .si_pp_option_wrap:hover .radiobtn {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+#si_pp_payment_amount .radiobtn.selected {
+  background-color: #4086b0;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+#si_pp_payment_amount .radiobtn:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+#si_pp_payment_amount .radiobtn.selected:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+#si_pp_payment_amount .radiobtn:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }

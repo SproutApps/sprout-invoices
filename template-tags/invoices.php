@@ -611,11 +611,11 @@ if ( ! function_exists( 'si_has_invoice_deposit' ) ) :
 	 * @param  integer $id
 	 * @return string
 	 */
-	function si_has_invoice_deposit( $id = 0 ) {
+	function si_has_invoice_deposit( $id = 0, $unfiltered = false ) {
 		if ( ! $id ) {
 			$id = get_the_ID();
 		}
-		$deposit = si_get_invoice_deposit( $id );
+		$deposit = si_get_invoice_deposit( $id, $unfiltered );
 		if ( $deposit < 0.01 ) {
 			return false;
 		}
@@ -630,12 +630,12 @@ if ( ! function_exists( 'si_get_invoice_deposit' ) ) :
 	 * @param  integer $id
 	 * @return string
 	 */
-	function si_get_invoice_deposit( $id = 0 ) {
+	function si_get_invoice_deposit( $id = 0, $unfiltered = false ) {
 		if ( ! $id ) {
 			$id = get_the_ID();
 		}
 		$invoice = SI_Invoice::get_instance( $id );
-		return apply_filters( 'si_get_invoice_deposit', si_get_number_format( $invoice->get_deposit() ), $invoice );
+		return apply_filters( 'si_get_si_invoice_deposit', si_get_number_format( $invoice->get_deposit( $unfiltered ) ), $invoice );
 	}
 endif;
 
@@ -645,11 +645,11 @@ if ( ! function_exists( 'si_invoice_deposit' ) ) :
 	 * @param  integer $id
 	 * @return string
 	 */
-	function si_invoice_deposit( $id = 0 ) {
+	function si_invoice_deposit( $id = 0, $unfiltered = false ) {
 		if ( ! $id ) {
 			$id = get_the_ID();
 		}
-		echo apply_filters( 'si_invoice_deposit', si_get_invoice_deposit( $id ), $id );
+		echo apply_filters( 'si_invoice_deposit', si_get_invoice_deposit( $id, $unfiltered ), $id );
 	}
 endif;
 

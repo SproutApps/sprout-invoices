@@ -26,8 +26,8 @@ body[class*='sprout-invoices'] div.updated {
 
 .si_settings_tabs .row {
     display: inline-block;
-    width: 60%;
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px;
 }
 #si_report .si_settings_tabs .row {
 	width: auto;
@@ -512,7 +512,7 @@ body[class*='sprout-invoices'] #wpfooter {
 		#addons_admin .type_addon {
 			/* min-height: 375px; */
 			height: 375px;
-			width: 12.5%;
+			width: 24%;
 			min-width: 180px;
 			float: left;
 			position: relative;
@@ -534,7 +534,7 @@ body[class*='sprout-invoices'] #wpfooter {
 			position: relative;
 			padding: 14px;
 			background: #fff8f8;
-			max-height: 100px;
+			max-height: 135px;
 			/* box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.45), inset 0px 0px 1px 1px white; */
 			}
 			#addons_admin .addons_grid .type_addon.activated .section .img_wrap {
@@ -542,7 +542,7 @@ body[class*='sprout-invoices'] #wpfooter {
 			box-shadow: none;
 			}
 			#addons_admin #marketplace_addons .addons_grid .section .img_wrap {
-			 max-height: 150px;
+			 max-height: 215px;
 			}
 		#addons_admin .addons_grid .section .img_wrap img {
 			width: 100%;
