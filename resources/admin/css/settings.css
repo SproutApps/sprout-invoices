@@ -21,9 +21,18 @@ body[class*='sprout-invoices'] div.updated {
  */
 
 .si_settings_tabs #main {
-	margin-right:  5em;
+	float: left;
+	width: 70%;
 }
-
+#si_report .si_settings_tabs #main,
+#addons_admin .si_settings_tabs #main {
+	width: auto;
+}
+.si-controls {
+    display: block;
+    clear: both;
+    margin-left: 17%;
+}
 .si_settings_tabs .row {
     display: inline-block;
     width: 100%;
@@ -32,6 +41,14 @@ body[class*='sprout-invoices'] div.updated {
 #si_report .si_settings_tabs .row {
 	width: auto;
 	max-width: 100%;
+}
+@media (max-width:768px) {
+  .si_settings_tabs #main {
+  	float: none;
+  	display: block;
+  	width: 95%;
+  	max-width: 95%;
+  }
 }
 
 /**
@@ -403,6 +420,8 @@ body[class*='sprout-invoices'] #wpfooter {
 	max-width: 20%;
 }
 
+
+
 .non_stick_subnav #si_settings_subnav {
 	position: initial;
 }
@@ -502,6 +521,16 @@ body[class*='sprout-invoices'] #wpfooter {
 	content: "\e604";
 }
 
+
+@media (max-width:768px) {
+  #si_settings_subnav {
+  	float: none;
+  	display: block;
+	margin-right: 0;
+  	width: 95%;
+  	max-width: 95%;
+  }
+}
 /**
  * Addons
  */

@@ -355,7 +355,7 @@ class SI_Notifications_Control extends SI_Controller {
 	 */
 	public static function save_meta_box_notification_submit( $post_id, $post, $callback_args, $notification_type = null ) {
 
-		self::clear_notification_cache( false );
+		self::clear_notification_cache();
 
 		if ( null === $notification_type && isset( $_POST['notification_type'] ) ) {
 			$notification_type = $_POST['notification_type'];
@@ -978,7 +978,7 @@ class SI_Notifications_Control extends SI_Controller {
 
 			do_action( 'si_refresh_notification', $notification, $notification_key );
 
-			self::clear_notification_cache( false );
+			self::clear_notification_cache();
 
 			wp_redirect( remove_query_arg( 'refresh-notification' ) );
 			exit();
@@ -1007,7 +1007,7 @@ class SI_Notifications_Control extends SI_Controller {
 				wp_delete_post( $post_id, true );
 			}
 
-			self::clear_notification_cache( false );
+			self::clear_notification_cache();
 		}
 	}
 

@@ -1,10 +1,10 @@
-=== Sprout Invoices - Invoice & Estimate your Clients ===
+=== Client Invoicing by Sprout Invoices - Easy Estimates and Invoices for WordPress ===
 Contributors: dancameron, sproutapps
 Donate link: https://sproutapps.co/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 19.0
+Stable tag: 19.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,9 +14,9 @@ The best invoicing plugin for WordPress. See how you can get paid faster without
 
 = WordPress Invoicing Made Easy =
 
-Take control of your invoicing! Sprout Invoices is fully customizable the WordPress way without limits, and features you can't get anywhere else.
+Sprout Invoices is fully customizable the WordPress way, and includes features you can't get anywhere else. Take control of your invoicing!
 
-Trust the <a href="https://wordpress.org/support/plugin/sprout-invoices/reviews/?filter=5" rel="friend" title="Sprout Invoices WordPress.org Reviews">reviews</a> and join an <a href="https://sproutapps.co/sprout-invoices/reviews/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org" rel="friend" title="Sprout Invoices Reviews">awesome community</a> of happy users.   
+Trust the <a href="https://wordpress.org/support/plugin/sprout-invoices/reviews/?filter=5" rel="friend" title="Sprout Invoices WordPress.org Reviews">reviews</a> and join an <a href="https://sproutapps.co/sprout-invoices/reviews/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org" rel="friend" title="Sprout Invoices Reviews">awesome community</a> of happy users getting paid on their WordPress site.   
 
 = Getting Paid Made Easy =
 
@@ -135,6 +135,17 @@ For more detailed look, checkout the full featured [demo](https://sproutapps.co/
 Form integrations for everyone!
 
 == Changelog ==
+
+= 19.0.2 =
+
+* Fix: Developer logs incorrectly enabled under some circumstances.
+
+= 19.0.1 =
+
+* New: Start of transition to new domain
+* Fix: Admin views support smaller screens
+* New: Login view override support
+* Fix: Estimate ranges typo
 
 = 19.0 =
 

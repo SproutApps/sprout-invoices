@@ -10,7 +10,7 @@
 class SI_Dev_Logs extends SI_Controller {
 	const LOG_TYPE = 'dev_log';
 	const ERROR_TYPE = 'si_error';
-	const LOG_OPTION = 'si_record_logs_option';
+	const LOG_OPTION = 'si_record_logs_option_v1';
 
 	private static $record_logs;
 	private static $recorded_logs = array();
@@ -18,10 +18,11 @@ class SI_Dev_Logs extends SI_Controller {
 
 	public static function init() {
 		// Admin option
-		self::$record_logs = (bool) get_option( self::LOG_OPTION, 0 );
+		self::$record_logs = get_option( self::LOG_OPTION, 0 );
 
 		// Register Settings
 		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
+		add_action( 'si_settings_saved', array( get_class(), 'save_log_option' ) );
 
 		// after
 		add_action( 'init', array( __CLASS__, 'record_stored_logs_and_errors' ), PHP_INT_MAX );
@@ -51,14 +52,19 @@ class SI_Dev_Logs extends SI_Controller {
 						'option' => array(
 							'label' => __( 'Save all logs as a sprout apps records (dev_log).', 'sprout-invoices' ),
 							'type' => 'checkbox',
-							'default' => self::$record_logs,
-							'value' => '1',
+							'default' => ( get_option( self::LOG_OPTION, 0 ) ) ? true : false,
+							'value' => false,
 							'description' => __( 'Note: This should only be used for testing and troubleshooting. Records are found under Tools.', 'sprout-invoices' ),
 							),
 						),
 					),
 				);
 		return $settings;
+	}
+
+	public static function save_log_option() {
+		$dolog = ( 'true' === $_POST[ self::LOG_OPTION ] ) ? 1 : 0 ;
+		update_option( self::LOG_OPTION, $dolog );
 	}
 
 	/**

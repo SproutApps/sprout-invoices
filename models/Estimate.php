@@ -764,7 +764,7 @@ class SI_Estimate extends SI_Post_Type {
 		if ( $calculate ) {
 			$this->get_subtotal();
 			$this->get_fees_total();
-			$this->get_calculated_total( false );
+			$this->get_calculated_total();
 		}
 	}
 

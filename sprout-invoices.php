@@ -2,16 +2,16 @@
 
 /**
  * @package Sprout_Invoices
- * @version 19.0
+ * @version 19.0.2
  */
 
 /*
  * Plugin Name: Sprout Invoices
- * Plugin URI: https://sproutapps.co/sprout-invoices/
- * Description: App allows for any WordPress site to accept estimates, create invoices and receive invoice payments. Learn more at <a href="https://sproutapps.co">Sprout Apps</a>.
- * Author: Sprout Apps
- * Version: 19.0
- * Author URI: https://sproutapps.co
+ * Plugin URI: https://sproutinvoices.com
+ * Description: Easily accept estimates, create invoices, and receive invoice payments on your WordPress site. Learn more at <a href="https://sproutinvoices.com">sproutinvoices.com</a>.
+ * Author: Sprout Invoices
+ * Version: 19.0.2
+ * Author URI: https://sproutinvoices.com
  * Text Domain: sprout-invoices
  * Domain Path: languages
 */
@@ -54,38 +54,6 @@ define( 'SI_SUPPORTED_PHP_VERSION', version_compare( phpversion(), '5.2.4', '>='
  * Flag for Free and Pro
  */
 define( 'SI_PRO', false );
-
-function si_fs() {
-
-	global $si_fs;
-
-	if ( ! isset( $si_fs ) ) {
-		// Include Freemius SDK.
-		require_once SI_PATH . '/controllers/updates/freemius-sdk/start.php';
-
-		$si_fs = fs_dynamic_init( array(
-			'id'                => '234',
-			'slug'              => 'sprout-invoices',
-			'public_key'        => 'pk_22ac32f2f35fd0e09e656f4671a0e',
-			'is_premium'        => false,
-			'has_addons'        => false,
-			'has_paid_plans'    => false,
-			'menu'              => array(
-			'slug'       => 'sprout-invoices',
-			'first-path' => 'admin.php?page=sprout-invoices',
-			'account'    => false,
-			'contact'    => false,
-			'support'    => false,
-			),
-		) );
-	}
-
-	return $si_fs;
-}
-// Init Freemius.
-if ( apply_filters( 'si_disable_freemius', false ) ) {
-	si_fs();
-}
 
 /**
  * Load plugin

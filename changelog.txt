@@ -1,3 +1,14 @@
+= 19.0.2 =
+
+* Fix: Developer logs incorrectly enabled under some circumstances.
+
+= 19.0.1 =
+
+* New: Start of transition to new domain
+* Fix: Admin views support smaller screens
+* New: Login view override support
+* Fix: Estimate ranges typo
+
 = 19.0 =
 
 * New: A lot of change to how Partial Payments and Deposits works. They're now an add-on that can be enabled/disabled.
