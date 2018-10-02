@@ -1,7 +1,7 @@
 <div class="si_settings si-settings-admin-header">
 	<header class="si_header">
 		<a href="#">
-			<img class="header_sa_logo" src="<?php echo SI_RESOURCES . 'admin/icons/sproutapps-flat-small-white.png' ?>" />
+			<img class="header_sa_logo" src="<?php echo SI_RESOURCES . 'admin/img/sprout/headshot.png' ?>" aria-label="<?php _e( 'Hello! My name is Sprout.', 'sprout-invoices' ) ?>"/>
 			<h1 class="si_title"><b>Sprout</b> Invoices</h1>
 		</a>
 	</header>
@@ -26,7 +26,7 @@
 	</div><!-- #si_progress_tracker_wrap -->
 </div>
 
-<script>!function(e,o,n){window.HSCW=o,window.HS=n,n.beacon=n.beacon||{};var t=n.beacon;t.userConfig={},t.readyQueue=[],t.config=function(e){this.userConfig=e},t.ready=function(e){this.readyQueue.push(e)},o.config={docs:{enabled:!0,baseUrl:"https://sproutapps.helpscoutdocs.com/"},contact:{enabled:!0,formId:"431cd2e5-75b4-11e8-8d65-0ee9bb0328ce"}};var r=e.getElementsByTagName("script")[0],c=e.createElement("script");c.type="text/javascript",c.async=!0,c.src="https://djtflbt20bdde.cloudfront.net/",r.parentNode.insertBefore(c,r)}(document,window.HSCW||{},window.HS||{});</script>
+<script>!function(e,o,n){window.HSCW=o,window.HS=n,n.beacon=n.beacon||{};var t=n.beacon;t.userConfig={},t.readyQueue=[],t.config=function(e){this.userConfig=e},t.ready=function(e){this.readyQueue.push(e)},o.config={docs:{enabled:!0,baseUrl:"https://sproutinvoices.helpscoutdocs.com/"},contact:{enabled:!0,formId:"431cd2e5-75b4-11e8-8d65-0ee9bb0328ce"}};var r=e.getElementsByTagName("script")[0],c=e.createElement("script");c.type="text/javascript",c.async=!0,c.src="https://djtflbt20bdde.cloudfront.net/",r.parentNode.insertBefore(c,r)}(document,window.HSCW||{},window.HS||{});</script>
 <script type="text/javascript">
 	HS.beacon.config({
 		icon: 'search',

@@ -1,29 +1,29 @@
 # Sprout Invoices
 Create estimates and invoices within your WordPress site. Accept invoice payments from multiple payment processors.
 
-Our mission at [Sprout Apps](https://sproutapps.co/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing those tedious tasks we have to perform to get paid.
+Our mission at [Sprout Invoices](https://sproutinvoices.com/) is to build a suite of apps to help small businesses and freelancers work more efficiently by reducing those tedious tasks we have to perform to get paid.
 
 
 ## Sprout Invoice Features
 
-Make sure to checkout the [Sprout Invoices](https://sproutapps.co/sprout-invoices/) features page for more detailed information. As well as the full featured [demo](https://sproutapps.co/demo/playground).
+Make sure to checkout the [Sprout Invoices](https://sproutinvoices.com) features page for more detailed information. As well as the full featured [demo](https://sproutinvoices.com/demo/playground).
 
-* An awesome [estimate & invoice workflow](https://sproutapps.co/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/). 
-* The best [payment experience](https://sproutapps.co/news/sprout-invoices-payment-options-deposits-checks-authorizations/) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutapps.co/marketplace/paypal-payments-express-checkout/) (additional gateways available).
+* An awesome [estimate & invoice workflow](https://sproutinvoices.com/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/). 
+* The best [payment experience](https://sproutinvoices.com/news/sprout-invoices-payment-options-deposits-checks-authorizations/) for your clients with options for them to pay via Check, PO or [Paypal](https://sproutinvoices.com/marketplace/paypal-payments-express-checkout/) (additional gateways available).
 * Unlimited Invoices, Estimates and Clients. No restrictions!
-* Fully [customizable templates](https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/) with your own theme.
+* Fully [customizable templates](https://sproutinvoices.com/support/knowledgebase/sprout-invoices/customizing-templates/) with your own theme.
 * Localization support for your language!
-* [Payment management](https://sproutapps.co/support/knowledgebase/sprout-invoices/payments/).
-* [Advanced Reporting](https://sproutapps.co/support/knowledgebase/sprout-invoices/reports/) (limited w/ free version)
-* [Client management](https://sproutapps.co/support/knowledgebase/sprout-invoices/clients/).
-* [Freshbooks, Harvest and WP-Invoice Importing](https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/).
-* Fully [customizable notifications](https://sproutapps.co/support/knowledgebase/sprout-invoices/notifications/). Notifications are sent from your server and allow for plain-text and HTML.
-* [Deposit payments](https://sproutapps.co/news/feature-spotlight-invoice-deposits/) (premium upgrade)
-* [Nested line items](https://sproutapps.co/news/feature-spotlight-nested-invoice-line-items/).
-* [Advanced records](https://sproutapps.co/support/knowledgebase/sprout-invoices/tools/) with any extra tables!
-* Includes a [customizable estimates/lead generation form](https://sproutapps.co/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/).
-* Integrates with [Gravity Forms, Ninja Forms and more](https://sproutapps.co/marketplace/advanced-form-integration-gravity-ninja-forms/) (premium upgrade).
-* Accept [Stripe Payments](https://sproutapps.co/marketplace/stripe-payments/) (paid add-on or premium upgrade)
+* [Payment management](https://sproutinvoices.com/support/knowledgebase/sprout-invoices/payments/).
+* [Advanced Reporting](https://sproutinvoices.com/support/knowledgebase/sprout-invoices/reports/) (limited w/ free version)
+* [Client management](https://sproutinvoices.com/support/knowledgebase/sprout-invoices/clients/).
+* [Freshbooks, Harvest and WP-Invoice Importing](https://sproutinvoices.com/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/).
+* Fully [customizable notifications](https://sproutinvoices.com/support/knowledgebase/sprout-invoices/notifications/). Notifications are sent from your server and allow for plain-text and HTML.
+* [Deposit payments](https://sproutinvoices.com/news/feature-spotlight-invoice-deposits/) (premium upgrade)
+* [Nested line items](https://sproutinvoices.com/news/feature-spotlight-nested-invoice-line-items/).
+* [Advanced records](https://sproutinvoices.com/support/knowledgebase/sprout-invoices/tools/) with any extra tables!
+* Includes a [customizable estimates/lead generation form](https://sproutinvoices.com/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/).
+* Integrates with [Gravity Forms, Ninja Forms and more](https://sproutinvoices.com/marketplace/advanced-form-integration-gravity-ninja-forms/) (premium upgrade).
+* Accept [Stripe Payments](https://sproutinvoices.com/marketplace/stripe-payments/) (paid add-on or premium upgrade)
 * Improved user experience with AJAX.
 * Taxes
 * Client records with multiple points of contact
@@ -41,7 +41,7 @@ Please note that this feature list is incomplete, since it's long enough.
 
 **[Download the most advanced Estimates and Invoicing plugin!](http://downloads.wordpress.org/plugin/sprout-invoices.zip)**
 
-**A [fully featured upgrade](https://sproutapps.co/sprout-invoices/) and [add-on marketplace](https://sproutapps.co/marketplace/) are available.**
+**A [fully featured upgrade](https://sproutinvoices.com) and [add-on marketplace](https://sproutinvoices.com/marketplace/) are available.**
 
 
 ### Flexibility built in
@@ -85,7 +85,7 @@ Invoices are automatically generated from accepted estimates speeding up the pro
 
 ### Frequently Asked Questions
 
-**Please visit [Sprout Apps](https://sproutapps.co/sprout-invoices/).**
+**Please visit [Sprout Invoices](https://sproutinvoices.com).**
 
 **Support**
 

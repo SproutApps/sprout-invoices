@@ -658,9 +658,13 @@ form table .sa_addon {
 	font-weight: bold;
 }
 
-#adminmenu li#toplevel_page_sprout-invoices div.wp-menu-image.svg {
+#adminmenu li#toplevel_page_sprout-invoices .wp-menu-image img {
     background-size: inherit;
+    max-width: 100%;
+    max-height: 20px;
+    margin-top: -3px;
 }
+
 
 .si_inline_spinner {
 	float: none;
@@ -2081,7 +2085,7 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 
 
 .activate_message {
-	margin: 25px 0;
+	margin: 100px 0 150px 0;
 	padding: 15px 50px;
 	background-color: #e9f2fe;
 	/* border-top: 4px solid #e9f2fe; */
@@ -2416,4 +2420,49 @@ span.si_admin_show_recurring {
 }
 .si_recurring_status {
 	padding-top: 10px;
+}
+
+
+/**
+ * New Welcome Page
+ */
+.welcome_content p.heading_desc {
+	font-size: 1.2em;
+	text-align: center;
+	margin-bottom: 2em;
+}
+div#mascot_start {
+    width: 200px;
+    float: right;
+    margin: 5px 0px 5px 50px;
+}
+div#mascot_progress {
+    width: 400px;
+    float: right;
+    margin: 25px 20px 25px 0px;
+}
+.welcome_content .progress_tracker li {
+	list-style: none;
+	margin-bottom: 10px;
+}
+.welcome_content .progress_tracker li a {
+	text-decoration: none;
+	font-weight: 600;
+}
+.welcome_content .workflow-overview,
+.welcome_content .welcome_content {
+	margin-bottom: 50px
+}
+.welcome_content .progress_tracker {
+	margin-top: 100px;
+}
+#si_progress_track.progress_completed ol #happy_sprout {
+	width: 150px;
+	position: absolute;
+	bottom: 80px;
+	right: 20px;
+}
+#si_progress_tracker_wrap #happy_sprout {
+	width: 160px;
+	margin-top: -40px;
 }

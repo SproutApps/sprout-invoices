@@ -21,4 +21,4 @@
 <?php endif ?>
 
 <label class="si_input_label"><?php _e( 'Advanced', 'sprout-invoices' ) ?></label>
-<p><?php printf( __( 'Customizing templates for estimates, invoices, or any other front-end generated content from Sprout Invoices is easy. Review the <a href="%s">customization documentation</a> on how to add custom CSS, overriding templates within your (child) theme, and adding custom templates.', 'sprout-invoices' ), 'https://docs.sproutapps.co/article/38-customizing-templates' )  ?></p>
+<p><?php printf( __( 'Customizing templates for estimates, invoices, or any other front-end generated content from Sprout Invoices is easy. Review the <a href="%s">customization documentation</a> on how to add custom CSS, overriding templates within your (child) theme, and adding custom templates.', 'sprout-invoices' ), 'https://docs.sproutinvoices.com/article/38-customizing-templates' )  ?></p>

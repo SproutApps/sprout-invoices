@@ -144,6 +144,9 @@ class SI_Settings_API extends SI_Controller {
 	 * @return string              html
 	 */
 	public static function sprout_settings_header() {
+		if ( ! isset( $_GET['page'] ) || self::TEXT_DOMAIN === $_GET['page'] ) {
+			return;
+		}
 		$sub_pages = apply_filters( 'si_sub_admin_pages', array() );
 		uasort( $sub_pages, array( __CLASS__, 'sort_by_weight' ) );
 		$args = array(

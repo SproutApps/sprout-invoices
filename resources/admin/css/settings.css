@@ -315,6 +315,7 @@ header.si_header {
 	background-color: rgb(108,170,228);
 	margin-left:  -20px;
 	padding: 20px 20px;
+	height: 80px;
 }
 
 .si-header-nav {
@@ -376,12 +377,12 @@ header.si_header {
 
 .si_header a {
 	margin-top: 0px;
-	margin-bottom: 10px
+	margin-bottom: 10px;
+	/* margin-left: 150px; */
 }
 
 .si_header a img {
-	float: left;
-	height: 3em;
+	height: 10em;
 }
 
 .si_header a h1 {
@@ -392,9 +393,14 @@ header.si_header {
 	font-size: 3em;
 	font-weight: 200;
 	display: inline-block;
-	margin: .25em 0 0 10px;
+	margin: 55px 0 0 120px;
 }
-
+.si_header a img {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+	height: 100px;
+}
 .si_header a h1 {
 }
 
@@ -807,9 +813,14 @@ span.notification_status {
 #si_progress_tracker_wrap {
 	position: absolute;
 	width: auto;
-	top: 11px;
+	top: 45px;
 	right: 25vw;
 	/* float: right; */
+}
+@media (max-width:768px) {
+  #si_progress_tracker_wrap {
+  	display: none;
+  }
 }
 div#si_progress_track {
     position: relative;

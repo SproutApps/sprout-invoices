@@ -1,3 +1,11 @@
+= 19.1 =
+
+* New: Transition to new domain
+* New: New branding for Sprout Invoices
+* New: Getting started is changed up for new users
+* Fix: PDF purchase button links
+* Fix: Login compat with default theme
+
 = 19.0.2 =
 
 * Fix: Developer logs incorrectly enabled under some circumstances.
@@ -677,7 +685,7 @@ Security updates:
 = 7.1 =
 
 * NEW: Sprout Invoice specific user roles
-* FIX: Multiple Sprout Apps settings conflict fix
+* FIX: Multiple Sprout Invoices settings conflict fix
 
 = 7.0.3 =
 

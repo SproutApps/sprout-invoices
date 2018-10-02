@@ -79,7 +79,7 @@ class SI_Free_License extends SI_Controller {
 
 		$license_response = self::get_free_license( $_REQUEST['license'] );
 		if ( is_object( $license_response ) ) {
-			$message = __( 'Thank you for registering Sprout Invoices with Sprout Apps.', 'sprout-invoices' );
+			$message = __( 'Thank you for registering Sprout Invoices with us.', 'sprout-invoices' );
 			$response = array(
 					'license' => $license_response->license_key,
 					'uid' => $license_response->uid,

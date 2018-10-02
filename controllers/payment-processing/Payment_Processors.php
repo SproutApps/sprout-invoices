@@ -380,7 +380,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 						'type' => 'input',
 						'default' => get_option( self::MONEY_FORMAT_OPTION ),
 						'attributes' => array( 'class' => 'si_input si_disabled_input si_tooltip', 'disabled' => 'disabled', 'aria-label' => __( 'Tip: currency formatting can be adjusted per client', 'sprout-invoices' ) ),
-						'description' => sprintf( __( 'Default money formatting is based on the local (<code>%s</code>) this WordPress install was configured with during installation. Please <a href="%s">review the Sprout Invoices knowledgebase</a> if this needs to be changed.', 'sprout-invoices' ), get_locale(), 'https://docs.sproutapps.co/article/49-troubleshooting-money-currency-issues' ),
+						'description' => sprintf( __( 'Default money formatting is based on the local (<code>%s</code>) this WordPress install was configured with during installation. Please <a href="%s">review the Sprout Invoices knowledgebase</a> if this needs to be changed.', 'sprout-invoices' ), get_locale(), 'https://docs.sproutinvoices.com/article/49-troubleshooting-money-currency-issues' ),
 					),
 				),
 			),
