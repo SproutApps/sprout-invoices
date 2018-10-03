@@ -590,7 +590,7 @@ class SI_Templating_API extends SI_Controller {
 								<?php endforeach ?>
 							</select>
 						<?php else : ?>
-							<span><?php printf( __( 'No <a href="%s" target="_blank">Custom Templates</a> Found', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
+							<span><?php printf( __( 'No <a href="%s" target="_blank">Custom Templates</a> Found', 'sprout-invoices' ), 'https://sproutinvoices.com/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
 						<?php endif ?>
 			 		</div>
 					<p>
@@ -680,7 +680,7 @@ class SI_Templating_API extends SI_Controller {
 							<?php endforeach ?>
 						</select>
 					<?php else : ?>
-						<span><?php printf( __( 'No <a href="%s" target="_blank">Custom Templates</a> Found', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
+						<span><?php printf( __( 'No <a href="%s" target="_blank">Custom Templates</a> Found', 'sprout-invoices' ), 'https://sproutinvoices.com/support/knowledgebase/sprout-invoices/customizing-templates/' ) ?></span>
 					<?php endif ?>
 		 		</div>
 				<p>

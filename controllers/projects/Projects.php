@@ -191,7 +191,7 @@ class SI_Projects extends SI_Controller {
 	 * @return
 	 */
 	public static function show_psp_meta_box( $post ) {
-		printf( '<p class="description help_block"><a href="%s"><img src="%s" /></a><br/>%s</p>', 'https://sproutapps.co/sprout-invoices/integrations/', SI_RESOURCES . 'admin/img/project-panorama-logo.png', __( 'SI now integrates with <a href="https://sproutapps.co/sprout-invoices/integrations/">Project Panorama</a>.', 'sprout-invoices' ) );
+		printf( '<p class="description help_block"><a href="%s"><img src="%s" /></a><br/>%s</p>', 'https://sproutinvoices.com/sprout-invoices/integrations/', SI_RESOURCES . 'admin/img/project-panorama-logo.png', __( 'SI now integrates with <a href="https://sproutinvoices.com/sprout-invoices/integrations/">Project Panorama</a>.', 'sprout-invoices' ) );
 	}
 
 	/**
@@ -576,8 +576,8 @@ class SI_Projects extends SI_Controller {
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/projects/', __( 'Documentation', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutapps.co/support/' ), __( 'Support', 'sprout-invoices' ) )
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutinvoices.com/support/knowledgebase/sprout-invoices/projects/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutinvoices.com/support/' ), __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

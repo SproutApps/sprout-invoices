@@ -8,7 +8,7 @@
  *
  * Theme overrides are easy too, so there's no excuse...
  *
- * https://sproutapps.co/support/knowledgebase/sprout-invoices/customizing-templates/
+ * https://sproutinvoices.com/support/knowledgebase/sprout-invoices/customizing-templates/
  *
  * You find something that you're not able to customize? We want your experience to be awesome so let support know and we'll be able to help you.
  *

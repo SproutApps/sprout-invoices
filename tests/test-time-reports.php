@@ -19,10 +19,10 @@ class Test_Reporting extends WP_UnitTestCase {
 
 	function build_test_invoice( $total = 0 ) {
 		$user_args = array(
-			'user_login' => 'unit-tests@sproutapps.co',
+			'user_login' => 'unit-tests@sproutinvoices.com',
 			'display_name' => 'Unit Tester',
 			'user_pass' => wp_generate_password(), // random password
-			'user_email' => 'unit-tests@sproutapps.co',
+			'user_email' => 'unit-tests@sproutinvoices.com',
 		);
 		$user_id = SI_Clients::create_user( $user_args );
 

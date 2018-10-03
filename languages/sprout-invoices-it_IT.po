@@ -4,8 +4,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-16 14:54-0800\n"
 "PO-Revision-Date: 2017-02-14 16:25+0100\n"
-"Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
-"Language-Team: Sprout Venture <l18n@sproutapps.co>\n"
+"Last-Translator: Dan Cameron <l10n@sproutinvoices.com>\n"
+"Language-Team: Sprout Venture <l18n@sproutinvoices.com>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5516,10 +5516,10 @@ msgstr "Dati"
 
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:202
 msgid ""
-"SI now integrates with <a href=\"https://sproutapps.co/sprout-invoices/"
+"SI now integrates with <a href=\"https://sproutinvoices.com/sprout-invoices/"
 "integrations/\">Project Panorama</a>."
 msgstr ""
-"SI ora si integra con <a href=\"https://sproutapps.co/sprout-invoices/"
+"SI ora si integra con <a href=\"https://sproutinvoices.com/sprout-invoices/"
 "integrations/\">Panorama progetto</a>."
 
 #: plugins/sprout-invoices-pro/controllers/projects/Projects.php:287
@@ -7358,12 +7358,12 @@ msgid ""
 "Generating a free license key is not required but takes seconds! Your email "
 "will be used to create a unique Sprout Apps license key that will enable "
 "future features (i.e. easy add-on installs from <a href=\"%s\">https://"
-"sproutapps.co</a>)."
+"sproutinvoices.com</a>)."
 msgstr ""
 "Generare una chiave di licenza gratuita non è obbligatorio ma richiede pochi "
 "secondi! Il tuo indirizzo email sarà utilizzato per creare una chiave di "
 "licenza Sprout Apps che attiverà future caratteristiche (es.: installazione "
-"facilitata Add-ons da <a href=\"%s\">https://sproutapps.co</a>)."
+"facilitata Add-ons da <a href=\"%s\">https://sproutinvoices.com</a>)."
 
 #: plugins/sprout-invoices-pro/views/admin/sprout-invoices-dashboard.php:99
 #, php-format

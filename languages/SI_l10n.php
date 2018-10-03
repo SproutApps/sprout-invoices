@@ -81,8 +81,8 @@ class SI_l10n extends SI_Controller {
 				esc_html( self::PLUGIN_NAME ),
 				esc_html( $translations[ $language ]['native_name'] ),
 				esc_url( 'https://translate.wordpress.org/projects/wp-plugins/sprout-invoices/' ),
-				si_get_sa_link( 'https://sproutapps.co/sprout-invoices/purchase/', 'translation' ),
-				si_get_sa_link( 'https://sproutapps.co/marketplace/', 'translation' )
+				si_get_sa_link( 'https://sproutinvoices.com/sprout-invoices/purchase/', 'translation' ),
+				si_get_sa_link( 'https://sproutinvoices.com/marketplace/', 'translation' )
 			)
 		);
 	}

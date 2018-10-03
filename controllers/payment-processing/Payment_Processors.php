@@ -770,8 +770,8 @@ abstract class SI_Payment_Processors extends SI_Controller {
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/payment-settings/', __( 'Documentation', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutapps.co/support/' ), __( 'Support', 'sprout-invoices' ) )
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutinvoices.com/support/knowledgebase/sprout-invoices/payment-settings/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutinvoices.com/support/' ), __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

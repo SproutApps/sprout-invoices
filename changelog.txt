@@ -112,7 +112,7 @@
 * New: New Notifications: Payment Cleared, and Recurring Invoice
 * New: Additional Importer (Sliced)
 
-More information found [here](https://sproutapps.co/news/summer-update-brings-all-new-sprout-invoices-admin/).
+More information found [here](https://sproutinvoices.com/news/summer-update-brings-all-new-sprout-invoices-admin/).
 
 = 17.2.1 =
 
@@ -696,7 +696,7 @@ Security updates:
 
 = 7.0 =
 
-https://sproutapps.co/news/sprout-invoices-7-0-banners-release-party-🎉/
+https://sproutinvoices.com/news/sprout-invoices-7-0-banners-release-party-🎉/
 
 * NEW: WooCommerce Integration is now bundled (for pro users).
 * NEW: Completely revamped Stats Dashboard.

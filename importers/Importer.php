@@ -204,13 +204,13 @@ class SI_Importer extends SI_Controller {
 			$screen->add_help_tab( array(
 				'id' => 'importing-about',
 				'title' => __( 'About Importing', 'sprout-invoices' ),
-				'content' => sprintf( '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>', __( 'This feature provides a way for you to import data from external invoicing services, including Harvest, Freshbooks, or WP-Invoice.', 'sprout-invoices' ), __( ' If you have your data in one of these systems you can import all of your clients, contacts, estimates, invoices, and payments into Sprout Invoices.', 'sprout-invoices' ), si_get_sa_link( 'https://sproutapps.co/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/' ), __( 'More Information', 'sprout-invoices' ) ),
+				'content' => sprintf( '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>', __( 'This feature provides a way for you to import data from external invoicing services, including Harvest, Freshbooks, or WP-Invoice.', 'sprout-invoices' ), __( ' If you have your data in one of these systems you can import all of your clients, contacts, estimates, invoices, and payments into Sprout Invoices.', 'sprout-invoices' ), si_get_sa_link( 'https://sproutinvoices.com/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/' ), __( 'More Information', 'sprout-invoices' ) ),
 			) );
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/importing/', __( 'Documentation', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutapps.co/support/' ), __( 'Support', 'sprout-invoices' ) )
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutinvoices.com/support/knowledgebase/sprout-invoices/importing/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutinvoices.com/support/' ), __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

@@ -27,7 +27,7 @@
 							<p><?php _e( 'Sprout Invoices has over 40 bundled add-ons to that would be enabled and/or disabled  individually here to make Sprout Invoices work for you!', 'sprout-invoices' ) ?></p>
 
 							<p>
-								<p><span class="dashicons dashicons-arrow-left-alt" style="margin-top: 2px;"></span>&nbsp;&nbsp;<?php printf( 'A full list of the available add-ons can be found on the "Available Add-ons" tab. Although our site has a lot of info too &mdash; <a href="%s">https://sproutapps.co</a>.</p>', si_get_purchase_link() ) ?></p>
+								<p><span class="dashicons dashicons-arrow-left-alt" style="margin-top: 2px;"></span>&nbsp;&nbsp;<?php printf( 'A full list of the available add-ons can be found on the "Available Add-ons" tab. Although our site has a lot of info too &mdash; <a href="%s">https://sproutinvoices.com</a>.</p>', si_get_purchase_link() ) ?></p>
 							</p>
 							
 						</section>

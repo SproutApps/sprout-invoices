@@ -7,7 +7,7 @@
 class SA_Addons extends SI_Controller {
 	const SETTINGS_PAGE = 'addons';
 	const ADDON_OPTION = 'si_active_addons_v3';
-	const API_CB = 'https://sproutapps.co/';
+	const API_CB = 'https://sproutinvoices.com/';
 	const PROGRESS_TRACKER = 'si_addons_progress';
 	private static $active_addons = array();
 

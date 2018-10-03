@@ -51,7 +51,7 @@ class SI_Settings_API extends SI_Controller {
 		/*/
 		$messages[] = array(
 			'type' => 'info',
-			'content' => sprintf( __( '<b>Summer Update Brings All New Sprout Invoices Admin</b>! Learn more about the release <a href="%1$s" target="_blank">at sproutapps.co</a>.', 'sprout-invoices' ), si_get_sa_link('https://sproutapps.co/news/summer-update-brings-all-new-sprout-invoices-admin/') ),
+			'content' => sprintf( __( '<b>Summer Update Brings All New Sprout Invoices Admin</b>! Learn more about the release <a href="%1$s" target="_blank">at sproutinvoices.com</a>.', 'sprout-invoices' ), si_get_sa_link('https://sproutinvoices.com/news/summer-update-brings-all-new-sprout-invoices-admin/') ),
 		);
 		/**/
 

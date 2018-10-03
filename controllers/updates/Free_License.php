@@ -10,7 +10,7 @@
 class SI_Free_License extends SI_Controller {
 	const LICENSE_KEY_OPTION = 'si_license_key';
 	const LICENSE_UID_OPTION = 'si_uid';
-	const API_CB = 'https://sproutapps.co/';
+	const API_CB = 'https://sproutinvoices.com/';
 	protected static $license_key;
 	protected static $uid;
 

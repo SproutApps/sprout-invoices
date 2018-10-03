@@ -56,7 +56,7 @@ class SI_Admin_Settings extends SI_Controller {
 		if ( $si == $plugin_file ) {
 
 			$settings = array( 'settings' => '<a href="admin.php?page=sprout-invoices-settings">' . __( 'Settings', 'General' ) . '</a>' );
-			$support_link = array( 'support' => sprintf( '<a href="%s">%s</a>', si_get_sa_link( 'https://sproutapps.co/support/' ), __( 'Support', 'sprout-invoices' ) ) );
+			$support_link = array( 'support' => sprintf( '<a href="%s">%s</a>', si_get_sa_link( 'https://sproutinvoices.com/support/' ), __( 'Support', 'sprout-invoices' ) ) );
 			$site_link = array( 'site' => sprintf( '<a href="%s">%s</a>', si_get_purchase_link(), __( 'Add-ons', 'sprout-invoices' ) ) );
 
 			$actions = array_merge( $support_link, $actions );
@@ -166,7 +166,7 @@ class SI_Admin_Settings extends SI_Controller {
 				'title' => __( 'Currency Formatting', 'sprout-invoices' ),
 				'weight' => 250,
 				'tab' => 'advanced',
-				'description' => sprintf( __( '<p>Manually set your currency formatting. More information about these settings and using a filter can be found in the <a href="%s">documentation</a>.</p>', 'sprout-invoices' ), 'https://sproutapps.co/support/knowledgebase/sprout-invoices/troubleshooting/troubleshooting-moneycurrency-issues/' ),
+				'description' => sprintf( __( '<p>Manually set your currency formatting. More information about these settings and using a filter can be found in the <a href="%s">documentation</a>.</p>', 'sprout-invoices' ), 'https://sproutinvoices.com/support/knowledgebase/sprout-invoices/troubleshooting/troubleshooting-moneycurrency-issues/' ),
 				'settings' => self::settings_currency_locale_fields(),
 			);
 		return apply_filters( 'si_general_settings', $settings );
@@ -621,8 +621,8 @@ class SI_Admin_Settings extends SI_Controller {
 
 			$screen->set_help_sidebar(
 				sprintf( '<p><strong>%s</strong></p>', __( 'For more information:', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutapps.co/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/', __( 'Documentation', 'sprout-invoices' ) ) .
-				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutapps.co/support/' ), __( 'Support', 'sprout-invoices' ) )
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', 'https://sproutinvoices.com/support/knowledgebase/sprout-invoices/sprout-invoices-getting-started/', __( 'Documentation', 'sprout-invoices' ) ) .
+				sprintf( '<p><a href="%s" class="button">%s</a></p>', si_get_sa_link( 'https://sproutinvoices.com/support/' ), __( 'Support', 'sprout-invoices' ) )
 			);
 		}
 	}

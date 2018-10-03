@@ -215,8 +215,8 @@ msgid "Recently Overdue &amp; Unpaid"
 msgstr "Recentemente atrasado &amp; a pagar"
 
 #: controllers/projects/Projects.php:202
-msgid "SI now integrates with <a href=\"https://sproutapps.co/sprout-invoices/integrations/\">Project Panorama</a>."
-msgstr "O SI agora se integra com o <a href=\"https://sproutapps.co/sprout-invoices/integrations/\">Panorama do Projeto</a>."
+msgid "SI now integrates with <a href=\"https://sproutinvoices.com/sprout-invoices/integrations/\">Project Panorama</a>."
+msgstr "O SI agora se integra com o <a href=\"https://sproutinvoices.com/sprout-invoices/integrations/\">Panorama do Projeto</a>."
 
 #: controllers/updates/freemius-sdk/templates/account.php:324
 msgctxt "verb"
@@ -1751,16 +1751,16 @@ msgid "Time Type"
 msgstr "Tipo de hora"
 
 #. Author URI of the plugin/theme
-msgid "https://sproutapps.co"
-msgstr "https://sproutapps.co"
+msgid "https://sproutinvoices.com"
+msgstr "https://sproutinvoices.com"
 
 #. Description of the plugin/theme
-msgid "App allows for any WordPress site to accept estimates, create invoices and receive invoice payments. Learn more at <a href=\"https://sproutapps.co\">Sprout Apps</a>."
-msgstr "O aplicativo permite que qualquer site do WordPress aceite estimativas, crie faturas e receba pagamentos de faturas. Saiba mais em <a href=\"https://sproutapps.co\">Sprout Apps</a>."
+msgid "App allows for any WordPress site to accept estimates, create invoices and receive invoice payments. Learn more at <a href=\"https://sproutinvoices.com\">Sprout Apps</a>."
+msgstr "O aplicativo permite que qualquer site do WordPress aceite estimativas, crie faturas e receba pagamentos de faturas. Saiba mais em <a href=\"https://sproutinvoices.com\">Sprout Apps</a>."
 
 #. Plugin URI of the plugin/theme
-msgid "https://sproutapps.co/sprout-invoices/"
-msgstr "https://sproutapps.co/sprout-invoices/"
+msgid "https://sproutinvoices.com/sprout-invoices/"
+msgstr "https://sproutinvoices.com/sprout-invoices/"
 
 #: views/templates/invoice/invoice.php:92
 msgid "TEMP"
@@ -1941,8 +1941,8 @@ msgid "The Sprout Invoices Flow"
 msgstr "O Fluxo Sprout Faturas"
 
 #: views/admin/sprout-invoices-dashboard.php:26
-msgid "Generating a free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key that will enable future features (i.e. easy add-on installs from <a href=\"%s\">https://sproutapps.co</a>)."
-msgstr "Gerar uma chave de licença livre não é necessário, mas leva segundos! Seu e-mail será usado para criar uma chave de licença exclusiva do Sprout Apps que habilitará os recursos futuros (ou seja, instalações de add-on fáceis de <a href=\"%s\">https://sproutapps.co</a>)."
+msgid "Generating a free license key is not required but takes seconds! Your email will be used to create a unique Sprout Apps license key that will enable future features (i.e. easy add-on installs from <a href=\"%s\">https://sproutinvoices.com</a>)."
+msgstr "Gerar uma chave de licença livre não é necessário, mas leva segundos! Seu e-mail será usado para criar uma chave de licença exclusiva do Sprout Apps que habilitará os recursos futuros (ou seja, instalações de add-on fáceis de <a href=\"%s\">https://sproutinvoices.com</a>)."
 
 #: views/admin/sprout-invoices-dashboard.php:21
 msgid "Get License"
