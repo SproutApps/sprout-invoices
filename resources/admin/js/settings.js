@@ -191,7 +191,7 @@ new Vue( {
 			// Make a POST request to the REST API route that we registered in our PHP file
 			jQuery.ajax( {
 
-				url: SI_Settings.siteUrl + '/wp-json/si-settings/v1/manage-pp',
+				url: SI_Settings.restURL + 'si-settings/v1/manage-pp',
 				method: 'POST',
 				data: { 'activate': processor, 'update_cc': true },
 
@@ -206,7 +206,17 @@ new Vue( {
 				},
 
 				// callback to run if our request caused an error
-				error: ( data ) => this.message = data.responseText,
+				error: ( data, status ) => { 
+					this.message = data.responseText;
+					if ( 404 === data.status ) {
+						alert( 'The JSON API was not found. 404: ' + SI_Settings.restURL );
+						return false;
+					}
+					if ( 500 === data.status ) {
+						alert( 'The JSON API is not reachable. 500: ' + SI_Settings.restURL );
+						return false;
+					}
+				},
 
 				// when our request is complete (successful or not), reset the state to indicate we are no longer saving
 				complete: () => this.isSaving = false,
@@ -231,7 +241,7 @@ new Vue( {
 			// Make a POST request to the REST API route that we registered in our PHP file
 			jQuery.ajax( {
 
-				url: SI_Settings.siteUrl + '/wp-json/si-settings/v1/manage-pp',
+				url: SI_Settings.restURL + 'si-settings/v1/manage-pp',
 				method: 'POST',
 				data: action,
 
@@ -246,7 +256,17 @@ new Vue( {
 				},
 
 				// callback to run if our request caused an error
-				error: ( data ) => this.message = data.responseText,
+				error: ( data, status ) => { 
+					this.message = data.responseText;
+					if ( 404 === data.status ) {
+						alert( 'The JSON API was not found. 404: ' + SI_Settings.restURL );
+						return false;
+					}
+					if ( 500 === data.status ) {
+						alert( 'The JSON API is not reachable. 500: ' + SI_Settings.restURL );
+						return false;
+					}
+				},
 
 				// when our request is complete (successful or not), reset the state to indicate we are no longer saving
 				complete: () => this.isSaving = false,
@@ -271,7 +291,7 @@ new Vue( {
 			// Make a POST request to the REST API route that we registered in our PHP file
 			jQuery.ajax( {
 
-				url: SI_Settings.siteUrl + '/wp-json/si-settings/v1/manage-addon',
+				url: SI_Settings.restURL + 'si-settings/v1/manage-addon',
 				method: 'POST',
 				data: action,
 
@@ -286,7 +306,17 @@ new Vue( {
 				},
 
 				// callback to run if our request caused an error
-				error: ( data ) => this.message = data.responseText,
+				error: ( data, status ) => { 
+					this.message = data.responseText;
+					if ( 404 === data.status ) {
+						alert( 'The JSON API was not found. 404: ' + SI_Settings.restURL );
+						return false;
+					}
+					if ( 500 === data.status ) {
+						alert( 'The JSON API is not reachable. 500: ' + SI_Settings.restURL );
+						return false;
+					}
+				},
 
 				// when our request is complete (successful or not), reset the state to indicate we are no longer saving
 				complete: () => this.isSaving = false,
@@ -340,7 +370,7 @@ new Vue( {
 			// Make a POST request to the REST API route that we registered in our PHP file
 			jQuery.ajax( {
 
-				url: SI_Settings.siteUrl + '/wp-json/si-settings/v1/save',
+				url: SI_Settings.restURL + 'si-settings/v1/save',
 				method: 'POST',
 				data: this.vm,
 
@@ -358,7 +388,17 @@ new Vue( {
 				},
 
 				// callback to run if our request caused an error
-				error: ( data ) => this.message = data.responseText,
+				error: ( data, status ) => { 
+					this.message = data.responseText;
+					if ( 404 === data.status ) {
+						alert( 'The JSON API was not found. 404: ' + SI_Settings.restURL );
+						return false;
+					}
+					if ( 500 === data.status ) {
+						alert( 'The JSON API is not reachable. 500: ' + SI_Settings.restURL );
+						return false;
+					}
+				},
 
 				// when our request is complete (successful or not), reset the state to indicate we are no longer saving
 				complete: () => this.isSaving = false,

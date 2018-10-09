@@ -1,3 +1,10 @@
+= 19.1.1 =
+
+* Fix: Settings not saved on sites with differing HOME/SITE urls.
+* Update: Partial Payments and Deposit option logic
+* Fix: Pointer conflicts
+* NEW: si_default_due_in_days includes invoice object as param
+
 = 19.1 =
 
 * New: Transition to new domain

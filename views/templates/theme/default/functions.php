@@ -32,8 +32,7 @@ function si_default_theme_inject_css() {
 			.invoice .unit,
 			#header .inner .intro .open,
 			#save_signature_via_ajax,
-			body a,
-			.history article .posted, .line_item_comments span.comment_date, .line_item_comment_wrap .submit.button {
+			body a, .line_item_comments span.comment_date, .line_item_comment_wrap .submit.button {
 				color: <?php echo esc_attr( $primary_color ); ?>;
 			}
 
@@ -46,7 +45,8 @@ function si_default_theme_inject_css() {
 		<?php if ( $primary_text_color ) :  ?>
 			body,
 			body#invoice,
-			body#estimate {
+			body#estimate,
+			.history article .posted {
 			    color: <?php echo esc_attr( $primary_text_color ); ?>;
 			}
 		<?php endif ?>

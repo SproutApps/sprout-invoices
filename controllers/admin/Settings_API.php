@@ -291,7 +291,7 @@ class SI_Settings_API extends SI_Controller {
 		// Sending data to our plugin settings JS file
 		wp_localize_script( 'sprout-invoices-settings', 'SI_Settings', array(
 			'nonce' => wp_create_nonce( 'wp_rest' ),
-			'siteUrl' => get_site_url(),
+			'restURL' => esc_url_raw( rest_url() ),
 			'options' => apply_filters( 'si_settings_options', self::add_settings_options() ),
 		) );
 	}

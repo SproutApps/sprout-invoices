@@ -2,7 +2,7 @@
 
 /**
  * @package Sprout_Invoices
- * @version 19.1
+ * @version 19.1.1
  */
 
 /*
@@ -10,7 +10,7 @@
  * Plugin URI: https://sproutinvoices.com
  * Description: Easily accept estimates, create invoices, and receive invoice payments on your WordPress site. Learn more at <a href="https://sproutinvoices.com">sproutinvoices.com</a>.
  * Author: Sprout Invoices
- * Version: 19.1
+ * Version: 19.1.1
  * Author URI: https://sproutinvoices.com
  * Text Domain: sprout-invoices
  * Domain Path: languages
