@@ -1,6 +1,10 @@
 <?php
 
+add_action( 'si_theme_customizer', 'si_original_theme_customizer_options' );
+
 function si_original_theme_customizer_options( $wp_customize ) {
+
+	if ( 'original' === SI_Templating_API::get_invoice_theme_option() ) {
 		// Highlight and link color
 		$wp_customize->add_setting( 'si_invoices_color', array(
 		    'default'           => '#FF5B4D',
@@ -13,7 +17,8 @@ function si_original_theme_customizer_options( $wp_customize ) {
 		    'section'  => 'si_custommizer_section',
 		    'settings' => 'si_invoices_color',
 		) ) );
-
+	}
+	if ( 'original' === SI_Templating_API::get_estimate_theme_option() ) {
 		// Highlight and link color
 		$wp_customize->add_setting( 'si_estimates_color', array(
 		    'default'           => '#4D9FFF',
@@ -26,5 +31,5 @@ function si_original_theme_customizer_options( $wp_customize ) {
 		    'section'  => 'si_custommizer_section',
 		    'settings' => 'si_estimates_color',
 		) ) );
+	}
 }
-add_action( 'customize_register', 'si_original_theme_customizer_options' );

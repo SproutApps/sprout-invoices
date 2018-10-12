@@ -1,3 +1,10 @@
+= 19.5 =
+
+* NEW: Basic Theme
+* NEW: Phone and Fax
+* Update: CSS for Basic and Default themes
+* NEW: Shipping add-on support for new themes
+
 = 19.1.1 =
 
 * Fix: Settings not saved on sites with differing HOME/SITE urls.

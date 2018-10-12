@@ -39,6 +39,52 @@ class SI_Customizer extends SI_Controller {
 			'description' => __( 'Upload a logo to replace the default estimate/invoice logo.', 'sprout-invoices' ),
 		) );
 
+		/*/
+		$wp_customize->add_setting( 'si_invoice_theme', array(
+			'sanitize_callback' => array( __CLASS__, 'save_theme_option' ),
+			'default' => SI_Templating_API::get_invoice_theme_option(),
+			//'transport' => 'postMessage',
+		) );
+
+		$wp_customize->add_setting( 'si_estimate_theme', array(
+			'sanitize_callback' => array( __CLASS__, 'save_est_theme_option' ),
+			'default' => SI_Templating_API::get_estimate_theme_option(),
+			//'transport' => 'postMessage',
+		) );
+
+		$wp_customize->add_control(
+			'si_invoice_theme',
+			array(
+				'label'    => __( 'Select Theme', 'sprout-invoices' ),
+				'section'  => 'si_custommizer_section',
+				'settings' => 'si_invoice_theme',
+				'type'     => 'select',
+				'choices'  => array(
+					'default' => 'Default',
+					'basic' => 'Basic',
+					'slate' => 'Slate',
+					'original' => 'Original',
+				),
+			)
+		);
+
+		$wp_customize->add_control(
+			'si_estimate_theme',
+			array(
+				'label'    => __( 'Select Theme', 'sprout-invoices' ),
+				'section'  => 'si_custommizer_section',
+				'settings' => 'si_estimate_theme',
+				'type'     => 'select',
+				'choices'  => array(
+					'default' => 'Default',
+					'basic' => 'Basic',
+					'slate' => 'Slate',
+					'original' => 'Original',
+				),
+			)
+		);
+		/**/
+
 		$wp_customize->add_setting( 'si_logo', array(
 			'sanitize_callback' => 'esc_url_raw',
 			//'transport' => 'postMessage',
@@ -50,6 +96,17 @@ class SI_Customizer extends SI_Controller {
 			'settings' => 'si_logo',
 		) ) );
 
+		do_action( 'si_theme_customizer', $wp_customize );
+
+	}
+
+	public static function save_theme_option( $value ) {
+		update_option( SI_Templating_API::INV_THEME_OPION, $value );
+		return $value;
+	}
+	public static function save_est_theme_option( $value ) {
+		update_option( SI_Templating_API::EST_THEME_OPION, $value );
+		return $value;
 	}
 
 	/**

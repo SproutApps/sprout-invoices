@@ -108,6 +108,56 @@ if ( ! function_exists( 'si_company_name' ) ) :
 	}
 endif;
 
+
+if ( ! function_exists( 'si_get_company_phone' ) ) :
+	/**
+ * Get the site company phone
+ * @param  integer $id
+ * @return string
+ */
+	function si_get_company_phone() {
+		$address = si_get_doc_address();
+		$phone = ( isset( $address['phone'] ) ) ? $address['phone'] : get_bloginfo( 'phone' );
+		return apply_filters( 'si_get_company_phone', $phone );
+	}
+endif;
+
+if ( ! function_exists( 'si_company_phone' ) ) :
+	/**
+ * Echo the site company phone
+ * @param  integer $id
+ * @return string
+ */
+	function si_company_phone() {
+		echo apply_filters( 'si_company_phone', si_get_company_phone() );
+	}
+endif;
+
+
+if ( ! function_exists( 'si_get_company_fax' ) ) :
+	/**
+ * Get the site company fax
+ * @param  integer $id
+ * @return string
+ */
+	function si_get_company_fax() {
+		$address = si_get_doc_address();
+		$fax = ( isset( $address['fax'] ) ) ? $address['fax'] : get_bloginfo( 'fax' );
+		return apply_filters( 'si_get_company_fax', $fax );
+	}
+endif;
+
+if ( ! function_exists( 'si_company_fax' ) ) :
+	/**
+ * Echo the site company fax
+ * @param  integer $id
+ * @return string
+ */
+	function si_company_fax() {
+		echo apply_filters( 'si_company_fax', si_get_company_fax() );
+	}
+endif;
+
 if ( ! function_exists( 'si_get_doc_address' ) ) :
 	/**
  * Get the formatted site address

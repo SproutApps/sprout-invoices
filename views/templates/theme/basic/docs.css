@@ -40,10 +40,8 @@ a,
 a img,
 a:before,
 a:after {
-  /* text-decoration: none; */
   transition-duration: .25s;
-  color: inherit;
-  }
+  color: inherit; }
 
 button {
   cursor: pointer; }
@@ -81,9 +79,10 @@ body {
   font-size: 14px;
   font-weight: 300;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(0, 0, 0, 0.75);
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility; }
+  text-rendering: optimizeLegibility;
+  }
   body strong {
     font-weight: 700; }
 
@@ -93,7 +92,7 @@ body {
   border: none;
   border-radius: 6px;
   font-family: 'Roboto', sans-serif;
-  color: rgba(255, 255, 255, 0.85);
+  color: #000;
   height: 50px;
   display: inline-block;
   padding: 0 20px;
@@ -101,18 +100,24 @@ body {
   -webkit-font-smoothing: subpixel-antialiased;
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
+  background-color: #EEE;
   text-decoration: none;
+  }
+  #paybar .button {
+  color: #EEE;
   }
 
 /* Body
 ---------------------------------------------------------------------------------------------------- */
 body {
-  background-color: #4086b0; }
+  background-color: #FFF;
+  }
 
 .row {
   width: 100%;
-  float: left;
-  position: relative; }
+  float: right;
+  position: relative;
+  }
   .row .inner {
     width: 80%;
     max-width: 800px;
@@ -122,8 +127,9 @@ body {
 /* The Main Header
 ---------------------------------------------------------------------------------------------------- */
 #header {
-  background-color: #438cb7;
-  text-align: center; }
+  background-color: #FFF;
+  text-align: center;
+  }
   #header .inner {
     padding: 30px 0 50px;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.75);
@@ -133,10 +139,11 @@ body {
       #header .inner {
         padding: 50px 0 43px; } }
     #header .inner img {
-      height: 10vw;
+      height: 5vw;
       max-width: 100%;
-      display: inline-block;
-      margin-bottom: 12px; }
+      float: left;
+      /* margin-bottom: 12px; */
+      }
       @media (max-width: 900px) {
         #header .inner img {
           height: 20vw;
@@ -144,39 +151,41 @@ body {
     #header .inner .intro h1 {
       font-size: 32px;
       line-height: 1.2;
-      margin-bottom: 14px; }
+      margin-bottom: 14px;
+      font-weight: 900;
+      }
       @media (max-width: 900px) {
         #header .inner .intro h1 {
           font-size: 22px; } }
       @media (max-width: 900px) {
         #header .inner .intro h1 {
           font-size: 22px; } }
-    #header .inner .intro span {
+    #header .inner .current_status span {
       display: inline-block;
-      font-size: 18px;
-      font-weight: 900;
-      margin-bottom: 22px; }
-    #header .inner .history_message .open {
-      height: 30px;
-      display: inline-block;
-      padding: 0 12px;
-      margin-bottom: 60px ;
-      background-color: #4086b0;
-      border-radius: 15px;
-      background-color: rgba(255, 255, 255, 0.75);
-      font-size: 12px;
-      font-weight: 900;
-      line-height: 30px;
+      padding: 5px 12px;
+      background-color: #EEE;
+      font-size: 10px;
+      font-weight: 800;
       text-transform: uppercase;
-      color: #4086b0; }
+       background-color: #000;
+       color: #FFF;
+       margin-bottom: 15px;
+     }
 
 /* The Invoice Intro
 ---------------------------------------------------------------------------------------------------- */
 #intro .inner {
-  padding: 42px 0 29px; }
+  /* padding: 42px 0 29px; */
+  }
   #intro .inner .column {
     width: 50%;
     float: left; }
+     #intro .inner #fromto_info.column {
+      width: 70%;
+    }
+     #intro .inner #invoice_info.column {
+      width: 30%;
+    }
     #intro .inner .column:last-of-type {
       text-align: right; }
     @media (max-width: 480px) {
@@ -186,19 +195,59 @@ body {
         #intro .inner .column:last-of-type {
           margin-top: 35px;
           text-align: center; } }
-    #intro .inner .column span {
+    #intro .inner .column .invoice_info {
+      font-size: 16px;
+      margin-bottom: 8px;
+      }
+      #intro .inner .column #deposit_total.invoice_info {
+        margin-top: 10px;
+      }
+      #intro .inner .column #deposit_total.invoice_info,
+      #intro .inner .column #total_due.invoice_info {
+           background-color: #EEE;
+           padding: 10px 20px;
+           font-size: 22px;
+           font-weight: 800;
+           width: 100%;
+           float: right;
+           clear: both;
+           margin-bottom: 0;
+       }
+      #intro .inner .column #total_due.invoice_info {
+        background-color: #000;
+        color: #FFF;
+      }
+      @media (max-width: 480px) {
+         #intro .inner .column #deposit_total.invoice_info,
+         #intro .inner .column #total_due.invoice_info {
+           min-width: 100%;
+         }
+       }
+      #intro .inner .column span.info {
       font-size: 12px;
-      color: rgba(255, 255, 255, 0.25);
-      font-weight: 400;
-      text-transform: uppercase; }
+      font-weight: 600;
+      text-transform: uppercase;
+      width: 100%;
+      display: block;
+      }
     #intro .inner .column h2 {
       width: 100%;
       float: left;
-      padding-bottom: 7px;
-      margin-bottom: 6px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 16px;
+      font-weight: 800;
+      }
+      #intro .inner .column h2 span {
+        font-weight: 200;
+        font-size: .7em;
+        text-transform: uppercase;
+        
+      }
+      #intro .inner .column h2.client_to {
+        margin-top: 26px;
+      }
+     #intro .inner .column h3 {
       font-size: 18px;
-      font-weight: 900; }
+      }
     #intro .inner .column ul li:first-of-type {
       font-weight: 400;
       color: #ffffff; }
@@ -209,32 +258,27 @@ body {
 
 /* Invoice Section Titles
 ---------------------------------------------------------------------------------------------------- */
+
+.title h2 {
+    padding: 8px 0px;
+    border-bottom: 1px solid #EEE;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    }
+
 .invoice .title {
-  height: 30px;
+  /* height: 30px; */
   margin-bottom: 11px;
   overflow: hidden;
-  text-align: center; }
-  .invoice .title:after {
-    width: 100%;
-    height: 30px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    z-index: -1;
-    border: 1px solid rgba(255, 255, 255, 0.75);
-    border-radius: 6px;
-    content: ''; }
+  /* text-align: center; */
+  }
   .invoice .title h2 {
-    height: 30px;
     display: inline-block;
-    padding: 0 12px;
-    background-color: #4086b0;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.75);
+    padding: 8px 16px;
     font-size: 12px;
-    font-weight: 900;
-    line-height: 28px;
-    text-transform: uppercase; }
+    margin-bottom: 8px;
+    }
 
 .invoice .unit {
   height: 19px;
@@ -248,18 +292,23 @@ body {
   line-height: 20px;
   color: #4086b0; }
 
+
+
 /* Import Work and Totals
 ---------------------------------------------------------------------------------------------------- */
 /* Items
 ---------------------------------------------------------------------------------------------------- */
 #items {
-  margin-bottom: 29px; }
+  margin: 30px 0;
+  }
   #items .title {
-    margin-bottom: 7px; }
+    margin-bottom: 0px;
+    }
   #items .items .item {
     display: flex;
     justify-content: space-between;
-    padding-top: 21px; }
+    /* padding-top: 21px; */
+    }
   #items .items .item.sub_item {
     margin: 0 10px 20px 10px; }
     #items .items .item .column {
@@ -271,15 +320,21 @@ body {
       #items .items .item .column h3 {
         width: 100%;
         float: left;
-        padding-bottom: 8px;
-        margin-bottom: 3px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-right: none;
         line-height: 1;
-        font-weight: 700; }
+        font-weight: 800;
+        background: #000;
+        color: #FFF;
+        }
       #items .items .item .column h4 {
         font-weight: 700; }
-      #items .items .item .column p {
-        font-size: 12px; }
+      #items .items .item .column .content {
+        font-size: 16px;
+        padding: 20px;
+        }
 
 #items .items .item .column .content ul { 
    list-style-type: disc; 
@@ -309,13 +364,41 @@ body {
   @media (max-width: 480px) {
     #totals {
       margin-bottom: 49px; } }
+  .invoice .title h2,
+  #totals .items {
+    width: 40%;
+    float: right;
+  }
+  @media (max-width: 480px) {
+    .invoice .title h2,
+    #totals .items {
+    width: 100%;
+    float: none;
+    }
+  }
   #totals .items .item {
-    padding: 16px 0 3px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+    padding: 0px 0 12px 0;
+    font-size: 16px;
+    }
+    #totals .items #line_balance.item {
+      background-color: #000;
+      color: #FFF;
+      padding: 20px 0px;
+    }
     #totals .items .item h3 {
-      float: left; }
+      float: left;
+      padding-left: 16px;
+      text-transform: uppercase;
+      /* font-weight: 800; */
+      font-size: 12px;
+      padding-top: 3px;
+      /* line-height: 26px; */
+      }
     #totals .items .item .total {
-      float: right; }
+      float: right;
+      padding-right: 16px;
+      font-weight: 800;
+      }
 
 /* Notes and Terms
 ---------------------------------------------------------------------------------------------------- */
@@ -350,15 +433,18 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  /* background-color: rgba(255, 255, 255, 0.95); */
   line-height: 50px;
-  color: #4086b0; }
+  color: #000000;
+  background: rgba(251, 251, 251, 0.95);
+  }
   #paybar .inner {
     padding: 25px 0; }
     #paybar .inner .button {
       float: right;
-      background-color: #4086b0;
-      margin-left: 15px; }
+      background-color: #67a4e3;
+      margin-left: 15px;
+      }
     @media (max-width: 480px) {
       #paybar .inner span {
         display: none; }
@@ -464,7 +550,9 @@ body {
         color: rgba(0, 0, 0, 0.25); }
     .panel .inner .button {
       margin: 25px 0px;
-      background-color: rgba(0, 0, 0, 0.75); }
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #FFF;
+      }
     .panel .inner .paytypes {
       position: relative; }
       .panel .inner .paytypes .paytype {
@@ -566,14 +654,15 @@ body {
   top: 9px;
   right: calc(100% - 75px);
   padding: 0 5px;
-  background-color: #4086b0;
+  background-color: #67a4e3;
   border-radius: 3px;
   font-size: 12px;
   line-height: 20px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
   text-align: center;
-  white-space: nowrap; }
+  white-space: nowrap;
+  }
 
 .history article .posted:after {
   width: 0;
@@ -584,7 +673,8 @@ body {
   content: '';
   border-style: solid;
   border-width: 5px 0 5px 6px;
-  border-color: transparent transparent transparent #4086b0; }
+  border-color: transparent transparent transparent #67a4e3;
+  }
 
 /* Mods
 ---------------------------------------------------------------------------------------------------- */
@@ -672,7 +762,7 @@ a.payment_option.toggle.active {
 }
 #header .messages {
   display: block;
-  min-height: 100px;
+  min-height: 20px;
 }
 #header .sa-message {
     width: auto;
@@ -768,7 +858,7 @@ b {font-weight: bold;}
   padding-right: 5px;
   margin-top: 33px;
   margin-left: -30px;
-  fill: #dce9f0;
+  fill: #aaa;
 }
 
 #items .items .item .li_comments_toggle {
@@ -816,7 +906,7 @@ b {font-weight: bold;}
   width: 80%;
   height: 5em;
   padding: 1em;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #AAA;
 }
 
 .line_item_comment_wrap .submit.button {
@@ -989,6 +1079,43 @@ b {font-weight: bold;}
 }
 
 
+
+/* Basic Adjustments from Default Base
+---------------------------------------------------------------------------------------------------- */
+
+#header #title {
+    float: right;
+    text-align: right;
+}
+#intro #client_info {
+  margin: 20px 0;
+  width: 50%;
+  float: left;
+}
+.row.content {
+  margin-bottom: 50px;
+}
+.row.content p {
+ font-size: inherit;
+ margin-bottom: 10px;
+}
+
+.history_message {
+  text-align: center;
+}
+.history_message a {
+  border-radius: 2px;
+  display: inline-block;
+  padding: 5px 20px;
+  background-color: #EEE;
+  font-weight: 200;
+  color: #000;
+  opacity: 1;
+}
+.history_message a:hover {
+  opacity: 1;
+}
+
 /**
  * Shipping
  */
@@ -1001,10 +1128,6 @@ a.button.edit_shipping_button {
     -webkit-box-shadow: none;
     box-shadow: none;
     background-color: #fbfbfb;
-    color: #000;
-}
-#edit_shipping_checkout_wrap .button {
-  background: #EEE;
 }
 #edit_shipping_checkout_wrap legend {
     padding: 8px 0px;
@@ -1053,9 +1176,17 @@ a.button.edit_shipping_button {
     height: 5em;
 }
 #edit_shipping_checkout_wrap .button {
-  background: #444;
     float: right;
 }
 #edit_shipping_checkout_wrap #shipping_address_fields {
     margin-bottom: 30px;
+}
+#doc_address_info {
+    width: 45%;
+    float: left;
+    margin-top: 45px;
+}
+
+#doc_address_info .dt_heading {
+    font-weight: 400;
 }

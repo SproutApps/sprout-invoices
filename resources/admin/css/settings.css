@@ -915,7 +915,7 @@ span.progress_footer.si_tooltip {}
     margin-right: 10px;
 }
 .si_theme_previews div {
-    width: 25%;
+    width: 20%;
     height: auto;
     display: inline-block;
     margin-right:  20px;
@@ -930,6 +930,7 @@ span.progress_footer.si_tooltip {}
     width: 100%;
     height: auto;
 }
+.si_theme_previews .basic_theme img,
 .si_theme_previews .default_theme img {
     width: 90%;
     height: auto;

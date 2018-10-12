@@ -20,6 +20,7 @@ class SI_Client extends SI_Post_Type {
 		'associated_users' => '_associated_users',
 		'money_format' => '_money_format',
 		'phone' => '_phone',
+		'fax' => '_fax',
 		'website' => '_website',
 	); // A list of meta keys this class cares about. Try to keep them in alphabetical order.
 
@@ -227,6 +228,14 @@ class SI_Client extends SI_Post_Type {
 
 	public function set_phone( $phone ) {
 		return $this->save_post_meta( array( self::$meta_keys['phone'] => $phone ) );
+	}
+
+	public function get_fax() {
+		return $this->get_post_meta( self::$meta_keys['fax'] );
+	}
+
+	public function set_fax( $fax ) {
+		return $this->save_post_meta( array( self::$meta_keys['fax'] => $fax ) );
 	}
 
 	public function get_website() {

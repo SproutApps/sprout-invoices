@@ -233,6 +233,20 @@ class SI_Admin_Settings extends SI_Controller {
 			'required' => $required,
 			'default' => self::$address['email'],
 		);
+		$fields['phone'] = array(
+			'weight' => 3,
+			'label' => __( 'Phone', 'sprout-invoices' ),
+			'type' => 'text',
+			'required' => $required,
+			'default' => self::$address['phone'],
+		);
+		$fields['fax'] = array(
+			'weight' => 4,
+			'label' => __( 'Fax', 'sprout-invoices' ),
+			'type' => 'text',
+			'required' => $required,
+			'default' => self::$address['fax'],
+		);
 
 		$fields = array_merge( $fields, self::get_standard_address_fields( $required ) );
 

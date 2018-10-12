@@ -1,5 +1,26 @@
 <?php
 
+function si_get_client_id( $id = 0 ) {
+	if ( ! $id ) {
+		$id = get_the_ID();
+	}
+	switch ( get_post_type( $id ) ) {
+		case SI_Estimate::POST_TYPE:
+			$doc = SI_Estimate::get_instance( $id );
+			$client_id = $doc->get_client_id();
+			break;
+		case SI_Invoice::POST_TYPE:
+			$doc = SI_Invoice::get_instance( $id );
+			$client_id = $doc->get_client_id();
+			break;
+
+		default:
+			$client_id = false;
+			break;
+	}
+	return apply_filters( 'si_get_client_id', $client_id );
+}
+
 if ( ! function_exists( 'si_get_client_address' ) ) :
 	/**
  * Get the client address
@@ -8,7 +29,7 @@ if ( ! function_exists( 'si_get_client_address' ) ) :
  */
 	function si_get_client_address( $id = 0 ) {
 		if ( ! $id ) {
-			$id = get_the_ID();
+			$id = si_get_client_id();
 		}
 		$client = SI_Client::get_instance( $id );
 		return apply_filters( 'si_get_client_address', $client->get_address(), $client );
@@ -23,9 +44,96 @@ if ( ! function_exists( 'si_client_address' ) ) :
  */
 	function si_client_address( $id = 0 ) {
 		if ( ! $id ) {
-			$id = get_the_ID();
+			$id = si_get_client_id();
 		}
 		echo apply_filters( 'si_client_address', si_address( si_get_client_address( $id ) ), $id );
+	}
+endif;
+
+if ( ! function_exists( 'si_get_client_phone' ) ) :
+	/**
+ * Get the client phone
+ * @param  integer $id
+ * @return string
+ */
+	function si_get_client_phone( $id = 0 ) {
+		if ( ! $id ) {
+			$id = si_get_client_id();
+		}
+		$client = SI_Client::get_instance( $id );
+		return apply_filters( 'si_get_client_phone', $client->get_phone(), $client );
+	}
+endif;
+
+if ( ! function_exists( 'si_client_phone' ) ) :
+	/**
+ * Echo the client phone
+ * @param  integer $id
+ * @return string
+ */
+	function si_client_phone( $id = 0 ) {
+		if ( ! $id ) {
+			$id = si_get_client_id();
+		}
+		echo apply_filters( 'si_client_phone', si_get_client_phone( $id ), $id );
+	}
+endif;
+
+if ( ! function_exists( 'si_get_client_website' ) ) :
+	/**
+ * Get the client website
+ * @param  integer $id
+ * @return string
+ */
+	function si_get_client_website( $id = 0 ) {
+		if ( ! $id ) {
+			$id = si_get_client_id();
+		}
+		$client = SI_Client::get_instance( $id );
+		return apply_filters( 'si_get_client_website', $client->get_website(), $client );
+	}
+endif;
+
+if ( ! function_exists( 'si_client_website' ) ) :
+	/**
+ * Echo the client website
+ * @param  integer $id
+ * @return string
+ */
+	function si_client_website( $id = 0 ) {
+		if ( ! $id ) {
+			$id = si_get_client_id();
+		}
+		echo apply_filters( 'si_client_website', si_get_client_website( $id ), $id );
+	}
+endif;
+
+if ( ! function_exists( 'si_get_client_fax' ) ) :
+	/**
+ * Get the client fax
+ * @param  integer $id
+ * @return string
+ */
+	function si_get_client_fax( $id = 0 ) {
+		if ( ! $id ) {
+			$id = si_get_client_id();
+		}
+		$client = SI_Client::get_instance( $id );
+		return apply_filters( 'si_get_client_fax', $client->get_fax(), $client );
+	}
+endif;
+
+if ( ! function_exists( 'si_client_fax' ) ) :
+	/**
+ * Echo the client fax
+ * @param  integer $id
+ * @return string
+ */
+	function si_client_fax( $id = 0 ) {
+		if ( ! $id ) {
+			$id = si_get_client_id();
+		}
+		echo apply_filters( 'si_client_fax', si_get_client_fax( $id ), $id );
 	}
 endif;
 

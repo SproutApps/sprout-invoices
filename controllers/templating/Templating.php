@@ -21,6 +21,7 @@ class SI_Templating_API extends SI_Controller {
 	private static $est_theme_option = '';
 	private static $themes = array(
 			'default' => 'Default',
+			'basic' => 'Basic',
 			'slate' => 'Slate',
 			'original' => 'Original',
 		);
@@ -52,8 +53,8 @@ class SI_Templating_API extends SI_Controller {
 	public static function init() {
 
 		// Theme Selection
-		self::$inv_theme_option = get_option( self::INV_THEME_OPION, 'original' );
-		self::$est_theme_option = get_option( self::EST_THEME_OPION, 'original' );
+		self::$inv_theme_option = self::get_invoice_theme_option();
+		self::$est_theme_option = self::get_estimate_theme_option();
 
 		// Register Settings
 		add_filter( 'si_settings', array( __CLASS__, 'register_settings' ) );
@@ -97,8 +98,8 @@ class SI_Templating_API extends SI_Controller {
 	public static function set_defaults( $upgraded_from ) {
 		$si_version = get_option( 'si_current_version', false );
 		if ( ! $si_version ) { // wasn't activated before
-			update_option( self::INV_THEME_OPION, 'default' );
-			update_option( self::EST_THEME_OPION, 'default' );
+			update_option( self::INV_THEME_OPION, 'basic' );
+			update_option( self::EST_THEME_OPION, 'basic' );
 		}
 	}
 
@@ -526,6 +527,7 @@ class SI_Templating_API extends SI_Controller {
 
 	public static function theme_selection_desc() {
 		$desc = '<div class="si_theme_previews">';
+		$desc .= sprintf( '<div class="basic_theme"><img src="%s"/>%s</div>', SI_RESOURCES . 'admin/img/basic.png', __( 'Basic Theme', 'sprout-invoices' ) );
 		$desc .= sprintf( '<div class="default_theme"><img src="%s"/>%s</div>', SI_RESOURCES . 'admin/img/default.png', __( 'Default Theme', 'sprout-invoices' ) );
 
 		$desc .= sprintf( '<div class="original_theme"><img src="%s"/>%s</div>', SI_RESOURCES . 'admin/img/original.png', __( 'Original Theme', 'sprout-invoices' ) );

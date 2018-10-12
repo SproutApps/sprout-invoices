@@ -235,6 +235,8 @@ class SI_Clients extends SI_Controller {
 	public static function save_meta_box_client_information( $post_id, $post, $callback_args, $estimate_id = null ) {
 		// name is filtered via update_post_data
 		$website = ( isset( $_POST['sa_metabox_website'] ) && $_POST['sa_metabox_website'] != '' ) ? $_POST['sa_metabox_website'] : '' ;
+		$phone = ( isset( $_POST['sa_metabox_phone'] ) && $_POST['sa_metabox_phone'] != '' ) ? $_POST['sa_metabox_phone'] : '' ;
+		$fax = ( isset( $_POST['sa_metabox_fax'] ) && $_POST['sa_metabox_fax'] != '' ) ? $_POST['sa_metabox_fax'] : '' ;
 
 		$address = array(
 			'street' => isset( $_POST['sa_metabox_street'] ) ? $_POST['sa_metabox_street'] : '',
@@ -246,7 +248,8 @@ class SI_Clients extends SI_Controller {
 
 		$client = SI_Client::get_instance( $post_id );
 		$client->set_website( $website );
-		$client->set_address( $address );
+		$client->set_phone( $phone );
+		$client->set_fax( $fax );
 
 		$user_id = 0;
 		// Attempt to create a user
@@ -415,6 +418,10 @@ class SI_Clients extends SI_Controller {
 				if ( $address != '' ) {
 					echo '<br/>';
 				}
+				if ( $client->get_phone() ) {
+					echo $client->get_phone();
+					echo '<br/>';
+				}
 				echo make_clickable( esc_url( $client->get_website() ) );
 				echo '</p>';
 
@@ -542,6 +549,7 @@ class SI_Clients extends SI_Controller {
 		}
 		$meta_search = array(
 			'_phone',
+			'_fax',
 			'_website',
 		);
 		return $meta_search;
@@ -572,6 +580,24 @@ class SI_Clients extends SI_Controller {
 				'default' => '',
 			);
 		}
+
+		$fields['phone'] = array(
+			'weight' => 110,
+			'label' => __( 'Phone', 'sprout-invoices' ),
+			'type' => 'text',
+			'required' => false,
+			'default' => ( $client ) ? $client->get_phone() : '',
+			'placeholder' => '',
+		);
+
+		$fields['fax'] = array(
+			'weight' => 115,
+			'label' => __( 'Fax', 'sprout-invoices' ),
+			'type' => 'text',
+			'required' => false,
+			'default' => ( $client ) ? $client->get_fax() : '',
+			'placeholder' => '',
+		);
 
 		$fields['website'] = array(
 			'weight' => 120,
@@ -843,6 +869,8 @@ class SI_Clients extends SI_Controller {
 		);
 		$args = array(
 			'company_name' => isset( $_REQUEST['sa_client_name'] ) ? esc_html( $_REQUEST['sa_client_name'] ) : '',
+			'phone' => isset( $_REQUEST['sa_client_phone'] ) ? esc_html( $_REQUEST['sa_client_phone'] ) : '',
+			'fax' => isset( $_REQUEST['sa_client_fax'] ) ? esc_html( $_REQUEST['sa_client_fax'] ) : '',
 			'website' => isset( $_REQUEST['sa_client_website'] ) ? esc_html( $_REQUEST['sa_client_website'] ) : '',
 			'address' => $address,
 			'user_id' => $user_id,
