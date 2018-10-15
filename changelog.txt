@@ -1,3 +1,9 @@
+= 19.5.1 =
+
+* Fix: Address not saving for some client records
+* Fix: Mercadopago sandbox option, and new filter for button
+
+
 = 19.5 =
 
 * NEW: Basic Theme

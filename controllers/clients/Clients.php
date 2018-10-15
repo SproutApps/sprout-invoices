@@ -247,6 +247,7 @@ class SI_Clients extends SI_Controller {
 		);
 
 		$client = SI_Client::get_instance( $post_id );
+		$client->set_address( $address );
 		$client->set_website( $website );
 		$client->set_phone( $phone );
 		$client->set_fax( $fax );
