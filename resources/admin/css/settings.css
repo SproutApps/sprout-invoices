@@ -90,7 +90,7 @@ body[class*='sprout-invoices'] div.updated {
 .title_and_actions {
 	display: block;
 	height: 3.6em;
-	margin: .67em 0;
+	margin-bottom: .67em;
 }
 
 .title_and_actions h1,
@@ -104,7 +104,9 @@ body[class*='sprout-invoices'] div.updated {
 	margin-top: -5px;
 	margin-left: 1em;
 }
-
+.title_and_actions .description p {
+    margin: 0 0 1.5em 0;
+}
 .si_tooltip[aria-label] {
 	position: relative;
 }

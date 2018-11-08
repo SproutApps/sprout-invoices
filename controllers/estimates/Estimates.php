@@ -142,6 +142,7 @@ class SI_Estimates extends SI_Controller {
 				$to = SI_Notifications::get_user_email( $user_id );
 			}
 
+			$data['manual_send'] = true;
 			$data['to'] = $to;
 			$data['user_id'] = $user_id;
 			SI_Notifications::send_notification( $type, $data, $to );

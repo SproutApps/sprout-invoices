@@ -45,6 +45,10 @@ class SI_Compatibility extends SI_Controller {
 			add_action( 'do_meta_boxes', array( __CLASS__, 'remove_um_metabox' ), 9 );
 		}
 
+		if ( class_exists( 'Social_Proof_Slider_Loader' ) ) {
+			add_action( 'init', array( __CLASS__, 'deregister_social_css' ), 10 );
+		}
+
 		// TC_back_pro_slider
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'deregister_select2_from_customizer' ), 100 );
 		add_filter( 'add_meta_boxes', array( __CLASS__, 'prevent_slider_pro_adding_metaboxes' ), 100 );
@@ -170,6 +174,12 @@ class SI_Compatibility extends SI_Controller {
 		if ( self::is_si_admin() ) {
 			wp_deregister_script( 'cf-select2minjs' );
 			wp_deregister_style( 'cf-select2css' );
+		}
+	}
+
+	public static function deregister_social_css() {
+		if ( self::is_si_admin() ) {
+			wp_deregister_style( 'social-proof-slider-css' );
 		}
 	}
 

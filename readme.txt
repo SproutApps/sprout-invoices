@@ -4,7 +4,7 @@ Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_s
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 5.0
-Stable tag: 19.5.1
+Stable tag: 19.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,30 @@ For more detailed look, checkout the full featured [demo](https://sproutinvoices
 Form integrations for everyone!
 
 == Changelog ==
+
+= 19.5.5 =
+
+* NEW: Show the notification descriptions on the main admin page
+* NEW: Authorize.net line items
+* NEW: Points of Contact Add-on updated to allow manual sends
+* Fix: Compatibility fix with plugins that like to share CSS with broad selectors on pages they shouldn't.
+* Fix: Advanced ID Generation for recurring/cloned invoices
+
+= 19.5.4 =
+
+* Fix: Recurring notifications not sending to all associated client users
+
+= 19.5.3 =
+
+* Fix: CSS Issue on payment page
+* Fix: Conditional bug that prevented the credit card form to show
+
+= 19.5.2 =
+
+* Fix: PHP Notices for older installs upgrading
+* Fix: A few Basic/Freelancer add-ons removed after a review that they shouldn't have been included
+* Fix: Service fee added after a fee was already added
+* Fix: Partial payments updated for better payment workflow, and styling
 
 = 19.5.1 =
 

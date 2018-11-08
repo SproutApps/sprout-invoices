@@ -231,21 +231,21 @@ class SI_Admin_Settings extends SI_Controller {
 			'label' => __( 'Contact Email', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
-			'default' => self::$address['email'],
+			'default' => ( isset( self::$address['email'] ) ) ? self::$address['email'] : get_bloginfo( 'admin_email' ),
 		);
 		$fields['phone'] = array(
 			'weight' => 3,
 			'label' => __( 'Phone', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
-			'default' => self::$address['phone'],
+			'default' => ( isset( self::$address['phone'] ) ) ? self::$address['phone'] : '',
 		);
 		$fields['fax'] = array(
 			'weight' => 4,
 			'label' => __( 'Fax', 'sprout-invoices' ),
 			'type' => 'text',
 			'required' => $required,
-			'default' => self::$address['fax'],
+			'default' => ( isset( self::$address['fax'] ) ) ? self::$address['fax'] : '',
 		);
 
 		$fields = array_merge( $fields, self::get_standard_address_fields( $required ) );

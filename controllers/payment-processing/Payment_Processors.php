@@ -449,19 +449,21 @@ abstract class SI_Payment_Processors extends SI_Controller {
 				break;
 
 			default:
-				// Load up all invoice level panes
-				self::$active_payment_processors = self::enabled_processors();
-				foreach ( self::$active_payment_processors as $class ) {
-					$processor = self::load_processor( $class );
-					if ( method_exists( $processor, 'invoice_pane' ) ) {
-						$pane .= $processor->invoice_pane( $checkout );
-					}
-					if ( self::is_cc_processor( $class ) && method_exists( $processor, 'payments_pane' ) ) {
-						$pane .= $processor->payments_pane( $checkout );
-					}
-				}
 				break;
 		}
+
+		// Load up all invoice level panes
+		self::$active_payment_processors = self::enabled_processors();
+		foreach ( self::$active_payment_processors as $class ) {
+			$processor = self::load_processor( $class );
+			if ( method_exists( $processor, 'invoice_pane' ) ) {
+				$pane .= $processor->invoice_pane( $checkout );
+			}
+			if ( self::is_cc_processor( $class ) && method_exists( $processor, 'payments_pane' ) ) {
+				$pane .= $processor->payments_pane( $checkout );
+			}
+		}
+
 		return $pane;
 	}
 

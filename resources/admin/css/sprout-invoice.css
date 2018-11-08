@@ -660,8 +660,8 @@ form table .sa_addon {
 
 #adminmenu li#toplevel_page_sprout-invoices .wp-menu-image img {
     background-size: inherit;
-    max-width: 100%;
-    max-height: 20px;
+    max-width: 22px;
+    max-height: 22px;
     margin-top: -3px;
 }
 
@@ -1360,7 +1360,10 @@ div#invoice_status_updates-sticky-wrapper {
 	/* padding: 0 40px; */
 	list-style: none
 }
-
+#si_invoice_line_items .items_list .item {
+	display: block;
+	margin: 0;
+}
 .items_list .item .items_list {
 	padding-left: 50px;
 }

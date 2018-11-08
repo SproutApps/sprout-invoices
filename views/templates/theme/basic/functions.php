@@ -43,7 +43,8 @@ function si_basic_theme_inject_css() {
 		<?php endif ?>
 		<?php if ( $button_color ) :  ?>
 			.history article .posted,
-			#paybar .inner .button {
+			#paybar .inner .button,
+			#header .sa-message {
 				background-color: <?php echo esc_attr( $button_color ); ?>;
 			}
 			.history article .posted:after {
@@ -56,7 +57,8 @@ function si_basic_theme_inject_css() {
 		<?php endif ?>
 		<?php if ( $button_text_color ) :  ?>
 			.history article .posted,
-			#paybar .inner .button {
+			#paybar .inner .button,
+			#header .sa-message {
 				color: <?php echo esc_attr( $button_text_color ); ?>;
 			}
 		<?php endif ?>

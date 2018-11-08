@@ -95,6 +95,7 @@
 								}
 									$notification_id = $data['post_id'];
 									$name = SI_Notifications::$notifications[ $notification_key ]['name'];
+									$desc = SI_Notifications::$notifications[ $notification_key ]['description'];
 									$notification = SI_Notification::get_instance( $notification_id );
 									$shown[] = $data['post_id'];
 									?>
@@ -104,10 +105,13 @@
 										<section id="section_<?php echo $notification_key ?>">
 
 											<div class="title_and_actions">
+												<div class="description">
+													<p><?php echo esc_html( $desc ) ?></p>
+												</div>
 												<h1><?php echo esc_html( $name ) ?></h1>
 												<a class="si_admin_button" href="<?php echo get_edit_post_link( $notification_id ) ?>"><?php _e( 'Edit Notification', 'sprout-invoices' ) ?></a>&nbsp;<a class="si_admin_button si_muted si_tooltip" href="<?php echo add_query_arg( array( 'refresh-notification' => $notification_id ) ) ?>" aria-label="<?php _e( 'This will reset the notification to the default template', 'sprout-invoices' ) ?>"><?php _e( 'Reset', 'sprout-invoices' ) ?></a>
 											</div>
-											
+
 											<h2><?php echo esc_html( $notification->get_title() ) ?></h2>
 
 											<div class="notification_content">
