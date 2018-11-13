@@ -1,3 +1,10 @@
+= 19.5.6 =
+
+* Fix: PDF Template overrides were not working correctly for PDF Service
+* Fix: CSS Updates for report pages
+* Fix: Subscription payment reciepts not working after invoice was edited after payment.
+* Update: Subscription and Recurring invoice messaging updates to help prevent conflicts
+
 = 19.5.5 =
 
 * NEW: Show the notification descriptions on the main admin page

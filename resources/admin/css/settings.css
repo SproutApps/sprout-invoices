@@ -24,9 +24,12 @@ body[class*='sprout-invoices'] div.updated {
 	float: left;
 	width: 70%;
 }
-#si_report .si_settings_tabs #main,
 #addons_admin .si_settings_tabs #main {
 	width: auto;
+    max-width: 90%;
+}
+#si_report .si_settings_tabs #main {
+	width: 90%;
 }
 .si-controls {
     display: block;
@@ -178,6 +181,7 @@ label.si_radio_label {
 	border-radius: 4px;
 	vertical-align: middle;
 	box-sizing: border-box;
+	height: auto;
 }
 .si_input.small-input {
 	width: 3em;
@@ -317,7 +321,7 @@ header.si_header {
 	background-color: rgb(108,170,228);
 	margin-left:  -20px;
 	padding: 20px 20px;
-	height: 80px;
+	/* height: 80px; */
 }
 
 .si-header-nav {
@@ -399,9 +403,9 @@ header.si_header {
 }
 .si_header a img {
     position: absolute;
-    top: 20px;
+    top: 25px;
     left: 10px;
-	height: 100px;
+    height: 100px;
 }
 .si_header a h1 {
 }

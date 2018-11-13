@@ -4,7 +4,7 @@ Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_s
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 5.0
-Stable tag: 19.5.5
+Stable tag: 19.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,13 @@ For more detailed look, checkout the full featured [demo](https://sproutinvoices
 Form integrations for everyone!
 
 == Changelog ==
+
+= 19.5.6 =
+
+* Fix: PDF Template overrides were not working correctly for PDF Service
+* Fix: CSS Updates for report pages
+* Fix: Subscription payment reciepts not working after invoice was edited after payment.
+* Update: Subscription and Recurring invoice messaging updates to help prevent conflicts
 
 = 19.5.5 =
 
