@@ -144,6 +144,9 @@ Form integrations for everyone!
 * Fix: CSS Updates for report pages
 * Fix: Subscription payment reciepts not working after invoice was edited after payment.
 * Update: Subscription and Recurring invoice messaging updates to help prevent conflicts
+* Update: Stripe filters
+* Update: Translations
+* Update: Optimizations
 
 = 19.5.5 =
 

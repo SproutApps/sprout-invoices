@@ -1,6 +1,6 @@
 <h1><?php _e( 'Logo & Color Styling', 'sprout-invoices' ) ?></h1>
 <p><?php _e( 'Styling for Invoice and Estimate templates is done via the WordPress customizer.', 'sprout-invoices' ) ?></p>
-<img src="<?php echo SI_URL ?>/resources/admin/img/customizer-how-to.gif" class="si_customizer_how_to">
+<img src="https://i1.wp.com/sproutinvoices.com/wp-content/uploads/2018/11/customizer-how-to.gif" class="si_customizer_how_to">
 
 <p><?php _e( 'You can access the customizer from any invoice or estimate but to make things easier below are some helpful links.', 'sprout-invoices' ) ?></p>
 

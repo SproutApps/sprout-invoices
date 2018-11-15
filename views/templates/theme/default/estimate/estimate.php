@@ -55,10 +55,10 @@ do_action( 'pre_si_estimate_view' ); ?><!DOCTYPE html>
 					<?php if ( $last_updated = si_doc_last_updated() ) :  ?>
 						<?php $days_since = (int) si_get_days_ago( $last_updated ); ?>
 						<?php if ( 2 > $days_since ) :  ?>
-							<a class="open" href="#history"><?php printf( 'Recently Updated', $days_since ) ?></a>
-						<?php else : ?>
-							<a class="open" href="#history"><?php printf( 'Updated %1$s Days Ago', $days_since ) ?></a>
-						<?php endif ?>
+								<a class="open" href="#history"><?php printf( __( 'Recently Updated', 'sprout-invoices' ), $days_since ) ?></a>
+							<?php else : ?>
+								<a class="open" href="#history"><?php printf( __( 'Updated %1$s Days Ago', 'sprout-invoices' ), $days_since ) ?></a>
+							<?php endif ?>
 					<?php endif ?>
 				</div>
 			</div>

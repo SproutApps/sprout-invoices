@@ -10,21 +10,21 @@
 
 			<?php if ( 1 === $days_left ) :  ?>
 				
-				<?php printf( 'Balance of <strong>%1$s</strong> is Due', sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
+				<?php printf( __( 'Balance of <strong>%1$s</strong> is Due', 'sprout-invoices' ), sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 
 			<?php else : ?>
 
 				<?php if ( si_has_invoice_deposit( get_the_id(), true ) ) : ?>
-					<?php printf( 'Balance of <strong>%2$s</strong> Due in <strong>%3$s Days</strong> & Deposit of <strong>%1$s</strong> Due <strong>Now</strong>', sa_get_formatted_money( si_get_invoice_deposit( get_the_id(), true ) ), sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
+					<?php printf( __( 'Balance of <strong>%2$s</strong> Due in <strong>%3$s Days</strong> & Deposit of <strong>%1$s</strong> Due <strong>Now</strong>', 'sprout-invoices' ), sa_get_formatted_money( si_get_invoice_deposit( get_the_id(), true ) ), sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 				<?php else : ?>
-					<?php printf( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Days</strong>', sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
+					<?php printf( __( 'Balance of <strong>%1$s</strong> Due in <strong>%2$s Days</strong>', 'sprout-invoices' ), sa_get_formatted_money( si_get_invoice_balance() ), $days_left ); ?>
 				<?php endif; ?>
 
 			<?php endif ?>
 
 		<?php else : ?>
 			
-			<?php printf( 'Balance of <strong>%1$s</strong> is <strong>Overdue</strong>', sa_get_formatted_money( si_get_invoice_balance() ) ); ?>
+			<?php printf( __( 'Balance of <strong>%1$s</strong> is <strong>Overdue</strong>', 'sprout-invoices' ), sa_get_formatted_money( si_get_invoice_balance() ) ); ?>
 
 		<?php endif ?>
 
