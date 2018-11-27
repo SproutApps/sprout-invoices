@@ -1,3 +1,7 @@
+= 19.5.7 =
+
+* Fix: Stripe filters caused error for plans
+
 = 19.5.6 =
 
 * Fix: PDF Template overrides were not working correctly for PDF Service
