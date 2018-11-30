@@ -121,7 +121,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		// Item management
 		wp_register_script( 'nestable', SI_URL . '/resources/admin/js/nestable.js', array( 'jquery' ), self::SI_VERSION );
 		wp_register_script( 'sticky', SI_URL . '/resources/admin/js/sticky.js', array( 'jquery' ), self::SI_VERSION );
-		wp_register_script( 'si_admin_est_and_invoices', SI_URL . '/resources/admin/js/est_and_invoices.js', array( 'jquery', 'nestable', 'sticky' ), self::SI_VERSION );
+		wp_register_script( 'si_admin_est_and_invoices', SI_URL . '/resources/admin/js/est_and_invoices.js', array( 'jquery', 'nestable', 'sticky', 'select2_4.0' ), self::SI_VERSION );
 		wp_register_style( 'sprout_invoice_admin_css', SI_URL . '/resources/admin/css/sprout-invoice.css', array(), self::SI_VERSION );
 
 		// Redactor
@@ -131,8 +131,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		}
 
 		// Select2
-		wp_register_script( 'select2_4.0', SI_URL . '/resources/admin/plugins/select2/js/select2.min.js', array( 'jquery' ), self::SI_VERSION, false );
-		wp_register_style( 'select2_4.0_css', SI_URL . '/resources/admin/plugins/select2/css/select2.min.css', null, self::SI_VERSION, false );
+		wp_register_script( 'select2_4.0', SI_URL . '/resources/admin/plugins/select2/js/select2.min.js', array( 'jquery' ), self::SI_VERSION );
+		wp_register_style( 'select2_4.0_css', SI_URL . '/resources/admin/plugins/select2/css/select2.min.css', null, self::SI_VERSION );
 
 		// qtip plugin
 		wp_register_style( 'qtip', SI_URL . '/resources/admin/plugins/qtip/jquery.qtip.min.css', null, self::SI_VERSION, false );

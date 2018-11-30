@@ -47,35 +47,6 @@
 
 		<?php endif ?>
 
-
-		<div class="workflow-overview">
-
-			<h2 class="subheadline_callout"><?php _e( 'Contact Forms and Getting Paid', 'sprout-invoices' ) ?></h2>
-
-			<div class="feature-section col three-col clearfix">
-				<div class="col-1">
-					<span class="flow_icon icon-handshake"></span>
-					<h4><?php _e( 'Requests', 'sprout-invoices' ); ?></h4>
-					<p><?php printf( __( "Receiving estimate requests on your site is simplified with Sprout Invoices and one of the <a href='%s'>major WordPress form builder integrations</a>, e.g. Gravity Forms, WPForms, Ninja Forms, and Formidable.", 'sprout-invoices' ), 'https://sproutinvoices.com/sprout-invoices/integrations/sprout-invoices-premium-form-integrations/' ); ?></p>
-
-					<p><?php printf( __( "If you're not accepting estimate or invoice requests on your site skip over to creating your first invoice below.", 'sprout-invoices' ) ); ?></p>
-					<p><?php printf( "<a href='https://sproutinvoices.com/sprout-invoices/integrations/sprout-invoices-premium-form-integrations/' target='_blank' class='si_admin_button si_muted'>%s</a>", __( 'Download Integrations', 'sprout-invoices' ) ); ?></p>
-				</div>
-				<div class="col-2">
-					<span class="flow_icon icon-sproutapps-estimates"></span>
-					<h4><?php _e( 'Estimating', 'sprout-invoices' ); ?></h4>
-					<p><?php printf( __( "After a request from a form builder is submitted an <a href='%s'>estimate</a> is automatically created. To help complete the estimate so you can send it to your client a <a href='%s'>notification</a> is sent immediatly after this new estimate is created.", 'sprout-invoices' ), admin_url( 'post-new.php?post_type='.SI_Estimate::POST_TYPE ),  admin_url( 'admin.php?page=sprout-invoices-notifications' ) ); ?></p>
-					<p><?php printf( "<a href='https://sproutinvoices.com/support/knowledgebase/sprout-invoices/estimates/' target='_blank' class='si_admin_button si_muted'>%s</a>", __( 'Documentation', 'sprout-invoices' ) ); ?></p>
-				</div>
-				<div class="col-3 last-feature">
-					<span class="flow_icon icon-sproutapps-invoices"></span>
-					<h4><?php _e( 'Invoicing', 'sprout-invoices' ); ?></h4>
-					<p><?php printf( __( "After any estimate is accepted an <a href='%s'>invoice</a> is automatically created and another notification is sent letting you know. You can finalize some details and send it to your client for a payment, including a depsoit payment.", 'sprout-invoices' ), admin_url( 'post-new.php?post_type='.SI_Invoice::POST_TYPE ) ); ?></p>
-					<p><?php printf( "<a href='https://sproutinvoices.com/support/knowledgebase/sprout-invoices/invoices/' target='_blank' class='si_admin_button si_muted'>%s</a>", __( 'Documentation', 'sprout-invoices' ) ); ?></p>
-				</div>
-			</div>
-
-		</div>
 	</div>
 
 	<div class="welcome_content">
@@ -89,6 +60,7 @@
 			<iframe width="100%" height="500" src="https://www.youtube-nocookie.com/embed/_Y73TchithM?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 		</div>
+
 	</div>
 
 	<div class="welcome_content">
@@ -122,6 +94,39 @@
 
 		</div>
 
+	</div>
+
+	<div class="welcome_content">
+		
+
+		<div class="workflow-overview">
+
+			<h2 class="subheadline_callout"><?php _e( 'Contact Forms and Getting Paid', 'sprout-invoices' ) ?></h2>
+
+			<div class="feature-section col three-col clearfix">
+				<div class="col-1">
+					<span class="flow_icon icon-handshake"></span>
+					<h4><?php _e( 'Requests', 'sprout-invoices' ); ?></h4>
+					<p><?php printf( __( "Receiving estimate requests on your site is simplified with Sprout Invoices and one of the <a href='%s'>major WordPress form builder integrations</a>, e.g. Gravity Forms, WPForms, Ninja Forms, and Formidable.", 'sprout-invoices' ), 'https://sproutinvoices.com/sprout-invoices/integrations/sprout-invoices-premium-form-integrations/' ); ?></p>
+
+					<p><?php printf( __( "If you're not accepting estimate or invoice requests on your site skip over to creating your first invoice below.", 'sprout-invoices' ) ); ?></p>
+					<p><?php printf( "<a href='https://sproutinvoices.com/sprout-invoices/integrations/sprout-invoices-premium-form-integrations/' target='_blank' class='si_admin_button si_muted'>%s</a>", __( 'Download Integrations', 'sprout-invoices' ) ); ?></p>
+				</div>
+				<div class="col-2">
+					<span class="flow_icon icon-sproutapps-estimates"></span>
+					<h4><?php _e( 'Estimating', 'sprout-invoices' ); ?></h4>
+					<p><?php printf( __( "After a request from a form builder is submitted an <a href='%s'>estimate</a> is automatically created. To help complete the estimate so you can send it to your client a <a href='%s'>notification</a> is sent immediatly after this new estimate is created.", 'sprout-invoices' ), admin_url( 'post-new.php?post_type='.SI_Estimate::POST_TYPE ),  admin_url( 'admin.php?page=sprout-invoices-notifications' ) ); ?></p>
+					<p><?php printf( "<a href='https://sproutinvoices.com/support/knowledgebase/sprout-invoices/estimates/' target='_blank' class='si_admin_button si_muted'>%s</a>", __( 'Documentation', 'sprout-invoices' ) ); ?></p>
+				</div>
+				<div class="col-3 last-feature">
+					<span class="flow_icon icon-sproutapps-invoices"></span>
+					<h4><?php _e( 'Invoicing', 'sprout-invoices' ); ?></h4>
+					<p><?php printf( __( "After any estimate is accepted an <a href='%s'>invoice</a> is automatically created and another notification is sent letting you know. You can finalize some details and send it to your client for a payment, including a depsoit payment.", 'sprout-invoices' ), admin_url( 'post-new.php?post_type='.SI_Invoice::POST_TYPE ) ); ?></p>
+					<p><?php printf( "<a href='https://sproutinvoices.com/support/knowledgebase/sprout-invoices/invoices/' target='_blank' class='si_admin_button si_muted'>%s</a>", __( 'Documentation', 'sprout-invoices' ) ); ?></p>
+				</div>
+			</div>
+
+		</div>
 	</div>
 
 	<div class="welcome_content">

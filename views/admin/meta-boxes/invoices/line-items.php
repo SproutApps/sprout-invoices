@@ -61,3 +61,18 @@
 		<?php endforeach ?>
 	</div>
 <?php endif ?>
+
+
+<?php
+
+	$num_posts = wp_count_posts( SI_Invoice::POST_TYPE );
+	$num_posts->{'auto-draft'} = 0; // remove auto-drafts
+	$total_posts = array_sum( (array) $num_posts );
+if ( $total_posts >= 10 && apply_filters( 'show_upgrade_messaging', true ) ) {
+
+	$class = 'upgrade_message';
+	$message = sprintf( '<img class="header_sa_logo" src="%s" height="64" width="auto" style="float: left;margin-top: 0px;margin-right: 8px;z-index: auto;padding: 0 10px;"/><strong style="font-size: 1.3em;margin-bottom: 5px;display: block;">Congrats on your %s Invoice!</strong>Please consider supporting the future of Sprout Invoices by purchasing a <a href="%s">discounted pro license</a> and/or writing a <a href="%s">positive 5 &#9733; review</a>.<br/><small>Dan Cameron - Founder, Lead Developer, and Small Business Owner </small>', SI_RESOURCES . 'admin/img/sprout/yipee.png', self::number_ordinal_suffix( $total_posts ), si_get_purchase_link(), 'http://wordpress.org/support/view/plugin-reviews/sprout-invoices?filter=5' );
+	;
+
+	printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+} ?>

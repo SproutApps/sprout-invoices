@@ -1,3 +1,11 @@
+= 19.5.8.1 =
+
+* Update: Scheduled posts in Zapier
+* Update: Change invoice status when sent before PDF is generated
+* Update: Select2 Update
+* Fix: Advanced select options on clients and project pages
+* Fix: Generating notifications for recurring invoices error under specific conditions
+
 = 19.5.7 =
 
 * Fix: Stripe filters caused error for plans

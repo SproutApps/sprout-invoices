@@ -1126,8 +1126,8 @@ span.status_change {
 #line_items_footer {
 	margin-top: 30px;
 	padding-top: 15px;
-	padding-bottom: 16px;
-	border-top: 1px solid #ddd
+	padding-bottom: 26px;
+	border-top: 1px solid #ddd;
 }
 
 #add_line_item {
@@ -2072,12 +2072,12 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
  * Upgrades
  */
 .upgrade_message {
-	margin: 5px 0 15px;
-	padding: 1px 12px;
-	background-color: #fff;
-	border-left: 4px solid #FFA500;
-	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	/* margin: 10px 0 0px; */
+	padding: 10px 0 10px 15px;
+	background-color: #ffffff;
+	border-top: 2px solid rgb(229, 229, 229);
+	/* -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1); */
+	/* box-shadow: 0 1px 1px 0 rgba(0,0,0,.1); */
 }
 .upgrade_message .icon-sproutapps-flat {
 	font-size: 2em;
@@ -2457,7 +2457,7 @@ div#mascot_progress {
 	margin-bottom: 50px
 }
 .welcome_content .progress_tracker {
-	margin-top: 100px;
+	margin-top: 10px;
 }
 #si_progress_track.progress_completed ol #happy_sprout {
 	width: 150px;
