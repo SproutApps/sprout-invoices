@@ -1,3 +1,15 @@
+= 19.5.9 =
+
+* Fix: WooCommerce Bug with "Cart is Empty"
+* New: Filter for WooCommerce to allow for products to be added back to the cart for payment from an invoice payment - "si_woo_payment_single_product_for_payment"
+* New: Invoice reciept delay with "si_create_invoice_receipts_upto"
+* Update: Zapier fixes for updates
+* Fix: Slate theme logo styling
+* Update: Record views only for published docs
+* Update: PDF display for footer
+* Update: Time widget
+* Update: PDF Attachment
+
 = 19.5.8.1 =
 
 * Update: Scheduled posts in Zapier

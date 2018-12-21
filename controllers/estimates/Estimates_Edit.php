@@ -423,14 +423,24 @@ class SI_Estimates_Edit extends SI_Estimates {
 
 		do_action( 'estimate_meta_saved', $estimate );
 
-		$user = get_userdata( get_current_user_id() );
-		do_action( 'si_new_record',
-			sprintf( __( 'Estimate updated by %s.', 'sprout-invoices' ), $user->display_name ),
-			self::HISTORY_UPDATE,
-			$estimate->get_id(),
-			sprintf( __( 'Data updated for %s.', 'sprout-invoices' ), $estimate->get_id() ),
-			0,
-		false );
+		/**
+		 * Don't create updated record if not yet published.
+		 */
+		$status = $estimate->get_status();
+		if ( ! in_array( $status, array( SI_Estimate::STATUS_TEMP, SI_Estimate::STATUS_REQUEST, SI_Estimate::STATUS_FUTURE ) )	) {
+
+			$user = get_userdata( get_current_user_id() );
+
+			do_action( 'si_new_record',
+				sprintf( __( 'Estimate updated by %s.', 'sprout-invoices' ), $user->display_name ),
+				self::HISTORY_UPDATE,
+				$estimate->get_id(),
+				sprintf( __( 'Data updated for %s.', 'sprout-invoices' ), $estimate->get_id() ),
+				0,
+			false );
+
+		}
+
 	}
 
 	/**

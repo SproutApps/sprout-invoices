@@ -431,14 +431,24 @@ class SI_Invoices_Edit extends SI_Invoices {
 
 		do_action( 'invoice_meta_saved', $invoice );
 
-		$user = get_userdata( get_current_user_id() );
-		do_action( 'si_new_record',
-			sprintf( __( 'Invoice updated by %s.', 'sprout-invoices' ), $user->display_name ),
-			self::HISTORY_UPDATE,
-			$invoice->get_id(),
-			sprintf( __( 'Data updated for %s.', 'sprout-invoices' ), $invoice->get_id() ),
-			0,
-		false );
+		/**
+		 * Don't create updated record if not yet published.
+		 */
+		$status = $invoice->get_status();
+		if ( ! in_array( $status, array( SI_Invoice::STATUS_TEMP, SI_Invoice::STATUS_FUTURE ) )	) {
+
+			$user = get_userdata( get_current_user_id() );
+
+			do_action( 'si_new_record',
+				sprintf( __( 'Invoice updated by %s.', 'sprout-invoices' ), $user->display_name ),
+				self::HISTORY_UPDATE,
+				$invoice->get_id(),
+				sprintf( __( 'Data updated for %s.', 'sprout-invoices' ), $invoice->get_id() ),
+				0,
+			false );
+
+		}
+
 	}
 
 	/**

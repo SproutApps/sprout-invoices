@@ -102,8 +102,9 @@ div#vcards {
 	border-top: none;
 }
 #inner_logo img {
-	width: 240px;
+	max-width: 240px;
 	float: left;
+    max-height: 74px;
 }
 div#vcards b {
 	color: #425065;

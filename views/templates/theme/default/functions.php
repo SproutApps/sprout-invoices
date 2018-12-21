@@ -32,7 +32,7 @@ function si_default_theme_inject_css() {
 			.invoice .unit,
 			#header .inner .intro .open,
 			#save_signature_via_ajax,
-			.history article .posted, .line_item_comments span.comment_date, .line_item_comment_wrap .submit.button {
+			body a, .history article .posted, .line_item_comments span.comment_date, .line_item_comment_wrap .submit.button {
 				color: <?php echo esc_attr( $primary_color ); ?>;
 			}
 
