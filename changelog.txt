@@ -1,3 +1,10 @@
+= 19.6 =
+
+* Fix: WooCommerce Cart Issue
+* New: Square Payment Notes
+* New Filter: "si_recurring_invoice_default_status" set the default status for recurring invoices
+* Update: Client wont need to sign invoice after signing the approved estimate 
+
 = 19.5.9 =
 
 * Fix: WooCommerce Bug with "Cart is Empty"

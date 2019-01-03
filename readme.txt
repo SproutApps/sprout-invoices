@@ -3,14 +3,21 @@ Contributors: dancameron, sproutapps
 Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
-Tested up to: 5.0
-Stable tag: 19.5.9
+Tested up to: 5.0.2
+Stable tag: 19.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 The best invoicing plugin for WordPress. See how you can get paid faster without those hidden service fees.
 
 == Description ==
+
+* Fix: WooCommerce Cart Issue
+* New: Square Payment Notes
+* New Filter: "si_recurring_invoice_default_status" set the default status for recurring invoices
+* Update: Client wont need to sign invoice after signing the approved estimate 
+
+= 19.5.9 =
 
 = WordPress Invoicing Made Easy =
 
@@ -138,7 +145,7 @@ Form integrations for everyone!
 
 == Changelog ==
 
-= 19.5.9 =
+= 19.6 =
 
 * Fix: WooCommerce Bug with "Cart is Empty"
 * New: Filter for WooCommerce to allow for products to be added back to the cart for payment from an invoice payment - "si_woo_payment_single_product_for_payment"
