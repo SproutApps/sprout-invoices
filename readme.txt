@@ -12,13 +12,6 @@ The best invoicing plugin for WordPress. See how you can get paid faster without
 
 == Description ==
 
-* Fix: WooCommerce Cart Issue
-* New: Square Payment Notes
-* New Filter: "si_recurring_invoice_default_status" set the default status for recurring invoices
-* Update: Client wont need to sign invoice after signing the approved estimate 
-
-= 19.5.9 =
-
 = WordPress Invoicing Made Easy =
 
 Our focus _since day one 4+ years ago_ with <a href="https://sproutinvoices.com?utm_medium=link&utm_campaign=free&utm_source=wordpress.org" rel="friend" title="Sprout Invoices Reviews">Sprout Invoices</a> has been to create a way for WordPress site owners to invoice and EASILY get paid. We also understand that customization beyond branding is important, and that's why we built the most POWERFUL solution with the most integrations around.
@@ -146,6 +139,13 @@ Form integrations for everyone!
 == Changelog ==
 
 = 19.6 =
+
+* Fix: WooCommerce Cart Issue
+* New: Square Payment Notes
+* New Filter: "si_recurring_invoice_default_status" set the default status for recurring invoices
+* Update: Client wont need to sign invoice after signing the approved estimate 
+
+= 19.5.9 =
 
 * Fix: WooCommerce Bug with "Cart is Empty"
 * New: Filter for WooCommerce to allow for products to be added back to the cart for payment from an invoice payment - "si_woo_payment_single_product_for_payment"
