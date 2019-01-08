@@ -83,13 +83,13 @@ class SI_Invoices_Admin extends SI_Invoices {
 		unset( $columns['title'] );
 		unset( $columns['comments'] );
 		unset( $columns['author'] );
-		$columns['notification_status'] = sprintf( '<mark class="helptip notification_status_wrap column_title" title="%s">&nbsp;</mark>', __( 'Notification Status', 'sprout-invoices' ) );
 		$columns['title'] = __( 'Invoice', 'sprout-invoices' );
 		$columns['status'] = __( 'Status', 'sprout-invoices' );
 		$columns['number'] = __( 'Invoice #', 'sprout-invoices' );
 		$columns['dates'] = __( 'Dates', 'sprout-invoices' );
 		$columns['total'] = __( 'Paid', 'sprout-invoices' );
 		$columns['client'] = __( 'Client', 'sprout-invoices' );
+		$columns['notification_status'] = sprintf( '<mark class="helptip notification_status_wrap column_title" title="%s">&nbsp;</mark>', __( 'Notification Status', 'sprout-invoices' ) );
 		$columns['doc_link'] = '<div class="dashicons icon-sproutapps-estimates"></div>';
 		return $columns;
 	}
