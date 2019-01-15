@@ -138,6 +138,7 @@ class SI_Importer extends SI_Controller {
 
 		if ( isset( $_POST['importer'] ) && '' !== $_POST['importer'] ) {
 			$class = sanitize_text_field( wp_unslash( $_POST['importer'] ) );
+			do_action( 'si_processing_importer', $class );
 			if ( method_exists( $class, 'init' ) ) {
 				call_user_func( array( $class, 'init' ) );
 			}
@@ -166,6 +167,7 @@ class SI_Importer extends SI_Controller {
 		$class = sanitize_text_field( $_REQUEST['importer'] );
 		$method = 'import_' . sanitize_text_field( $_REQUEST['method'] );
 		if ( method_exists( $class, $method ) ) {
+			do_action( 'si_processing_importer_method', $class, $method );
 			call_user_func( array( $class, $method ) );
 		}
 		exit();
