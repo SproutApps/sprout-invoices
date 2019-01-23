@@ -1,3 +1,9 @@
+= 19.6.1 =
+
+* Update: New Zapier Integrations & Updates
+* Fix: Mobile view for admin tables
+* New: New Hook for Importing
+
 = 19.6 =
 
 * Fix: WooCommerce Cart Issue

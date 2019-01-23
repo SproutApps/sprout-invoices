@@ -992,23 +992,21 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( ! current_user_can( 'delete_sprout_invoices' ) ) {
 			return;
 		}
-		if ( isset( $_GET['refresh-notifications'] ) && $_GET['refresh-notifications'] ) { // If dev than don't cache.
-			$active_notifications = get_option( self::NOTIFICATIONS_OPTION_NAME );
+		$active_notifications = get_option( self::NOTIFICATIONS_OPTION_NAME );
 
-			$args = array(
-				'post_type' => SI_Notification::POST_TYPE,
-				'posts_per_page' => -1,
-				'exclude' => array_values( $active_notifications ),
-				'fields' => 'ids',
-			);
-			$posts = get_posts( $args );
+		$args = array(
+			'post_type' => SI_Notification::POST_TYPE,
+			'posts_per_page' => -1,
+			'exclude' => array_values( $active_notifications ),
+			'fields' => 'ids',
+		);
+		$posts = get_posts( $args );
 
-			foreach ( $posts as $post_id ) {
-				wp_delete_post( $post_id, true );
-			}
-
-			self::clear_notification_cache();
+		foreach ( $posts as $post_id ) {
+			wp_delete_post( $post_id, true );
 		}
+
+		self::clear_notification_cache();
 	}
 
 	public static function return_notification_html() {
