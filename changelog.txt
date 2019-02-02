@@ -1,3 +1,17 @@
+= 19.7 =
+
+* Update: Zapier authentication simplification
+* New: [admin_note] shortcode added to more notifications
+* Fix: Due date changed after notification sent from invoices admin
+* New: Filter to remove help desk - si_show_help_desk
+* Fix: PDF template color issues
+
+= 19.6.1 =
+
+* Update: New Zapier Integrations & Updates
+* Fix: Mobile view for admin tables
+* New: New Hook for Importing
+
 = 19.6 =
 
 * Fix: WooCommerce Cart Issue

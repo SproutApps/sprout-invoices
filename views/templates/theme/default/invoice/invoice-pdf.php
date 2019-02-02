@@ -38,7 +38,7 @@ do_action( 'pre_si_pdf_invoice_view' ); ?><!DOCTYPE html>
 		</style>
 	</head>
 
-	<body id="invoice" class="si_og_theme">
+	<body id="invoice" class="si_default_theme">
 		<header class="row" id="header">
 			<div class="inner">
 
