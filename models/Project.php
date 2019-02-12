@@ -175,7 +175,8 @@ class SI_Project extends SI_Post_Type {
 		if ( ! is_array( $times ) ) {
 			$times = array();
 		}
-		return array_filter( $times );
+		$time = array_filter( $times );
+		return apply_filters( 'si_project_get_associated_times', $time, $this );
 	}
 
 	/**

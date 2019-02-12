@@ -458,6 +458,7 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public function set_client_id( $client_id = 0 ) {
+		wpbt();
 		$this->save_post_meta( array(
 			self::$meta_keys['client_id'] => $client_id,
 		) );

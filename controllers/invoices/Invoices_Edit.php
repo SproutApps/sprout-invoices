@@ -208,7 +208,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 				'context' => 'normal',
 				'priority' => 'low',
 				'weight' => 30,
-				'save_priority' => 500,
+				'save_priority' => PHP_INT_MAX,
 			),
 			'si_invoice_history' => array(
 				'title' => __( 'Invoice History', 'sprout-invoices' ),
@@ -402,6 +402,7 @@ class SI_Invoices_Edit extends SI_Invoices {
 	 * @return
 	 */
 	public static function save_meta_box_invoice_information( $post_id, $post, $callback_args, $invoice_id = null ) {
+
 		$invoice = SI_Invoice::get_instance( $post_id );
 
 		$status = ( isset( $_POST['status'] ) && $_POST['status'] != '' ) ? $_POST['status'] : '' ;

@@ -4,7 +4,7 @@ Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_s
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 5.0.2
-Stable tag: 19.7
+Stable tag: 19.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,18 @@ For more detailed look, checkout the full featured [demo](https://sproutinvoices
 Form integrations for everyone!
 
 == Changelog ==
+
+= 19.7.2 =
+
+* Fix: Metabox saved when other posts are saved, i.e. WooCommerce orders.
+
+= 19.7.1 =
+
+* Update: Zapier Updates
+* Fix: Partial Payments setting invoices as paid under specific circumstances.
+* Fix: Notifications sent without complete information
+* Fix: WooCommerce product for integration will be recreated
+* New: Project times filter - si_project_get_associated_times
 
 = 19.7 =
 

@@ -105,7 +105,8 @@ class SI_Metabox_API extends SI_Controller {
 		if ( isset( $_GET['import'] ) && $_GET['import'] == 'wordpress' ) {
 			return;
 		}
-		if ( isset( $_POST['option_page'] ) ) {
+
+		if ( ! isset( $_POST['action'] ) || 'editpost' !== $_POST['action'] ) {
 			return;
 		}
 
