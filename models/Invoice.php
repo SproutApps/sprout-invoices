@@ -306,9 +306,11 @@ class SI_Invoice extends SI_Post_Type {
 		$total = $this->get_calculated_total( false );
 		$paid = $this->get_payments_total( false );
 		$balance = floatval( $total - $paid );
-		if ( self::STATUS_PENDING === $this->get_status() ) {
-			if ( round( $balance, 2 ) < 0.01 ) {
-				$this->set_as_paid();
+		if ( apply_filters( 'si_do_attempt_status_update_on_get_balance', true, $this ) ) {
+			if ( self::STATUS_PENDING === $this->get_status() ) {
+				if ( round( $balance, 2 ) < 0.01 ) {
+					$this->set_as_paid();
+				}
 			}
 		}
 		return round( $balance, 2 );
@@ -458,7 +460,6 @@ class SI_Invoice extends SI_Post_Type {
 	}
 
 	public function set_client_id( $client_id = 0 ) {
-		wpbt();
 		$this->save_post_meta( array(
 			self::$meta_keys['client_id'] => $client_id,
 		) );

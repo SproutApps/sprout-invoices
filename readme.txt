@@ -3,7 +3,7 @@ Contributors: dancameron, sproutapps
 Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_source=wordpress.org
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
-Tested up to: 5.0.2
+Tested up to: 5.1
 Stable tag: 19.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

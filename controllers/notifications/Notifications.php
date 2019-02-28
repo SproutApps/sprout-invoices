@@ -382,7 +382,7 @@ class SI_Notifications extends SI_Notifications_Control {
 			$estimate = SI_Estimate::get_instance( $estimate_id );
 		}
 
-		// If status is temp than change to pending.
+		// If status is temp then change to pending.
 		if ( SI_Invoice::STATUS_TEMP === $invoice->get_status() ) {
 			$invoice->set_pending();
 		}

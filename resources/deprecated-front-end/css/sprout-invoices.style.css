@@ -703,7 +703,8 @@ div#vcards {
 	background-color: #DDD;
 	color: #7C7C7C;
 }
-.button.change_payment_amount {
+.button.change_payment_amount,
+.button.si_change_payment_amount {
 	margin-left: 10px;
 }
 

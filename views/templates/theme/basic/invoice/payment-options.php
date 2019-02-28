@@ -102,6 +102,7 @@
 				//<![CDATA[
 				jQuery(document).ready( function($) {
 					$(".toggles > a").trigger( "click" );
+					$(".toggles > a").hide();
 				});
 				//]]>
 			</script>
