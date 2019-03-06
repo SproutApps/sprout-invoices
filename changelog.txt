@@ -1,3 +1,13 @@
+= 19.7.5 =
+
+* NEW: Ability to reset payment generation dates for subscription based invoices
+* Update: PDF Filter si_pdf_invoice_file_name passes doc_id
+* NEW: Filter si_do_attempt_status_update_on_get_balance
+* Update: Partial Payments updates for Sprout Billings, and improved user experience.
+* Fix: Advanced ID Generation with padding
+* Update: Show compat with WordPress 5.1
+* Update: Adding Stripe partner id
+
 = 19.7.2 =
 
 * Fix: Metabox saved when other posts are saved, i.e. WooCommerce orders.

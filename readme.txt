@@ -4,7 +4,7 @@ Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_s
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 5.1
-Stable tag: 19.7.2
+Stable tag: 19.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,16 @@ For more detailed look, checkout the full featured [demo](https://sproutinvoices
 Form integrations for everyone!
 
 == Changelog ==
+
+= 19.7.5 =
+
+* NEW: Ability to reset payment generation dates for subscription based invoices
+* Update: PDF Filter si_pdf_invoice_file_name passes doc_id
+* NEW: Filter si_do_attempt_status_update_on_get_balance
+* Update: Partial Payments updates for Sprout Billings, and improved user experience.
+* Fix: Advanced ID Generation with padding
+* Update: Show compat with WordPress 5.1
+* Update: Adding Stripe partner id
 
 = 19.7.2 =
 

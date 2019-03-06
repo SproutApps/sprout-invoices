@@ -183,6 +183,9 @@ label.si_radio_label {
 	box-sizing: border-box;
 	height: auto;
 }
+.si_input_field_wrap input[type="checkbox"] {
+	min-height: 1.2em;
+}
 .si_input.small-input {
 	width: 3em;
 }
