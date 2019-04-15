@@ -1,6 +1,6 @@
 <?php
 
-if ( !class_exists( 'WP_List_Table' ) ) {
+if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 class SI_Payments_Table extends WP_List_Table {
@@ -11,10 +11,10 @@ class SI_Payments_Table extends WP_List_Table {
 
 		//Set parent defaults
 		parent::__construct( array(
-				'singular' => 'payment',     // singular name of the listed records
-				'plural' => 'payments', // plural name of the listed records
-				'ajax' => false     // does this table support ajax?
-			) );
+			'singular' => 'payment',     // singular name of the listed records
+			'plural' => 'payments', // plural name of the listed records
+			'ajax' => false,// does this table support ajax?
+		) );
 
 	}
 
@@ -27,26 +27,26 @@ class SI_Payments_Table extends WP_List_Table {
 		$total_posts = array_sum( (array) $num_posts );
 
 		// Subtract post types that are not included in the admin all list.
-		foreach ( get_post_stati( array( 'show_in_admin_all_list' => false ) ) as $state )
-			$total_posts -= $num_posts->$state;
+		foreach ( get_post_stati( array( 'show_in_admin_all_list' => false ) ) as $state ) {
+			$total_posts -= $num_posts->$state; }
 
 		$class = empty( $_REQUEST['post_status'] ) ? ' class="current"' : '';
 		$status_links['all'] = "<a href='edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments{$allposts}'$class>" . sprintf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts' ), number_format_i18n( $total_posts ) ) . '</a>';
 
 		foreach ( get_post_stati( array( 'show_in_admin_status_list' => true ), 'objects' ) as $status ) {
 			$class = '';
-			
+
 			$status_name = $status->name;
 
-			if ( empty( $num_posts->$status_name ) )
-				continue;
+			if ( empty( $num_posts->$status_name ) ) {
+				continue; }
 
-			if ( isset( $_REQUEST['post_status'] ) && $status_name == $_REQUEST['post_status'] )
-				$class = ' class="current"';
+			if ( isset( $_REQUEST['post_status'] ) && $status_name == $_REQUEST['post_status'] ) {
+				$class = ' class="current"'; }
 
 			// replace "Published" with "Complete".
 			$label = str_replace( 'Published', 'Complete', translate_nooped_plural( $status->label_count, $num_posts->$status_name ) );
-			$status_links[$status_name] = "<a href='edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments&post_status=$status_name'$class>" . sprintf( $label, number_format_i18n( $num_posts->$status_name ) ) . '</a>';
+			$status_links[ $status_name ] = "<a href='edit.php?post_type=sa_invoice&page=sprout-apps/invoice_payments&post_status=$status_name'$class>" . sprintf( $label, number_format_i18n( $num_posts->$status_name ) ) . '</a>';
 		}
 
 		return $status_links;
@@ -55,7 +55,7 @@ class SI_Payments_Table extends WP_List_Table {
 	function extra_tablenav( $which ) {
 		?>
 		<div class="alignleft actions"> <?php
-		if ( 'top' == $which && !is_singular() ) {
+		if ( 'top' == $which && ! is_singular() ) {
 
 			$this->months_dropdown( self::$post_type );
 
@@ -77,7 +77,7 @@ class SI_Payments_Table extends WP_List_Table {
 	 */
 	function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
-		default:
+			default:
 			return apply_filters( 'si_mngt_payments_column_'.$column_name, $item ); // do action for those columns that are filtered in
 		}
 	}
@@ -92,23 +92,23 @@ class SI_Payments_Table extends WP_List_Table {
 	 */
 	function column_title( $item ) {
 		// wp_delete_post( $item->ID, true );
-		$payment = SI_Payment::get_instance( $item->ID );	
+		$payment = SI_Payment::get_instance( $item->ID );
 		$invoice_id = $payment->get_invoice_id();
-		$invoice = SI_Invoice::get_instance($invoice_id);
+		$invoice = SI_Invoice::get_instance( $invoice_id );
 		$client = $payment->get_client();
 
 		//Build row actions
 		$actions = array();
 		if ( is_a( $invoice, 'SI_Invoice' ) ) { // Check if purchase wasn't deleted
 			$actions += array(
-				'invoice'    => sprintf( '<a href="%s">Invoice</a>', get_edit_post_link( $invoice_id ) )
+				'invoice'    => sprintf( '<a href="%s">Invoice</a>', get_edit_post_link( $invoice_id ) ),
 			);
 		}
 		if ( is_a( $client, 'SI_Client' ) ) { // Check if purchase wasn't deleted
 			$actions += array(
 				'client'  => sprintf( '<a href="%s">'.__( 'Client', 'sprout-invoices' ).'</a>', get_edit_post_link( $client->get_ID() ) ),
 			);
-		} 
+		}
 		if ( empty( $actions ) ) {
 			$actions = array(
 				'error'    => __( 'Associated records cannot be found.', 'sprout-invoices' ),
@@ -116,9 +116,8 @@ class SI_Payments_Table extends WP_List_Table {
 		}
 
 		//Return the title contents
-		return sprintf( '%1$s <span style="color:silver">(invoice&nbsp;id:%2$s)</span>%3$s',
+		return sprintf( '%1$s %2$s',
 			$item->post_title,
-			( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : __( 'unknown', 'sprout-invoices' ),
 			$this->row_actions( $actions )
 		);
 	}
@@ -132,15 +131,70 @@ class SI_Payments_Table extends WP_List_Table {
 				echo '<strong>'.__( 'Payment Total', 'sprout-invoices' ).':</strong> '.sa_get_formatted_money( $payment->get_amount() ).'<br/>';
 				echo '<em>'.__( 'Invoice Balance', 'sprout-invoices' ).': '.sa_get_formatted_money( $invoice->get_balance(), $invoice->get_id() ).'</em><br/>';
 				echo '<em>'.__( 'Invoice Total', 'sprout-invoices' ).': '.sa_get_formatted_money( $invoice->get_total(), $invoice->get_id() ).'</em>';
-			}
-			else {
+			} else {
 				_e( 'No invoice found', 'sprout-invoices' );
 			}
-		}
-		else {
+		} else {
 			printf( __( 'No invoice associated with this payment.', 'sprout-invoices' ) );
 		}
 	}
+
+	function column_client( $item ) {
+		$payment = SI_Payment::get_instance( $item->ID );
+		$invoice_id = $payment->get_invoice_id();
+		$invoice = SI_Invoice::get_instance( $invoice_id );
+		$client = $payment->get_client();
+
+		if ( ! is_a( $client, 'SI_Client' ) ) { // Check if purchase wasn't deleted
+			return;
+		}
+
+		$actions = array(
+			'client'  => sprintf( '<a href="%s">'.__( 'Edit', 'sprout-invoices' ).'</a>', get_edit_post_link( $client->get_ID() ) ),
+		);
+
+		$user = si_who_is_paying( $invoice );
+		$user_email = ( is_a( $user, 'WP_User' ) ) ? $user->user_email : __( 'unknown', 'sprout-invoices' );
+
+		//Return the title contents
+		return sprintf( '%1$s <span style="color:silver">(%2$s)</span>%3$s',
+			get_the_title( $client->get_ID() ),
+			$user_email,
+			$this->row_actions( $actions )
+		);
+
+		//Return the title contents
+		return sprintf( '%1$s', get_the_title( $client->get_ID() ) );
+	}
+
+
+	function column_invoice( $item ) {
+		$payment = SI_Payment::get_instance( $item->ID );
+		$invoice_id = $payment->get_invoice_id();
+		$invoice = SI_Invoice::get_instance( $invoice_id );
+		$client = $payment->get_client();
+
+		//Build row actions
+		$actions = array();
+		if ( is_a( $invoice, 'SI_Invoice' ) ) { // Check if purchase wasn't deleted
+			$actions += array(
+				'invoice'    => sprintf( '<a href="%s">Edit</a>', get_edit_post_link( $invoice_id ) ),
+			);
+		}
+		if ( empty( $actions ) ) {
+			$actions = array(
+				'error'    => __( 'Associated records cannot be found.', 'sprout-invoices' ),
+			);
+		}
+
+		//Return the title contents
+		return sprintf( '%1$s <span style="color:silver">(invoice&nbsp;id:%2$s)</span>%3$s',
+			get_the_title( $invoice_id ),
+			( is_a( $invoice, 'SI_Invoice' ) ) ? $invoice->get_invoice_id() : __( 'unknown', 'sprout-invoices' ),
+			$this->row_actions( $actions )
+		);
+	}
+
 
 	function column_data( $item ) {
 		$payment_id = $item->ID;
@@ -155,17 +209,16 @@ class SI_Payments_Table extends WP_List_Table {
 				}
 				if ( is_string( $value ) ) {
 					$detail .= '<dl>
-						<dt><b>'.ucfirst(str_replace( '_', ' ', $key )).'</b></dt>
+						<dt><b>'.ucfirst( str_replace( '_', ' ', $key ) ).'</b></dt>
 						<dd>'.$value.'</dd>
 					</dl>';
 				}
-				
 			}
 		}
 
 		//Build row actions
 		$actions = array(
-			'detail'    => sprintf( '<a href="#TB_inline?width=900&height=600&inlineId=data_id_%s" class="thickbox button" title="'.__( 'Transaction Data', 'sprout-invoices' ).'">'.__( 'Transaction Data', 'sprout-invoices' ).'</a><div id="data_id_%s" style="display:none;">%s</div>', $payment_id, $payment_id, $detail )
+			'detail'    => sprintf( '<a href="#TB_inline?width=900&height=600&inlineId=data_id_%s" class="thickbox button" title="'.__( 'Transaction Data', 'sprout-invoices' ).'">'.__( 'Transaction Data', 'sprout-invoices' ).'</a><div id="data_id_%s" style="display:none;">%s</div>', $payment_id, $payment_id, $detail ),
 		);
 
 		//Return the title contents
@@ -174,10 +227,10 @@ class SI_Payments_Table extends WP_List_Table {
 
 	function column_status( $item ) {
 		$payment_id = $item->ID;
-		
+
 		$actions = array();
 		if ( in_array( $item->post_status, array( SI_Payment::STATUS_PENDING, SI_Payment::STATUS_AUTHORIZED, SI_Payment::STATUS_COMPLETE, SI_Payment::STATUS_PARTIAL ) ) ) {
-			
+
 			$actions['trash'] = '<a href="#TB_inline?width=900&height=260&inlineId=void_payment_'.$payment_id.'" class="thickbox" id="void_link_'.$payment_id.'" title="'.__( 'Void Payment', 'sprout-invoices' ).'">'.__( 'Void Payment', 'sprout-invoices' ).'</a>';
 
 			if ( $item->post_status == SI_Payment::STATUS_AUTHORIZED ) {
@@ -211,10 +264,12 @@ class SI_Payments_Table extends WP_List_Table {
 	 * */
 	function get_columns() {
 		$columns = array(
-			'status'  => __( 'Status', 'sprout-invoices' ),
 			'title'  => __( 'Payment', 'sprout-invoices' ),
+			'status'  => __( 'Status', 'sprout-invoices' ),
 			'total'  => __( 'Totals', 'sprout-invoices' ),
-			'data'  => __( 'Data', 'sprout-invoices' )
+			'invoice'  => __( 'Invoice', 'sprout-invoices' ),
+			'client'  => __( 'Client', 'sprout-invoices' ),
+			'data'  => __( 'Data', 'sprout-invoices' ),
 		);
 		return apply_filters( 'si_mngt_payments_columns', $columns );
 	}
@@ -228,8 +283,7 @@ class SI_Payments_Table extends WP_List_Table {
 	 * @return array An associative array containing all the columns that should be sortable: 'slugs'=>array('data_values',bool)
 	 * */
 	function get_sortable_columns() {
-		$sortable_columns = array(
-		);
+		$sortable_columns = array();
 		return apply_filters( 'si_mngt_payments_sortable_columns', $sortable_columns );
 	}
 
@@ -263,14 +317,12 @@ class SI_Payments_Table extends WP_List_Table {
 		 */
 		$per_page = 25;
 
-
 		/**
 		 * Define our column headers.
 		 */
 		$columns = $this->get_columns();
 		$hidden = array();
 		$sortable = $this->get_sortable_columns();
-
 
 		/**
 		 * REQUIRED. Build an array to be used by the class for column
@@ -284,7 +336,7 @@ class SI_Payments_Table extends WP_List_Table {
 			'post_type' => SI_Payment::POST_TYPE,
 			'post_status' => $filter,
 			'posts_per_page' => $per_page,
-			'paged' => $this->get_pagenum()
+			'paged' => $this->get_pagenum(),
 		);
 		// Check based on post_type id
 		if ( isset( $_REQUEST['s'] ) && is_numeric( $_REQUEST['s'] ) ) {
@@ -314,8 +366,7 @@ class SI_Payments_Table extends WP_List_Table {
 				);
 				$args = array_merge( $args, $meta_query );
 			}
-		}
-		// Search
+		} // Search
 		elseif ( isset( $_GET['s'] ) && $_GET['s'] != '' ) {
 			$args = array_merge( $args, array( 's' => sanitize_text_field( $_GET['s'] ) ) );
 		}
@@ -323,7 +374,7 @@ class SI_Payments_Table extends WP_List_Table {
 		if ( isset( $_GET['m'] ) && $_GET['m'] != '' ) {
 			$args = array_merge( $args, array( 'm' => sanitize_text_field( $_GET['m'] ) ) );
 		}
-		
+
 		$payments = new WP_Query( $args );
 
 		/**
@@ -336,10 +387,9 @@ class SI_Payments_Table extends WP_List_Table {
 		 * REQUIRED. Register our pagination options & calculations.
 		 */
 		$this->set_pagination_args( array(
-				'total_items' => $payments->found_posts,                //WE have to calculate the total number of items
-				'per_page'  => $per_page,                    //WE have to determine how many items to show on a page
-				'total_pages' => $payments->max_num_pages   //WE have to calculate the total number of pages
-			) );
+			'total_items' => $payments->found_posts,                //WE have to calculate the total number of items
+			'per_page'  => $per_page,                    //WE have to determine how many items to show on a page
+			'total_pages' => $payments->max_num_pages,//WE have to calculate the total number of pages
+		) );
 	}
-
 }

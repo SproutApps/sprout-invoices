@@ -1,3 +1,15 @@
+= 19.8 =
+
+* NEW: TOS Add-on
+* NEW: Processor Limits
+* NEW: Recurring Payment Terms
+* NEW: Importable Default Payment Terms
+* NEW: Interest on Unpaid Balance and Payment Terms
+* NEW: New Payment Term Shortcodes, payment_term_min_due and payment_term_min_due_date
+* NEW: Set Line Item Type with "Line Item Type" with CSV Import
+* Update: Payments Table Updated
+* Update: Stripe updated for payment source management
+
 = 19.7.5 =
 
 * NEW: Ability to reset payment generation dates for subscription based invoices

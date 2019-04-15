@@ -1881,8 +1881,8 @@ legend.legend.form-heading {
     width: 100%;
     margin-top: 0px;
     margin-bottom: 10px;
-    padding: 5px;
-    background-color: #E5E5E5;
+    padding: 5px 10px;
+    background-color: #f5f9ff;
 }
 
 #si_report table.dataTable thead th, #si_report table.dataTable thead td {

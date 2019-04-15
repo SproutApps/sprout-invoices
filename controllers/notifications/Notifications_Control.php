@@ -494,6 +494,8 @@ class SI_Notifications_Control extends SI_Controller {
 	 */
 	public static function send_notification( $notification_name, $data = array(), $to, $from_email = null, $from_name = null, $html = null ) {
 
+		$data = apply_filters( 'si_send_notification_data', $data, $notification_name );
+
 		// Allow for a notification to be suppressed based on data
 		if ( apply_filters( 'si_is_test_notification', false, $data, $to ) ) {
 			self::test_send_notification( $notification_name, $data, $to, $from_email, $from_name, $html );

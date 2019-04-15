@@ -4,7 +4,7 @@ Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_s
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.4
 Tested up to: 5.1
-Stable tag: 19.7.5
+Stable tag: 19.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,18 @@ For more detailed look, checkout the full featured [demo](https://sproutinvoices
 Form integrations for everyone!
 
 == Changelog ==
+
+= 19.8 =
+
+* NEW: TOS Add-on
+* NEW: Processor Limits by Payment Amount
+* NEW: Recurring Payment Terms
+* NEW: Importable Default Payment Terms
+* NEW: Interest on Unpaid Balance and Payment Terms
+* NEW: New Payment Term Shortcodes, payment_term_min_due and payment_term_min_due_date
+* NEW: Set Line Item Type with "Line Item Type" with CSV Import
+* Update: Payments Table Updated
+* Update: Stripe updated for payment source management
 
 = 19.7.5 =
 

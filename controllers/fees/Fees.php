@@ -86,7 +86,7 @@ class SI_Fees extends SI_Controller {
 			wp_send_json_error( array( 'message' => 'remove_fee method does not exist, or the fee id was not passed.' ) );
 		}
 		$fees = $doc->remove_fee( $fee_id );
-
+		do_action( 'si_fee_deleted', $fee_id, $doc_id );
 		return wp_send_json_success( $fees );
 	}
 }

@@ -818,6 +818,7 @@ class SI_CSV_Import extends SI_Importer {
 		$line_items_qty = explode( ',', $data['Line Item Quantity'] );
 		$line_items_percentage = explode( ',', $data['Line Item Percentage'] );
 		$line_items_total = explode( ',', $data['Line Item Total'] );
+		$line_items_type = explode( ',', $data['Line Item Type'] );
 		foreach ( $line_items_desc as $key => $value ) {
 			$line_items[] = array(
 				'rate' => ( isset( $line_items_rate[ $key ] ) ) ? $line_items_rate[ $key ] : 0,
@@ -825,6 +826,7 @@ class SI_CSV_Import extends SI_Importer {
 				'desc' => $value,
 				'total' => ( isset( $line_items_total[ $key ] ) ) ? $line_items_total[ $key ] : 0,
 				'tax' => ( isset( $line_items_percentage[ $key ] ) ) ? $line_items_percentage[ $key ] : '',
+				'type' => ( isset( $line_items_type[ $key ] ) ) ? $line_items_type[ $key ] : '',
 				);
 		}
 		return $line_items;

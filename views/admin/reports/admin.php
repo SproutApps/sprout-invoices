@@ -21,6 +21,8 @@
 				
 				<main id="main" role="main">
 
+					<?php do_action( 'si_settings_page_pre_load_reports', $view ); ?>
+
 					<?php self::load_view( $view, array() ) ?>	
 
 				</main>

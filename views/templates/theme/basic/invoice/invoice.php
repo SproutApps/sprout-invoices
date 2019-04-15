@@ -141,6 +141,10 @@ do_action( 'pre_si_invoice_view' ); ?><!DOCTYPE html>
 
 					<div id="total_due" class="invoice_info"><?php printf( '<span class="info">%1$s</span> <span class="total">%2$s</span>', __( 'Balance Due', 'sprout-invoices' ), sa_get_formatted_money( si_get_invoice_balance() ) ) ?></div>
 
+					<?php if ( 0 < si_get_invoice_payment_terms_amount_due() && si_get_invoice_payment_terms_amount_due() < si_get_invoice_balance() ) :  ?>
+						<div id="total_due" class="invoice_info"><?php printf( '<span class="info">%1$s</span> <span class="total">%2$s</span>', __( 'Minimum Payment Due', 'sprout-invoices' ), sa_get_formatted_money( si_get_invoice_payment_terms_amount_due() ) ) ?></div>
+					<?php endif ?>
+
 				</div>
 
 			</div>

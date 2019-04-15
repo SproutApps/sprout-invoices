@@ -565,3 +565,35 @@ function si_set_img_transparency( $image ) {
 	imagedestroy( $image );
 	return $new_image;
 }
+
+
+function __sameday_next_month( $start_date = false ) {
+
+	if ( $start_date ) {
+		$now = $start_date; // Use supplied start date.
+	} else {
+		$now = current_time( 'timestamp' ); // Use current time.
+	}
+
+	// Get the current month (as integer).
+	$current_month = date( 'n', $now );
+
+	// If the we're in Dec (12), set current month to Jan (1), add 1 to year.
+	if ( $current_month == 12 ) {
+		$next_month = 1;
+		$plus_one_month = mktime( 0, 0, 0, 1, date( 'd', $now ), date( 'Y', $now ) + 1 );
+	} // Otherwise, add a month to the next month and calculate the date.
+	else {
+		$next_month = $current_month + 1;
+		$plus_one_month = mktime( 0, 0, 0, date( 'm', $now ) + 1, date( 'd', $now ), date( 'Y', $now ) );
+	}
+
+	$i = 1;
+	// Go back a day at a time until we get the last day next month.
+	while ( date( 'n', $plus_one_month ) != $next_month ) {
+		$plus_one_month = mktime( 0, 0, 0, date( 'm', $now ) + 1, date( 'd', $now ) - $i, date( 'Y', $now ) );
+		$i++;
+	}
+
+	return $plus_one_month;
+}

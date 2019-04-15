@@ -154,7 +154,7 @@
 				}
 				else {
 					$.each( response, function(i, time) {
-						si.docEdit.timeAddItem( time );
+						setTimeout( function(){ si.docEdit.timeAddItem( time ); }, i*500);
 					});
 					$('#time_importing_project_selection').hide();
 					$('#time_import_question_answer').fadeIn();
