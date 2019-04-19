@@ -58,7 +58,7 @@ class SI_Notifications_Control extends SI_Controller {
 		add_action( 'admin_menu', array( get_class(), 'help_sections' ) );
 
 		if ( is_admin() ) {
-			//add_action( 'admin_init', array( get_class(), 'maybe_refresh_notifications' ) );
+			add_action( 'admin_init', array( get_class(), 'maybe_refresh_notifications' ) );
 			add_action( 'admin_init', array( get_class(), 'maybe_refresh_notification' ) );
 			add_action( 'admin_init', array( get_class(), 'return_notification_html' ) );
 		}
@@ -994,8 +994,14 @@ class SI_Notifications_Control extends SI_Controller {
 		if ( ! current_user_can( 'delete_sprout_invoices' ) ) {
 			return;
 		}
+
+		self::clear_notification_cache();
+
 		$active_notifications = get_option( self::NOTIFICATIONS_OPTION_NAME );
 
+		if ( ! isset( $_GET['reset-notifications'] ) || 'yes' !== $_GET['reset-notifications'] ) { // If dev than don't cache.
+			return;
+		}
 		$args = array(
 			'post_type' => SI_Notification::POST_TYPE,
 			'posts_per_page' => -1,
@@ -1007,8 +1013,8 @@ class SI_Notifications_Control extends SI_Controller {
 		foreach ( $posts as $post_id ) {
 			wp_delete_post( $post_id, true );
 		}
-
 		self::clear_notification_cache();
+		wp_redirect( remove_query_arg( 'reset-notifications' ) );
 	}
 
 	public static function return_notification_html() {

@@ -41,7 +41,7 @@
 						
 						<a href='#notification_<?php echo $notification_post_id ?>' v-on:click="makeTabActive('<?php echo $notification_post_id ?>')" v-bind:class="{ active : isActiveTab('<?php echo $notification_post_id ?>') == true }" class="si_smaller_nav"><?php printf( __( '<span class="dashicons dashicons-email-alt"></span> %s %s', 'sprout-invoices' ), $name, $status ) ?></a>
 				<?php endforeach ?>
-				
+				<a href="<?php echo add_query_arg( array( 'reset-notifications' => 'yes' ) ) ?>" class="si_delete_button"><span class="si_icon icon-lightsaber"></span> <?php _e( 'Reset All Notifications', 'sprout-invoices' ) ?></a>
 			</div>
 				<main id="main" role="main">
 

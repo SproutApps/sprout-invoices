@@ -451,6 +451,10 @@ body[class*='sprout-invoices'] #wpfooter {
 	border-bottom: 2px solid #fff;
 	margin-bottom: 5px;
 }
+#si_settings_subnav a.si_delete_button {
+	background: none;
+	opacity: .5;
+}
 #si_settings_subnav a.si_smaller_nav {
 	padding: 10px 10px 10px 20px;
 }
@@ -461,6 +465,10 @@ body[class*='sprout-invoices'] #wpfooter {
 }
 #si_settings_subnav a:hover {
 	background: #e9f2fe;
+}
+#si_settings_subnav a.si_delete_button:hover {
+	background: #fee9ed;
+	opacity: 1;
 }
 #si_settings_subnav a:last-child {
 	border-bottom: none;
