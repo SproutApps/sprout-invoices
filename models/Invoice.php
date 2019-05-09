@@ -626,7 +626,7 @@ class SI_Invoice extends SI_Post_Type {
 			return (float) $this->calculated_total;
 		}
 		$subtotal = (float) $this->get_subtotal();
-		if ( $subtotal < 0.01 ) { // In case the line items are zero but the total has a value
+		if ( $subtotal < 0.01 && ! apply_filters( 'si_allow_negative_doc_balance', false ) ) { // In case the line items are zero but the total has a value
 			$subtotal = (float) $this->get_total();
 		}
 

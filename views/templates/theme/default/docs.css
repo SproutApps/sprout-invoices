@@ -676,24 +676,30 @@ a.payment_option.toggle.active {
   display: block;
   min-height: 100px;
 }
-#header .sa-message {
+.sa-message {
     width: auto;
-    padding: 0 12px;
+    padding: 2px 14px;
     display: block;
     margin-bottom: 40px;
-    background-color: #4086b0;
-    border-radius: 15px;
-    border: 2px solid rgb(207, 225, 235);
-    font-size: 12px;
-    font-weight: 400;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    /* border: 2px solid rgb(207, 225, 235); */
+    font-size: 14px;
+    font-weight: 600;
     line-height: 28px;
     text-transform: uppercase;
 }
-#header .inner .sa-message:last-of-type {
+.inner .sa-message:last-of-type {
     margin-bottom: 75px;
 }
-#header .sa-message.error {
+.sa-message.error {
     border: 3px solid rgb(255, 255, 255);
+}
+
+#header .sa-message {
+    background-color: #64a2e5;
+    border-radius: 15px;
+    color: #fff;
 }
 
 #save_signature_via_ajax {

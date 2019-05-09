@@ -99,7 +99,7 @@ if ( ! function_exists( 'si_doc_notification_sent' ) ) :
 		$history = $doc->get_history();
 		foreach ( $history as $item_id ) {
 			$record = SI_Record::get_instance( $item_id );
-			if ( SI_Notifications::RECORD === $record->get_type() ) {
+			if ( is_a( $record, 'SI_Record' ) && SI_Notifications::RECORD === $record->get_type() ) {
 
 				preg_match( '/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/i', $record->get_title(), $matches );
 

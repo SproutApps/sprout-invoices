@@ -1919,3 +1919,17 @@ p.service_fee_message {
   border-radius: 50%;
   background: white;
 }
+
+label.sa-checkbox[for="sa_billing_tos_agreeeement"] {
+    text-align: left;
+    margin-left: 3%;
+    width: 46%;
+    float: left;
+    clear: right;
+    margin: 0 2%;
+}
+label.sa-checkbox[for="sa_billing_tos_agreeeement"] input.checkbox {
+    width: 1.5em !important;
+    float: left;
+    margin-top: 5px;
+}
