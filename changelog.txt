@@ -1,3 +1,7 @@
+= 19.8.4 =
+
+* Fix: Basic theme issue with payment options
+
 = 19.8.3 =
 
 * Fix: TOS Agreement add-on incompatibility with e-signature add-on.
