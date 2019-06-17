@@ -656,7 +656,8 @@ abstract class SI_Controller extends Sprout_Invoices {
 		if ( isset( $post ) && $post != null ) {
 
 			if ( $new_post_type == '' ) {
-				$new_post_type = $post->post_type; }
+				$new_post_type = $post->post_type;
+			}
 
 			/*
 			 * new post data array
@@ -1036,7 +1037,7 @@ abstract class SI_Controller extends Sprout_Invoices {
 		} elseif ( filter_var( $remote, FILTER_VALIDATE_IP ) ) {
 			$ip = $remote;
 		}
-		return $ip;
+		return apply_filters( 'si_get_user_ip', $ip );
 	}
 
 	/**

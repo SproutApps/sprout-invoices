@@ -31,7 +31,7 @@
 			$args = array(
 				'orderby' => 'modified',
 				'post_type' => SI_Invoice::POST_TYPE,
-				'post_status' => 'any', // Not Written-off?
+				'post_status' => array_keys( SI_Invoice::get_statuses() ),
 				'posts_per_page' => 3,
 				'fields' => 'ids',
 				);

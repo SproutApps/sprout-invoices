@@ -1379,11 +1379,11 @@ div#invoice_status_updates-sticky-wrapper {
 	background-color: #FDFDFD;
 }
 
-.item:hover {
+.items_list .item:hover {
 	background-color: #FFF
 }
 
-.item > button {
+.items_list .item > button {
 	position: absolute;
 	top: -12px;
 	right: -5px;
@@ -1398,7 +1398,7 @@ div#invoice_status_updates-sticky-wrapper {
 	font-weight: 700
 }
 
-.item > button:before {
+.items_list .item > button:before {
 	content: "\f140";
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
@@ -1406,7 +1406,7 @@ div#invoice_status_updates-sticky-wrapper {
 	vertical-align: top
 }
 
-.item > button[data-action="collapse"]:before {
+.items_list .item > button[data-action="collapse"]:before {
 	content: "\f142"
 }
 
