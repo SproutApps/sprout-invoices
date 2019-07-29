@@ -427,6 +427,7 @@ body {
     .panel .inner p {
       margin-bottom: 18px; }
     .panel .inner input[type="text"],
+    .panel .inner input[type="input"],
     .panel .inner input[type="email"] {
       float: left;
       padding: 16px 0 3px 0;
@@ -435,13 +436,16 @@ body {
       color: rgba(0, 0, 0, 0.75);
       max-width: 300px }
       .panel .inner input[type="text"].half,
+      .panel .inner input[type="input"].half,
       .panel .inner input[type="email"].half {
         width: 50%; }
         @media (max-width: 480px) {
-          .panel .inner input[type="text"].half,
+          .panel .inner input[type="text"].half,,
+          .panel .inner input[type="input"].half
           .panel .inner input[type="email"].half {
             width: 100%; } }
-      .panel .inner input[type="text"].whole,
+      .panel .inner input[type="text"].whole,,
+      .panel .inner input[type="input"].whole
       .panel .inner input[type="email"].whole {
         width: 100%; }
     .panel .inner .toggle {
@@ -640,6 +644,9 @@ body {
 .panel .inner #sa_credit_cc_cvv {
     width: 20%;
     margin-top: 5px;
+}
+.panel .inner #sa_credit_cc_cvv[size="5"] {
+  width: 50%;
 }
 .row.toggles {
     margin-bottom: 20px;

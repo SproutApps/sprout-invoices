@@ -1,0 +1,3379 @@
+# Translation of Plugins - Client Invoicing by Sprout Invoices &#8211; Easy Estimates and Invoices for WordPress - Stable Readme (latest release) in English (Australia)
+# This file is distributed under the same license as the Plugins - Client Invoicing by Sprout Invoices &#8211; Easy Estimates and Invoices for WordPress - Stable Readme (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-07-26 09:59-0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.2.3\n"
+"Language: en_AU\n"
+"Project-Id-Version: Plugins - Client Invoicing by Sprout Invoices &#8211; Easy Estimates and Invoices for WordPress - Stable Readme (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
+"Language-Team: \n"
+
+#. Plugin name.
+msgid "Client Invoicing by Sprout Invoices - Easy Estimates and Invoices for WordPress"
+msgstr "Client Invoicing by Sprout Invoices - Easy Estimates and Invoices for WordPress"
+
+#. Short description.
+msgid "The best invoicing plugin for WordPress. See how you can get paid faster without those hidden service fees."
+msgstr "The best invoicing plugin for WordPress. See how you can get paid faster without those hidden service fees."
+
+#. Found in faq paragraph.
+msgid "<em>Please visit <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/faqs/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Sprout Invoices</a> for the latest FAQs.</em>"
+msgstr "<em>Please visit <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/faqs/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Sprout Invoices</a> for the latest FAQs.</em>"
+
+#. Found in description paragraph.
+msgid "Even though our goal is to make getting paid easy, providing fast and reliable support is a priority. We don't want any user to feel alone."
+msgstr "Even though our goal is to make getting paid easy, providing fast and reliable support is a priority. We don't want any user to feel alone."
+
+#. Found in description paragraph.
+msgid "Sprout Invoices allows you to create beautiful estimates and invoices for your clients in minutes -- not hours. If you're not familiar with WordPress templating than our <a href=\"https://docs.sproutinvoices.com\">knowledgebase</a> and priority support can help."
+msgstr "Sprout Invoices allows you to create beautiful estimates and invoices for your clients in minutes -- not hours. If you're not familiar with WordPress templating then our <a href=\"https://docs.sproutinvoices.com\">knowledge base</a> and priority support can help."
+
+#. Found in description paragraph.
+msgid "Our focus <em>since day one 4+ years ago</em> with <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Sprout Invoices Reviews\">Sprout Invoices</a> has been to create a way for WordPress site owners to invoice and EASILY get paid. We also understand that customization beyond branding is important, and that's why we built the most POWERFUL solution with the most integrations around."
+msgstr "Our focus <em>since day one 4+ years ago</em> with <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Sprout Invoices Reviews\">Sprout Invoices</a> has been to create a way for WordPress site owners to invoice and EASILY get paid. We also understand that customisation beyond branding is important, and that's why we built the most POWERFUL solution with the most integrations around."
+
+#. Found in description header.
+msgid "Invoicing Requirements Around the Globe"
+msgstr "Invoicing Requirements Around the Globe"
+
+#. Found in description header.
+msgid "Getting Paid Efficiently"
+msgstr "Getting Paid Efficiently"
+
+#. Found in description paragraph.
+msgid "All of the popular features listed below are bundled <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">with a pro license</a>. Consider joining the community of happy Sprout Invoices Pro users."
+msgstr "All of the popular features listed below are bundled <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">with a pro licence</a>. Consider joining the community of happy Sprout Invoices Pro users."
+
+#. Found in description paragraph.
+msgid "If your invoice requirements are not met with one of the plugins above please <a href=\"https://sproutinvoices.com/contact/\">let us know</a>."
+msgstr "If your invoice requirements are not met with one of the plugins above please <a href=\"https://sproutinvoices.com/contact/\">let us know</a>."
+
+#. Found in description paragraph.
+msgid "Supporting many <a href=\"https://translate.wordpress.org/projects/wp-plugins/sprout-invoices\">different languages</a> is another focus of ours, and with that comes the responsibility of meeting local government invoicing requirements. Here are some of free plugins to help support the globe:"
+msgstr "Supporting many <a href=\"https://translate.wordpress.org/projects/wp-plugins/sprout-invoices\">different languages</a> is another focus of ours, and with that comes the responsibility of meeting local government invoicing requirements. Here are some of free plugins to help support the globe:"
+
+#. Found in description paragraph.
+msgid "All form builder integrations are free!"
+msgstr "All form builder integrations are free!"
+
+#. Found in description paragraph.
+msgid "Integrations with your favorite WordPress form plugins allow you to build an easy solution to creating dynamic invoices based on the prospective client’s form selections. Pre-defined Line Items (pro feature) are used to create the custom submission form and every form integration is easy!"
+msgstr "Integrations with your favourite WordPress form plugins allow you to build an easy solution to creating dynamic invoices based on the prospective client’s form selections. Predefined Line Items (pro feature) are used to create the custom submission form and every form integration is easy!"
+
+#. Found in description paragraph.
+msgid "Integrate with PayPal &amp; make accepting invoice payments easy. The free <a href=\"https://sproutinvoices.com/marketplace/paypal-payments-express-checkout/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"WordPress Invoicing with PayPal\">PayPal plugin is available here</a>."
+msgstr "Integrate with PayPal &amp; make accepting invoice payments easy. The free <a href=\"https://sproutinvoices.com/marketplace/paypal-payments-express-checkout/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"WordPress Invoicing with PayPal\">PayPal plugin is available here</a>."
+
+#. Found in description paragraph.
+msgid "Sprout Invoices integrates with the most popular payment gateways around. Including: PayPal (free), Stripe, Authorize.net, Square, 2Checkout, eWay, NMI, and <a href=\"https://sproutinvoices.com/marketplace/category/payment-gateway/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"WordPress invoicing payment processors\">many more</a>."
+msgstr "Sprout Invoices integrates with the most popular payment gateways around. Including: PayPal (free), Stripe, Authorize.net, Square, 2Checkout, eWay, NMI, and <a href=\"https://sproutinvoices.com/marketplace/category/payment-gateway/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"WordPress invoicing payment processors\">many more</a>."
+
+#. Found in description paragraph.
+msgid "While Sprout Invoices automates many tasks the real power comes from the flexibility through <a href=\"https://sproutinvoices.com/integrations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"WordPress invoicing integrations\">integrations</a>."
+msgstr "While Sprout Invoices automates many tasks the real power comes from the flexibility through <a href=\"https://sproutinvoices.com/integrations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"WordPress invoicing integrations\">integrations</a>."
+
+#. Found in description paragraph.
+msgid ""
+"<strong>Sprout Invoices Pro</strong><br />\n"
+"  This plugin is the lite version of the Sprout Invoices Pro plugin that comes with all the invoicing features you will ever need including recurring invoices, recurring payments, pre-defined line items, client dashboards, Stripe and many other payment processors, advanced reporting, hundreds of integrations (including Zapier) and a ton more. <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Sprout Invoices\">Click here to learn more about the best Invoicing plugin for WordPress now!</a>"
+msgstr ""
+"<strong>Sprout Invoices Pro</strong><br />\n"
+"  This plugin is the lite version of the Sprout Invoices Pro plugin that comes with all the invoicing features you will ever need including recurring invoices, recurring payments, predefined line items, client dashboards, Stripe and many other payment processors, advanced reporting, hundreds of integrations (including Zapier) and a ton more. <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Sprout Invoices\">Click here to learn more about the best Invoicing plugin for WordPress now!</a>"
+
+#. Found in description paragraph.
+msgid "Sprout Invoices is meant to remove the hoops and hurdles required in a typical workflow of accepting estimate requests, creating an estimate/quote, and getting paid. Learn more about this goal to <a href=\"https://sproutinvoices.com/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"What Sprout Invoices Sets To Solve\">improve your workflow on sproutinvoices.com</a>."
+msgstr "Sprout Invoices is meant to remove the hoops and hurdles required in a typical workflow of accepting estimate requests, creating an estimate/quote, and getting paid. Learn more about this goal to <a href=\"https://sproutinvoices.com/news/what-sprout-invoices-solves-for-freelancers-and-wordpress-sites/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"What Sprout Invoices Sets To Solve\">improve your workflow on sproutinvoices.com</a>."
+
+#. Found in description paragraph.
+msgid "Trust the <a href=\"https://wordpress.org/support/plugin/sprout-invoices/reviews/?filter=5\" rel=\"friend\" title=\"Sprout Invoices WordPress.org Reviews\">reviews</a> and join an <a href=\"https://sproutinvoices.com/reviews/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Sprout Invoices Reviews\">awesome community</a> of happy users."
+msgstr "Trust the <a href=\"https://wordpress.org/support/plugin/sprout-invoices/reviews/?filter=5\" rel=\"friend\" title=\"Sprout Invoices WordPress.org Reviews\">reviews</a> and join an <a href=\"https://sproutinvoices.com/reviews/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Sprout Invoices Reviews\">awesome community</a> of happy users."
+
+#. Found in description list item.
+msgid "Accept payments from <a href=\"https://sproutinvoices.com/marketplace/category/payment-gateway/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Authorize.net, Square, 2Checkout, eWay, NMI, and many more</a>"
+msgstr "Accept payments from <a href=\"https://sproutinvoices.com/marketplace/category/payment-gateway/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Authorize.net, Square, 2Checkout, eWay, NMI, and many more</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/marketplace/esp-invoicing-requirements-iva-irpf-customizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Invoicing Tax Requirements\">ESP Invoicing Requirements (IVA &amp; IRPF)</a>"
+msgstr "<a href=\"https://sproutinvoices.com/marketplace/esp-invoicing-requirements-iva-irpf-customizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Invoicing Tax Requirements\">ESP Invoicing Requirements (IVA &amp; IRPF)</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/marketplace/canadian-tax-requirements/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Canadian Invoicing Requirements\">Canadian Invoicing Requirements</a>"
+msgstr "<a href=\"https://sproutinvoices.com/marketplace/canadian-tax-requirements/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Canadian Invoicing Requirements\">Canadian Invoicing Requirements</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/marketplace/australian-invoicing-requirements-customizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Australian Invoicing Requirements\">Australian Invoicing Requirements</a>"
+msgstr "<a href=\"https://sproutinvoices.com/marketplace/australian-invoicing-requirements-customizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"Australian Invoicing Requirements\">Australian Invoicing Requirements</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/marketplace/eu-invoicing-requirements-customizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"EU Invoicing Requirements\">EU Invoicing Requirements</a>"
+msgstr "<a href=\"https://sproutinvoices.com/marketplace/eu-invoicing-requirements-customizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\" rel=\"friend\" title=\"EU Invoicing Requirements\">EU Invoicing Requirements</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://wordpress.org/plugins/sprout-invoices-formidable-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">Formidable Forms</a>"
+msgstr "<a href=\"https://wordpress.org/plugins/sprout-invoices-formidable-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">Formidable Forms</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://wordpress.org/plugins/sprout-invoices-wp-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">WP Forms</a>"
+msgstr "<a href=\"https://wordpress.org/plugins/sprout-invoices-wp-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">WP Forms</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://wordpress.org/plugins/sprout-invoices-ninja-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">Ninja Forms</a>"
+msgstr "<a href=\"https://wordpress.org/plugins/sprout-invoices-ninja-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">Ninja Forms</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://wordpress.org/plugins/sprout-invoices-gravity-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">Gravity Forms</a>"
+msgstr "<a href=\"https://wordpress.org/plugins/sprout-invoices-gravity-forms/\" rel=\"friend\" title=\"Easy Invoice &amp; Estimate Submissions with WordPress\">Gravity Forms</a>"
+
+#. Found in description header.
+msgid "Getting Paid with WordPress and Sprout Invoices"
+msgstr "Getting Paid with WordPress and Sprout Invoices"
+
+#. Found in description header.
+msgid "Full Sprout Invoices Feature List"
+msgstr "Full Sprout Invoices Feature List"
+
+#. Found in description header.
+msgid "Easy Invoice &amp; Estimate Submissions with WordPress"
+msgstr "Easy Invoice &amp; Estimate Submissions with WordPress"
+
+#. Found in description header.
+msgid "Payments Integrations"
+msgstr "Payments Integrations"
+
+#. Found in description header.
+msgid "The Integration Powers of Sprout Invoices"
+msgstr "The Integration Powers of Sprout Invoices"
+
+#. Found in description header.
+msgid "WordPress Invoicing Made Easy"
+msgstr "WordPress Invoicing Made Easy"
+
+#. Found in description paragraph.
+msgid "https://www.youtube.com/watch?v=n1pP_hQSKlQ"
+msgstr "https://www.youtube.com/watch?v=n1pP_hQSKlQ"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/sprout-invoices-v10-account-credits-client-summary-notifications/\">Client Summary Notications</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/sprout-invoices-v10-account-credits-client-summary-notifications/\">Client Summary Notifications</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/payment-terms-simple-invoice-payment-scheduling-v14/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Payment Terms</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/payment-terms-simple-invoice-payment-scheduling-v14/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Payment Terms</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/integrations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">WooCommerce Integrations</a>"
+msgstr "<a href=\"https://sproutinvoices.com/integrations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">WooCommerce Integrations</a>"
+
+#. Found in description list item.
+msgid "<a href=\"http://docs.sproutinvoices.com/article/36-client-dashboards/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Client Dashboards</a>"
+msgstr "<a href=\"http://docs.sproutinvoices.com/article/36-client-dashboards/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Client Dashboards</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/sprout-billings/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Sprout Billings</a> an effortless way for recurring invoices to be paid automatically on a set bill date, and easily settle outstanding invoices with a single click. Your customers/clients can easily manage their payment profiles from a dashboards or an invoice. Sprout Billings offers ACH support too!"
+msgstr "<a href=\"https://sproutinvoices.com/sprout-billings/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Sprout Billings</a> an effortless way for recurring invoices to be paid automatically on a set bill date, and easily settle outstanding invoices with a single click. Your customers/clients can easily manage their payment profiles from a dashboards or an invoice. Sprout Billings offers ACH support too!"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/marketplace/category/free/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Advanced Taxes for your region</a>"
+msgstr "<a href=\"https://sproutinvoices.com/marketplace/category/free/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Advanced Taxes for your region</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/integrations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Hundreds of Integrations</a>"
+msgstr "<a href=\"https://sproutinvoices.com/integrations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Hundreds of Integrations</a>"
+
+#. Found in description list item.
+msgid "The best <a href=\"https://sproutinvoices.com/news/sprout-invoices-payment-options-deposits-checks-authorizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">payment experience</a> for your clients with options for them to pay via Check, PO or <a href=\"https://sproutinvoices.com/marketplace/paypal-payments-express-checkout/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Paypal</a> (<a href=\"https://sproutinvoices.com/marketplace/category/payment-gateway/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">additional gateways available</a>)."
+msgstr "The best <a href=\"https://sproutinvoices.com/news/sprout-invoices-payment-options-deposits-checks-authorizations/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">payment experience</a> for your clients with options for them to pay via Check, PO or <a href=\"https://sproutinvoices.com/marketplace/paypal-payments-express-checkout/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Paypal</a> (<a href=\"https://sproutinvoices.com/marketplace/category/payment-gateway/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">additional gateways available</a>)."
+
+#. Found in description paragraph.
+msgid "Priority support is provided with an <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">upgraded version</a>. All free support will provided in the <a href=\"https://wordpress.org/support/plugin/sprout-invoices\">forums</a>."
+msgstr "Priority support is provided with an <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">upgraded version</a>. All free support will provided in the <a href=\"https://wordpress.org/support/plugin/sprout-invoices\">forums</a>."
+
+#. Found in description header.
+msgid "Support"
+msgstr "Support"
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress"
+msgstr "Activate the plugin through the 'Plugins' menu in WordPress."
+
+#. Found in installation list item.
+msgid "Upload plugin folder to the <code>/wp-content/plugins/</code> directory"
+msgstr "Upload plugin folder to the <code>/wp-content/plugins/</code> directory"
+
+#. Found in description header.
+msgid "Pro Features"
+msgstr "Pro Features"
+
+#. Found in description paragraph.
+msgid "Make sure to review the <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Sprout Invoices</a> features page for more detailed information. As well as the full featured <a href=\"https://sproutinvoices.com/demo/playground\">demo</a>."
+msgstr "Make sure to review the <a href=\"https://sproutinvoices.com?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Sprout Invoices</a> features page for more detailed information. As well as the full featured <a href=\"https://sproutinvoices.com/demo/playground\">demo</a>."
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Dynamic Text</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Dynamic Text</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Pre-defined Line Items</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Predefined Line Items</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Line Item Commenting</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/latest-version-of-sprout-invoices-brings-line-item-commenting-pre-defined-items-and-more//?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Line Item Commenting</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Recurring Invoices</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Recurring Invoices</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Recurring/Subscription Payments</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/sprout-invoices-3-0-release-recurring-aka-subscription-payments-recurring-invoices/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Recurring/Subscription Payments</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/feature-spotlight-invoice-deposits/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Deposit payments</a>"
+msgstr "<a href=\"https://sproutinvoices.com/news/feature-spotlight-invoice-deposits/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Deposit payments</a>"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.comprojects-time-tracking-sprout-invoices/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Time Tracking and Projects</a>"
+msgstr "<a href=\"https://sproutinvoices.comprojects-time-tracking-sprout-invoices/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Time Tracking and Projects</a>"
+
+#. Found in description list item.
+msgid "Accept <a href=\"https://sproutinvoices.com/marketplace/stripe-payments/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Stripe Payments</a>"
+msgstr "Accept <a href=\"https://sproutinvoices.com/marketplace/stripe-payments/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Stripe Payments</a>"
+
+#. Found in description list item.
+msgid "No extra database tables!"
+msgstr "No extra database tables!"
+
+#. Found in description list item.
+msgid "Client records with multiple points of contact"
+msgstr "Client records with multiple points of contact"
+
+#. Found in description list item.
+msgid "Improved user experience with AJAX."
+msgstr "Improved user experience with AJAX."
+
+#. Found in description list item.
+msgid "Includes a <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">customizable estimates/lead generation form</a>."
+msgstr "Includes a <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/advanced/customize-estimate-submission-form/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">customisable estimates/lead generation form</a>."
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/tools/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Advanced records</a> with any extra tables!"
+msgstr "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/tools/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Advanced records</a> with any extra tables!"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/feature-spotlight-nested-invoice-line-items/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Nested line items</a>."
+msgstr "<a href=\"https://sproutinvoices.com/news/feature-spotlight-nested-invoice-line-items/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Nested line items</a>."
+
+#. Found in description list item.
+msgid "Fully <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/notifications/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">customizable notifications</a>. Notifications are sent from your server and allow for plain-text and HTML."
+msgstr "Fully <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/notifications/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">customisable notifications</a>. Notifications are sent from your server and allow for plain-text and HTML."
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Freshbooks, Harvest, WP-Invoice, and CSV Importing</a>."
+msgstr "<a href=\"https://sproutinvoices.com/news/feature-spotlight-import-freshbooks-harvest-wp-invoice/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Freshbooks, Harvest, WP-Invoice, and CSV Importing</a>."
+
+#. Found in description list item.
+msgid "Localization support for your language!"
+msgstr "Localisation support for your language!"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/clients-options/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Multi-currency support with client specific options</a>."
+msgstr "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/clients-options/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Multi-currency support with client specific options</a>."
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/clients/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Client management</a>."
+msgstr "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/clients/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Client management</a>."
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/reports/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Advanced Reporting</a> (limited w/ free version)"
+msgstr "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/reports/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Advanced Reporting</a> (limited w/ free version)"
+
+#. Found in description list item.
+msgid "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/payments/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Payment management</a>."
+msgstr "<a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/payments/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">Payment management</a>."
+
+#. Found in description list item.
+msgid "Fully <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/customizing-templates/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">customizable templates</a> with your own theme."
+msgstr "Fully <a href=\"https://sproutinvoices.com/support/knowledgebase/sprout-invoices/customizing-templates/?utm_medium=link&amp;utm_campaign=free&amp;utm_source=wordpress.org\">customisable templates</a> with your own theme."
+
+#. Found in description list item.
+msgid "Unlimited Invoices, Estimates and Clients. No restrictions!"
+msgstr "Unlimited Invoices, Estimates and Clients. No restrictions!"
+
+#. Screenshot description.
+msgid "Easy Estimate Management"
+msgstr "Easy Estimate Management"
+
+#. Screenshot description.
+msgid "Common management tasks are sped up by Sprout Invoices utilization of AJAX."
+msgstr "Common management tasks are sped up by Sprout Invoices utilisation of AJAX."
+
+#. Screenshot description.
+msgid "Dynamic reports allow for date filtering, sorting, search, and exporting."
+msgstr "Dynamic reports allow for date filtering, sorting, search, and exporting."
+
+#. Screenshot description.
+msgid "A dashboard with charts and summaries answer the question \"how am I doing?\"."
+msgstr "A dashboard with charts and summaries answer the question \"how am I doing?\"."
+
+#. Screenshot description.
+msgid "Easy Invoice Management"
+msgstr "Easy Invoice Management"
+
+#. Screenshot description.
+msgid "Invoice Template"
+msgstr "Invoice Template"
+
+#. Found in changelog list item.
+msgid "Fix: Basic theme issue with payment options"
+msgstr "Fix: Basic theme issue with payment options"
+
+#. Found in changelog list item.
+msgid "Update: Handle Stripe user tokens different."
+msgstr "Update: Handle Stripe user tokens different."
+
+#. Found in changelog list item.
+msgid "Fix: TOS Agreement add-on incompatibility with e-signature add-on."
+msgstr "Fix: TOS Agreement add-on incompatibility with e-signature add-on."
+
+#. Found in changelog list item.
+msgid "Fix: Square payment processor API keys incorrectly used."
+msgstr "Fix: Square payment processor API keys incorrectly used."
+
+#. Found in changelog list item.
+msgid "Fix: Zapier payments info."
+msgstr "Fix: Zapier payments info."
+
+#. Found in changelog list item.
+msgid "Fix: Don't show hidden invoices within reports."
+msgstr "Fix: Don't show hidden invoices within reports."
+
+#. Found in changelog list item.
+msgid "Fix: Styling updates to prevent conflict."
+msgstr "Fix: Styling updates to prevent conflict."
+
+#. Found in changelog list item.
+msgid "Fix: Error prevention on dashboard."
+msgstr "Fix: Error prevention on dashboard."
+
+#. Found in changelog list item.
+msgid "Fix: Adding interest fix."
+msgstr "Fix: Adding interest fix."
+
+#. Found in changelog list item.
+msgid "Fix: Notification fixes for new interest email."
+msgstr "Fix: Notification fixes for new interest email."
+
+#. Found in changelog list item.
+msgid "New: New filter for getting visitor ip, 'si_get_user_ip'."
+msgstr "New: New filter for getting visitor ip, 'si_get_user_ip'."
+
+#. Found in changelog list item.
+msgid "Update: Stripe updated for payment source management"
+msgstr "Update: Stripe updated for payment source management"
+
+#. Found in changelog list item.
+msgid "Update: Payments Table Updated"
+msgstr "Update: Payments Table Updated"
+
+#. Found in changelog list item.
+msgid "NEW: Set Line Item Type with \"Line Item Type\" with CSV Import"
+msgstr "NEW: Set Line Item Type with \"Line Item Type\" with CSV Import"
+
+#. Found in changelog list item.
+msgid "NEW: New Payment Term Shortcodes, payment_term_min_due and payment_term_min_due_date"
+msgstr "NEW: New Payment Term Shortcodes, payment_term_min_due and payment_term_min_due_date"
+
+#. Found in changelog list item.
+msgid "NEW: Interest on Unpaid Balance and Payment Terms"
+msgstr "NEW: Interest on Unpaid Balance and Payment Terms"
+
+#. Found in changelog list item.
+msgid "NEW: Importable Default Payment Terms"
+msgstr "NEW: Importable Default Payment Terms"
+
+#. Found in changelog list item.
+msgid "NEW: Recurring Payment Terms"
+msgstr "NEW: Recurring Payment Terms"
+
+#. Found in changelog list item.
+msgid "NEW: Processor Limits by Payment Amount"
+msgstr "NEW: Processor Limits by Payment Amount"
+
+#. Found in changelog list item.
+msgid "NEW: TOS Add-on"
+msgstr "NEW: TOS Add-on"
+
+#. Found in changelog list item.
+msgid "Update: Adding Stripe partner id"
+msgstr "Update: Adding Stripe partner id"
+
+#. Found in changelog list item.
+msgid "Update: Show compat with WordPress 5.1"
+msgstr "Update: Show compat with WordPress 5.1"
+
+#. Found in changelog list item.
+msgid "Fix: Advanced ID Generation with padding"
+msgstr "Fix: Advanced ID Generation with padding"
+
+#. Found in changelog list item.
+msgid "Update: Partial Payments updates for Sprout Billings, and improved user experience."
+msgstr "Update: Partial Payments updates for Sprout Billings, and improved user experience."
+
+#. Found in changelog list item.
+msgid "NEW: Filter si_do_attempt_status_update_on_get_balance"
+msgstr "NEW: Filter si_do_attempt_status_update_on_get_balance"
+
+#. Found in changelog list item.
+msgid "Update: PDF Filter si_pdf_invoice_file_name passes doc_id"
+msgstr "Update: PDF Filter si_pdf_invoice_file_name passes doc_id"
+
+#. Found in changelog list item.
+msgid "NEW: Ability to reset payment generation dates for subscription based invoices"
+msgstr "NEW: Ability to reset payment generation dates for subscription based invoices"
+
+#. Found in changelog list item.
+msgid "Fix: Metabox saved when other posts are saved, i.e. WooCommerce orders."
+msgstr "Fix: Metabox saved when other posts are saved, i.e. WooCommerce orders."
+
+#. Found in changelog list item.
+msgid "New: Project times filter - si_project_get_associated_times"
+msgstr "New: Project times filter - si_project_get_associated_times"
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce product for integration will be recreated"
+msgstr "Fix: WooCommerce product for integration will be recreated"
+
+#. Found in changelog list item.
+msgid "Fix: Notifications sent without complete information"
+msgstr "Fix: Notifications sent without complete information"
+
+#. Found in changelog list item.
+msgid "Fix: Partial Payments setting invoices as paid under specific circumstances."
+msgstr "Fix: Partial Payments setting invoices as paid under specific circumstances."
+
+#. Found in changelog list item.
+msgid "Update: Zapier Updates"
+msgstr "Update: Zapier Updates"
+
+#. Found in changelog list item.
+msgid "Fix: PDF template color issues"
+msgstr "Fix: PDF template color issues"
+
+#. Found in changelog list item.
+msgid "New: Filter to remove help desk - si_show_help_desk"
+msgstr "New: Filter to remove help desk - si_show_help_desk"
+
+#. Found in changelog list item.
+msgid "Fix: Due date changed after notification sent from invoices admin"
+msgstr "Fix: Due date changed after notification sent from invoices admin"
+
+#. Found in changelog list item.
+msgid "New: [admin_note] shortcode added to more notifications"
+msgstr "New: [admin_note] shortcode added to more notifications"
+
+#. Found in changelog list item.
+msgid "Update: Zapier authentication simplification"
+msgstr "Update: Zapier authentication simplification"
+
+#. Found in changelog list item.
+msgid "New: New Hook for Importing"
+msgstr "New: New Hook for Importing"
+
+#. Found in changelog list item.
+msgid "Fix: Mobile view for admin tables"
+msgstr "Fix: Mobile view for admin tables"
+
+#. Found in changelog list item.
+msgid "Update: New Zapier Integrations &amp; Updates"
+msgstr "Update: New Zapier Integrations &amp; Updates"
+
+#. Found in changelog list item.
+msgid "Update: Client wont need to sign invoice after signing the approved estimate "
+msgstr "Update: Client wont need to sign invoice after signing the approved estimate"
+
+#. Found in changelog list item.
+msgid "New Filter: \"si_recurring_invoice_default_status\" set the default status for recurring invoices"
+msgstr "New Filter: \"si_recurring_invoice_default_status\" set the default status for recurring invoices"
+
+#. Found in changelog list item.
+msgid "New: Square Payment Notes"
+msgstr "New: Square Payment Notes"
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce Cart Issue"
+msgstr "Fix: WooCommerce Cart Issue"
+
+#. Found in changelog list item.
+msgid "Update: PDF Attachment"
+msgstr "Update: PDF Attachment"
+
+#. Found in changelog list item.
+msgid "Update: Time widget"
+msgstr "Update: Time widget"
+
+#. Found in changelog list item.
+msgid "Update: PDF display for footer"
+msgstr "Update: PDF display for footer"
+
+#. Found in changelog list item.
+msgid "Update: Record views only for published docs"
+msgstr "Update: Record views only for published docs"
+
+#. Found in changelog list item.
+msgid "Fix: Slate theme logo styling"
+msgstr "Fix: Slate theme logo styling"
+
+#. Found in changelog list item.
+msgid "Update: Zapier fixes for updates"
+msgstr "Update: Zapier fixes for updates"
+
+#. Found in changelog list item.
+msgid "New: Invoice reciept delay with \"si_create_invoice_receipts_upto\""
+msgstr "New: Invoice reciept delay with \"si_create_invoice_receipts_upto\""
+
+#. Found in changelog list item.
+msgid "New: Filter for WooCommerce to allow for products to be added back to the cart for payment from an invoice payment - \"si_woo_payment_single_product_for_payment\""
+msgstr "New: Filter for WooCommerce to allow for products to be added back to the cart for payment from an invoice payment - \"si_woo_payment_single_product_for_payment\""
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce Bug with \"Cart is Empty\""
+msgstr "Fix: WooCommerce Bug with \"Cart is Empty\""
+
+#. Found in changelog list item.
+msgid "Fix: Generating notifications for recurring invoices error under specific conditions"
+msgstr "Fix: Generating notifications for recurring invoices error under specific conditions"
+
+#. Found in changelog list item.
+msgid "Fix: Advanced select options on clients and project pages"
+msgstr "Fix: Advanced select options on clients and project pages"
+
+#. Found in changelog list item.
+msgid "Update: Select2 Update"
+msgstr "Update: Select2 Update"
+
+#. Found in changelog list item.
+msgid "Update: Change invoice status when sent before PDF is generated"
+msgstr "Update: Change invoice status when sent before PDF is generated"
+
+#. Found in changelog list item.
+msgid "Update: Scheduled posts in Zapier"
+msgstr "Update: Scheduled posts in Zapier"
+
+#. Found in changelog list item.
+msgid "Fix: Stripe filters caused error for plans"
+msgstr "Fix: Stripe filters caused error for plans"
+
+#. Found in changelog list item.
+msgid "Update: Optimizations"
+msgstr "Update: Optimisations"
+
+#. Found in changelog list item.
+msgid "Update: Stripe filters"
+msgstr "Update: Stripe filters"
+
+#. Found in changelog list item.
+msgid "Update: Subscription and Recurring invoice messaging updates to help prevent conflicts"
+msgstr "Update: Subscription and Recurring invoice messaging updates to help prevent conflicts"
+
+#. Found in changelog list item.
+msgid "Fix: Subscription payment reciepts not working after invoice was edited after payment."
+msgstr "Fix: Subscription payment receipts not working after invoice was edited after payment."
+
+#. Found in changelog list item.
+msgid "Fix: CSS Updates for report pages"
+msgstr "Fix: CSS Updates for report pages"
+
+#. Found in changelog list item.
+msgid "Fix: PDF Template overrides were not working correctly for PDF Service"
+msgstr "Fix: PDF Template overrides were not working correctly for PDF Service"
+
+#. Found in changelog list item.
+msgid "Fix: Advanced ID Generation for recurring/cloned invoices"
+msgstr "Fix: Advanced ID Generation for recurring/cloned invoices"
+
+#. Found in changelog list item.
+msgid "Fix: Compatibility fix with plugins that like to share CSS with broad selectors on pages they shouldn't."
+msgstr "Fix: Compatibility fix with plugins that like to share CSS with broad selectors on pages they shouldn't."
+
+#. Found in changelog list item.
+msgid "NEW: Points of Contact Add-on updated to allow manual sends"
+msgstr "NEW: Points of Contact Add-on updated to allow manual sends"
+
+#. Found in changelog list item.
+msgid "NEW: Authorize.net line items"
+msgstr "NEW: Authorize.net line items"
+
+#. Found in changelog list item.
+msgid "NEW: Show the notification descriptions on the main admin page"
+msgstr "NEW: Show the notification descriptions on the main admin page"
+
+#. Found in changelog list item.
+msgid "Fix: Partial payments updated for better payment workflow, and styling"
+msgstr "Fix: Partial payments updated for better payment workflow, and styling"
+
+#. Found in changelog list item.
+msgid "Fix: Service fee added after a fee was already added"
+msgstr "Fix: Service fee added after a fee was already added"
+
+#. Found in changelog list item.
+msgid "Fix: A few Basic/Freelancer add-ons removed after a review that they shouldn't have been included"
+msgstr "Fix: A few Basic/Freelancer add-ons removed after a review that they shouldn't have been included"
+
+#. Found in changelog list item.
+msgid "Fix: PHP Notices for older installs upgrading"
+msgstr "Fix: PHP Notices for older installs upgrading"
+
+#. Found in changelog list item.
+msgid "Fix: Conditional bug that prevented the credit card form to show"
+msgstr "Fix: Conditional bug that prevented the credit card form to show"
+
+#. Found in changelog list item.
+msgid "Fix: CSS Issue on payment page"
+msgstr "Fix: CSS Issue on payment page"
+
+#. Found in changelog list item.
+msgid "Fix: Recurring notifications not sending to all associated client users"
+msgstr "Fix: Recurring notifications not sending to all associated client users"
+
+#. Found in changelog list item.
+msgid "Fix: Mercadopago sandbox option, and new filter for button"
+msgstr "Fix: Mercadopago sandbox option, and new filter for button"
+
+#. Found in changelog list item.
+msgid "Fix: Address not saving for some client records"
+msgstr "Fix: Address not saving for some client records"
+
+#. Found in changelog list item.
+msgid "NEW: Shipping add-on support for new themes"
+msgstr "NEW: Shipping add-on support for new themes"
+
+#. Found in changelog list item.
+msgid "Update: CSS for Basic and Default themes"
+msgstr "Update: CSS for Basic and Default themes"
+
+#. Found in changelog list item.
+msgid "NEW: Phone and Fax"
+msgstr "NEW: Phone and Fax"
+
+#. Found in changelog list item.
+msgid "NEW: Basic Theme"
+msgstr "NEW: Basic Theme"
+
+#. Found in changelog list item.
+msgid "NEW: si_default_due_in_days includes invoice object as param"
+msgstr "NEW: si_default_due_in_days includes invoice object as param"
+
+#. Found in changelog list item.
+msgid "Fix: Pointer conflicts"
+msgstr "Fix: Pointer conflicts"
+
+#. Found in changelog list item.
+msgid "Update: Partial Payments and Deposit option logic"
+msgstr "Update: Partial Payments and Deposit option logic"
+
+#. Found in changelog list item.
+msgid "Fix: Settings not saved on sites with differing HOME/SITE urls."
+msgstr "Fix: Settings not saved on sites with differing HOME/SITE URLs."
+
+#. Found in changelog list item.
+msgid "Fix: Login compat with default theme"
+msgstr "Fix: Login compat with default theme"
+
+#. Found in changelog list item.
+msgid "Fix: PDF purchase button links"
+msgstr "Fix: PDF purchase button links"
+
+#. Found in changelog list item.
+msgid "New: Getting started is changed up for new users"
+msgstr "New: Getting started is changed up for new users"
+
+#. Found in changelog list item.
+msgid "New: New branding for Sprout Invoices"
+msgstr "New: New branding for Sprout Invoices"
+
+#. Found in changelog list item.
+msgid "New: Transition to new domain"
+msgstr "New: Transition to new domain"
+
+#. Found in changelog list item.
+msgid "Fix: Developer logs incorrectly enabled under some circumstances."
+msgstr "Fix: Developer logs incorrectly enabled under some circumstances."
+
+#. Found in changelog list item.
+msgid "Fix: Estimate ranges typo"
+msgstr "Fix: Estimate ranges typo"
+
+#. Found in changelog list item.
+msgid "New: Login view override support"
+msgstr "New: Login view override support"
+
+#. Found in changelog list item.
+msgid "Fix: Admin views support smaller screens"
+msgstr "Fix: Admin views support smaller screens"
+
+#. Found in changelog list item.
+msgid "New: Start of transition to new domain"
+msgstr "New: Start of transition to new domain"
+
+#. Found in changelog list item.
+msgid "Fix: Payment Term notification status"
+msgstr "Fix: Payment Term notification status"
+
+#. Found in changelog list item.
+msgid "Fix: Payment Term notification shortcodes"
+msgstr "Fix: Payment Term notification shortcodes"
+
+#. Found in changelog list item.
+msgid "New: Estimate expiration shortcode"
+msgstr "New: Estimate expiration shortcode"
+
+#. Found in changelog list item.
+msgid "New: Manual recurring/payment-receipts creation"
+msgstr "New: Manual recurring/payment-receipts creation"
+
+#. Found in changelog list item.
+msgid "New: Estimate Ranges Add-on"
+msgstr "New: Estimate Ranges Add-on"
+
+#. Found in changelog list item.
+msgid "New: A lot of change to how Partial Payments and Deposits works. They're now an add-on that can be enabled/disabled."
+msgstr "New: A lot of change to how Partial Payments and Deposits works. They're now an add-on that can be enabled/disabled."
+
+#. Found in changelog list item.
+msgid "Update: Updated messaging for free users"
+msgstr "Update: Updated messaging for free users"
+
+#. Found in changelog list item.
+msgid "Fix: PayPal Pro and Standard mode conflicts. "
+msgstr "Fix: PayPal Pro and Standard mode conflicts. "
+
+#. Found in changelog list item.
+msgid "Fix: Service fee not automatically added if single processor is active"
+msgstr "Fix: Service fee not automatically added if single processor is active"
+
+#. Found in changelog list item.
+msgid "Update: Service line item type has no qty, and manage admin prevents its use."
+msgstr "Update: Service line item type has no qty, and manage admin prevents its use."
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce correctly updating invoice after order status changed."
+msgstr "Fix: WooCommerce correctly updating invoice after order status changed."
+
+#. Found in changelog list item.
+msgid "New: Filter for WooCommerce product import"
+msgstr "New: Filter for WooCommerce product import"
+
+#. Found in changelog list item.
+msgid "New: Filter to bypass service fee"
+msgstr "New: Filter to bypass service fee"
+
+#. Found in changelog list item.
+msgid "Fix/Refactor: Line item commenting"
+msgstr "Fix/Refactor: Line item commenting"
+
+#. Found in changelog list item.
+msgid "Fix: Notification content reset with HTML"
+msgstr "Fix: Notification content reset with HTML"
+
+#. Found in changelog list item.
+msgid "Fix: Notification content not resetting"
+msgstr "Fix: Notification content not resetting"
+
+#. Found in changelog list item.
+msgid "Fix: Notification admin optimization"
+msgstr "Fix: Notification admin optimisation"
+
+#. Found in changelog list item.
+msgid "Fix: Title of Invoice/Estimate not shown"
+msgstr "Fix: Title of Invoice/Estimate not shown"
+
+#. Found in changelog list item.
+msgid "Fix: GST not calculated on reports correctly"
+msgstr "Fix: GST not calculated on reports correctly"
+
+#. Found in changelog list item.
+msgid "Fix: PDF CSS not showing terms/info titles"
+msgstr "Fix: PDF CSS not showing terms/info titles"
+
+#. Found in changelog list item.
+msgid "Temp: Temporarily removing comments add-on"
+msgstr "Temp: Temporarily removing comments add-on"
+
+#. Found in changelog list item.
+msgid "Fix: Stripe settings not saving correctly"
+msgstr "Fix: Stripe settings not saving correctly"
+
+#. Found in changelog list item.
+msgid "Fix: Stripe error section shown when there are no errors"
+msgstr "Fix: Stripe error section shown when there are no errors"
+
+#. Found in changelog list item.
+msgid "Fix: Improved PHP 7.1 Support"
+msgstr "Fix: Improved PHP 7.1 Support"
+
+#. Found in changelog list item.
+msgid "Fix: Payment receipts for subscription payments not completing under certain circumstances."
+msgstr "Fix: Payment receipts for subscription payments not completing under certain circumstances."
+
+#. Found in changelog list item.
+msgid "Fix: Update old admin urls "
+msgstr "Fix: Update old admin urls "
+
+#. Found in changelog list item.
+msgid "Update: Try to not record bot/se visits"
+msgstr "Update: Try to not record bot/se visits"
+
+#. Found in changelog list item.
+msgid "Update: Payment options template is using the invoice balance"
+msgstr "Update: Payment options template is using the invoice balance"
+
+#. Found in changelog list item.
+msgid "Fix: Account Credit Types"
+msgstr "Fix: Account Credit Types"
+
+#. Found in changelog list item.
+msgid "Update: Stripe SDK Updated"
+msgstr "Update: Stripe SDK Updated"
+
+#. Found in changelog list item.
+msgid "Update: Double check some meta for recurring and subscription payment invoice duplication, in case the WP_Query meta query is being hijacked."
+msgstr "Update: Double check some meta for recurring and subscription payment invoice duplication, in case the WP_Query meta query is being hijacked."
+
+#. Found in changelog list item.
+msgid "Update: Notification previews respect which format is selected"
+msgstr "Update: Notification previews respect which format is selected"
+
+#. Found in changelog list item.
+msgid "Fixed: WooCommerce Add-on description updated"
+msgstr "Fixed: WooCommerce Add-on description updated"
+
+#. Found in changelog list item.
+msgid "Update: Test notifications brought back"
+msgstr "Update: Test notifications brought back"
+
+#. Found in changelog list item.
+msgid "Fixed: Account Credits add-on unavailable"
+msgstr "Fixed: Account Credits add-on unavailable"
+
+#. Found in changelog list item.
+msgid "Fixed: License key being reset after certain conditions"
+msgstr "Fixed: Licence key being reset after certain conditions"
+
+#. Found in changelog list item.
+msgid "NEW: Add-ons settings no longer blank"
+msgstr "NEW: Add-ons settings no longer blank"
+
+#. Found in changelog list item.
+msgid "NEW: New filter for invoice total - si_use_total_for_calculated_total"
+msgstr "NEW: New filter for invoice total - si_use_total_for_calculated_total"
+
+#. Found in changelog list item.
+msgid "Fixed: Typos"
+msgstr "Fixed: Typos"
+
+#. Found in changelog list item.
+msgid "Fixed: Deprecated PHP Support"
+msgstr "Fixed: Deprecated PHP Support"
+
+#. Found in changelog list item.
+msgid "Fixed: More Responize Admin"
+msgstr "Fixed: More Responsive Admin"
+
+#. Found in changelog list item.
+msgid "Fixed: Some js admin callbacks not working under some setups"
+msgstr "Fixed: Some js admin callbacks not working under some setups"
+
+#. Found in changelog list item.
+msgid "Fixed: CC Settings not saving"
+msgstr "Fixed: CC Settings not saving"
+
+#. Found in changelog paragraph.
+msgid "More information found <a href=\"https://sproutinvoices.com/news/summer-update-brings-all-new-sprout-invoices-admin/\">here</a>."
+msgstr "More information found <a href=\"https://sproutinvoices.com/news/summer-update-brings-all-new-sprout-invoices-admin/\">here</a>."
+
+#. Found in changelog list item.
+msgid "Update/Fix: Reset totals after invoices are cloned for subscriptions and recurring. This should address when servers cache the balance and it's not reset before the invoice is viewed."
+msgstr "Update/Fix: Reset totals after invoices are cloned for subscriptions and recurring. This should address when servers cache the balance and it's not reset before the invoice is viewed."
+
+#. Found in changelog list item.
+msgid "New: Additional Importer (Sliced)"
+msgstr "New: Additional Importer (Sliced)"
+
+#. Found in changelog list item.
+msgid "New: New Notifications: Payment Cleared, and Recurring Invoice"
+msgstr "New: New Notifications: Payment Cleared, and Recurring Invoice"
+
+#. Found in changelog list item.
+msgid "New: Improved Invoices List Admin"
+msgstr "New: Improved Invoices List Admin"
+
+#. Found in changelog list item.
+msgid "New: Manual Notifications"
+msgstr "New: Manual Notifications"
+
+#. Found in changelog list item.
+msgid "New: Integrated Support"
+msgstr "New: Integrated Support"
+
+#. Found in changelog list item.
+msgid "New: Completely New Admin"
+msgstr "New: Completely New Admin"
+
+#. Found in changelog list item.
+msgid "Update: Sprout Billings styling updates "
+msgstr "Update: Sprout Billings styling updates "
+
+#. Found in changelog list item.
+msgid "Update/New/Fix: New WYSIWYG Editor "
+msgstr "Update/New/Fix: New WYSIWYG Editor "
+
+#. Found in changelog list item.
+msgid "Update: Better PDF Formatting and additional filters"
+msgstr "Update: Better PDF Formatting and additional filters"
+
+#. Found in changelog list item.
+msgid "Fix: Stripe user defaulting to admin under specific circumstances"
+msgstr "Fix: Stripe user defaulting to admin under specific circumstances"
+
+#. Found in changelog list item.
+msgid "Update: Allow for estimate totals cache to be reset"
+msgstr "Update: Allow for estimate totals cache to be reset"
+
+#. Found in changelog list item.
+msgid "Fix: elements collapsing instead of auto flowing "
+msgstr "Fix: elements collapsing instead of auto flowing "
+
+#. Found in changelog list item.
+msgid "Fix: Stored PDF for notifications may not be stored with the correct file names."
+msgstr "Fix: Stored PDF for notifications may not be stored with the correct file names."
+
+#. Found in changelog list item.
+msgid "Update: All Pro versions of Sprout Invoices include the advanced numbering add-on."
+msgstr "Update: All Pro versions of Sprout Invoices include the advanced numbering add-on."
+
+#. Found in changelog list item.
+msgid "Fix: Prevent non existent users from being attributed to possible payments"
+msgstr "Fix: Prevent non existent users from being attributed to possible payments"
+
+#. Found in changelog list item.
+msgid "Fix: CSS Updates"
+msgstr "Fix: CSS Updates"
+
+#. Found in changelog list item.
+msgid "NEW: Notification shortcode for first_name"
+msgstr "NEW: Notification shortcode for first_name"
+
+#. Found in changelog list item.
+msgid "Fix: Notes not saving for estimates before sending"
+msgstr "Fix: Notes not saving for estimates before sending"
+
+#. Found in changelog list item.
+msgid "Update: PHP version check for WooCommerce integration"
+msgstr "Update: PHP version check for WooCommerce integration"
+
+#. Found in changelog list item.
+msgid "Fix: Estimate acceptance actions bug fix for invoice creation"
+msgstr "Fix: Estimate acceptance actions bug fix for invoice creation"
+
+#. Found in changelog list item.
+msgid "Update: GMT for all history"
+msgstr "Update: GMT for all history"
+
+#. Found in changelog list item.
+msgid "Fix: Removed private bundled add-on"
+msgstr "Fix: Removed private bundled add-on"
+
+#. Found in changelog list item.
+msgid "Update: Freemius updated for free versions"
+msgstr "Update: Freemius updated for free versions"
+
+#. Found in changelog list item.
+msgid "Update: Remove all form integrations add-ons since they're now in the .org repo for free"
+msgstr "Update: Remove all form integrations add-ons since they're now in the .org repo for free"
+
+#. Found in changelog list item.
+msgid "Update: New Stripe API Changes"
+msgstr "Update: New Stripe API Changes"
+
+#. Found in changelog list item.
+msgid "Update: Minor updates and bug fixes"
+msgstr "Update: Minor updates and bug fixes"
+
+#. Found in changelog list item.
+msgid "Update: Show the client's stored address info when using a credit card payment"
+msgstr "Update: Show the client's stored address info when using a credit card payment"
+
+#. Found in changelog list item.
+msgid "Update: Fix for client types"
+msgstr "Update: Fix for client types"
+
+#. Found in changelog list item.
+msgid "Update: Stripe API fixes"
+msgstr "Update: Stripe API fixes"
+
+#. Found in changelog list item.
+msgid "Fix/Update: Status for records being updated irregularly"
+msgstr "Fix/Update: Status for records being updated irregularly"
+
+#. Found in changelog list item.
+msgid "NEW: PDF Service for better PDF creation!"
+msgstr "NEW: PDF Service for better PDF creation!"
+
+#. Found in changelog list item.
+msgid "Fix: Add-on caching issue"
+msgstr "Fix: Add-on caching issue"
+
+#. Found in changelog list item.
+msgid "Fix/Update: Ability to view PDF after invoice is paid (default theme)"
+msgstr "Fix/Update: Ability to view PDF after invoice is paid (default theme)"
+
+#. Found in changelog list item.
+msgid "Fix/Update: Password protection compat for new PDF Service"
+msgstr "Fix/Update: Password protection compat for new PDF Service"
+
+#. Found in changelog list item.
+msgid "Update: Reporting totals and column adjustments"
+msgstr "Update: Reporting totals and column adjustments"
+
+#. Found in changelog list item.
+msgid "Fix: PDF Service caching issue"
+msgstr "Fix: PDF Service caching issue"
+
+#. Found in changelog list item.
+msgid "Update: Improved error messaging for PDF Service."
+msgstr "Update: Improved error messaging for PDF Service."
+
+#. Found in changelog list item.
+msgid "Fix: Fees should not be doubled up"
+msgstr "Fix: Fees should not be doubled up"
+
+#. Found in changelog list item.
+msgid "Fix: Project time tracking meta box redundancy"
+msgstr "Fix: Project time tracking meta box redundancy"
+
+#. Found in changelog list item.
+msgid "Update: Plaid filter for enviroment"
+msgstr "Update: Plaid filter for enviroment"
+
+#. Found in changelog list item.
+msgid "Fix: Recurring (more) fail checks"
+msgstr "Fix: Recurring (more) fail checks"
+
+#. Found in changelog list item.
+msgid "Update: Remove Ready Status add-on because of incompatibilities"
+msgstr "Update: Remove Ready Status add-on because of incompatibilities"
+
+#. Found in changelog list item.
+msgid "Update: PO updates"
+msgstr "Update: PO updates"
+
+#. Found in changelog list item.
+msgid "Update: Adjustments for better PDF add-on support"
+msgstr "Update: Adjustments for better PDF add-on support"
+
+#. Found in changelog list item.
+msgid "NEW: More options to change the colors for the default theme in the customizer"
+msgstr "NEW: More options to change the colours for the default theme in the customiser"
+
+#. Found in changelog list item.
+msgid "Update: WooCommerce compatibility update"
+msgstr "Update: WooCommerce compatibility update"
+
+#. Found in changelog list item.
+msgid "Update/Fix: WooCommerce exclusive/inclusive tax updates"
+msgstr "Update/Fix: WooCommerce exclusive/inclusive tax updates"
+
+#. Found in changelog list item.
+msgid "New: Save a default list of add-ons to be active on setup."
+msgstr "New: Save a default list of add-ons to be active on setup."
+
+#. Found in changelog list item.
+msgid "Update: Line items totals display updated for the admin."
+msgstr "Update: Line items totals display updated for the admin."
+
+#. Found in changelog list item.
+msgid "New: Filtering for checkboxes"
+msgstr "New: Filtering for checkboxes"
+
+#. Found in changelog list item.
+msgid "Update: Offsite payment processor update"
+msgstr "Update: Offsite payment processor update"
+
+#. Found in changelog list item.
+msgid "Update: Reverting GMT offset changes from last release. Needs more testing."
+msgstr "Update: Reverting GMT offset changes from last release. Needs more testing."
+
+#. Found in changelog list item.
+msgid "Fix: Pushing an update because business license holders were not receiving the proper bundle"
+msgstr "Fix: Pushing an update because business licence holders were not receiving the proper bundle"
+
+#. Found in changelog list item.
+msgid "Fix: NMI bundle fix"
+msgstr "Fix: NMI bundle fix"
+
+#. Found in changelog list item.
+msgid "Fix: Extraneous callback for updates on every load."
+msgstr "Fix: Extraneous callback for updates on every load."
+
+#. Found in changelog list item.
+msgid "Fix: Some payment processsors were executing filters/actions without being active."
+msgstr "Fix: Some payment processors were executing filters/actions without being active."
+
+#. Found in changelog list item.
+msgid "Fix: Signature add-on errors for default theme"
+msgstr "Fix: Signature add-on errors for default theme"
+
+#. Found in changelog list item.
+msgid "Update: Use GMT offset everywhere"
+msgstr "Update: Use GMT offset everywhere"
+
+#. Found in changelog list item.
+msgid "Update: Point of Contact add-on will no longer force itself if unused."
+msgstr "Update: Point of Contact add-on will no longer force itself if unused."
+
+#. Found in changelog list item.
+msgid "Fix: Latest version of WordPress handles taxonomy queries differently which may have resulted in some records being purged."
+msgstr "Fix: Latest version of WordPress handles taxonomy queries differently which may have resulted in some records being purged."
+
+#. Found in changelog list item.
+msgid "Updated: Minor updates including EU and VAT importing"
+msgstr "Updated: Minor updates including EU and VAT importing"
+
+#. Found in changelog paragraph.
+msgid "New pricing plans for all pro licenses"
+msgstr "New pricing plans for all pro licences"
+
+#. Found in changelog list item.
+msgid "Updated: Woo integration updates for cached product"
+msgstr "Updated: Woo integration updates for cached product"
+
+#. Found in changelog list item.
+msgid "Updated: Better show the deposit payment with the Default theme"
+msgstr "Updated: Better show the deposit payment with the Default theme"
+
+#. Found in changelog list item.
+msgid "Fix: Prevent error for non WP object"
+msgstr "Fix: Prevent error for non WP object"
+
+#. Found in changelog list item.
+msgid "Fix: Subscription payment method using wrong object param"
+msgstr "Fix: Subscription payment method using wrong object param"
+
+#. Found in changelog list item.
+msgid "Updated: New action for Default theme to show more info"
+msgstr "Updated: New action for Default theme to show more info"
+
+#. Found in changelog list item.
+msgid "Fix: Localization issues for estimates template"
+msgstr "Fix: Localisation issues for estimates template"
+
+#. Found in changelog list item.
+msgid "New: Payment Term notifications have new shortcodes"
+msgstr "New: Payment Term notifications have new shortcodes"
+
+#. Found in changelog list item.
+msgid "New: Don't repeat line item headers via filter: si_show_all_line_item_headers"
+msgstr "New: Don't repeat line item headers via filter: si_show_all_line_item_headers"
+
+#. Found in changelog list item.
+msgid "New: New filter when clients are created, si_create_user_args"
+msgstr "New: New filter when clients are created, si_create_user_args"
+
+#. Found in changelog list item.
+msgid "Updated: Prevent future invoices from being generated."
+msgstr "Updated: Prevent future invoices from being generated."
+
+#. Found in changelog list item.
+msgid "Updated: Adjust recurring invoice editing, so the start date is updated after every change."
+msgstr "Updated: Adjust recurring invoice editing, so the start date is updated after every change."
+
+#. Found in changelog list item.
+msgid "Fix: date warnings displayed above recurring payments section"
+msgstr "Fix: date warnings displayed above recurring payments section"
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce Checkout w/ Shipping"
+msgstr "Fix: WooCommerce Checkout w/ Shipping"
+
+#. Found in changelog list item.
+msgid "Fix: Payment terms display issue"
+msgstr "Fix: Payment terms display issue"
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce customer not logged in"
+msgstr "Fix: WooCommerce customer not logged in"
+
+#. Found in changelog list item.
+msgid "Updated: Free version now necessary"
+msgstr "Updated: Free version now necessary"
+
+#. Found in changelog list item.
+msgid "Updated: PO, Localization"
+msgstr "Updated: PO, Localisation"
+
+#. Found in changelog list item.
+msgid "Updated: Subscription payments, new information"
+msgstr "Updated: Subscription payments, new information"
+
+#. Found in changelog list item.
+msgid "New: Square support"
+msgstr "New: Square support"
+
+#. Found in changelog list item.
+msgid "New: Allow to easily filter default line item"
+msgstr "New: Allow to easily filter default line item"
+
+#. Found in changelog list item.
+msgid "New: Client set payments supoort for new Default Theme"
+msgstr "New: Client set payments support for new Default Theme"
+
+#. Found in changelog list item.
+msgid "New: ApproveMe integration support for Default Theme"
+msgstr "New: ApproveMe integration support for Default Theme"
+
+#. Found in changelog list item.
+msgid "New: Recurring invoices re-write"
+msgstr "New: Recurring invoices re-write"
+
+#. Found in changelog list item.
+msgid "New: Zapier Support"
+msgstr "New: Zapier Support"
+
+#. Found in changelog list item.
+msgid "Updated: Templates have body classes"
+msgstr "Updated: Templates have body classes"
+
+#. Found in changelog list item.
+msgid "New: Spanish Translation"
+msgstr "New: Spanish Translation"
+
+#. Found in changelog list item.
+msgid "Fix: Free version deactivation bug"
+msgstr "Fix: Free version deactivation bug"
+
+#. Found in changelog list item.
+msgid "Fix: Localazation"
+msgstr "Fix: Localisation"
+
+#. Found in changelog list item.
+msgid "Fix: Payment processor object not returned, causing CRON to fail under certain circumstances."
+msgstr "Fix: Payment processor object not returned, causing CRON to fail under certain circumstances."
+
+#. Found in changelog list item.
+msgid "Fix: Payment term notifications not being sent."
+msgstr "Fix: Payment term notifications not being sent."
+
+#. Found in changelog list item.
+msgid "Fix: CA Tax error"
+msgstr "Fix: CA Tax error"
+
+#. Found in changelog list item.
+msgid "Fix: Recurring Invoices dups created with pre-startdate save."
+msgstr "Fix: Recurring Invoices dups created with pre-startdate save."
+
+#. Found in changelog list item.
+msgid "Fix: Lineitem template overrides"
+msgstr "Fix: Lineitem template overrides"
+
+#. Found in changelog list item.
+msgid "Fix: Notification shortcodes bug"
+msgstr "Fix: Notification shortcodes bug"
+
+#. Found in changelog list item.
+msgid "Fix: Avada Theme compat"
+msgstr "Fix: Avada Theme compat"
+
+#. Found in changelog list item.
+msgid "Fix: Jetpack compatibility issue"
+msgstr "Fix: Jetpack compatibility issue"
+
+#. Found in changelog list item.
+msgid "Update: Select2 Upgraded"
+msgstr "Update: Select2 Upgraded"
+
+#. Found in changelog list item.
+msgid "Fix: Service Fee add-on updated"
+msgstr "Fix: Service Fee add-on updated"
+
+#. Found in changelog list item.
+msgid "Fix: Estimate template function typo"
+msgstr "Fix: Estimate template function typo"
+
+#. Found in changelog list item.
+msgid "FIX: Bulk edit causing lost client association."
+msgstr "FIX: Bulk edit causing lost client association."
+
+#. Found in changelog list item.
+msgid "NEW: Notification shortcode to show payments"
+msgstr "NEW: Notification shortcode to show payments"
+
+#. Found in changelog list item.
+msgid "NEW: Added info for recurring invoice on the invoice admin."
+msgstr "NEW: Added info for recurring invoice on the invoice admin."
+
+#. Found in changelog list item.
+msgid "NEW: Support for Square payments, new add-on will be released soon."
+msgstr "NEW: Support for Square payments, new add-on will be released soon."
+
+#. Found in changelog list item.
+msgid "NEW: Fees are added to reports."
+msgstr "NEW: Fees are added to reports."
+
+#. Found in changelog list item.
+msgid "NEW: Updates to support the new Service Fee add-on."
+msgstr "NEW: Updates to support the new Service Fee add-on."
+
+#. Found in changelog list item.
+msgid "NEW: Theme selection"
+msgstr "NEW: Theme selection"
+
+#. Found in changelog list item.
+msgid "NEW: Default Theme!!!!"
+msgstr "NEW: Default Theme!!!!"
+
+#. Found in changelog list item.
+msgid "Fix: Multiple theme selections"
+msgstr "Fix: Multiple theme selections"
+
+#. Found in changelog list item.
+msgid "Fix: Auto select the first payment method if only one exists"
+msgstr "Fix: Auto select the first payment method if only one exists"
+
+#. Found in changelog list item.
+msgid "NEW: Sprout Billings support"
+msgstr "NEW: Sprout Billings support"
+
+#. Found in changelog list item.
+msgid "FEATURE: CA GST Report Support"
+msgstr "FEATURE: CA GST Report Support"
+
+#. Found in changelog list item.
+msgid "FIX: HTML Notifications add-on conflict with Test Notifications"
+msgstr "FIX: HTML Notifications add-on conflict with Test Notifications"
+
+#. Found in changelog list item.
+msgid "UPDATE: EU Region name update"
+msgstr "UPDATE: EU Region name update"
+
+#. Found in changelog list item.
+msgid "FIX: Firefox support"
+msgstr "FIX: Firefox support"
+
+#. Found in changelog list item.
+msgid "NEW: Delay loading hook, si_delayed_load"
+msgstr "NEW: Delay loading hook, si_delayed_load"
+
+#. Found in changelog list item.
+msgid "FIX: Shipping fees not loaded"
+msgstr "FIX: Shipping fees not loaded"
+
+#. Found in changelog list item.
+msgid "FIX: WC Compat Check"
+msgstr "FIX: WC Compat Check"
+
+#. Found in changelog list item.
+msgid "FIX: Payment Term Notifications Disabled"
+msgstr "FIX: Payment Term Notifications Disabled"
+
+#. Found in changelog list item.
+msgid "COMPAT: WPSEO compatibility"
+msgstr "COMPAT: WPSEO compatibility"
+
+#. Found in changelog list item.
+msgid "FIX: Minor bug fixes all around"
+msgstr "FIX: Minor bug fixes all around"
+
+#. Found in changelog list item.
+msgid "NEW FEATURE: Payment Terms"
+msgstr "NEW FEATURE: Payment Terms"
+
+#. Found in changelog list item.
+msgid "FIX: Payment obejct sent and interpreted as array"
+msgstr "FIX: Payment obejct sent and interpreted as array"
+
+#. Found in changelog list item.
+msgid "FIX: WooCommerce integration fixes for VAT"
+msgstr "FIX: WooCommerce integration fixes for VAT"
+
+#. Found in changelog list item.
+msgid "FIX: Reset totals on submission"
+msgstr "FIX: Reset totals on submission"
+
+#. Found in changelog list item.
+msgid "UPDATE: Ninja Forms THREES support"
+msgstr "UPDATE: Ninja Forms THREES support"
+
+#. Found in changelog list item.
+msgid "UPDATE: WooCommerce Tools Update"
+msgstr "UPDATE: WooCommerce Tools Update"
+
+#. Found in changelog list item.
+msgid "FIX: Multiple bug fixes, including the escaping of notes"
+msgstr "FIX: Multiple bug fixes, including the escaping of notes"
+
+#. Found in changelog list item.
+msgid "NEW: Digital signature support"
+msgstr "NEW: Digital signature support"
+
+#. Found in changelog list item.
+msgid "NEW: Notification status indicators"
+msgstr "NEW: Notification status indicators"
+
+#. Found in changelog list item.
+msgid "UPDATE: IP address method global use"
+msgstr "UPDATE: IP address method global use"
+
+#. Found in changelog list item.
+msgid "FIX: Customizer not saving colors correctly"
+msgstr "FIX: Customiser not saving colours correctly"
+
+#. Found in changelog list item.
+msgid "NEW: New method for is_processor_enabled."
+msgstr "NEW: New method for is_processor_enabled."
+
+#. Found in changelog list item.
+msgid "FIX: Saving error for new PO payment processor"
+msgstr "FIX: Saving error for new PO payment processor"
+
+#. Found in changelog list item.
+msgid "FIX: CSV importer fix"
+msgstr "FIX: CSV importer fix"
+
+#. Found in changelog list item.
+msgid "IMPROVED: CSV Importer error messaging"
+msgstr "IMPROVED: CSV Importer error messaging"
+
+#. Found in changelog list item.
+msgid "NEW: New PO processor"
+msgstr "NEW: New PO processor"
+
+#. Found in changelog list item.
+msgid "FIX: Select2 Compat issues with themes and other plugins"
+msgstr "FIX: Select2 Compat issues with themes and other plugins"
+
+#. Found in changelog list item.
+msgid "Commpatibility: ACF Pro"
+msgstr "Compatibility: ACF Pro"
+
+#. Found in changelog list item.
+msgid "New: New notification filters."
+msgstr "New: New notification filters."
+
+#. Found in changelog list item.
+msgid "New: Client website shortcodes [client_company_website]"
+msgstr "New: Client website shortcodes [client_company_website]"
+
+#. Found in changelog list item.
+msgid "New: Client Address shortcodes [client_address]"
+msgstr "New: Client Address shortcodes [client_address]"
+
+#. Found in changelog list item.
+msgid "New: Client edit url shortcode [client_edit_url]"
+msgstr "New: Client edit URL shortcode [client_edit_url]"
+
+#. Found in changelog list item.
+msgid "New: Allow the filtering of subscription payment invoices in the admin."
+msgstr "New: Allow the filtering of subscription payment invoices in the admin."
+
+#. Found in changelog list item.
+msgid "New: Allow the filtering of recurring invoices in the admin."
+msgstr "New: Allow the filtering of recurring invoices in the admin."
+
+#. Found in changelog list item.
+msgid "New: New Zapier integration authorizations to prevent issues on some servers."
+msgstr "New: New Zapier integration authorisations to prevent issues on some servers."
+
+#. Found in changelog list item.
+msgid "New: Project expense overview."
+msgstr "New: Project expense overview."
+
+#. Found in changelog list item.
+msgid "New: Ability to delete all SI records, great for a bad first import."
+msgstr "New: Ability to delete all SI records, great for a bad first import."
+
+#. Found in changelog list item.
+msgid "New: Notification testing!"
+msgstr "New: Notification testing!"
+
+#. Found in changelog list item.
+msgid "New: Allow for sumary to be sent to admin - si_send_summary_to_admin"
+msgstr "New: Allow for sumary to be sent to admin - si_send_summary_to_admin"
+
+#. Found in changelog list item.
+msgid "Fix: Ability to override si_split_full_name"
+msgstr "Fix: Ability to override si_split_full_name"
+
+#. Found in changelog list item.
+msgid "Fix: Subscription compatibility updates"
+msgstr "Fix: Subscription compatibility updates"
+
+#. Found in changelog list item.
+msgid "Fix: Recurring subscription fixes"
+msgstr "Fix: Recurring subscription fixes"
+
+#. Found in changelog list item.
+msgid "Fix: number formatter fix"
+msgstr "Fix: number formatter fix"
+
+#. Found in changelog list item.
+msgid "Fix: THREEs support for Advanced Form Integrations"
+msgstr "Fix: THREEs support for Advanced Form Integrations"
+
+#. Found in changelog list item.
+msgid "Fix: Recurring totals improperly calculated on dashboard"
+msgstr "Fix: Recurring totals improperly calculated on dashboard"
+
+#. Found in changelog list item.
+msgid "Fix: Invoice status updates for void/complete"
+msgstr "Fix: Invoice status updates for void/complete"
+
+#. Found in changelog list item.
+msgid "Fix: Payment calculations within some dashboard widgets"
+msgstr "Fix: Payment calculations within some dashboard widgets"
+
+#. Found in changelog list item.
+msgid "Fix: \".00\" removed from line item totals has a condition for site currency settings."
+msgstr "Fix: \".00\" removed from line item totals has a condition for site currency settings."
+
+#. Found in changelog list item.
+msgid "Fix: Predefined option disappears under some conditions."
+msgstr "Fix: Predefined option disappears under some conditions."
+
+#. Found in changelog list item.
+msgid "NEW: Default rate for projects."
+msgstr "NEW: Default rate for projects."
+
+#. Found in changelog list item.
+msgid "NEW: Invoices sent when new invoices are created from recurring settings."
+msgstr "NEW: Invoices sent when new invoices are created from recurring settings."
+
+#. Found in changelog list item.
+msgid "NEW: Footer counts dynamically update on reports."
+msgstr "NEW: Footer counts dynamically update on reports."
+
+#. Found in changelog list item.
+msgid "NEW: Shipping fee option."
+msgstr "NEW: Shipping fee option."
+
+#. Found in changelog list item.
+msgid "NEW: Fees API!"
+msgstr "NEW: Fees API!"
+
+#. Found in changelog list item.
+msgid "NEW: Compatibility with expense tracking add-on"
+msgstr "NEW: Compatibility with expense tracking add-on"
+
+#. Found in changelog list item.
+msgid "NEW: Create new invoices for subscriptions payments."
+msgstr "NEW: Create new invoices for subscriptions payments."
+
+#. Found in changelog list item.
+msgid "Fix: PayPal issues with advanced tax add-ons"
+msgstr "Fix: PayPal issues with advanced tax add-ons"
+
+#. Found in changelog list item.
+msgid "Fix: PHP warning"
+msgstr "Fix: PHP warning"
+
+#. Found in changelog list item.
+msgid "Update: Redactor updated"
+msgstr "Update: Redactor updated"
+
+#. Found in changelog list item.
+msgid "Fix: Payment reminder refactored"
+msgstr "Fix: Payment reminder refactored"
+
+#. Found in changelog list item.
+msgid "Fix: Line item fix"
+msgstr "Fix: Line item fix"
+
+#. Found in changelog list item.
+msgid "NEW: Add WooCommerce product import compatibility"
+msgstr "NEW: Add WooCommerce product import compatibility"
+
+#. Found in changelog list item.
+msgid "Fix: Overdue invoices within widgets"
+msgstr "Fix: Overdue invoices within widgets"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Features</em>\n"
+"\n"
+"<ul>\n"
+"<li>Custom template messaging improvements"
+msgstr ""
+"<em>Features</em>\n"
+"\n"
+"<ul>\n"
+"<li>Custom template messaging improvements"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Fix</em>\n"
+"\n"
+"<ul>\n"
+"<li>Deposits bug for free versions"
+msgstr ""
+"<em>Fix</em>\n"
+"\n"
+"<ul>\n"
+"<li>Deposits bug for free versions"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Fix</em>\n"
+"\n"
+"<ul>\n"
+"<li>Client could have non-user_ids associated"
+msgstr ""
+"<em>Fix</em>\n"
+"\n"
+"<ul>\n"
+"<li>Client could have non-user_ids associated"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Fix</em>\n"
+"\n"
+"<ul>\n"
+"<li>Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)"
+msgstr ""
+"<em>Fix</em>\n"
+"\n"
+"<ul>\n"
+"<li>Freshbooks payment import fix. FBAPI uses an unconventional amount format (i.e. 353634.980)"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Fix:</em>\n"
+"\n"
+"<ul>\n"
+"<li>Saving error"
+msgstr ""
+"<em>Fix:</em>\n"
+"\n"
+"<ul>\n"
+"<li>Saving error"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Fix:</em>\n"
+"\n"
+"<ul>\n"
+"<li>Estimates slug not created"
+msgstr ""
+"<em>Fix:</em>\n"
+"\n"
+"<ul>\n"
+"<li>Estimates slug not created"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Fix:</em>\n"
+"\n"
+"<ul>\n"
+"<li>ID shortcode fix"
+msgstr ""
+"<em>Fix:</em>\n"
+"\n"
+"<ul>\n"
+"<li>ID shortcode fix"
+
+#. Found in changelog list item.
+msgid ""
+"<em>Change:</em>\n"
+"\n"
+"<ul>\n"
+"<li>More hooks and filters"
+msgstr ""
+"<em>Change:</em>\n"
+"\n"
+"<ul>\n"
+"<li>More hooks and filters"
+
+#. Found in changelog list item.
+msgid "Update: Translations"
+msgstr "Update: Translations"
+
+#. Found in changelog list item.
+msgid "Fix: UI for Recurring "
+msgstr "Fix: UI for Recurring "
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce Integration Update Mechanism fix"
+msgstr "Fix: WooCommerce Integration Update Mechanism fix"
+
+#. Found in changelog list item.
+msgid "New: Project Panorama Integration"
+msgstr "New: Project Panorama Integration"
+
+#. Found in changelog list item.
+msgid "Change: Free updates"
+msgstr "Change: Free updates"
+
+#. Found in changelog list item.
+msgid "Fix: Selection of of users from client admin"
+msgstr "Fix: Selection of of users from client admin"
+
+#. Found in changelog list item.
+msgid "Fix: Slow loading servers need feedback on AJAX requests"
+msgstr "Fix: Slow loading servers need feedback on AJAX requests"
+
+#. Found in changelog list item.
+msgid "Fix: Account credits doesn't have an admin bar option"
+msgstr "Fix: Account credits doesn't have an admin bar option"
+
+#. Found in changelog list item.
+msgid "Fix: Fields error when no payment options are available"
+msgstr "Fix: Fields error when no payment options are available"
+
+#. Found in changelog list item.
+msgid "Change: Option to help improve sprout invoices."
+msgstr "Change: Option to help improve sprout invoices."
+
+#. Found in changelog list item.
+msgid "Fix: Recurring options missing under certain conditions."
+msgstr "Fix: Recurring options missing under certain conditions."
+
+#. Found in changelog list item.
+msgid "Fix: Select2 Compatibility issues"
+msgstr "Fix: Select2 Compatibility issues"
+
+#. Found in changelog list item.
+msgid "Fix: Client payment processor limits fix"
+msgstr "Fix: Client payment processor limits fix"
+
+#. Found in changelog list item.
+msgid "Fix: PHP7 compatibility"
+msgstr "Fix: PHP7 compatibility"
+
+#. Found in changelog list item.
+msgid "Fix: Select2 should not be loaded everywhere"
+msgstr "Fix: Select2 should not be loaded everywhere"
+
+#. Found in changelog list item.
+msgid "Fix: Line item totals not formatted"
+msgstr "Fix: Line item totals not formatted"
+
+#. Found in changelog list item.
+msgid "Fix: PayPal transaction error when parent line items are used."
+msgstr "Fix: PayPal transaction error when parent line items are used."
+
+#. Found in changelog list item.
+msgid "Fix: Dynamic text"
+msgstr "Fix: Dynamic text"
+
+#. Found in changelog list item.
+msgid "Fix: Misc. minor bug fixes"
+msgstr "Fix: Misc. minor bug fixes"
+
+#. Found in changelog list item.
+msgid "Fix: Code cleanup with WP coding standards (formatting)"
+msgstr "Fix: Code cleanup with WP coding standards (formatting)"
+
+#. Found in changelog list item.
+msgid "Fix: New line for plain text notifications"
+msgstr "Fix: New line for plain text notifications"
+
+#. Found in changelog list item.
+msgid "Fix: New line adjustments for address"
+msgstr "Fix: New line adjustments for address"
+
+#. Found in changelog list item.
+msgid "Change: Remove visual editor from notification admin"
+msgstr "Change: Remove visual editor from notification admin"
+
+#. Found in changelog list item.
+msgid "Change: Premium reports updated with HTML5 export options"
+msgstr "Change: Premium reports updated with HTML5 export options"
+
+#. Found in changelog list item.
+msgid "Change: Tax and discount are seperate line item totals"
+msgstr "Change: Tax and discount are seperate line item totals"
+
+#. Found in changelog list item.
+msgid "Change: Add user of time keeper"
+msgstr "Change: Add user of time keeper"
+
+#. Found in changelog list item.
+msgid "Change: Send to multiple recipients with comma separated list"
+msgstr "Change: Send to multiple recipients with comma separated list"
+
+#. Found in changelog list item.
+msgid "Change: Automatically send invoice/estimate when published from a schedule"
+msgstr "Change: Automatically send invoice/estimate when published from a schedule"
+
+#. Found in changelog list item.
+msgid "Change: Automatically change status of scheduled docs"
+msgstr "Change: Automatically change status of scheduled docs"
+
+#. Found in changelog list item.
+msgid "New: Payments dashboard widget"
+msgstr "New: Payments dashboard widget"
+
+#. Found in changelog list item.
+msgid "New: Limit automatic recurring creation"
+msgstr "New: Limit automatic recurring creation"
+
+#. Found in changelog list item.
+msgid "New: Archive status, removes from front-end views"
+msgstr "New: Archive status, removes from front end views"
+
+#. Found in changelog list item.
+msgid "New: Client specific payment options"
+msgstr "New: Client specific payment options"
+
+#. Found in changelog list item.
+msgid "New: Estimate approval reminder (new reminder email)"
+msgstr "New: Estimate approval reminder (new reminder email)"
+
+#. Found in changelog list item.
+msgid "New: Improved payment reminder (new reminder email)"
+msgstr "New: Improved payment reminder (new reminder email)"
+
+#. Found in changelog list item.
+msgid "New: Account credits and payment credits"
+msgstr "New: Account credits and payment credits"
+
+#. Found in changelog paragraph.
+msgid "Security updates:"
+msgstr "Security updates:"
+
+#. Found in changelog list item.
+msgid "Security issue with unfinished (unreleased) JSON API."
+msgstr "Security issue with unfinished (unreleased) JSON API."
+
+#. Found in changelog list item.
+msgid "Possible for anyone to create a payment"
+msgstr "Possible for anyone to create a payment"
+
+#. Found in changelog list item.
+msgid "Possible for anyone to save new importer options, including uploading CSVs."
+msgstr "Possible for anyone to save new importer options, including uploading CSVs."
+
+#. Found in changelog list item.
+msgid "New: Notifications action."
+msgstr "New: Notifications action."
+
+#. Found in changelog list item.
+msgid "Fix: Email address truncated on long top level domains."
+msgstr "Fix: Email address truncated on long top level domains."
+
+#. Found in changelog list item.
+msgid "Fix: Reporting fixes"
+msgstr "Fix: Reporting fixes"
+
+#. Found in changelog list item.
+msgid "UPDATE: Localization update, including French translation"
+msgstr "UPDATE: Localisation update, including French translation"
+
+#. Found in changelog list item.
+msgid "UPDATE: Default Invoice/Estimate Subject to ID"
+msgstr "UPDATE: Default Invoice/Estimate Subject to ID"
+
+#. Found in changelog list item.
+msgid "FIX: discount calculation improvements"
+msgstr "FIX: discount calculation improvements"
+
+#. Found in changelog list item.
+msgid "UPDATE: Theme compatibility improvements, e.g select2"
+msgstr "UPDATE: Theme compatibility improvements, e.g select2"
+
+#. Found in changelog list item.
+msgid "FIX: Extreme edge case calculation issues"
+msgstr "FIX: Extreme edge case calculation issues"
+
+#. Found in changelog list item.
+msgid "FIX: Cloning line items would result in descriptions that couldn't be saved."
+msgstr "FIX: Cloning line items would result in descriptions that couldn't be saved."
+
+#. Found in changelog list item.
+msgid "UPDATE: Added more line item totals within the admin"
+msgstr "UPDATE: Added more line item totals within the admin"
+
+#. Found in changelog list item.
+msgid "FIX: Estimates issue"
+msgstr "FIX: Estimates issue"
+
+#. Found in changelog paragraph.
+msgid "Welcome! This is a big update and a big step for us."
+msgstr "Welcome! This is a big update and a big step for us."
+
+#. Found in changelog paragraph.
+msgid "<em>Features</em>"
+msgstr "<em>Features</em>"
+
+#. Found in changelog paragraph.
+msgid "<em>Fix</em>"
+msgstr "<em>Fix</em>"
+
+#. Found in changelog paragraph.
+msgid "<em>Features:</em>"
+msgstr "<em>Features:</em>"
+
+#. Found in changelog paragraph.
+msgid "<em>Fix:</em>"
+msgstr "<em>Fix:</em>"
+
+#. Found in changelog paragraph.
+msgid "<em>Change:</em>"
+msgstr "<em>Change:</em>"
+
+#. Found in changelog paragraph.
+msgid "https://sproutinvoices.com/news/sprout-invoices-7-0-banners-release-party-🎉/"
+msgstr "https://sproutinvoices.com/news/sprout-invoices-7-0-banners-release-party-🎉/"
+
+#. Found in changelog paragraph.
+msgid "Read more all about the release at <a href=\"https://sproutinvoices.com/news/rocket-8-0-brings-a-new-invoice-line-item-management-and-more/\">Sprout Invoices</a>"
+msgstr "Read more all about the release at <a href=\"https://sproutinvoices.com/news/rocket-8-0-brings-a-new-invoice-line-item-management-and-more/\">Sprout Invoices</a>"
+
+#. Found in changelog list item.
+msgid "Remove debugging logs from release branch."
+msgstr "Remove debugging logs from release branch."
+
+#. Found in changelog list item.
+msgid "Initial Release"
+msgstr "Initial Release"
+
+#. Found in changelog list item.
+msgid "Better documentation and linking to site."
+msgstr "Better documentation and linking to site."
+
+#. Found in changelog list item.
+msgid "Plugin updater conflict."
+msgstr "Plugin updater conflict."
+
+#. Found in changelog list item.
+msgid "Invoice Style fixes"
+msgstr "Invoice Style fixes"
+
+#. Found in changelog list item.
+msgid "Line Item UI changes."
+msgstr "Line Item UI changes."
+
+#. Found in changelog list item.
+msgid "Minor updates"
+msgstr "Minor updates"
+
+#. Found in changelog list item.
+msgid "Additional hooks and filters required by submission integration add-on"
+msgstr "Additional hooks and filters required by submission integration add-on"
+
+#. Found in changelog list item.
+msgid "Admin bar links"
+msgstr "Admin bar links"
+
+#. Found in changelog list item.
+msgid "Fix deposit and cleanup files"
+msgstr "Fix deposit and cleanup files"
+
+#. Found in changelog list item.
+msgid "Import progress fix."
+msgstr "Import progress fix."
+
+#. Found in changelog list item.
+msgid "Dashboard fix"
+msgstr "Dashboard fix"
+
+#. Found in changelog list item.
+msgid "Add-ons not loading, e.g. Stripe."
+msgstr "Add-ons not loading, e.g. Stripe."
+
+#. Found in changelog list item.
+msgid "Plugin updates fix"
+msgstr "Plugin updates fix"
+
+#. Found in changelog list item.
+msgid "Some versions of PHP will bomb when checking if method_exists on a nonexistant class. Silly..."
+msgstr "Some versions of PHP will bomb when checking if method_exists on a nonexistant class. Silly..."
+
+#. Found in changelog list item.
+msgid "Strict standards fixins"
+msgstr "Strict standards fixins"
+
+#. Found in changelog list item.
+msgid "WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code."
+msgstr "WP-Invoice Importer Bug fix: Add si_default_country_code filter to set default country code."
+
+#. Found in changelog list item.
+msgid "WP-Invoice Importer Bug fix: Fix devision by zero error"
+msgstr "WP-Invoice Importer Bug fix: Fix division by zero error"
+
+#. Found in changelog list item.
+msgid "WP-Invoice Importer Bug fix: Import any type"
+msgstr "WP-Invoice Importer Bug fix: Import any type"
+
+#. Found in changelog list item.
+msgid "Subject line fix."
+msgstr "Subject line fix."
+
+#. Found in changelog list item.
+msgid "Multiple taxes"
+msgstr "Multiple taxes"
+
+#. Found in changelog list item.
+msgid "Remove some unnecessary cruft."
+msgstr "Remove some unnecessary cruft."
+
+#. Found in changelog list item.
+msgid "Better dashboard let you know what's up."
+msgstr "Better dashboard let you know what's up."
+
+#. Found in changelog list item.
+msgid "Admin bar links."
+msgstr "Admin bar links."
+
+#. Found in changelog list item.
+msgid "So many bug fixes that make this a legit 1.0 release."
+msgstr "So many bug fixes that make this a legit 1.0 release."
+
+#. Found in changelog list item.
+msgid "Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)"
+msgstr "Helpers, coming before this is truly 1.0. (shush! this is really 0.9.*)"
+
+#. Found in changelog list item.
+msgid "Import from WP-Invoice, Harvest or Freshbooks."
+msgstr "Import from WP-Invoice, Harvest or Freshbooks."
+
+#. Found in changelog list item.
+msgid "There's a free version and most like you're using it."
+msgstr "There's a free version and most like you're using it."
+
+#. Found in changelog list item.
+msgid "Load order update to improve add-on support"
+msgstr "Load order update to improve add-on support"
+
+#. Found in changelog list item.
+msgid "apple_filters('the_content') to the terms and notes on estimates and invoices"
+msgstr "apple_filters('the_content') to the terms and notes on estimates and invoices"
+
+#. Found in changelog list item.
+msgid "Better error handling during import"
+msgstr "Better error handling during import"
+
+#. Found in changelog list item.
+msgid "Title/Subject not showing correctly"
+msgstr "Title/Subject not showing correctly"
+
+#. Found in changelog list item.
+msgid "Fix for advanced reporting on some hosts"
+msgstr "Fix for advanced reporting on some hosts"
+
+#. Found in changelog list item.
+msgid "Reports table updates"
+msgstr "Reports table updates"
+
+#. Found in changelog list item.
+msgid "Invoices with Outstanding Balance have a label on mngt. screen."
+msgstr "Invoices with Outstanding Balance have a label on mngt. screen."
+
+#. Found in changelog list item.
+msgid "Importer improvements"
+msgstr "Importer improvements"
+
+#. Found in changelog list item.
+msgid "Translatable string improvements"
+msgstr "Translatable string improvements"
+
+#. Found in changelog list item.
+msgid "Invoice/Esitmate metabox order fix"
+msgstr "Invoice/Esitmate metabox order fix"
+
+#. Found in changelog list item.
+msgid "Localization support!"
+msgstr "Localisation support!"
+
+#. Found in changelog list item.
+msgid "Settings API improvements"
+msgstr "Settings API improvements"
+
+#. Found in changelog list item.
+msgid "Minor bug fixes"
+msgstr "Minor bug fixes"
+
+#. Found in changelog list item.
+msgid "Better rewrite handling"
+msgstr "Better rewrite handling"
+
+#. Found in changelog list item.
+msgid "Notification updates"
+msgstr "Notification updates"
+
+#. Found in changelog list item.
+msgid "New status UI"
+msgstr "New status UI"
+
+#. Found in changelog list item.
+msgid "New templating class (select the invoice/estimate template)"
+msgstr "New templating class (select the invoice/estimate template)"
+
+#. Found in changelog list item.
+msgid "Auto upgrades fix for pro users"
+msgstr "Auto upgrades fix for pro users"
+
+#. Found in changelog list item.
+msgid "Much improved importing with AJAX"
+msgstr "Much improved importing with AJAX"
+
+#. Found in changelog list item.
+msgid "Major overhaul of importing from freshbooks, harvest and WP-Invoices."
+msgstr "Major overhaul of importing from freshbooks, harvest and WP-Invoices."
+
+#. Found in changelog list item.
+msgid "Minor fixes for importing from freshbooks, harvest and WP-Invoices"
+msgstr "Minor fixes for importing from freshbooks, harvest and WP-Invoices"
+
+#. Found in changelog list item.
+msgid "client_name shortcode"
+msgstr "client_name shortcode"
+
+#. Found in changelog list item.
+msgid "Quick send bug fixes for Estimates and Invoices"
+msgstr "Quick send bug fixes for Estimates and Invoices"
+
+#. Found in changelog list item.
+msgid "Client creation via AJAX/Modal"
+msgstr "Client creation via AJAX/Modal"
+
+#. Found in changelog list item.
+msgid "Allow for deletion with new drop-down UI"
+msgstr "Allow for deletion with new drop-down UI"
+
+#. Found in changelog list item.
+msgid "Tasks clarification for free version"
+msgstr "Tasks clarification for free version"
+
+#. Found in changelog list item.
+msgid "Handle text input with bad formatting better"
+msgstr "Handle text input with bad formatting better"
+
+#. Found in changelog list item.
+msgid "Few error prevention updates"
+msgstr "Few error prevention updates"
+
+#. Found in changelog list item.
+msgid "minor UI improvements"
+msgstr "minor UI improvements"
+
+#. Found in changelog list item.
+msgid "Client specific currency code for payment processing"
+msgstr "Client specific currency code for payment processing"
+
+#. Found in changelog list item.
+msgid "Client specific money format"
+msgstr "Client specific money format"
+
+#. Found in changelog list item.
+msgid "Improved multi-currency support"
+msgstr "Improved multi-currency support"
+
+#. Found in changelog list item.
+msgid "Customizable money formats"
+msgstr "Customisable money formats"
+
+#. Found in changelog list item.
+msgid "Client specific estimate templates"
+msgstr "Client specific estimate templates"
+
+#. Found in changelog list item.
+msgid "Client specific invoice templates"
+msgstr "Client specific invoice templates"
+
+#. Found in changelog list item.
+msgid "Improved Invoice and Estimate templates"
+msgstr "Improved Invoice and Estimate templates"
+
+#. Found in changelog list item.
+msgid "Line item width after payment"
+msgstr "Line item width after payment"
+
+#. Found in changelog list item.
+msgid "Better support for sites without permalinks setup"
+msgstr "Better support for sites without permalinks setup"
+
+#. Found in changelog list item.
+msgid "Clone warning (strict notices)"
+msgstr "Clone warning (strict notices)"
+
+#. Found in changelog list item.
+msgid "Total calculation issue with template tag"
+msgstr "Total calculation issue with template tag"
+
+#. Found in changelog list item.
+msgid "Fix qtip"
+msgstr "Fix qtip"
+
+#. Found in changelog list item.
+msgid "Doc changes"
+msgstr "Doc changes"
+
+#. Found in changelog list item.
+msgid "Starting to create some unit tests"
+msgstr "Starting to create some unit tests"
+
+#. Found in changelog list item.
+msgid "New hooks for estimates and invoice templates"
+msgstr "New hooks for estimates and invoice templates"
+
+#. Found in changelog list item.
+msgid "Critical Paypal EC update to capture payment"
+msgstr "Critical Paypal EC update to capture payment"
+
+#. Found in changelog list item.
+msgid "Other minor bug fixes"
+msgstr "Other minor bug fixes"
+
+#. Found in changelog list item.
+msgid "Estimates/Invoices auto-draft bug when doc isn't saved first"
+msgstr "Estimates/Invoices auto-draft bug when doc isn't saved first"
+
+#. Found in changelog list item.
+msgid "Misc. errors and notices"
+msgstr "Misc. errors and notices"
+
+#. Found in changelog list item.
+msgid "Paypal qty fraction fix."
+msgstr "Paypal qty fraction fix."
+
+#. Found in changelog list item.
+msgid "Paypal balance calculation fix"
+msgstr "Paypal balance calculation fix"
+
+#. Found in changelog list item.
+msgid "Deposit function adjustments"
+msgstr "Deposit function adjustments"
+
+#. Found in changelog list item.
+msgid "Some themes don't register their scripts and styles correctly, so unregistering them comes later on wp_print_scripts"
+msgstr "Some themes don't register their scripts and styles correctly, so unregistering them comes later on wp_print_scripts"
+
+#. Found in changelog list item.
+msgid "Paypal line items will not longer use qty since PP prevents fractions (now?)"
+msgstr "Paypal line items will not longer use qty since PP prevents fractions (now?)"
+
+#. Found in changelog list item.
+msgid "No index on estimates and invoices!"
+msgstr "No index on estimates and invoices!"
+
+#. Found in changelog list item.
+msgid "Helper functions for future payment processors"
+msgstr "Helper functions for future payment processors"
+
+#. Found in changelog list item.
+msgid "Better error handling for invoices without clients assigned"
+msgstr "Better error handling for invoices without clients assigned"
+
+#. Found in changelog list item.
+msgid "No page breaks when printing large invoices/estimates"
+msgstr "No page breaks when printing large invoices/estimates"
+
+#. Found in changelog list item.
+msgid "js error with custom templates"
+msgstr "JS error with custom templates"
+
+#. Found in changelog list item.
+msgid "fix for unit tests"
+msgstr "fix for unit tests"
+
+#. Found in changelog list item.
+msgid "More hooks and filters"
+msgstr "More hooks and filters"
+
+#. Found in changelog list item.
+msgid "Change: New possibilities for add-ons"
+msgstr "Change: New possibilities for add-ons"
+
+#. Found in changelog list item.
+msgid "Change: Freshened editing and management all around"
+msgstr "Change: Freshened editing and management all around"
+
+#. Found in changelog list item.
+msgid "Change: Streamlined Invoice and Estimate edit UI"
+msgstr "Change: Streamlined Invoice and Estimate edit UI"
+
+#. Found in changelog list item.
+msgid "Change: Easier user assignment and creation for Clients"
+msgstr "Change: Easier user assignment and creation for Clients"
+
+#. Found in changelog list item.
+msgid "Change: Improved Client management"
+msgstr "Change: Improved Client management"
+
+#. Found in changelog list item.
+msgid "NEW: WYSIWYG for line items (premium license or add-on)"
+msgstr "NEW: WYSIWYG for line items (premium licence or add-on)"
+
+#. Found in changelog list item.
+msgid "NEW: Time Tracking (premium license or add-on)"
+msgstr "NEW: Time Tracking (premium licence or add-on)"
+
+#. Found in changelog list item.
+msgid "NEW: Projects"
+msgstr "NEW: Projects"
+
+#. Found in changelog list item.
+msgid "Fix: Other minor fixes"
+msgstr "Fix: Other minor fixes"
+
+#. Found in changelog list item.
+msgid "Fix: Chart values are now localized"
+msgstr "Fix: Chart values are now localised"
+
+#. Found in changelog list item.
+msgid "Fix: Dashboard values incorrect under certain circumstances"
+msgstr "Fix: Dashboard values incorrect under certain circumstances"
+
+#. Found in changelog list item.
+msgid "Change: Chart js API updated"
+msgstr "Change: Chart JS API updated"
+
+#. Found in changelog list item.
+msgid "NEW: Reports dashboard fully responsive"
+msgstr "NEW: Reports dashboard fully responsive"
+
+#. Found in changelog list item.
+msgid "Fix: AJAX bug fixes for clients and other sections"
+msgstr "Fix: AJAX bug fixes for clients and other sections"
+
+#. Found in changelog list item.
+msgid "Fix: Bug fix for sites without permalinks"
+msgstr "Fix: Bug fix for sites without permalinks"
+
+#. Found in changelog list item.
+msgid "Fix: Client currency code not defaulting"
+msgstr "Fix: Client currency code not defaulting"
+
+#. Found in changelog list item.
+msgid "Fix: Currency code improvements"
+msgstr "Fix: Currency code improvements"
+
+#. Found in changelog list item.
+msgid "Fix: Filter names si_allowed_*_doc_scripts/styles"
+msgstr "Fix: Filter names si_allowed_*_doc_scripts/styles"
+
+#. Found in changelog list item.
+msgid "Fix: Client and user creation confusion"
+msgstr "Fix: Client and user creation confusion"
+
+#. Found in changelog list item.
+msgid "Change: Use the_content filter on line items only, and create a filter to bypass"
+msgstr "Change: Use the_content filter on line items only, and create a filter to bypass"
+
+#. Found in changelog list item.
+msgid "Change/New: Estimate and Invoice templates are no longer using wp_head and wp_footer. Instead use si_head and si_footer (respectively). This allows for the templates to not be subjected to plugins and themes that inject code with those hooks. If you've created a custom template you should look into changing those functions."
+msgstr "Change/New: Estimate and Invoice templates are no longer using wp_head and wp_footer. Instead use si_head and si_footer (respectively). This allows for the templates to not be subjected to plugins and themes that inject code with those hooks. If you've created a custom template you should look into changing those functions."
+
+#. Found in changelog list item.
+msgid "Tested bump for 4.1"
+msgstr "Tested bump for 4.1"
+
+#. Found in changelog list item.
+msgid "Firefox style issue in admin"
+msgstr "Firefox style issue in admin"
+
+#. Found in changelog list item.
+msgid "Improved CC processing for future add-ons"
+msgstr "Improved CC processing for future add-ons"
+
+#. Found in changelog list item.
+msgid "Confirmation page fix"
+msgstr "Confirmation page fix"
+
+#. Found in changelog list item.
+msgid "Fix: Less than a bunch more than a couple"
+msgstr "Fix: Less than a bunch more than a couple"
+
+#. Found in changelog list item.
+msgid "New: Recurring Invoices"
+msgstr "New: Recurring Invoices"
+
+#. Found in changelog list item.
+msgid "New: Recurring Payments (aka subscriptions)"
+msgstr "New: Recurring Payments (aka subscriptions)"
+
+#. Found in changelog list item.
+msgid "Reporting fixes"
+msgstr "Reporting fixes"
+
+#. Found in changelog list item.
+msgid "Notification shortcode filters"
+msgstr "Notification shortcode filters"
+
+#. Found in changelog list item.
+msgid "Dashboard updates including method to flush cached values"
+msgstr "Dashboard updates including method to flush cached values"
+
+#. Found in changelog list item.
+msgid "Fix: Some minor php warnings and notices"
+msgstr "Fix: Some minor PHP warnings and notices"
+
+#. Found in changelog list item.
+msgid "Fix: Send paid notification after payment is complete, not created"
+msgstr "Fix: Send paid notification after payment is complete, not created"
+
+#. Found in changelog list item.
+msgid "Fix: Review untranslated strings"
+msgstr "Fix: Review untranslated strings"
+
+#. Found in changelog list item.
+msgid "New: pt_BR and nl Translations"
+msgstr "New: pt_BR and nl Translations"
+
+#. Found in changelog list item.
+msgid "New: Add PO Number and separate Tax line items to templates"
+msgstr "New: Add PO Number and separate Tax line items to templates"
+
+#. Found in changelog list item.
+msgid "New: Import time from Freshbooks"
+msgstr "New: Import time from Freshbooks"
+
+#. Found in changelog list item.
+msgid "Fix: Quantity fields not allowing for decimals and negatives with some OSs"
+msgstr "Fix: Quantity fields not allowing for decimals and negatives with some OSs"
+
+#. Found in changelog list item.
+msgid "Fix: Missing .mo files for new translations"
+msgstr "Fix: Missing .mo files for new translations"
+
+#. Found in changelog list item.
+msgid "Fix: Firefox not allowing negative value in qty inputs "
+msgstr "Fix: Firefox not allowing negative value in qty inputs "
+
+#. Found in changelog list item.
+msgid "Fix: Misnamed Dutch translation files "
+msgstr "Fix: Misnamed Dutch translation files "
+
+#. Found in changelog list item.
+msgid "Fix: Charts on reports dashboard not working"
+msgstr "Fix: Charts on reports dashboard not working"
+
+#. Found in changelog list item.
+msgid "Added: Filtering localeconv with si_localeconv"
+msgstr "Added: Filtering localeconv with si_localeconv"
+
+#. Found in changelog list item.
+msgid "Fix: Estimates not being associated with Invoices correctly"
+msgstr "Fix: Estimates not being associated with Invoices correctly"
+
+#. Found in changelog list item.
+msgid "Change: Invoice ID shown on payments page"
+msgstr "Change: Invoice ID shown on payments page"
+
+#. Found in changelog list item.
+msgid "Fix: FF incompatibility with status update drop-down"
+msgstr "Fix: FF incompatibility with status update drop-down"
+
+#. Found in changelog list item.
+msgid "Fix: Notification activation"
+msgstr "Fix: Notification activation"
+
+#. Found in changelog list item.
+msgid "Improved: Filtering localeconv"
+msgstr "Improved: Filtering localeconv"
+
+#. Found in changelog list item.
+msgid "Improved: Language translations"
+msgstr "Improved: Language translations"
+
+#. Found in changelog list item.
+msgid "Improved: State and Country Selection"
+msgstr "Improved: State and Country Selection"
+
+#. Found in changelog list item.
+msgid "Change: Payment notification after admin payment"
+msgstr "Change: Payment notification after admin payment"
+
+#. Found in changelog list item.
+msgid "Misc. bug fixes and updates"
+msgstr "Misc. bug fixes and updates"
+
+#. Found in changelog list item.
+msgid "NEW: Time importing from Freshbooks"
+msgstr "NEW: Time importing from Freshbooks"
+
+#. Found in changelog list item.
+msgid "NEW: HTML notification add-on support"
+msgstr "NEW: HTML notification add-on support"
+
+#. Found in changelog list item.
+msgid "NEW: Client Dashboards"
+msgstr "NEW: Client Dashboards"
+
+#. Found in changelog list item.
+msgid "CHANGE: Improving automatic money formatting for non-US currencies"
+msgstr "CHANGE: Improving automatic money formatting for non-US currencies"
+
+#. Found in changelog list item.
+msgid "FIXES: Misc. minor code updates"
+msgstr "FIXES: Misc. minor code updates"
+
+#. Found in changelog list item.
+msgid "FIX: Translation fix"
+msgstr "FIX: Translation fix"
+
+#. Found in changelog list item.
+msgid "CHANGE: Again...improving automatic money formatting for non-US currencies"
+msgstr "CHANGE: Again...improving automatic money formatting for non-US currencies"
+
+#. Found in changelog list item.
+msgid "CHANGE: Updates to the free version."
+msgstr "CHANGE: Updates to the free version."
+
+#. Found in changelog list item.
+msgid "NEW: Allow to clean up notifications, which is a fix from a bug in an older version."
+msgstr "NEW: Allow to clean up notifications, which is a fix from a bug in an older version."
+
+#. Found in changelog list item.
+msgid "FIX: Fixing bad build with white screen of death. Sorry! Seriously! Sorry!"
+msgstr "FIX: Fixing bad build with white screen of death. Sorry! Seriously! Sorry!"
+
+#. Found in changelog list item.
+msgid "FIX: Compatibility fix with some plugins, namely Visual Composer"
+msgstr "FIX: Compatibility fix with some plugins, namely Visual Composer"
+
+#. Found in changelog list item.
+msgid "CHANGE: Taxes are floats not integers"
+msgstr "CHANGE: Taxes are floats not integers"
+
+#. Found in changelog list item.
+msgid "CHANGE: Remove Client currency code option, never used."
+msgstr "CHANGE: Remove Client currency code option, never used."
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Compatibility with Visual Composer and other plugins"
+msgstr "IMPROVEMENT: Compatibility with Visual Composer and other plugins"
+
+#. Found in changelog list item.
+msgid "CHANGE: localeconv() defaults so money is always formated"
+msgstr "CHANGE: localeconv() defaults so money is always formated"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Nesting items UX/UI"
+msgstr "IMPROVEMENT: Nesting items UX/UI"
+
+#. Found in changelog list item.
+msgid "FIX: Fix for nested items"
+msgstr "FIX: Fix for nested items"
+
+#. Found in changelog list item.
+msgid "FIX: JS issues on client management page."
+msgstr "FIX: JS issues on client management page."
+
+#. Found in changelog list item.
+msgid "FIX: Newly created invoices from a recurring schedule will have it's due date and issue date set"
+msgstr "FIX: Newly created invoices from a recurring schedule will have it's due date and issue date set"
+
+#. Found in changelog list item.
+msgid "NEW: Added si_client_dashboard_page_id filter"
+msgstr "NEW: Added si_client_dashboard_page_id filter"
+
+#. Found in changelog list item.
+msgid "NEW: Tax shortcodes"
+msgstr "NEW: Tax shortcodes"
+
+#. Found in changelog list item.
+msgid "FIX: Custom currency for clients and notifications"
+msgstr "FIX: Custom currency for clients and notifications"
+
+#. Found in changelog list item.
+msgid "FIX: Client dashboard updates"
+msgstr "FIX: Client dashboard updates"
+
+#. Found in changelog list item.
+msgid "NEW: Currency formating options"
+msgstr "NEW: Currency formating options"
+
+#. Found in changelog list item.
+msgid "FIX: Expiration dates not displaying"
+msgstr "FIX: Expiration dates not displaying"
+
+#. Found in changelog list item.
+msgid "FIX: Better handling of client dashboard page id caching"
+msgstr "FIX: Better handling of client dashboard page id caching"
+
+#. Found in changelog list item.
+msgid "UPDATE: PO updates"
+msgstr "UPDATE: PO updates"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Auto updates"
+msgstr "IMPROVEMENT: Auto updates"
+
+#. Found in changelog list item.
+msgid "UPDATE: PO Updates."
+msgstr "UPDATE: PO Updates."
+
+#. Found in changelog list item.
+msgid "FIX: Strict Standard notice fixes."
+msgstr "FIX: Strict Standard notice fixes."
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Re-worked currency formatting again."
+msgstr "IMPROVEMENT: Reworked currency formatting again."
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Improved security on estimates."
+msgstr "IMPROVEMENT: Improved security on estimates."
+
+#. Found in changelog list item.
+msgid "FIX: Estimate Accept/Decline not working on some setups."
+msgstr "FIX: Estimate Accept/Decline not working on some setups."
+
+#. Found in changelog list item.
+msgid "UPDATE: Datatables library update"
+msgstr "UPDATE: Datatables library update"
+
+#. Found in changelog list item.
+msgid "FIX: Email on client dashboard error"
+msgstr "FIX: Email on client dashboard error"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Cross compatibility with other plugins, including Visual Composer"
+msgstr "IMPROVEMENT: Cross compatibility with other plugins, including Visual Composer"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Added client default currency formatting option"
+msgstr "IMPROVEMENT: Added client default currency formatting option"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Optimize logic for screen checking"
+msgstr "IMPROVEMENT: Optimise logic for screen checking"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Force private URL under circumstances when auto-draft is tried to use"
+msgstr "IMPROVEMENT: Force private URL under circumstances when auto-draft is tried to use"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: Estimates and Invoices can have strings for IDs"
+msgstr "IMPROVEMENT: Estimates and Invoices can have strings for IDs"
+
+#. Found in changelog list item.
+msgid "Update: Future status"
+msgstr "Update: Future status"
+
+#. Found in changelog list item.
+msgid "Fix: [invoice_total_due] should respect deposit amounts"
+msgstr "Fix: [invoice_total_due] should respect deposit amounts"
+
+#. Found in changelog list item.
+msgid "IMPROVEMENT: UI update so other plugins wont conflict."
+msgstr "IMPROVEMENT: UI update so other plugins wont conflict."
+
+#. Found in changelog list item.
+msgid "UPDATED: Admin UI tweaks"
+msgstr "UPDATED: Admin UI tweaks"
+
+#. Found in changelog list item.
+msgid "NEW: Dynamic text (pro version)"
+msgstr "NEW: Dynamic text (pro version)"
+
+#. Found in changelog list item.
+msgid "NEW: Pre-defined line items (pro version)"
+msgstr "NEW: Predefined line items (pro version)"
+
+#. Found in changelog list item.
+msgid "NEW: Line item commenting (pro version)"
+msgstr "NEW: Line item commenting (pro version)"
+
+#. Found in changelog list item.
+msgid "FIX: Compatibility fix with other plugins/themes using .tooltip"
+msgstr "FIX: Compatibility fix with other plugins/themes using .tooltip"
+
+#. Found in changelog list item.
+msgid "FIX: Comment shortcode issue when client has multiple users"
+msgstr "FIX: Comment shortcode issue when client has multiple users"
+
+#. Found in changelog list item.
+msgid "FIX: Estimate line item button styling issue"
+msgstr "FIX: Estimate line item button styling issue"
+
+#. Found in changelog list item.
+msgid "FIX: PayPal total issue when invoice has a deposit and previous payments"
+msgstr "FIX: PayPal total issue when invoice has a deposit and previous payments"
+
+#. Found in changelog list item.
+msgid "FIX: Comment issue with multiple line items open"
+msgstr "FIX: Comment issue with multiple line items open"
+
+#. Found in changelog list item.
+msgid "FIX: Add Customizer to the SI menu for clarity"
+msgstr "FIX: Add Customiser to the SI menu for clarity"
+
+#. Found in changelog list item.
+msgid "FIX: Free version fix for PayPal"
+msgstr "FIX: Free version fix for PayPal"
+
+#. Found in changelog list item.
+msgid "FIX: Shortcode fix"
+msgstr "FIX: Shortcode fix"
+
+#. Found in changelog list item.
+msgid "FIX: Client Dashboard notification error; fixed with better abstraction"
+msgstr "FIX: Client Dashboard notification error; fixed with better abstraction"
+
+#. Found in changelog list item.
+msgid "FIX: Client Dashboard was blank when a non-client was logged in"
+msgstr "FIX: Client Dashboard was blank when a non-client was logged in"
+
+#. Found in changelog list item.
+msgid "FIX: Customizer filter should only be for the front-end"
+msgstr "FIX: Customiser filter should only be for the front end"
+
+#. Found in changelog list item.
+msgid "FIX: More error reports for missing notifications."
+msgstr "FIX: More error reports for missing notifications."
+
+#. Found in changelog list item.
+msgid "New: Compatibility class to resolve other plugins problems, e.g. Gravity Forms erring out js on custom post type pages"
+msgstr "New: Compatibility class to resolve other plugins problems, e.g. Gravity Forms erring out JS on custom post type pages"
+
+#. Found in changelog list item.
+msgid "Misc. Fixes "
+msgstr "Misc. Fixes "
+
+#. Found in changelog list item.
+msgid "FIX: Dynamic text within notification shortcodes"
+msgstr "FIX: Dynamic text within notification shortcodes"
+
+#. Found in changelog list item.
+msgid "NEW: 'si_default_due_in_days' filter added"
+msgstr "NEW: 'si_default_due_in_days' filter added"
+
+#. Found in changelog list item.
+msgid "NEW: Improve WP-Invoice Importer"
+msgstr "NEW: Improve WP-Invoice Importer"
+
+#. Found in changelog list item.
+msgid "New: Create a payment when an invoice is marked as paid."
+msgstr "New: Create a payment when an invoice is marked as paid."
+
+#. Found in changelog list item.
+msgid "Improvement: Added nofollow for robots in header meta tag"
+msgstr "Improvement: Added nofollow for robots in header meta tag"
+
+#. Found in changelog list item.
+msgid "Improvement: Freshbooks import"
+msgstr "Improvement: Freshbooks import"
+
+#. Found in changelog list item.
+msgid "FIX: Return all clients on Client Dashboard"
+msgstr "FIX: Return all clients on Client Dashboard"
+
+#. Found in changelog list item.
+msgid "FIX: Import admin"
+msgstr "FIX: Import admin"
+
+#. Found in changelog list item.
+msgid "FIX: Invoices and Estimates were being returned in public search queries."
+msgstr "FIX: Invoices and Estimates were being returned in public search queries."
+
+#. Found in changelog list item.
+msgid "FIX: Payment date should be post_date"
+msgstr "FIX: Payment date should be post_date"
+
+#. Found in changelog list item.
+msgid "FIX: Project Estimates and Invoices on Project admin adjusted"
+msgstr "FIX: Project Estimates and Invoices on Project admin adjusted"
+
+#. Found in changelog list item.
+msgid "FIX: Send estimates/invoices when saved if recipient is selected"
+msgstr "FIX: Send estimates/invoices when saved if recipient is selected"
+
+#. Found in changelog list item.
+msgid "FIX: Cloned Estimates/Invoices shouldn't retain the same status"
+msgstr "FIX: Cloned Estimates/Invoices shouldn't retain the same status"
+
+#. Found in changelog list item.
+msgid "FIX: Client dashboard: multiple clients for a single user (pro version)"
+msgstr "FIX: Client dashboard: multiple clients for a single user (pro version)"
+
+#. Found in changelog list item.
+msgid "FIX: Redactor bug fixes when used within modal"
+msgstr "FIX: Redactor bug fixes when used within modal"
+
+#. Found in changelog list item.
+msgid "Improvement: Handle payments better when invoice is deleted"
+msgstr "Improvement: Handle payments better when invoice is deleted"
+
+#. Found in changelog list item.
+msgid "Improvement: Confirmation page template updated"
+msgstr "Improvement: Confirmation page template updated"
+
+#. Found in changelog list item.
+msgid "Improvement: Adjust Estimate/Invoice ID after clone"
+msgstr "Improvement: Adjust Estimate/Invoice ID after clone"
+
+#. Found in changelog list item.
+msgid "Improvement: View logs adjustment to prevent duplication"
+msgstr "Improvement: View logs adjustment to prevent duplication"
+
+#. Found in changelog list item.
+msgid "Improvement: CSV Importing of estimates and line items (with examples)"
+msgstr "Improvement: CSV Importing of estimates and line items (with examples)"
+
+#. Found in changelog list item.
+msgid "Improvement: API Updates for Future Release"
+msgstr "Improvement: API Updates for Future Release"
+
+#. Found in changelog list item.
+msgid "NEW: Allow for blank terms and notes with [si_blank] shortcode"
+msgstr "NEW: Allow for blank terms and notes with [si_blank] shortcode"
+
+#. Found in changelog list item.
+msgid "NEW: Invoice that is voided will have a new stamp plus the user can't pay"
+msgstr "NEW: Invoice that is voided will have a new stamp plus the user can't pay"
+
+#. Found in changelog list item.
+msgid "NEW: Filter for payment reminder delay, si_get_overdue_payment_reminder_delay (pro version)"
+msgstr "NEW: Filter for payment reminder delay, si_get_overdue_payment_reminder_delay (pro version)"
+
+#. Found in changelog list item.
+msgid "NEW: Toggl Integration (pro version)"
+msgstr "NEW: Toggl Integration (pro version)"
+
+#. Found in changelog list item.
+msgid "NEW: CSV Importing"
+msgstr "NEW: CSV Importing"
+
+#. Found in changelog list item.
+msgid "NEW: Zapier Integration (pro version)"
+msgstr "NEW: Zapier Integration (pro version)"
+
+#. Found in changelog list item.
+msgid "FIX: Estimate approval failing under certain circumstances."
+msgstr "FIX: Estimate approval failing under certain circumstances."
+
+#. Found in changelog list item.
+msgid "FIX: Projects page error under come configurations"
+msgstr "FIX: Projects page error under come configurations"
+
+#. Found in changelog list item.
+msgid "FIX: Estimate template error."
+msgstr "FIX: Estimate template error."
+
+#. Found in changelog list item.
+msgid "FIX: set_invoice_id error"
+msgstr "FIX: set_invoice_id error"
+
+#. Found in changelog list item.
+msgid "FIX: Toggl incompatibility issue"
+msgstr "FIX: Toggl incompatibility issue"
+
+#. Found in changelog list item.
+msgid "FIX: PayPal Totals issue with Tax + Deposit #69"
+msgstr "FIX: PayPal Totals issue with Tax + Deposit #69"
+
+#. Found in changelog list item.
+msgid "FIX: Redirect to prevent refresh issues when a check/po is submitted #65"
+msgstr "FIX: Redirect to prevent refresh issues when a cheque/PO is submitted #65"
+
+#. Found in changelog list item.
+msgid "FIX: Block Spambots from Submitting the Payment Form"
+msgstr "FIX: Block Spambots from Submitting the Payment Form"
+
+#. Found in changelog list item.
+msgid "NEW: Filter the Admin Notification To: email address with <code>si_admin_notification_to_address</code>"
+msgstr "NEW: Filter the Admin Notification To: email address with <code>si_admin_notification_to_address</code>"
+
+#. Found in changelog list item.
+msgid "NEW: Manage bundled addons (for paid users)"
+msgstr "NEW: Manage bundled addons (for paid users)"
+
+#. Found in changelog list item.
+msgid "NEW: Sprout Invoices Addons Page"
+msgstr "NEW: Sprout Invoices Addons Page"
+
+#. Found in changelog list item.
+msgid "SECURITY: Reviewed and updated every case of echoing an un-escaped variable; with a very strict standard of making every variable escaped or casted as an int/float."
+msgstr "SECURITY: Reviewed and updated every case of echoing an un-escaped variable; with a very strict standard of making every variable escaped or casted as an int/float."
+
+#. Found in changelog list item.
+msgid "SECURITY: Reviewed all uses of add_query_arg, regardless if $url is passed esc_url is used. "
+msgstr "SECURITY: Reviewed all uses of add_query_arg, regardless if $url is passed esc_url is used. "
+
+#. Found in changelog list item.
+msgid "FIX: Some escaping issues from 6.1.1"
+msgstr "FIX: Some escaping issues from 6.1.1"
+
+#. Found in changelog list item.
+msgid "UPDATE: 4.2 Compatibility"
+msgstr "UPDATE: 4.2 Compatibility"
+
+#. Found in changelog list item.
+msgid "FIX: API callback fix for activation/deactivation and updates."
+msgstr "FIX: API callback fix for activation/deactivation and updates."
+
+#. Found in changelog list item.
+msgid "FIX: Some escaping fixes from 6.1.1 for some sites using PayPal"
+msgstr "FIX: Some escaping fixes from 6.1.1 for some sites using PayPal"
+
+#. Found in changelog list item.
+msgid "FIX: Importers failing under certain circumstances."
+msgstr "FIX: Importers failing under certain circumstances."
+
+#. Found in changelog list item.
+msgid "FIX: Minor importer updates for sanitization"
+msgstr "FIX: Minor importer updates for sanitisation"
+
+#. Found in changelog list item.
+msgid "FIX: ACF Pro Compatibility"
+msgstr "FIX: ACF Pro Compatibility"
+
+#. Found in changelog list item.
+msgid "FIX: Dashboard caching issue"
+msgstr "FIX: Dashboard caching issue"
+
+#. Found in changelog list item.
+msgid "FIX: Pointer Dismissals"
+msgstr "FIX: Pointer Dismissals"
+
+#. Found in changelog list item.
+msgid "FIX: Estimate creation via API fix"
+msgstr "FIX: Estimate creation via API fix"
+
+#. Found in changelog list item.
+msgid "FIX: Language translations updated (8.6)"
+msgstr "FIX: Language translations updated (8.6)"
+
+#. Found in changelog list item.
+msgid "FIX: Remove project types from submission page"
+msgstr "FIX: Remove project types from submission page"
+
+#. Found in changelog list item.
+msgid "FIX: Fix for old PHP versions without json_last_error"
+msgstr "FIX: Fix for old PHP versions without json_last_error"
+
+#. Found in changelog list item.
+msgid "FIX: Start CSV import without using previous files"
+msgstr "FIX: Start CSV import without using previous files"
+
+#. Found in changelog list item.
+msgid "FIX: Deposits issue for the free version (7.0.1)"
+msgstr "FIX: Deposits issue for the free version (7.0.1)"
+
+#. Found in changelog list item.
+msgid "NEW: Invoice ID dynamic text"
+msgstr "NEW: Invoice ID dynamic text"
+
+#. Found in changelog list item.
+msgid "FIX: Prevent WP SEO from caring about Sprout Invoices."
+msgstr "FIX: Prevent WP SEO from caring about Sprout Invoices."
+
+#. Found in changelog list item.
+msgid "UPDATE: Improved responsive design for meta boxes and multi-column edit screens."
+msgstr "UPDATE: Improved responsive design for meta boxes and multi-column edit screens."
+
+#. Found in changelog list item.
+msgid "UPDATE: Zapier integration updates, e.g. email data."
+msgstr "UPDATE: Zapier integration updates, e.g. email data."
+
+#. Found in changelog list item.
+msgid "UPDATE: Modify the \"to\" email for all admin notifications without a filter."
+msgstr "UPDATE: Modify the \"to\" email for all admin notifications without a filter."
+
+#. Found in changelog list item.
+msgid "UPDATE: Improved pay button on invoice template."
+msgstr "UPDATE: Improved pay button on invoice template."
+
+#. Found in changelog list item.
+msgid "UPDATE: Modify the sender’s email for estimates and invoices on the invoice/estimate admin."
+msgstr "UPDATE: Modify the sender’s email for estimates and invoices on the invoice/estimate admin."
+
+#. Found in changelog list item.
+msgid "NEW: Send invoice/estimate to a new email without creating a Client user with a simple input box."
+msgstr "NEW: Send invoice/estimate to a new email without creating a Client user with a simple input box."
+
+#. Found in changelog list item.
+msgid "UPDATE: Improved admin search."
+msgstr "UPDATE: Improved admin search."
+
+#. Found in changelog list item.
+msgid "UPDATE: Add dashboard widgets to standard WP Dashboard."
+msgstr "UPDATE: Add dashboard widgets to standard WP Dashboard."
+
+#. Found in changelog list item.
+msgid "UPDATE: Easily import unbilled time into an invoice with a single click."
+msgstr "UPDATE: Easily import unbilled time into an invoice with a single click."
+
+#. Found in changelog list item.
+msgid "NEW: Subscriber specific Time Tracking dashboard widgets."
+msgstr "NEW: Subscriber specific Time Tracking dashboard widgets."
+
+#. Found in changelog list item.
+msgid "NEW: History Management"
+msgstr "NEW: History Management"
+
+#. Found in changelog list item.
+msgid "NEW: Web accessible Time Tracking widget."
+msgstr "NEW: Web accessible Time Tracking widget."
+
+#. Found in changelog list item.
+msgid "NEW: Completely revamped Stats Dashboard."
+msgstr "NEW: Completely revamped Stats Dashboard."
+
+#. Found in changelog list item.
+msgid "NEW: WooCommerce Integration is now bundled (for pro users)."
+msgstr "NEW: WooCommerce Integration is now bundled (for pro users)."
+
+#. Found in changelog list item.
+msgid "FIX: Deposits issue for free version"
+msgstr "FIX: Deposits issue for free version"
+
+#. Found in changelog list item.
+msgid "FIX: Time Tracker on Dashboard issue"
+msgstr "FIX: Time Tracker on Dashboard issue"
+
+#. Found in changelog list item.
+msgid "FIX: Time tracker not accepting fractions"
+msgstr "FIX: Time tracker not accepting fractions"
+
+#. Found in changelog list item.
+msgid "FIX: Free version issues with redactor add-on"
+msgstr "FIX: Free version issues with redactor add-on"
+
+#. Found in changelog list item.
+msgid "FIX: Multiple Sprout Invoices settings conflict fix"
+msgstr "FIX: Multiple Sprout Apps settings conflict fix"
+
+#. Found in changelog list item.
+msgid "NEW: Sprout Invoice specific user roles"
+msgstr "NEW: Sprout Invoice specific user roles"
+
+#. Found in changelog list item.
+msgid "FIX: Updates for Pro Versions"
+msgstr "FIX: Updates for Pro Versions"
+
+#. Found in changelog list item.
+msgid "CHANGE: Free Version messaging updates"
+msgstr "CHANGE: Free Version messaging updates"
+
+#. Found in changelog list item.
+msgid "CHANGE: [dashboard_link] available on User Creation notification"
+msgstr "CHANGE: [dashboard_link] available on User Creation notification"
+
+#. Found in changelog list item.
+msgid "FIX: Remove \"pre=\" header that some SEO plugins add"
+msgstr "FIX: Remove \"pre=\" header that some SEO plugins add"
+
+#. Found in changelog list item.
+msgid "FIX: Edit post link fix for notification shortcodes"
+msgstr "FIX: Edit post link fix for notification shortcodes"
+
+#. Found in changelog list item.
+msgid "CHANGE: Improved no-index via http headers"
+msgstr "CHANGE: Improved no-index via http headers"
+
+#. Found in changelog list item.
+msgid "CHANGE: More Responsive Admin"
+msgstr "CHANGE: More Responsive Admin"
+
+#. Found in changelog list item.
+msgid "NEW: Deposit filter allows for new add-ons"
+msgstr "NEW: Deposit filter allows for new add-ons"
+
+#. Found in changelog list item.
+msgid "NEW: Sprout Client Compatibility"
+msgstr "NEW: Sprout Client Compatibility"
+
+#. Found in changelog list item.
+msgid "FIX: PayPal line item totaling issues preventing some payments"
+msgstr "FIX: PayPal line item totalling issues preventing some payments"
+
+#. Found in changelog list item.
+msgid "FIX: WP-Invoice Issues with duplicate clients"
+msgstr "FIX: WP-Invoice Issues with duplicate clients"
+
+#. Found in changelog list item.
+msgid "FIX: Help section added to the new reporting dashboards"
+msgstr "FIX: Help section added to the new reporting dashboards"
+
+#. Found in changelog list item.
+msgid "FIX: Allow for deposit total to be set before saving"
+msgstr "FIX: Allow for deposit total to be set before saving"
+
+#. Found in changelog list item.
+msgid "FIX: Deposit notification sent only if the payment is complete (not pending)"
+msgstr "FIX: Deposit notification sent only if the payment is complete (not pending)"
+
+#. Found in changelog list item.
+msgid "FIX: Possible security fix with exposed estimates/invoices with site.com?post_type=*"
+msgstr "FIX: Possible security fix with exposed estimates/invoices with site.com?post_type=*"
+
+#. Found in changelog list item.
+msgid "New: New bulk send of invoices or estimates"
+msgstr "New: New bulk send of invoices or estimates"
+
+#. Found in changelog list item.
+msgid "New: Invoices and Estimates Admin filtering"
+msgstr "New: Invoices and Estimates Admin filtering"
+
+#. Found in changelog list item.
+msgid "Update: Time Tracking update to support item types"
+msgstr "Update: Time Tracking update to support item types"
+
+#. Found in changelog list item.
+msgid "New: Pre-defined item selection search"
+msgstr "New: Predefined item selection search"
+
+#. Found in changelog list item.
+msgid "New: Pre-defined editing with new types"
+msgstr "New: Predefined editing with new types"
+
+#. Found in changelog list item.
+msgid "New: Line Item Types and new management"
+msgstr "New: Line Item Types and new management"
+
+#. Found in changelog list item.
+msgid "Fix: Javascript error on some admin pages"
+msgstr "Fix: JavaScript error on some admin pages"
+
+#. Found in changelog list item.
+msgid "Fix: Javascript error when adding new users on clients page (select2 incompatibility)"
+msgstr "Fix: JavaScript error when adding new users on clients page (select2 incompatibility)"
+
+#. Found in changelog list item.
+msgid "NEW: New filters for some bundled add-ons"
+msgstr "NEW: New filters for some bundled add-ons"
+
+#. Found in changelog list item.
+msgid "Fix: Estimates not saved advanced columns correctly"
+msgstr "Fix: Estimates not saved advanced columns correctly"
+
+#. Found in changelog list item.
+msgid "Fix: Estimates and pre-defined items"
+msgstr "Fix: Estimates and predefined items"
+
+#. Found in changelog list item.
+msgid "Fix: WooCommerce compatibility with their outdated version of select2"
+msgstr "Fix: WooCommerce compatibility with their outdated version of select2"
+
+#. Found in changelog list item.
+msgid "Fix: Redactor fix from 8.0.4"
+msgstr "Fix: Redactor fix from 8.0.4"
+
+#. Found in changelog list item.
+msgid "Fix: Escaped Addresses"
+msgstr "Fix: Escaped Addresses"
+
+#. Found in changelog list item.
+msgid "Fix: Misc. Error fixes"
+msgstr "Fix: Misc. Error fixes"
+
+#. Found in changelog list item.
+msgid "NEW: Line item total sorting"
+msgstr "NEW: Line item total sorting"
+
+#. Found in changelog list item.
+msgid "NEW: MercadoPago Support (payment button link callback)"
+msgstr "NEW: MercadoPago Support (payment button link callback)"
+
+#. Found in changelog list item.
+msgid "Fix: PHP Notice suppression on old line items."
+msgstr "Fix: PHP Notice suppression on old line items."
+
+#. Found in changelog list item.
+msgid "New: Filter for attachments"
+msgstr "New: Filter for attachments"
+
+#. Found in changelog list item.
+msgid "New: Pricing options is a hook for invoice templates"
+msgstr "New: Pricing options is a hook for invoice templates"
+
+#. Found in changelog list item.
+msgid "New: Bundled add-on for admin filtering"
+msgstr "New: Bundled add-on for admin filtering"
+
+#. Found in changelog list item.
+msgid "FIX: Select2 compatibility issues with some plugins."
+msgstr "FIX: Select2 compatibility issues with some plugins."
+
+#. Found in changelog list item.
+msgid "FIX: ACF compatibility fixes."
+msgstr "FIX: ACF compatibility fixes."
+
+#. Found in changelog list item.
+msgid "New: New add-on hook to disable invoice creation."
+msgstr "New: New add-on hook to disable invoice creation."
+
+#. Found in changelog list item.
+msgid "New: New add-on compatibility hooks."
+msgstr "New: New add-on compatibility hooks."
+
+#. Found in changelog list item.
+msgid "New: Save info meta action hook."
+msgstr "New: Save info meta action hook."
+
+#. Found in changelog list item.
+msgid "Fix: Ultimate Member compatibility"
+msgstr "Fix: Ultimate Member compatibility"
+
+#. Found in changelog list item.
+msgid "Fix: Invoice template showing \"Pending Payment\" when balance is zero"
+msgstr "Fix: Invoice template showing \"Pending Payment\" when balance is zero"
+
+#. Found in changelog list item.
+msgid "Fix: CSV Importing of already imported client users"
+msgstr "Fix: CSV Importing of already imported client users"
+
+#. Found in changelog list item.
+msgid "NEW: Reduce overall size."
+msgstr "NEW: Reduce overall size."
+
+#. Found in changelog list item.
+msgid "Update: Improved Sprout Clients compatibility with Client Dashboards"
+msgstr "Update: Improved Sprout Clients compatibility with Client Dashboards"
+
+#. Found in changelog list item.
+msgid "Fix: Caldera Forms compatibility"
+msgstr "Fix: Caldera Forms compatibility"
+
+#. Found in changelog list item.
+msgid "NEW: Payment options templating"
+msgstr "NEW: Payment options templating"
+
+#. Found in changelog list item.
+msgid "OPT: Prevent looping of meta_box saves"
+msgstr "OPT: Prevent looping of meta_box saves"
+
+#. Found in changelog list item.
+msgid "Fix: PayPal \"Adjustment\" resolution"
+msgstr "Fix: PayPal \"Adjustment\" resolution"
+
+#. Found in changelog list item.
+msgid "NEW: Form field wrapper classes"
+msgstr "NEW: Form field wrapper classes"
+
+#. Found in changelog list item.
+msgid "NEW: Recurring dashboard updates"
+msgstr "NEW: Recurring dashboard updates"
+
+#. Found in changelog list item.
+msgid "NEW: Sprout Billings Support"
+msgstr "NEW: Sprout Billings Support"
+
+#. Found in changelog list item.
+msgid "FIX: Estimate Submission Info Missing. #158"
+msgstr "FIX: Estimate Submission Info Missing. #158"
+
+#. Found in changelog list item.
+msgid "FIX: Report Filtering/Sorting. #159"
+msgstr "FIX: Report Filtering/Sorting. #159"
+
+#. Found in changelog list item.
+msgid "UPDATE: Submission Hooks &amp; Line Item Type priority. #161"
+msgstr "UPDATE: Submission Hooks &amp; Line Item Type priority. #161"
+
+#. Found in changelog list item.
+msgid "FIX: Default Terms/Notes for All Estimate/Invoices bug priority. #162"
+msgstr "FIX: Default Terms/Notes for All Estimate/Invoices bug priority. #162"
+
+#. Found in changelog list item.
+msgid "NEW: Filter to suppress notifications on an individual basis. #163"
+msgstr "NEW: Filter to suppress notifications on an individual basis. #163"
+
+#. Found in changelog list item.
+msgid "FIX: Default Terms/Notes transposed in some cases."
+msgstr "FIX: Default Terms/Notes transposed in some cases."
+
+#. Found in changelog list item.
+msgid "FIX: Fix for line item comments not showing highlighted icon when a comment is available. #166"
+msgstr "FIX: Fix for line item comments not showing highlighted icon when a comment is available. #166"
+
+#. Found in changelog list item.
+msgid "FIX: Estimate dashboard not showing current records. #167"
+msgstr "FIX: Estimate dashboard not showing current records. #167"
+
+#. Found in changelog list item.
+msgid "NEW: Filter for sending invoices to prevent filters. i.e. fix for PDF add-on. #165"
+msgstr "NEW: Filter for sending invoices to prevent filters. i.e. fix for PDF add-on. #165"
+
+#. Found in changelog list item.
+msgid "NEW: Associated client records are removed when a client is deleted."
+msgstr "NEW: Associated client records are removed when a client is deleted."
+
+#. Found in changelog list item.
+msgid "NEW: Temp status redirects user to home page"
+msgstr "NEW: Temp status redirects user to home page"
+
+#. Found in changelog list item.
+msgid "FIX: Fractional discounts for PayPal"
+msgstr "FIX: Fractional discounts for PayPal"
+
+#. Found in changelog list item.
+msgid "NEW: Improved dashboard time tracking widget"
+msgstr "NEW: Improved dashboard time tracking widget"
+
+#. Found in changelog list item.
+msgid "FIX: Line item commenting allows for reordering of comments"
+msgstr "FIX: Line item commenting allows for reordering of comments"
+
+#. Found in changelog list item.
+msgid "CHANGE: Line items have a unique index for future features"
+msgstr "CHANGE: Line items have a unique index for future features"
+
+#. Found in changelog list item.
+msgid "NEW: Load custom CSS based on invoice or estimate"
+msgstr "NEW: Load custom CSS based on invoice or estimate"
+
+#. Found in changelog list item.
+msgid "FIX: Payments by month filtering error"
+msgstr "FIX: Payments by month filtering error"
+
+#. Found in changelog list item.
+msgid "NEW: All strings are wrapped by WP functions not wrapper class methods."
+msgstr "NEW: All strings are wrapped by WP functions not wrapper class methods."
+
+#. Found in changelog list item.
+msgid "NEW: Dashboard report caches are deleted on record updates"
+msgstr "NEW: Dashboard report caches are deleted on record updates"
+
+#. Found in changelog list item.
+msgid "NEW: Improved reporting and filtering"
+msgstr "NEW: Improved reporting and filtering"
+
+#. Found in changelog list item.
+msgid "NEW: Estimate and Invoice shortcodes"
+msgstr "NEW: Estimate and Invoice shortcodes"
+
+#. Found in changelog list item.
+msgid "FIX: Localization changes causing errors on free version."
+msgstr "FIX: Localisation changes causing errors on free version."
+
+#. Found in changelog list item.
+msgid "FIX: AJAX callback errors, i.e. client creation."
+msgstr "FIX: AJAX callback errors, i.e. client creation."
+
+#. Found in changelog list item.
+msgid "FIX: Time tracking load order fix"
+msgstr "FIX: Time tracking load order fix"
+
+#. Found in changelog list item.
+msgid "FIX: Pass estimates notes to newly created invoice from estimate"
+msgstr "FIX: Pass estimates notes to newly created invoice from estimate"
+
+#. Found in changelog list item.
+msgid "FIX: Zapier routing issues"
+msgstr "FIX: Zapier routing issues"
+
+#. Found in changelog list item.
+msgid "NEW: Notes and Terms notification shortcodes"
+msgstr "NEW: Notes and Terms notification shortcodes"
+
+#. Found in changelog list item.
+msgid "FIX: PayPal cart total errors with invoices that utilize discounts, deposits, and taxes with fractional totals."
+msgstr "FIX: PayPal cart total errors with invoices that utilise discounts, deposits, and taxes with fractional totals."
+
+#. Found in changelog list item.
+msgid "OPT: Slight optimization for estimates and invoices"
+msgstr "OPT: Slight optimisation for estimates and invoices"
+
+#. Found in changelog list item.
+msgid "FIX: Parent line item totals"
+msgstr "FIX: Parent line item totals"

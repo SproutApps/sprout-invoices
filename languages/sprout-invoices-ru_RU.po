@@ -2,55 +2,61 @@
 # This file is distributed under the same license as the Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-03-02 08:58-0800\n"
+"PO-Revision-Date: 2019-07-26 10:03-0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 2.2.3\n"
 "Project-Id-Version: Development (trunk)\n"
 "POT-Creation-Date: \n"
-"Last-Translator: Dan Cameron <l10n@sproutinvoices.com>\n"
+"Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
 "Language-Team: \n"
+"Language: ru_RU\n"
 
 #: controllers/invoices/Invoices_Deposit.php:33
 msgid "Upgrade Sprout Invoices to enable deposits."
-msgstr ""
+msgstr "Обновите Sprout Invoices, чтобы пополнить счет."
 
 #: controllers/invoices/Invoices_Deposit.php:40
 msgid "Set the amount due for the next payment&mdash;amount due will be used 0"
 msgstr ""
+"Установите сумму, причитающуюся к оплате в&mdash;следующий платеж, которая "
+"будет использована 0"
 
 #: controllers/payment-processing/Payment_Processors.php:181
 msgid ""
 "<strong>Missing Paypal Express Checkout?</strong> The add-on is available "
 "for <b>free</b> on the <a href=\"%s\">Sprout Apps marketplace</a>."
 msgstr ""
+"<strong>Пропавший экспресс-кассовый чек Paypal?</strong> Дополнительный "
+"модуль доступен <b>бесплатно</b> на <a href=\"%s\">рынке приложений Sprout "
+"Apps</a>."
 
 #: controllers/payment-processing/Payment_Processors.php:184
 msgid "More Payment Gateways Available:"
-msgstr ""
+msgstr "Больше доступных платёжных шлюзов:"
 
 #: controllers/payment-processing/Payment_Processors.php:184
 msgid "Checkout the Sprout Apps <a href=\"%s\">marketplace</a>."
-msgstr ""
+msgstr "Загляните на <a href=\"%s\">рынок</a> приложений Sprout Apps."
 
 #: languages/SI_Strings.php:81
 msgid "No Time found in Trash"
-msgstr ""
+msgstr "Время в мусоре не найдено"
 
 #: languages/SI_Strings.php:82
 msgid "Search Invoices"
-msgstr ""
+msgstr "Поиск счетов"
 
 #: languages/SI_Strings.php:83
 msgid "Search Estimates"
-msgstr ""
+msgstr "Поисковые оценки"
 
 #: languages/SI_Strings.php:84
 msgid "Search Clients"
-msgstr ""
+msgstr "Поиск клиентов"
 
 #: languages/SI_Strings.php:85
 msgid "Search Projects"
@@ -62,11 +68,11 @@ msgstr "Поиск в платежах"
 
 #: languages/SI_Strings.php:87
 msgid "Search Notifications"
-msgstr ""
+msgstr "Поиск уведомлений"
 
 #: languages/SI_Strings.php:88
 msgid "Search Time"
-msgstr ""
+msgstr "Время поиска"
 
 #: languages/SI_l10n.php:80
 msgid ""
@@ -76,43 +82,49 @@ msgid ""
 "major discounts on <a href=\"%4$s\" target=\"_blank\">pro licenses</a> and "
 "<a href=\"%5$s\" target=\"_blank\">add-ons</a>."
 msgstr ""
+"<span class=\"dashicons dashicons-megaphone\"></span><b> %1$s</b> не имеет "
+"перевода на <b>%2$s</b>, пожалуйста, помогите сообществу перевести на <a "
+"href=\"%3$s\" target=\"_blank\">%3$s</a>. Поддерживающие переводчики "
+"получают значительные скидки на <a href=\"%4$s\" target=\"_blank"
+"\">профессиональные лицензии</a> и <a href=\"%5$s\" target=\"_blank"
+"\">дополнения</a>."
 
 #: views/admin/addons/marketplace.php:34
 #: views/admin/sprout-apps-dashboard.php:57
 msgid "Bundled w/ Business License Only"
-msgstr ""
+msgstr "В комплекте w/ Только лицензия на ведение бизнеса"
 
 #: views/admin/meta-boxes/estimates/information.php:182
 #: views/admin/meta-boxes/invoices/information.php:176
 msgid "The discount is applied after tax."
-msgstr ""
+msgstr "Скидка применяется после уплаты налога."
 
 #: views/admin/meta-boxes/estimates/information.php:202
 #: views/admin/meta-boxes/estimates/information.php:223
 #: views/admin/meta-boxes/invoices/information.php:196
 #: views/admin/meta-boxes/invoices/information.php:217
 msgid "Tax is applied before the discount."
-msgstr ""
+msgstr "Налог применяется до предоставления скидки."
 
 #: languages/SI_Strings.php:76
 msgid "No Estimate found in Trash"
-msgstr ""
+msgstr "Нет Оценок, найденных в мусорном баке"
 
 #: languages/SI_Strings.php:77
 msgid "No Client found in Trash"
-msgstr ""
+msgstr "В корзине клиенты не найдены"
 
 #: languages/SI_Strings.php:78
 msgid "No Project found in Trash"
-msgstr ""
+msgstr "В корзине не найдено ни одного проекта"
 
 #: languages/SI_Strings.php:79
 msgid "No Payment found in Trash"
-msgstr ""
+msgstr "Платеж не найден в мусорной корзине"
 
 #: languages/SI_Strings.php:80
 msgid "No Notification found in Trash"
-msgstr ""
+msgstr "Уведомление в корзине не найдено"
 
 #: languages/SI_Strings.php:65
 msgid "View Payment"
@@ -120,39 +132,39 @@ msgstr "Просмотреть платёж"
 
 #: languages/SI_Strings.php:66
 msgid "View Notification"
-msgstr ""
+msgstr "Просмотреть уведомление"
 
 #: languages/SI_Strings.php:67 languages/SI_Strings.php:74
 msgid "No Time found"
-msgstr ""
+msgstr "Нет найденного времени"
 
 #: languages/SI_Strings.php:68
 msgid "No Invoice found"
-msgstr ""
+msgstr "Не найдено"
 
 #: languages/SI_Strings.php:69
 msgid "No Estimate found"
-msgstr ""
+msgstr "Оценка не найдена"
 
 #: languages/SI_Strings.php:70
 msgid "No Client found"
-msgstr ""
+msgstr "Клиенты не найдены"
 
 #: languages/SI_Strings.php:71
 msgid "No Project found"
-msgstr ""
+msgstr "Проект не найден"
 
 #: languages/SI_Strings.php:72
 msgid "No Payment found"
-msgstr ""
+msgstr "Платеж не найден"
 
 #: languages/SI_Strings.php:73
 msgid "No Notification found"
-msgstr ""
+msgstr "Уведомления не найдено"
 
 #: languages/SI_Strings.php:75
 msgid "No Invoice found in Trash"
-msgstr ""
+msgstr "Не найдено"
 
 #: languages/SI_Strings.php:58
 msgid "New Payment"
@@ -160,15 +172,15 @@ msgstr "Новый платёж"
 
 #: languages/SI_Strings.php:59
 msgid "New Notification"
-msgstr ""
+msgstr "Новое уведомление"
 
 #: languages/SI_Strings.php:60
 msgid "New Time"
-msgstr ""
+msgstr "Новое время"
 
 #: languages/SI_Strings.php:63
 msgid "View Client"
-msgstr ""
+msgstr "Просмотр клиента"
 
 #: languages/SI_Strings.php:64
 msgid "View Project"
@@ -176,15 +188,15 @@ msgstr "Просмотр проекта"
 
 #: languages/SI_Strings.php:54
 msgid "New Invoice"
-msgstr ""
+msgstr "Новый счет"
 
 #: languages/SI_Strings.php:55
 msgid "New Estimate"
-msgstr ""
+msgstr "Новая оценка"
 
 #: languages/SI_Strings.php:56
 msgid "New Client"
-msgstr ""
+msgstr "Новый клиент"
 
 #: languages/SI_Strings.php:57
 msgid "New Project"
@@ -192,23 +204,23 @@ msgstr "Новый проект"
 
 #: languages/SI_Strings.php:45
 msgid "Add New Notification"
-msgstr ""
+msgstr "Добавить новое уведомление"
 
 #: languages/SI_Strings.php:46
 msgid "Add New Time"
-msgstr ""
+msgstr "Добавить новое время"
 
 #: languages/SI_Strings.php:47
 msgid "Edit Invoice"
-msgstr ""
+msgstr "Редактировать счет"
 
 #: languages/SI_Strings.php:48
 msgid "Edit Estimate"
-msgstr ""
+msgstr "Редактировать смету"
 
 #: languages/SI_Strings.php:49
 msgid "Edit Client"
-msgstr ""
+msgstr "Редактировать клиента"
 
 #: languages/SI_Strings.php:50
 msgid "Edit Project"
@@ -224,27 +236,27 @@ msgstr "Редактировать оповещение"
 
 #: languages/SI_Strings.php:53
 msgid "Edit Time"
-msgstr ""
+msgstr "Время редактирования"
 
 #: languages/SI_Strings.php:33
 msgid "Add Invoice"
-msgstr ""
+msgstr "Добавить счет"
 
 #: languages/SI_Strings.php:34
 msgid "Add Estimate"
-msgstr ""
+msgstr "Добавить оценку"
 
 #: languages/SI_Strings.php:35
 msgid "Add Client"
-msgstr ""
+msgstr "Добавить клиента"
 
 #: languages/SI_Strings.php:36
 msgid "Add Project"
-msgstr ""
+msgstr "Добавить проект"
 
 #: languages/SI_Strings.php:37
 msgid "Add Payment"
-msgstr ""
+msgstr "Добавить платеж"
 
 #: languages/SI_Strings.php:38
 msgid "Add Notification"
@@ -252,19 +264,19 @@ msgstr "Добавить оповещение"
 
 #: languages/SI_Strings.php:39
 msgid "Add Time"
-msgstr ""
+msgstr "Добавить время"
 
 #: languages/SI_Strings.php:40
 msgid "Add New Invoice"
-msgstr ""
+msgstr "Добавить новый счет"
 
 #: languages/SI_Strings.php:41
 msgid "Add New Estimate"
-msgstr ""
+msgstr "Добавить новую оценку"
 
 #: languages/SI_Strings.php:42
 msgid "Add New Client"
-msgstr ""
+msgstr "Добавить нового клиента"
 
 #: languages/SI_Strings.php:43
 msgid "Add New Project"
@@ -276,7 +288,7 @@ msgstr "Добавить новый платёж"
 
 #: languages/SI_Strings.php:25
 msgid "Time Type"
-msgstr ""
+msgstr "Тип времени"
 
 #: languages/SI_Strings.php:32
 msgid "Time"
@@ -349,11 +361,11 @@ msgstr "Платёж в ожидании"
 
 #: views/templates/invoice/invoice.php:92
 msgid "TEMP"
-msgstr ""
+msgstr "TEMP"
 
 #. Plugin URI of the plugin/theme
 msgid "https://sproutinvoices.com/sprout-invoices/"
-msgstr ""
+msgstr "https://sproutinvoices.com/sprout-invoices/"
 
 #. Description of the plugin/theme
 msgid ""
@@ -361,10 +373,13 @@ msgid ""
 "receive invoice payments. Learn more at <a href=\"https://sproutinvoices.com"
 "\">Sprout Apps</a>."
 msgstr ""
+"Приложение позволяет любому сайту WordPress принимать сметы, создавать счета-"
+"фактуры и получать платежи по счетам. Узнайте больше в <a href=\"https://"
+"sproutinvoices.com\">приложении Sprout Apps</a>."
 
 #. Author URI of the plugin/theme
 msgid "https://sproutinvoices.com"
-msgstr ""
+msgstr "https://sproutinvoices.com"
 
 #: views/templates/checkout/confirmation.php:36
 #: views/templates/invoice/invoice.php:39
@@ -401,6 +416,8 @@ msgid ""
 "Start <a href='%s'>importing</a> your data from other services (i.e. WP-"
 "Invoice, Freshbooks or Harvest)."
 msgstr ""
+"Начните <a href='%s'>импортировать</a> данные из других служб (например, WP-"
+"Invoice, Freshbook или Harvest)."
 
 #: views/admin/sprout-invoices-dashboard.php:70
 msgid ""
@@ -715,6 +732,11 @@ msgid ""
 "future features (i.e. easy add-on installs from <a href=\"%s\">https://"
 "sproutinvoices.com</a>)."
 msgstr ""
+"Генерация свободного лицензионного ключа не требуется, но занимает считанные "
+"секунды! Ваша электронная почта будет использована для создания уникального "
+"лицензионного ключа Sprout Apps, который позволит использовать будущие "
+"функции (т.е. простые дополнительные установки с <a href=\"%s\">https://"
+"sproutinvoices.com</a>)."
 
 #: views/admin/sprout-invoices-dashboard.php:33
 msgid "The Sprout Invoices Flow"
@@ -929,6 +951,9 @@ msgid ""
 "default descriptions. This is a premium feature that will be added with a "
 "pro version upgrade."
 msgstr ""
+"Предварительно заданные элементы линии могут быть созданы, чтобы помочь в "
+"создании счетов путем добавления описаний по умолчанию. Это премиум-функция, "
+"которая будет добавлена с профессиональным обновлением версии."
 
 #: views/admin/meta-boxes/invoices/line-items.php:19
 msgid ""
@@ -1054,6 +1079,9 @@ msgid ""
 "adding default descriptions. This is a premium feature that will be added "
 "with a pro version upgrade."
 msgstr ""
+"Предварительно определенные элементы линии могут быть созданы, чтобы помочь "
+"в создании оценки путем добавления описаний по умолчанию. Это премиум-"
+"функция, которая будет добавлена с профессиональным обновлением версии."
 
 #: views/admin/meta-boxes/estimates/notes.php:9
 #: views/admin/meta-boxes/invoices/notes.php:9
@@ -1390,7 +1418,7 @@ msgstr "Оплаченных (на этой неделе)"
 #: views/admin/dashboards/invoices.php:22
 #: views/admin/dashboards/invoices.php:25
 msgid "Data available with upgraded version of Sprout Invoices"
-msgstr ""
+msgstr "Доступны данные с обновленной версией счета-фактуры"
 
 #: views/admin/dashboards/invoices.php:15
 #: views/admin/dashboards/premium/invoices.php:21
@@ -1564,8 +1592,7 @@ msgstr "Просмотрено"
 msgid "Notification"
 msgstr "Оповещения"
 
-#: template-tags/invoices.php:980
-#: views/admin/meta-boxes/clients/history.php:37
+#: template-tags/invoices.php:980 views/admin/meta-boxes/clients/history.php:37
 msgid "Invoice Created"
 msgstr "Счёт Создан"
 
@@ -1579,8 +1606,7 @@ msgstr "Отправлен"
 msgid "Imported"
 msgstr "Импортирован"
 
-#: template-tags/invoices.php:993
-#: views/admin/meta-boxes/clients/history.php:42
+#: template-tags/invoices.php:993 views/admin/meta-boxes/clients/history.php:42
 #: views/admin/meta-boxes/projects/history-premium.php:30
 #: views/admin/meta-boxes/projects/history.php:30
 msgid "Status Update"
@@ -1770,8 +1796,7 @@ msgstr "отложено"
 msgid "No client associated with this invoice."
 msgstr "Нет клиента связанного с этим счетом."
 
-#: models/Invoice.php:76
-#: views/admin/sections/invoice-status-change-drop.php:12
+#: models/Invoice.php:76 views/admin/sections/invoice-status-change-drop.php:12
 msgid "Outstanding Balance"
 msgstr "Неоплаченный Баланс"
 
@@ -2563,6 +2588,8 @@ msgid ""
 "<b>Date filtering</b> is available and can be used to retrieve data between "
 "two dates, after a date, or before a date."
 msgstr ""
+"<b>Фильтрация по датам</b> доступна и может использоваться для получения "
+"данных между двумя датами, после даты или перед датой."
 
 #: controllers/reporting/Reporting.php:827
 msgid ""
@@ -3325,6 +3352,8 @@ msgid ""
 "E-mail address that receives the admin notifications (e.g. Payment "
 "Received )."
 msgstr ""
+"Адрес электронной почты, на который поступают уведомления от администратора "
+"(например, Получен платеж)."
 
 #: controllers/notifications/Notifications_Control.php:118
 msgid "Email format"
@@ -3465,11 +3494,11 @@ msgstr "Используется для отображения налога см
 
 #: controllers/notifications/Notifications.php:297
 msgid "Used to display the estimate notes."
-msgstr ""
+msgstr "Используется для отображения примечаний к оценке."
 
 #: controllers/notifications/Notifications.php:301
 msgid "Used to display the estimate terms."
-msgstr ""
+msgstr "Используется для отображения условий оценки."
 
 #: controllers/notifications/Notifications.php:305
 msgid "Used to display the lead entries in HTML."
@@ -3720,11 +3749,11 @@ msgstr "Используется для отображения налога сч
 
 #: controllers/notifications/Notifications.php:213
 msgid "Used to display the invoice notes."
-msgstr ""
+msgstr "Используется для отображения примечаний к счетам."
 
 #: controllers/notifications/Notifications.php:217
 msgid "Used to display the invoice terms."
-msgstr ""
+msgstr "Используется для отображения условий выставления счета."
 
 #: controllers/notifications/Notifications.php:221
 msgid "Used to display the invoice total."
@@ -4175,9 +4204,8 @@ msgstr ""
 "Текущий формат: %1$s. Денежный Формат по умолчанию (%2$s) можно "
 "переопределить для всех смет и счетов клиентов здесь."
 
-#: controllers/clients/Clients.php:1077
-#: controllers/reporting/Dashboard.php:219 importers/CSV.php:51
-#: languages/SI_Strings.php:21
+#: controllers/clients/Clients.php:1077 controllers/reporting/Dashboard.php:219
+#: importers/CSV.php:51 languages/SI_Strings.php:21
 msgid "Clients"
 msgstr "Клиенты"
 
@@ -4515,7 +4543,6 @@ msgstr "Рассмотрение"
 msgid "Cheatin&#8217; uh?"
 msgstr "Cheatin&#8217; да?"
 
-#. #-#-#-#-#  tmp-sprout-invoices.pot (Sprout Invoices 9.4)  #-#-#-#-#
 #. Author of the plugin/theme
 #: controllers/admin/Settings_API.php:170
 #: controllers/admin/Settings_API.php:171
@@ -4762,7 +4789,6 @@ msgstr ""
 "Выберите штаты и страны/провинции для всех форм, например, покупки, сметы и "
 "регистрации."
 
-#. #-#-#-#-#  tmp-sprout-invoices.pot (Sprout Invoices 9.4)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: controllers/admin/Settings.php:569 controllers/reporting/Dashboard.php:141
 #: controllers/templating/Customizer.php:59
@@ -4812,9 +4838,8 @@ msgstr ""
 msgid "Private note failed to save, try again."
 msgstr "Личную заметку не удалось сохранить, попробуйте ещё раз."
 
-#: controllers/_Controller.php:834
-#: controllers/records/Internal_Records.php:217 template-tags/invoices.php:964
-#: views/admin/meta-boxes/clients/history.php:21
+#: controllers/_Controller.php:834 controllers/records/Internal_Records.php:217
+#: template-tags/invoices.php:964 views/admin/meta-boxes/clients/history.php:21
 #: views/admin/meta-boxes/projects/history-premium.php:21
 #: views/admin/meta-boxes/projects/history.php:21
 msgid "Private Note"

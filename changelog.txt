@@ -1,3 +1,7 @@
+= 19.8.5 =
+
+* Fix: Payment terms and auto billing with Sprout Billings.
+
 = 19.8.4 =
 
 * Fix: Basic theme issue with payment options
