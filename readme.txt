@@ -4,7 +4,7 @@ Donate link: https://sproutinvoices.com/?utm_medium=link&utm_campaign=free&utm_s
 Tags: invoice, invoicing, billing, estimates, quote, quotes, payments, billings, paypal, online payment, send invoice, bill clients, credit cards, Stripe, freshbooks, Harvest, sliced, wp-invoice
 Requires at least: 4.5
 Tested up to: 5.2
-Stable tag: 19.8.5
+Stable tag: 19.9.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,11 @@ Form integrations for everyone!
 
 == Changelog ==
 
+
+= 19.9 =
+
+* New: Stripe Checkout Integration for Biz+ licenses
+* Update: Additional translations
 
 = 19.8.5 =
 

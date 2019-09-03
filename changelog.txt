@@ -1,3 +1,8 @@
+= 19.9 =
+
+* New: Stripe Checkout Integration for Biz+ licenses
+* Update: Additional translations
+
 = 19.8.5 =
 
 * Fix: Payment terms and auto billing with Sprout Billings.

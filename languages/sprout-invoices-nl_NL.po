@@ -2,47 +2,42 @@
 # This file is distributed under the same license as the Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-07-26 10:02-0700\n"
+"PO-Revision-Date: 2016-03-02 08:58-0800\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 1.5.7\n"
 "Project-Id-Version: Development (trunk)\n"
 "POT-Creation-Date: \n"
-"Last-Translator: Dan Cameron <l10n@sproutapps.co>\n"
+"Last-Translator: Dan Cameron <l10n@sproutinvoices.com>\n"
 "Language-Team: \n"
-"Language: nl_NL\n"
 
 #: controllers/invoices/Invoices_Deposit.php:33
 msgid "Upgrade Sprout Invoices to enable deposits."
-msgstr "Upgraden van Sprout Invoices om stortingen mogelijk te maken."
+msgstr ""
 
 #: controllers/invoices/Invoices_Deposit.php:40
 msgid "Set the amount due for the next payment&mdash;amount due will be used 0"
 msgstr ""
-"Stel het verschuldigde bedrag voor de volgende betaling in en stel het "
-"bedrag in dat voor de volgende betaling zal worden gebruikt"
 
 #: controllers/payment-processing/Payment_Processors.php:181
 msgid ""
 "<strong>Missing Paypal Express Checkout?</strong> The add-on is available "
 "for <b>free</b> on the <a href=\"%s\">Sprout Apps marketplace</a>."
 msgstr ""
-"<strong>Ontbrekende Paypal Express Checkout?</strong> De add-on is "
-"<b>gratis</b> beschikbaar op de <a href=\"%s\">Sprout Apps marktplaats</a>."
 
 #: controllers/payment-processing/Payment_Processors.php:184
 msgid "More Payment Gateways Available:"
-msgstr "Meer betaalgateways beschikbaar:"
+msgstr ""
 
 #: controllers/payment-processing/Payment_Processors.php:184
 msgid "Checkout the Sprout Apps <a href=\"%s\">marketplace</a>."
-msgstr "Checkout de Sprout Apps <a href=\"%s\">marktplaats</a>."
+msgstr ""
 
 #: languages/SI_Strings.php:81
 msgid "No Time found in Trash"
-msgstr "Geen tijd gevonden in vuilnisbak"
+msgstr ""
 
 #: languages/SI_Strings.php:82
 msgid "Search Invoices"
@@ -50,11 +45,11 @@ msgstr "Zoek facturen"
 
 #: languages/SI_Strings.php:83
 msgid "Search Estimates"
-msgstr "Zoek kostenraming"
+msgstr ""
 
 #: languages/SI_Strings.php:84
 msgid "Search Clients"
-msgstr "Zoek klant"
+msgstr ""
 
 #: languages/SI_Strings.php:85
 msgid "Search Projects"
@@ -66,11 +61,11 @@ msgstr "Betalingen zoeken"
 
 #: languages/SI_Strings.php:87
 msgid "Search Notifications"
-msgstr "Zoek notificaties"
+msgstr ""
 
 #: languages/SI_Strings.php:88
 msgid "Search Time"
-msgstr "Zoektijd"
+msgstr ""
 
 #: languages/SI_l10n.php:80
 msgid ""
@@ -80,48 +75,43 @@ msgid ""
 "major discounts on <a href=\"%4$s\" target=\"_blank\">pro licenses</a> and "
 "<a href=\"%5$s\" target=\"_blank\">add-ons</a>."
 msgstr ""
-"<span class=\"dashicons dashicons-megaphone\"></span><b> %1$s</b> heeft geen "
-"vertaling voor <b>%2$s</b>, help de gemeenschap te vertalen voor <a href="
-"\"%3$s\" target=\"_blank\">%3$s</a>. Ondersteunende vertalers ontvangen "
-"grote kortingen op <a href=\"%4$s\" target=\"_blank\">pro-licenties</a> en "
-"<a href=\"%5$s\" target=\"_blank\">add-ons</a>."
 
 #: views/admin/addons/marketplace.php:34
 #: views/admin/sprout-apps-dashboard.php:57
 msgid "Bundled w/ Business License Only"
-msgstr "Gebundeld met alleen een zakelijke licentie"
+msgstr ""
 
 #: views/admin/meta-boxes/estimates/information.php:182
 #: views/admin/meta-boxes/invoices/information.php:176
 msgid "The discount is applied after tax."
-msgstr "De korting wordt toegepast na belastingen."
+msgstr ""
 
 #: views/admin/meta-boxes/estimates/information.php:202
 #: views/admin/meta-boxes/estimates/information.php:223
 #: views/admin/meta-boxes/invoices/information.php:196
 #: views/admin/meta-boxes/invoices/information.php:217
 msgid "Tax is applied before the discount."
-msgstr "De belasting wordt toegepast vóór de korting."
+msgstr ""
 
 #: languages/SI_Strings.php:76
 msgid "No Estimate found in Trash"
-msgstr "Geen schatting gevonden in Vuilnisbak"
+msgstr ""
 
 #: languages/SI_Strings.php:77
 msgid "No Client found in Trash"
-msgstr "Geen Client gevonden in prullenbak"
+msgstr ""
 
 #: languages/SI_Strings.php:78
 msgid "No Project found in Trash"
-msgstr "Geen project gevonden in Vuilnisbak"
+msgstr ""
 
 #: languages/SI_Strings.php:79
 msgid "No Payment found in Trash"
-msgstr "Geen betaling gevonden in vuilnisbak"
+msgstr ""
 
 #: languages/SI_Strings.php:80
 msgid "No Notification found in Trash"
-msgstr "Geen notificatie in de prullenbak gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:65
 msgid "View Payment"
@@ -129,39 +119,39 @@ msgstr "Bekijk betaling"
 
 #: languages/SI_Strings.php:66
 msgid "View Notification"
-msgstr "Bekijk melding"
+msgstr ""
 
 #: languages/SI_Strings.php:67 languages/SI_Strings.php:74
 msgid "No Time found"
-msgstr "Geen tijd gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:68
 msgid "No Invoice found"
-msgstr "Geen facturen gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:69
 msgid "No Estimate found"
-msgstr "Geen schatting gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:70
 msgid "No Client found"
-msgstr "Geen client gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:71
 msgid "No Project found"
-msgstr "Geen project gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:72
 msgid "No Payment found"
-msgstr "Geen betaling gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:73
 msgid "No Notification found"
-msgstr "Geen notificatie gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:75
 msgid "No Invoice found in Trash"
-msgstr "Geen verwijderde factuur gevonden"
+msgstr ""
 
 #: languages/SI_Strings.php:58
 msgid "New Payment"
@@ -169,15 +159,15 @@ msgstr "Nieuwe betaling"
 
 #: languages/SI_Strings.php:59
 msgid "New Notification"
-msgstr "Nieuwe melding"
+msgstr ""
 
 #: languages/SI_Strings.php:60
 msgid "New Time"
-msgstr "Nieuwe tijd"
+msgstr ""
 
 #: languages/SI_Strings.php:63
 msgid "View Client"
-msgstr "Bekijk klant"
+msgstr ""
 
 #: languages/SI_Strings.php:64
 msgid "View Project"
@@ -189,11 +179,11 @@ msgstr "Nieuwe factuur"
 
 #: languages/SI_Strings.php:55
 msgid "New Estimate"
-msgstr "Nieuwe schatting"
+msgstr ""
 
 #: languages/SI_Strings.php:56
 msgid "New Client"
-msgstr "Nieuwe klant"
+msgstr ""
 
 #: languages/SI_Strings.php:57
 msgid "New Project"
@@ -201,11 +191,11 @@ msgstr "Nieuw project"
 
 #: languages/SI_Strings.php:45
 msgid "Add New Notification"
-msgstr "Nieuwe melding toevoegen"
+msgstr ""
 
 #: languages/SI_Strings.php:46
 msgid "Add New Time"
-msgstr "Nieuwe tijd toevoegen"
+msgstr ""
 
 #: languages/SI_Strings.php:47
 msgid "Edit Invoice"
@@ -213,11 +203,11 @@ msgstr "Bewerk factuur"
 
 #: languages/SI_Strings.php:48
 msgid "Edit Estimate"
-msgstr "Begroting bewerken"
+msgstr ""
 
 #: languages/SI_Strings.php:49
 msgid "Edit Client"
-msgstr "Bewerk klant"
+msgstr ""
 
 #: languages/SI_Strings.php:50
 msgid "Edit Project"
@@ -233,27 +223,27 @@ msgstr "Edit kennisgeving "
 
 #: languages/SI_Strings.php:53
 msgid "Edit Time"
-msgstr "Tijd bewerken"
+msgstr ""
 
 #: languages/SI_Strings.php:33
 msgid "Add Invoice"
-msgstr "Voeg factuur"
+msgstr ""
 
 #: languages/SI_Strings.php:34
 msgid "Add Estimate"
-msgstr "Nieuwe offerte toevoegen"
+msgstr ""
 
 #: languages/SI_Strings.php:35
 msgid "Add Client"
-msgstr "Klant toevoegen"
+msgstr ""
 
 #: languages/SI_Strings.php:36
 msgid "Add Project"
-msgstr "Project toevoegen"
+msgstr ""
 
 #: languages/SI_Strings.php:37
 msgid "Add Payment"
-msgstr "Betaling toevoegen"
+msgstr ""
 
 #: languages/SI_Strings.php:38
 msgid "Add Notification"
@@ -261,19 +251,19 @@ msgstr "Voeg kennisgeving toe"
 
 #: languages/SI_Strings.php:39
 msgid "Add Time"
-msgstr "Tijd toevoegen"
+msgstr ""
 
 #: languages/SI_Strings.php:40
 msgid "Add New Invoice"
-msgstr "Voeg nieuwe factuur toe"
+msgstr ""
 
 #: languages/SI_Strings.php:41
 msgid "Add New Estimate"
-msgstr "Voeg nieuwe kostenraming toe"
+msgstr ""
 
 #: languages/SI_Strings.php:42
 msgid "Add New Client"
-msgstr "Voeg nieuwe klant toe"
+msgstr ""
 
 #: languages/SI_Strings.php:43
 msgid "Add New Project"
@@ -285,7 +275,7 @@ msgstr "Nieuwe betaling toevoegen"
 
 #: languages/SI_Strings.php:25
 msgid "Time Type"
-msgstr "Tijdstip"
+msgstr ""
 
 #: languages/SI_Strings.php:32
 msgid "Time"
@@ -358,11 +348,11 @@ msgstr "In afwachting van betaling"
 
 #: views/templates/invoice/invoice.php:92
 msgid "TEMP"
-msgstr "TEMP"
+msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid "https://sproutinvoices.com/sprout-invoices/"
-msgstr "https://sproutinvoices.com/sprout-invoices/"
+msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
@@ -370,13 +360,10 @@ msgid ""
 "receive invoice payments. Learn more at <a href=\"https://sproutinvoices.com"
 "\">Sprout Apps</a>."
 msgstr ""
-"Met de app kan elke WordPress-site offertes accepteren, facturen maken en "
-"betalingen ontvangen. Meer informatie vindt u op <a href=\"https://"
-"sproutinvoices.com\">Sprout Apps</a>."
 
 #. Author URI of the plugin/theme
 msgid "https://sproutinvoices.com"
-msgstr "https://sproutinvoices.com"
+msgstr ""
 
 #: views/templates/checkout/confirmation.php:36
 #: views/templates/invoice/invoice.php:39
@@ -413,8 +400,6 @@ msgid ""
 "Start <a href='%s'>importing</a> your data from other services (i.e. WP-"
 "Invoice, Freshbooks or Harvest)."
 msgstr ""
-"Begin met het <a href='%s'>importeren van</a> uw gegevens van andere "
-"diensten (bijv. WP-factuur, Freshbooks of Harvest)."
 
 #: views/admin/sprout-invoices-dashboard.php:70
 msgid ""
@@ -730,11 +715,6 @@ msgid ""
 "future features (i.e. easy add-on installs from <a href=\"%s\">https://"
 "sproutinvoices.com</a>)."
 msgstr ""
-"Het genereren van een vrije licentiesleutel is niet vereist, maar duurt "
-"slechts enkele seconden! Uw e-mail zal worden gebruikt om een unieke Sprout "
-"Apps licentiecode te maken die toekomstige functies mogelijk maakt (d.w.z. "
-"eenvoudige add-on installaties van <a href=\"%s\">https://sproutinvoices."
-"com</a>)."
 
 #: views/admin/sprout-invoices-dashboard.php:33
 msgid "The Sprout Invoices Flow"
@@ -952,9 +932,6 @@ msgid ""
 "default descriptions. This is a premium feature that will be added with a "
 "pro version upgrade."
 msgstr ""
-"Voorgedefinieerde regelitems kunnen worden aangemaakt om te helpen bij het "
-"maken van facturen door standaard beschrijvingen toe te voegen. Dit is een "
-"premium functie die zal worden toegevoegd met een pro versie upgrade."
 
 #: views/admin/meta-boxes/invoices/line-items.php:19
 msgid ""
@@ -1080,9 +1057,6 @@ msgid ""
 "adding default descriptions. This is a premium feature that will be added "
 "with a pro version upgrade."
 msgstr ""
-"Voorgedefinieerde regel-items kunnen worden aangemaakt om te helpen bij het "
-"maken van schattingen door het toevoegen van standaard beschrijvingen. Dit "
-"is een premium functie die zal worden toegevoegd met een pro versie upgrade."
 
 #: views/admin/meta-boxes/estimates/notes.php:9
 #: views/admin/meta-boxes/invoices/notes.php:9
@@ -1419,7 +1393,7 @@ msgstr "Betaald (deze week)"
 #: views/admin/dashboards/invoices.php:22
 #: views/admin/dashboards/invoices.php:25
 msgid "Data available with upgraded version of Sprout Invoices"
-msgstr "Gegevens beschikbaar met geüpgrade versie van spruitjesfacturen"
+msgstr ""
 
 #: views/admin/dashboards/invoices.php:15
 #: views/admin/dashboards/premium/invoices.php:21
@@ -1593,7 +1567,8 @@ msgstr "Bekeken"
 msgid "Notification"
 msgstr "Kennisgeving"
 
-#: template-tags/invoices.php:980 views/admin/meta-boxes/clients/history.php:37
+#: template-tags/invoices.php:980
+#: views/admin/meta-boxes/clients/history.php:37
 msgid "Invoice Created"
 msgstr "Factuur aangemaakt"
 
@@ -1607,7 +1582,8 @@ msgstr "Verzonden"
 msgid "Imported"
 msgstr "Geimporteerd"
 
-#: template-tags/invoices.php:993 views/admin/meta-boxes/clients/history.php:42
+#: template-tags/invoices.php:993
+#: views/admin/meta-boxes/clients/history.php:42
 #: views/admin/meta-boxes/projects/history-premium.php:30
 #: views/admin/meta-boxes/projects/history.php:30
 msgid "Status Update"
@@ -1797,7 +1773,8 @@ msgstr "terugzetten"
 msgid "No client associated with this invoice."
 msgstr "Geen bijbehorende klant voor deze factuur."
 
-#: models/Invoice.php:76 views/admin/sections/invoice-status-change-drop.php:12
+#: models/Invoice.php:76
+#: views/admin/sections/invoice-status-change-drop.php:12
 msgid "Outstanding Balance"
 msgstr "Openstaand saldo"
 
@@ -2591,8 +2568,6 @@ msgid ""
 "<b>Date filtering</b> is available and can be used to retrieve data between "
 "two dates, after a date, or before a date."
 msgstr ""
-"<b>Datumfiltering</b> is beschikbaar en kan worden gebruikt om gegevens op "
-"te halen tussen twee data, na een datum of voor een datum."
 
 #: controllers/reporting/Reporting.php:827
 msgid ""
@@ -3360,7 +3335,7 @@ msgstr "Admin e-mail"
 msgid ""
 "E-mail address that receives the admin notifications (e.g. Payment "
 "Received )."
-msgstr "E-mailadres dat de adminmeldingen ontvangt (bijv. Ontvangen betaling)."
+msgstr ""
 
 #: controllers/notifications/Notifications_Control.php:118
 msgid "Email format"
@@ -3501,11 +3476,11 @@ msgstr "Gebruikt om de btw op de offerte weer te geven (2)."
 
 #: controllers/notifications/Notifications.php:297
 msgid "Used to display the estimate notes."
-msgstr "Wordt gebruikt om de schattingen weer te geven."
+msgstr ""
 
 #: controllers/notifications/Notifications.php:301
 msgid "Used to display the estimate terms."
-msgstr "Wordt gebruikt om de schattingstermen weer te geven."
+msgstr ""
 
 #: controllers/notifications/Notifications.php:305
 msgid "Used to display the lead entries in HTML."
@@ -3758,11 +3733,11 @@ msgstr "Gebruikt om de btw op de factuur weer te geven (2)."
 
 #: controllers/notifications/Notifications.php:213
 msgid "Used to display the invoice notes."
-msgstr "Wordt gebruikt om de factuurnota's weer te geven."
+msgstr ""
 
 #: controllers/notifications/Notifications.php:217
 msgid "Used to display the invoice terms."
-msgstr "Wordt gebruikt om de factuurvoorwaarden weer te geven."
+msgstr ""
 
 #: controllers/notifications/Notifications.php:221
 msgid "Used to display the invoice total."
@@ -4216,8 +4191,9 @@ msgstr ""
 "Huidig formaat:%1$s. De standaard geld opmaak (%2$s) kan hier voor alle "
 "klantoffertes en facturen worden overschreven."
 
-#: controllers/clients/Clients.php:1077 controllers/reporting/Dashboard.php:219
-#: importers/CSV.php:51 languages/SI_Strings.php:21
+#: controllers/clients/Clients.php:1077
+#: controllers/reporting/Dashboard.php:219 importers/CSV.php:51
+#: languages/SI_Strings.php:21
 msgid "Clients"
 msgstr "Klanten"
 
@@ -4558,6 +4534,7 @@ msgstr "Controle"
 msgid "Cheatin&#8217; uh?"
 msgstr "Valsspelen&#8217; uh?"
 
+#. #-#-#-#-#  tmp-sprout-invoices.pot (Sprout Invoices 9.4)  #-#-#-#-#
 #. Author of the plugin/theme
 #: controllers/admin/Settings_API.php:170
 #: controllers/admin/Settings_API.php:171
@@ -4642,8 +4619,8 @@ msgid ""
 msgstr ""
 "Om snel aan de slag te kunnen biedt Sprout Facturen een volledig aanpasbaar "
 "formulier voor offertes. Voeg de onderstaande verkorte code toe aan een "
-"willekeurige pagina om het standaard formulier te gebruiken "
-"<code>[estimate_submission]Bedankt[/ estimate_submission]</ code>"
+"willekeurige pagina om het standaard formulier te gebruiken <code>"
+"[estimate_submission]Bedankt[/ estimate_submission]</ code>"
 
 #: controllers/admin/Settings.php:624
 msgid ""
@@ -4805,6 +4782,7 @@ msgstr ""
 "Selecteer de landen / provincies voor alle vormen, bv aankopen, offertes en "
 "registraties."
 
+#. #-#-#-#-#  tmp-sprout-invoices.pot (Sprout Invoices 9.4)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: controllers/admin/Settings.php:569 controllers/reporting/Dashboard.php:141
 #: controllers/templating/Customizer.php:59
@@ -4855,8 +4833,9 @@ msgstr ""
 msgid "Private note failed to save, try again."
 msgstr "Privé notitie is niet opgeslagen, probeer het opnieuw."
 
-#: controllers/_Controller.php:834 controllers/records/Internal_Records.php:217
-#: template-tags/invoices.php:964 views/admin/meta-boxes/clients/history.php:21
+#: controllers/_Controller.php:834
+#: controllers/records/Internal_Records.php:217 template-tags/invoices.php:964
+#: views/admin/meta-boxes/clients/history.php:21
 #: views/admin/meta-boxes/projects/history-premium.php:21
 #: views/admin/meta-boxes/projects/history.php:21
 msgid "Private Note"

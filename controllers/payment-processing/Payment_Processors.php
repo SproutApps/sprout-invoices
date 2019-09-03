@@ -730,7 +730,7 @@ abstract class SI_Payment_Processors extends SI_Controller {
 		for ( $i = 0 ; $i < $number ; $i++ ) {
 			$years[ $this_year + $i ] = $this_year + $i;
 		}
-		return apply_filters( 'si_payment_year_options', $years );
+		return apply_filters( 'si_payment_year_options', $years, $number );
 	}
 
 	////////////////

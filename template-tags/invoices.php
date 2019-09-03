@@ -847,6 +847,7 @@ if ( ! function_exists( 'si_payment_options' ) ) :
 		if ( $return == 'options' ) {
 			$processor_options = array();
 			foreach ( $enabled_processors as $class ) {
+				error_log( 'class; ' . print_r( $class, true ) );
 				if ( method_exists( $class, 'get_instance' ) ) {
 					$payment_processor = call_user_func( array( $class, 'get_instance' ) );
 					$processor_options[ $payment_processor->get_slug() ] = $payment_processor->checkout_options();

@@ -32,6 +32,21 @@ class SA_Init_Addon_Processors extends SI_Controller {
 			}
 		}
 
+		if ( ! class_exists( 'SI_Stripe_Checkout' ) ) {
+
+			if ( file_exists( SI_PATH.'/bundles/sprout-invoices-payments-stripe-checkout/SI_Stripe_Checkout.php' ) ) {
+				if ( ! function_exists( 'sa_load_auto_billing_addon' ) ) {
+					if ( ! defined( 'SA_ADDON_STRIPE_CHECKOUT_URL' ) ) {
+						define( 'SA_ADDON_STRIPE_CHECKOUT_URL', plugins_url( '/sprout-invoices-payments-stripe-checkout', __FILE__ ) );
+					}
+					if ( ! defined( 'SA_ADDON_STRIPE_CHECKOUT_PATH' ) ) {
+						define( 'SA_ADDON_STRIPE_CHECKOUT_PATH', SI_PATH . '/bundles/sprout-invoices-payments-stripe-checkout' );
+					}
+					require_once SI_PATH.'/bundles/sprout-invoices-payments-stripe-checkout/SI_Stripe_Checkout.php';
+				}
+			}
+		}
+
 		if ( ! class_exists( 'SA_Payment_Redirect' ) ) {
 
 			if ( file_exists( SI_PATH.'/bundles/sprout-invoices-payments-offsite-url/inc/SA_Offsite_URL.php' ) ) {

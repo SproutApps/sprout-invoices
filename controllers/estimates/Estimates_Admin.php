@@ -143,7 +143,7 @@ class SI_Estimates_Admin extends SI_Estimates {
 		unset( $columns['author'] );
 		$columns['title'] = __( 'Estimate', 'sprout-invoices' );
 		$columns['status'] = __( 'Status', 'sprout-invoices' );
-		$columns['number'] = __( 'Invoice #', 'sprout-invoices' );
+		$columns['number'] = __( 'Estimate #', 'sprout-invoices' );
 		$columns['dates'] = __( 'Dates', 'sprout-invoices' );
 		$columns['total'] = __( 'Total', 'sprout-invoices' );
 		$columns['client'] = __( 'Client', 'sprout-invoices' );
