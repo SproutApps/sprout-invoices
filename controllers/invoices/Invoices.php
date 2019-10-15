@@ -30,7 +30,7 @@ class SI_Invoices extends SI_Controller {
 		add_action( 'save_post', array( __CLASS__, 'reset_totals_cache' ) );
 
 		// Mark paid or partial after payment
-		add_action( 'si_new_payment',  array( __CLASS__, 'change_status_after_payment_status_update' ) );
+		add_action( 'si_new_payment',  array( __CLASS__, 'change_status_after_new_payment' ) );
 		add_action( 'si_payment_status_updated',  array( __CLASS__, 'change_status_after_payment_status_update' ) );
 
 		// Cloning from estimates
@@ -207,6 +207,13 @@ class SI_Invoices extends SI_Controller {
 		$invoice_id = $payment->get_invoice_id();
 		self::reset_totals_cache( $invoice_id );
 
+	}
+
+	public static function change_status_after_new_payment( SI_Payment $payment ) {
+		if ( $payment->get_status() === SI_Payment::STATUS_VOID ) {
+			return;
+		}
+		self::change_status_after_payment_status_update( $payment );
 	}
 
 	public static function change_status_after_payment_status_update( SI_Payment $payment ) {

@@ -187,17 +187,21 @@ a.sa_icon_link {
  * Misc
  */
 
-body[class*='sprout-invoices'] .clearfix,
-.post-type-sa_estimate .clearfix,
-.post-type-sa_invoice .clearfix,
-.sprout-apps_page_sprout-apps-settings .clearfix,
-#si_admin_field_send_metabox_recipients .clearfix,
-.sa-control-group.clearfix {
-	overflow: auto;
+body[class*='sprout-invoices'] .clearfix:after,
+.post-type-sa_estimate .clearfix:after,
+.post-type-sa_invoice .clearfix:after,
+.sprout-apps_page_sprout-apps-settings .clearfix:after,
+#si_admin_field_send_metabox_recipients .clearfix:after,
+.sa-control-group.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
 }
 
-#si_admin_field_send_metabox_recipients .clearfix {
-	display: block;
+#si_admin_field_send_metabox_recipients .clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
 }
 
 input[type=date] {

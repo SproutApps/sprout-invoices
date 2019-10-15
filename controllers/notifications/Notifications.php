@@ -530,6 +530,11 @@ class SI_Notifications extends SI_Notifications_Control {
 	 * @return
 	 */
 	public static function admin_payment_notification( SI_Payment $payment, $args = array() ) {
+
+		if ( $payment->get_status() === SI_Payment::STATUS_VOID ) {
+			return;
+		}
+
 		$payment_method = $payment->get_payment_method();
 		// A notification shouldn't be sent to the admin when s/he created it
 		if ( apply_filters( 'si_disable_payment_notification_by_payment_method', false, $payment_method ) ) {
