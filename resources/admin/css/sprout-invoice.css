@@ -2473,3 +2473,16 @@ div#mascot_progress {
 	width: 160px;
 	margin-top: -40px;
 }
+/**
+* Premium CTA
+*/
+.si_premium_cta {
+    padding: 1em;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .si_premium_cta {
+        text-align: left;
+        padding-left: 20%;
+    }
+}

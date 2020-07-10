@@ -125,3 +125,17 @@ function si_compatibility_check_fail_notices() {
 		printf( '<div class="error"><p><strong>Sprout Invoices</strong> requires PHP version %s or higher to be installed on your server. Talk to your web host about using a secure version of PHP.</p></div>', SI_SUPPORTED_PHP_VERSION );
 	}
 }
+
+
+/**
+ * Premium CTA
+*/ 
+function si_premium_cta() {
+    $cta = '<div class="si_premium_cta">You&#39;re using the free version of Sprout Invoices. <a href="https://sproutinvoices.com/sprout-invoices/purchase?utm_source=Upgrade%20Today&utm_medium=Top%20Banner&utm_campaign=In%20Plugin%20Upgrade"><b>Upgrade today</b></a> to unlock more features.</div>';
+    
+    echo $cta;
+}
+
+if ( ! function_exists('si_pro_plugin_activated') ) {
+    add_action( 'sprout_settings_header' , 'si_premium_cta' );
+}
