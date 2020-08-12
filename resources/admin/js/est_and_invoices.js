@@ -10,16 +10,16 @@
 	 * @param {} element element id without #
 	 */
 	si.docEdit.SelectText = function(element) {
-		var doc = document, 
-			text = doc.getElementById(element), 
+		var doc = document,
+			text = doc.getElementById(element),
 			range, 
-			selection;    
+			selection;
 		if (doc.body.createTextRange) {
 			range = document.body.createTextRange();
 			range.moveToElementText(text);
 			range.select();
 		} else if (window.getSelection) {
-			selection = window.getSelection();        
+			selection = window.getSelection();
 			range = document.createRange();
 			range.selectNodeContents(text);
 			selection.removeAllRanges();
@@ -29,8 +29,8 @@
 
 	/**
 	 * Refresh the client submit sidebar
-	 * @param  {int} $client_id 
-	 * @return {html}            
+	 * @param  {int} $client_id
+	 * @return {html}
 	 */
 	si.docEdit.refresh_client_submit_meta = function( $client_id ) {
 		var $submit_box = $('#si_client_submit .submitbox'),
@@ -57,7 +57,7 @@
 			function( response ) {
 				$('.spinner').hide();
 				if ( response.error ) {
-					$button.after('<span class="inline_error_message">' + response.response + '</span>');	
+					$button.after('<span class="inline_error_message">' + response.response + '</span>');
 				}
 				else {
 					// close modal
@@ -107,7 +107,7 @@
 
 	/**
 	 * Prevent collapse of line items
-	 * @return {} 
+	 * @return {}
 	 */
 	si.docEdit.preventCollapseLineItemsMetaBox = function() {
 		// $('#si_invoice_line_items.postbox .hndle').unbind('click.postboxes');
@@ -122,7 +122,7 @@
 
 	/**
 	 * Sticky header
-	 * @return {} 
+	 * @return {}
 	 */
 	si.docEdit.stickySave = function() {
 		var $sticky_offest = ( $('body').hasClass('admin-bar') ) ? 30: 0;
@@ -150,7 +150,7 @@
 			function( response ) {
 				$('.spinner').hide();
 				if ( response.error ) {
-					$select.after('<span class="inline_error_message">' + response.response + '</span>');	
+					$select.after('<span class="inline_error_message">' + response.response + '</span>');
 				}
 				else {
 					$.each( response, function(i, time) {
@@ -181,14 +181,14 @@
 					var $row = $(response.data.option);
 
 					$('.spinner').hide();
-					
+
 					// append the row to the list.
 					$type_list.append($row);
 
 					// update key
 					si.lineItems.modifyInputKey();
 					si.lineItems.calculateEachLineItemTotal();
-					
+
 					// Add the redactor
 					if ( si_js_object.redactor ) {
 						$row.find('.column_desc [name="line_item_desc[]"]').redactor();
@@ -204,7 +204,7 @@
 	/**
 	 * Expenses
 	 */
-	
+
 
 
 	si.docEdit.expenseImportingButton = function( button ) {
@@ -228,7 +228,7 @@
 			function( response ) {
 				$('.spinner').hide();
 				if ( response.error ) {
-					$select.after('<span class="inline_error_message">' + response.response + '</span>');	
+					$select.after('<span class="inline_error_message">' + response.response + '</span>');
 				}
 				else {
 					$.each( response, function(i, expense) {
@@ -259,14 +259,14 @@
 					var $row = $(response.data.option);
 
 					$('.spinner').hide();
-					
+
 					// append the row to the list.
 					$type_list.append($row);
 
 					// update key
 					si.lineItems.modifyInputKey();
 					si.lineItems.calculateEachLineItemTotal();
-					
+
 					// Add the redactor
 					if ( si_js_object.redactor ) {
 						$row.find('.column_desc [name="line_item_desc[]"]').redactor();
@@ -331,7 +331,7 @@
 		$.post( ajaxurl, { action: 'si_change_doc_status', id: $id, status: $new_status, change_status_nonce: $nonce },
 			function( data ) {
 				if ( data.error ) {
-					$status_button.html( data.response );	
+					$status_button.html( data.response );
 				}
 				else {
 					$button_html = $( data.new_button ).html();
@@ -341,7 +341,7 @@
 					// Update status dropdown
 					$status_select.val( $new_status );
 					$status_span.text( $status_select.find('option:selected').text() );
-					// Change 
+					// Change
 					$publish_button.val( $publish_button_text );
 				};
 				return data;
@@ -358,71 +358,71 @@
 		si.docEdit.stickySave();
 
 		// Select permalink
-		$('#permalink-select').live( 'click', function(e) {
+		$('#permalink-select').on( 'click', function(e) {
 			si.docEdit.SelectText('permalink-select');
 		});
 
 		// Time importing
-		$('#time_import_question_answer').live( 'click', function(e) {
+		$('#time_import_question_answer').on( 'click', function(e) {
 			e.preventDefault();
 			si.docEdit.timeImportingButton( this );
 		});
 
 		// Time importing
-		$('#time_importing_project_selection select').live( 'change', function(e) {
+		$('#time_importing_project_selection select').on( 'change', function(e) {
 			e.preventDefault();
 			si.docEdit.timeImportingProjectSelected( this );
 		});
 
 		// Expense importing
-		$('#expense_import_question_answer').live( 'click', function(e) {
+		$('#expense_import_question_answer').on( 'click', function(e) {
 			e.preventDefault();
 			si.docEdit.expenseImportingButton( this );
 		});
 
 		// Expense importing
-		$('#expense_importing_project_selection select').live( 'change', function(e) {
+		$('#expense_importing_project_selection select').on( 'change', function(e) {
 			e.preventDefault();
 			si.docEdit.expenseImportingProjectSelected( this );
 		});
 
 		// Create private note
-		$("#save_private_note").live('click', function(e) {
+		$("#save_private_note").on('click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			si.docEdit.createNote( $( this ) );
 		});
-		
+
 		// Status updates
-		$("#quick_links .quick_status_update a.doc_status_change").live('click', function(e) {
+		$("#quick_links .quick_status_update a.doc_status_change").on('click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			si.docEdit.statusChange( $( this ) );
 		});
 
 		// scroll to send
-		$('#send_doc_quick_link').live( 'click', function(e) {
+		$('#send_doc_quick_link').on( 'click', function(e) {
 			$('html, body').animate({
 				scrollTop: $("#si_doc_send").offset().top
 			}, 200);
 		});
 
 		// delete history record
-		$('.delete_record').live( 'click', function(e) {
+		$('.delete_record').on( 'click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			si.docEdit.deleteRecord( this );
 		});
 
 		// delete a fee
-		$('.si_delete_fee').live( 'click', function(e) {
+		$('.si_delete_fee').on( 'click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			si.docEdit.deleteFee( this );
 		});
 
 		// edit private note
-		$('#save_edit_private_note').live( 'click', function(e) {
+		$('#save_edit_private_note').on( 'click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			si.docEdit.editPrivateNote( this );
@@ -433,14 +433,14 @@
 		/**
 		 * Disable quick send if the form has changed.
 		 */
-		$('[name="sa_send_metabox_send_as"]').live( 'click', function( e ){
+		$('[name="sa_send_metabox_send_as"]').on( 'click', function( e ){
 			$(this).prop('readonly', false);
 		});
 
 		/**
 		 * Disable quick send if the form has changed.
 		 */
-		$('[name="sa_metabox_custom_recipient"]').live( 'keyup', function( e ){
+		$('[name="sa_metabox_custom_recipient"]').on( 'keyup', function( e ){
 			var val = $('[name="sa_metabox_custom_recipient"]').val(),
 				$checkbox = $('[name="sa_metabox_custom_recipient_check"]');
 			if ( val.length > 0 ) {
@@ -449,14 +449,14 @@
 			else {
 				$checkbox.prop('checked', false);
 			};
-			
+
 			// $('#quick_send_option #send_doc_notification').attr( 'disabled', 'disabled' );
 		});
 
 		/**
 		 * Send estimate
 		 */
-		$('#send_doc_notification').live( 'click', function(e) {
+		$('#send_doc_notification').on( 'click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			var $send_button = $(this),
@@ -470,7 +470,7 @@
 				function( data ) {
 					$('.spinner').hide();
 					if ( data.error ) {
-						$send_button.after('<span class="inline_error_message">' + data.response + '</span>');	
+						$send_button.after('<span class="inline_error_message">' + data.response + '</span>');
 					}
 					else {
 						$('#si_doc_send :checked').removeAttr('checked');
@@ -483,7 +483,7 @@
 		/**
 		 * Option updates
 		 */
-		$('.misc-pub-section a.edit_control').live( 'click', function(e) {
+		$('.misc-pub-section a.edit_control').on( 'click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			var $parent = $(this).parents('.misc-pub-section'),
@@ -496,7 +496,7 @@
 			$controls.slideDown('fast');
 		});
 
-		$('.misc-pub-section a.save_control').live( 'click', function(e) {
+		$('.misc-pub-section a.save_control').on( 'click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 
@@ -532,7 +532,7 @@
 			return;
 		});
 
-		$('.misc-pub-section a.cancel_control').live( 'click', function(e) {
+		$('.misc-pub-section a.cancel_control').on( 'click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			var $parent = $(this).parents('.misc-pub-section'),
@@ -544,7 +544,7 @@
 			$(this).parents('.control_wrap').slideUp('fast');
 		});
 
-		$('.misc-pub-section select[name="client"]').live( 'change', function(e) {
+		$('.misc-pub-section select[name="client"]').on( 'change', function(e) {
 			var $value = $(this).val();
 			if ( $value === 'create_client' ) {
 				$('#create_client_tb_link').trigger('click');
@@ -554,7 +554,7 @@
 		/**
 		 * Create client via ajax
 		 */
-		$('#create_client').live('click', function(e) {
+		$('#create_client').on('click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			var $save_button = $( this ),
@@ -567,7 +567,7 @@
 					$('.spinner').hide();
 					if ( data.error ) {
 						$('.spinner').hide();
-						$save_button.after('<span class="inline_error_message">' + data.response + '</span>');	
+						$save_button.after('<span class="inline_error_message">' + data.response + '</span>');
 					}
 					else {
 						// close modal
@@ -576,9 +576,9 @@
 						$('#create_client_tb_link').hide();
 						// change option text
 						$('#client b').text(data.title);
-						$('[name="sa_metabox_client"]').append($('<option/>', { 
+						$('[name="sa_metabox_client"]').append($('<option/>', {
 								value: data.id,
-								text : data.title 
+								text : data.title
 							})).val(data.id);
 
 						var	$client_controls = $('#client').parents('.misc-pub-section'),
@@ -586,7 +586,7 @@
 							$si_tooltip = $client_controls.find('.si_tooltip'),
 							$controls = $client_controls.find('.control_wrap');
 
-						// close the control						
+						// close the control
 						$si_tooltip.hide();
 						$edit_control.show();
 						$controls.slideUp('slow');
@@ -600,7 +600,7 @@
 		 * Manage users for client list
 		 */
 		$('#associated_users').select2();
-		$('#associated_users').live('change', function(e) {
+		$('#associated_users').on('change', function(e) {
 			var $data = $(this).select2('data')[0],
 				$option = $(this).find("option:selected"),
 				$user_id = $data.id,
@@ -609,7 +609,7 @@
 				$dl = $('#associated_users_list');
 
 			var user_item = '<li id="list_user_id-'+$user_id+'"><a href="'+$edit_url+'">'+$user_name+'</a> <a data-id="'+$user_id+'" class="remove_user del_button">X</a></li>';
-			
+
 			$dl.append( user_item );
 			$('#hidden_associated_users_list').append($('<input/>', {
 								type: 'hidden',
@@ -621,7 +621,7 @@
 		/**
 		 * Remove user and hidden option associated list
 		 */
-		$('.remove_user').live('click', function(e) {
+		$('.remove_user').on('click', function(e) {
 			var $user_id = $( this ).data('id');
 			$('#list_user_id-'+$user_id).remove();
 			$('#hidden_associated_users_list').find( '[value="'+$user_id+'"]' ).remove();
@@ -630,7 +630,7 @@
 		/**
 		 * Create user via ajax
 		 */
-		$('#create_user').live('click', function(e) {
+		$('#create_user').on('click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			var $save_button = $( this ),
@@ -644,7 +644,7 @@
 					$('.spinner').hide();
 					if ( data.error ) {
 						$('.spinner').hide();
-						$save_button.after('<span class="inline_error_message">' + data.response + '</span>');	
+						$save_button.after('<span class="inline_error_message">' + data.response + '</span>');
 					}
 					else {
 						si.docEdit.refresh_client_submit_meta( $client_id );
@@ -657,7 +657,7 @@
 		/**
 		 * Add an admin payment
 		 */
-		$("#add_admin_payments").live('click', function(e) {
+		$("#add_admin_payments").on('click', function(e) {
 			e.stopPropagation();
 			e.preventDefault();
 			var $send_button = $(this),
@@ -671,7 +671,7 @@
 				function( data ) {
 					$('.spinner').hide();
 					if ( data.error ) {
-						$send_button.after('<span class="inline_error_message">' + data.response + '</span>');	
+						$send_button.after('<span class="inline_error_message">' + data.response + '</span>');
 					}
 					else {
 						$meta_box.before('<div class="updated"><p>' + data.response + '</p></div>');
@@ -683,9 +683,9 @@
 
 		/**
 		 * Change the text area to the default, if the text area is blank.
-		 * @return {} 
+		 * @return {}
 		 */
-		$('.column_type select').live( 'change', function() {
+		$('.column_type select').on( 'change', function() {
 			var $val = $(this).val(),
 				$description = $('#term_desc_'+$val).text(),
 				$parent = $(this).parents('.item').closest('.item'),
@@ -752,7 +752,7 @@
 				return null;
 			}
 		});
-	
+
 	}; // end init
 
 })( jQuery, window.si = window.si || {} );

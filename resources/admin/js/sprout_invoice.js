@@ -28,7 +28,7 @@ jQuery(function($) {
 		}
 	});
 
-    jQuery("#the-list .doc_status_change").live('click', function(e) {
+    jQuery("#the-list .doc_status_change").on('click', function(e) {
 		e.preventDefault();
 		var $status_change_link = $( this ),
 			$status_button = $( this ).closest('.quick_status_update'),
@@ -39,11 +39,11 @@ jQuery(function($) {
 			$status_span = $( '#status_' + $id );
 
 		$status_button.html(si_js_object.inline_spinner);
-		
+
 		$.post( ajaxurl, { action: 'si_change_doc_status', id: $id, status: $new_status, change_status_nonce: $nonce },
 			function( data ) {
 				if ( data.error ) {
-					$status_span.html( data.response );	
+					$status_span.html( data.response );
 				}
 				else {
 					$button_html = $( data.new_button ).html();
