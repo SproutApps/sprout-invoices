@@ -1,5 +1,5 @@
 ;(function( $, si, undefined ) {
-	
+
 	si.lineItems = {
 		config: {
 		},
@@ -23,7 +23,7 @@
 					var $row = $(response.data.option);
 
 					$('.spinner').hide();
-					
+
 					// append the row to the list.
 					$type_list.append($row);
 
@@ -45,7 +45,7 @@
 
 	/**
 	 * Hide the inputs for parent line items
-	 * @return {} 
+	 * @return {}
 	 */
 	si.lineItems.handleParents = function() {
 		$('ol#line_item_list .item').each(function(i, li) {
@@ -71,12 +71,12 @@
 				$(li).removeClass('hide_subheading_columns');
 			}
 		});
-		
+
 	};
 
 	/**
-	 * Store the line item index 
-	 * @return {} 
+	 * Store the line item index
+	 * @return {}
 	 */
 	si.lineItems.modifyInputKey = function() {
 		$('ol.items_list').each(function(i, ol) {
@@ -107,8 +107,8 @@
 
 	/**
 	 * Calculate line items based on the input
-	 * @param  {object} list item (li) 
-	 * @return {}    
+	 * @param  {object} list item (li)
+	 * @return {}
 	 */
 	si.lineItems.calculateLineItemTotals = function( li ) {
 		// Clear out the totals if there's no more children
@@ -142,7 +142,7 @@
 	/**
 	 * Calculate parent line item totals based on children that were updated prior.
 	 * FUTURE average out the rate and discount and show total qty.
-	 * @return {} 
+	 * @return {}
 	 */
 	si.lineItems.calculateParentTotals = function() {
 		$('ol.items_list .item').each(function(i, li) {
@@ -205,7 +205,7 @@
 
 		// total after tax
 		$total = $sub_total + $tax_total + $tax2_total;
-		
+
 		if ( $discount > 0 ) {
 			// adjust for discount
 			$total = $total * ( ( 100 - $discount ) / 100 );
@@ -228,7 +228,7 @@
 	 * Simple function to highlight the total update.
 	 * @param  {object} span  span that will get the total
 	 * @param  {float} total total that will be showed
-	 * @return {}       
+	 * @return {}
 	 */
 	si.lineItems.totalUpdate = function( span, total ) {
 		$total = ( isNaN(total) ) ? '0.00' : total;
@@ -258,7 +258,7 @@
 		/**
 		 * Use the nestable jquery plugin on the line items.
 		 */
-		$('.nestable').nestable({ 
+		$('.nestable').nestable({
 			maxDepth: 2,
 			listClass: 'items_list',
 			itemClass: 'item',
@@ -277,15 +277,15 @@
 		};
 
 		// Add item
-		$('.item_add_type').live('click', function(e) {
+		$('.item_add_type').on('click', function(e) {
 			si.lineItems.addLineItem( $( this ) );
 		});
 
 		/**
 		 * Add a line items
-		 * @return {} 
+		 * @return {}
 		 */
-		$('.item_action.item_clone').live( 'click', function() {
+		$('.item_action.item_clone').on( 'click', function() {
 			var $row = $(this).closest('.item').clone().attr('id','');
 			var rand_num = Math.floor( Math.random() * 10000000 );
 			// change the unique id
@@ -309,9 +309,9 @@
 
 		/**
 		 * Delete a line item
-		 * @return {} 
+		 * @return {}
 		 */
-		$('.item_action.item_delete').live( 'click', function() {
+		$('.item_action.item_delete').on( 'click', function() {
 			$(this).closest('.item').remove();
 			si.lineItems.modifyInputKey();
 			return false;
@@ -320,9 +320,9 @@
 		/**
 		 * Add an edited class so that the item type select desc.
 		 * doesn't populate if the field has been edited.
-		 * @return {} 
+		 * @return {}
 		 */
-		$('.column_desc textarea').live( 'keyup', function() {
+		$('.column_desc textarea').on( 'keyup', function() {
 			$(this).addClass('edited');
 			return false;
 		});
@@ -336,9 +336,9 @@
 
 		/**
 		 * calculate totals whenever an input is updated
-		 * @return {} 
+		 * @return {}
 		 */
-		$('.totalled_input').live( 'keyup', function() {
+		$('.totalled_input').on( 'keyup', function() {
 			si.lineItems.calculateEachLineItemTotal();
 			si.lineItems.calculateSubtotal();
 			si.lineItems.calculateTotal();
@@ -350,7 +350,7 @@
 			$('.item_add_type.default_type').trigger('click');
 		};
 	};
-	
+
 })( jQuery, window.si = window.si || {} );
 
 // Init
