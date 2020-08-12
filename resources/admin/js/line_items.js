@@ -41,7 +41,7 @@
 			}
 		);
 	};
-
+	
 
 	/**
 	 * Hide the inputs for parent line items
