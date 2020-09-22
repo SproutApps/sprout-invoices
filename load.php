@@ -40,7 +40,10 @@ function sprout_invoices_load() {
 
 	// i18n
 	require_once SI_PATH.'/controllers/i18n/Countries_States.php';
-	require_once SI_PATH.'/controllers/i18n/Locales.php';
+    require_once SI_PATH.'/controllers/i18n/Locales.php';
+    
+    // premium upsell cta
+    require_once SI_PATH.'/premium-cta.php';
 
 	do_action( 'si_require_model_classes' );
 
