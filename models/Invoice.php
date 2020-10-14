@@ -139,7 +139,7 @@ class SI_Invoice extends SI_Post_Type {
 	 *
 	 * @static
 	 * @param int     $id
-	 * @return Sprout_Invoices_Invoice
+	 * @return SI_Invoice
 	 */
 	public static function get_instance( $id = 0 ) {
 		if ( ! $id ) {
